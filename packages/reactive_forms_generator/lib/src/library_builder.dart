@@ -1,10 +1,9 @@
-import 'package:code_builder/code_builder.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:reactive_forms_generator/src/form_element_generator.dart';
 import 'package:reactive_forms_generator/src/form_generator.dart';
-import 'package:source_gen/source_gen.dart';
+import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
 
 const stringRef = Reference('String');
@@ -18,10 +17,6 @@ String generateLibrary(ClassElement element) {
   );
 
   final formGenerator = FormGenerator(element);
-
-  final formControlChecker =
-      const TypeChecker.fromRuntime(FormControlAnnotation);
-  final formArrayChecker = const TypeChecker.fromRuntime(FormArrayAnnotation);
 
   final library = Library(
     (b) => b
@@ -212,8 +207,7 @@ String generateLibrary(ClassElement element) {
                     ),
                   ])
                   // ..name = formGenerator.className
-                  ..body = Code(
-                      'form = fb.group(_formElements(${element.name.camelCase}));'),
+                  ..body = Code('form = fb.group(_formElements(${element.name.camelCase}));'),
               ),
             )
             ..methods.addAll([

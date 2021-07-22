@@ -1,10 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
+import 'package:reactive_forms_generator/src/types.dart';
 import 'package:source_gen/source_gen.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-
-const formControlChecker = const TypeChecker.fromRuntime(FormControlAnnotation);
-const formArrayChecker = const TypeChecker.fromRuntime(FormArrayAnnotation);
 
 abstract class FormElementGenerator {
   final FieldElement field;
@@ -77,8 +74,7 @@ class FormArrayGenerator extends FormElementGenerator {
   @override
   String element(defaultValue) {
     final type = field.type;
-    final typeArguments =
-        type is ParameterizedType ? type.typeArguments : const [];
+    final typeArguments = type is ParameterizedType ? type.typeArguments : const [];
 
     final props = [
       '${defaultValue ?? []}',
