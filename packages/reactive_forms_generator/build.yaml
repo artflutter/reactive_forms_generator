@@ -1,7 +1,20 @@
+targets:
+  $default:
+    builders:
+      reactiveFormsGenerator:
+        enabled: true
+        generate_for:
+          exclude:
+            - test
+            - example
+          include:
+            - test/integration/*
+            - test/integration/**/*
+
 builders:
   reactiveFormsGenerator:
     import: "package:reactive_forms_generator/builder.dart"
-    builder_factories: ["autoRouteGenerator"]
+    builder_factories: ["reactiveFormsGenerator"]
     build_extensions: {'.dart': ['.gr.dart']}
     auto_apply: dependents
     build_to: source

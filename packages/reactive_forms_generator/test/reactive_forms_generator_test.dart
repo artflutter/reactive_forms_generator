@@ -10,10 +10,12 @@ void main() {
         return testGenerator(
           model: r'''
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+            
+            part 'login.gform.dart';
 
-            @ReactiveForm()
+            @ReactiveFormAnnotation()
             class Login {
-              @FormControl(
+              @FormControlAnnotation(
                 validators: const [
                   NumberValidator.validate,
                 ],
@@ -23,7 +25,7 @@ void main() {
               )
               final String email;
             
-              @FormControl(
+              @FormControlAnnotation(
                 validators: const [
                   NumberValidator.validate,
                 ],
@@ -33,7 +35,7 @@ void main() {
               )
               final String password;
             
-              @FormArray(
+              @FormArrayAnnotation(
                 validators: const [
                   NumberValidator.validate,
                 ],
@@ -59,20 +61,23 @@ void main() {
 
 const generatedFile = r'''// GENERATED CODE - DO NOT MODIFY BY HAND
 
+part of 'login.dart';
+
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-import 'package:reactive_forms/reactive_forms.dart';
-
 class LoginFormBuilder extends StatefulWidget {
   LoginFormBuilder(
-      {Key? key,
-      required Login model,
-      Widget? child,
-      required Widget Function(
-              BuildContext context, LoginForm formModel, Widget? child)
-          builder});
+      {Key? key, required this.model, this.child, required this.builder})
+      : super(key: key);
+
+  final Login model;
+
+  final Widget? child;
+
+  final Widget Function(
+      BuildContext context, LoginForm formModel, Widget? child) builder;
 
   @override
   _LoginFormBuilderState createState() => _LoginFormBuilderState();
@@ -89,7 +94,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    ReactiveFormBuilder(
+    return ReactiveFormBuilder(
       child: widget.child,
       form: () => _form.form,
       builder: (context, form, child) {
@@ -121,16 +126,11 @@ class LoginForm {
   bool get containsCategories => form.contains(LoginForm.categories);
   Map<String, Object> _formElements(Login login) => {
         LoginForm.email: FormControl<String>(
-            value: login.email,
-            validators: [NumberValidator.validate],
-            asyncValidators: [uniqueEmail]),
+            value: login.email, validators: [], asyncValidators: []),
         LoginForm.password: FormControl<String>(
-            value: login.password,
-            validators: [NumberValidator.validate],
-            asyncValidators: [uniqueEmail]),
+            value: login.password, validators: [], asyncValidators: []),
         LoginForm.categories: FormArray<String>(login.categories,
-            validators: [NumberValidator.validate],
-            asyncValidators: [uniqueEmail])
+            validators: [], asyncValidators: [])
       };
 }
 ''';

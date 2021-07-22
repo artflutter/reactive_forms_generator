@@ -3,8 +3,8 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
-const formControlChecker = const TypeChecker.fromRuntime(FormControl);
-const formArrayChecker = const TypeChecker.fromRuntime(FormArray);
+const formControlChecker = const TypeChecker.fromRuntime(FormControlAnnotation);
+const formArrayChecker = const TypeChecker.fromRuntime(FormArrayAnnotation);
 
 abstract class FormElementGenerator {
   final FieldElement field;

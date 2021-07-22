@@ -19,20 +19,51 @@ String generateLibrary(ClassElement element) {
 
   final formGenerator = FormGenerator(element);
 
-  final formControlChecker = const TypeChecker.fromRuntime(FormControl);
-  final formArrayChecker = const TypeChecker.fromRuntime(FormArray);
+  final formControlChecker =
+      const TypeChecker.fromRuntime(FormControlAnnotation);
+  final formArrayChecker = const TypeChecker.fromRuntime(FormArrayAnnotation);
 
   final library = Library(
     (b) => b
       ..body.addAll([
-        Directive.import('package:reactive_forms/reactive_forms.dart'),
+        // Directive.import('package:reactive_forms/reactive_forms.dart'),
         Class(
           (b) => b
             ..name = '${formGenerator.className}Builder'
             ..extend = Reference('StatefulWidget')
+            ..fields.addAll(
+              [
+                Field(
+                  (b) => b
+                    ..name = 'model'
+                    ..type = Reference(element.name)
+                    ..modifier = FieldModifier.final$,
+                ),
+                Field(
+                  (b) => b
+                    ..name = 'child'
+                    ..type = Reference('Widget?')
+                    ..modifier = FieldModifier.final$,
+                ),
+                Field(
+                  (b) => b
+                    ..name = 'builder'
+                    ..type = Reference(
+                      'Widget Function(BuildContext context, ${formGenerator.className} formModel, Widget? child)',
+                    )
+                    ..modifier = FieldModifier.final$,
+                ),
+              ],
+            )
             ..constructors.add(
               Constructor(
                 (b) => b
+                  ..initializers.add(
+                    refer('super').call(
+                      [],
+                      {'key': CodeExpression(Code('key'))},
+                    ).code,
+                  )
                   ..optionalParameters.addAll(
                     [
                       Parameter(
@@ -41,28 +72,28 @@ String generateLibrary(ClassElement element) {
                           ..named = true
                           ..type = Reference('Key?'),
                       ),
-                      Parameter(
-                        (b) => b
-                          ..name = 'model'
-                          ..named = true
-                          ..required = true
-                          ..type = Reference(element.name),
-                      ),
-                      Parameter(
-                        (b) => b
-                          ..name = 'child'
-                          ..named = true
-                          ..type = Reference('Widget?'),
-                      ),
-                      Parameter(
-                        (b) => b
-                          ..name = 'builder'
-                          ..named = true
-                          ..required = true
-                          ..type = Reference(
-                            'Widget Function(BuildContext context, ${formGenerator.className} formModel, Widget? child)',
+                      Parameter((b) => b
+                            ..name = 'model'
+                            ..named = true
+                            ..toThis = true
+                            ..required = true
+                          // ..type = Reference(element.name),
                           ),
-                      ),
+                      Parameter((b) => b
+                            ..name = 'child'
+                            ..named = true
+                            ..toThis = true
+                          // ..type = Reference('Widget?'),
+                          ),
+                      Parameter((b) => b
+                            ..name = 'builder'
+                            ..named = true
+                            ..toThis = true
+                            ..required = true
+                          // ..type = Reference(
+                          //   'Widget Function(BuildContext context, ${formGenerator.className} formModel, Widget? child)',
+                          // ),
+                          ),
                     ],
                   ),
               ),
@@ -142,7 +173,7 @@ String generateLibrary(ClassElement element) {
                     )
                     ..body = Code(
                       '''
-                        ReactiveFormBuilder(
+                        return ReactiveFormBuilder(
                           child: widget.child,
                           form: () => _form.form,
                           builder: (context, form, child) {

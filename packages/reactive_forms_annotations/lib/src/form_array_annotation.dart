@@ -1,10 +1,10 @@
-import 'package:reactive_forms_annotations/src/typedefs.dart';
+import 'package:reactive_forms_core/reactive_forms_core.dart';
 
-class FormArray {
+class FormArrayAnnotation {
   final List<ValidatorFunction> validators;
   final List<AsyncValidatorFunction> asyncValidators;
 
-  const FormArray({
+  const FormArrayAnnotation({
     this.validators = const [],
     this.asyncValidators = const [],
   });

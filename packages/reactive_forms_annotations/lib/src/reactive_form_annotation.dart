@@ -1,3 +1,3 @@
-class ReactiveForm {
-  const ReactiveForm();
+class ReactiveFormAnnotation {
+  const ReactiveFormAnnotation();
 }

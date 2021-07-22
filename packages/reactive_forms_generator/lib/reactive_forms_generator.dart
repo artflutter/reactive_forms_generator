@@ -6,7 +6,8 @@ import 'package:source_gen/source_gen.dart';
 import 'src/library_builder.dart';
 import 'utils.dart';
 
-class ReactiveFormsGenerator extends GeneratorForAnnotation<ReactiveForm> {
+class ReactiveFormsGenerator
+    extends GeneratorForAnnotation<ReactiveFormAnnotation> {
   @override
   dynamic generateForAnnotatedElement(
     Element element,

@@ -1,6 +1,6 @@
-import 'package:reactive_forms_annotations/src/typedefs.dart';
+import 'package:reactive_forms_core/reactive_forms_core.dart';
 
-class FormControl {
+class FormControlAnnotation {
   final List<ValidatorFunction> validators;
 
   final List<AsyncValidatorFunction> asyncValidators;
@@ -11,7 +11,7 @@ class FormControl {
 
   final bool disabled;
 
-  const FormControl({
+  const FormControlAnnotation({
     this.validators = const [],
     this.asyncValidators = const [],
     this.asyncValidatorsDebounceTime = 250,
