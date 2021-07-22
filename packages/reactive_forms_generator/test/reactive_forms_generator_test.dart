@@ -115,6 +115,12 @@ class LoginForm {
 
   static String categories = "categories";
 
+  String emailControlName = "email";
+
+  String passwordControlName = "password";
+
+  String categoriesControlName = "categories";
+
   late FormGroup form;
 
   String get emailValue => form.value[LoginForm.email] as String;
@@ -124,6 +130,12 @@ class LoginForm {
   bool get containsEmail => form.contains(LoginForm.email);
   bool get containsPassword => form.contains(LoginForm.password);
   bool get containsCategories => form.contains(LoginForm.categories);
+  Object? get emailErrors => form.errors[LoginForm.email];
+  Object? get passwordErrors => form.errors[LoginForm.password];
+  Object? get categoriesErrors => form.errors[LoginForm.categories];
+  void get emailFocus => form.focus(LoginForm.email);
+  void get passwordFocus => form.focus(LoginForm.password);
+  void get categoriesFocus => form.focus(LoginForm.categories);
   Map<String, Object> _formElements(Login login) => {
         LoginForm.email: FormControl<String>(
             value: login.email, validators: [], asyncValidators: []),

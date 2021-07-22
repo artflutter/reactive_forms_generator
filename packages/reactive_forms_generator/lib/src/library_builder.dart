@@ -7,8 +7,8 @@ import 'package:reactive_forms_generator/src/form_generator.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:recase/recase.dart';
 
-const stringRefer = Reference('String');
-const formGroupRefer = Reference('FormGroup');
+const stringRef = Reference('String');
+const formGroupRef = Reference('FormGroup');
 
 String generateLibrary(ClassElement element) {
   final emitter = DartEmitter(
@@ -72,28 +72,26 @@ String generateLibrary(ClassElement element) {
                           ..named = true
                           ..type = Reference('Key?'),
                       ),
-                      Parameter((b) => b
-                            ..name = 'model'
-                            ..named = true
-                            ..toThis = true
-                            ..required = true
-                          // ..type = Reference(element.name),
-                          ),
-                      Parameter((b) => b
-                            ..name = 'child'
-                            ..named = true
-                            ..toThis = true
-                          // ..type = Reference('Widget?'),
-                          ),
-                      Parameter((b) => b
-                            ..name = 'builder'
-                            ..named = true
-                            ..toThis = true
-                            ..required = true
-                          // ..type = Reference(
-                          //   'Widget Function(BuildContext context, ${formGenerator.className} formModel, Widget? child)',
-                          // ),
-                          ),
+                      Parameter(
+                        (b) => b
+                          ..name = 'model'
+                          ..named = true
+                          ..toThis = true
+                          ..required = true,
+                      ),
+                      Parameter(
+                        (b) => b
+                          ..name = 'child'
+                          ..named = true
+                          ..toThis = true,
+                      ),
+                      Parameter(
+                        (b) => b
+                          ..name = 'builder'
+                          ..named = true
+                          ..toThis = true
+                          ..required = true,
+                      ),
                     ],
                   ),
               ),
@@ -103,6 +101,7 @@ String generateLibrary(ClassElement element) {
                 (b) => b
                   ..name = 'createState'
                   ..lambda = true
+                  ..type
                   ..annotations.add(CodeExpression(Code('override')))
                   ..returns = Reference(
                     '_${formGenerator.className}BuilderState',
@@ -117,7 +116,8 @@ String generateLibrary(ClassElement element) {
             ..extend = Reference('State<${formGenerator.className}Builder>')
             ..fields.add(Field((b) => b
               ..name = '_form'
-              ..type = Reference('late ${formGenerator.className}')))
+              ..late = true
+              ..type = Reference(formGenerator.className)))
             // ..constructors.add(
             //   Constructor(
             //         (b) => b
@@ -191,21 +191,13 @@ String generateLibrary(ClassElement element) {
             ..name = formGenerator.className
             ..fields.addAll(
               [
-                ...element.fields.map(
-                  (e) => Field(
-                    (b) => b
-                      ..static = true
-                      ..type = stringRefer
-                      ..name = e.name
-                      ..assignment = Code('"${e.name}"'),
-                  ),
-                ),
+                ...formGenerator.staticFieldNameList,
+                ...formGenerator.fieldControlNameList,
                 Field(
                   (b) => b
                     ..name = 'form'
-                    // TODO: remove this workaround when code_builder includes late field modifier:
-                    // https://github.com/dart-lang/code_builder/pull/310
-                    ..type = Reference('late FormGroup'),
+                    ..late = true
+                    ..type = Reference('FormGroup'),
                 ),
               ],
             )
@@ -227,6 +219,8 @@ String generateLibrary(ClassElement element) {
             ..methods.addAll([
               ...formGenerator.fieldValueMethodList,
               ...formGenerator.fieldContainsMethodList,
+              ...formGenerator.fieldErrorsMethodList,
+              ...formGenerator.fieldFocusMethodList,
               Method(
                 (b) {
                   final formElements = element.fields.map(

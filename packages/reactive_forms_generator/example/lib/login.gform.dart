@@ -62,6 +62,10 @@ class LoginForm {
   String get passwordValue => form.value[LoginForm.password] as String;
   bool get containsEmail => form.contains(LoginForm.email);
   bool get containsPassword => form.contains(LoginForm.password);
+  Object? get emailErrors => form.errors[LoginForm.email];
+  Object? get passwordErrors => form.errors[LoginForm.password];
+  void get emailFocus => form.focus(LoginForm.email);
+  void get passwordFocus => form.focus(LoginForm.password);
   Map<String, Object> _formElements(Login login) => {
         LoginForm.email: FormControl<String>(
             value: login.email, validators: [required], asyncValidators: []),

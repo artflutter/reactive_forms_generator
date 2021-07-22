@@ -24,10 +24,10 @@ dependencies:
 #  flutter:
 #    sdk: flutter
   build: ^2.0.3
-  source_gen: ^1.0.2
+  source_gen: ^1.0.5
   path: ^1.8.0
   build_runner: ^2.0.6
-  code_builder: ^4.0.0
+  code_builder: ^4.1.0
   dart_style: ^2.0.2
   recase: ^4.0.0
 #  reactive_forms_annotations:

@@ -21,12 +21,12 @@ class ReactiveFormsGenerator
       element: element,
     );
 
-    var libs = await buildStep.resolver.libraries.toList();
+    // var libs = await buildStep.resolver.libraries.toList();
 
-    Uri? targetFileUri;
-    if (annotation.peek('preferRelativeImports')?.boolValue != false) {
-      targetFileUri = element.source?.uri;
-    }
+    // Uri? targetFileUri;
+    // if (annotation.peek('preferRelativeImports')?.boolValue != false) {
+    //   targetFileUri = element.source?.uri;
+    // }
     // var importResolver = TypeResolver(libs, targetFileUri);
 
     // var routerResolver = RouterConfigResolver(importResolver);
