@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 import 'helpers.dart';
 
 void main() {
-  group('Material auto_router', () {
+  group('reactive_forms_generator', () {
     test(
       'Simple test',
       () async {

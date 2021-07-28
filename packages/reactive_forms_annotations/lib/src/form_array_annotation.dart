@@ -1,4 +1,4 @@
-import 'package:reactive_forms_core/reactive_forms_core.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 class FormArrayAnnotation {
   final List<ValidatorFunction> validators;

@@ -25,11 +25,12 @@ dependencies:
     sdk: flutter
   reactive_forms_annotations:
     path: ../../reactive_forms_annotations
-  reactive_forms:
-    git:
-      url: https://github.com/artflutter/reactive_forms.git
-      ref: package-split
-      path: packages/reactive_forms
+  reactive_forms: ^10.5.0
+#  reactive_forms:
+#    git:
+#      url: https://github.com/artflutter/reactive_forms.git
+#      ref: package-split
+#      path: packages/reactive_forms
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -37,12 +38,12 @@ dependencies:
   cupertino_icons: ^1.0.3
 
 dependency_overrides:
-  meta: ^1.7.0
-  reactive_forms_core:
-    git:
-      url: https://github.com/artflutter/reactive_forms.git
-      ref: package-split
-      path: packages/reactive_forms_core
+#  meta: ^1.7.0
+#  reactive_forms_core:
+#    git:
+#      url: https://github.com/artflutter/reactive_forms.git
+#      ref: package-split
+#      path: packages/reactive_forms_core
 
 dev_dependencies:
   reactive_forms_generator:
