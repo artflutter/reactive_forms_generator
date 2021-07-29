@@ -36,6 +36,10 @@ String generateLibrary(ClassElement element) {
         Directive.import(
           'package:reactive_forms/src/widgets/inherited_streamer.dart',
         ),
+        ...element.enclosingElement.enclosingElement.imports
+            .map((e) => e.uri)
+            .whereType<String>()
+            .map((e) => Directive.import(e)),
         Directive.import(element.librarySource.shortName),
         reactiveFormConsumer.generate,
         reactiveInheritedStreamer.generate,

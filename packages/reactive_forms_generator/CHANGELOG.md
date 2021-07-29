@@ -1,3 +1,7 @@
+## [0.0.4-beta]
+
+* re-import imports from model
+
 ## [0.0.3-beta]
 
 * pascal case fix

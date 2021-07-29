@@ -70,6 +70,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
+import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'dart:core';
 import 'login.dart';
 
 class ReactiveLoginFormConsumer extends StatelessWidget {
