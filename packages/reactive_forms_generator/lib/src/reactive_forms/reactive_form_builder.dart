@@ -130,16 +130,16 @@ class ReactiveFormBuilder {
             )
             ..body = Code(
               '''
-                        return ReactiveLoginForm(
-                          form: _form,
-                          onWillPop: widget.onWillPop,
-                          child: ReactiveForm(
-                            formGroup: _form.form,
-                            onWillPop: widget.onWillPop,
-                            child: widget.builder(context, _form, widget.child),
-                          ),
-                        );
-                      ''',
+                return ${reactiveForm.className}(
+                  form: _form,
+                  onWillPop: widget.onWillPop,
+                  child: ReactiveForm(
+                    formGroup: _form.form,
+                    onWillPop: widget.onWillPop,
+                    child: widget.builder(context, _form, widget.child),
+                  ),
+                );
+              ''',
             ),
         ),
       ];

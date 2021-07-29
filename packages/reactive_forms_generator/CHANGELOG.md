@@ -1,3 +1,7 @@
+## [0.0.5-beta]
+
+* hardcoded value fix
+
 ## [0.0.4-beta]
 
 * re-import imports from model
