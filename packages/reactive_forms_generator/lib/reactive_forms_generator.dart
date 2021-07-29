@@ -1,3 +1,5 @@
+library reactive_forms_generator;
+
 import 'dart:async';
 
 import 'package:analyzer/dart/element/element.dart';
@@ -17,7 +19,8 @@ class ReactiveFormsGenerator extends Generator {
     final values = <String>{};
 
     for (var annotatedElement in library.annotatedWith(formChecker)) {
-      final generatedValue = generateForAnnotatedElement(annotatedElement.element, annotatedElement.annotation, buildStep);
+      final generatedValue = generateForAnnotatedElement(
+          annotatedElement.element, annotatedElement.annotation, buildStep);
       await for (var value in normalizeGeneratorOutput(generatedValue)) {
         assert(value.length == value.trim().length);
         values.add(value);
