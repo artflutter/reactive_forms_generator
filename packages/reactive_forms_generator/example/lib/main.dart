@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 ReactiveLoginFormConsumer(
                   builder: (context, form, child) {
-                    return RaisedButton(
+                    return ElevatedButton(
                       child: Text('Submit'),
                       onPressed: form.form.valid ? () {} : null,
                     );

@@ -1,5 +1,3 @@
-import 'package:flutter/widgets.dart';
-
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 

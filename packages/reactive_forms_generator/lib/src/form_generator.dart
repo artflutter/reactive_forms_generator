@@ -48,7 +48,7 @@ class FormGenerator {
           ..type = MethodType.getter
           ..returns = Reference(field.type.toString())
           ..body = Code(
-            'form.value[${className}.${fieldName(field)}] as ${field.type}',
+            'form.value[$className.${fieldName(field)}] as ${field.type}',
           ),
       );
 
@@ -62,7 +62,7 @@ class FormGenerator {
           ..type = MethodType.getter
           ..returns = Reference('bool')
           ..body = Code(
-            'form.contains(${className}.${fieldName(field)})',
+            'form.contains($className.${fieldName(field)})',
           ),
       );
 
@@ -76,7 +76,7 @@ class FormGenerator {
           ..type = MethodType.getter
           ..returns = Reference('Object?')
           ..body = Code(
-            'form.errors[${className}.${fieldName(field)}]',
+            'form.errors[$className.${fieldName(field)}]',
           ),
       );
 
@@ -89,22 +89,26 @@ class FormGenerator {
           ..type = MethodType.getter
           ..returns = Reference('void')
           ..body = Code(
-            'form.focus(${className}.${fieldName(field)})',
+            'form.focus($className.${fieldName(field)})',
           ),
       );
 
   List<Method> get fieldFocusMethodList => element.fields.map(focus).toList();
 
-  Method control(FieldElement field) => Method(
-        (b) => b
-          ..name = fieldControlName(field)
-          ..lambda = true
-          ..type = MethodType.getter
-          ..returns = Reference('FormControl<${field.type}>')
-          ..body = Code(
-            'form.control(${className}.${fieldName(field)}) as FormControl<${field.type}>',
-          ),
-      );
+  Method control(FieldElement field) {
+    final type = field.type.getDisplayString(withNullability: false);
+
+    return Method(
+      (b) => b
+        ..name = fieldControlName(field)
+        ..lambda = true
+        ..type = MethodType.getter
+        ..returns = Reference('FormControl<$type>')
+        ..body = Code(
+          'form.control($className.${fieldName(field)}) as FormControl<$type>',
+        ),
+    );
+  }
 
   List<Method> get fieldControlMethodList =>
       element.fields.map(control).toList();
@@ -168,7 +172,7 @@ class FormGenerator {
                 (b) {
                   final formElements = element.fields.map(
                     (f) {
-                      FormElementGenerator? formElementGenerator = null;
+                      FormElementGenerator? formElementGenerator;
                       if (formControlChecker.hasAnnotationOfExact(f)) {
                         formElementGenerator = FormControlGenerator(f);
                       }
@@ -178,7 +182,7 @@ class FormGenerator {
                       }
 
                       if (formElementGenerator != null) {
-                        return '${className}.${f.name}: ${formElementGenerator.element(
+                        return '$className.${f.name}: ${formElementGenerator.element(
                           '${element.name.camelCase}.${f.name}',
                         )}';
                       }

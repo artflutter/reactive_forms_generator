@@ -59,12 +59,12 @@ class FormControlGenerator extends FormElementGenerator {
   @override
   String element(defaultValue) {
     final props = [
-      'value: ${defaultValue}',
+      'value: $defaultValue',
       'validators: [${syncValidatorList(formControlChecker).join(',')}]',
       'asyncValidators: [${asyncValidatorList(formControlChecker).join(',')}]',
     ].join(',');
 
-    return 'FormControl<${field.type}>(${props})';
+    return 'FormControl<${field.type.getDisplayString(withNullability: false)}>($props)';
   }
 }
 
@@ -74,7 +74,8 @@ class FormArrayGenerator extends FormElementGenerator {
   @override
   String element(defaultValue) {
     final type = field.type;
-    final typeArguments = type is ParameterizedType ? type.typeArguments : const [];
+    final typeArguments =
+        type is ParameterizedType ? type.typeArguments : const [];
 
     final props = [
       '${defaultValue ?? []}',
@@ -82,6 +83,6 @@ class FormArrayGenerator extends FormElementGenerator {
       'asyncValidators: [${asyncValidatorList(formArrayChecker).join(',')}]',
     ].join(',');
 
-    return 'FormArray<${typeArguments.first}>(${props})';
+    return 'FormArray<${typeArguments.first}>($props)';
   }
 }

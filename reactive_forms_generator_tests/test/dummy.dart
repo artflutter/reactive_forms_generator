@@ -8,6 +8,8 @@
 // import 'package:flutter/material.dart';
 // import 'package:reactive_forms/reactive_forms.dart';
 // import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
+// import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+// import 'dart:core';
 // import 'login.dart';
 //
 // class ReactiveLoginFormConsumer extends StatelessWidget {
@@ -149,7 +151,7 @@
 //   late FormGroup form;
 //
 //   String get emailValue => form.value[LoginForm.email] as String;
-//   String get clientIdValue => form.value[LoginForm.clientId] as String;
+//   String? get clientIdValue => form.value[LoginForm.clientId] as String?;
 //   String get passwordValue => form.value[LoginForm.password] as String;
 //   List<String> get categoriesValue =>
 //       form.value[LoginForm.categories] as List<String>;
@@ -181,7 +183,7 @@
 //   Map<String, Object> _formElements(Login login) => {
 //         LoginForm.email: FormControl<String>(
 //             value: login.email, validators: [], asyncValidators: []),
-//         LoginForm.clientId: FormControl<String>(
+//         LoginForm.clientId: FormControl<String?>(
 //             value: login.clientId, validators: [], asyncValidators: []),
 //         LoginForm.password: FormControl<String>(
 //             value: login.password, validators: [], asyncValidators: []),

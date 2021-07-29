@@ -24,7 +24,7 @@ void main() {
               final String email;
               
               @FormControlAnnotation()
-              final String clientId;
+              final String? clientId;
             
               @FormControlAnnotation(
                 validators: const [
@@ -213,7 +213,7 @@ class LoginForm {
   late FormGroup form;
 
   String get emailValue => form.value[LoginForm.email] as String;
-  String get clientIdValue => form.value[LoginForm.clientId] as String;
+  String? get clientIdValue => form.value[LoginForm.clientId] as String?;
   String get passwordValue => form.value[LoginForm.password] as String;
   List<String> get categoriesValue =>
       form.value[LoginForm.categories] as List<String>;

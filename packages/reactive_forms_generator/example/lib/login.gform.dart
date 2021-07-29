@@ -27,7 +27,6 @@ class ReactiveLoginFormConsumer extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, form, child);
-    ;
   }
 }
 

@@ -1,3 +1,7 @@
+## [0.0.6-beta]
+
+* FormControl type fix
+ 
 ## [0.0.5-beta]
 
 * hardcoded value fix
