@@ -1,9 +1,9 @@
 name: reactive_forms_generator
-description: A new Flutter project.
+description: Generator for reactive_forms. Generates form classes based on model.
+repository: https://github.com/artflutter/reactive_forms_generator
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 0.0.1-beta
 
 environment:
   sdk: ">=2.13.0 <3.0.0"
@@ -23,10 +23,11 @@ environment:
 dependencies:
   build: ^2.0.3
   source_gen: ^1.0.3
+  analyzer: ">=0.40.0 <2.0.0"
   path: ^1.8.0
   build_runner: ^2.0.6
   code_builder: ^4.1.0
-  dart_style: ^2.0.2
+  dart_style: ^2.0.3
   recase: ^4.0.0
 
 dev_dependencies:

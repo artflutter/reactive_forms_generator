@@ -1,6 +1,6 @@
 # reactive_forms_annotations
 
-A new Flutter project.
+Annotations for `reactive_forms_generator`
 
 ## Getting Started
 

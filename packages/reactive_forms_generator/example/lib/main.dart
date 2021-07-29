@@ -1,4 +1,5 @@
 import 'package:example/login.dart';
+import 'package:example/login.gform.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -78,12 +79,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 ElevatedButton(
                   onPressed: () {
                     if (formModel.form.valid) {
-                      print(formModel.form.value);
+                      print(formModel.model);
+                      print(formModel.model.email);
                     } else {
                       formModel.form.markAllAsTouched();
                     }
                   },
                   child: const Text('Sign Up'),
+                ),
+                ReactiveLoginFormConsumer(
+                  builder: (context, form, child) {
+                    return RaisedButton(
+                      child: Text('Submit'),
+                      onPressed: form.form.valid ? () {} : null,
+                    );
+                  },
                 ),
               ],
             ),
