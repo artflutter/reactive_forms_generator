@@ -11,8 +11,6 @@ void main() {
           model: r'''
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
-            part 'login.gform.dart';
-
             @ReactiveFormAnnotation()
             class Login {
               @FormControlAnnotation(
@@ -24,6 +22,9 @@ void main() {
                 ],
               )
               final String email;
+              
+              @FormControlAnnotation()
+              final String clientId;
             
               @FormControlAnnotation(
                 validators: const [
@@ -193,11 +194,15 @@ class LoginForm {
 
   static String email = "email";
 
+  static String clientId = "clientId";
+
   static String password = "password";
 
   static String categories = "categories";
 
   String emailControlName = "email";
+
+  String clientIdControlName = "clientId";
 
   String passwordControlName = "password";
 
@@ -206,29 +211,40 @@ class LoginForm {
   late FormGroup form;
 
   String get emailValue => form.value[LoginForm.email] as String;
+  String get clientIdValue => form.value[LoginForm.clientId] as String;
   String get passwordValue => form.value[LoginForm.password] as String;
   List<String> get categoriesValue =>
       form.value[LoginForm.categories] as List<String>;
   bool get containsEmail => form.contains(LoginForm.email);
+  bool get containsClientId => form.contains(LoginForm.clientId);
   bool get containsPassword => form.contains(LoginForm.password);
   bool get containsCategories => form.contains(LoginForm.categories);
   Object? get emailErrors => form.errors[LoginForm.email];
+  Object? get clientIdErrors => form.errors[LoginForm.clientId];
   Object? get passwordErrors => form.errors[LoginForm.password];
   Object? get categoriesErrors => form.errors[LoginForm.categories];
   void get emailFocus => form.focus(LoginForm.email);
+  void get clientIdFocus => form.focus(LoginForm.clientId);
   void get passwordFocus => form.focus(LoginForm.password);
   void get categoriesFocus => form.focus(LoginForm.categories);
   FormControl<String> get emailControl =>
       form.control(LoginForm.email) as FormControl<String>;
+  FormControl<String> get clientIdControl =>
+      form.control(LoginForm.clientId) as FormControl<String>;
   FormControl<String> get passwordControl =>
       form.control(LoginForm.password) as FormControl<String>;
   FormControl<List<String>> get categoriesControl =>
       form.control(LoginForm.categories) as FormControl<List<String>>;
   Login get model => Login(
-      email: emailValue, password: passwordValue, categories: categoriesValue);
+      email: emailValue,
+      clientId: clientIdValue,
+      password: passwordValue,
+      categories: categoriesValue);
   Map<String, Object> _formElements(Login login) => {
         LoginForm.email: FormControl<String>(
             value: login.email, validators: [], asyncValidators: []),
+        LoginForm.clientId: FormControl<String>(
+            value: login.clientId, validators: [], asyncValidators: []),
         LoginForm.password: FormControl<String>(
             value: login.password, validators: [], asyncValidators: []),
         LoginForm.categories: FormArray<String>(login.categories,

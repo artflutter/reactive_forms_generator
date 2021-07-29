@@ -57,7 +57,7 @@ class FormGenerator {
 
   Method fieldContainsMethod(FieldElement field) => Method(
         (b) => b
-          ..name = 'contains${field.name.sentenceCase}'
+          ..name = 'contains${field.name.pascalCase}'
           ..lambda = true
           ..type = MethodType.getter
           ..returns = Reference('bool')
