@@ -1,3 +1,7 @@
+## [0.0.7-beta]
+
+* FormGroup support
+ 
 ## [0.0.6-beta]
 
 * FormControl type fix

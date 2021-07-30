@@ -41,7 +41,7 @@ String generateLibrary(ClassElement element) {
         reactiveInheritedStreamer.generate,
         reactiveForm.generate,
         ...reactiveFormBuilder.generate,
-        formGenerator.generate,
+        ...formGenerator.generate,
       ]),
   );
 

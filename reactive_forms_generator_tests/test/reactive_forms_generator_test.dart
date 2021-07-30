@@ -11,6 +11,24 @@ void main() {
           model: r'''
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
+            @FormGroupAnnotation()
+            class UserData {
+              @FormControlAnnotation()
+              final String firstName;
+            
+              @FormControlAnnotation()
+              final String lastName;
+            
+              @FormArrayAnnotation()
+              final List<String> skills;
+            
+              UserData({
+                required this.firstName,
+                required this.lastName,
+                required this.skills,
+              });
+            }
+            
             @ReactiveFormAnnotation()
             class Login {
               @FormControlAnnotation(
@@ -35,6 +53,8 @@ void main() {
                 ],
               )
               final String password;
+              
+              final UserData userData;
             
               @FormArrayAnnotation(
                 validators: const [
@@ -50,6 +70,8 @@ void main() {
                 this.email = 'default@e.mail',
                 required this.password,
                 required this.categories,
+                required this.userData,
+                this.clientId
               });
             }
           ''',
@@ -190,8 +212,9 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
 }
 
 class LoginForm {
-  LoginForm(Login login) {
-    form = fb.group(_formElements(login));
+  LoginForm(this.login) {
+    form = fb.group(formElements());
+    userDataForm = UserDataForm(login.userData);
   }
 
   static String email = "email";
@@ -199,6 +222,8 @@ class LoginForm {
   static String clientId = "clientId";
 
   static String password = "password";
+
+  static String userData = "userData";
 
   static String categories = "categories";
 
@@ -209,6 +234,10 @@ class LoginForm {
   String passwordControlName = "password";
 
   String categoriesControlName = "categories";
+
+  late UserDataForm userDataForm;
+
+  Login login;
 
   late FormGroup form;
 
@@ -241,16 +270,74 @@ class LoginForm {
       email: emailValue,
       clientId: clientIdValue,
       password: passwordValue,
-      categories: categoriesValue);
-  Map<String, Object> _formElements(Login login) => {
+      categories: categoriesValue,
+      userData: userDataForm.model);
+  Map<String, AbstractControl<dynamic>> formElements() => {
         LoginForm.email: FormControl<String>(
             value: login.email, validators: [], asyncValidators: []),
         LoginForm.clientId: FormControl<String>(
             value: login.clientId, validators: [], asyncValidators: []),
         LoginForm.password: FormControl<String>(
             value: login.password, validators: [], asyncValidators: []),
-        LoginForm.categories: FormArray<String>(login.categories,
-            validators: [], asyncValidators: [])
+        LoginForm.categories: FormArray<String>(
+            login.categories.map((e) => FormControl<String>(value: e)).toList(),
+            validators: [],
+            asyncValidators: []),
+        LoginForm.userData: FormGroup(userDataForm.formElements())
+      };
+}
+
+class UserDataForm {
+  UserDataForm(this.userData) {
+    form = fb.group(formElements());
+  }
+
+  static String firstName = "firstName";
+
+  static String lastName = "lastName";
+
+  static String skills = "skills";
+
+  String firstNameControlName = "firstName";
+
+  String lastNameControlName = "lastName";
+
+  String skillsControlName = "skills";
+
+  UserData userData;
+
+  late FormGroup form;
+
+  String get firstNameValue => form.value[UserDataForm.firstName] as String;
+  String get lastNameValue => form.value[UserDataForm.lastName] as String;
+  List<String> get skillsValue =>
+      form.value[UserDataForm.skills] as List<String>;
+  bool get containsFirstName => form.contains(UserDataForm.firstName);
+  bool get containsLastName => form.contains(UserDataForm.lastName);
+  bool get containsSkills => form.contains(UserDataForm.skills);
+  Object? get firstNameErrors => form.errors[UserDataForm.firstName];
+  Object? get lastNameErrors => form.errors[UserDataForm.lastName];
+  Object? get skillsErrors => form.errors[UserDataForm.skills];
+  void get firstNameFocus => form.focus(UserDataForm.firstName);
+  void get lastNameFocus => form.focus(UserDataForm.lastName);
+  void get skillsFocus => form.focus(UserDataForm.skills);
+  FormControl<String> get firstNameControl =>
+      form.control(UserDataForm.firstName) as FormControl<String>;
+  FormControl<String> get lastNameControl =>
+      form.control(UserDataForm.lastName) as FormControl<String>;
+  FormControl<List<String>> get skillsControl =>
+      form.control(UserDataForm.skills) as FormControl<List<String>>;
+  UserData get model => UserData(
+      firstName: firstNameValue, lastName: lastNameValue, skills: skillsValue);
+  Map<String, AbstractControl<dynamic>> formElements() => {
+        UserDataForm.firstName: FormControl<String>(
+            value: userData.firstName, validators: [], asyncValidators: []),
+        UserDataForm.lastName: FormControl<String>(
+            value: userData.lastName, validators: [], asyncValidators: []),
+        UserDataForm.skills: FormArray<String>(
+            userData.skills.map((e) => FormControl<String>(value: e)).toList(),
+            validators: [],
+            asyncValidators: [])
       };
 }
 ''';
