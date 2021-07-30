@@ -1,3 +1,7 @@
+## [0.0.4-beta]
+
+* asyncDebounceTime and disable support
+
 ## [0.0.3-beta]
 
 * FormGroup support
