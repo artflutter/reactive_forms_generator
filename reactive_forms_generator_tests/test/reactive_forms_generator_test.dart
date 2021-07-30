@@ -274,16 +274,37 @@ class LoginForm {
       userData: userDataForm.model);
   Map<String, AbstractControl<dynamic>> formElements() => {
         LoginForm.email: FormControl<String>(
-            value: login.email, validators: [], asyncValidators: []),
+            value: login.email,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
         LoginForm.clientId: FormControl<String>(
-            value: login.clientId, validators: [], asyncValidators: []),
+            value: login.clientId,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
         LoginForm.password: FormControl<String>(
-            value: login.password, validators: [], asyncValidators: []),
+            value: login.password,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
         LoginForm.categories: FormArray<String>(
             login.categories.map((e) => FormControl<String>(value: e)).toList(),
             validators: [],
-            asyncValidators: []),
-        LoginForm.userData: FormGroup(userDataForm.formElements())
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false),
+        LoginForm.userData: FormGroup(userDataForm.formElements(),
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false)
       };
 }
 
@@ -331,13 +352,25 @@ class UserDataForm {
       firstName: firstNameValue, lastName: lastNameValue, skills: skillsValue);
   Map<String, AbstractControl<dynamic>> formElements() => {
         UserDataForm.firstName: FormControl<String>(
-            value: userData.firstName, validators: [], asyncValidators: []),
+            value: userData.firstName,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
         UserDataForm.lastName: FormControl<String>(
-            value: userData.lastName, validators: [], asyncValidators: []),
+            value: userData.lastName,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
         UserDataForm.skills: FormArray<String>(
             userData.skills.map((e) => FormControl<String>(value: e)).toList(),
             validators: [],
-            asyncValidators: [])
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false)
       };
 }
 ''';

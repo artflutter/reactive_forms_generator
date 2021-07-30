@@ -55,6 +55,45 @@ abstract class FormElementGenerator {
     return [];
   }
 
+  int asyncValidatorsDebounceTime(TypeChecker typeChecker) {
+    int? debounceTime;
+    if (typeChecker.hasAnnotationOfExact(field)) {
+      final annotation = typeChecker.firstAnnotationOfExact(field);
+      debounceTime = annotation
+          ?.getField(
+            'asyncValidatorsDebounceTime',
+          )
+          ?.toIntValue();
+    }
+    return debounceTime ?? 250;
+  }
+
+  bool disabled(TypeChecker typeChecker) {
+    bool? disabled;
+    if (typeChecker.hasAnnotationOfExact(field)) {
+      final annotation = typeChecker.firstAnnotationOfExact(field);
+      disabled = annotation
+          ?.getField(
+            'disabled',
+          )
+          ?.toBoolValue();
+    }
+    return disabled ?? false;
+  }
+
+  bool touched(TypeChecker typeChecker) {
+    bool? touched;
+    if (typeChecker.hasAnnotationOfExact(field)) {
+      final annotation = typeChecker.firstAnnotationOfExact(field);
+      touched = annotation
+          ?.getField(
+            'touched',
+          )
+          ?.toBoolValue();
+    }
+    return touched ?? false;
+  }
+
   String element();
 }
 
@@ -66,7 +105,15 @@ class FormGroupGenerator extends FormElementGenerator {
     final enclosingClass = field.type.element as ClassElement;
     final formGenerator = FormGenerator(enclosingClass);
 
-    return 'FormGroup(${formGenerator.className.camelCase}.formElements())';
+    final props = [
+      '${formGenerator.className.camelCase}.formElements()',
+      'validators: [${syncValidatorList(formControlChecker).join(',')}]',
+      'asyncValidators: [${asyncValidatorList(formControlChecker).join(',')}]',
+      'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formControlChecker)}',
+      'disabled: ${disabled(formControlChecker)}',
+    ].join(',');
+
+    return 'FormGroup($props)';
   }
 }
 
@@ -79,6 +126,9 @@ class FormControlGenerator extends FormElementGenerator {
       'value: $value',
       'validators: [${syncValidatorList(formControlChecker).join(',')}]',
       'asyncValidators: [${asyncValidatorList(formControlChecker).join(',')}]',
+      'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formControlChecker)}',
+      'disabled: ${disabled(formControlChecker)}',
+      'touched: ${touched(formControlChecker)}',
     ].join(',');
 
     return 'FormControl<${field.type.getDisplayString(withNullability: false)}>($props)';
@@ -98,6 +148,8 @@ class FormArrayGenerator extends FormElementGenerator {
       '$value.map((e) => FormControl<${typeArguments.first}>(value: e)).toList()',
       'validators: [${syncValidatorList(formArrayChecker).join(',')}]',
       'asyncValidators: [${asyncValidatorList(formArrayChecker).join(',')}]',
+      'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formControlChecker)}',
+      'disabled: ${disabled(formControlChecker)}',
     ].join(',');
 
     return 'FormArray<${typeArguments.first}>($props)';
