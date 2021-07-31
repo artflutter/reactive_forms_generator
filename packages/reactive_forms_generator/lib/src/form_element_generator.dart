@@ -100,13 +100,66 @@ abstract class FormElementGenerator {
 class FormGroupGenerator extends FormElementGenerator {
   FormGroupGenerator(FieldElement field) : super(field);
 
+  List<FieldElement> get formElements => (field.type.element as ClassElement)
+      .fields
+      .where(
+        (e) =>
+            formControlChecker.hasAnnotationOfExact(e) ||
+            formArrayChecker.hasAnnotationOfExact(e),
+      )
+      .toList();
+
+  List<FieldElement> get nestedFormElements =>
+      (field.type.element as ClassElement)
+          .fields
+          .where(
+            (e) => e.type.element is ClassElement,
+          )
+          .where(
+            (e) => formGroupChecker.hasAnnotationOfExact(e.type.element!),
+          )
+          .toList();
+
   @override
   String element() {
     final enclosingClass = field.type.element as ClassElement;
-    final formGenerator = FormGenerator(enclosingClass);
+
+    final _formElements = formElements
+        .map(
+          (f) {
+            f.type.element;
+            FormElementGenerator? formElementGenerator;
+
+            if (formControlChecker.hasAnnotationOfExact(f)) {
+              formElementGenerator = FormControlGenerator(f);
+            }
+
+            if (formArrayChecker.hasAnnotationOfExact(f)) {
+              formElementGenerator = FormArrayGenerator(f);
+            }
+
+            if (formElementGenerator != null) {
+              return '${f.name}: ${formElementGenerator.element()}';
+            }
+
+            return null;
+          },
+        )
+        .whereType<String>()
+        .toList();
+
+    _formElements.addAll(
+      nestedFormElements.map(
+        (f) {
+          final formGenerator = FormGenerator(f.type.element as ClassElement);
+
+          return '${f.name}: ${formGenerator.className.camelCase}.formElements()';
+        },
+      ),
+    );
 
     final props = [
-      '${formGenerator.className.camelCase}.formElements()',
+      '{${_formElements.join(',')}}',
       'validators: [${syncValidatorList(formControlChecker).join(',')}]',
       'asyncValidators: [${asyncValidatorList(formControlChecker).join(',')}]',
       'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formControlChecker)}',
@@ -140,18 +193,39 @@ class FormArrayGenerator extends FormElementGenerator {
 
   @override
   String element() {
-    final type = field.type;
-    final typeArguments =
-        type is ParameterizedType ? type.typeArguments : const [];
-
-    final props = [
-      '$value.map((e) => FormControl<${typeArguments.first}>(value: e)).toList()',
+    final partialProps = [
       'validators: [${syncValidatorList(formArrayChecker).join(',')}]',
       'asyncValidators: [${asyncValidatorList(formArrayChecker).join(',')}]',
       'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formControlChecker)}',
       'disabled: ${disabled(formControlChecker)}',
-    ].join(',');
+    ];
 
-    return 'FormArray<${typeArguments.first}>($props)';
+    final type = field.type;
+    final typeArguments =
+        type is ParameterizedType ? type.typeArguments : const [];
+
+    final typeParameter = typeArguments.first;
+
+    if (typeParameter is DartType &&
+        typeParameter.element is ClassElement &&
+        formGroupChecker.hasAnnotationOf(typeParameter.element!)) {
+      final formGenerator = FormGenerator(
+        typeParameter.element! as ClassElement,
+      );
+
+      final props = [
+        '${formGenerator.className.camelCase}.formElements()',
+        ...partialProps
+      ].join(', ');
+
+      return 'FormArray<FormGroup>($props)';
+    } else {
+      final props = [
+        '$value.map((e) => FormControl<${typeParameter}>(value: e)).toList()',
+        ...partialProps
+      ].join(', ');
+
+      return 'FormArray<${typeParameter}>($props)';
+    }
   }
 }

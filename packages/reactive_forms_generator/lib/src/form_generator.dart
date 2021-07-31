@@ -1,4 +1,8 @@
 import 'package:analyzer/dart/element/element.dart';
+// import 'package:analyzer/dart/element/type.dart';
+import 'package:analyzer/src/dart/element/element.dart' as e;
+import 'package:analyzer/dart/element/nullability_suffix.dart';
+import 'package:analyzer/src/dart/element/type.dart' as t;
 
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/form_element_generator.dart';
@@ -45,26 +49,32 @@ class FormGenerator {
 
   String fieldControlName(FieldElement field) => '${field.name}Control';
 
-  Field staticFieldName(FieldElement field) => Field(
+  // String staticFieldName(FieldElement field) => '$className.${field.name}';
+
+  Field field(FieldElement field) => Field(
         (b) => b
-          ..static = true
+          // ..static = true
           ..type = stringRef
-          ..name = field.name
-          ..assignment = Code('"${field.name}"'),
+          ..name = fieldName(field)
+          ..assignment = Code('"${fieldName(field)}"'),
       );
 
-  List<Field> get staticFieldNameList =>
-      element.fields.map(staticFieldName).toList();
+  List<Field> get fieldNameList => element.fields.map(field).toList();
 
-  Field fieldControlField(FieldElement field) => Field(
+  String fieldControlPatchMethodName(FieldElement field) =>
+      '${field.name}ControlPath';
+
+  Method fieldControlNameMethod(FieldElement field) => Method(
         (b) => b
-          ..type = stringRef
-          ..name = '${field.name}ControlName'
-          ..assignment = Code('"${field.name}"'),
+          ..returns = stringRef
+          ..name = fieldControlPatchMethodName(field)
+          ..lambda = true
+          ..body = Code(
+              '[path, "${fieldName(field)}"].whereType<String>().join(".")'),
       );
 
-  List<Field> get fieldControlFieldList =>
-      formElements.map(fieldControlField).toList();
+  List<Method> get fieldControlNameMethodList =>
+      formElements.map(fieldControlNameMethod).toList();
 
   List<Field> get nestedFormGroupFields => nestedFormElements
       .map(
@@ -87,7 +97,7 @@ class FormGenerator {
           ..type = MethodType.getter
           ..returns = Reference(field.type.toString())
           ..body = Code(
-            'form.value[$className.${fieldName(field)}] as ${field.type}',
+            'form.value[${fieldControlPatchMethodName(field)}()] as ${field.type}',
           ),
       );
 
@@ -101,7 +111,7 @@ class FormGenerator {
           ..type = MethodType.getter
           ..returns = Reference('bool')
           ..body = Code(
-            'form.contains($className.${fieldName(field)})',
+            'form.contains(${fieldControlPatchMethodName(field)}())',
           ),
       );
 
@@ -115,7 +125,7 @@ class FormGenerator {
           ..type = MethodType.getter
           ..returns = Reference('Object?')
           ..body = Code(
-            'form.errors[$className.${fieldName(field)}]',
+            'form.errors[${fieldControlPatchMethodName(field)}()]',
           ),
       );
 
@@ -128,7 +138,7 @@ class FormGenerator {
           ..type = MethodType.getter
           ..returns = Reference('void')
           ..body = Code(
-            'form.focus($className.${fieldName(field)})',
+            'form.focus(${fieldControlPatchMethodName(field)}())',
           ),
       );
 
@@ -144,7 +154,7 @@ class FormGenerator {
         ..type = MethodType.getter
         ..returns = Reference('FormControl<$type>')
         ..body = Code(
-          'form.control($className.${fieldName(field)}) as FormControl<$type>',
+          'form.control(${fieldControlPatchMethodName(field)}()) as FormControl<$type>',
         ),
     );
   }
@@ -185,22 +195,33 @@ class FormGenerator {
                 (nestedElement) =>
                     nestedElement.type.element!.name == e.element.name,
               );
-              return '${e.className.camelCase} = ${e.className}(${element.name.camelCase}.${nestedElement.name});';
+              return '${e.className.camelCase} = ${e.className}(${element.name.camelCase}.${nestedElement.name}, form, \'${nestedElement.name}\');';
             },
           );
 
           b
-            ..requiredParameters.addAll([
-              Parameter(
-                (b) => b
-                  ..name = element.name.camelCase
-                  ..toThis = true,
-              ),
-            ])
+            ..requiredParameters.addAll(
+              [
+                Parameter(
+                  (b) => b
+                    ..name = element.name.camelCase
+                    ..toThis = true,
+                ),
+                Parameter(
+                  (b) => b
+                    ..name = 'form'
+                    ..toThis = true,
+                ),
+                Parameter(
+                  (b) => b
+                    ..name = 'path'
+                    ..toThis = true,
+                ),
+              ],
+            )
             ..body = Code('''
-                form = fb.group(formElements());
-                ${formGroupInitializers.join('')}
-              ''');
+              ${formGroupInitializers.join('')}
+            ''');
         },
       );
 
@@ -210,26 +231,35 @@ class FormGenerator {
             ..name = className
             ..fields.addAll(
               [
-                ...staticFieldNameList,
-                ...fieldControlFieldList,
+                ...fieldNameList,
+                // ...staticFieldNameList,
+                // ...fieldControlFieldList,
                 ...nestedFormGroupFields,
                 // ..type = Reference(element.name),
                 Field(
                   (b) => b
                     ..name = element.name.camelCase
+                    ..modifier = FieldModifier.final$
                     ..type = Reference(element.name),
                 ),
                 Field(
                   (b) => b
                     ..name = 'form'
-                    ..late = true
+                    ..modifier = FieldModifier.final$
                     ..type = Reference('FormGroup'),
+                ),
+                Field(
+                  (b) => b
+                    ..name = 'path'
+                    ..modifier = FieldModifier.final$
+                    ..type = Reference('String?'),
                 ),
               ],
             )
             ..constructors.add(_constructor)
             ..methods.addAll(
               [
+                ...fieldControlNameMethodList,
                 ...fieldValueMethodList,
                 ...fieldContainsMethodList,
                 ...fieldErrorsMethodList,
@@ -238,36 +268,36 @@ class FormGenerator {
                 modelMethod,
                 Method(
                   (b) {
-                    final _formElements = formElements
-                        .map(
-                          (f) {
-                            f.type.element;
-                            FormElementGenerator? formElementGenerator;
-
-                            if (formControlChecker.hasAnnotationOfExact(f)) {
-                              formElementGenerator = FormControlGenerator(f);
-                            }
-
-                            if (formArrayChecker.hasAnnotationOfExact(f)) {
-                              formElementGenerator = FormArrayGenerator(f);
-                            }
-
-                            if (formElementGenerator != null) {
-                              return '$className.${f.name}: ${formElementGenerator.element()}';
-                            }
-
-                            return null;
-                          },
-                        )
-                        .whereType<String>()
-                        .toList();
-
-                    _formElements.addAll(
-                      nestedFormElements.map(
-                        (f) =>
-                            '$className.${f.name}: ${FormGroupGenerator(f).element()}',
-                      ),
-                    );
+                    // final _formElements = formElements
+                    //     .map(
+                    //       (f) {
+                    //         f.type.element;
+                    //         FormElementGenerator? formElementGenerator;
+                    //
+                    //         if (formControlChecker.hasAnnotationOfExact(f)) {
+                    //           formElementGenerator = FormControlGenerator(f);
+                    //         }
+                    //
+                    //         if (formArrayChecker.hasAnnotationOfExact(f)) {
+                    //           formElementGenerator = FormArrayGenerator(f);
+                    //         }
+                    //
+                    //         if (formElementGenerator != null) {
+                    //           return '${fieldName(f)}: ${formElementGenerator.element()}';
+                    //         }
+                    //
+                    //         return null;
+                    //       },
+                    //     )
+                    //     .whereType<String>()
+                    //     .toList();
+                    //
+                    // _formElements.addAll(
+                    //   nestedFormElements.map(
+                    //     (f) =>
+                    //         '${fieldName(f)}: ${FormGroupGenerator(f).element()}',
+                    //   ),
+                    // );
 
                     b
                       ..name = 'formElements'
@@ -277,9 +307,17 @@ class FormGenerator {
                       //     ..name = element.name.camelCase
                       //     ..type = Reference(element.name),
                       // ))
-                      ..returns =
-                          Reference('Map<String, AbstractControl<dynamic>>')
-                      ..body = Code('{${_formElements.join(',')}}');
+                      ..returns = Reference('FormGroup')
+                      ..body = Code(
+                        FormGroupGenerator(
+                          e.FieldElementImpl('FakeFieldElement', 20)
+                            ..type = t.InterfaceTypeImpl(
+                              element: element,
+                              typeArguments: [],
+                              nullabilitySuffix: NullabilitySuffix.none,
+                            ),
+                        ).element(),
+                      );
                   },
                 )
               ],
