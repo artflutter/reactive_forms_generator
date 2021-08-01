@@ -1,3 +1,7 @@
+## [0.0.10-beta]
+
+* quick fix
+
 ## [0.0.9-beta]
 
 * array of form groups support
