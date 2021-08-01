@@ -1,7 +1,4 @@
 import 'package:analyzer/dart/element/element.dart';
-import 'package:analyzer/dart/element/type.dart';
-import 'package:reactive_forms_generator/src/form_generator.dart';
-import 'package:reactive_forms_generator/src/types.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:recase/recase.dart';
 
@@ -95,63 +92,4 @@ abstract class FormElementGenerator {
   }
 
   String element();
-}
-
-class FormGroupGenerator extends FormElementGenerator {
-  FormGroupGenerator(FieldElement field) : super(field);
-
-  @override
-  String element() {
-    final enclosingClass = field.type.element as ClassElement;
-    final formGenerator = FormGenerator(enclosingClass);
-
-    final props = [
-      '${formGenerator.className.camelCase}.formElements()',
-      'validators: [${syncValidatorList(formControlChecker).join(',')}]',
-      'asyncValidators: [${asyncValidatorList(formControlChecker).join(',')}]',
-      'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formControlChecker)}',
-      'disabled: ${disabled(formControlChecker)}',
-    ].join(',');
-
-    return 'FormGroup($props)';
-  }
-}
-
-class FormControlGenerator extends FormElementGenerator {
-  FormControlGenerator(FieldElement field) : super(field);
-
-  @override
-  String element() {
-    final props = [
-      'value: $value',
-      'validators: [${syncValidatorList(formControlChecker).join(',')}]',
-      'asyncValidators: [${asyncValidatorList(formControlChecker).join(',')}]',
-      'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formControlChecker)}',
-      'disabled: ${disabled(formControlChecker)}',
-      'touched: ${touched(formControlChecker)}',
-    ].join(',');
-
-    return 'FormControl<${field.type.getDisplayString(withNullability: false)}>($props)';
-  }
-}
-
-class FormArrayGenerator extends FormElementGenerator {
-  FormArrayGenerator(FieldElement field) : super(field);
-
-  @override
-  String element() {
-    final type = field.type;
-    final typeArguments =
-        type is ParameterizedType ? type.typeArguments : const [];
-
-    final props = [
-      '$value.map((e) => FormControl<${typeArguments.first}>(value: e)).toList()',
-      'validators: [${syncValidatorList(formArrayChecker).join(',')}]',
-      'asyncValidators: [${asyncValidatorList(formArrayChecker).join(',')}]',
-      'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formControlChecker)}',
-      'disabled: ${disabled(formControlChecker)}',
-    ].join(',');
-
-    return 'FormArray<${typeArguments.first}>($props)';
-  }
 }

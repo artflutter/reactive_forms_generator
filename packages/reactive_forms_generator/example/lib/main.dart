@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               children: [
                 ReactiveTextField<String>(
-                  formControlName: formModel.emailControlName,
+                  formControlName: formModel.email,
                   validationMessages: (control) => {
                     ValidationMessage.required: 'The email must not be empty',
                     ValidationMessage.email:
@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 const SizedBox(height: 16.0),
                 ReactiveTextField<String>(
-                  formControlName: formModel.passwordControlName,
+                  formControlName: formModel.password,
                   obscureText: true,
                   validationMessages: (control) => {
                     ValidationMessage.required:
@@ -99,7 +99,16 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           );
         },
-        model: Login(password: '1234'),
+        model: Login(
+          password: '1234',
+          categories: [],
+          friends: [],
+          userData: UserData(
+            skills: [],
+            lastName: '',
+            firstName: '',
+          ),
+        ),
       ),
     );
   }
