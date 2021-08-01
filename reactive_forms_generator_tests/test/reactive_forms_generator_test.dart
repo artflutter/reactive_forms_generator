@@ -55,6 +55,16 @@ void main() {
               final String password;
               
               final UserData userData;
+              
+              @FormArrayAnnotation(
+                validators: const [
+                  NumberValidator.validate,
+                ],
+                asyncValidators: const [
+                  uniqueEmail,
+                ],
+              )
+              final List<UserData> friends;
             
               @FormArrayAnnotation(
                 validators: const [
@@ -71,6 +81,7 @@ void main() {
                 required this.password,
                 required this.categories,
                 required this.userData,
+                required this.friends,
                 this.clientId
               });
             }

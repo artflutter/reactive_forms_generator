@@ -8,6 +8,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:reactive_forms/reactive_forms.dart';
 // import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
+// import 'package:reactive_forms/reactive_forms.dart';
 // import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 // import 'dart:core';
 // import 'login.dart';
@@ -105,187 +106,221 @@
 // }
 //
 // class _LoginFormBuilderState extends State<LoginFormBuilder> {
-//   late LoginForm _form;
+//   late FormGroup _form;
+//
+//   late LoginForm _formModel;
 //
 //   @override
 //   void initState() {
-//     _form = LoginForm(widget.model);
+//     _form = FormGroup({});
+//     _formModel = LoginForm(widget.model, _form, null);
+//
+//     _form.addAll(_formModel.formElements().controls);
+//
 //     super.initState();
 //   }
 //
 //   @override
 //   Widget build(BuildContext context) {
 //     return ReactiveLoginForm(
-//       form: _form,
+//       form: _formModel,
 //       onWillPop: widget.onWillPop,
 //       child: ReactiveForm(
-//         formGroup: _form.form,
+//         formGroup: _form,
 //         onWillPop: widget.onWillPop,
-//         child: widget.builder(context, _form, widget.child),
+//         child: widget.builder(context, _formModel, widget.child),
 //       ),
 //     );
 //   }
 // }
 //
 // class LoginForm {
-//   LoginForm(this.login) {
-//     form = fb.group(formElements());
-//     userDataForm = UserDataForm(login.userData);
+//   LoginForm(this.login, this.form, this.path) {
+//     userDataForm = UserDataForm(login.userData, form, 'userData');
+//     friendsUserDataForm = login.friends
+//         .asMap()
+//         .map((k, v) => MapEntry(k, UserDataForm(v, form, "friends.$k")))
+//         .values
+//         .toList();
 //   }
 //
-//   static String email = "email";
+//   String email = "email";
 //
-//   static String clientId = "clientId";
+//   String clientId = "clientId";
 //
-//   static String password = "password";
+//   String password = "password";
 //
-//   static String userData = "userData";
+//   String userData = "userData";
 //
-//   static String categories = "categories";
+//   String friends = "friends";
 //
-//   String emailControlName = "email";
-//
-//   String clientIdControlName = "clientId";
-//
-//   String passwordControlName = "password";
-//
-//   String categoriesControlName = "categories";
+//   String categories = "categories";
 //
 //   late UserDataForm userDataForm;
 //
-//   Login login;
+//   final Login login;
 //
-//   late FormGroup form;
+//   final FormGroup form;
 //
-//   String get emailValue => form.value[LoginForm.email] as String;
-//   String? get clientIdValue => form.value[LoginForm.clientId] as String?;
-//   String get passwordValue => form.value[LoginForm.password] as String;
+//   final String? path;
+//
+//   late List<UserDataForm> friendsUserDataForm;
+//
+//   String emailControlPath() => [path, "email"].whereType<String>().join(".");
+//   String clientIdControlPath() =>
+//       [path, "clientId"].whereType<String>().join(".");
+//   String passwordControlPath() =>
+//       [path, "password"].whereType<String>().join(".");
+//   String friendsControlPath() =>
+//       [path, "friends"].whereType<String>().join(".");
+//   String categoriesControlPath() =>
+//       [path, "categories"].whereType<String>().join(".");
+//   String get emailValue => emailControl.value as String;
+//   String? get clientIdValue => clientIdControl.value as String?;
+//   String get passwordValue => passwordControl.value as String;
+//   List<UserData> get friendsValue =>
+//       friendsUserDataForm.map((e) => e.model).toList();
 //   List<String> get categoriesValue =>
-//       form.value[LoginForm.categories] as List<String>;
-//   bool get containsEmail => form.contains(LoginForm.email);
-//   bool get containsClientId => form.contains(LoginForm.clientId);
-//   bool get containsPassword => form.contains(LoginForm.password);
-//   bool get containsCategories => form.contains(LoginForm.categories);
-//   Object? get emailErrors => form.errors[LoginForm.email];
-//   Object? get clientIdErrors => form.errors[LoginForm.clientId];
-//   Object? get passwordErrors => form.errors[LoginForm.password];
-//   Object? get categoriesErrors => form.errors[LoginForm.categories];
-//   void get emailFocus => form.focus(LoginForm.email);
-//   void get clientIdFocus => form.focus(LoginForm.clientId);
-//   void get passwordFocus => form.focus(LoginForm.password);
-//   void get categoriesFocus => form.focus(LoginForm.categories);
+//       categoriesControl.value?.whereType<String>().toList() ?? [];
+//   bool get containsEmail => form.contains(emailControlPath());
+//   bool get containsClientId => form.contains(clientIdControlPath());
+//   bool get containsPassword => form.contains(passwordControlPath());
+//   bool get containsFriends => form.contains(friendsControlPath());
+//   bool get containsCategories => form.contains(categoriesControlPath());
+//   Object? get emailErrors => emailControl.errors;
+//   Object? get clientIdErrors => clientIdControl.errors;
+//   Object? get passwordErrors => passwordControl.errors;
+//   Object? get friendsErrors => friendsControl.errors;
+//   Object? get categoriesErrors => categoriesControl.errors;
+//   void get emailFocus => form.focus(emailControlPath());
+//   void get clientIdFocus => form.focus(clientIdControlPath());
+//   void get passwordFocus => form.focus(passwordControlPath());
+//   void get friendsFocus => form.focus(friendsControlPath());
+//   void get categoriesFocus => form.focus(categoriesControlPath());
 //   FormControl<String> get emailControl =>
-//       form.control(LoginForm.email) as FormControl<String>;
+//       form.control(emailControlPath()) as FormControl<String>;
 //   FormControl<String> get clientIdControl =>
-//       form.control(LoginForm.clientId) as FormControl<String>;
+//       form.control(clientIdControlPath()) as FormControl<String>;
 //   FormControl<String> get passwordControl =>
-//       form.control(LoginForm.password) as FormControl<String>;
-//   FormControl<List<String>> get categoriesControl =>
-//       form.control(LoginForm.categories) as FormControl<List<String>>;
+//       form.control(passwordControlPath()) as FormControl<String>;
+//   FormArray get friendsControl =>
+//       form.control(friendsControlPath()) as FormArray;
+//   FormArray<String> get categoriesControl =>
+//       form.control(categoriesControlPath()) as FormArray<String>;
 //   Login get model => Login(
 //       email: emailValue,
 //       clientId: clientIdValue,
 //       password: passwordValue,
+//       friends: friendsValue,
 //       categories: categoriesValue,
 //       userData: userDataForm.model);
-//   Map<String, AbstractControl<dynamic>> formElements() => {
-//         LoginForm.email: FormControl<String>(
+//   FormGroup formElements() => FormGroup({
+//         email: FormControl<String>(
 //             value: login.email,
-//             validators: [],
+//             validators: [requiredValidator],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
 //             disabled: false,
 //             touched: false),
-//         LoginForm.clientId: FormControl<String>(
+//         clientId: FormControl<String>(
 //             value: login.clientId,
 //             validators: [],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
 //             disabled: false,
 //             touched: false),
-//         LoginForm.password: FormControl<String>(
+//         password: FormControl<String>(
 //             value: login.password,
-//             validators: [],
+//             validators: [requiredValidator],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
 //             disabled: false,
 //             touched: false),
-//         LoginForm.categories: FormArray<String>(
-//             login.categories.map((e) => FormControl<String>(value: e)).toList(),
-//             validators: [],
+//         friends: FormArray(
+//             friendsUserDataForm.map((e) => e.formElements()).toList(),
+//             validators: [requiredValidator],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
 //             disabled: false),
-//         LoginForm.userData: FormGroup(userDataForm.formElements(),
-//             validators: [],
+//         categories: FormArray<String>(
+//             login.categories.map((e) => FormControl<String>(value: e)).toList(),
+//             validators: [requiredValidator],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
-//             disabled: false)
-//       };
+//             disabled: false),
+//         userData: userDataForm.formElements()
+//       },
+//           validators: [],
+//           asyncValidators: [],
+//           asyncValidatorsDebounceTime: 250,
+//           disabled: false);
 // }
 //
 // class UserDataForm {
-//   UserDataForm(this.userData) {
-//     form = fb.group(formElements());
-//   }
+//   UserDataForm(this.userData, this.form, this.path) {}
 //
-//   static String firstName = "firstName";
+//   String firstName = "firstName";
 //
-//   static String lastName = "lastName";
+//   String lastName = "lastName";
 //
-//   static String skills = "skills";
+//   String skills = "skills";
 //
-//   String firstNameControlName = "firstName";
+//   final UserData userData;
 //
-//   String lastNameControlName = "lastName";
+//   final FormGroup form;
 //
-//   String skillsControlName = "skills";
+//   final String? path;
 //
-//   UserData userData;
-//
-//   late FormGroup form;
-//
-//   String get firstNameValue => form.value[UserDataForm.firstName] as String;
-//   String get lastNameValue => form.value[UserDataForm.lastName] as String;
+//   String firstNameControlPath() =>
+//       [path, "firstName"].whereType<String>().join(".");
+//   String lastNameControlPath() =>
+//       [path, "lastName"].whereType<String>().join(".");
+//   String skillsControlPath() => [path, "skills"].whereType<String>().join(".");
+//   String get firstNameValue => firstNameControl.value as String;
+//   String get lastNameValue => lastNameControl.value as String;
 //   List<String> get skillsValue =>
-//       form.value[UserDataForm.skills] as List<String>;
-//   bool get containsFirstName => form.contains(UserDataForm.firstName);
-//   bool get containsLastName => form.contains(UserDataForm.lastName);
-//   bool get containsSkills => form.contains(UserDataForm.skills);
-//   Object? get firstNameErrors => form.errors[UserDataForm.firstName];
-//   Object? get lastNameErrors => form.errors[UserDataForm.lastName];
-//   Object? get skillsErrors => form.errors[UserDataForm.skills];
-//   void get firstNameFocus => form.focus(UserDataForm.firstName);
-//   void get lastNameFocus => form.focus(UserDataForm.lastName);
-//   void get skillsFocus => form.focus(UserDataForm.skills);
+//       skillsControl.value?.whereType<String>().toList() ?? [];
+//   bool get containsFirstName => form.contains(firstNameControlPath());
+//   bool get containsLastName => form.contains(lastNameControlPath());
+//   bool get containsSkills => form.contains(skillsControlPath());
+//   Object? get firstNameErrors => firstNameControl.errors;
+//   Object? get lastNameErrors => lastNameControl.errors;
+//   Object? get skillsErrors => skillsControl.errors;
+//   void get firstNameFocus => form.focus(firstNameControlPath());
+//   void get lastNameFocus => form.focus(lastNameControlPath());
+//   void get skillsFocus => form.focus(skillsControlPath());
 //   FormControl<String> get firstNameControl =>
-//       form.control(UserDataForm.firstName) as FormControl<String>;
+//       form.control(firstNameControlPath()) as FormControl<String>;
 //   FormControl<String> get lastNameControl =>
-//       form.control(UserDataForm.lastName) as FormControl<String>;
-//   FormControl<List<String>> get skillsControl =>
-//       form.control(UserDataForm.skills) as FormControl<List<String>>;
+//       form.control(lastNameControlPath()) as FormControl<String>;
+//   FormArray<String> get skillsControl =>
+//       form.control(skillsControlPath()) as FormArray<String>;
 //   UserData get model => UserData(
 //       firstName: firstNameValue, lastName: lastNameValue, skills: skillsValue);
-//   Map<String, AbstractControl<dynamic>> formElements() => {
-//         UserDataForm.firstName: FormControl<String>(
+//   FormGroup formElements() => FormGroup({
+//         firstName: FormControl<String>(
 //             value: userData.firstName,
 //             validators: [],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
 //             disabled: false,
 //             touched: false),
-//         UserDataForm.lastName: FormControl<String>(
+//         lastName: FormControl<String>(
 //             value: userData.lastName,
 //             validators: [],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
 //             disabled: false,
 //             touched: false),
-//         UserDataForm.skills: FormArray<String>(
+//         skills: FormArray<String>(
 //             userData.skills.map((e) => FormControl<String>(value: e)).toList(),
 //             validators: [],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
 //             disabled: false)
-//       };
+//       },
+//           validators: [],
+//           asyncValidators: [],
+//           asyncValidatorsDebounceTime: 250,
+//           disabled: false);
 // }

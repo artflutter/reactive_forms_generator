@@ -112,9 +112,14 @@ class ReactiveFormBuilder {
             ..name = 'initState'
             ..annotations.add(CodeExpression(Code('override')))
             ..returns = Reference('void')
-            ..body = Code(
-              '_form = ${reactiveForm.reactiveInheritedStreamer.formGenerator.className}(widget.model); super.initState();',
-            ),
+            ..body = Code('''
+                _form = FormGroup({});
+                _formModel = ${reactiveForm.reactiveInheritedStreamer.formGenerator.className}(widget.model, _form, null);
+    
+                _form.addAll(_formModel.formElements().controls);
+                
+                super.initState();              
+              '''),
         ),
         Method(
           (b) => b
@@ -131,12 +136,12 @@ class ReactiveFormBuilder {
             ..body = Code(
               '''
                 return ${reactiveForm.className}(
-                  form: _form,
+                  form: _formModel,
                   onWillPop: widget.onWillPop,
                   child: ReactiveForm(
-                    formGroup: _form.form,
+                    formGroup: _form,
                     onWillPop: widget.onWillPop,
-                    child: widget.builder(context, _form, widget.child),
+                    child: widget.builder(context, _formModel, widget.child),
                   ),
                 );
               ''',
@@ -150,11 +155,25 @@ class ReactiveFormBuilder {
               '_${reactiveForm.reactiveInheritedStreamer.formGenerator.className}BuilderState'
           ..extend = Reference(
               'State<${reactiveForm.reactiveInheritedStreamer.formGenerator.className}Builder>')
-          ..fields.add(Field((b) => b
-            ..name = '_form'
-            ..late = true
-            ..type = Reference(reactiveForm
-                .reactiveInheritedStreamer.formGenerator.className)))
+          ..fields.addAll(
+            [
+              Field(
+                (b) => b
+                  ..name = '_form'
+                  ..late = true
+                  ..type = Reference('FormGroup'),
+              ),
+              Field(
+                (b) => b
+                  ..name = '_formModel'
+                  ..late = true
+                  ..type = Reference(
+                    reactiveForm
+                        .reactiveInheritedStreamer.formGenerator.className,
+                  ),
+              ),
+            ],
+          )
           ..methods.addAll(_stateMethods),
       );
 

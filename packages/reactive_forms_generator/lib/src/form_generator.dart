@@ -1,7 +1,12 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
+import 'package:analyzer/src/dart/element/element.dart' as e;
+import 'package:analyzer/dart/element/nullability_suffix.dart';
+import 'package:analyzer/src/dart/element/type.dart' as t;
 
 import 'package:code_builder/code_builder.dart';
-import 'package:reactive_forms_generator/src/form_element_generator.dart';
+import 'package:reactive_forms_generator/src/form_elements/form_group_generator.dart';
+import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
 
@@ -13,27 +18,37 @@ class FormGenerator {
   final Map<String, FormGenerator> formGroupGenerators = {};
 
   FormGenerator(this.element) {
-    nestedFormElements.forEach(
+    nestedFormGroupElements.forEach(
       (e) => formGroupGenerators[e.name] = FormGenerator(
         e.type.element! as ClassElement,
       ),
     );
   }
 
-  List<FieldElement> get formElements => element.fields
+  List<FieldElement> get formControls => element.fields
       .where(
-        (e) =>
-            formControlChecker.hasAnnotationOfExact(e) ||
-            formArrayChecker.hasAnnotationOfExact(e),
+        (e) => e.isFormControl,
       )
       .toList();
 
-  List<FieldElement> get nestedFormElements => element.fields
+  List<FieldElement> get formArrays => element.fields
+      .where(
+        (e) => e.isFormArray,
+      )
+      .toList();
+
+  List<FieldElement> get nestedFormGroupElements => element.fields
       .where(
         (e) => e.type.element is ClassElement,
       )
       .where(
         (e) => formGroupChecker.hasAnnotationOfExact(e.type.element!),
+      )
+      .toList();
+
+  List<FieldElement> get nestedArrayFormGroupElements => element.fields
+      .where(
+        (e) => e.isFormGroupArray,
       )
       .toList();
 
@@ -49,24 +64,41 @@ class FormGenerator {
         (b) => b
           ..static = true
           ..type = stringRef
-          ..name = field.name
+          ..name = '${field.name}ControlName'
           ..assignment = Code('"${field.name}"'),
       );
 
   List<Field> get staticFieldNameList =>
       element.fields.map(staticFieldName).toList();
 
-  Field fieldControlField(FieldElement field) => Field(
+  Field field(FieldElement field) => Field(
         (b) => b
+          // ..static = true
           ..type = stringRef
-          ..name = '${field.name}ControlName'
-          ..assignment = Code('"${field.name}"'),
+          ..name = fieldName(field)
+          ..assignment = Code('"${fieldName(field)}"'),
       );
 
-  List<Field> get fieldControlFieldList =>
-      formElements.map(fieldControlField).toList();
+  List<Field> get fieldNameList => element.fields.map(field).toList();
 
-  List<Field> get nestedFormGroupFields => nestedFormElements
+  String fieldControlPathMethodName(FieldElement field) =>
+      '${field.name}ControlPath';
+
+  Method fieldControlNameMethod(FieldElement field) => Method(
+        (b) => b
+          ..returns = stringRef
+          ..name = fieldControlPathMethodName(field)
+          ..lambda = true
+          ..body = Code(
+              '[path, "${fieldName(field)}"].whereType<String>().join(".")'),
+      );
+
+  List<Method> get fieldControlNameMethodList => [
+        ...formControls,
+        ...formArrays,
+      ].map(fieldControlNameMethod).toList();
+
+  List<Field> get nestedFormGroupFields => nestedFormGroupElements
       .map(
         (e) => Field(
           (b) {
@@ -80,19 +112,44 @@ class FormGenerator {
       )
       .toList();
 
-  Method fieldValueMethod(FieldElement field) => Method(
-        (b) => b
-          ..name = fieldValueName(field)
-          ..lambda = true
-          ..type = MethodType.getter
-          ..returns = Reference(field.type.toString())
-          ..body = Code(
-            'form.value[$className.${fieldName(field)}] as ${field.type}',
-          ),
+  Method fieldValueMethod(FieldElement field) {
+    String fieldValue = '${fieldControlName(field)}.value as ${field.type}';
+
+    if (field.isFormGroupArray) {
+      final typeParameter =
+          (field.type as ParameterizedType).typeArguments.first;
+
+      final formGenerator = FormGenerator(
+        typeParameter.element! as ClassElement,
       );
 
-  List<Method> get fieldValueMethodList =>
-      formElements.map(fieldValueMethod).toList();
+      fieldValue =
+          '${field.name}${formGenerator.className}.map((e) => e.model).toList()';
+    } else if (field.isFormArray) {
+      final type = (field.type as ParameterizedType).typeArguments.first;
+
+      fieldValue =
+          '${fieldControlName(field)}.value?.whereType<${type.getDisplayString(
+        withNullability: true,
+      )}>().toList() ?? []';
+    }
+
+    return Method(
+      (b) => b
+        ..name = fieldValueName(field)
+        ..lambda = true
+        ..type = MethodType.getter
+        ..returns = Reference(field.type.toString())
+        ..body = Code(
+          fieldValue,
+        ),
+    );
+  }
+
+  List<Method> get fieldValueMethodList => [
+        ...formControls,
+        ...formArrays,
+      ].map(fieldValueMethod).toList();
 
   Method fieldContainsMethod(FieldElement field) => Method(
         (b) => b
@@ -101,12 +158,14 @@ class FormGenerator {
           ..type = MethodType.getter
           ..returns = Reference('bool')
           ..body = Code(
-            'form.contains($className.${fieldName(field)})',
+            'form.contains(${fieldControlPathMethodName(field)}())',
           ),
       );
 
-  List<Method> get fieldContainsMethodList =>
-      formElements.map(fieldContainsMethod).toList();
+  List<Method> get fieldContainsMethodList => [
+        ...formControls,
+        ...formArrays,
+      ].map(fieldContainsMethod).toList();
 
   Method errors(FieldElement field) => Method(
         (b) => b
@@ -115,11 +174,14 @@ class FormGenerator {
           ..type = MethodType.getter
           ..returns = Reference('Object?')
           ..body = Code(
-            'form.errors[$className.${fieldName(field)}]',
+            '${fieldControlName(field)}.errors',
           ),
       );
 
-  List<Method> get fieldErrorsMethodList => formElements.map(errors).toList();
+  List<Method> get fieldErrorsMethodList => [
+        ...formControls,
+        ...formArrays,
+      ].map(errors).toList();
 
   Method focus(FieldElement field) => Method(
         (b) => b
@@ -128,11 +190,14 @@ class FormGenerator {
           ..type = MethodType.getter
           ..returns = Reference('void')
           ..body = Code(
-            'form.focus($className.${fieldName(field)})',
+            'form.focus(${fieldControlPathMethodName(field)}())',
           ),
       );
 
-  List<Method> get fieldFocusMethodList => formElements.map(focus).toList();
+  List<Method> get fieldFocusMethodList => [
+        ...formControls,
+        ...formArrays,
+      ].map(focus).toList();
 
   Method control(FieldElement field) {
     final type = field.type.getDisplayString(withNullability: false);
@@ -144,23 +209,55 @@ class FormGenerator {
         ..type = MethodType.getter
         ..returns = Reference('FormControl<$type>')
         ..body = Code(
-          'form.control($className.${fieldName(field)}) as FormControl<$type>',
+          'form.control(${fieldControlPathMethodName(field)}()) as FormControl<$type>',
         ),
     );
   }
 
-  List<Method> get fieldControlMethodList => formElements.map(control).toList();
+  Method array(FieldElement field) {
+    final type = (field.type as ParameterizedType)
+        .typeArguments
+        .first
+        .getDisplayString(withNullability: false);
+
+    String typeReference = 'FormArray<$type>';
+
+    if (field.isFormGroupArray) {
+      typeReference = 'FormArray';
+    }
+
+    return Method(
+      (b) => b
+        ..name = fieldControlName(field)
+        ..lambda = true
+        ..type = MethodType.getter
+        ..returns = Reference(typeReference)
+        ..body = Code(
+          'form.control(${fieldControlPathMethodName(field)}()) as ${typeReference}',
+        ),
+    );
+  }
+
+  List<Method> get fieldControlMethodList => formControls.map(control).toList();
+
+  List<Method> get fieldArrayMethodList => formArrays.map(array).toList();
 
   Method get modelMethod => Method(
         (b) {
-          final fields = formElements
+          final fields = formControls
               .map(
                 (field) => '${fieldName(field)}:${fieldValueName(field)}',
               )
               .toList();
 
           fields.addAll(
-            nestedFormElements.map(
+            formArrays.map(
+              (field) => '${fieldName(field)}:${fieldValueName(field)}',
+            ),
+          );
+
+          fields.addAll(
+            nestedFormGroupElements.map(
               (field) =>
                   '${fieldName(field)}:${formGroupGenerators[fieldName(field)]!.className.camelCase}.model',
             ),
@@ -181,26 +278,57 @@ class FormGenerator {
         (b) {
           final formGroupInitializers = formGroupGenerators.values.map(
             (e) {
-              final nestedElement = nestedFormElements.firstWhere(
+              final nestedElement = nestedFormGroupElements.firstWhere(
                 (nestedElement) =>
                     nestedElement.type.element!.name == e.element.name,
               );
-              return '${e.className.camelCase} = ${e.className}(${element.name.camelCase}.${nestedElement.name});';
+              return '${e.className.camelCase} = ${e.className}(${element.name.camelCase}.${nestedElement.name}, form, \'${nestedElement.name}\');';
             },
+          ).toList();
+
+          formGroupInitializers.addAll(
+            nestedArrayFormGroupElements.map(
+              (e) {
+                final typeParameter =
+                    (e.type as ParameterizedType).typeArguments.first;
+
+                final formGenerator = FormGenerator(
+                  typeParameter.element! as ClassElement,
+                );
+
+                return '''${e.name}${formGenerator.className} = ${element.name.camelCase}.${e.name}
+                  .asMap()
+                  .map((k, v) => MapEntry(k, ${formGenerator.className}(v, form, "${e.name}.\$k")))
+                  .values
+                  .toList();
+                ''';
+              },
+            ),
           );
 
           b
-            ..requiredParameters.addAll([
-              Parameter(
-                (b) => b
-                  ..name = element.name.camelCase
-                  ..toThis = true,
-              ),
-            ])
+            ..requiredParameters.addAll(
+              [
+                Parameter(
+                  (b) => b
+                    ..name = element.name.camelCase
+                    ..toThis = true,
+                ),
+                Parameter(
+                  (b) => b
+                    ..name = 'form'
+                    ..toThis = true,
+                ),
+                Parameter(
+                  (b) => b
+                    ..name = 'path'
+                    ..toThis = true,
+                ),
+              ],
+            )
             ..body = Code('''
-                form = fb.group(formElements());
-                ${formGroupInitializers.join('')}
-              ''');
+              ${formGroupInitializers.join('')}
+            ''');
         },
       );
 
@@ -210,64 +338,91 @@ class FormGenerator {
             ..name = className
             ..fields.addAll(
               [
+                ...fieldNameList,
                 ...staticFieldNameList,
-                ...fieldControlFieldList,
+                // ...fieldControlFieldList,
                 ...nestedFormGroupFields,
                 // ..type = Reference(element.name),
                 Field(
                   (b) => b
                     ..name = element.name.camelCase
+                    ..modifier = FieldModifier.final$
                     ..type = Reference(element.name),
                 ),
                 Field(
                   (b) => b
                     ..name = 'form'
-                    ..late = true
+                    ..modifier = FieldModifier.final$
                     ..type = Reference('FormGroup'),
+                ),
+                Field(
+                  (b) => b
+                    ..name = 'path'
+                    ..modifier = FieldModifier.final$
+                    ..type = Reference('String?'),
+                ),
+                ...nestedArrayFormGroupElements.map(
+                  (e) {
+                    final typeParameter =
+                        (e.type as ParameterizedType).typeArguments.first;
+
+                    final formGenerator = FormGenerator(
+                      typeParameter.element! as ClassElement,
+                    );
+
+                    return Field(
+                      (b) => b
+                        ..name = '${e.name}${formGenerator.className}'
+                        ..type = Reference('List<${formGenerator.className}>')
+                        ..late = true,
+                    );
+                  },
                 ),
               ],
             )
             ..constructors.add(_constructor)
             ..methods.addAll(
               [
+                ...fieldControlNameMethodList,
                 ...fieldValueMethodList,
                 ...fieldContainsMethodList,
                 ...fieldErrorsMethodList,
                 ...fieldFocusMethodList,
                 ...fieldControlMethodList,
+                ...fieldArrayMethodList,
                 modelMethod,
                 Method(
                   (b) {
-                    final _formElements = formElements
-                        .map(
-                          (f) {
-                            f.type.element;
-                            FormElementGenerator? formElementGenerator;
-
-                            if (formControlChecker.hasAnnotationOfExact(f)) {
-                              formElementGenerator = FormControlGenerator(f);
-                            }
-
-                            if (formArrayChecker.hasAnnotationOfExact(f)) {
-                              formElementGenerator = FormArrayGenerator(f);
-                            }
-
-                            if (formElementGenerator != null) {
-                              return '$className.${f.name}: ${formElementGenerator.element()}';
-                            }
-
-                            return null;
-                          },
-                        )
-                        .whereType<String>()
-                        .toList();
-
-                    _formElements.addAll(
-                      nestedFormElements.map(
-                        (f) =>
-                            '$className.${f.name}: ${FormGroupGenerator(f).element()}',
-                      ),
-                    );
+                    // final _formElements = formElements
+                    //     .map(
+                    //       (f) {
+                    //         f.type.element;
+                    //         FormElementGenerator? formElementGenerator;
+                    //
+                    //         if (formControlChecker.hasAnnotationOfExact(f)) {
+                    //           formElementGenerator = FormControlGenerator(f);
+                    //         }
+                    //
+                    //         if (formArrayChecker.hasAnnotationOfExact(f)) {
+                    //           formElementGenerator = FormArrayGenerator(f);
+                    //         }
+                    //
+                    //         if (formElementGenerator != null) {
+                    //           return '${fieldName(f)}: ${formElementGenerator.element()}';
+                    //         }
+                    //
+                    //         return null;
+                    //       },
+                    //     )
+                    //     .whereType<String>()
+                    //     .toList();
+                    //
+                    // _formElements.addAll(
+                    //   nestedFormElements.map(
+                    //     (f) =>
+                    //         '${fieldName(f)}: ${FormGroupGenerator(f).element()}',
+                    //   ),
+                    // );
 
                     b
                       ..name = 'formElements'
@@ -277,9 +432,17 @@ class FormGenerator {
                       //     ..name = element.name.camelCase
                       //     ..type = Reference(element.name),
                       // ))
-                      ..returns =
-                          Reference('Map<String, AbstractControl<dynamic>>')
-                      ..body = Code('{${_formElements.join(',')}}');
+                      ..returns = Reference('FormGroup')
+                      ..body = Code(
+                        FormGroupGenerator(
+                          e.FieldElementImpl('FakeFieldElement', 20)
+                            ..type = t.InterfaceTypeImpl(
+                              element: element,
+                              typeArguments: [],
+                              nullabilitySuffix: NullabilitySuffix.none,
+                            ),
+                        ).element(),
+                      );
                   },
                 )
               ],
