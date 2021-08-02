@@ -1,10 +1,31 @@
-import 'package:example/login.dart';
-import 'package:example/login.gform.dart';
+import 'package:example/forms/login.dart';
+import 'package:example/forms/login.gform.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:reactive_touch_spin/reactive_touch_spin.dart';
 
 void main() {
   runApp(MyApp());
+}
+
+class NumValueAccessor extends ControlValueAccessor<int, num> {
+  final int fractionDigits;
+
+  NumValueAccessor({
+    this.fractionDigits = 2,
+  });
+
+  @override
+  num? modelToViewValue(int? modelValue) {
+    return modelValue;
+  }
+
+  @override
+  int? viewToModelValue(num? viewValue) {
+    return viewValue?.toInt();
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -76,6 +97,63 @@ class _MyHomePageState extends State<MyHomePage> {
                     errorStyle: TextStyle(height: 0.7),
                   ),
                 ),
+                const SizedBox(height: 16.0),
+                ReactiveDropdownSearch<String>(
+                  formControlName: formModel.theme,
+                  decoration: InputDecoration(
+                    helperText: '',
+                    contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+                    border: OutlineInputBorder(),
+                  ),
+                  mode: Mode.MENU,
+                  hint: "Select a theme",
+                  showSelectedItem: true,
+                  items: [
+                    "light",
+                    "dark",
+                  ],
+                  label: "Theme",
+                  showClearButton: true,
+                ),
+                const SizedBox(height: 16.0),
+                ReactiveDropdownSearch<UserMode>(
+                  formControlName: formModel.mode,
+                  decoration: InputDecoration(
+                    helperText: '',
+                    contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+                    border: OutlineInputBorder(),
+                  ),
+                  mode: Mode.MENU,
+                  hint: "Select a theme",
+                  showSelectedItem: true,
+                  items: [
+                    UserMode.admin,
+                    UserMode.user,
+                  ],
+                  compareFn: (item, selectedItem) => item == selectedItem,
+                  label: "Theme",
+                  showClearButton: true,
+                ),
+                ReactiveTouchSpin<int>(
+                  formControlName: formModel.timeout,
+                  decoration: InputDecoration(
+                    labelText: 'Logout timeout mins.',
+                  ),
+                  valueAccessor: NumValueAccessor(),
+                  displayFormat: NumberFormat()..minimumFractionDigits = 0,
+                  min: 0,
+                  max: 10,
+                ),
+                ReactiveSwitchListTile(
+                  formControlName: formModel.rememberMe,
+                  title: Text('remember me'),
+                  controlAffinity: ListTileControlAffinity.trailing,
+                ),
+                ReactiveSlider(
+                  formControlName: formModel.height,
+                  min: 120,
+                  max: 220,
+                ),
                 ElevatedButton(
                   onPressed: () {
                     if (formModel.form.valid) {
@@ -101,13 +179,11 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         model: Login(
           password: '1234',
-          categories: [],
-          friends: [],
-          userData: UserData(
-            skills: [],
-            lastName: '',
-            firstName: '',
-          ),
+          timeout: 3,
+          theme: 'dark',
+          height: 150,
+          mode: UserMode.admin,
+          rememberMe: false,
         ),
       ),
     );

@@ -135,28 +135,35 @@
 // }
 //
 // class LoginForm {
-//   LoginForm(this.login, this.form, this.path) {
-//     userDataForm = UserDataForm(login.userData, form, 'userData');
-//     friendsUserDataForm = login.friends
-//         .asMap()
-//         .map((k, v) => MapEntry(k, UserDataForm(v, form, "friends.$k")))
-//         .values
-//         .toList();
-//   }
+//   LoginForm(this.login, this.form, this.path) {}
 //
 //   String email = "email";
 //
-//   String clientId = "clientId";
-//
 //   String password = "password";
 //
-//   String userData = "userData";
+//   String rememberMe = "rememberMe";
 //
-//   String friends = "friends";
+//   String theme = "theme";
 //
-//   String categories = "categories";
+//   String mode = "mode";
 //
-//   late UserDataForm userDataForm;
+//   String timeout = "timeout";
+//
+//   String height = "height";
+//
+//   static String emailControlName = "email";
+//
+//   static String passwordControlName = "password";
+//
+//   static String rememberMeControlName = "rememberMe";
+//
+//   static String themeControlName = "theme";
+//
+//   static String modeControlName = "mode";
+//
+//   static String timeoutControlName = "timeout";
+//
+//   static String heightControlName = "height";
 //
 //   final Login login;
 //
@@ -164,67 +171,70 @@
 //
 //   final String? path;
 //
-//   late List<UserDataForm> friendsUserDataForm;
-//
 //   String emailControlPath() => [path, "email"].whereType<String>().join(".");
-//   String clientIdControlPath() =>
-//       [path, "clientId"].whereType<String>().join(".");
 //   String passwordControlPath() =>
 //       [path, "password"].whereType<String>().join(".");
-//   String friendsControlPath() =>
-//       [path, "friends"].whereType<String>().join(".");
-//   String categoriesControlPath() =>
-//       [path, "categories"].whereType<String>().join(".");
+//   String rememberMeControlPath() =>
+//       [path, "rememberMe"].whereType<String>().join(".");
+//   String themeControlPath() => [path, "theme"].whereType<String>().join(".");
+//   String modeControlPath() => [path, "mode"].whereType<String>().join(".");
+//   String timeoutControlPath() =>
+//       [path, "timeout"].whereType<String>().join(".");
+//   String heightControlPath() => [path, "height"].whereType<String>().join(".");
 //   String get emailValue => emailControl.value as String;
-//   String? get clientIdValue => clientIdControl.value as String?;
 //   String get passwordValue => passwordControl.value as String;
-//   List<UserData> get friendsValue =>
-//       friendsUserDataForm.map((e) => e.model).toList();
-//   List<String> get categoriesValue =>
-//       categoriesControl.value?.whereType<String>().toList() ?? [];
+//   bool get rememberMeValue => rememberMeControl.value as bool;
+//   String get themeValue => themeControl.value as String;
+//   UserMode get modeValue => modeControl.value as UserMode;
+//   int get timeoutValue => timeoutControl.value as int;
+//   double get heightValue => heightControl.value as double;
 //   bool get containsEmail => form.contains(emailControlPath());
-//   bool get containsClientId => form.contains(clientIdControlPath());
 //   bool get containsPassword => form.contains(passwordControlPath());
-//   bool get containsFriends => form.contains(friendsControlPath());
-//   bool get containsCategories => form.contains(categoriesControlPath());
+//   bool get containsRememberMe => form.contains(rememberMeControlPath());
+//   bool get containsTheme => form.contains(themeControlPath());
+//   bool get containsMode => form.contains(modeControlPath());
+//   bool get containsTimeout => form.contains(timeoutControlPath());
+//   bool get containsHeight => form.contains(heightControlPath());
 //   Object? get emailErrors => emailControl.errors;
-//   Object? get clientIdErrors => clientIdControl.errors;
 //   Object? get passwordErrors => passwordControl.errors;
-//   Object? get friendsErrors => friendsControl.errors;
-//   Object? get categoriesErrors => categoriesControl.errors;
+//   Object? get rememberMeErrors => rememberMeControl.errors;
+//   Object? get themeErrors => themeControl.errors;
+//   Object? get modeErrors => modeControl.errors;
+//   Object? get timeoutErrors => timeoutControl.errors;
+//   Object? get heightErrors => heightControl.errors;
 //   void get emailFocus => form.focus(emailControlPath());
-//   void get clientIdFocus => form.focus(clientIdControlPath());
 //   void get passwordFocus => form.focus(passwordControlPath());
-//   void get friendsFocus => form.focus(friendsControlPath());
-//   void get categoriesFocus => form.focus(categoriesControlPath());
+//   void get rememberMeFocus => form.focus(rememberMeControlPath());
+//   void get themeFocus => form.focus(themeControlPath());
+//   void get modeFocus => form.focus(modeControlPath());
+//   void get timeoutFocus => form.focus(timeoutControlPath());
+//   void get heightFocus => form.focus(heightControlPath());
 //   FormControl<String> get emailControl =>
 //       form.control(emailControlPath()) as FormControl<String>;
-//   FormControl<String> get clientIdControl =>
-//       form.control(clientIdControlPath()) as FormControl<String>;
 //   FormControl<String> get passwordControl =>
 //       form.control(passwordControlPath()) as FormControl<String>;
-//   FormArray get friendsControl =>
-//       form.control(friendsControlPath()) as FormArray;
-//   FormArray<String> get categoriesControl =>
-//       form.control(categoriesControlPath()) as FormArray<String>;
+//   FormControl<bool> get rememberMeControl =>
+//       form.control(rememberMeControlPath()) as FormControl<bool>;
+//   FormControl<String> get themeControl =>
+//       form.control(themeControlPath()) as FormControl<String>;
+//   FormControl<UserMode> get modeControl =>
+//       form.control(modeControlPath()) as FormControl<UserMode>;
+//   FormControl<int> get timeoutControl =>
+//       form.control(timeoutControlPath()) as FormControl<int>;
+//   FormControl<double> get heightControl =>
+//       form.control(heightControlPath()) as FormControl<double>;
 //   Login get model => Login(
 //       email: emailValue,
-//       clientId: clientIdValue,
 //       password: passwordValue,
-//       friends: friendsValue,
-//       categories: categoriesValue,
-//       userData: userDataForm.model);
+//       rememberMe: rememberMeValue,
+//       theme: themeValue,
+//       mode: modeValue,
+//       timeout: timeoutValue,
+//       height: heightValue);
 //   FormGroup formElements() => FormGroup({
 //         email: FormControl<String>(
 //             value: login.email,
 //             validators: [requiredValidator],
-//             asyncValidators: [],
-//             asyncValidatorsDebounceTime: 250,
-//             disabled: false,
-//             touched: false),
-//         clientId: FormControl<String>(
-//             value: login.clientId,
-//             validators: [],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
 //             disabled: false,
@@ -236,88 +246,41 @@
 //             asyncValidatorsDebounceTime: 250,
 //             disabled: false,
 //             touched: false),
-//         friends: FormArray(
-//             friendsUserDataForm.map((e) => e.formElements()).toList(),
+//         rememberMe: FormControl<bool>(
+//             value: login.rememberMe,
 //             validators: [requiredValidator],
-//             asyncValidators: [],
-//             asyncValidatorsDebounceTime: 250,
-//             disabled: false),
-//         categories: FormArray<String>(
-//             login.categories.map((e) => FormControl<String>(value: e)).toList(),
-//             validators: [requiredValidator],
-//             asyncValidators: [],
-//             asyncValidatorsDebounceTime: 250,
-//             disabled: false),
-//         userData: userDataForm.formElements()
-//       },
-//           validators: [],
-//           asyncValidators: [],
-//           asyncValidatorsDebounceTime: 250,
-//           disabled: false);
-// }
-//
-// class UserDataForm {
-//   UserDataForm(this.userData, this.form, this.path) {}
-//
-//   String firstName = "firstName";
-//
-//   String lastName = "lastName";
-//
-//   String skills = "skills";
-//
-//   final UserData userData;
-//
-//   final FormGroup form;
-//
-//   final String? path;
-//
-//   String firstNameControlPath() =>
-//       [path, "firstName"].whereType<String>().join(".");
-//   String lastNameControlPath() =>
-//       [path, "lastName"].whereType<String>().join(".");
-//   String skillsControlPath() => [path, "skills"].whereType<String>().join(".");
-//   String get firstNameValue => firstNameControl.value as String;
-//   String get lastNameValue => lastNameControl.value as String;
-//   List<String> get skillsValue =>
-//       skillsControl.value?.whereType<String>().toList() ?? [];
-//   bool get containsFirstName => form.contains(firstNameControlPath());
-//   bool get containsLastName => form.contains(lastNameControlPath());
-//   bool get containsSkills => form.contains(skillsControlPath());
-//   Object? get firstNameErrors => firstNameControl.errors;
-//   Object? get lastNameErrors => lastNameControl.errors;
-//   Object? get skillsErrors => skillsControl.errors;
-//   void get firstNameFocus => form.focus(firstNameControlPath());
-//   void get lastNameFocus => form.focus(lastNameControlPath());
-//   void get skillsFocus => form.focus(skillsControlPath());
-//   FormControl<String> get firstNameControl =>
-//       form.control(firstNameControlPath()) as FormControl<String>;
-//   FormControl<String> get lastNameControl =>
-//       form.control(lastNameControlPath()) as FormControl<String>;
-//   FormArray<String> get skillsControl =>
-//       form.control(skillsControlPath()) as FormArray<String>;
-//   UserData get model => UserData(
-//       firstName: firstNameValue, lastName: lastNameValue, skills: skillsValue);
-//   FormGroup formElements() => FormGroup({
-//         firstName: FormControl<String>(
-//             value: userData.firstName,
-//             validators: [],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
 //             disabled: false,
 //             touched: false),
-//         lastName: FormControl<String>(
-//             value: userData.lastName,
-//             validators: [],
+//         theme: FormControl<String>(
+//             value: login.theme,
+//             validators: [requiredValidator],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
 //             disabled: false,
 //             touched: false),
-//         skills: FormArray<String>(
-//             userData.skills.map((e) => FormControl<String>(value: e)).toList(),
-//             validators: [],
+//         mode: FormControl<UserMode>(
+//             value: login.mode,
+//             validators: [requiredValidator],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
-//             disabled: false)
+//             disabled: false,
+//             touched: false),
+//         timeout: FormControl<int>(
+//             value: login.timeout,
+//             validators: [requiredValidator],
+//             asyncValidators: [],
+//             asyncValidatorsDebounceTime: 250,
+//             disabled: false,
+//             touched: false),
+//         height: FormControl<double>(
+//             value: login.height,
+//             validators: [requiredValidator],
+//             asyncValidators: [],
+//             asyncValidatorsDebounceTime: 250,
+//             disabled: false,
+//             touched: false)
 //       },
 //           validators: [],
 //           asyncValidators: [],

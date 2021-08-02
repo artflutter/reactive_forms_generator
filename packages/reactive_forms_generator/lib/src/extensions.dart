@@ -10,7 +10,7 @@ extension FieldElementExt on FieldElement {
 
     final type = this.type;
     final typeArguments =
-        type is ParameterizedType ? type.typeArguments : const [];
+        type is ParameterizedType ? type.typeArguments : const <DartType>[];
 
     final typeParameter = typeArguments.first;
 
