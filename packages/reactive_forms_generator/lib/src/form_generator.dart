@@ -206,27 +206,40 @@ class FormGenerator {
       ].map(focus).toList();
 
   Method control(FieldElement field) {
-    final type = field.type.getDisplayString(withNullability: false);
+    String displayType = field.type.getDisplayString(withNullability: true);
+
+    // we need to trim last NullabilitySuffix.question cause FormControl modifies
+    // generic T => T?
+    if (field.type.nullabilitySuffix == NullabilitySuffix.question) {
+      displayType = displayType.substring(0, displayType.length - 1);
+    }
+
+    final reference = 'FormControl<$displayType>';
 
     return Method(
       (b) => b
         ..name = fieldControlName(field)
         ..lambda = true
         ..type = MethodType.getter
-        ..returns = Reference('FormControl<$type>')
+        ..returns = Reference(reference)
         ..body = Code(
-          'form.control(${fieldControlPathMethodName(field)}()) as FormControl<$type>',
+          'form.control(${fieldControlPathMethodName(field)}()) as ${reference}',
         ),
     );
   }
 
   Method array(FieldElement field) {
-    final type = (field.type as ParameterizedType)
-        .typeArguments
-        .first
-        .getDisplayString(withNullability: false);
+    final type = (field.type as ParameterizedType).typeArguments.first;
 
-    String typeReference = 'FormArray<$type>';
+    String displayType = type.getDisplayString(withNullability: true);
+
+    // we need to trim last NullabilitySuffix.question cause FormControl modifies
+    // generic T => T?
+    if (type.nullabilitySuffix == NullabilitySuffix.question) {
+      displayType = displayType.substring(0, displayType.length - 1);
+    }
+
+    String typeReference = 'FormArray<$displayType>';
 
     if (field.isFormGroupArray) {
       typeReference = 'FormArray';

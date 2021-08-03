@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
 import 'package:reactive_forms_generator/src/form_generator.dart';
@@ -18,6 +19,21 @@ class FormArrayGenerator extends FormElementGenerator {
     ];
 
     final typeParameter = (field.type as ParameterizedType).typeArguments.first;
+    String displayType = typeParameter.getDisplayString(withNullability: true);
+
+    // we need to trim last NullabilitySuffix.question cause FormControl modifies
+    // generic T => T?
+    if (typeParameter.nullabilitySuffix == NullabilitySuffix.question) {
+      displayType = displayType.substring(0, displayType.length - 1);
+    }
+
+    final optionalChaining =
+        field.type.nullabilitySuffix == NullabilitySuffix.question ? '?' : '';
+
+    final defaultValue =
+        field.type.nullabilitySuffix == NullabilitySuffix.question
+            ? '?? []'
+            : '';
 
     if (field.isFormGroupArray) {
       final formGenerator = FormGenerator(
@@ -32,11 +48,11 @@ class FormArrayGenerator extends FormElementGenerator {
       return 'FormArray($props)';
     } else {
       final props = [
-        '$value.map((e) => FormControl<$typeParameter>(value: e)).toList()',
+        '$value${optionalChaining}.map((e) => FormControl<${displayType}>(value: e)).toList() ${defaultValue}',
         ...partialProps
       ].join(', ');
 
-      return 'FormArray<$typeParameter>($props)';
+      return 'FormArray<$displayType>($props)';
     }
   }
 }

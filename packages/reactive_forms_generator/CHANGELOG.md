@@ -1,3 +1,7 @@
+## [0.0.11-beta]
+
+* improved support of array types
+
 ## [0.0.10-beta]
 
 * quick fix
