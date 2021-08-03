@@ -1,11 +1,5 @@
-import 'package:reactive_forms/reactive_forms.dart';
+import 'package:example/helpers.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-
-Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
-  return Validators.required(control);
-}
-
-enum UserMode { user, admin }
 
 @ReactiveFormAnnotation()
 class Login {

@@ -4,8 +4,6 @@ import 'package:reactive_forms_generator/src/form_elements/form_element_generato
 import 'package:reactive_forms_generator/src/form_generator.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
-import 'package:source_gen/source_gen.dart';
-import 'package:recase/recase.dart';
 
 class FormArrayGenerator extends FormElementGenerator {
   FormArrayGenerator(FieldElement field) : super(field);

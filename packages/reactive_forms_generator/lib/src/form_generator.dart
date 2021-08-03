@@ -113,7 +113,13 @@ class FormGenerator {
       .toList();
 
   Method fieldValueMethod(FieldElement field) {
-    String fieldValue = '${fieldControlName(field)}.value as ${field.type}';
+    String fieldValue = '${fieldControlName(field)}.value';
+
+    // do not add additional cast if the field is nullable to avoid
+    // unnecessary_cast notes
+    if (field.type.nullabilitySuffix == NullabilitySuffix.none) {
+      fieldValue += ' as ${field.type}';
+    }
 
     if (field.isFormGroupArray) {
       final typeParameter =

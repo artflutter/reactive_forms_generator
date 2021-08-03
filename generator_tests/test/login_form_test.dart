@@ -1,4 +1,93 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
+import 'package:test/test.dart';
+
+import 'helpers.dart';
+
+void main() {
+  group('reactive_forms_generator', () {
+    test(
+      'Form with simple non-nullable types',
+      () async {
+        return testGenerator(
+          model: r'''
+            import 'package:reactive_forms/reactive_forms.dart';
+            import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+            
+            Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
+              return Validators.required(control);
+            }
+            
+            enum UserMode { user, admin }
+            
+            @ReactiveFormAnnotation()
+            class Login {
+              @FormControlAnnotation(
+                validators: const [
+                  requiredValidator,
+                ],
+              )
+              final String email;
+            
+              @FormControlAnnotation(
+                validators: const [
+                  requiredValidator,
+                ],
+              )
+              final String password;
+            
+              @FormControlAnnotation(
+                validators: const [
+                  requiredValidator,
+                ],
+              )
+              final bool rememberMe;
+            
+              @FormControlAnnotation(
+                validators: const [
+                  requiredValidator,
+                ],
+              )
+              final String theme;
+            
+              @FormControlAnnotation(
+                validators: const [
+                  requiredValidator,
+                ],
+              )
+              final UserMode mode;
+            
+              @FormControlAnnotation(
+                validators: const [
+                  requiredValidator,
+                ],
+              )
+              final int timeout;
+            
+              @FormControlAnnotation(
+                validators: const [
+                  requiredValidator,
+                ],
+              )
+              final double height;
+            
+              Login({
+                this.email = 'default@e.mail',
+                required this.password,
+                required this.rememberMe,
+                required this.theme,
+                required this.mode,
+                required this.timeout,
+                required this.height,
+              });
+            }
+          ''',
+          generatedFile: generatedFile,
+        );
+      },
+    );
+  });
+}
+
+const generatedFile = r'''// GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
 // ReactiveFormsGenerator
@@ -8,7 +97,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
-import 'package:example/helpers.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'dart:core';
 import 'login.dart';
@@ -286,3 +375,4 @@ class LoginForm {
           asyncValidatorsDebounceTime: 250,
           disabled: false);
 }
+''';

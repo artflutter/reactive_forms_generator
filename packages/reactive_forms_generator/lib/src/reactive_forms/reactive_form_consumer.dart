@@ -59,7 +59,7 @@ class ReactiveFormConsumer {
             if (form is! ${reactiveForm.formGenerator.className}) {
               throw FormControlParentNotFoundException(this);
             }
-            return builder(context, form, child);;
+            return builder(context, form, child);
           '''),
       );
 

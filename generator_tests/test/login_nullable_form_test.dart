@@ -5,80 +5,47 @@ import 'helpers.dart';
 void main() {
   group('reactive_forms_generator', () {
     test(
-      'Simple types',
+      'Form with simple nullable types',
       () async {
         return testGenerator(
           model: r'''
-            import 'package:reactive_forms/reactive_forms.dart';
+            import 'package:example/helpers.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
-            Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
-              return Validators.required(control);
-            }
-            
-            enum UserMode { user, admin }
-            
             @ReactiveFormAnnotation()
-            class Login {
-              @FormControlAnnotation(
-                validators: const [
-                  requiredValidator,
-                ],
-              )
-              final String email;
+            class LoginNullable {
+              @FormControlAnnotation()
+              final String? email;
             
-              @FormControlAnnotation(
-                validators: const [
-                  requiredValidator,
-                ],
-              )
-              final String password;
+              @FormControlAnnotation()
+              final String? password;
             
-              @FormControlAnnotation(
-                validators: const [
-                  requiredValidator,
-                ],
-              )
-              final bool rememberMe;
+              @FormControlAnnotation()
+              final bool? rememberMe;
             
-              @FormControlAnnotation(
-                validators: const [
-                  requiredValidator,
-                ],
-              )
-              final String theme;
+              @FormControlAnnotation()
+              final String? theme;
             
-              @FormControlAnnotation(
-                validators: const [
-                  requiredValidator,
-                ],
-              )
-              final UserMode mode;
+              @FormControlAnnotation()
+              final UserMode? mode;
             
-              @FormControlAnnotation(
-                validators: const [
-                  requiredValidator,
-                ],
-              )
-              final int timeout;
+              @FormControlAnnotation()
+              final int? timeout;
             
-              @FormControlAnnotation(
-                validators: const [
-                  requiredValidator,
-                ],
-              )
-              final double height;
+              @FormControlAnnotation()
+              final double? height;
             
-              Login({
-                this.email = 'default@e.mail',
-                required this.password,
-                required this.rememberMe,
-                required this.theme,
-                required this.mode,
-                required this.timeout,
-                required this.height,
+              LoginNullable({
+                this.email,
+                this.password,
+                this.rememberMe,
+                this.theme,
+                this.mode,
+                this.timeout,
+                this.height,
               });
             }
+
           ''',
           generatedFile: generatedFile,
         );
@@ -97,71 +64,72 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
-import 'package:reactive_forms/reactive_forms.dart';
+import 'package:example/helpers.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'dart:core';
 import 'login.dart';
 
-class ReactiveLoginFormConsumer extends StatelessWidget {
-  ReactiveLoginFormConsumer({Key? key, required this.builder, this.child})
+class ReactiveLoginNullableFormConsumer extends StatelessWidget {
+  ReactiveLoginNullableFormConsumer(
+      {Key? key, required this.builder, this.child})
       : super(key: key);
 
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, LoginForm formGroup, Widget? child) builder;
+      BuildContext context, LoginNullableForm formGroup, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final form = ReactiveLoginForm.of(context);
+    final form = ReactiveLoginNullableForm.of(context);
 
-    if (form is! LoginForm) {
+    if (form is! LoginNullableForm) {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, form, child);
-    ;
   }
 }
 
-class LoginFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  LoginFormInheritedStreamer(
+class LoginNullableFormInheritedStreamer extends InheritedStreamer<dynamic> {
+  LoginNullableFormInheritedStreamer(
       {Key? key,
       required this.form,
       required Stream<dynamic> stream,
       required Widget child})
       : super(stream, child, key: key);
 
-  final LoginForm form;
+  final LoginNullableForm form;
 }
 
-class ReactiveLoginForm extends StatelessWidget {
-  ReactiveLoginForm(
+class ReactiveLoginNullableForm extends StatelessWidget {
+  ReactiveLoginNullableForm(
       {Key? key, required this.form, required this.child, this.onWillPop})
       : super(key: key);
 
   final Widget child;
 
-  final LoginForm form;
+  final LoginNullableForm form;
 
   final WillPopCallback? onWillPop;
 
-  static LoginForm? of(BuildContext context, {bool listen = true}) {
+  static LoginNullableForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
       return context
-          .dependOnInheritedWidgetOfExactType<LoginFormInheritedStreamer>()
+          .dependOnInheritedWidgetOfExactType<
+              LoginNullableFormInheritedStreamer>()
           ?.form;
     }
 
-    final element = context
-        .getElementForInheritedWidgetOfExactType<LoginFormInheritedStreamer>();
+    final element = context.getElementForInheritedWidgetOfExactType<
+        LoginNullableFormInheritedStreamer>();
     return element == null
         ? null
-        : (element.widget as LoginFormInheritedStreamer).form;
+        : (element.widget as LoginNullableFormInheritedStreamer).form;
   }
 
   @override
   Widget build(BuildContext context) {
-    return LoginFormInheritedStreamer(
+    return LoginNullableFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
       child: WillPopScope(
@@ -172,8 +140,8 @@ class ReactiveLoginForm extends StatelessWidget {
   }
 }
 
-class LoginFormBuilder extends StatefulWidget {
-  LoginFormBuilder(
+class LoginNullableFormBuilder extends StatefulWidget {
+  LoginNullableFormBuilder(
       {Key? key,
       required this.model,
       this.child,
@@ -181,28 +149,29 @@ class LoginFormBuilder extends StatefulWidget {
       required this.builder})
       : super(key: key);
 
-  final Login model;
+  final LoginNullable model;
 
   final Widget? child;
 
   final WillPopCallback? onWillPop;
 
   final Widget Function(
-      BuildContext context, LoginForm formModel, Widget? child) builder;
+      BuildContext context, LoginNullableForm formModel, Widget? child) builder;
 
   @override
-  _LoginFormBuilderState createState() => _LoginFormBuilderState();
+  _LoginNullableFormBuilderState createState() =>
+      _LoginNullableFormBuilderState();
 }
 
-class _LoginFormBuilderState extends State<LoginFormBuilder> {
+class _LoginNullableFormBuilderState extends State<LoginNullableFormBuilder> {
   late FormGroup _form;
 
-  late LoginForm _formModel;
+  late LoginNullableForm _formModel;
 
   @override
   void initState() {
     _form = FormGroup({});
-    _formModel = LoginForm(widget.model, _form, null);
+    _formModel = LoginNullableForm(widget.model, _form, null);
 
     _form.addAll(_formModel.formElements().controls);
 
@@ -211,7 +180,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveLoginForm(
+    return ReactiveLoginNullableForm(
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveForm(
@@ -223,8 +192,8 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
   }
 }
 
-class LoginForm {
-  LoginForm(this.login, this.form, this.path) {}
+class LoginNullableForm {
+  LoginNullableForm(this.loginNullable, this.form, this.path) {}
 
   String email = "email";
 
@@ -254,7 +223,7 @@ class LoginForm {
 
   static String heightControlName = "height";
 
-  final Login login;
+  final LoginNullable loginNullable;
 
   final FormGroup form;
 
@@ -270,13 +239,13 @@ class LoginForm {
   String timeoutControlPath() =>
       [path, "timeout"].whereType<String>().join(".");
   String heightControlPath() => [path, "height"].whereType<String>().join(".");
-  String get emailValue => emailControl.value as String;
-  String get passwordValue => passwordControl.value as String;
-  bool get rememberMeValue => rememberMeControl.value as bool;
-  String get themeValue => themeControl.value as String;
-  UserMode get modeValue => modeControl.value as UserMode;
-  int get timeoutValue => timeoutControl.value as int;
-  double get heightValue => heightControl.value as double;
+  String? get emailValue => emailControl.value;
+  String? get passwordValue => passwordControl.value;
+  bool? get rememberMeValue => rememberMeControl.value;
+  String? get themeValue => themeControl.value;
+  dynamic get modeValue => modeControl.value as dynamic;
+  int? get timeoutValue => timeoutControl.value;
+  double? get heightValue => heightControl.value;
   bool get containsEmail => form.contains(emailControlPath());
   bool get containsPassword => form.contains(passwordControlPath());
   bool get containsRememberMe => form.contains(rememberMeControlPath());
@@ -306,13 +275,13 @@ class LoginForm {
       form.control(rememberMeControlPath()) as FormControl<bool>;
   FormControl<String> get themeControl =>
       form.control(themeControlPath()) as FormControl<String>;
-  FormControl<UserMode> get modeControl =>
-      form.control(modeControlPath()) as FormControl<UserMode>;
+  FormControl<dynamic> get modeControl =>
+      form.control(modeControlPath()) as FormControl<dynamic>;
   FormControl<int> get timeoutControl =>
       form.control(timeoutControlPath()) as FormControl<int>;
   FormControl<double> get heightControl =>
       form.control(heightControlPath()) as FormControl<double>;
-  Login get model => Login(
+  LoginNullable get model => LoginNullable(
       email: emailValue,
       password: passwordValue,
       rememberMe: rememberMeValue,
@@ -322,50 +291,50 @@ class LoginForm {
       height: heightValue);
   FormGroup formElements() => FormGroup({
         email: FormControl<String>(
-            value: login.email,
-            validators: [requiredValidator],
+            value: loginNullable.email,
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         password: FormControl<String>(
-            value: login.password,
-            validators: [requiredValidator],
+            value: loginNullable.password,
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         rememberMe: FormControl<bool>(
-            value: login.rememberMe,
-            validators: [requiredValidator],
+            value: loginNullable.rememberMe,
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         theme: FormControl<String>(
-            value: login.theme,
-            validators: [requiredValidator],
+            value: loginNullable.theme,
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        mode: FormControl<UserMode>(
-            value: login.mode,
-            validators: [requiredValidator],
+        mode: FormControl<dynamic>(
+            value: loginNullable.mode,
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         timeout: FormControl<int>(
-            value: login.timeout,
-            validators: [requiredValidator],
+            value: loginNullable.timeout,
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         height: FormControl<double>(
-            value: login.height,
-            validators: [requiredValidator],
+            value: loginNullable.height,
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
