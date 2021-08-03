@@ -1,6 +1,7 @@
 import 'package:example/routes/array_nullable_form.dart';
 import 'package:example/routes/login_form.dart';
 import 'package:example/routes/login_nullable_form.dart';
+import 'package:example/routes/tiny_form.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,6 +10,8 @@ void main() {
 
 class Routes {
   static const login = '/login';
+
+  static const tiny = '/tiny';
 
   static const loginNullable = '/login-nullable';
 
@@ -25,8 +28,9 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: <String, WidgetBuilder>{
-        // Routes.login: (_) => LoginFormWidget(),
-        // Routes.loginNullable: (_) => LoginNullableFormWidget(),
+        Routes.login: (_) => LoginFormWidget(),
+        Routes.tiny: (_) => TinyFormWidget(),
+        Routes.loginNullable: (_) => LoginNullableFormWidget(),
         Routes.arrayNullable: (_) => ArrayNullableFormWidget(),
       },
       home: ArrayNullableFormWidget(),

@@ -30,7 +30,7 @@ class ArrayNullableFormWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ReactiveFormArray<String>(
-                      formArrayName: formModel.emailList,
+                      formArray: formModel.emailListControl,
                       builder: (context, formArray, child) => Column(
                         children: formModel.emailListValue
                             .map(
@@ -62,7 +62,7 @@ class ArrayNullableFormWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ReactiveFormArray<bool>(
-                      formArrayName: formModel.fruitList,
+                      formArray: formModel.fruitListControl,
                       builder: (context, formArray, child) => Column(
                         children: fruits.map(
                           (fruit) {

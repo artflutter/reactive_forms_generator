@@ -1,14 +1,275 @@
-# reactive_forms_generator
+<p align="center">
+  <img src="https://github.com/artflutter/reactive_forms_generator/blob/master/assets/img.png?raw=true" height="200" />
+  <h1><b>ReactiveFormsGenerator</b></h1>
+</p>
 
-A new Flutter package.
+Welcome to [ReactiveFormsGenerator](https://pub.dev/packages/reactive_forms_generator), code generator for [reactive_forms](https://pub.dev/packages/reactive_forms) 
+which will save you tons of time and make your forms type safe.
 
-## Getting Started
+**There is no reason write code manually! Let the code generation work for you.**
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+# Motivation
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+One of the goals of this package is to make [reactive_forms](https://pub.dev/packages/reactive_forms) package even more cool and fun to use.
+
+Let's see what issues this package tries to mitigate.
+
+Here is how typical `reactive_forms` form looks like
+
+```dart
+/// form instantiation
+FormGroup buildForm() => fb.group(<String, Object>{
+  'email': FormControl<String>(
+    validators: [Validators.required, Validators.email],
+  ),
+  'password': ['', Validators.required, Validators.minLength(8)],
+  'rememberMe': false,
+});
+
+/// form itself
+final form = ReactiveFormBuilder(
+    form: buildForm,
+    builder: (context, form, child) {
+      return Column(
+        children: [
+          ReactiveTextField<String>(
+            formControlName: 'email',
+          ),
+          const SizedBox(height: 16.0),
+          ReactiveTextField<String>(
+            formControlName: 'password',
+          ),
+          const SizedBox(height: 16.0),
+          ElevatedButton(
+            onPressed: () {
+              if (form.valid) {
+                print(form.value);
+              } else {
+                form.markAllAsTouched();
+              }
+            },
+            child: const Text('Sign Up'),
+          ),
+          ElevatedButton(
+            onPressed: () => form.resetState({
+              'email': ControlState<String>(value: null),
+              'password': ControlState<String>(value: null),
+              'rememberMe': ControlState<bool>(value: false),
+            }, removeFocus: true),
+            child: const Text('Reset all'),
+          ),
+        ],
+      );
+    },
+);
+```
+
+1. First issue is `String` identifiers which is used to define fields. Technically you can extract them into separate 
+class, enum or whatever you like. But this is manual work which you have to do each time you create the form. The other 
+disadvantage is when you refer to any field by it's `String` identifier you loos static type check. There is no way for
+static analyser to check if some random field name `login` is suitable to put in particular widget. So you can easily 
+get the form which looks `ok` but fails to build due to the typo in field names and putting `login` field into 
+`ReactiveCheckbox` field. **Isn't it better the code generation to do it for you?**
+
+
+2. Second issue is output which is always `Map<String, Object>`. It is ok for languages like JS. But for the typed language 
+you would prefer to get the output fom the form like model. And avoid manual type casting like this one.
+```dart
+final document = DocumentInput(
+      subTypeId: form.value["subType"] as DocumentSubTypeMixin,
+      documentNumber: form.value["documentNumber"] as String,
+      countryIsoCode: form.value["country"] as CountryMixin,
+      countryOfIssueIsoCode: form.value["country"] as CountryMixin,
+      issueDate: form.value["issueDate"] as DateTime,
+      vesselId: form.value["vessel"] as VesselMixin,
+    );
+```
+
+This is two main issues that forced me to write this generator.
+In the next chapters of documentation you'll see how we define and annotate the model which describes the form state and
+how easy and elegant it works with a bit of magic from code generation.
+
+#How to use
+
+## Minimum Requirements
+
+- Dart SDK: >=2.12.0 <3.0.0
+- Flutter: >= 2.2.0
+
+## Install
+
+To use [reactive_forms_generator], you will need your typical [build_runner]/code-generator setup.\
+First, install [build_runner] and [reactive_forms_generator] by adding them to your `pubspec.yaml` file:
+
+```yaml
+# pubspec.yaml
+dependencies:
+  reactive_forms:
+  reactive_forms_annotation:
+
+dev_dependencies:
+  build_runner:
+  reactive_forms_generator:
+```
+
+This installs three packages:
+
+- [build_runner](https://pub.dev/packages/build_runner), the tool to run code-generators
+- [reactive_forms](https://pub.dev/packages/reactive_forms), form engine itself
+- [reactive_forms_generator](https://pub.dev/packages/reactive_forms_generator), the code generator
+- [reactive_forms_annotation](https://pub.dev/packages/reactive_forms_annotation), a package containing annotations for [reactive_forms_generator].
+
+## Ignore lint warnings on generated files
+
+It is likely that the code generated by [reactive_forms_generator] will cause your linter to
+report warnings.
+
+The solution to this problem is to tell the linter to ignore generated files,
+by modifying your `analysis_options.yaml`:
+
+```yaml
+analyzer:
+  exclude:
+    - "**/*.gform.dart"
+```
+
+## Run the generator
+
+To run the code generator you have two possibilities:
+
+- If your package depends on Flutter:
+    - `flutter pub run build_runner build`
+- If your package _does not_ depend on Flutter:
+    - `dart pub run build_runner build`
+
+# The features
+
+## The syntax
+
+### Basics
+
+Let's start from simple login form.
+
+First we need to define our form model
+
+#### Model
+```dart
+class Tiny {
+  final String email;
+
+  final String password;
+
+  Tiny({this.email = '', this.password = ''});
+}
+```
+
+We defined here a simple model with non-nullable `email` and `password` fields.
+
+#### Annotations
+
+The next step is to add annotations to help generator do it's job.
+
+```dart
+import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+
+@ReactiveFormAnnotation()
+class Tiny {
+  @FormControlAnnotation()
+  final String email;
+
+  @FormControlAnnotation()
+  final String password;
+
+  Tiny({this.email = '', this.password = ''});
+}
+```
+
+`ReactiveFormAnnotation` - tells the generator that we want to build form based on this model.
+`FormControlAnnotation` - maps fields to control elements.
+
+#### Validation
+
+The login form should not proceed if there is any empty values. We need to modify our code to add some `required` validators.
+
+```dart
+import 'package:example/helpers.dart';
+import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+
+Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
+  return Validators.required(control);
+}
+
+@ReactiveFormAnnotation()
+class Tiny {
+  @FormControlAnnotation(
+    validators: const [requiredValidator],
+  )
+  final String email;
+
+  @FormControlAnnotation(
+    validators: const [requiredValidator],
+  )
+  final String password;
+
+  Tiny({this.email = '', this.password = ''});
+}
+```
+
+As far as we are using annotations - validators should be top level functions or static class fields.
+
+Now we are ready to run our form generator. You can check output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/forms/tiny.gform.dart).
+
+#### Build form
+
+Let's build our form based on generated code
+
+```dart
+final form = TinyFormBuilder(
+  // setup form model with initial data
+  model: Tiny(),
+  // form builder
+  builder: (context, formModel, child) {
+    return Column(
+      children: [
+        ReactiveTextField<String>(
+          formControl: formModel.emailControl,
+          validationMessages: (control) => {
+            ValidationMessage.required: 'The email must not be empty',
+          },
+          decoration: const InputDecoration(labelText: 'Email'),
+        ),
+        const SizedBox(height: 8.0),
+        ReactiveTextField<String>(
+          formControl: formModel.passwordControl,
+          obscureText: true,
+          validationMessages: (control) => {
+            ValidationMessage.required: 'The password must not be empty',
+          },
+          textInputAction: TextInputAction.done,
+          decoration: const InputDecoration(labelText: 'Password'),
+        ),
+        const SizedBox(height: 8.0),
+        ReactiveTinyFormConsumer(
+          builder: (context, form, child) {
+            return ElevatedButton(
+              child: Text('Submit'),
+              onPressed: form.form.valid
+                      ? () {
+                print(form.model.email);
+                print(form.model.password);
+              }
+                      : null,
+            );
+          },
+        ),
+      ],
+    );
+  },
+);
+```
+
+`TinyFormBuilder` - generated widget that injects form into context
+`ReactiveTextField` - bundled text fields 
+`ReactiveTinyFormConsumer` - generated widget that rebuilds upon form change
+
+You can get access to prefilled form model by calling `form.model.[field-name]`.

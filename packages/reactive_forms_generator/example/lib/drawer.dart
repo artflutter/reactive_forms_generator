@@ -21,6 +21,18 @@ class AppDrawer extends StatelessWidget {
                 Routes.loginNullable,
               ),
             ),
+            ListTile(
+              title: const Text('Array nullable'),
+              onTap: () => Navigator.of(context).pushReplacementNamed(
+                Routes.arrayNullable,
+              ),
+            ),
+            ListTile(
+              title: const Text('Tiny form'),
+              onTap: () => Navigator.of(context).pushReplacementNamed(
+                Routes.tiny,
+              ),
+            ),
             // ListTile(
             //   title: const Text('Complex sample'),
             //   onTap: () => Navigator.of(context).pushReplacementNamed(
