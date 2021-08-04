@@ -17,7 +17,7 @@ String generateLibrary(ClassElement element) {
     useNullSafetySyntax: true,
   );
 
-  final formGenerator = FormGenerator(element);
+  final formGenerator = FormGenerator(element, null);
   final reactiveInheritedStreamer = ReactiveInheritedStreamer(formGenerator);
   final reactiveForm = ReactiveForm(reactiveInheritedStreamer);
   final reactiveFormConsumer = ReactiveFormConsumer(reactiveForm);

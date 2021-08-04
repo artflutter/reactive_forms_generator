@@ -14,13 +14,15 @@ import 'library_builder.dart';
 
 class FormGenerator {
   final ClassElement element;
+  final DartType? type;
 
   final Map<String, FormGenerator> formGroupGenerators = {};
 
-  FormGenerator(this.element) {
+  FormGenerator(this.element, this.type) {
     nestedFormGroupElements.forEach(
       (e) => formGroupGenerators[e.name] = FormGenerator(
         e.type.element! as ClassElement,
+        e.type,
       ),
     );
   }
@@ -125,9 +127,8 @@ class FormGenerator {
       final typeParameter =
           (field.type as ParameterizedType).typeArguments.first;
 
-      final formGenerator = FormGenerator(
-        typeParameter.element! as ClassElement,
-      );
+      final formGenerator =
+          FormGenerator(typeParameter.element! as ClassElement, type);
 
       fieldValue =
           '${field.name}${formGenerator.className}.map((e) => e.model).toList()';
@@ -311,9 +312,8 @@ class FormGenerator {
                 final typeParameter =
                     (e.type as ParameterizedType).typeArguments.first;
 
-                final formGenerator = FormGenerator(
-                  typeParameter.element! as ClassElement,
-                );
+                final formGenerator =
+                    FormGenerator(typeParameter.element! as ClassElement, type);
 
                 return '''${e.name}${formGenerator.className} = ${element.name.camelCase}.${e.name}
                   .asMap()
@@ -363,10 +363,15 @@ class FormGenerator {
                 ...nestedFormGroupFields,
                 // ..type = Reference(element.name),
                 Field(
-                  (b) => b
-                    ..name = element.name.camelCase
-                    ..modifier = FieldModifier.final$
-                    ..type = Reference(element.name),
+                  (b) {
+                    final displayType =
+                        type?.getDisplayString(withNullability: true) ??
+                            element.name;
+                    b
+                      ..name = element.name.camelCase
+                      ..modifier = FieldModifier.final$
+                      ..type = Reference('$displayType');
+                  },
                 ),
                 Field(
                   (b) => b
@@ -386,8 +391,7 @@ class FormGenerator {
                         (e.type as ParameterizedType).typeArguments.first;
 
                     final formGenerator = FormGenerator(
-                      typeParameter.element! as ClassElement,
-                    );
+                        typeParameter.element! as ClassElement, type);
 
                     return Field(
                       (b) => b
@@ -412,37 +416,6 @@ class FormGenerator {
                 modelMethod,
                 Method(
                   (b) {
-                    // final _formElements = formElements
-                    //     .map(
-                    //       (f) {
-                    //         f.type.element;
-                    //         FormElementGenerator? formElementGenerator;
-                    //
-                    //         if (formControlChecker.hasAnnotationOfExact(f)) {
-                    //           formElementGenerator = FormControlGenerator(f);
-                    //         }
-                    //
-                    //         if (formArrayChecker.hasAnnotationOfExact(f)) {
-                    //           formElementGenerator = FormArrayGenerator(f);
-                    //         }
-                    //
-                    //         if (formElementGenerator != null) {
-                    //           return '${fieldName(f)}: ${formElementGenerator.element()}';
-                    //         }
-                    //
-                    //         return null;
-                    //       },
-                    //     )
-                    //     .whereType<String>()
-                    //     .toList();
-                    //
-                    // _formElements.addAll(
-                    //   nestedFormElements.map(
-                    //     (f) =>
-                    //         '${fieldName(f)}: ${FormGroupGenerator(f).element()}',
-                    //   ),
-                    // );
-
                     b
                       ..name = 'formElements'
                       ..lambda = true
@@ -460,6 +433,7 @@ class FormGenerator {
                               typeArguments: [],
                               nullabilitySuffix: NullabilitySuffix.none,
                             ),
+                          type,
                         ).element(),
                       );
                   },

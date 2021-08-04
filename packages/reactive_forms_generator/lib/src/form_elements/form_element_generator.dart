@@ -1,14 +1,20 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/nullability_suffix.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:recase/recase.dart';
 
 abstract class FormElementGenerator {
   final FieldElement field;
+  final DartType? type;
 
-  FormElementGenerator(this.field);
+  FormElementGenerator(this.field, this.type);
 
-  String get value =>
-      '${(field.enclosingElement as ClassElement).name.camelCase}.${field.name}';
+  String get value {
+    final optionalChaining =
+        type?.nullabilitySuffix == NullabilitySuffix.question ? '?' : '';
+    return '${(field.enclosingElement as ClassElement).name.camelCase}${optionalChaining}.${field.name}';
+  }
 
   String? validatorName(ExecutableElement? e) {
     var name = e?.name;

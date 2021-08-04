@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_array_generator.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_control_generator.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
@@ -7,7 +8,7 @@ import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
 
 class FormGroupGenerator extends FormElementGenerator {
-  FormGroupGenerator(FieldElement field) : super(field);
+  FormGroupGenerator(FieldElement field, DartType? type) : super(field, type);
 
   List<FieldElement> get formElements => (field.type.element as ClassElement)
       .fields
@@ -34,15 +35,14 @@ class FormGroupGenerator extends FormElementGenerator {
     final _formElements = formElements
         .map(
           (f) {
-            f.type.element;
             FormElementGenerator? formElementGenerator;
 
             if (formControlChecker.hasAnnotationOfExact(f)) {
-              formElementGenerator = FormControlGenerator(f);
+              formElementGenerator = FormControlGenerator(f, type);
             }
 
             if (formArrayChecker.hasAnnotationOfExact(f)) {
-              formElementGenerator = FormArrayGenerator(f);
+              formElementGenerator = FormArrayGenerator(f, type);
             }
 
             if (formElementGenerator != null) {
@@ -58,7 +58,10 @@ class FormGroupGenerator extends FormElementGenerator {
     _formElements.addAll(
       nestedFormElements.map(
         (f) {
-          final formGenerator = FormGenerator(f.type.element as ClassElement);
+          final formGenerator = FormGenerator(
+            f.type.element as ClassElement,
+            f.type,
+          );
 
           return '${f.name}: ${formGenerator.className.camelCase}.formElements()';
         },

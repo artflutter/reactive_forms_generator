@@ -1,7 +1,8 @@
 import 'package:example/routes/array_nullable_form.dart';
+import 'package:example/routes/group_nullable_group.dart';
 import 'package:example/routes/login_form.dart';
 import 'package:example/routes/login_nullable_form.dart';
-import 'package:example/routes/tiny_form.dart';
+import 'package:example/docs/basics/tiny_form.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,6 +13,8 @@ class Routes {
   static const login = '/login';
 
   static const tiny = '/tiny';
+
+  static const group = '/group';
 
   static const loginNullable = '/login-nullable';
 
@@ -32,8 +35,9 @@ class MyApp extends StatelessWidget {
         Routes.tiny: (_) => TinyFormWidget(),
         Routes.loginNullable: (_) => LoginNullableFormWidget(),
         Routes.arrayNullable: (_) => ArrayNullableFormWidget(),
+        Routes.group: (_) => GroupNullableFormWidget(),
       },
-      home: ArrayNullableFormWidget(),
+      home: GroupNullableFormWidget(),
     );
   }
 }

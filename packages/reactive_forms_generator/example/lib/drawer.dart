@@ -28,6 +28,12 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             ListTile(
+              title: const Text('Group'),
+              onTap: () => Navigator.of(context).pushReplacementNamed(
+                Routes.group,
+              ),
+            ),
+            ListTile(
               title: const Text('Tiny form'),
               onTap: () => Navigator.of(context).pushReplacementNamed(
                 Routes.tiny,
