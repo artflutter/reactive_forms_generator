@@ -8,10 +8,13 @@ class Group {
 
   final Address? address;
 
+  final Address? address2;
+
   Group({
     this.personal,
     this.phone,
     this.address,
+    this.address2,
   });
 }
 

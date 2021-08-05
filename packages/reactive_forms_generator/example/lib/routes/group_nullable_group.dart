@@ -54,33 +54,87 @@ class GroupNullableFormWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16.0),
-              ReactiveTextField<String>(
-                formControl: formModel.addressForm.cityControl,
-                decoration: const InputDecoration(
-                  labelText: 'City',
-                  helperText: '',
-                  helperStyle: TextStyle(height: 0.7),
-                  errorStyle: TextStyle(height: 0.7),
+              Card(
+                margin: EdgeInsets.all(0),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Address 1', style: TextStyle(fontSize: 20)),
+                      ReactiveTextField<String>(
+                        formControl: formModel.addressForm.cityControl,
+                        decoration: const InputDecoration(
+                          labelText: 'City',
+                          helperText: '',
+                          helperStyle: TextStyle(height: 0.7),
+                          errorStyle: TextStyle(height: 0.7),
+                        ),
+                      ),
+                      const SizedBox(height: 16.0),
+                      ReactiveTextField<String>(
+                        formControl: formModel.addressForm.streetControl,
+                        decoration: const InputDecoration(
+                          labelText: 'Street',
+                          helperText: '',
+                          helperStyle: TextStyle(height: 0.7),
+                          errorStyle: TextStyle(height: 0.7),
+                        ),
+                      ),
+                      const SizedBox(height: 16.0),
+                      ReactiveTextField<String>(
+                        formControl: formModel.addressForm.zipControl,
+                        decoration: const InputDecoration(
+                          labelText: 'Zip',
+                          helperText: '',
+                          helperStyle: TextStyle(height: 0.7),
+                          errorStyle: TextStyle(height: 0.7),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 16.0),
-              ReactiveTextField<String>(
-                formControl: formModel.addressForm.streetControl,
-                decoration: const InputDecoration(
-                  labelText: 'Street',
-                  helperText: '',
-                  helperStyle: TextStyle(height: 0.7),
-                  errorStyle: TextStyle(height: 0.7),
-                ),
-              ),
-              const SizedBox(height: 16.0),
-              ReactiveTextField<String>(
-                formControl: formModel.addressForm.zipControl,
-                decoration: const InputDecoration(
-                  labelText: 'Zip',
-                  helperText: '',
-                  helperStyle: TextStyle(height: 0.7),
-                  errorStyle: TextStyle(height: 0.7),
+              Card(
+                margin: EdgeInsets.all(0),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Address 2', style: TextStyle(fontSize: 20)),
+                      ReactiveTextField<String>(
+                        formControl: formModel.address2Form.cityControl,
+                        decoration: const InputDecoration(
+                          labelText: 'City',
+                          helperText: '',
+                          helperStyle: TextStyle(height: 0.7),
+                          errorStyle: TextStyle(height: 0.7),
+                        ),
+                      ),
+                      const SizedBox(height: 16.0),
+                      ReactiveTextField<String>(
+                        formControl: formModel.address2Form.streetControl,
+                        decoration: const InputDecoration(
+                          labelText: 'Street',
+                          helperText: '',
+                          helperStyle: TextStyle(height: 0.7),
+                          errorStyle: TextStyle(height: 0.7),
+                        ),
+                      ),
+                      const SizedBox(height: 16.0),
+                      ReactiveTextField<String>(
+                        formControl: formModel.address2Form.zipControl,
+                        decoration: const InputDecoration(
+                          labelText: 'Zip',
+                          helperText: '',
+                          helperStyle: TextStyle(height: 0.7),
+                          errorStyle: TextStyle(height: 0.7),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 16.0),
@@ -111,6 +165,7 @@ class GroupNullableFormWidget extends StatelessWidget {
           personal: Personal(name: 'vasilich'),
           phone: Phone(countryIso: 'UA'),
           address: Address(city: 'Kiev'),
+          address2: Address(city: 'Odessa'),
         ),
       ),
     );

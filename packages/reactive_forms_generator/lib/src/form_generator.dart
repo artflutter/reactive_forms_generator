@@ -106,7 +106,7 @@ class FormGenerator {
           (b) {
             final name = formGroupGenerators[e.name]!.className;
             b
-              ..name = name.camelCase
+              ..name = '${e.name}Form'
               ..late = true
               ..type = Reference(name);
           },
@@ -296,15 +296,15 @@ class FormGenerator {
 
   Constructor get _constructor => Constructor(
         (b) {
-          final formGroupInitializers = formGroupGenerators.values.map(
-            (e) {
-              final nestedElement = nestedFormGroupElements.firstWhere(
-                (nestedElement) =>
-                    nestedElement.type.element!.name == e.element.name,
-              );
-              return '${e.className.camelCase} = ${e.className}(${element.name.camelCase}.${nestedElement.name}, form, \'${nestedElement.name}\');';
-            },
-          ).toList();
+          final formGroupInitializers = formGroupGenerators
+              .map((name, generator) {
+                final item =
+                    '${name}Form = ${generator.className}(${element.name.camelCase}.${name}, form, \'${name}\');';
+
+                return MapEntry(name, item);
+              })
+              .values
+              .toList();
 
           formGroupInitializers.addAll(
             nestedArrayFormGroupElements.map(

@@ -58,12 +58,7 @@ class FormGroupGenerator extends FormElementGenerator {
     _formElements.addAll(
       nestedFormElements.map(
         (f) {
-          final formGenerator = FormGenerator(
-            f.type.element as ClassElement,
-            f.type,
-          );
-
-          return '${f.name}: ${formGenerator.className.camelCase}.formElements()';
+          return '${f.name}: ${f.name}Form.formElements()';
         },
       ),
     );
