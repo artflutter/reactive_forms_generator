@@ -5,7 +5,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 class MailingList {
   @FormArrayAnnotation(
     validators: const [
-      emailDuplicates,
+      mailingListValidator,
     ],
   )
   final List<String?> emailList;

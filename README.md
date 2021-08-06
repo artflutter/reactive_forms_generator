@@ -273,3 +273,194 @@ final form = TinyFormBuilder(
 `ReactiveTinyFormConsumer` - generated widget that rebuilds upon form change
 
 You can get access to prefilled form model by calling `form.model.[field-name]`.
+
+### Dynamic forms with FormArray
+
+The next example will show how to build dynamis forms. We will create a mailing list which will allow adding new email
+and basic validation.
+
+#### Model
+The model is pretty simple.
+
+```dart
+class MailingList {
+  final List<String?> emailList;
+
+  MailingList({
+    this.emailList = const [],
+  });
+}
+```
+
+#### Annotations
+
+The next step is to add annotations to help generator do it's job.
+
+```dart
+import 'package:example/helpers.dart';
+import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+
+@ReactiveFormAnnotation()
+class MailingList {
+  @FormArrayAnnotation(
+    validators: const [
+      emailDuplicates,
+    ],
+  )
+  final List<String?> emailList;
+
+  MailingList({
+    this.emailList = const [],
+  });
+}
+```
+
+`ReactiveFormAnnotation` - tells the generator that we want to build form based on this model.
+`FormArrayAnnotation` - maps fields to control elements.
+
+#### Validation
+
+The login form should not proceed if there is any empty values. We need to modify our code to add some `required` validators.
+
+```dart
+/// simple regexp to validate email
+final emailRegex = RegExp(
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+
+/// validator that validates field against email regex
+Map<String, dynamic> emailValidator(AbstractControl<dynamic> control) {
+  final email = control.value as String?;
+
+  return email != null && emailRegex.hasMatch(email)
+          ? <String, dynamic>{}
+          : <String, dynamic>{ValidationMessage.email: true};
+}
+
+/// validates there is no duplicates in email list and each item is valid email
+Map<String, dynamic>? mailingListValidator(AbstractControl control) {
+  final formArray = control as FormArray<String>;
+  final emails = formArray.value ?? [];
+  final test = Set<String>();
+
+  // sets errors for each input in case if value is invalid email
+  formArray.controls.forEach((e) => e.setErrors(emailValidator(e)));
+
+  // checks that there is no duplicates
+  final result = emails.fold<bool>(true,
+    (previousValue, element) => previousValue && test.add(element ?? ''),
+  );
+
+  return result ? null : <String, dynamic>{'emailDuplicates': true};
+}
+```
+
+As far as we are using annotations - validators should be top level functions or static class fields.
+
+Now we are ready to run our form generator. You can check output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/arrays/mailing_list.gform.dart).
+
+#### Build form
+
+Let's build our form based on generated code
+
+```dart
+// create form based on generated widget
+final form = MailingListFormBuilder(
+  // instantiate with empty model
+  model: MailingList(),
+  builder: (context, formModel, child) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Expanded(
+              // renders list of fields corresponding to added elements
+              child: ReactiveFormArray<String>(
+                formArray: formModel.emailListControl,
+                builder: (context, formArray, child) => Column(
+                  children: formModel.emailListValue
+                          .asMap()
+                          .map((i, email) {
+                    return MapEntry(
+                            i,
+                            ReactiveTextField<String>(
+                              formControlName: i.toString(),
+                              validationMessages: (_) => {
+                                'email': 'Invalid email',
+                              },
+                              decoration: InputDecoration(
+                                      labelText: 'Email ${i}'),
+                            ));
+                  })
+                          .values
+                          .toList(),
+                ),
+              ),
+            ),
+            SizedBox(width: 16),
+            // adds new item to the list of fields
+            ElevatedButton(
+              onPressed: () {
+                formModel.emailListControl.add(
+                  FormControl<String>(value: null),
+                );
+              },
+              child: const Text('add'),
+            )
+          ],
+        ),
+        SizedBox(height: 16),
+        // renders error related to the whole list of elements
+        ReactiveMailingListFormConsumer(
+          builder: (context, form, child) {
+            // map error keys to text
+            final errorText = {
+              'emailDuplicates': 'Two identical emails are in the list',
+            };
+            final errors = <String, dynamic>{};
+
+            // filter values related to individual text fields
+            form.emailListControl.errors.forEach((key, value) {
+              final intKey = int.tryParse(key);
+              if (intKey == null) {
+                errors[key] = value;
+              }
+            });
+            
+            // if there is still erros left - render an error message 
+            if (form.emailListControl.hasErrors && errors.isNotEmpty) {
+              return Text(errorText[errors.entries.first.key] ?? '');
+            } else {
+              return Container();
+            }
+          },
+        ),
+        SizedBox(height: 16),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                if (formModel.form.valid) {
+                  print(formModel.model);
+                } else {
+                  formModel.form.markAllAsTouched();
+                }
+              },
+              child: const Text('Sign Up'),
+            ),
+            ReactiveMailingListFormConsumer(
+              builder: (context, form, child) {
+                return ElevatedButton(
+                  child: Text('Submit'),
+                  onPressed: form.form.valid ? () {} : null,
+                );
+              },
+            ),
+          ],
+        )
+      ],
+    );
+  },
+);
+```

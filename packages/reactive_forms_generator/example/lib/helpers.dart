@@ -15,16 +15,8 @@ Map<String, dynamic> emailValidator(AbstractControl<dynamic> control) {
       : <String, dynamic>{ValidationMessage.email: true};
 }
 
-// Map<String, dynamic>? groupValidator(AbstractControl<dynamic> control) {
-//   final form = control as FormGroup;
-//
-//   return <String, dynamic>{
-//     'emailList.0': <String, dynamic>{'invalidEmail': true}
-//   };
-// }
-
 // validates that at least one email is selected
-Map<String, dynamic>? emailDuplicates(AbstractControl control) {
+Map<String, dynamic>? mailingListValidator(AbstractControl control) {
   final formArray = control as FormArray<String>;
   final emails = formArray.value ?? [];
   final test = Set<String>();

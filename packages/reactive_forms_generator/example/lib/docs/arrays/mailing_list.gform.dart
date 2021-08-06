@@ -162,7 +162,7 @@ class MailingListForm {
             mailingList.emailList
                 .map((e) => FormControl<String>(value: e))
                 .toList(),
-            validators: [emailDuplicates],
+            validators: [mailingListValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false)
