@@ -39,6 +39,12 @@ class AppDrawer extends StatelessWidget {
                 Routes.tiny,
               ),
             ),
+            ListTile(
+              title: const Text('Mailing list'),
+              onTap: () => Navigator.of(context).pushReplacementNamed(
+                Routes.mailingList,
+              ),
+            ),
             // ListTile(
             //   title: const Text('Complex sample'),
             //   onTap: () => Navigator.of(context).pushReplacementNamed(

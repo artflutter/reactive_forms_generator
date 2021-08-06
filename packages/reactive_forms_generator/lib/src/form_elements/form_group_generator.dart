@@ -3,9 +3,7 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_array_generator.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_control_generator.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
-import 'package:reactive_forms_generator/src/form_generator.dart';
 import 'package:reactive_forms_generator/src/types.dart';
-import 'package:recase/recase.dart';
 
 class FormGroupGenerator extends FormElementGenerator {
   FormGroupGenerator(FieldElement field, DartType? type) : super(field, type);

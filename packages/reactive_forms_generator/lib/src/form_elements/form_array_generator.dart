@@ -14,8 +14,8 @@ class FormArrayGenerator extends FormElementGenerator {
     final partialProps = [
       'validators: [${syncValidatorList(formArrayChecker).join(',')}]',
       'asyncValidators: [${asyncValidatorList(formArrayChecker).join(',')}]',
-      'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formControlChecker)}',
-      'disabled: ${disabled(formControlChecker)}',
+      'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formArrayChecker)}',
+      'disabled: ${disabled(formArrayChecker)}',
     ];
 
     final typeParameter = (field.type as ParameterizedType).typeArguments.first;

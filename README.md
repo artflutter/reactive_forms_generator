@@ -217,7 +217,7 @@ class Tiny {
 
 As far as we are using annotations - validators should be top level functions or static class fields.
 
-Now we are ready to run our form generator. You can check output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/forms/tiny.gform.dart).
+Now we are ready to run our form generator. You can check output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/basics/tiny.gform.dart).
 
 #### Build form
 
