@@ -1,3 +1,8 @@
+## [0.0.13-beta]
+
+* bugfixes for array support
+* bugfixes for form groups
+
 ## [0.0.12-beta]
 
 * bugfixes for form groups
