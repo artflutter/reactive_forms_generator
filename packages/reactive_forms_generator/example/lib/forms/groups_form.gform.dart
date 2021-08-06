@@ -174,7 +174,7 @@ class GroupForm {
       personal: personalForm.model,
       phone: phoneForm.model,
       address: addressForm.model,
-      address2: addressForm.model);
+      address2: address2Form.model);
   FormGroup formElements() => FormGroup({
         personal: personalForm.formElements(),
         phone: phoneForm.formElements(),

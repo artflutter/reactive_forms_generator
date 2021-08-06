@@ -278,8 +278,7 @@ class FormGenerator {
 
           fields.addAll(
             nestedFormGroupElements.map(
-              (field) =>
-                  '${fieldName(field)}:${formGroupGenerators[fieldName(field)]!.className.camelCase}.model',
+              (field) => '${fieldName(field)}:${field.name}Form.model',
             ),
           );
 
