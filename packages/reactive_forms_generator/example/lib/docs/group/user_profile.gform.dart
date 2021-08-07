@@ -265,7 +265,7 @@ class AddressForm {
             touched: false),
         city: FormControl<String>(
             value: address?.city,
-            validators: [],
+            validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

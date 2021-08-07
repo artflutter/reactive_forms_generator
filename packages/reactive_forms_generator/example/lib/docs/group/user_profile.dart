@@ -18,8 +18,8 @@ class UserProfile {
   final Address? office;
 
   UserProfile({
-    required this.firstName,
-    required this.lastName,
+    this.firstName = '',
+    this.lastName = '',
     this.home,
     this.office,
   });
@@ -30,7 +30,9 @@ class Address {
   @FormControlAnnotation()
   final String? street;
 
-  @FormControlAnnotation()
+  @FormControlAnnotation(
+    validators: const [requiredValidator],
+  )
   final String? city;
 
   @FormControlAnnotation()

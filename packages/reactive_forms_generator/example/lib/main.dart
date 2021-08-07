@@ -1,4 +1,5 @@
 import 'package:example/docs/arrays/mailing_list_form.dart';
+import 'package:example/docs/group/user_profile_form.dart';
 import 'package:example/routes/array_nullable_form.dart';
 import 'package:example/routes/group_nullable_group.dart';
 import 'package:example/routes/login_form.dart';
@@ -16,6 +17,8 @@ class Routes {
   static const tiny = '/tiny';
 
   static const mailingList = '/mailing-list';
+
+  static const userProfile = '/user-profile';
 
   static const group = '/group';
 
@@ -37,11 +40,12 @@ class MyApp extends StatelessWidget {
         Routes.login: (_) => LoginFormWidget(),
         Routes.tiny: (_) => TinyFormWidget(),
         Routes.mailingList: (_) => MailingListFormWidget(),
+        Routes.userProfile: (_) => UserProfileFormWidget(),
         Routes.loginNullable: (_) => LoginNullableFormWidget(),
         Routes.arrayNullable: (_) => ArrayNullableFormWidget(),
         Routes.group: (_) => GroupNullableFormWidget(),
       },
-      home: MailingListFormWidget(),
+      home: UserProfileFormWidget(),
     );
   }
 }
