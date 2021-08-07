@@ -66,7 +66,7 @@ final form = ReactiveFormBuilder(
 
 1. First issue is `String` identifiers which is used to define fields. Technically you can extract them into separate 
 class, enum or whatever you like. But this is manual work which you have to do each time you create the form. The other 
-disadvantage is when you refer to any field by it's `String` identifier you loos static type check. There is no way for
+disadvantage is when you refer to any field by his `String` identifier you loos static type check. There is no way for
 static analyser to check if some random field name `login` is suitable to put in particular widget. So you can easily 
 get the form which looks `ok` but fails to build due to the typo in field names and putting `login` field into 
 `ReactiveCheckbox` field. **Isn't it better the code generation to do it for you?**
@@ -167,7 +167,7 @@ We defined here a simple model with non-nullable `email` and `password` fields.
 
 #### Annotations
 
-The next step is to add annotations to help generator do it's job.
+The next step is to add annotations to help generator do his job.
 
 ```dart
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
@@ -276,7 +276,7 @@ You can get access to prefilled form model by calling `form.model.[field-name]`.
 
 ### Dynamic forms with FormArray
 
-The next example will show how to build dynamis forms. We will create a mailing list which will allow adding new email
+The next example will show how to build dynamic forms. We will create a mailing list which will allow adding new email
 and basic validation.
 
 #### Model
@@ -294,7 +294,7 @@ class MailingList {
 
 #### Annotations
 
-The next step is to add annotations to help generator do it's job.
+The next step is to add annotations to help generator do his job.
 
 ```dart
 import 'package:example/helpers.dart';
@@ -320,7 +320,7 @@ class MailingList {
 
 #### Validation
 
-The login form should not proceed if there is any empty values. We need to modify our code to add some `required` validators.
+The mailing list form should not be valid in two cases - if there are duplicates and if any field is invalid email.
 
 ```dart
 /// simple regexp to validate email
@@ -460,6 +460,244 @@ final form = MailingListFormBuilder(
           ],
         )
       ],
+    );
+  },
+);
+```
+
+### Nested forms with FormGroups
+
+The next example will show how to build nested forms. We will create a user profile form with first/last names 
+and home/office addresses. Address will contain city/street/zip fields.
+
+#### Model
+The model will be separated on two parts `UserProfile` and `Address`
+
+```dart
+class UserProfile {
+  final String firstName;
+
+  final String lastName;
+
+  final Address? home;
+
+  final Address? office;
+
+  UserProfile({
+    this.firstName = '',
+    this.lastName = '',
+    this.home,
+    this.office,
+  });
+}
+
+class Address {
+  final String? street;
+
+  final String? city;
+
+  final String? zip;
+
+  Address({
+    this.street,
+    this.city,
+    this.zip,
+  });
+}
+
+```
+
+#### Annotations
+
+The next step is to add annotations to help generator do his job.
+
+```dart
+import 'package:example/helpers.dart';
+import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+
+@ReactiveFormAnnotation()
+class UserProfile {
+  @FormControlAnnotation(
+    validators: const [requiredValidator],
+  )
+  final String firstName;
+
+  @FormControlAnnotation(
+    validators: const [requiredValidator],
+  )
+  final String lastName;
+
+  final Address? home;
+
+  final Address? office;
+
+  UserProfile({
+    this.firstName = '',
+    this.lastName = '',
+    this.home,
+    this.office,
+  });
+}
+
+@FormGroupAnnotation()
+class Address {
+  @FormControlAnnotation()
+  final String? street;
+
+  @FormControlAnnotation(
+    validators: const [requiredValidator],
+  )
+  final String? city;
+
+  @FormControlAnnotation()
+  final String? zip;
+
+  Address({
+    this.street,
+    this.city,
+    this.zip,
+  });
+}
+```
+
+`ReactiveFormAnnotation` - tells the generator that we want to build form based on this model.
+`FormGroupAnnotation` - describes the nested form.
+
+#### Validation
+
+We will use only simple `requiredValidator` for first/last names and city.
+
+```dart
+Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
+  return Validators.required(control);
+}
+```
+
+As far as we are using annotations - validators should be top level functions or static class fields.
+
+Now we are ready to run our form generator. You can check output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/group/user_profile.gform.dart).
+
+#### Build form
+
+Let's build our form based on generated code
+
+```dart
+// create form based on generated widget
+final form = UserProfileFormBuilder(
+  model: UserProfile(),
+  builder: (context, formModel, child) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ReactiveTextField<String>(
+            formControl: formModel.firstNameControl,
+            validationMessages: (control) => {
+              ValidationMessage.required: 'Must not be empty',
+            },
+            decoration: const InputDecoration(
+              labelText: 'First name',
+            ),
+          ),
+          const SizedBox(height: 8.0),
+          ReactiveTextField<String>(
+            formControl: formModel.lastNameControl,
+            validationMessages: (control) => {
+              ValidationMessage.required: 'Must not be empty',
+            },
+            decoration: const InputDecoration(
+              labelText: 'Last name',
+            ),
+          ),
+          const SizedBox(height: 24.0),
+          Text('Home address', style: TextStyle(fontSize: 18)),
+          ReactiveTextField<String>(
+            formControl: formModel.homeForm.cityControl,
+            validationMessages: (control) => {
+              ValidationMessage.required: 'Must not be empty',
+            },
+            decoration: const InputDecoration(
+              labelText: 'Home city',
+            ),
+          ),
+          const SizedBox(height: 8.0),
+          ReactiveTextField<String>(
+            formControl: formModel.homeForm.streetControl,
+            validationMessages: (control) => {
+              ValidationMessage.required: 'Must not be empty',
+            },
+            decoration: const InputDecoration(
+              labelText: 'Home street',
+            ),
+          ),
+          const SizedBox(height: 8.0),
+          ReactiveTextField<String>(
+            formControl: formModel.homeForm.zipControl,
+            validationMessages: (control) => {
+              ValidationMessage.required: 'Must not be empty',
+            },
+            textInputAction: TextInputAction.done,
+            decoration: const InputDecoration(
+              labelText: 'Home zip',
+            ),
+          ),
+          const SizedBox(height: 8.0),
+          Text('Office address', style: TextStyle(fontSize: 18)),
+          const SizedBox(height: 8.0),
+          ReactiveTextField<String>(
+            formControl: formModel.officeForm.cityControl,
+            validationMessages: (control) => {
+              ValidationMessage.required: 'Must not be empty',
+            },
+            decoration: const InputDecoration(
+              labelText: 'Office city',
+            ),
+          ),
+          const SizedBox(height: 8.0),
+          ReactiveTextField<String>(
+            formControl: formModel.officeForm.streetControl,
+            validationMessages: (control) => {
+              ValidationMessage.required: 'Must not be empty',
+            },
+            decoration: const InputDecoration(
+              labelText: 'Office street',
+            ),
+          ),
+          const SizedBox(height: 8.0),
+          ReactiveTextField<String>(
+            formControl: formModel.officeForm.zipControl,
+            validationMessages: (control) => {
+              ValidationMessage.required: 'Must not be empty',
+            },
+            decoration: const InputDecoration(
+              labelText: 'Office zip',
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              if (formModel.form.valid) {
+                print(formModel.model);
+              } else {
+                formModel.form.markAllAsTouched();
+              }
+            },
+            child: const Text('Sign Up'),
+          ),
+          ReactiveUserProfileFormConsumer(
+            builder: (context, form, child) {
+              return ElevatedButton(
+                child: Text('Submit'),
+                onPressed: form.form.valid
+                        ? () {
+                  print(form.model.firstName);
+                  print(form.model.lastName);
+                }
+                        : null,
+              );
+            },
+          ),
+        ],
+      ),
     );
   },
 );
