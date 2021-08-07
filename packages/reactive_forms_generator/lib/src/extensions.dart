@@ -3,6 +3,16 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 
 extension FieldElementExt on FieldElement {
+  String get fieldName => this.name;
+
+  String get fieldValueName => '${fieldName}Value';
+
+  String get fieldControlName => '${fieldName}Control';
+
+  String get fieldControlNameName => '${fieldName}ControlName';
+
+  String get fieldControlPath => '${fieldName}ControlPath';
+
   bool get isFormGroupArray {
     if (!isFormArray) {
       return false;

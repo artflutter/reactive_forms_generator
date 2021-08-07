@@ -137,8 +137,6 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
 class MailingListForm {
   MailingListForm(this.mailingList, this.form, this.path) {}
 
-  String emailList = "emailList";
-
   static String emailListControlName = "emailList";
 
   final MailingList mailingList;
@@ -148,7 +146,7 @@ class MailingListForm {
   final String? path;
 
   String emailListControlPath() =>
-      [path, "emailList"].whereType<String>().join(".");
+      [path, emailListControlName].whereType<String>().join(".");
   List<String?> get emailListValue =>
       emailListControl.value?.whereType<String?>().toList() ?? [];
   bool get containsEmailList => form.contains(emailListControlPath());
@@ -158,7 +156,7 @@ class MailingListForm {
       form.control(emailListControlPath()) as FormArray<String>;
   MailingList get model => MailingList(emailList: emailListValue);
   FormGroup formElements() => FormGroup({
-        emailList: FormArray<String>(
+        emailListControlName: FormArray<String>(
             mailingList.emailList
                 .map((e) => FormControl<String>(value: e))
                 .toList(),

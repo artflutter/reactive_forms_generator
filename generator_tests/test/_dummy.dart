@@ -8,69 +8,72 @@
 // import 'package:flutter/material.dart';
 // import 'package:reactive_forms/reactive_forms.dart';
 // import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
+// import 'package:example/helpers.dart';
 // import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 // import 'dart:core';
 // import 'login.dart';
 //
-// class ReactiveGroupFormConsumer extends StatelessWidget {
-//   ReactiveGroupFormConsumer({Key? key, required this.builder, this.child})
+// class ReactiveLoginNullableFormConsumer extends StatelessWidget {
+//   ReactiveLoginNullableFormConsumer(
+//       {Key? key, required this.builder, this.child})
 //       : super(key: key);
 //
 //   final Widget? child;
 //
 //   final Widget Function(
-//       BuildContext context, GroupForm formGroup, Widget? child) builder;
+//       BuildContext context, LoginNullableForm formGroup, Widget? child) builder;
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     final form = ReactiveGroupForm.of(context);
+//     final form = ReactiveLoginNullableForm.of(context);
 //
-//     if (form is! GroupForm) {
+//     if (form is! LoginNullableForm) {
 //       throw FormControlParentNotFoundException(this);
 //     }
 //     return builder(context, form, child);
 //   }
 // }
 //
-// class GroupFormInheritedStreamer extends InheritedStreamer<dynamic> {
-//   GroupFormInheritedStreamer(
+// class LoginNullableFormInheritedStreamer extends InheritedStreamer<dynamic> {
+//   LoginNullableFormInheritedStreamer(
 //       {Key? key,
 //       required this.form,
 //       required Stream<dynamic> stream,
 //       required Widget child})
 //       : super(stream, child, key: key);
 //
-//   final GroupForm form;
+//   final LoginNullableForm form;
 // }
 //
-// class ReactiveGroupForm extends StatelessWidget {
-//   ReactiveGroupForm(
+// class ReactiveLoginNullableForm extends StatelessWidget {
+//   ReactiveLoginNullableForm(
 //       {Key? key, required this.form, required this.child, this.onWillPop})
 //       : super(key: key);
 //
 //   final Widget child;
 //
-//   final GroupForm form;
+//   final LoginNullableForm form;
 //
 //   final WillPopCallback? onWillPop;
 //
-//   static GroupForm? of(BuildContext context, {bool listen = true}) {
+//   static LoginNullableForm? of(BuildContext context, {bool listen = true}) {
 //     if (listen) {
 //       return context
-//           .dependOnInheritedWidgetOfExactType<GroupFormInheritedStreamer>()
+//           .dependOnInheritedWidgetOfExactType<
+//               LoginNullableFormInheritedStreamer>()
 //           ?.form;
 //     }
 //
-//     final element = context
-//         .getElementForInheritedWidgetOfExactType<GroupFormInheritedStreamer>();
+//     final element = context.getElementForInheritedWidgetOfExactType<
+//         LoginNullableFormInheritedStreamer>();
 //     return element == null
 //         ? null
-//         : (element.widget as GroupFormInheritedStreamer).form;
+//         : (element.widget as LoginNullableFormInheritedStreamer).form;
 //   }
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     return GroupFormInheritedStreamer(
+//     return LoginNullableFormInheritedStreamer(
 //       form: form,
 //       stream: form.form.statusChanged,
 //       child: WillPopScope(
@@ -81,8 +84,8 @@
 //   }
 // }
 //
-// class GroupFormBuilder extends StatefulWidget {
-//   GroupFormBuilder(
+// class LoginNullableFormBuilder extends StatefulWidget {
+//   LoginNullableFormBuilder(
 //       {Key? key,
 //       required this.model,
 //       this.child,
@@ -90,28 +93,29 @@
 //       required this.builder})
 //       : super(key: key);
 //
-//   final Group model;
+//   final LoginNullable model;
 //
 //   final Widget? child;
 //
 //   final WillPopCallback? onWillPop;
 //
 //   final Widget Function(
-//       BuildContext context, GroupForm formModel, Widget? child) builder;
+//       BuildContext context, LoginNullableForm formModel, Widget? child) builder;
 //
 //   @override
-//   _GroupFormBuilderState createState() => _GroupFormBuilderState();
+//   _LoginNullableFormBuilderState createState() =>
+//       _LoginNullableFormBuilderState();
 // }
 //
-// class _GroupFormBuilderState extends State<GroupFormBuilder> {
+// class _LoginNullableFormBuilderState extends State<LoginNullableFormBuilder> {
 //   late FormGroup _form;
 //
-//   late GroupForm _formModel;
+//   late LoginNullableForm _formModel;
 //
 //   @override
 //   void initState() {
 //     _form = FormGroup({});
-//     _formModel = GroupForm(widget.model, _form, null);
+//     _formModel = LoginNullableForm(widget.model, _form, null);
 //
 //     _form.addAll(_formModel.formElements().controls);
 //
@@ -120,7 +124,7 @@
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     return ReactiveGroupForm(
+//     return ReactiveLoginNullableForm(
 //       form: _formModel,
 //       onWillPop: widget.onWillPop,
 //       child: ReactiveForm(
@@ -132,233 +136,138 @@
 //   }
 // }
 //
-// class GroupForm {
-//   GroupForm(this.group, this.form, this.path) {
-//     personalForm = PersonalForm(group.personal, form, 'personal');
-//     phoneForm = PhoneForm(group.phone, form, 'phone');
-//     addressForm = AddressForm(group.address, form, 'address');
-//     address2Form = AddressForm(group.address2, form, 'address2');
-//   }
-//
-//   String personal = "personal";
-//
-//   String phone = "phone";
-//
-//   String address = "address";
-//
-//   String address2 = "address2";
-//
-//   static String personalControlName = "personal";
-//
-//   static String phoneControlName = "phone";
-//
-//   static String addressControlName = "address";
-//
-//   static String address2ControlName = "address2";
-//
-//   late PersonalForm personalForm;
-//
-//   late PhoneForm phoneForm;
-//
-//   late AddressForm addressForm;
-//
-//   late AddressForm address2Form;
-//
-//   final Group group;
-//
-//   final FormGroup form;
-//
-//   final String? path;
-//
-//   Group get model => Group(
-//       personal: personalForm.model,
-//       phone: phoneForm.model,
-//       address: addressForm.model,
-//       address2: address2Form.model);
-//   FormGroup formElements() => FormGroup({
-//         personal: personalForm.formElements(),
-//         phone: phoneForm.formElements(),
-//         address: addressForm.formElements(),
-//         address2: address2Form.formElements()
-//       },
-//           validators: [],
-//           asyncValidators: [],
-//           asyncValidatorsDebounceTime: 250,
-//           disabled: false);
-// }
-//
-// class PersonalForm {
-//   PersonalForm(this.personal, this.form, this.path) {}
-//
-//   String name = "name";
-//
-//   String email = "email";
-//
-//   static String nameControlName = "name";
+// class LoginNullableForm {
+//   LoginNullableForm(this.loginNullable, this.form, this.path) {}
 //
 //   static String emailControlName = "email";
 //
-//   final Personal? personal;
+//   static String passwordControlName = "password";
+//
+//   static String rememberMeControlName = "rememberMe";
+//
+//   static String themeControlName = "theme";
+//
+//   static String modeControlName = "mode";
+//
+//   static String timeoutControlName = "timeout";
+//
+//   static String heightControlName = "height";
+//
+//   final LoginNullable loginNullable;
 //
 //   final FormGroup form;
 //
 //   final String? path;
 //
-//   String nameControlPath() => [path, "name"].whereType<String>().join(".");
-//   String emailControlPath() => [path, "email"].whereType<String>().join(".");
-//   String? get nameValue => nameControl.value;
+//   String emailControlPath() =>
+//       [path, emailControlName].whereType<String>().join(".");
+//   String passwordControlPath() =>
+//       [path, passwordControlName].whereType<String>().join(".");
+//   String rememberMeControlPath() =>
+//       [path, rememberMeControlName].whereType<String>().join(".");
+//   String themeControlPath() =>
+//       [path, themeControlName].whereType<String>().join(".");
+//   String modeControlPath() =>
+//       [path, modeControlName].whereType<String>().join(".");
+//   String timeoutControlPath() =>
+//       [path, timeoutControlName].whereType<String>().join(".");
+//   String heightControlPath() =>
+//       [path, heightControlName].whereType<String>().join(".");
 //   String? get emailValue => emailControl.value;
-//   bool get containsName => form.contains(nameControlPath());
+//   String? get passwordValue => passwordControl.value;
+//   bool? get rememberMeValue => rememberMeControl.value;
+//   String? get themeValue => themeControl.value;
+//   dynamic get modeValue => modeControl.value as dynamic;
+//   int? get timeoutValue => timeoutControl.value;
+//   double? get heightValue => heightControl.value;
 //   bool get containsEmail => form.contains(emailControlPath());
-//   Object? get nameErrors => nameControl.errors;
+//   bool get containsPassword => form.contains(passwordControlPath());
+//   bool get containsRememberMe => form.contains(rememberMeControlPath());
+//   bool get containsTheme => form.contains(themeControlPath());
+//   bool get containsMode => form.contains(modeControlPath());
+//   bool get containsTimeout => form.contains(timeoutControlPath());
+//   bool get containsHeight => form.contains(heightControlPath());
 //   Object? get emailErrors => emailControl.errors;
-//   void get nameFocus => form.focus(nameControlPath());
+//   Object? get passwordErrors => passwordControl.errors;
+//   Object? get rememberMeErrors => rememberMeControl.errors;
+//   Object? get themeErrors => themeControl.errors;
+//   Object? get modeErrors => modeControl.errors;
+//   Object? get timeoutErrors => timeoutControl.errors;
+//   Object? get heightErrors => heightControl.errors;
 //   void get emailFocus => form.focus(emailControlPath());
-//   FormControl<String> get nameControl =>
-//       form.control(nameControlPath()) as FormControl<String>;
+//   void get passwordFocus => form.focus(passwordControlPath());
+//   void get rememberMeFocus => form.focus(rememberMeControlPath());
+//   void get themeFocus => form.focus(themeControlPath());
+//   void get modeFocus => form.focus(modeControlPath());
+//   void get timeoutFocus => form.focus(timeoutControlPath());
+//   void get heightFocus => form.focus(heightControlPath());
 //   FormControl<String> get emailControl =>
 //       form.control(emailControlPath()) as FormControl<String>;
-//   Personal get model => Personal(name: nameValue, email: emailValue);
+//   FormControl<String> get passwordControl =>
+//       form.control(passwordControlPath()) as FormControl<String>;
+//   FormControl<bool> get rememberMeControl =>
+//       form.control(rememberMeControlPath()) as FormControl<bool>;
+//   FormControl<String> get themeControl =>
+//       form.control(themeControlPath()) as FormControl<String>;
+//   FormControl<dynamic> get modeControl =>
+//       form.control(modeControlPath()) as FormControl<dynamic>;
+//   FormControl<int> get timeoutControl =>
+//       form.control(timeoutControlPath()) as FormControl<int>;
+//   FormControl<double> get heightControl =>
+//       form.control(heightControlPath()) as FormControl<double>;
+//   LoginNullable get model => LoginNullable(
+//       email: emailValue,
+//       password: passwordValue,
+//       rememberMe: rememberMeValue,
+//       theme: themeValue,
+//       mode: modeValue,
+//       timeout: timeoutValue,
+//       height: heightValue);
 //   FormGroup formElements() => FormGroup({
-//         name: FormControl<String>(
-//             value: personal?.name,
+//         emailControlName: FormControl<String>(
+//             value: loginNullable.email,
 //             validators: [],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
 //             disabled: false,
 //             touched: false),
-//         email: FormControl<String>(
-//             value: personal?.email,
-//             validators: [],
-//             asyncValidators: [],
-//             asyncValidatorsDebounceTime: 250,
-//             disabled: false,
-//             touched: false)
-//       },
-//           validators: [],
-//           asyncValidators: [],
-//           asyncValidatorsDebounceTime: 250,
-//           disabled: false);
-// }
-//
-// class PhoneForm {
-//   PhoneForm(this.phone, this.form, this.path) {}
-//
-//   String phoneNumber = "phoneNumber";
-//
-//   String countryIso = "countryIso";
-//
-//   static String phoneNumberControlName = "phoneNumber";
-//
-//   static String countryIsoControlName = "countryIso";
-//
-//   final Phone? phone;
-//
-//   final FormGroup form;
-//
-//   final String? path;
-//
-//   String phoneNumberControlPath() =>
-//       [path, "phoneNumber"].whereType<String>().join(".");
-//   String countryIsoControlPath() =>
-//       [path, "countryIso"].whereType<String>().join(".");
-//   String? get phoneNumberValue => phoneNumberControl.value;
-//   String? get countryIsoValue => countryIsoControl.value;
-//   bool get containsPhoneNumber => form.contains(phoneNumberControlPath());
-//   bool get containsCountryIso => form.contains(countryIsoControlPath());
-//   Object? get phoneNumberErrors => phoneNumberControl.errors;
-//   Object? get countryIsoErrors => countryIsoControl.errors;
-//   void get phoneNumberFocus => form.focus(phoneNumberControlPath());
-//   void get countryIsoFocus => form.focus(countryIsoControlPath());
-//   FormControl<String> get phoneNumberControl =>
-//       form.control(phoneNumberControlPath()) as FormControl<String>;
-//   FormControl<String> get countryIsoControl =>
-//       form.control(countryIsoControlPath()) as FormControl<String>;
-//   Phone get model =>
-//       Phone(phoneNumber: phoneNumberValue, countryIso: countryIsoValue);
-//   FormGroup formElements() => FormGroup({
-//         phoneNumber: FormControl<String>(
-//             value: phone?.phoneNumber,
+//         passwordControlName: FormControl<String>(
+//             value: loginNullable.password,
 //             validators: [],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
 //             disabled: false,
 //             touched: false),
-//         countryIso: FormControl<String>(
-//             value: phone?.countryIso,
-//             validators: [],
-//             asyncValidators: [],
-//             asyncValidatorsDebounceTime: 250,
-//             disabled: false,
-//             touched: false)
-//       },
-//           validators: [],
-//           asyncValidators: [],
-//           asyncValidatorsDebounceTime: 250,
-//           disabled: false);
-// }
-//
-// class AddressForm {
-//   AddressForm(this.address, this.form, this.path) {}
-//
-//   String street = "street";
-//
-//   String city = "city";
-//
-//   String zip = "zip";
-//
-//   static String streetControlName = "street";
-//
-//   static String cityControlName = "city";
-//
-//   static String zipControlName = "zip";
-//
-//   final Address? address;
-//
-//   final FormGroup form;
-//
-//   final String? path;
-//
-//   String streetControlPath() => [path, "street"].whereType<String>().join(".");
-//   String cityControlPath() => [path, "city"].whereType<String>().join(".");
-//   String zipControlPath() => [path, "zip"].whereType<String>().join(".");
-//   String? get streetValue => streetControl.value;
-//   String? get cityValue => cityControl.value;
-//   String? get zipValue => zipControl.value;
-//   bool get containsStreet => form.contains(streetControlPath());
-//   bool get containsCity => form.contains(cityControlPath());
-//   bool get containsZip => form.contains(zipControlPath());
-//   Object? get streetErrors => streetControl.errors;
-//   Object? get cityErrors => cityControl.errors;
-//   Object? get zipErrors => zipControl.errors;
-//   void get streetFocus => form.focus(streetControlPath());
-//   void get cityFocus => form.focus(cityControlPath());
-//   void get zipFocus => form.focus(zipControlPath());
-//   FormControl<String> get streetControl =>
-//       form.control(streetControlPath()) as FormControl<String>;
-//   FormControl<String> get cityControl =>
-//       form.control(cityControlPath()) as FormControl<String>;
-//   FormControl<String> get zipControl =>
-//       form.control(zipControlPath()) as FormControl<String>;
-//   Address get model =>
-//       Address(street: streetValue, city: cityValue, zip: zipValue);
-//   FormGroup formElements() => FormGroup({
-//         street: FormControl<String>(
-//             value: address?.street,
+//         rememberMeControlName: FormControl<bool>(
+//             value: loginNullable.rememberMe,
 //             validators: [],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
 //             disabled: false,
 //             touched: false),
-//         city: FormControl<String>(
-//             value: address?.city,
+//         themeControlName: FormControl<String>(
+//             value: loginNullable.theme,
 //             validators: [],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
 //             disabled: false,
 //             touched: false),
-//         zip: FormControl<String>(
-//             value: address?.zip,
+//         modeControlName: FormControl<dynamic>(
+//             value: loginNullable.mode,
+//             validators: [],
+//             asyncValidators: [],
+//             asyncValidatorsDebounceTime: 250,
+//             disabled: false,
+//             touched: false),
+//         timeoutControlName: FormControl<int>(
+//             value: loginNullable.timeout,
+//             validators: [],
+//             asyncValidators: [],
+//             asyncValidatorsDebounceTime: 250,
+//             disabled: false,
+//             touched: false),
+//         heightControlName: FormControl<double>(
+//             value: loginNullable.height,
 //             validators: [],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,

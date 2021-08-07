@@ -195,20 +195,6 @@ class _LoginNullableFormBuilderState extends State<LoginNullableFormBuilder> {
 class LoginNullableForm {
   LoginNullableForm(this.loginNullable, this.form, this.path) {}
 
-  String email = "email";
-
-  String password = "password";
-
-  String rememberMe = "rememberMe";
-
-  String theme = "theme";
-
-  String mode = "mode";
-
-  String timeout = "timeout";
-
-  String height = "height";
-
   static String emailControlName = "email";
 
   static String passwordControlName = "password";
@@ -229,16 +215,20 @@ class LoginNullableForm {
 
   final String? path;
 
-  String emailControlPath() => [path, "email"].whereType<String>().join(".");
+  String emailControlPath() =>
+      [path, emailControlName].whereType<String>().join(".");
   String passwordControlPath() =>
-      [path, "password"].whereType<String>().join(".");
+      [path, passwordControlName].whereType<String>().join(".");
   String rememberMeControlPath() =>
-      [path, "rememberMe"].whereType<String>().join(".");
-  String themeControlPath() => [path, "theme"].whereType<String>().join(".");
-  String modeControlPath() => [path, "mode"].whereType<String>().join(".");
+      [path, rememberMeControlName].whereType<String>().join(".");
+  String themeControlPath() =>
+      [path, themeControlName].whereType<String>().join(".");
+  String modeControlPath() =>
+      [path, modeControlName].whereType<String>().join(".");
   String timeoutControlPath() =>
-      [path, "timeout"].whereType<String>().join(".");
-  String heightControlPath() => [path, "height"].whereType<String>().join(".");
+      [path, timeoutControlName].whereType<String>().join(".");
+  String heightControlPath() =>
+      [path, heightControlName].whereType<String>().join(".");
   String? get emailValue => emailControl.value;
   String? get passwordValue => passwordControl.value;
   bool? get rememberMeValue => rememberMeControl.value;
@@ -290,49 +280,49 @@ class LoginNullableForm {
       timeout: timeoutValue,
       height: heightValue);
   FormGroup formElements() => FormGroup({
-        email: FormControl<String>(
+        emailControlName: FormControl<String>(
             value: loginNullable.email,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        password: FormControl<String>(
+        passwordControlName: FormControl<String>(
             value: loginNullable.password,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        rememberMe: FormControl<bool>(
+        rememberMeControlName: FormControl<bool>(
             value: loginNullable.rememberMe,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        theme: FormControl<String>(
+        themeControlName: FormControl<String>(
             value: loginNullable.theme,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        mode: FormControl<dynamic>(
+        modeControlName: FormControl<dynamic>(
             value: loginNullable.mode,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        timeout: FormControl<int>(
+        timeoutControlName: FormControl<int>(
             value: loginNullable.timeout,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        height: FormControl<double>(
+        heightControlName: FormControl<double>(
             value: loginNullable.height,
             validators: [],
             asyncValidators: [],

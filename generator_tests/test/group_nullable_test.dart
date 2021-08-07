@@ -224,14 +224,6 @@ class GroupForm {
     address2Form = AddressForm(group.address2, form, 'address2');
   }
 
-  String personal = "personal";
-
-  String phone = "phone";
-
-  String address = "address";
-
-  String address2 = "address2";
-
   static String personalControlName = "personal";
 
   static String phoneControlName = "phone";
@@ -260,10 +252,10 @@ class GroupForm {
       address: addressForm.model,
       address2: address2Form.model);
   FormGroup formElements() => FormGroup({
-        personal: personalForm.formElements(),
-        phone: phoneForm.formElements(),
-        address: addressForm.formElements(),
-        address2: address2Form.formElements()
+        personalControlName: personalForm.formElements(),
+        phoneControlName: phoneForm.formElements(),
+        addressControlName: addressForm.formElements(),
+        address2ControlName: address2Form.formElements()
       },
           validators: [],
           asyncValidators: [],
@@ -273,10 +265,6 @@ class GroupForm {
 
 class PersonalForm {
   PersonalForm(this.personal, this.form, this.path) {}
-
-  String name = "name";
-
-  String email = "email";
 
   static String nameControlName = "name";
 
@@ -288,8 +276,10 @@ class PersonalForm {
 
   final String? path;
 
-  String nameControlPath() => [path, "name"].whereType<String>().join(".");
-  String emailControlPath() => [path, "email"].whereType<String>().join(".");
+  String nameControlPath() =>
+      [path, nameControlName].whereType<String>().join(".");
+  String emailControlPath() =>
+      [path, emailControlName].whereType<String>().join(".");
   String? get nameValue => nameControl.value;
   String? get emailValue => emailControl.value;
   bool get containsName => form.contains(nameControlPath());
@@ -304,14 +294,14 @@ class PersonalForm {
       form.control(emailControlPath()) as FormControl<String>;
   Personal get model => Personal(name: nameValue, email: emailValue);
   FormGroup formElements() => FormGroup({
-        name: FormControl<String>(
+        nameControlName: FormControl<String>(
             value: personal?.name,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        email: FormControl<String>(
+        emailControlName: FormControl<String>(
             value: personal?.email,
             validators: [],
             asyncValidators: [],
@@ -328,10 +318,6 @@ class PersonalForm {
 class PhoneForm {
   PhoneForm(this.phone, this.form, this.path) {}
 
-  String phoneNumber = "phoneNumber";
-
-  String countryIso = "countryIso";
-
   static String phoneNumberControlName = "phoneNumber";
 
   static String countryIsoControlName = "countryIso";
@@ -343,9 +329,9 @@ class PhoneForm {
   final String? path;
 
   String phoneNumberControlPath() =>
-      [path, "phoneNumber"].whereType<String>().join(".");
+      [path, phoneNumberControlName].whereType<String>().join(".");
   String countryIsoControlPath() =>
-      [path, "countryIso"].whereType<String>().join(".");
+      [path, countryIsoControlName].whereType<String>().join(".");
   String? get phoneNumberValue => phoneNumberControl.value;
   String? get countryIsoValue => countryIsoControl.value;
   bool get containsPhoneNumber => form.contains(phoneNumberControlPath());
@@ -361,14 +347,14 @@ class PhoneForm {
   Phone get model =>
       Phone(phoneNumber: phoneNumberValue, countryIso: countryIsoValue);
   FormGroup formElements() => FormGroup({
-        phoneNumber: FormControl<String>(
+        phoneNumberControlName: FormControl<String>(
             value: phone?.phoneNumber,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        countryIso: FormControl<String>(
+        countryIsoControlName: FormControl<String>(
             value: phone?.countryIso,
             validators: [],
             asyncValidators: [],
@@ -385,12 +371,6 @@ class PhoneForm {
 class AddressForm {
   AddressForm(this.address, this.form, this.path) {}
 
-  String street = "street";
-
-  String city = "city";
-
-  String zip = "zip";
-
   static String streetControlName = "street";
 
   static String cityControlName = "city";
@@ -403,9 +383,12 @@ class AddressForm {
 
   final String? path;
 
-  String streetControlPath() => [path, "street"].whereType<String>().join(".");
-  String cityControlPath() => [path, "city"].whereType<String>().join(".");
-  String zipControlPath() => [path, "zip"].whereType<String>().join(".");
+  String streetControlPath() =>
+      [path, streetControlName].whereType<String>().join(".");
+  String cityControlPath() =>
+      [path, cityControlName].whereType<String>().join(".");
+  String zipControlPath() =>
+      [path, zipControlName].whereType<String>().join(".");
   String? get streetValue => streetControl.value;
   String? get cityValue => cityControl.value;
   String? get zipValue => zipControl.value;
@@ -427,21 +410,21 @@ class AddressForm {
   Address get model =>
       Address(street: streetValue, city: cityValue, zip: zipValue);
   FormGroup formElements() => FormGroup({
-        street: FormControl<String>(
+        streetControlName: FormControl<String>(
             value: address?.street,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        city: FormControl<String>(
+        cityControlName: FormControl<String>(
             value: address?.city,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        zip: FormControl<String>(
+        zipControlName: FormControl<String>(
             value: address?.zip,
             validators: [],
             asyncValidators: [],

@@ -186,14 +186,6 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
 class ArrayNullableForm {
   ArrayNullableForm(this.arrayNullable, this.form, this.path) {}
 
-  String emailList = "emailList";
-
-  String fruitList = "fruitList";
-
-  String vegetablesList = "vegetablesList";
-
-  String someList = "someList";
-
   static String emailListControlName = "emailList";
 
   static String fruitListControlName = "fruitList";
@@ -209,13 +201,13 @@ class ArrayNullableForm {
   final String? path;
 
   String someListControlPath() =>
-      [path, "someList"].whereType<String>().join(".");
+      [path, someListControlName].whereType<String>().join(".");
   String emailListControlPath() =>
-      [path, "emailList"].whereType<String>().join(".");
+      [path, emailListControlName].whereType<String>().join(".");
   String fruitListControlPath() =>
-      [path, "fruitList"].whereType<String>().join(".");
+      [path, fruitListControlName].whereType<String>().join(".");
   String vegetablesListControlPath() =>
-      [path, "vegetablesList"].whereType<String>().join(".");
+      [path, vegetablesListControlName].whereType<String>().join(".");
   List<String?>? get someListValue => someListControl.value;
   List<String> get emailListValue =>
       emailListControl.value?.whereType<String>().toList() ?? [];
@@ -249,7 +241,7 @@ class ArrayNullableForm {
       fruitList: fruitListValue,
       vegetablesList: vegetablesListValue);
   FormGroup formElements() => FormGroup({
-        emailList: FormArray<String>(
+        emailListControlName: FormArray<String>(
             arrayNullable.emailList
                 .map((e) => FormControl<String>(value: e))
                 .toList(),
@@ -257,7 +249,7 @@ class ArrayNullableForm {
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false),
-        fruitList: FormArray<bool>(
+        fruitListControlName: FormArray<bool>(
             arrayNullable.fruitList
                 .map((e) => FormControl<bool>(value: e))
                 .toList(),
@@ -265,7 +257,7 @@ class ArrayNullableForm {
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false),
-        vegetablesList: FormArray<String>(
+        vegetablesListControlName: FormArray<String>(
             arrayNullable.vegetablesList
                     ?.map((e) => FormControl<String>(value: e))
                     .toList() ??
@@ -274,7 +266,7 @@ class ArrayNullableForm {
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false),
-        someList: FormControl<List<String?>>(
+        someListControlName: FormControl<List<String?>>(
             value: arrayNullable.someList,
             validators: [],
             asyncValidators: [],

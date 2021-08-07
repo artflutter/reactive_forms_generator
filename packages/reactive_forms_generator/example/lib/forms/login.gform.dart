@@ -136,20 +136,6 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
 class LoginForm {
   LoginForm(this.login, this.form, this.path) {}
 
-  String email = "email";
-
-  String password = "password";
-
-  String rememberMe = "rememberMe";
-
-  String theme = "theme";
-
-  String mode = "mode";
-
-  String timeout = "timeout";
-
-  String height = "height";
-
   static String emailControlName = "email";
 
   static String passwordControlName = "password";
@@ -170,16 +156,20 @@ class LoginForm {
 
   final String? path;
 
-  String emailControlPath() => [path, "email"].whereType<String>().join(".");
+  String emailControlPath() =>
+      [path, emailControlName].whereType<String>().join(".");
   String passwordControlPath() =>
-      [path, "password"].whereType<String>().join(".");
+      [path, passwordControlName].whereType<String>().join(".");
   String rememberMeControlPath() =>
-      [path, "rememberMe"].whereType<String>().join(".");
-  String themeControlPath() => [path, "theme"].whereType<String>().join(".");
-  String modeControlPath() => [path, "mode"].whereType<String>().join(".");
+      [path, rememberMeControlName].whereType<String>().join(".");
+  String themeControlPath() =>
+      [path, themeControlName].whereType<String>().join(".");
+  String modeControlPath() =>
+      [path, modeControlName].whereType<String>().join(".");
   String timeoutControlPath() =>
-      [path, "timeout"].whereType<String>().join(".");
-  String heightControlPath() => [path, "height"].whereType<String>().join(".");
+      [path, timeoutControlName].whereType<String>().join(".");
+  String heightControlPath() =>
+      [path, heightControlName].whereType<String>().join(".");
   String get emailValue => emailControl.value as String;
   String get passwordValue => passwordControl.value as String;
   bool get rememberMeValue => rememberMeControl.value as bool;
@@ -231,49 +221,49 @@ class LoginForm {
       timeout: timeoutValue,
       height: heightValue);
   FormGroup formElements() => FormGroup({
-        email: FormControl<String>(
+        emailControlName: FormControl<String>(
             value: login.email,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        password: FormControl<String>(
+        passwordControlName: FormControl<String>(
             value: login.password,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        rememberMe: FormControl<bool>(
+        rememberMeControlName: FormControl<bool>(
             value: login.rememberMe,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        theme: FormControl<String>(
+        themeControlName: FormControl<String>(
             value: login.theme,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        mode: FormControl<UserMode>(
+        modeControlName: FormControl<UserMode>(
             value: login.mode,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        timeout: FormControl<int>(
+        timeoutControlName: FormControl<int>(
             value: login.timeout,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        height: FormControl<double>(
+        heightControlName: FormControl<double>(
             value: login.height,
             validators: [requiredValidator],
             asyncValidators: [],

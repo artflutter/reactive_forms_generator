@@ -136,10 +136,6 @@ class _TinyFormBuilderState extends State<TinyFormBuilder> {
 class TinyForm {
   TinyForm(this.tiny, this.form, this.path) {}
 
-  String email = "email";
-
-  String password = "password";
-
   static String emailControlName = "email";
 
   static String passwordControlName = "password";
@@ -150,9 +146,10 @@ class TinyForm {
 
   final String? path;
 
-  String emailControlPath() => [path, "email"].whereType<String>().join(".");
+  String emailControlPath() =>
+      [path, emailControlName].whereType<String>().join(".");
   String passwordControlPath() =>
-      [path, "password"].whereType<String>().join(".");
+      [path, passwordControlName].whereType<String>().join(".");
   String get emailValue => emailControl.value as String;
   String get passwordValue => passwordControl.value as String;
   bool get containsEmail => form.contains(emailControlPath());
@@ -167,14 +164,14 @@ class TinyForm {
       form.control(passwordControlPath()) as FormControl<String>;
   Tiny get model => Tiny(email: emailValue, password: passwordValue);
   FormGroup formElements() => FormGroup({
-        email: FormControl<String>(
+        emailControlName: FormControl<String>(
             value: tiny.email,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        password: FormControl<String>(
+        passwordControlName: FormControl<String>(
             value: tiny.password,
             validators: [requiredValidator],
             asyncValidators: [],

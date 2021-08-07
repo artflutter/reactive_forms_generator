@@ -25,6 +25,23 @@ class FormGenerator {
         e.type,
       ),
     );
+
+    nestedArrayFormGroupElements.forEach(
+      (e) {
+        final type = e.type;
+        final typeArguments =
+            type is ParameterizedType ? type.typeArguments : const <DartType>[];
+
+        final typeParameter = typeArguments.first;
+
+        // print(type is ParameterizedType);
+
+        formGroupGenerators[e.name] = FormGenerator(
+          typeParameter.element! as ClassElement,
+          e.type,
+        );
+      },
+    );
   }
 
   List<FieldElement> get formControls => element.fields
@@ -56,18 +73,18 @@ class FormGenerator {
 
   String get className => '${element.name}Form';
 
-  String fieldName(FieldElement field) => field.name;
+  // String fieldName(FieldElement field) => field.name;
 
-  String fieldValueName(FieldElement field) => '${field.name}Value';
+  // String fieldValueName(FieldElement field) => '${field.name}Value';
 
-  String fieldControlName(FieldElement field) => '${field.name}Control';
+  // String fieldControlName(FieldElement field) => '${field.name}Control';
 
   Field staticFieldName(FieldElement field) => Field(
         (b) => b
           ..static = true
           ..type = stringRef
-          ..name = '${field.name}ControlName'
-          ..assignment = Code('"${field.name}"'),
+          ..name = '${field.fieldControlNameName}'
+          ..assignment = Code('"${field.fieldName}"'),
       );
 
   List<Field> get staticFieldNameList =>
@@ -77,22 +94,22 @@ class FormGenerator {
         (b) => b
           // ..static = true
           ..type = stringRef
-          ..name = fieldName(field)
-          ..assignment = Code('"${fieldName(field)}"'),
+          ..name = field.fieldName
+          ..assignment = Code('"${field.fieldName}"'),
       );
 
   List<Field> get fieldNameList => element.fields.map(field).toList();
 
-  String fieldControlPathMethodName(FieldElement field) =>
-      '${field.name}ControlPath';
+  // String fieldControlPathMethodName(FieldElement field) =>
+  //     '${field.name}ControlPath';
 
   Method fieldControlNameMethod(FieldElement field) => Method(
         (b) => b
           ..returns = stringRef
-          ..name = fieldControlPathMethodName(field)
+          ..name = field.fieldControlPath
           ..lambda = true
           ..body = Code(
-              '[path, "${fieldName(field)}"].whereType<String>().join(".")'),
+              '[path, ${field.fieldControlNameName}].whereType<String>().join(".")'),
       );
 
   List<Method> get fieldControlNameMethodList => [
@@ -115,7 +132,7 @@ class FormGenerator {
       .toList();
 
   Method fieldValueMethod(FieldElement field) {
-    String fieldValue = '${fieldControlName(field)}.value';
+    String fieldValue = '${field.fieldControlName}.value';
 
     // do not add additional cast if the field is nullable to avoid
     // unnecessary_cast notes
@@ -136,14 +153,14 @@ class FormGenerator {
       final type = (field.type as ParameterizedType).typeArguments.first;
 
       fieldValue =
-          '${fieldControlName(field)}.value?.whereType<${type.getDisplayString(
+          '${field.fieldControlName}.value?.whereType<${type.getDisplayString(
         withNullability: true,
       )}>().toList() ?? []';
     }
 
     return Method(
       (b) => b
-        ..name = fieldValueName(field)
+        ..name = field.fieldValueName
         ..lambda = true
         ..type = MethodType.getter
         ..returns = Reference(field.type.toString())
@@ -165,7 +182,7 @@ class FormGenerator {
           ..type = MethodType.getter
           ..returns = Reference('bool')
           ..body = Code(
-            'form.contains(${fieldControlPathMethodName(field)}())',
+            'form.contains(${field.fieldControlPath}())',
           ),
       );
 
@@ -181,7 +198,7 @@ class FormGenerator {
           ..type = MethodType.getter
           ..returns = Reference('Object?')
           ..body = Code(
-            '${fieldControlName(field)}.errors',
+            '${field.fieldControlName}.errors',
           ),
       );
 
@@ -197,7 +214,7 @@ class FormGenerator {
           ..type = MethodType.getter
           ..returns = Reference('void')
           ..body = Code(
-            'form.focus(${fieldControlPathMethodName(field)}())',
+            'form.focus(${field.fieldControlPath}())',
           ),
       );
 
@@ -219,12 +236,12 @@ class FormGenerator {
 
     return Method(
       (b) => b
-        ..name = fieldControlName(field)
+        ..name = field.fieldControlName
         ..lambda = true
         ..type = MethodType.getter
         ..returns = Reference(reference)
         ..body = Code(
-          'form.control(${fieldControlPathMethodName(field)}()) as ${reference}',
+          'form.control(${field.fieldControlPath}()) as ${reference}',
         ),
     );
   }
@@ -248,12 +265,12 @@ class FormGenerator {
 
     return Method(
       (b) => b
-        ..name = fieldControlName(field)
+        ..name = field.fieldControlName
         ..lambda = true
         ..type = MethodType.getter
         ..returns = Reference(typeReference)
         ..body = Code(
-          'form.control(${fieldControlPathMethodName(field)}()) as ${typeReference}',
+          'form.control(${field.fieldControlPath}()) as ${typeReference}',
         ),
     );
   }
@@ -266,19 +283,19 @@ class FormGenerator {
         (b) {
           final fields = formControls
               .map(
-                (field) => '${fieldName(field)}:${fieldValueName(field)}',
+                (field) => '${field.fieldName}:${field.fieldValueName}',
               )
               .toList();
 
           fields.addAll(
             formArrays.map(
-              (field) => '${fieldName(field)}:${fieldValueName(field)}',
+              (field) => '${field.fieldName}:${field.fieldValueName}',
             ),
           );
 
           fields.addAll(
             nestedFormGroupElements.map(
-              (field) => '${fieldName(field)}:${field.name}Form.model',
+              (field) => '${field.fieldName}:${field.name}Form.model',
             ),
           );
 
@@ -356,7 +373,7 @@ class FormGenerator {
             ..name = className
             ..fields.addAll(
               [
-                ...fieldNameList,
+                // ...fieldNameList,
                 ...staticFieldNameList,
                 // ...fieldControlFieldList,
                 ...nestedFormGroupFields,

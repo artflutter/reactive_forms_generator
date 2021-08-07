@@ -140,14 +140,6 @@ class UserProfileForm {
     officeForm = AddressForm(userProfile.office, form, 'office');
   }
 
-  String firstName = "firstName";
-
-  String lastName = "lastName";
-
-  String home = "home";
-
-  String office = "office";
-
   static String firstNameControlName = "firstName";
 
   static String lastNameControlName = "lastName";
@@ -167,9 +159,9 @@ class UserProfileForm {
   final String? path;
 
   String firstNameControlPath() =>
-      [path, "firstName"].whereType<String>().join(".");
+      [path, firstNameControlName].whereType<String>().join(".");
   String lastNameControlPath() =>
-      [path, "lastName"].whereType<String>().join(".");
+      [path, lastNameControlName].whereType<String>().join(".");
   String get firstNameValue => firstNameControl.value as String;
   String get lastNameValue => lastNameControl.value as String;
   bool get containsFirstName => form.contains(firstNameControlPath());
@@ -188,22 +180,22 @@ class UserProfileForm {
       home: homeForm.model,
       office: officeForm.model);
   FormGroup formElements() => FormGroup({
-        firstName: FormControl<String>(
+        firstNameControlName: FormControl<String>(
             value: userProfile.firstName,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        lastName: FormControl<String>(
+        lastNameControlName: FormControl<String>(
             value: userProfile.lastName,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        home: homeForm.formElements(),
-        office: officeForm.formElements()
+        homeControlName: homeForm.formElements(),
+        officeControlName: officeForm.formElements()
       },
           validators: [],
           asyncValidators: [],
@@ -213,12 +205,6 @@ class UserProfileForm {
 
 class AddressForm {
   AddressForm(this.address, this.form, this.path) {}
-
-  String street = "street";
-
-  String city = "city";
-
-  String zip = "zip";
 
   static String streetControlName = "street";
 
@@ -232,9 +218,12 @@ class AddressForm {
 
   final String? path;
 
-  String streetControlPath() => [path, "street"].whereType<String>().join(".");
-  String cityControlPath() => [path, "city"].whereType<String>().join(".");
-  String zipControlPath() => [path, "zip"].whereType<String>().join(".");
+  String streetControlPath() =>
+      [path, streetControlName].whereType<String>().join(".");
+  String cityControlPath() =>
+      [path, cityControlName].whereType<String>().join(".");
+  String zipControlPath() =>
+      [path, zipControlName].whereType<String>().join(".");
   String? get streetValue => streetControl.value;
   String? get cityValue => cityControl.value;
   String? get zipValue => zipControl.value;
@@ -256,21 +245,21 @@ class AddressForm {
   Address get model =>
       Address(street: streetValue, city: cityValue, zip: zipValue);
   FormGroup formElements() => FormGroup({
-        street: FormControl<String>(
+        streetControlName: FormControl<String>(
             value: address?.street,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        city: FormControl<String>(
+        cityControlName: FormControl<String>(
             value: address?.city,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        zip: FormControl<String>(
+        zipControlName: FormControl<String>(
             value: address?.zip,
             validators: [],
             asyncValidators: [],
