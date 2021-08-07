@@ -8,6 +8,18 @@ which will save you tons of time and make your forms type safe.
 
 **There is no reason write code manually! Let the code generation work for you.**
 
+# Table of Contents
+- [Motivation](#motivation)
+- [How to use](#how-to-use)
+  - [Minimum Requirements](#minimum-requirements)
+  - [Installation](#installation)
+  - [Ignore lint warnings on generated files](#ignore-lint-warnings-on-generated-files)
+  - [Run the generator](#run-the-generator)
+- [Features](#features)
+  - [Syntax](#syntax)
+    - [Basics](#basics)
+      - [Model](#basics-model)
+
 # Motivation
 
 One of the goals of this package is to make [reactive_forms](https://pub.dev/packages/reactive_forms) package even more cool and fun to use.
@@ -89,14 +101,14 @@ This is two main issues that forced me to write this generator.
 In the next chapters of documentation you'll see how we define and annotate the model which describes the form state and
 how easy and elegant it works with a bit of magic from code generation.
 
-#How to use
+# How to use
 
 ## Minimum Requirements
 
 - Dart SDK: >=2.12.0 <3.0.0
 - Flutter: >= 2.2.0
 
-## Install
+## Installation
 
 To use [reactive_forms_generator], you will need your typical [build_runner]/code-generator setup.\
 First, install [build_runner] and [reactive_forms_generator] by adding them to your `pubspec.yaml` file:
@@ -142,9 +154,9 @@ To run the code generator you have two possibilities:
 - If your package _does not_ depend on Flutter:
     - `dart pub run build_runner build`
 
-# The features
+# Features
 
-## The syntax
+## Syntax
 
 ### Basics
 
@@ -152,7 +164,7 @@ Let's start from simple login form.
 
 First we need to define our form model
 
-#### Model
+#### Model <a name="basics-model" href="#basics-model"></a>
 ```dart
 class Tiny {
   final String email;
