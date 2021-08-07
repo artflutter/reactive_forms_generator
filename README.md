@@ -19,6 +19,19 @@ which will save you tons of time and make your forms type safe.
   - [Syntax](#syntax)
     - [Basics](#basics)
       - [Model](#basics-model)
+      - [Annotation](#basics-annotation)
+      - [Validation](#basics-validation)
+      - [Form](#basics-form)
+    - [Dynamic forms with FormArray](#dynamic-forms-with-formarray)
+      - [Model](#array-model)
+      - [Annotation](#array-annotation)
+      - [Validation](#array-validation)
+      - [Form](#array-form)
+    - [Nested forms with FormGroups](#nested-forms-with-formgroups)
+      - [Model](#group-model)
+      - [Annotation](#group-annotation)
+      - [Validation](#group-validation)
+      - [Form](#group-form)
 
 # Motivation
 
@@ -164,7 +177,7 @@ Let's start from simple login form.
 
 First we need to define our form model
 
-#### Model <a name="basics-model" href="#basics-model"></a>
+#### Model <a name="basics-model" />
 ```dart
 class Tiny {
   final String email;
@@ -177,7 +190,7 @@ class Tiny {
 
 We defined here a simple model with non-nullable `email` and `password` fields.
 
-#### Annotations
+#### Annotation <a name="basics-annotation" />
 
 The next step is to add annotations to help generator do his job.
 
@@ -196,10 +209,10 @@ class Tiny {
 }
 ```
 
-`ReactiveFormAnnotation` - tells the generator that we want to build form based on this model.
+`ReactiveFormAnnotation` - tells the generator that we want to Form based on this model.
 `FormControlAnnotation` - maps fields to control elements.
 
-#### Validation
+#### Validation <a name="basics-validation" />
 
 The login form should not proceed if there is any empty values. We need to modify our code to add some `required` validators.
 
@@ -231,7 +244,7 @@ As far as we are using annotations - validators should be top level functions or
 
 Now we are ready to run our form generator. You can check output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/basics/tiny.gform.dart).
 
-#### Build form
+#### Form <a name="basics-form" />
 
 Let's build our form based on generated code
 
@@ -291,7 +304,7 @@ You can get access to prefilled form model by calling `form.model.[field-name]`.
 The next example will show how to build dynamic forms. We will create a mailing list which will allow adding new email
 and basic validation.
 
-#### Model
+#### Model <a name="array-model" />
 The model is pretty simple.
 
 ```dart
@@ -304,7 +317,7 @@ class MailingList {
 }
 ```
 
-#### Annotations
+#### Annotation <a name="array-annotation" />
 
 The next step is to add annotations to help generator do his job.
 
@@ -327,10 +340,10 @@ class MailingList {
 }
 ```
 
-`ReactiveFormAnnotation` - tells the generator that we want to build form based on this model.
+`ReactiveFormAnnotation` - tells the generator that we want to Form based on this model.
 `FormArrayAnnotation` - maps fields to control elements.
 
-#### Validation
+#### Validation <a name="array-validation" />
 
 The mailing list form should not be valid in two cases - if there are duplicates and if any field is invalid email.
 
@@ -370,7 +383,7 @@ As far as we are using annotations - validators should be top level functions or
 
 Now we are ready to run our form generator. You can check output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/arrays/mailing_list.gform.dart).
 
-#### Build form
+#### Form <a name="array-form" />
 
 Let's build our form based on generated code
 
@@ -482,7 +495,7 @@ final form = MailingListFormBuilder(
 The next example will show how to build nested forms. We will create a user profile form with first/last names 
 and home/office addresses. Address will contain city/street/zip fields.
 
-#### Model
+#### Model <a name="group-model" />
 The model will be separated on two parts `UserProfile` and `Address`
 
 ```dart
@@ -519,7 +532,7 @@ class Address {
 
 ```
 
-#### Annotations
+#### Annotation <a name="group-annotation" />
 
 The next step is to add annotations to help generator do his job.
 
@@ -572,10 +585,10 @@ class Address {
 }
 ```
 
-`ReactiveFormAnnotation` - tells the generator that we want to build form based on this model.
+`ReactiveFormAnnotation` - tells the generator that we want to Form based on this model.
 `FormGroupAnnotation` - describes the nested form.
 
-#### Validation
+#### Validation <a name="group-validation" />
 
 We will use only simple `requiredValidator` for first/last names and city.
 
@@ -589,7 +602,7 @@ As far as we are using annotations - validators should be top level functions or
 
 Now we are ready to run our form generator. You can check output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/group/user_profile.gform.dart).
 
-#### Build form
+#### Form <a name="group-form" />
 
 Let's build our form based on generated code
 
