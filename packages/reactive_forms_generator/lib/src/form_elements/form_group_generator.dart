@@ -4,6 +4,7 @@ import 'package:reactive_forms_generator/src/form_elements/form_array_generator.
 import 'package:reactive_forms_generator/src/form_elements/form_control_generator.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
 import 'package:reactive_forms_generator/src/types.dart';
+import 'package:reactive_forms_generator/src/extensions.dart';
 
 class FormGroupGenerator extends FormElementGenerator {
   FormGroupGenerator(FieldElement field, DartType? type) : super(field, type);
@@ -44,7 +45,7 @@ class FormGroupGenerator extends FormElementGenerator {
             }
 
             if (formElementGenerator != null) {
-              return '${f.name}: ${formElementGenerator.element()}';
+              return '${f.fieldControlNameName}: ${formElementGenerator.element()}';
             }
 
             return null;
@@ -56,7 +57,7 @@ class FormGroupGenerator extends FormElementGenerator {
     _formElements.addAll(
       nestedFormElements.map(
         (f) {
-          return '${f.name}: ${f.name}Form.formElements()';
+          return '${f.fieldControlNameName}: ${f.name}Form.formElements()';
         },
       ),
     );
