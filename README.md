@@ -32,6 +32,10 @@ which will save you tons of time and make your forms type safe.
       - [Annotation](#group-annotation)
       - [Validation](#group-validation)
       - [Form](#group-form)
+    - [Nested forms with array of FormGroups](#nested-forms-with-array-of-formgroups)
+      - [Model](#array-group-model)
+      - [Annotation](#array-group-annotation)
+      - [Form](#array-group-form)
 
 # Motivation
 
@@ -723,6 +727,202 @@ final form = UserProfileFormBuilder(
           ),
         ],
       ),
+    );
+  },
+);
+```
+
+### Nested forms with array of FormGroups
+
+The next example will show how to build nested forms. We will create a delivery list with simple control for `name` and 
+form group for `address`; Address will contain city/street fields.
+
+#### Model <a name="array-group-model" />
+The model will be separated on three parts `DeliveryList`, `DeliveryPoint` and `Address`
+
+```dart
+class DeliveryList {
+  final List<DeliveryPoint> deliveryList;
+
+  DeliveryList({
+    this.deliveryList = const [],
+  });
+}
+
+class DeliveryPoint {
+  final String name;
+
+  final Address? address;
+
+  DeliveryPoint({
+    this.name = '',
+    this.address,
+  });
+}
+
+class Address {
+  final String? street;
+
+  final String? city;
+
+  Address({
+    this.street,
+    this.city,
+  });
+}
+```
+
+#### Annotation <a name="array-group-annotation" />
+
+The next step is to add annotations to help generator do his job.
+
+```dart
+@FormGroupAnnotation()
+class DeliveryPoint {
+  @FormControlAnnotation(
+    validators: const [requiredValidator],
+  )
+  final String name;
+
+  final Address? address;
+
+  DeliveryPoint({
+    this.name = '',
+    this.address,
+  });
+}
+
+@FormGroupAnnotation()
+class Address {
+  @FormControlAnnotation(
+    validators: const [requiredValidator],
+  )
+  final String? street;
+
+  @FormControlAnnotation()
+  final String? city;
+
+  Address({
+    this.street,
+    this.city,
+  });
+}
+```
+
+`ReactiveFormAnnotation` - tells the generator that we want to Form based on this model.
+`FormGroupAnnotation` - describes the nested form.
+
+Now we are ready to run our form generator. You can check output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/array_group/delivery_list.gform.dart).
+
+#### Form <a name="array-group-form" />
+
+Let's build our form based on generated code
+
+```dart
+// create form based on generated widget
+final form = DeliveryListFormBuilder(
+  model: DeliveryList(),
+  builder: (context, formModel, child) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: ReactiveFormArray<Map<String, Object?>>(
+                formArray: formModel.deliveryListControl,
+                builder: (context, formArray, child) {
+                  return Column(
+                    children: formModel.deliveryListValue
+                            .asMap()
+                            .map((i, deliveryPoint) {
+                      return MapEntry(
+                              i,
+                              Column(
+                                children: [
+                                  ReactiveTextField<String>(
+                                    formControlName: '${i}.name',
+                                    validationMessages: (_) => {
+                                      ValidationMessage.required:
+                                      'Must not be empty',
+                                    },
+                                    decoration: InputDecoration(
+                                      labelText: 'Name ${i}',
+                                    ),
+                                  ),
+                                  ReactiveTextField<String>(
+                                    formControlName:
+                                    '${i}.address.street',
+                                    validationMessages: (_) => {
+                                      ValidationMessage.required:
+                                      'Must not be empty',
+                                    },
+                                    decoration: InputDecoration(
+                                      labelText: 'Street ${i}',
+                                    ),
+                                  ),
+                                  ReactiveTextField<String>(
+                                    formControlName: '${i}.address.city',
+                                    validationMessages: (_) => {
+                                      ValidationMessage.required:
+                                      'Must not be empty',
+                                    },
+                                    decoration: InputDecoration(
+                                      labelText: 'City ${i}',
+                                    ),
+                                  ),
+                                ],
+                              ));
+                    })
+                            .values
+                            .toList(),
+                  );
+                },
+              ),
+            ),
+            SizedBox(width: 16),
+            ElevatedButton(
+              onPressed: () {
+                formModel.deliveryListControl.add(
+                  FormGroup({
+                    'name': FormControl<String>(value: ''),
+                    'address': FormGroup({
+                      'street': FormControl<String>(),
+                      'city': FormControl<String>()
+                    })
+                  }),
+                );
+              },
+              child: const Text('add'),
+            )
+          ],
+        ),
+        SizedBox(height: 16),
+        SizedBox(height: 16),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                if (formModel.form.valid) {
+                  print(formModel.model);
+                } else {
+                  formModel.form.markAllAsTouched();
+                }
+              },
+              child: const Text('Sign Up'),
+            ),
+            ReactiveDeliveryListFormConsumer(
+              builder: (context, form, child) {
+                return ElevatedButton(
+                  child: Text('Submit'),
+                  onPressed: form.form.valid ? () {} : null,
+                );
+              },
+            ),
+          ],
+        )
+      ],
     );
   },
 );
