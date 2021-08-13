@@ -13,6 +13,10 @@ extension FieldElementExt on FieldElement {
 
   String get fieldControlPath => '${fieldName}ControlPath';
 
+  // needs careful usage and possibly refactoring
+  DartType get typeParameter =>
+      (this.type as ParameterizedType).typeArguments.first;
+
   bool get isFormGroupArray {
     if (!isFormArray) {
       return false;

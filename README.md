@@ -430,9 +430,7 @@ final form = MailingListFormBuilder(
             // adds new item to the list of fields
             ElevatedButton(
               onPressed: () {
-                formModel.emailListControl.add(
-                  FormControl<String>(value: null),
-                );
+                formModel.addEmailListItem('');
               },
               child: const Text('add'),
             )

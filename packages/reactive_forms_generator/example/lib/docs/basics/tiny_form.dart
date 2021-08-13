@@ -11,6 +11,7 @@ class TinyFormWidget extends StatelessWidget {
     return SampleScreen(
       title: Text('Tiny'),
       body: TinyFormBuilder(
+        model: Tiny(),
         builder: (context, formModel, child) {
           return Column(
             children: [
@@ -58,7 +59,6 @@ class TinyFormWidget extends StatelessWidget {
             ],
           );
         },
-        model: Tiny(),
       ),
     );
   }

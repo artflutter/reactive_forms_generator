@@ -16,6 +16,14 @@ class LoginFormWidget extends StatelessWidget {
     return SampleScreen(
       title: Text('Login'),
       body: LoginFormBuilder(
+        model: Login(
+          password: '1234',
+          timeout: 3,
+          theme: 'dark',
+          height: 150,
+          mode: UserMode.admin,
+          rememberMe: false,
+        ),
         builder: (context, formModel, child) {
           return Column(
             children: [
@@ -131,14 +139,6 @@ class LoginFormWidget extends StatelessWidget {
             ],
           );
         },
-        model: Login(
-          password: '1234',
-          timeout: 3,
-          theme: 'dark',
-          height: 150,
-          mode: UserMode.admin,
-          rememberMe: false,
-        ),
       ),
     );
   }

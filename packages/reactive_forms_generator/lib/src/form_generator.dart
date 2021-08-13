@@ -52,7 +52,7 @@ class FormGenerator {
 
   List<FieldElement> get formArrays => element.fields
       .where(
-        (e) => e.isFormArray,
+        (e) => e.isFormArray && !e.isFormGroupArray,
       )
       .toList();
 
@@ -102,6 +102,7 @@ class FormGenerator {
         ...formControls,
         ...formArrays,
         ...formGroups,
+        ...formGroupArrays,
       ].map(fieldControlNameMethod).toList();
 
   List<Field> get nestedFormGroupFields => formGroups
@@ -172,6 +173,7 @@ class FormGenerator {
         ...formControls,
         ...formArrays,
         ...formGroups,
+        ...formGroupArrays,
       ].map(fieldValueMethod).toList();
 
   Method fieldContainsMethod(FieldElement field) => Method(
@@ -189,6 +191,7 @@ class FormGenerator {
         ...formControls,
         ...formArrays,
         ...formGroups,
+        ...formGroupArrays,
       ].map(fieldContainsMethod).toList();
 
   Method errors(FieldElement field) => Method(
@@ -206,6 +209,7 @@ class FormGenerator {
         ...formControls,
         ...formArrays,
         ...formGroups,
+        ...formGroupArrays,
       ].map(errors).toList();
 
   Method focus(FieldElement field) => Method(
@@ -223,6 +227,7 @@ class FormGenerator {
         ...formControls,
         ...formArrays,
         ...formGroups,
+        ...formGroupArrays,
       ].map(focus).toList();
 
   Method control(FieldElement field) {
@@ -300,11 +305,39 @@ class FormGenerator {
     );
   }
 
+  Method addArrayControl(FieldElement field) {
+    // until https://github.com/joanpablo/reactive_forms/issues/204 is somehow resolved
+    final type = field.typeParameter.getDisplayString(withNullability: false);
+
+    return Method(
+      (b) => b
+        ..name = 'add${field.fieldName.pascalCase}Item'
+        ..lambda = true
+        ..requiredParameters.add(
+          Parameter(
+            (b) => b
+              ..name = 'value'
+              ..type = Reference(type),
+          ),
+        )
+        ..returns = Reference('void')
+        ..body = Code(
+          '${field.fieldControlName}.add(FormControl<${type}>(value: value))',
+        ),
+    );
+  }
+
   List<Method> get fieldControlMethodList => formControls.map(control).toList();
 
-  List<Method> get fieldArrayMethodList => formArrays.map(array).toList();
+  List<Method> get fieldArrayMethodList => [
+        ...formArrays.map(array).toList(),
+        ...formGroupArrays.map(array).toList()
+      ];
 
   List<Method> get fieldGroupMethodList => formGroups.map(formGroup).toList();
+
+  List<Method> get addArrayControlMethodList =>
+      formArrays.map(addArrayControl).toList();
 
   Method get modelMethod => Method(
         (b) {
@@ -454,6 +487,7 @@ class FormGenerator {
                 ...fieldControlMethodList,
                 ...fieldArrayMethodList,
                 ...fieldGroupMethodList,
+                ...addArrayControlMethodList,
                 modelMethod,
                 Method(
                   (b) => b
@@ -476,11 +510,6 @@ class FormGenerator {
                     b
                       ..name = 'formElements'
                       ..lambda = true
-                      // ..requiredParameters.add(Parameter(
-                      //   (b) => b
-                      //     ..name = element.name.camelCase
-                      //     ..type = Reference(element.name),
-                      // ))
                       ..returns = Reference('FormGroup')
                       ..body = Code(
                         FormGroupGenerator(

@@ -11,6 +11,12 @@ class GroupNullableFormWidget extends StatelessWidget {
     return SampleScreen(
       title: Text('Login'),
       body: GroupFormBuilder(
+        model: Group(
+          personal: Personal(name: 'vasilich'),
+          phone: Phone(countryIso: 'UA'),
+          address: Address(city: 'Kiev'),
+          address2: Address(city: 'Odessa'),
+        ),
         builder: (context, formModel, child) {
           return Column(
             children: [
@@ -161,12 +167,6 @@ class GroupNullableFormWidget extends StatelessWidget {
             ],
           );
         },
-        model: Group(
-          personal: Personal(name: 'vasilich'),
-          phone: Phone(countryIso: 'UA'),
-          address: Address(city: 'Kiev'),
-          address2: Address(city: 'Odessa'),
-        ),
       ),
     );
   }

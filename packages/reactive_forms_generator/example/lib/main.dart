@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
         Routes.group: (_) => GroupNullableFormWidget(),
         Routes.deliveryList: (_) => DeliveryListFormWidget(),
       },
-      home: DeliveryListFormWidget(),
+      home: MailingListFormWidget(),
     );
   }
 }

@@ -153,6 +153,8 @@ class MailingListForm {
   void get emailListFocus => form.focus(emailListControlPath());
   FormArray<String> get emailListControl =>
       form.control(emailListControlPath()) as FormArray<String>;
+  void addEmailListItem(String value) =>
+      emailListControl.add(FormControl<String>(value: value));
   MailingList get model => MailingList(emailList: emailListValue);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");

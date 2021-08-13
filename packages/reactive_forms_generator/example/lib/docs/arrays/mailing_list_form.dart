@@ -11,6 +11,7 @@ class MailingListFormWidget extends StatelessWidget {
     return SampleScreen(
       title: Text('Mailing list'),
       body: MailingListFormBuilder(
+        model: MailingList(),
         builder: (context, formModel, child) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,9 +44,7 @@ class MailingListFormWidget extends StatelessWidget {
                   SizedBox(width: 16),
                   ElevatedButton(
                     onPressed: () {
-                      formModel.emailListControl.add(
-                        FormControl<String>(value: null),
-                      );
+                      formModel.addEmailListItem('');
                     },
                     child: const Text('add'),
                   )
@@ -99,7 +98,6 @@ class MailingListFormWidget extends StatelessWidget {
             ],
           );
         },
-        model: MailingList(),
       ),
     );
   }

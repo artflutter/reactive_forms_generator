@@ -23,6 +23,10 @@ class ArrayNullableFormWidget extends StatelessWidget {
     return SampleScreen(
       title: Text('Array nullable'),
       body: ArrayNullableFormBuilder(
+        model: ArrayNullable(
+          emailList: contacts,
+          fruitList: fruits.map((e) => false).toList(),
+        ),
         builder: (context, formModel, child) {
           return Column(
             children: [
@@ -109,10 +113,6 @@ class ArrayNullableFormWidget extends StatelessWidget {
             ],
           );
         },
-        model: ArrayNullable(
-          emailList: contacts,
-          fruitList: fruits.map((e) => false).toList(),
-        ),
       ),
     );
   }

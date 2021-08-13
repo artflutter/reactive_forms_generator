@@ -15,6 +15,7 @@ class LoginNullableFormWidget extends StatelessWidget {
     return SampleScreen(
       title: Text('Login nullable'),
       body: LoginNullableFormBuilder(
+        model: LoginNullable(),
         builder: (context, formModel, child) {
           return Column(
             children: [
@@ -130,7 +131,6 @@ class LoginNullableFormWidget extends StatelessWidget {
             ],
           );
         },
-        model: LoginNullable(),
       ),
     );
   }

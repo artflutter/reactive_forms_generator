@@ -184,6 +184,12 @@ class ArrayNullableForm {
       form.control(fruitListControlPath()) as FormArray<bool>;
   FormArray<String> get vegetablesListControl =>
       form.control(vegetablesListControlPath()) as FormArray<String>;
+  void addEmailListItem(String value) =>
+      emailListControl.add(FormControl<String>(value: value));
+  void addFruitListItem(bool value) =>
+      fruitListControl.add(FormControl<bool>(value: value));
+  void addVegetablesListItem(String value) =>
+      vegetablesListControl.add(FormControl<String>(value: value));
   ArrayNullable get model => ArrayNullable(
       emailList: emailListValue,
       fruitList: fruitListValue,
