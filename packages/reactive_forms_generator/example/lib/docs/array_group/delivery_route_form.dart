@@ -1,15 +1,17 @@
-import 'package:example/docs/array_group/delivery_route.gform.dart';
+import 'package:example/docs/array_group/delivery_list.dart';
+import 'package:example/docs/array_group/delivery_list.gform.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 
-class DeliveryRouteFormWidget extends StatelessWidget {
+class DeliveryListFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
-      title: Text('Mailing list'),
+      title: Text('Delivery list'),
       body: DeliveryListFormBuilder(
+        model: DeliveryList(),
         builder: (context, formModel, child) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -17,33 +19,68 @@ class DeliveryRouteFormWidget extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: ReactiveFormArray<String>(
+                    child: ReactiveFormArray<Map<String, Object?>>(
                       formArray: formModel.deliveryListControl,
-                      builder: (context, formArray, child) => Column(
-                        children: formModel.deliveryListValue
-                            .asMap()
-                            .map((i, email) {
-                              return MapEntry(
-                                  i,
-                                  ReactiveTextField<String>(
-                                    formControlName: i.toString(),
-                                    validationMessages: (_) => {
-                                      'email': 'Invalid email',
-                                    },
-                                    decoration: InputDecoration(
-                                        labelText: 'Email ${i}'),
-                                  ));
-                            })
-                            .values
-                            .toList(),
-                      ),
+                      builder: (context, formArray, child) {
+                        return Column(
+                          children: formModel.deliveryListValue
+                              .asMap()
+                              .map((i, deliveryPoint) {
+                                return MapEntry(
+                                    i,
+                                    Column(
+                                      children: [
+                                        ReactiveTextField<String>(
+                                          formControlName: '${i}.name',
+                                          validationMessages: (_) => {
+                                            ValidationMessage.required:
+                                                'Must not be empty',
+                                          },
+                                          decoration: InputDecoration(
+                                            labelText: 'Name ${i}',
+                                          ),
+                                        ),
+                                        ReactiveTextField<String>(
+                                          formControlName:
+                                              '${i}.address.street',
+                                          validationMessages: (_) => {
+                                            ValidationMessage.required:
+                                                'Must not be empty',
+                                          },
+                                          decoration: InputDecoration(
+                                            labelText: 'Street ${i}',
+                                          ),
+                                        ),
+                                        ReactiveTextField<String>(
+                                          formControlName: '${i}.address.city',
+                                          validationMessages: (_) => {
+                                            ValidationMessage.required:
+                                                'Must not be empty',
+                                          },
+                                          decoration: InputDecoration(
+                                            labelText: 'City ${i}',
+                                          ),
+                                        ),
+                                      ],
+                                    ));
+                              })
+                              .values
+                              .toList(),
+                        );
+                      },
                     ),
                   ),
                   SizedBox(width: 16),
                   ElevatedButton(
                     onPressed: () {
-                      formModel.emailListControl.add(
-                        FormControl<String>(value: null),
+                      formModel.deliveryListControl.add(
+                        FormGroup({
+                          'name': FormControl<String>(value: ''),
+                          'address': FormGroup({
+                            'street': FormControl<String>(),
+                            'city': FormControl<String>()
+                          })
+                        }),
                       );
                     },
                     child: const Text('add'),
@@ -51,26 +88,6 @@ class DeliveryRouteFormWidget extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 16),
-              ReactiveMailingListFormConsumer(
-                builder: (context, form, child) {
-                  final errorText = {
-                    'emailDuplicates': 'Two identical emails are in the list',
-                  };
-                  final errors = <String, dynamic>{};
-
-                  form.emailListControl.errors.forEach((key, value) {
-                    final intKey = int.tryParse(key);
-                    if (intKey == null) {
-                      errors[key] = value;
-                    }
-                  });
-                  if (form.emailListControl.hasErrors && errors.isNotEmpty) {
-                    return Text(errorText[errors.entries.first.key] ?? '');
-                  } else {
-                    return Container();
-                  }
-                },
-              ),
               SizedBox(height: 16),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -85,7 +102,7 @@ class DeliveryRouteFormWidget extends StatelessWidget {
                     },
                     child: const Text('Sign Up'),
                   ),
-                  ReactiveMailingListFormConsumer(
+                  ReactiveDeliveryListFormConsumer(
                     builder: (context, form, child) {
                       return ElevatedButton(
                         child: Text('Submit'),
@@ -98,7 +115,6 @@ class DeliveryRouteFormWidget extends StatelessWidget {
             ],
           );
         },
-        model: MailingList(),
       ),
     );
   }

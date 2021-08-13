@@ -159,20 +159,13 @@ class LoginNullableForm {
 
   final String? path;
 
-  String emailControlPath() =>
-      [path, emailControlName].whereType<String>().join(".");
-  String passwordControlPath() =>
-      [path, passwordControlName].whereType<String>().join(".");
-  String rememberMeControlPath() =>
-      [path, rememberMeControlName].whereType<String>().join(".");
-  String themeControlPath() =>
-      [path, themeControlName].whereType<String>().join(".");
-  String modeControlPath() =>
-      [path, modeControlName].whereType<String>().join(".");
-  String timeoutControlPath() =>
-      [path, timeoutControlName].whereType<String>().join(".");
-  String heightControlPath() =>
-      [path, heightControlName].whereType<String>().join(".");
+  String emailControlPath() => pathBuilder(emailControlName);
+  String passwordControlPath() => pathBuilder(passwordControlName);
+  String rememberMeControlPath() => pathBuilder(rememberMeControlName);
+  String themeControlPath() => pathBuilder(themeControlName);
+  String modeControlPath() => pathBuilder(modeControlName);
+  String timeoutControlPath() => pathBuilder(timeoutControlName);
+  String heightControlPath() => pathBuilder(heightControlName);
   String? get emailValue => emailControl.value;
   String? get passwordValue => passwordControl.value;
   bool? get rememberMeValue => rememberMeControl.value;
@@ -223,6 +216,8 @@ class LoginNullableForm {
       mode: modeValue,
       timeout: timeoutValue,
       height: heightValue);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         emailControlName: FormControl<String>(
             value: loginNullable.email,

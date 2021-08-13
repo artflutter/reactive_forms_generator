@@ -11,7 +11,7 @@ import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
 import 'package:example/helpers.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'dart:core';
-import 'delivery_route.dart';
+import 'delivery_list.dart';
 
 class ReactiveDeliveryListFormConsumer extends StatelessWidget {
   ReactiveDeliveryListFormConsumer(
@@ -138,12 +138,10 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
 
 class DeliveryListForm {
   DeliveryListForm(this.deliveryList, this.form, this.path) {
-    deliveryListForm =
-        DeliveryPointForm(deliveryList.deliveryList, form, 'deliveryList');
     deliveryListDeliveryPointForm = deliveryList.deliveryList
         .asMap()
-        .map((k, v) =>
-            MapEntry(k, DeliveryPointForm(v, form, "deliveryList.$k")))
+        .map((k, v) => MapEntry(
+            k, DeliveryPointForm(v, form, pathBuilder("deliveryList.$k"))))
         .values
         .toList();
   }
@@ -158,16 +156,25 @@ class DeliveryListForm {
 
   late List<DeliveryPointForm> deliveryListDeliveryPointForm;
 
-  String deliveryListControlPath() =>
-      [path, deliveryListControlName].whereType<String>().join(".");
-  List<DeliveryPoint> get deliveryListValue =>
-      deliveryListDeliveryPointForm.map((e) => e.model).toList();
+  String deliveryListControlPath() => pathBuilder(deliveryListControlName);
+  List<DeliveryPoint> get deliveryListValue => (deliveryListControl.value ?? [])
+      .asMap()
+      .map((k, v) => MapEntry(
+          k,
+          DeliveryPointForm(
+                  DeliveryPoint(), form, pathBuilder("deliveryList.$k"))
+              .model))
+      .values
+      .toList();
   bool get containsDeliveryList => form.contains(deliveryListControlPath());
   Object? get deliveryListErrors => deliveryListControl.errors;
   void get deliveryListFocus => form.focus(deliveryListControlPath());
-  FormArray get deliveryListControl =>
-      form.control(deliveryListControlPath()) as FormArray;
+  FormArray<Map<String, Object?>> get deliveryListControl =>
+      form.control(deliveryListControlPath())
+          as FormArray<Map<String, Object?>>;
   DeliveryList get model => DeliveryList(deliveryList: deliveryListValue);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         deliveryListControlName: FormArray(
             deliveryListDeliveryPointForm.map((e) => e.formElements()).toList(),
@@ -184,7 +191,8 @@ class DeliveryListForm {
 
 class DeliveryPointForm {
   DeliveryPointForm(this.deliveryPoint, this.form, this.path) {
-    addressForm = AddressForm(deliveryPoint.address, form, 'address');
+    addressForm =
+        AddressForm(deliveryPoint.address, form, pathBuilder('address'));
   }
 
   static String nameControlName = "name";
@@ -199,16 +207,24 @@ class DeliveryPointForm {
 
   final String? path;
 
-  String nameControlPath() =>
-      [path, nameControlName].whereType<String>().join(".");
+  String nameControlPath() => pathBuilder(nameControlName);
+  String addressControlPath() => pathBuilder(addressControlName);
   String get nameValue => nameControl.value as String;
+  Address? get addressValue => addressForm.model;
   bool get containsName => form.contains(nameControlPath());
+  bool get containsAddress => form.contains(addressControlPath());
   Object? get nameErrors => nameControl.errors;
+  Object? get addressErrors => addressControl.errors;
   void get nameFocus => form.focus(nameControlPath());
+  void get addressFocus => form.focus(addressControlPath());
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
+  FormGroup get addressControl =>
+      form.control(addressControlPath()) as FormGroup;
   DeliveryPoint get model =>
-      DeliveryPoint(name: nameValue, address: addressForm.model);
+      DeliveryPoint(name: nameValue, address: addressValue);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         nameControlName: FormControl<String>(
             value: deliveryPoint.name,
@@ -238,10 +254,8 @@ class AddressForm {
 
   final String? path;
 
-  String streetControlPath() =>
-      [path, streetControlName].whereType<String>().join(".");
-  String cityControlPath() =>
-      [path, cityControlName].whereType<String>().join(".");
+  String streetControlPath() => pathBuilder(streetControlName);
+  String cityControlPath() => pathBuilder(cityControlName);
   String? get streetValue => streetControl.value;
   String? get cityValue => cityControl.value;
   bool get containsStreet => form.contains(streetControlPath());
@@ -255,6 +269,8 @@ class AddressForm {
   FormControl<String> get cityControl =>
       form.control(cityControlPath()) as FormControl<String>;
   Address get model => Address(street: streetValue, city: cityValue);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         streetControlName: FormControl<String>(
             value: address?.street,

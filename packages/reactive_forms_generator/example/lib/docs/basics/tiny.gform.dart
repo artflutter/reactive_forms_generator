@@ -146,10 +146,8 @@ class TinyForm {
 
   final String? path;
 
-  String emailControlPath() =>
-      [path, emailControlName].whereType<String>().join(".");
-  String passwordControlPath() =>
-      [path, passwordControlName].whereType<String>().join(".");
+  String emailControlPath() => pathBuilder(emailControlName);
+  String passwordControlPath() => pathBuilder(passwordControlName);
   String get emailValue => emailControl.value as String;
   String get passwordValue => passwordControl.value as String;
   bool get containsEmail => form.contains(emailControlPath());
@@ -163,6 +161,8 @@ class TinyForm {
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
   Tiny get model => Tiny(email: emailValue, password: passwordValue);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         emailControlName: FormControl<String>(
             value: tiny.email,

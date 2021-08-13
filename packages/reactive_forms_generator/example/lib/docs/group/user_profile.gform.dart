@@ -136,8 +136,8 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
 
 class UserProfileForm {
   UserProfileForm(this.userProfile, this.form, this.path) {
-    homeForm = AddressForm(userProfile.home, form, 'home');
-    officeForm = AddressForm(userProfile.office, form, 'office');
+    homeForm = AddressForm(userProfile.home, form, pathBuilder('home'));
+    officeForm = AddressForm(userProfile.office, form, pathBuilder('office'));
   }
 
   static String firstNameControlName = "firstName";
@@ -158,27 +158,39 @@ class UserProfileForm {
 
   final String? path;
 
-  String firstNameControlPath() =>
-      [path, firstNameControlName].whereType<String>().join(".");
-  String lastNameControlPath() =>
-      [path, lastNameControlName].whereType<String>().join(".");
+  String firstNameControlPath() => pathBuilder(firstNameControlName);
+  String lastNameControlPath() => pathBuilder(lastNameControlName);
+  String homeControlPath() => pathBuilder(homeControlName);
+  String officeControlPath() => pathBuilder(officeControlName);
   String get firstNameValue => firstNameControl.value as String;
   String get lastNameValue => lastNameControl.value as String;
+  Address? get homeValue => homeForm.model;
+  Address? get officeValue => officeForm.model;
   bool get containsFirstName => form.contains(firstNameControlPath());
   bool get containsLastName => form.contains(lastNameControlPath());
+  bool get containsHome => form.contains(homeControlPath());
+  bool get containsOffice => form.contains(officeControlPath());
   Object? get firstNameErrors => firstNameControl.errors;
   Object? get lastNameErrors => lastNameControl.errors;
+  Object? get homeErrors => homeControl.errors;
+  Object? get officeErrors => officeControl.errors;
   void get firstNameFocus => form.focus(firstNameControlPath());
   void get lastNameFocus => form.focus(lastNameControlPath());
+  void get homeFocus => form.focus(homeControlPath());
+  void get officeFocus => form.focus(officeControlPath());
   FormControl<String> get firstNameControl =>
       form.control(firstNameControlPath()) as FormControl<String>;
   FormControl<String> get lastNameControl =>
       form.control(lastNameControlPath()) as FormControl<String>;
+  FormGroup get homeControl => form.control(homeControlPath()) as FormGroup;
+  FormGroup get officeControl => form.control(officeControlPath()) as FormGroup;
   UserProfile get model => UserProfile(
       firstName: firstNameValue,
       lastName: lastNameValue,
-      home: homeForm.model,
-      office: officeForm.model);
+      home: homeValue,
+      office: officeValue);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         firstNameControlName: FormControl<String>(
             value: userProfile.firstName,
@@ -218,12 +230,9 @@ class AddressForm {
 
   final String? path;
 
-  String streetControlPath() =>
-      [path, streetControlName].whereType<String>().join(".");
-  String cityControlPath() =>
-      [path, cityControlName].whereType<String>().join(".");
-  String zipControlPath() =>
-      [path, zipControlName].whereType<String>().join(".");
+  String streetControlPath() => pathBuilder(streetControlName);
+  String cityControlPath() => pathBuilder(cityControlName);
+  String zipControlPath() => pathBuilder(zipControlName);
   String? get streetValue => streetControl.value;
   String? get cityValue => cityControl.value;
   String? get zipValue => zipControl.value;
@@ -244,6 +253,8 @@ class AddressForm {
       form.control(zipControlPath()) as FormControl<String>;
   Address get model =>
       Address(street: streetValue, city: cityValue, zip: zipValue);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         streetControlName: FormControl<String>(
             value: address?.street,

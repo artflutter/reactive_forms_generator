@@ -1,3 +1,5 @@
+@Timeout(Duration(seconds: 145))
+
 import 'package:test/test.dart';
 
 import 'helpers.dart';
@@ -218,10 +220,10 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
 
 class GroupForm {
   GroupForm(this.group, this.form, this.path) {
-    personalForm = PersonalForm(group.personal, form, 'personal');
-    phoneForm = PhoneForm(group.phone, form, 'phone');
-    addressForm = AddressForm(group.address, form, 'address');
-    address2Form = AddressForm(group.address2, form, 'address2');
+    personalForm = PersonalForm(group.personal, form, pathBuilder('personal'));
+    phoneForm = PhoneForm(group.phone, form, pathBuilder('phone'));
+    addressForm = AddressForm(group.address, form, pathBuilder('address'));
+    address2Form = AddressForm(group.address2, form, pathBuilder('address2'));
   }
 
   static String personalControlName = "personal";
@@ -246,11 +248,40 @@ class GroupForm {
 
   final String? path;
 
+  String personalControlPath() => pathBuilder(personalControlName);
+  String phoneControlPath() => pathBuilder(phoneControlName);
+  String addressControlPath() => pathBuilder(addressControlName);
+  String address2ControlPath() => pathBuilder(address2ControlName);
+  Personal? get personalValue => personalForm.model;
+  Phone? get phoneValue => phoneForm.model;
+  Address? get addressValue => addressForm.model;
+  Address? get address2Value => address2Form.model;
+  bool get containsPersonal => form.contains(personalControlPath());
+  bool get containsPhone => form.contains(phoneControlPath());
+  bool get containsAddress => form.contains(addressControlPath());
+  bool get containsAddress2 => form.contains(address2ControlPath());
+  Object? get personalErrors => personalControl.errors;
+  Object? get phoneErrors => phoneControl.errors;
+  Object? get addressErrors => addressControl.errors;
+  Object? get address2Errors => address2Control.errors;
+  void get personalFocus => form.focus(personalControlPath());
+  void get phoneFocus => form.focus(phoneControlPath());
+  void get addressFocus => form.focus(addressControlPath());
+  void get address2Focus => form.focus(address2ControlPath());
+  FormGroup get personalControl =>
+      form.control(personalControlPath()) as FormGroup;
+  FormGroup get phoneControl => form.control(phoneControlPath()) as FormGroup;
+  FormGroup get addressControl =>
+      form.control(addressControlPath()) as FormGroup;
+  FormGroup get address2Control =>
+      form.control(address2ControlPath()) as FormGroup;
   Group get model => Group(
-      personal: personalForm.model,
-      phone: phoneForm.model,
-      address: addressForm.model,
-      address2: address2Form.model);
+      personal: personalValue,
+      phone: phoneValue,
+      address: addressValue,
+      address2: address2Value);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         personalControlName: personalForm.formElements(),
         phoneControlName: phoneForm.formElements(),
@@ -276,10 +307,8 @@ class PersonalForm {
 
   final String? path;
 
-  String nameControlPath() =>
-      [path, nameControlName].whereType<String>().join(".");
-  String emailControlPath() =>
-      [path, emailControlName].whereType<String>().join(".");
+  String nameControlPath() => pathBuilder(nameControlName);
+  String emailControlPath() => pathBuilder(emailControlName);
   String? get nameValue => nameControl.value;
   String? get emailValue => emailControl.value;
   bool get containsName => form.contains(nameControlPath());
@@ -293,6 +322,8 @@ class PersonalForm {
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
   Personal get model => Personal(name: nameValue, email: emailValue);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         nameControlName: FormControl<String>(
             value: personal?.name,
@@ -328,10 +359,8 @@ class PhoneForm {
 
   final String? path;
 
-  String phoneNumberControlPath() =>
-      [path, phoneNumberControlName].whereType<String>().join(".");
-  String countryIsoControlPath() =>
-      [path, countryIsoControlName].whereType<String>().join(".");
+  String phoneNumberControlPath() => pathBuilder(phoneNumberControlName);
+  String countryIsoControlPath() => pathBuilder(countryIsoControlName);
   String? get phoneNumberValue => phoneNumberControl.value;
   String? get countryIsoValue => countryIsoControl.value;
   bool get containsPhoneNumber => form.contains(phoneNumberControlPath());
@@ -346,6 +375,8 @@ class PhoneForm {
       form.control(countryIsoControlPath()) as FormControl<String>;
   Phone get model =>
       Phone(phoneNumber: phoneNumberValue, countryIso: countryIsoValue);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         phoneNumberControlName: FormControl<String>(
             value: phone?.phoneNumber,
@@ -383,12 +414,9 @@ class AddressForm {
 
   final String? path;
 
-  String streetControlPath() =>
-      [path, streetControlName].whereType<String>().join(".");
-  String cityControlPath() =>
-      [path, cityControlName].whereType<String>().join(".");
-  String zipControlPath() =>
-      [path, zipControlName].whereType<String>().join(".");
+  String streetControlPath() => pathBuilder(streetControlName);
+  String cityControlPath() => pathBuilder(cityControlName);
+  String zipControlPath() => pathBuilder(zipControlName);
   String? get streetValue => streetControl.value;
   String? get cityValue => cityControl.value;
   String? get zipValue => zipControl.value;
@@ -409,6 +437,8 @@ class AddressForm {
       form.control(zipControlPath()) as FormControl<String>;
   Address get model =>
       Address(street: streetValue, city: cityValue, zip: zipValue);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         streetControlName: FormControl<String>(
             value: address?.street,

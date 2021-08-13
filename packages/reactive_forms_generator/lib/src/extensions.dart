@@ -33,7 +33,12 @@ extension FieldElementExt on FieldElement {
 
   bool get isFormControl => formControlChecker.hasAnnotationOfExact(this);
 
-  bool get isFormGroup => formGroupChecker.hasAnnotationOfExact(this);
+  bool get isFormGroup {
+    final element = this.type.element;
+    return element != null
+        ? formGroupChecker.hasAnnotationOfExact(element)
+        : false;
+  }
 
   bool get isForm => formChecker.hasAnnotationOfExact(this);
 }

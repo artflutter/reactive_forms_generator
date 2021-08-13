@@ -145,8 +145,7 @@ class MailingListForm {
 
   final String? path;
 
-  String emailListControlPath() =>
-      [path, emailListControlName].whereType<String>().join(".");
+  String emailListControlPath() => pathBuilder(emailListControlName);
   List<String?> get emailListValue =>
       emailListControl.value?.whereType<String?>().toList() ?? [];
   bool get containsEmailList => form.contains(emailListControlPath());
@@ -155,6 +154,8 @@ class MailingListForm {
   FormArray<String> get emailListControl =>
       form.control(emailListControlPath()) as FormArray<String>;
   MailingList get model => MailingList(emailList: emailListValue);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         emailListControlName: FormArray<String>(
             mailingList.emailList

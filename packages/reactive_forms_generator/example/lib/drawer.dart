@@ -45,48 +45,18 @@ class AppDrawer extends StatelessWidget {
                 Routes.mailingList,
               ),
             ),
-            // ListTile(
-            //   title: const Text('Complex sample'),
-            //   onTap: () => Navigator.of(context).pushReplacementNamed(
-            //     Routes.complex,
-            //   ),
-            // ),
-            // ListTile(
-            //   title: const Text('Simple sample'),
-            //   onTap: () => Navigator.of(context).pushReplacementNamed(
-            //     Routes.simple,
-            //   ),
-            // ),
-            // ListTile(
-            //   title: const Text('Array sample'),
-            //   onTap: () => Navigator.of(context).pushReplacementNamed(
-            //     Routes.arraySample,
-            //   ),
-            // ),
-            // ListTile(
-            //   title: const Text('Datepicker sample'),
-            //   onTap: () => Navigator.of(context).pushReplacementNamed(
-            //     Routes.datePickerSample,
-            //   ),
-            // ),
-            // ListTile(
-            //   title: const Text('Reactive forms widgets'),
-            //   onTap: () => Navigator.of(context).pushReplacementNamed(
-            //     Routes.reactiveFormWidgets,
-            //   ),
-            // ),
-            // ListTile(
-            //   title: Text('Disable form sample'),
-            //   onTap: () => Navigator.of(context).pushReplacementNamed(
-            //     Routes.disableFormSample,
-            //   ),
-            // ),
-            // ListTile(
-            //   title: Text('Add dynamic controls'),
-            //   onTap: () => Navigator.of(context).pushReplacementNamed(
-            //     Routes.addDynamicControls,
-            //   ),
-            // )
+            ListTile(
+              title: const Text('User profile'),
+              onTap: () => Navigator.of(context).pushReplacementNamed(
+                Routes.userProfile,
+              ),
+            ),
+            ListTile(
+              title: const Text('Delivery list'),
+              onTap: () => Navigator.of(context).pushReplacementNamed(
+                Routes.deliveryList,
+              ),
+            ),
           ],
         ),
       ),

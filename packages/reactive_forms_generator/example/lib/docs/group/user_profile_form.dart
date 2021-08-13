@@ -132,6 +132,7 @@ class UserProfileFormWidget extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      final test = formModel.homeValue;
                       if (formModel.form.valid) {
                         print(formModel.model);
                       } else {

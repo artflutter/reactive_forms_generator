@@ -1,3 +1,5 @@
+@Timeout(Duration(seconds: 145))
+
 import 'package:test/test.dart';
 
 import 'helpers.dart';
@@ -200,14 +202,10 @@ class ArrayNullableForm {
 
   final String? path;
 
-  String someListControlPath() =>
-      [path, someListControlName].whereType<String>().join(".");
-  String emailListControlPath() =>
-      [path, emailListControlName].whereType<String>().join(".");
-  String fruitListControlPath() =>
-      [path, fruitListControlName].whereType<String>().join(".");
-  String vegetablesListControlPath() =>
-      [path, vegetablesListControlName].whereType<String>().join(".");
+  String someListControlPath() => pathBuilder(someListControlName);
+  String emailListControlPath() => pathBuilder(emailListControlName);
+  String fruitListControlPath() => pathBuilder(fruitListControlName);
+  String vegetablesListControlPath() => pathBuilder(vegetablesListControlName);
   List<String?>? get someListValue => someListControl.value;
   List<String> get emailListValue =>
       emailListControl.value?.whereType<String>().toList() ?? [];
@@ -236,10 +234,12 @@ class ArrayNullableForm {
   FormArray<String> get vegetablesListControl =>
       form.control(vegetablesListControlPath()) as FormArray<String>;
   ArrayNullable get model => ArrayNullable(
-      someList: someListValue,
       emailList: emailListValue,
       fruitList: fruitListValue,
-      vegetablesList: vegetablesListValue);
+      vegetablesList: vegetablesListValue,
+      someList: someListValue);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         emailListControlName: FormArray<String>(
             arrayNullable.emailList
