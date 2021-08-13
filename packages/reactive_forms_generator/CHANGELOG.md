@@ -1,3 +1,7 @@
+## [0.0.14-beta]
+* extended array of form groups support
+* bugfixes
+
 ## [0.0.13-beta]
 
 * bugfixes for array support
