@@ -134,7 +134,7 @@ First, install [build_runner] and [reactive_forms_generator] by adding them to y
 # pubspec.yaml
 dependencies:
   reactive_forms:
-  reactive_forms_annotation:
+  reactive_forms_annotations:
 
 dev_dependencies:
   build_runner:
