@@ -79,16 +79,16 @@ class ReactiveLoginNullableFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, LoginNullableForm formGroup, Widget? child) builder;
+      BuildContext context, LoginNullableForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final form = ReactiveLoginNullableForm.of(context);
+    final formModel = ReactiveLoginNullableForm.of(context);
 
-    if (form is! LoginNullableForm) {
+    if (formModel is! LoginNullableForm) {
       throw FormControlParentNotFoundException(this);
     }
-    return builder(context, form, child);
+    return builder(context, formModel, child);
   }
 }
 

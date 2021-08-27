@@ -20,16 +20,16 @@ class ReactiveMailingListFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, MailingListForm formGroup, Widget? child) builder;
+      BuildContext context, MailingListForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final form = ReactiveMailingListForm.of(context);
+    final formModel = ReactiveMailingListForm.of(context);
 
-    if (form is! MailingListForm) {
+    if (formModel is! MailingListForm) {
       throw FormControlParentNotFoundException(this);
     }
-    return builder(context, form, child);
+    return builder(context, formModel, child);
   }
 }
 
@@ -153,15 +153,50 @@ class MailingListForm {
   void get emailListFocus => form.focus(emailListControlPath());
   FormArray<String> get emailListControl =>
       form.control(emailListControlPath()) as FormArray<String>;
-  void addEmailListItem(String value) =>
-      emailListControl.add(FormControl<String>(value: value));
+  void addEmailListItem(String value,
+      {List<AsyncValidatorFunction>? asyncValidators,
+      List<ValidatorFunction>? validators,
+      int? asyncValidatorsDebounceTime,
+      bool? disabled,
+      ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge}) {
+    List<ValidatorFunction> resultingValidators = [emailValidator];
+    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+
+    switch (validatorsApplyMode) {
+      case ValidatorsApplyMode.merge:
+        if (validators != null) resultingValidators.addAll(validators);
+        if (asyncValidators != null)
+          resultingAsyncValidators.addAll(asyncValidators);
+        break;
+      case ValidatorsApplyMode.override:
+        if (validators != null) resultingValidators = validators;
+
+        if (asyncValidators != null) resultingAsyncValidators = asyncValidators;
+        break;
+    }
+
+    emailListControl.add(FormControl<String>(
+      value: value,
+      validators: resultingValidators,
+      asyncValidators: resultingAsyncValidators,
+      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+      disabled: disabled ?? false,
+    ));
+  }
+
   MailingList get model => MailingList(emailList: emailListValue);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         emailListControlName: FormArray<String>(
             mailingList.emailList
-                .map((e) => FormControl<String>(value: e))
+                .map((e) => FormControl<String>(
+                      value: e,
+                      validators: [emailValidator],
+                      asyncValidators: [],
+                      asyncValidatorsDebounceTime: 250,
+                      disabled: false,
+                    ))
                 .toList(),
             validators: [mailingListValidator],
             asyncValidators: [],

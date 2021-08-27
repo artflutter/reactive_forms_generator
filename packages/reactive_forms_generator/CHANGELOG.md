@@ -1,4 +1,9 @@
+## [0.0.15-beta]
+
+* generate method to add item to array
+
 ## [0.0.14-beta]
+
 * extended array of form groups support
 * bugfixes
 

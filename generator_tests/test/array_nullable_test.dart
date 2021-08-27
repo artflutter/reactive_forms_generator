@@ -70,16 +70,16 @@ class ReactiveArrayNullableFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, ArrayNullableForm formGroup, Widget? child) builder;
+      BuildContext context, ArrayNullableForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final form = ReactiveArrayNullableForm.of(context);
+    final formModel = ReactiveArrayNullableForm.of(context);
 
-    if (form is! ArrayNullableForm) {
+    if (formModel is! ArrayNullableForm) {
       throw FormControlParentNotFoundException(this);
     }
-    return builder(context, form, child);
+    return builder(context, formModel, child);
   }
 }
 
@@ -233,12 +233,99 @@ class ArrayNullableForm {
       form.control(fruitListControlPath()) as FormArray<bool>;
   FormArray<String> get vegetablesListControl =>
       form.control(vegetablesListControlPath()) as FormArray<String>;
-  void addEmailListItem(String value) =>
-      emailListControl.add(FormControl<String>(value: value));
-  void addFruitListItem(bool value) =>
-      fruitListControl.add(FormControl<bool>(value: value));
-  void addVegetablesListItem(String value) =>
-      vegetablesListControl.add(FormControl<String>(value: value));
+  void addEmailListItem(String value,
+      {List<AsyncValidatorFunction>? asyncValidators,
+      List<ValidatorFunction>? validators,
+      int? asyncValidatorsDebounceTime,
+      bool? disabled,
+      ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge}) {
+    List<ValidatorFunction> resultingValidators = [];
+    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+
+    switch (validatorsApplyMode) {
+      case ValidatorsApplyMode.merge:
+        if (validators != null) resultingValidators.addAll(validators);
+        if (asyncValidators != null)
+          resultingAsyncValidators.addAll(asyncValidators);
+        break;
+      case ValidatorsApplyMode.override:
+        if (validators != null) resultingValidators = validators;
+
+        if (asyncValidators != null) resultingAsyncValidators = asyncValidators;
+        break;
+    }
+
+    emailListControl.add(FormControl<String>(
+      value: value,
+      validators: resultingValidators,
+      asyncValidators: resultingAsyncValidators,
+      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+      disabled: disabled ?? false,
+    ));
+  }
+
+  void addFruitListItem(bool value,
+      {List<AsyncValidatorFunction>? asyncValidators,
+      List<ValidatorFunction>? validators,
+      int? asyncValidatorsDebounceTime,
+      bool? disabled,
+      ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge}) {
+    List<ValidatorFunction> resultingValidators = [];
+    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+
+    switch (validatorsApplyMode) {
+      case ValidatorsApplyMode.merge:
+        if (validators != null) resultingValidators.addAll(validators);
+        if (asyncValidators != null)
+          resultingAsyncValidators.addAll(asyncValidators);
+        break;
+      case ValidatorsApplyMode.override:
+        if (validators != null) resultingValidators = validators;
+
+        if (asyncValidators != null) resultingAsyncValidators = asyncValidators;
+        break;
+    }
+
+    fruitListControl.add(FormControl<bool>(
+      value: value,
+      validators: resultingValidators,
+      asyncValidators: resultingAsyncValidators,
+      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+      disabled: disabled ?? false,
+    ));
+  }
+
+  void addVegetablesListItem(String value,
+      {List<AsyncValidatorFunction>? asyncValidators,
+      List<ValidatorFunction>? validators,
+      int? asyncValidatorsDebounceTime,
+      bool? disabled,
+      ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge}) {
+    List<ValidatorFunction> resultingValidators = [];
+    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+
+    switch (validatorsApplyMode) {
+      case ValidatorsApplyMode.merge:
+        if (validators != null) resultingValidators.addAll(validators);
+        if (asyncValidators != null)
+          resultingAsyncValidators.addAll(asyncValidators);
+        break;
+      case ValidatorsApplyMode.override:
+        if (validators != null) resultingValidators = validators;
+
+        if (asyncValidators != null) resultingAsyncValidators = asyncValidators;
+        break;
+    }
+
+    vegetablesListControl.add(FormControl<String>(
+      value: value,
+      validators: resultingValidators,
+      asyncValidators: resultingAsyncValidators,
+      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+      disabled: disabled ?? false,
+    ));
+  }
+
   ArrayNullable get model => ArrayNullable(
       emailList: emailListValue,
       fruitList: fruitListValue,
@@ -249,7 +336,13 @@ class ArrayNullableForm {
   FormGroup formElements() => FormGroup({
         emailListControlName: FormArray<String>(
             arrayNullable.emailList
-                .map((e) => FormControl<String>(value: e))
+                .map((e) => FormControl<String>(
+                      value: e,
+                      validators: [],
+                      asyncValidators: [],
+                      asyncValidatorsDebounceTime: 250,
+                      disabled: false,
+                    ))
                 .toList(),
             validators: [],
             asyncValidators: [],
@@ -257,7 +350,13 @@ class ArrayNullableForm {
             disabled: false),
         fruitListControlName: FormArray<bool>(
             arrayNullable.fruitList
-                .map((e) => FormControl<bool>(value: e))
+                .map((e) => FormControl<bool>(
+                      value: e,
+                      validators: [],
+                      asyncValidators: [],
+                      asyncValidatorsDebounceTime: 250,
+                      disabled: false,
+                    ))
                 .toList(),
             validators: [],
             asyncValidators: [],
@@ -265,7 +364,13 @@ class ArrayNullableForm {
             disabled: false),
         vegetablesListControlName: FormArray<String>(
             arrayNullable.vegetablesList
-                    ?.map((e) => FormControl<String>(value: e))
+                    ?.map((e) => FormControl<String>(
+                          value: e,
+                          validators: [],
+                          asyncValidators: [],
+                          asyncValidatorsDebounceTime: 250,
+                          disabled: false,
+                        ))
                     .toList() ??
                 [],
             validators: [],

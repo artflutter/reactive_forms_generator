@@ -5,11 +5,18 @@ import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/src/dart/element/type.dart' as t;
 
 import 'package:code_builder/code_builder.dart';
+import 'package:reactive_forms_generator/src/form_elements/form_array_generator.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_group_generator.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
+import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
 
 import 'library_builder.dart';
+
+enum ValidatorsApplyMode {
+  merge,
+  override,
+}
 
 class FormGenerator {
   final ClassElement element;
@@ -309,10 +316,19 @@ class FormGenerator {
     // until https://github.com/joanpablo/reactive_forms/issues/204 is somehow resolved
     final type = field.typeParameter.getDisplayString(withNullability: false);
 
+    final formArrayGenerator = FormArrayGenerator(field, field.typeParameter);
+
+    final validators =
+        formArrayGenerator.itemSyncValidatorList(formArrayChecker);
+    final asyncValidators =
+        formArrayGenerator.itemAsyncValidatorList(formArrayChecker);
+    final asyncValidatorsDebounceTime =
+        formArrayGenerator.itemAsyncValidatorsDebounceTime(formArrayChecker);
+    final disabled = formArrayGenerator.itemDisabled(formArrayChecker);
+
     return Method(
       (b) => b
         ..name = 'add${field.fieldName.pascalCase}Item'
-        ..lambda = true
         ..requiredParameters.add(
           Parameter(
             (b) => b
@@ -320,9 +336,76 @@ class FormGenerator {
               ..type = Reference(type),
           ),
         )
+        ..optionalParameters.add(
+          Parameter(
+            (b) => b
+              ..name = 'asyncValidators'
+              ..named = true
+              ..type = Reference('List<AsyncValidatorFunction>?'),
+          ),
+        )
+        ..optionalParameters.add(
+          Parameter(
+            (b) => b
+              ..name = 'validators'
+              ..named = true
+              ..type = Reference('List<ValidatorFunction>?'),
+          ),
+        )
+        ..optionalParameters.add(
+          Parameter(
+            (b) => b
+              ..name = 'asyncValidatorsDebounceTime'
+              ..named = true
+              ..type = Reference('int?'),
+          ),
+        )
+        ..optionalParameters.add(
+          Parameter(
+            (b) => b
+              ..name = 'disabled'
+              ..named = true
+              ..type = Reference('bool?'),
+          ),
+        )
+        ..optionalParameters.add(
+          Parameter(
+            (b) => b
+              ..name = 'validatorsApplyMode'
+              ..named = true
+              ..defaultTo = Code('ValidatorsApplyMode.merge')
+              ..type = Reference('ValidatorsApplyMode'),
+          ),
+        )
         ..returns = Reference('void')
         ..body = Code(
-          '${field.fieldControlName}.add(FormControl<${type}>(value: value))',
+          '''
+              List<ValidatorFunction> resultingValidators = ${validators}; 
+              List<AsyncValidatorFunction> resultingAsyncValidators = ${asyncValidators};
+              
+              switch(validatorsApplyMode) { 
+                case ValidatorsApplyMode.merge:
+                  if(validators != null)
+                    resultingValidators.addAll(validators);
+                  if(asyncValidators != null)
+                    resultingAsyncValidators.addAll(asyncValidators);
+                  break;
+                case ValidatorsApplyMode.override:
+                  if(validators != null)
+                    resultingValidators = validators;
+                    
+                  if(asyncValidators != null)
+                    resultingAsyncValidators = asyncValidators;
+                  break;
+              }
+               
+              ${field.fieldControlName}.add(FormControl<${type}>(
+                value: value, 
+                validators: resultingValidators,
+                asyncValidators: resultingAsyncValidators,
+                asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? ${asyncValidatorsDebounceTime},
+                disabled: disabled ?? ${disabled},
+              ));''',
         ),
     );
   }

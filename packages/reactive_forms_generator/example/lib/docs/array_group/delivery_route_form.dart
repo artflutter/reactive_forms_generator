@@ -103,10 +103,10 @@ class DeliveryListFormWidget extends StatelessWidget {
                     child: const Text('Sign Up'),
                   ),
                   ReactiveDeliveryListFormConsumer(
-                    builder: (context, form, child) {
+                    builder: (context, formModel, child) {
                       return ElevatedButton(
                         child: Text('Submit'),
-                        onPressed: form.form.valid ? () {} : null,
+                        onPressed: formModel.form.valid ? () {} : null,
                       );
                     },
                   ),

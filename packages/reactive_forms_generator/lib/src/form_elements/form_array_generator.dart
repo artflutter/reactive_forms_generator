@@ -49,7 +49,13 @@ class FormArrayGenerator extends FormElementGenerator {
       return 'FormArray($props)';
     } else {
       final props = [
-        '$value${optionalChaining}.map((e) => FormControl<${displayType}>(value: e)).toList() ${defaultValue}',
+        '''$value${optionalChaining}.map((e) => FormControl<${displayType}>(
+              value: e,
+              validators: ${itemSyncValidatorList(formArrayChecker)},
+              asyncValidators: ${itemAsyncValidatorList(formArrayChecker)},
+              asyncValidatorsDebounceTime: ${itemAsyncValidatorsDebounceTime(formArrayChecker)},
+              disabled: ${itemDisabled(formArrayChecker)},
+            )).toList() ${defaultValue}''',
         ...partialProps
       ].join(', ');
 

@@ -85,16 +85,16 @@ class ReactiveDeliveryListFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, DeliveryListForm formGroup, Widget? child) builder;
+      BuildContext context, DeliveryListForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final form = ReactiveDeliveryListForm.of(context);
+    final formModel = ReactiveDeliveryListForm.of(context);
 
-    if (form is! DeliveryListForm) {
+    if (formModel is! DeliveryListForm) {
       throw FormControlParentNotFoundException(this);
     }
-    return builder(context, form, child);
+    return builder(context, formModel, child);
   }
 }
 

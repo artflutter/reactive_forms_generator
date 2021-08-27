@@ -157,10 +157,10 @@ class GroupNullableFormWidget extends StatelessWidget {
                 child: const Text('Sign Up'),
               ),
               ReactiveGroupFormConsumer(
-                builder: (context, form, child) {
+                builder: (context, formModel, child) {
                   return ElevatedButton(
                     child: Text('Submit'),
-                    onPressed: form.form.valid ? () {} : null,
+                    onPressed: formModel.form.valid ? () {} : null,
                   );
                 },
               ),

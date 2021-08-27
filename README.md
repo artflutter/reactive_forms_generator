@@ -335,6 +335,11 @@ class MailingList {
     validators: const [
       emailDuplicates,
     ],
+    // you can also add validators for each item of the array
+    // it will be added to each FormControl
+    // itemValidators: [
+    //   emailValidator,
+    // ],
   )
   final List<String?> emailList;
 
@@ -430,6 +435,15 @@ final form = MailingListFormBuilder(
             // adds new item to the list of fields
             ElevatedButton(
               onPressed: () {
+                // add****Item function allows you not only to add values but also alter the FormControl parameters if needed
+                // you can change 
+                //  - validators,
+                //  - asyncValidators,
+                //  - asyncValidatorsDebounceTime,
+                //  - disabled,
+                // validatorsApplyMode - controls how the validators will be applied
+                //  - merge - will append to the validators defined in annotation
+                //  - override - will override to the validators defined in annotation
                 formModel.addEmailListItem('');
               },
               child: const Text('add'),

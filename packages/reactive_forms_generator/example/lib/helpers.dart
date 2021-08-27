@@ -16,7 +16,7 @@ Map<String, dynamic> emailValidator(AbstractControl<dynamic> control) {
 }
 
 // validates that at least one email is selected
-Map<String, dynamic>? mailingListValidator(AbstractControl control) {
+Map<String, dynamic>? mailingComplexListValidator(AbstractControl control) {
   final formArray = control as FormArray<String>;
   final emails = formArray.value ?? [];
   final test = Set<String>();
@@ -24,6 +24,18 @@ Map<String, dynamic>? mailingListValidator(AbstractControl control) {
   formArray.controls.forEach(
     (e) => e.setErrors(emailValidator(e)),
   );
+
+  final result = emails.fold<bool>(true,
+      (previousValue, element) => previousValue && test.add(element ?? ''));
+
+  return result ? null : <String, dynamic>{'emailDuplicates': true};
+}
+
+// validates that at least one email is selected
+Map<String, dynamic>? mailingListValidator(AbstractControl control) {
+  final formArray = control as FormArray<String>;
+  final emails = formArray.value ?? [];
+  final test = Set<String>();
 
   final result = emails.fold<bool>(true,
       (previousValue, element) => previousValue && test.add(element ?? ''));

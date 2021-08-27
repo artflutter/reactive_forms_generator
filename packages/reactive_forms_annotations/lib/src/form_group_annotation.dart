@@ -9,10 +9,22 @@ class FormGroupAnnotation {
 
   final bool disabled;
 
+  final List<ValidatorFunction> itemValidators;
+
+  final List<AsyncValidatorFunction> itemAsyncValidators;
+
+  final int itemAsyncValidatorsDebounceTime;
+
+  final bool itemDisabled;
+
   const FormGroupAnnotation({
     this.validators = const [],
     this.asyncValidators = const [],
     this.asyncValidatorsDebounceTime = 250,
     this.disabled = false,
+    this.itemValidators = const [],
+    this.itemAsyncValidators = const [],
+    this.itemAsyncValidatorsDebounceTime = 250,
+    this.itemDisabled = false,
   });
 }

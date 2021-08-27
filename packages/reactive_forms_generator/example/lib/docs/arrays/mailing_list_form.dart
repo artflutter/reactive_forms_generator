@@ -11,7 +11,10 @@ class MailingListFormWidget extends StatelessWidget {
     return SampleScreen(
       title: Text('Mailing list'),
       body: MailingListFormBuilder(
-        model: MailingList(),
+        model: MailingList(emailList: [
+          'test@gmail.com',
+          'wrond email',
+        ]),
         builder: (context, formModel, child) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,19 +55,20 @@ class MailingListFormWidget extends StatelessWidget {
               ),
               SizedBox(height: 16),
               ReactiveMailingListFormConsumer(
-                builder: (context, form, child) {
+                builder: (context, formModel, child) {
                   final errorText = {
                     'emailDuplicates': 'Two identical emails are in the list',
                   };
                   final errors = <String, dynamic>{};
 
-                  form.emailListControl.errors.forEach((key, value) {
+                  formModel.emailListControl.errors.forEach((key, value) {
                     final intKey = int.tryParse(key);
                     if (intKey == null) {
                       errors[key] = value;
                     }
                   });
-                  if (form.emailListControl.hasErrors && errors.isNotEmpty) {
+                  if (formModel.emailListControl.hasErrors &&
+                      errors.isNotEmpty) {
                     return Text(errorText[errors.entries.first.key] ?? '');
                   } else {
                     return Container();
@@ -86,10 +90,10 @@ class MailingListFormWidget extends StatelessWidget {
                     child: const Text('Sign Up'),
                   ),
                   ReactiveMailingListFormConsumer(
-                    builder: (context, form, child) {
+                    builder: (context, formModel, child) {
                       return ElevatedButton(
                         child: Text('Submit'),
-                        onPressed: form.form.valid ? () {} : null,
+                        onPressed: formModel.form.valid ? () {} : null,
                       );
                     },
                   ),

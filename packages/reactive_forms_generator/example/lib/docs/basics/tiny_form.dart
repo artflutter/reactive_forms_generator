@@ -44,13 +44,13 @@ class TinyFormWidget extends StatelessWidget {
               ),
               const SizedBox(height: 8.0),
               ReactiveTinyFormConsumer(
-                builder: (context, form, child) {
+                builder: (context, formModel, child) {
                   return ElevatedButton(
                     child: Text('Submit'),
-                    onPressed: form.form.valid
+                    onPressed: formModel.form.valid
                         ? () {
-                            print(form.model.email);
-                            print(form.model.password);
+                            print(formModel.model.email);
+                            print(formModel.model.password);
                           }
                         : null,
                   );

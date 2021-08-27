@@ -26,11 +26,43 @@ abstract class FormElementGenerator {
     return name;
   }
 
+  List<String> itemSyncValidatorList(TypeChecker typeChecker) {
+    if (typeChecker.hasAnnotationOfExact(field)) {
+      final annotation = typeChecker.firstAnnotationOfExact(field);
+      return annotation
+              ?.getField('itemValidators')
+              ?.toListValue()
+              ?.map((e) {
+                return validatorName(e.toFunctionValue());
+              })
+              .whereType<String>()
+              .toList() ??
+          [];
+    }
+    return [];
+  }
+
   List<String> syncValidatorList(TypeChecker typeChecker) {
     if (typeChecker.hasAnnotationOfExact(field)) {
       final annotation = typeChecker.firstAnnotationOfExact(field);
       return annotation
               ?.getField('validators')
+              ?.toListValue()
+              ?.map((e) {
+                return validatorName(e.toFunctionValue());
+              })
+              .whereType<String>()
+              .toList() ??
+          [];
+    }
+    return [];
+  }
+
+  List<String> itemAsyncValidatorList(TypeChecker typeChecker) {
+    if (typeChecker.hasAnnotationOfExact(field)) {
+      final annotation = typeChecker.firstAnnotationOfExact(field);
+      return annotation
+              ?.getField('itemAsyncValidators')
               ?.toListValue()
               ?.map((e) {
                 return validatorName(e.toFunctionValue());
@@ -69,6 +101,32 @@ abstract class FormElementGenerator {
           ?.toIntValue();
     }
     return debounceTime ?? 250;
+  }
+
+  int itemAsyncValidatorsDebounceTime(TypeChecker typeChecker) {
+    int? debounceTime;
+    if (typeChecker.hasAnnotationOfExact(field)) {
+      final annotation = typeChecker.firstAnnotationOfExact(field);
+      debounceTime = annotation
+          ?.getField(
+            'itemAsyncValidatorsDebounceTime',
+          )
+          ?.toIntValue();
+    }
+    return debounceTime ?? 250;
+  }
+
+  bool itemDisabled(TypeChecker typeChecker) {
+    bool? disabled;
+    if (typeChecker.hasAnnotationOfExact(field)) {
+      final annotation = typeChecker.firstAnnotationOfExact(field);
+      disabled = annotation
+          ?.getField(
+            'itemDisabled',
+          )
+          ?.toBoolValue();
+    }
+    return disabled ?? false;
   }
 
   bool disabled(TypeChecker typeChecker) {

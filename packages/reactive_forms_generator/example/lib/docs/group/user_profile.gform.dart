@@ -20,16 +20,16 @@ class ReactiveUserProfileFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, UserProfileForm formGroup, Widget? child) builder;
+      BuildContext context, UserProfileForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final form = ReactiveUserProfileForm.of(context);
+    final formModel = ReactiveUserProfileForm.of(context);
 
-    if (form is! UserProfileForm) {
+    if (formModel is! UserProfileForm) {
       throw FormControlParentNotFoundException(this);
     }
-    return builder(context, form, child);
+    return builder(context, formModel, child);
   }
 }
 

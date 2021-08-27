@@ -7,6 +7,9 @@ class MailingList {
     validators: const [
       mailingListValidator,
     ],
+    itemValidators: [
+      emailValidator,
+    ],
   )
   final List<String?> emailList;
 

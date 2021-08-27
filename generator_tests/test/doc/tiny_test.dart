@@ -58,17 +58,17 @@ class ReactiveTinyFormConsumer extends StatelessWidget {
 
   final Widget? child;
 
-  final Widget Function(BuildContext context, TinyForm formGroup, Widget? child)
+  final Widget Function(BuildContext context, TinyForm formModel, Widget? child)
       builder;
 
   @override
   Widget build(BuildContext context) {
-    final form = ReactiveTinyForm.of(context);
+    final formModel = ReactiveTinyForm.of(context);
 
-    if (form is! TinyForm) {
+    if (formModel is! TinyForm) {
       throw FormControlParentNotFoundException(this);
     }
-    return builder(context, form, child);
+    return builder(context, formModel, child);
   }
 }
 

@@ -20,16 +20,16 @@ class ReactiveLoginFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, LoginForm formGroup, Widget? child) builder;
+      BuildContext context, LoginForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final form = ReactiveLoginForm.of(context);
+    final formModel = ReactiveLoginForm.of(context);
 
-    if (form is! LoginForm) {
+    if (formModel is! LoginForm) {
       throw FormControlParentNotFoundException(this);
     }
-    return builder(context, form, child);
+    return builder(context, formModel, child);
   }
 }
 

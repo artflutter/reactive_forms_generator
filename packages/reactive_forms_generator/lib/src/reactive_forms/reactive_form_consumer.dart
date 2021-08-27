@@ -54,12 +54,12 @@ class ReactiveFormConsumer {
             CodeExpression(Code('override')),
           )
           ..body = Code('''
-            final form = ${reactiveForm.className}.of(context);
+            final formModel = ${reactiveForm.className}.of(context);
             
-            if (form is! ${reactiveForm.formGenerator.className}) {
+            if (formModel is! ${reactiveForm.formGenerator.className}) {
               throw FormControlParentNotFoundException(this);
             }
-            return builder(context, form, child);
+            return builder(context, formModel, child);
           '''),
       );
 
@@ -75,7 +75,7 @@ class ReactiveFormConsumer {
             ..name = 'builder'
             ..modifier = FieldModifier.final$
             ..type = Reference(
-              'Widget Function(BuildContext context, ${reactiveForm.formGenerator.className} formGroup, Widget? child)',
+              'Widget Function(BuildContext context, ${reactiveForm.formGenerator.className} formModel, Widget? child)',
             ),
         ),
       ];

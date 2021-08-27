@@ -1,3 +1,7 @@
+## [0.0.5-beta]
+
+* extended FormArray annotation
+
 ## [0.0.4-beta]
 
 * asyncDebounceTime and disable support

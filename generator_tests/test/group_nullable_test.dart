@@ -105,16 +105,16 @@ class ReactiveGroupFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, GroupForm formGroup, Widget? child) builder;
+      BuildContext context, GroupForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final form = ReactiveGroupForm.of(context);
+    final formModel = ReactiveGroupForm.of(context);
 
-    if (form is! GroupForm) {
+    if (formModel is! GroupForm) {
       throw FormControlParentNotFoundException(this);
     }
-    return builder(context, form, child);
+    return builder(context, formModel, child);
   }
 }
 
