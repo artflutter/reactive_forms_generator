@@ -16,18 +16,18 @@ void main() {
             
             @ReactiveFormAnnotation()
             class MailingList {
-              @FormArrayAnnotation(
-                validators: const [
-                  mailingListValidator,
-                ],
-                itemValidators: [
-                  emailValidator,
-                ],
-              )
               final List<String?> emailList;
             
               MailingList({
-                this.emailList = const [],
+                @FormArrayAnnotation(
+                  validators: const [
+                    mailingListValidator,
+                  ],
+                  itemValidators: [
+                    emailValidator,
+                  ],
+                )
+                    this.emailList = const [],
               });
             }
           ''',

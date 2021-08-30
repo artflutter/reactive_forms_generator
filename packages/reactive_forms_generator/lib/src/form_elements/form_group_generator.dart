@@ -7,20 +7,26 @@ import 'package:reactive_forms_generator/src/types.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 
 class FormGroupGenerator extends FormElementGenerator {
-  FormGroupGenerator(FieldElement field, DartType? type) : super(field, type);
+  FormGroupGenerator(ParameterElement field, DartType? type)
+      : super(field, type);
 
-  List<FieldElement> get formElements => (field.type.element as ClassElement)
-      .fields
-      .where(
-        (e) =>
-            formControlChecker.hasAnnotationOfExact(e) ||
-            formArrayChecker.hasAnnotationOfExact(e),
-      )
-      .toList();
-
-  List<FieldElement> get nestedFormElements =>
+  List<ParameterElement> get formElements =>
       (field.type.element as ClassElement)
-          .fields
+          .constructors
+          .first
+          .parameters
+          .where(
+            (e) =>
+                formControlChecker.hasAnnotationOfExact(e) ||
+                formArrayChecker.hasAnnotationOfExact(e),
+          )
+          .toList();
+
+  List<ParameterElement> get nestedFormElements =>
+      (field.type.element as ClassElement)
+          .constructors
+          .first
+          .parameters
           .where(
             (e) => e.type.element is ClassElement,
           )

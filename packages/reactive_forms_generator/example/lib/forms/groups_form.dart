@@ -20,46 +20,39 @@ class Group {
 
 @FormGroupAnnotation()
 class Personal {
-  @FormControlAnnotation()
   final String? name;
 
-  @FormControlAnnotation()
   final String? email;
 
   Personal({
-    this.name,
-    this.email,
+    @FormControlAnnotation() this.name,
+    @FormControlAnnotation() this.email,
   });
 }
 
 @FormGroupAnnotation()
 class Phone {
-  @FormControlAnnotation()
   final String? phoneNumber;
 
-  @FormControlAnnotation()
   final String? countryIso;
 
   Phone({
-    this.phoneNumber,
-    this.countryIso,
+    @FormControlAnnotation() this.phoneNumber,
+    @FormControlAnnotation() this.countryIso,
   });
 }
 
 @FormGroupAnnotation()
 class Address {
-  @FormControlAnnotation()
   final String? street;
 
-  @FormControlAnnotation()
   final String? city;
 
-  @FormControlAnnotation()
   final String? zip;
 
   Address({
-    this.street,
-    this.city,
-    this.zip,
+    @FormControlAnnotation() this.street,
+    @FormControlAnnotation() this.city,
+    @FormControlAnnotation() this.zip,
   });
 }

@@ -16,14 +16,8 @@ void main() {
             
             @ReactiveFormAnnotation()
             class UserProfile {
-              @FormControlAnnotation(
-                validators: const [requiredValidator],
-              )
               final String firstName;
             
-              @FormControlAnnotation(
-                validators: const [requiredValidator],
-              )
               final String lastName;
             
               final Address? home;
@@ -31,8 +25,14 @@ void main() {
               final Address? office;
             
               UserProfile({
-                this.firstName = '',
-                this.lastName = '',
+                @FormControlAnnotation(
+                  validators: const [requiredValidator],
+                )
+                    this.firstName = '',
+                @FormControlAnnotation(
+                  validators: const [requiredValidator],
+                )
+                    this.lastName = '',
                 this.home,
                 this.office,
               });
@@ -40,21 +40,21 @@ void main() {
             
             @FormGroupAnnotation()
             class Address {
-              @FormControlAnnotation()
               final String? street;
             
-              @FormControlAnnotation(
-                validators: const [requiredValidator],
-              )
               final String? city;
             
-              @FormControlAnnotation()
               final String? zip;
             
               Address({
-                this.street,
-                this.city,
-                this.zip,
+                @FormControlAnnotation()
+                    this.street,
+                @FormControlAnnotation(
+                  validators: const [requiredValidator],
+                )
+                    this.city,
+                @FormControlAnnotation()
+                    this.zip,
               });
             }
           ''',

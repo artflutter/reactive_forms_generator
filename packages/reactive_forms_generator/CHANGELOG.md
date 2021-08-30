@@ -1,3 +1,8 @@
+## [0.1.0-beta]
+**BREAKING CHANGE**
+* repositioning of annotations
+* Freezed support
+
 ## [0.0.15-beta]
 
 * generate method to add item to array

@@ -11,76 +11,76 @@ void main() {
       () async {
         return testGenerator(
           model: r'''
-            import 'package:reactive_forms/reactive_forms.dart';
-            import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+          import 'package:reactive_forms/reactive_forms.dart';
+          import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+          
+          Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
+            return Validators.required(control);
+          }
             
-            Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
-              return Validators.required(control);
-            }
-            
-            enum UserMode { user, admin }
-            
-            @ReactiveFormAnnotation()
-            class Login {
+          enum UserMode { user, admin }
+          
+          @ReactiveFormAnnotation()
+          class Login {
+            final String email;
+          
+            final String password;
+          
+            final bool rememberMe;
+          
+            final String theme;
+          
+            final UserMode mode;
+          
+            final int timeout;
+          
+            final double height;
+          
+            Login({
               @FormControlAnnotation(
                 validators: const [
                   requiredValidator,
                 ],
               )
-              final String email;
-            
+                  this.email = 'default@e.mail',
               @FormControlAnnotation(
                 validators: const [
                   requiredValidator,
                 ],
               )
-              final String password;
-            
+                  required this.password,
               @FormControlAnnotation(
                 validators: const [
                   requiredValidator,
                 ],
               )
-              final bool rememberMe;
-            
+                  required this.rememberMe,
               @FormControlAnnotation(
                 validators: const [
                   requiredValidator,
                 ],
               )
-              final String theme;
-            
+                  required this.theme,
               @FormControlAnnotation(
                 validators: const [
                   requiredValidator,
                 ],
               )
-              final UserMode mode;
-            
+                  required this.mode,
               @FormControlAnnotation(
                 validators: const [
                   requiredValidator,
                 ],
               )
-              final int timeout;
-            
+                  required this.timeout,
               @FormControlAnnotation(
                 validators: const [
                   requiredValidator,
                 ],
               )
-              final double height;
-            
-              Login({
-                this.email = 'default@e.mail',
-                required this.password,
-                required this.rememberMe,
-                required this.theme,
-                required this.mode,
-                required this.timeout,
-                required this.height,
-              });
-            }
+                  required this.height,
+            });
+          }
           ''',
           generatedFile: generatedFile,
         );

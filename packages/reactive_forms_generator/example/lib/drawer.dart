@@ -57,6 +57,12 @@ class AppDrawer extends StatelessWidget {
                 Routes.deliveryList,
               ),
             ),
+            ListTile(
+              title: const Text('Freezed form'),
+              onTap: () => Navigator.of(context).pushReplacementNamed(
+                Routes.deliveryList,
+              ),
+            ),
           ],
         ),
       ),

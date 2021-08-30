@@ -5,7 +5,7 @@ import 'package:source_gen/source_gen.dart';
 import 'package:recase/recase.dart';
 
 abstract class FormElementGenerator {
-  final FieldElement field;
+  final ParameterElement field;
   final DartType? type;
 
   FormElementGenerator(this.field, this.type);
@@ -13,7 +13,8 @@ abstract class FormElementGenerator {
   String get value {
     final optionalChaining =
         type?.nullabilitySuffix == NullabilitySuffix.question ? '?' : '';
-    return '${(field.enclosingElement as ClassElement).name.camelCase}${optionalChaining}.${field.name}';
+
+    return '${(field.enclosingElement as ConstructorElement).enclosingElement.name.camelCase}${optionalChaining}.${field.name}';
   }
 
   String? validatorName(ExecutableElement? e) {

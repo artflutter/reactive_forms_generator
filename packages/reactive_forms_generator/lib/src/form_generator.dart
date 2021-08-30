@@ -51,25 +51,25 @@ class FormGenerator {
     );
   }
 
-  List<FieldElement> get formControls => element.fields
+  List<ParameterElement> get formControls => parameters
       .where(
         (e) => e.isFormControl,
       )
       .toList();
 
-  List<FieldElement> get formArrays => element.fields
+  List<ParameterElement> get formArrays => parameters
       .where(
         (e) => e.isFormArray && !e.isFormGroupArray,
       )
       .toList();
 
-  List<FieldElement> get formGroups => element.fields
+  List<ParameterElement> get formGroups => parameters
       .where(
         (e) => e.isFormGroup,
       )
       .toList();
 
-  List<FieldElement> get formGroupArrays => element.fields
+  List<ParameterElement> get formGroupArrays => parameters
       .where(
         (e) => e.isFormGroupArray,
       )
@@ -77,7 +77,10 @@ class FormGenerator {
 
   String get className => '${element.name}Form';
 
-  Field staticFieldName(FieldElement field) => Field(
+  List<ParameterElement> get parameters =>
+      element.constructors.first.parameters;
+
+  Field staticFieldName(ParameterElement field) => Field(
         (b) => b
           ..static = true
           ..type = stringRef
@@ -85,19 +88,20 @@ class FormGenerator {
           ..assignment = Code('"${field.fieldName}"'),
       );
 
-  List<Field> get staticFieldNameList =>
-      element.fields.map(staticFieldName).toList();
+  List<Field> get staticFieldNameList {
+    return parameters.map(staticFieldName).toList();
+  }
 
-  Field field(FieldElement field) => Field(
+  Field field(ParameterElement field) => Field(
         (b) => b
           ..type = stringRef
           ..name = field.fieldName
           ..assignment = Code('"${field.fieldName}"'),
       );
 
-  List<Field> get fieldNameList => element.fields.map(field).toList();
+  List<Field> get fieldNameList => parameters.map(field).toList();
 
-  Method fieldControlNameMethod(FieldElement field) => Method(
+  Method fieldControlNameMethod(ParameterElement field) => Method(
         (b) => b
           ..returns = stringRef
           ..name = field.fieldControlPath
@@ -126,7 +130,7 @@ class FormGenerator {
       )
       .toList();
 
-  Method fieldValueMethod(FieldElement field) {
+  Method fieldValueMethod(ParameterElement field) {
     String fieldValue = '${field.fieldControlName}.value';
 
     if (field.isFormGroup) {
@@ -183,7 +187,7 @@ class FormGenerator {
         ...formGroupArrays,
       ].map(fieldValueMethod).toList();
 
-  Method fieldContainsMethod(FieldElement field) => Method(
+  Method fieldContainsMethod(ParameterElement field) => Method(
         (b) => b
           ..name = 'contains${field.name.pascalCase}'
           ..lambda = true
@@ -201,7 +205,7 @@ class FormGenerator {
         ...formGroupArrays,
       ].map(fieldContainsMethod).toList();
 
-  Method errors(FieldElement field) => Method(
+  Method errors(ParameterElement field) => Method(
         (b) => b
           ..name = '${field.name}Errors'
           ..lambda = true
@@ -219,7 +223,7 @@ class FormGenerator {
         ...formGroupArrays,
       ].map(errors).toList();
 
-  Method focus(FieldElement field) => Method(
+  Method focus(ParameterElement field) => Method(
         (b) => b
           ..name = '${field.name}Focus'
           ..lambda = true
@@ -237,7 +241,7 @@ class FormGenerator {
         ...formGroupArrays,
       ].map(focus).toList();
 
-  Method control(FieldElement field) {
+  Method control(ParameterElement field) {
     String displayType = field.type.getDisplayString(withNullability: true);
 
     // we need to trim last NullabilitySuffix.question cause FormControl modifies
@@ -260,7 +264,7 @@ class FormGenerator {
     );
   }
 
-  Method formGroup(FieldElement field) {
+  Method formGroup(ParameterElement field) {
     // String displayType = field.type.getDisplayString(withNullability: true);
     //
     // // we need to trim last NullabilitySuffix.question cause FormControl modifies
@@ -283,7 +287,7 @@ class FormGenerator {
     );
   }
 
-  Method array(FieldElement field) {
+  Method array(ParameterElement field) {
     final type = (field.type as ParameterizedType).typeArguments.first;
 
     String displayType = type.getDisplayString(withNullability: true);
@@ -312,7 +316,7 @@ class FormGenerator {
     );
   }
 
-  Method addArrayControl(FieldElement field) {
+  Method addArrayControl(ParameterElement field) {
     // until https://github.com/joanpablo/reactive_forms/issues/204 is somehow resolved
     final type = field.typeParameter.getDisplayString(withNullability: false);
 
@@ -424,11 +428,15 @@ class FormGenerator {
 
   Method get modelMethod => Method(
         (b) {
-          final fields = element.fields
-              .map(
-                (field) => '${field.fieldName}:${field.fieldValueName}',
-              )
-              .toList();
+          final parameterValues = parameters.map((e) {
+            if (e.isPositional ||
+                e.isRequiredPositional ||
+                (e.isOptional && e.isPositional)) {
+              return e.fieldValueName;
+            }
+
+            return '${e.fieldName}:${e.fieldValueName}';
+          });
 
           b
             ..name = 'model'
@@ -436,7 +444,7 @@ class FormGenerator {
             ..type = MethodType.getter
             ..lambda = true
             ..body = Code('''
-              ${element.name}(${fields.join(', ')})
+              ${element.name}(${parameterValues.join(', ')})
             ''');
         },
       );
@@ -503,11 +511,8 @@ class FormGenerator {
             ..name = className
             ..fields.addAll(
               [
-                // ...fieldNameList,
                 ...staticFieldNameList,
-                // ...fieldControlFieldList,
                 ...nestedFormGroupFields,
-                // ..type = Reference(element.name),
                 Field(
                   (b) {
                     String displayType =
@@ -596,7 +601,7 @@ class FormGenerator {
                       ..returns = Reference('FormGroup')
                       ..body = Code(
                         FormGroupGenerator(
-                          e.FieldElementImpl('FakeFieldElement', 20)
+                          e.ParameterElementImpl('FakeParameterElement', 20)
                             ..type = t.InterfaceTypeImpl(
                               element: element,
                               typeArguments: [],

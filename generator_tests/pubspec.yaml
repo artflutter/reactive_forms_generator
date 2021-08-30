@@ -30,9 +30,12 @@ dependencies:
   dart_style: ^2.0.2
   recase: ^4.0.0
   reactive_forms_annotations: 1.0.0+1
+  freezed_annotation: ^0.14.3
 
 dev_dependencies:
+  json_serializable:
   build_test: ^2.1.2
+  freezed: ^0.14.5
   flutter_test:
     sdk: flutter
   logging: ^1.0.1
@@ -43,6 +46,9 @@ dependency_overrides:
     path: ../packages/reactive_forms_annotations
   reactive_forms_generator:
     path: ../packages/reactive_forms_generator
+  meta: 1.7.0
+  analyzer: ^2.0.0
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

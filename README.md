@@ -16,26 +16,30 @@ which will save you tons of time and make your forms type safe.
   - [Ignore lint warnings on generated files](#ignore-lint-warnings-on-generated-files)
   - [Run the generator](#run-the-generator)
 - [Features](#features)
-  - [Syntax](#syntax)
-    - [Basics](#basics)
-      - [Model](#basics-model)
-      - [Annotation](#basics-annotation)
-      - [Validation](#basics-validation)
-      - [Form](#basics-form)
-    - [Dynamic forms with FormArray](#dynamic-forms-with-formarray)
-      - [Model](#array-model)
-      - [Annotation](#array-annotation)
-      - [Validation](#array-validation)
-      - [Form](#array-form)
-    - [Nested forms with FormGroups](#nested-forms-with-formgroups)
-      - [Model](#group-model)
-      - [Annotation](#group-annotation)
-      - [Validation](#group-validation)
-      - [Form](#group-form)
-    - [Nested forms with array of FormGroups](#nested-forms-with-array-of-formgroups)
-      - [Model](#array-group-model)
-      - [Annotation](#array-group-annotation)
-      - [Form](#array-group-form)
+  - [Basics](#basics)
+    - [Model](#basics-model)
+    - [Annotation](#basics-annotation)
+    - [Validation](#basics-validation)
+    - [Form](#basics-form)
+  - [Dynamic forms with FormArray](#dynamic-forms-with-formarray)
+    - [Model](#array-model)
+    - [Annotation](#array-annotation)
+    - [Validation](#array-validation)
+    - [Form](#array-form)
+  - [Nested forms with FormGroups](#nested-forms-with-formgroups)
+    - [Model](#group-model)
+    - [Annotation](#group-annotation)
+    - [Validation](#group-validation)
+    - [Form](#group-form)
+  - [Nested forms with array of FormGroups](#nested-forms-with-array-of-formgroups)
+    - [Model](#array-group-model)
+    - [Annotation](#array-group-annotation)
+    - [Form](#array-group-form)
+  - [Freezed](#frezzed)
+    - [Model](#frezzed-model)
+    - [Annotation](#frezzed-annotation)
+    - [Validation](#frezzed-validation)
+    - [Form](#frezzed-form)
 
 # Motivation
 
@@ -173,8 +177,6 @@ To run the code generator you have two possibilities:
 
 # Features
 
-## Syntax
-
 ### Basics
 
 Let's start from simple login form.
@@ -203,13 +205,17 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 @ReactiveFormAnnotation()
 class Tiny {
-  @FormControlAnnotation()
   final String email;
 
-  @FormControlAnnotation()
   final String password;
 
-  Tiny({this.email = '', this.password = ''});
+  Tiny({
+    @FormControlAnnotation()
+    this.email = '',
+    
+    @FormControlAnnotation()
+    this.password = '',
+  });
 }
 ```
 
@@ -224,23 +230,22 @@ The login form should not proceed if there is any empty values. We need to modif
 import 'package:example/helpers.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
-Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
-  return Validators.required(control);
-}
-
 @ReactiveFormAnnotation()
 class Tiny {
-  @FormControlAnnotation(
-    validators: const [requiredValidator],
-  )
   final String email;
 
-  @FormControlAnnotation(
-    validators: const [requiredValidator],
-  )
   final String password;
 
-  Tiny({this.email = '', this.password = ''});
+  Tiny({
+    @FormControlAnnotation(
+      validators: const [requiredValidator],
+    )
+    this.email = '',
+    @FormControlAnnotation(
+      validators: const [requiredValidator],
+    )
+    this.password = '',
+  });
 }
 ```
 
@@ -331,19 +336,19 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 @ReactiveFormAnnotation()
 class MailingList {
-  @FormArrayAnnotation(
-    validators: const [
-      emailDuplicates,
-    ],
-    // you can also add validators for each item of the array
-    // it will be added to each FormControl
-    // itemValidators: [
-    //   emailValidator,
-    // ],
-  )
   final List<String?> emailList;
 
   MailingList({
+    @FormArrayAnnotation(
+      validators: const [
+        mailingListValidator,
+      ],
+      // you can also add validators for each item of the array
+      // it will be added to each FormControl
+      // itemValidators: [
+      //   emailValidator,
+      // ],
+    )
     this.emailList = const [],
   });
 }
@@ -558,14 +563,8 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 @ReactiveFormAnnotation()
 class UserProfile {
-  @FormControlAnnotation(
-    validators: const [requiredValidator],
-  )
   final String firstName;
 
-  @FormControlAnnotation(
-    validators: const [requiredValidator],
-  )
   final String lastName;
 
   final Address? home;
@@ -573,7 +572,13 @@ class UserProfile {
   final Address? office;
 
   UserProfile({
+    @FormControlAnnotation(
+      validators: const [requiredValidator],
+    )
     this.firstName = '',
+    @FormControlAnnotation(
+      validators: const [requiredValidator],
+    )
     this.lastName = '',
     this.home,
     this.office,
@@ -582,20 +587,20 @@ class UserProfile {
 
 @FormGroupAnnotation()
 class Address {
-  @FormControlAnnotation()
   final String? street;
 
-  @FormControlAnnotation(
-    validators: const [requiredValidator],
-  )
   final String? city;
 
-  @FormControlAnnotation()
   final String? zip;
 
   Address({
+    @FormControlAnnotation()
     this.street,
+    @FormControlAnnotation(
+      validators: const [requiredValidator],
+    )
     this.city,
+    @FormControlAnnotation()
     this.zip,
   });
 }
@@ -789,16 +794,25 @@ class Address {
 The next step is to add annotations to help generator do his job.
 
 ```dart
+@ReactiveFormAnnotation()
+class DeliveryList {
+  final List<DeliveryPoint> deliveryList;
+
+  DeliveryList({
+    @FormArrayAnnotation() this.deliveryList = const [],
+  });
+}
+
 @FormGroupAnnotation()
 class DeliveryPoint {
-  @FormControlAnnotation(
-    validators: const [requiredValidator],
-  )
   final String name;
 
   final Address? address;
 
   DeliveryPoint({
+    @FormControlAnnotation(
+      validators: const [requiredValidator],
+    )
     this.name = '',
     this.address,
   });
@@ -806,16 +820,16 @@ class DeliveryPoint {
 
 @FormGroupAnnotation()
 class Address {
-  @FormControlAnnotation(
-    validators: const [requiredValidator],
-  )
   final String? street;
 
-  @FormControlAnnotation()
   final String? city;
 
   Address({
+    @FormControlAnnotation(
+      validators: const [requiredValidator],
+    )
     this.street,
+    @FormControlAnnotation()
     this.city,
   });
 }
@@ -934,6 +948,107 @@ final form = DeliveryListFormBuilder(
             ),
           ],
         )
+      ],
+    );
+  },
+);
+```
+
+### Freezed
+
+You can annotate models produced by Freezed with additional annotations to generate the form
+Read more about freezed [here](https://pub.dev/packages/freezed)
+
+First we need to define our form model
+
+#### Model <a name="freezed-model" />
+
+```dart
+@freezed
+class FreezedClass with _$FreezedClass {
+  const factory FreezedClass({
+    String? id,
+    String? name,
+    double? year,
+  }) = _FreezedClass;
+
+  factory FreezedClass.fromJson(Map<String, dynamic> json) =>
+          _$FreezedClassFromJson(json);
+}
+```
+
+#### Annotation <a name="freezed-annotation" />
+
+The next step is to add annotations to help generator do his job.
+
+```dart
+import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'freezed_class.g.dart';
+part 'freezed_class.freezed.dart';
+
+@freezed
+@ReactiveFormAnnotation()
+class FreezedClass with _$FreezedClass {
+  const factory FreezedClass({
+    @FormControlAnnotation() String? id,
+    @FormControlAnnotation() String? name,
+    @FormControlAnnotation() double? year,
+  }) = _FreezedClass;
+
+  factory FreezedClass.fromJson(Map<String, dynamic> json) =>
+          _$FreezedClassFromJson(json);
+}
+```
+
+#### Validation <a name="freezed-validation" />
+
+You can add validations the same way as in [basics](#basics-validation) example 
+
+#### Form <a name="freezed-form" />
+
+Let's build our form based on generated code
+
+```dart
+final form = TinyFormBuilder(
+  // setup form model with initial data
+  model: Tiny(),
+  // form builder
+  builder: (context, formModel, child) {
+    return Column(
+      children: [
+        ReactiveTextField<String>(
+          formControl: formModel.emailControl,
+          validationMessages: (control) => {
+            ValidationMessage.required: 'The email must not be empty',
+          },
+          decoration: const InputDecoration(labelText: 'Email'),
+        ),
+        const SizedBox(height: 8.0),
+        ReactiveTextField<String>(
+          formControl: formModel.passwordControl,
+          obscureText: true,
+          validationMessages: (control) => {
+            ValidationMessage.required: 'The password must not be empty',
+          },
+          textInputAction: TextInputAction.done,
+          decoration: const InputDecoration(labelText: 'Password'),
+        ),
+        const SizedBox(height: 8.0),
+        ReactiveTinyFormConsumer(
+          builder: (context, form, child) {
+            return ElevatedButton(
+              child: Text('Submit'),
+              onPressed: form.form.valid
+                      ? () {
+                print(form.model.email);
+                print(form.model.password);
+              }
+                      : null,
+            );
+          },
+        ),
       ],
     );
   },
