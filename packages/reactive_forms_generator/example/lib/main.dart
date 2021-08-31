@@ -1,5 +1,6 @@
 import 'package:example/docs/array_group/delivery_route_form.dart';
 import 'package:example/docs/arrays/mailing_list_form.dart';
+import 'package:example/docs/freezed/freezed_form.dart';
 import 'package:example/docs/group/user_profile_form.dart';
 import 'package:example/routes/array_nullable_form.dart';
 import 'package:example/routes/group_nullable_group.dart';
@@ -28,6 +29,8 @@ class Routes {
   static const loginNullable = '/login-nullable';
 
   static const arrayNullable = '/array-nullable';
+
+  static const freezed = '/freezed';
 }
 
 class MyApp extends StatelessWidget {
@@ -48,8 +51,10 @@ class MyApp extends StatelessWidget {
         Routes.arrayNullable: (_) => ArrayNullableFormWidget(),
         Routes.group: (_) => GroupNullableFormWidget(),
         Routes.deliveryList: (_) => DeliveryListFormWidget(),
+        Routes.freezed: (_) => DeliveryListFormWidget(),
+        Routes.freezed: (_) => FreezedFormWidget(),
       },
-      home: MailingListFormWidget(),
+      home: FreezedFormWidget(),
     );
   }
 }

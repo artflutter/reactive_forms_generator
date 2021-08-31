@@ -21,16 +21,16 @@
 //   final Widget? child;
 //
 //   final Widget Function(
-//       BuildContext context, ArrayNullableForm formGroup, Widget? child) builder;
+//       BuildContext context, ArrayNullableForm formModel, Widget? child) builder;
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     final form = ReactiveArrayNullableForm.of(context);
+//     final formModel = ReactiveArrayNullableForm.of(context);
 //
-//     if (form is! ArrayNullableForm) {
+//     if (formModel is! ArrayNullableForm) {
 //       throw FormControlParentNotFoundException(this);
 //     }
-//     return builder(context, form, child);
+//     return builder(context, formModel, child);
 //   }
 // }
 //
@@ -153,37 +153,38 @@
 //
 //   final String? path;
 //
-//   String someListControlPath() => pathBuilder(someListControlName);
 //   String emailListControlPath() => pathBuilder(emailListControlName);
 //   String fruitListControlPath() => pathBuilder(fruitListControlName);
 //   String vegetablesListControlPath() => pathBuilder(vegetablesListControlName);
-//   List<String?>? get someListValue => someListControl.value;
+//   String someListControlPath() => pathBuilder(someListControlName);
 //   List<String> get emailListValue =>
 //       emailListControl.value?.whereType<String>().toList() ?? [];
 //   List<bool?> get fruitListValue =>
 //       fruitListControl.value?.whereType<bool?>().toList() ?? [];
 //   List<String?>? get vegetablesListValue =>
 //       vegetablesListControl.value?.whereType<String?>().toList() ?? [];
-//   bool get containsSomeList => form.contains(someListControlPath());
+//   List<String?>? get someListValue =>
+//       someListControl.value?.whereType<String?>().toList() ?? [];
 //   bool get containsEmailList => form.contains(emailListControlPath());
 //   bool get containsFruitList => form.contains(fruitListControlPath());
 //   bool get containsVegetablesList => form.contains(vegetablesListControlPath());
-//   Object? get someListErrors => someListControl.errors;
+//   bool get containsSomeList => form.contains(someListControlPath());
 //   Object? get emailListErrors => emailListControl.errors;
 //   Object? get fruitListErrors => fruitListControl.errors;
 //   Object? get vegetablesListErrors => vegetablesListControl.errors;
-//   void get someListFocus => form.focus(someListControlPath());
+//   Object? get someListErrors => someListControl.errors;
 //   void get emailListFocus => form.focus(emailListControlPath());
 //   void get fruitListFocus => form.focus(fruitListControlPath());
 //   void get vegetablesListFocus => form.focus(vegetablesListControlPath());
-//   FormControl<List<String?>> get someListControl =>
-//       form.control(someListControlPath()) as FormControl<List<String?>>;
+//   void get someListFocus => form.focus(someListControlPath());
 //   FormArray<String> get emailListControl =>
 //       form.control(emailListControlPath()) as FormArray<String>;
 //   FormArray<bool> get fruitListControl =>
 //       form.control(fruitListControlPath()) as FormArray<bool>;
 //   FormArray<String> get vegetablesListControl =>
 //       form.control(vegetablesListControlPath()) as FormArray<String>;
+//   FormArray<String> get someListControl =>
+//       form.control(someListControlPath()) as FormArray<String>;
 //   void addEmailListItem(String value,
 //       {List<AsyncValidatorFunction>? asyncValidators,
 //       List<ValidatorFunction>? validators,
@@ -277,6 +278,37 @@
 //     ));
 //   }
 //
+//   void addSomeListItem(String value,
+//       {List<AsyncValidatorFunction>? asyncValidators,
+//       List<ValidatorFunction>? validators,
+//       int? asyncValidatorsDebounceTime,
+//       bool? disabled,
+//       ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge}) {
+//     List<ValidatorFunction> resultingValidators = [];
+//     List<AsyncValidatorFunction> resultingAsyncValidators = [];
+//
+//     switch (validatorsApplyMode) {
+//       case ValidatorsApplyMode.merge:
+//         if (validators != null) resultingValidators.addAll(validators);
+//         if (asyncValidators != null)
+//           resultingAsyncValidators.addAll(asyncValidators);
+//         break;
+//       case ValidatorsApplyMode.override:
+//         if (validators != null) resultingValidators = validators;
+//
+//         if (asyncValidators != null) resultingAsyncValidators = asyncValidators;
+//         break;
+//     }
+//
+//     someListControl.add(FormControl<String>(
+//       value: value,
+//       validators: resultingValidators,
+//       asyncValidators: resultingAsyncValidators,
+//       asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+//       disabled: disabled ?? false,
+//     ));
+//   }
+//
 //   ArrayNullable get model => ArrayNullable(
 //       emailList: emailListValue,
 //       fruitList: fruitListValue,
@@ -328,13 +360,21 @@
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
 //             disabled: false),
-//         someListControlName: FormControl<List<String?>>(
-//             value: arrayNullable.someList,
+//         someListControlName: FormArray<String>(
+//             arrayNullable.someList
+//                     ?.map((e) => FormControl<String>(
+//                           value: e,
+//                           validators: [],
+//                           asyncValidators: [],
+//                           asyncValidatorsDebounceTime: 250,
+//                           disabled: false,
+//                         ))
+//                     .toList() ??
+//                 [],
 //             validators: [],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
-//             disabled: false,
-//             touched: false)
+//             disabled: false)
 //       },
 //           validators: [],
 //           asyncValidators: [],

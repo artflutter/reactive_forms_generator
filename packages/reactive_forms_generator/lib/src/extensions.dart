@@ -2,6 +2,51 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 
+extension ParameterElementExt on ParameterElement {
+  String get fieldName => this.name;
+
+  String get fieldValueName => '${fieldName}Value';
+
+  String get fieldControlName => '${fieldName}Control';
+
+  String get fieldControlNameName => '${fieldName}ControlName';
+
+  String get fieldControlPath => '${fieldName}ControlPath';
+
+  // needs careful usage and possibly refactoring
+  DartType get typeParameter =>
+      (this.type as ParameterizedType).typeArguments.first;
+
+  bool get isFormGroupArray {
+    if (!isFormArray) {
+      return false;
+    }
+
+    final type = this.type;
+    final typeArguments =
+        type is ParameterizedType ? type.typeArguments : const <DartType>[];
+
+    final typeParameter = typeArguments.first;
+
+    return typeParameter is DartType &&
+        typeParameter.element is ClassElement &&
+        formGroupChecker.hasAnnotationOf(typeParameter.element!);
+  }
+
+  bool get isFormArray => formArrayChecker.hasAnnotationOfExact(this);
+
+  bool get isFormControl => formControlChecker.hasAnnotationOfExact(this);
+
+  bool get isFormGroup {
+    final element = this.type.element;
+    return element != null
+        ? formGroupChecker.hasAnnotationOfExact(element)
+        : false;
+  }
+
+  bool get isForm => formChecker.hasAnnotationOfExact(this);
+}
+
 extension FieldElementExt on FieldElement {
   String get fieldName => this.name;
 

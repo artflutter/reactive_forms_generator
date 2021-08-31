@@ -16,42 +16,41 @@ void main() {
             
             @ReactiveFormAnnotation()
             class DeliveryList {
-              @FormArrayAnnotation()
               final List<DeliveryPoint> deliveryList;
             
               DeliveryList({
-                this.deliveryList = const [],
+                @FormArrayAnnotation() this.deliveryList = const [],
               });
             }
             
             @FormGroupAnnotation()
             class DeliveryPoint {
-              @FormControlAnnotation(
-                validators: const [requiredValidator],
-              )
               final String name;
             
               final Address? address;
             
               DeliveryPoint({
-                this.name = '',
+                @FormControlAnnotation(
+                  validators: const [requiredValidator],
+                )
+                    this.name = '',
                 this.address,
               });
             }
             
             @FormGroupAnnotation()
             class Address {
-              @FormControlAnnotation(
-                validators: const [requiredValidator],
-              )
               final String? street;
             
-              @FormControlAnnotation()
               final String? city;
             
               Address({
-                this.street,
-                this.city,
+                @FormControlAnnotation(
+                  validators: const [requiredValidator],
+                )
+                    this.street,
+                @FormControlAnnotation()
+                    this.city,
               });
             }
           ''',

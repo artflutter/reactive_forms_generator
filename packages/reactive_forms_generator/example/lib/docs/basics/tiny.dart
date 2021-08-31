@@ -3,15 +3,18 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 @ReactiveFormAnnotation()
 class Tiny {
-  @FormControlAnnotation(
-    validators: const [requiredValidator],
-  )
   final String email;
 
-  @FormControlAnnotation(
-    validators: const [requiredValidator],
-  )
   final String password;
 
-  Tiny({this.email = '', this.password = ''});
+  Tiny({
+    @FormControlAnnotation(
+      validators: const [requiredValidator],
+    )
+        this.email = '',
+    @FormControlAnnotation(
+      validators: const [requiredValidator],
+    )
+        this.password = '',
+  });
 }
