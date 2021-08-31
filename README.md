@@ -35,7 +35,7 @@ which will save you tons of time and make your forms type safe.
     - [Model](#array-group-model)
     - [Annotation](#array-group-annotation)
     - [Form](#array-group-form)
-  - [Freezed](#frezzed)
+  - [Freezed](#freezed)
     - [Model](#frezzed-model)
     - [Annotation](#frezzed-annotation)
     - [Validation](#frezzed-validation)
