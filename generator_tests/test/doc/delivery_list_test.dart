@@ -235,6 +235,14 @@ class DeliveryListForm {
   FormArray<Map<String, Object?>> get deliveryListControl =>
       form.control(deliveryListControlPath())
           as FormArray<Map<String, Object?>>;
+  void addDeliveryListItem(DeliveryPoint value) {
+    final formGroup =
+        DeliveryPointForm(value, form, pathBuilder('deliveryList'))
+            .formElements();
+
+    deliveryListControl.add(formGroup);
+  }
+
   DeliveryList get model => DeliveryList(deliveryList: deliveryListValue);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");

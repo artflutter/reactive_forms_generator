@@ -51,10 +51,9 @@ class MyApp extends StatelessWidget {
         Routes.arrayNullable: (_) => ArrayNullableFormWidget(),
         Routes.group: (_) => GroupNullableFormWidget(),
         Routes.deliveryList: (_) => DeliveryListFormWidget(),
-        Routes.freezed: (_) => DeliveryListFormWidget(),
         Routes.freezed: (_) => FreezedFormWidget(),
       },
-      home: FreezedFormWidget(),
+      home: DeliveryListFormWidget(),
     );
   }
 }

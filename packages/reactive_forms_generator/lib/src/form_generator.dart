@@ -316,6 +316,32 @@ class FormGenerator {
     );
   }
 
+  Method addGroupControl(ParameterElement field) {
+    final type = field.typeParameter.getDisplayString(withNullability: false);
+
+    final formGroupGenerator = FormGenerator(
+        field.typeParameter.element as ClassElement, field.typeParameter);
+
+    return Method(
+      (b) => b
+        ..name = 'add${field.fieldName.pascalCase}Item'
+        ..requiredParameters.add(
+          Parameter(
+            (b) => b
+              ..name = 'value'
+              ..type = Reference(type),
+          ),
+        )
+        ..returns = Reference('void')
+        ..body = Code(
+          '''
+              final formGroup = ${formGroupGenerator.className}(value, form, pathBuilder(\'${field.fieldName}\')).formElements();
+
+              ${field.fieldControlName}.add(formGroup);''',
+        ),
+    );
+  }
+
   Method addArrayControl(ParameterElement field) {
     // until https://github.com/joanpablo/reactive_forms/issues/204 is somehow resolved
     final type = field.typeParameter.getDisplayString(withNullability: false);
@@ -425,6 +451,9 @@ class FormGenerator {
 
   List<Method> get addArrayControlMethodList =>
       formArrays.map(addArrayControl).toList();
+
+  List<Method> get addGroupControlMethodList =>
+      formGroupArrays.map(addGroupControl).toList();
 
   Method get modelMethod => Method(
         (b) {
@@ -576,6 +605,7 @@ class FormGenerator {
                 ...fieldArrayMethodList,
                 ...fieldGroupMethodList,
                 ...addArrayControlMethodList,
+                ...addGroupControlMethodList,
                 modelMethod,
                 Method(
                   (b) => b

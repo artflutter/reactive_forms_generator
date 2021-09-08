@@ -1,3 +1,6 @@
+## [0.1.1-beta]
+* generate method to add FormGroup item to array 
+
 ## [0.1.0-beta]
 **BREAKING CHANGE**
 * repositioning of annotations

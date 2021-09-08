@@ -13,67 +13,67 @@
 // import 'dart:core';
 // import 'login.dart';
 //
-// class ReactiveArrayNullableFormConsumer extends StatelessWidget {
-//   ReactiveArrayNullableFormConsumer(
+// class ReactiveDeliveryListFormConsumer extends StatelessWidget {
+//   ReactiveDeliveryListFormConsumer(
 //       {Key? key, required this.builder, this.child})
 //       : super(key: key);
 //
 //   final Widget? child;
 //
 //   final Widget Function(
-//       BuildContext context, ArrayNullableForm formModel, Widget? child) builder;
+//       BuildContext context, DeliveryListForm formModel, Widget? child) builder;
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     final formModel = ReactiveArrayNullableForm.of(context);
+//     final formModel = ReactiveDeliveryListForm.of(context);
 //
-//     if (formModel is! ArrayNullableForm) {
+//     if (formModel is! DeliveryListForm) {
 //       throw FormControlParentNotFoundException(this);
 //     }
 //     return builder(context, formModel, child);
 //   }
 // }
 //
-// class ArrayNullableFormInheritedStreamer extends InheritedStreamer<dynamic> {
-//   ArrayNullableFormInheritedStreamer(
+// class DeliveryListFormInheritedStreamer extends InheritedStreamer<dynamic> {
+//   DeliveryListFormInheritedStreamer(
 //       {Key? key,
 //       required this.form,
 //       required Stream<dynamic> stream,
 //       required Widget child})
 //       : super(stream, child, key: key);
 //
-//   final ArrayNullableForm form;
+//   final DeliveryListForm form;
 // }
 //
-// class ReactiveArrayNullableForm extends StatelessWidget {
-//   ReactiveArrayNullableForm(
+// class ReactiveDeliveryListForm extends StatelessWidget {
+//   ReactiveDeliveryListForm(
 //       {Key? key, required this.form, required this.child, this.onWillPop})
 //       : super(key: key);
 //
 //   final Widget child;
 //
-//   final ArrayNullableForm form;
+//   final DeliveryListForm form;
 //
 //   final WillPopCallback? onWillPop;
 //
-//   static ArrayNullableForm? of(BuildContext context, {bool listen = true}) {
+//   static DeliveryListForm? of(BuildContext context, {bool listen = true}) {
 //     if (listen) {
 //       return context
 //           .dependOnInheritedWidgetOfExactType<
-//               ArrayNullableFormInheritedStreamer>()
+//               DeliveryListFormInheritedStreamer>()
 //           ?.form;
 //     }
 //
 //     final element = context.getElementForInheritedWidgetOfExactType<
-//         ArrayNullableFormInheritedStreamer>();
+//         DeliveryListFormInheritedStreamer>();
 //     return element == null
 //         ? null
-//         : (element.widget as ArrayNullableFormInheritedStreamer).form;
+//         : (element.widget as DeliveryListFormInheritedStreamer).form;
 //   }
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     return ArrayNullableFormInheritedStreamer(
+//     return DeliveryListFormInheritedStreamer(
 //       form: form,
 //       stream: form.form.statusChanged,
 //       child: WillPopScope(
@@ -84,8 +84,8 @@
 //   }
 // }
 //
-// class ArrayNullableFormBuilder extends StatefulWidget {
-//   ArrayNullableFormBuilder(
+// class DeliveryListFormBuilder extends StatefulWidget {
+//   DeliveryListFormBuilder(
 //       {Key? key,
 //       required this.model,
 //       this.child,
@@ -93,29 +93,29 @@
 //       required this.builder})
 //       : super(key: key);
 //
-//   final ArrayNullable model;
+//   final DeliveryList model;
 //
 //   final Widget? child;
 //
 //   final WillPopCallback? onWillPop;
 //
 //   final Widget Function(
-//       BuildContext context, ArrayNullableForm formModel, Widget? child) builder;
+//       BuildContext context, DeliveryListForm formModel, Widget? child) builder;
 //
 //   @override
-//   _ArrayNullableFormBuilderState createState() =>
-//       _ArrayNullableFormBuilderState();
+//   _DeliveryListFormBuilderState createState() =>
+//       _DeliveryListFormBuilderState();
 // }
 //
-// class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
+// class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
 //   late FormGroup _form;
 //
-//   late ArrayNullableForm _formModel;
+//   late DeliveryListForm _formModel;
 //
 //   @override
 //   void initState() {
 //     _form = FormGroup({});
-//     _formModel = ArrayNullableForm(widget.model, _form, null);
+//     _formModel = DeliveryListForm(widget.model, _form, null);
 //
 //     _form.addAll(_formModel.formElements().controls);
 //
@@ -124,7 +124,7 @@
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     return ReactiveArrayNullableForm(
+//     return ReactiveDeliveryListForm(
 //       form: _formModel,
 //       onWillPop: widget.onWillPop,
 //       child: ReactiveForm(
@@ -136,245 +136,164 @@
 //   }
 // }
 //
-// class ArrayNullableForm {
-//   ArrayNullableForm(this.arrayNullable, this.form, this.path) {}
+// class DeliveryListForm {
+//   DeliveryListForm(this.deliveryList, this.form, this.path) {
+//     deliveryListDeliveryPointForm = deliveryList.deliveryList
+//         .asMap()
+//         .map((k, v) => MapEntry(
+//             k, DeliveryPointForm(v, form, pathBuilder("deliveryList.$k"))))
+//         .values
+//         .toList();
+//   }
 //
-//   static String emailListControlName = "emailList";
+//   static String deliveryListControlName = "deliveryList";
 //
-//   static String fruitListControlName = "fruitList";
-//
-//   static String vegetablesListControlName = "vegetablesList";
-//
-//   static String someListControlName = "someList";
-//
-//   final ArrayNullable arrayNullable;
+//   final DeliveryList deliveryList;
 //
 //   final FormGroup form;
 //
 //   final String? path;
 //
-//   String emailListControlPath() => pathBuilder(emailListControlName);
-//   String fruitListControlPath() => pathBuilder(fruitListControlName);
-//   String vegetablesListControlPath() => pathBuilder(vegetablesListControlName);
-//   String someListControlPath() => pathBuilder(someListControlName);
-//   List<String> get emailListValue =>
-//       emailListControl.value?.whereType<String>().toList() ?? [];
-//   List<bool?> get fruitListValue =>
-//       fruitListControl.value?.whereType<bool?>().toList() ?? [];
-//   List<String?>? get vegetablesListValue =>
-//       vegetablesListControl.value?.whereType<String?>().toList() ?? [];
-//   List<String?>? get someListValue =>
-//       someListControl.value?.whereType<String?>().toList() ?? [];
-//   bool get containsEmailList => form.contains(emailListControlPath());
-//   bool get containsFruitList => form.contains(fruitListControlPath());
-//   bool get containsVegetablesList => form.contains(vegetablesListControlPath());
-//   bool get containsSomeList => form.contains(someListControlPath());
-//   Object? get emailListErrors => emailListControl.errors;
-//   Object? get fruitListErrors => fruitListControl.errors;
-//   Object? get vegetablesListErrors => vegetablesListControl.errors;
-//   Object? get someListErrors => someListControl.errors;
-//   void get emailListFocus => form.focus(emailListControlPath());
-//   void get fruitListFocus => form.focus(fruitListControlPath());
-//   void get vegetablesListFocus => form.focus(vegetablesListControlPath());
-//   void get someListFocus => form.focus(someListControlPath());
-//   FormArray<String> get emailListControl =>
-//       form.control(emailListControlPath()) as FormArray<String>;
-//   FormArray<bool> get fruitListControl =>
-//       form.control(fruitListControlPath()) as FormArray<bool>;
-//   FormArray<String> get vegetablesListControl =>
-//       form.control(vegetablesListControlPath()) as FormArray<String>;
-//   FormArray<String> get someListControl =>
-//       form.control(someListControlPath()) as FormArray<String>;
-//   void addEmailListItem(String value,
-//       {List<AsyncValidatorFunction>? asyncValidators,
-//       List<ValidatorFunction>? validators,
-//       int? asyncValidatorsDebounceTime,
-//       bool? disabled,
-//       ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge}) {
-//     List<ValidatorFunction> resultingValidators = [];
-//     List<AsyncValidatorFunction> resultingAsyncValidators = [];
+//   late List<DeliveryPointForm> deliveryListDeliveryPointForm;
 //
-//     switch (validatorsApplyMode) {
-//       case ValidatorsApplyMode.merge:
-//         if (validators != null) resultingValidators.addAll(validators);
-//         if (asyncValidators != null)
-//           resultingAsyncValidators.addAll(asyncValidators);
-//         break;
-//       case ValidatorsApplyMode.override:
-//         if (validators != null) resultingValidators = validators;
+//   String deliveryListControlPath() => pathBuilder(deliveryListControlName);
+//   List<DeliveryPoint> get deliveryListValue => (deliveryListControl.value ?? [])
+//       .asMap()
+//       .map((k, v) => MapEntry(
+//           k,
+//           DeliveryPointForm(
+//                   DeliveryPoint(), form, pathBuilder("deliveryList.$k"))
+//               .model))
+//       .values
+//       .toList();
+//   bool get containsDeliveryList => form.contains(deliveryListControlPath());
+//   Object? get deliveryListErrors => deliveryListControl.errors;
+//   void get deliveryListFocus => form.focus(deliveryListControlPath());
+//   FormArray<Map<String, Object?>> get deliveryListControl =>
+//       form.control(deliveryListControlPath())
+//           as FormArray<Map<String, Object?>>;
+//   void addDeliveryListItem(DeliveryPoint value) {
+//     final formGroup =
+//         DeliveryPointForm(value, form, pathBuilder('deliveryList'))
+//             .formElements();
 //
-//         if (asyncValidators != null) resultingAsyncValidators = asyncValidators;
-//         break;
-//     }
-//
-//     emailListControl.add(FormControl<String>(
-//       value: value,
-//       validators: resultingValidators,
-//       asyncValidators: resultingAsyncValidators,
-//       asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
-//       disabled: disabled ?? false,
-//     ));
+//     deliveryListControl.add(formGroup);
 //   }
 //
-//   void addFruitListItem(bool value,
-//       {List<AsyncValidatorFunction>? asyncValidators,
-//       List<ValidatorFunction>? validators,
-//       int? asyncValidatorsDebounceTime,
-//       bool? disabled,
-//       ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge}) {
-//     List<ValidatorFunction> resultingValidators = [];
-//     List<AsyncValidatorFunction> resultingAsyncValidators = [];
-//
-//     switch (validatorsApplyMode) {
-//       case ValidatorsApplyMode.merge:
-//         if (validators != null) resultingValidators.addAll(validators);
-//         if (asyncValidators != null)
-//           resultingAsyncValidators.addAll(asyncValidators);
-//         break;
-//       case ValidatorsApplyMode.override:
-//         if (validators != null) resultingValidators = validators;
-//
-//         if (asyncValidators != null) resultingAsyncValidators = asyncValidators;
-//         break;
-//     }
-//
-//     fruitListControl.add(FormControl<bool>(
-//       value: value,
-//       validators: resultingValidators,
-//       asyncValidators: resultingAsyncValidators,
-//       asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
-//       disabled: disabled ?? false,
-//     ));
-//   }
-//
-//   void addVegetablesListItem(String value,
-//       {List<AsyncValidatorFunction>? asyncValidators,
-//       List<ValidatorFunction>? validators,
-//       int? asyncValidatorsDebounceTime,
-//       bool? disabled,
-//       ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge}) {
-//     List<ValidatorFunction> resultingValidators = [];
-//     List<AsyncValidatorFunction> resultingAsyncValidators = [];
-//
-//     switch (validatorsApplyMode) {
-//       case ValidatorsApplyMode.merge:
-//         if (validators != null) resultingValidators.addAll(validators);
-//         if (asyncValidators != null)
-//           resultingAsyncValidators.addAll(asyncValidators);
-//         break;
-//       case ValidatorsApplyMode.override:
-//         if (validators != null) resultingValidators = validators;
-//
-//         if (asyncValidators != null) resultingAsyncValidators = asyncValidators;
-//         break;
-//     }
-//
-//     vegetablesListControl.add(FormControl<String>(
-//       value: value,
-//       validators: resultingValidators,
-//       asyncValidators: resultingAsyncValidators,
-//       asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
-//       disabled: disabled ?? false,
-//     ));
-//   }
-//
-//   void addSomeListItem(String value,
-//       {List<AsyncValidatorFunction>? asyncValidators,
-//       List<ValidatorFunction>? validators,
-//       int? asyncValidatorsDebounceTime,
-//       bool? disabled,
-//       ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge}) {
-//     List<ValidatorFunction> resultingValidators = [];
-//     List<AsyncValidatorFunction> resultingAsyncValidators = [];
-//
-//     switch (validatorsApplyMode) {
-//       case ValidatorsApplyMode.merge:
-//         if (validators != null) resultingValidators.addAll(validators);
-//         if (asyncValidators != null)
-//           resultingAsyncValidators.addAll(asyncValidators);
-//         break;
-//       case ValidatorsApplyMode.override:
-//         if (validators != null) resultingValidators = validators;
-//
-//         if (asyncValidators != null) resultingAsyncValidators = asyncValidators;
-//         break;
-//     }
-//
-//     someListControl.add(FormControl<String>(
-//       value: value,
-//       validators: resultingValidators,
-//       asyncValidators: resultingAsyncValidators,
-//       asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
-//       disabled: disabled ?? false,
-//     ));
-//   }
-//
-//   ArrayNullable get model => ArrayNullable(
-//       emailList: emailListValue,
-//       fruitList: fruitListValue,
-//       vegetablesList: vegetablesListValue,
-//       someList: someListValue);
+//   DeliveryList get model => DeliveryList(deliveryList: deliveryListValue);
 //   String pathBuilder(String? pathItem) =>
 //       [path, pathItem].whereType<String>().join(".");
 //   FormGroup formElements() => FormGroup({
-//         emailListControlName: FormArray<String>(
-//             arrayNullable.emailList
-//                 .map((e) => FormControl<String>(
-//                       value: e,
-//                       validators: [],
-//                       asyncValidators: [],
-//                       asyncValidatorsDebounceTime: 250,
-//                       disabled: false,
-//                     ))
-//                 .toList(),
-//             validators: [],
-//             asyncValidators: [],
-//             asyncValidatorsDebounceTime: 250,
-//             disabled: false),
-//         fruitListControlName: FormArray<bool>(
-//             arrayNullable.fruitList
-//                 .map((e) => FormControl<bool>(
-//                       value: e,
-//                       validators: [],
-//                       asyncValidators: [],
-//                       asyncValidatorsDebounceTime: 250,
-//                       disabled: false,
-//                     ))
-//                 .toList(),
-//             validators: [],
-//             asyncValidators: [],
-//             asyncValidatorsDebounceTime: 250,
-//             disabled: false),
-//         vegetablesListControlName: FormArray<String>(
-//             arrayNullable.vegetablesList
-//                     ?.map((e) => FormControl<String>(
-//                           value: e,
-//                           validators: [],
-//                           asyncValidators: [],
-//                           asyncValidatorsDebounceTime: 250,
-//                           disabled: false,
-//                         ))
-//                     .toList() ??
-//                 [],
-//             validators: [],
-//             asyncValidators: [],
-//             asyncValidatorsDebounceTime: 250,
-//             disabled: false),
-//         someListControlName: FormArray<String>(
-//             arrayNullable.someList
-//                     ?.map((e) => FormControl<String>(
-//                           value: e,
-//                           validators: [],
-//                           asyncValidators: [],
-//                           asyncValidatorsDebounceTime: 250,
-//                           disabled: false,
-//                         ))
-//                     .toList() ??
-//                 [],
+//         deliveryListControlName: FormArray(
+//             deliveryListDeliveryPointForm.map((e) => e.formElements()).toList(),
 //             validators: [],
 //             asyncValidators: [],
 //             asyncValidatorsDebounceTime: 250,
 //             disabled: false)
+//       },
+//           validators: [],
+//           asyncValidators: [],
+//           asyncValidatorsDebounceTime: 250,
+//           disabled: false);
+// }
+//
+// class DeliveryPointForm {
+//   DeliveryPointForm(this.deliveryPoint, this.form, this.path) {
+//     addressForm =
+//         AddressForm(deliveryPoint.address, form, pathBuilder('address'));
+//   }
+//
+//   static String nameControlName = "name";
+//
+//   static String addressControlName = "address";
+//
+//   late AddressForm addressForm;
+//
+//   final DeliveryPoint deliveryPoint;
+//
+//   final FormGroup form;
+//
+//   final String? path;
+//
+//   String nameControlPath() => pathBuilder(nameControlName);
+//   String addressControlPath() => pathBuilder(addressControlName);
+//   String get nameValue => nameControl.value as String;
+//   Address? get addressValue => addressForm.model;
+//   bool get containsName => form.contains(nameControlPath());
+//   bool get containsAddress => form.contains(addressControlPath());
+//   Object? get nameErrors => nameControl.errors;
+//   Object? get addressErrors => addressControl.errors;
+//   void get nameFocus => form.focus(nameControlPath());
+//   void get addressFocus => form.focus(addressControlPath());
+//   FormControl<String> get nameControl =>
+//       form.control(nameControlPath()) as FormControl<String>;
+//   FormGroup get addressControl =>
+//       form.control(addressControlPath()) as FormGroup;
+//   DeliveryPoint get model =>
+//       DeliveryPoint(name: nameValue, address: addressValue);
+//   String pathBuilder(String? pathItem) =>
+//       [path, pathItem].whereType<String>().join(".");
+//   FormGroup formElements() => FormGroup({
+//         nameControlName: FormControl<String>(
+//             value: deliveryPoint.name,
+//             validators: [],
+//             asyncValidators: [],
+//             asyncValidatorsDebounceTime: 250,
+//             disabled: false,
+//             touched: false),
+//         addressControlName: addressForm.formElements()
+//       },
+//           validators: [],
+//           asyncValidators: [],
+//           asyncValidatorsDebounceTime: 250,
+//           disabled: false);
+// }
+//
+// class AddressForm {
+//   AddressForm(this.address, this.form, this.path) {}
+//
+//   static String streetControlName = "street";
+//
+//   static String cityControlName = "city";
+//
+//   final Address? address;
+//
+//   final FormGroup form;
+//
+//   final String? path;
+//
+//   String streetControlPath() => pathBuilder(streetControlName);
+//   String cityControlPath() => pathBuilder(cityControlName);
+//   String? get streetValue => streetControl.value;
+//   String? get cityValue => cityControl.value;
+//   bool get containsStreet => form.contains(streetControlPath());
+//   bool get containsCity => form.contains(cityControlPath());
+//   Object? get streetErrors => streetControl.errors;
+//   Object? get cityErrors => cityControl.errors;
+//   void get streetFocus => form.focus(streetControlPath());
+//   void get cityFocus => form.focus(cityControlPath());
+//   FormControl<String> get streetControl =>
+//       form.control(streetControlPath()) as FormControl<String>;
+//   FormControl<String> get cityControl =>
+//       form.control(cityControlPath()) as FormControl<String>;
+//   Address get model => Address(street: streetValue, city: cityValue);
+//   String pathBuilder(String? pathItem) =>
+//       [path, pathItem].whereType<String>().join(".");
+//   FormGroup formElements() => FormGroup({
+//         streetControlName: FormControl<String>(
+//             value: address?.street,
+//             validators: [],
+//             asyncValidators: [],
+//             asyncValidatorsDebounceTime: 250,
+//             disabled: false,
+//             touched: false),
+//         cityControlName: FormControl<String>(
+//             value: address?.city,
+//             validators: [],
+//             asyncValidators: [],
+//             asyncValidatorsDebounceTime: 250,
+//             disabled: false,
+//             touched: false)
 //       },
 //           validators: [],
 //           asyncValidators: [],
