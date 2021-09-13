@@ -1,3 +1,6 @@
+## [0.2.0-beta]
+* analyzer 2.2.0 support
+
 ## [0.1.1-beta]
 * generate method to add FormGroup item to array 
 

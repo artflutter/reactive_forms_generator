@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/src/dart/element/element.dart' as e;
+import 'package:analyzer/src/generated/utilities_dart.dart' as u;
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/src/dart/element/type.dart' as t;
 
@@ -631,8 +632,11 @@ class FormGenerator {
                       ..returns = Reference('FormGroup')
                       ..body = Code(
                         FormGroupGenerator(
-                          e.ParameterElementImpl('FakeParameterElement', 20)
-                            ..type = t.InterfaceTypeImpl(
+                          e.ParameterElementImpl(
+                            name: 'FakeParameterElement',
+                            nameOffset: 20,
+                            parameterKind: u.ParameterKind.REQUIRED,
+                          )..type = t.InterfaceTypeImpl(
                               element: element,
                               typeArguments: [],
                               nullabilitySuffix: NullabilitySuffix.none,
