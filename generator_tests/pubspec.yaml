@@ -23,7 +23,7 @@ environment:
 
 dependencies:
   build: ^2.0.3
-  source_gen: 1.0.3
+  source_gen: 1.1.0
   path: ^1.8.0
   build_runner: ^2.0.6
   code_builder: ^4.1.0
@@ -47,7 +47,7 @@ dependency_overrides:
   reactive_forms_generator:
     path: ../packages/reactive_forms_generator
   meta: 1.7.0
-  analyzer: ^2.0.0
+#  analyzer: ^2.0.0
 
 
 # For information on the generic Dart part of this file, see the

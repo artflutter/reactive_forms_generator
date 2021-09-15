@@ -17,6 +17,8 @@ class Login {
 
   final double height;
 
+  final String? unAnnotated;
+
   Login({
     @FormControlAnnotation(
       validators: const [
@@ -60,5 +62,6 @@ class Login {
       ],
     )
         required this.height,
+    this.unAnnotated,
   });
 }

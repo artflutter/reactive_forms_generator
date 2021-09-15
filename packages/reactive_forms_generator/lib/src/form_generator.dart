@@ -78,8 +78,10 @@ class FormGenerator {
 
   String get className => '${element.name}Form';
 
-  List<ParameterElement> get parameters =>
-      element.constructors.first.parameters;
+  List<ParameterElement> get parameters => element.constructors
+      .where((e) => e.hasReactiveFormAnnotatedParameters)
+      .first
+      .parameters;
 
   Field staticFieldName(ParameterElement field) => Field(
         (b) => b
@@ -459,6 +461,10 @@ class FormGenerator {
   Method get modelMethod => Method(
         (b) {
           final parameterValues = parameters.map((e) {
+            if (!e.isReactiveFormAnnotated) {
+              return '${e.fieldName}:${element.name.camelCase}.${e.fieldName}';
+            }
+
             if (e.isPositional ||
                 e.isRequiredPositional ||
                 (e.isOptional && e.isPositional)) {

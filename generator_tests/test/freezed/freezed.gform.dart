@@ -136,13 +136,50 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
 class TestForm {
   TestForm(this.test, this.form, this.path) {}
 
+  static String genderControlName = "gender";
+
+  static String idControlName = "id";
+
+  static String nameControlName = "name";
+
+  static String yearControlName = "year";
+
   final Test test;
 
   final FormGroup form;
 
   final String? path;
 
-  Test get model => Test('');
+  String genderControlPath() => pathBuilder(genderControlName);
+  String idControlPath() => pathBuilder(idControlName);
+  String nameControlPath() => pathBuilder(nameControlName);
+  String yearControlPath() => pathBuilder(yearControlName);
+  String? get genderValue => genderControl.value;
+  String? get idValue => idControl.value;
+  String? get nameValue => nameControl.value;
+  double? get yearValue => yearControl.value;
+  bool get containsGender => form.contains(genderControlPath());
+  bool get containsId => form.contains(idControlPath());
+  bool get containsName => form.contains(nameControlPath());
+  bool get containsYear => form.contains(yearControlPath());
+  Object? get genderErrors => genderControl.errors;
+  Object? get idErrors => idControl.errors;
+  Object? get nameErrors => nameControl.errors;
+  Object? get yearErrors => yearControl.errors;
+  void get genderFocus => form.focus(genderControlPath());
+  void get idFocus => form.focus(idControlPath());
+  void get nameFocus => form.focus(nameControlPath());
+  void get yearFocus => form.focus(yearControlPath());
+  FormControl<String> get genderControl =>
+      form.control(genderControlPath()) as FormControl<String>;
+  FormControl<String> get idControl =>
+      form.control(idControlPath()) as FormControl<String>;
+  FormControl<String> get nameControl =>
+      form.control(nameControlPath()) as FormControl<String>;
+  FormControl<double> get yearControl =>
+      form.control(yearControlPath()) as FormControl<double>;
+  Test get model =>
+      Test(genderValue, id: idValue, name: nameValue, year: yearValue);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({},

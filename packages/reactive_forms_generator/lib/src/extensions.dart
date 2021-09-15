@@ -2,6 +2,12 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 
+extension ConstructorElementExt on ConstructorElement {
+  bool get hasReactiveFormAnnotatedParameters => this.parameters.any(
+        (e) => e.isReactiveFormAnnotated,
+      );
+}
+
 extension ParameterElementExt on ParameterElement {
   String get fieldName => this.name;
 
@@ -12,6 +18,12 @@ extension ParameterElementExt on ParameterElement {
   String get fieldControlNameName => '${fieldName}ControlName';
 
   String get fieldControlPath => '${fieldName}ControlPath';
+
+  bool get isReactiveFormAnnotated =>
+      this.isFormGroupArray ||
+      this.isFormGroup ||
+      this.isFormControl ||
+      this.isFormArray;
 
   // needs careful usage and possibly refactoring
   DartType get typeParameter =>

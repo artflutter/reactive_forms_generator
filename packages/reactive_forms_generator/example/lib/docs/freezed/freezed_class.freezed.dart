@@ -145,11 +145,12 @@ class __$FreezedClassCopyWithImpl<$Res> extends _$FreezedClassCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FreezedClass implements _FreezedClass {
-  const _$_FreezedClass(
+class _$_FreezedClass extends _FreezedClass {
+  _$_FreezedClass(
       {@FormControlAnnotation() this.id,
       @FormControlAnnotation() this.name,
-      @FormControlAnnotation() this.year});
+      @FormControlAnnotation() this.year})
+      : super._();
 
   factory _$_FreezedClass.fromJson(Map<String, dynamic> json) =>
       _$$_FreezedClassFromJson(json);
@@ -199,11 +200,12 @@ class _$_FreezedClass implements _FreezedClass {
   }
 }
 
-abstract class _FreezedClass implements FreezedClass {
-  const factory _FreezedClass(
+abstract class _FreezedClass extends FreezedClass {
+  factory _FreezedClass(
       {@FormControlAnnotation() String? id,
       @FormControlAnnotation() String? name,
       @FormControlAnnotation() double? year}) = _$_FreezedClass;
+  _FreezedClass._() : super._();
 
   factory _FreezedClass.fromJson(Map<String, dynamic> json) =
       _$_FreezedClass.fromJson;

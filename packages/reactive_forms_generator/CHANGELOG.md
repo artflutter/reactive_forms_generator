@@ -1,3 +1,7 @@
+## [0.2.1-beta]
+* fixed processing non annotated parameters
+* improved freezed support with private constructors
+
 ## [0.2.0-beta]
 * analyzer 2.2.0 support
 

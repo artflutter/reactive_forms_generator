@@ -13,6 +13,7 @@ class FormGroupGenerator extends FormElementGenerator {
   List<ParameterElement> get formElements =>
       (field.type.element as ClassElement)
           .constructors
+          .where((e) => e.hasReactiveFormAnnotatedParameters)
           .first
           .parameters
           .where(
@@ -25,6 +26,7 @@ class FormGroupGenerator extends FormElementGenerator {
   List<ParameterElement> get nestedFormElements =>
       (field.type.element as ClassElement)
           .constructors
+          .where((e) => e.hasReactiveFormAnnotatedParameters)
           .first
           .parameters
           .where(

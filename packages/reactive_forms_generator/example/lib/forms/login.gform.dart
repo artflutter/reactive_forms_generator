@@ -150,6 +150,8 @@ class LoginForm {
 
   static String heightControlName = "height";
 
+  static String unAnnotatedControlName = "unAnnotated";
+
   final Login login;
 
   final FormGroup form;
@@ -212,7 +214,8 @@ class LoginForm {
       theme: themeValue,
       mode: modeValue,
       timeout: timeoutValue,
-      height: heightValue);
+      height: heightValue,
+      unAnnotated: login.unAnnotated);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({

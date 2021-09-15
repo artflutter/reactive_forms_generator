@@ -155,11 +155,12 @@ class __$TestCopyWithImpl<$Res> extends _$TestCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Test implements _Test {
-  const _$_Test(@FormControlAnnotation() this.gender,
+class _$_Test extends _Test {
+  _$_Test(@FormControlAnnotation() this.gender,
       {@FormControlAnnotation() this.id,
       @FormControlAnnotation() this.name,
-      @FormControlAnnotation() this.year});
+      @FormControlAnnotation() this.year})
+      : super._();
 
   factory _$_Test.fromJson(Map<String, dynamic> json) => _$$_TestFromJson(json);
 
@@ -214,11 +215,12 @@ class _$_Test implements _Test {
   }
 }
 
-abstract class _Test implements Test {
-  const factory _Test(@FormControlAnnotation() String? gender,
+abstract class _Test extends Test {
+  factory _Test(@FormControlAnnotation() String? gender,
       {@FormControlAnnotation() String? id,
       @FormControlAnnotation() String? name,
       @FormControlAnnotation() double? year}) = _$_Test;
+  _Test._() : super._();
 
   factory _Test.fromJson(Map<String, dynamic> json) = _$_Test.fromJson;
 

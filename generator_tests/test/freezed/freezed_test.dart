@@ -20,7 +20,9 @@ void main() {
             @freezed
             @ReactiveFormAnnotation()
             class Test with _$Test {
-              const factory Test(
+              Test._();
+            
+              factory Test(
                 @FormControlAnnotation() String? gender, {
                 @FormControlAnnotation() String? id,
                 @FormControlAnnotation() String? name,

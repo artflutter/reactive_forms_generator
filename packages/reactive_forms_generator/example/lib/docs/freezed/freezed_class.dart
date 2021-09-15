@@ -7,7 +7,9 @@ part 'freezed_class.freezed.dart';
 @freezed
 @ReactiveFormAnnotation()
 class FreezedClass with _$FreezedClass {
-  const factory FreezedClass({
+  FreezedClass._();
+
+  factory FreezedClass({
     @FormControlAnnotation() String? id,
     @FormControlAnnotation() String? name,
     @FormControlAnnotation() double? year,
@@ -15,4 +17,6 @@ class FreezedClass with _$FreezedClass {
 
   factory FreezedClass.fromJson(Map<String, dynamic> json) =>
       _$FreezedClassFromJson(json);
+
+  bool method() => false;
 }
