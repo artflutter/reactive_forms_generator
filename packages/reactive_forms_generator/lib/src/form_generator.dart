@@ -83,6 +83,9 @@ class FormGenerator {
       .first
       .parameters;
 
+  List<ParameterElement> get annotatedParameters =>
+      parameters.where((e) => e.isReactiveFormAnnotated).toList();
+
   Field staticFieldName(ParameterElement field) => Field(
         (b) => b
           ..static = true
@@ -92,7 +95,7 @@ class FormGenerator {
       );
 
   List<Field> get staticFieldNameList {
-    return parameters.map(staticFieldName).toList();
+    return annotatedParameters.map(staticFieldName).toList();
   }
 
   Field field(ParameterElement field) => Field(
@@ -102,7 +105,7 @@ class FormGenerator {
           ..assignment = Code('"${field.fieldName}"'),
       );
 
-  List<Field> get fieldNameList => parameters.map(field).toList();
+  List<Field> get fieldNameList => annotatedParameters.map(field).toList();
 
   Method fieldControlNameMethod(ParameterElement field) => Method(
         (b) => b

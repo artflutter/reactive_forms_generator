@@ -36,6 +36,8 @@ void main() {
           
             final double height;
           
+            final String? unAnnotated;
+          
             Login({
               @FormControlAnnotation(
                 validators: const [
@@ -79,6 +81,7 @@ void main() {
                 ],
               )
                   required this.height,
+              this.unAnnotated,
             });
           }
           ''',
@@ -303,7 +306,8 @@ class LoginForm {
       theme: themeValue,
       mode: modeValue,
       timeout: timeoutValue,
-      height: heightValue);
+      height: heightValue,
+      unAnnotated: login.unAnnotated);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({

@@ -150,8 +150,6 @@ class LoginForm {
 
   static String heightControlName = "height";
 
-  static String unAnnotatedControlName = "unAnnotated";
-
   final Login login;
 
   final FormGroup form;

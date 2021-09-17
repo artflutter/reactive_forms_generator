@@ -1,3 +1,6 @@
+## [0.2.2-beta]
+* removed redundant getters generated on non-annotated fields
+
 ## [0.2.1-beta]
 * fixed processing non annotated parameters
 * improved freezed support with private constructors

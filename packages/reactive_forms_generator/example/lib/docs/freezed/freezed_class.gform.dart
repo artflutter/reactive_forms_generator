@@ -176,9 +176,31 @@ class FreezedClassForm {
       FreezedClass(id: idValue, name: nameValue, year: yearValue);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({},
-      validators: [],
-      asyncValidators: [],
-      asyncValidatorsDebounceTime: 250,
-      disabled: false);
+  FormGroup formElements() => FormGroup({
+        idControlName: FormControl<String>(
+            value: freezedClass.id,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        nameControlName: FormControl<String>(
+            value: freezedClass.name,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        yearControlName: FormControl<double>(
+            value: freezedClass.year,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
 }
