@@ -47,7 +47,6 @@ dependency_overrides:
   reactive_forms_generator:
     path: ../packages/reactive_forms_generator
   meta: 1.7.0
-#  analyzer: ^2.0.0
 
 
 # For information on the generic Dart part of this file, see the

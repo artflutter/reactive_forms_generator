@@ -7,14 +7,14 @@ packages:
       name: _fe_analyzer_shared
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "25.0.0"
+    version: "26.0.0"
   analyzer:
     dependency: transitive
     description:
       name: analyzer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.0"
+    version: "2.3.0"
   args:
     dependency: transitive
     description:
@@ -388,21 +388,21 @@ packages:
       name: reactive_forms
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "10.5.0"
+    version: "10.6.0"
   reactive_forms_annotations:
     dependency: "direct main"
     description:
       path: "../packages/reactive_forms_annotations"
       relative: true
     source: path
-    version: "0.0.5-beta"
+    version: "0.1.0-beta"
   reactive_forms_generator:
     dependency: "direct dev"
     description:
       path: "../packages/reactive_forms_generator"
       relative: true
     source: path
-    version: "0.2.0-beta"
+    version: "0.2.2-beta"
   recase:
     dependency: "direct main"
     description:

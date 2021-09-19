@@ -1,3 +1,6 @@
+## [0.3.0-beta]
+* package update
+
 ## [0.2.2-beta]
 * removed redundant getters generated on non-annotated fields
 
