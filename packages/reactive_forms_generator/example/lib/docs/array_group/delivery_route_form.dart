@@ -87,6 +87,7 @@ class DeliveryListFormWidget extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       if (formModel.form.valid) {
+                        print(formModel.deliveryListValue);
                         print(formModel.model);
                       } else {
                         formModel.form.markAllAsTouched();

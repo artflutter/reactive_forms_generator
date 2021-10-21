@@ -163,7 +163,7 @@ class FormGenerator {
           .map((k, v) => MapEntry(
             k,
             ${typeParameter}Form(
-              ${typeParameter}(), form, pathBuilder("deliveryList.\$k"))
+              ${typeParameter}(), form, pathBuilder("${field.name}.\$k"))
               .model))
           .values
           .toList()''';
