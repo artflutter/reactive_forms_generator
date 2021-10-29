@@ -176,6 +176,79 @@ class ArrayNullableForm {
   void get emailListFocus => form.focus(emailListControlPath());
   void get fruitListFocus => form.focus(fruitListControlPath());
   void get vegetablesListFocus => form.focus(vegetablesListControlPath());
+  void someListRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(someListControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void emailListRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(emailListControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void fruitListRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(fruitListControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void vegetablesListRemove(
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(vegetablesListControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void someListValueUpdate(List<String?>? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      someListControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void emailListValueUpdate(List<String> value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      emailListControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void fruitListValueUpdate(List<bool?> value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      fruitListControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void vegetablesListValueUpdate(List<String?>? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      vegetablesListControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void someListValuePatch(List<String?>? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      someListControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void emailListValuePatch(List<String> value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      emailListControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void fruitListValuePatch(List<bool?> value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      fruitListControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void vegetablesListValuePatch(List<String?>? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      vegetablesListControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void someListValueReset(List<String?>? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      someListControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void emailListValueReset(List<String> value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      emailListControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void fruitListValueReset(List<bool?> value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      fruitListControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void vegetablesListValueReset(List<String?>? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      vegetablesListControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<List<String?>> get someListControl =>
       form.control(someListControlPath()) as FormControl<List<String?>>;
   FormArray<String> get emailListControl =>
@@ -282,6 +355,24 @@ class ArrayNullableForm {
       fruitList: fruitListValue,
       vegetablesList: vegetablesListValue,
       someList: someListValue);
+  void updateValue(ArrayNullable value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.updateValue(
+          ArrayNullableForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void resetValue(ArrayNullable value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.reset(
+          value: ArrayNullableForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
+      value: this.formElements().rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({

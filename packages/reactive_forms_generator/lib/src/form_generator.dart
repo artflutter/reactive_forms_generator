@@ -153,8 +153,8 @@ class FormGenerator {
       final typeParameter =
           (field.type as ParameterizedType).typeArguments.first;
 
-      final formGenerator =
-          FormGenerator(typeParameter.element! as ClassElement, type);
+      // final formGenerator =
+      //     FormGenerator(typeParameter.element! as ClassElement, type);
 
       // fieldValue =
       //     '${field.name}${formGenerator.className}.map((e) => e.model).toList()';
@@ -240,12 +240,342 @@ class FormGenerator {
           ),
       );
 
+  Method remove(ParameterElement field) => Method(
+        (b) => b
+          ..name = '${field.name}Remove'
+          ..lambda = true
+          ..optionalParameters.addAll([
+            Parameter(
+              (b) => b
+                ..name = 'updateParent'
+                ..named = true
+                ..defaultTo = Code('true')
+                ..type = Reference('bool'),
+            ),
+            Parameter(
+              (b) => b
+                ..name = 'emitEvent'
+                ..named = true
+                ..defaultTo = Code('true')
+                ..type = Reference('bool'),
+            ),
+          ])
+          ..returns = Reference('void')
+          ..body = Code(
+            'form.removeControl(${field.fieldControlPath}(), updateParent: updateParent, emitEvent:emitEvent)',
+          ),
+      );
+
+  Method update(ParameterElement field) {
+    String value = 'value';
+
+    if (field.isFormGroup) {
+      value =
+          '${formGroupGenerators[field.name]!.className}(value, FormGroup({}), null).formElements().rawValue';
+    }
+
+    if (field.isFormGroupArray) {
+      value =
+          'value.map((e) => ${nestedFormGroupGenerators[field.name]!.className}(e, FormGroup({}), null).formElements().rawValue).toList()';
+    }
+
+    return Method(
+      (b) => b
+        ..name = '${field.name}ValueUpdate'
+        ..lambda = true
+        ..requiredParameters.add(
+          Parameter(
+            (b) => b
+              ..name = 'value'
+              ..type = Reference(field.type.toString()),
+          ),
+        )
+        ..optionalParameters.addAll([
+          Parameter(
+            (b) => b
+              ..name = 'updateParent'
+              ..named = true
+              ..defaultTo = Code('true')
+              ..type = Reference('bool'),
+          ),
+          Parameter(
+            (b) => b
+              ..name = 'emitEvent'
+              ..named = true
+              ..defaultTo = Code('true')
+              ..type = Reference('bool'),
+          ),
+        ])
+        ..returns = Reference('void')
+        ..body = Code(
+          '${field.fieldControlName}.updateValue(${value}, updateParent: updateParent, emitEvent:emitEvent)',
+        ),
+    );
+  }
+
+  Method patch(ParameterElement field) {
+    String value = 'value';
+
+    if (field.isFormGroup) {
+      value =
+          '${formGroupGenerators[field.name]!.className}(value, FormGroup({}), null).formElements().rawValue';
+    }
+
+    if (field.isFormGroupArray) {
+      value =
+          'value.map((e) => ${nestedFormGroupGenerators[field.name]!.className}(e, FormGroup({}), null).formElements().rawValue).toList()';
+    }
+
+    return Method(
+      (b) => b
+        ..name = '${field.name}ValuePatch'
+        ..lambda = true
+        ..requiredParameters.add(
+          Parameter(
+            (b) => b
+              ..name = 'value'
+              ..type = Reference(field.type.toString()),
+          ),
+        )
+        ..optionalParameters.addAll([
+          Parameter(
+            (b) => b
+              ..name = 'updateParent'
+              ..named = true
+              ..defaultTo = Code('true')
+              ..type = Reference('bool'),
+          ),
+          Parameter(
+            (b) => b
+              ..name = 'emitEvent'
+              ..named = true
+              ..defaultTo = Code('true')
+              ..type = Reference('bool'),
+          ),
+        ])
+        ..returns = Reference('void')
+        ..body = Code(
+          '${field.fieldControlName}.patchValue(${value}, updateParent: updateParent, emitEvent:emitEvent)',
+        ),
+    );
+  }
+
+  Method reset(ParameterElement field) {
+    String value = 'value';
+
+    if (field.isFormGroup) {
+      value =
+          '${formGroupGenerators[field.name]!.className}(value, FormGroup({}), null).formElements().rawValue';
+    }
+
+    if (field.isFormGroupArray) {
+      value =
+          'value.map((e) => ${nestedFormGroupGenerators[field.name]!.className}(e, FormGroup({}), null).formElements().rawValue).toList()';
+    }
+
+    return Method(
+      (b) => b
+        ..name = '${field.name}ValueReset'
+        ..lambda = true
+        ..requiredParameters.add(
+          Parameter(
+            (b) => b
+              ..name = 'value'
+              ..type = Reference(field.type.toString()),
+          ),
+        )
+        ..optionalParameters.addAll([
+          Parameter(
+            (b) => b
+              ..name = 'updateParent'
+              ..named = true
+              ..defaultTo = Code('true')
+              ..type = Reference('bool'),
+          ),
+          Parameter(
+            (b) => b
+              ..name = 'emitEvent'
+              ..named = true
+              ..defaultTo = Code('true')
+              ..type = Reference('bool'),
+          ),
+          Parameter(
+            (b) => b
+              ..name = 'removeFocus'
+              ..named = true
+              ..defaultTo = Code('false')
+              ..type = Reference('bool'),
+          ),
+          Parameter(
+            (b) => b
+              ..name = 'disabled'
+              ..named = true
+              ..type = Reference('bool?'),
+          ),
+        ])
+        ..returns = Reference('void')
+        ..body = Code(
+          '${field.fieldControlName}.reset(value: ${value}, updateParent: updateParent, emitEvent:emitEvent)',
+        ),
+    );
+  }
+
+  Method get updateValueMethod {
+    String displayType =
+        type?.getDisplayString(withNullability: true) ?? element.name;
+
+    if (type != null &&
+        type is ParameterizedType &&
+        (type as ParameterizedType).typeArguments.isNotEmpty) {
+      displayType = (type as ParameterizedType)
+          .typeArguments
+          .first
+          .getDisplayString(withNullability: true);
+    }
+
+    return Method(
+      (b) => b
+        ..name = 'updateValue'
+        ..lambda = true
+        ..requiredParameters.add(
+          Parameter(
+            (b) => b
+              ..name = 'value'
+              ..type = Reference(displayType),
+          ),
+        )
+        ..optionalParameters.addAll([
+          Parameter(
+            (b) => b
+              ..name = 'updateParent'
+              ..named = true
+              ..defaultTo = Code('true')
+              ..type = Reference('bool'),
+          ),
+          Parameter(
+            (b) => b
+              ..name = 'emitEvent'
+              ..named = true
+              ..defaultTo = Code('true')
+              ..type = Reference('bool'),
+          ),
+        ])
+        ..returns = Reference('void')
+        ..body = Code(
+          'form.updateValue(${className}(value, FormGroup({}), null).formElements().rawValue, updateParent: updateParent, emitEvent:emitEvent)',
+        ),
+    );
+  }
+
+  Method get resetValueMethod {
+    String displayType =
+        type?.getDisplayString(withNullability: true) ?? element.name;
+
+    if (type != null &&
+        type is ParameterizedType &&
+        (type as ParameterizedType).typeArguments.isNotEmpty) {
+      displayType = (type as ParameterizedType)
+          .typeArguments
+          .first
+          .getDisplayString(withNullability: true);
+    }
+
+    return Method(
+      (b) => b
+        ..name = 'resetValue'
+        ..lambda = true
+        ..requiredParameters.add(
+          Parameter(
+            (b) => b
+              ..name = 'value'
+              ..type = Reference(displayType),
+          ),
+        )
+        ..optionalParameters.addAll([
+          Parameter(
+            (b) => b
+              ..name = 'updateParent'
+              ..named = true
+              ..defaultTo = Code('true')
+              ..type = Reference('bool'),
+          ),
+          Parameter(
+            (b) => b
+              ..name = 'emitEvent'
+              ..named = true
+              ..defaultTo = Code('true')
+              ..type = Reference('bool'),
+          ),
+        ])
+        ..returns = Reference('void')
+        ..body = Code(
+          'form.reset(value: ${className}(value, FormGroup({}), null).formElements().rawValue, updateParent: updateParent, emitEvent:emitEvent)',
+        ),
+    );
+  }
+
+  Method get resetMethod {
+    return Method(
+      (b) => b
+        ..name = 'reset'
+        ..lambda = true
+        ..optionalParameters.addAll([
+          Parameter(
+            (b) => b
+              ..name = 'updateParent'
+              ..named = true
+              ..defaultTo = Code('true')
+              ..type = Reference('bool'),
+          ),
+          Parameter(
+            (b) => b
+              ..name = 'emitEvent'
+              ..named = true
+              ..defaultTo = Code('true')
+              ..type = Reference('bool'),
+          ),
+        ])
+        ..returns = Reference('void')
+        ..body = Code(
+          'form.reset(value: this.formElements().rawValue, updateParent: updateParent, emitEvent:emitEvent)',
+        ),
+    );
+  }
+
   List<Method> get fieldFocusMethodList => [
         ...formControls,
         ...formArrays,
         ...formGroups,
         ...formGroupArrays,
       ].map(focus).toList();
+
+  List<Method> get fieldRemoveMethodList => [
+        ...formControls,
+        ...formArrays,
+        ...formGroups,
+        ...formGroupArrays,
+      ].map(remove).toList();
+
+  List<Method> get fieldUpdateMethodList => [
+        ...formControls,
+        ...formArrays,
+        ...formGroups,
+        ...formGroupArrays,
+      ].map(update).toList();
+
+  List<Method> get fieldPatchMethodList => [
+        ...formControls,
+        ...formArrays,
+        ...formGroups,
+        ...formGroupArrays,
+      ].map(patch).toList();
+
+  List<Method> get fieldResetMethodList => [
+        ...formControls,
+        ...formArrays,
+        ...formGroups,
+        ...formGroupArrays,
+      ].map(reset).toList();
 
   Method control(ParameterElement field) {
     String displayType = field.type.getDisplayString(withNullability: true);
@@ -611,12 +941,19 @@ class FormGenerator {
                 ...fieldContainsMethodList,
                 ...fieldErrorsMethodList,
                 ...fieldFocusMethodList,
+                ...fieldRemoveMethodList,
+                ...fieldUpdateMethodList,
+                ...fieldPatchMethodList,
+                ...fieldResetMethodList,
                 ...fieldControlMethodList,
                 ...fieldArrayMethodList,
                 ...fieldGroupMethodList,
                 ...addArrayControlMethodList,
                 ...addGroupControlMethodList,
                 modelMethod,
+                updateValueMethod,
+                resetValueMethod,
+                resetMethod,
                 Method(
                   (b) => b
                     ..name = 'pathBuilder'

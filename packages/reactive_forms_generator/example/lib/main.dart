@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         Routes.deliveryList: (_) => DeliveryListFormWidget(),
         Routes.freezed: (_) => FreezedFormWidget(),
       },
-      home: DeliveryListFormWidget(),
+      home: LoginFormWidget(),
     );
   }
 }

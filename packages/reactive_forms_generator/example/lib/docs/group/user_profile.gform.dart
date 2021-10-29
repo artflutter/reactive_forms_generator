@@ -178,6 +178,92 @@ class UserProfileForm {
   void get lastNameFocus => form.focus(lastNameControlPath());
   void get homeFocus => form.focus(homeControlPath());
   void get officeFocus => form.focus(officeControlPath());
+  void firstNameRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(firstNameControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void lastNameRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(lastNameControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void homeRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(homeControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void officeRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(officeControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void firstNameValueUpdate(String value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      firstNameControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void lastNameValueUpdate(String value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      lastNameControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void homeValueUpdate(Address? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      homeControl.updateValue(
+          AddressForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void officeValueUpdate(Address? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      officeControl.updateValue(
+          AddressForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void firstNameValuePatch(String value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      firstNameControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void lastNameValuePatch(String value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      lastNameControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void homeValuePatch(Address? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      homeControl.patchValue(
+          AddressForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void officeValuePatch(Address? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      officeControl.patchValue(
+          AddressForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void firstNameValueReset(String value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      firstNameControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void lastNameValueReset(String value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      lastNameControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void homeValueReset(Address? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      homeControl.reset(
+          value:
+              AddressForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void officeValueReset(Address? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      officeControl.reset(
+          value:
+              AddressForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   FormControl<String> get firstNameControl =>
       form.control(firstNameControlPath()) as FormControl<String>;
   FormControl<String> get lastNameControl =>
@@ -189,6 +275,24 @@ class UserProfileForm {
       lastName: lastNameValue,
       home: homeValue,
       office: officeValue);
+  void updateValue(UserProfile value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.updateValue(
+          UserProfileForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void resetValue(UserProfile value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.reset(
+          value: UserProfileForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
+      value: this.formElements().rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
@@ -245,6 +349,60 @@ class AddressForm {
   void get streetFocus => form.focus(streetControlPath());
   void get cityFocus => form.focus(cityControlPath());
   void get zipFocus => form.focus(zipControlPath());
+  void streetRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(streetControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void cityRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(cityControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void zipRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(zipControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void streetValueUpdate(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      streetControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void cityValueUpdate(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      cityControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void zipValueUpdate(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      zipControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void streetValuePatch(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      streetControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void cityValuePatch(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      cityControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void zipValuePatch(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      zipControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void streetValueReset(String? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      streetControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void cityValueReset(String? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      cityControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void zipValueReset(String? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      zipControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String> get streetControl =>
       form.control(streetControlPath()) as FormControl<String>;
   FormControl<String> get cityControl =>
@@ -253,6 +411,23 @@ class AddressForm {
       form.control(zipControlPath()) as FormControl<String>;
   Address get model =>
       Address(street: streetValue, city: cityValue, zip: zipValue);
+  void updateValue(Address? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.updateValue(
+          AddressForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void resetValue(Address? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.reset(
+          value:
+              AddressForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
+      value: this.formElements().rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({

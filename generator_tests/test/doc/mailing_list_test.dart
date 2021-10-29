@@ -191,6 +191,24 @@ class MailingListForm {
   bool get containsEmailList => form.contains(emailListControlPath());
   Object? get emailListErrors => emailListControl.errors;
   void get emailListFocus => form.focus(emailListControlPath());
+  void emailListRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(emailListControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void emailListValueUpdate(List<String?> value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      emailListControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void emailListValuePatch(List<String?> value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      emailListControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void emailListValueReset(List<String?> value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      emailListControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormArray<String> get emailListControl =>
       form.control(emailListControlPath()) as FormArray<String>;
   void addEmailListItem(String value,
@@ -225,6 +243,24 @@ class MailingListForm {
   }
 
   MailingList get model => MailingList(emailList: emailListValue);
+  void updateValue(MailingList value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.updateValue(
+          MailingListForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void resetValue(MailingList value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.reset(
+          value: MailingListForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
+      value: this.formElements().rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({

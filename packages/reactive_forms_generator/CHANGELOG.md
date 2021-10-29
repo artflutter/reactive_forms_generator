@@ -1,3 +1,12 @@
+## [0.3.2-beta]
+* [control]Remove methods
+* [control]ValueUpdate methods
+* [control]ValuePatch methods
+* [control]ValueReset methods
+* updateValue method
+* resetValue method
+* reset method
+
 ## [0.3.1-beta]
 * fix for https://github.com/artflutter/reactive_forms_generator/issues/11
 

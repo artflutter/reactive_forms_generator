@@ -232,6 +232,42 @@ class DeliveryListForm {
   bool get containsDeliveryList => form.contains(deliveryListControlPath());
   Object? get deliveryListErrors => deliveryListControl.errors;
   void get deliveryListFocus => form.focus(deliveryListControlPath());
+  void deliveryListRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(deliveryListControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void deliveryListValueUpdate(List<DeliveryPoint> value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      deliveryListControl.updateValue(
+          value
+              .map((e) => DeliveryPointForm(e, FormGroup({}), null)
+                  .formElements()
+                  .rawValue)
+              .toList(),
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void deliveryListValuePatch(List<DeliveryPoint> value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      deliveryListControl.patchValue(
+          value
+              .map((e) => DeliveryPointForm(e, FormGroup({}), null)
+                  .formElements()
+                  .rawValue)
+              .toList(),
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void deliveryListValueReset(List<DeliveryPoint> value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      deliveryListControl.reset(
+          value: value
+              .map((e) => DeliveryPointForm(e, FormGroup({}), null)
+                  .formElements()
+                  .rawValue)
+              .toList(),
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   FormArray<Map<String, Object?>> get deliveryListControl =>
       form.control(deliveryListControlPath())
           as FormArray<Map<String, Object?>>;
@@ -244,6 +280,24 @@ class DeliveryListForm {
   }
 
   DeliveryList get model => DeliveryList(deliveryList: deliveryListValue);
+  void updateValue(DeliveryList value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.updateValue(
+          DeliveryListForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void resetValue(DeliveryList value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.reset(
+          value: DeliveryListForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
+      value: this.formElements().rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
@@ -288,12 +342,73 @@ class DeliveryPointForm {
   Object? get addressErrors => addressControl.errors;
   void get nameFocus => form.focus(nameControlPath());
   void get addressFocus => form.focus(addressControlPath());
+  void nameRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(nameControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void addressRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(addressControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void nameValueUpdate(String value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      nameControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void addressValueUpdate(Address? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      addressControl.updateValue(
+          AddressForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void nameValuePatch(String value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      nameControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void addressValuePatch(Address? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      addressControl.patchValue(
+          AddressForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void nameValueReset(String value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      nameControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void addressValueReset(Address? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      addressControl.reset(
+          value:
+              AddressForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
   FormGroup get addressControl =>
       form.control(addressControlPath()) as FormGroup;
   DeliveryPoint get model =>
       DeliveryPoint(name: nameValue, address: addressValue);
+  void updateValue(DeliveryPoint value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.updateValue(
+          DeliveryPointForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void resetValue(DeliveryPoint value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.reset(
+          value: DeliveryPointForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
+      value: this.formElements().rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
@@ -335,11 +450,64 @@ class AddressForm {
   Object? get cityErrors => cityControl.errors;
   void get streetFocus => form.focus(streetControlPath());
   void get cityFocus => form.focus(cityControlPath());
+  void streetRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(streetControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void cityRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(cityControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void streetValueUpdate(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      streetControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void cityValueUpdate(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      cityControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void streetValuePatch(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      streetControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void cityValuePatch(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      cityControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void streetValueReset(String? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      streetControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void cityValueReset(String? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      cityControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String> get streetControl =>
       form.control(streetControlPath()) as FormControl<String>;
   FormControl<String> get cityControl =>
       form.control(cityControlPath()) as FormControl<String>;
   Address get model => Address(street: streetValue, city: cityValue);
+  void updateValue(Address? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.updateValue(
+          AddressForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void resetValue(Address? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.reset(
+          value:
+              AddressForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
+      value: this.formElements().rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({

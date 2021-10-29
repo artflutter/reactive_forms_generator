@@ -128,13 +128,43 @@ class LoginFormWidget extends StatelessWidget {
                 },
                 child: const Text('Sign Up'),
               ),
-              ReactiveLoginFormConsumer(
-                builder: (context, formModel, child) {
-                  return ElevatedButton(
-                    child: Text('Submit'),
-                    onPressed: formModel.form.valid ? () {} : null,
-                  );
-                },
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ReactiveLoginFormConsumer(
+                    builder: (context, formModel, child) {
+                      return ElevatedButton(
+                        child: Text('Update'),
+                        onPressed: formModel.form.valid
+                            ? () {
+                                formModel.updateValue(Login(
+                                  email: 'some@e.mail',
+                                  password: 'a',
+                                  timeout: 3,
+                                  theme: 'light',
+                                  height: 130,
+                                  mode: UserMode.user,
+                                  rememberMe: true,
+                                ));
+                              }
+                            : null,
+                      );
+                    },
+                  ),
+                  SizedBox(width: 16),
+                  ReactiveLoginFormConsumer(
+                    builder: (context, formModel, child) {
+                      return ElevatedButton(
+                        child: Text('Reset'),
+                        onPressed: formModel.form.valid
+                            ? () {
+                                formModel.reset();
+                              }
+                            : null,
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           );
