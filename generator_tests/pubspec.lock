@@ -70,7 +70,7 @@ packages:
       name: build_runner
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.4"
+    version: "2.1.5"
   build_runner_core:
     dependency: transitive
     description:
@@ -402,7 +402,7 @@ packages:
       path: "../packages/reactive_forms_generator"
       relative: true
     source: path
-    version: "0.3.1-beta"
+    version: "0.4.0-beta"
   recase:
     dependency: "direct main"
     description:

@@ -1,5 +1,4 @@
 import 'package:example/docs/freezed/freezed_class.dart';
-import 'package:example/docs/freezed/freezed_class.gform.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;

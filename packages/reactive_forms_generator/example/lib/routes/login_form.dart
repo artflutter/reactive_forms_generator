@@ -1,3 +1,4 @@
+import 'package:example/forms/login.dart';
 import 'package:example/helpers.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,9 +7,6 @@ import 'package:intl/intl.dart';
 import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_touch_spin/reactive_touch_spin.dart';
-
-import '../forms/login.dart';
-import '../forms/login.gform.dart';
 
 class LoginFormWidget extends StatelessWidget {
   @override

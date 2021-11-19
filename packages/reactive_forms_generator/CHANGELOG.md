@@ -1,3 +1,8 @@
+## [0.4.0-beta]
+**BREAKING CHANGE**
+* made *.gform.dart a part file check README file https://github.com/artflutter/reactive_forms_generator#run-the-generator
+* `const` constructors 
+
 ## [0.3.2-beta]
 * [control]Remove methods
 * [control]ValueUpdate methods

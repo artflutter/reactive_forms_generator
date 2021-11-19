@@ -22,6 +22,7 @@ class ReactiveFormBuilder {
 
   Constructor get _widgetConstructor => Constructor(
         (b) => b
+          ..constant = true
           ..initializers.add(
             refer('super').call(
               [],

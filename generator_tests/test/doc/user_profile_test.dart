@@ -11,8 +11,13 @@ void main() {
       () async {
         return testGenerator(
           model: r'''
-            import 'package:example/helpers.dart';
+            import 'package:flutter/material.dart';
+            import 'package:reactive_forms/reactive_forms.dart';
+            import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+            import 'package:example/helpers.dart';
+            
+            part 'gen.gform.dart';
             
             @ReactiveFormAnnotation()
             class UserProfile {
@@ -67,21 +72,15 @@ void main() {
 
 const generatedFile = r'''// GENERATED CODE - DO NOT MODIFY BY HAND
 
+part of 'gen.dart';
+
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
-import 'package:example/helpers.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'dart:core';
-import 'login.dart';
-
 class ReactiveUserProfileFormConsumer extends StatelessWidget {
-  ReactiveUserProfileFormConsumer({Key? key, required this.builder, this.child})
+  const ReactiveUserProfileFormConsumer(
+      {Key? key, required this.builder, this.child})
       : super(key: key);
 
   final Widget? child;
@@ -101,7 +100,7 @@ class ReactiveUserProfileFormConsumer extends StatelessWidget {
 }
 
 class UserProfileFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  UserProfileFormInheritedStreamer(
+  const UserProfileFormInheritedStreamer(
       {Key? key,
       required this.form,
       required Stream<dynamic> stream,
@@ -112,7 +111,7 @@ class UserProfileFormInheritedStreamer extends InheritedStreamer<dynamic> {
 }
 
 class ReactiveUserProfileForm extends StatelessWidget {
-  ReactiveUserProfileForm(
+  const ReactiveUserProfileForm(
       {Key? key, required this.form, required this.child, this.onWillPop})
       : super(key: key);
 
@@ -151,7 +150,7 @@ class ReactiveUserProfileForm extends StatelessWidget {
 }
 
 class UserProfileFormBuilder extends StatefulWidget {
-  UserProfileFormBuilder(
+  const UserProfileFormBuilder(
       {Key? key,
       required this.model,
       this.child,

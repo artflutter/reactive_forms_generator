@@ -12,7 +12,12 @@ void main() {
         return testGenerator(
           model: r'''
             import 'package:example/helpers.dart';
+            import 'package:flutter/material.dart';
+            import 'package:reactive_forms/reactive_forms.dart';
+            import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+            
+            part 'gen.gform.dart';
             
             @ReactiveFormAnnotation()
             class LoginNullable {
@@ -50,21 +55,14 @@ void main() {
 
 const generatedFile = r'''// GENERATED CODE - DO NOT MODIFY BY HAND
 
+part of 'gen.dart';
+
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
-import 'package:example/helpers.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'dart:core';
-import 'login.dart';
-
 class ReactiveLoginNullableFormConsumer extends StatelessWidget {
-  ReactiveLoginNullableFormConsumer(
+  const ReactiveLoginNullableFormConsumer(
       {Key? key, required this.builder, this.child})
       : super(key: key);
 
@@ -85,7 +83,7 @@ class ReactiveLoginNullableFormConsumer extends StatelessWidget {
 }
 
 class LoginNullableFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  LoginNullableFormInheritedStreamer(
+  const LoginNullableFormInheritedStreamer(
       {Key? key,
       required this.form,
       required Stream<dynamic> stream,
@@ -96,7 +94,7 @@ class LoginNullableFormInheritedStreamer extends InheritedStreamer<dynamic> {
 }
 
 class ReactiveLoginNullableForm extends StatelessWidget {
-  ReactiveLoginNullableForm(
+  const ReactiveLoginNullableForm(
       {Key? key, required this.form, required this.child, this.onWillPop})
       : super(key: key);
 
@@ -135,7 +133,7 @@ class ReactiveLoginNullableForm extends StatelessWidget {
 }
 
 class LoginNullableFormBuilder extends StatefulWidget {
-  LoginNullableFormBuilder(
+  const LoginNullableFormBuilder(
       {Key? key,
       required this.model,
       this.child,

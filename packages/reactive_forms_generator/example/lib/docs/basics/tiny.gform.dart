@@ -1,20 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+part of 'tiny.dart';
+
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
-import 'package:example/helpers.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'dart:core';
-import 'tiny.dart';
-
 class ReactiveTinyFormConsumer extends StatelessWidget {
-  ReactiveTinyFormConsumer({Key? key, required this.builder, this.child})
+  const ReactiveTinyFormConsumer({Key? key, required this.builder, this.child})
       : super(key: key);
 
   final Widget? child;
@@ -34,7 +27,7 @@ class ReactiveTinyFormConsumer extends StatelessWidget {
 }
 
 class TinyFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  TinyFormInheritedStreamer(
+  const TinyFormInheritedStreamer(
       {Key? key,
       required this.form,
       required Stream<dynamic> stream,
@@ -45,7 +38,7 @@ class TinyFormInheritedStreamer extends InheritedStreamer<dynamic> {
 }
 
 class ReactiveTinyForm extends StatelessWidget {
-  ReactiveTinyForm(
+  const ReactiveTinyForm(
       {Key? key, required this.form, required this.child, this.onWillPop})
       : super(key: key);
 
@@ -83,7 +76,7 @@ class ReactiveTinyForm extends StatelessWidget {
 }
 
 class TinyFormBuilder extends StatefulWidget {
-  TinyFormBuilder(
+  const TinyFormBuilder(
       {Key? key,
       required this.model,
       this.child,

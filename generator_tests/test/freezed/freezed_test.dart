@@ -11,9 +11,14 @@ void main() {
       () async {
         return testGenerator(
           model: r'''
-            import 'package:freezed_annotation/freezed_annotation.dart';
+            import 'package:flutter/material.dart';
+            import 'package:reactive_forms/reactive_forms.dart';
+            import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+            import 'package:freezed_annotation/freezed_annotation.dart';
+            import 'package:example/helpers.dart';
             
+            part 'gen.gform.dart';
             part 'freezed.g.dart';
             part 'freezed.freezed.dart';
             
@@ -41,21 +46,14 @@ void main() {
 
 const generatedFile = r'''// GENERATED CODE - DO NOT MODIFY BY HAND
 
+part of 'gen.dart';
+
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'dart:core';
-import 'login.dart';
-
 class ReactiveTestFormConsumer extends StatelessWidget {
-  ReactiveTestFormConsumer({Key? key, required this.builder, this.child})
+  const ReactiveTestFormConsumer({Key? key, required this.builder, this.child})
       : super(key: key);
 
   final Widget? child;
@@ -75,7 +73,7 @@ class ReactiveTestFormConsumer extends StatelessWidget {
 }
 
 class TestFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  TestFormInheritedStreamer(
+  const TestFormInheritedStreamer(
       {Key? key,
       required this.form,
       required Stream<dynamic> stream,
@@ -86,7 +84,7 @@ class TestFormInheritedStreamer extends InheritedStreamer<dynamic> {
 }
 
 class ReactiveTestForm extends StatelessWidget {
-  ReactiveTestForm(
+  const ReactiveTestForm(
       {Key? key, required this.form, required this.child, this.onWillPop})
       : super(key: key);
 
@@ -124,7 +122,7 @@ class ReactiveTestForm extends StatelessWidget {
 }
 
 class TestFormBuilder extends StatefulWidget {
-  TestFormBuilder(
+  const TestFormBuilder(
       {Key? key,
       required this.model,
       this.child,

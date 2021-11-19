@@ -1,20 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+part of 'login.dart';
+
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
-import 'package:example/helpers.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'dart:core';
-import 'login.dart';
-
 class ReactiveLoginFormConsumer extends StatelessWidget {
-  ReactiveLoginFormConsumer({Key? key, required this.builder, this.child})
+  const ReactiveLoginFormConsumer({Key? key, required this.builder, this.child})
       : super(key: key);
 
   final Widget? child;
@@ -34,7 +27,7 @@ class ReactiveLoginFormConsumer extends StatelessWidget {
 }
 
 class LoginFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  LoginFormInheritedStreamer(
+  const LoginFormInheritedStreamer(
       {Key? key,
       required this.form,
       required Stream<dynamic> stream,
@@ -45,7 +38,7 @@ class LoginFormInheritedStreamer extends InheritedStreamer<dynamic> {
 }
 
 class ReactiveLoginForm extends StatelessWidget {
-  ReactiveLoginForm(
+  const ReactiveLoginForm(
       {Key? key, required this.form, required this.child, this.onWillPop})
       : super(key: key);
 
@@ -83,7 +76,7 @@ class ReactiveLoginForm extends StatelessWidget {
 }
 
 class LoginFormBuilder extends StatefulWidget {
-  LoginFormBuilder(
+  const LoginFormBuilder(
       {Key? key,
       required this.model,
       this.child,

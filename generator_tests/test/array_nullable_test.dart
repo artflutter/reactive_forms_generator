@@ -11,8 +11,13 @@ void main() {
       () async {
         return testGenerator(
           model: r'''
-            import 'package:example/helpers.dart';
+            import 'package:flutter/material.dart';
+            import 'package:reactive_forms/reactive_forms.dart';
+            import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+            import 'package:example/helpers.dart';
+            
+            part 'gen.gform.dart';
             
             @ReactiveFormAnnotation()
             class ArrayNullable {
@@ -53,21 +58,14 @@ void main() {
 
 const generatedFile = r'''// GENERATED CODE - DO NOT MODIFY BY HAND
 
+part of 'gen.dart';
+
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
-import 'package:example/helpers.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'dart:core';
-import 'login.dart';
-
 class ReactiveArrayNullableFormConsumer extends StatelessWidget {
-  ReactiveArrayNullableFormConsumer(
+  const ReactiveArrayNullableFormConsumer(
       {Key? key, required this.builder, this.child})
       : super(key: key);
 
@@ -88,7 +86,7 @@ class ReactiveArrayNullableFormConsumer extends StatelessWidget {
 }
 
 class ArrayNullableFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  ArrayNullableFormInheritedStreamer(
+  const ArrayNullableFormInheritedStreamer(
       {Key? key,
       required this.form,
       required Stream<dynamic> stream,
@@ -99,7 +97,7 @@ class ArrayNullableFormInheritedStreamer extends InheritedStreamer<dynamic> {
 }
 
 class ReactiveArrayNullableForm extends StatelessWidget {
-  ReactiveArrayNullableForm(
+  const ReactiveArrayNullableForm(
       {Key? key, required this.form, required this.child, this.onWillPop})
       : super(key: key);
 
@@ -138,7 +136,7 @@ class ReactiveArrayNullableForm extends StatelessWidget {
 }
 
 class ArrayNullableFormBuilder extends StatefulWidget {
-  ArrayNullableFormBuilder(
+  const ArrayNullableFormBuilder(
       {Key? key,
       required this.model,
       this.child,

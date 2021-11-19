@@ -1,20 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+part of 'delivery_list.dart';
+
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
-import 'package:example/helpers.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'dart:core';
-import 'delivery_list.dart';
-
 class ReactiveDeliveryListFormConsumer extends StatelessWidget {
-  ReactiveDeliveryListFormConsumer(
+  const ReactiveDeliveryListFormConsumer(
       {Key? key, required this.builder, this.child})
       : super(key: key);
 
@@ -35,7 +28,7 @@ class ReactiveDeliveryListFormConsumer extends StatelessWidget {
 }
 
 class DeliveryListFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  DeliveryListFormInheritedStreamer(
+  const DeliveryListFormInheritedStreamer(
       {Key? key,
       required this.form,
       required Stream<dynamic> stream,
@@ -46,7 +39,7 @@ class DeliveryListFormInheritedStreamer extends InheritedStreamer<dynamic> {
 }
 
 class ReactiveDeliveryListForm extends StatelessWidget {
-  ReactiveDeliveryListForm(
+  const ReactiveDeliveryListForm(
       {Key? key, required this.form, required this.child, this.onWillPop})
       : super(key: key);
 
@@ -85,7 +78,7 @@ class ReactiveDeliveryListForm extends StatelessWidget {
 }
 
 class DeliveryListFormBuilder extends StatefulWidget {
-  DeliveryListFormBuilder(
+  const DeliveryListFormBuilder(
       {Key? key,
       required this.model,
       this.child,

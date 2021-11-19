@@ -168,6 +168,20 @@ analyzer:
 
 ## Run the generator
 
+Note that like most code-generators, `reactive_forms_generator` will need you to both import the annotation (meta) 
+and use the part keyword on the top of your files.
+
+Make sure you added required imports before running the generator
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
+import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+
+part 'my_file.gform.dart';
+```
+
 To run the code generator you have two possibilities:
 
 - If your package depends on Flutter:

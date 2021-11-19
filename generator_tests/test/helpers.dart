@@ -14,10 +14,10 @@ Future testGenerator({
   return await testBuilder(
     anotherBuilder,
     {
-      'a|lib/login.dart': model,
+      'a|lib/gen.dart': model,
     },
     outputs: {
-      'a|lib/login.gform.dart': generatedFile,
+      'a|lib/gen.gform.dart': generatedFile,
     },
     onLog: print,
     reader: await PackageAssetReader.currentIsolate(),

@@ -1,20 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+part of 'freezed_class.dart';
+
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'dart:core';
-import 'freezed_class.dart';
-
 class ReactiveFreezedClassFormConsumer extends StatelessWidget {
-  ReactiveFreezedClassFormConsumer(
+  const ReactiveFreezedClassFormConsumer(
       {Key? key, required this.builder, this.child})
       : super(key: key);
 
@@ -35,7 +28,7 @@ class ReactiveFreezedClassFormConsumer extends StatelessWidget {
 }
 
 class FreezedClassFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  FreezedClassFormInheritedStreamer(
+  const FreezedClassFormInheritedStreamer(
       {Key? key,
       required this.form,
       required Stream<dynamic> stream,
@@ -46,7 +39,7 @@ class FreezedClassFormInheritedStreamer extends InheritedStreamer<dynamic> {
 }
 
 class ReactiveFreezedClassForm extends StatelessWidget {
-  ReactiveFreezedClassForm(
+  const ReactiveFreezedClassForm(
       {Key? key, required this.form, required this.child, this.onWillPop})
       : super(key: key);
 
@@ -85,7 +78,7 @@ class ReactiveFreezedClassForm extends StatelessWidget {
 }
 
 class FreezedClassFormBuilder extends StatefulWidget {
-  FreezedClassFormBuilder(
+  const FreezedClassFormBuilder(
       {Key? key,
       required this.model,
       this.child,

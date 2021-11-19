@@ -10,6 +10,7 @@ class ReactiveInheritedStreamer {
 
   Constructor get _constructor => Constructor(
         (b) => b
+          ..constant = true
           ..initializers.add(
             refer('super').call(
               [

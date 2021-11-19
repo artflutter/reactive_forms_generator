@@ -1,5 +1,4 @@
 import 'package:example/forms/array.dart';
-import 'package:example/forms/array.gform.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;

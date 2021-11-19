@@ -1,5 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
 import 'package:example/helpers.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+
+part 'array.gform.dart';
 
 @ReactiveFormAnnotation()
 class ArrayNullable {

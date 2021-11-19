@@ -13,6 +13,7 @@ class ReactiveForm {
 
   Constructor get _constructor => Constructor(
         (b) => b
+          ..constant = true
           ..optionalParameters.addAll(
             [
               Parameter(

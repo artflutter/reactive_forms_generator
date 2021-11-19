@@ -11,8 +11,13 @@ void main() {
       () async {
         return testGenerator(
           model: r'''
-            import 'package:example/helpers.dart';
+            import 'package:flutter/material.dart';
+            import 'package:reactive_forms/reactive_forms.dart';
+            import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+            import 'package:example/helpers.dart';
+            
+            part 'gen.gform.dart';
             
             @ReactiveFormAnnotation()
             class MailingList {
@@ -40,21 +45,15 @@ void main() {
 
 const generatedFile = r'''// GENERATED CODE - DO NOT MODIFY BY HAND
 
+part of 'gen.dart';
+
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
-import 'package:example/helpers.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'dart:core';
-import 'login.dart';
-
 class ReactiveMailingListFormConsumer extends StatelessWidget {
-  ReactiveMailingListFormConsumer({Key? key, required this.builder, this.child})
+  const ReactiveMailingListFormConsumer(
+      {Key? key, required this.builder, this.child})
       : super(key: key);
 
   final Widget? child;
@@ -74,7 +73,7 @@ class ReactiveMailingListFormConsumer extends StatelessWidget {
 }
 
 class MailingListFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  MailingListFormInheritedStreamer(
+  const MailingListFormInheritedStreamer(
       {Key? key,
       required this.form,
       required Stream<dynamic> stream,
@@ -85,7 +84,7 @@ class MailingListFormInheritedStreamer extends InheritedStreamer<dynamic> {
 }
 
 class ReactiveMailingListForm extends StatelessWidget {
-  ReactiveMailingListForm(
+  const ReactiveMailingListForm(
       {Key? key, required this.form, required this.child, this.onWillPop})
       : super(key: key);
 
@@ -124,7 +123,7 @@ class ReactiveMailingListForm extends StatelessWidget {
 }
 
 class MailingListFormBuilder extends StatefulWidget {
-  MailingListFormBuilder(
+  const MailingListFormBuilder(
       {Key? key,
       required this.model,
       this.child,
