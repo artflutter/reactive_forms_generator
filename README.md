@@ -923,15 +923,7 @@ final form = DeliveryListFormBuilder(
             SizedBox(width: 16),
             ElevatedButton(
               onPressed: () {
-                formModel.deliveryListControl.add(
-                  FormGroup({
-                    'name': FormControl<String>(value: ''),
-                    'address': FormGroup({
-                      'street': FormControl<String>(),
-                      'city': FormControl<String>()
-                    })
-                  }),
-                );
+                formModel.addDeliveryListItem(DeliveryPoint());
               },
               child: const Text('add'),
             )
