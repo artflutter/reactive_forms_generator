@@ -1,20 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+part of 'freezed.dart';
+
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'dart:core';
-import 'freezed.dart';
-
 class ReactiveTestFormConsumer extends StatelessWidget {
-  ReactiveTestFormConsumer({Key? key, required this.builder, this.child})
+  const ReactiveTestFormConsumer({Key? key, required this.builder, this.child})
       : super(key: key);
 
   final Widget? child;
@@ -34,7 +27,7 @@ class ReactiveTestFormConsumer extends StatelessWidget {
 }
 
 class TestFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  TestFormInheritedStreamer(
+  const TestFormInheritedStreamer(
       {Key? key,
       required this.form,
       required Stream<dynamic> stream,
@@ -45,7 +38,7 @@ class TestFormInheritedStreamer extends InheritedStreamer<dynamic> {
 }
 
 class ReactiveTestForm extends StatelessWidget {
-  ReactiveTestForm(
+  const ReactiveTestForm(
       {Key? key, required this.form, required this.child, this.onWillPop})
       : super(key: key);
 
@@ -83,7 +76,7 @@ class ReactiveTestForm extends StatelessWidget {
 }
 
 class TestFormBuilder extends StatefulWidget {
-  TestFormBuilder(
+  const TestFormBuilder(
       {Key? key,
       required this.model,
       this.child,
@@ -170,6 +163,78 @@ class TestForm {
   void get idFocus => form.focus(idControlPath());
   void get nameFocus => form.focus(nameControlPath());
   void get yearFocus => form.focus(yearControlPath());
+  void genderRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(genderControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void idRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(idControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void nameRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(nameControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void yearRemove({bool updateParent = true, bool emitEvent = true}) =>
+      form.removeControl(yearControlPath(),
+          updateParent: updateParent, emitEvent: emitEvent);
+  void genderValueUpdate(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      genderControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void idValueUpdate(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      idControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void nameValueUpdate(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      nameControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void yearValueUpdate(double? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      yearControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void genderValuePatch(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      genderControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void idValuePatch(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      idControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void nameValuePatch(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      nameControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void yearValuePatch(double? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      yearControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void genderValueReset(String? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      genderControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void idValueReset(String? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      idControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void nameValueReset(String? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      nameControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void yearValueReset(double? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      yearControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String> get genderControl =>
       form.control(genderControlPath()) as FormControl<String>;
   FormControl<String> get idControl =>
@@ -180,11 +245,56 @@ class TestForm {
       form.control(yearControlPath()) as FormControl<double>;
   Test get model =>
       Test(genderValue, id: idValue, name: nameValue, year: yearValue);
+  void updateValue(Test value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.updateValue(
+          TestForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void resetValue(Test value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.reset(
+          value: TestForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
+      value: this.formElements().rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({},
-      validators: [],
-      asyncValidators: [],
-      asyncValidatorsDebounceTime: 250,
-      disabled: false);
+  FormGroup formElements() => FormGroup({
+        genderControlName: FormControl<String>(
+            value: test.gender,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        idControlName: FormControl<String>(
+            value: test.id,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        nameControlName: FormControl<String>(
+            value: test.name,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        yearControlName: FormControl<double>(
+            value: test.year,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
 }

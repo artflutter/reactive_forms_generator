@@ -1,3 +1,6 @@
+## [0.1.1-beta]
+* package update
+
 ## [0.1.0-beta]
 * package update
 

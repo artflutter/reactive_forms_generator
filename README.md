@@ -176,7 +176,6 @@ Make sure you added required imports before running the generator
 ```dart
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'my_file.gform.dart';

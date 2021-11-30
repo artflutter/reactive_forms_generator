@@ -1,8 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+import 'package:reactive_forms/src/widgets/inherited_streamer.dart';
+import 'dart:core';
 
 part 'freezed.g.dart';
 part 'freezed.freezed.dart';
+part 'freezed.gform.dart';
 
 @freezed
 @ReactiveFormAnnotation()
