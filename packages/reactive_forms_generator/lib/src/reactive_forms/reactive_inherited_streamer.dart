@@ -14,10 +14,10 @@ class ReactiveInheritedStreamer {
           ..initializers.add(
             refer('super').call(
               [
-                CodeExpression(Code('stream')),
-                CodeExpression(Code('child')),
+                const CodeExpression(Code('stream')),
+                const CodeExpression(Code('child')),
               ],
-              {'key': CodeExpression(Code('key'))},
+              {'key': const CodeExpression(Code('key'))},
             ).code,
           )
           ..optionalParameters.addAll(
@@ -26,7 +26,7 @@ class ReactiveInheritedStreamer {
                 (b) => b
                   ..name = 'key'
                   ..named = true
-                  ..type = Reference('Key?'),
+                  ..type = const Reference('Key?'),
               ),
               Parameter(
                 (b) => b
@@ -40,14 +40,14 @@ class ReactiveInheritedStreamer {
                   ..name = 'stream'
                   ..required = true
                   ..named = true
-                  ..type = Reference('Stream<dynamic>'),
+                  ..type = const Reference('Stream<dynamic>'),
               ),
               Parameter(
                 (b) => b
                   ..name = 'child'
                   ..required = true
                   ..named = true
-                  ..type = Reference('Widget'),
+                  ..type = const Reference('Widget'),
               ),
             ],
           ),
@@ -65,7 +65,7 @@ class ReactiveInheritedStreamer {
   Class get generate => Class(
         (b) => b
           ..name = className
-          ..extend = Reference('InheritedStreamer<dynamic>')
+          ..extend = const Reference('InheritedStreamer<dynamic>')
           ..constructors.add(_constructor)
           ..fields.add(
             Field(

@@ -20,7 +20,7 @@ class ReactiveForm {
                 (b) => b
                   ..name = 'key'
                   ..named = true
-                  ..type = Reference('Key?'),
+                  ..type = const Reference('Key?'),
               ),
               Parameter(
                 (b) => b
@@ -47,7 +47,7 @@ class ReactiveForm {
           ..initializers.add(
             refer('super').call(
               [],
-              {'key': CodeExpression(Code('key'))},
+              {'key': const CodeExpression(Code('key'))},
             ).code,
           ),
       );
@@ -63,14 +63,14 @@ class ReactiveForm {
   Class get reactiveForm => Class(
         (b) => b
           ..name = className
-          ..extend = Reference('StatelessWidget')
+          ..extend = const Reference('StatelessWidget')
           ..constructors.add(_constructor)
           ..fields.addAll([
             Field(
               (b) => b
                 ..name = 'child'
                 ..modifier = FieldModifier.final$
-                ..type = Reference('Widget'),
+                ..type = const Reference('Widget'),
             ),
             Field(
               (b) => b
@@ -82,7 +82,7 @@ class ReactiveForm {
               (b) => b
                 ..name = 'onWillPop'
                 ..modifier = FieldModifier.final$
-                ..type = Reference('WillPopCallback?'),
+                ..type = const Reference('WillPopCallback?'),
             )
           ])
           ..methods.addAll(
@@ -96,7 +96,7 @@ class ReactiveForm {
                     Parameter(
                       (b) => b
                         ..name = 'context'
-                        ..type = Reference('BuildContext'),
+                        ..type = const Reference('BuildContext'),
                     ),
                   )
                   ..optionalParameters.add(
@@ -104,8 +104,8 @@ class ReactiveForm {
                       (b) => b
                         ..name = 'listen'
                         ..named = true
-                        ..defaultTo = Code('true')
-                        ..type = Reference('bool'),
+                        ..defaultTo = const Code('true')
+                        ..type = const Reference('bool'),
                     ),
                   )
                   ..body = Code('''
@@ -125,16 +125,16 @@ class ReactiveForm {
               Method(
                 (b) => b
                   ..name = 'build'
-                  ..returns = Reference('Widget')
+                  ..returns = const Reference('Widget')
                   ..requiredParameters.add(
                     Parameter(
                       (b) => b
                         ..name = 'context'
-                        ..type = Reference('BuildContext'),
+                        ..type = const Reference('BuildContext'),
                     ),
                   )
                   ..annotations.add(
-                    CodeExpression(Code('override')),
+                    const CodeExpression(Code('override')),
                   )
                   ..body = Code('''
                     return ${reactiveInheritedStreamer.className}(

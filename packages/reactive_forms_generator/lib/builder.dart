@@ -5,7 +5,7 @@ import 'reactive_forms_generator.dart';
 
 Builder reactiveFormsGenerator(BuilderOptions options) {
   return PartBuilder(
-    [ReactiveFormsGenerator()],
+    [const ReactiveFormsGenerator()],
     '.gform.dart',
   );
 }

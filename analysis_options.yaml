@@ -1,0 +1,11 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude: [
+      generator_tests/**/*.freezed.dart,
+      generator_tests/**/*.g.dart,
+      generator_tests/**/*.gform.dart,
+  ]
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false

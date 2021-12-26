@@ -18,28 +18,29 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  flutter: '>=2.2.0 <3.0.0'
-  sdk: ">=2.13.0 <3.0.0"
+  flutter: '>=2.8.0 <3.0.0'
+  sdk: ">=2.15.0 <3.0.0"
 
 dependencies:
   build: ^2.0.3
-  source_gen: 1.1.1
-  path: ^1.8.0
+  source_gen: 1.2.1
+  path: ^1.8.1
   build_runner: ^2.0.6
   code_builder: ^4.1.0
   dart_style: ^2.0.2
   recase: ^4.0.0
   reactive_forms_annotations: 1.0.0+1
-  freezed_annotation: ^0.14.3
+  freezed_annotation: ^1.1.0
 
 dev_dependencies:
   json_serializable:
   build_test: ^2.1.2
-  freezed: ^0.14.5
+  freezed: ^1.1.0
   flutter_test:
     sdk: flutter
   logging: ^1.0.1
   reactive_forms_generator: 1.0.0+1
+  flutter_lints: ^1.0.4
 
 dependency_overrides:
   reactive_forms_annotations:
@@ -47,6 +48,7 @@ dependency_overrides:
   reactive_forms_generator:
     path: ../packages/reactive_forms_generator
   meta: 1.7.0
+  path: ^1.8.1
 
 
 # For information on the generic Dart part of this file, see the

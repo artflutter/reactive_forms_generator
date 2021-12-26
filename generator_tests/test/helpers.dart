@@ -9,7 +9,9 @@ Future testGenerator({
 }) async {
   Logger.root.level = Level.INFO;
 
-  final anotherBuilder = reactiveFormsGenerator(BuilderOptions({}));
+  final anotherBuilder = reactiveFormsGenerator(
+    const BuilderOptions(<String, dynamic>{}),
+  );
 
   return await testBuilder(
     anotherBuilder,

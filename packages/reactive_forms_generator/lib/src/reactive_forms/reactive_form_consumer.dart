@@ -12,7 +12,7 @@ class ReactiveFormConsumer {
           ..initializers.add(
             refer('super').call(
               [],
-              {'key': CodeExpression(Code('key'))},
+              {'key': const CodeExpression(Code('key'))},
             ).code,
           )
           ..optionalParameters.addAll(
@@ -21,7 +21,7 @@ class ReactiveFormConsumer {
                 (b) => b
                   ..name = 'key'
                   ..named = true
-                  ..type = Reference('Key?'),
+                  ..type = const Reference('Key?'),
               ),
               Parameter(
                 (b) => b
@@ -43,16 +43,16 @@ class ReactiveFormConsumer {
   Method get _buildMethod => Method(
         (b) => b
           ..name = 'build'
-          ..returns = Reference('Widget')
+          ..returns = const Reference('Widget')
           ..requiredParameters.add(
             Parameter(
               (b) => b
                 ..name = 'context'
-                ..type = Reference('BuildContext'),
+                ..type = const Reference('BuildContext'),
             ),
           )
           ..annotations.add(
-            CodeExpression(Code('override')),
+            const CodeExpression(Code('override')),
           )
           ..body = Code('''
             final formModel = ${reactiveForm.className}.of(context);
@@ -69,7 +69,7 @@ class ReactiveFormConsumer {
           (b) => b
             ..name = 'child'
             ..modifier = FieldModifier.final$
-            ..type = Reference('Widget?'),
+            ..type = const Reference('Widget?'),
         ),
         Field(
           (b) => b
@@ -84,7 +84,7 @@ class ReactiveFormConsumer {
   Class get generate => Class(
         (b) => b
           ..name = '${reactiveForm.className}Consumer'
-          ..extend = Reference('StatelessWidget')
+          ..extend = const Reference('StatelessWidget')
           ..constructors.add(_constructor)
           ..methods.add(_buildMethod)
           ..fields.addAll(_fields),

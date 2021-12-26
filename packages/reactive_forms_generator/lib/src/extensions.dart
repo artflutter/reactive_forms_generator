@@ -3,13 +3,13 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 
 extension ConstructorElementExt on ConstructorElement {
-  bool get hasReactiveFormAnnotatedParameters => this.parameters.any(
+  bool get hasReactiveFormAnnotatedParameters => parameters.any(
         (e) => e.isReactiveFormAnnotated,
       );
 }
 
 extension ParameterElementExt on ParameterElement {
-  String get fieldName => this.name;
+  String get fieldName => name;
 
   String get fieldValueName => '${fieldName}Value';
 
@@ -20,14 +20,10 @@ extension ParameterElementExt on ParameterElement {
   String get fieldControlPath => '${fieldName}ControlPath';
 
   bool get isReactiveFormAnnotated =>
-      this.isFormGroupArray ||
-      this.isFormGroup ||
-      this.isFormControl ||
-      this.isFormArray;
+      isFormGroupArray || isFormGroup || isFormControl || isFormArray;
 
   // needs careful usage and possibly refactoring
-  DartType get typeParameter =>
-      (this.type as ParameterizedType).typeArguments.first;
+  DartType get typeParameter => (type as ParameterizedType).typeArguments.first;
 
   bool get isFormGroupArray {
     if (!isFormArray) {
@@ -40,8 +36,7 @@ extension ParameterElementExt on ParameterElement {
 
     final typeParameter = typeArguments.first;
 
-    return typeParameter is DartType &&
-        typeParameter.element is ClassElement &&
+    return typeParameter.element is ClassElement &&
         formGroupChecker.hasAnnotationOf(typeParameter.element!);
   }
 
@@ -50,7 +45,7 @@ extension ParameterElementExt on ParameterElement {
   bool get isFormControl => formControlChecker.hasAnnotationOfExact(this);
 
   bool get isFormGroup {
-    final element = this.type.element;
+    final element = type.element;
     return element != null
         ? formGroupChecker.hasAnnotationOfExact(element)
         : false;
@@ -60,7 +55,7 @@ extension ParameterElementExt on ParameterElement {
 }
 
 extension FieldElementExt on FieldElement {
-  String get fieldName => this.name;
+  String get fieldName => name;
 
   String get fieldValueName => '${fieldName}Value';
 
@@ -71,8 +66,7 @@ extension FieldElementExt on FieldElement {
   String get fieldControlPath => '${fieldName}ControlPath';
 
   // needs careful usage and possibly refactoring
-  DartType get typeParameter =>
-      (this.type as ParameterizedType).typeArguments.first;
+  DartType get typeParameter => (type as ParameterizedType).typeArguments.first;
 
   bool get isFormGroupArray {
     if (!isFormArray) {
@@ -85,8 +79,7 @@ extension FieldElementExt on FieldElement {
 
     final typeParameter = typeArguments.first;
 
-    return typeParameter is DartType &&
-        typeParameter.element is ClassElement &&
+    return typeParameter.element is ClassElement &&
         formGroupChecker.hasAnnotationOf(typeParameter.element!);
   }
 
@@ -95,7 +88,7 @@ extension FieldElementExt on FieldElement {
   bool get isFormControl => formControlChecker.hasAnnotationOfExact(this);
 
   bool get isFormGroup {
-    final element = this.type.element;
+    final element = type.element;
     return element != null
         ? formGroupChecker.hasAnnotationOfExact(element)
         : false;
@@ -110,10 +103,10 @@ typedef _MergeableFunction<T> = T Function(T oldT, T newT);
 Iterable<T> _mergeDuplicatesBy<T, U>(Iterable<T> list,
     _IterableFunction<T, U> fn, _MergeableFunction<T> mergeFn) {
   final values = <U, T>{};
-  list.forEach((i) {
+  for (var i in list) {
     final value = fn(i);
     values.update(value, (oldI) => mergeFn(oldI, i), ifAbsent: () => i);
-  });
+  }
   return values.values.toList();
 }
 

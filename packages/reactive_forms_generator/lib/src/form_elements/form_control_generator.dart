@@ -27,6 +27,6 @@ class FormControlGenerator extends FormElementGenerator {
       displayType = displayType.substring(0, displayType.length - 1);
     }
 
-    return 'FormControl<${displayType}>($props)';
+    return 'FormControl<$displayType>($props)';
   }
 }

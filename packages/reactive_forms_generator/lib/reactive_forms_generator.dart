@@ -6,6 +6,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:source_gen/source_gen.dart';
+// ignore: implementation_imports
 import 'package:source_gen/src/output_helpers.dart';
 
 import 'src/library_builder.dart';

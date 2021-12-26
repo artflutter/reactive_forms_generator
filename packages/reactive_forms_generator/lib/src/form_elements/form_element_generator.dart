@@ -14,7 +14,7 @@ abstract class FormElementGenerator {
     final optionalChaining =
         type?.nullabilitySuffix == NullabilitySuffix.question ? '?' : '';
 
-    return '${(field.enclosingElement as ConstructorElement).enclosingElement.name.camelCase}${optionalChaining}.${field.name}';
+    return '${(field.enclosingElement as ConstructorElement).enclosingElement.name.camelCase}$optionalChaining.${field.name}';
   }
 
   String? validatorName(ExecutableElement? e) {

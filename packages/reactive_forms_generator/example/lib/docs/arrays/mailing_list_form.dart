@@ -1,6 +1,5 @@
 import 'package:example/docs/arrays/mailing_list.dart';
 import 'package:example/sample_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -23,24 +22,26 @@ class MailingListFormWidget extends StatelessWidget {
                   Expanded(
                     child: ReactiveFormArray<String>(
                       formArray: formModel.emailListControl,
-                      builder: (context, formArray, child) => Column(
-                        children: formModel.emailListValue
-                            .asMap()
-                            .map((i, email) {
-                              return MapEntry(
-                                  i,
-                                  ReactiveTextField<String>(
-                                    formControlName: i.toString(),
-                                    validationMessages: (_) => {
-                                      'email': 'Invalid email',
-                                    },
-                                    decoration: InputDecoration(
-                                        labelText: 'Email ${i}'),
-                                  ));
-                            })
-                            .values
-                            .toList(),
-                      ),
+                      builder: (context, formArray, child) {
+                        return Column(
+                          children: formModel.emailListValue
+                              .asMap()
+                              .map((i, email) {
+                                return MapEntry(
+                                    i,
+                                    ReactiveTextField<String>(
+                                      formControlName: i.toString(),
+                                      validationMessages: (_) => {
+                                        'email': 'Invalid email',
+                                      },
+                                      decoration: InputDecoration(
+                                          labelText: 'Email ${i}'),
+                                    ));
+                              })
+                              .values
+                              .toList(),
+                        );
+                      },
                     ),
                   ),
                   SizedBox(width: 16),
@@ -78,6 +79,15 @@ class MailingListFormWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      formModel.resetValue(MailingList(emailList: [
+                        'test@gmail.com2',
+                        'wrond email3',
+                      ]));
+                    },
+                    child: const Text('Reset'),
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       if (formModel.form.valid) {

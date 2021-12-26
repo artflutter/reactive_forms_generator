@@ -1,8 +1,11 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
+// ignore: implementation_imports
 import 'package:analyzer/src/dart/element/element.dart' as e;
+// ignore: implementation_imports
 import 'package:analyzer/src/generated/utilities_dart.dart' as u;
 import 'package:analyzer/dart/element/nullability_suffix.dart';
+// ignore: implementation_imports
 import 'package:analyzer/src/dart/element/type.dart' as t;
 
 import 'package:code_builder/code_builder.dart';
@@ -29,27 +32,25 @@ class FormGenerator {
   final Map<String, FormGenerator> nestedFormGroupGenerators = {};
 
   FormGenerator(this.element, this.type) {
-    formGroups.forEach(
-      (e) => formGroupGenerators[e.name] = FormGenerator(
+    for (var e in formGroups) {
+      formGroupGenerators[e.name] = FormGenerator(
         e.type.element! as ClassElement,
         e.type,
-      ),
-    );
+      );
+    }
 
-    formGroupArrays.forEach(
-      (e) {
-        final type = e.type;
-        final typeArguments =
-            type is ParameterizedType ? type.typeArguments : const <DartType>[];
+    for (var e in formGroupArrays) {
+      final type = e.type;
+      final typeArguments =
+          type is ParameterizedType ? type.typeArguments : const <DartType>[];
 
-        final typeParameter = typeArguments.first;
+      final typeParameter = typeArguments.first;
 
-        nestedFormGroupGenerators[e.name] = FormGenerator(
-          typeParameter.element! as ClassElement,
-          e.type,
-        );
-      },
-    );
+      nestedFormGroupGenerators[e.name] = FormGenerator(
+        typeParameter.element! as ClassElement,
+        e.type,
+      );
+    }
   }
 
   List<ParameterElement> get formControls => parameters
@@ -90,7 +91,7 @@ class FormGenerator {
         (b) => b
           ..static = true
           ..type = stringRef
-          ..name = '${field.fieldControlNameName}'
+          ..name = field.fieldControlNameName
           ..assignment = Code('"${field.fieldName}"'),
       );
 
@@ -163,7 +164,7 @@ class FormGenerator {
           .map((k, v) => MapEntry(
             k,
             ${typeParameter}Form(
-              ${typeParameter}(), form, pathBuilder("${field.name}.\$k"))
+              $typeParameter(), form, pathBuilder("${field.name}.\$k"))
               .model))
           .values
           .toList()''';
@@ -198,7 +199,7 @@ class FormGenerator {
           ..name = 'contains${field.name.pascalCase}'
           ..lambda = true
           ..type = MethodType.getter
-          ..returns = Reference('bool')
+          ..returns = const Reference('bool')
           ..body = Code(
             'form.contains(${field.fieldControlPath}())',
           ),
@@ -216,7 +217,7 @@ class FormGenerator {
           ..name = '${field.name}Errors'
           ..lambda = true
           ..type = MethodType.getter
-          ..returns = Reference('Object?')
+          ..returns = const Reference('Object?')
           ..body = Code(
             '${field.fieldControlName}.errors',
           ),
@@ -234,7 +235,7 @@ class FormGenerator {
           ..name = '${field.name}Focus'
           ..lambda = true
           ..type = MethodType.getter
-          ..returns = Reference('void')
+          ..returns = const Reference('void')
           ..body = Code(
             'form.focus(${field.fieldControlPath}())',
           ),
@@ -249,18 +250,18 @@ class FormGenerator {
               (b) => b
                 ..name = 'updateParent'
                 ..named = true
-                ..defaultTo = Code('true')
-                ..type = Reference('bool'),
+                ..defaultTo = const Code('true')
+                ..type = const Reference('bool'),
             ),
             Parameter(
               (b) => b
                 ..name = 'emitEvent'
                 ..named = true
-                ..defaultTo = Code('true')
-                ..type = Reference('bool'),
+                ..defaultTo = const Code('true')
+                ..type = const Reference('bool'),
             ),
           ])
-          ..returns = Reference('void')
+          ..returns = const Reference('void')
           ..body = Code(
             'form.removeControl(${field.fieldControlPath}(), updateParent: updateParent, emitEvent:emitEvent)',
           ),
@@ -295,20 +296,20 @@ class FormGenerator {
             (b) => b
               ..name = 'updateParent'
               ..named = true
-              ..defaultTo = Code('true')
-              ..type = Reference('bool'),
+              ..defaultTo = const Code('true')
+              ..type = const Reference('bool'),
           ),
           Parameter(
             (b) => b
               ..name = 'emitEvent'
               ..named = true
-              ..defaultTo = Code('true')
-              ..type = Reference('bool'),
+              ..defaultTo = const Code('true')
+              ..type = const Reference('bool'),
           ),
         ])
-        ..returns = Reference('void')
+        ..returns = const Reference('void')
         ..body = Code(
-          '${field.fieldControlName}.updateValue(${value}, updateParent: updateParent, emitEvent:emitEvent)',
+          '${field.fieldControlName}.updateValue($value, updateParent: updateParent, emitEvent:emitEvent)',
         ),
     );
   }
@@ -342,20 +343,20 @@ class FormGenerator {
             (b) => b
               ..name = 'updateParent'
               ..named = true
-              ..defaultTo = Code('true')
-              ..type = Reference('bool'),
+              ..defaultTo = const Code('true')
+              ..type = const Reference('bool'),
           ),
           Parameter(
             (b) => b
               ..name = 'emitEvent'
               ..named = true
-              ..defaultTo = Code('true')
-              ..type = Reference('bool'),
+              ..defaultTo = const Code('true')
+              ..type = const Reference('bool'),
           ),
         ])
-        ..returns = Reference('void')
+        ..returns = const Reference('void')
         ..body = Code(
-          '${field.fieldControlName}.patchValue(${value}, updateParent: updateParent, emitEvent:emitEvent)',
+          '${field.fieldControlName}.patchValue($value, updateParent: updateParent, emitEvent:emitEvent)',
         ),
     );
   }
@@ -389,33 +390,33 @@ class FormGenerator {
             (b) => b
               ..name = 'updateParent'
               ..named = true
-              ..defaultTo = Code('true')
-              ..type = Reference('bool'),
+              ..defaultTo = const Code('true')
+              ..type = const Reference('bool'),
           ),
           Parameter(
             (b) => b
               ..name = 'emitEvent'
               ..named = true
-              ..defaultTo = Code('true')
-              ..type = Reference('bool'),
+              ..defaultTo = const Code('true')
+              ..type = const Reference('bool'),
           ),
           Parameter(
             (b) => b
               ..name = 'removeFocus'
               ..named = true
-              ..defaultTo = Code('false')
-              ..type = Reference('bool'),
+              ..defaultTo = const Code('false')
+              ..type = const Reference('bool'),
           ),
           Parameter(
             (b) => b
               ..name = 'disabled'
               ..named = true
-              ..type = Reference('bool?'),
+              ..type = const Reference('bool?'),
           ),
         ])
-        ..returns = Reference('void')
+        ..returns = const Reference('void')
         ..body = Code(
-          '${field.fieldControlName}.reset(value: ${value}, updateParent: updateParent, emitEvent:emitEvent)',
+          '${field.fieldControlName}.reset(value: $value, updateParent: updateParent, emitEvent:emitEvent)',
         ),
     );
   }
@@ -449,20 +450,20 @@ class FormGenerator {
             (b) => b
               ..name = 'updateParent'
               ..named = true
-              ..defaultTo = Code('true')
-              ..type = Reference('bool'),
+              ..defaultTo = const Code('true')
+              ..type = const Reference('bool'),
           ),
           Parameter(
             (b) => b
               ..name = 'emitEvent'
               ..named = true
-              ..defaultTo = Code('true')
-              ..type = Reference('bool'),
+              ..defaultTo = const Code('true')
+              ..type = const Reference('bool'),
           ),
         ])
-        ..returns = Reference('void')
+        ..returns = const Reference('void')
         ..body = Code(
-          'form.updateValue(${className}(value, FormGroup({}), null).formElements().rawValue, updateParent: updateParent, emitEvent:emitEvent)',
+          'form.updateValue($className(value, FormGroup({}), null).formElements().rawValue, updateParent: updateParent, emitEvent:emitEvent)',
         ),
     );
   }
@@ -496,20 +497,20 @@ class FormGenerator {
             (b) => b
               ..name = 'updateParent'
               ..named = true
-              ..defaultTo = Code('true')
-              ..type = Reference('bool'),
+              ..defaultTo = const Code('true')
+              ..type = const Reference('bool'),
           ),
           Parameter(
             (b) => b
               ..name = 'emitEvent'
               ..named = true
-              ..defaultTo = Code('true')
-              ..type = Reference('bool'),
+              ..defaultTo = const Code('true')
+              ..type = const Reference('bool'),
           ),
         ])
-        ..returns = Reference('void')
+        ..returns = const Reference('void')
         ..body = Code(
-          'form.reset(value: ${className}(value, FormGroup({}), null).formElements().rawValue, updateParent: updateParent, emitEvent:emitEvent)',
+          'form.reset(value: $className(value, FormGroup({}), null).formElements().rawValue, updateParent: updateParent, emitEvent:emitEvent)',
         ),
     );
   }
@@ -524,19 +525,19 @@ class FormGenerator {
             (b) => b
               ..name = 'updateParent'
               ..named = true
-              ..defaultTo = Code('true')
-              ..type = Reference('bool'),
+              ..defaultTo = const Code('true')
+              ..type = const Reference('bool'),
           ),
           Parameter(
             (b) => b
               ..name = 'emitEvent'
               ..named = true
-              ..defaultTo = Code('true')
-              ..type = Reference('bool'),
+              ..defaultTo = const Code('true')
+              ..type = const Reference('bool'),
           ),
         ])
-        ..returns = Reference('void')
-        ..body = Code(
+        ..returns = const Reference('void')
+        ..body = const Code(
           'form.reset(value: this.formElements().rawValue, updateParent: updateParent, emitEvent:emitEvent)',
         ),
     );
@@ -595,7 +596,7 @@ class FormGenerator {
         ..type = MethodType.getter
         ..returns = Reference(reference)
         ..body = Code(
-          'form.control(${field.fieldControlPath}()) as ${reference}',
+          'form.control(${field.fieldControlPath}()) as $reference',
         ),
     );
   }
@@ -609,16 +610,16 @@ class FormGenerator {
     //   displayType = displayType.substring(0, displayType.length - 1);
     // }
 
-    final reference = 'FormGroup';
+    const reference = 'FormGroup';
 
     return Method(
       (b) => b
         ..name = field.fieldControlName
         ..lambda = true
         ..type = MethodType.getter
-        ..returns = Reference(reference)
+        ..returns = const Reference(reference)
         ..body = Code(
-          'form.control(${field.fieldControlPath}()) as ${reference}',
+          'form.control(${field.fieldControlPath}()) as $reference',
         ),
     );
   }
@@ -647,7 +648,7 @@ class FormGenerator {
         ..type = MethodType.getter
         ..returns = Reference(typeReference)
         ..body = Code(
-          'form.control(${field.fieldControlPath}()) as ${typeReference}',
+          'form.control(${field.fieldControlPath}()) as $typeReference',
         ),
     );
   }
@@ -668,10 +669,10 @@ class FormGenerator {
               ..type = Reference(type),
           ),
         )
-        ..returns = Reference('void')
+        ..returns = const Reference('void')
         ..body = Code(
           '''
-              final formGroup = ${formGroupGenerator.className}(value, form, pathBuilder(\'${field.fieldName}\')).formElements();
+              final formGroup = ${formGroupGenerator.className}(value, form, pathBuilder('${field.fieldName}')).formElements();
 
               ${field.fieldControlName}.add(formGroup);''',
         ),
@@ -707,7 +708,7 @@ class FormGenerator {
             (b) => b
               ..name = 'asyncValidators'
               ..named = true
-              ..type = Reference('List<AsyncValidatorFunction>?'),
+              ..type = const Reference('List<AsyncValidatorFunction>?'),
           ),
         )
         ..optionalParameters.add(
@@ -715,7 +716,7 @@ class FormGenerator {
             (b) => b
               ..name = 'validators'
               ..named = true
-              ..type = Reference('List<ValidatorFunction>?'),
+              ..type = const Reference('List<ValidatorFunction>?'),
           ),
         )
         ..optionalParameters.add(
@@ -723,7 +724,7 @@ class FormGenerator {
             (b) => b
               ..name = 'asyncValidatorsDebounceTime'
               ..named = true
-              ..type = Reference('int?'),
+              ..type = const Reference('int?'),
           ),
         )
         ..optionalParameters.add(
@@ -731,7 +732,7 @@ class FormGenerator {
             (b) => b
               ..name = 'disabled'
               ..named = true
-              ..type = Reference('bool?'),
+              ..type = const Reference('bool?'),
           ),
         )
         ..optionalParameters.add(
@@ -739,15 +740,15 @@ class FormGenerator {
             (b) => b
               ..name = 'validatorsApplyMode'
               ..named = true
-              ..defaultTo = Code('ValidatorsApplyMode.merge')
-              ..type = Reference('ValidatorsApplyMode'),
+              ..defaultTo = const Code('ValidatorsApplyMode.merge')
+              ..type = const Reference('ValidatorsApplyMode'),
           ),
         )
-        ..returns = Reference('void')
+        ..returns = const Reference('void')
         ..body = Code(
           '''
-              List<ValidatorFunction> resultingValidators = ${validators}; 
-              List<AsyncValidatorFunction> resultingAsyncValidators = ${asyncValidators};
+              List<ValidatorFunction> resultingValidators = $validators; 
+              List<AsyncValidatorFunction> resultingAsyncValidators = $asyncValidators;
               
               switch(validatorsApplyMode) { 
                 case ValidatorsApplyMode.merge:
@@ -765,12 +766,12 @@ class FormGenerator {
                   break;
               }
                
-              ${field.fieldControlName}.add(FormControl<${type}>(
+              ${field.fieldControlName}.add(FormControl<$type>(
                 value: value, 
                 validators: resultingValidators,
                 asyncValidators: resultingAsyncValidators,
-                asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? ${asyncValidatorsDebounceTime},
-                disabled: disabled ?? ${disabled},
+                asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? $asyncValidatorsDebounceTime,
+                disabled: disabled ?? $disabled,
               ));''',
         ),
     );
@@ -823,7 +824,7 @@ class FormGenerator {
           final formGroupInitializers = formGroupGenerators
               .map((name, generator) {
                 final item =
-                    '${name}Form = ${generator.className}(${element.name.camelCase}.${name}, form, pathBuilder(\'${name}\'));';
+                    '${name}Form = ${generator.className}(${element.name.camelCase}.$name, form, pathBuilder(\'$name\'));';
 
                 return MapEntry(name, item);
               })
@@ -900,20 +901,20 @@ class FormGenerator {
                     b
                       ..name = element.name.camelCase
                       ..modifier = FieldModifier.final$
-                      ..type = Reference('$displayType');
+                      ..type = Reference(displayType);
                   },
                 ),
                 Field(
                   (b) => b
                     ..name = 'form'
                     ..modifier = FieldModifier.final$
-                    ..type = Reference('FormGroup'),
+                    ..type = const Reference('FormGroup'),
                 ),
                 Field(
                   (b) => b
                     ..name = 'path'
                     ..modifier = FieldModifier.final$
-                    ..type = Reference('String?'),
+                    ..type = const Reference('String?'),
                 ),
                 ...formGroupArrays.map(
                   (e) {
@@ -962,11 +963,11 @@ class FormGenerator {
                       Parameter(
                         (b) => b
                           ..name = 'pathItem'
-                          ..type = Reference('String?'),
+                          ..type = const Reference('String?'),
                       ),
                     )
-                    ..returns = Reference('String')
-                    ..body = Code('''
+                    ..returns = const Reference('String')
+                    ..body = const Code('''
                       [path, pathItem].whereType<String>().join(".")
                     '''),
                 ),
@@ -975,7 +976,7 @@ class FormGenerator {
                     b
                       ..name = 'formElements'
                       ..lambda = true
-                      ..returns = Reference('FormGroup')
+                      ..returns = const Reference('FormGroup')
                       ..body = Code(
                         FormGroupGenerator(
                           e.ParameterElementImpl(

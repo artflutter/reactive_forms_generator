@@ -1,6 +1,5 @@
 import 'package:example/forms/groups_form.dart';
 import 'package:example/sample_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 

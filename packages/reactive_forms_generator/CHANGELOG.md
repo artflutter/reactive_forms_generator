@@ -1,3 +1,6 @@
+## [0.5.0-beta]
+* package updates
+
 ## [0.4.0-beta]
 **BREAKING CHANGE**
 * made *.gform.dart a part file check README file https://github.com/artflutter/reactive_forms_generator#run-the-generator

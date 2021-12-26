@@ -11,7 +11,7 @@ class ReactiveFormBuilder {
           ..name = 'createState'
           ..lambda = true
           ..type
-          ..annotations.add(CodeExpression(Code('override')))
+          ..annotations.add(const CodeExpression(Code('override')))
           ..returns = Reference(
             '_${reactiveForm.reactiveInheritedStreamer.formGenerator.className}BuilderState',
           )
@@ -26,7 +26,7 @@ class ReactiveFormBuilder {
           ..initializers.add(
             refer('super').call(
               [],
-              {'key': CodeExpression(Code('key'))},
+              {'key': const CodeExpression(Code('key'))},
             ).code,
           )
           ..optionalParameters.addAll(
@@ -35,7 +35,7 @@ class ReactiveFormBuilder {
                 (b) => b
                   ..name = 'key'
                   ..named = true
-                  ..type = Reference('Key?'),
+                  ..type = const Reference('Key?'),
               ),
               Parameter(
                 (b) => b
@@ -78,13 +78,13 @@ class ReactiveFormBuilder {
         Field(
           (b) => b
             ..name = 'child'
-            ..type = Reference('Widget?')
+            ..type = const Reference('Widget?')
             ..modifier = FieldModifier.final$,
         ),
         Field(
           (b) => b
             ..name = 'onWillPop'
-            ..type = Reference('WillPopCallback?')
+            ..type = const Reference('WillPopCallback?')
             ..modifier = FieldModifier.final$,
         ),
         Field(
@@ -101,7 +101,7 @@ class ReactiveFormBuilder {
         (b) => b
           ..name =
               '${reactiveForm.reactiveInheritedStreamer.formGenerator.className}Builder'
-          ..extend = Reference('StatefulWidget')
+          ..extend = const Reference('StatefulWidget')
           ..fields.addAll(_widgetFields)
           ..constructors.add(_widgetConstructor)
           ..methods.add(_createStateMethod),
@@ -111,8 +111,8 @@ class ReactiveFormBuilder {
         Method(
           (b) => b
             ..name = 'initState'
-            ..annotations.add(CodeExpression(Code('override')))
-            ..returns = Reference('void')
+            ..annotations.add(const CodeExpression(Code('override')))
+            ..returns = const Reference('void')
             ..body = Code('''
                 _form = FormGroup({});
                 _formModel = ${reactiveForm.reactiveInheritedStreamer.formGenerator.className}(widget.model, _form, null);
@@ -125,13 +125,13 @@ class ReactiveFormBuilder {
         Method(
           (b) => b
             ..name = 'build'
-            ..annotations.add(CodeExpression(Code('override')))
-            ..returns = Reference('Widget')
+            ..annotations.add(const CodeExpression(Code('override')))
+            ..returns = const Reference('Widget')
             ..requiredParameters.add(
               Parameter(
                 (b) => b
                   ..name = 'context'
-                  ..type = Reference('BuildContext'),
+                  ..type = const Reference('BuildContext'),
               ),
             )
             ..body = Code(
@@ -162,7 +162,7 @@ class ReactiveFormBuilder {
                 (b) => b
                   ..name = '_form'
                   ..late = true
-                  ..type = Reference('FormGroup'),
+                  ..type = const Reference('FormGroup'),
               ),
               Field(
                 (b) => b
