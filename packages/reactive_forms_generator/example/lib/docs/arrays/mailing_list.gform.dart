@@ -198,13 +198,11 @@ class MailingListForm {
 
   MailingList get model => MailingList(emailList: emailListValue);
   void updateValue(MailingList value,
-      {bool updateParent = true, bool emitEvent = true}) {
-    form.updateValue(
-        MailingListForm(value, FormGroup({}), null).formElements().rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent);
-  }
-
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.updateValue(
+          MailingListForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   void resetValue(MailingList value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.reset(

@@ -402,7 +402,7 @@ packages:
       name: reactive_forms
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "10.6.8"
+    version: "11.0.0"
   reactive_forms_annotations:
     dependency: "direct main"
     description:
@@ -416,7 +416,7 @@ packages:
       path: "../packages/reactive_forms_generator"
       relative: true
     source: path
-    version: "0.4.1-beta"
+    version: "0.5.0-beta"
   recase:
     dependency: "direct main"
     description:

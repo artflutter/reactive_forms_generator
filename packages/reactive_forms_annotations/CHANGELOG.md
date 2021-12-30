@@ -1,3 +1,6 @@
+## [0.3.0-beta]
+* rf11
+
 ## [0.2.0-beta]
 * package update
 

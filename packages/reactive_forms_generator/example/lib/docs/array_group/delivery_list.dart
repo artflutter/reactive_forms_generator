@@ -14,6 +14,7 @@ class DeliveryList {
   });
 }
 
+@ReactiveFormAnnotation()
 @FormGroupAnnotation()
 class DeliveryPoint {
   final String name;

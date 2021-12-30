@@ -1,3 +1,7 @@
+## [0.6.0-beta]
+* subforms support
+* reactive-forms 11
+
 ## [0.5.0-beta]
 * package updates
 

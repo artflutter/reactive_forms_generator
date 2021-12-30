@@ -11,43 +11,45 @@ import 'package:reactive_forms_generator/src/reactive_forms/reactive_inherited_s
 const stringRef = Reference('String');
 const formGroupRef = Reference('FormGroup');
 
-String generateLibrary(ClassElement element) {
-  final emitter = DartEmitter(
-    allocator: Allocator.simplePrefixing(),
-    orderDirectives: true,
-    useNullSafetySyntax: true,
-  );
-
+List<Spec> generateLibrary(ClassElement element) {
   final formGenerator = FormGenerator(element, null);
   final reactiveInheritedStreamer = ReactiveInheritedStreamer(formGenerator);
   final reactiveForm = ReactiveForm(reactiveInheritedStreamer);
   final reactiveFormConsumer = ReactiveFormConsumer(reactiveForm);
   final reactiveFormBuilder = ReactiveFormBuilder(reactiveForm);
 
-  final library = Library(
-    (b) => b
-      ..body.addAll([
-        // Directive.import('package:flutter/foundation.dart'),
-        // Directive.import('package:flutter/material.dart'),
-        // Directive.import('package:reactive_forms/reactive_forms.dart'),
-        // Directive.import(
-        //   'package:reactive_forms/src/widgets/inherited_streamer.dart',
-        // ),
-        // ...element.enclosingElement.enclosingElement.imports
-        //     .map((e) => e.uri)
-        //     .whereType<String>()
-        //     .map((e) => Directive.import(e)),
-        // Directive.import(element.librarySource.shortName),
-        reactiveFormConsumer.generate,
-        reactiveInheritedStreamer.generate,
-        reactiveForm.generate,
-        ...reactiveFormBuilder.generate,
-        ...formGenerator.generate,
-      ].mergeDuplicatesBy(
-        (i) => i is Class ? i.name : i,
-        (a, b) => a,
-      )),
-  );
+  return [
+    reactiveFormConsumer.generate,
+    reactiveInheritedStreamer.generate,
+    reactiveForm.generate,
+    ...reactiveFormBuilder.generate,
+    ...formGenerator.generate,
+  ];
 
-  return DartFormatter().format(library.accept(emitter).toString());
+  // final library = Library(
+  //   (b) => b
+  //     ..body.addAll([
+  //       // Directive.import('package:flutter/foundation.dart'),
+  //       // Directive.import('package:flutter/material.dart'),
+  //       // Directive.import('package:reactive_forms/reactive_forms.dart'),
+  //       // Directive.import(
+  //       //   'package:reactive_forms/src/widgets/inherited_streamer.dart',
+  //       // ),
+  //       // ...element.enclosingElement.enclosingElement.imports
+  //       //     .map((e) => e.uri)
+  //       //     .whereType<String>()
+  //       //     .map((e) => Directive.import(e)),
+  //       // Directive.import(element.librarySource.shortName),
+  //       reactiveFormConsumer.generate,
+  //       reactiveInheritedStreamer.generate,
+  //       reactiveForm.generate,
+  //       ...reactiveFormBuilder.generate,
+  //       ...formGenerator.generate,
+  //     ].mergeDuplicatesBy(
+  //       (i) => i is Class ? i.name : i,
+  //       (a, b) => a,
+  //     )),
+  // );
+  //
+  // return DartFormatter().format(library.accept(emitter).toString());
 }

@@ -4,6 +4,9 @@ import 'dart:async';
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
+import 'package:code_builder/code_builder.dart';
+import 'package:dart_style/dart_style.dart';
+import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:source_gen/source_gen.dart';
 // ignore: implementation_imports
@@ -17,21 +20,45 @@ class ReactiveFormsGenerator extends Generator {
 
   @override
   Future<String> generate(LibraryReader library, BuildStep buildStep) async {
-    final values = <String>{};
+    final specList = <Spec>[];
+
+    final emitter = DartEmitter(
+      allocator: Allocator.simplePrefixing(),
+      orderDirectives: true,
+      useNullSafetySyntax: true,
+    );
 
     for (var annotatedElement in library.annotatedWith(formChecker)) {
-      final generatedValue = generateForAnnotatedElement(
-          annotatedElement.element, annotatedElement.annotation, buildStep);
-      await for (var value in normalizeGeneratorOutput(generatedValue)) {
-        assert(value.length == value.trim().length);
-        values.add(value);
-      }
+      specList.addAll(
+        generateForAnnotatedElement(
+          annotatedElement.element,
+          annotatedElement.annotation,
+          buildStep,
+        ),
+      );
+    }
+
+    final lib = Library(
+      (b) => b
+        ..body.addAll(specList.mergeDuplicatesBy(
+          (i) => i is Class ? i.name : i,
+          (a, b) => a,
+        )),
+    );
+
+    final generatedValue =
+        DartFormatter().format(lib.accept(emitter).toString());
+
+    final values = <String>[];
+    await for (var value in normalizeGeneratorOutput(generatedValue)) {
+      assert(value.length == value.trim().length);
+      values.add(value);
     }
 
     return values.join('\n\n');
   }
 
-  String generateForAnnotatedElement(
+  List<Spec> generateForAnnotatedElement(
     Element element,
     ConstantReader annotation,
     BuildStep buildStep,

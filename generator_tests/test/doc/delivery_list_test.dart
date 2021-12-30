@@ -27,6 +27,7 @@ void main() {
               });
             }
             
+            @ReactiveFormAnnotation()
             @FormGroupAnnotation()
             class DeliveryPoint {
               final String name;
@@ -527,5 +528,128 @@ class AddressForm {
           asyncValidators: [],
           asyncValidatorsDebounceTime: 250,
           disabled: false);
+}
+
+class ReactiveDeliveryPointFormConsumer extends StatelessWidget {
+  const ReactiveDeliveryPointFormConsumer(
+      {Key? key, required this.builder, this.child})
+      : super(key: key);
+
+  final Widget? child;
+
+  final Widget Function(
+      BuildContext context, DeliveryPointForm formModel, Widget? child) builder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveDeliveryPointForm.of(context);
+
+    if (formModel is! DeliveryPointForm) {
+      throw FormControlParentNotFoundException(this);
+    }
+    return builder(context, formModel, child);
+  }
+}
+
+class DeliveryPointFormInheritedStreamer extends InheritedStreamer<dynamic> {
+  const DeliveryPointFormInheritedStreamer(
+      {Key? key,
+      required this.form,
+      required Stream<dynamic> stream,
+      required Widget child})
+      : super(stream, child, key: key);
+
+  final DeliveryPointForm form;
+}
+
+class ReactiveDeliveryPointForm extends StatelessWidget {
+  const ReactiveDeliveryPointForm(
+      {Key? key, required this.form, required this.child, this.onWillPop})
+      : super(key: key);
+
+  final Widget child;
+
+  final DeliveryPointForm form;
+
+  final WillPopCallback? onWillPop;
+
+  static DeliveryPointForm? of(BuildContext context, {bool listen = true}) {
+    if (listen) {
+      return context
+          .dependOnInheritedWidgetOfExactType<
+              DeliveryPointFormInheritedStreamer>()
+          ?.form;
+    }
+
+    final element = context.getElementForInheritedWidgetOfExactType<
+        DeliveryPointFormInheritedStreamer>();
+    return element == null
+        ? null
+        : (element.widget as DeliveryPointFormInheritedStreamer).form;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DeliveryPointFormInheritedStreamer(
+      form: form,
+      stream: form.form.statusChanged,
+      child: WillPopScope(
+        onWillPop: onWillPop,
+        child: child,
+      ),
+    );
+  }
+}
+
+class DeliveryPointFormBuilder extends StatefulWidget {
+  const DeliveryPointFormBuilder(
+      {Key? key,
+      required this.model,
+      this.child,
+      this.onWillPop,
+      required this.builder})
+      : super(key: key);
+
+  final DeliveryPoint model;
+
+  final Widget? child;
+
+  final WillPopCallback? onWillPop;
+
+  final Widget Function(
+      BuildContext context, DeliveryPointForm formModel, Widget? child) builder;
+
+  @override
+  _DeliveryPointFormBuilderState createState() =>
+      _DeliveryPointFormBuilderState();
+}
+
+class _DeliveryPointFormBuilderState extends State<DeliveryPointFormBuilder> {
+  late FormGroup _form;
+
+  late DeliveryPointForm _formModel;
+
+  @override
+  void initState() {
+    _form = FormGroup({});
+    _formModel = DeliveryPointForm(widget.model, _form, null);
+
+    _form.addAll(_formModel.formElements().controls);
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveDeliveryPointForm(
+      form: _formModel,
+      onWillPop: widget.onWillPop,
+      child: ReactiveForm(
+        formGroup: _form,
+        onWillPop: widget.onWillPop,
+        child: widget.builder(context, _formModel, widget.child),
+      ),
+    );
+  }
 }
 ''';

@@ -42,6 +42,7 @@ which will save you tons of time and make your forms type safe.
         - [Annotation](#frezzed-annotation)
         - [Validation](#frezzed-validation)
         - [Form](#frezzed-form)
+    - [Subforms](#subforms)
 
 # Motivation
 
@@ -63,39 +64,39 @@ FormGroup buildForm() => fb.group(<String, Object>{
 
 /// form itself
 final form = ReactiveFormBuilder(
-    form: buildForm,
-    builder: (context, form, child) {
-      return Column(
-        children: [
-          ReactiveTextField<String>(
-            formControlName: 'email',
-          ),
-          const SizedBox(height: 16.0),
-          ReactiveTextField<String>(
-            formControlName: 'password',
-          ),
-          const SizedBox(height: 16.0),
-          ElevatedButton(
-            onPressed: () {
-              if (form.valid) {
-                print(form.value);
-              } else {
-                form.markAllAsTouched();
-              }
-            },
-            child: const Text('Sign Up'),
-          ),
-          ElevatedButton(
-            onPressed: () => form.resetState({
-              'email': ControlState<String>(value: null),
-              'password': ControlState<String>(value: null),
-              'rememberMe': ControlState<bool>(value: false),
-            }, removeFocus: true),
-            child: const Text('Reset all'),
-          ),
-        ],
-      );
-    },
+  form: buildForm,
+  builder: (context, form, child) {
+    return Column(
+      children: [
+        ReactiveTextField<String>(
+          formControlName: 'email',
+        ),
+        const SizedBox(height: 16.0),
+        ReactiveTextField<String>(
+          formControlName: 'password',
+        ),
+        const SizedBox(height: 16.0),
+        ElevatedButton(
+          onPressed: () {
+            if (form.valid) {
+              print(form.value);
+            } else {
+              form.markAllAsTouched();
+            }
+          },
+          child: const Text('Sign Up'),
+        ),
+        ElevatedButton(
+          onPressed: () => form.resetState({
+            'email': ControlState<String>(value: null),
+            'password': ControlState<String>(value: null),
+            'rememberMe': ControlState<bool>(value: false),
+          }, removeFocus: true),
+          child: const Text('Reset all'),
+        ),
+      ],
+    );
+  },
 );
 ```
 
@@ -111,13 +112,13 @@ final form = ReactiveFormBuilder(
    you would prefer to get the output fom the form like model. And avoid manual type casting like this one.
 ```dart
 final document = DocumentInput(
-      subTypeId: form.value["subType"] as DocumentSubTypeMixin,
-      documentNumber: form.value["documentNumber"] as String,
-      countryIsoCode: form.value["country"] as CountryMixin,
-      countryOfIssueIsoCode: form.value["country"] as CountryMixin,
-      issueDate: form.value["issueDate"] as DateTime,
-      vesselId: form.value["vessel"] as VesselMixin,
-    );
+  subTypeId: form.value["subType"] as DocumentSubTypeMixin,
+  documentNumber: form.value["documentNumber"] as String,
+  countryIsoCode: form.value["country"] as CountryMixin,
+  countryOfIssueIsoCode: form.value["country"] as CountryMixin,
+  issueDate: form.value["issueDate"] as DateTime,
+  vesselId: form.value["vessel"] as VesselMixin,
+);
 ```
 
 This is two main issues that forced me to write this generator.
@@ -227,7 +228,7 @@ class Tiny {
   Tiny({
     @FormControlAnnotation()
     this.email = '',
-    
+
     @FormControlAnnotation()
     this.password = '',
   });
@@ -303,11 +304,11 @@ final form = TinyFormBuilder(
             return ElevatedButton(
               child: Text('Submit'),
               onPressed: form.form.valid
-                      ? () {
+                  ? () {
                 print(form.model.email);
                 print(form.model.password);
               }
-                      : null,
+                  : null,
             );
           },
         ),
@@ -379,15 +380,15 @@ The mailing list form should not be valid in two cases - if there are duplicates
 ```dart
 /// simple regexp to validate email
 final emailRegex = RegExp(
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
 
 /// validator that validates field against email regex
 Map<String, dynamic> emailValidator(AbstractControl<dynamic> control) {
   final email = control.value as String?;
 
   return email != null && emailRegex.hasMatch(email)
-          ? <String, dynamic>{}
-          : <String, dynamic>{ValidationMessage.email: true};
+      ? <String, dynamic>{}
+      : <String, dynamic>{ValidationMessage.email: true};
 }
 
 /// validates there is no duplicates in email list and each item is valid email
@@ -401,7 +402,7 @@ Map<String, dynamic>? mailingListValidator(AbstractControl control) {
 
   // checks that there is no duplicates
   final result = emails.fold<bool>(true,
-    (previousValue, element) => previousValue && test.add(element ?? ''),
+        (previousValue, element) => previousValue && test.add(element ?? ''),
   );
 
   return result ? null : <String, dynamic>{'emailDuplicates': true};
@@ -433,21 +434,21 @@ final form = MailingListFormBuilder(
                 formArray: formModel.emailListControl,
                 builder: (context, formArray, child) => Column(
                   children: formModel.emailListValue
-                          .asMap()
-                          .map((i, email) {
+                      .asMap()
+                      .map((i, email) {
                     return MapEntry(
-                            i,
-                            ReactiveTextField<String>(
-                              formControlName: i.toString(),
-                              validationMessages: (_) => {
-                                'email': 'Invalid email',
-                              },
-                              decoration: InputDecoration(
-                                      labelText: 'Email ${i}'),
-                            ));
+                        i,
+                        ReactiveTextField<String>(
+                          formControlName: i.toString(),
+                          validationMessages: (_) => {
+                            'email': 'Invalid email',
+                          },
+                          decoration: InputDecoration(
+                              labelText: 'Email ${i}'),
+                        ));
                   })
-                          .values
-                          .toList(),
+                      .values
+                      .toList(),
                 ),
               ),
             ),
@@ -487,7 +488,7 @@ final form = MailingListFormBuilder(
                 errors[key] = value;
               }
             });
-            
+
             // if there is still erros left - render an error message 
             if (form.emailListControl.hasErrors && errors.isNotEmpty) {
               return Text(errorText[errors.entries.first.key] ?? '');
@@ -749,11 +750,11 @@ final form = UserProfileFormBuilder(
               return ElevatedButton(
                 child: Text('Submit'),
                 onPressed: form.form.valid
-                        ? () {
+                    ? () {
                   print(form.model.firstName);
                   print(form.model.lastName);
                 }
-                        : null,
+                    : null,
               );
             },
           ),
@@ -875,48 +876,48 @@ final form = DeliveryListFormBuilder(
                 builder: (context, formArray, child) {
                   return Column(
                     children: formModel.deliveryListValue
-                            .asMap()
-                            .map((i, deliveryPoint) {
+                        .asMap()
+                        .map((i, deliveryPoint) {
                       return MapEntry(
-                              i,
-                              Column(
-                                children: [
-                                  ReactiveTextField<String>(
-                                    formControlName: '${i}.name',
-                                    validationMessages: (_) => {
-                                      ValidationMessage.required:
-                                      'Must not be empty',
-                                    },
-                                    decoration: InputDecoration(
-                                      labelText: 'Name ${i}',
-                                    ),
-                                  ),
-                                  ReactiveTextField<String>(
-                                    formControlName:
-                                    '${i}.address.street',
-                                    validationMessages: (_) => {
-                                      ValidationMessage.required:
-                                      'Must not be empty',
-                                    },
-                                    decoration: InputDecoration(
-                                      labelText: 'Street ${i}',
-                                    ),
-                                  ),
-                                  ReactiveTextField<String>(
-                                    formControlName: '${i}.address.city',
-                                    validationMessages: (_) => {
-                                      ValidationMessage.required:
-                                      'Must not be empty',
-                                    },
-                                    decoration: InputDecoration(
-                                      labelText: 'City ${i}',
-                                    ),
-                                  ),
-                                ],
-                              ));
+                          i,
+                          Column(
+                            children: [
+                              ReactiveTextField<String>(
+                                formControlName: '${i}.name',
+                                validationMessages: (_) => {
+                                  ValidationMessage.required:
+                                  'Must not be empty',
+                                },
+                                decoration: InputDecoration(
+                                  labelText: 'Name ${i}',
+                                ),
+                              ),
+                              ReactiveTextField<String>(
+                                formControlName:
+                                '${i}.address.street',
+                                validationMessages: (_) => {
+                                  ValidationMessage.required:
+                                  'Must not be empty',
+                                },
+                                decoration: InputDecoration(
+                                  labelText: 'Street ${i}',
+                                ),
+                              ),
+                              ReactiveTextField<String>(
+                                formControlName: '${i}.address.city',
+                                validationMessages: (_) => {
+                                  ValidationMessage.required:
+                                  'Must not be empty',
+                                },
+                                decoration: InputDecoration(
+                                  labelText: 'City ${i}',
+                                ),
+                              ),
+                            ],
+                          ));
                     })
-                            .values
-                            .toList(),
+                        .values
+                        .toList(),
                   );
                 },
               ),
@@ -980,7 +981,7 @@ class FreezedClass with _$FreezedClass {
   }) = _FreezedClass;
 
   factory FreezedClass.fromJson(Map<String, dynamic> json) =>
-          _$FreezedClassFromJson(json);
+      _$FreezedClassFromJson(json);
 }
 ```
 
@@ -1005,7 +1006,7 @@ class FreezedClass with _$FreezedClass {
   }) = _FreezedClass;
 
   factory FreezedClass.fromJson(Map<String, dynamic> json) =>
-          _$FreezedClassFromJson(json);
+      _$FreezedClassFromJson(json);
 }
 ```
 
@@ -1018,41 +1019,54 @@ You can add validations the same way as in [basics](#basics-validation) example
 Let's build our form based on generated code
 
 ```dart
-final form = TinyFormBuilder(
-  // setup form model with initial data
-  model: Tiny(),
-  // form builder
+final form = FreezedClassFormBuilder(
+  model: FreezedClass(),
   builder: (context, formModel, child) {
     return Column(
       children: [
         ReactiveTextField<String>(
-          formControl: formModel.emailControl,
-          validationMessages: (control) => {
-            ValidationMessage.required: 'The email must not be empty',
-          },
-          decoration: const InputDecoration(labelText: 'Email'),
+          formControl: formModel.idControl,
+          textInputAction: TextInputAction.next,
+          decoration: const InputDecoration(
+            labelText: 'ID',
+            helperText: '',
+            helperStyle: TextStyle(height: 0.7),
+            errorStyle: TextStyle(height: 0.7),
+          ),
         ),
-        const SizedBox(height: 8.0),
+        const SizedBox(height: 16.0),
         ReactiveTextField<String>(
-          formControl: formModel.passwordControl,
-          obscureText: true,
-          validationMessages: (control) => {
-            ValidationMessage.required: 'The password must not be empty',
-          },
+          formControl: formModel.nameControl,
           textInputAction: TextInputAction.done,
-          decoration: const InputDecoration(labelText: 'Password'),
+          decoration: const InputDecoration(
+            labelText: 'Name',
+            helperText: '',
+            helperStyle: TextStyle(height: 0.7),
+            errorStyle: TextStyle(height: 0.7),
+          ),
         ),
-        const SizedBox(height: 8.0),
-        ReactiveTinyFormConsumer(
-          builder: (context, form, child) {
+        const SizedBox(height: 16.0),
+        ReactiveSlider(
+          formControl: formModel.yearControl,
+          min: 1900,
+          max: 2100,
+        ),
+        ElevatedButton(
+          onPressed: () {
+            if (formModel.form.valid) {
+              print(formModel.model);
+              print(formModel.model.year);
+            } else {
+              formModel.form.markAllAsTouched();
+            }
+          },
+          child: const Text('Sign Up'),
+        ),
+        ReactiveFreezedClassFormConsumer(
+          builder: (context, formModel, child) {
             return ElevatedButton(
               child: Text('Submit'),
-              onPressed: form.form.valid
-                      ? () {
-                print(form.model.email);
-                print(form.model.password);
-              }
-                      : null,
+              onPressed: formModel.form.valid ? () {} : null,
             );
           },
         ),
@@ -1061,3 +1075,30 @@ final form = TinyFormBuilder(
   },
 );
 ```
+
+### Subforms
+
+There could be the case when some of your nested entities will have to have their own subform with subset of fields.
+Let's refer to our previous example of [Nested forms with array of FormGroups](#nested-forms-with-array-of-formgroups)
+
+We used `DeliveryPoint` entity to create a list for points for delivery.
+If you want to have the set of form classes to be generated for `DeliveryPoint` just add and additional `ReactiveFormAnnotation` annotation
+
+```dart
+@ReactiveFormAnnotation()
+@FormGroupAnnotation()
+class DeliveryPoint {
+  final String name;
+
+  final Address? address;
+
+  DeliveryPoint({
+    @FormControlAnnotation(
+      validators: const [requiredValidator],
+    )
+        this.name = '',
+    this.address,
+  });
+}
+```
+

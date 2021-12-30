@@ -1,3 +1,4 @@
+import 'package:example/docs/array_group/delivery_point_route_form.dart';
 import 'package:example/docs/array_group/delivery_route_form.dart';
 import 'package:example/docs/arrays/mailing_list_form.dart';
 import 'package:example/docs/freezed/freezed_form.dart';
@@ -26,6 +27,8 @@ class Routes {
 
   static const deliveryList = '/delivery-list';
 
+  static const deliveryPoint = '/delivery-point';
+
   static const loginNullable = '/login-nullable';
 
   static const arrayNullable = '/array-nullable';
@@ -51,6 +54,7 @@ class MyApp extends StatelessWidget {
         Routes.arrayNullable: (_) => ArrayNullableFormWidget(),
         Routes.group: (_) => GroupNullableFormWidget(),
         Routes.deliveryList: (_) => DeliveryListFormWidget(),
+        Routes.deliveryPoint: (_) => DeliveryPointWidget(),
         Routes.freezed: (_) => FreezedFormWidget(),
       },
       home: LoginFormWidget(),
