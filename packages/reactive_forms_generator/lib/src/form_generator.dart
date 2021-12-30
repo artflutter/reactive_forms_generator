@@ -879,6 +879,7 @@ class FormGenerator {
         Class(
           (b) => b
             ..name = className
+            ..implements.add(Reference('FormModel<${element.name}>'))
             ..fields.addAll(
               [
                 ...staticFieldNameList,

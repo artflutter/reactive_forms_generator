@@ -126,7 +126,7 @@ class _TinyFormBuilderState extends State<TinyFormBuilder> {
   }
 }
 
-class TinyForm {
+class TinyForm implements FormModel<Tiny> {
   TinyForm(this.tiny, this.form, this.path) {}
 
   static String emailControlName = "email";

@@ -197,7 +197,7 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
   }
 }
 
-class DeliveryListForm {
+class DeliveryListForm implements FormModel<DeliveryList> {
   DeliveryListForm(this.deliveryList, this.form, this.path) {
     deliveryListDeliveryPointForm = deliveryList.deliveryList
         .asMap()
@@ -312,7 +312,7 @@ class DeliveryListForm {
           disabled: false);
 }
 
-class DeliveryPointForm {
+class DeliveryPointForm implements FormModel<DeliveryPoint> {
   DeliveryPointForm(this.deliveryPoint, this.form, this.path) {
     addressForm =
         AddressForm(deliveryPoint.address, form, pathBuilder('address'));
@@ -425,7 +425,7 @@ class DeliveryPointForm {
           disabled: false);
 }
 
-class AddressForm {
+class AddressForm implements FormModel<Address> {
   AddressForm(this.address, this.form, this.path) {}
 
   static String streetControlName = "street";

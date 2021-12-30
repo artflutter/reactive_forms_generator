@@ -2,6 +2,7 @@ import 'package:example/docs/basics/tiny.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 class TinyFormWidget extends StatelessWidget {
   @override
@@ -47,6 +48,8 @@ class TinyFormWidget extends StatelessWidget {
                     child: Text('Submit'),
                     onPressed: formModel.form.valid
                         ? () {
+                            // ignore: unnecessary_cast
+                            print((formModel as FormModel<Tiny>).model);
                             print(formModel.model.email);
                             print(formModel.model.password);
                           }

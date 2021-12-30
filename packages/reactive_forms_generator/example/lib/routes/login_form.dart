@@ -58,7 +58,7 @@ class LoginFormWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16.0),
-              ReactiveDropdownSearch<String>(
+              ReactiveDropdownSearch<String, String>(
                 formControl: formModel.themeControl,
                 decoration: InputDecoration(
                   helperText: '',
@@ -67,7 +67,7 @@ class LoginFormWidget extends StatelessWidget {
                 ),
                 mode: Mode.MENU,
                 hint: "Select a theme",
-                showSelectedItem: true,
+                // showSelectedItem: true,
                 items: [
                   "light",
                   "dark",
@@ -76,7 +76,7 @@ class LoginFormWidget extends StatelessWidget {
                 showClearButton: true,
               ),
               const SizedBox(height: 16.0),
-              ReactiveDropdownSearch<UserMode>(
+              ReactiveDropdownSearch<UserMode, UserMode>(
                 formControl: formModel.modeControl,
                 decoration: InputDecoration(
                   helperText: '',
@@ -85,7 +85,7 @@ class LoginFormWidget extends StatelessWidget {
                 ),
                 mode: Mode.MENU,
                 hint: "Select a theme",
-                showSelectedItem: true,
+                // showSelectedItem: true,
                 items: [
                   UserMode.admin,
                   UserMode.user,

@@ -126,7 +126,7 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
   }
 }
 
-class GroupForm {
+class GroupForm implements FormModel<Group> {
   GroupForm(this.group, this.form, this.path) {
     personalForm = PersonalForm(group.personal, form, pathBuilder('personal'));
     phoneForm = PhoneForm(group.phone, form, pathBuilder('phone'));
@@ -317,7 +317,7 @@ class GroupForm {
           disabled: false);
 }
 
-class PersonalForm {
+class PersonalForm implements FormModel<Personal> {
   PersonalForm(this.personal, this.form, this.path) {}
 
   static String nameControlName = "name";
@@ -422,7 +422,7 @@ class PersonalForm {
           disabled: false);
 }
 
-class PhoneForm {
+class PhoneForm implements FormModel<Phone> {
   PhoneForm(this.phone, this.form, this.path) {}
 
   static String phoneNumberControlName = "phoneNumber";
@@ -527,7 +527,7 @@ class PhoneForm {
           disabled: false);
 }
 
-class AddressForm {
+class AddressForm implements FormModel<Address> {
   AddressForm(this.address, this.form, this.path) {}
 
   static String streetControlName = "street";

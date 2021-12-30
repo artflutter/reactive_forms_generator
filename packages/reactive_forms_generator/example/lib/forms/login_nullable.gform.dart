@@ -129,7 +129,7 @@ class _LoginNullableFormBuilderState extends State<LoginNullableFormBuilder> {
   }
 }
 
-class LoginNullableForm {
+class LoginNullableForm implements FormModel<LoginNullable> {
   LoginNullableForm(this.loginNullable, this.form, this.path) {}
 
   static String emailControlName = "email";

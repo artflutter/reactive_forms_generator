@@ -128,7 +128,7 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
   }
 }
 
-class MailingListForm {
+class MailingListForm implements FormModel<MailingList> {
   MailingListForm(this.mailingList, this.form, this.path) {}
 
   static String emailListControlName = "emailList";

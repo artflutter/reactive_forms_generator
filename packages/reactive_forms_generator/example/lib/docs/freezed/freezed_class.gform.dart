@@ -129,7 +129,7 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
   }
 }
 
-class FreezedClassForm {
+class FreezedClassForm implements FormModel<FreezedClass> {
   FreezedClassForm(this.freezedClass, this.form, this.path) {}
 
   static String idControlName = "id";

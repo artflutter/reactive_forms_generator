@@ -129,7 +129,7 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
   }
 }
 
-class ArrayNullableForm {
+class ArrayNullableForm implements FormModel<ArrayNullable> {
   ArrayNullableForm(this.arrayNullable, this.form, this.path) {}
 
   static String emailListControlName = "emailList";

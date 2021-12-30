@@ -128,7 +128,7 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
   }
 }
 
-class UserProfileForm {
+class UserProfileForm implements FormModel<UserProfile> {
   UserProfileForm(this.userProfile, this.form, this.path) {
     homeForm = AddressForm(userProfile.home, form, pathBuilder('home'));
     officeForm = AddressForm(userProfile.office, form, pathBuilder('office'));
@@ -313,7 +313,7 @@ class UserProfileForm {
           disabled: false);
 }
 
-class AddressForm {
+class AddressForm implements FormModel<Address> {
   AddressForm(this.address, this.form, this.path) {}
 
   static String streetControlName = "street";

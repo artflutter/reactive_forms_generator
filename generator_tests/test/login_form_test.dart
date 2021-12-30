@@ -223,7 +223,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
   }
 }
 
-class LoginForm {
+class LoginForm implements FormModel<Login> {
   LoginForm(this.login, this.form, this.path) {}
 
   static String emailControlName = "email";

@@ -1,3 +1,6 @@
+## [0.6.1-beta]
+* FormModel interface
+
 ## [0.6.0-beta]
 * subforms support
 * reactive-forms 11

@@ -126,7 +126,7 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
   }
 }
 
-class TestForm {
+class TestForm implements FormModel<Test> {
   TestForm(this.test, this.form, this.path) {}
 
   static String titleControlName = "title";

@@ -1,3 +1,6 @@
+## [0.3.1-beta]
+* FormModel interface
+
 ## [0.3.0-beta]
 * rf11
 
