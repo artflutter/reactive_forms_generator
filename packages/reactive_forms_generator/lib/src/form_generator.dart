@@ -138,7 +138,7 @@ class FormGenerator {
       .toList();
 
   Method fieldValueMethod(ParameterElement field) {
-    String fieldValue = '${field.fieldControlName}.value';
+    String fieldValue = '${field.fieldControlName}?.value';
 
     if (field.isFormGroup) {
       fieldValue = '${field.fieldName}Form.model';
@@ -159,7 +159,7 @@ class FormGenerator {
 
       // fieldValue =
       //     '${field.name}${formGenerator.className}.map((e) => e.model).toList()';
-      fieldValue = '''(${field.fieldControlName}.value ?? [])
+      fieldValue = '''(${field.fieldControlName}?.value ?? [])
           .asMap()
           .map((k, v) => MapEntry(
             k,
@@ -172,7 +172,7 @@ class FormGenerator {
       final type = (field.type as ParameterizedType).typeArguments.first;
 
       fieldValue =
-          '${field.fieldControlName}.value?.whereType<${type.getDisplayString(
+          '${field.fieldControlName}?.value?.whereType<${type.getDisplayString(
         withNullability: true,
       )}>().toList() ?? []';
     }
@@ -219,7 +219,7 @@ class FormGenerator {
           ..type = MethodType.getter
           ..returns = const Reference('Object?')
           ..body = Code(
-            '${field.fieldControlName}.errors',
+            '${field.fieldControlName}?.errors',
           ),
       );
 
@@ -309,7 +309,7 @@ class FormGenerator {
         ])
         ..returns = const Reference('void')
         ..body = Code(
-          '${field.fieldControlName}.updateValue($value, updateParent: updateParent, emitEvent:emitEvent)',
+          '${field.fieldControlName}?.updateValue($value, updateParent: updateParent, emitEvent:emitEvent)',
         ),
     );
   }
@@ -356,7 +356,7 @@ class FormGenerator {
         ])
         ..returns = const Reference('void')
         ..body = Code(
-          '${field.fieldControlName}.patchValue($value, updateParent: updateParent, emitEvent:emitEvent)',
+          '${field.fieldControlName}?.patchValue($value, updateParent: updateParent, emitEvent:emitEvent)',
         ),
     );
   }
@@ -416,7 +416,7 @@ class FormGenerator {
         ])
         ..returns = const Reference('void')
         ..body = Code(
-          '${field.fieldControlName}.reset(value: $value, updateParent: updateParent, emitEvent:emitEvent)',
+          '${field.fieldControlName}?.reset(value: $value, updateParent: updateParent, emitEvent:emitEvent)',
         ),
     );
   }
@@ -587,16 +587,17 @@ class FormGenerator {
       displayType = displayType.substring(0, displayType.length - 1);
     }
 
-    final reference = 'FormControl<$displayType>';
+    final reference = 'FormControl<$displayType>?';
 
     return Method(
       (b) => b
         ..name = field.fieldControlName
-        ..lambda = true
         ..type = MethodType.getter
         ..returns = Reference(reference)
         ..body = Code(
-          'form.control(${field.fieldControlPath}()) as $reference',
+          '''if (contains${field.name.pascalCase}) {
+            return form.control(${field.fieldControlPath}()) as $reference;
+          }''',
         ),
     );
   }
@@ -610,16 +611,17 @@ class FormGenerator {
     //   displayType = displayType.substring(0, displayType.length - 1);
     // }
 
-    const reference = 'FormGroup';
+    const reference = 'FormGroup?';
 
     return Method(
       (b) => b
         ..name = field.fieldControlName
-        ..lambda = true
         ..type = MethodType.getter
         ..returns = const Reference(reference)
         ..body = Code(
-          'form.control(${field.fieldControlPath}()) as $reference',
+          '''if (contains${field.name.pascalCase}) {
+            return form.control(${field.fieldControlPath}()) as $reference;
+          }''',
         ),
     );
   }
@@ -635,20 +637,21 @@ class FormGenerator {
       displayType = displayType.substring(0, displayType.length - 1);
     }
 
-    String typeReference = 'FormArray<$displayType>';
+    String typeReference = 'FormArray<$displayType>?';
 
     if (field.isFormGroupArray) {
-      typeReference = 'FormArray<Map<String, Object?>>';
+      typeReference = 'FormArray<Map<String, Object?>>?';
     }
 
     return Method(
       (b) => b
         ..name = field.fieldControlName
-        ..lambda = true
         ..type = MethodType.getter
         ..returns = Reference(typeReference)
         ..body = Code(
-          'form.control(${field.fieldControlPath}()) as $typeReference',
+          '''if (contains${field.name.pascalCase}) {
+            return form.control(${field.fieldControlPath}()) as $typeReference;
+          }''',
         ),
     );
   }
@@ -674,7 +677,7 @@ class FormGenerator {
           '''
               final formGroup = ${formGroupGenerator.className}(value, form, pathBuilder('${field.fieldName}')).formElements();
 
-              ${field.fieldControlName}.add(formGroup);''',
+              ${field.fieldControlName}?.add(formGroup);''',
         ),
     );
   }
@@ -766,7 +769,7 @@ class FormGenerator {
                   break;
               }
                
-              ${field.fieldControlName}.add(FormControl<$type>(
+              ${field.fieldControlName}?.add(FormControl<$type>(
                 value: value, 
                 validators: resultingValidators,
                 asyncValidators: resultingAsyncValidators,

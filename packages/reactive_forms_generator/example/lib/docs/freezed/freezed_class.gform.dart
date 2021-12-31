@@ -147,15 +147,15 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   String idControlPath() => pathBuilder(idControlName);
   String nameControlPath() => pathBuilder(nameControlName);
   String yearControlPath() => pathBuilder(yearControlName);
-  String? get idValue => idControl.value;
-  String? get nameValue => nameControl.value;
-  double? get yearValue => yearControl.value;
+  String? get idValue => idControl?.value;
+  String? get nameValue => nameControl?.value;
+  double? get yearValue => yearControl?.value;
   bool get containsId => form.contains(idControlPath());
   bool get containsName => form.contains(nameControlPath());
   bool get containsYear => form.contains(yearControlPath());
-  Object? get idErrors => idControl.errors;
-  Object? get nameErrors => nameControl.errors;
-  Object? get yearErrors => yearControl.errors;
+  Object? get idErrors => idControl?.errors;
+  Object? get nameErrors => nameControl?.errors;
+  Object? get yearErrors => yearControl?.errors;
   void get idFocus => form.focus(idControlPath());
   void get nameFocus => form.focus(nameControlPath());
   void get yearFocus => form.focus(yearControlPath());
@@ -170,55 +170,67 @@ class FreezedClassForm implements FormModel<FreezedClass> {
           updateParent: updateParent, emitEvent: emitEvent);
   void idValueUpdate(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      idControl.updateValue(value,
+      idControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void nameValueUpdate(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      nameControl.updateValue(value,
+      nameControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void yearValueUpdate(double? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      yearControl.updateValue(value,
+      yearControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void idValuePatch(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      idControl.patchValue(value,
+      idControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void nameValuePatch(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      nameControl.patchValue(value,
+      nameControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void yearValuePatch(double? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      yearControl.patchValue(value,
+      yearControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void idValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      idControl.reset(
+      idControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void nameValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      nameControl.reset(
+      nameControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void yearValueReset(double? value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      yearControl.reset(
+      yearControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<String> get idControl =>
-      form.control(idControlPath()) as FormControl<String>;
-  FormControl<String> get nameControl =>
-      form.control(nameControlPath()) as FormControl<String>;
-  FormControl<double> get yearControl =>
-      form.control(yearControlPath()) as FormControl<double>;
+  FormControl<String>? get idControl {
+    if (containsId) {
+      return form.control(idControlPath()) as FormControl<String>?;
+    }
+  }
+
+  FormControl<String>? get nameControl {
+    if (containsName) {
+      return form.control(nameControlPath()) as FormControl<String>?;
+    }
+  }
+
+  FormControl<double>? get yearControl {
+    if (containsYear) {
+      return form.control(yearControlPath()) as FormControl<double>?;
+    }
+  }
+
   FreezedClass get model =>
       FreezedClass(id: idValue, name: nameValue, year: yearValue);
   void updateValue(FreezedClass value,

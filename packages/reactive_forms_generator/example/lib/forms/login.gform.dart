@@ -156,13 +156,13 @@ class LoginForm implements FormModel<Login> {
   String modeControlPath() => pathBuilder(modeControlName);
   String timeoutControlPath() => pathBuilder(timeoutControlName);
   String heightControlPath() => pathBuilder(heightControlName);
-  String get emailValue => emailControl.value as String;
-  String get passwordValue => passwordControl.value as String;
-  bool get rememberMeValue => rememberMeControl.value as bool;
-  String get themeValue => themeControl.value as String;
-  UserMode get modeValue => modeControl.value as UserMode;
-  int get timeoutValue => timeoutControl.value as int;
-  double get heightValue => heightControl.value as double;
+  String get emailValue => emailControl?.value as String;
+  String get passwordValue => passwordControl?.value as String;
+  bool get rememberMeValue => rememberMeControl?.value as bool;
+  String get themeValue => themeControl?.value as String;
+  UserMode get modeValue => modeControl?.value as UserMode;
+  int get timeoutValue => timeoutControl?.value as int;
+  double get heightValue => heightControl?.value as double;
   bool get containsEmail => form.contains(emailControlPath());
   bool get containsPassword => form.contains(passwordControlPath());
   bool get containsRememberMe => form.contains(rememberMeControlPath());
@@ -170,13 +170,13 @@ class LoginForm implements FormModel<Login> {
   bool get containsMode => form.contains(modeControlPath());
   bool get containsTimeout => form.contains(timeoutControlPath());
   bool get containsHeight => form.contains(heightControlPath());
-  Object? get emailErrors => emailControl.errors;
-  Object? get passwordErrors => passwordControl.errors;
-  Object? get rememberMeErrors => rememberMeControl.errors;
-  Object? get themeErrors => themeControl.errors;
-  Object? get modeErrors => modeControl.errors;
-  Object? get timeoutErrors => timeoutControl.errors;
-  Object? get heightErrors => heightControl.errors;
+  Object? get emailErrors => emailControl?.errors;
+  Object? get passwordErrors => passwordControl?.errors;
+  Object? get rememberMeErrors => rememberMeControl?.errors;
+  Object? get themeErrors => themeControl?.errors;
+  Object? get modeErrors => modeControl?.errors;
+  Object? get timeoutErrors => timeoutControl?.errors;
+  Object? get heightErrors => heightControl?.errors;
   void get emailFocus => form.focus(emailControlPath());
   void get passwordFocus => form.focus(passwordControlPath());
   void get rememberMeFocus => form.focus(rememberMeControlPath());
@@ -207,123 +207,151 @@ class LoginForm implements FormModel<Login> {
           updateParent: updateParent, emitEvent: emitEvent);
   void emailValueUpdate(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      emailControl.updateValue(value,
+      emailControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void passwordValueUpdate(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      passwordControl.updateValue(value,
+      passwordControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void rememberMeValueUpdate(bool value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      rememberMeControl.updateValue(value,
+      rememberMeControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void themeValueUpdate(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      themeControl.updateValue(value,
+      themeControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void modeValueUpdate(UserMode value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      modeControl.updateValue(value,
+      modeControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void timeoutValueUpdate(int value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      timeoutControl.updateValue(value,
+      timeoutControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void heightValueUpdate(double value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      heightControl.updateValue(value,
+      heightControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void emailValuePatch(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      emailControl.patchValue(value,
+      emailControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void passwordValuePatch(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      passwordControl.patchValue(value,
+      passwordControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void rememberMeValuePatch(bool value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      rememberMeControl.patchValue(value,
+      rememberMeControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void themeValuePatch(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      themeControl.patchValue(value,
+      themeControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void modeValuePatch(UserMode value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      modeControl.patchValue(value,
+      modeControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void timeoutValuePatch(int value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      timeoutControl.patchValue(value,
+      timeoutControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void heightValuePatch(double value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      heightControl.patchValue(value,
+      heightControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void emailValueReset(String value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      emailControl.reset(
+      emailControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void passwordValueReset(String value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      passwordControl.reset(
+      passwordControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void rememberMeValueReset(bool value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      rememberMeControl.reset(
+      rememberMeControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void themeValueReset(String value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      themeControl.reset(
+      themeControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void modeValueReset(UserMode value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      modeControl.reset(
+      modeControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void timeoutValueReset(int value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      timeoutControl.reset(
+      timeoutControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void heightValueReset(double value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      heightControl.reset(
+      heightControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<String> get emailControl =>
-      form.control(emailControlPath()) as FormControl<String>;
-  FormControl<String> get passwordControl =>
-      form.control(passwordControlPath()) as FormControl<String>;
-  FormControl<bool> get rememberMeControl =>
-      form.control(rememberMeControlPath()) as FormControl<bool>;
-  FormControl<String> get themeControl =>
-      form.control(themeControlPath()) as FormControl<String>;
-  FormControl<UserMode> get modeControl =>
-      form.control(modeControlPath()) as FormControl<UserMode>;
-  FormControl<int> get timeoutControl =>
-      form.control(timeoutControlPath()) as FormControl<int>;
-  FormControl<double> get heightControl =>
-      form.control(heightControlPath()) as FormControl<double>;
+  FormControl<String>? get emailControl {
+    if (containsEmail) {
+      return form.control(emailControlPath()) as FormControl<String>?;
+    }
+  }
+
+  FormControl<String>? get passwordControl {
+    if (containsPassword) {
+      return form.control(passwordControlPath()) as FormControl<String>?;
+    }
+  }
+
+  FormControl<bool>? get rememberMeControl {
+    if (containsRememberMe) {
+      return form.control(rememberMeControlPath()) as FormControl<bool>?;
+    }
+  }
+
+  FormControl<String>? get themeControl {
+    if (containsTheme) {
+      return form.control(themeControlPath()) as FormControl<String>?;
+    }
+  }
+
+  FormControl<UserMode>? get modeControl {
+    if (containsMode) {
+      return form.control(modeControlPath()) as FormControl<UserMode>?;
+    }
+  }
+
+  FormControl<int>? get timeoutControl {
+    if (containsTimeout) {
+      return form.control(timeoutControlPath()) as FormControl<int>?;
+    }
+  }
+
+  FormControl<double>? get heightControl {
+    if (containsHeight) {
+      return form.control(heightControlPath()) as FormControl<double>?;
+    }
+  }
+
   Login get model => Login(
       email: emailValue,
       password: passwordValue,

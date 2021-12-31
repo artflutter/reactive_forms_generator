@@ -141,30 +141,34 @@ class MailingListForm implements FormModel<MailingList> {
 
   String emailListControlPath() => pathBuilder(emailListControlName);
   List<String?> get emailListValue =>
-      emailListControl.value?.whereType<String?>().toList() ?? [];
+      emailListControl?.value?.whereType<String?>().toList() ?? [];
   bool get containsEmailList => form.contains(emailListControlPath());
-  Object? get emailListErrors => emailListControl.errors;
+  Object? get emailListErrors => emailListControl?.errors;
   void get emailListFocus => form.focus(emailListControlPath());
   void emailListRemove({bool updateParent = true, bool emitEvent = true}) =>
       form.removeControl(emailListControlPath(),
           updateParent: updateParent, emitEvent: emitEvent);
   void emailListValueUpdate(List<String?> value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      emailListControl.updateValue(value,
+      emailListControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void emailListValuePatch(List<String?> value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      emailListControl.patchValue(value,
+      emailListControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void emailListValueReset(List<String?> value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      emailListControl.reset(
+      emailListControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormArray<String> get emailListControl =>
-      form.control(emailListControlPath()) as FormArray<String>;
+  FormArray<String>? get emailListControl {
+    if (containsEmailList) {
+      return form.control(emailListControlPath()) as FormArray<String>?;
+    }
+  }
+
   void addEmailListItem(String value,
       {List<AsyncValidatorFunction>? asyncValidators,
       List<ValidatorFunction>? validators,
@@ -187,7 +191,7 @@ class MailingListForm implements FormModel<MailingList> {
         break;
     }
 
-    emailListControl.add(FormControl<String>(
+    emailListControl?.add(FormControl<String>(
       value: value,
       validators: resultingValidators,
       asyncValidators: resultingAsyncValidators,

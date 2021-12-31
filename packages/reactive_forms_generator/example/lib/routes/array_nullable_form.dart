@@ -52,7 +52,7 @@ class ArrayNullableFormWidget extends StatelessWidget {
                     onPressed: () {
                       final newEmail = 'other${contacts.length + 1}@email.com';
                       contacts.add(newEmail);
-                      formModel.emailListControl.add(
+                      formModel.emailListControl?.add(
                         FormControl<String>(value: newEmail),
                       );
                     },
@@ -82,7 +82,7 @@ class ArrayNullableFormWidget extends StatelessWidget {
                     onPressed: () {
                       final newFruit = 'otherFruit${fruits.length + 1}';
                       fruits.add(newFruit);
-                      formModel.fruitListControl.add(
+                      formModel.fruitListControl?.add(
                         FormControl<bool>(value: false),
                       );
                     },

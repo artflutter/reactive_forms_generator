@@ -156,18 +156,18 @@ class UserProfileForm implements FormModel<UserProfile> {
   String lastNameControlPath() => pathBuilder(lastNameControlName);
   String homeControlPath() => pathBuilder(homeControlName);
   String officeControlPath() => pathBuilder(officeControlName);
-  String get firstNameValue => firstNameControl.value as String;
-  String get lastNameValue => lastNameControl.value as String;
+  String get firstNameValue => firstNameControl?.value as String;
+  String get lastNameValue => lastNameControl?.value as String;
   Address? get homeValue => homeForm.model;
   Address? get officeValue => officeForm.model;
   bool get containsFirstName => form.contains(firstNameControlPath());
   bool get containsLastName => form.contains(lastNameControlPath());
   bool get containsHome => form.contains(homeControlPath());
   bool get containsOffice => form.contains(officeControlPath());
-  Object? get firstNameErrors => firstNameControl.errors;
-  Object? get lastNameErrors => lastNameControl.errors;
-  Object? get homeErrors => homeControl.errors;
-  Object? get officeErrors => officeControl.errors;
+  Object? get firstNameErrors => firstNameControl?.errors;
+  Object? get lastNameErrors => lastNameControl?.errors;
+  Object? get homeErrors => homeControl?.errors;
+  Object? get officeErrors => officeControl?.errors;
   void get firstNameFocus => form.focus(firstNameControlPath());
   void get lastNameFocus => form.focus(lastNameControlPath());
   void get homeFocus => form.focus(homeControlPath());
@@ -186,41 +186,41 @@ class UserProfileForm implements FormModel<UserProfile> {
           updateParent: updateParent, emitEvent: emitEvent);
   void firstNameValueUpdate(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      firstNameControl.updateValue(value,
+      firstNameControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void lastNameValueUpdate(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      lastNameControl.updateValue(value,
+      lastNameControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void homeValueUpdate(Address? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      homeControl.updateValue(
+      homeControl?.updateValue(
           AddressForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   void officeValueUpdate(Address? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      officeControl.updateValue(
+      officeControl?.updateValue(
           AddressForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   void firstNameValuePatch(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      firstNameControl.patchValue(value,
+      firstNameControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void lastNameValuePatch(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      lastNameControl.patchValue(value,
+      lastNameControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void homeValuePatch(Address? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      homeControl.patchValue(
+      homeControl?.patchValue(
           AddressForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   void officeValuePatch(Address? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      officeControl.patchValue(
+      officeControl?.patchValue(
           AddressForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
@@ -229,21 +229,21 @@ class UserProfileForm implements FormModel<UserProfile> {
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      firstNameControl.reset(
+      firstNameControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void lastNameValueReset(String value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      lastNameControl.reset(
+      lastNameControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void homeValueReset(Address? value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      homeControl.reset(
+      homeControl?.reset(
           value:
               AddressForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
@@ -253,17 +253,35 @@ class UserProfileForm implements FormModel<UserProfile> {
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      officeControl.reset(
+      officeControl?.reset(
           value:
               AddressForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  FormControl<String> get firstNameControl =>
-      form.control(firstNameControlPath()) as FormControl<String>;
-  FormControl<String> get lastNameControl =>
-      form.control(lastNameControlPath()) as FormControl<String>;
-  FormGroup get homeControl => form.control(homeControlPath()) as FormGroup;
-  FormGroup get officeControl => form.control(officeControlPath()) as FormGroup;
+  FormControl<String>? get firstNameControl {
+    if (containsFirstName) {
+      return form.control(firstNameControlPath()) as FormControl<String>?;
+    }
+  }
+
+  FormControl<String>? get lastNameControl {
+    if (containsLastName) {
+      return form.control(lastNameControlPath()) as FormControl<String>?;
+    }
+  }
+
+  FormGroup? get homeControl {
+    if (containsHome) {
+      return form.control(homeControlPath()) as FormGroup?;
+    }
+  }
+
+  FormGroup? get officeControl {
+    if (containsOffice) {
+      return form.control(officeControlPath()) as FormGroup?;
+    }
+  }
+
   UserProfile get model => UserProfile(
       firstName: firstNameValue,
       lastName: lastNameValue,
@@ -331,15 +349,15 @@ class AddressForm implements FormModel<Address> {
   String streetControlPath() => pathBuilder(streetControlName);
   String cityControlPath() => pathBuilder(cityControlName);
   String zipControlPath() => pathBuilder(zipControlName);
-  String? get streetValue => streetControl.value;
-  String? get cityValue => cityControl.value;
-  String? get zipValue => zipControl.value;
+  String? get streetValue => streetControl?.value;
+  String? get cityValue => cityControl?.value;
+  String? get zipValue => zipControl?.value;
   bool get containsStreet => form.contains(streetControlPath());
   bool get containsCity => form.contains(cityControlPath());
   bool get containsZip => form.contains(zipControlPath());
-  Object? get streetErrors => streetControl.errors;
-  Object? get cityErrors => cityControl.errors;
-  Object? get zipErrors => zipControl.errors;
+  Object? get streetErrors => streetControl?.errors;
+  Object? get cityErrors => cityControl?.errors;
+  Object? get zipErrors => zipControl?.errors;
   void get streetFocus => form.focus(streetControlPath());
   void get cityFocus => form.focus(cityControlPath());
   void get zipFocus => form.focus(zipControlPath());
@@ -354,55 +372,67 @@ class AddressForm implements FormModel<Address> {
           updateParent: updateParent, emitEvent: emitEvent);
   void streetValueUpdate(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      streetControl.updateValue(value,
+      streetControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void cityValueUpdate(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      cityControl.updateValue(value,
+      cityControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void zipValueUpdate(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      zipControl.updateValue(value,
+      zipControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void streetValuePatch(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      streetControl.patchValue(value,
+      streetControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void cityValuePatch(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      cityControl.patchValue(value,
+      cityControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void zipValuePatch(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      zipControl.patchValue(value,
+      zipControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void streetValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      streetControl.reset(
+      streetControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void cityValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      cityControl.reset(
+      cityControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void zipValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      zipControl.reset(
+      zipControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<String> get streetControl =>
-      form.control(streetControlPath()) as FormControl<String>;
-  FormControl<String> get cityControl =>
-      form.control(cityControlPath()) as FormControl<String>;
-  FormControl<String> get zipControl =>
-      form.control(zipControlPath()) as FormControl<String>;
+  FormControl<String>? get streetControl {
+    if (containsStreet) {
+      return form.control(streetControlPath()) as FormControl<String>?;
+    }
+  }
+
+  FormControl<String>? get cityControl {
+    if (containsCity) {
+      return form.control(cityControlPath()) as FormControl<String>?;
+    }
+  }
+
+  FormControl<String>? get zipControl {
+    if (containsZip) {
+      return form.control(zipControlPath()) as FormControl<String>?;
+    }
+  }
+
   Address get model =>
       Address(street: streetValue, city: cityValue, zip: zipValue);
   void updateValue(Address? value,

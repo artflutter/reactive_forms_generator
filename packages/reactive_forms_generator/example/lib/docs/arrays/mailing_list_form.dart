@@ -61,13 +61,14 @@ class MailingListFormWidget extends StatelessWidget {
                   };
                   final errors = <String, dynamic>{};
 
-                  formModel.emailListControl.errors.forEach((key, value) {
+                  formModel.emailListControl?.errors.forEach((key, value) {
                     final intKey = int.tryParse(key);
                     if (intKey == null) {
                       errors[key] = value;
                     }
                   });
-                  if (formModel.emailListControl.hasErrors &&
+                  if (formModel.emailListControl != null &&
+                      formModel.emailListControl!.hasErrors &&
                       errors.isNotEmpty) {
                     return Text(errorText[errors.entries.first.key] ?? '');
                   } else {

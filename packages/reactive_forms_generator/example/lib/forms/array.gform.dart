@@ -150,21 +150,21 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   String emailListControlPath() => pathBuilder(emailListControlName);
   String fruitListControlPath() => pathBuilder(fruitListControlName);
   String vegetablesListControlPath() => pathBuilder(vegetablesListControlName);
-  List<String?>? get someListValue => someListControl.value;
+  List<String?>? get someListValue => someListControl?.value;
   List<String> get emailListValue =>
-      emailListControl.value?.whereType<String>().toList() ?? [];
+      emailListControl?.value?.whereType<String>().toList() ?? [];
   List<bool?> get fruitListValue =>
-      fruitListControl.value?.whereType<bool?>().toList() ?? [];
+      fruitListControl?.value?.whereType<bool?>().toList() ?? [];
   List<String?>? get vegetablesListValue =>
-      vegetablesListControl.value?.whereType<String?>().toList() ?? [];
+      vegetablesListControl?.value?.whereType<String?>().toList() ?? [];
   bool get containsSomeList => form.contains(someListControlPath());
   bool get containsEmailList => form.contains(emailListControlPath());
   bool get containsFruitList => form.contains(fruitListControlPath());
   bool get containsVegetablesList => form.contains(vegetablesListControlPath());
-  Object? get someListErrors => someListControl.errors;
-  Object? get emailListErrors => emailListControl.errors;
-  Object? get fruitListErrors => fruitListControl.errors;
-  Object? get vegetablesListErrors => vegetablesListControl.errors;
+  Object? get someListErrors => someListControl?.errors;
+  Object? get emailListErrors => emailListControl?.errors;
+  Object? get fruitListErrors => fruitListControl?.errors;
+  Object? get vegetablesListErrors => vegetablesListControl?.errors;
   void get someListFocus => form.focus(someListControlPath());
   void get emailListFocus => form.focus(emailListControlPath());
   void get fruitListFocus => form.focus(fruitListControlPath());
@@ -184,72 +184,88 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
           updateParent: updateParent, emitEvent: emitEvent);
   void someListValueUpdate(List<String?>? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      someListControl.updateValue(value,
+      someListControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void emailListValueUpdate(List<String> value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      emailListControl.updateValue(value,
+      emailListControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void fruitListValueUpdate(List<bool?> value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      fruitListControl.updateValue(value,
+      fruitListControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void vegetablesListValueUpdate(List<String?>? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      vegetablesListControl.updateValue(value,
+      vegetablesListControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void someListValuePatch(List<String?>? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      someListControl.patchValue(value,
+      someListControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void emailListValuePatch(List<String> value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      emailListControl.patchValue(value,
+      emailListControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void fruitListValuePatch(List<bool?> value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      fruitListControl.patchValue(value,
+      fruitListControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void vegetablesListValuePatch(List<String?>? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      vegetablesListControl.patchValue(value,
+      vegetablesListControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void someListValueReset(List<String?>? value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      someListControl.reset(
+      someListControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void emailListValueReset(List<String> value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      emailListControl.reset(
+      emailListControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void fruitListValueReset(List<bool?> value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      fruitListControl.reset(
+      fruitListControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void vegetablesListValueReset(List<String?>? value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      vegetablesListControl.reset(
+      vegetablesListControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<List<String?>> get someListControl =>
-      form.control(someListControlPath()) as FormControl<List<String?>>;
-  FormArray<String> get emailListControl =>
-      form.control(emailListControlPath()) as FormArray<String>;
-  FormArray<bool> get fruitListControl =>
-      form.control(fruitListControlPath()) as FormArray<bool>;
-  FormArray<String> get vegetablesListControl =>
-      form.control(vegetablesListControlPath()) as FormArray<String>;
+  FormControl<List<String?>>? get someListControl {
+    if (containsSomeList) {
+      return form.control(someListControlPath()) as FormControl<List<String?>>?;
+    }
+  }
+
+  FormArray<String>? get emailListControl {
+    if (containsEmailList) {
+      return form.control(emailListControlPath()) as FormArray<String>?;
+    }
+  }
+
+  FormArray<bool>? get fruitListControl {
+    if (containsFruitList) {
+      return form.control(fruitListControlPath()) as FormArray<bool>?;
+    }
+  }
+
+  FormArray<String>? get vegetablesListControl {
+    if (containsVegetablesList) {
+      return form.control(vegetablesListControlPath()) as FormArray<String>?;
+    }
+  }
+
   void addEmailListItem(String value,
       {List<AsyncValidatorFunction>? asyncValidators,
       List<ValidatorFunction>? validators,
@@ -272,7 +288,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
         break;
     }
 
-    emailListControl.add(FormControl<String>(
+    emailListControl?.add(FormControl<String>(
       value: value,
       validators: resultingValidators,
       asyncValidators: resultingAsyncValidators,
@@ -303,7 +319,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
         break;
     }
 
-    fruitListControl.add(FormControl<bool>(
+    fruitListControl?.add(FormControl<bool>(
       value: value,
       validators: resultingValidators,
       asyncValidators: resultingAsyncValidators,
@@ -334,7 +350,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
         break;
     }
 
-    vegetablesListControl.add(FormControl<String>(
+    vegetablesListControl?.add(FormControl<String>(
       value: value,
       validators: resultingValidators,
       asyncValidators: resultingAsyncValidators,
