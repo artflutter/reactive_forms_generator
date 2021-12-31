@@ -69,6 +69,12 @@ class AppDrawer extends StatelessWidget {
                 Routes.freezed,
               ),
             ),
+            ListTile(
+              title: const Text('Super Tiny form'),
+              onTap: () => Navigator.of(context).pushReplacementNamed(
+                Routes.superTiny,
+              ),
+            ),
           ],
         ),
       ),
