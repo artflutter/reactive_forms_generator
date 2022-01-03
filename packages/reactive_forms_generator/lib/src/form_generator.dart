@@ -138,7 +138,8 @@ class FormGenerator {
       .toList();
 
   Method fieldValueMethod(ParameterElement field) {
-    String fieldValue = '${field.fieldControlName}.value';
+    String fieldValue =
+        '${field.fieldControlName}${field.nullabilitySuffix}.value';
 
     if (field.isFormGroup) {
       fieldValue = '${field.fieldName}Form.model';
@@ -172,7 +173,7 @@ class FormGenerator {
       final type = (field.type as ParameterizedType).typeArguments.first;
 
       fieldValue =
-          '${field.fieldControlName}.value?.whereType<${type.getDisplayString(
+          '${field.fieldControlName}${field.nullabilitySuffix}.value?.whereType<${type.getDisplayString(
         withNullability: true,
       )}>().toList() ?? []';
     }
@@ -196,7 +197,7 @@ class FormGenerator {
 
   Method fieldContainsMethod(ParameterElement field) => Method(
         (b) => b
-          ..name = 'contains${field.name.pascalCase}'
+          ..name = field.fieldContainsMethodName
           ..lambda = true
           ..type = MethodType.getter
           ..returns = const Reference('bool')
@@ -219,7 +220,7 @@ class FormGenerator {
           ..type = MethodType.getter
           ..returns = const Reference('Object?')
           ..body = Code(
-            '${field.fieldControlName}.errors',
+            '${field.fieldControlName}${field.nullabilitySuffix}.errors',
           ),
       );
 
@@ -241,31 +242,37 @@ class FormGenerator {
           ),
       );
 
-  Method remove(ParameterElement field) => Method(
-        (b) => b
-          ..name = '${field.name}Remove'
-          ..lambda = true
-          ..optionalParameters.addAll([
-            Parameter(
-              (b) => b
-                ..name = 'updateParent'
-                ..named = true
-                ..defaultTo = const Code('true')
-                ..type = const Reference('bool'),
-            ),
-            Parameter(
-              (b) => b
-                ..name = 'emitEvent'
-                ..named = true
-                ..defaultTo = const Code('true')
-                ..type = const Reference('bool'),
-            ),
-          ])
-          ..returns = const Reference('void')
-          ..body = Code(
-            'form.removeControl(${field.fieldControlPath}(), updateParent: updateParent, emitEvent:emitEvent)',
+  Method? remove(ParameterElement field) {
+    if (field.type.nullabilitySuffix == NullabilitySuffix.none) {
+      return null;
+    }
+
+    return Method(
+      (b) => b
+        ..name = '${field.name}Remove'
+        ..lambda = true
+        ..optionalParameters.addAll([
+          Parameter(
+            (b) => b
+              ..name = 'updateParent'
+              ..named = true
+              ..defaultTo = const Code('true')
+              ..type = const Reference('bool'),
           ),
-      );
+          Parameter(
+            (b) => b
+              ..name = 'emitEvent'
+              ..named = true
+              ..defaultTo = const Code('true')
+              ..type = const Reference('bool'),
+          ),
+        ])
+        ..returns = const Reference('void')
+        ..body = Code(
+          'form.removeControl(${field.fieldControlPath}(), updateParent: updateParent, emitEvent:emitEvent)',
+        ),
+    );
+  }
 
   Method update(ParameterElement field) {
     String value = 'value';
@@ -309,7 +316,7 @@ class FormGenerator {
         ])
         ..returns = const Reference('void')
         ..body = Code(
-          '${field.fieldControlName}.updateValue($value, updateParent: updateParent, emitEvent:emitEvent)',
+          '${field.fieldControlName}${field.nullabilitySuffix}.updateValue($value, updateParent: updateParent, emitEvent:emitEvent)',
         ),
     );
   }
@@ -356,7 +363,7 @@ class FormGenerator {
         ])
         ..returns = const Reference('void')
         ..body = Code(
-          '${field.fieldControlName}.patchValue($value, updateParent: updateParent, emitEvent:emitEvent)',
+          '${field.fieldControlName}${field.nullabilitySuffix}.patchValue($value, updateParent: updateParent, emitEvent:emitEvent)',
         ),
     );
   }
@@ -416,7 +423,7 @@ class FormGenerator {
         ])
         ..returns = const Reference('void')
         ..body = Code(
-          '${field.fieldControlName}.reset(value: $value, updateParent: updateParent, emitEvent:emitEvent)',
+          '${field.fieldControlName}${field.nullabilitySuffix}.reset(value: $value, updateParent: updateParent, emitEvent:emitEvent)',
         ),
     );
   }
@@ -555,7 +562,7 @@ class FormGenerator {
         ...formArrays,
         ...formGroups,
         ...formGroupArrays,
-      ].map(remove).toList();
+      ].map(remove).whereType<Method>().toList();
 
   List<Method> get fieldUpdateMethodList => [
         ...formControls,
@@ -587,7 +594,14 @@ class FormGenerator {
       displayType = displayType.substring(0, displayType.length - 1);
     }
 
-    final reference = 'FormControl<$displayType>';
+    final reference = 'FormControl<$displayType>${field.nullabilitySuffix}';
+
+    String body = 'form.control(${field.fieldControlPath}()) as $reference';
+
+    if (field.isNullable) {
+      body =
+          '${field.fieldContainsMethodName} ? form.control(${field.fieldControlPath}()) as $reference : null';
+    }
 
     return Method(
       (b) => b
@@ -595,9 +609,7 @@ class FormGenerator {
         ..lambda = true
         ..type = MethodType.getter
         ..returns = Reference(reference)
-        ..body = Code(
-          'form.control(${field.fieldControlPath}()) as $reference',
-        ),
+        ..body = Code(body),
     );
   }
 
@@ -610,17 +622,22 @@ class FormGenerator {
     //   displayType = displayType.substring(0, displayType.length - 1);
     // }
 
-    const reference = 'FormGroup';
+    final reference = 'FormGroup${field.nullabilitySuffix}';
+
+    String body = 'form.control(${field.fieldControlPath}()) as $reference';
+
+    if (field.isNullable) {
+      body =
+          '${field.fieldContainsMethodName} ? form.control(${field.fieldControlPath}()) as $reference : null';
+    }
 
     return Method(
       (b) => b
         ..name = field.fieldControlName
         ..lambda = true
         ..type = MethodType.getter
-        ..returns = const Reference(reference)
-        ..body = Code(
-          'form.control(${field.fieldControlPath}()) as $reference',
-        ),
+        ..returns = Reference(reference)
+        ..body = Code(body),
     );
   }
 
@@ -635,10 +652,18 @@ class FormGenerator {
       displayType = displayType.substring(0, displayType.length - 1);
     }
 
-    String typeReference = 'FormArray<$displayType>';
+    String typeReference = 'FormArray<$displayType>${field.nullabilitySuffix}';
 
     if (field.isFormGroupArray) {
-      typeReference = 'FormArray<Map<String, Object?>>';
+      typeReference =
+          'FormArray<Map<String, Object?>>${field.nullabilitySuffix}';
+    }
+
+    String body = 'form.control(${field.fieldControlPath}()) as $typeReference';
+
+    if (field.isNullable) {
+      body =
+          '${field.fieldContainsMethodName} ? form.control(${field.fieldControlPath}()) as $typeReference : null';
     }
 
     return Method(
@@ -647,9 +672,7 @@ class FormGenerator {
         ..lambda = true
         ..type = MethodType.getter
         ..returns = Reference(typeReference)
-        ..body = Code(
-          'form.control(${field.fieldControlPath}()) as $typeReference',
-        ),
+        ..body = Code(body),
     );
   }
 
@@ -674,7 +697,7 @@ class FormGenerator {
           '''
               final formGroup = ${formGroupGenerator.className}(value, form, pathBuilder('${field.fieldName}')).formElements();
 
-              ${field.fieldControlName}.add(formGroup);''',
+              ${field.fieldControlName}${field.nullabilitySuffix}.add(formGroup);''',
         ),
     );
   }
@@ -766,7 +789,7 @@ class FormGenerator {
                   break;
               }
                
-              ${field.fieldControlName}.add(FormControl<$type>(
+              ${field.fieldControlName}${field.nullabilitySuffix}.add(FormControl<$type>(
                 value: value, 
                 validators: resultingValidators,
                 asyncValidators: resultingAsyncValidators,
