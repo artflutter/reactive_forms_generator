@@ -14,7 +14,7 @@ class RemoveControlFormWidget extends StatelessWidget {
         builder: (context, formModel, child) {
           // We don't want the password control but we still want to use the
           // TinyForm for code reuse purposes
-          formModel.passwordRemove();
+          //
           return Column(
             children: [
               ReactiveTextField<String>(
@@ -42,6 +42,18 @@ class RemoveControlFormWidget extends StatelessWidget {
                             print((formModel as FormModel<Tiny>).model);
                             print(formModel.model.email);
                             print(formModel.model.password);
+                          }
+                        : null,
+                  );
+                },
+              ),
+              ReactiveTinyFormConsumer(
+                builder: (context, formModel, child) {
+                  return ElevatedButton(
+                    child: Text('Remove control'),
+                    onPressed: formModel.containsPassword
+                        ? () {
+                            formModel.passwordRemove();
                           }
                         : null,
                   );

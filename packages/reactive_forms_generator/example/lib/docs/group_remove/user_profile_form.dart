@@ -12,10 +12,10 @@ class GroupRemoveFormWidget extends StatelessWidget {
         child: UserProfileFormBuilder(
           model: UserProfile(),
           builder: (context, formModel, child) {
-            formModel.homeForm.cityRemove();
-            if (formModel.homeForm.cityControl == null) {
-              print('You fixed removing a nested form\'s control. Good job!');
-            }
+            // formModel.homeForm.cityRemove();
+            // if (formModel.homeForm.cityControl == null) {
+            //   print('You fixed removing a nested form\'s control. Good job!');
+            // }
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

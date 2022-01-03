@@ -12,9 +12,9 @@ class GroupContainsFormWidget extends StatelessWidget {
         child: UserProfileFormBuilder(
           model: UserProfile(),
           builder: (context, formModel, child) {
-            if (formModel.homeForm.containsCity) {
-              print('Issue is fixed, well done!');
-            }
+            // if (formModel.homeForm.containsCity) {
+            //   print('Issue is fixed, well done!');
+            // }
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
