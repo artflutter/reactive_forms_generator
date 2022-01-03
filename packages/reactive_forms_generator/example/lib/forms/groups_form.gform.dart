@@ -164,10 +164,42 @@ class GroupForm implements FormModel<Group> {
   Phone? get phoneValue => phoneForm.model;
   Address? get addressValue => addressForm.model;
   Address? get address2Value => address2Form.model;
-  bool get containsPersonal => form.contains(personalControlPath());
-  bool get containsPhone => form.contains(phoneControlPath());
-  bool get containsAddress => form.contains(addressControlPath());
-  bool get containsAddress2 => form.contains(address2ControlPath());
+  bool get containsPersonal {
+    try {
+      form.control(personalControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsPhone {
+    try {
+      form.control(phoneControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsAddress {
+    try {
+      form.control(addressControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsAddress2 {
+    try {
+      form.control(address2ControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get personalErrors => personalControl?.errors;
   Object? get phoneErrors => phoneControl?.errors;
   Object? get addressErrors => addressControl?.errors;
@@ -337,8 +369,24 @@ class PersonalForm implements FormModel<Personal> {
   String emailControlPath() => pathBuilder(emailControlName);
   String? get nameValue => nameControl?.value;
   String? get emailValue => emailControl?.value;
-  bool get containsName => form.contains(nameControlPath());
-  bool get containsEmail => form.contains(emailControlPath());
+  bool get containsName {
+    try {
+      form.control(nameControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsEmail {
+    try {
+      form.control(emailControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get nameErrors => nameControl?.errors;
   Object? get emailErrors => emailControl?.errors;
   void get nameFocus => form.focus(nameControlPath());
@@ -444,8 +492,24 @@ class PhoneForm implements FormModel<Phone> {
   String countryIsoControlPath() => pathBuilder(countryIsoControlName);
   String? get phoneNumberValue => phoneNumberControl?.value;
   String? get countryIsoValue => countryIsoControl?.value;
-  bool get containsPhoneNumber => form.contains(phoneNumberControlPath());
-  bool get containsCountryIso => form.contains(countryIsoControlPath());
+  bool get containsPhoneNumber {
+    try {
+      form.control(phoneNumberControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsCountryIso {
+    try {
+      form.control(countryIsoControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get phoneNumberErrors => phoneNumberControl?.errors;
   Object? get countryIsoErrors => countryIsoControl?.errors;
   void get phoneNumberFocus => form.focus(phoneNumberControlPath());
@@ -555,9 +619,33 @@ class AddressForm implements FormModel<Address> {
   String? get streetValue => streetControl?.value;
   String? get cityValue => cityControl?.value;
   String? get zipValue => zipControl?.value;
-  bool get containsStreet => form.contains(streetControlPath());
-  bool get containsCity => form.contains(cityControlPath());
-  bool get containsZip => form.contains(zipControlPath());
+  bool get containsStreet {
+    try {
+      form.control(streetControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsCity {
+    try {
+      form.control(cityControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsZip {
+    try {
+      form.control(zipControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get streetErrors => streetControl?.errors;
   Object? get cityErrors => cityControl?.errors;
   Object? get zipErrors => zipControl?.errors;

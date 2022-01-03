@@ -143,8 +143,24 @@ class TestForm implements FormModel<Test> {
   String descriptionControlPath() => pathBuilder(descriptionControlName);
   String get titleValue => titleControl.value as String;
   String? get descriptionValue => descriptionControl?.value;
-  bool get containsTitle => form.contains(titleControlPath());
-  bool get containsDescription => form.contains(descriptionControlPath());
+  bool get containsTitle {
+    try {
+      form.control(titleControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsDescription {
+    try {
+      form.control(descriptionControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get titleErrors => titleControl.errors;
   Object? get descriptionErrors => descriptionControl?.errors;
   void get titleFocus => form.focus(titleControlPath());

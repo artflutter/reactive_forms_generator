@@ -150,9 +150,33 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   String? get idValue => idControl?.value;
   String? get nameValue => nameControl?.value;
   double? get yearValue => yearControl?.value;
-  bool get containsId => form.contains(idControlPath());
-  bool get containsName => form.contains(nameControlPath());
-  bool get containsYear => form.contains(yearControlPath());
+  bool get containsId {
+    try {
+      form.control(idControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsName {
+    try {
+      form.control(nameControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsYear {
+    try {
+      form.control(yearControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get idErrors => idControl?.errors;
   Object? get nameErrors => nameControl?.errors;
   Object? get yearErrors => yearControl?.errors;

@@ -159,7 +159,15 @@ class DeliveryListForm implements FormModel<DeliveryList> {
               .model))
       .values
       .toList();
-  bool get containsDeliveryList => form.contains(deliveryListControlPath());
+  bool get containsDeliveryList {
+    try {
+      form.control(deliveryListControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get deliveryListErrors => deliveryListControl.errors;
   void get deliveryListFocus => form.focus(deliveryListControlPath());
   void deliveryListValueUpdate(List<DeliveryPoint> value,
@@ -263,8 +271,24 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
   String addressControlPath() => pathBuilder(addressControlName);
   String get nameValue => nameControl.value as String;
   Address? get addressValue => addressForm.model;
-  bool get containsName => form.contains(nameControlPath());
-  bool get containsAddress => form.contains(addressControlPath());
+  bool get containsName {
+    try {
+      form.control(nameControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsAddress {
+    try {
+      form.control(addressControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get nameErrors => nameControl.errors;
   Object? get addressErrors => addressControl?.errors;
   void get nameFocus => form.focus(nameControlPath());
@@ -368,8 +392,24 @@ class AddressForm implements FormModel<Address> {
   String cityControlPath() => pathBuilder(cityControlName);
   String? get streetValue => streetControl?.value;
   String? get cityValue => cityControl?.value;
-  bool get containsStreet => form.contains(streetControlPath());
-  bool get containsCity => form.contains(cityControlPath());
+  bool get containsStreet {
+    try {
+      form.control(streetControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsCity {
+    try {
+      form.control(cityControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get streetErrors => streetControl?.errors;
   Object? get cityErrors => cityControl?.errors;
   void get streetFocus => form.focus(streetControlPath());

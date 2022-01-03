@@ -7,14 +7,11 @@ class GroupContainsFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
-      title: Text('Tiny'),
+      title: Text('Group contains test'),
       body: SafeArea(
         child: UserProfileFormBuilder(
           model: UserProfile(),
           builder: (context, formModel, child) {
-            // if (formModel.homeForm.containsCity) {
-            //   print('Issue is fixed, well done!');
-            // }
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -151,6 +148,16 @@ class GroupContainsFormWidget extends StatelessWidget {
                                 print(formModel.model.lastName);
                               }
                             : null,
+                      );
+                    },
+                  ),
+                  ReactiveUserProfileFormConsumer(
+                    builder: (context, formModel, child) {
+                      return ElevatedButton(
+                        child: Text('Contains'),
+                        onPressed: () {
+                          print(formModel.homeForm.containsCity);
+                        },
                       );
                     },
                   ),

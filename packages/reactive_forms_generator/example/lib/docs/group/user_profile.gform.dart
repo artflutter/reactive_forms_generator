@@ -160,10 +160,42 @@ class UserProfileForm implements FormModel<UserProfile> {
   String get lastNameValue => lastNameControl.value as String;
   Address? get homeValue => homeForm.model;
   Address? get officeValue => officeForm.model;
-  bool get containsFirstName => form.contains(firstNameControlPath());
-  bool get containsLastName => form.contains(lastNameControlPath());
-  bool get containsHome => form.contains(homeControlPath());
-  bool get containsOffice => form.contains(officeControlPath());
+  bool get containsFirstName {
+    try {
+      form.control(firstNameControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsLastName {
+    try {
+      form.control(lastNameControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsHome {
+    try {
+      form.control(homeControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsOffice {
+    try {
+      form.control(officeControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get firstNameErrors => firstNameControl.errors;
   Object? get lastNameErrors => lastNameControl.errors;
   Object? get homeErrors => homeControl?.errors;
@@ -330,9 +362,33 @@ class AddressForm implements FormModel<Address> {
   String? get streetValue => streetControl?.value;
   String? get cityValue => cityControl?.value;
   String? get zipValue => zipControl?.value;
-  bool get containsStreet => form.contains(streetControlPath());
-  bool get containsCity => form.contains(cityControlPath());
-  bool get containsZip => form.contains(zipControlPath());
+  bool get containsStreet {
+    try {
+      form.control(streetControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsCity {
+    try {
+      form.control(cityControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsZip {
+    try {
+      form.control(zipControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get streetErrors => streetControl?.errors;
   Object? get cityErrors => cityControl?.errors;
   Object? get zipErrors => zipControl?.errors;

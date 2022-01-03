@@ -163,13 +163,69 @@ class LoginForm implements FormModel<Login> {
   UserMode get modeValue => modeControl.value as UserMode;
   int get timeoutValue => timeoutControl.value as int;
   double get heightValue => heightControl.value as double;
-  bool get containsEmail => form.contains(emailControlPath());
-  bool get containsPassword => form.contains(passwordControlPath());
-  bool get containsRememberMe => form.contains(rememberMeControlPath());
-  bool get containsTheme => form.contains(themeControlPath());
-  bool get containsMode => form.contains(modeControlPath());
-  bool get containsTimeout => form.contains(timeoutControlPath());
-  bool get containsHeight => form.contains(heightControlPath());
+  bool get containsEmail {
+    try {
+      form.control(emailControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsPassword {
+    try {
+      form.control(passwordControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsRememberMe {
+    try {
+      form.control(rememberMeControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsTheme {
+    try {
+      form.control(themeControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsMode {
+    try {
+      form.control(modeControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsTimeout {
+    try {
+      form.control(timeoutControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsHeight {
+    try {
+      form.control(heightControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get emailErrors => emailControl.errors;
   Object? get passwordErrors => passwordControl.errors;
   Object? get rememberMeErrors => rememberMeControl.errors;

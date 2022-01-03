@@ -143,8 +143,24 @@ class TinyForm implements FormModel<Tiny> {
   String passwordControlPath() => pathBuilder(passwordControlName);
   String get emailValue => emailControl.value as String;
   String? get passwordValue => passwordControl?.value;
-  bool get containsEmail => form.contains(emailControlPath());
-  bool get containsPassword => form.contains(passwordControlPath());
+  bool get containsEmail {
+    try {
+      form.control(emailControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsPassword {
+    try {
+      form.control(passwordControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get emailErrors => emailControl.errors;
   Object? get passwordErrors => passwordControl?.errors;
   void get emailFocus => form.focus(emailControlPath());

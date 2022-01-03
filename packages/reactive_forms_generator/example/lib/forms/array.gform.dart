@@ -157,10 +157,42 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
       fruitListControl.value?.whereType<bool?>().toList() ?? [];
   List<String?>? get vegetablesListValue =>
       vegetablesListControl?.value?.whereType<String?>().toList() ?? [];
-  bool get containsSomeList => form.contains(someListControlPath());
-  bool get containsEmailList => form.contains(emailListControlPath());
-  bool get containsFruitList => form.contains(fruitListControlPath());
-  bool get containsVegetablesList => form.contains(vegetablesListControlPath());
+  bool get containsSomeList {
+    try {
+      form.control(someListControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsEmailList {
+    try {
+      form.control(emailListControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsFruitList {
+    try {
+      form.control(fruitListControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsVegetablesList {
+    try {
+      form.control(vegetablesListControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get someListErrors => someListControl?.errors;
   Object? get emailListErrors => emailListControl.errors;
   Object? get fruitListErrors => fruitListControl.errors;
