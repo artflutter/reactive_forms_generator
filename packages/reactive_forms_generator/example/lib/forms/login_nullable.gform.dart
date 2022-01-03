@@ -243,27 +243,167 @@ class LoginNullableForm implements FormModel<LoginNullable> {
   void get modeFocus => form.focus(modeControlPath());
   void get timeoutFocus => form.focus(timeoutControlPath());
   void get heightFocus => form.focus(heightControlPath());
-  void emailRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(emailControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void passwordRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(passwordControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void rememberMeRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(rememberMeControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void themeRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(themeControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void modeRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(modeControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void timeoutRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(timeoutControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void heightRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(heightControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
+  void emailRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsEmail) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          emailControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            emailControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void passwordRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsPassword) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          passwordControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            passwordControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void rememberMeRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsRememberMe) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          rememberMeControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            rememberMeControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void themeRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsTheme) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          themeControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            themeControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void modeRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsMode) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          modeControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            modeControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void timeoutRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsTimeout) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          timeoutControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            timeoutControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void heightRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsHeight) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          heightControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            heightControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void emailValueUpdate(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
       emailControl?.updateValue(value,

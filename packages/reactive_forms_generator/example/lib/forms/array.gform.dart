@@ -201,13 +201,52 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   void get emailListFocus => form.focus(emailListControlPath());
   void get fruitListFocus => form.focus(fruitListControlPath());
   void get vegetablesListFocus => form.focus(vegetablesListControlPath());
-  void someListRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(someListControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void vegetablesListRemove(
-          {bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(vegetablesListControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
+  void someListRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsSomeList) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          someListControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            someListControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void vegetablesListRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsVegetablesList) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          vegetablesListControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            vegetablesListControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void someListValueUpdate(List<String?>? value,
           {bool updateParent = true, bool emitEvent = true}) =>
       someListControl?.updateValue(value,

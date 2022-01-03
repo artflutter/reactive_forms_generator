@@ -183,15 +183,75 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   void get idFocus => form.focus(idControlPath());
   void get nameFocus => form.focus(nameControlPath());
   void get yearFocus => form.focus(yearControlPath());
-  void idRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(idControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void nameRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(nameControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void yearRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(yearControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
+  void idRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsId) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          idControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            idControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void nameRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsName) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          nameControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            nameControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void yearRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsYear) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          yearControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            yearControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void idValueUpdate(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
       idControl?.updateValue(value,

@@ -293,9 +293,29 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
   Object? get addressErrors => addressControl?.errors;
   void get nameFocus => form.focus(nameControlPath());
   void get addressFocus => form.focus(addressControlPath());
-  void addressRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(addressControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
+  void addressRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsAddress) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          addressControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            addressControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void nameValueUpdate(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
       nameControl.updateValue(value,
@@ -414,12 +434,52 @@ class AddressForm implements FormModel<Address> {
   Object? get cityErrors => cityControl?.errors;
   void get streetFocus => form.focus(streetControlPath());
   void get cityFocus => form.focus(cityControlPath());
-  void streetRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(streetControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void cityRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(cityControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
+  void streetRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsStreet) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          streetControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            streetControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void cityRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsCity) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          cityControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            cityControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void streetValueUpdate(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
       streetControl?.updateValue(value,

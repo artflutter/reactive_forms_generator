@@ -165,9 +165,29 @@ class TinyForm implements FormModel<Tiny> {
   Object? get passwordErrors => passwordControl?.errors;
   void get emailFocus => form.focus(emailControlPath());
   void get passwordFocus => form.focus(passwordControlPath());
-  void passwordRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(passwordControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
+  void passwordRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsPassword) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          passwordControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            passwordControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void emailValueUpdate(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
       emailControl.updateValue(value,

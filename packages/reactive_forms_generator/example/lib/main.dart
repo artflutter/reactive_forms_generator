@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
         Routes.groupContains: (_) => GroupContainsFormWidget(),
         Routes.groupRemove: (_) => GroupRemoveFormWidget(),
       },
-      home: GroupContainsFormWidget(),
+      home: GroupRemoveFormWidget(),
     );
   }
 }

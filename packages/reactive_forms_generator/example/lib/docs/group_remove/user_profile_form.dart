@@ -7,15 +7,11 @@ class GroupRemoveFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
-      title: Text('Tiny'),
+      title: Text('Group remove test'),
       body: SafeArea(
         child: UserProfileFormBuilder(
           model: UserProfile(),
           builder: (context, formModel, child) {
-            // formModel.homeForm.cityRemove();
-            // if (formModel.homeForm.cityControl == null) {
-            //   print('You fixed removing a nested form\'s control. Good job!');
-            // }
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -155,6 +151,18 @@ class GroupRemoveFormWidget extends StatelessWidget {
                       );
                     },
                   ),
+                  ReactiveUserProfileFormConsumer(
+                    builder: (context, formModel, child) {
+                      return ElevatedButton(
+                        child: Text('Remove control'),
+                        onPressed: formModel.homeForm.cityControl != null
+                            ? () {
+                                formModel.homeForm.cityRemove();
+                              }
+                            : null,
+                      );
+                    },
+                  )
                 ],
               ),
             );

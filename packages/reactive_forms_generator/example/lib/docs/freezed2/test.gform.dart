@@ -165,9 +165,29 @@ class TestForm implements FormModel<Test> {
   Object? get descriptionErrors => descriptionControl?.errors;
   void get titleFocus => form.focus(titleControlPath());
   void get descriptionFocus => form.focus(descriptionControlPath());
-  void descriptionRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(descriptionControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
+  void descriptionRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsDescription) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          descriptionControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            descriptionControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void titleValueUpdate(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
       titleControl.updateValue(value,
