@@ -254,7 +254,6 @@ class FormGenerator {
     return Method(
       (b) => b
         ..name = '${field.name}Remove'
-        ..lambda = true
         ..optionalParameters.addAll([
           Parameter(
             (b) => b
@@ -273,7 +272,28 @@ class FormGenerator {
         ])
         ..returns = const Reference('void')
         ..body = Code(
-          'form.removeControl(${field.fieldControlPath}(), updateParent: updateParent, emitEvent:emitEvent)',
+          '''
+            if (${field.fieldContainsMethodName}) {
+              final controlPath = path;
+              if (controlPath == null) {
+                form.removeControl(
+                  ${field.fieldControlNameName},
+                  updateParent: updateParent,
+                  emitEvent: emitEvent,
+                );
+              } else {
+                final formGroup = form.control(controlPath);
+        
+                if (formGroup is FormGroup) {
+                  formGroup.removeControl(
+                    ${field.fieldControlNameName},
+                    updateParent: updateParent,
+                    emitEvent: emitEvent,
+                  );
+                }
+              }
+            }
+          ''',
         ),
     );
   }
