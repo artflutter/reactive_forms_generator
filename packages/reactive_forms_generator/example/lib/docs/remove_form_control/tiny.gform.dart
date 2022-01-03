@@ -142,16 +142,13 @@ class TinyForm implements FormModel<Tiny> {
   String emailControlPath() => pathBuilder(emailControlName);
   String passwordControlPath() => pathBuilder(passwordControlName);
   String get emailValue => emailControl.value as String;
-  String? get passwordValue => passwordControl.value;
+  String? get passwordValue => passwordControl?.value;
   bool get containsEmail => form.contains(emailControlPath());
   bool get containsPassword => form.contains(passwordControlPath());
   Object? get emailErrors => emailControl.errors;
-  Object? get passwordErrors => passwordControl.errors;
+  Object? get passwordErrors => passwordControl?.errors;
   void get emailFocus => form.focus(emailControlPath());
   void get passwordFocus => form.focus(passwordControlPath());
-  void emailRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(emailControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
   void passwordRemove({bool updateParent = true, bool emitEvent = true}) =>
       form.removeControl(passwordControlPath(),
           updateParent: updateParent, emitEvent: emitEvent);
@@ -161,7 +158,7 @@ class TinyForm implements FormModel<Tiny> {
           updateParent: updateParent, emitEvent: emitEvent);
   void passwordValueUpdate(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      passwordControl.updateValue(value,
+      passwordControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void emailValuePatch(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
@@ -169,7 +166,7 @@ class TinyForm implements FormModel<Tiny> {
           updateParent: updateParent, emitEvent: emitEvent);
   void passwordValuePatch(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      passwordControl.patchValue(value,
+      passwordControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void emailValueReset(String value,
           {bool updateParent = true,
@@ -183,12 +180,13 @@ class TinyForm implements FormModel<Tiny> {
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      passwordControl.reset(
+      passwordControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
-  FormControl<String> get passwordControl =>
-      form.control(passwordControlPath()) as FormControl<String>;
+  FormControl<String>? get passwordControl => containsPassword
+      ? form.control(passwordControlPath()) as FormControl<String>?
+      : null;
   Tiny get model => Tiny(email: emailValue, password: passwordValue);
   void updateValue(Tiny value,
           {bool updateParent = true, bool emitEvent = true}) =>

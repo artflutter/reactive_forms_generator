@@ -145,9 +145,6 @@ class MailingListForm implements FormModel<MailingList> {
   bool get containsEmailList => form.contains(emailListControlPath());
   Object? get emailListErrors => emailListControl.errors;
   void get emailListFocus => form.focus(emailListControlPath());
-  void emailListRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(emailListControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
   void emailListValueUpdate(List<String?> value,
           {bool updateParent = true, bool emitEvent = true}) =>
       emailListControl.updateValue(value,

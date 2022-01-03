@@ -142,16 +142,13 @@ class TestForm implements FormModel<Test> {
   String titleControlPath() => pathBuilder(titleControlName);
   String descriptionControlPath() => pathBuilder(descriptionControlName);
   String get titleValue => titleControl.value as String;
-  String? get descriptionValue => descriptionControl.value;
+  String? get descriptionValue => descriptionControl?.value;
   bool get containsTitle => form.contains(titleControlPath());
   bool get containsDescription => form.contains(descriptionControlPath());
   Object? get titleErrors => titleControl.errors;
-  Object? get descriptionErrors => descriptionControl.errors;
+  Object? get descriptionErrors => descriptionControl?.errors;
   void get titleFocus => form.focus(titleControlPath());
   void get descriptionFocus => form.focus(descriptionControlPath());
-  void titleRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(titleControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
   void descriptionRemove({bool updateParent = true, bool emitEvent = true}) =>
       form.removeControl(descriptionControlPath(),
           updateParent: updateParent, emitEvent: emitEvent);
@@ -161,7 +158,7 @@ class TestForm implements FormModel<Test> {
           updateParent: updateParent, emitEvent: emitEvent);
   void descriptionValueUpdate(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      descriptionControl.updateValue(value,
+      descriptionControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void titleValuePatch(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
@@ -169,7 +166,7 @@ class TestForm implements FormModel<Test> {
           updateParent: updateParent, emitEvent: emitEvent);
   void descriptionValuePatch(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      descriptionControl.patchValue(value,
+      descriptionControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void titleValueReset(String value,
           {bool updateParent = true,
@@ -183,12 +180,13 @@ class TestForm implements FormModel<Test> {
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      descriptionControl.reset(
+      descriptionControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String> get titleControl =>
       form.control(titleControlPath()) as FormControl<String>;
-  FormControl<String> get descriptionControl =>
-      form.control(descriptionControlPath()) as FormControl<String>;
+  FormControl<String>? get descriptionControl => containsDescription
+      ? form.control(descriptionControlPath()) as FormControl<String>?
+      : null;
   Test get model => Test(title: titleValue, description: descriptionValue);
   void updateValue(Test value,
           {bool updateParent = true, bool emitEvent = true}) =>

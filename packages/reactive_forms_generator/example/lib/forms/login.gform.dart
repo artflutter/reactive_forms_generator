@@ -184,27 +184,6 @@ class LoginForm implements FormModel<Login> {
   void get modeFocus => form.focus(modeControlPath());
   void get timeoutFocus => form.focus(timeoutControlPath());
   void get heightFocus => form.focus(heightControlPath());
-  void emailRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(emailControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void passwordRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(passwordControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void rememberMeRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(rememberMeControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void themeRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(themeControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void modeRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(modeControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void timeoutRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(timeoutControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void heightRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(heightControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
   void emailValueUpdate(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
       emailControl.updateValue(value,

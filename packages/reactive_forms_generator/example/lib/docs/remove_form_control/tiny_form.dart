@@ -36,9 +36,9 @@ class RemoveControlFormWidget extends StatelessWidget {
                     child: Text('Submit'),
                     onPressed: formModel.form.valid
                         ? () {
-                            // ignore: unnecessary_cast
                             print(
                                 'If there is no error below this text, you fixed it, good job!');
+                            // ignore: unnecessary_cast
                             print((formModel as FormModel<Tiny>).model);
                             print(formModel.model.email);
                             print(formModel.model.password);
