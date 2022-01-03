@@ -198,11 +198,15 @@ class FormGenerator {
   Method fieldContainsMethod(ParameterElement field) => Method(
         (b) => b
           ..name = field.fieldContainsMethodName
-          ..lambda = true
           ..type = MethodType.getter
           ..returns = const Reference('bool')
           ..body = Code(
-            'form.contains(${field.fieldControlPath}())',
+            '''try {
+                form.control(${field.fieldControlPath}());
+                return true;
+              } catch (e) {
+                return false;
+              }''',
           ),
       );
 
