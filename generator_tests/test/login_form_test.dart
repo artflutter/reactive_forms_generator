@@ -260,13 +260,69 @@ class LoginForm implements FormModel<Login> {
   UserMode get modeValue => modeControl.value as UserMode;
   int get timeoutValue => timeoutControl.value as int;
   double get heightValue => heightControl.value as double;
-  bool get containsEmail => form.contains(emailControlPath());
-  bool get containsPassword => form.contains(passwordControlPath());
-  bool get containsRememberMe => form.contains(rememberMeControlPath());
-  bool get containsTheme => form.contains(themeControlPath());
-  bool get containsMode => form.contains(modeControlPath());
-  bool get containsTimeout => form.contains(timeoutControlPath());
-  bool get containsHeight => form.contains(heightControlPath());
+  bool get containsEmail {
+    try {
+      form.control(emailControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsPassword {
+    try {
+      form.control(passwordControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsRememberMe {
+    try {
+      form.control(rememberMeControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsTheme {
+    try {
+      form.control(themeControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsMode {
+    try {
+      form.control(modeControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsTimeout {
+    try {
+      form.control(timeoutControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsHeight {
+    try {
+      form.control(heightControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get emailErrors => emailControl.errors;
   Object? get passwordErrors => passwordControl.errors;
   Object? get rememberMeErrors => rememberMeControl.errors;
@@ -281,27 +337,6 @@ class LoginForm implements FormModel<Login> {
   void get modeFocus => form.focus(modeControlPath());
   void get timeoutFocus => form.focus(timeoutControlPath());
   void get heightFocus => form.focus(heightControlPath());
-  void emailRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(emailControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void passwordRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(passwordControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void rememberMeRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(rememberMeControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void themeRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(themeControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void modeRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(modeControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void timeoutRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(timeoutControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void heightRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(heightControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
   void emailValueUpdate(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
       emailControl.updateValue(value,

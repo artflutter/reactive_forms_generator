@@ -1,3 +1,6 @@
+## [0.3.2-beta]
+* name parameter added
+
 ## [0.3.1-beta]
 * FormModel interface
 

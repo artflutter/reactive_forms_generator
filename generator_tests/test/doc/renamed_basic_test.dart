@@ -1,70 +1,117 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
+@Timeout(Duration(seconds: 145))
 
-part of 'tiny.dart';
+import 'package:test/test.dart';
+
+import '../helpers.dart';
+
+void main() {
+  group('doc', () {
+    test(
+      'Renamed basic',
+      () async {
+        return testGenerator(
+          model: r'''
+            import 'package:flutter/material.dart';
+            import 'package:reactive_forms/reactive_forms.dart';
+            import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+            import 'package:example/helpers.dart';
+            
+            part 'gen.gform.dart';
+            
+            @ReactiveFormAnnotation(name: 'SomeWiredName')
+            class RenamedBasic {
+              final String email;
+            
+              final String password;
+            
+              RenamedBasic({
+                @FormControlAnnotation(
+                  validators: const [requiredValidator],
+                )
+                    this.email = '',
+                @FormControlAnnotation(
+                  validators: const [requiredValidator],
+                )
+                    this.password = '',
+              });
+            }
+          ''',
+          generatedFile: generatedFile,
+        );
+      },
+    );
+  });
+}
+
+const generatedFile = r'''// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'gen.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-class ReactiveTinyFormConsumer extends StatelessWidget {
-  const ReactiveTinyFormConsumer({Key? key, required this.builder, this.child})
+class ReactiveSomeWiredNameFormConsumer extends StatelessWidget {
+  const ReactiveSomeWiredNameFormConsumer(
+      {Key? key, required this.builder, this.child})
       : super(key: key);
 
   final Widget? child;
 
-  final Widget Function(BuildContext context, TinyForm formModel, Widget? child)
-      builder;
+  final Widget Function(
+      BuildContext context, SomeWiredNameForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveTinyForm.of(context);
+    final formModel = ReactiveSomeWiredNameForm.of(context);
 
-    if (formModel is! TinyForm) {
+    if (formModel is! SomeWiredNameForm) {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, formModel, child);
   }
 }
 
-class TinyFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const TinyFormInheritedStreamer(
+class SomeWiredNameFormInheritedStreamer extends InheritedStreamer<dynamic> {
+  const SomeWiredNameFormInheritedStreamer(
       {Key? key,
       required this.form,
       required Stream<dynamic> stream,
       required Widget child})
       : super(stream, child, key: key);
 
-  final TinyForm form;
+  final SomeWiredNameForm form;
 }
 
-class ReactiveTinyForm extends StatelessWidget {
-  const ReactiveTinyForm(
+class ReactiveSomeWiredNameForm extends StatelessWidget {
+  const ReactiveSomeWiredNameForm(
       {Key? key, required this.form, required this.child, this.onWillPop})
       : super(key: key);
 
   final Widget child;
 
-  final TinyForm form;
+  final SomeWiredNameForm form;
 
   final WillPopCallback? onWillPop;
 
-  static TinyForm? of(BuildContext context, {bool listen = true}) {
+  static SomeWiredNameForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
       return context
-          .dependOnInheritedWidgetOfExactType<TinyFormInheritedStreamer>()
+          .dependOnInheritedWidgetOfExactType<
+              SomeWiredNameFormInheritedStreamer>()
           ?.form;
     }
 
-    final element = context
-        .getElementForInheritedWidgetOfExactType<TinyFormInheritedStreamer>();
+    final element = context.getElementForInheritedWidgetOfExactType<
+        SomeWiredNameFormInheritedStreamer>();
     return element == null
         ? null
-        : (element.widget as TinyFormInheritedStreamer).form;
+        : (element.widget as SomeWiredNameFormInheritedStreamer).form;
   }
 
   @override
   Widget build(BuildContext context) {
-    return TinyFormInheritedStreamer(
+    return SomeWiredNameFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
       child: WillPopScope(
@@ -75,8 +122,8 @@ class ReactiveTinyForm extends StatelessWidget {
   }
 }
 
-class TinyFormBuilder extends StatefulWidget {
-  const TinyFormBuilder(
+class SomeWiredNameFormBuilder extends StatefulWidget {
+  const SomeWiredNameFormBuilder(
       {Key? key,
       required this.model,
       this.child,
@@ -84,28 +131,29 @@ class TinyFormBuilder extends StatefulWidget {
       required this.builder})
       : super(key: key);
 
-  final Tiny model;
+  final RenamedBasic model;
 
   final Widget? child;
 
   final WillPopCallback? onWillPop;
 
-  final Widget Function(BuildContext context, TinyForm formModel, Widget? child)
-      builder;
+  final Widget Function(
+      BuildContext context, SomeWiredNameForm formModel, Widget? child) builder;
 
   @override
-  _TinyFormBuilderState createState() => _TinyFormBuilderState();
+  _SomeWiredNameFormBuilderState createState() =>
+      _SomeWiredNameFormBuilderState();
 }
 
-class _TinyFormBuilderState extends State<TinyFormBuilder> {
+class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
   late FormGroup _form;
 
-  late TinyForm _formModel;
+  late SomeWiredNameForm _formModel;
 
   @override
   void initState() {
     _form = FormGroup({});
-    _formModel = TinyForm(widget.model, _form, null);
+    _formModel = SomeWiredNameForm(widget.model, _form, null);
 
     _form.addAll(_formModel.formElements().controls);
 
@@ -114,7 +162,7 @@ class _TinyFormBuilderState extends State<TinyFormBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveTinyForm(
+    return ReactiveSomeWiredNameForm(
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveForm(
@@ -126,14 +174,14 @@ class _TinyFormBuilderState extends State<TinyFormBuilder> {
   }
 }
 
-class TinyForm implements FormModel<Tiny> {
-  TinyForm(this.tiny, this.form, this.path) {}
+class SomeWiredNameForm implements FormModel<RenamedBasic> {
+  SomeWiredNameForm(this.renamedBasic, this.form, this.path) {}
 
   static String emailControlName = "email";
 
   static String passwordControlName = "password";
 
-  final Tiny tiny;
+  final RenamedBasic renamedBasic;
 
   final FormGroup form;
 
@@ -199,17 +247,20 @@ class TinyForm implements FormModel<Tiny> {
       form.control(emailControlPath()) as FormControl<String>;
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
-  Tiny get model => Tiny(email: emailValue, password: passwordValue);
-  void updateValue(Tiny value,
+  RenamedBasic get model =>
+      RenamedBasic(email: emailValue, password: passwordValue);
+  void updateValue(RenamedBasic value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
-          TinyForm(value, FormGroup({}), null).formElements().rawValue,
+          SomeWiredNameForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(Tiny value,
+  void resetValue(RenamedBasic value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.reset(
-          value: TinyForm(value, FormGroup({}), null).formElements().rawValue,
+          value: SomeWiredNameForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
@@ -220,15 +271,15 @@ class TinyForm implements FormModel<Tiny> {
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         emailControlName: FormControl<String>(
-            value: tiny.email,
-            validators: [requiredValidator],
+            value: renamedBasic.email,
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
-            value: tiny.password,
-            validators: [requiredValidator],
+            value: renamedBasic.password,
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -239,3 +290,4 @@ class TinyForm implements FormModel<Tiny> {
           asyncValidatorsDebounceTime: 250,
           disabled: false);
 }
+''';

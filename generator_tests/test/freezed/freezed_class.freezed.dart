@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'freezed.dart';
+part of 'freezed_class.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,19 +13,19 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Test _$TestFromJson(Map<String, dynamic> json) {
-  return _Test.fromJson(json);
+FreezedClass _$FreezedClassFromJson(Map<String, dynamic> json) {
+  return _FreezedClass.fromJson(json);
 }
 
 /// @nodoc
-class _$TestTearOff {
-  const _$TestTearOff();
+class _$FreezedClassTearOff {
+  const _$FreezedClassTearOff();
 
-  _Test call(@FormControlAnnotation() String? gender,
+  _FreezedClass call(@FormControlAnnotation() String gender,
       {@FormControlAnnotation() String? id,
       @FormControlAnnotation() String? name,
       @FormControlAnnotation() double? year}) {
-    return _Test(
+    return _FreezedClass(
       gender,
       id: id,
       name: name,
@@ -33,18 +33,18 @@ class _$TestTearOff {
     );
   }
 
-  Test fromJson(Map<String, Object> json) {
-    return Test.fromJson(json);
+  FreezedClass fromJson(Map<String, Object> json) {
+    return FreezedClass.fromJson(json);
   }
 }
 
 /// @nodoc
-const $Test = _$TestTearOff();
+const $FreezedClass = _$FreezedClassTearOff();
 
 /// @nodoc
-mixin _$Test {
+mixin _$FreezedClass {
   @FormControlAnnotation()
-  String? get gender => throw _privateConstructorUsedError;
+  String get gender => throw _privateConstructorUsedError;
   @FormControlAnnotation()
   String? get id => throw _privateConstructorUsedError;
   @FormControlAnnotation()
@@ -54,27 +54,29 @@ mixin _$Test {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $TestCopyWith<Test> get copyWith => throw _privateConstructorUsedError;
+  $FreezedClassCopyWith<FreezedClass> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TestCopyWith<$Res> {
-  factory $TestCopyWith(Test value, $Res Function(Test) then) =
-      _$TestCopyWithImpl<$Res>;
+abstract class $FreezedClassCopyWith<$Res> {
+  factory $FreezedClassCopyWith(
+          FreezedClass value, $Res Function(FreezedClass) then) =
+      _$FreezedClassCopyWithImpl<$Res>;
   $Res call(
-      {@FormControlAnnotation() String? gender,
+      {@FormControlAnnotation() String gender,
       @FormControlAnnotation() String? id,
       @FormControlAnnotation() String? name,
       @FormControlAnnotation() double? year});
 }
 
 /// @nodoc
-class _$TestCopyWithImpl<$Res> implements $TestCopyWith<$Res> {
-  _$TestCopyWithImpl(this._value, this._then);
+class _$FreezedClassCopyWithImpl<$Res> implements $FreezedClassCopyWith<$Res> {
+  _$FreezedClassCopyWithImpl(this._value, this._then);
 
-  final Test _value;
+  final FreezedClass _value;
   // ignore: unused_field
-  final $Res Function(Test) _then;
+  final $Res Function(FreezedClass) _then;
 
   @override
   $Res call({
@@ -87,7 +89,7 @@ class _$TestCopyWithImpl<$Res> implements $TestCopyWith<$Res> {
       gender: gender == freezed
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -105,25 +107,28 @@ class _$TestCopyWithImpl<$Res> implements $TestCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$TestCopyWith<$Res> implements $TestCopyWith<$Res> {
-  factory _$TestCopyWith(_Test value, $Res Function(_Test) then) =
-      __$TestCopyWithImpl<$Res>;
+abstract class _$FreezedClassCopyWith<$Res>
+    implements $FreezedClassCopyWith<$Res> {
+  factory _$FreezedClassCopyWith(
+          _FreezedClass value, $Res Function(_FreezedClass) then) =
+      __$FreezedClassCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@FormControlAnnotation() String? gender,
+      {@FormControlAnnotation() String gender,
       @FormControlAnnotation() String? id,
       @FormControlAnnotation() String? name,
       @FormControlAnnotation() double? year});
 }
 
 /// @nodoc
-class __$TestCopyWithImpl<$Res> extends _$TestCopyWithImpl<$Res>
-    implements _$TestCopyWith<$Res> {
-  __$TestCopyWithImpl(_Test _value, $Res Function(_Test) _then)
-      : super(_value, (v) => _then(v as _Test));
+class __$FreezedClassCopyWithImpl<$Res> extends _$FreezedClassCopyWithImpl<$Res>
+    implements _$FreezedClassCopyWith<$Res> {
+  __$FreezedClassCopyWithImpl(
+      _FreezedClass _value, $Res Function(_FreezedClass) _then)
+      : super(_value, (v) => _then(v as _FreezedClass));
 
   @override
-  _Test get _value => super._value as _Test;
+  _FreezedClass get _value => super._value as _FreezedClass;
 
   @override
   $Res call({
@@ -132,11 +137,11 @@ class __$TestCopyWithImpl<$Res> extends _$TestCopyWithImpl<$Res>
     Object? name = freezed,
     Object? year = freezed,
   }) {
-    return _then(_Test(
+    return _then(_FreezedClass(
       gender == freezed
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -155,18 +160,19 @@ class __$TestCopyWithImpl<$Res> extends _$TestCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Test extends _Test {
-  _$_Test(@FormControlAnnotation() this.gender,
+class _$_FreezedClass extends _FreezedClass {
+  _$_FreezedClass(@FormControlAnnotation() this.gender,
       {@FormControlAnnotation() this.id,
       @FormControlAnnotation() this.name,
       @FormControlAnnotation() this.year})
       : super._();
 
-  factory _$_Test.fromJson(Map<String, dynamic> json) => _$$_TestFromJson(json);
+  factory _$_FreezedClass.fromJson(Map<String, dynamic> json) =>
+      _$$_FreezedClassFromJson(json);
 
   @override
   @FormControlAnnotation()
-  final String? gender;
+  final String gender;
   @override
   @FormControlAnnotation()
   final String? id;
@@ -179,13 +185,13 @@ class _$_Test extends _Test {
 
   @override
   String toString() {
-    return 'Test(gender: $gender, id: $id, name: $name, year: $year)';
+    return 'FreezedClass(gender: $gender, id: $id, name: $name, year: $year)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Test &&
+        (other is _FreezedClass &&
             (identical(other.gender, gender) ||
                 const DeepCollectionEquality().equals(other.gender, gender)) &&
             (identical(other.id, id) ||
@@ -206,27 +212,28 @@ class _$_Test extends _Test {
 
   @JsonKey(ignore: true)
   @override
-  _$TestCopyWith<_Test> get copyWith =>
-      __$TestCopyWithImpl<_Test>(this, _$identity);
+  _$FreezedClassCopyWith<_FreezedClass> get copyWith =>
+      __$FreezedClassCopyWithImpl<_FreezedClass>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TestToJson(this);
+    return _$$_FreezedClassToJson(this);
   }
 }
 
-abstract class _Test extends Test {
-  factory _Test(@FormControlAnnotation() String? gender,
+abstract class _FreezedClass extends FreezedClass {
+  factory _FreezedClass(@FormControlAnnotation() String gender,
       {@FormControlAnnotation() String? id,
       @FormControlAnnotation() String? name,
-      @FormControlAnnotation() double? year}) = _$_Test;
-  _Test._() : super._();
+      @FormControlAnnotation() double? year}) = _$_FreezedClass;
+  _FreezedClass._() : super._();
 
-  factory _Test.fromJson(Map<String, dynamic> json) = _$_Test.fromJson;
+  factory _FreezedClass.fromJson(Map<String, dynamic> json) =
+      _$_FreezedClass.fromJson;
 
   @override
   @FormControlAnnotation()
-  String? get gender => throw _privateConstructorUsedError;
+  String get gender => throw _privateConstructorUsedError;
   @override
   @FormControlAnnotation()
   String? get id => throw _privateConstructorUsedError;
@@ -238,5 +245,6 @@ abstract class _Test extends Test {
   double? get year => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$TestCopyWith<_Test> get copyWith => throw _privateConstructorUsedError;
+  _$FreezedClassCopyWith<_FreezedClass> get copyWith =>
+      throw _privateConstructorUsedError;
 }

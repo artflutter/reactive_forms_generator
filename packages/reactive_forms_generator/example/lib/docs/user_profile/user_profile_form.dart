@@ -1,13 +1,13 @@
-import 'package:example/docs/group/user_profile.dart';
+import 'package:example/docs/user_profile/user_profile.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 
-class GroupContainsFormWidget extends StatelessWidget {
+class UserProfileFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
-      title: Text('Group contains test'),
+      title: Text('User profile'),
       body: SafeArea(
         child: UserProfileFormBuilder(
           model: UserProfile(),
@@ -148,16 +148,6 @@ class GroupContainsFormWidget extends StatelessWidget {
                                 print(formModel.model.lastName);
                               }
                             : null,
-                      );
-                    },
-                  ),
-                  ReactiveUserProfileFormConsumer(
-                    builder: (context, formModel, child) {
-                      return ElevatedButton(
-                        child: Text('Contains'),
-                        onPressed: () {
-                          print(formModel.homeForm.containsCity);
-                        },
                       );
                     },
                   ),

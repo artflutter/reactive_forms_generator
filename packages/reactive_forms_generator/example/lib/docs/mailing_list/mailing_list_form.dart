@@ -1,4 +1,4 @@
-import 'package:example/docs/arrays/mailing_list.dart';
+import 'package:example/docs/mailing_list/mailing_list.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';

@@ -31,6 +31,14 @@ class FormGenerator {
 
   final Map<String, FormGenerator> nestedFormGroupGenerators = {};
 
+  String get baseName {
+    if (formChecker.hasAnnotationOfExact(element)) {
+      final annotation = formChecker.firstAnnotationOfExact(element);
+      return annotation?.getField('name')?.toStringValue() ?? element.name;
+    }
+    return element.name;
+  }
+
   FormGenerator(this.element, this.type) {
     for (var e in formGroups) {
       formGroupGenerators[e.name] = FormGenerator(
@@ -77,7 +85,7 @@ class FormGenerator {
       )
       .toList();
 
-  String get className => '${element.name}Form';
+  String get className => '${baseName}Form';
 
   List<ParameterElement> get parameters => element.constructors
       .where((e) => e.hasReactiveFormAnnotatedParameters)

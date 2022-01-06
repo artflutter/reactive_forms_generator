@@ -1,3 +1,6 @@
+## [0.7.0-beta]
+* contains and remove method refactored
+
 ## [0.6.1-beta]
 * FormModel interface
 

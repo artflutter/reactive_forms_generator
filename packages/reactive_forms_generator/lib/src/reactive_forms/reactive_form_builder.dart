@@ -6,18 +6,21 @@ class ReactiveFormBuilder {
 
   ReactiveFormBuilder(this.reactiveForm);
 
+  String get _baseName =>
+      reactiveForm.reactiveInheritedStreamer.formGenerator.className;
+
+  String get className => '${_baseName}Builder';
+
+  String get stateClassName => '_${_baseName}BuilderState';
+
   Method get _createStateMethod => Method(
         (b) => b
           ..name = 'createState'
           ..lambda = true
           ..type
           ..annotations.add(const CodeExpression(Code('override')))
-          ..returns = Reference(
-            '_${reactiveForm.reactiveInheritedStreamer.formGenerator.className}BuilderState',
-          )
-          ..body = Code(
-            '_${reactiveForm.reactiveInheritedStreamer.formGenerator.className}BuilderState()',
-          ),
+          ..returns = Reference(stateClassName)
+          ..body = Code('$stateClassName()'),
       );
 
   Constructor get _widgetConstructor => Constructor(
@@ -99,8 +102,7 @@ class ReactiveFormBuilder {
 
   Class get _widget => Class(
         (b) => b
-          ..name =
-              '${reactiveForm.reactiveInheritedStreamer.formGenerator.className}Builder'
+          ..name = className
           ..extend = const Reference('StatefulWidget')
           ..fields.addAll(_widgetFields)
           ..constructors.add(_widgetConstructor)
@@ -152,10 +154,8 @@ class ReactiveFormBuilder {
 
   Class get _state => Class(
         (b) => b
-          ..name =
-              '_${reactiveForm.reactiveInheritedStreamer.formGenerator.className}BuilderState'
-          ..extend = Reference(
-              'State<${reactiveForm.reactiveInheritedStreamer.formGenerator.className}Builder>')
+          ..name = stateClassName
+          ..extend = Reference('State<$className>')
           ..fields.addAll(
             [
               Field(

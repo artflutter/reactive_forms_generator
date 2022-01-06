@@ -132,6 +132,8 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
 class FreezedClassForm implements FormModel<FreezedClass> {
   FreezedClassForm(this.freezedClass, this.form, this.path) {}
 
+  static String genderControlName = "gender";
+
   static String idControlName = "id";
 
   static String nameControlName = "name";
@@ -144,12 +146,23 @@ class FreezedClassForm implements FormModel<FreezedClass> {
 
   final String? path;
 
+  String genderControlPath() => pathBuilder(genderControlName);
   String idControlPath() => pathBuilder(idControlName);
   String nameControlPath() => pathBuilder(nameControlName);
   String yearControlPath() => pathBuilder(yearControlName);
+  String get genderValue => genderControl.value as String;
   String? get idValue => idControl?.value;
   String? get nameValue => nameControl?.value;
   double? get yearValue => yearControl?.value;
+  bool get containsGender {
+    try {
+      form.control(genderControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -177,9 +190,11 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     }
   }
 
+  Object? get genderErrors => genderControl.errors;
   Object? get idErrors => idControl?.errors;
   Object? get nameErrors => nameControl?.errors;
   Object? get yearErrors => yearControl?.errors;
+  void get genderFocus => form.focus(genderControlPath());
   void get idFocus => form.focus(idControlPath());
   void get nameFocus => form.focus(nameControlPath());
   void get yearFocus => form.focus(yearControlPath());
@@ -252,6 +267,10 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     }
   }
 
+  void genderValueUpdate(String value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      genderControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
   void idValueUpdate(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
       idControl?.updateValue(value,
@@ -263,6 +282,10 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   void yearValueUpdate(double? value,
           {bool updateParent = true, bool emitEvent = true}) =>
       yearControl?.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void genderValuePatch(String value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      genderControl.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void idValuePatch(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
@@ -276,6 +299,13 @@ class FreezedClassForm implements FormModel<FreezedClass> {
           {bool updateParent = true, bool emitEvent = true}) =>
       yearControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
+  void genderValueReset(String value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      genderControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void idValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,
@@ -297,6 +327,8 @@ class FreezedClassForm implements FormModel<FreezedClass> {
           bool? disabled}) =>
       yearControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<String> get genderControl =>
+      form.control(genderControlPath()) as FormControl<String>;
   FormControl<String>? get idControl =>
       containsId ? form.control(idControlPath()) as FormControl<String>? : null;
   FormControl<String>? get nameControl => containsName
@@ -306,7 +338,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
       ? form.control(yearControlPath()) as FormControl<double>?
       : null;
   FreezedClass get model =>
-      FreezedClass(id: idValue, name: nameValue, year: yearValue);
+      FreezedClass(genderValue, id: idValue, name: nameValue, year: yearValue);
   void updateValue(FreezedClass value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -328,6 +360,13 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
+        genderControlName: FormControl<String>(
+            value: freezedClass.gender,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
         idControlName: FormControl<String>(
             value: freezedClass.id,
             validators: [],

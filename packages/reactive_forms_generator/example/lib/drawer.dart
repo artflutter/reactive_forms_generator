@@ -34,9 +34,9 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: const Text('Tiny form'),
+              title: const Text('Basic form'),
               onTap: () => Navigator.of(context).pushReplacementNamed(
-                Routes.tiny,
+                Routes.basic,
               ),
             ),
             ListTile(
@@ -67,24 +67,6 @@ class AppDrawer extends StatelessWidget {
               title: const Text('Freezed form'),
               onTap: () => Navigator.of(context).pushReplacementNamed(
                 Routes.freezed,
-              ),
-            ),
-            ListTile(
-              title: const Text('Remove form control test'),
-              onTap: () => Navigator.of(context).pushReplacementNamed(
-                Routes.removeControl,
-              ),
-            ),
-            ListTile(
-              title: const Text('Group contains test'),
-              onTap: () => Navigator.of(context).pushReplacementNamed(
-                Routes.groupContains,
-              ),
-            ),
-            ListTile(
-              title: const Text('Group remove test'),
-              onTap: () => Navigator.of(context).pushReplacementNamed(
-                Routes.groupRemove,
               ),
             ),
           ],

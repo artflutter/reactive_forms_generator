@@ -1,20 +1,17 @@
-import 'package:example/docs/remove_form_control/tiny.dart';
+import 'package:example/docs/renamed_basic/renamed_basic.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
-class RemoveControlFormWidget extends StatelessWidget {
+class BasicFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
-      title: Text('Form control is removed'),
-      body: TinyFormBuilder(
-        model: Tiny(),
+      title: Text('Basic'),
+      body: SomeWiredNameFormBuilder(
+        model: RenamedBasic(),
         builder: (context, formModel, child) {
-          // We don't want the password control but we still want to use the
-          // TinyForm for code reuse purposes
-          //
           return Column(
             children: [
               ReactiveTextField<String>(
@@ -30,30 +27,31 @@ class RemoveControlFormWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8.0),
-              ReactiveTinyFormConsumer(
+              ReactiveTextField<String>(
+                formControl: formModel.passwordControl,
+                obscureText: true,
+                validationMessages: (control) => {
+                  ValidationMessage.required: 'The password must not be empty',
+                },
+                textInputAction: TextInputAction.done,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                  helperText: '',
+                  helperStyle: TextStyle(height: 0.7),
+                  errorStyle: TextStyle(height: 0.7),
+                ),
+              ),
+              const SizedBox(height: 8.0),
+              ReactiveSomeWiredNameFormConsumer(
                 builder: (context, formModel, child) {
                   return ElevatedButton(
                     child: Text('Submit'),
                     onPressed: formModel.form.valid
                         ? () {
-                            print(
-                                'If there is no error below this text, you fixed it, good job!');
                             // ignore: unnecessary_cast
-                            print((formModel as FormModel<Tiny>).model);
+                            print((formModel as FormModel<RenamedBasic>).model);
                             print(formModel.model.email);
                             print(formModel.model.password);
-                          }
-                        : null,
-                  );
-                },
-              ),
-              ReactiveTinyFormConsumer(
-                builder: (context, formModel, child) {
-                  return ElevatedButton(
-                    child: Text('Remove control'),
-                    onPressed: formModel.containsPassword
-                        ? () {
-                            formModel.passwordRemove();
                           }
                         : null,
                   );
