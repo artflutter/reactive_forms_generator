@@ -132,6 +132,8 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
 class FreezedClassForm implements FormModel<FreezedClass> {
   FreezedClassForm(this.freezedClass, this.form, this.path) {}
 
+  static String genderControlName = "gender";
+
   static String idControlName = "id";
 
   static String nameControlName = "name";
@@ -144,83 +146,199 @@ class FreezedClassForm implements FormModel<FreezedClass> {
 
   final String? path;
 
+  String genderControlPath() => pathBuilder(genderControlName);
   String idControlPath() => pathBuilder(idControlName);
   String nameControlPath() => pathBuilder(nameControlName);
   String yearControlPath() => pathBuilder(yearControlName);
-  String? get idValue => idControl.value;
-  String? get nameValue => nameControl.value;
-  double? get yearValue => yearControl.value;
-  bool get containsId => form.contains(idControlPath());
-  bool get containsName => form.contains(nameControlPath());
-  bool get containsYear => form.contains(yearControlPath());
-  Object? get idErrors => idControl.errors;
-  Object? get nameErrors => nameControl.errors;
-  Object? get yearErrors => yearControl.errors;
+  String get genderValue => genderControl.value as String;
+  String? get idValue => idControl?.value;
+  String? get nameValue => nameControl?.value;
+  double? get yearValue => yearControl?.value;
+  bool get containsGender {
+    try {
+      form.control(genderControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsId {
+    try {
+      form.control(idControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsName {
+    try {
+      form.control(nameControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsYear {
+    try {
+      form.control(yearControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Object? get genderErrors => genderControl.errors;
+  Object? get idErrors => idControl?.errors;
+  Object? get nameErrors => nameControl?.errors;
+  Object? get yearErrors => yearControl?.errors;
+  void get genderFocus => form.focus(genderControlPath());
   void get idFocus => form.focus(idControlPath());
   void get nameFocus => form.focus(nameControlPath());
   void get yearFocus => form.focus(yearControlPath());
-  void idRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(idControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void nameRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(nameControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void yearRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(yearControlPath(),
+  void idRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsId) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          idControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            idControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void nameRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsName) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          nameControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            nameControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void yearRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsYear) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          yearControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            yearControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void genderValueUpdate(String value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      genderControl.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void idValueUpdate(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      idControl.updateValue(value,
+      idControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void nameValueUpdate(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      nameControl.updateValue(value,
+      nameControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void yearValueUpdate(double? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      yearControl.updateValue(value,
+      yearControl?.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void genderValuePatch(String value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      genderControl.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void idValuePatch(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      idControl.patchValue(value,
+      idControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void nameValuePatch(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      nameControl.patchValue(value,
+      nameControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void yearValuePatch(double? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      yearControl.patchValue(value,
+      yearControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
+  void genderValueReset(String value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      genderControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void idValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      idControl.reset(
+      idControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void nameValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      nameControl.reset(
+      nameControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void yearValueReset(double? value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      yearControl.reset(
+      yearControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<String> get idControl =>
-      form.control(idControlPath()) as FormControl<String>;
-  FormControl<String> get nameControl =>
-      form.control(nameControlPath()) as FormControl<String>;
-  FormControl<double> get yearControl =>
-      form.control(yearControlPath()) as FormControl<double>;
+  FormControl<String> get genderControl =>
+      form.control(genderControlPath()) as FormControl<String>;
+  FormControl<String>? get idControl =>
+      containsId ? form.control(idControlPath()) as FormControl<String>? : null;
+  FormControl<String>? get nameControl => containsName
+      ? form.control(nameControlPath()) as FormControl<String>?
+      : null;
+  FormControl<double>? get yearControl => containsYear
+      ? form.control(yearControlPath()) as FormControl<double>?
+      : null;
   FreezedClass get model =>
-      FreezedClass(id: idValue, name: nameValue, year: yearValue);
+      FreezedClass(genderValue, id: idValue, name: nameValue, year: yearValue);
   void updateValue(FreezedClass value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -242,6 +360,13 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
+        genderControlName: FormControl<String>(
+            value: freezedClass.gender,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
         idControlName: FormControl<String>(
             value: freezedClass.id,
             validators: [],

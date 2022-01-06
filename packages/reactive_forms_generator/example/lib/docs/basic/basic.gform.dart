@@ -1,70 +1,70 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'tiny.dart';
+part of 'basic.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-class ReactiveTinyFormConsumer extends StatelessWidget {
-  const ReactiveTinyFormConsumer({Key? key, required this.builder, this.child})
+class ReactiveBasicFormConsumer extends StatelessWidget {
+  const ReactiveBasicFormConsumer({Key? key, required this.builder, this.child})
       : super(key: key);
 
   final Widget? child;
 
-  final Widget Function(BuildContext context, TinyForm formModel, Widget? child)
-      builder;
+  final Widget Function(
+      BuildContext context, BasicForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveTinyForm.of(context);
+    final formModel = ReactiveBasicForm.of(context);
 
-    if (formModel is! TinyForm) {
+    if (formModel is! BasicForm) {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, formModel, child);
   }
 }
 
-class TinyFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const TinyFormInheritedStreamer(
+class BasicFormInheritedStreamer extends InheritedStreamer<dynamic> {
+  const BasicFormInheritedStreamer(
       {Key? key,
       required this.form,
       required Stream<dynamic> stream,
       required Widget child})
       : super(stream, child, key: key);
 
-  final TinyForm form;
+  final BasicForm form;
 }
 
-class ReactiveTinyForm extends StatelessWidget {
-  const ReactiveTinyForm(
+class ReactiveBasicForm extends StatelessWidget {
+  const ReactiveBasicForm(
       {Key? key, required this.form, required this.child, this.onWillPop})
       : super(key: key);
 
   final Widget child;
 
-  final TinyForm form;
+  final BasicForm form;
 
   final WillPopCallback? onWillPop;
 
-  static TinyForm? of(BuildContext context, {bool listen = true}) {
+  static BasicForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
       return context
-          .dependOnInheritedWidgetOfExactType<TinyFormInheritedStreamer>()
+          .dependOnInheritedWidgetOfExactType<BasicFormInheritedStreamer>()
           ?.form;
     }
 
     final element = context
-        .getElementForInheritedWidgetOfExactType<TinyFormInheritedStreamer>();
+        .getElementForInheritedWidgetOfExactType<BasicFormInheritedStreamer>();
     return element == null
         ? null
-        : (element.widget as TinyFormInheritedStreamer).form;
+        : (element.widget as BasicFormInheritedStreamer).form;
   }
 
   @override
   Widget build(BuildContext context) {
-    return TinyFormInheritedStreamer(
+    return BasicFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
       child: WillPopScope(
@@ -75,8 +75,8 @@ class ReactiveTinyForm extends StatelessWidget {
   }
 }
 
-class TinyFormBuilder extends StatefulWidget {
-  const TinyFormBuilder(
+class BasicFormBuilder extends StatefulWidget {
+  const BasicFormBuilder(
       {Key? key,
       required this.model,
       this.child,
@@ -84,28 +84,28 @@ class TinyFormBuilder extends StatefulWidget {
       required this.builder})
       : super(key: key);
 
-  final Tiny model;
+  final Basic model;
 
   final Widget? child;
 
   final WillPopCallback? onWillPop;
 
-  final Widget Function(BuildContext context, TinyForm formModel, Widget? child)
-      builder;
+  final Widget Function(
+      BuildContext context, BasicForm formModel, Widget? child) builder;
 
   @override
-  _TinyFormBuilderState createState() => _TinyFormBuilderState();
+  _BasicFormBuilderState createState() => _BasicFormBuilderState();
 }
 
-class _TinyFormBuilderState extends State<TinyFormBuilder> {
+class _BasicFormBuilderState extends State<BasicFormBuilder> {
   late FormGroup _form;
 
-  late TinyForm _formModel;
+  late BasicForm _formModel;
 
   @override
   void initState() {
     _form = FormGroup({});
-    _formModel = TinyForm(widget.model, _form, null);
+    _formModel = BasicForm(widget.model, _form, null);
 
     _form.addAll(_formModel.formElements().controls);
 
@@ -114,7 +114,7 @@ class _TinyFormBuilderState extends State<TinyFormBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveTinyForm(
+    return ReactiveBasicForm(
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveForm(
@@ -126,14 +126,14 @@ class _TinyFormBuilderState extends State<TinyFormBuilder> {
   }
 }
 
-class TinyForm implements FormModel<Tiny> {
-  TinyForm(this.tiny, this.form, this.path) {}
+class BasicForm implements FormModel<Basic> {
+  BasicForm(this.basic, this.form, this.path) {}
 
   static String emailControlName = "email";
 
   static String passwordControlName = "password";
 
-  final Tiny tiny;
+  final Basic basic;
 
   final FormGroup form;
 
@@ -142,24 +142,34 @@ class TinyForm implements FormModel<Tiny> {
   String emailControlPath() => pathBuilder(emailControlName);
   String passwordControlPath() => pathBuilder(passwordControlName);
   String get emailValue => emailControl.value as String;
-  String? get passwordValue => passwordControl.value;
-  bool get containsEmail => form.contains(emailControlPath());
-  bool get containsPassword => form.contains(passwordControlPath());
+  String get passwordValue => passwordControl.value as String;
+  bool get containsEmail {
+    try {
+      form.control(emailControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsPassword {
+    try {
+      form.control(passwordControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get emailErrors => emailControl.errors;
   Object? get passwordErrors => passwordControl.errors;
   void get emailFocus => form.focus(emailControlPath());
   void get passwordFocus => form.focus(passwordControlPath());
-  void emailRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(emailControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
-  void passwordRemove({bool updateParent = true, bool emitEvent = true}) =>
-      form.removeControl(passwordControlPath(),
-          updateParent: updateParent, emitEvent: emitEvent);
   void emailValueUpdate(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
       emailControl.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
-  void passwordValueUpdate(String? value,
+  void passwordValueUpdate(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
       passwordControl.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
@@ -167,7 +177,7 @@ class TinyForm implements FormModel<Tiny> {
           {bool updateParent = true, bool emitEvent = true}) =>
       emailControl.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
-  void passwordValuePatch(String? value,
+  void passwordValuePatch(String value,
           {bool updateParent = true, bool emitEvent = true}) =>
       passwordControl.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
@@ -178,7 +188,7 @@ class TinyForm implements FormModel<Tiny> {
           bool? disabled}) =>
       emailControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void passwordValueReset(String? value,
+  void passwordValueReset(String value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
@@ -189,17 +199,17 @@ class TinyForm implements FormModel<Tiny> {
       form.control(emailControlPath()) as FormControl<String>;
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
-  Tiny get model => Tiny(email: emailValue, password: passwordValue);
-  void updateValue(Tiny value,
+  Basic get model => Basic(email: emailValue, password: passwordValue);
+  void updateValue(Basic value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
-          TinyForm(value, FormGroup({}), null).formElements().rawValue,
+          BasicForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(Tiny value,
+  void resetValue(Basic value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.reset(
-          value: TinyForm(value, FormGroup({}), null).formElements().rawValue,
+          value: BasicForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
@@ -210,14 +220,14 @@ class TinyForm implements FormModel<Tiny> {
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         emailControlName: FormControl<String>(
-            value: tiny.email,
+            value: basic.email,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
-            value: tiny.password,
+            value: basic.password,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

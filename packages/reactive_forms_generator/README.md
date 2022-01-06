@@ -201,12 +201,12 @@ First we need to define our form model
 
 #### Model <a name="basics-model" />
 ```dart
-class Tiny {
+class Basic {
   final String email;
 
   final String password;
 
-  Tiny({this.email = '', this.password = ''});
+  Basic({this.email = '', this.password = ''});
 }
 ```
 
@@ -220,12 +220,12 @@ The next step is to add annotations to help generator do his job.
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 @ReactiveFormAnnotation()
-class Tiny {
+class Basic {
   final String email;
 
   final String password;
 
-  Tiny({
+  Basic({
     @FormControlAnnotation()
     this.email = '',
 
@@ -247,12 +247,12 @@ import 'package:example/helpers.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 @ReactiveFormAnnotation()
-class Tiny {
+class Basic {
   final String email;
 
   final String password;
 
-  Tiny({
+  Basic({
     @FormControlAnnotation(
       validators: const [requiredValidator],
     )
@@ -267,16 +267,16 @@ class Tiny {
 
 As far as we are using annotations - validators should be top level functions or static class fields.
 
-Now we are ready to run our form generator. You can check output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/basics/tiny.gform.dart).
+Now we are ready to run our form generator. You can check output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/basics/basic.gform.dart).
 
 #### Form <a name="basics-form" />
 
 Let's build our form based on generated code
 
 ```dart
-final form = TinyFormBuilder(
+final form = BasicFormBuilder(
   // setup form model with initial data
-  model: Tiny(),
+  model: Basic(),
   // form builder
   builder: (context, formModel, child) {
     return Column(
@@ -299,7 +299,7 @@ final form = TinyFormBuilder(
           decoration: const InputDecoration(labelText: 'Password'),
         ),
         const SizedBox(height: 8.0),
-        ReactiveTinyFormConsumer(
+        ReactiveBasicFormConsumer(
           builder: (context, form, child) {
             return ElevatedButton(
               child: Text('Submit'),
@@ -318,9 +318,9 @@ final form = TinyFormBuilder(
 );
 ```
 
-`TinyFormBuilder` - generated widget that injects form into context
+`BasicFormBuilder` - generated widget that injects form into context
 `ReactiveTextField` - bundled text fields
-`ReactiveTinyFormConsumer` - generated widget that rebuilds upon form change
+`ReactiveBasicFormConsumer` - generated widget that rebuilds upon form change
 
 You can get access to prefilled form model by calling `form.model.[field-name]`.
 

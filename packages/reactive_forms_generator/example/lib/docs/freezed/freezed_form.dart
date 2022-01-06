@@ -9,7 +9,7 @@ class FreezedFormWidget extends StatelessWidget {
     return SampleScreen(
       title: Text('Login'),
       body: FreezedClassFormBuilder(
-        model: FreezedClass(),
+        model: FreezedClass(''),
         builder: (context, formModel, child) {
           return Column(
             children: [

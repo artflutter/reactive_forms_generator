@@ -1,16 +1,16 @@
-import 'package:example/docs/basics/tiny.dart';
+import 'package:example/docs/basic/basic.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
-class TinyFormWidget extends StatelessWidget {
+class BasicFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
-      title: Text('Tiny'),
-      body: TinyFormBuilder(
-        model: Tiny(),
+      title: Text('Basic'),
+      body: BasicFormBuilder(
+        model: Basic(),
         builder: (context, formModel, child) {
           return Column(
             children: [
@@ -42,14 +42,14 @@ class TinyFormWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8.0),
-              ReactiveTinyFormConsumer(
+              ReactiveBasicFormConsumer(
                 builder: (context, formModel, child) {
                   return ElevatedButton(
                     child: Text('Submit'),
                     onPressed: formModel.form.valid
                         ? () {
                             // ignore: unnecessary_cast
-                            print((formModel as FormModel<Tiny>).model);
+                            print((formModel as FormModel<Basic>).model);
                             print(formModel.model.email);
                             print(formModel.model.password);
                           }

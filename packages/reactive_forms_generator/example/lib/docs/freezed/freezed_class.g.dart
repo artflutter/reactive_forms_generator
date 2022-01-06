@@ -8,6 +8,7 @@ part of 'freezed_class.dart';
 
 _$_FreezedClass _$$_FreezedClassFromJson(Map<String, dynamic> json) =>
     _$_FreezedClass(
+      json['gender'] as String,
       id: json['id'] as String?,
       name: json['name'] as String?,
       year: (json['year'] as num?)?.toDouble(),
@@ -15,6 +16,7 @@ _$_FreezedClass _$$_FreezedClassFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_FreezedClassToJson(_$_FreezedClass instance) =>
     <String, dynamic>{
+      'gender': instance.gender,
       'id': instance.id,
       'name': instance.name,
       'year': instance.year,

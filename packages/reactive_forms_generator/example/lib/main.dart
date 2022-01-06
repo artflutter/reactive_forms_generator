@@ -1,16 +1,13 @@
 import 'package:example/docs/array_group/delivery_point_route_form.dart';
 import 'package:example/docs/array_group/delivery_route_form.dart';
-import 'package:example/docs/arrays/mailing_list_form.dart';
+import 'package:example/docs/mailing_list/mailing_list_form.dart';
 import 'package:example/docs/freezed/freezed_form.dart';
-import 'package:example/docs/group/user_profile_form.dart';
-import 'package:example/docs/group_contains/user_profile_form.dart';
-import 'package:example/docs/group_remove/user_profile_form.dart';
-import 'package:example/docs/remove_form_control/tiny_form.dart';
+import 'package:example/docs/user_profile/user_profile_form.dart';
 import 'package:example/routes/array_nullable_form.dart';
 import 'package:example/routes/group_nullable_group.dart';
 import 'package:example/routes/login_form.dart';
 import 'package:example/routes/login_nullable_form.dart';
-import 'package:example/docs/basics/tiny_form.dart';
+import 'package:example/docs/basic/basic_form.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,7 +17,7 @@ void main() {
 class Routes {
   static const login = '/login';
 
-  static const tiny = '/tiny';
+  static const basic = '/basic';
 
   static const mailingList = '/mailing-list';
 
@@ -37,12 +34,6 @@ class Routes {
   static const arrayNullable = '/array-nullable';
 
   static const freezed = '/freezed';
-
-  static const removeControl = '/super-tiny';
-
-  static const groupContains = '/group-contains';
-
-  static const groupRemove = '/group-remove';
 }
 
 class MyApp extends StatelessWidget {
@@ -56,7 +47,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: <String, WidgetBuilder>{
         Routes.login: (_) => LoginFormWidget(),
-        Routes.tiny: (_) => TinyFormWidget(),
+        Routes.basic: (_) => BasicFormWidget(),
         Routes.mailingList: (_) => MailingListFormWidget(),
         Routes.userProfile: (_) => UserProfileFormWidget(),
         Routes.loginNullable: (_) => LoginNullableFormWidget(),
@@ -65,9 +56,6 @@ class MyApp extends StatelessWidget {
         Routes.deliveryList: (_) => DeliveryListFormWidget(),
         Routes.deliveryPoint: (_) => DeliveryPointWidget(),
         Routes.freezed: (_) => FreezedFormWidget(),
-        Routes.removeControl: (_) => RemoveControlFormWidget(),
-        Routes.groupContains: (_) => GroupContainsFormWidget(),
-        Routes.groupRemove: (_) => GroupRemoveFormWidget(),
       },
       home: LoginFormWidget(),
     );

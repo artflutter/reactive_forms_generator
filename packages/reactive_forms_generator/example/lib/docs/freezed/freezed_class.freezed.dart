@@ -21,11 +21,12 @@ FreezedClass _$FreezedClassFromJson(Map<String, dynamic> json) {
 class _$FreezedClassTearOff {
   const _$FreezedClassTearOff();
 
-  _FreezedClass call(
+  _FreezedClass call(@FormControlAnnotation() String gender,
       {@FormControlAnnotation() String? id,
       @FormControlAnnotation() String? name,
       @FormControlAnnotation() double? year}) {
     return _FreezedClass(
+      gender,
       id: id,
       name: name,
       year: year,
@@ -42,6 +43,8 @@ const $FreezedClass = _$FreezedClassTearOff();
 
 /// @nodoc
 mixin _$FreezedClass {
+  @FormControlAnnotation()
+  String get gender => throw _privateConstructorUsedError;
   @FormControlAnnotation()
   String? get id => throw _privateConstructorUsedError;
   @FormControlAnnotation()
@@ -61,7 +64,8 @@ abstract class $FreezedClassCopyWith<$Res> {
           FreezedClass value, $Res Function(FreezedClass) then) =
       _$FreezedClassCopyWithImpl<$Res>;
   $Res call(
-      {@FormControlAnnotation() String? id,
+      {@FormControlAnnotation() String gender,
+      @FormControlAnnotation() String? id,
       @FormControlAnnotation() String? name,
       @FormControlAnnotation() double? year});
 }
@@ -76,11 +80,16 @@ class _$FreezedClassCopyWithImpl<$Res> implements $FreezedClassCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? gender = freezed,
     Object? id = freezed,
     Object? name = freezed,
     Object? year = freezed,
   }) {
     return _then(_value.copyWith(
+      gender: gender == freezed
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -105,7 +114,8 @@ abstract class _$FreezedClassCopyWith<$Res>
       __$FreezedClassCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@FormControlAnnotation() String? id,
+      {@FormControlAnnotation() String gender,
+      @FormControlAnnotation() String? id,
       @FormControlAnnotation() String? name,
       @FormControlAnnotation() double? year});
 }
@@ -122,11 +132,16 @@ class __$FreezedClassCopyWithImpl<$Res> extends _$FreezedClassCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? gender = freezed,
     Object? id = freezed,
     Object? name = freezed,
     Object? year = freezed,
   }) {
     return _then(_FreezedClass(
+      gender == freezed
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -146,7 +161,7 @@ class __$FreezedClassCopyWithImpl<$Res> extends _$FreezedClassCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_FreezedClass extends _FreezedClass {
-  _$_FreezedClass(
+  _$_FreezedClass(@FormControlAnnotation() this.gender,
       {@FormControlAnnotation() this.id,
       @FormControlAnnotation() this.name,
       @FormControlAnnotation() this.year})
@@ -155,6 +170,9 @@ class _$_FreezedClass extends _FreezedClass {
   factory _$_FreezedClass.fromJson(Map<String, dynamic> json) =>
       _$$_FreezedClassFromJson(json);
 
+  @override
+  @FormControlAnnotation()
+  final String gender;
   @override
   @FormControlAnnotation()
   final String? id;
@@ -167,13 +185,15 @@ class _$_FreezedClass extends _FreezedClass {
 
   @override
   String toString() {
-    return 'FreezedClass(id: $id, name: $name, year: $year)';
+    return 'FreezedClass(gender: $gender, id: $id, name: $name, year: $year)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _FreezedClass &&
+            (identical(other.gender, gender) ||
+                const DeepCollectionEquality().equals(other.gender, gender)) &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
@@ -185,6 +205,7 @@ class _$_FreezedClass extends _FreezedClass {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(gender) ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(year);
@@ -201,7 +222,7 @@ class _$_FreezedClass extends _FreezedClass {
 }
 
 abstract class _FreezedClass extends FreezedClass {
-  factory _FreezedClass(
+  factory _FreezedClass(@FormControlAnnotation() String gender,
       {@FormControlAnnotation() String? id,
       @FormControlAnnotation() String? name,
       @FormControlAnnotation() double? year}) = _$_FreezedClass;
@@ -210,6 +231,9 @@ abstract class _FreezedClass extends FreezedClass {
   factory _FreezedClass.fromJson(Map<String, dynamic> json) =
       _$_FreezedClass.fromJson;
 
+  @override
+  @FormControlAnnotation()
+  String get gender => throw _privateConstructorUsedError;
   @override
   @FormControlAnnotation()
   String? get id => throw _privateConstructorUsedError;

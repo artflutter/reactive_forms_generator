@@ -1,4 +1,4 @@
-import 'package:example/docs/group/user_profile.dart';
+import 'package:example/docs/user_profile/user_profile.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
@@ -7,7 +7,7 @@ class UserProfileFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
-      title: Text('Tiny'),
+      title: Text('User profile'),
       body: SafeArea(
         child: UserProfileFormBuilder(
           model: UserProfile(),

@@ -1,6 +1,8 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/types.dart';
+import 'package:recase/recase.dart';
 
 extension ConstructorElementExt on ConstructorElement {
   bool get hasReactiveFormAnnotatedParameters => parameters.any(
@@ -18,6 +20,12 @@ extension ParameterElementExt on ParameterElement {
   String get fieldControlNameName => '${fieldName}ControlName';
 
   String get fieldControlPath => '${fieldName}ControlPath';
+
+  String get fieldContainsMethodName => 'contains${fieldName.pascalCase}';
+
+  bool get isNullable => type.nullabilitySuffix == NullabilitySuffix.question;
+
+  String get nullabilitySuffix => isNullable ? '?' : '';
 
   bool get isReactiveFormAnnotated =>
       isFormGroupArray || isFormGroup || isFormControl || isFormArray;
