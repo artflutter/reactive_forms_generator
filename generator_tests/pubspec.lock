@@ -7,14 +7,14 @@ packages:
       name: _fe_analyzer_shared
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "30.0.0"
+    version: "33.0.0"
   analyzer:
     dependency: transitive
     description:
       name: analyzer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.7.0"
+    version: "3.1.0"
   args:
     dependency: transitive
     description:
@@ -63,7 +63,7 @@ packages:
       name: build_resolvers
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4"
+    version: "2.0.6"
   build_runner:
     dependency: "direct main"
     description:
@@ -84,7 +84,7 @@ packages:
       name: build_test
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.2"
+    version: "2.1.5"
   built_collection:
     dependency: transitive
     description:
@@ -227,7 +227,7 @@ packages:
       name: freezed
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
   freezed_annotation:
     dependency: "direct main"
     description:
@@ -409,14 +409,14 @@ packages:
       path: "../packages/reactive_forms_annotations"
       relative: true
     source: path
-    version: "0.2.0-beta"
+    version: "0.3.2-beta"
   reactive_forms_generator:
     dependency: "direct dev"
     description:
       path: "../packages/reactive_forms_generator"
       relative: true
     source: path
-    version: "0.5.0-beta"
+    version: "0.7.0-beta"
   recase:
     dependency: "direct main"
     description:
@@ -533,21 +533,21 @@ packages:
       name: test
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.17.12"
+    version: "1.20.1"
   test_api:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.3"
+    version: "0.4.9"
   test_core:
     dependency: transitive
     description:
       name: test_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.2"
+    version: "0.4.11"
   timing:
     dependency: transitive
     description:

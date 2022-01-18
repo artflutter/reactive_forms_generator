@@ -34,8 +34,8 @@ dependencies:
 
 dev_dependencies:
   json_serializable:
-  build_test: ^2.1.2
-  freezed: ^1.1.0
+  build_test: ^2.1.5
+  freezed: ^1.1.1
   flutter_test:
     sdk: flutter
   logging: ^1.0.1
@@ -49,6 +49,7 @@ dependency_overrides:
     path: ../packages/reactive_forms_generator
   meta: 1.7.0
   path: ^1.8.1
+  test_api: 0.4.9
 
 
 # For information on the generic Dart part of this file, see the
