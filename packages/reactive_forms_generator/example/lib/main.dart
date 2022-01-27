@@ -1,5 +1,5 @@
-import 'package:example/docs/array_group/delivery_point_route_form.dart';
-import 'package:example/docs/array_group/delivery_route_form.dart';
+import 'package:example/docs/delivery_list/delivery_point_route_form.dart';
+import 'package:example/docs/delivery_list/delivery_route_form.dart';
 import 'package:example/docs/mailing_list/mailing_list_form.dart';
 import 'package:example/docs/freezed/freezed_form.dart';
 import 'package:example/docs/user_profile/user_profile_form.dart';

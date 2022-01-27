@@ -1,4 +1,5 @@
 import 'package:code_builder/code_builder.dart';
+import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form.dart';
 
 class ReactiveFormBuilder {
@@ -45,7 +46,8 @@ class ReactiveFormBuilder {
                   ..name = 'model'
                   ..named = true
                   ..toThis = true
-                  ..required = true,
+                  ..required = reactiveForm.reactiveInheritedStreamer
+                      .formGenerator.element.hasNonAnnotatedRequiredParameters,
               ),
               Parameter(
                 (b) => b
@@ -70,14 +72,22 @@ class ReactiveFormBuilder {
           ),
       );
 
+  Field get _model {
+    final element =
+        reactiveForm.reactiveInheritedStreamer.formGenerator.element;
+
+    return Field(
+      (b) => b
+        ..name = 'model'
+        ..type = Reference(
+          '${element.name}${element.hasNonAnnotatedRequiredParameters ? '' : '?'}',
+        )
+        ..modifier = FieldModifier.final$,
+    );
+  }
+
   List<Field> get _widgetFields => [
-        Field(
-          (b) => b
-            ..name = 'model'
-            ..type = Reference(reactiveForm
-                .reactiveInheritedStreamer.formGenerator.element.name)
-            ..modifier = FieldModifier.final$,
-        ),
+        _model,
         Field(
           (b) => b
             ..name = 'child'

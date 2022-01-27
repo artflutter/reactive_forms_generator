@@ -17,76 +17,76 @@ void main() {
             
             part 'gen.gform.dart';
           
-          Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
-            return Validators.required(control);
-          }
+            Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
+              return Validators.required(control);
+            }
+              
+            enum UserMode { user, admin }
             
-          enum UserMode { user, admin }
-          
-          @ReactiveFormAnnotation()
-          class Login {
-            final String email;
-          
-            final String password;
-          
-            final bool rememberMe;
-          
-            final String theme;
-          
-            final UserMode mode;
-          
-            final int timeout;
-          
-            final double height;
-          
-            final String? unAnnotated;
-          
-            Login({
-              @FormControlAnnotation(
-                validators: const [
-                  requiredValidator,
-                ],
-              )
-                  this.email = 'default@e.mail',
-              @FormControlAnnotation(
-                validators: const [
-                  requiredValidator,
-                ],
-              )
-                  required this.password,
-              @FormControlAnnotation(
-                validators: const [
-                  requiredValidator,
-                ],
-              )
-                  required this.rememberMe,
-              @FormControlAnnotation(
-                validators: const [
-                  requiredValidator,
-                ],
-              )
-                  required this.theme,
-              @FormControlAnnotation(
-                validators: const [
-                  requiredValidator,
-                ],
-              )
-                  required this.mode,
-              @FormControlAnnotation(
-                validators: const [
-                  requiredValidator,
-                ],
-              )
-                  required this.timeout,
-              @FormControlAnnotation(
-                validators: const [
-                  requiredValidator,
-                ],
-              )
-                  required this.height,
-              this.unAnnotated,
-            });
-          }
+            @ReactiveFormAnnotation()
+            class Login {
+              final String email;
+            
+              final String password;
+            
+              final bool rememberMe;
+            
+              final String theme;
+            
+              final UserMode mode;
+            
+              final int timeout;
+            
+              final double height;
+            
+              final String? unAnnotated;
+            
+              Login({
+                @FormControlAnnotation(
+                  validators: const [
+                    requiredValidator,
+                  ],
+                )
+                    this.email = 'default@e.mail',
+                @FormControlAnnotation(
+                  validators: const [
+                    requiredValidator,
+                  ],
+                )
+                    required this.password,
+                @FormControlAnnotation(
+                  validators: const [
+                    requiredValidator,
+                  ],
+                )
+                    required this.rememberMe,
+                @FormControlAnnotation(
+                  validators: const [
+                    requiredValidator,
+                  ],
+                )
+                    required this.theme,
+                @FormControlAnnotation(
+                  validators: const [
+                    requiredValidator,
+                  ],
+                )
+                    required this.mode,
+                @FormControlAnnotation(
+                  validators: const [
+                    requiredValidator,
+                  ],
+                )
+                    required this.timeout,
+                @FormControlAnnotation(
+                  validators: const [
+                    requiredValidator,
+                  ],
+                )
+                    required this.height,
+                this.unAnnotated,
+              });
+            }
           ''',
           generatedFile: generatedFile,
         );
@@ -174,14 +174,10 @@ class ReactiveLoginForm extends StatelessWidget {
 
 class LoginFormBuilder extends StatefulWidget {
   const LoginFormBuilder(
-      {Key? key,
-      required this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder})
+      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
       : super(key: key);
 
-  final Login model;
+  final Login? model;
 
   final Widget? child;
 
@@ -240,7 +236,7 @@ class LoginForm implements FormModel<Login> {
 
   static String heightControlName = "height";
 
-  final Login login;
+  final Login? login;
 
   final FormGroup form;
 
@@ -464,7 +460,7 @@ class LoginForm implements FormModel<Login> {
       mode: modeValue,
       timeout: timeoutValue,
       height: heightValue,
-      unAnnotated: login.unAnnotated);
+      unAnnotated: login?.unAnnotated);
   void updateValue(Login value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -485,49 +481,49 @@ class LoginForm implements FormModel<Login> {
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         emailControlName: FormControl<String>(
-            value: login.email,
+            value: login?.email,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
-            value: login.password,
+            value: login?.password,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         rememberMeControlName: FormControl<bool>(
-            value: login.rememberMe,
+            value: login?.rememberMe,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         themeControlName: FormControl<String>(
-            value: login.theme,
+            value: login?.theme,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         modeControlName: FormControl<UserMode>(
-            value: login.mode,
+            value: login?.mode,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         timeoutControlName: FormControl<int>(
-            value: login.timeout,
+            value: login?.timeout,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         heightControlName: FormControl<double>(
-            value: login.height,
+            value: login?.height,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

@@ -14,9 +14,12 @@ void main() {
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-            import 'package:example/helpers.dart';
             
             part 'gen.gform.dart';
+            
+            Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
+              return Validators.required(control);
+            }
             
             @ReactiveFormAnnotation()
             class Basic {
@@ -122,14 +125,10 @@ class ReactiveBasicForm extends StatelessWidget {
 
 class BasicFormBuilder extends StatefulWidget {
   const BasicFormBuilder(
-      {Key? key,
-      required this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder})
+      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
       : super(key: key);
 
-  final Basic model;
+  final Basic? model;
 
   final Widget? child;
 
@@ -178,7 +177,7 @@ class BasicForm implements FormModel<Basic> {
 
   static String passwordControlName = "password";
 
-  final Basic basic;
+  final Basic? basic;
 
   final FormGroup form;
 
@@ -265,15 +264,15 @@ class BasicForm implements FormModel<Basic> {
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         emailControlName: FormControl<String>(
-            value: basic.email,
-            validators: [],
+            value: basic?.email,
+            validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
-            value: basic.password,
-            validators: [],
+            value: basic?.password,
+            validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

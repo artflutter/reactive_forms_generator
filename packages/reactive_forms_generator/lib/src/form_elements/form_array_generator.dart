@@ -32,9 +32,7 @@ class FormArrayGenerator extends FormElementGenerator {
         field.type.nullabilitySuffix == NullabilitySuffix.question ? '?' : '';
 
     final defaultValue =
-        field.type.nullabilitySuffix == NullabilitySuffix.question
-            ? '?? []'
-            : '';
+        type?.nullabilitySuffix == NullabilitySuffix.question ? '?? []' : '';
 
     if (field.isFormGroupArray) {
       final formGenerator = FormGenerator(

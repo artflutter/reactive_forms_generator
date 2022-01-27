@@ -77,14 +77,10 @@ class ReactiveBasicForm extends StatelessWidget {
 
 class BasicFormBuilder extends StatefulWidget {
   const BasicFormBuilder(
-      {Key? key,
-      required this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder})
+      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
       : super(key: key);
 
-  final Basic model;
+  final Basic? model;
 
   final Widget? child;
 
@@ -133,7 +129,7 @@ class BasicForm implements FormModel<Basic> {
 
   static String passwordControlName = "password";
 
-  final Basic basic;
+  final Basic? basic;
 
   final FormGroup form;
 
@@ -220,14 +216,14 @@ class BasicForm implements FormModel<Basic> {
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         emailControlName: FormControl<String>(
-            value: basic.email,
+            value: basic?.email,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
-            value: basic.password,
+            value: basic?.password,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

@@ -79,14 +79,10 @@ class ReactiveDeliveryListForm extends StatelessWidget {
 
 class DeliveryListFormBuilder extends StatefulWidget {
   const DeliveryListFormBuilder(
-      {Key? key,
-      required this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder})
+      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
       : super(key: key);
 
-  final DeliveryList model;
+  final DeliveryList? model;
 
   final Widget? child;
 
@@ -131,17 +127,18 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
 
 class DeliveryListForm implements FormModel<DeliveryList> {
   DeliveryListForm(this.deliveryList, this.form, this.path) {
-    deliveryListDeliveryPointForm = deliveryList.deliveryList
-        .asMap()
-        .map((k, v) => MapEntry(
-            k, DeliveryPointForm(v, form, pathBuilder("deliveryList.$k"))))
-        .values
-        .toList();
+    deliveryListDeliveryPointForm = deliveryList?.deliveryList
+            .asMap()
+            .map((k, v) => MapEntry(
+                k, DeliveryPointForm(v, form, pathBuilder("deliveryList.$k"))))
+            .values
+            .toList() ??
+        [];
   }
 
   static String deliveryListControlName = "deliveryList";
 
-  final DeliveryList deliveryList;
+  final DeliveryList? deliveryList;
 
   final FormGroup form;
 
@@ -252,7 +249,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
 class DeliveryPointForm implements FormModel<DeliveryPoint> {
   DeliveryPointForm(this.deliveryPoint, this.form, this.path) {
     addressForm =
-        AddressForm(deliveryPoint.address, form, pathBuilder('address'));
+        AddressForm(deliveryPoint?.address, form, pathBuilder('address'));
   }
 
   static String nameControlName = "name";
@@ -261,7 +258,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
 
   late AddressForm addressForm;
 
-  final DeliveryPoint deliveryPoint;
+  final DeliveryPoint? deliveryPoint;
 
   final FormGroup form;
 
@@ -381,7 +378,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         nameControlName: FormControl<String>(
-            value: deliveryPoint.name,
+            value: deliveryPoint?.name,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -631,14 +628,10 @@ class ReactiveDeliveryPointForm extends StatelessWidget {
 
 class DeliveryPointFormBuilder extends StatefulWidget {
   const DeliveryPointFormBuilder(
-      {Key? key,
-      required this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder})
+      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
       : super(key: key);
 
-  final DeliveryPoint model;
+  final DeliveryPoint? model;
 
   final Widget? child;
 

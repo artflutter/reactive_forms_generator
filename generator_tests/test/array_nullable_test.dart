@@ -14,10 +14,13 @@ void main() {
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-            import 'package:example/helpers.dart';
             
             part 'gen.gform.dart';
             
+            Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
+              return Validators.required(control);
+            }
+
             @ReactiveFormAnnotation()
             class ArrayNullable {
               
@@ -136,14 +139,10 @@ class ReactiveArrayNullableForm extends StatelessWidget {
 
 class ArrayNullableFormBuilder extends StatefulWidget {
   const ArrayNullableFormBuilder(
-      {Key? key,
-      required this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder})
+      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
       : super(key: key);
 
-  final ArrayNullable model;
+  final ArrayNullable? model;
 
   final Widget? child;
 
@@ -197,7 +196,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
 
   static String someListControlName = "someList";
 
-  final ArrayNullable arrayNullable;
+  final ArrayNullable? arrayNullable;
 
   final FormGroup form;
 
@@ -494,35 +493,37 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         emailListControlName: FormArray<String>(
-            arrayNullable.emailList
-                .map((e) => FormControl<String>(
-                      value: e,
-                      validators: [],
-                      asyncValidators: [],
-                      asyncValidatorsDebounceTime: 250,
-                      disabled: false,
-                    ))
-                .toList(),
-            validators: [],
+            arrayNullable?.emailList
+                    .map((e) => FormControl<String>(
+                          value: e,
+                          validators: [],
+                          asyncValidators: [],
+                          asyncValidatorsDebounceTime: 250,
+                          disabled: false,
+                        ))
+                    .toList() ??
+                [],
+            validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false),
         fruitListControlName: FormArray<bool>(
-            arrayNullable.fruitList
-                .map((e) => FormControl<bool>(
-                      value: e,
-                      validators: [],
-                      asyncValidators: [],
-                      asyncValidatorsDebounceTime: 250,
-                      disabled: false,
-                    ))
-                .toList(),
+            arrayNullable?.fruitList
+                    .map((e) => FormControl<bool>(
+                          value: e,
+                          validators: [],
+                          asyncValidators: [],
+                          asyncValidatorsDebounceTime: 250,
+                          disabled: false,
+                        ))
+                    .toList() ??
+                [],
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false),
         vegetablesListControlName: FormArray<String>(
-            arrayNullable.vegetablesList
+            arrayNullable?.vegetablesList
                     ?.map((e) => FormControl<String>(
                           value: e,
                           validators: [],
@@ -537,7 +538,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
             asyncValidatorsDebounceTime: 250,
             disabled: false),
         someListControlName: FormControl<List<String?>>(
-            value: arrayNullable.someList,
+            value: arrayNullable?.someList,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

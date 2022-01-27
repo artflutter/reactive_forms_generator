@@ -87,10 +87,7 @@ class FormGenerator {
 
   String get className => '${baseName}Form';
 
-  List<ParameterElement> get parameters => element.constructors
-      .where((e) => e.hasReactiveFormAnnotatedParameters)
-      .first
-      .parameters;
+  List<ParameterElement> get parameters => element.annotatedParameters;
 
   List<ParameterElement> get annotatedParameters =>
       parameters.where((e) => e.isReactiveFormAnnotated).toList();
@@ -851,7 +848,9 @@ class FormGenerator {
         (b) {
           final parameterValues = parameters.map((e) {
             if (!e.isReactiveFormAnnotated) {
-              return '${e.fieldName}:${element.name.camelCase}.${e.fieldName}';
+              final nullabilitySuffix =
+                  element.hasNonAnnotatedRequiredParameters ? '' : '?';
+              return '${e.fieldName}:${element.name.camelCase}$nullabilitySuffix.${e.fieldName}';
             }
 
             if (e.isPositional ||
@@ -876,10 +875,13 @@ class FormGenerator {
 
   Constructor get _constructor => Constructor(
         (b) {
+          final nullabilitySuffix =
+              element.hasNonAnnotatedRequiredParameters ? '' : '?';
+
           final formGroupInitializers = formGroupGenerators
               .map((name, generator) {
                 final item =
-                    '${name}Form = ${generator.className}(${element.name.camelCase}.$name, form, pathBuilder(\'$name\'));';
+                    '${name}Form = ${generator.className}(${element.name.camelCase}$nullabilitySuffix.$name, form, pathBuilder(\'$name\'));';
 
                 return MapEntry(name, item);
               })
@@ -892,13 +894,16 @@ class FormGenerator {
                 final typeParameter =
                     (e.type as ParameterizedType).typeArguments.first;
 
+                final defaultValue =
+                    element.hasNonAnnotatedRequiredParameters ? '' : '?? []';
+
                 final formGenerator =
                     FormGenerator(typeParameter.element! as ClassElement, type);
-                return '''${e.name}${formGenerator.className} = ${element.name.camelCase}.${e.name}
+                return '''${e.name}${formGenerator.className} = ${element.name.camelCase}$nullabilitySuffix.${e.name}
                   .asMap()
                   .map((k, v) => MapEntry(k, ${formGenerator.className}(v, form, pathBuilder("${e.name}.\$k"))))
                   .values
-                  .toList();
+                  .toList() $defaultValue;
                 ''';
               },
             ),
@@ -941,17 +946,24 @@ class FormGenerator {
                 ...nestedFormGroupFields,
                 Field(
                   (b) {
-                    String displayType =
-                        type?.getDisplayString(withNullability: true) ??
-                            element.name;
+                    String displayType = type?.getDisplayString(
+                            withNullability: true) ??
+                        '${element.name}${element.hasNonAnnotatedRequiredParameters ? '' : '?'}';
 
                     if (type != null &&
                         type is ParameterizedType &&
                         (type as ParameterizedType).typeArguments.isNotEmpty) {
-                      displayType = (type as ParameterizedType)
-                          .typeArguments
-                          .first
-                          .getDisplayString(withNullability: true);
+                      final parameterizedType =
+                          (type as ParameterizedType).typeArguments.first;
+
+                      displayType = parameterizedType.getDisplayString(
+                          withNullability: false);
+
+                      if (parameterizedType.element is ClassElement &&
+                          !(parameterizedType.element as ClassElement)
+                              .hasNonAnnotatedRequiredParameters) {
+                        displayType = '$displayType?';
+                      }
                     }
 
                     b
@@ -1044,7 +1056,15 @@ class FormGenerator {
                               typeArguments: [],
                               nullabilitySuffix: NullabilitySuffix.none,
                             ),
-                          type,
+                          type ??
+                              t.InterfaceTypeImpl(
+                                element: element,
+                                typeArguments: element.thisType.typeArguments,
+                                nullabilitySuffix:
+                                    element.hasNonAnnotatedRequiredParameters
+                                        ? NullabilitySuffix.none
+                                        : NullabilitySuffix.question,
+                              ),
                         ).element(),
                       );
                   },

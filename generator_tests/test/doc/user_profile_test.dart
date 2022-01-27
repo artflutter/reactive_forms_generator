@@ -14,9 +14,12 @@ void main() {
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-            import 'package:example/helpers.dart';
             
             part 'gen.gform.dart';
+            
+            Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
+              return Validators.required(control);
+            }
             
             @ReactiveFormAnnotation()
             class UserProfile {
@@ -150,14 +153,10 @@ class ReactiveUserProfileForm extends StatelessWidget {
 
 class UserProfileFormBuilder extends StatefulWidget {
   const UserProfileFormBuilder(
-      {Key? key,
-      required this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder})
+      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
       : super(key: key);
 
-  final UserProfile model;
+  final UserProfile? model;
 
   final Widget? child;
 
@@ -201,8 +200,8 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
 
 class UserProfileForm implements FormModel<UserProfile> {
   UserProfileForm(this.userProfile, this.form, this.path) {
-    homeForm = AddressForm(userProfile.home, form, pathBuilder('home'));
-    officeForm = AddressForm(userProfile.office, form, pathBuilder('office'));
+    homeForm = AddressForm(userProfile?.home, form, pathBuilder('home'));
+    officeForm = AddressForm(userProfile?.office, form, pathBuilder('office'));
   }
 
   static String firstNameControlName = "firstName";
@@ -217,7 +216,7 @@ class UserProfileForm implements FormModel<UserProfile> {
 
   late AddressForm officeForm;
 
-  final UserProfile userProfile;
+  final UserProfile? userProfile;
 
   final FormGroup form;
 
@@ -430,15 +429,15 @@ class UserProfileForm implements FormModel<UserProfile> {
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         firstNameControlName: FormControl<String>(
-            value: userProfile.firstName,
-            validators: [],
+            value: userProfile?.firstName,
+            validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         lastNameControlName: FormControl<String>(
-            value: userProfile.lastName,
-            validators: [],
+            value: userProfile?.lastName,
+            validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -660,7 +659,7 @@ class AddressForm implements FormModel<Address> {
             touched: false),
         cityControlName: FormControl<String>(
             value: address?.city,
-            validators: [],
+            validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

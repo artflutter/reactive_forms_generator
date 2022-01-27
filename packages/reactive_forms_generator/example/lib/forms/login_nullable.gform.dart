@@ -79,14 +79,10 @@ class ReactiveLoginNullableForm extends StatelessWidget {
 
 class LoginNullableFormBuilder extends StatefulWidget {
   const LoginNullableFormBuilder(
-      {Key? key,
-      required this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder})
+      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
       : super(key: key);
 
-  final LoginNullable model;
+  final LoginNullable? model;
 
   final Widget? child;
 
@@ -146,7 +142,7 @@ class LoginNullableForm implements FormModel<LoginNullable> {
 
   static String heightControlName = "height";
 
-  final LoginNullable loginNullable;
+  final LoginNullable? loginNullable;
 
   final FormGroup form;
 
@@ -560,49 +556,49 @@ class LoginNullableForm implements FormModel<LoginNullable> {
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         emailControlName: FormControl<String>(
-            value: loginNullable.email,
+            value: loginNullable?.email,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
-            value: loginNullable.password,
+            value: loginNullable?.password,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         rememberMeControlName: FormControl<bool>(
-            value: loginNullable.rememberMe,
+            value: loginNullable?.rememberMe,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         themeControlName: FormControl<String>(
-            value: loginNullable.theme,
+            value: loginNullable?.theme,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         modeControlName: FormControl<UserMode>(
-            value: loginNullable.mode,
+            value: loginNullable?.mode,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         timeoutControlName: FormControl<int>(
-            value: loginNullable.timeout,
+            value: loginNullable?.timeout,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         heightControlName: FormControl<double>(
-            value: loginNullable.height,
+            value: loginNullable?.height,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

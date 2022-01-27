@@ -10,7 +10,7 @@ class BasicFormWidget extends StatelessWidget {
     return SampleScreen(
       title: Text('Basic'),
       body: BasicFormBuilder(
-        model: Basic(),
+        // model: Basic(),
         builder: (context, formModel, child) {
           return Column(
             children: [

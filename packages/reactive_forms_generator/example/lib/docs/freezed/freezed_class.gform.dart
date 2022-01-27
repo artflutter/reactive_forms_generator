@@ -79,14 +79,10 @@ class ReactiveFreezedClassForm extends StatelessWidget {
 
 class FreezedClassFormBuilder extends StatefulWidget {
   const FreezedClassFormBuilder(
-      {Key? key,
-      required this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder})
+      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
       : super(key: key);
 
-  final FreezedClass model;
+  final FreezedClass? model;
 
   final Widget? child;
 
@@ -140,7 +136,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
 
   static String yearControlName = "year";
 
-  final FreezedClass freezedClass;
+  final FreezedClass? freezedClass;
 
   final FormGroup form;
 
@@ -150,7 +146,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   String idControlPath() => pathBuilder(idControlName);
   String nameControlPath() => pathBuilder(nameControlName);
   String yearControlPath() => pathBuilder(yearControlName);
-  String get genderValue => genderControl.value as String;
+  String? get genderValue => genderControl?.value;
   String? get idValue => idControl?.value;
   String? get nameValue => nameControl?.value;
   double? get yearValue => yearControl?.value;
@@ -190,7 +186,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     }
   }
 
-  Object? get genderErrors => genderControl.errors;
+  Object? get genderErrors => genderControl?.errors;
   Object? get idErrors => idControl?.errors;
   Object? get nameErrors => nameControl?.errors;
   Object? get yearErrors => yearControl?.errors;
@@ -198,6 +194,29 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   void get idFocus => form.focus(idControlPath());
   void get nameFocus => form.focus(nameControlPath());
   void get yearFocus => form.focus(yearControlPath());
+  void genderRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsGender) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          genderControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            genderControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void idRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsId) {
       final controlPath = path;
@@ -267,9 +286,9 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     }
   }
 
-  void genderValueUpdate(String value,
+  void genderValueUpdate(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      genderControl.updateValue(value,
+      genderControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void idValueUpdate(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
@@ -283,9 +302,9 @@ class FreezedClassForm implements FormModel<FreezedClass> {
           {bool updateParent = true, bool emitEvent = true}) =>
       yearControl?.updateValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
-  void genderValuePatch(String value,
+  void genderValuePatch(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
-      genderControl.patchValue(value,
+      genderControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
   void idValuePatch(String? value,
           {bool updateParent = true, bool emitEvent = true}) =>
@@ -299,12 +318,12 @@ class FreezedClassForm implements FormModel<FreezedClass> {
           {bool updateParent = true, bool emitEvent = true}) =>
       yearControl?.patchValue(value,
           updateParent: updateParent, emitEvent: emitEvent);
-  void genderValueReset(String value,
+  void genderValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      genderControl.reset(
+      genderControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void idValueReset(String? value,
           {bool updateParent = true,
@@ -327,8 +346,9 @@ class FreezedClassForm implements FormModel<FreezedClass> {
           bool? disabled}) =>
       yearControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<String> get genderControl =>
-      form.control(genderControlPath()) as FormControl<String>;
+  FormControl<String>? get genderControl => containsGender
+      ? form.control(genderControlPath()) as FormControl<String>?
+      : null;
   FormControl<String>? get idControl =>
       containsId ? form.control(idControlPath()) as FormControl<String>? : null;
   FormControl<String>? get nameControl => containsName
@@ -361,28 +381,28 @@ class FreezedClassForm implements FormModel<FreezedClass> {
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         genderControlName: FormControl<String>(
-            value: freezedClass.gender,
+            value: freezedClass?.gender,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         idControlName: FormControl<String>(
-            value: freezedClass.id,
+            value: freezedClass?.id,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         nameControlName: FormControl<String>(
-            value: freezedClass.name,
+            value: freezedClass?.name,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         yearControlName: FormControl<double>(
-            value: freezedClass.year,
+            value: freezedClass?.year,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

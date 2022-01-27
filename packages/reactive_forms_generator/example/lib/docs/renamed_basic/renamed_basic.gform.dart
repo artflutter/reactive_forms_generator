@@ -79,14 +79,10 @@ class ReactiveSomeWiredNameForm extends StatelessWidget {
 
 class SomeWiredNameFormBuilder extends StatefulWidget {
   const SomeWiredNameFormBuilder(
-      {Key? key,
-      required this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder})
+      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
       : super(key: key);
 
-  final RenamedBasic model;
+  final RenamedBasic? model;
 
   final Widget? child;
 
@@ -136,7 +132,7 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
 
   static String passwordControlName = "password";
 
-  final RenamedBasic renamedBasic;
+  final RenamedBasic? renamedBasic;
 
   final FormGroup form;
 
@@ -226,14 +222,14 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         emailControlName: FormControl<String>(
-            value: renamedBasic.email,
+            value: renamedBasic?.email,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
-            value: renamedBasic.password,
+            value: renamedBasic?.password,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

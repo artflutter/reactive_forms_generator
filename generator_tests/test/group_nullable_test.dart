@@ -171,14 +171,10 @@ class ReactiveGroupForm extends StatelessWidget {
 
 class GroupFormBuilder extends StatefulWidget {
   const GroupFormBuilder(
-      {Key? key,
-      required this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder})
+      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
       : super(key: key);
 
-  final Group model;
+  final Group? model;
 
   final Widget? child;
 
@@ -222,10 +218,10 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
 
 class GroupForm implements FormModel<Group> {
   GroupForm(this.group, this.form, this.path) {
-    personalForm = PersonalForm(group.personal, form, pathBuilder('personal'));
-    phoneForm = PhoneForm(group.phone, form, pathBuilder('phone'));
-    addressForm = AddressForm(group.address, form, pathBuilder('address'));
-    address2Form = AddressForm(group.address2, form, pathBuilder('address2'));
+    personalForm = PersonalForm(group?.personal, form, pathBuilder('personal'));
+    phoneForm = PhoneForm(group?.phone, form, pathBuilder('phone'));
+    addressForm = AddressForm(group?.address, form, pathBuilder('address'));
+    address2Form = AddressForm(group?.address2, form, pathBuilder('address2'));
   }
 
   static String personalControlName = "personal";
@@ -244,7 +240,7 @@ class GroupForm implements FormModel<Group> {
 
   late AddressForm address2Form;
 
-  final Group group;
+  final Group? group;
 
   final FormGroup form;
 

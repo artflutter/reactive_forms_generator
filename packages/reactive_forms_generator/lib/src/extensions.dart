@@ -10,6 +10,22 @@ extension ConstructorElementExt on ConstructorElement {
       );
 }
 
+extension ClassElementExt on ClassElement {
+  List<ParameterElement> get annotatedParameters => constructors
+      .where((e) => e.hasReactiveFormAnnotatedParameters)
+      .first
+      .parameters;
+
+  bool get hasNonAnnotatedRequiredParameters {
+    return annotatedParameters.any(
+      (e) =>
+          !e.isReactiveFormAnnotated &&
+          e.type.nullabilitySuffix == NullabilitySuffix.none &&
+          (e.isRequiredPositional || e.isRequiredNamed),
+    );
+  }
+}
+
 extension ParameterElementExt on ParameterElement {
   String get fieldName => name;
 
@@ -60,6 +76,9 @@ extension ParameterElementExt on ParameterElement {
   }
 
   bool get isForm => formChecker.hasAnnotationOfExact(this);
+  //
+  // bool get hasNoReactiveFormAnnotation =>
+  //     !isFormGroup && !isForm && !isFormArray && !isFormControl;
 }
 
 extension FieldElementExt on FieldElement {

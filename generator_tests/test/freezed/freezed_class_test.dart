@@ -23,17 +23,18 @@ void main() {
             
             @freezed
             @ReactiveFormAnnotation()
-            class Test with _$Test {
-              Test._();
+            class FreezedClass with _$FreezedClass {
+              FreezedClass._();
             
-              factory Test(
+              factory FreezedClass(
                 @FormControlAnnotation() String? gender, {
                 @FormControlAnnotation() String? id,
                 @FormControlAnnotation() String? name,
                 @FormControlAnnotation() double? year,
-              }) = _Test;
+              }) = _FreezedClass;
             
-              factory Test.fromJson(Map<String, dynamic> json) => _$TestFromJson(json);
+              factory FreezedClass.fromJson(Map<String, dynamic> json) =>
+                  _$FreezedClassFromJson(json);
             }
           ''',
           generatedFile: generatedFile,
@@ -51,65 +52,67 @@ part of 'gen.dart';
 // ReactiveFormsGenerator
 // **************************************************************************
 
-class ReactiveTestFormConsumer extends StatelessWidget {
-  const ReactiveTestFormConsumer({Key? key, required this.builder, this.child})
+class ReactiveFreezedClassFormConsumer extends StatelessWidget {
+  const ReactiveFreezedClassFormConsumer(
+      {Key? key, required this.builder, this.child})
       : super(key: key);
 
   final Widget? child;
 
-  final Widget Function(BuildContext context, TestForm formModel, Widget? child)
-      builder;
+  final Widget Function(
+      BuildContext context, FreezedClassForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveTestForm.of(context);
+    final formModel = ReactiveFreezedClassForm.of(context);
 
-    if (formModel is! TestForm) {
+    if (formModel is! FreezedClassForm) {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, formModel, child);
   }
 }
 
-class TestFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const TestFormInheritedStreamer(
+class FreezedClassFormInheritedStreamer extends InheritedStreamer<dynamic> {
+  const FreezedClassFormInheritedStreamer(
       {Key? key,
       required this.form,
       required Stream<dynamic> stream,
       required Widget child})
       : super(stream, child, key: key);
 
-  final TestForm form;
+  final FreezedClassForm form;
 }
 
-class ReactiveTestForm extends StatelessWidget {
-  const ReactiveTestForm(
+class ReactiveFreezedClassForm extends StatelessWidget {
+  const ReactiveFreezedClassForm(
       {Key? key, required this.form, required this.child, this.onWillPop})
       : super(key: key);
 
   final Widget child;
 
-  final TestForm form;
+  final FreezedClassForm form;
 
   final WillPopCallback? onWillPop;
 
-  static TestForm? of(BuildContext context, {bool listen = true}) {
+  static FreezedClassForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
       return context
-          .dependOnInheritedWidgetOfExactType<TestFormInheritedStreamer>()
+          .dependOnInheritedWidgetOfExactType<
+              FreezedClassFormInheritedStreamer>()
           ?.form;
     }
 
-    final element = context
-        .getElementForInheritedWidgetOfExactType<TestFormInheritedStreamer>();
+    final element = context.getElementForInheritedWidgetOfExactType<
+        FreezedClassFormInheritedStreamer>();
     return element == null
         ? null
-        : (element.widget as TestFormInheritedStreamer).form;
+        : (element.widget as FreezedClassFormInheritedStreamer).form;
   }
 
   @override
   Widget build(BuildContext context) {
-    return TestFormInheritedStreamer(
+    return FreezedClassFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
       child: WillPopScope(
@@ -120,37 +123,34 @@ class ReactiveTestForm extends StatelessWidget {
   }
 }
 
-class TestFormBuilder extends StatefulWidget {
-  const TestFormBuilder(
-      {Key? key,
-      required this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder})
+class FreezedClassFormBuilder extends StatefulWidget {
+  const FreezedClassFormBuilder(
+      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
       : super(key: key);
 
-  final Test model;
+  final FreezedClass? model;
 
   final Widget? child;
 
   final WillPopCallback? onWillPop;
 
-  final Widget Function(BuildContext context, TestForm formModel, Widget? child)
-      builder;
+  final Widget Function(
+      BuildContext context, FreezedClassForm formModel, Widget? child) builder;
 
   @override
-  _TestFormBuilderState createState() => _TestFormBuilderState();
+  _FreezedClassFormBuilderState createState() =>
+      _FreezedClassFormBuilderState();
 }
 
-class _TestFormBuilderState extends State<TestFormBuilder> {
+class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
   late FormGroup _form;
 
-  late TestForm _formModel;
+  late FreezedClassForm _formModel;
 
   @override
   void initState() {
     _form = FormGroup({});
-    _formModel = TestForm(widget.model, _form, null);
+    _formModel = FreezedClassForm(widget.model, _form, null);
 
     _form.addAll(_formModel.formElements().controls);
 
@@ -159,7 +159,7 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveTestForm(
+    return ReactiveFreezedClassForm(
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveForm(
@@ -171,8 +171,8 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
   }
 }
 
-class TestForm implements FormModel<Test> {
-  TestForm(this.test, this.form, this.path) {}
+class FreezedClassForm implements FormModel<FreezedClass> {
+  FreezedClassForm(this.freezedClass, this.form, this.path) {}
 
   static String genderControlName = "gender";
 
@@ -182,7 +182,7 @@ class TestForm implements FormModel<Test> {
 
   static String yearControlName = "year";
 
-  final Test test;
+  final FreezedClass? freezedClass;
 
   final FormGroup form;
 
@@ -403,18 +403,20 @@ class TestForm implements FormModel<Test> {
   FormControl<double>? get yearControl => containsYear
       ? form.control(yearControlPath()) as FormControl<double>?
       : null;
-  Test get model =>
-      Test(genderValue, id: idValue, name: nameValue, year: yearValue);
-  void updateValue(Test value,
+  FreezedClass get model =>
+      FreezedClass(genderValue, id: idValue, name: nameValue, year: yearValue);
+  void updateValue(FreezedClass value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
-          TestForm(value, FormGroup({}), null).formElements().rawValue,
+          FreezedClassForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(Test value,
+  void resetValue(FreezedClass value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.reset(
-          value: TestForm(value, FormGroup({}), null).formElements().rawValue,
+          value: FreezedClassForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
@@ -425,28 +427,28 @@ class TestForm implements FormModel<Test> {
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         genderControlName: FormControl<String>(
-            value: test.gender,
+            value: freezedClass?.gender,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         idControlName: FormControl<String>(
-            value: test.id,
+            value: freezedClass?.id,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         nameControlName: FormControl<String>(
-            value: test.name,
+            value: freezedClass?.name,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         yearControlName: FormControl<double>(
-            value: test.year,
+            value: freezedClass?.year,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

@@ -79,14 +79,10 @@ class ReactiveMailingListForm extends StatelessWidget {
 
 class MailingListFormBuilder extends StatefulWidget {
   const MailingListFormBuilder(
-      {Key? key,
-      required this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder})
+      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
       : super(key: key);
 
-  final MailingList model;
+  final MailingList? model;
 
   final Widget? child;
 
@@ -133,7 +129,7 @@ class MailingListForm implements FormModel<MailingList> {
 
   static String emailListControlName = "emailList";
 
-  final MailingList mailingList;
+  final MailingList? mailingList;
 
   final FormGroup form;
 
@@ -224,15 +220,16 @@ class MailingListForm implements FormModel<MailingList> {
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         emailListControlName: FormArray<String>(
-            mailingList.emailList
-                .map((e) => FormControl<String>(
-                      value: e,
-                      validators: [emailValidator],
-                      asyncValidators: [],
-                      asyncValidatorsDebounceTime: 250,
-                      disabled: false,
-                    ))
-                .toList(),
+            mailingList?.emailList
+                    .map((e) => FormControl<String>(
+                          value: e,
+                          validators: [emailValidator],
+                          asyncValidators: [],
+                          asyncValidatorsDebounceTime: 250,
+                          disabled: false,
+                        ))
+                    .toList() ??
+                [],
             validators: [mailingListValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

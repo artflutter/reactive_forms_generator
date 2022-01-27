@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
+import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:recase/recase.dart';
 
@@ -11,10 +12,21 @@ abstract class FormElementGenerator {
   FormElementGenerator(this.field, this.type);
 
   String get value {
-    final optionalChaining =
-        type?.nullabilitySuffix == NullabilitySuffix.question ? '?' : '';
+    final enclosingElement =
+        (field.enclosingElement as ConstructorElement).enclosingElement;
 
-    return '${(field.enclosingElement as ConstructorElement).enclosingElement.name.camelCase}$optionalChaining.${field.name}';
+    final optionalChaining =
+        type?.nullabilitySuffix == NullabilitySuffix.question ||
+                !enclosingElement.hasNonAnnotatedRequiredParameters
+            ? '?'
+            : '';
+
+    // print(enclosingElement.hasNonAnnotatedRequiredParameters);
+    // print(enclosingElement.thisType.getDisplayString(withNullability: true));
+    // print('${enclosingElement.name.camelCase}$optionalChaining.${field.name}');
+    // print('----------');
+
+    return '${enclosingElement.name.camelCase}$optionalChaining.${field.name}';
   }
 
   String? validatorName(ExecutableElement? e) {

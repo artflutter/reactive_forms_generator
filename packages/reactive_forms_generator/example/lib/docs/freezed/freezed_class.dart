@@ -13,7 +13,7 @@ class FreezedClass with _$FreezedClass {
   FreezedClass._();
 
   factory FreezedClass(
-    @FormControlAnnotation() String gender, {
+    @FormControlAnnotation() String? gender, {
     @FormControlAnnotation() String? id,
     @FormControlAnnotation() String? name,
     @FormControlAnnotation() double? year,

@@ -77,14 +77,10 @@ class ReactiveTestForm extends StatelessWidget {
 
 class TestFormBuilder extends StatefulWidget {
   const TestFormBuilder(
-      {Key? key,
-      required this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder})
+      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
       : super(key: key);
 
-  final Test model;
+  final Test? model;
 
   final Widget? child;
 
@@ -133,7 +129,7 @@ class TestForm implements FormModel<Test> {
 
   static String descriptionControlName = "description";
 
-  final Test test;
+  final Test? test;
 
   final FormGroup form;
 
@@ -244,14 +240,14 @@ class TestForm implements FormModel<Test> {
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         titleControlName: FormControl<String>(
-            value: test.title,
+            value: test?.title,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         descriptionControlName: FormControl<String>(
-            value: test.description,
+            value: test?.description,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
