@@ -59,6 +59,19 @@ class DeliveryListFormWidget extends StatelessWidget {
                                             labelText: 'City ${i}',
                                           ),
                                         ),
+                                        ElevatedButton(
+                                          onPressed: () => formModel
+                                              .removeDeliveryListItemAtIndex(i),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Icon(Icons.arrow_upward),
+                                              Text('Remove ${i}'),
+                                              Icon(Icons.arrow_upward),
+                                            ],
+                                          ),
+                                        )
                                       ],
                                     ));
                               })

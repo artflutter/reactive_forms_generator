@@ -29,6 +29,12 @@ extension ClassElementExt on ClassElement {
 extension ParameterElementExt on ParameterElement {
   String get fieldName => name;
 
+  String get addListItemName => 'add${fieldName.pascalCase}Item';
+
+  String get removeListItemName => 'remove${fieldName.pascalCase}ItemAtIndex';
+
+  String get addListItemListName => 'add${fieldName.pascalCase}ItemList';
+
   String get fieldValueName => '${fieldName}Value';
 
   String get fieldControlName => '${fieldName}Control';

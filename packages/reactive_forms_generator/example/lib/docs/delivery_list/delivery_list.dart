@@ -8,9 +8,11 @@ part 'delivery_list.gform.dart';
 @ReactiveFormAnnotation()
 class DeliveryList {
   final List<DeliveryPoint> deliveryList;
+  final List<Client>? clientList;
 
   DeliveryList({
     @FormArrayAnnotation() this.deliveryList = const [],
+    @FormArrayAnnotation() this.clientList,
   });
 }
 
@@ -27,6 +29,23 @@ class DeliveryPoint {
     )
         this.name = '',
     this.address,
+  });
+}
+
+enum ClientType { home, office }
+
+@FormGroupAnnotation()
+class Client {
+  final ClientType clientType;
+
+  final String? name;
+
+  final String? notes;
+
+  Client({
+    @FormControlAnnotation() required this.clientType,
+    @FormControlAnnotation() this.name,
+    @FormControlAnnotation() this.notes,
   });
 }
 

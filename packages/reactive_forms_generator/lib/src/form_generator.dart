@@ -160,18 +160,18 @@ class FormGenerator {
       final typeParameter =
           (field.type as ParameterizedType).typeArguments.first;
 
-      // final formGenerator =
-      //     FormGenerator(typeParameter.element! as ClassElement, type);
+      final formGenerator =
+          FormGenerator(typeParameter.element! as ClassElement, type);
 
       // fieldValue =
       //     '${field.name}${formGenerator.className}.map((e) => e.model).toList()';
-      fieldValue = '''(${field.fieldControlName}.value ?? [])
+      // DeliveryPointForm(
+      //     v.deliveryPoint, v.form, pathBuilder("deliveryList.$k"))
+
+      fieldValue = '''${field.name}${formGenerator.className}
           .asMap()
-          .map((k, v) => MapEntry(
-            k,
-            ${typeParameter}Form(
-              $typeParameter(), form, pathBuilder("${field.name}.\$k"))
-              .model))
+          .map((k, v) => MapEntry(k,${typeParameter}Form(
+              v.${field.typeParameter.toString().camelCase}, v.form, pathBuilder("${field.name}.\$k")).model))
           .values
           .toList()''';
     } else if (field.isFormArray) {
@@ -313,7 +313,7 @@ class FormGenerator {
 
     if (field.isFormGroupArray) {
       value =
-          'value.map((e) => ${nestedFormGroupGenerators[field.name]!.className}(e, FormGroup({}), null).formElements().rawValue).toList()';
+          'value${field.nullabilitySuffix}.map((e) => ${nestedFormGroupGenerators[field.name]!.className}(e, FormGroup({}), null).formElements().rawValue).toList()';
     }
 
     return Method(
@@ -360,7 +360,7 @@ class FormGenerator {
 
     if (field.isFormGroupArray) {
       value =
-          'value.map((e) => ${nestedFormGroupGenerators[field.name]!.className}(e, FormGroup({}), null).formElements().rawValue).toList()';
+          'value${field.nullabilitySuffix}.map((e) => ${nestedFormGroupGenerators[field.name]!.className}(e, FormGroup({}), null).formElements().rawValue).toList()';
     }
 
     return Method(
@@ -407,7 +407,7 @@ class FormGenerator {
 
     if (field.isFormGroupArray) {
       value =
-          'value.map((e) => ${nestedFormGroupGenerators[field.name]!.className}(e, FormGroup({}), null).formElements().rawValue).toList()';
+          'value${field.nullabilitySuffix}.map((e) => ${nestedFormGroupGenerators[field.name]!.className}(e, FormGroup({}), null).formElements().rawValue).toList()';
     }
 
     return Method(
@@ -713,7 +713,7 @@ class FormGenerator {
 
     return Method(
       (b) => b
-        ..name = 'add${field.fieldName.pascalCase}Item'
+        ..name = field.addListItemName
         ..requiredParameters.add(
           Parameter(
             (b) => b
@@ -724,9 +724,60 @@ class FormGenerator {
         ..returns = const Reference('void')
         ..body = Code(
           '''
-              final formGroup = ${formGroupGenerator.className}(value, form, pathBuilder('${field.fieldName}')).formElements();
+              final formClass = ${formGroupGenerator.className}(value, form, pathBuilder('${field.fieldName}.\${${field.name}${formGroupGenerator.className}.length}'));
 
-              ${field.fieldControlName}${field.nullabilitySuffix}.add(formGroup);''',
+              ${field.name}${formGroupGenerator.className}.add(formClass);
+              ${field.fieldControlName}${field.nullabilitySuffix}.add(formClass.formElements());''',
+        ),
+    );
+  }
+
+  Method removeGroupControl(ParameterElement field) {
+    final formGroupGenerator = FormGenerator(
+        field.typeParameter.element as ClassElement, field.typeParameter);
+
+    final formField = '${field.name}${formGroupGenerator.className}';
+    final controlField = '${field.fieldControlName}${field.nullabilitySuffix}';
+
+    return Method(
+      (b) => b
+        ..name = field.removeListItemName
+        ..requiredParameters.add(
+          Parameter(
+            (b) => b
+              ..name = 'i'
+              ..type = const Reference('int'),
+          ),
+        )
+        ..returns = const Reference('void')
+        ..body = Code(
+          '''
+              if ($formField.asMap().containsKey(i) &&
+                  ($controlField.value ?? []).asMap().containsKey(i)) {
+                $formField.removeAt(i);
+                $controlField.removeAt(i);
+              }
+            ''',
+        ),
+    );
+  }
+
+  Method addGroupControlList(ParameterElement field) {
+    final type = field.typeParameter.getDisplayString(withNullability: false);
+
+    return Method(
+      (b) => b
+        ..name = field.addListItemListName
+        ..requiredParameters.add(
+          Parameter(
+            (b) => b
+              ..name = 'value'
+              ..type = Reference('List<$type>'),
+          ),
+        )
+        ..returns = const Reference('void')
+        ..body = Code(
+          '''value.map((e) => ${field.addListItemName}(e));''',
         ),
     );
   }
@@ -747,7 +798,7 @@ class FormGenerator {
 
     return Method(
       (b) => b
-        ..name = 'add${field.fieldName.pascalCase}Item'
+        ..name = field.addListItemName
         ..requiredParameters.add(
           Parameter(
             (b) => b
@@ -844,6 +895,12 @@ class FormGenerator {
   List<Method> get addGroupControlMethodList =>
       formGroupArrays.map(addGroupControl).toList();
 
+  List<Method> get removeGroupControlMethodList =>
+      formGroupArrays.map(removeGroupControl).toList();
+
+  List<Method> get addGroupControlListMethodList =>
+      formGroupArrays.map(addGroupControlList).toList();
+
   Method get modelMethod => Method(
         (b) {
           final parameterValues = parameters.map((e) {
@@ -899,11 +956,11 @@ class FormGenerator {
 
                 final formGenerator =
                     FormGenerator(typeParameter.element! as ClassElement, type);
-                return '''${e.name}${formGenerator.className} = ${element.name.camelCase}$nullabilitySuffix.${e.name}
+                return '''${e.name}${formGenerator.className} = (${element.name.camelCase}$nullabilitySuffix.${e.name} $defaultValue)
                   .asMap()
                   .map((k, v) => MapEntry(k, ${formGenerator.className}(v, form, pathBuilder("${e.name}.\$k"))))
                   .values
-                  .toList() $defaultValue;
+                  .toList();
                 ''';
               },
             ),
@@ -1019,6 +1076,8 @@ class FormGenerator {
                 ...fieldGroupMethodList,
                 ...addArrayControlMethodList,
                 ...addGroupControlMethodList,
+                ...removeGroupControlMethodList,
+                ...addGroupControlListMethodList,
                 modelMethod,
                 updateValueMethod,
                 resetValueMethod,

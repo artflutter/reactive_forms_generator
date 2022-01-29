@@ -127,16 +127,23 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
 
 class DeliveryListForm implements FormModel<DeliveryList> {
   DeliveryListForm(this.deliveryList, this.form, this.path) {
-    deliveryListDeliveryPointForm = deliveryList?.deliveryList
-            .asMap()
-            .map((k, v) => MapEntry(
-                k, DeliveryPointForm(v, form, pathBuilder("deliveryList.$k"))))
-            .values
-            .toList() ??
-        [];
+    deliveryListDeliveryPointForm = (deliveryList?.deliveryList ?? [])
+        .asMap()
+        .map((k, v) => MapEntry(
+            k, DeliveryPointForm(v, form, pathBuilder("deliveryList.$k"))))
+        .values
+        .toList();
+    clientListClientForm = (deliveryList?.clientList ?? [])
+        .asMap()
+        .map((k, v) =>
+            MapEntry(k, ClientForm(v, form, pathBuilder("clientList.$k"))))
+        .values
+        .toList();
   }
 
   static String deliveryListControlName = "deliveryList";
+
+  static String clientListControlName = "clientList";
 
   final DeliveryList? deliveryList;
 
@@ -146,14 +153,23 @@ class DeliveryListForm implements FormModel<DeliveryList> {
 
   late List<DeliveryPointForm> deliveryListDeliveryPointForm;
 
+  late List<ClientForm> clientListClientForm;
+
   String deliveryListControlPath() => pathBuilder(deliveryListControlName);
-  List<DeliveryPoint> get deliveryListValue => (deliveryListControl.value ?? [])
+  String clientListControlPath() => pathBuilder(clientListControlName);
+  List<DeliveryPoint> get deliveryListValue => deliveryListDeliveryPointForm
       .asMap()
       .map((k, v) => MapEntry(
           k,
           DeliveryPointForm(
-                  DeliveryPoint(), form, pathBuilder("deliveryList.$k"))
+                  v.deliveryPoint, v.form, pathBuilder("deliveryList.$k"))
               .model))
+      .values
+      .toList();
+  List<Client>? get clientListValue => clientListClientForm
+      .asMap()
+      .map((k, v) => MapEntry(
+          k, ClientForm(v.client, v.form, pathBuilder("clientList.$k")).model))
       .values
       .toList();
   bool get containsDeliveryList {
@@ -165,8 +181,42 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     }
   }
 
+  bool get containsClientList {
+    try {
+      form.control(clientListControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get deliveryListErrors => deliveryListControl.errors;
+  Object? get clientListErrors => clientListControl?.errors;
   void get deliveryListFocus => form.focus(deliveryListControlPath());
+  void get clientListFocus => form.focus(clientListControlPath());
+  void clientListRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsClientList) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          clientListControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            clientListControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void deliveryListValueUpdate(List<DeliveryPoint> value,
           {bool updateParent = true, bool emitEvent = true}) =>
       deliveryListControl.updateValue(
@@ -177,6 +227,15 @@ class DeliveryListForm implements FormModel<DeliveryList> {
               .toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
+  void clientListValueUpdate(List<Client>? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      clientListControl?.updateValue(
+          value
+              ?.map((e) =>
+                  ClientForm(e, FormGroup({}), null).formElements().rawValue)
+              .toList(),
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   void deliveryListValuePatch(List<DeliveryPoint> value,
           {bool updateParent = true, bool emitEvent = true}) =>
       deliveryListControl.patchValue(
@@ -184,6 +243,15 @@ class DeliveryListForm implements FormModel<DeliveryList> {
               .map((e) => DeliveryPointForm(e, FormGroup({}), null)
                   .formElements()
                   .rawValue)
+              .toList(),
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void clientListValuePatch(List<Client>? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      clientListControl?.patchValue(
+          value
+              ?.map((e) =>
+                  ClientForm(e, FormGroup({}), null).formElements().rawValue)
               .toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
@@ -200,18 +268,67 @@ class DeliveryListForm implements FormModel<DeliveryList> {
               .toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
+  void clientListValueReset(List<Client>? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      clientListControl?.reset(
+          value: value
+              ?.map((e) =>
+                  ClientForm(e, FormGroup({}), null).formElements().rawValue)
+              .toList(),
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   FormArray<Map<String, Object?>> get deliveryListControl =>
       form.control(deliveryListControlPath())
           as FormArray<Map<String, Object?>>;
+  FormArray<Map<String, Object?>>? get clientListControl => containsClientList
+      ? form.control(clientListControlPath())
+          as FormArray<Map<String, Object?>>?
+      : null;
   void addDeliveryListItem(DeliveryPoint value) {
-    final formGroup =
-        DeliveryPointForm(value, form, pathBuilder('deliveryList'))
-            .formElements();
+    final formClass = DeliveryPointForm(value, form,
+        pathBuilder('deliveryList.${deliveryListDeliveryPointForm.length}'));
 
-    deliveryListControl.add(formGroup);
+    deliveryListDeliveryPointForm.add(formClass);
+    deliveryListControl.add(formClass.formElements());
   }
 
-  DeliveryList get model => DeliveryList(deliveryList: deliveryListValue);
+  void addClientListItem(Client value) {
+    final formClass = ClientForm(
+        value, form, pathBuilder('clientList.${clientListClientForm.length}'));
+
+    clientListClientForm.add(formClass);
+    clientListControl?.add(formClass.formElements());
+  }
+
+  void removeDeliveryListItemAtIndex(int i) {
+    if (deliveryListDeliveryPointForm.asMap().containsKey(i) &&
+        (deliveryListControl.value ?? []).asMap().containsKey(i)) {
+      deliveryListDeliveryPointForm.removeAt(i);
+      deliveryListControl.removeAt(i);
+    }
+  }
+
+  void removeClientListItemAtIndex(int i) {
+    if (clientListClientForm.asMap().containsKey(i) &&
+        (clientListControl?.value ?? []).asMap().containsKey(i)) {
+      clientListClientForm.removeAt(i);
+      clientListControl?.removeAt(i);
+    }
+  }
+
+  void addDeliveryListItemList(List<DeliveryPoint> value) {
+    value.map((e) => addDeliveryListItem(e));
+  }
+
+  void addClientListItemList(List<Client> value) {
+    value.map((e) => addClientListItem(e));
+  }
+
+  DeliveryList get model => DeliveryList(
+      deliveryList: deliveryListValue, clientList: clientListValue);
   void updateValue(DeliveryList value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -235,6 +352,12 @@ class DeliveryListForm implements FormModel<DeliveryList> {
   FormGroup formElements() => FormGroup({
         deliveryListControlName: FormArray(
             deliveryListDeliveryPointForm.map((e) => e.formElements()).toList(),
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false),
+        clientListControlName: FormArray(
+            clientListClientForm.map((e) => e.formElements()).toList(),
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -543,6 +666,208 @@ class AddressForm implements FormModel<Address> {
             touched: false),
         cityControlName: FormControl<String>(
             value: address?.city,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
+}
+
+class ClientForm implements FormModel<Client> {
+  ClientForm(this.client, this.form, this.path) {}
+
+  static String clientTypeControlName = "clientType";
+
+  static String nameControlName = "name";
+
+  static String notesControlName = "notes";
+
+  final Client? client;
+
+  final FormGroup form;
+
+  final String? path;
+
+  String clientTypeControlPath() => pathBuilder(clientTypeControlName);
+  String nameControlPath() => pathBuilder(nameControlName);
+  String notesControlPath() => pathBuilder(notesControlName);
+  ClientType get clientTypeValue => clientTypeControl.value as ClientType;
+  String? get nameValue => nameControl?.value;
+  String? get notesValue => notesControl?.value;
+  bool get containsClientType {
+    try {
+      form.control(clientTypeControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsName {
+    try {
+      form.control(nameControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsNotes {
+    try {
+      form.control(notesControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Object? get clientTypeErrors => clientTypeControl.errors;
+  Object? get nameErrors => nameControl?.errors;
+  Object? get notesErrors => notesControl?.errors;
+  void get clientTypeFocus => form.focus(clientTypeControlPath());
+  void get nameFocus => form.focus(nameControlPath());
+  void get notesFocus => form.focus(notesControlPath());
+  void nameRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsName) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          nameControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            nameControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void notesRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsNotes) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          notesControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            notesControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void clientTypeValueUpdate(ClientType value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      clientTypeControl.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void nameValueUpdate(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      nameControl?.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void notesValueUpdate(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      notesControl?.updateValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void clientTypeValuePatch(ClientType value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      clientTypeControl.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void nameValuePatch(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      nameControl?.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void notesValuePatch(String? value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      notesControl?.patchValue(value,
+          updateParent: updateParent, emitEvent: emitEvent);
+  void clientTypeValueReset(ClientType value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      clientTypeControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void nameValueReset(String? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      nameControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void notesValueReset(String? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      notesControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<ClientType> get clientTypeControl =>
+      form.control(clientTypeControlPath()) as FormControl<ClientType>;
+  FormControl<String>? get nameControl => containsName
+      ? form.control(nameControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get notesControl => containsNotes
+      ? form.control(notesControlPath()) as FormControl<String>?
+      : null;
+  Client get model =>
+      Client(clientType: clientTypeValue, name: nameValue, notes: notesValue);
+  void updateValue(Client value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.updateValue(
+          ClientForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void resetValue(Client value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.reset(
+          value: ClientForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
+      value: this.formElements().rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
+  FormGroup formElements() => FormGroup({
+        clientTypeControlName: FormControl<ClientType>(
+            value: client?.clientType,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        nameControlName: FormControl<String>(
+            value: client?.name,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        notesControlName: FormControl<String>(
+            value: client?.notes,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
