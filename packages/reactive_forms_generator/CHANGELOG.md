@@ -1,3 +1,6 @@
+## [0.9.2-beta]
+* bugfixes
+ 
 ## [0.9.1-beta]
 * more array helper methods
 * bugfixes(if you are working with arrays do not use form methods - use only generated one)

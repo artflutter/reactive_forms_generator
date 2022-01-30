@@ -161,15 +161,14 @@ class DeliveryListForm implements FormModel<DeliveryList> {
       .asMap()
       .map((k, v) => MapEntry(
           k,
-          DeliveryPointForm(
-                  v.deliveryPoint, v.form, pathBuilder("deliveryList.$k"))
+          DeliveryPointForm(v.model, v.form, pathBuilder("deliveryList.$k"))
               .model))
       .values
       .toList();
   List<Client>? get clientListValue => clientListClientForm
       .asMap()
       .map((k, v) => MapEntry(
-          k, ClientForm(v.client, v.form, pathBuilder("clientList.$k")).model))
+          k, ClientForm(v.model, v.form, pathBuilder("clientList.$k")).model))
       .values
       .toList();
   bool get containsDeliveryList {
@@ -307,6 +306,12 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     if (deliveryListDeliveryPointForm.asMap().containsKey(i) &&
         (deliveryListControl.value ?? []).asMap().containsKey(i)) {
       deliveryListDeliveryPointForm.removeAt(i);
+
+      deliveryListDeliveryPointForm.asMap().forEach((k, v) {
+        deliveryListDeliveryPointForm[k] =
+            DeliveryPointForm(v.model, v.form, pathBuilder("deliveryList.$k"));
+      });
+
       deliveryListControl.removeAt(i);
     }
   }
@@ -315,6 +320,12 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     if (clientListClientForm.asMap().containsKey(i) &&
         (clientListControl?.value ?? []).asMap().containsKey(i)) {
       clientListClientForm.removeAt(i);
+
+      clientListClientForm.asMap().forEach((k, v) {
+        clientListClientForm[k] =
+            ClientForm(v.model, v.form, pathBuilder("clientList.$k"));
+      });
+
       clientListControl?.removeAt(i);
     }
   }

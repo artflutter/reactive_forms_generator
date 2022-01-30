@@ -165,13 +165,11 @@ class FormGenerator {
 
       // fieldValue =
       //     '${field.name}${formGenerator.className}.map((e) => e.model).toList()';
-      // DeliveryPointForm(
-      //     v.deliveryPoint, v.form, pathBuilder("deliveryList.$k"))
 
       fieldValue = '''${field.name}${formGenerator.className}
           .asMap()
           .map((k, v) => MapEntry(k,${typeParameter}Form(
-              v.${field.typeParameter.toString().camelCase}, v.form, pathBuilder("${field.name}.\$k")).model))
+              v.model, v.form, pathBuilder("${field.name}.\$k")).model))
           .values
           .toList()''';
     } else if (field.isFormArray) {
@@ -739,6 +737,8 @@ class FormGenerator {
     final formField = '${field.name}${formGroupGenerator.className}';
     final controlField = '${field.fieldControlName}${field.nullabilitySuffix}';
 
+    final typeParameter = (field.type as ParameterizedType).typeArguments.first;
+
     return Method(
       (b) => b
         ..name = field.removeListItemName
@@ -755,6 +755,11 @@ class FormGenerator {
               if ($formField.asMap().containsKey(i) &&
                   ($controlField.value ?? []).asMap().containsKey(i)) {
                 $formField.removeAt(i);
+                
+                $formField.asMap().forEach((k, v) {
+                  $formField[k] = ${typeParameter}Form(v.model, v.form, pathBuilder("${field.name}.\$k"));
+                });
+                
                 $controlField.removeAt(i);
               }
             ''',

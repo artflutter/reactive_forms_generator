@@ -21,15 +21,18 @@ class DeliveryListFormWidget extends StatelessWidget {
                       formArray: formModel.deliveryListControl,
                       builder: (context, formArray, child) {
                         return Column(
-                          children: formModel.deliveryListValue
+                          children: formModel.deliveryListDeliveryPointForm
                               .asMap()
                               .map((i, deliveryPoint) {
+                                print(deliveryPoint.nameControlPath());
                                 return MapEntry(
                                     i,
                                     Column(
                                       children: [
                                         ReactiveTextField<String>(
-                                          formControlName: '${i}.name',
+                                          key: UniqueKey(),
+                                          formControl:
+                                              deliveryPoint.nameControl,
                                           validationMessages: (_) => {
                                             ValidationMessage.required:
                                                 'Must not be empty',
@@ -39,8 +42,9 @@ class DeliveryListFormWidget extends StatelessWidget {
                                           ),
                                         ),
                                         ReactiveTextField<String>(
-                                          formControlName:
-                                              '${i}.address.street',
+                                          key: UniqueKey(),
+                                          formControl: deliveryPoint
+                                              .addressForm.streetControl,
                                           validationMessages: (_) => {
                                             ValidationMessage.required:
                                                 'Must not be empty',
@@ -50,7 +54,9 @@ class DeliveryListFormWidget extends StatelessWidget {
                                           ),
                                         ),
                                         ReactiveTextField<String>(
-                                          formControlName: '${i}.address.city',
+                                          key: UniqueKey(),
+                                          formControl: deliveryPoint
+                                              .addressForm.cityControl,
                                           validationMessages: (_) => {
                                             ValidationMessage.required:
                                                 'Must not be empty',
