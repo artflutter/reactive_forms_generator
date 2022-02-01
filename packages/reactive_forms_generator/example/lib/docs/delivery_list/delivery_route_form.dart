@@ -162,6 +162,35 @@ class DeliveryListFormWidget extends StatelessWidget {
                       );
                     },
                   ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ReactiveDeliveryListFormConsumer(
+                          builder: (context, formModel, child) {
+                            return ElevatedButton(
+                              child: Text('Empty'),
+                              onPressed: () {
+                                formModel.deliveryListValueUpdate([]);
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: ReactiveDeliveryListFormConsumer(
+                          builder: (context, formModel, child) {
+                            return ElevatedButton(
+                              child: Text('Clear'),
+                              onPressed: () {
+                                formModel.deliveryListClear();
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                   ReactiveDeliveryListFormConsumer(
                     builder: (context, formModel, child) {
                       return ElevatedButton(

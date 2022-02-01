@@ -14,6 +14,7 @@ import 'package:reactive_forms_generator/src/form_elements/form_group_generator.
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_update_value_method.dart';
+import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_clear_method.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
 
@@ -303,8 +304,11 @@ class FormGenerator {
     );
   }
 
-  Method update(ParameterElement field) =>
+  Method? update(ParameterElement field) =>
       ReactiveFormUpdateValueMethod(field).method();
+
+  Method? clear(ParameterElement field) =>
+      ReactiveFormClearMethod(field).method();
 
   Method patch(ParameterElement field) {
     String value = 'value';
@@ -554,7 +558,14 @@ class FormGenerator {
         ...formArrays,
         ...formGroups,
         ...formGroupArrays,
-      ].map(update).toList();
+      ].map(update).whereType<Method>().toList();
+
+  List<Method> get fieldClearMethodList => [
+        ...formControls,
+        ...formArrays,
+        ...formGroups,
+        ...formGroupArrays,
+      ].map(clear).whereType<Method>().toList();
 
   List<Method> get fieldPatchMethodList => [
         ...formControls,
@@ -1032,6 +1043,7 @@ class FormGenerator {
                 ...fieldFocusMethodList,
                 ...fieldRemoveMethodList,
                 ...fieldUpdateMethodList,
+                ...fieldClearMethodList,
                 ...fieldPatchMethodList,
                 ...fieldResetMethodList,
                 ...fieldControlMethodList,

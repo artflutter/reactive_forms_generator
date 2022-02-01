@@ -7,7 +7,7 @@ abstract class ReactiveFormMethod {
 
   ReactiveFormMethod(this.field);
 
-  Method method() {
+  Method? method() {
     if (field.isFormGroup) {
       return formGroupMethod();
     }
@@ -23,13 +23,13 @@ abstract class ReactiveFormMethod {
     return formControlMethod();
   }
 
-  Method formControlMethod() => defaultMethod();
+  Method? formControlMethod() => defaultMethod();
 
-  Method formGroupMethod() => defaultMethod();
+  Method? formGroupMethod() => defaultMethod();
 
-  Method formArrayMethod() => defaultMethod();
+  Method? formArrayMethod() => defaultMethod();
 
-  Method formGroupArrayMethod() => defaultMethod();
+  Method? formGroupArrayMethod() => defaultMethod();
 
-  Method defaultMethod();
+  Method? defaultMethod();
 }

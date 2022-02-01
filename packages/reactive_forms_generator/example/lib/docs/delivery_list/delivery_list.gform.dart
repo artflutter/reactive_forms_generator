@@ -218,6 +218,11 @@ class DeliveryListForm implements FormModel<DeliveryList> {
 
   void deliveryListValueUpdate(List<DeliveryPoint> value,
       {bool updateParent = true, bool emitEvent = true}) {
+    if ((value).isEmpty) {
+      deliveryListClear(updateParent: updateParent, emitEvent: emitEvent);
+
+      return;
+    }
     final updateList = (value)
         .asMap()
         .map(
@@ -261,6 +266,11 @@ class DeliveryListForm implements FormModel<DeliveryList> {
 
   void clientListValueUpdate(List<Client>? value,
       {bool updateParent = true, bool emitEvent = true}) {
+    if ((value ?? []).isEmpty) {
+      clientListClear(updateParent: updateParent, emitEvent: emitEvent);
+
+      return;
+    }
     final updateList = (value ?? [])
         .asMap()
         .map(
@@ -300,6 +310,16 @@ class DeliveryListForm implements FormModel<DeliveryList> {
             updateParent: updateParent, emitEvent: emitEvent);
       });
     }
+  }
+
+  void deliveryListClear({bool updateParent = true, bool emitEvent = true}) {
+    deliveryListDeliveryPointForm.clear();
+    deliveryListControl.clear(updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void clientListClear({bool updateParent = true, bool emitEvent = true}) {
+    clientListClientForm.clear();
+    clientListControl?.clear(updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void deliveryListValuePatch(List<DeliveryPoint> value,

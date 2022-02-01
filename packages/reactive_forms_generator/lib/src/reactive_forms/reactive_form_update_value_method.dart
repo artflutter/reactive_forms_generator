@@ -9,6 +9,12 @@ class ReactiveFormUpdateValueMethod extends ReactiveFormMethod {
   @override
   Method formGroupArrayMethod() {
     final code = '''
+        if((value ${field.isNullable ? '?? []' : ''}).isEmpty) {
+          ${field.clearMethodName}(updateParent: updateParent, emitEvent: emitEvent);
+          
+          return;
+        }
+        
         final updateList = (value
         ${field.isNullable ? '?? []' : ''}).asMap()
         .map(
