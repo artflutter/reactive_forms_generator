@@ -118,6 +118,60 @@ class DeliveryListFormWidget extends StatelessWidget {
                       );
                     },
                   ),
+                  SizedBox(height: 16),
+                  ReactiveDeliveryListFormConsumer(
+                    builder: (context, formModel, child) {
+                      return ElevatedButton(
+                        child: Text('Patch'),
+                        onPressed: () {
+                          formModel.deliveryListValuePatch([
+                            DeliveryPoint(
+                              name: 'patched',
+                              address: Address(
+                                city: 'patchedCity',
+                                street: 'patchedStreet',
+                              ),
+                            ),
+                          ]);
+                        },
+                      );
+                    },
+                  ),
+                  ReactiveDeliveryListFormConsumer(
+                    builder: (context, formModel, child) {
+                      return ElevatedButton(
+                        child: Text('Update'),
+                        onPressed: () {
+                          formModel.deliveryListValueUpdate([
+                            DeliveryPoint(
+                              name: 'updated1',
+                              address: Address(
+                                city: 'updatedCity1',
+                                street: 'updatedStreet1',
+                              ),
+                            ),
+                            DeliveryPoint(
+                              name: 'updated2',
+                              address: Address(
+                                city: 'updatedCity2',
+                                street: 'updatedStreet2',
+                              ),
+                            ),
+                          ]);
+                        },
+                      );
+                    },
+                  ),
+                  ReactiveDeliveryListFormConsumer(
+                    builder: (context, formModel, child) {
+                      return ElevatedButton(
+                        child: Text('Reset'),
+                        onPressed: () {
+                          formModel.deliveryListValueReset([]);
+                        },
+                      );
+                    },
+                  ),
                 ],
               )
             ],

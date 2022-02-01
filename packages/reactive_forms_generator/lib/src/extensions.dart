@@ -52,11 +52,40 @@ extension ParameterElementExt on ParameterElement {
   bool get isReactiveFormAnnotated =>
       isFormGroupArray || isFormGroup || isFormControl || isFormArray;
 
+  String get className {
+    final element = type.element as ClassElement;
+
+    String baseName = '';
+
+    if (formChecker.hasAnnotationOfExact(element)) {
+      final annotation = formChecker.firstAnnotationOfExact(element);
+      baseName = annotation?.getField('name')?.toStringValue() ?? element.name;
+    }
+
+    baseName = element.name;
+
+    if (isFormGroupArray) {
+      final element = typeParameter.element as ClassElement;
+
+      if (formChecker.hasAnnotationOfExact(element)) {
+        final annotation = formChecker.firstAnnotationOfExact(element);
+        baseName =
+            annotation?.getField('name')?.toStringValue() ?? element.name;
+      }
+
+      baseName = element.name;
+    }
+
+    return '${baseName}Form';
+  }
+
+  String get valueUpdateMethodName => '${name}ValueUpdate';
+
   // needs careful usage and possibly refactoring
   DartType get typeParameter => (type as ParameterizedType).typeArguments.first;
 
   bool get isFormGroupArray {
-    if (!isFormArray) {
+    if (!formArrayChecker.hasAnnotationOfExact(this)) {
       return false;
     }
 
@@ -70,7 +99,20 @@ extension ParameterElementExt on ParameterElement {
         formGroupChecker.hasAnnotationOf(typeParameter.element!);
   }
 
-  bool get isFormArray => formArrayChecker.hasAnnotationOfExact(this);
+  bool get isFormArray {
+    if (!formArrayChecker.hasAnnotationOfExact(this)) {
+      return false;
+    }
+
+    final type = this.type;
+    final typeArguments =
+        type is ParameterizedType ? type.typeArguments : const <DartType>[];
+
+    final typeParameter = typeArguments.first;
+
+    return typeParameter.element is ClassElement &&
+        !formGroupChecker.hasAnnotationOf(typeParameter.element!);
+  }
 
   bool get isFormControl => formControlChecker.hasAnnotationOfExact(this);
 
