@@ -1,3 +1,5 @@
+[![Pub](https://img.shields.io/pub/v/reactive_forms_annotations)](https://pub.dev/packages/reactive_forms_annotations)
+
 # reactive_forms_annotations
 
 Annotations for `reactive_forms_generator`
