@@ -314,6 +314,72 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     }
   }
 
+  void deliveryListInsert(int i, DeliveryPoint value,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (deliveryListDeliveryPointForm.length < i) {
+      addDeliveryListItem(value);
+      return;
+    }
+
+    final item = DeliveryPointForm(
+      value,
+      form,
+      pathBuilder('deliveryList.$i'),
+    );
+
+    deliveryListDeliveryPointForm.insert(i, item);
+
+    deliveryListDeliveryPointForm.asMap().forEach((k, v) {
+      if (k > i) {
+        deliveryListDeliveryPointForm[k] = DeliveryPointForm(
+          v.model,
+          form,
+          pathBuilder("deliveryList.$k"),
+        );
+      }
+    });
+
+    deliveryListControl.insert(
+      i,
+      item.formElements(),
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
+  }
+
+  void clientListInsert(int i, Client value,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (deliveryListDeliveryPointForm.length < i) {
+      addClientListItem(value);
+      return;
+    }
+
+    final item = ClientForm(
+      value,
+      form,
+      pathBuilder('clientList.$i'),
+    );
+
+    clientListClientForm.insert(i, item);
+
+    clientListClientForm.asMap().forEach((k, v) {
+      if (k > i) {
+        clientListClientForm[k] = ClientForm(
+          v.model,
+          form,
+          pathBuilder("clientList.$k"),
+        );
+      }
+    });
+
+    clientListControl?.insert(
+      i,
+      item.formElements(),
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
+  }
+
   void deliveryListClear({bool updateParent = true, bool emitEvent = true}) {
     deliveryListDeliveryPointForm.clear();
     deliveryListControl.clear(updateParent: updateParent, emitEvent: emitEvent);

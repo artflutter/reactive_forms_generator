@@ -3,6 +3,8 @@ linter:
     close_sink: false
 
 analyzer:
+  exclude:
+    - "**/*.g.dart"
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false

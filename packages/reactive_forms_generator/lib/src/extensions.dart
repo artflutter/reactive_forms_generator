@@ -85,6 +85,8 @@ extension ParameterElementExt on ParameterElement {
 
   String get clearMethodName => '${name}Clear';
 
+  String get insertMethodName => '${name}Insert';
+
   // needs careful usage and possibly refactoring
   DartType get typeParameter => (type as ParameterizedType).typeArguments.first;
 

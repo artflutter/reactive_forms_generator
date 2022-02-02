@@ -208,16 +208,78 @@ class DeliveryListFormWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  ReactiveDeliveryListFormConsumer(
-                    builder: (context, formModel, child) {
-                      return ElevatedButton(
-                        child: Text('Reset'),
-                        onPressed: () {
-                          formModel.deliveryListValueReset([]);
-                        },
-                      );
-                    },
-                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ReactiveDeliveryListFormConsumer(
+                          builder: (context, formModel, child) {
+                            return ElevatedButton(
+                              child: Text('Insert at 1'),
+                              onPressed: () {
+                                formModel.deliveryListInsert(
+                                  1,
+                                  DeliveryPoint(
+                                    name: 'inserted',
+                                    address: Address(
+                                      city: 'insertedCity',
+                                      street: 'insertedStreet',
+                                    ),
+                                  ),
+                                );
+                                // formModel.deliveryListValuePatch([
+                                //   DeliveryPoint(
+                                //     name: 'patched',
+                                //     address: Address(
+                                //       city: 'patchedCity',
+                                //       street: 'patchedStreet',
+                                //     ),
+                                //   ),
+                                // ]);
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                      // SizedBox(width: 8),
+                      // Expanded(
+                      //   child: ReactiveDeliveryListFormConsumer(
+                      //     builder: (context, formModel, child) {
+                      //       return ElevatedButton(
+                      //         child: Text('Update'),
+                      //         onPressed: () {
+                      //           formModel.deliveryListValueUpdate([
+                      //             DeliveryPoint(
+                      //               name: 'updated1',
+                      //               address: Address(
+                      //                 city: 'updatedCity1',
+                      //                 street: 'updatedStreet1',
+                      //               ),
+                      //             ),
+                      //             DeliveryPoint(
+                      //               name: 'updated2',
+                      //               address: Address(
+                      //                 city: 'updatedCity2',
+                      //                 street: 'updatedStreet2',
+                      //               ),
+                      //             ),
+                      //           ]);
+                      //         },
+                      //       );
+                      //     },
+                      //   ),
+                      // ),
+                    ],
+                  )
+                  // ReactiveDeliveryListFormConsumer(
+                  //   builder: (context, formModel, child) {
+                  //     return ElevatedButton(
+                  //       child: Text('Reset'),
+                  //       onPressed: () {
+                  //         formModel.deliveryListValueReset([]);
+                  //       },
+                  //     );
+                  //   },
+                  // ),
                 ],
               )
             ],

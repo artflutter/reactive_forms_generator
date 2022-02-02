@@ -1,3 +1,6 @@
+## [0.9.5-beta]
+* array insert method
+ 
 ## [0.9.4-beta]
 * bugfixes
  
