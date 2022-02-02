@@ -21,6 +21,7 @@ import 'package:reactive_forms_generator/src/reactive_forms_generator/control_pa
 import 'package:reactive_forms_generator/src/reactive_forms_generator/errors_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/field_value_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/focus_method.dart';
+import 'package:reactive_forms_generator/src/reactive_forms_generator/remove_method.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
 
@@ -168,57 +169,7 @@ class FormGenerator {
 
   Method? focus(ParameterElement field) => FocusMethod(field).method();
 
-  Method? remove(ParameterElement field) {
-    if (field.type.nullabilitySuffix == NullabilitySuffix.none) {
-      return null;
-    }
-
-    return Method(
-      (b) => b
-        ..name = '${field.name}Remove'
-        ..optionalParameters.addAll([
-          Parameter(
-            (b) => b
-              ..name = 'updateParent'
-              ..named = true
-              ..defaultTo = const Code('true')
-              ..type = const Reference('bool'),
-          ),
-          Parameter(
-            (b) => b
-              ..name = 'emitEvent'
-              ..named = true
-              ..defaultTo = const Code('true')
-              ..type = const Reference('bool'),
-          ),
-        ])
-        ..returns = const Reference('void')
-        ..body = Code(
-          '''
-            if (${field.containsMethodName}) {
-              final controlPath = path;
-              if (controlPath == null) {
-                form.removeControl(
-                  ${field.fieldControlNameName},
-                  updateParent: updateParent,
-                  emitEvent: emitEvent,
-                );
-              } else {
-                final formGroup = form.control(controlPath);
-        
-                if (formGroup is FormGroup) {
-                  formGroup.removeControl(
-                    ${field.fieldControlNameName},
-                    updateParent: updateParent,
-                    emitEvent: emitEvent,
-                  );
-                }
-              }
-            }
-          ''',
-        ),
-    );
-  }
+  Method? remove(ParameterElement field) => RemoveMethod(field).method();
 
   Method? insert(ParameterElement field) =>
       ReactiveFormInsertMethod(field).method();
