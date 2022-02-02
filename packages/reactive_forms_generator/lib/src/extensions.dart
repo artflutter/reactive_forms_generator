@@ -43,7 +43,7 @@ extension ParameterElementExt on ParameterElement {
 
   String get fieldControlPath => '${fieldName}ControlPath';
 
-  String get fieldContainsMethodName => 'contains${fieldName.pascalCase}';
+  String get containsMethodName => 'contains${fieldName.pascalCase}';
 
   bool get isNullable => type.nullabilitySuffix == NullabilitySuffix.question;
 

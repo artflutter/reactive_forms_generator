@@ -16,6 +16,7 @@ import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_update
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_clear_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_insert_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_patch_value_method.dart';
+import 'package:reactive_forms_generator/src/reactive_forms_generator/contains_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/control_path_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/field_value_method.dart';
 import 'package:reactive_forms_generator/src/types.dart';
@@ -152,23 +153,11 @@ class FormGenerator {
   List<Method> get fieldValueMethodList =>
       all.map(fieldValueMethod).whereType<Method>().toList();
 
-  Method fieldContainsMethod(ParameterElement field) => Method(
-        (b) => b
-          ..name = field.fieldContainsMethodName
-          ..type = MethodType.getter
-          ..returns = const Reference('bool')
-          ..body = Code(
-            '''try {
-                form.control(${field.fieldControlPath}());
-                return true;
-              } catch (e) {
-                return false;
-              }''',
-          ),
-      );
+  Method? fieldContainsMethod(ParameterElement field) =>
+      ContainsMethod(field).method();
 
   List<Method> get fieldContainsMethodList =>
-      all.map(fieldContainsMethod).toList();
+      all.map(fieldContainsMethod).whereType<Method>().toList();
 
   Method errors(ParameterElement field) => Method(
         (b) => b
@@ -221,7 +210,7 @@ class FormGenerator {
         ..returns = const Reference('void')
         ..body = Code(
           '''
-            if (${field.fieldContainsMethodName}) {
+            if (${field.containsMethodName}) {
               final controlPath = path;
               if (controlPath == null) {
                 form.removeControl(
@@ -474,7 +463,7 @@ class FormGenerator {
 
     if (field.isNullable) {
       body =
-          '${field.fieldContainsMethodName} ? form.control(${field.fieldControlPath}()) as $reference : null';
+          '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $reference : null';
     }
 
     return Method(
@@ -502,7 +491,7 @@ class FormGenerator {
 
     if (field.isNullable) {
       body =
-          '${field.fieldContainsMethodName} ? form.control(${field.fieldControlPath}()) as $reference : null';
+          '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $reference : null';
     }
 
     return Method(
@@ -537,7 +526,7 @@ class FormGenerator {
 
     if (field.isNullable) {
       body =
-          '${field.fieldContainsMethodName} ? form.control(${field.fieldControlPath}()) as $typeReference : null';
+          '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $typeReference : null';
     }
 
     return Method(
