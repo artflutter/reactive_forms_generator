@@ -334,61 +334,89 @@ class LoginForm implements FormModel<Login> {
   void get timeoutFocus => form.focus(timeoutControlPath());
   void get heightFocus => form.focus(heightControlPath());
   void emailValueUpdate(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      emailControl.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    emailControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void passwordValueUpdate(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      passwordControl.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    passwordControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void rememberMeValueUpdate(bool value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      rememberMeControl.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    rememberMeControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void themeValueUpdate(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      themeControl.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    themeControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void modeValueUpdate(UserMode value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      modeControl.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    modeControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void timeoutValueUpdate(int value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      timeoutControl.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    timeoutControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void heightValueUpdate(double value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      heightControl.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    heightControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void emailValuePatch(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      emailControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    emailControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void passwordValuePatch(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      passwordControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    passwordControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void rememberMeValuePatch(bool value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      rememberMeControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    rememberMeControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void themeValuePatch(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      themeControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    themeControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void modeValuePatch(UserMode value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      modeControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    modeControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void timeoutValuePatch(int value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      timeoutControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    timeoutControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void heightValuePatch(double value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      heightControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    heightControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void emailValueReset(String value,
           {bool updateParent = true,
           bool emitEvent = true,

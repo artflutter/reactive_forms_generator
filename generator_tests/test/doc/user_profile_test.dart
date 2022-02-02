@@ -321,45 +321,61 @@ class UserProfileForm implements FormModel<UserProfile> {
   }
 
   void firstNameValueUpdate(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      firstNameControl.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    firstNameControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void lastNameValueUpdate(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      lastNameControl.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    lastNameControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void homeValueUpdate(Address? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      homeControl?.updateValue(
-          AddressForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    homeControl?.updateValue(
+        AddressForm(value, FormGroup({}), null).formElements().rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
   void officeValueUpdate(Address? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      officeControl?.updateValue(
-          AddressForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    officeControl?.updateValue(
+        AddressForm(value, FormGroup({}), null).formElements().rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
   void firstNameValuePatch(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      firstNameControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    firstNameControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void lastNameValuePatch(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      lastNameControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    lastNameControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void homeValuePatch(Address? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      homeControl?.patchValue(
-          AddressForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    homeControl?.updateValue(
+        AddressForm(value, form, null).formElements().rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
   void officeValuePatch(Address? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      officeControl?.patchValue(
-          AddressForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    officeControl?.updateValue(
+        AddressForm(value, form, null).formElements().rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
   void firstNameValueReset(String value,
           {bool updateParent = true,
           bool emitEvent = true,
@@ -575,29 +591,41 @@ class AddressForm implements FormModel<Address> {
   }
 
   void streetValueUpdate(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      streetControl?.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    streetControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void cityValueUpdate(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      cityControl?.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    cityControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void zipValueUpdate(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      zipControl?.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    zipControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void streetValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      streetControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    streetControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void cityValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      cityControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    cityControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void zipValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      zipControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    zipControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void streetValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,

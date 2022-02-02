@@ -214,21 +214,29 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
   void get emailFocus => form.focus(emailControlPath());
   void get passwordFocus => form.focus(passwordControlPath());
   void emailValueUpdate(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      emailControl.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    emailControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void passwordValueUpdate(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      passwordControl.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    passwordControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void emailValuePatch(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      emailControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    emailControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void passwordValuePatch(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      passwordControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    passwordControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void emailValueReset(String value,
           {bool updateParent = true,
           bool emitEvent = true,

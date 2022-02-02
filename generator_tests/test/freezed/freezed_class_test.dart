@@ -333,37 +333,53 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }
 
   void genderValueUpdate(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      genderControl?.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    genderControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void idValueUpdate(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      idControl?.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    idControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void nameValueUpdate(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      nameControl?.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    nameControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void yearValueUpdate(double? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      yearControl?.updateValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    yearControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void genderValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      genderControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    genderControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void idValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      idControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    idControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void nameValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      nameControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    nameControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void yearValuePatch(double? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      yearControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    yearControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void genderValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,
