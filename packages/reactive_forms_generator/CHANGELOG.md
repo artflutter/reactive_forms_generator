@@ -1,3 +1,6 @@
+## [0.9.4-beta]
+* bugfixes
+ 
 ## [0.9.3-beta]
 * bugfixes
 * array clear method

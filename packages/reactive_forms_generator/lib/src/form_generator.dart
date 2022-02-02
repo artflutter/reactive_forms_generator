@@ -12,9 +12,9 @@ import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_array_generator.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_group_generator.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
-import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_update_value_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_clear_method.dart';
+import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_patch_value_method.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
 
@@ -310,52 +310,8 @@ class FormGenerator {
   Method? clear(ParameterElement field) =>
       ReactiveFormClearMethod(field).method();
 
-  Method patch(ParameterElement field) {
-    String value = 'value';
-
-    if (field.isFormGroup) {
-      value =
-          '${formGroupGenerators[field.name]!.className}(value, FormGroup({}), null).formElements().rawValue';
-    }
-
-    if (field.isFormGroupArray) {
-      value =
-          'value${field.nullabilitySuffix}.map((e) => ${nestedFormGroupGenerators[field.name]!.className}(e, FormGroup({}), null).formElements().rawValue).toList()';
-    }
-
-    return Method(
-      (b) => b
-        ..name = '${field.name}ValuePatch'
-        ..lambda = true
-        ..requiredParameters.add(
-          Parameter(
-            (b) => b
-              ..name = 'value'
-              ..type = Reference(field.type.toString()),
-          ),
-        )
-        ..optionalParameters.addAll([
-          Parameter(
-            (b) => b
-              ..name = 'updateParent'
-              ..named = true
-              ..defaultTo = const Code('true')
-              ..type = const Reference('bool'),
-          ),
-          Parameter(
-            (b) => b
-              ..name = 'emitEvent'
-              ..named = true
-              ..defaultTo = const Code('true')
-              ..type = const Reference('bool'),
-          ),
-        ])
-        ..returns = const Reference('void')
-        ..body = Code(
-          '${field.fieldControlName}${field.nullabilitySuffix}.patchValue($value, updateParent: updateParent, emitEvent:emitEvent)',
-        ),
-    );
-  }
+  Method? patch(ParameterElement field) =>
+      ReactiveFormPatchValueMethod(field).method();
 
   Method reset(ParameterElement field) {
     String value = 'value';
@@ -572,7 +528,7 @@ class FormGenerator {
         ...formArrays,
         ...formGroups,
         ...formGroupArrays,
-      ].map(patch).toList();
+      ].map(patch).whereType<Method>().toList();
 
   List<Method> get fieldResetMethodList => [
         ...formControls,

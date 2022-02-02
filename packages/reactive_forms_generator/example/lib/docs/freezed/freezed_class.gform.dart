@@ -311,21 +311,29 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }
 
   void genderValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      genderControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    genderControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void idValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      idControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    idControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void nameValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      nameControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    nameControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void yearValuePatch(double? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      yearControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    yearControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void genderValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,

@@ -223,6 +223,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
 
       return;
     }
+
     final updateList = (value)
         .asMap()
         .map(
@@ -271,6 +272,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
 
       return;
     }
+
     final updateList = (value ?? [])
         .asMap()
         .map(
@@ -323,24 +325,48 @@ class DeliveryListForm implements FormModel<DeliveryList> {
   }
 
   void deliveryListValuePatch(List<DeliveryPoint> value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      deliveryListControl.patchValue(
-          value
-              .map((e) => DeliveryPointForm(e, FormGroup({}), null)
-                  .formElements()
-                  .rawValue)
-              .toList(),
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    final keys = deliveryListDeliveryPointForm.asMap().keys;
+
+    final toPatch = <DeliveryPointForm>[];
+    (value).asMap().forEach(
+      (k, v) {
+        if (keys.contains(k)) {
+          final patch =
+              DeliveryPointForm(v, form, pathBuilder("deliveryList.$k"));
+          deliveryListDeliveryPointForm[k] = patch;
+          toPatch.add(patch);
+        }
+      },
+    );
+
+    deliveryListControl.patchValue(
+        toPatch.map((e) => e.formElements().rawValue).toList(),
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
   void clientListValuePatch(List<Client>? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      clientListControl?.patchValue(
-          value
-              ?.map((e) =>
-                  ClientForm(e, FormGroup({}), null).formElements().rawValue)
-              .toList(),
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    final keys = clientListClientForm.asMap().keys;
+
+    final toPatch = <ClientForm>[];
+    (value ?? []).asMap().forEach(
+      (k, v) {
+        if (keys.contains(k)) {
+          final patch = ClientForm(v, form, pathBuilder("clientList.$k"));
+          clientListClientForm[k] = patch;
+          toPatch.add(patch);
+        }
+      },
+    );
+
+    clientListControl?.patchValue(
+        toPatch.map((e) => e.formElements().rawValue).toList(),
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
   void deliveryListValueReset(List<DeliveryPoint> value,
           {bool updateParent = true,
           bool emitEvent = true,
@@ -549,15 +575,19 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
   }
 
   void nameValuePatch(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      nameControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    nameControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void addressValuePatch(Address? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      addressControl?.patchValue(
-          AddressForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    addressControl?.updateValue(
+        AddressForm(value, form, null).formElements().rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
   void nameValueReset(String value,
           {bool updateParent = true,
           bool emitEvent = true,
@@ -715,13 +745,17 @@ class AddressForm implements FormModel<Address> {
   }
 
   void streetValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      streetControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    streetControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void cityValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      cityControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    cityControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void streetValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,
@@ -903,17 +937,23 @@ class ClientForm implements FormModel<Client> {
   }
 
   void clientTypeValuePatch(ClientType value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      clientTypeControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    clientTypeControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void nameValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      nameControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    nameControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void notesValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      notesControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    notesControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void clientTypeValueReset(ClientType value,
           {bool updateParent = true,
           bool emitEvent = true,

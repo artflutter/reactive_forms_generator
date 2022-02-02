@@ -99,68 +99,85 @@ class DeliveryListFormWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      if (formModel.form.valid) {
-                        print(formModel.deliveryListValue);
-                        print(formModel.model);
-                      } else {
-                        formModel.form.markAllAsTouched();
-                      }
-                    },
-                    child: const Text('Sign Up'),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (formModel.form.valid) {
+                              print(formModel.deliveryListValue);
+                              print(formModel.model);
+                            } else {
+                              formModel.form.markAllAsTouched();
+                            }
+                          },
+                          child: const Text('Sign Up'),
+                        ),
+                      ),
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: ReactiveDeliveryListFormConsumer(
+                          builder: (context, formModel, child) {
+                            return ElevatedButton(
+                              child: Text('Submit'),
+                              onPressed: formModel.form.valid ? () {} : null,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                  ReactiveDeliveryListFormConsumer(
-                    builder: (context, formModel, child) {
-                      return ElevatedButton(
-                        child: Text('Submit'),
-                        onPressed: formModel.form.valid ? () {} : null,
-                      );
-                    },
-                  ),
-                  SizedBox(height: 16),
-                  ReactiveDeliveryListFormConsumer(
-                    builder: (context, formModel, child) {
-                      return ElevatedButton(
-                        child: Text('Patch'),
-                        onPressed: () {
-                          formModel.deliveryListValuePatch([
-                            DeliveryPoint(
-                              name: 'patched',
-                              address: Address(
-                                city: 'patchedCity',
-                                street: 'patchedStreet',
-                              ),
-                            ),
-                          ]);
-                        },
-                      );
-                    },
-                  ),
-                  ReactiveDeliveryListFormConsumer(
-                    builder: (context, formModel, child) {
-                      return ElevatedButton(
-                        child: Text('Update'),
-                        onPressed: () {
-                          formModel.deliveryListValueUpdate([
-                            DeliveryPoint(
-                              name: 'updated1',
-                              address: Address(
-                                city: 'updatedCity1',
-                                street: 'updatedStreet1',
-                              ),
-                            ),
-                            DeliveryPoint(
-                              name: 'updated2',
-                              address: Address(
-                                city: 'updatedCity2',
-                                street: 'updatedStreet2',
-                              ),
-                            ),
-                          ]);
-                        },
-                      );
-                    },
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ReactiveDeliveryListFormConsumer(
+                          builder: (context, formModel, child) {
+                            return ElevatedButton(
+                              child: Text('Patch'),
+                              onPressed: () {
+                                formModel.deliveryListValuePatch([
+                                  DeliveryPoint(
+                                    name: 'patched',
+                                    address: Address(
+                                      city: 'patchedCity',
+                                      street: 'patchedStreet',
+                                    ),
+                                  ),
+                                ]);
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: ReactiveDeliveryListFormConsumer(
+                          builder: (context, formModel, child) {
+                            return ElevatedButton(
+                              child: Text('Update'),
+                              onPressed: () {
+                                formModel.deliveryListValueUpdate([
+                                  DeliveryPoint(
+                                    name: 'updated1',
+                                    address: Address(
+                                      city: 'updatedCity1',
+                                      street: 'updatedStreet1',
+                                    ),
+                                  ),
+                                  DeliveryPoint(
+                                    name: 'updated2',
+                                    address: Address(
+                                      city: 'updatedCity2',
+                                      street: 'updatedStreet2',
+                                    ),
+                                  ),
+                                ]);
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                   Row(
                     children: [

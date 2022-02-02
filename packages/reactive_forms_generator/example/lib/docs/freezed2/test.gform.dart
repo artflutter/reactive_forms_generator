@@ -197,13 +197,17 @@ class TestForm implements FormModel<Test> {
   }
 
   void titleValuePatch(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      titleControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    titleControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void descriptionValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      descriptionControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    descriptionControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void titleValueReset(String value,
           {bool updateParent = true,
           bool emitEvent = true,

@@ -275,25 +275,33 @@ class UserProfileForm implements FormModel<UserProfile> {
   }
 
   void firstNameValuePatch(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      firstNameControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    firstNameControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void lastNameValuePatch(String value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      lastNameControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    lastNameControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void homeValuePatch(Address? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      homeControl?.patchValue(
-          AddressForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    homeControl?.updateValue(
+        AddressForm(value, form, null).formElements().rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
   void officeValuePatch(Address? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      officeControl?.patchValue(
-          AddressForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    officeControl?.updateValue(
+        AddressForm(value, form, null).formElements().rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
   void firstNameValueReset(String value,
           {bool updateParent = true,
           bool emitEvent = true,
@@ -527,17 +535,23 @@ class AddressForm implements FormModel<Address> {
   }
 
   void streetValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      streetControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    streetControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void cityValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      cityControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    cityControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void zipValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      zipControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    zipControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void streetValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,

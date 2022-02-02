@@ -268,21 +268,29 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }
 
   void someListValuePatch(List<String?>? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      someListControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    someListControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void emailListValuePatch(List<String> value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      emailListControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    emailListControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void fruitListValuePatch(List<bool?> value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      fruitListControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    fruitListControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void vegetablesListValuePatch(List<String?>? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      vegetablesListControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    vegetablesListControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void someListValueReset(List<String?>? value,
           {bool updateParent = true,
           bool emitEvent = true,

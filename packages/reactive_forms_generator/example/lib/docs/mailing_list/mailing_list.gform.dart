@@ -156,9 +156,11 @@ class MailingListForm implements FormModel<MailingList> {
   }
 
   void emailListValuePatch(List<String?> value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      emailListControl.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    emailListControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void emailListValueReset(List<String?> value,
           {bool updateParent = true,
           bool emitEvent = true,

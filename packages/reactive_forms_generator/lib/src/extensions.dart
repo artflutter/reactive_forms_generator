@@ -81,6 +81,8 @@ extension ParameterElementExt on ParameterElement {
 
   String get valueUpdateMethodName => '${name}ValueUpdate';
 
+  String get valuePatchMethodName => '${name}ValuePatch';
+
   String get clearMethodName => '${name}Clear';
 
   // needs careful usage and possibly refactoring

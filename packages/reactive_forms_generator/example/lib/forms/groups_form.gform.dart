@@ -329,29 +329,37 @@ class GroupForm implements FormModel<Group> {
   }
 
   void personalValuePatch(Personal? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      personalControl?.patchValue(
-          PersonalForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    personalControl?.updateValue(
+        PersonalForm(value, form, null).formElements().rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
   void phoneValuePatch(Phone? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      phoneControl?.patchValue(
-          PhoneForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    phoneControl?.updateValue(
+        PhoneForm(value, form, null).formElements().rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
   void addressValuePatch(Address? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      addressControl?.patchValue(
-          AddressForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    addressControl?.updateValue(
+        AddressForm(value, form, null).formElements().rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
   void address2ValuePatch(Address? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      address2Control?.patchValue(
-          AddressForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    address2Control?.updateValue(
+        AddressForm(value, form, null).formElements().rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
   void personalValueReset(Personal? value,
           {bool updateParent = true,
           bool emitEvent = true,
@@ -534,13 +542,17 @@ class PersonalForm implements FormModel<Personal> {
   }
 
   void nameValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      nameControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    nameControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void emailValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      emailControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    emailControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void nameValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,
@@ -701,13 +713,17 @@ class PhoneForm implements FormModel<Phone> {
   }
 
   void phoneNumberValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      phoneNumberControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    phoneNumberControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void countryIsoValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      countryIsoControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    countryIsoControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void phoneNumberValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,
@@ -912,17 +928,23 @@ class AddressForm implements FormModel<Address> {
   }
 
   void streetValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      streetControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    streetControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void cityValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      cityControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    cityControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void zipValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      zipControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    zipControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void streetValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,

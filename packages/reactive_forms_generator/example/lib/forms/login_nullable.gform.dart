@@ -443,33 +443,47 @@ class LoginNullableForm implements FormModel<LoginNullable> {
   }
 
   void emailValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      emailControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    emailControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void passwordValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      passwordControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    passwordControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void rememberMeValuePatch(bool? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      rememberMeControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    rememberMeControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void themeValuePatch(String? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      themeControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    themeControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void modeValuePatch(UserMode? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      modeControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    modeControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void timeoutValuePatch(int? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      timeoutControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    timeoutControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void heightValuePatch(double? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
-      heightControl?.patchValue(value,
-          updateParent: updateParent, emitEvent: emitEvent);
+      {bool updateParent = true, bool emitEvent = true}) {
+    heightControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void emailValueReset(String? value,
           {bool updateParent = true,
           bool emitEvent = true,
