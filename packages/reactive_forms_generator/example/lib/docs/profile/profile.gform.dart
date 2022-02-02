@@ -183,11 +183,9 @@ class ProfileForm implements FormModel<Profile> {
   MeasurementType get measurementTypeValue =>
       measurementTypeControl.value as MeasurementType;
   bool get audioGuidanceValue => audioGuidanceControl.value as bool;
-  IncidenceFilter get incidenceFilterValue =>
-      incidenceFilterForm.model as IncidenceFilter;
-  ThresholdSetting get thresholdValue =>
-      thresholdForm.model as ThresholdSetting;
-  TimerSetting get timerValue => timerForm.model as TimerSetting;
+  IncidenceFilter get incidenceFilterValue => incidenceFilterForm.model;
+  ThresholdSetting get thresholdValue => thresholdForm.model;
+  TimerSetting get timerValue => timerForm.model;
   bool get containsName {
     try {
       form.control(nameControlPath());

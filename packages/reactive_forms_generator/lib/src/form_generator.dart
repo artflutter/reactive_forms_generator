@@ -17,6 +17,7 @@ import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_clear
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_insert_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_patch_value_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/control_path_method.dart';
+import 'package:reactive_forms_generator/src/reactive_forms_generator/field_value_method.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
 
@@ -81,7 +82,7 @@ class FormGenerator {
 
   List<ParameterElement> get formArrays => parameters
       .where(
-        (e) => e.isFormArray && !e.isFormGroupArray,
+        (e) => e.isFormArray,
       )
       .toList();
 
@@ -145,56 +146,11 @@ class FormGenerator {
       )
       .toList();
 
-  Method fieldValueMethod(ParameterElement field) {
-    String fieldValue =
-        '${field.fieldControlName}${field.nullabilitySuffix}.value';
+  Method? fieldValueMethod(ParameterElement field) =>
+      FieldValueMethod(field).method();
 
-    if (field.isFormGroup) {
-      fieldValue = '${field.fieldName}Form.model';
-    }
-
-    // do not add additional cast if the field is nullable to avoid
-    // unnecessary_cast notes
-    if (field.type.nullabilitySuffix == NullabilitySuffix.none) {
-      fieldValue += ' as ${field.type}';
-    }
-
-    if (field.isFormGroupArray) {
-      final typeParameter =
-          (field.type as ParameterizedType).typeArguments.first;
-
-      final formGenerator =
-          FormGenerator(typeParameter.element! as ClassElement, type);
-
-      // fieldValue =
-      //     '${field.name}${formGenerator.className}.map((e) => e.model).toList()';
-
-      fieldValue = '''${field.name}${formGenerator.className}
-          .asMap()
-          .map((k, v) => MapEntry(k,${typeParameter}Form(
-              v.model, v.form, pathBuilder("${field.name}.\$k")).model))
-          .values
-          .toList()''';
-    } else if (field.isFormArray) {
-      final type = (field.type as ParameterizedType).typeArguments.first;
-
-      fieldValue =
-          '${field.fieldControlName}${field.nullabilitySuffix}.value?.whereType<${type.getDisplayString(
-        withNullability: true,
-      )}>().toList() ?? []';
-    }
-
-    return Method(
-      (b) => b
-        ..name = field.fieldValueName
-        ..lambda = true
-        ..type = MethodType.getter
-        ..returns = Reference(field.type.toString())
-        ..body = Code(fieldValue),
-    );
-  }
-
-  List<Method> get fieldValueMethodList => all.map(fieldValueMethod).toList();
+  List<Method> get fieldValueMethodList =>
+      all.map(fieldValueMethod).whereType<Method>().toList();
 
   Method fieldContainsMethod(ParameterElement field) => Method(
         (b) => b
