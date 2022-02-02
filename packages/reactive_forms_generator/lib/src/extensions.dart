@@ -51,6 +51,8 @@ extension ParameterElementExt on ParameterElement {
 
   String get removeMethodName => '${fieldName}Remove';
 
+  String get resetMethodName => '${fieldName}ValueReset';
+
   bool get isNullable => type.nullabilitySuffix == NullabilitySuffix.question;
 
   String get nullabilitySuffix => isNullable ? '?' : '';

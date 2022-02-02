@@ -22,6 +22,7 @@ import 'package:reactive_forms_generator/src/reactive_forms_generator/errors_met
 import 'package:reactive_forms_generator/src/reactive_forms_generator/field_value_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/focus_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/remove_method.dart';
+import 'package:reactive_forms_generator/src/reactive_forms_generator/reset_method.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
 
@@ -183,65 +184,7 @@ class FormGenerator {
   Method? patch(ParameterElement field) =>
       ReactiveFormPatchValueMethod(field).method();
 
-  Method reset(ParameterElement field) {
-    String value = 'value';
-
-    if (field.isFormGroup) {
-      value =
-          '${formGroupGenerators[field.name]!.className}(value, FormGroup({}), null).formElements().rawValue';
-    }
-
-    if (field.isFormGroupArray) {
-      value =
-          'value${field.nullabilitySuffix}.map((e) => ${nestedFormGroupGenerators[field.name]!.className}(e, FormGroup({}), null).formElements().rawValue).toList()';
-    }
-
-    return Method(
-      (b) => b
-        ..name = '${field.name}ValueReset'
-        ..lambda = true
-        ..requiredParameters.add(
-          Parameter(
-            (b) => b
-              ..name = 'value'
-              ..type = Reference(field.type.toString()),
-          ),
-        )
-        ..optionalParameters.addAll([
-          Parameter(
-            (b) => b
-              ..name = 'updateParent'
-              ..named = true
-              ..defaultTo = const Code('true')
-              ..type = const Reference('bool'),
-          ),
-          Parameter(
-            (b) => b
-              ..name = 'emitEvent'
-              ..named = true
-              ..defaultTo = const Code('true')
-              ..type = const Reference('bool'),
-          ),
-          Parameter(
-            (b) => b
-              ..name = 'removeFocus'
-              ..named = true
-              ..defaultTo = const Code('false')
-              ..type = const Reference('bool'),
-          ),
-          Parameter(
-            (b) => b
-              ..name = 'disabled'
-              ..named = true
-              ..type = const Reference('bool?'),
-          ),
-        ])
-        ..returns = const Reference('void')
-        ..body = Code(
-          '${field.fieldControlName}${field.nullabilitySuffix}.reset(value: $value, updateParent: updateParent, emitEvent:emitEvent)',
-        ),
-    );
-  }
+  Method? reset(ParameterElement field) => ResetMethod(field).method();
 
   Method get updateValueMethod {
     String displayType =
@@ -383,7 +326,8 @@ class FormGenerator {
   List<Method> get fieldPatchMethodList =>
       all.map(patch).whereType<Method>().toList();
 
-  List<Method> get fieldResetMethodList => all.map(reset).toList();
+  List<Method> get fieldResetMethodList =>
+      all.map(reset).whereType<Method>().toList();
 
   Method control(ParameterElement field) {
     String displayType = field.type.getDisplayString(withNullability: true);
