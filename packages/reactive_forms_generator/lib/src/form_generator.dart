@@ -18,6 +18,7 @@ import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_inser
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_patch_value_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/contains_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/control_path_method.dart';
+import 'package:reactive_forms_generator/src/reactive_forms_generator/errors_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/field_value_method.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
@@ -159,18 +160,10 @@ class FormGenerator {
   List<Method> get fieldContainsMethodList =>
       all.map(fieldContainsMethod).whereType<Method>().toList();
 
-  Method errors(ParameterElement field) => Method(
-        (b) => b
-          ..name = '${field.name}Errors'
-          ..lambda = true
-          ..type = MethodType.getter
-          ..returns = const Reference('Object?')
-          ..body = Code(
-            '${field.fieldControlName}${field.nullabilitySuffix}.errors',
-          ),
-      );
+  Method? errors(ParameterElement field) => ErrorsMethod(field).method();
 
-  List<Method> get fieldErrorsMethodList => all.map(errors).toList();
+  List<Method> get fieldErrorsMethodList =>
+      all.map(errors).whereType<Method>().toList();
 
   Method focus(ParameterElement field) => Method(
         (b) => b

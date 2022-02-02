@@ -45,6 +45,8 @@ extension ParameterElementExt on ParameterElement {
 
   String get containsMethodName => 'contains${fieldName.pascalCase}';
 
+  String get errorsMethodName => '${fieldName}Errors';
+
   bool get isNullable => type.nullabilitySuffix == NullabilitySuffix.question;
 
   String get nullabilitySuffix => isNullable ? '?' : '';
