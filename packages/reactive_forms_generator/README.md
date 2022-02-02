@@ -1,3 +1,5 @@
+[![Pub](https://img.shields.io/pub/v/reactive_forms_generator)](https://pub.dev/packages/reactive_forms_generator)
+
 # reactive_forms_generator
 
 <p align="center">
