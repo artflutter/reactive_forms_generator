@@ -2,10 +2,10 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 
-abstract class ReactiveFormMethod {
+abstract class ReactiveFormGeneratorMethod {
   final ParameterElement field;
 
-  ReactiveFormMethod(this.field);
+  ReactiveFormGeneratorMethod(this.field);
 
   Method? method() {
     if (field.isFormGroup) {

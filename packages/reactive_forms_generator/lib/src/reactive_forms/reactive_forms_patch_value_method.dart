@@ -1,9 +1,9 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
-import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_method.dart';
+import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
-class ReactiveFormPatchValueMethod extends ReactiveFormMethod {
+class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
   ReactiveFormPatchValueMethod(ParameterElement field) : super(field);
 
   @override

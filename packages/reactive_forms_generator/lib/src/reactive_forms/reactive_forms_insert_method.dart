@@ -1,42 +1,13 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
-import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_method.dart';
+import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
-class ReactiveFormInsertMethod extends ReactiveFormMethod {
+class ReactiveFormInsertMethod extends ReactiveFormGeneratorMethod {
   ReactiveFormInsertMethod(ParameterElement field) : super(field);
 
   @override
   Method? formGroupArrayMethod() {
-    // if (deliveryListDeliveryPointForm.length < i) {
-    //   addDeliveryListItem(value);
-    //   return;
-    // }
-    //
-    // final item = DeliveryPointForm(
-    //   value,
-    //   form,
-    //   pathBuilder('deliveryList.$i'),
-    // );
-    //
-    // deliveryListDeliveryPointForm.insert(i, item);
-    //
-    // deliveryListDeliveryPointForm.asMap().forEach((k, v) {
-    //   if (k > i) {
-    //     deliveryListDeliveryPointForm[k] = DeliveryPointForm(
-    //       v.model,
-    //       form,
-    //       pathBuilder("deliveryList.$k"),
-    //     );
-    //   }
-    // });
-    //
-    // deliveryListControl.insert(
-    //   i,
-    //   item.formElements(),
-    //   updateParent: updateParent,
-    //   emitEvent: emitEvent,
-    // );
     return methodEntity.rebuild((b) => b..body = Code('''
       if (deliveryListDeliveryPointForm.length < i) {
         ${field.addListItemName}(value);
@@ -68,11 +39,6 @@ class ReactiveFormInsertMethod extends ReactiveFormMethod {
         emitEvent: emitEvent,
       );
     '''));
-
-    // ${field.name}${field.className}.clear();
-    // ${field.fieldControlName}${field.nullabilitySuffix}.clear(
-    // updateParent: updateParent,
-    // emitEvent: emitEvent);
   }
 
   @override

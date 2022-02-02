@@ -16,6 +16,7 @@ import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_update
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_clear_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_insert_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_patch_value_method.dart';
+import 'package:reactive_forms_generator/src/reactive_forms_generator/control_path_method.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
 
@@ -64,6 +65,13 @@ class FormGenerator {
       );
     }
   }
+
+  List<ParameterElement> get all => [
+        ...formControls,
+        ...formArrays,
+        ...formGroups,
+        ...formGroupArrays,
+      ];
 
   List<ParameterElement> get formControls => parameters
       .where(
@@ -117,20 +125,11 @@ class FormGenerator {
 
   List<Field> get fieldNameList => annotatedParameters.map(field).toList();
 
-  Method fieldControlNameMethod(ParameterElement field) => Method(
-        (b) => b
-          ..returns = stringRef
-          ..name = field.fieldControlPath
-          ..lambda = true
-          ..body = Code('pathBuilder(${field.fieldControlNameName})'),
-      );
+  Method? fieldControlNameMethod(ParameterElement field) =>
+      ControlPathMethod(field).method();
 
-  List<Method> get fieldControlNameMethodList => [
-        ...formControls,
-        ...formArrays,
-        ...formGroups,
-        ...formGroupArrays,
-      ].map(fieldControlNameMethod).toList();
+  List<Method> get fieldControlNameMethodList =>
+      all.map(fieldControlNameMethod).whereType<Method>().toList();
 
   List<Field> get nestedFormGroupFields => formGroups
       .map(
@@ -195,12 +194,7 @@ class FormGenerator {
     );
   }
 
-  List<Method> get fieldValueMethodList => [
-        ...formControls,
-        ...formArrays,
-        ...formGroups,
-        ...formGroupArrays,
-      ].map(fieldValueMethod).toList();
+  List<Method> get fieldValueMethodList => all.map(fieldValueMethod).toList();
 
   Method fieldContainsMethod(ParameterElement field) => Method(
         (b) => b
@@ -217,12 +211,8 @@ class FormGenerator {
           ),
       );
 
-  List<Method> get fieldContainsMethodList => [
-        ...formControls,
-        ...formArrays,
-        ...formGroups,
-        ...formGroupArrays,
-      ].map(fieldContainsMethod).toList();
+  List<Method> get fieldContainsMethodList =>
+      all.map(fieldContainsMethod).toList();
 
   Method errors(ParameterElement field) => Method(
         (b) => b
@@ -235,12 +225,7 @@ class FormGenerator {
           ),
       );
 
-  List<Method> get fieldErrorsMethodList => [
-        ...formControls,
-        ...formArrays,
-        ...formGroups,
-        ...formGroupArrays,
-      ].map(errors).toList();
+  List<Method> get fieldErrorsMethodList => all.map(errors).toList();
 
   Method focus(ParameterElement field) => Method(
         (b) => b
@@ -499,54 +484,24 @@ class FormGenerator {
     );
   }
 
-  List<Method> get fieldFocusMethodList => [
-        ...formControls,
-        ...formArrays,
-        ...formGroups,
-        ...formGroupArrays,
-      ].map(focus).toList();
+  List<Method> get fieldFocusMethodList => all.map(focus).toList();
 
-  List<Method> get fieldRemoveMethodList => [
-        ...formControls,
-        ...formArrays,
-        ...formGroups,
-        ...formGroupArrays,
-      ].map(remove).whereType<Method>().toList();
+  List<Method> get fieldRemoveMethodList =>
+      all.map(remove).whereType<Method>().toList();
 
-  List<Method> get fieldUpdateMethodList => [
-        ...formControls,
-        ...formArrays,
-        ...formGroups,
-        ...formGroupArrays,
-      ].map(update).whereType<Method>().toList();
+  List<Method> get fieldUpdateMethodList =>
+      all.map(update).whereType<Method>().toList();
 
-  List<Method> get fieldInsertMethodList => [
-        ...formControls,
-        ...formArrays,
-        ...formGroups,
-        ...formGroupArrays,
-      ].map(insert).whereType<Method>().toList();
+  List<Method> get fieldInsertMethodList =>
+      all.map(insert).whereType<Method>().toList();
 
-  List<Method> get fieldClearMethodList => [
-        ...formControls,
-        ...formArrays,
-        ...formGroups,
-        ...formGroupArrays,
-      ].map(clear).whereType<Method>().toList();
+  List<Method> get fieldClearMethodList =>
+      all.map(clear).whereType<Method>().toList();
 
-  List<Method> get fieldPatchMethodList => [
-        ...formControls,
-        ...formArrays,
-        ...formGroups,
-        ...formGroupArrays,
-      ].map(patch).whereType<Method>().toList();
+  List<Method> get fieldPatchMethodList =>
+      all.map(patch).whereType<Method>().toList();
 
-  List<Method> get fieldResetMethodList => [
-        ...formControls,
-        ...formArrays,
-        ...formGroups,
-        ...formGroupArrays,
-      ].map(reset).toList();
+  List<Method> get fieldResetMethodList => all.map(reset).toList();
 
   Method control(ParameterElement field) {
     String displayType = field.type.getDisplayString(withNullability: true);
