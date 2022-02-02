@@ -47,6 +47,8 @@ extension ParameterElementExt on ParameterElement {
 
   String get errorsMethodName => '${fieldName}Errors';
 
+  String get focusMethodName => '${fieldName}Focus';
+
   bool get isNullable => type.nullabilitySuffix == NullabilitySuffix.question;
 
   String get nullabilitySuffix => isNullable ? '?' : '';

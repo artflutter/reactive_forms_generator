@@ -20,6 +20,7 @@ import 'package:reactive_forms_generator/src/reactive_forms_generator/contains_m
 import 'package:reactive_forms_generator/src/reactive_forms_generator/control_path_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/errors_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/field_value_method.dart';
+import 'package:reactive_forms_generator/src/reactive_forms_generator/focus_method.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
 
@@ -165,16 +166,7 @@ class FormGenerator {
   List<Method> get fieldErrorsMethodList =>
       all.map(errors).whereType<Method>().toList();
 
-  Method focus(ParameterElement field) => Method(
-        (b) => b
-          ..name = '${field.name}Focus'
-          ..lambda = true
-          ..type = MethodType.getter
-          ..returns = const Reference('void')
-          ..body = Code(
-            'form.focus(${field.fieldControlPath}())',
-          ),
-      );
+  Method? focus(ParameterElement field) => FocusMethod(field).method();
 
   Method? remove(ParameterElement field) {
     if (field.type.nullabilitySuffix == NullabilitySuffix.none) {
@@ -422,7 +414,8 @@ class FormGenerator {
     );
   }
 
-  List<Method> get fieldFocusMethodList => all.map(focus).toList();
+  List<Method> get fieldFocusMethodList =>
+      all.map(focus).whereType<Method>().toList();
 
   List<Method> get fieldRemoveMethodList =>
       all.map(remove).whereType<Method>().toList();
