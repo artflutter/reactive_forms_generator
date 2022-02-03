@@ -17,6 +17,7 @@ import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_clear
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_insert_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_patch_value_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/contains_method.dart';
+import 'package:reactive_forms_generator/src/reactive_forms_generator/control_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/control_path_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/errors_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/field_value_method.dart';
@@ -329,96 +330,7 @@ class FormGenerator {
   List<Method> get fieldResetMethodList =>
       all.map(reset).whereType<Method>().toList();
 
-  Method control(ParameterElement field) {
-    String displayType = field.type.getDisplayString(withNullability: true);
-
-    // we need to trim last NullabilitySuffix.question cause FormControl modifies
-    // generic T => T?
-    if (field.type.nullabilitySuffix == NullabilitySuffix.question) {
-      displayType = displayType.substring(0, displayType.length - 1);
-    }
-
-    final reference = 'FormControl<$displayType>${field.nullabilitySuffix}';
-
-    String body = 'form.control(${field.fieldControlPath}()) as $reference';
-
-    if (field.isNullable) {
-      body =
-          '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $reference : null';
-    }
-
-    return Method(
-      (b) => b
-        ..name = field.fieldControlName
-        ..lambda = true
-        ..type = MethodType.getter
-        ..returns = Reference(reference)
-        ..body = Code(body),
-    );
-  }
-
-  Method formGroup(ParameterElement field) {
-    // String displayType = field.type.getDisplayString(withNullability: true);
-    //
-    // // we need to trim last NullabilitySuffix.question cause FormControl modifies
-    // // generic T => T?
-    // if (field.type.nullabilitySuffix == NullabilitySuffix.question) {
-    //   displayType = displayType.substring(0, displayType.length - 1);
-    // }
-
-    final reference = 'FormGroup${field.nullabilitySuffix}';
-
-    String body = 'form.control(${field.fieldControlPath}()) as $reference';
-
-    if (field.isNullable) {
-      body =
-          '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $reference : null';
-    }
-
-    return Method(
-      (b) => b
-        ..name = field.fieldControlName
-        ..lambda = true
-        ..type = MethodType.getter
-        ..returns = Reference(reference)
-        ..body = Code(body),
-    );
-  }
-
-  Method array(ParameterElement field) {
-    final type = (field.type as ParameterizedType).typeArguments.first;
-
-    String displayType = type.getDisplayString(withNullability: true);
-
-    // we need to trim last NullabilitySuffix.question cause FormControl modifies
-    // generic T => T?
-    if (type.nullabilitySuffix == NullabilitySuffix.question) {
-      displayType = displayType.substring(0, displayType.length - 1);
-    }
-
-    String typeReference = 'FormArray<$displayType>${field.nullabilitySuffix}';
-
-    if (field.isFormGroupArray) {
-      typeReference =
-          'FormArray<Map<String, Object?>>${field.nullabilitySuffix}';
-    }
-
-    String body = 'form.control(${field.fieldControlPath}()) as $typeReference';
-
-    if (field.isNullable) {
-      body =
-          '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $typeReference : null';
-    }
-
-    return Method(
-      (b) => b
-        ..name = field.fieldControlName
-        ..lambda = true
-        ..type = MethodType.getter
-        ..returns = Reference(typeReference)
-        ..body = Code(body),
-    );
-  }
+  Method? control(ParameterElement field) => ControlMethod(field).method();
 
   Method addGroupControl(ParameterElement field) {
     final type = field.typeParameter.getDisplayString(withNullability: false);
@@ -602,14 +514,8 @@ class FormGenerator {
     );
   }
 
-  List<Method> get fieldControlMethodList => formControls.map(control).toList();
-
-  List<Method> get fieldArrayMethodList => [
-        ...formArrays.map(array).toList(),
-        ...formGroupArrays.map(array).toList()
-      ];
-
-  List<Method> get fieldGroupMethodList => formGroups.map(formGroup).toList();
+  List<Method> get controlMethodList =>
+      all.map(control).whereType<Method>().toList();
 
   List<Method> get addArrayControlMethodList =>
       formArrays.map(addArrayControl).toList();
@@ -795,9 +701,7 @@ class FormGenerator {
                 ...fieldClearMethodList,
                 ...fieldPatchMethodList,
                 ...fieldResetMethodList,
-                ...fieldControlMethodList,
-                ...fieldArrayMethodList,
-                ...fieldGroupMethodList,
+                ...controlMethodList,
                 ...addArrayControlMethodList,
                 ...addGroupControlMethodList,
                 ...removeGroupControlMethodList,

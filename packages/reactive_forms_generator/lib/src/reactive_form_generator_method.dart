@@ -31,5 +31,5 @@ abstract class ReactiveFormGeneratorMethod {
 
   Method? formGroupArrayMethod() => defaultMethod();
 
-  Method? defaultMethod();
+  Method? defaultMethod() => null;
 }
