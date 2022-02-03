@@ -119,24 +119,12 @@ class FormGenerator {
           ..assignment = Code('"${field.fieldName}"'),
       );
 
-  List<Field> get staticFieldNameList {
-    return annotatedParameters.map(staticFieldName).toList();
-  }
-
   Field field(ParameterElement field) => Field(
         (b) => b
           ..type = stringRef
           ..name = field.fieldName
           ..assignment = Code('"${field.fieldName}"'),
       );
-
-  List<Field> get fieldNameList => annotatedParameters.map(field).toList();
-
-  Method? fieldControlNameMethod(ParameterElement field) =>
-      ControlPathMethod(field).method();
-
-  List<Method> get fieldControlNameMethodList =>
-      all.map(fieldControlNameMethod).whereType<Method>().toList();
 
   List<Field> get nestedFormGroupFields => formGroups
       .map(
@@ -151,41 +139,6 @@ class FormGenerator {
         ),
       )
       .toList();
-
-  Method? fieldValueMethod(ParameterElement field) =>
-      FieldValueMethod(field).method();
-
-  List<Method> get fieldValueMethodList =>
-      all.map(fieldValueMethod).whereType<Method>().toList();
-
-  Method? fieldContainsMethod(ParameterElement field) =>
-      ContainsMethod(field).method();
-
-  List<Method> get fieldContainsMethodList =>
-      all.map(fieldContainsMethod).whereType<Method>().toList();
-
-  Method? errors(ParameterElement field) => ErrorsMethod(field).method();
-
-  List<Method> get fieldErrorsMethodList =>
-      all.map(errors).whereType<Method>().toList();
-
-  Method? focus(ParameterElement field) => FocusMethod(field).method();
-
-  Method? remove(ParameterElement field) => RemoveMethod(field).method();
-
-  Method? insert(ParameterElement field) =>
-      ReactiveFormInsertMethod(field).method();
-
-  Method? update(ParameterElement field) =>
-      ReactiveFormUpdateValueMethod(field).method();
-
-  Method? clear(ParameterElement field) =>
-      ReactiveFormClearMethod(field).method();
-
-  Method? patch(ParameterElement field) =>
-      ReactiveFormPatchValueMethod(field).method();
-
-  Method? reset(ParameterElement field) => ResetMethod(field).method();
 
   Method get updateValueMethod {
     String displayType =
@@ -308,29 +261,6 @@ class FormGenerator {
         ),
     );
   }
-
-  List<Method> get fieldFocusMethodList =>
-      all.map(focus).whereType<Method>().toList();
-
-  List<Method> get fieldRemoveMethodList =>
-      all.map(remove).whereType<Method>().toList();
-
-  List<Method> get fieldUpdateMethodList =>
-      all.map(update).whereType<Method>().toList();
-
-  List<Method> get fieldInsertMethodList =>
-      all.map(insert).whereType<Method>().toList();
-
-  List<Method> get fieldClearMethodList =>
-      all.map(clear).whereType<Method>().toList();
-
-  List<Method> get fieldPatchMethodList =>
-      all.map(patch).whereType<Method>().toList();
-
-  List<Method> get fieldResetMethodList =>
-      all.map(reset).whereType<Method>().toList();
-
-  Method? control(ParameterElement field) => ControlMethod(field).method();
 
   Method addGroupControl(ParameterElement field) {
     final type = field.typeParameter.getDisplayString(withNullability: false);
@@ -513,21 +443,6 @@ class FormGenerator {
         ),
     );
   }
-
-  List<Method> get controlMethodList =>
-      all.map(control).whereType<Method>().toList();
-
-  List<Method> get addArrayControlMethodList =>
-      formArrays.map(addArrayControl).toList();
-
-  List<Method> get addGroupControlMethodList =>
-      formGroupArrays.map(addGroupControl).toList();
-
-  List<Method> get removeGroupControlMethodList =>
-      formGroupArrays.map(removeGroupControl).toList();
-
-  List<Method> get addGroupControlListMethodList =>
-      formGroupArrays.map(addGroupControlList).toList();
 
   Method get modelMethod => Method(
         (b) {
@@ -764,4 +679,67 @@ class FormGenerator {
             .map((e) => e.generate)
             .expand((e) => e),
       ];
+
+  List<Method> get fieldContainsMethodList =>
+      all.map((e) => ContainsMethod(e).method()).whereType<Method>().toList();
+
+  List<Method> get fieldValueMethodList =>
+      all.map((e) => FieldValueMethod(e).method()).whereType<Method>().toList();
+
+  List<Method> get fieldControlNameMethodList => all
+      .map((e) => ControlPathMethod(e).method())
+      .whereType<Method>()
+      .toList();
+
+  List<Field> get staticFieldNameList =>
+      annotatedParameters.map(staticFieldName).toList();
+
+  List<Method> get fieldErrorsMethodList =>
+      all.map((e) => ErrorsMethod(e).method()).whereType<Method>().toList();
+
+  List<Field> get fieldNameList => annotatedParameters.map(field).toList();
+
+  List<Method> get fieldFocusMethodList =>
+      all.map((e) => FocusMethod(e).method()).whereType<Method>().toList();
+
+  List<Method> get fieldRemoveMethodList =>
+      all.map((e) => RemoveMethod(e).method()).whereType<Method>().toList();
+
+  List<Method> get fieldUpdateMethodList => all
+      .map((e) => ReactiveFormUpdateValueMethod(e).method())
+      .whereType<Method>()
+      .toList();
+
+  List<Method> get fieldInsertMethodList => all
+      .map((e) => ReactiveFormInsertMethod(e).method())
+      .whereType<Method>()
+      .toList();
+
+  List<Method> get fieldClearMethodList => all
+      .map((e) => ReactiveFormClearMethod(e).method())
+      .whereType<Method>()
+      .toList();
+
+  List<Method> get fieldPatchMethodList => all
+      .map((e) => ReactiveFormPatchValueMethod(e).method())
+      .whereType<Method>()
+      .toList();
+
+  List<Method> get fieldResetMethodList =>
+      all.map((e) => ResetMethod(e).method()).whereType<Method>().toList();
+
+  List<Method> get controlMethodList =>
+      all.map((e) => ControlMethod(e).method()).whereType<Method>().toList();
+
+  List<Method> get addArrayControlMethodList =>
+      formArrays.map(addArrayControl).toList();
+
+  List<Method> get addGroupControlMethodList =>
+      formGroupArrays.map(addGroupControl).toList();
+
+  List<Method> get removeGroupControlMethodList =>
+      formGroupArrays.map(removeGroupControl).toList();
+
+  List<Method> get addGroupControlListMethodList =>
+      formGroupArrays.map(addGroupControlList).toList();
 }
