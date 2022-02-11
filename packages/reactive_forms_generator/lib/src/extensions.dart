@@ -11,10 +11,16 @@ extension ConstructorElementExt on ConstructorElement {
 }
 
 extension ClassElementExt on ClassElement {
-  List<ParameterElement> get annotatedParameters => constructors
-      .where((e) => e.hasReactiveFormAnnotatedParameters)
-      .first
-      .parameters;
+  List<ParameterElement> get annotatedParameters {
+    final annotatedConstructors =
+        constructors.where((e) => e.hasReactiveFormAnnotatedParameters);
+
+    if (annotatedConstructors.isNotEmpty) {
+      return annotatedConstructors.first.parameters;
+    }
+
+    return [];
+  }
 
   bool get hasNonAnnotatedRequiredParameters {
     return annotatedParameters.any(
@@ -23,6 +29,34 @@ extension ClassElementExt on ClassElement {
           e.type.nullabilitySuffix == NullabilitySuffix.none &&
           (e.isRequiredPositional || e.isRequiredNamed),
     );
+  }
+
+  bool get isNullable {
+    // print(
+    //     constructors.where((e) => e.hasReactiveFormAnnotatedParameters).first);
+    // return false;
+    return annotatedParameters.fold(true, (acc, e) {
+      if (e.isNotReactiveFormAnnotatedAndNullable) {
+        final element = e.type.element;
+        if (element is ClassElement) {
+          if (element.annotatedParameters.isEmpty) {
+            return acc && false;
+          } else {
+            // print('=====');
+            // print(element.name);
+            // print('isDartCoreObject => ${e.type.isDartCoreObject}');
+            // print('isDartCoreString => ${e.type.isDartCoreString}');
+            // print('isDartCoreSymbol => ${e.type.isDartCoreSymbol}');
+            // print(element);
+            acc = acc && element.isNullable;
+          }
+        }
+
+        return acc;
+      }
+
+      return acc;
+    });
   }
 }
 
@@ -59,6 +93,11 @@ extension ParameterElementExt on ParameterElement {
 
   bool get isReactiveFormAnnotated =>
       isFormGroupArray || isFormGroup || isFormControl || isFormArray;
+
+  bool get isNotReactiveFormAnnotatedAndNullable =>
+      !isReactiveFormAnnotated &&
+      type.nullabilitySuffix == NullabilitySuffix.none &&
+      ((isRequiredPositional || isRequiredNamed) && !hasDefaultValue);
 
   String get className {
     final element = type.element as ClassElement;

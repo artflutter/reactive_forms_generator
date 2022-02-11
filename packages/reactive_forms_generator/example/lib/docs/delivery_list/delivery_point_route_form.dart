@@ -8,7 +8,7 @@ class DeliveryPointWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SampleScreen(
       title: Text('Delivery list'),
-      body: DeliveryPointFormBuilder(
+      body: StandaloneDeliveryPointFormBuilder(
         model: DeliveryPoint(),
         builder: (context, formModel, child) {
           return Column(
@@ -60,7 +60,7 @@ class DeliveryPointWidget extends StatelessWidget {
                     },
                     child: const Text('Sign Up'),
                   ),
-                  ReactiveDeliveryPointFormConsumer(
+                  ReactiveStandaloneDeliveryPointFormConsumer(
                     builder: (context, formModel, child) {
                       return ElevatedButton(
                         child: Text('Submit'),

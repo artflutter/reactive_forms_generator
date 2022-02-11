@@ -46,8 +46,8 @@ class ReactiveFormBuilder {
                   ..name = 'model'
                   ..named = true
                   ..toThis = true
-                  ..required = reactiveForm.reactiveInheritedStreamer
-                      .formGenerator.element.hasNonAnnotatedRequiredParameters,
+                  ..required = !reactiveForm.reactiveInheritedStreamer
+                      .formGenerator.element.isNullable,
               ),
               Parameter(
                 (b) => b
@@ -80,7 +80,7 @@ class ReactiveFormBuilder {
       (b) => b
         ..name = 'model'
         ..type = Reference(
-          '${element.name}${element.hasNonAnnotatedRequiredParameters ? '' : '?'}',
+          '${element.name}${element.isNullable ? '?' : ''}',
         )
         ..modifier = FieldModifier.final$,
     );

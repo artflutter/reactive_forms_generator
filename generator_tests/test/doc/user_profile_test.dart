@@ -23,15 +23,18 @@ void main() {
             
             @ReactiveFormAnnotation()
             class UserProfile {
+              final String id;
+            
               final String firstName;
             
               final String lastName;
             
-              final Address? home;
+              final Address home;
             
               final Address? office;
             
               UserProfile({
+                required this.id,
                 @FormControlAnnotation(
                   validators: const [requiredValidator],
                 )
@@ -40,7 +43,7 @@ void main() {
                   validators: const [requiredValidator],
                 )
                     this.lastName = '',
-                this.home,
+                required this.home,
                 this.office,
               });
             }
@@ -153,10 +156,14 @@ class ReactiveUserProfileForm extends StatelessWidget {
 
 class UserProfileFormBuilder extends StatefulWidget {
   const UserProfileFormBuilder(
-      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
+      {Key? key,
+      required this.model,
+      this.child,
+      this.onWillPop,
+      required this.builder})
       : super(key: key);
 
-  final UserProfile? model;
+  final UserProfile model;
 
   final Widget? child;
 
@@ -200,8 +207,8 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
 
 class UserProfileForm implements FormModel<UserProfile> {
   UserProfileForm(this.userProfile, this.form, this.path) {
-    homeForm = AddressForm(userProfile?.home, form, pathBuilder('home'));
-    officeForm = AddressForm(userProfile?.office, form, pathBuilder('office'));
+    homeForm = AddressForm(userProfile.home, form, pathBuilder('home'));
+    officeForm = AddressForm(userProfile.office, form, pathBuilder('office'));
   }
 
   static String firstNameControlName = "firstName";
@@ -216,7 +223,7 @@ class UserProfileForm implements FormModel<UserProfile> {
 
   late AddressForm officeForm;
 
-  final UserProfile? userProfile;
+  final UserProfile userProfile;
 
   final FormGroup form;
 
@@ -228,7 +235,7 @@ class UserProfileForm implements FormModel<UserProfile> {
   String officeControlPath() => pathBuilder(officeControlName);
   String get firstNameValue => firstNameControl.value as String;
   String get lastNameValue => lastNameControl.value as String;
-  Address? get homeValue => homeForm.model;
+  Address get homeValue => homeForm.model;
   Address? get officeValue => officeForm.model;
   bool get containsFirstName {
     try {
@@ -268,35 +275,12 @@ class UserProfileForm implements FormModel<UserProfile> {
 
   Object? get firstNameErrors => firstNameControl.errors;
   Object? get lastNameErrors => lastNameControl.errors;
-  Object? get homeErrors => homeControl?.errors;
+  Object? get homeErrors => homeControl.errors;
   Object? get officeErrors => officeControl?.errors;
   void get firstNameFocus => form.focus(firstNameControlPath());
   void get lastNameFocus => form.focus(lastNameControlPath());
   void get homeFocus => form.focus(homeControlPath());
   void get officeFocus => form.focus(officeControlPath());
-  void homeRemove({bool updateParent = true, bool emitEvent = true}) {
-    if (containsHome) {
-      final controlPath = path;
-      if (controlPath == null) {
-        form.removeControl(
-          homeControlName,
-          updateParent: updateParent,
-          emitEvent: emitEvent,
-        );
-      } else {
-        final formGroup = form.control(controlPath);
-
-        if (formGroup is FormGroup) {
-          formGroup.removeControl(
-            homeControlName,
-            updateParent: updateParent,
-            emitEvent: emitEvent,
-          );
-        }
-      }
-    }
-  }
-
   void officeRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsOffice) {
       final controlPath = path;
@@ -332,9 +316,9 @@ class UserProfileForm implements FormModel<UserProfile> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void homeValueUpdate(Address? value,
+  void homeValueUpdate(Address value,
       {bool updateParent = true, bool emitEvent = true}) {
-    homeControl?.updateValue(
+    homeControl.updateValue(
         AddressForm(value, FormGroup({}), null).formElements().rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
@@ -360,9 +344,9 @@ class UserProfileForm implements FormModel<UserProfile> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void homeValuePatch(Address? value,
+  void homeValuePatch(Address value,
       {bool updateParent = true, bool emitEvent = true}) {
-    homeControl?.updateValue(
+    homeControl.updateValue(
         AddressForm(value, form, null).formElements().rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
@@ -390,12 +374,12 @@ class UserProfileForm implements FormModel<UserProfile> {
           bool? disabled}) =>
       lastNameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void homeValueReset(Address? value,
+  void homeValueReset(Address value,
           {bool updateParent = true,
           bool emitEvent = true,
           bool removeFocus = false,
           bool? disabled}) =>
-      homeControl?.reset(
+      homeControl.reset(
           value:
               AddressForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
@@ -414,11 +398,11 @@ class UserProfileForm implements FormModel<UserProfile> {
       form.control(firstNameControlPath()) as FormControl<String>;
   FormControl<String> get lastNameControl =>
       form.control(lastNameControlPath()) as FormControl<String>;
-  FormGroup? get homeControl =>
-      containsHome ? form.control(homeControlPath()) as FormGroup? : null;
+  FormGroup get homeControl => form.control(homeControlPath()) as FormGroup;
   FormGroup? get officeControl =>
       containsOffice ? form.control(officeControlPath()) as FormGroup? : null;
   UserProfile get model => UserProfile(
+      id: userProfile.id,
       firstName: firstNameValue,
       lastName: lastNameValue,
       home: homeValue,
@@ -445,14 +429,14 @@ class UserProfileForm implements FormModel<UserProfile> {
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         firstNameControlName: FormControl<String>(
-            value: userProfile?.firstName,
+            value: userProfile.firstName,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         lastNameControlName: FormControl<String>(
-            value: userProfile?.lastName,
+            value: userProfile.lastName,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -476,7 +460,7 @@ class AddressForm implements FormModel<Address> {
 
   static String zipControlName = "zip";
 
-  final Address? address;
+  final Address address;
 
   final FormGroup form;
 
@@ -658,13 +642,13 @@ class AddressForm implements FormModel<Address> {
       : null;
   Address get model =>
       Address(street: streetValue, city: cityValue, zip: zipValue);
-  void updateValue(Address? value,
+  void updateValue(Address value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
           AddressForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(Address? value,
+  void resetValue(Address value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.reset(
           value:
@@ -679,21 +663,21 @@ class AddressForm implements FormModel<Address> {
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         streetControlName: FormControl<String>(
-            value: address?.street,
+            value: address.street,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         cityControlName: FormControl<String>(
-            value: address?.city,
+            value: address.city,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         zipControlName: FormControl<String>(
-            value: address?.zip,
+            value: address.zip,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

@@ -5,8 +5,9 @@ import 'package:reactive_forms_generator/src/form_elements/form_element_generato
 import 'package:reactive_forms_generator/src/types.dart';
 
 class FormControlGenerator extends FormElementGenerator {
-  FormControlGenerator(ParameterElement field, DartType? type)
-      : super(field, type);
+  FormControlGenerator(
+      ClassElement root, ParameterElement field, DartType? type)
+      : super(root, field, type);
 
   @override
   String element() {

@@ -7,15 +7,18 @@ part 'user_profile.gform.dart';
 
 @ReactiveFormAnnotation()
 class UserProfile {
+  final String id;
+
   final String firstName;
 
   final String lastName;
 
-  final Address? home;
+  final Address home;
 
   final Address? office;
 
   UserProfile({
+    required this.id,
     @FormControlAnnotation(
       validators: const [requiredValidator],
     )
@@ -24,7 +27,7 @@ class UserProfile {
       validators: const [requiredValidator],
     )
         this.lastName = '',
-    this.home,
+    required this.home,
     this.office,
   });
 }

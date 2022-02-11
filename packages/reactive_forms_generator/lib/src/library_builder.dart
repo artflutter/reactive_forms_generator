@@ -10,7 +10,7 @@ const stringRef = Reference('String');
 const formGroupRef = Reference('FormGroup');
 
 List<Spec> generateLibrary(ClassElement element) {
-  final formGenerator = FormGenerator(element, null);
+  final formGenerator = FormGenerator(element, element, null);
   final reactiveInheritedStreamer = ReactiveInheritedStreamer(formGenerator);
   final reactiveForm = ReactiveForm(reactiveInheritedStreamer);
   final reactiveFormConsumer = ReactiveFormConsumer(reactiveForm);

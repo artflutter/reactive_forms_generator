@@ -1,3 +1,6 @@
+## [0.9.6-beta]
+* model nullability control improvements and bugfixes
+
 ## [0.9.5-beta]
 * array insert method
  

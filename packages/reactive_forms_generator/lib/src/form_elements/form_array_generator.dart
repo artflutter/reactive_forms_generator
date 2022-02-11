@@ -7,8 +7,8 @@ import 'package:reactive_forms_generator/src/types.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 
 class FormArrayGenerator extends FormElementGenerator {
-  FormArrayGenerator(ParameterElement field, DartType? type)
-      : super(field, type);
+  FormArrayGenerator(ClassElement root, ParameterElement field, DartType? type)
+      : super(root, field, type);
 
   @override
   String element() {
@@ -36,6 +36,7 @@ class FormArrayGenerator extends FormElementGenerator {
 
     if (field.isFormGroupArray) {
       final formGenerator = FormGenerator(
+        root,
         typeParameter.element! as ClassElement,
         field.type,
       );

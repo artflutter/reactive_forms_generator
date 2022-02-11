@@ -7,8 +7,8 @@ import 'package:reactive_forms_generator/src/types.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 
 class FormGroupGenerator extends FormElementGenerator {
-  FormGroupGenerator(ParameterElement field, DartType? type)
-      : super(field, type);
+  FormGroupGenerator(ClassElement root, ParameterElement field, DartType? type)
+      : super(root, field, type);
 
   List<ParameterElement> get formElements =>
       (field.type.element as ClassElement)
@@ -45,11 +45,11 @@ class FormGroupGenerator extends FormElementGenerator {
             FormElementGenerator? formElementGenerator;
 
             if (formControlChecker.hasAnnotationOfExact(f)) {
-              formElementGenerator = FormControlGenerator(f, type);
+              formElementGenerator = FormControlGenerator(root, f, type);
             }
 
             if (formArrayChecker.hasAnnotationOfExact(f)) {
-              formElementGenerator = FormArrayGenerator(f, type);
+              formElementGenerator = FormArrayGenerator(root, f, type);
             }
 
             if (formElementGenerator != null) {
@@ -65,6 +65,8 @@ class FormGroupGenerator extends FormElementGenerator {
     _formElements.addAll(
       nestedFormElements.map(
         (f) {
+          // final nullabilitySuffix = root.isNullable ? '?' : '';
+          // return '${f.fieldControlNameName}: ${f.name}Form$nullabilitySuffix.formElements()';
           return '${f.fieldControlNameName}: ${f.name}Form.formElements()';
         },
       ),

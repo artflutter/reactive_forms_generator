@@ -6,20 +6,45 @@ import 'package:source_gen/source_gen.dart';
 import 'package:recase/recase.dart';
 
 abstract class FormElementGenerator {
+  final ClassElement root;
   final ParameterElement field;
   final DartType? type;
 
-  FormElementGenerator(this.field, this.type);
+  FormElementGenerator(this.root, this.field, this.type);
 
   String get value {
     final enclosingElement =
         (field.enclosingElement as ConstructorElement).enclosingElement;
 
-    final optionalChaining =
-        type?.nullabilitySuffix == NullabilitySuffix.question ||
-                !enclosingElement.hasNonAnnotatedRequiredParameters
-            ? '?'
-            : '';
+    // final optionalChaining =
+    //     type?.nullabilitySuffix != NullabilitySuffix.question ||
+    //             (enclosingElement == root && !root.isNullable) ||
+    //             (enclosingElement != root && !root.isNullable)
+    //         ? ''
+    //         : '?';
+
+    final optionalChaining = (enclosingElement == root &&
+                type?.nullabilitySuffix != NullabilitySuffix.question) ||
+            (enclosingElement == root && !root.isNullable)
+        // (enclosingElement != root && !root.isNullable) ||
+        // !root.isNullable
+        ? ''
+        : '?';
+
+    // if (enclosingElement.name.camelCase == 'incidenceFilter') {
+    //   print('root => $root');
+    //   print('root isNullable => ${root.isNullable}');
+    //   print('enclosingElement => ${enclosingElement}');
+    //   print(optionalChaining);
+    //   print(
+    //       '${enclosingElement.name.camelCase}$optionalChaining.${field.name}');
+    //   print('----------');
+    // }
+
+    // print('field => $field');
+    // print('type => $type');
+    // print('root => $root');
+    // print('----------');
 
     // print(enclosingElement.hasNonAnnotatedRequiredParameters);
     // print(enclosingElement.thisType.getDisplayString(withNullability: true));

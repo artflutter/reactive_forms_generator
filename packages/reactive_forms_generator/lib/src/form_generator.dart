@@ -35,6 +35,8 @@ enum ValidatorsApplyMode {
 }
 
 class FormGenerator {
+  final ClassElement root;
+
   final ClassElement element;
 
   final DartType? type;
@@ -44,16 +46,17 @@ class FormGenerator {
   final Map<String, FormGenerator> nestedFormGroupGenerators = {};
 
   String get baseName {
-    if (formChecker.hasAnnotationOfExact(element)) {
+    if (formChecker.hasAnnotationOfExact(element) && root == element) {
       final annotation = formChecker.firstAnnotationOfExact(element);
       return annotation?.getField('name')?.toStringValue() ?? element.name;
     }
     return element.name;
   }
 
-  FormGenerator(this.element, this.type) {
+  FormGenerator(this.root, this.element, this.type) {
     for (var e in formGroups) {
       formGroupGenerators[e.name] = FormGenerator(
+        root,
         e.type.element! as ClassElement,
         e.type,
       );
@@ -67,6 +70,7 @@ class FormGenerator {
       final typeParameter = typeArguments.first;
 
       nestedFormGroupGenerators[e.name] = FormGenerator(
+        root,
         typeParameter.element! as ClassElement,
         e.type,
       );
@@ -266,7 +270,7 @@ class FormGenerator {
     final type = field.typeParameter.getDisplayString(withNullability: false);
 
     final formGroupGenerator = FormGenerator(
-        field.typeParameter.element as ClassElement, field.typeParameter);
+        root, field.typeParameter.element as ClassElement, field.typeParameter);
 
     return Method(
       (b) => b
@@ -291,7 +295,7 @@ class FormGenerator {
 
   Method removeGroupControl(ParameterElement field) {
     final formGroupGenerator = FormGenerator(
-        field.typeParameter.element as ClassElement, field.typeParameter);
+        root, field.typeParameter.element as ClassElement, field.typeParameter);
 
     final formField = '${field.name}${formGroupGenerator.className}';
     final controlField = '${field.fieldControlName}${field.nullabilitySuffix}';
@@ -350,7 +354,8 @@ class FormGenerator {
     // until https://github.com/joanpablo/reactive_forms/issues/204 is somehow resolved
     final type = field.typeParameter.getDisplayString(withNullability: false);
 
-    final formArrayGenerator = FormArrayGenerator(field, field.typeParameter);
+    final formArrayGenerator =
+        FormArrayGenerator(element, field, field.typeParameter);
 
     final validators =
         formArrayGenerator.itemSyncValidatorList(formArrayChecker);
@@ -448,8 +453,7 @@ class FormGenerator {
         (b) {
           final parameterValues = parameters.map((e) {
             if (!e.isReactiveFormAnnotated) {
-              final nullabilitySuffix =
-                  element.hasNonAnnotatedRequiredParameters ? '' : '?';
+              final nullabilitySuffix = element.isNullable ? '?' : '';
               return '${e.fieldName}:${element.name.camelCase}$nullabilitySuffix.${e.fieldName}';
             }
 
@@ -475,8 +479,7 @@ class FormGenerator {
 
   Constructor get _constructor => Constructor(
         (b) {
-          final nullabilitySuffix =
-              element.hasNonAnnotatedRequiredParameters ? '' : '?';
+          final nullabilitySuffix = root.isNullable ? '?' : '';
 
           final formGroupInitializers = formGroupGenerators
               .map((name, generator) {
@@ -494,11 +497,13 @@ class FormGenerator {
                 final typeParameter =
                     (e.type as ParameterizedType).typeArguments.first;
 
-                final defaultValue =
-                    element.hasNonAnnotatedRequiredParameters ? '' : '?? []';
+                final defaultValue = element.isNullable ? '?? []' : '';
 
-                final formGenerator =
-                    FormGenerator(typeParameter.element! as ClassElement, type);
+                final formGenerator = FormGenerator(
+                  root,
+                  typeParameter.element! as ClassElement,
+                  type,
+                );
                 return '''${e.name}${formGenerator.className} = (${element.name.camelCase}$nullabilitySuffix.${e.name} $defaultValue)
                   .asMap()
                   .map((k, v) => MapEntry(k, ${formGenerator.className}(v, form, pathBuilder("${e.name}.\$k"))))
@@ -546,9 +551,20 @@ class FormGenerator {
                 ...nestedFormGroupFields,
                 Field(
                   (b) {
-                    String displayType = type?.getDisplayString(
-                            withNullability: true) ??
-                        '${element.name}${element.hasNonAnnotatedRequiredParameters ? '' : '?'}';
+                    final nullabilitySuffix =
+                        root.isNullable || root != element ? '?' : '';
+                    String displayType =
+                        type?.getDisplayString(withNullability: false) ??
+                            element.name;
+
+                    displayType = '$displayType$nullabilitySuffix';
+
+                    // if (className == 'AddressForm') {
+                    //   print(type?.getDisplayString(withNullability: true));
+                    //   print(root.isNullable);
+                    //   print(displayType);
+                    //   print('==//==');
+                    // }
 
                     if (type != null &&
                         type is ParameterizedType &&
@@ -560,8 +576,8 @@ class FormGenerator {
                           withNullability: false);
 
                       if (parameterizedType.element is ClassElement &&
-                          !(parameterizedType.element as ClassElement)
-                              .hasNonAnnotatedRequiredParameters) {
+                          (parameterizedType.element as ClassElement)
+                              .isNullable) {
                         displayType = '$displayType?';
                       }
                     }
@@ -590,7 +606,7 @@ class FormGenerator {
                         (e.type as ParameterizedType).typeArguments.first;
 
                     final formGenerator = FormGenerator(
-                        typeParameter.element! as ClassElement, type);
+                        root, typeParameter.element! as ClassElement, type);
 
                     return Field(
                       (b) => b
@@ -649,6 +665,7 @@ class FormGenerator {
                       ..returns = const Reference('FormGroup')
                       ..body = Code(
                         FormGroupGenerator(
+                          root,
                           e.ParameterElementImpl(
                             name: 'FakeParameterElement',
                             nameOffset: 20,
@@ -662,10 +679,9 @@ class FormGenerator {
                               t.InterfaceTypeImpl(
                                 element: element,
                                 typeArguments: element.thisType.typeArguments,
-                                nullabilitySuffix:
-                                    element.hasNonAnnotatedRequiredParameters
-                                        ? NullabilitySuffix.none
-                                        : NullabilitySuffix.question,
+                                nullabilitySuffix: element.isNullable
+                                    ? NullabilitySuffix.question
+                                    : NullabilitySuffix.none,
                               ),
                         ).element(),
                       );

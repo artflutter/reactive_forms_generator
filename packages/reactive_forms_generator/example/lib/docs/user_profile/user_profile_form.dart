@@ -10,7 +10,10 @@ class UserProfileFormWidget extends StatelessWidget {
       title: Text('User profile'),
       body: SafeArea(
         child: UserProfileFormBuilder(
-          model: UserProfile(),
+          model: UserProfile(
+            id: 'id',
+            home: Address(),
+          ),
           builder: (context, formModel, child) {
             return SingleChildScrollView(
               child: Column(
