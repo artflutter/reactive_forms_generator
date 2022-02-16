@@ -6,6 +6,7 @@ import 'package:reactive_forms_generator/builder.dart';
 Future testGenerator({
   required String generatedFile,
   required String model,
+  String fileName = 'gen',
 }) async {
   Logger.root.level = Level.INFO;
 
@@ -16,10 +17,10 @@ Future testGenerator({
   return await testBuilder(
     anotherBuilder,
     {
-      'a|lib/gen.dart': model,
+      'a|lib/$fileName.dart': model,
     },
     outputs: {
-      'a|lib/gen.gform.dart': generatedFile,
+      'a|lib/$fileName.gform.dart': generatedFile,
     },
     onLog: print,
     reader: await PackageAssetReader.currentIsolate(),

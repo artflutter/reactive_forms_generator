@@ -4,18 +4,21 @@ import 'package:test/test.dart';
 
 import 'helpers.dart';
 
+const fileName = 'login';
+
 void main() {
   group('reactive_forms_generator', () {
     test(
       'Form with simple non-nullable types',
       () async {
         return testGenerator(
-          model: r'''
+          fileName: fileName,
+          model: '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
-            part 'gen.gform.dart';
+            part '$fileName.gform.dart';
           
             Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
               return Validators.required(control);
@@ -95,9 +98,12 @@ void main() {
   });
 }
 
-const generatedFile = r'''// GENERATED CODE - DO NOT MODIFY BY HAND
+const generatedFile = r'''// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file:
 
-part of 'gen.dart';
+part of 'login.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
@@ -502,7 +508,7 @@ class LoginForm implements FormModel<Login> {
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: this.formElements().rawValue,
+      value: formElements().rawValue,
       updateParent: updateParent,
       emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>

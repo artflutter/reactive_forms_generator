@@ -4,18 +4,21 @@ import 'package:test/test.dart';
 
 import '../helpers.dart';
 
+const fileName = 'mailing_list';
+
 void main() {
   group('doc', () {
     test(
       'Mailing list',
       () async {
         return testGenerator(
-          model: r'''
+          fileName: fileName,
+          model: '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
-            part 'gen.gform.dart';
+            part '$fileName.gform.dart';
             
             Map<String, dynamic>? mailingListValidator(AbstractControl control) {
               final formArray = control as FormArray<String>;
@@ -60,9 +63,12 @@ void main() {
   });
 }
 
-const generatedFile = r'''// GENERATED CODE - DO NOT MODIFY BY HAND
+const generatedFile = r'''// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file:
 
-part of 'gen.dart';
+part of 'mailing_list.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
@@ -243,14 +249,21 @@ class MailingListForm implements FormModel<MailingList> {
 
     switch (validatorsApplyMode) {
       case ValidatorsApplyMode.merge:
-        if (validators != null) resultingValidators.addAll(validators);
-        if (asyncValidators != null)
+        if (validators != null) {
+          resultingValidators.addAll(validators);
+        }
+        if (asyncValidators != null) {
           resultingAsyncValidators.addAll(asyncValidators);
+        }
         break;
       case ValidatorsApplyMode.override:
-        if (validators != null) resultingValidators = validators;
+        if (validators != null) {
+          resultingValidators = validators;
+        }
 
-        if (asyncValidators != null) resultingAsyncValidators = asyncValidators;
+        if (asyncValidators != null) {
+          resultingAsyncValidators = asyncValidators;
+        }
         break;
     }
 
@@ -279,7 +292,7 @@ class MailingListForm implements FormModel<MailingList> {
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: this.formElements().rawValue,
+      value: formElements().rawValue,
       updateParent: updateParent,
       emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>

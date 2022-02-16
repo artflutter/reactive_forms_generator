@@ -4,26 +4,29 @@ import 'package:test/test.dart';
 
 import '../helpers.dart';
 
+const fileName = 'freezed_class';
+
 void main() {
   group('reactive_forms_generator', () {
     test(
       'Freezed support',
       () async {
         return testGenerator(
-          model: r'''
+          fileName: fileName,
+          model: '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             import 'package:freezed_annotation/freezed_annotation.dart';
             import 'package:example/helpers.dart';
             
-            part 'gen.gform.dart';
-            part 'freezed_class.g.dart';
-            part 'freezed_class.freezed.dart';
+            part '$fileName.gform.dart';
+            part '$fileName.g.dart';
+            part '$fileName.freezed.dart';
             
             @freezed
             @ReactiveFormAnnotation()
-            class FreezedClass with _$FreezedClass {
+            class FreezedClass with _\$FreezedClass {
               FreezedClass._();
             
               factory FreezedClass(
@@ -34,7 +37,7 @@ void main() {
               }) = _FreezedClass;
             
               factory FreezedClass.fromJson(Map<String, dynamic> json) =>
-                  _$FreezedClassFromJson(json);
+                  _\$FreezedClassFromJson(json);
             }
           ''',
           generatedFile: generatedFile,
@@ -44,9 +47,12 @@ void main() {
   });
 }
 
-const generatedFile = r'''// GENERATED CODE - DO NOT MODIFY BY HAND
+const generatedFile = r'''// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file:
 
-part of 'gen.dart';
+part of 'freezed_class.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
@@ -436,7 +442,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: this.formElements().rawValue,
+      value: formElements().rawValue,
       updateParent: updateParent,
       emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>

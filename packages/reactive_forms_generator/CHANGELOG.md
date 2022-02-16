@@ -1,3 +1,6 @@
+## [0.9.7-beta]
+* ignore for file annotations
+
 ## [0.9.6-beta]
 * model nullability control improvements and bugfixes
 

@@ -4,18 +4,21 @@ import 'package:test/test.dart';
 
 import 'helpers.dart';
 
+const fileName = 'array_nullable';
+
 void main() {
   group('reactive_forms_generator', () {
     test(
       'Form with array nullable types',
       () async {
         return testGenerator(
-          model: r'''
+          fileName: fileName,
+          model: '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
-            part 'gen.gform.dart';
+            part '$fileName.gform.dart';
             
             Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
               return Validators.required(control);
@@ -58,9 +61,12 @@ void main() {
   });
 }
 
-const generatedFile = r'''// GENERATED CODE - DO NOT MODIFY BY HAND
+const generatedFile = r'''// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file:
 
-part of 'gen.dart';
+part of 'array_nullable.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
@@ -400,14 +406,21 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
 
     switch (validatorsApplyMode) {
       case ValidatorsApplyMode.merge:
-        if (validators != null) resultingValidators.addAll(validators);
-        if (asyncValidators != null)
+        if (validators != null) {
+          resultingValidators.addAll(validators);
+        }
+        if (asyncValidators != null) {
           resultingAsyncValidators.addAll(asyncValidators);
+        }
         break;
       case ValidatorsApplyMode.override:
-        if (validators != null) resultingValidators = validators;
+        if (validators != null) {
+          resultingValidators = validators;
+        }
 
-        if (asyncValidators != null) resultingAsyncValidators = asyncValidators;
+        if (asyncValidators != null) {
+          resultingAsyncValidators = asyncValidators;
+        }
         break;
     }
 
@@ -431,14 +444,21 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
 
     switch (validatorsApplyMode) {
       case ValidatorsApplyMode.merge:
-        if (validators != null) resultingValidators.addAll(validators);
-        if (asyncValidators != null)
+        if (validators != null) {
+          resultingValidators.addAll(validators);
+        }
+        if (asyncValidators != null) {
           resultingAsyncValidators.addAll(asyncValidators);
+        }
         break;
       case ValidatorsApplyMode.override:
-        if (validators != null) resultingValidators = validators;
+        if (validators != null) {
+          resultingValidators = validators;
+        }
 
-        if (asyncValidators != null) resultingAsyncValidators = asyncValidators;
+        if (asyncValidators != null) {
+          resultingAsyncValidators = asyncValidators;
+        }
         break;
     }
 
@@ -462,14 +482,21 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
 
     switch (validatorsApplyMode) {
       case ValidatorsApplyMode.merge:
-        if (validators != null) resultingValidators.addAll(validators);
-        if (asyncValidators != null)
+        if (validators != null) {
+          resultingValidators.addAll(validators);
+        }
+        if (asyncValidators != null) {
           resultingAsyncValidators.addAll(asyncValidators);
+        }
         break;
       case ValidatorsApplyMode.override:
-        if (validators != null) resultingValidators = validators;
+        if (validators != null) {
+          resultingValidators = validators;
+        }
 
-        if (asyncValidators != null) resultingAsyncValidators = asyncValidators;
+        if (asyncValidators != null) {
+          resultingAsyncValidators = asyncValidators;
+        }
         break;
     }
 
@@ -502,7 +529,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: this.formElements().rawValue,
+      value: formElements().rawValue,
       updateParent: updateParent,
       emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>

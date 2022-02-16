@@ -1,0 +1,36 @@
+name: PR check
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+    types:
+      - opened
+      - reopened
+      - edited
+      - synchronize
+
+jobs:
+  pr-check:
+    runs-on: ubuntu-latest
+    container:
+      image: cirrusci/flutter:2.10.1
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Code generation tests
+        run: cd generator_tests && flutter pub get && dart test && cd ../
+
+      - name: build_runner
+        run: cd packages/reactive_forms_generator/example && flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: analyze
+        run: cd packages/reactive_forms_generator/example && flutter pub get && flutter analyze
+
+      - name: code formatting
+        run: cd packages/reactive_forms_generator/example && flutter pub get && flutter format --set-exit-if-changed lib
+
+      - name: test
+        run: cd packages/reactive_forms_generator/example && flutter pub get && flutter test
