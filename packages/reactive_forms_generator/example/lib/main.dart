@@ -3,15 +3,15 @@ import 'package:example/docs/delivery_list/delivery_route_form.dart';
 import 'package:example/docs/mailing_list/mailing_list_form.dart';
 import 'package:example/docs/freezed/freezed_form.dart';
 import 'package:example/docs/user_profile/user_profile_form.dart';
-import 'package:example/routes/array_nullable_form.dart';
-import 'package:example/routes/group_nullable_group.dart';
-import 'package:example/routes/login_form.dart';
-import 'package:example/routes/login_nullable_form.dart';
+import 'package:example/docs/array_nullable/array_nullable_form.dart';
+import 'package:example/docs/group/group_form.dart';
+import 'package:example/docs/login/login_form.dart';
+import 'package:example/docs/login_nullable/login_nullable_form.dart';
 import 'package:example/docs/basic/basic_form.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class Routes {
@@ -37,6 +37,8 @@ class Routes {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,18 +48,18 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: <String, WidgetBuilder>{
-        Routes.login: (_) => LoginFormWidget(),
-        Routes.basic: (_) => BasicFormWidget(),
-        Routes.mailingList: (_) => MailingListFormWidget(),
-        Routes.userProfile: (_) => UserProfileFormWidget(),
-        Routes.loginNullable: (_) => LoginNullableFormWidget(),
+        Routes.login: (_) => const LoginFormWidget(),
+        Routes.basic: (_) => const BasicFormWidget(),
+        Routes.mailingList: (_) => const MailingListFormWidget(),
+        Routes.userProfile: (_) => const UserProfileFormWidget(),
+        Routes.loginNullable: (_) => const LoginNullableFormWidget(),
         Routes.arrayNullable: (_) => ArrayNullableFormWidget(),
-        Routes.group: (_) => GroupNullableFormWidget(),
-        Routes.deliveryList: (_) => DeliveryListFormWidget(),
-        Routes.deliveryPoint: (_) => DeliveryPointWidget(),
-        Routes.freezed: (_) => FreezedFormWidget(),
+        Routes.group: (_) => const GroupFormWidget(),
+        Routes.deliveryList: (_) => const DeliveryListFormWidget(),
+        Routes.deliveryPoint: (_) => const DeliveryPointWidget(),
+        Routes.freezed: (_) => const FreezedFormWidget(),
       },
-      home: DeliveryListFormWidget(),
+      home: const DeliveryListFormWidget(),
     );
   }
 }

@@ -1,17 +1,21 @@
+// ignore_for_file: avoid_print
+
 import 'package:example/docs/mailing_list/mailing_list.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 
 class MailingListFormWidget extends StatelessWidget {
+  const MailingListFormWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
-      title: Text('Mailing list'),
+      title: const Text('Mailing list'),
       body: MailingListFormBuilder(
         model: MailingList(emailList: [
           'test@gmail.com',
-          'wrond email',
+          'wrong email',
         ]),
         builder: (context, formModel, child) {
           return Column(
@@ -35,7 +39,7 @@ class MailingListFormWidget extends StatelessWidget {
                                         'email': 'Invalid email',
                                       },
                                       decoration: InputDecoration(
-                                          labelText: 'Email ${i}'),
+                                          labelText: 'Email $i'),
                                     ));
                               })
                               .values
@@ -44,7 +48,7 @@ class MailingListFormWidget extends StatelessWidget {
                       },
                     ),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   ElevatedButton(
                     onPressed: () {
                       formModel.addEmailListItem('');
@@ -53,7 +57,7 @@ class MailingListFormWidget extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ReactiveMailingListFormConsumer(
                 builder: (context, formModel, child) {
                   final errorText = {
@@ -75,7 +79,7 @@ class MailingListFormWidget extends StatelessWidget {
                   }
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -101,7 +105,7 @@ class MailingListFormWidget extends StatelessWidget {
                   ReactiveMailingListFormConsumer(
                     builder: (context, formModel, child) {
                       return ElevatedButton(
-                        child: Text('Submit'),
+                        child: const Text('Submit'),
                         onPressed: formModel.form.valid ? () {} : null,
                       );
                     },

@@ -1,4 +1,7 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file:
 
 part of 'mailing_list.dart';
 
@@ -181,14 +184,21 @@ class MailingListForm implements FormModel<MailingList> {
 
     switch (validatorsApplyMode) {
       case ValidatorsApplyMode.merge:
-        if (validators != null) resultingValidators.addAll(validators);
-        if (asyncValidators != null)
+        if (validators != null) {
+          resultingValidators.addAll(validators);
+        }
+        if (asyncValidators != null) {
           resultingAsyncValidators.addAll(asyncValidators);
+        }
         break;
       case ValidatorsApplyMode.override:
-        if (validators != null) resultingValidators = validators;
+        if (validators != null) {
+          resultingValidators = validators;
+        }
 
-        if (asyncValidators != null) resultingAsyncValidators = asyncValidators;
+        if (asyncValidators != null) {
+          resultingAsyncValidators = asyncValidators;
+        }
         break;
     }
 
@@ -217,7 +227,7 @@ class MailingListForm implements FormModel<MailingList> {
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: this.formElements().rawValue,
+      value: formElements().rawValue,
       updateParent: updateParent,
       emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>

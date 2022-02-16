@@ -16,7 +16,7 @@ class Test with _$Test {
     @FormControlAnnotation() String? description,
   }) = _Test;
 
-  factory Test.empty() => Test(
+  factory Test.empty() => const Test(
         title: '',
         description: '',
       );

@@ -12,15 +12,15 @@ class SampleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: title),
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.symmetric(
             horizontal: 20.0,
             vertical: 20.0,
           ),
-          child: this.body,
+          child: body,
         ),
       ),
     );

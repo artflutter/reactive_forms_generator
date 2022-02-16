@@ -1,13 +1,17 @@
+// ignore_for_file: avoid_print
+
 import 'package:example/docs/user_profile/user_profile.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 
 class UserProfileFormWidget extends StatelessWidget {
+  const UserProfileFormWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
-      title: Text('User profile'),
+      title: const Text('User profile'),
       body: SafeArea(
         child: UserProfileFormBuilder(
           model: UserProfile(
@@ -46,7 +50,10 @@ class UserProfileFormWidget extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 24.0),
-                  Text('Home address', style: TextStyle(fontSize: 18)),
+                  const Text(
+                    'Home address',
+                    style: TextStyle(fontSize: 18),
+                  ),
                   ReactiveTextField<String>(
                     formControl: formModel.homeForm.cityControl,
                     validationMessages: (control) => {
@@ -88,7 +95,7 @@ class UserProfileFormWidget extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8.0),
-                  Text('Office address', style: TextStyle(fontSize: 18)),
+                  const Text('Office address', style: TextStyle(fontSize: 18)),
                   const SizedBox(height: 8.0),
                   ReactiveTextField<String>(
                     formControl: formModel.officeForm.cityControl,
@@ -144,7 +151,7 @@ class UserProfileFormWidget extends StatelessWidget {
                   ReactiveUserProfileFormConsumer(
                     builder: (context, formModel, child) {
                       return ElevatedButton(
-                        child: Text('Submit'),
+                        child: const Text('Submit'),
                         onPressed: formModel.form.valid
                             ? () {
                                 print(formModel.model.firstName);

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 
 class AppDrawer extends StatelessWidget {
+  const AppDrawer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -28,7 +30,7 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: const Text('Group'),
+              title: const Text('Group nullable'),
               onTap: () => Navigator.of(context).pushReplacementNamed(
                 Routes.group,
               ),

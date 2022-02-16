@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:example/docs/renamed_basic/renamed_basic.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
@@ -5,10 +7,12 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 class BasicFormWidget extends StatelessWidget {
+  const BasicFormWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
-      title: Text('Basic'),
+      title: const Text('Basic'),
       body: SomeWiredNameFormBuilder(
         model: RenamedBasic(),
         builder: (context, formModel, child) {
@@ -45,7 +49,7 @@ class BasicFormWidget extends StatelessWidget {
               ReactiveSomeWiredNameFormConsumer(
                 builder: (context, formModel, child) {
                   return ElevatedButton(
-                    child: Text('Submit'),
+                    child: const Text('Submit'),
                     onPressed: formModel.form.valid
                         ? () {
                             // ignore: unnecessary_cast

@@ -1,13 +1,17 @@
-import 'package:example/forms/groups_form.dart';
+// ignore_for_file: avoid_print
+
+import 'package:example/docs/group/group.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 
-class GroupNullableFormWidget extends StatelessWidget {
+class GroupFormWidget extends StatelessWidget {
+  const GroupFormWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
-      title: Text('Login'),
+      title: const Text('Login'),
       body: GroupFormBuilder(
         model: Group(
           personal: Personal(name: 'vasilich'),
@@ -59,13 +63,13 @@ class GroupNullableFormWidget extends StatelessWidget {
               ),
               const SizedBox(height: 16.0),
               Card(
-                margin: EdgeInsets.all(0),
+                margin: const EdgeInsets.all(0),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Address 1', style: TextStyle(fontSize: 20)),
+                      const Text('Address 1', style: TextStyle(fontSize: 20)),
                       ReactiveTextField<String>(
                         formControl: formModel.addressForm.cityControl,
                         decoration: const InputDecoration(
@@ -101,13 +105,13 @@ class GroupNullableFormWidget extends StatelessWidget {
               ),
               const SizedBox(height: 16.0),
               Card(
-                margin: EdgeInsets.all(0),
+                margin: const EdgeInsets.all(0),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Address 2', style: TextStyle(fontSize: 20)),
+                      const Text('Address 2', style: TextStyle(fontSize: 20)),
                       ReactiveTextField<String>(
                         formControl: formModel.address2Form.cityControl,
                         decoration: const InputDecoration(
@@ -157,7 +161,7 @@ class GroupNullableFormWidget extends StatelessWidget {
               ReactiveGroupFormConsumer(
                 builder: (context, formModel, child) {
                   return ElevatedButton(
-                    child: Text('Submit'),
+                    child: const Text('Submit'),
                     onPressed: formModel.form.valid ? () {} : null,
                   );
                 },

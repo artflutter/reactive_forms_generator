@@ -25,7 +25,7 @@ class DeliveryPoint {
 
   DeliveryPoint({
     @FormControlAnnotation(
-      validators: const [requiredValidator],
+      validators: [requiredValidator],
     )
         this.name = '',
     this.address,
@@ -57,7 +57,7 @@ class Address {
 
   Address({
     @FormControlAnnotation(
-      validators: const [requiredValidator],
+      validators: [requiredValidator],
     )
         this.street,
     @FormControlAnnotation()

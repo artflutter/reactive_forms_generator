@@ -20,11 +20,11 @@ class UserProfile {
   UserProfile({
     required this.id,
     @FormControlAnnotation(
-      validators: const [requiredValidator],
+      validators: [requiredValidator],
     )
         this.firstName = '',
     @FormControlAnnotation(
-      validators: const [requiredValidator],
+      validators: [requiredValidator],
     )
         this.lastName = '',
     required this.home,
@@ -44,7 +44,7 @@ class Address {
     @FormControlAnnotation()
         this.street,
     @FormControlAnnotation(
-      validators: const [requiredValidator],
+      validators: [requiredValidator],
     )
         this.city,
     @FormControlAnnotation()

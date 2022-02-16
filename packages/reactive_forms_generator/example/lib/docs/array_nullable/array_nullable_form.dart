@@ -1,4 +1,5 @@
-import 'package:example/forms/array.dart';
+// ignore_for_file: avoid_print
+import 'package:example/docs/array_nullable/array_nullable.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
@@ -16,10 +17,12 @@ class ArrayNullableFormWidget extends StatelessWidget {
     'orange',
   ];
 
+  ArrayNullableFormWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
-      title: Text('Array nullable'),
+      title: const Text('Array nullable'),
       body: ArrayNullableFormBuilder(
         model: ArrayNullable(
           emailList: contacts,
@@ -40,14 +43,15 @@ class ArrayNullableFormWidget extends StatelessWidget {
                                 formControlName: formModel.emailListValue
                                     .indexOf(email)
                                     .toString(),
-                                decoration: InputDecoration(labelText: 'Email'),
+                                decoration:
+                                    const InputDecoration(labelText: 'Email'),
                               ),
                             )
                             .toList(),
                       ),
                     ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   ElevatedButton(
                     onPressed: () {
                       final newEmail = 'other${contacts.length + 1}@email.com';
@@ -77,7 +81,7 @@ class ArrayNullableFormWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   ElevatedButton(
                     onPressed: () {
                       final newFruit = 'otherFruit${fruits.length + 1}';
@@ -103,7 +107,7 @@ class ArrayNullableFormWidget extends StatelessWidget {
               ReactiveArrayNullableFormConsumer(
                 builder: (context, formModel, child) {
                   return ElevatedButton(
-                    child: Text('Submit'),
+                    child: const Text('Submit'),
                     onPressed: formModel.form.valid ? () {} : null,
                   );
                 },

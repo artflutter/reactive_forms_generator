@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
-part 'groups_form.gform.dart';
+part 'group.gform.dart';
 
 @ReactiveFormAnnotation()
 class Group {

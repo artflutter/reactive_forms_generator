@@ -13,11 +13,11 @@ class RenamedBasic {
 
   RenamedBasic({
     @FormControlAnnotation(
-      validators: const [requiredValidator],
+      validators: [requiredValidator],
     )
         this.email = '',
     @FormControlAnnotation(
-      validators: const [requiredValidator],
+      validators: [requiredValidator],
     )
         this.password = '',
   });

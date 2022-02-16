@@ -1,13 +1,17 @@
+// ignore_for_file: avoid_print
+
 import 'package:example/docs/delivery_list/delivery_list.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 
 class DeliveryPointWidget extends StatelessWidget {
+  const DeliveryPointWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
-      title: Text('Delivery list'),
+      title: const Text('Delivery list'),
       body: StandaloneDeliveryPointFormBuilder(
         model: DeliveryPoint(),
         builder: (context, formModel, child) {
@@ -21,7 +25,7 @@ class DeliveryPointWidget extends StatelessWidget {
                     validationMessages: (_) => {
                       ValidationMessage.required: 'Must not be empty',
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Name',
                     ),
                   ),
@@ -30,7 +34,7 @@ class DeliveryPointWidget extends StatelessWidget {
                     validationMessages: (_) => {
                       ValidationMessage.required: 'Must not be empty',
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Street',
                     ),
                   ),
@@ -39,14 +43,14 @@ class DeliveryPointWidget extends StatelessWidget {
                     validationMessages: (_) => {
                       ValidationMessage.required: 'Must not be empty',
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'City',
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 16),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
+              const SizedBox(height: 16),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -63,7 +67,7 @@ class DeliveryPointWidget extends StatelessWidget {
                   ReactiveStandaloneDeliveryPointFormConsumer(
                     builder: (context, formModel, child) {
                       return ElevatedButton(
-                        child: Text('Submit'),
+                        child: const Text('Submit'),
                         onPressed: formModel.form.valid ? () {} : null,
                       );
                     },

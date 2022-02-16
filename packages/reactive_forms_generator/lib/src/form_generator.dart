@@ -261,7 +261,7 @@ class FormGenerator {
         ])
         ..returns = const Reference('void')
         ..body = const Code(
-          'form.reset(value: this.formElements().rawValue, updateParent: updateParent, emitEvent:emitEvent)',
+          'form.reset(value: formElements().rawValue, updateParent: updateParent, emitEvent:emitEvent)',
         ),
     );
   }
@@ -424,17 +424,21 @@ class FormGenerator {
               
               switch(validatorsApplyMode) { 
                 case ValidatorsApplyMode.merge:
-                  if(validators != null)
+                  if(validators != null) {
                     resultingValidators.addAll(validators);
-                  if(asyncValidators != null)
+                  }
+                  if(asyncValidators != null) {
                     resultingAsyncValidators.addAll(asyncValidators);
+                  }
                   break;
                 case ValidatorsApplyMode.override:
-                  if(validators != null)
+                  if(validators != null) {
                     resultingValidators = validators;
+                  }
                     
-                  if(asyncValidators != null)
+                  if(asyncValidators != null) {
                     resultingAsyncValidators = asyncValidators;
+                  }
                   break;
               }
                

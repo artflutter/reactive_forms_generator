@@ -11,7 +11,7 @@ class MailingList {
 
   MailingList({
     @FormArrayAnnotation(
-      validators: const [
+      validators: [
         mailingListValidator,
       ],
       itemValidators: [

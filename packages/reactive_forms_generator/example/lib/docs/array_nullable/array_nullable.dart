@@ -3,7 +3,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:example/helpers.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
-part 'array.gform.dart';
+part 'array_nullable.gform.dart';
 
 @ReactiveFormAnnotation()
 class ArrayNullable {
@@ -17,7 +17,7 @@ class ArrayNullable {
 
   ArrayNullable({
     @FormArrayAnnotation(
-      validators: const [
+      validators: [
         requiredValidator,
       ],
     )

@@ -1,4 +1,6 @@
-import 'package:example/forms/login.dart';
+// ignore_for_file: avoid_print
+
+import 'package:example/docs/login/login.dart';
 import 'package:example/helpers.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
@@ -8,10 +10,12 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_touch_spin/reactive_touch_spin.dart';
 
 class LoginFormWidget extends StatelessWidget {
+  const LoginFormWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
-      title: Text('Login'),
+      title: const Text('Login'),
       body: LoginFormBuilder(
         model: Login(
           password: '1234',
@@ -60,7 +64,7 @@ class LoginFormWidget extends StatelessWidget {
               const SizedBox(height: 16.0),
               ReactiveDropdownSearch<String, String>(
                 formControl: formModel.themeControl,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   helperText: '',
                   contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
                   border: OutlineInputBorder(),
@@ -68,7 +72,7 @@ class LoginFormWidget extends StatelessWidget {
                 mode: Mode.MENU,
                 hint: "Select a theme",
                 // showSelectedItem: true,
-                items: [
+                items: const [
                   "light",
                   "dark",
                 ],
@@ -78,7 +82,7 @@ class LoginFormWidget extends StatelessWidget {
               const SizedBox(height: 16.0),
               ReactiveDropdownSearch<UserMode, UserMode>(
                 formControl: formModel.modeControl,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   helperText: '',
                   contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
                   border: OutlineInputBorder(),
@@ -86,7 +90,7 @@ class LoginFormWidget extends StatelessWidget {
                 mode: Mode.MENU,
                 hint: "Select a theme",
                 // showSelectedItem: true,
-                items: [
+                items: const [
                   UserMode.admin,
                   UserMode.user,
                 ],
@@ -96,7 +100,7 @@ class LoginFormWidget extends StatelessWidget {
               ),
               ReactiveTouchSpin<int>(
                 formControl: formModel.timeoutControl,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Logout timeout mins.',
                 ),
                 valueAccessor: NumValueAccessor(),
@@ -106,7 +110,7 @@ class LoginFormWidget extends StatelessWidget {
               ),
               ReactiveSwitchListTile(
                 formControl: formModel.rememberMeControl,
-                title: Text('remember me'),
+                title: const Text('remember me'),
                 controlAffinity: ListTileControlAffinity.trailing,
               ),
               ReactiveSlider(
@@ -131,7 +135,7 @@ class LoginFormWidget extends StatelessWidget {
                   ReactiveLoginFormConsumer(
                     builder: (context, formModel, child) {
                       return ElevatedButton(
-                        child: Text('Update'),
+                        child: const Text('Update'),
                         onPressed: formModel.form.valid
                             ? () {
                                 formModel.updateValue(Login(
@@ -148,11 +152,11 @@ class LoginFormWidget extends StatelessWidget {
                       );
                     },
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   ReactiveLoginFormConsumer(
                     builder: (context, formModel, child) {
                       return ElevatedButton(
-                        child: Text('Reset'),
+                        child: const Text('Reset'),
                         onPressed: formModel.form.valid
                             ? () {
                                 formModel.reset();

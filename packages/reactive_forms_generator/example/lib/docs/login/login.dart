@@ -25,43 +25,43 @@ class Login {
 
   Login({
     @FormControlAnnotation(
-      validators: const [
+      validators: [
         requiredValidator,
       ],
     )
         this.email = 'default@e.mail',
     @FormControlAnnotation(
-      validators: const [
+      validators: [
         requiredValidator,
       ],
     )
         required this.password,
     @FormControlAnnotation(
-      validators: const [
+      validators: [
         requiredValidator,
       ],
     )
         required this.rememberMe,
     @FormControlAnnotation(
-      validators: const [
+      validators: [
         requiredValidator,
       ],
     )
         required this.theme,
     @FormControlAnnotation(
-      validators: const [
+      validators: [
         requiredValidator,
       ],
     )
         required this.mode,
     @FormControlAnnotation(
-      validators: const [
+      validators: [
         requiredValidator,
       ],
     )
         required this.timeout,
     @FormControlAnnotation(
-      validators: const [
+      validators: [
         requiredValidator,
       ],
     )

@@ -19,11 +19,11 @@ Map<String, dynamic> emailValidator(AbstractControl<dynamic> control) {
 Map<String, dynamic>? mailingComplexListValidator(AbstractControl control) {
   final formArray = control as FormArray<String>;
   final emails = formArray.value ?? [];
-  final test = Set<String>();
+  final test = <String>{};
 
-  formArray.controls.forEach(
-    (e) => e.setErrors(emailValidator(e)),
-  );
+  for (var e in formArray.controls) {
+    e.setErrors(emailValidator(e));
+  }
 
   final result = emails.fold<bool>(true,
       (previousValue, element) => previousValue && test.add(element ?? ''));
@@ -35,7 +35,7 @@ Map<String, dynamic>? mailingComplexListValidator(AbstractControl control) {
 Map<String, dynamic>? mailingListValidator(AbstractControl control) {
   final formArray = control as FormArray<String>;
   final emails = formArray.value ?? [];
-  final test = Set<String>();
+  final test = <String>{};
 
   final result = emails.fold<bool>(true,
       (previousValue, element) => previousValue && test.add(element ?? ''));
