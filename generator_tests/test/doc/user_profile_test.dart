@@ -4,18 +4,21 @@ import 'package:test/test.dart';
 
 import '../helpers.dart';
 
+const fileName = 'user_profile';
+
 void main() {
   group('doc', () {
     test(
       'User profile',
       () async {
         return testGenerator(
-          model: r'''
+          fileName: fileName,
+          model: '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
-            part 'gen.gform.dart';
+            part '$fileName.gform.dart';
             
             Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
               return Validators.required(control);
@@ -75,9 +78,12 @@ void main() {
   });
 }
 
-const generatedFile = r'''// GENERATED CODE - DO NOT MODIFY BY HAND
+const generatedFile = r'''// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file:
 
-part of 'gen.dart';
+part of 'user_profile.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
@@ -422,7 +428,7 @@ class UserProfileForm implements FormModel<UserProfile> {
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: this.formElements().rawValue,
+      value: formElements().rawValue,
       updateParent: updateParent,
       emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
@@ -460,7 +466,7 @@ class AddressForm implements FormModel<Address> {
 
   static String zipControlName = "zip";
 
-  final Address address;
+  final Address? address;
 
   final FormGroup form;
 
@@ -656,28 +662,28 @@ class AddressForm implements FormModel<Address> {
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: this.formElements().rawValue,
+      value: formElements().rawValue,
       updateParent: updateParent,
       emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         streetControlName: FormControl<String>(
-            value: address.street,
+            value: address?.street,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         cityControlName: FormControl<String>(
-            value: address.city,
+            value: address?.city,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         zipControlName: FormControl<String>(
-            value: address.zip,
+            value: address?.zip,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

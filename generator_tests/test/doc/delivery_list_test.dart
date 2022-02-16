@@ -4,18 +4,21 @@ import 'package:test/test.dart';
 
 import '../helpers.dart';
 
+const fileName = 'delivery_list';
+
 void main() {
   group('doc', () {
     test(
       'Delivery list',
       () async {
         return testGenerator(
-          model: r'''
+          fileName: fileName,
+          model: '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
-            part 'gen.gform.dart';
+            part '$fileName.gform.dart';
             
             Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
               return Validators.required(control);
@@ -32,7 +35,7 @@ void main() {
               });
             }
             
-            @ReactiveFormAnnotation()
+            @ReactiveFormAnnotation(name: 'StandaloneDeliveryPoint')
             @FormGroupAnnotation()
             class DeliveryPoint {
               final String name;
@@ -88,9 +91,12 @@ void main() {
   });
 }
 
-const generatedFile = r'''// GENERATED CODE - DO NOT MODIFY BY HAND
+const generatedFile = r'''// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file:
 
-part of 'gen.dart';
+part of 'delivery_list.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
@@ -624,7 +630,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: this.formElements().rawValue,
+      value: formElements().rawValue,
       updateParent: updateParent,
       emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
@@ -782,7 +788,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: this.formElements().rawValue,
+      value: formElements().rawValue,
       updateParent: updateParent,
       emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
@@ -947,7 +953,7 @@ class AddressForm implements FormModel<Address> {
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: this.formElements().rawValue,
+      value: formElements().rawValue,
       updateParent: updateParent,
       emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
@@ -1154,7 +1160,7 @@ class ClientForm implements FormModel<Client> {
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: this.formElements().rawValue,
+      value: formElements().rawValue,
       updateParent: updateParent,
       emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
@@ -1188,67 +1194,69 @@ class ClientForm implements FormModel<Client> {
           disabled: false);
 }
 
-class ReactiveDeliveryPointFormConsumer extends StatelessWidget {
-  const ReactiveDeliveryPointFormConsumer(
+class ReactiveStandaloneDeliveryPointFormConsumer extends StatelessWidget {
+  const ReactiveStandaloneDeliveryPointFormConsumer(
       {Key? key, required this.builder, this.child})
       : super(key: key);
 
   final Widget? child;
 
-  final Widget Function(
-      BuildContext context, DeliveryPointForm formModel, Widget? child) builder;
+  final Widget Function(BuildContext context,
+      StandaloneDeliveryPointForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveDeliveryPointForm.of(context);
+    final formModel = ReactiveStandaloneDeliveryPointForm.of(context);
 
-    if (formModel is! DeliveryPointForm) {
+    if (formModel is! StandaloneDeliveryPointForm) {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, formModel, child);
   }
 }
 
-class DeliveryPointFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const DeliveryPointFormInheritedStreamer(
+class StandaloneDeliveryPointFormInheritedStreamer
+    extends InheritedStreamer<dynamic> {
+  const StandaloneDeliveryPointFormInheritedStreamer(
       {Key? key,
       required this.form,
       required Stream<dynamic> stream,
       required Widget child})
       : super(stream, child, key: key);
 
-  final DeliveryPointForm form;
+  final StandaloneDeliveryPointForm form;
 }
 
-class ReactiveDeliveryPointForm extends StatelessWidget {
-  const ReactiveDeliveryPointForm(
+class ReactiveStandaloneDeliveryPointForm extends StatelessWidget {
+  const ReactiveStandaloneDeliveryPointForm(
       {Key? key, required this.form, required this.child, this.onWillPop})
       : super(key: key);
 
   final Widget child;
 
-  final DeliveryPointForm form;
+  final StandaloneDeliveryPointForm form;
 
   final WillPopCallback? onWillPop;
 
-  static DeliveryPointForm? of(BuildContext context, {bool listen = true}) {
+  static StandaloneDeliveryPointForm? of(BuildContext context,
+      {bool listen = true}) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
-              DeliveryPointFormInheritedStreamer>()
+              StandaloneDeliveryPointFormInheritedStreamer>()
           ?.form;
     }
 
     final element = context.getElementForInheritedWidgetOfExactType<
-        DeliveryPointFormInheritedStreamer>();
+        StandaloneDeliveryPointFormInheritedStreamer>();
     return element == null
         ? null
-        : (element.widget as DeliveryPointFormInheritedStreamer).form;
+        : (element.widget as StandaloneDeliveryPointFormInheritedStreamer).form;
   }
 
   @override
   Widget build(BuildContext context) {
-    return DeliveryPointFormInheritedStreamer(
+    return StandaloneDeliveryPointFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
       child: WillPopScope(
@@ -1259,8 +1267,8 @@ class ReactiveDeliveryPointForm extends StatelessWidget {
   }
 }
 
-class DeliveryPointFormBuilder extends StatefulWidget {
-  const DeliveryPointFormBuilder(
+class StandaloneDeliveryPointFormBuilder extends StatefulWidget {
+  const StandaloneDeliveryPointFormBuilder(
       {Key? key, this.model, this.child, this.onWillPop, required this.builder})
       : super(key: key);
 
@@ -1270,23 +1278,24 @@ class DeliveryPointFormBuilder extends StatefulWidget {
 
   final WillPopCallback? onWillPop;
 
-  final Widget Function(
-      BuildContext context, DeliveryPointForm formModel, Widget? child) builder;
+  final Widget Function(BuildContext context,
+      StandaloneDeliveryPointForm formModel, Widget? child) builder;
 
   @override
-  _DeliveryPointFormBuilderState createState() =>
-      _DeliveryPointFormBuilderState();
+  _StandaloneDeliveryPointFormBuilderState createState() =>
+      _StandaloneDeliveryPointFormBuilderState();
 }
 
-class _DeliveryPointFormBuilderState extends State<DeliveryPointFormBuilder> {
+class _StandaloneDeliveryPointFormBuilderState
+    extends State<StandaloneDeliveryPointFormBuilder> {
   late FormGroup _form;
 
-  late DeliveryPointForm _formModel;
+  late StandaloneDeliveryPointForm _formModel;
 
   @override
   void initState() {
     _form = FormGroup({});
-    _formModel = DeliveryPointForm(widget.model, _form, null);
+    _formModel = StandaloneDeliveryPointForm(widget.model, _form, null);
 
     _form.addAll(_formModel.formElements().controls);
 
@@ -1295,7 +1304,7 @@ class _DeliveryPointFormBuilderState extends State<DeliveryPointFormBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveDeliveryPointForm(
+    return ReactiveStandaloneDeliveryPointForm(
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveForm(
@@ -1305,5 +1314,161 @@ class _DeliveryPointFormBuilderState extends State<DeliveryPointFormBuilder> {
       ),
     );
   }
+}
+
+class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
+  StandaloneDeliveryPointForm(this.deliveryPoint, this.form, this.path) {
+    addressForm =
+        AddressForm(deliveryPoint?.address, form, pathBuilder('address'));
+  }
+
+  static String nameControlName = "name";
+
+  static String addressControlName = "address";
+
+  late AddressForm addressForm;
+
+  final DeliveryPoint? deliveryPoint;
+
+  final FormGroup form;
+
+  final String? path;
+
+  String nameControlPath() => pathBuilder(nameControlName);
+  String addressControlPath() => pathBuilder(addressControlName);
+  String get nameValue => nameControl.value as String;
+  Address? get addressValue => addressForm.model;
+  bool get containsName {
+    try {
+      form.control(nameControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsAddress {
+    try {
+      form.control(addressControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Object? get nameErrors => nameControl.errors;
+  Object? get addressErrors => addressControl?.errors;
+  void get nameFocus => form.focus(nameControlPath());
+  void get addressFocus => form.focus(addressControlPath());
+  void addressRemove({bool updateParent = true, bool emitEvent = true}) {
+    if (containsAddress) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          addressControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            addressControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void nameValueUpdate(String value,
+      {bool updateParent = true, bool emitEvent = true}) {
+    nameControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void addressValueUpdate(Address? value,
+      {bool updateParent = true, bool emitEvent = true}) {
+    addressControl?.updateValue(
+        AddressForm(value, FormGroup({}), null).formElements().rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
+  void nameValuePatch(String value,
+      {bool updateParent = true, bool emitEvent = true}) {
+    nameControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void addressValuePatch(Address? value,
+      {bool updateParent = true, bool emitEvent = true}) {
+    addressControl?.updateValue(
+        AddressForm(value, form, null).formElements().rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
+  void nameValueReset(String value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      nameControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void addressValueReset(Address? value,
+          {bool updateParent = true,
+          bool emitEvent = true,
+          bool removeFocus = false,
+          bool? disabled}) =>
+      addressControl?.reset(
+          value:
+              AddressForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  FormControl<String> get nameControl =>
+      form.control(nameControlPath()) as FormControl<String>;
+  FormGroup? get addressControl =>
+      containsAddress ? form.control(addressControlPath()) as FormGroup? : null;
+  DeliveryPoint get model =>
+      DeliveryPoint(name: nameValue, address: addressValue);
+  void updateValue(DeliveryPoint value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.updateValue(
+          StandaloneDeliveryPointForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void resetValue(DeliveryPoint value,
+          {bool updateParent = true, bool emitEvent = true}) =>
+      form.reset(
+          value: StandaloneDeliveryPointForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
+      value: formElements().rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
+  FormGroup formElements() => FormGroup({
+        nameControlName: FormControl<String>(
+            value: deliveryPoint?.name,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        addressControlName: addressForm.formElements()
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
 }
 ''';

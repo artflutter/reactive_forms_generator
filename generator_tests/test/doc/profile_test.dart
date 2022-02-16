@@ -4,21 +4,24 @@ import 'package:test/test.dart';
 
 import '../helpers.dart';
 
+const fileName = 'profile';
+
 void main() {
   group('doc', () {
     test(
       'Basic',
       () async {
         return testGenerator(
-          model: r'''
+          fileName: fileName,
+          model: '''
             import 'package:flutter/widgets.dart';
             import 'package:freezed_annotation/freezed_annotation.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
-            part 'gen.freezed.dart';
-            part 'gen.g.dart';
-            part 'gen.gform.dart';
+            part '$fileName.freezed.dart';
+            part '$fileName.g.dart';
+            part '$fileName.gform.dart';
             
             enum NumberingStandard { ada, fdi }
             
@@ -57,7 +60,7 @@ void main() {
             
             @freezed
             @ReactiveFormAnnotation()
-            class Profile with _$Profile {
+            class Profile with _\$Profile {
               const Profile._();
             
               factory Profile({
@@ -73,12 +76,12 @@ void main() {
               }) = _Profile;
             
               factory Profile.fromJson(Map<String, dynamic> json) =>
-                  _$ProfileFromJson(json);
+                  _\$ProfileFromJson(json);
             }
             
             @freezed
             @FormGroupAnnotation()
-            class ThresholdSetting with _$ThresholdSetting {
+            class ThresholdSetting with _\$ThresholdSetting {
               static const values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
             
               const factory ThresholdSetting({
@@ -87,12 +90,12 @@ void main() {
               }) = _ThresholdSetting;
             
               factory ThresholdSetting.fromJson(Map<String, dynamic> json) =>
-                  _$ThresholdSettingFromJson(json);
+                  _\$ThresholdSettingFromJson(json);
             }
             
             @freezed
             @FormGroupAnnotation()
-            class TimerSetting with _$TimerSetting {
+            class TimerSetting with _\$TimerSetting {
               static const values = [1, 2, 3, 4, 5, 6];
             
               const factory TimerSetting({
@@ -101,12 +104,12 @@ void main() {
               }) = _TimerSetting;
             
               factory TimerSetting.fromJson(Map<String, dynamic> json) =>
-                  _$TimerSettingFromJson(json);
+                  _\$TimerSettingFromJson(json);
             }
             
             @FormGroupAnnotation()
             @freezed
-            class IncidenceFilter with _$IncidenceFilter {
+            class IncidenceFilter with _\$IncidenceFilter {
               const factory IncidenceFilter({
                 @FormControlAnnotation() @Default(true) bool isMobilityEnabled,
                 @FormControlAnnotation() @Default(true) bool isFurcationEnabled,
@@ -117,7 +120,7 @@ void main() {
               }) = _IncidenceFilter;
             
               factory IncidenceFilter.fromJson(Map<String, dynamic> json) =>
-                  _$IncidenceFilterFromJson(json);
+                  _\$IncidenceFilterFromJson(json);
             }
             
             enum ChartingOrderType { arch, quadrant }
@@ -131,7 +134,7 @@ void main() {
             enum ToothSide { facial, lingual }
             
             @freezed
-            class ScanOrder with _$ScanOrder {
+            class ScanOrder with _\$ScanOrder {
               const factory ScanOrder.arch(
                 Jaw jaw, {
                 required Direction direction,
@@ -145,11 +148,11 @@ void main() {
               }) = QuadrantScanOrder;
             
               factory ScanOrder.fromJson(Map<String, dynamic> json) =>
-                  _$ScanOrderFromJson(json);
+                  _\$ScanOrderFromJson(json);
             }
             
             @freezed
-            class ChartingOrderValue with _$ChartingOrderValue {
+            class ChartingOrderValue with _\$ChartingOrderValue {
               const factory ChartingOrderValue({
                 @Default(ChartingOrderType.arch) ChartingOrderType chartingOrder,
                 @Default(0) int selectedOption,
@@ -168,7 +171,7 @@ void main() {
                   );
             
               factory ChartingOrderValue.fromJson(Map<String, dynamic> json) =>
-                  _$ChartingOrderValueFromJson(json);
+                  _\$ChartingOrderValueFromJson(json);
             }
             
             enum Jaw {
@@ -279,9 +282,12 @@ void main() {
   });
 }
 
-const generatedFile = r'''// GENERATED CODE - DO NOT MODIFY BY HAND
+const generatedFile = r'''// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file:
 
-part of 'gen.dart';
+part of 'profile.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
@@ -775,7 +781,7 @@ class ProfileForm implements FormModel<Profile> {
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: this.formElements().rawValue,
+      value: formElements().rawValue,
       updateParent: updateParent,
       emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
@@ -1084,49 +1090,49 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: this.formElements().rawValue,
+      value: formElements().rawValue,
       updateParent: updateParent,
       emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         isMobilityEnabledControlName: FormControl<bool>(
-            value: incidenceFilter.isMobilityEnabled,
+            value: incidenceFilter?.isMobilityEnabled,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         isFurcationEnabledControlName: FormControl<bool>(
-            value: incidenceFilter.isFurcationEnabled,
+            value: incidenceFilter?.isFurcationEnabled,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         isBleedingEnabledControlName: FormControl<bool>(
-            value: incidenceFilter.isBleedingEnabled,
+            value: incidenceFilter?.isBleedingEnabled,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         isSuppurationEnabledControlName: FormControl<bool>(
-            value: incidenceFilter.isSuppurationEnabled,
+            value: incidenceFilter?.isSuppurationEnabled,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         isCalculusEnabledControlName: FormControl<bool>(
-            value: incidenceFilter.isCalculusEnabled,
+            value: incidenceFilter?.isCalculusEnabled,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         isPlaqueEnabledControlName: FormControl<bool>(
-            value: incidenceFilter.isPlaqueEnabled,
+            value: incidenceFilter?.isPlaqueEnabled,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -1239,21 +1245,21 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: this.formElements().rawValue,
+      value: formElements().rawValue,
       updateParent: updateParent,
       emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         isEnabledControlName: FormControl<bool>(
-            value: thresholdSetting.isEnabled,
+            value: thresholdSetting?.isEnabled,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         valueControlName: FormControl<int>(
-            value: thresholdSetting.value,
+            value: thresholdSetting?.value,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -1364,21 +1370,21 @@ class TimerSettingForm implements FormModel<TimerSetting> {
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: this.formElements().rawValue,
+      value: formElements().rawValue,
       updateParent: updateParent,
       emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         isEnabledControlName: FormControl<bool>(
-            value: timerSetting.isEnabled,
+            value: timerSetting?.isEnabled,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         valueControlName: FormControl<int>(
-            value: timerSetting.value,
+            value: timerSetting?.value,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
