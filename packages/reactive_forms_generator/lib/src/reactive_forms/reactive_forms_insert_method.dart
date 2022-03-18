@@ -9,7 +9,7 @@ class ReactiveFormInsertMethod extends ReactiveFormGeneratorMethod {
   @override
   Method? formGroupArrayMethod() {
     return methodEntity.rebuild((b) => b..body = Code('''
-      if (deliveryListDeliveryPointForm.length < i) {
+      if (${field.name}${field.className}.length < i) {
         ${field.addListItemName}(value);
         return;
       }
