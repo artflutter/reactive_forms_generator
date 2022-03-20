@@ -445,7 +445,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
 
   void clientListInsert(int i, Client value,
       {bool updateParent = true, bool emitEvent = true}) {
-    if (deliveryListDeliveryPointForm.length < i) {
+    if (clientListClientForm.length < i) {
       addClientListItem(value);
       return;
     }

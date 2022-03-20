@@ -333,6 +333,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.11"
+  material_color_utilities:
+    dependency: transitive
+    description:
+      name: material_color_utilities
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.3"
   meta:
     dependency: "direct overridden"
     description:
@@ -416,7 +423,7 @@ packages:
       path: "../packages/reactive_forms_generator"
       relative: true
     source: path
-    version: "0.7.0-beta"
+    version: "0.9.7-beta"
   recase:
     dependency: "direct main"
     description:
