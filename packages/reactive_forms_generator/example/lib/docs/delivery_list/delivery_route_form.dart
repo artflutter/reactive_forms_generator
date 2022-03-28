@@ -1,20 +1,24 @@
 // ignore_for_file: avoid_print
 
 import 'package:example/docs/delivery_list/delivery_list.dart';
+import 'package:example/docs/delivery_list/labels.dart';
+import 'package:example/docs/delivery_list/mocks.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart' hide ReactiveTextField;
 import 'package:reactive_text_field/reactive_text_field.dart';
 
 class DeliveryListFormWidget extends StatelessWidget {
-  const DeliveryListFormWidget({Key? key}) : super(key: key);
+  final ValueChanged<DeliveryList>? onChange;
+
+  const DeliveryListFormWidget({Key? key, this.onChange}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
       title: const Text('Delivery list'),
       body: DeliveryListFormBuilder(
-        model: DeliveryList(),
+        model: const DeliveryList(),
         builder: (context, formModel, child) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,12 +33,12 @@ class DeliveryListFormWidget extends StatelessWidget {
                           children: formModel.deliveryListDeliveryPointForm
                               .asMap()
                               .map((i, deliveryPoint) {
-                                print(deliveryPoint.nameControlPath());
                                 return MapEntry(
                                     i,
                                     Column(
                                       children: [
                                         ReactiveTextField<String>(
+                                          key: name.itemIndexKey(i),
                                           formControl:
                                               deliveryPoint.nameControl,
                                           validationMessages: (_) => {
@@ -42,10 +46,11 @@ class DeliveryListFormWidget extends StatelessWidget {
                                                 'Must not be empty',
                                           },
                                           decoration: InputDecoration(
-                                            labelText: 'Name $i',
+                                            labelText: name.itemIndex(i),
                                           ),
                                         ),
                                         ReactiveTextField<String>(
+                                          key: street.itemIndexKey(i),
                                           formControl: deliveryPoint
                                               .addressForm.streetControl,
                                           validationMessages: (_) => {
@@ -53,10 +58,11 @@ class DeliveryListFormWidget extends StatelessWidget {
                                                 'Must not be empty',
                                           },
                                           decoration: InputDecoration(
-                                            labelText: 'Street $i',
+                                            labelText: street.itemIndex(i),
                                           ),
                                         ),
                                         ReactiveTextField<String>(
+                                          key: city.itemIndexKey(i),
                                           formControl: deliveryPoint
                                               .addressForm.cityControl,
                                           validationMessages: (_) => {
@@ -64,7 +70,7 @@ class DeliveryListFormWidget extends StatelessWidget {
                                                 'Must not be empty',
                                           },
                                           decoration: InputDecoration(
-                                            labelText: 'City $i',
+                                            labelText: city.itemIndex(i),
                                           ),
                                         ),
                                         ElevatedButton(
@@ -75,7 +81,7 @@ class DeliveryListFormWidget extends StatelessWidget {
                                                 MainAxisAlignment.spaceEvenly,
                                             children: [
                                               const Icon(Icons.arrow_upward),
-                                              Text('Remove $i'),
+                                              Text(remove.itemIndex(i)),
                                               const Icon(Icons.arrow_upward),
                                             ],
                                           ),
@@ -92,9 +98,9 @@ class DeliveryListFormWidget extends StatelessWidget {
                   const SizedBox(width: 16),
                   ElevatedButton(
                     onPressed: () {
-                      formModel.addDeliveryListItem(DeliveryPoint());
+                      formModel.addDeliveryListItem(emptyDeliveryPoint);
                     },
-                    child: const Text('add'),
+                    child: Text(add.name),
                   )
                 ],
               ),
@@ -111,23 +117,17 @@ class DeliveryListFormWidget extends StatelessWidget {
                             if (formModel.form.valid) {
                               print(formModel.deliveryListValue);
                               print(formModel.model);
+                              onChange?.call(formModel.model);
                             } else {
                               formModel.form.markAllAsTouched();
                             }
                           },
-                          child: const Text('Sign Up'),
+                          child: Text(submit.name),
                         ),
                       ),
                       const SizedBox(width: 8),
-                      Expanded(
-                        child: ReactiveDeliveryListFormConsumer(
-                          builder: (context, formModel, child) {
-                            return ElevatedButton(
-                              child: const Text('Submit'),
-                              onPressed: formModel.form.valid ? () {} : null,
-                            );
-                          },
-                        ),
+                      const Expanded(
+                        child: SizedBox.shrink(),
                       ),
                     ],
                   ),
@@ -137,17 +137,11 @@ class DeliveryListFormWidget extends StatelessWidget {
                         child: ReactiveDeliveryListFormConsumer(
                           builder: (context, formModel, child) {
                             return ElevatedButton(
-                              child: const Text('Patch'),
+                              child: Text(patch.name),
                               onPressed: () {
-                                formModel.deliveryListValuePatch([
-                                  DeliveryPoint(
-                                    name: 'patched',
-                                    address: Address(
-                                      city: 'patchedCity',
-                                      street: 'patchedStreet',
-                                    ),
-                                  ),
-                                ]);
+                                formModel.deliveryListValuePatch(
+                                  patchPointList,
+                                );
                               },
                             );
                           },
@@ -158,24 +152,11 @@ class DeliveryListFormWidget extends StatelessWidget {
                         child: ReactiveDeliveryListFormConsumer(
                           builder: (context, formModel, child) {
                             return ElevatedButton(
-                              child: const Text('Update'),
+                              child: Text(update.name),
                               onPressed: () {
-                                formModel.deliveryListValueUpdate([
-                                  DeliveryPoint(
-                                    name: 'updated1',
-                                    address: Address(
-                                      city: 'updatedCity1',
-                                      street: 'updatedStreet1',
-                                    ),
-                                  ),
-                                  DeliveryPoint(
-                                    name: 'updated2',
-                                    address: Address(
-                                      city: 'updatedCity2',
-                                      street: 'updatedStreet2',
-                                    ),
-                                  ),
-                                ]);
+                                formModel.deliveryListValueUpdate(
+                                  updatePointList,
+                                );
                               },
                             );
                           },
@@ -189,7 +170,7 @@ class DeliveryListFormWidget extends StatelessWidget {
                         child: ReactiveDeliveryListFormConsumer(
                           builder: (context, formModel, child) {
                             return ElevatedButton(
-                              child: const Text('Empty'),
+                              child: Text(empty.name),
                               onPressed: () {
                                 formModel.deliveryListValueUpdate([]);
                               },
@@ -202,7 +183,7 @@ class DeliveryListFormWidget extends StatelessWidget {
                         child: ReactiveDeliveryListFormConsumer(
                           builder: (context, formModel, child) {
                             return ElevatedButton(
-                              child: const Text('Clear'),
+                              child: Text(clear.name),
                               onPressed: () {
                                 formModel.deliveryListClear();
                               },
@@ -218,72 +199,19 @@ class DeliveryListFormWidget extends StatelessWidget {
                         child: ReactiveDeliveryListFormConsumer(
                           builder: (context, formModel, child) {
                             return ElevatedButton(
-                              child: const Text('Insert at 1'),
+                              child: Text(insertAt.itemIndex(1)),
                               onPressed: () {
                                 formModel.deliveryListInsert(
                                   1,
-                                  DeliveryPoint(
-                                    name: 'inserted',
-                                    address: Address(
-                                      city: 'insertedCity',
-                                      street: 'insertedStreet',
-                                    ),
-                                  ),
+                                  insertedDeliveryPoint,
                                 );
-                                // formModel.deliveryListValuePatch([
-                                //   DeliveryPoint(
-                                //     name: 'patched',
-                                //     address: Address(
-                                //       city: 'patchedCity',
-                                //       street: 'patchedStreet',
-                                //     ),
-                                //   ),
-                                // ]);
                               },
                             );
                           },
                         ),
                       ),
-                      // SizedBox(width: 8),
-                      // Expanded(
-                      //   child: ReactiveDeliveryListFormConsumer(
-                      //     builder: (context, formModel, child) {
-                      //       return ElevatedButton(
-                      //         child: Text('Update'),
-                      //         onPressed: () {
-                      //           formModel.deliveryListValueUpdate([
-                      //             DeliveryPoint(
-                      //               name: 'updated1',
-                      //               address: Address(
-                      //                 city: 'updatedCity1',
-                      //                 street: 'updatedStreet1',
-                      //               ),
-                      //             ),
-                      //             DeliveryPoint(
-                      //               name: 'updated2',
-                      //               address: Address(
-                      //                 city: 'updatedCity2',
-                      //                 street: 'updatedStreet2',
-                      //               ),
-                      //             ),
-                      //           ]);
-                      //         },
-                      //       );
-                      //     },
-                      //   ),
-                      // ),
                     ],
                   )
-                  // ReactiveDeliveryListFormConsumer(
-                  //   builder: (context, formModel, child) {
-                  //     return ElevatedButton(
-                  //       child: Text('Reset'),
-                  //       onPressed: () {
-                  //         formModel.deliveryListValueReset([]);
-                  //       },
-                  //     );
-                  //   },
-                  // ),
                 ],
               )
             ],

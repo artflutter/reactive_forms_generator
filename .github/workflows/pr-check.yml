@@ -26,6 +26,9 @@ jobs:
       - name: build_runner
         run: cd packages/reactive_forms_generator/example && flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
 
+      - name: example tests
+        run: cd packages/reactive_forms_generator/example && flutter test
+
       - name: analyze
         run: cd packages/reactive_forms_generator/example && flutter pub get && flutter analyze
 

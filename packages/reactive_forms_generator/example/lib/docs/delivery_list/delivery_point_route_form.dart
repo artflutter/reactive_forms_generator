@@ -13,7 +13,7 @@ class DeliveryPointWidget extends StatelessWidget {
     return SampleScreen(
       title: const Text('Delivery list'),
       body: StandaloneDeliveryPointFormBuilder(
-        model: DeliveryPoint(),
+        model: const DeliveryPoint(),
         builder: (context, formModel, child) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
