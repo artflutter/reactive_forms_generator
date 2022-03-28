@@ -1,3 +1,6 @@
+## [0.9.8-beta]
+* bugfix
+
 ## [0.9.7-beta]
 * ignore for file annotations
 

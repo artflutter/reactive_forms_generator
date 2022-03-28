@@ -36,6 +36,7 @@ dependencies:
   dartz: ^0.10.0
   json_annotation: ^4.4.0
   reactive_text_field: ^0.2.0
+  equatable: ^2.0.3
 
 dev_dependencies:
   reactive_forms_generator:
