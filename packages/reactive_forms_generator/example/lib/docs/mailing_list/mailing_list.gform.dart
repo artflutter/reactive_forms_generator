@@ -140,7 +140,7 @@ class MailingListForm implements FormModel<MailingList> {
 
   String emailListControlPath() => pathBuilder(emailListControlName);
   List<String?> get emailListValue =>
-      emailListControl.value?.whereType<String?>().toList() ?? [];
+      emailListControl.value?.whereType<String?>().toList() ?? [/*--*/];
   bool get containsEmailList {
     try {
       form.control(emailListControlPath());
@@ -253,4 +253,64 @@ class MailingListForm implements FormModel<MailingList> {
           asyncValidators: [],
           asyncValidatorsDebounceTime: 250,
           disabled: false);
+}
+
+class ReactiveMailingListFormArrayBuilder<T> extends StatelessWidget {
+  const ReactiveMailingListFormArrayBuilder(
+      {Key? key,
+      this.control,
+      this.formControl,
+      this.builder,
+      required this.itemBuilder})
+      : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<T>? formControl;
+
+  final FormArray<T>? Function(MailingListForm formModel)? control;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      MailingListForm formModel)? builder;
+
+  final Widget Function(
+          BuildContext context, int i, T? item, MailingListForm formModel)
+      itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveMailingListForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    return ReactiveFormArray<T>(
+      formArray: formControl ?? control?.call(formModel),
+      builder: (context, formArray, child) {
+        final itemList = (formArray.value ?? [])
+            .asMap()
+            .map((i, item) {
+              return MapEntry(
+                i,
+                itemBuilder(
+                  context,
+                  i,
+                  item,
+                  formModel,
+                ),
+              );
+            })
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
 }

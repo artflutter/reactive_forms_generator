@@ -30,7 +30,7 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: const Text('Group nullable'),
+              title: const Text('Group'),
               onTap: () => Navigator.of(context).pushReplacementNamed(
                 Routes.group,
               ),

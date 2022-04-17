@@ -252,3 +252,63 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
           asyncValidatorsDebounceTime: 250,
           disabled: false);
 }
+
+class ReactiveSomeWiredNameFormArrayBuilder<T> extends StatelessWidget {
+  const ReactiveSomeWiredNameFormArrayBuilder(
+      {Key? key,
+      this.control,
+      this.formControl,
+      this.builder,
+      required this.itemBuilder})
+      : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<T>? formControl;
+
+  final FormArray<T>? Function(SomeWiredNameForm formModel)? control;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      SomeWiredNameForm formModel)? builder;
+
+  final Widget Function(
+          BuildContext context, int i, T? item, SomeWiredNameForm formModel)
+      itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveSomeWiredNameForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    return ReactiveFormArray<T>(
+      formArray: formControl ?? control?.call(formModel),
+      builder: (context, formArray, child) {
+        final itemList = (formArray.value ?? [])
+            .asMap()
+            .map((i, item) {
+              return MapEntry(
+                i,
+                itemBuilder(
+                  context,
+                  i,
+                  item,
+                  formModel,
+                ),
+              );
+            })
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}

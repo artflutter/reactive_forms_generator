@@ -1,3 +1,6 @@
+## [0.10.0-beta]
+* widget for handling array of items see packages/reactive_forms_generator/example/lib/docs/mailing_list/mailing_list_form.dart for example of use
+
 ## [0.9.8-beta]
 * bugfix
 

@@ -11,7 +11,7 @@ class GroupFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
-      title: const Text('Login'),
+      title: const Text('Group'),
       body: GroupFormBuilder(
         model: Group(
           personal: Personal(name: 'vasilich'),

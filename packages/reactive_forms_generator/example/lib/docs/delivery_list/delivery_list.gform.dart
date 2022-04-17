@@ -352,7 +352,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
 
   void clientListInsert(int i, Client value,
       {bool updateParent = true, bool emitEvent = true}) {
-    if (deliveryListDeliveryPointForm.length < i) {
+    if (clientListClientForm.length < i) {
       addClientListItem(value);
       return;
     }
@@ -1101,6 +1101,66 @@ class ClientForm implements FormModel<Client> {
           disabled: false);
 }
 
+class ReactiveDeliveryListFormArrayBuilder<T> extends StatelessWidget {
+  const ReactiveDeliveryListFormArrayBuilder(
+      {Key? key,
+      this.control,
+      this.formControl,
+      this.builder,
+      required this.itemBuilder})
+      : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<T>? formControl;
+
+  final FormArray<T>? Function(DeliveryListForm formModel)? control;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      DeliveryListForm formModel)? builder;
+
+  final Widget Function(
+          BuildContext context, int i, T? item, DeliveryListForm formModel)
+      itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveDeliveryListForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    return ReactiveFormArray<T>(
+      formArray: formControl ?? control?.call(formModel),
+      builder: (context, formArray, child) {
+        final itemList = (formArray.value ?? [])
+            .asMap()
+            .map((i, item) {
+              return MapEntry(
+                i,
+                itemBuilder(
+                  context,
+                  i,
+                  item,
+                  formModel,
+                ),
+              );
+            })
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
 class ReactiveStandaloneDeliveryPointFormConsumer extends StatelessWidget {
   const ReactiveStandaloneDeliveryPointFormConsumer(
       {Key? key, required this.builder, this.child})
@@ -1377,4 +1437,64 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
           asyncValidators: [],
           asyncValidatorsDebounceTime: 250,
           disabled: false);
+}
+
+class ReactiveStandaloneDeliveryPointFormArrayBuilder<T>
+    extends StatelessWidget {
+  const ReactiveStandaloneDeliveryPointFormArrayBuilder(
+      {Key? key,
+      this.control,
+      this.formControl,
+      this.builder,
+      required this.itemBuilder})
+      : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<T>? formControl;
+
+  final FormArray<T>? Function(StandaloneDeliveryPointForm formModel)? control;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      StandaloneDeliveryPointForm formModel)? builder;
+
+  final Widget Function(BuildContext context, int i, T? item,
+      StandaloneDeliveryPointForm formModel) itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveStandaloneDeliveryPointForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    return ReactiveFormArray<T>(
+      formArray: formControl ?? control?.call(formModel),
+      builder: (context, formArray, child) {
+        final itemList = (formArray.value ?? [])
+            .asMap()
+            .map((i, item) {
+              return MapEntry(
+                i,
+                itemBuilder(
+                  context,
+                  i,
+                  item,
+                  formModel,
+                ),
+              );
+            })
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
 }

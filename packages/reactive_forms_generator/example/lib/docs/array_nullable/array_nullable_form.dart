@@ -34,21 +34,14 @@ class ArrayNullableFormWidget extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: ReactiveFormArray<String>(
-                      formArray: formModel.emailListControl,
-                      builder: (context, formArray, child) => Column(
-                        children: formModel.emailListValue
-                            .map(
-                              (email) => ReactiveTextField<String>(
-                                formControlName: formModel.emailListValue
-                                    .indexOf(email)
-                                    .toString(),
-                                decoration:
-                                    const InputDecoration(labelText: 'Email'),
-                              ),
-                            )
-                            .toList(),
-                      ),
+                    child: ReactiveArrayNullableFormArrayBuilder<String>(
+                      formControl: formModel.emailListControl,
+                      itemBuilder: (context, i, item, formModel) {
+                        return ReactiveTextField<String>(
+                          formControlName: i.toString(),
+                          decoration: const InputDecoration(labelText: 'Email'),
+                        );
+                      },
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -67,18 +60,14 @@ class ArrayNullableFormWidget extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: ReactiveFormArray<bool>(
-                      formArray: formModel.fruitListControl,
-                      builder: (context, formArray, child) => Column(
-                        children: fruits.map(
-                          (fruit) {
-                            return ReactiveCheckboxListTile(
-                              formControlName: fruits.indexOf(fruit).toString(),
-                              title: Text(fruit),
-                            );
-                          },
-                        ).toList(),
-                      ),
+                    child: ReactiveArrayNullableFormArrayBuilder<bool>(
+                      formControl: formModel.fruitListControl,
+                      itemBuilder: (_, i, __, ___) {
+                        return ReactiveCheckboxListTile(
+                          formControlName: i.toString(),
+                          title: Text(fruits[i]),
+                        );
+                      },
                     ),
                   ),
                   const SizedBox(width: 8),
