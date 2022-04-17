@@ -24,26 +24,17 @@ class MailingListFormWidget extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: ReactiveFormArray<String>(
-                      formArray: formModel.emailListControl,
-                      builder: (context, formArray, child) {
-                        return Column(
-                          children: formModel.emailListValue
-                              .asMap()
-                              .map((i, email) {
-                                return MapEntry(
-                                    i,
-                                    ReactiveTextField<String>(
-                                      formControlName: i.toString(),
-                                      validationMessages: (_) => {
-                                        'email': 'Invalid email',
-                                      },
-                                      decoration: InputDecoration(
-                                          labelText: 'Email $i'),
-                                    ));
-                              })
-                              .values
-                              .toList(),
+                    child: ReactiveMailingListFormArrayBuilder<String>(
+                      formControl: formModel.emailListControl,
+                      itemBuilder: (context, i, item, formModel) {
+                        return ReactiveTextField<String>(
+                          formControlName: i.toString(),
+                          validationMessages: (_) => {
+                            'email': 'Invalid email',
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'Email $i',
+                          ),
                         );
                       },
                     ),

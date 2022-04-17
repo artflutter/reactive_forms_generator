@@ -2,6 +2,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/form_generator.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form.dart';
+import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_array_builder.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_builder.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_consumer.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_inherited_streamer.dart';
@@ -15,6 +16,9 @@ List<Spec> generateLibrary(ClassElement element) {
   final reactiveForm = ReactiveForm(reactiveInheritedStreamer);
   final reactiveFormConsumer = ReactiveFormConsumer(reactiveForm);
   final reactiveFormBuilder = ReactiveFormBuilder(reactiveForm);
+  final reactiveFormArrayBuilder = ReactiveFormArrayBuilder(formGenerator);
+  // final reactiveFormFormArrayBuilder =
+  //     ReactiveFormGroupArrayBuilder(formGenerator);
 
   return [
     reactiveFormConsumer.generate,
@@ -22,32 +26,7 @@ List<Spec> generateLibrary(ClassElement element) {
     reactiveForm.generate,
     ...reactiveFormBuilder.generate,
     ...formGenerator.generate,
+    reactiveFormArrayBuilder.generate,
+    // reactiveFormFormArrayBuilder.generate,
   ];
-
-  // final library = Library(
-  //   (b) => b
-  //     ..body.addAll([
-  //       // Directive.import('package:flutter/foundation.dart'),
-  //       // Directive.import('package:flutter/material.dart'),
-  //       // Directive.import('package:reactive_forms/reactive_forms.dart'),
-  //       // Directive.import(
-  //       //   'package:reactive_forms/src/widgets/inherited_streamer.dart',
-  //       // ),
-  //       // ...element.enclosingElement.enclosingElement.imports
-  //       //     .map((e) => e.uri)
-  //       //     .whereType<String>()
-  //       //     .map((e) => Directive.import(e)),
-  //       // Directive.import(element.librarySource.shortName),
-  //       reactiveFormConsumer.generate,
-  //       reactiveInheritedStreamer.generate,
-  //       reactiveForm.generate,
-  //       ...reactiveFormBuilder.generate,
-  //       ...formGenerator.generate,
-  //     ].mergeDuplicatesBy(
-  //       (i) => i is Class ? i.name : i,
-  //       (a, b) => a,
-  //     )),
-  // );
-  //
-  // return DartFormatter().format(library.accept(emitter).toString());
 }

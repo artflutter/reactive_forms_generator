@@ -136,7 +136,7 @@ class FormGenerator {
           (b) {
             final name = formGroupGenerators[e.name]!.className;
             b
-              ..name = '${e.name}Form'
+              ..name = e.fieldControlForm
               ..late = true
               ..type = Reference(name);
           },

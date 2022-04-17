@@ -1,3 +1,6 @@
+## [0.4.0-beta]
+* reactive_forms bump
+
 ## [0.3.2-beta]
 * name parameter added
 

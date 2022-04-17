@@ -22,14 +22,15 @@ environment:
   sdk: ">=2.15.0 <3.0.0"
 
 dependencies:
-  build: ^2.0.3
-  source_gen: 1.2.1
+  build: ^2.3.0
+  source_gen: ^1.2.2
   path: ^1.8.1
-  build_runner: ^2.0.6
+  build_runner: ^2.1.10
   code_builder: ^4.1.0
-  dart_style: ^2.0.2
+  dart_style: ^2.2.3
   recase: ^4.0.0
-  reactive_forms_annotations: 1.0.0+1
+  reactive_forms_annotations:
+    path: ../packages/reactive_forms_annotations
   freezed_annotation: ^1.1.0
 
 dev_dependencies:
@@ -38,15 +39,12 @@ dev_dependencies:
   freezed: ^1.1.1
   flutter_test:
     sdk: flutter
-  logging: ^1.0.1
-  reactive_forms_generator: 1.0.0+1
+  logging: ^1.0.2
+  reactive_forms_generator:
+    path: ../packages/reactive_forms_generator
   flutter_lints: ^1.0.4
 
 dependency_overrides:
-  reactive_forms_annotations:
-    path: ../packages/reactive_forms_annotations
-  reactive_forms_generator:
-    path: ../packages/reactive_forms_generator
   meta: 1.7.0
   path: ^1.8.1
   test_api: 0.4.9
