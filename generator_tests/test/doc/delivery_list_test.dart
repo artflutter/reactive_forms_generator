@@ -561,6 +561,18 @@ class DeliveryListForm implements FormModel<DeliveryList> {
       ? form.control(clientListControlPath())
           as FormArray<Map<String, Object?>>?
       : null;
+  ExtendedControl<List<Map<String, Object?>?>, List<DeliveryPointForm>>
+      get deliveryListExtendedControl =>
+          ExtendedControl<List<Map<String, Object?>?>, List<DeliveryPointForm>>(
+              form.control(deliveryListControlPath())
+                  as FormArray<Map<String, Object?>>,
+              () => deliveryListDeliveryPointForm);
+  ExtendedControl<List<Map<String, Object?>?>, List<ClientForm>>
+      get clientListExtendedControl =>
+          ExtendedControl<List<Map<String, Object?>?>, List<ClientForm>>(
+              form.control(clientListControlPath())
+                  as FormArray<Map<String, Object?>>,
+              () => clientListClientForm);
   void addDeliveryListItem(DeliveryPoint value) {
     final formClass = DeliveryPointForm(value, form,
         pathBuilder('deliveryList.${deliveryListDeliveryPointForm.length}'));
@@ -1254,6 +1266,67 @@ class ReactiveDeliveryListFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
+class ReactiveDeliveryListFormFormGroupArrayBuilder<V> extends StatelessWidget {
+  const ReactiveDeliveryListFormFormGroupArrayBuilder(
+      {Key? key,
+      this.extended,
+      this.getExtended,
+      this.builder,
+      required this.itemBuilder})
+      : assert(extended != null || getExtended != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+      DeliveryListForm formModel)? getExtended;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      DeliveryListForm formModel)? builder;
+
+  final Widget Function(
+          BuildContext context, int i, V? item, DeliveryListForm formModel)
+      itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveDeliveryListForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    final value = (extended ?? getExtended?.call(formModel))!;
+
+    return StreamBuilder<List<Map<String, Object?>?>?>(
+      stream: value.control.valueChanges,
+      builder: (context, snapshot) {
+        final itemList = (value.value() ?? <V>[])
+            .asMap()
+            .map((i, item) => MapEntry(
+                  i,
+                  itemBuilder(
+                    context,
+                    i,
+                    item,
+                    formModel,
+                  ),
+                ))
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
 class ReactiveStandaloneDeliveryPointFormConsumer extends StatelessWidget {
   const ReactiveStandaloneDeliveryPointFormConsumer(
       {Key? key, required this.builder, this.child})
@@ -1578,6 +1651,67 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder<T>
                 ),
               );
             })
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilder<V>
+    extends StatelessWidget {
+  const ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilder(
+      {Key? key,
+      this.extended,
+      this.getExtended,
+      this.builder,
+      required this.itemBuilder})
+      : assert(extended != null || getExtended != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+      StandaloneDeliveryPointForm formModel)? getExtended;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      StandaloneDeliveryPointForm formModel)? builder;
+
+  final Widget Function(BuildContext context, int i, V? item,
+      StandaloneDeliveryPointForm formModel) itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveStandaloneDeliveryPointForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    final value = (extended ?? getExtended?.call(formModel))!;
+
+    return StreamBuilder<List<Map<String, Object?>?>?>(
+      stream: value.control.valueChanges,
+      builder: (context, snapshot) {
+        final itemList = (value.value() ?? <V>[])
+            .asMap()
+            .map((i, item) => MapEntry(
+                  i,
+                  itemBuilder(
+                    context,
+                    i,
+                    item,
+                    formModel,
+                  ),
+                ))
             .values
             .toList();
 

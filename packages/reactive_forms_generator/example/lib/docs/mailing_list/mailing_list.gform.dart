@@ -140,7 +140,7 @@ class MailingListForm implements FormModel<MailingList> {
 
   String emailListControlPath() => pathBuilder(emailListControlName);
   List<String?> get emailListValue =>
-      emailListControl.value?.whereType<String?>().toList() ?? [/*--*/];
+      emailListControl.value?.whereType<String?>().toList() ?? [];
   bool get containsEmailList {
     try {
       form.control(emailListControlPath());
@@ -301,6 +301,67 @@ class ReactiveMailingListFormArrayBuilder<T> extends StatelessWidget {
                 ),
               );
             })
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveMailingListFormFormGroupArrayBuilder<V> extends StatelessWidget {
+  const ReactiveMailingListFormFormGroupArrayBuilder(
+      {Key? key,
+      this.extended,
+      this.getExtended,
+      this.builder,
+      required this.itemBuilder})
+      : assert(extended != null || getExtended != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+      MailingListForm formModel)? getExtended;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      MailingListForm formModel)? builder;
+
+  final Widget Function(
+          BuildContext context, int i, V? item, MailingListForm formModel)
+      itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveMailingListForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    final value = (extended ?? getExtended?.call(formModel))!;
+
+    return StreamBuilder<List<Map<String, Object?>?>?>(
+      stream: value.control.valueChanges,
+      builder: (context, snapshot) {
+        final itemList = (value.value() ?? <V>[])
+            .asMap()
+            .map((i, item) => MapEntry(
+                  i,
+                  itemBuilder(
+                    context,
+                    i,
+                    item,
+                    formModel,
+                  ),
+                ))
             .values
             .toList();
 

@@ -1184,4 +1184,65 @@ class ReactiveGroupFormArrayBuilder<T> extends StatelessWidget {
     );
   }
 }
+
+class ReactiveGroupFormFormGroupArrayBuilder<V> extends StatelessWidget {
+  const ReactiveGroupFormFormGroupArrayBuilder(
+      {Key? key,
+      this.extended,
+      this.getExtended,
+      this.builder,
+      required this.itemBuilder})
+      : assert(extended != null || getExtended != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+      GroupForm formModel)? getExtended;
+
+  final Widget Function(
+          BuildContext context, List<Widget> itemList, GroupForm formModel)?
+      builder;
+
+  final Widget Function(
+      BuildContext context, int i, V? item, GroupForm formModel) itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveGroupForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    final value = (extended ?? getExtended?.call(formModel))!;
+
+    return StreamBuilder<List<Map<String, Object?>?>?>(
+      stream: value.control.valueChanges,
+      builder: (context, snapshot) {
+        final itemList = (value.value() ?? <V>[])
+            .asMap()
+            .map((i, item) => MapEntry(
+                  i,
+                  itemBuilder(
+                    context,
+                    i,
+                    item,
+                    formModel,
+                  ),
+                ))
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
 ''';

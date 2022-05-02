@@ -151,11 +151,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   String vegetablesListControlPath() => pathBuilder(vegetablesListControlName);
   List<String?>? get someListValue => someListControl?.value;
   List<String> get emailListValue =>
-      emailListControl.value?.whereType<String>().toList() ?? [/*--*/];
+      emailListControl.value?.whereType<String>().toList() ?? [];
   List<bool?> get fruitListValue =>
-      fruitListControl.value?.whereType<bool?>().toList() ?? [/*--*/];
+      fruitListControl.value?.whereType<bool?>().toList() ?? [];
   List<String?>? get vegetablesListValue =>
-      vegetablesListControl?.value?.whereType<String?>().toList() ?? [/*--*/];
+      vegetablesListControl?.value?.whereType<String?>().toList() ?? [];
   bool get containsSomeList {
     try {
       form.control(someListControlPath());
@@ -577,6 +577,68 @@ class ReactiveArrayNullableFormArrayBuilder<T> extends StatelessWidget {
                 ),
               );
             })
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveArrayNullableFormFormGroupArrayBuilder<V>
+    extends StatelessWidget {
+  const ReactiveArrayNullableFormFormGroupArrayBuilder(
+      {Key? key,
+      this.extended,
+      this.getExtended,
+      this.builder,
+      required this.itemBuilder})
+      : assert(extended != null || getExtended != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+      ArrayNullableForm formModel)? getExtended;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      ArrayNullableForm formModel)? builder;
+
+  final Widget Function(
+          BuildContext context, int i, V? item, ArrayNullableForm formModel)
+      itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveArrayNullableForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    final value = (extended ?? getExtended?.call(formModel))!;
+
+    return StreamBuilder<List<Map<String, Object?>?>?>(
+      stream: value.control.valueChanges,
+      builder: (context, snapshot) {
+        final itemList = (value.value() ?? <V>[])
+            .asMap()
+            .map((i, item) => MapEntry(
+                  i,
+                  itemBuilder(
+                    context,
+                    i,
+                    item,
+                    formModel,
+                  ),
+                ))
             .values
             .toList();
 

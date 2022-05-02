@@ -20,6 +20,7 @@ import 'package:reactive_forms_generator/src/reactive_forms_generator/contains_m
 import 'package:reactive_forms_generator/src/reactive_forms_generator/control_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/control_path_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/errors_method.dart';
+import 'package:reactive_forms_generator/src/reactive_forms_generator/extended_control_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/field_value_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/focus_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/remove_method.dart';
@@ -637,6 +638,7 @@ class FormGenerator {
                 ...fieldPatchMethodList,
                 ...fieldResetMethodList,
                 ...controlMethodList,
+                ...extendedControlMethodList,
                 ...addArrayControlMethodList,
                 ...addGroupControlMethodList,
                 ...removeGroupControlMethodList,
@@ -750,6 +752,9 @@ class FormGenerator {
 
   List<Method> get controlMethodList =>
       all.map((e) => ControlMethod(e).method()).whereType<Method>().toList();
+
+  List<Method> get extendedControlMethodList =>
+      all.map((e) => ExtendedControlMethod(e).method()).whereType<Method>().toList();
 
   List<Method> get addArrayControlMethodList =>
       formArrays.map(addArrayControl).toList();
