@@ -10,14 +10,6 @@ class ControlMethod extends ReactiveFormGeneratorMethod {
 
   @override
   Method? formGroupMethod() {
-    // String displayType = field.type.getDisplayString(withNullability: true);
-    //
-    // // we need to trim last NullabilitySuffix.question cause FormControl modifies
-    // // generic T => T?
-    // if (field.type.nullabilitySuffix == NullabilitySuffix.question) {
-    //   displayType = displayType.substring(0, displayType.length - 1);
-    // }
-
     final reference = 'FormGroup${field.nullabilitySuffix}';
 
     String body = 'form.control(${field.fieldControlPath}()) as $reference';

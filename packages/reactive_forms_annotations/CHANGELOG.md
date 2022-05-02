@@ -1,3 +1,6 @@
+## [0.5.0-beta]
+* ExtendedControl model
+
 ## [0.4.0-beta]
 * reactive_forms bump
 

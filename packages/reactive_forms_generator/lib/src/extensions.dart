@@ -75,6 +75,8 @@ extension ParameterElementExt on ParameterElement {
 
   String get fieldControlName => '${fieldName}Control';
 
+  String get fieldExtendedControlName => '${fieldName}ExtendedControl';
+
   String get fieldControlNameName => '${fieldName}ControlName';
 
   String get fieldControlPath => '${fieldName}ControlPath';

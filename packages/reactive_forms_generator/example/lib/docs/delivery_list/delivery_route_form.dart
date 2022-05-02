@@ -26,71 +26,56 @@ class DeliveryListFormWidget extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: ReactiveFormArray<Map<String, Object?>>(
-                      formArray: formModel.deliveryListControl,
-                      builder: (context, formArray, child) {
+                    child: ReactiveDeliveryListFormFormGroupArrayBuilder<
+                        DeliveryPointForm>(
+                      extended: formModel.deliveryListExtendedControl,
+                      itemBuilder: (context, i, formItem, _) {
                         return Column(
-                          children: formModel.deliveryListDeliveryPointForm
-                              .asMap()
-                              .map((i, deliveryPoint) {
-                                return MapEntry(
-                                    i,
-                                    Column(
-                                      children: [
-                                        ReactiveTextField<String>(
-                                          key: name.itemIndexKey(i),
-                                          formControl:
-                                              deliveryPoint.nameControl,
-                                          validationMessages: (_) => {
-                                            ValidationMessage.required:
-                                                'Must not be empty',
-                                          },
-                                          decoration: InputDecoration(
-                                            labelText: name.itemIndex(i),
-                                          ),
-                                        ),
-                                        ReactiveTextField<String>(
-                                          key: street.itemIndexKey(i),
-                                          formControl: deliveryPoint
-                                              .addressForm.streetControl,
-                                          validationMessages: (_) => {
-                                            ValidationMessage.required:
-                                                'Must not be empty',
-                                          },
-                                          decoration: InputDecoration(
-                                            labelText: street.itemIndex(i),
-                                          ),
-                                        ),
-                                        ReactiveTextField<String>(
-                                          key: city.itemIndexKey(i),
-                                          formControl: deliveryPoint
-                                              .addressForm.cityControl,
-                                          validationMessages: (_) => {
-                                            ValidationMessage.required:
-                                                'Must not be empty',
-                                          },
-                                          decoration: InputDecoration(
-                                            labelText: city.itemIndex(i),
-                                          ),
-                                        ),
-                                        ElevatedButton(
-                                          onPressed: () => formModel
-                                              .removeDeliveryListItemAtIndex(i),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              const Icon(Icons.arrow_upward),
-                                              Text(remove.itemIndex(i)),
-                                              const Icon(Icons.arrow_upward),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ));
-                              })
-                              .values
-                              .toList(),
+                          children: [
+                            ReactiveTextField<String>(
+                              key: name.itemIndexKey(i),
+                              formControl: formItem?.nameControl,
+                              validationMessages: (_) => {
+                                ValidationMessage.required: 'Must not be empty',
+                              },
+                              decoration: InputDecoration(
+                                labelText: name.itemIndex(i),
+                              ),
+                            ),
+                            ReactiveTextField<String>(
+                              key: street.itemIndexKey(i),
+                              formControl: formItem?.addressForm.streetControl,
+                              validationMessages: (_) => {
+                                ValidationMessage.required: 'Must not be empty',
+                              },
+                              decoration: InputDecoration(
+                                labelText: street.itemIndex(i),
+                              ),
+                            ),
+                            ReactiveTextField<String>(
+                              key: city.itemIndexKey(i),
+                              formControl: formItem?.addressForm.cityControl,
+                              validationMessages: (_) => {
+                                ValidationMessage.required: 'Must not be empty',
+                              },
+                              decoration: InputDecoration(
+                                labelText: city.itemIndex(i),
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () =>
+                                  formModel.removeDeliveryListItemAtIndex(i),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  const Icon(Icons.arrow_upward),
+                                  Text(remove.itemIndex(i)),
+                                  const Icon(Icons.arrow_upward),
+                                ],
+                              ),
+                            )
+                          ],
                         );
                       },
                     ),

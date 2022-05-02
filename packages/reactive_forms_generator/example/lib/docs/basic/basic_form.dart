@@ -29,6 +29,12 @@ class BasicFormWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8.0),
+              ReactiveValueListenableBuilder<double>(
+                formControlName: 'lightIntensity',
+                builder: (context, value, child) {
+                  return Container();
+                },
+              ),
               ReactiveTextField<String>(
                 formControl: formModel.passwordControl,
                 obscureText: true,
