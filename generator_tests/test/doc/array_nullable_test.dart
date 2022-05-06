@@ -1,5 +1,4 @@
 @Timeout(Duration(seconds: 145))
-
 import 'package:test/test.dart';
 
 import '../helpers.dart';
@@ -26,7 +25,6 @@ void main() {
 
             @ReactiveFormAnnotation()
             class ArrayNullable {
-              
               final List<String> emailList;
              
               final List<bool?> fruitList;
@@ -41,16 +39,13 @@ void main() {
                     requiredValidator,
                   ],
                 )
-                required this.emailList,
-                
+                    required this.emailList,
                 @FormArrayAnnotation()
-                this.fruitList = const [],
-                
+                    this.fruitList = const [],
                 @FormArrayAnnotation()
-                this.vegetablesList,
-                
-                @FormControlAnnotation()
-                this.someList,
+                    this.vegetablesList,
+                @FormControlAnnotation<List<String?>>()
+                    this.someList,
               });
             }
           ''',

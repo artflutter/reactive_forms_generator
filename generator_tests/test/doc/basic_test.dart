@@ -1,8 +1,9 @@
 @Timeout(Duration(seconds: 145))
-
 import 'package:test/test.dart';
 
 import '../helpers.dart';
+
+const fileName = 'basic';
 
 void main() {
   group('doc', () {
@@ -10,13 +11,14 @@ void main() {
       'Basic',
       () async {
         return testGenerator(
-          fileName: 'basic',
-          model: r'''
+          fileName: fileName,
+          model: '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
+            import 'package:example/helpers.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
-            part 'basic.gform.dart';
+            part '$fileName.gform.dart';
             
             Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
               return Validators.required(control);
@@ -30,11 +32,11 @@ void main() {
             
               Basic({
                 @FormControlAnnotation(
-                  validators: const [requiredValidator],
+                  validators: [requiredValidator],
                 )
                     this.email = '',
                 @FormControlAnnotation(
-                  validators: const [requiredValidator],
+                  validators: [requiredValidator],
                 )
                     this.password = '',
               });

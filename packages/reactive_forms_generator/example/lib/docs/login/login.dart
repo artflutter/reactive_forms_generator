@@ -24,43 +24,43 @@ class Login {
   final String? unAnnotated;
 
   Login({
-    @FormControlAnnotation(
+    @FormControlAnnotation<String>(
       validators: [
         requiredValidator,
       ],
     )
         this.email = 'default@e.mail',
-    @FormControlAnnotation(
+    @FormControlAnnotation<String>(
       validators: [
         requiredValidator,
       ],
     )
         required this.password,
-    @FormControlAnnotation(
+    @FormControlAnnotation<bool>(
       validators: [
         requiredValidator,
       ],
     )
         required this.rememberMe,
-    @FormControlAnnotation(
+    @FormControlAnnotation<String>(
       validators: [
         requiredValidator,
       ],
     )
         required this.theme,
-    @FormControlAnnotation(
+    @FormControlAnnotation<UserMode>(
       validators: [
         requiredValidator,
       ],
     )
         required this.mode,
-    @FormControlAnnotation(
+    @FormControlAnnotation<int>(
       validators: [
         requiredValidator,
       ],
     )
         required this.timeout,
-    @FormControlAnnotation(
+    @FormControlAnnotation<double>(
       validators: [
         requiredValidator,
       ],

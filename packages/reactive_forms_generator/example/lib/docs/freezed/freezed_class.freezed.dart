@@ -12,45 +12,21 @@ part of 'freezed_class.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 FreezedClass _$FreezedClassFromJson(Map<String, dynamic> json) {
   return _FreezedClass.fromJson(json);
 }
 
 /// @nodoc
-class _$FreezedClassTearOff {
-  const _$FreezedClassTearOff();
-
-  _FreezedClass call(@FormControlAnnotation() String? gender,
-      {@FormControlAnnotation() String? id,
-      @FormControlAnnotation() String? name,
-      @FormControlAnnotation() double? year}) {
-    return _FreezedClass(
-      gender,
-      id: id,
-      name: name,
-      year: year,
-    );
-  }
-
-  FreezedClass fromJson(Map<String, Object?> json) {
-    return FreezedClass.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $FreezedClass = _$FreezedClassTearOff();
-
-/// @nodoc
 mixin _$FreezedClass {
-  @FormControlAnnotation()
+  @FormControlAnnotation<String>()
   String? get gender => throw _privateConstructorUsedError;
-  @FormControlAnnotation()
+  @FormControlAnnotation<String>()
   String? get id => throw _privateConstructorUsedError;
-  @FormControlAnnotation()
+  @FormControlAnnotation<String>()
   String? get name => throw _privateConstructorUsedError;
-  @FormControlAnnotation()
+  @FormControlAnnotation<double>()
   double? get year => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -65,10 +41,10 @@ abstract class $FreezedClassCopyWith<$Res> {
           FreezedClass value, $Res Function(FreezedClass) then) =
       _$FreezedClassCopyWithImpl<$Res>;
   $Res call(
-      {@FormControlAnnotation() String? gender,
-      @FormControlAnnotation() String? id,
-      @FormControlAnnotation() String? name,
-      @FormControlAnnotation() double? year});
+      {@FormControlAnnotation<String>() String? gender,
+      @FormControlAnnotation<String>() String? id,
+      @FormControlAnnotation<String>() String? name,
+      @FormControlAnnotation<double>() double? year});
 }
 
 /// @nodoc
@@ -115,10 +91,10 @@ abstract class _$FreezedClassCopyWith<$Res>
       __$FreezedClassCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@FormControlAnnotation() String? gender,
-      @FormControlAnnotation() String? id,
-      @FormControlAnnotation() String? name,
-      @FormControlAnnotation() double? year});
+      {@FormControlAnnotation<String>() String? gender,
+      @FormControlAnnotation<String>() String? id,
+      @FormControlAnnotation<String>() String? name,
+      @FormControlAnnotation<double>() double? year});
 }
 
 /// @nodoc
@@ -162,26 +138,26 @@ class __$FreezedClassCopyWithImpl<$Res> extends _$FreezedClassCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_FreezedClass extends _FreezedClass {
-  _$_FreezedClass(@FormControlAnnotation() this.gender,
-      {@FormControlAnnotation() this.id,
-      @FormControlAnnotation() this.name,
-      @FormControlAnnotation() this.year})
+  _$_FreezedClass(@FormControlAnnotation<String>() this.gender,
+      {@FormControlAnnotation<String>() this.id,
+      @FormControlAnnotation<String>() this.name,
+      @FormControlAnnotation<double>() this.year})
       : super._();
 
   factory _$_FreezedClass.fromJson(Map<String, dynamic> json) =>
       _$$_FreezedClassFromJson(json);
 
   @override
-  @FormControlAnnotation()
+  @FormControlAnnotation<String>()
   final String? gender;
   @override
-  @FormControlAnnotation()
+  @FormControlAnnotation<String>()
   final String? id;
   @override
-  @FormControlAnnotation()
+  @FormControlAnnotation<String>()
   final String? name;
   @override
-  @FormControlAnnotation()
+  @FormControlAnnotation<double>()
   final double? year;
 
   @override
@@ -200,6 +176,7 @@ class _$_FreezedClass extends _FreezedClass {
             const DeepCollectionEquality().equals(other.year, year));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -220,27 +197,27 @@ class _$_FreezedClass extends _FreezedClass {
 }
 
 abstract class _FreezedClass extends FreezedClass {
-  factory _FreezedClass(@FormControlAnnotation() String? gender,
-      {@FormControlAnnotation() String? id,
-      @FormControlAnnotation() String? name,
-      @FormControlAnnotation() double? year}) = _$_FreezedClass;
+  factory _FreezedClass(@FormControlAnnotation<String>() final String? gender,
+      {@FormControlAnnotation<String>() final String? id,
+      @FormControlAnnotation<String>() final String? name,
+      @FormControlAnnotation<double>() final double? year}) = _$_FreezedClass;
   _FreezedClass._() : super._();
 
   factory _FreezedClass.fromJson(Map<String, dynamic> json) =
       _$_FreezedClass.fromJson;
 
   @override
-  @FormControlAnnotation()
-  String? get gender;
+  @FormControlAnnotation<String>()
+  String? get gender => throw _privateConstructorUsedError;
   @override
-  @FormControlAnnotation()
-  String? get id;
+  @FormControlAnnotation<String>()
+  String? get id => throw _privateConstructorUsedError;
   @override
-  @FormControlAnnotation()
-  String? get name;
+  @FormControlAnnotation<String>()
+  String? get name => throw _privateConstructorUsedError;
   @override
-  @FormControlAnnotation()
-  double? get year;
+  @FormControlAnnotation<double>()
+  double? get year => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$FreezedClassCopyWith<_FreezedClass> get copyWith =>

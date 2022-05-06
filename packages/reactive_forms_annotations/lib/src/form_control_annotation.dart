@@ -1,9 +1,15 @@
 import 'package:reactive_forms/reactive_forms.dart';
 
-class FormControlAnnotation {
-  final List<ValidatorFunction> validators;
+typedef FormControlValidatorFunctionTyped<T> = Map<String, dynamic>? Function(
+    FormControl<T> control);
 
-  final List<AsyncValidatorFunction> asyncValidators;
+typedef FormControlAsyncValidatorFunctionTyped<T> = Future<Map<String, dynamic>?> Function(
+    FormControl<T> control);
+
+class FormControlAnnotation<T> {
+  final List<FormControlValidatorFunctionTyped<T>> validators;
+
+  final List<FormControlAsyncValidatorFunctionTyped<T>> asyncValidators;
 
   final int asyncValidatorsDebounceTime;
 

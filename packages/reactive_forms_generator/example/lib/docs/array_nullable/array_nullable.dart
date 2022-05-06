@@ -26,7 +26,7 @@ class ArrayNullable {
         this.fruitList = const [],
     @FormArrayAnnotation()
         this.vegetablesList,
-    @FormControlAnnotation()
+    @FormControlAnnotation<List<String?>>()
         this.someList,
   });
 }

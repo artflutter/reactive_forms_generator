@@ -19,11 +19,11 @@ class UserProfile {
 
   UserProfile({
     required this.id,
-    @FormControlAnnotation(
+    @FormControlAnnotation<String>(
       validators: [requiredValidator],
     )
         this.firstName = '',
-    @FormControlAnnotation(
+    @FormControlAnnotation<String>(
       validators: [requiredValidator],
     )
         this.lastName = '',
@@ -41,13 +41,13 @@ class Address {
   final String? zip;
 
   Address({
-    @FormControlAnnotation()
+    @FormControlAnnotation<String>()
         this.street,
-    @FormControlAnnotation(
+    @FormControlAnnotation<String>(
       validators: [requiredValidator],
     )
         this.city,
-    @FormControlAnnotation()
+    @FormControlAnnotation<String>()
         this.zip,
   });
 }

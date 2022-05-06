@@ -10,7 +10,7 @@ class MailingList {
   final List<String?> emailList;
 
   MailingList({
-    @FormArrayAnnotation(
+    @FormArrayAnnotation<String>(
       validators: [
         mailingListValidator,
       ],

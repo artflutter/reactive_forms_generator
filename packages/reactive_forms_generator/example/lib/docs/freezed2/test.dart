@@ -12,8 +12,8 @@ part 'test.gform.dart';
 class Test with _$Test {
   const Test._();
   const factory Test({
-    @FormControlAnnotation() required String title,
-    @FormControlAnnotation() String? description,
+    @FormControlAnnotation<String>() required String title,
+    @FormControlAnnotation<String>() String? description,
   }) = _Test;
 
   factory Test.empty() => const Test(

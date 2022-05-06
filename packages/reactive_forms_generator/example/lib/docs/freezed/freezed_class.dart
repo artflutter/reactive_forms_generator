@@ -4,7 +4,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'freezed_class.g.dart';
+
 part 'freezed_class.freezed.dart';
+
 part 'freezed_class.gform.dart';
 
 @freezed
@@ -13,10 +15,10 @@ class FreezedClass with _$FreezedClass {
   FreezedClass._();
 
   factory FreezedClass(
-    @FormControlAnnotation() String? gender, {
-    @FormControlAnnotation() String? id,
-    @FormControlAnnotation() String? name,
-    @FormControlAnnotation() double? year,
+    @FormControlAnnotation<String>() String? gender, {
+    @FormControlAnnotation<String>() String? id,
+    @FormControlAnnotation<String>() String? name,
+    @FormControlAnnotation<double>() double? year,
   }) = _FreezedClass;
 
   factory FreezedClass.fromJson(Map<String, dynamic> json) =>

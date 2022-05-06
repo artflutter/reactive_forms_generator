@@ -22,12 +22,12 @@ class LoginNullable {
   final double? height;
 
   LoginNullable({
-    @FormControlAnnotation() this.email,
-    @FormControlAnnotation() this.password,
-    @FormControlAnnotation() this.rememberMe,
-    @FormControlAnnotation() this.theme,
-    @FormControlAnnotation() this.mode,
-    @FormControlAnnotation() this.timeout,
-    @FormControlAnnotation() this.height,
+    @FormControlAnnotation<String>() this.email,
+    @FormControlAnnotation<String>() this.password,
+    @FormControlAnnotation<bool>() this.rememberMe,
+    @FormControlAnnotation<String>() this.theme,
+    @FormControlAnnotation<UserMode>() this.mode,
+    @FormControlAnnotation<int>() this.timeout,
+    @FormControlAnnotation<double>() this.height,
   });
 }

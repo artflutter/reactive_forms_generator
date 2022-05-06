@@ -1,22 +1,29 @@
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 enum ValidatorsApplyMode {
   merge,
   override,
 }
 
-class FormArrayAnnotation {
-  final List<ValidatorFunction> validators;
+typedef FormArrayValidatorFunctionTyped<T> = Map<String, dynamic>? Function(
+    FormArray<T> control);
 
-  final List<AsyncValidatorFunction> asyncValidators;
+typedef FormArrayAsyncValidatorFunctionTyped<T> = Future<Map<String, dynamic>?>
+    Function(FormArray<T> control);
+
+class FormArrayAnnotation<T> {
+  final List<FormArrayValidatorFunctionTyped<T>> validators;
+
+  final List<FormArrayAsyncValidatorFunctionTyped<T>> asyncValidators;
 
   final int asyncValidatorsDebounceTime;
 
   final bool disabled;
 
-  final List<ValidatorFunction> itemValidators;
+  final List<FormControlValidatorFunctionTyped<T>> itemValidators;
 
-  final List<AsyncValidatorFunction> itemAsyncValidators;
+  final List<FormControlAsyncValidatorFunctionTyped<T>> itemAsyncValidators;
 
   final int itemAsyncValidatorsDebounceTime;
 

@@ -10,29 +10,108 @@ class FormArrayGenerator extends FormElementGenerator {
   FormArrayGenerator(ClassElement root, ParameterElement field, DartType? type)
       : super(root, field, type);
 
-  @override
-  String element() {
-    final partialProps = [
-      'validators: [${syncValidatorList(formArrayChecker).join(',')}]',
-      'asyncValidators: [${asyncValidatorList(formArrayChecker).join(',')}]',
-      'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formArrayChecker)}',
-      'disabled: ${disabled(formArrayChecker)}',
-    ];
+  DartType get typeParameter =>
+      (field.type as ParameterizedType).typeArguments.first;
 
-    final typeParameter = (field.type as ParameterizedType).typeArguments.first;
-    String displayType = typeParameter.getDisplayString(withNullability: true);
+  String get displayType {
+    String _displayType = typeParameter.getDisplayString(withNullability: true);
 
     // we need to trim last NullabilitySuffix.question cause FormControl modifies
     // generic T => T?
     if (typeParameter.nullabilitySuffix == NullabilitySuffix.question) {
-      displayType = displayType.substring(0, displayType.length - 1);
+      _displayType = _displayType.substring(0, _displayType.length - 1);
     }
 
+    return _displayType;
+  }
+
+  List<String> get validators {
+    List<String> _validators = syncValidatorList(formArrayChecker);
+
+    if (annotationType != 'dynamic') {
+      _validators = _validators
+          .map(
+            (e) => '(control) => $e(control as FormArray<$displayType>)',
+          )
+          .toList();
+    }
+
+    return _validators;
+  }
+
+  List<String> get asyncValidators {
+    List<String> _asyncValidators = asyncValidatorList(formArrayChecker);
+
+    if (annotationType != 'dynamic') {
+      _asyncValidators = _asyncValidators
+          .map(
+            (e) => '(control) => $e(control as FormArray<$displayType>)',
+          )
+          .toList();
+    }
+
+    return _asyncValidators;
+  }
+
+  List<String> get itemValidators {
+    List<String> _itemValidators = itemSyncValidatorList(formArrayChecker);
+
+    if (annotationType != 'dynamic') {
+      _itemValidators = _itemValidators
+          .map(
+            (e) => '(control) => $e(control as FormControl<$displayType>)',
+          )
+          .toList();
+    }
+
+    return _itemValidators;
+  }
+
+  List<String> get itemAsyncValidators {
+    List<String> _itemAsyncValidators =
+        itemAsyncValidatorList(formArrayChecker);
+
+    if (annotationType != 'dynamic') {
+      _itemAsyncValidators = _itemAsyncValidators
+          .map(
+            (e) => '(control) => $e(control as FormControl<$displayType>)',
+          )
+          .toList();
+    }
+
+    return _itemAsyncValidators;
+  }
+
+  String get annotationType =>
+      (annotation(formArrayChecker)?.type as ParameterizedType)
+          .typeArguments
+          .first
+          .toString();
+
+  @override
+  String element() {
     final optionalChaining =
         field.type.nullabilitySuffix == NullabilitySuffix.question ? '?' : '';
 
     final defaultValue =
         type?.nullabilitySuffix == NullabilitySuffix.question ? '?? []' : '';
+
+    final typeParameterType = typeParameter.getDisplayString(
+      withNullability: false,
+    );
+
+    if (annotationType != 'dynamic' && annotationType != typeParameterType) {
+      throw Exception(
+        'Annotation and field type mismatch. Annotation is typed as `$annotationType` and field(`${field.name}`) as `$typeParameterType`.',
+      );
+    }
+
+    final partialProps = [
+      'validators: [${validators.join(',')}]',
+      'asyncValidators: [${asyncValidators.join(',')}]',
+      'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formArrayChecker)}',
+      'disabled: ${disabled(formArrayChecker)}',
+    ];
 
     if (field.isFormGroupArray) {
       final formGenerator = FormGenerator(
@@ -51,8 +130,8 @@ class FormArrayGenerator extends FormElementGenerator {
       final props = [
         '''$value$optionalChaining.map((e) => FormControl<$displayType>(
               value: e,
-              validators: ${itemSyncValidatorList(formArrayChecker)},
-              asyncValidators: ${itemAsyncValidatorList(formArrayChecker)},
+              validators: $itemValidators,
+              asyncValidators: $itemAsyncValidators,
               asyncValidatorsDebounceTime: ${itemAsyncValidatorsDebounceTime(formArrayChecker)},
               disabled: ${itemDisabled(formArrayChecker)},
             )).toList() $defaultValue''',
