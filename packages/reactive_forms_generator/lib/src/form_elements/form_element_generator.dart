@@ -1,3 +1,4 @@
+import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
@@ -78,6 +79,15 @@ abstract class FormElementGenerator {
           [];
     }
     return [];
+  }
+
+  DartObject? annotation(TypeChecker typeChecker) {
+    if (typeChecker.hasAnnotationOfExact(field)) {
+      final annotation = typeChecker.firstAnnotationOfExact(field);
+
+      return annotation;
+    }
+    return null;
   }
 
   List<String> syncValidatorList(TypeChecker typeChecker) {

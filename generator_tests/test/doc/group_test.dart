@@ -1,5 +1,4 @@
 @Timeout(Duration(seconds: 145))
-
 import 'package:test/test.dart';
 
 import '../helpers.dart';
@@ -45,11 +44,8 @@ void main() {
               final String? email;
             
               Personal({
-                @FormControlAnnotation()
-                this.name,
-                
-                @FormControlAnnotation()
-                this.email,
+                @FormControlAnnotation<String>() this.name,
+                @FormControlAnnotation<String>() this.email,
               });
             }
             
@@ -60,11 +56,8 @@ void main() {
               final String? countryIso;
             
               Phone({
-                @FormControlAnnotation()
-                this.phoneNumber,
-                
-                @FormControlAnnotation()
-                this.countryIso,
+                @FormControlAnnotation<String>() this.phoneNumber,
+                @FormControlAnnotation<String>() this.countryIso,
               });
             }
             
@@ -77,14 +70,9 @@ void main() {
               final String? zip;
             
               Address({
-                @FormControlAnnotation()
-                this.street,
-                
-                @FormControlAnnotation()
-                this.city,
-                
-                @FormControlAnnotation()
-                this.zip,
+                @FormControlAnnotation<String>() this.street,
+                @FormControlAnnotation<String>() this.city,
+                @FormControlAnnotation<String>() this.zip,
               });
             }
           ''',

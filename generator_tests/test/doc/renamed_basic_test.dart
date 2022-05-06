@@ -1,5 +1,4 @@
 @Timeout(Duration(seconds: 145))
-
 import 'package:test/test.dart';
 
 import '../helpers.dart';
@@ -32,12 +31,12 @@ void main() {
               final String password;
             
               RenamedBasic({
-                @FormControlAnnotation(
-                  validators: const [requiredValidator],
+                @FormControlAnnotation<String>(
+                  validators: [requiredValidator],
                 )
                     this.email = '',
-                @FormControlAnnotation(
-                  validators: const [requiredValidator],
+                @FormControlAnnotation<String>(
+                  validators: [requiredValidator],
                 )
                     this.password = '',
               });
@@ -286,14 +285,18 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
   FormGroup formElements() => FormGroup({
         emailControlName: FormControl<String>(
             value: renamedBasic?.email,
-            validators: [requiredValidator],
+            validators: [
+              (control) => requiredValidator(control as FormControl<String>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
             value: renamedBasic?.password,
-            validators: [requiredValidator],
+            validators: [
+              (control) => requiredValidator(control as FormControl<String>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

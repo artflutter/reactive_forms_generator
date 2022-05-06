@@ -234,14 +234,18 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
   FormGroup formElements() => FormGroup({
         emailControlName: FormControl<String>(
             value: renamedBasic?.email,
-            validators: [requiredValidator],
+            validators: [
+              (control) => requiredValidator(control as FormControl<String>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
             value: renamedBasic?.password,
-            validators: [requiredValidator],
+            validators: [
+              (control) => requiredValidator(control as FormControl<String>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

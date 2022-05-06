@@ -29,8 +29,8 @@ class Personal {
   final String? email;
 
   Personal({
-    @FormControlAnnotation() this.name,
-    @FormControlAnnotation() this.email,
+    @FormControlAnnotation<String>() this.name,
+    @FormControlAnnotation<String>() this.email,
   });
 }
 
@@ -41,8 +41,8 @@ class Phone {
   final String? countryIso;
 
   Phone({
-    @FormControlAnnotation() this.phoneNumber,
-    @FormControlAnnotation() this.countryIso,
+    @FormControlAnnotation<String>() this.phoneNumber,
+    @FormControlAnnotation<String>() this.countryIso,
   });
 }
 
@@ -55,8 +55,8 @@ class Address {
   final String? zip;
 
   Address({
-    @FormControlAnnotation() this.street,
-    @FormControlAnnotation() this.city,
-    @FormControlAnnotation() this.zip,
+    @FormControlAnnotation<String>() this.street,
+    @FormControlAnnotation<String>() this.city,
+    @FormControlAnnotation<String>() this.zip,
   });
 }

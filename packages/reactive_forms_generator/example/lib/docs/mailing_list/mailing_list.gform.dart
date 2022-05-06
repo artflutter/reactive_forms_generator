@@ -179,7 +179,9 @@ class MailingListForm implements FormModel<MailingList> {
       int? asyncValidatorsDebounceTime,
       bool? disabled,
       ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge}) {
-    List<ValidatorFunction> resultingValidators = [emailValidator];
+    List<ValidatorFunction> resultingValidators = [
+      (control) => emailValidator(control as FormControl<String>)
+    ];
     List<AsyncValidatorFunction> resultingAsyncValidators = [];
 
     switch (validatorsApplyMode) {
@@ -237,14 +239,19 @@ class MailingListForm implements FormModel<MailingList> {
             mailingList?.emailList
                     .map((e) => FormControl<String>(
                           value: e,
-                          validators: [emailValidator],
+                          validators: [
+                            (control) =>
+                                emailValidator(control as FormControl<String>)
+                          ],
                           asyncValidators: [],
                           asyncValidatorsDebounceTime: 250,
                           disabled: false,
                         ))
                     .toList() ??
                 [],
-            validators: [mailingListValidator],
+            validators: [
+              (control) => mailingListValidator(control as FormArray<String>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false)

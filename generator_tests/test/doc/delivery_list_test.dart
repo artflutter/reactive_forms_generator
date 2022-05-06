@@ -1,5 +1,4 @@
 @Timeout(Duration(seconds: 145))
-
 import 'package:test/test.dart';
 
 import '../helpers.dart';
@@ -42,9 +41,9 @@ void main() {
             
               final Address? address;
             
-              DeliveryPoint({
-                @FormControlAnnotation(
-                  validators: const [requiredValidator],
+              const DeliveryPoint({
+                @FormControlAnnotation<String>(
+                  validators: [requiredValidator],
                 )
                     this.name = '',
                 this.address,
@@ -61,10 +60,10 @@ void main() {
             
               final String? notes;
             
-              Client({
-                @FormControlAnnotation() required this.clientType,
-                @FormControlAnnotation() this.name,
-                @FormControlAnnotation() this.notes,
+              const Client({
+                @FormControlAnnotation<ClientType>() required this.clientType,
+                @FormControlAnnotation<String>() this.name,
+                @FormControlAnnotation<String>() this.notes,
               });
             }
             
@@ -74,12 +73,12 @@ void main() {
             
               final String? city;
             
-              Address({
-                @FormControlAnnotation(
-                  validators: const [requiredValidator],
+              const Address({
+                @FormControlAnnotation<String>(
+                  validators: [requiredValidator],
                 )
                     this.street,
-                @FormControlAnnotation()
+                @FormControlAnnotation<String>()
                     this.city,
               });
             }
@@ -808,7 +807,9 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
   FormGroup formElements() => FormGroup({
         nameControlName: FormControl<String>(
             value: deliveryPoint?.name,
-            validators: [requiredValidator],
+            validators: [
+              (control) => requiredValidator(control as FormControl<String>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -973,7 +974,9 @@ class AddressForm implements FormModel<Address> {
   FormGroup formElements() => FormGroup({
         streetControlName: FormControl<String>(
             value: address?.street,
-            validators: [requiredValidator],
+            validators: [
+              (control) => requiredValidator(control as FormControl<String>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -1592,7 +1595,9 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
   FormGroup formElements() => FormGroup({
         nameControlName: FormControl<String>(
             value: deliveryPoint?.name,
-            validators: [requiredValidator],
+            validators: [
+              (control) => requiredValidator(control as FormControl<String>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

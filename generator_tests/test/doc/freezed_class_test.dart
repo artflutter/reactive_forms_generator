@@ -1,5 +1,4 @@
 @Timeout(Duration(seconds: 145))
-
 import 'package:test/test.dart';
 
 import '../helpers.dart';
@@ -30,10 +29,10 @@ void main() {
               FreezedClass._();
             
               factory FreezedClass(
-                @FormControlAnnotation() String? gender, {
-                @FormControlAnnotation() String? id,
-                @FormControlAnnotation() String? name,
-                @FormControlAnnotation() double? year,
+                @FormControlAnnotation<String>() String? gender, {
+                @FormControlAnnotation<String>() String? id,
+                @FormControlAnnotation<String>() String? name,
+                @FormControlAnnotation<double>() double? year,
               }) = _FreezedClass;
             
               factory FreezedClass.fromJson(Map<String, dynamic> json) =>

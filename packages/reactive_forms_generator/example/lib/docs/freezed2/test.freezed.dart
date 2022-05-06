@@ -12,30 +12,13 @@ part of 'test.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$TestTearOff {
-  const _$TestTearOff();
-
-  _Test call(
-      {@FormControlAnnotation() required String title,
-      @FormControlAnnotation() String? description}) {
-    return _Test(
-      title: title,
-      description: description,
-    );
-  }
-}
-
-/// @nodoc
-const $Test = _$TestTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$Test {
-  @FormControlAnnotation()
+  @FormControlAnnotation<String>()
   String get title => throw _privateConstructorUsedError;
-  @FormControlAnnotation()
+  @FormControlAnnotation<String>()
   String? get description => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -47,8 +30,8 @@ abstract class $TestCopyWith<$Res> {
   factory $TestCopyWith(Test value, $Res Function(Test) then) =
       _$TestCopyWithImpl<$Res>;
   $Res call(
-      {@FormControlAnnotation() String title,
-      @FormControlAnnotation() String? description});
+      {@FormControlAnnotation<String>() String title,
+      @FormControlAnnotation<String>() String? description});
 }
 
 /// @nodoc
@@ -83,8 +66,8 @@ abstract class _$TestCopyWith<$Res> implements $TestCopyWith<$Res> {
       __$TestCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@FormControlAnnotation() String title,
-      @FormControlAnnotation() String? description});
+      {@FormControlAnnotation<String>() String title,
+      @FormControlAnnotation<String>() String? description});
 }
 
 /// @nodoc
@@ -118,15 +101,15 @@ class __$TestCopyWithImpl<$Res> extends _$TestCopyWithImpl<$Res>
 
 class _$_Test extends _Test {
   const _$_Test(
-      {@FormControlAnnotation() required this.title,
-      @FormControlAnnotation() this.description})
+      {@FormControlAnnotation<String>() required this.title,
+      @FormControlAnnotation<String>() this.description})
       : super._();
 
   @override
-  @FormControlAnnotation()
+  @FormControlAnnotation<String>()
   final String title;
   @override
-  @FormControlAnnotation()
+  @FormControlAnnotation<String>()
   final String? description;
 
   @override
@@ -158,16 +141,16 @@ class _$_Test extends _Test {
 
 abstract class _Test extends Test {
   const factory _Test(
-      {@FormControlAnnotation() required String title,
-      @FormControlAnnotation() String? description}) = _$_Test;
+      {@FormControlAnnotation<String>() required final String title,
+      @FormControlAnnotation<String>() final String? description}) = _$_Test;
   const _Test._() : super._();
 
   @override
-  @FormControlAnnotation()
-  String get title;
+  @FormControlAnnotation<String>()
+  String get title => throw _privateConstructorUsedError;
   @override
-  @FormControlAnnotation()
-  String? get description;
+  @FormControlAnnotation<String>()
+  String? get description => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TestCopyWith<_Test> get copyWith => throw _privateConstructorUsedError;

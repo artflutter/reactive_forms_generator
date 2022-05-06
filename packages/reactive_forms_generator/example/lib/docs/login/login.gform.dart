@@ -416,49 +416,63 @@ class LoginForm implements FormModel<Login> {
   FormGroup formElements() => FormGroup({
         emailControlName: FormControl<String>(
             value: login?.email,
-            validators: [requiredValidator],
+            validators: [
+              (control) => requiredValidator(control as FormControl<String>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
             value: login?.password,
-            validators: [requiredValidator],
+            validators: [
+              (control) => requiredValidator(control as FormControl<String>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         rememberMeControlName: FormControl<bool>(
             value: login?.rememberMe,
-            validators: [requiredValidator],
+            validators: [
+              (control) => requiredValidator(control as FormControl<bool>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         themeControlName: FormControl<String>(
             value: login?.theme,
-            validators: [requiredValidator],
+            validators: [
+              (control) => requiredValidator(control as FormControl<String>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         modeControlName: FormControl<UserMode>(
             value: login?.mode,
-            validators: [requiredValidator],
+            validators: [
+              (control) => requiredValidator(control as FormControl<UserMode>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         timeoutControlName: FormControl<int>(
             value: login?.timeout,
-            validators: [requiredValidator],
+            validators: [
+              (control) => requiredValidator(control as FormControl<int>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         heightControlName: FormControl<double>(
             value: login?.height,
-            validators: [requiredValidator],
+            validators: [
+              (control) => requiredValidator(control as FormControl<double>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

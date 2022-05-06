@@ -6,7 +6,9 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'profile.freezed.dart';
+
 part 'profile.g.dart';
+
 part 'profile.gform.dart';
 
 enum NumberingStandard { ada, fdi }
@@ -51,14 +53,17 @@ class Profile with _$Profile {
 
   factory Profile({
     required String id,
-    @FormControlAnnotation() required String name,
-    @FormControlAnnotation() required ChartingOrderValue chartingOrder,
-    @FormControlAnnotation() required NumberingStandard numberingStandard,
+    @FormControlAnnotation<String>() required String name,
+    @FormControlAnnotation<ChartingOrderValue>()
+        required ChartingOrderValue chartingOrder,
+    @FormControlAnnotation<NumberingStandard>()
+        required NumberingStandard numberingStandard,
     required IncidenceFilter incidenceFilter,
-    @FormControlAnnotation() required MeasurementType measurementType,
+    @FormControlAnnotation<MeasurementType>()
+        required MeasurementType measurementType,
     required ThresholdSetting threshold,
     required TimerSetting timer,
-    @FormControlAnnotation() required bool audioGuidance,
+    @FormControlAnnotation<bool>() required bool audioGuidance,
   }) = _Profile;
 
   factory Profile.fromJson(Map<String, dynamic> json) =>
@@ -71,8 +76,8 @@ class ThresholdSetting with _$ThresholdSetting {
   static const values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const factory ThresholdSetting({
-    @FormControlAnnotation() @Default(true) bool isEnabled,
-    @FormControlAnnotation() @Default(2) int value,
+    @FormControlAnnotation<bool>() @Default(true) bool isEnabled,
+    @FormControlAnnotation<int>() @Default(2) int value,
   }) = _ThresholdSetting;
 
   factory ThresholdSetting.fromJson(Map<String, dynamic> json) =>
@@ -85,8 +90,8 @@ class TimerSetting with _$TimerSetting {
   static const values = [1, 2, 3, 4, 5, 6];
 
   const factory TimerSetting({
-    @FormControlAnnotation() @Default(false) bool isEnabled,
-    @FormControlAnnotation() @Default(5) int value,
+    @FormControlAnnotation<bool>() @Default(false) bool isEnabled,
+    @FormControlAnnotation<int>() @Default(5) int value,
   }) = _TimerSetting;
 
   factory TimerSetting.fromJson(Map<String, dynamic> json) =>
@@ -97,12 +102,12 @@ class TimerSetting with _$TimerSetting {
 @freezed
 class IncidenceFilter with _$IncidenceFilter {
   const factory IncidenceFilter({
-    @FormControlAnnotation() @Default(true) bool isMobilityEnabled,
-    @FormControlAnnotation() @Default(true) bool isFurcationEnabled,
-    @FormControlAnnotation() @Default(true) bool isBleedingEnabled,
-    @FormControlAnnotation() @Default(true) bool isSuppurationEnabled,
-    @FormControlAnnotation() @Default(true) bool isCalculusEnabled,
-    @FormControlAnnotation() @Default(true) bool isPlaqueEnabled,
+    @FormControlAnnotation<bool>() @Default(true) bool isMobilityEnabled,
+    @FormControlAnnotation<bool>() @Default(true) bool isFurcationEnabled,
+    @FormControlAnnotation<bool>() @Default(true) bool isBleedingEnabled,
+    @FormControlAnnotation<bool>() @Default(true) bool isSuppurationEnabled,
+    @FormControlAnnotation<bool>() @Default(true) bool isCalculusEnabled,
+    @FormControlAnnotation<bool>() @Default(true) bool isPlaqueEnabled,
   }) = _IncidenceFilter;
 
   factory IncidenceFilter.fromJson(Map<String, dynamic> json) =>

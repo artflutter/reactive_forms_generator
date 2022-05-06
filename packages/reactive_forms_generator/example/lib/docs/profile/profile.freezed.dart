@@ -12,62 +12,27 @@ part of 'profile.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Profile _$ProfileFromJson(Map<String, dynamic> json) {
   return _Profile.fromJson(json);
 }
 
 /// @nodoc
-class _$ProfileTearOff {
-  const _$ProfileTearOff();
-
-  _Profile call(
-      {required String id,
-      @FormControlAnnotation() required String name,
-      @FormControlAnnotation() required ChartingOrderValue chartingOrder,
-      @FormControlAnnotation() required NumberingStandard numberingStandard,
-      required IncidenceFilter incidenceFilter,
-      @FormControlAnnotation() required MeasurementType measurementType,
-      required ThresholdSetting threshold,
-      required TimerSetting timer,
-      @FormControlAnnotation() required bool audioGuidance}) {
-    return _Profile(
-      id: id,
-      name: name,
-      chartingOrder: chartingOrder,
-      numberingStandard: numberingStandard,
-      incidenceFilter: incidenceFilter,
-      measurementType: measurementType,
-      threshold: threshold,
-      timer: timer,
-      audioGuidance: audioGuidance,
-    );
-  }
-
-  Profile fromJson(Map<String, Object?> json) {
-    return Profile.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Profile = _$ProfileTearOff();
-
-/// @nodoc
 mixin _$Profile {
   String get id => throw _privateConstructorUsedError;
-  @FormControlAnnotation()
+  @FormControlAnnotation<String>()
   String get name => throw _privateConstructorUsedError;
-  @FormControlAnnotation()
+  @FormControlAnnotation<ChartingOrderValue>()
   ChartingOrderValue get chartingOrder => throw _privateConstructorUsedError;
-  @FormControlAnnotation()
+  @FormControlAnnotation<NumberingStandard>()
   NumberingStandard get numberingStandard => throw _privateConstructorUsedError;
   IncidenceFilter get incidenceFilter => throw _privateConstructorUsedError;
-  @FormControlAnnotation()
+  @FormControlAnnotation<MeasurementType>()
   MeasurementType get measurementType => throw _privateConstructorUsedError;
   ThresholdSetting get threshold => throw _privateConstructorUsedError;
   TimerSetting get timer => throw _privateConstructorUsedError;
-  @FormControlAnnotation()
+  @FormControlAnnotation<bool>()
   bool get audioGuidance => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -81,14 +46,19 @@ abstract class $ProfileCopyWith<$Res> {
       _$ProfileCopyWithImpl<$Res>;
   $Res call(
       {String id,
-      @FormControlAnnotation() String name,
-      @FormControlAnnotation() ChartingOrderValue chartingOrder,
-      @FormControlAnnotation() NumberingStandard numberingStandard,
+      @FormControlAnnotation<String>()
+          String name,
+      @FormControlAnnotation<ChartingOrderValue>()
+          ChartingOrderValue chartingOrder,
+      @FormControlAnnotation<NumberingStandard>()
+          NumberingStandard numberingStandard,
       IncidenceFilter incidenceFilter,
-      @FormControlAnnotation() MeasurementType measurementType,
+      @FormControlAnnotation<MeasurementType>()
+          MeasurementType measurementType,
       ThresholdSetting threshold,
       TimerSetting timer,
-      @FormControlAnnotation() bool audioGuidance});
+      @FormControlAnnotation<bool>()
+          bool audioGuidance});
 
   $ChartingOrderValueCopyWith<$Res> get chartingOrder;
   $IncidenceFilterCopyWith<$Res> get incidenceFilter;
@@ -192,14 +162,19 @@ abstract class _$ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
   @override
   $Res call(
       {String id,
-      @FormControlAnnotation() String name,
-      @FormControlAnnotation() ChartingOrderValue chartingOrder,
-      @FormControlAnnotation() NumberingStandard numberingStandard,
+      @FormControlAnnotation<String>()
+          String name,
+      @FormControlAnnotation<ChartingOrderValue>()
+          ChartingOrderValue chartingOrder,
+      @FormControlAnnotation<NumberingStandard>()
+          NumberingStandard numberingStandard,
       IncidenceFilter incidenceFilter,
-      @FormControlAnnotation() MeasurementType measurementType,
+      @FormControlAnnotation<MeasurementType>()
+          MeasurementType measurementType,
       ThresholdSetting threshold,
       TimerSetting timer,
-      @FormControlAnnotation() bool audioGuidance});
+      @FormControlAnnotation<bool>()
+          bool audioGuidance});
 
   @override
   $ChartingOrderValueCopyWith<$Res> get chartingOrder;
@@ -278,14 +253,19 @@ class __$ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
 class _$_Profile extends _Profile {
   _$_Profile(
       {required this.id,
-      @FormControlAnnotation() required this.name,
-      @FormControlAnnotation() required this.chartingOrder,
-      @FormControlAnnotation() required this.numberingStandard,
+      @FormControlAnnotation<String>()
+          required this.name,
+      @FormControlAnnotation<ChartingOrderValue>()
+          required this.chartingOrder,
+      @FormControlAnnotation<NumberingStandard>()
+          required this.numberingStandard,
       required this.incidenceFilter,
-      @FormControlAnnotation() required this.measurementType,
+      @FormControlAnnotation<MeasurementType>()
+          required this.measurementType,
       required this.threshold,
       required this.timer,
-      @FormControlAnnotation() required this.audioGuidance})
+      @FormControlAnnotation<bool>()
+          required this.audioGuidance})
       : super._();
 
   factory _$_Profile.fromJson(Map<String, dynamic> json) =>
@@ -294,25 +274,25 @@ class _$_Profile extends _Profile {
   @override
   final String id;
   @override
-  @FormControlAnnotation()
+  @FormControlAnnotation<String>()
   final String name;
   @override
-  @FormControlAnnotation()
+  @FormControlAnnotation<ChartingOrderValue>()
   final ChartingOrderValue chartingOrder;
   @override
-  @FormControlAnnotation()
+  @FormControlAnnotation<NumberingStandard>()
   final NumberingStandard numberingStandard;
   @override
   final IncidenceFilter incidenceFilter;
   @override
-  @FormControlAnnotation()
+  @FormControlAnnotation<MeasurementType>()
   final MeasurementType measurementType;
   @override
   final ThresholdSetting threshold;
   @override
   final TimerSetting timer;
   @override
-  @FormControlAnnotation()
+  @FormControlAnnotation<bool>()
   final bool audioGuidance;
 
   @override
@@ -341,6 +321,7 @@ class _$_Profile extends _Profile {
                 .equals(other.audioGuidance, audioGuidance));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -367,42 +348,47 @@ class _$_Profile extends _Profile {
 
 abstract class _Profile extends Profile {
   factory _Profile(
-      {required String id,
-      @FormControlAnnotation() required String name,
-      @FormControlAnnotation() required ChartingOrderValue chartingOrder,
-      @FormControlAnnotation() required NumberingStandard numberingStandard,
-      required IncidenceFilter incidenceFilter,
-      @FormControlAnnotation() required MeasurementType measurementType,
-      required ThresholdSetting threshold,
-      required TimerSetting timer,
-      @FormControlAnnotation() required bool audioGuidance}) = _$_Profile;
+      {required final String id,
+      @FormControlAnnotation<String>()
+          required final String name,
+      @FormControlAnnotation<ChartingOrderValue>()
+          required final ChartingOrderValue chartingOrder,
+      @FormControlAnnotation<NumberingStandard>()
+          required final NumberingStandard numberingStandard,
+      required final IncidenceFilter incidenceFilter,
+      @FormControlAnnotation<MeasurementType>()
+          required final MeasurementType measurementType,
+      required final ThresholdSetting threshold,
+      required final TimerSetting timer,
+      @FormControlAnnotation<bool>()
+          required final bool audioGuidance}) = _$_Profile;
   _Profile._() : super._();
 
   factory _Profile.fromJson(Map<String, dynamic> json) = _$_Profile.fromJson;
 
   @override
-  String get id;
+  String get id => throw _privateConstructorUsedError;
   @override
-  @FormControlAnnotation()
-  String get name;
+  @FormControlAnnotation<String>()
+  String get name => throw _privateConstructorUsedError;
   @override
-  @FormControlAnnotation()
-  ChartingOrderValue get chartingOrder;
+  @FormControlAnnotation<ChartingOrderValue>()
+  ChartingOrderValue get chartingOrder => throw _privateConstructorUsedError;
   @override
-  @FormControlAnnotation()
-  NumberingStandard get numberingStandard;
+  @FormControlAnnotation<NumberingStandard>()
+  NumberingStandard get numberingStandard => throw _privateConstructorUsedError;
   @override
-  IncidenceFilter get incidenceFilter;
+  IncidenceFilter get incidenceFilter => throw _privateConstructorUsedError;
   @override
-  @FormControlAnnotation()
-  MeasurementType get measurementType;
+  @FormControlAnnotation<MeasurementType>()
+  MeasurementType get measurementType => throw _privateConstructorUsedError;
   @override
-  ThresholdSetting get threshold;
+  ThresholdSetting get threshold => throw _privateConstructorUsedError;
   @override
-  TimerSetting get timer;
+  TimerSetting get timer => throw _privateConstructorUsedError;
   @override
-  @FormControlAnnotation()
-  bool get audioGuidance;
+  @FormControlAnnotation<bool>()
+  bool get audioGuidance => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ProfileCopyWith<_Profile> get copyWith =>
@@ -414,31 +400,10 @@ ThresholdSetting _$ThresholdSettingFromJson(Map<String, dynamic> json) {
 }
 
 /// @nodoc
-class _$ThresholdSettingTearOff {
-  const _$ThresholdSettingTearOff();
-
-  _ThresholdSetting call(
-      {@FormControlAnnotation() bool isEnabled = true,
-      @FormControlAnnotation() int value = 2}) {
-    return _ThresholdSetting(
-      isEnabled: isEnabled,
-      value: value,
-    );
-  }
-
-  ThresholdSetting fromJson(Map<String, Object?> json) {
-    return ThresholdSetting.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $ThresholdSetting = _$ThresholdSettingTearOff();
-
-/// @nodoc
 mixin _$ThresholdSetting {
-  @FormControlAnnotation()
+  @FormControlAnnotation<bool>()
   bool get isEnabled => throw _privateConstructorUsedError;
-  @FormControlAnnotation()
+  @FormControlAnnotation<int>()
   int get value => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -453,8 +418,8 @@ abstract class $ThresholdSettingCopyWith<$Res> {
           ThresholdSetting value, $Res Function(ThresholdSetting) then) =
       _$ThresholdSettingCopyWithImpl<$Res>;
   $Res call(
-      {@FormControlAnnotation() bool isEnabled,
-      @FormControlAnnotation() int value});
+      {@FormControlAnnotation<bool>() bool isEnabled,
+      @FormControlAnnotation<int>() int value});
 }
 
 /// @nodoc
@@ -492,8 +457,8 @@ abstract class _$ThresholdSettingCopyWith<$Res>
       __$ThresholdSettingCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@FormControlAnnotation() bool isEnabled,
-      @FormControlAnnotation() int value});
+      {@FormControlAnnotation<bool>() bool isEnabled,
+      @FormControlAnnotation<int>() int value});
 }
 
 /// @nodoc
@@ -529,19 +494,19 @@ class __$ThresholdSettingCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ThresholdSetting implements _ThresholdSetting {
   const _$_ThresholdSetting(
-      {@FormControlAnnotation() this.isEnabled = true,
-      @FormControlAnnotation() this.value = 2});
+      {@FormControlAnnotation<bool>() this.isEnabled = true,
+      @FormControlAnnotation<int>() this.value = 2});
 
   factory _$_ThresholdSetting.fromJson(Map<String, dynamic> json) =>
       _$$_ThresholdSettingFromJson(json);
 
-  @JsonKey()
   @override
-  @FormControlAnnotation()
+  @JsonKey()
+  @FormControlAnnotation<bool>()
   final bool isEnabled;
-  @JsonKey()
   @override
-  @FormControlAnnotation()
+  @JsonKey()
+  @FormControlAnnotation<int>()
   final int value;
 
   @override
@@ -558,6 +523,7 @@ class _$_ThresholdSetting implements _ThresholdSetting {
             const DeepCollectionEquality().equals(other.value, value));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -577,18 +543,18 @@ class _$_ThresholdSetting implements _ThresholdSetting {
 
 abstract class _ThresholdSetting implements ThresholdSetting {
   const factory _ThresholdSetting(
-      {@FormControlAnnotation() bool isEnabled,
-      @FormControlAnnotation() int value}) = _$_ThresholdSetting;
+      {@FormControlAnnotation<bool>() final bool isEnabled,
+      @FormControlAnnotation<int>() final int value}) = _$_ThresholdSetting;
 
   factory _ThresholdSetting.fromJson(Map<String, dynamic> json) =
       _$_ThresholdSetting.fromJson;
 
   @override
-  @FormControlAnnotation()
-  bool get isEnabled;
+  @FormControlAnnotation<bool>()
+  bool get isEnabled => throw _privateConstructorUsedError;
   @override
-  @FormControlAnnotation()
-  int get value;
+  @FormControlAnnotation<int>()
+  int get value => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ThresholdSettingCopyWith<_ThresholdSetting> get copyWith =>
@@ -600,31 +566,10 @@ TimerSetting _$TimerSettingFromJson(Map<String, dynamic> json) {
 }
 
 /// @nodoc
-class _$TimerSettingTearOff {
-  const _$TimerSettingTearOff();
-
-  _TimerSetting call(
-      {@FormControlAnnotation() bool isEnabled = false,
-      @FormControlAnnotation() int value = 5}) {
-    return _TimerSetting(
-      isEnabled: isEnabled,
-      value: value,
-    );
-  }
-
-  TimerSetting fromJson(Map<String, Object?> json) {
-    return TimerSetting.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $TimerSetting = _$TimerSettingTearOff();
-
-/// @nodoc
 mixin _$TimerSetting {
-  @FormControlAnnotation()
+  @FormControlAnnotation<bool>()
   bool get isEnabled => throw _privateConstructorUsedError;
-  @FormControlAnnotation()
+  @FormControlAnnotation<int>()
   int get value => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -639,8 +584,8 @@ abstract class $TimerSettingCopyWith<$Res> {
           TimerSetting value, $Res Function(TimerSetting) then) =
       _$TimerSettingCopyWithImpl<$Res>;
   $Res call(
-      {@FormControlAnnotation() bool isEnabled,
-      @FormControlAnnotation() int value});
+      {@FormControlAnnotation<bool>() bool isEnabled,
+      @FormControlAnnotation<int>() int value});
 }
 
 /// @nodoc
@@ -677,8 +622,8 @@ abstract class _$TimerSettingCopyWith<$Res>
       __$TimerSettingCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@FormControlAnnotation() bool isEnabled,
-      @FormControlAnnotation() int value});
+      {@FormControlAnnotation<bool>() bool isEnabled,
+      @FormControlAnnotation<int>() int value});
 }
 
 /// @nodoc
@@ -713,19 +658,19 @@ class __$TimerSettingCopyWithImpl<$Res> extends _$TimerSettingCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TimerSetting implements _TimerSetting {
   const _$_TimerSetting(
-      {@FormControlAnnotation() this.isEnabled = false,
-      @FormControlAnnotation() this.value = 5});
+      {@FormControlAnnotation<bool>() this.isEnabled = false,
+      @FormControlAnnotation<int>() this.value = 5});
 
   factory _$_TimerSetting.fromJson(Map<String, dynamic> json) =>
       _$$_TimerSettingFromJson(json);
 
-  @JsonKey()
   @override
-  @FormControlAnnotation()
+  @JsonKey()
+  @FormControlAnnotation<bool>()
   final bool isEnabled;
-  @JsonKey()
   @override
-  @FormControlAnnotation()
+  @JsonKey()
+  @FormControlAnnotation<int>()
   final int value;
 
   @override
@@ -742,6 +687,7 @@ class _$_TimerSetting implements _TimerSetting {
             const DeepCollectionEquality().equals(other.value, value));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -761,18 +707,18 @@ class _$_TimerSetting implements _TimerSetting {
 
 abstract class _TimerSetting implements TimerSetting {
   const factory _TimerSetting(
-      {@FormControlAnnotation() bool isEnabled,
-      @FormControlAnnotation() int value}) = _$_TimerSetting;
+      {@FormControlAnnotation<bool>() final bool isEnabled,
+      @FormControlAnnotation<int>() final int value}) = _$_TimerSetting;
 
   factory _TimerSetting.fromJson(Map<String, dynamic> json) =
       _$_TimerSetting.fromJson;
 
   @override
-  @FormControlAnnotation()
-  bool get isEnabled;
+  @FormControlAnnotation<bool>()
+  bool get isEnabled => throw _privateConstructorUsedError;
   @override
-  @FormControlAnnotation()
-  int get value;
+  @FormControlAnnotation<int>()
+  int get value => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TimerSettingCopyWith<_TimerSetting> get copyWith =>
@@ -784,47 +730,18 @@ IncidenceFilter _$IncidenceFilterFromJson(Map<String, dynamic> json) {
 }
 
 /// @nodoc
-class _$IncidenceFilterTearOff {
-  const _$IncidenceFilterTearOff();
-
-  _IncidenceFilter call(
-      {@FormControlAnnotation() bool isMobilityEnabled = true,
-      @FormControlAnnotation() bool isFurcationEnabled = true,
-      @FormControlAnnotation() bool isBleedingEnabled = true,
-      @FormControlAnnotation() bool isSuppurationEnabled = true,
-      @FormControlAnnotation() bool isCalculusEnabled = true,
-      @FormControlAnnotation() bool isPlaqueEnabled = true}) {
-    return _IncidenceFilter(
-      isMobilityEnabled: isMobilityEnabled,
-      isFurcationEnabled: isFurcationEnabled,
-      isBleedingEnabled: isBleedingEnabled,
-      isSuppurationEnabled: isSuppurationEnabled,
-      isCalculusEnabled: isCalculusEnabled,
-      isPlaqueEnabled: isPlaqueEnabled,
-    );
-  }
-
-  IncidenceFilter fromJson(Map<String, Object?> json) {
-    return IncidenceFilter.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $IncidenceFilter = _$IncidenceFilterTearOff();
-
-/// @nodoc
 mixin _$IncidenceFilter {
-  @FormControlAnnotation()
+  @FormControlAnnotation<bool>()
   bool get isMobilityEnabled => throw _privateConstructorUsedError;
-  @FormControlAnnotation()
+  @FormControlAnnotation<bool>()
   bool get isFurcationEnabled => throw _privateConstructorUsedError;
-  @FormControlAnnotation()
+  @FormControlAnnotation<bool>()
   bool get isBleedingEnabled => throw _privateConstructorUsedError;
-  @FormControlAnnotation()
+  @FormControlAnnotation<bool>()
   bool get isSuppurationEnabled => throw _privateConstructorUsedError;
-  @FormControlAnnotation()
+  @FormControlAnnotation<bool>()
   bool get isCalculusEnabled => throw _privateConstructorUsedError;
-  @FormControlAnnotation()
+  @FormControlAnnotation<bool>()
   bool get isPlaqueEnabled => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -839,12 +756,12 @@ abstract class $IncidenceFilterCopyWith<$Res> {
           IncidenceFilter value, $Res Function(IncidenceFilter) then) =
       _$IncidenceFilterCopyWithImpl<$Res>;
   $Res call(
-      {@FormControlAnnotation() bool isMobilityEnabled,
-      @FormControlAnnotation() bool isFurcationEnabled,
-      @FormControlAnnotation() bool isBleedingEnabled,
-      @FormControlAnnotation() bool isSuppurationEnabled,
-      @FormControlAnnotation() bool isCalculusEnabled,
-      @FormControlAnnotation() bool isPlaqueEnabled});
+      {@FormControlAnnotation<bool>() bool isMobilityEnabled,
+      @FormControlAnnotation<bool>() bool isFurcationEnabled,
+      @FormControlAnnotation<bool>() bool isBleedingEnabled,
+      @FormControlAnnotation<bool>() bool isSuppurationEnabled,
+      @FormControlAnnotation<bool>() bool isCalculusEnabled,
+      @FormControlAnnotation<bool>() bool isPlaqueEnabled});
 }
 
 /// @nodoc
@@ -902,12 +819,12 @@ abstract class _$IncidenceFilterCopyWith<$Res>
       __$IncidenceFilterCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@FormControlAnnotation() bool isMobilityEnabled,
-      @FormControlAnnotation() bool isFurcationEnabled,
-      @FormControlAnnotation() bool isBleedingEnabled,
-      @FormControlAnnotation() bool isSuppurationEnabled,
-      @FormControlAnnotation() bool isCalculusEnabled,
-      @FormControlAnnotation() bool isPlaqueEnabled});
+      {@FormControlAnnotation<bool>() bool isMobilityEnabled,
+      @FormControlAnnotation<bool>() bool isFurcationEnabled,
+      @FormControlAnnotation<bool>() bool isBleedingEnabled,
+      @FormControlAnnotation<bool>() bool isSuppurationEnabled,
+      @FormControlAnnotation<bool>() bool isCalculusEnabled,
+      @FormControlAnnotation<bool>() bool isPlaqueEnabled});
 }
 
 /// @nodoc
@@ -963,39 +880,39 @@ class __$IncidenceFilterCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_IncidenceFilter implements _IncidenceFilter {
   const _$_IncidenceFilter(
-      {@FormControlAnnotation() this.isMobilityEnabled = true,
-      @FormControlAnnotation() this.isFurcationEnabled = true,
-      @FormControlAnnotation() this.isBleedingEnabled = true,
-      @FormControlAnnotation() this.isSuppurationEnabled = true,
-      @FormControlAnnotation() this.isCalculusEnabled = true,
-      @FormControlAnnotation() this.isPlaqueEnabled = true});
+      {@FormControlAnnotation<bool>() this.isMobilityEnabled = true,
+      @FormControlAnnotation<bool>() this.isFurcationEnabled = true,
+      @FormControlAnnotation<bool>() this.isBleedingEnabled = true,
+      @FormControlAnnotation<bool>() this.isSuppurationEnabled = true,
+      @FormControlAnnotation<bool>() this.isCalculusEnabled = true,
+      @FormControlAnnotation<bool>() this.isPlaqueEnabled = true});
 
   factory _$_IncidenceFilter.fromJson(Map<String, dynamic> json) =>
       _$$_IncidenceFilterFromJson(json);
 
-  @JsonKey()
   @override
-  @FormControlAnnotation()
+  @JsonKey()
+  @FormControlAnnotation<bool>()
   final bool isMobilityEnabled;
-  @JsonKey()
   @override
-  @FormControlAnnotation()
+  @JsonKey()
+  @FormControlAnnotation<bool>()
   final bool isFurcationEnabled;
-  @JsonKey()
   @override
-  @FormControlAnnotation()
+  @JsonKey()
+  @FormControlAnnotation<bool>()
   final bool isBleedingEnabled;
-  @JsonKey()
   @override
-  @FormControlAnnotation()
+  @JsonKey()
+  @FormControlAnnotation<bool>()
   final bool isSuppurationEnabled;
-  @JsonKey()
   @override
-  @FormControlAnnotation()
+  @JsonKey()
+  @FormControlAnnotation<bool>()
   final bool isCalculusEnabled;
-  @JsonKey()
   @override
-  @FormControlAnnotation()
+  @JsonKey()
+  @FormControlAnnotation<bool>()
   final bool isPlaqueEnabled;
 
   @override
@@ -1022,6 +939,7 @@ class _$_IncidenceFilter implements _IncidenceFilter {
                 .equals(other.isPlaqueEnabled, isPlaqueEnabled));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1045,34 +963,35 @@ class _$_IncidenceFilter implements _IncidenceFilter {
 
 abstract class _IncidenceFilter implements IncidenceFilter {
   const factory _IncidenceFilter(
-      {@FormControlAnnotation() bool isMobilityEnabled,
-      @FormControlAnnotation() bool isFurcationEnabled,
-      @FormControlAnnotation() bool isBleedingEnabled,
-      @FormControlAnnotation() bool isSuppurationEnabled,
-      @FormControlAnnotation() bool isCalculusEnabled,
-      @FormControlAnnotation() bool isPlaqueEnabled}) = _$_IncidenceFilter;
+          {@FormControlAnnotation<bool>() final bool isMobilityEnabled,
+          @FormControlAnnotation<bool>() final bool isFurcationEnabled,
+          @FormControlAnnotation<bool>() final bool isBleedingEnabled,
+          @FormControlAnnotation<bool>() final bool isSuppurationEnabled,
+          @FormControlAnnotation<bool>() final bool isCalculusEnabled,
+          @FormControlAnnotation<bool>() final bool isPlaqueEnabled}) =
+      _$_IncidenceFilter;
 
   factory _IncidenceFilter.fromJson(Map<String, dynamic> json) =
       _$_IncidenceFilter.fromJson;
 
   @override
-  @FormControlAnnotation()
-  bool get isMobilityEnabled;
+  @FormControlAnnotation<bool>()
+  bool get isMobilityEnabled => throw _privateConstructorUsedError;
   @override
-  @FormControlAnnotation()
-  bool get isFurcationEnabled;
+  @FormControlAnnotation<bool>()
+  bool get isFurcationEnabled => throw _privateConstructorUsedError;
   @override
-  @FormControlAnnotation()
-  bool get isBleedingEnabled;
+  @FormControlAnnotation<bool>()
+  bool get isBleedingEnabled => throw _privateConstructorUsedError;
   @override
-  @FormControlAnnotation()
-  bool get isSuppurationEnabled;
+  @FormControlAnnotation<bool>()
+  bool get isSuppurationEnabled => throw _privateConstructorUsedError;
   @override
-  @FormControlAnnotation()
-  bool get isCalculusEnabled;
+  @FormControlAnnotation<bool>()
+  bool get isCalculusEnabled => throw _privateConstructorUsedError;
   @override
-  @FormControlAnnotation()
-  bool get isPlaqueEnabled;
+  @FormControlAnnotation<bool>()
+  bool get isPlaqueEnabled => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$IncidenceFilterCopyWith<_IncidenceFilter> get copyWith =>
@@ -1093,40 +1012,9 @@ ScanOrder _$ScanOrderFromJson(Map<String, dynamic> json) {
 }
 
 /// @nodoc
-class _$ScanOrderTearOff {
-  const _$ScanOrderTearOff();
-
-  ArchScanOrder arch(Jaw jaw,
-      {required Direction direction, required ToothSide toothSide}) {
-    return ArchScanOrder(
-      jaw,
-      direction: direction,
-      toothSide: toothSide,
-    );
-  }
-
-  QuadrantScanOrder quadrant(Quadrant quadrant,
-      {required Direction direction, required ToothSide toothSide}) {
-    return QuadrantScanOrder(
-      quadrant,
-      direction: direction,
-      toothSide: toothSide,
-    );
-  }
-
-  ScanOrder fromJson(Map<String, Object?> json) {
-    return ScanOrder.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $ScanOrder = _$ScanOrderTearOff();
-
-/// @nodoc
 mixin _$ScanOrder {
   Direction get direction => throw _privateConstructorUsedError;
   ToothSide get toothSide => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Jaw jaw, Direction direction, ToothSide toothSide)
@@ -1258,7 +1146,7 @@ class _$ArchScanOrderCopyWithImpl<$Res> extends _$ScanOrderCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ArchScanOrder implements ArchScanOrder {
   const _$ArchScanOrder(this.jaw,
-      {required this.direction, required this.toothSide, String? $type})
+      {required this.direction, required this.toothSide, final String? $type})
       : $type = $type ?? 'arch';
 
   factory _$ArchScanOrder.fromJson(Map<String, dynamic> json) =>
@@ -1289,6 +1177,7 @@ class _$ArchScanOrder implements ArchScanOrder {
             const DeepCollectionEquality().equals(other.toothSide, toothSide));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1377,18 +1266,18 @@ class _$ArchScanOrder implements ArchScanOrder {
 }
 
 abstract class ArchScanOrder implements ScanOrder {
-  const factory ArchScanOrder(Jaw jaw,
-      {required Direction direction,
-      required ToothSide toothSide}) = _$ArchScanOrder;
+  const factory ArchScanOrder(final Jaw jaw,
+      {required final Direction direction,
+      required final ToothSide toothSide}) = _$ArchScanOrder;
 
   factory ArchScanOrder.fromJson(Map<String, dynamic> json) =
       _$ArchScanOrder.fromJson;
 
-  Jaw get jaw;
+  Jaw get jaw => throw _privateConstructorUsedError;
   @override
-  Direction get direction;
+  Direction get direction => throw _privateConstructorUsedError;
   @override
-  ToothSide get toothSide;
+  ToothSide get toothSide => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $ArchScanOrderCopyWith<ArchScanOrder> get copyWith =>
@@ -1443,7 +1332,7 @@ class _$QuadrantScanOrderCopyWithImpl<$Res>
 @JsonSerializable()
 class _$QuadrantScanOrder implements QuadrantScanOrder {
   const _$QuadrantScanOrder(this.quadrant,
-      {required this.direction, required this.toothSide, String? $type})
+      {required this.direction, required this.toothSide, final String? $type})
       : $type = $type ?? 'quadrant';
 
   factory _$QuadrantScanOrder.fromJson(Map<String, dynamic> json) =>
@@ -1474,6 +1363,7 @@ class _$QuadrantScanOrder implements QuadrantScanOrder {
             const DeepCollectionEquality().equals(other.toothSide, toothSide));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1562,18 +1452,18 @@ class _$QuadrantScanOrder implements QuadrantScanOrder {
 }
 
 abstract class QuadrantScanOrder implements ScanOrder {
-  const factory QuadrantScanOrder(Quadrant quadrant,
-      {required Direction direction,
-      required ToothSide toothSide}) = _$QuadrantScanOrder;
+  const factory QuadrantScanOrder(final Quadrant quadrant,
+      {required final Direction direction,
+      required final ToothSide toothSide}) = _$QuadrantScanOrder;
 
   factory QuadrantScanOrder.fromJson(Map<String, dynamic> json) =
       _$QuadrantScanOrder.fromJson;
 
-  Quadrant get quadrant;
+  Quadrant get quadrant => throw _privateConstructorUsedError;
   @override
-  Direction get direction;
+  Direction get direction => throw _privateConstructorUsedError;
   @override
-  ToothSide get toothSide;
+  ToothSide get toothSide => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $QuadrantScanOrderCopyWith<QuadrantScanOrder> get copyWith =>
@@ -1583,29 +1473,6 @@ abstract class QuadrantScanOrder implements ScanOrder {
 ChartingOrderValue _$ChartingOrderValueFromJson(Map<String, dynamic> json) {
   return _ChartingOrderValue.fromJson(json);
 }
-
-/// @nodoc
-class _$ChartingOrderValueTearOff {
-  const _$ChartingOrderValueTearOff();
-
-  _ChartingOrderValue call(
-      {ChartingOrderType chartingOrder = ChartingOrderType.arch,
-      int selectedOption = 0,
-      required List<List<ScanOrder>> order}) {
-    return _ChartingOrderValue(
-      chartingOrder: chartingOrder,
-      selectedOption: selectedOption,
-      order: order,
-    );
-  }
-
-  ChartingOrderValue fromJson(Map<String, Object?> json) {
-    return ChartingOrderValue.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $ChartingOrderValue = _$ChartingOrderValueTearOff();
 
 /// @nodoc
 mixin _$ChartingOrderValue {
@@ -1715,19 +1582,24 @@ class _$_ChartingOrderValue implements _ChartingOrderValue {
   const _$_ChartingOrderValue(
       {this.chartingOrder = ChartingOrderType.arch,
       this.selectedOption = 0,
-      required this.order});
+      required final List<List<ScanOrder>> order})
+      : _order = order;
 
   factory _$_ChartingOrderValue.fromJson(Map<String, dynamic> json) =>
       _$$_ChartingOrderValueFromJson(json);
 
-  @JsonKey()
   @override
+  @JsonKey()
   final ChartingOrderType chartingOrder;
+  @override
   @JsonKey()
-  @override
   final int selectedOption;
+  final List<List<ScanOrder>> _order;
   @override
-  final List<List<ScanOrder>> order;
+  List<List<ScanOrder>> get order {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_order);
+  }
 
   @override
   String toString() {
@@ -1746,6 +1618,7 @@ class _$_ChartingOrderValue implements _ChartingOrderValue {
             const DeepCollectionEquality().equals(other.order, order));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1766,19 +1639,19 @@ class _$_ChartingOrderValue implements _ChartingOrderValue {
 
 abstract class _ChartingOrderValue implements ChartingOrderValue {
   const factory _ChartingOrderValue(
-      {ChartingOrderType chartingOrder,
-      int selectedOption,
-      required List<List<ScanOrder>> order}) = _$_ChartingOrderValue;
+      {final ChartingOrderType chartingOrder,
+      final int selectedOption,
+      required final List<List<ScanOrder>> order}) = _$_ChartingOrderValue;
 
   factory _ChartingOrderValue.fromJson(Map<String, dynamic> json) =
       _$_ChartingOrderValue.fromJson;
 
   @override
-  ChartingOrderType get chartingOrder;
+  ChartingOrderType get chartingOrder => throw _privateConstructorUsedError;
   @override
-  int get selectedOption;
+  int get selectedOption => throw _privateConstructorUsedError;
   @override
-  List<List<ScanOrder>> get order;
+  List<List<ScanOrder>> get order => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ChartingOrderValueCopyWith<_ChartingOrderValue> get copyWith =>

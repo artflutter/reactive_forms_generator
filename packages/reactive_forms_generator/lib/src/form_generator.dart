@@ -1,10 +1,13 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
+
 // ignore: implementation_imports
 import 'package:analyzer/src/dart/element/element.dart' as e;
+
 // ignore: implementation_imports
 import 'package:analyzer/src/generated/utilities_dart.dart' as u;
 import 'package:analyzer/dart/element/nullability_suffix.dart';
+
 // ignore: implementation_imports
 import 'package:analyzer/src/dart/element/type.dart' as t;
 
@@ -358,10 +361,9 @@ class FormGenerator {
     final formArrayGenerator =
         FormArrayGenerator(element, field, field.typeParameter);
 
-    final validators =
-        formArrayGenerator.itemSyncValidatorList(formArrayChecker);
-    final asyncValidators =
-        formArrayGenerator.itemAsyncValidatorList(formArrayChecker);
+    final validators = formArrayGenerator.itemValidators;
+    final asyncValidators = formArrayGenerator.itemAsyncValidators;
+
     final asyncValidatorsDebounceTime =
         formArrayGenerator.itemAsyncValidatorsDebounceTime(formArrayChecker);
     final disabled = formArrayGenerator.itemDisabled(formArrayChecker);
@@ -753,8 +755,10 @@ class FormGenerator {
   List<Method> get controlMethodList =>
       all.map((e) => ControlMethod(e).method()).whereType<Method>().toList();
 
-  List<Method> get extendedControlMethodList =>
-      all.map((e) => ExtendedControlMethod(e).method()).whereType<Method>().toList();
+  List<Method> get extendedControlMethodList => all
+      .map((e) => ExtendedControlMethod(e).method())
+      .whereType<Method>()
+      .toList();
 
   List<Method> get addArrayControlMethodList =>
       formArrays.map(addArrayControl).toList();

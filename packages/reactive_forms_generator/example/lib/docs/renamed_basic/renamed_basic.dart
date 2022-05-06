@@ -12,11 +12,11 @@ class RenamedBasic {
   final String password;
 
   RenamedBasic({
-    @FormControlAnnotation(
+    @FormControlAnnotation<String>(
       validators: [requiredValidator],
     )
         this.email = '',
-    @FormControlAnnotation(
+    @FormControlAnnotation<String>(
       validators: [requiredValidator],
     )
         this.password = '',

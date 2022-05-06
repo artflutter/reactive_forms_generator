@@ -28,7 +28,7 @@ class DeliveryPoint extends Equatable {
   final Address? address;
 
   const DeliveryPoint({
-    @FormControlAnnotation(
+    @FormControlAnnotation<String>(
       validators: [requiredValidator],
     )
         this.name = '',
@@ -50,9 +50,9 @@ class Client extends Equatable {
   final String? notes;
 
   const Client({
-    @FormControlAnnotation() required this.clientType,
-    @FormControlAnnotation() this.name,
-    @FormControlAnnotation() this.notes,
+    @FormControlAnnotation<ClientType>() required this.clientType,
+    @FormControlAnnotation<String>() this.name,
+    @FormControlAnnotation<String>() this.notes,
   });
 
   @override
@@ -66,11 +66,11 @@ class Address extends Equatable {
   final String? city;
 
   const Address({
-    @FormControlAnnotation(
+    @FormControlAnnotation<String>(
       validators: [requiredValidator],
     )
         this.street,
-    @FormControlAnnotation()
+    @FormControlAnnotation<String>()
         this.city,
   });
 
