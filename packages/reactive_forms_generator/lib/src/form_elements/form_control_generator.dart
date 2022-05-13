@@ -19,22 +19,19 @@ class FormControlGenerator extends FormElementGenerator {
       displayType = displayType.substring(0, displayType.length - 1);
     }
 
-    final annotationType =
-        (annotation(formControlChecker)?.type as ParameterizedType)
-            .typeArguments
-            .first
-            .toString();
+    final _annotationType = annotationType(formControlChecker);
+    final _annotationTyped = annotationTyped(formControlChecker);
 
-    if (annotationType != 'dynamic' && annotationType != displayType) {
+    if (_annotationTyped && _annotationType != displayType) {
       throw Exception(
-        'Annotation and field type mismatch. Annotation is typed as `$annotationType` and field(`${field.name}`) as `$displayType`.',
+        'Annotation and field type mismatch. Annotation is typed as `$_annotationType` and field(`${field.name}`) as `$displayType`.',
       );
     }
 
     List<String> validators = syncValidatorList(formControlChecker);
     List<String> asyncValidators = asyncValidatorList(formControlChecker);
 
-    if (annotationType != 'dynamic') {
+    if (_annotationTyped) {
       validators = validators
           .map(
             (e) => '(control) => $e(control as FormControl<$displayType>)',

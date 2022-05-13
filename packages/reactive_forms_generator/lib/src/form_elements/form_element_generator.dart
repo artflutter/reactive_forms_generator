@@ -90,6 +90,18 @@ abstract class FormElementGenerator {
     return null;
   }
 
+  String? annotationType(TypeChecker typeChecker) =>
+      (annotation(typeChecker)?.type as ParameterizedType)
+          .typeArguments
+          .first
+          .toString();
+
+  bool annotationTyped(TypeChecker typeChecker) {
+    final _annotationType = annotationType(typeChecker);
+
+    return _annotationType != 'dynamic' && _annotationType != 'Never';
+  }
+
   List<String> syncValidatorList(TypeChecker typeChecker) {
     if (typeChecker.hasAnnotationOfExact(field)) {
       final annotation = typeChecker.firstAnnotationOfExact(field);

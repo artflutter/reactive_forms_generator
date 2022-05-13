@@ -2,9 +2,8 @@ include: package:flutter_lints/flutter.yaml
 
 analyzer:
   exclude: [
-      generator_tests/**/*.freezed.dart,
-      generator_tests/**/*.g.dart,
-#      generator_tests/**/*.gform.dart,
+    /**/*.freezed.dart,
+    /**/*.g.dart,
   ]
   strong-mode:
     implicit-casts: false
