@@ -10,23 +10,17 @@ import 'package:reactive_forms_generator/builder.dart';
 import 'package:test/test.dart';
 
 const fileName = 'basic';
-const model = r'''
+const model = '''
   import 'package:flutter/material.dart';
   import 'package:reactive_forms/reactive_forms.dart';
   import 'package:example/helpers.dart';
   import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
   
-  part 'array_nullable.gform.dart';
+  part '$fileName.gform.dart';
   
   @ReactiveFormAnnotation()
   class ArrayNullable {
     final List<String> emailList;
-  
-    final List<bool?> fruitList;
-  
-    final List<String?>? vegetablesList;
-  
-    final List<String?>? someList;
   
     ArrayNullable({
       @FormArrayAnnotation<double>(
@@ -35,12 +29,6 @@ const model = r'''
         ],
       )
           required this.emailList,
-      @FormArrayAnnotation()
-          this.fruitList = const [],
-      @FormArrayAnnotation()
-          this.vegetablesList,
-      @FormControlAnnotation<List<String?>>()
-          this.someList,
     });
   }
 ''';
@@ -48,7 +36,7 @@ const model = r'''
 void main() {
   group('doc', () {
     test(
-      'Basic',
+      'Form array annotation exception',
       () async {
         final anotherBuilder = reactiveFormsGenerator(
           const BuilderOptions(<String, dynamic>{}),

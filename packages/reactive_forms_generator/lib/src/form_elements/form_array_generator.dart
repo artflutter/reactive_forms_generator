@@ -28,7 +28,7 @@ class FormArrayGenerator extends FormElementGenerator {
   List<String> get validators {
     List<String> _validators = syncValidatorList(formArrayChecker);
 
-    if (annotationType != 'dynamic') {
+    if (annotationTyped(formArrayChecker)) {
       _validators = _validators
           .map(
             (e) => '(control) => $e(control as FormArray<$displayType>)',
@@ -42,7 +42,7 @@ class FormArrayGenerator extends FormElementGenerator {
   List<String> get asyncValidators {
     List<String> _asyncValidators = asyncValidatorList(formArrayChecker);
 
-    if (annotationType != 'dynamic') {
+    if (annotationTyped(formArrayChecker)) {
       _asyncValidators = _asyncValidators
           .map(
             (e) => '(control) => $e(control as FormArray<$displayType>)',
@@ -56,7 +56,7 @@ class FormArrayGenerator extends FormElementGenerator {
   List<String> get itemValidators {
     List<String> _itemValidators = itemSyncValidatorList(formArrayChecker);
 
-    if (annotationType != 'dynamic') {
+    if (annotationTyped(formArrayChecker)) {
       _itemValidators = _itemValidators
           .map(
             (e) => '(control) => $e(control as FormControl<$displayType>)',
@@ -71,7 +71,7 @@ class FormArrayGenerator extends FormElementGenerator {
     List<String> _itemAsyncValidators =
         itemAsyncValidatorList(formArrayChecker);
 
-    if (annotationType != 'dynamic') {
+    if (annotationTyped(formArrayChecker)) {
       _itemAsyncValidators = _itemAsyncValidators
           .map(
             (e) => '(control) => $e(control as FormControl<$displayType>)',
@@ -82,11 +82,11 @@ class FormArrayGenerator extends FormElementGenerator {
     return _itemAsyncValidators;
   }
 
-  String get annotationType =>
-      (annotation(formArrayChecker)?.type as ParameterizedType)
-          .typeArguments
-          .first
-          .toString();
+  // String get annotationType =>
+  //     (annotation(formArrayChecker)?.type as ParameterizedType)
+  //         .typeArguments
+  //         .first
+  //         .toString();
 
   @override
   String element() {
@@ -100,9 +100,12 @@ class FormArrayGenerator extends FormElementGenerator {
       withNullability: false,
     );
 
-    if (annotationType != 'dynamic' && annotationType != typeParameterType) {
+    final _annotationType = annotationType(formArrayChecker);
+    final _annotationTyped = annotationTyped(formArrayChecker);
+
+    if (_annotationTyped && _annotationType != typeParameterType) {
       throw Exception(
-        'Annotation and field type mismatch. Annotation is typed as `$annotationType` and field(`${field.name}`) as `$typeParameterType`.',
+        'Annotation and field type mismatch. Annotation is typed as `$_annotationType` and field(`${field.name}`) as `$typeParameterType`.',
       );
     }
 

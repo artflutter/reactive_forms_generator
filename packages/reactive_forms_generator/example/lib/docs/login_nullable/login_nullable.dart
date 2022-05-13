@@ -22,8 +22,8 @@ class LoginNullable {
   final double? height;
 
   LoginNullable({
-    @FormControlAnnotation<String>() this.email,
-    @FormControlAnnotation<String>() this.password,
+    @FormControlAnnotation<String>(validators: []) this.email,
+    @FormControlAnnotation() this.password,
     @FormControlAnnotation<bool>() this.rememberMe,
     @FormControlAnnotation<String>() this.theme,
     @FormControlAnnotation<UserMode>() this.mode,
