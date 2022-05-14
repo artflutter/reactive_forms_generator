@@ -36,7 +36,10 @@ class DeliveryListFormWidget extends StatelessWidget {
                               key: name.itemIndexKey(i),
                               formControl: formItem?.nameControl,
                               validationMessages: (_) => {
-                                ValidationMessage.required: 'Must not be empty',
+                                ValidationMessage.required: name.itemError(
+                                  i,
+                                  errorRequired,
+                                ),
                               },
                               decoration: InputDecoration(
                                 labelText: name.itemIndex(i),
@@ -46,7 +49,10 @@ class DeliveryListFormWidget extends StatelessWidget {
                               key: street.itemIndexKey(i),
                               formControl: formItem?.addressForm.streetControl,
                               validationMessages: (_) => {
-                                ValidationMessage.required: 'Must not be empty',
+                                ValidationMessage.required: street.itemError(
+                                  i,
+                                  errorRequired,
+                                ),
                               },
                               decoration: InputDecoration(
                                 labelText: street.itemIndex(i),
@@ -55,9 +61,6 @@ class DeliveryListFormWidget extends StatelessWidget {
                             ReactiveTextField<String>(
                               key: city.itemIndexKey(i),
                               formControl: formItem?.addressForm.cityControl,
-                              validationMessages: (_) => {
-                                ValidationMessage.required: 'Must not be empty',
-                              },
                               decoration: InputDecoration(
                                 labelText: city.itemIndex(i),
                               ),

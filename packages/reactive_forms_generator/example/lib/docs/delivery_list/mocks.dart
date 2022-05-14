@@ -1,5 +1,19 @@
 import 'package:example/docs/delivery_list/delivery_list.dart';
 
+const mockedDeliveryPoint1 = DeliveryPoint(
+  name: 'hi1',
+  address: Address(
+    street: 'fi1',
+  ),
+);
+
+const mockedDeliveryPoint2 = DeliveryPoint(
+  name: 'hi2',
+  address: Address(
+    street: 'fi2',
+  ),
+);
+
 const patchedDeliveryPoint = DeliveryPoint(
   name: 'patched',
   address: Address(

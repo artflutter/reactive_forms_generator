@@ -1,5 +1,7 @@
 import 'package:example/naming.dart';
 
+const errorRequired = 'required';
+
 const name = Naming('Name');
 const street = Naming('Street');
 const city = Naming('City');
