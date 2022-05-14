@@ -11,5 +11,7 @@ class Naming {
 
   String itemIndex(int i) => '$name $i';
 
+  String itemError(int i, String message) => '${itemIndex(i)} $message';
+
   Key itemIndexKey(int i) => Key('$name $i');
 }
