@@ -9,7 +9,7 @@ void main() {
   group('reactive_forms_generator', () {
     test(
       'Form with simple nullable types',
-      () async {
+          () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -176,10 +176,12 @@ class _LoginNullableFormBuilderState extends State<LoginNullableFormBuilder> {
     return ReactiveLoginNullableForm(
       form: _formModel,
       onWillPop: widget.onWillPop,
-      child: ReactiveForm(
-        formGroup: _form,
+      child: ReactiveFormBuilder(
+        form: () => _form,
         onWillPop: widget.onWillPop,
-        child: widget.builder(context, _formModel, widget.child),
+        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
       ),
     );
   }
