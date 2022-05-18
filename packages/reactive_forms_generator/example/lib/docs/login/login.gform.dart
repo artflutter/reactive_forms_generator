@@ -116,10 +116,12 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
     return ReactiveLoginForm(
       form: _formModel,
       onWillPop: widget.onWillPop,
-      child: ReactiveForm(
-        formGroup: _form,
+      child: ReactiveFormBuilder(
+        form: () => _form,
         onWillPop: widget.onWillPop,
-        child: widget.builder(context, _formModel, widget.child),
+        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
       ),
     );
   }
