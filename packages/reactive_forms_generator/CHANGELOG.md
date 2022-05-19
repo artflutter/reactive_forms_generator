@@ -1,3 +1,7 @@
+## [0.14.1-beta]
+
+* bump dart version
+
 ## [0.14.0-beta]
 
 * Flutter 3
