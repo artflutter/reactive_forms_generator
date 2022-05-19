@@ -32,7 +32,8 @@ class ExtendedControlMethod extends ReactiveFormGeneratorMethod {
   Method? formGroupArrayMethod() {
     final type = (field.type as ParameterizedType).typeArguments.first;
 
-    final typeReference = 'ExtendedControl<List<Map<String, Object?>?>, List<${type}Form>>';
+    final typeReference =
+        'ExtendedControl<List<Map<String, Object?>?>, List<${type}Form>>';
 
     final body = '''
       ExtendedControl<List<Map<String, Object?>?>, List<${type}Form>>(
@@ -42,7 +43,7 @@ class ExtendedControlMethod extends ReactiveFormGeneratorMethod {
     ''';
 
     return Method(
-          (b) => b
+      (b) => b
         ..name = field.fieldExtendedControlName
         ..lambda = true
         ..type = MethodType.getter

@@ -135,7 +135,6 @@ class LoginFormWidget extends StatelessWidget {
                   ReactiveLoginFormConsumer(
                     builder: (context, formModel, child) {
                       return ElevatedButton(
-                        child: const Text('Update'),
                         onPressed: formModel.form.valid
                             ? () {
                                 formModel.updateValue(Login(
@@ -149,6 +148,7 @@ class LoginFormWidget extends StatelessWidget {
                                 ));
                               }
                             : null,
+                        child: const Text('Update'),
                       );
                     },
                   ),
@@ -156,12 +156,12 @@ class LoginFormWidget extends StatelessWidget {
                   ReactiveLoginFormConsumer(
                     builder: (context, formModel, child) {
                       return ElevatedButton(
-                        child: const Text('Reset'),
                         onPressed: formModel.form.valid
                             ? () {
                                 formModel.reset();
                               }
                             : null,
+                        child: const Text('Reset'),
                       );
                     },
                   ),

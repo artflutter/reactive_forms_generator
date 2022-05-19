@@ -61,9 +61,9 @@ class _$TestCopyWithImpl<$Res> implements $TestCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$TestCopyWith<$Res> implements $TestCopyWith<$Res> {
-  factory _$TestCopyWith(_Test value, $Res Function(_Test) then) =
-      __$TestCopyWithImpl<$Res>;
+abstract class _$$_TestCopyWith<$Res> implements $TestCopyWith<$Res> {
+  factory _$$_TestCopyWith(_$_Test value, $Res Function(_$_Test) then) =
+      __$$_TestCopyWithImpl<$Res>;
   @override
   $Res call(
       {@FormControlAnnotation<String>() String title,
@@ -71,20 +71,20 @@ abstract class _$TestCopyWith<$Res> implements $TestCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$TestCopyWithImpl<$Res> extends _$TestCopyWithImpl<$Res>
-    implements _$TestCopyWith<$Res> {
-  __$TestCopyWithImpl(_Test _value, $Res Function(_Test) _then)
-      : super(_value, (v) => _then(v as _Test));
+class __$$_TestCopyWithImpl<$Res> extends _$TestCopyWithImpl<$Res>
+    implements _$$_TestCopyWith<$Res> {
+  __$$_TestCopyWithImpl(_$_Test _value, $Res Function(_$_Test) _then)
+      : super(_value, (v) => _then(v as _$_Test));
 
   @override
-  _Test get _value => super._value as _Test;
+  _$_Test get _value => super._value as _$_Test;
 
   @override
   $Res call({
     Object? title = freezed,
     Object? description = freezed,
   }) {
-    return _then(_Test(
+    return _then(_$_Test(
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -121,7 +121,7 @@ class _$_Test extends _Test {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Test &&
+            other is _$_Test &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality()
                 .equals(other.description, description));
@@ -135,8 +135,8 @@ class _$_Test extends _Test {
 
   @JsonKey(ignore: true)
   @override
-  _$TestCopyWith<_Test> get copyWith =>
-      __$TestCopyWithImpl<_Test>(this, _$identity);
+  _$$_TestCopyWith<_$_Test> get copyWith =>
+      __$$_TestCopyWithImpl<_$_Test>(this, _$identity);
 }
 
 abstract class _Test extends Test {
@@ -153,5 +153,5 @@ abstract class _Test extends Test {
   String? get description => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$TestCopyWith<_Test> get copyWith => throw _privateConstructorUsedError;
+  _$$_TestCopyWith<_$_Test> get copyWith => throw _privateConstructorUsedError;
 }

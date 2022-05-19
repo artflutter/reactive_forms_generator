@@ -156,9 +156,10 @@ class _$ProfileCopyWithImpl<$Res> implements $ProfileCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
-  factory _$ProfileCopyWith(_Profile value, $Res Function(_Profile) then) =
-      __$ProfileCopyWithImpl<$Res>;
+abstract class _$$_ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
+  factory _$$_ProfileCopyWith(
+          _$_Profile value, $Res Function(_$_Profile) then) =
+      __$$_ProfileCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
@@ -187,13 +188,13 @@ abstract class _$ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
-    implements _$ProfileCopyWith<$Res> {
-  __$ProfileCopyWithImpl(_Profile _value, $Res Function(_Profile) _then)
-      : super(_value, (v) => _then(v as _Profile));
+class __$$_ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
+    implements _$$_ProfileCopyWith<$Res> {
+  __$$_ProfileCopyWithImpl(_$_Profile _value, $Res Function(_$_Profile) _then)
+      : super(_value, (v) => _then(v as _$_Profile));
 
   @override
-  _Profile get _value => super._value as _Profile;
+  _$_Profile get _value => super._value as _$_Profile;
 
   @override
   $Res call({
@@ -207,7 +208,7 @@ class __$ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
     Object? timer = freezed,
     Object? audioGuidance = freezed,
   }) {
-    return _then(_Profile(
+    return _then(_$_Profile(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -304,7 +305,7 @@ class _$_Profile extends _Profile {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Profile &&
+            other is _$_Profile &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
@@ -337,8 +338,8 @@ class _$_Profile extends _Profile {
 
   @JsonKey(ignore: true)
   @override
-  _$ProfileCopyWith<_Profile> get copyWith =>
-      __$ProfileCopyWithImpl<_Profile>(this, _$identity);
+  _$$_ProfileCopyWith<_$_Profile> get copyWith =>
+      __$$_ProfileCopyWithImpl<_$_Profile>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -391,7 +392,7 @@ abstract class _Profile extends Profile {
   bool get audioGuidance => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ProfileCopyWith<_Profile> get copyWith =>
+  _$$_ProfileCopyWith<_$_Profile> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -450,11 +451,11 @@ class _$ThresholdSettingCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$ThresholdSettingCopyWith<$Res>
+abstract class _$$_ThresholdSettingCopyWith<$Res>
     implements $ThresholdSettingCopyWith<$Res> {
-  factory _$ThresholdSettingCopyWith(
-          _ThresholdSetting value, $Res Function(_ThresholdSetting) then) =
-      __$ThresholdSettingCopyWithImpl<$Res>;
+  factory _$$_ThresholdSettingCopyWith(
+          _$_ThresholdSetting value, $Res Function(_$_ThresholdSetting) then) =
+      __$$_ThresholdSettingCopyWithImpl<$Res>;
   @override
   $Res call(
       {@FormControlAnnotation<bool>() bool isEnabled,
@@ -462,22 +463,22 @@ abstract class _$ThresholdSettingCopyWith<$Res>
 }
 
 /// @nodoc
-class __$ThresholdSettingCopyWithImpl<$Res>
+class __$$_ThresholdSettingCopyWithImpl<$Res>
     extends _$ThresholdSettingCopyWithImpl<$Res>
-    implements _$ThresholdSettingCopyWith<$Res> {
-  __$ThresholdSettingCopyWithImpl(
-      _ThresholdSetting _value, $Res Function(_ThresholdSetting) _then)
-      : super(_value, (v) => _then(v as _ThresholdSetting));
+    implements _$$_ThresholdSettingCopyWith<$Res> {
+  __$$_ThresholdSettingCopyWithImpl(
+      _$_ThresholdSetting _value, $Res Function(_$_ThresholdSetting) _then)
+      : super(_value, (v) => _then(v as _$_ThresholdSetting));
 
   @override
-  _ThresholdSetting get _value => super._value as _ThresholdSetting;
+  _$_ThresholdSetting get _value => super._value as _$_ThresholdSetting;
 
   @override
   $Res call({
     Object? isEnabled = freezed,
     Object? value = freezed,
   }) {
-    return _then(_ThresholdSetting(
+    return _then(_$_ThresholdSetting(
       isEnabled: isEnabled == freezed
           ? _value.isEnabled
           : isEnabled // ignore: cast_nullable_to_non_nullable
@@ -518,7 +519,7 @@ class _$_ThresholdSetting implements _ThresholdSetting {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ThresholdSetting &&
+            other is _$_ThresholdSetting &&
             const DeepCollectionEquality().equals(other.isEnabled, isEnabled) &&
             const DeepCollectionEquality().equals(other.value, value));
   }
@@ -532,8 +533,8 @@ class _$_ThresholdSetting implements _ThresholdSetting {
 
   @JsonKey(ignore: true)
   @override
-  _$ThresholdSettingCopyWith<_ThresholdSetting> get copyWith =>
-      __$ThresholdSettingCopyWithImpl<_ThresholdSetting>(this, _$identity);
+  _$$_ThresholdSettingCopyWith<_$_ThresholdSetting> get copyWith =>
+      __$$_ThresholdSettingCopyWithImpl<_$_ThresholdSetting>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -557,7 +558,7 @@ abstract class _ThresholdSetting implements ThresholdSetting {
   int get value => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ThresholdSettingCopyWith<_ThresholdSetting> get copyWith =>
+  _$$_ThresholdSettingCopyWith<_$_ThresholdSetting> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -615,11 +616,11 @@ class _$TimerSettingCopyWithImpl<$Res> implements $TimerSettingCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$TimerSettingCopyWith<$Res>
+abstract class _$$_TimerSettingCopyWith<$Res>
     implements $TimerSettingCopyWith<$Res> {
-  factory _$TimerSettingCopyWith(
-          _TimerSetting value, $Res Function(_TimerSetting) then) =
-      __$TimerSettingCopyWithImpl<$Res>;
+  factory _$$_TimerSettingCopyWith(
+          _$_TimerSetting value, $Res Function(_$_TimerSetting) then) =
+      __$$_TimerSettingCopyWithImpl<$Res>;
   @override
   $Res call(
       {@FormControlAnnotation<bool>() bool isEnabled,
@@ -627,21 +628,22 @@ abstract class _$TimerSettingCopyWith<$Res>
 }
 
 /// @nodoc
-class __$TimerSettingCopyWithImpl<$Res> extends _$TimerSettingCopyWithImpl<$Res>
-    implements _$TimerSettingCopyWith<$Res> {
-  __$TimerSettingCopyWithImpl(
-      _TimerSetting _value, $Res Function(_TimerSetting) _then)
-      : super(_value, (v) => _then(v as _TimerSetting));
+class __$$_TimerSettingCopyWithImpl<$Res>
+    extends _$TimerSettingCopyWithImpl<$Res>
+    implements _$$_TimerSettingCopyWith<$Res> {
+  __$$_TimerSettingCopyWithImpl(
+      _$_TimerSetting _value, $Res Function(_$_TimerSetting) _then)
+      : super(_value, (v) => _then(v as _$_TimerSetting));
 
   @override
-  _TimerSetting get _value => super._value as _TimerSetting;
+  _$_TimerSetting get _value => super._value as _$_TimerSetting;
 
   @override
   $Res call({
     Object? isEnabled = freezed,
     Object? value = freezed,
   }) {
-    return _then(_TimerSetting(
+    return _then(_$_TimerSetting(
       isEnabled: isEnabled == freezed
           ? _value.isEnabled
           : isEnabled // ignore: cast_nullable_to_non_nullable
@@ -682,7 +684,7 @@ class _$_TimerSetting implements _TimerSetting {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _TimerSetting &&
+            other is _$_TimerSetting &&
             const DeepCollectionEquality().equals(other.isEnabled, isEnabled) &&
             const DeepCollectionEquality().equals(other.value, value));
   }
@@ -696,8 +698,8 @@ class _$_TimerSetting implements _TimerSetting {
 
   @JsonKey(ignore: true)
   @override
-  _$TimerSettingCopyWith<_TimerSetting> get copyWith =>
-      __$TimerSettingCopyWithImpl<_TimerSetting>(this, _$identity);
+  _$$_TimerSettingCopyWith<_$_TimerSetting> get copyWith =>
+      __$$_TimerSettingCopyWithImpl<_$_TimerSetting>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -721,7 +723,7 @@ abstract class _TimerSetting implements TimerSetting {
   int get value => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$TimerSettingCopyWith<_TimerSetting> get copyWith =>
+  _$$_TimerSettingCopyWith<_$_TimerSetting> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -812,11 +814,11 @@ class _$IncidenceFilterCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$IncidenceFilterCopyWith<$Res>
+abstract class _$$_IncidenceFilterCopyWith<$Res>
     implements $IncidenceFilterCopyWith<$Res> {
-  factory _$IncidenceFilterCopyWith(
-          _IncidenceFilter value, $Res Function(_IncidenceFilter) then) =
-      __$IncidenceFilterCopyWithImpl<$Res>;
+  factory _$$_IncidenceFilterCopyWith(
+          _$_IncidenceFilter value, $Res Function(_$_IncidenceFilter) then) =
+      __$$_IncidenceFilterCopyWithImpl<$Res>;
   @override
   $Res call(
       {@FormControlAnnotation<bool>() bool isMobilityEnabled,
@@ -828,15 +830,15 @@ abstract class _$IncidenceFilterCopyWith<$Res>
 }
 
 /// @nodoc
-class __$IncidenceFilterCopyWithImpl<$Res>
+class __$$_IncidenceFilterCopyWithImpl<$Res>
     extends _$IncidenceFilterCopyWithImpl<$Res>
-    implements _$IncidenceFilterCopyWith<$Res> {
-  __$IncidenceFilterCopyWithImpl(
-      _IncidenceFilter _value, $Res Function(_IncidenceFilter) _then)
-      : super(_value, (v) => _then(v as _IncidenceFilter));
+    implements _$$_IncidenceFilterCopyWith<$Res> {
+  __$$_IncidenceFilterCopyWithImpl(
+      _$_IncidenceFilter _value, $Res Function(_$_IncidenceFilter) _then)
+      : super(_value, (v) => _then(v as _$_IncidenceFilter));
 
   @override
-  _IncidenceFilter get _value => super._value as _IncidenceFilter;
+  _$_IncidenceFilter get _value => super._value as _$_IncidenceFilter;
 
   @override
   $Res call({
@@ -847,7 +849,7 @@ class __$IncidenceFilterCopyWithImpl<$Res>
     Object? isCalculusEnabled = freezed,
     Object? isPlaqueEnabled = freezed,
   }) {
-    return _then(_IncidenceFilter(
+    return _then(_$_IncidenceFilter(
       isMobilityEnabled: isMobilityEnabled == freezed
           ? _value.isMobilityEnabled
           : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
@@ -924,7 +926,7 @@ class _$_IncidenceFilter implements _IncidenceFilter {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _IncidenceFilter &&
+            other is _$_IncidenceFilter &&
             const DeepCollectionEquality()
                 .equals(other.isMobilityEnabled, isMobilityEnabled) &&
             const DeepCollectionEquality()
@@ -952,8 +954,8 @@ class _$_IncidenceFilter implements _IncidenceFilter {
 
   @JsonKey(ignore: true)
   @override
-  _$IncidenceFilterCopyWith<_IncidenceFilter> get copyWith =>
-      __$IncidenceFilterCopyWithImpl<_IncidenceFilter>(this, _$identity);
+  _$$_IncidenceFilterCopyWith<_$_IncidenceFilter> get copyWith =>
+      __$$_IncidenceFilterCopyWithImpl<_$_IncidenceFilter>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -994,7 +996,7 @@ abstract class _IncidenceFilter implements IncidenceFilter {
   bool get isPlaqueEnabled => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$IncidenceFilterCopyWith<_IncidenceFilter> get copyWith =>
+  _$$_IncidenceFilterCopyWith<_$_IncidenceFilter> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1100,24 +1102,24 @@ class _$ScanOrderCopyWithImpl<$Res> implements $ScanOrderCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class $ArchScanOrderCopyWith<$Res>
+abstract class _$$ArchScanOrderCopyWith<$Res>
     implements $ScanOrderCopyWith<$Res> {
-  factory $ArchScanOrderCopyWith(
-          ArchScanOrder value, $Res Function(ArchScanOrder) then) =
-      _$ArchScanOrderCopyWithImpl<$Res>;
+  factory _$$ArchScanOrderCopyWith(
+          _$ArchScanOrder value, $Res Function(_$ArchScanOrder) then) =
+      __$$ArchScanOrderCopyWithImpl<$Res>;
   @override
   $Res call({Jaw jaw, Direction direction, ToothSide toothSide});
 }
 
 /// @nodoc
-class _$ArchScanOrderCopyWithImpl<$Res> extends _$ScanOrderCopyWithImpl<$Res>
-    implements $ArchScanOrderCopyWith<$Res> {
-  _$ArchScanOrderCopyWithImpl(
-      ArchScanOrder _value, $Res Function(ArchScanOrder) _then)
-      : super(_value, (v) => _then(v as ArchScanOrder));
+class __$$ArchScanOrderCopyWithImpl<$Res> extends _$ScanOrderCopyWithImpl<$Res>
+    implements _$$ArchScanOrderCopyWith<$Res> {
+  __$$ArchScanOrderCopyWithImpl(
+      _$ArchScanOrder _value, $Res Function(_$ArchScanOrder) _then)
+      : super(_value, (v) => _then(v as _$ArchScanOrder));
 
   @override
-  ArchScanOrder get _value => super._value as ArchScanOrder;
+  _$ArchScanOrder get _value => super._value as _$ArchScanOrder;
 
   @override
   $Res call({
@@ -1125,7 +1127,7 @@ class _$ArchScanOrderCopyWithImpl<$Res> extends _$ScanOrderCopyWithImpl<$Res>
     Object? direction = freezed,
     Object? toothSide = freezed,
   }) {
-    return _then(ArchScanOrder(
+    return _then(_$ArchScanOrder(
       jaw == freezed
           ? _value.jaw
           : jaw // ignore: cast_nullable_to_non_nullable
@@ -1171,7 +1173,7 @@ class _$ArchScanOrder implements ArchScanOrder {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is ArchScanOrder &&
+            other is _$ArchScanOrder &&
             const DeepCollectionEquality().equals(other.jaw, jaw) &&
             const DeepCollectionEquality().equals(other.direction, direction) &&
             const DeepCollectionEquality().equals(other.toothSide, toothSide));
@@ -1187,8 +1189,8 @@ class _$ArchScanOrder implements ArchScanOrder {
 
   @JsonKey(ignore: true)
   @override
-  $ArchScanOrderCopyWith<ArchScanOrder> get copyWith =>
-      _$ArchScanOrderCopyWithImpl<ArchScanOrder>(this, _$identity);
+  _$$ArchScanOrderCopyWith<_$ArchScanOrder> get copyWith =>
+      __$$ArchScanOrderCopyWithImpl<_$ArchScanOrder>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1280,30 +1282,30 @@ abstract class ArchScanOrder implements ScanOrder {
   ToothSide get toothSide => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  $ArchScanOrderCopyWith<ArchScanOrder> get copyWith =>
+  _$$ArchScanOrderCopyWith<_$ArchScanOrder> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $QuadrantScanOrderCopyWith<$Res>
+abstract class _$$QuadrantScanOrderCopyWith<$Res>
     implements $ScanOrderCopyWith<$Res> {
-  factory $QuadrantScanOrderCopyWith(
-          QuadrantScanOrder value, $Res Function(QuadrantScanOrder) then) =
-      _$QuadrantScanOrderCopyWithImpl<$Res>;
+  factory _$$QuadrantScanOrderCopyWith(
+          _$QuadrantScanOrder value, $Res Function(_$QuadrantScanOrder) then) =
+      __$$QuadrantScanOrderCopyWithImpl<$Res>;
   @override
   $Res call({Quadrant quadrant, Direction direction, ToothSide toothSide});
 }
 
 /// @nodoc
-class _$QuadrantScanOrderCopyWithImpl<$Res>
+class __$$QuadrantScanOrderCopyWithImpl<$Res>
     extends _$ScanOrderCopyWithImpl<$Res>
-    implements $QuadrantScanOrderCopyWith<$Res> {
-  _$QuadrantScanOrderCopyWithImpl(
-      QuadrantScanOrder _value, $Res Function(QuadrantScanOrder) _then)
-      : super(_value, (v) => _then(v as QuadrantScanOrder));
+    implements _$$QuadrantScanOrderCopyWith<$Res> {
+  __$$QuadrantScanOrderCopyWithImpl(
+      _$QuadrantScanOrder _value, $Res Function(_$QuadrantScanOrder) _then)
+      : super(_value, (v) => _then(v as _$QuadrantScanOrder));
 
   @override
-  QuadrantScanOrder get _value => super._value as QuadrantScanOrder;
+  _$QuadrantScanOrder get _value => super._value as _$QuadrantScanOrder;
 
   @override
   $Res call({
@@ -1311,7 +1313,7 @@ class _$QuadrantScanOrderCopyWithImpl<$Res>
     Object? direction = freezed,
     Object? toothSide = freezed,
   }) {
-    return _then(QuadrantScanOrder(
+    return _then(_$QuadrantScanOrder(
       quadrant == freezed
           ? _value.quadrant
           : quadrant // ignore: cast_nullable_to_non_nullable
@@ -1357,7 +1359,7 @@ class _$QuadrantScanOrder implements QuadrantScanOrder {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is QuadrantScanOrder &&
+            other is _$QuadrantScanOrder &&
             const DeepCollectionEquality().equals(other.quadrant, quadrant) &&
             const DeepCollectionEquality().equals(other.direction, direction) &&
             const DeepCollectionEquality().equals(other.toothSide, toothSide));
@@ -1373,8 +1375,8 @@ class _$QuadrantScanOrder implements QuadrantScanOrder {
 
   @JsonKey(ignore: true)
   @override
-  $QuadrantScanOrderCopyWith<QuadrantScanOrder> get copyWith =>
-      _$QuadrantScanOrderCopyWithImpl<QuadrantScanOrder>(this, _$identity);
+  _$$QuadrantScanOrderCopyWith<_$QuadrantScanOrder> get copyWith =>
+      __$$QuadrantScanOrderCopyWithImpl<_$QuadrantScanOrder>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1466,7 +1468,7 @@ abstract class QuadrantScanOrder implements ScanOrder {
   ToothSide get toothSide => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  $QuadrantScanOrderCopyWith<QuadrantScanOrder> get copyWith =>
+  _$$QuadrantScanOrderCopyWith<_$QuadrantScanOrder> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1530,11 +1532,11 @@ class _$ChartingOrderValueCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$ChartingOrderValueCopyWith<$Res>
+abstract class _$$_ChartingOrderValueCopyWith<$Res>
     implements $ChartingOrderValueCopyWith<$Res> {
-  factory _$ChartingOrderValueCopyWith(
-          _ChartingOrderValue value, $Res Function(_ChartingOrderValue) then) =
-      __$ChartingOrderValueCopyWithImpl<$Res>;
+  factory _$$_ChartingOrderValueCopyWith(_$_ChartingOrderValue value,
+          $Res Function(_$_ChartingOrderValue) then) =
+      __$$_ChartingOrderValueCopyWithImpl<$Res>;
   @override
   $Res call(
       {ChartingOrderType chartingOrder,
@@ -1543,15 +1545,15 @@ abstract class _$ChartingOrderValueCopyWith<$Res>
 }
 
 /// @nodoc
-class __$ChartingOrderValueCopyWithImpl<$Res>
+class __$$_ChartingOrderValueCopyWithImpl<$Res>
     extends _$ChartingOrderValueCopyWithImpl<$Res>
-    implements _$ChartingOrderValueCopyWith<$Res> {
-  __$ChartingOrderValueCopyWithImpl(
-      _ChartingOrderValue _value, $Res Function(_ChartingOrderValue) _then)
-      : super(_value, (v) => _then(v as _ChartingOrderValue));
+    implements _$$_ChartingOrderValueCopyWith<$Res> {
+  __$$_ChartingOrderValueCopyWithImpl(
+      _$_ChartingOrderValue _value, $Res Function(_$_ChartingOrderValue) _then)
+      : super(_value, (v) => _then(v as _$_ChartingOrderValue));
 
   @override
-  _ChartingOrderValue get _value => super._value as _ChartingOrderValue;
+  _$_ChartingOrderValue get _value => super._value as _$_ChartingOrderValue;
 
   @override
   $Res call({
@@ -1559,7 +1561,7 @@ class __$ChartingOrderValueCopyWithImpl<$Res>
     Object? selectedOption = freezed,
     Object? order = freezed,
   }) {
-    return _then(_ChartingOrderValue(
+    return _then(_$_ChartingOrderValue(
       chartingOrder: chartingOrder == freezed
           ? _value.chartingOrder
           : chartingOrder // ignore: cast_nullable_to_non_nullable
@@ -1569,7 +1571,7 @@ class __$ChartingOrderValueCopyWithImpl<$Res>
           : selectedOption // ignore: cast_nullable_to_non_nullable
               as int,
       order: order == freezed
-          ? _value.order
+          ? _value._order
           : order // ignore: cast_nullable_to_non_nullable
               as List<List<ScanOrder>>,
     ));
@@ -1610,12 +1612,12 @@ class _$_ChartingOrderValue implements _ChartingOrderValue {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ChartingOrderValue &&
+            other is _$_ChartingOrderValue &&
             const DeepCollectionEquality()
                 .equals(other.chartingOrder, chartingOrder) &&
             const DeepCollectionEquality()
                 .equals(other.selectedOption, selectedOption) &&
-            const DeepCollectionEquality().equals(other.order, order));
+            const DeepCollectionEquality().equals(other._order, _order));
   }
 
   @JsonKey(ignore: true)
@@ -1624,12 +1626,13 @@ class _$_ChartingOrderValue implements _ChartingOrderValue {
       runtimeType,
       const DeepCollectionEquality().hash(chartingOrder),
       const DeepCollectionEquality().hash(selectedOption),
-      const DeepCollectionEquality().hash(order));
+      const DeepCollectionEquality().hash(_order));
 
   @JsonKey(ignore: true)
   @override
-  _$ChartingOrderValueCopyWith<_ChartingOrderValue> get copyWith =>
-      __$ChartingOrderValueCopyWithImpl<_ChartingOrderValue>(this, _$identity);
+  _$$_ChartingOrderValueCopyWith<_$_ChartingOrderValue> get copyWith =>
+      __$$_ChartingOrderValueCopyWithImpl<_$_ChartingOrderValue>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -1654,6 +1657,6 @@ abstract class _ChartingOrderValue implements ChartingOrderValue {
   List<List<ScanOrder>> get order => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ChartingOrderValueCopyWith<_ChartingOrderValue> get copyWith =>
+  _$$_ChartingOrderValueCopyWith<_$_ChartingOrderValue> get copyWith =>
       throw _privateConstructorUsedError;
 }
