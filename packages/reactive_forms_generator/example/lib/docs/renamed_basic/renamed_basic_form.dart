@@ -49,7 +49,6 @@ class BasicFormWidget extends StatelessWidget {
               ReactiveSomeWiredNameFormConsumer(
                 builder: (context, formModel, child) {
                   return ElevatedButton(
-                    child: const Text('Submit'),
                     onPressed: formModel.form.valid
                         ? () {
                             // ignore: unnecessary_cast
@@ -58,6 +57,7 @@ class BasicFormWidget extends StatelessWidget {
                             print(formModel.model.password);
                           }
                         : null,
+                    child: const Text('Submit'),
                   );
                 },
               ),

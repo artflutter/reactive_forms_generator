@@ -9,7 +9,7 @@ void main() {
   group('reactive_forms_generator', () {
     test(
       'Form with simple nullable types',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''

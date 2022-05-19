@@ -161,8 +161,8 @@ class GroupFormWidget extends StatelessWidget {
               ReactiveGroupFormConsumer(
                 builder: (context, formModel, child) {
                   return ElevatedButton(
-                    child: const Text('Submit'),
                     onPressed: formModel.form.valid ? () {} : null,
+                    child: const Text('Submit'),
                   );
                 },
               ),

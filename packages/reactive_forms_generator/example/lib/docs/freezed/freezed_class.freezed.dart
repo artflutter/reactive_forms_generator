@@ -84,11 +84,11 @@ class _$FreezedClassCopyWithImpl<$Res> implements $FreezedClassCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$FreezedClassCopyWith<$Res>
+abstract class _$$_FreezedClassCopyWith<$Res>
     implements $FreezedClassCopyWith<$Res> {
-  factory _$FreezedClassCopyWith(
-          _FreezedClass value, $Res Function(_FreezedClass) then) =
-      __$FreezedClassCopyWithImpl<$Res>;
+  factory _$$_FreezedClassCopyWith(
+          _$_FreezedClass value, $Res Function(_$_FreezedClass) then) =
+      __$$_FreezedClassCopyWithImpl<$Res>;
   @override
   $Res call(
       {@FormControlAnnotation<String>() String? gender,
@@ -98,14 +98,15 @@ abstract class _$FreezedClassCopyWith<$Res>
 }
 
 /// @nodoc
-class __$FreezedClassCopyWithImpl<$Res> extends _$FreezedClassCopyWithImpl<$Res>
-    implements _$FreezedClassCopyWith<$Res> {
-  __$FreezedClassCopyWithImpl(
-      _FreezedClass _value, $Res Function(_FreezedClass) _then)
-      : super(_value, (v) => _then(v as _FreezedClass));
+class __$$_FreezedClassCopyWithImpl<$Res>
+    extends _$FreezedClassCopyWithImpl<$Res>
+    implements _$$_FreezedClassCopyWith<$Res> {
+  __$$_FreezedClassCopyWithImpl(
+      _$_FreezedClass _value, $Res Function(_$_FreezedClass) _then)
+      : super(_value, (v) => _then(v as _$_FreezedClass));
 
   @override
-  _FreezedClass get _value => super._value as _FreezedClass;
+  _$_FreezedClass get _value => super._value as _$_FreezedClass;
 
   @override
   $Res call({
@@ -114,7 +115,7 @@ class __$FreezedClassCopyWithImpl<$Res> extends _$FreezedClassCopyWithImpl<$Res>
     Object? name = freezed,
     Object? year = freezed,
   }) {
-    return _then(_FreezedClass(
+    return _then(_$_FreezedClass(
       gender == freezed
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
@@ -169,7 +170,7 @@ class _$_FreezedClass extends _FreezedClass {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _FreezedClass &&
+            other is _$_FreezedClass &&
             const DeepCollectionEquality().equals(other.gender, gender) &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
@@ -187,8 +188,8 @@ class _$_FreezedClass extends _FreezedClass {
 
   @JsonKey(ignore: true)
   @override
-  _$FreezedClassCopyWith<_FreezedClass> get copyWith =>
-      __$FreezedClassCopyWithImpl<_FreezedClass>(this, _$identity);
+  _$$_FreezedClassCopyWith<_$_FreezedClass> get copyWith =>
+      __$$_FreezedClassCopyWithImpl<_$_FreezedClass>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -220,6 +221,6 @@ abstract class _FreezedClass extends FreezedClass {
   double? get year => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$FreezedClassCopyWith<_FreezedClass> get copyWith =>
+  _$$_FreezedClassCopyWith<_$_FreezedClass> get copyWith =>
       throw _privateConstructorUsedError;
 }

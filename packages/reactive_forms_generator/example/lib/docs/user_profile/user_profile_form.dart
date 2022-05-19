@@ -151,13 +151,13 @@ class UserProfileFormWidget extends StatelessWidget {
                   ReactiveUserProfileFormConsumer(
                     builder: (context, formModel, child) {
                       return ElevatedButton(
-                        child: const Text('Submit'),
                         onPressed: formModel.form.valid
                             ? () {
                                 print(formModel.model.firstName);
                                 print(formModel.model.lastName);
                               }
                             : null,
+                        child: const Text('Submit'),
                       );
                     },
                   ),

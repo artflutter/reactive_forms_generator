@@ -115,6 +115,7 @@ class IncidenceFilter with _$IncidenceFilter {
 }
 
 enum ChartingOrderType { arch, quadrant }
+
 enum Direction {
   /// ==>
   rightward,
@@ -122,6 +123,7 @@ enum Direction {
   /// <===
   leftward
 }
+
 enum ToothSide { facial, lingual }
 
 @freezed

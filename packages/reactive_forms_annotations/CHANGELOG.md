@@ -1,3 +1,7 @@
+## [0.8.0-beta]
+
+* Flutter 3
+
 ## [0.7.0-beta]
 
 * FormArrayAnnotation with generic typing

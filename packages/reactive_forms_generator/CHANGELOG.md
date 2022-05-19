@@ -1,3 +1,7 @@
+## [0.14.0-beta]
+
+* Flutter 3
+
 ## [0.13.0-beta]
 
 * replace ReactiveForm with ReactiveFormBuilder to avoid rebuilds and bugs
