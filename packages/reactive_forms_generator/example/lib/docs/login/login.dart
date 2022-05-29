@@ -24,11 +24,11 @@ class Login {
   final String? unAnnotated;
 
   Login({
-    @FormControlAnnotation<String>(
-      validators: [
-        requiredValidator,
-      ],
-    )
+    @FormControlAnnotation<String>(validators: [
+      requiredValidator,
+    ], validatorsTest: [
+      RequiredValidator<String>()
+    ])
         this.email = 'default@e.mail',
     @FormControlAnnotation<String>(
       validators: [

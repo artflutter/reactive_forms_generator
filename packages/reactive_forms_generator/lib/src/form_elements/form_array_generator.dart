@@ -110,7 +110,7 @@ class FormArrayGenerator extends FormElementGenerator {
     }
 
     final partialProps = [
-      'validators: [${validators.join(',')}]',
+      // 'validators: [${validators.join(',')}]',
       'asyncValidators: [${asyncValidators.join(',')}]',
       'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formArrayChecker)}',
       'disabled: ${disabled(formArrayChecker)}',
@@ -133,7 +133,7 @@ class FormArrayGenerator extends FormElementGenerator {
       final props = [
         '''$value$optionalChaining.map((e) => FormControl<$displayType>(
               value: e,
-              validators: $itemValidators,
+              // validators: $itemValidators,
               asyncValidators: $itemAsyncValidators,
               asyncValidatorsDebounceTime: ${itemAsyncValidatorsDebounceTime(formArrayChecker)},
               disabled: ${itemDisabled(formArrayChecker)},

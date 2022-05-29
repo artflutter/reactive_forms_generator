@@ -418,7 +418,7 @@ class LoginForm implements FormModel<Login> {
   FormGroup formElements() => FormGroup({
         emailControlName: FormControl<String>(
             value: login?.email,
-            validators: [],
+            validators: [RequiredValidator<String>()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

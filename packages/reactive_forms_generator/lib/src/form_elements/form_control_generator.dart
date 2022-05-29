@@ -29,7 +29,16 @@ class FormControlGenerator extends FormElementGenerator {
     }
 
     List<String> validators = syncValidatorList(formControlChecker);
+    List<String> validatorsTest = [];
     List<String> asyncValidators = asyncValidatorList(formControlChecker);
+
+    if (field.name == 'email') {
+      validatorsTest = syncValidatorTestList(formControlChecker);
+      print('=======');
+      print(field.name);
+      print(validatorsTest);
+      print('=======');
+    }
 
     if (_annotationTyped) {
       validators = validators
@@ -46,7 +55,8 @@ class FormControlGenerator extends FormElementGenerator {
 
     final props = [
       'value: $value',
-      'validators: [${validators.join(',')}]',
+      // 'validators: [${validators.join(',')}]',
+      'validators: [${validatorsTest.join(',')}]',
       'asyncValidators: [${asyncValidators.join(',')}]',
       'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formControlChecker)}',
       'disabled: ${disabled(formControlChecker)}',

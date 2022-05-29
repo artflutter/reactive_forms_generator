@@ -36,11 +36,13 @@ dev_dependencies:
   build_test: ^2.1.5
   logging: ^1.0.2
   flutter_lints: ^2.0.1
+  reflectable: ^3.0.8
 
 dependency_overrides:
   path: 1.8.2
   test_core: ^0.4.13
   test_api: 0.4.9
+  analyzer: ^4.1.0
 #  reactive_forms_annotations:
 #    path: ../reactive_forms_annotations
 

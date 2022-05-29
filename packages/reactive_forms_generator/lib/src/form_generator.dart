@@ -447,7 +447,7 @@ class FormGenerator {
                
               ${field.fieldControlName}${field.nullabilitySuffix}.add(FormControl<$type>(
                 value: value, 
-                validators: resultingValidators,
+                // validators: resultingValidators,
                 asyncValidators: resultingAsyncValidators,
                 asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? $asyncValidatorsDebounceTime,
                 disabled: disabled ?? $disabled,

@@ -5,6 +5,7 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:recase/recase.dart';
+// import 'dart:mirrors';
 
 abstract class FormElementGenerator {
   final ClassElement root;
@@ -65,6 +66,24 @@ abstract class FormElementGenerator {
     return name;
   }
 
+  String? validatorClassName(DartObject? e) {
+    // print('XXXXXXXX => ${e?.type?.element?.source?.contents?.data}');
+    print(
+        'XXXXXXXX => ${(e?.type?.element as ClassElement?)?.getField('messageKey1')?.computeConstantValue()}');
+    // print('4444444 => ${e?.type?.getDisplayString(withNullability: true)}');
+
+    var name = e?.type?.getDisplayString(withNullability: true);
+
+    // findStaticAndInvoke(food, "doSomething");
+    // print('0000000 => ${e?.getField('messageKey')}');
+
+    // if (e is MethodElement) {
+    //   name = '${e.enclosingElement.name}.$name';
+    // }
+
+    return name == null ? name : '${name}()';
+  }
+
   List<String> itemSyncValidatorList(TypeChecker typeChecker) {
     if (typeChecker.hasAnnotationOfExact(field)) {
       final annotation = typeChecker.firstAnnotationOfExact(field);
@@ -110,6 +129,31 @@ abstract class FormElementGenerator {
               ?.toListValue()
               ?.map((e) {
                 return validatorName(e.toFunctionValue());
+              })
+              .whereType<String>()
+              .toList() ??
+          [];
+    }
+    return [];
+  }
+
+  List<String> syncValidatorTestList(TypeChecker typeChecker) {
+    // print('111111 ${typeChecker.hasAnnotationOfExact(field)}');
+    if (typeChecker.hasAnnotationOfExact(field)) {
+      final annotation = typeChecker.firstAnnotationOfExact(field);
+      // print('22222 => ${annotation?.getField('validatorsTest')}');
+      // print(
+      //     '33333 => ${annotation?.getField('validatorsTest')?.toListValue()?.map((e) {
+      //   print('5555555 => ${e}');
+      //   return validatorClassName(e);
+      // })}');
+      // print(
+      //     '=====> ${(annotation?.getField('validatorsTest')?.type as ParameterizedType?)?.typeArguments.first}');
+      return annotation
+              ?.getField('validatorsTest')
+              ?.toListValue()
+              ?.map((e) {
+                return validatorClassName(e);
               })
               .whereType<String>()
               .toList() ??

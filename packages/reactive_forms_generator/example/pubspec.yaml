@@ -49,8 +49,10 @@ dev_dependencies:
   flutter_lints: ^2.0.1
 
 dependency_overrides:
-  reactive_forms: ^13.0.0
+  #  reactive_forms: ^13.0.0
   path: 1.8.2
+  reactive_forms:
+    path: ../../../../reactive_forms
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

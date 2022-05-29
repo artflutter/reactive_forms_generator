@@ -74,7 +74,7 @@ class FormGroupGenerator extends FormElementGenerator {
 
     final props = [
       '{${_formElements.join(',')}}',
-      'validators: [${syncValidatorList(formControlChecker).join(',')}]',
+      // 'validators: [${syncValidatorList(formControlChecker).join(',')}]',
       'asyncValidators: [${asyncValidatorList(formControlChecker).join(',')}]',
       'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formControlChecker)}',
       'disabled: ${disabled(formControlChecker)}',
