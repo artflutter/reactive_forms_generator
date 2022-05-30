@@ -57,37 +57,38 @@ class LoginNullableFormWidget extends StatelessWidget {
               ReactiveDropdownSearch<String, String>(
                 formControl: formModel.themeControl,
                 decoration: const InputDecoration(
+                  hintText: "Select a theme",
+                  labelText: "Theme",
                   helperText: '',
                   contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
                   border: OutlineInputBorder(),
                 ),
-                mode: Mode.MENU,
-                hint: "Select a theme",
+                popupProps: const PopupProps.menu(),
                 // showSelectedItem: true,
                 items: const [
                   "light",
                   "dark",
                 ],
-                label: "Theme",
                 showClearButton: true,
               ),
               const SizedBox(height: 16.0),
               ReactiveDropdownSearch<UserMode, UserMode>(
                 formControl: formModel.modeControl,
+                popupProps: const PopupProps.menu(),
                 decoration: const InputDecoration(
+                  hintText: "Select a mode",
+                  labelText: "Mode",
                   helperText: '',
                   contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
                   border: OutlineInputBorder(),
                 ),
-                mode: Mode.MENU,
-                hint: "Select a theme",
                 // showSelectedItem: true,
                 items: const [
                   UserMode.admin,
                   UserMode.user,
                 ],
                 compareFn: (item, selectedItem) => item == selectedItem,
-                label: "Theme",
+
                 showClearButton: true,
               ),
               ReactiveTouchSpin<int>(

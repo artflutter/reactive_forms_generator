@@ -64,38 +64,39 @@ class LoginFormWidget extends StatelessWidget {
               const SizedBox(height: 16.0),
               ReactiveDropdownSearch<String, String>(
                 formControl: formModel.themeControl,
+                popupProps: const PopupProps.menu(),
                 decoration: const InputDecoration(
+                  labelText: 'Theme',
+                  hintText: 'Select a theme',
                   helperText: '',
                   contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
                   border: OutlineInputBorder(),
                 ),
-                mode: Mode.MENU,
-                hint: "Select a theme",
                 // showSelectedItem: true,
                 items: const [
                   "light",
                   "dark",
                 ],
-                label: "Theme",
                 showClearButton: true,
               ),
               const SizedBox(height: 16.0),
               ReactiveDropdownSearch<UserMode, UserMode>(
                 formControl: formModel.modeControl,
                 decoration: const InputDecoration(
+                  hintText: "Select a theme",
+                  labelText: "Theme",
                   helperText: '',
                   contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
                   border: OutlineInputBorder(),
                 ),
-                mode: Mode.MENU,
-                hint: "Select a theme",
+                popupProps: const PopupProps.menu(),
                 // showSelectedItem: true,
                 items: const [
                   UserMode.admin,
                   UserMode.user,
                 ],
                 compareFn: (item, selectedItem) => item == selectedItem,
-                label: "Theme",
+
                 showClearButton: true,
               ),
               ReactiveTouchSpin<int>(
@@ -117,6 +118,12 @@ class LoginFormWidget extends StatelessWidget {
                 formControl: formModel.heightControl,
                 min: 120,
                 max: 220,
+              ),
+              ReactiveLoginFormConsumer(
+                builder: (context, formModel, child) {
+                  print(formModel.form.errors);
+                  return Container();
+                },
               ),
               ElevatedButton(
                 onPressed: () {
@@ -157,9 +164,7 @@ class LoginFormWidget extends StatelessWidget {
                     builder: (context, formModel, child) {
                       return ElevatedButton(
                         onPressed: formModel.form.valid
-                            ? () {
-                                formModel.reset();
-                              }
+                            ? () => formModel.reset()
                             : null,
                         child: const Text('Reset'),
                       );

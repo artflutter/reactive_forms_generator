@@ -10,6 +10,9 @@ class FormGroupGenerator extends FormElementGenerator {
   FormGroupGenerator(ClassElement root, ParameterElement field, DartType? type)
       : super(root, field, type);
 
+  @override
+  Element get fieldElement => field.type.element!;
+
   List<ParameterElement> get formElements =>
       (field.type.element as ClassElement)
           .constructors
@@ -74,10 +77,10 @@ class FormGroupGenerator extends FormElementGenerator {
 
     final props = [
       '{${_formElements.join(',')}}',
-      'validators: [${syncValidatorList(formControlChecker).join(',')}]',
-      'asyncValidators: [${asyncValidatorList(formControlChecker).join(',')}]',
-      'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formControlChecker)}',
-      'disabled: ${disabled(formControlChecker)}',
+      'validators: [${syncValidatorList(formGroupChecker).join(',')}]',
+      'asyncValidators: [${asyncValidatorList(formGroupChecker).join(',')}]',
+      'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formGroupChecker)}',
+      'disabled: ${disabled(formGroupChecker)}',
     ].join(',');
 
     return 'FormGroup($props)';

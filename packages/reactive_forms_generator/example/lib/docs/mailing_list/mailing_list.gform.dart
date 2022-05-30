@@ -108,7 +108,15 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
     _form = FormGroup({});
     _formModel = MailingListForm(widget.model, _form, null);
 
-    _form.addAll(_formModel.formElements().controls);
+    final elements = _formModel.formElements();
+    _form.setValidators(elements.validators);
+    _form.setAsyncValidators(elements.asyncValidators);
+
+    if (elements.disabled) {
+      _form.markAsDisabled();
+    }
+
+    _form.addAll(elements.controls);
 
     super.initState();
   }
@@ -181,9 +189,7 @@ class MailingListForm implements FormModel<MailingList> {
       int? asyncValidatorsDebounceTime,
       bool? disabled,
       ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge}) {
-    List<ValidatorFunction> resultingValidators = [
-      (control) => emailValidator(control as FormControl<String>)
-    ];
+    List<ValidatorFunction> resultingValidators = [emailValidator];
     List<AsyncValidatorFunction> resultingAsyncValidators = [];
 
     switch (validatorsApplyMode) {
@@ -241,19 +247,14 @@ class MailingListForm implements FormModel<MailingList> {
             mailingList?.emailList
                     .map((e) => FormControl<String>(
                           value: e,
-                          validators: [
-                            (control) =>
-                                emailValidator(control as FormControl<String>)
-                          ],
+                          validators: [emailValidator],
                           asyncValidators: [],
                           asyncValidatorsDebounceTime: 250,
                           disabled: false,
                         ))
                     .toList() ??
                 [],
-            validators: [
-              (control) => mailingListValidator(control as FormArray<String>)
-            ],
+            validators: [mailingListValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false)

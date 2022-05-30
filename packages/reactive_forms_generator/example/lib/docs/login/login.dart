@@ -6,6 +6,11 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 part 'login.gform.dart';
 
 @ReactiveFormAnnotation()
+@FormGroupAnnotation(
+  validators: [
+    allFieldsRequired,
+  ],
+)
 class Login {
   final String email;
 
@@ -29,7 +34,7 @@ class Login {
         requiredValidator,
       ],
     )
-        this.email = 'default@e.mail',
+        this.email = '',
     @FormControlAnnotation<String>(
       validators: [
         requiredValidator,

@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
         Routes.deliveryPoint: (_) => const DeliveryPointWidget(),
         Routes.freezed: (_) => const FreezedFormWidget(),
       },
-      home: const DeliveryListFormWidget(),
+      home: const MailingListFormWidget(),
     );
   }
 }

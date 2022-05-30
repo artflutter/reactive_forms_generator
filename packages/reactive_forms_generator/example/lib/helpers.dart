@@ -1,5 +1,16 @@
 import 'package:reactive_forms/reactive_forms.dart';
 
+Map<String, dynamic>? allFieldsRequired(AbstractControl<dynamic> control) {
+  final email = control.value['email'] as String?;
+  final password = control.value['password'] as String?;
+
+  if (email == null || password == null || email.isEmpty || password.isEmpty) {
+    return <String, dynamic>{'allFieldsRequired': true};
+  }
+
+  return null;
+}
+
 Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
   return Validators.required(control);
 }
@@ -7,8 +18,8 @@ Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
 final emailRegex = RegExp(
     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
 
-Map<String, dynamic> emailValidator(FormControl<String> control) {
-  final email = control.value;
+Map<String, dynamic> emailValidator(AbstractControl<dynamic> control) {
+  final email = control.value as String?;
 
   return email != null && emailRegex.hasMatch(email)
       ? <String, dynamic>{}
@@ -32,8 +43,9 @@ Map<String, dynamic> emailValidator(FormControl<String> control) {
 // }
 
 // validates that at least one email is selected
-Map<String, dynamic>? mailingListValidator(FormArray<String> control) {
-  final emails = control.value ?? [];
+Map<String, dynamic>? mailingListValidator(AbstractControl control) {
+  final formArray = control as FormArray<String>;
+  final emails = formArray.value ?? [];
   final test = <String>{};
 
   final result = emails.fold<bool>(true,
