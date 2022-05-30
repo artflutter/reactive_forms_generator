@@ -1,3 +1,7 @@
+## [0.14.2-beta]
+
+* bugfix: FormGroupAnnotation params were skipped
+
 ## [0.14.1-beta]
 
 * bump dart version

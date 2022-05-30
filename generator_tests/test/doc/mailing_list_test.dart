@@ -30,7 +30,7 @@ void main() {
               return result ? null : <String, dynamic>{'emailDuplicates': true};
             }
             
-            Map<String, dynamic> emailValidator(AbstractControl<dynamic> control) {
+              Map<String, dynamic> emailValidator(AbstractControl<dynamic> control) {
               final email = control.value as String?;
             
               return email != null && emailRegex.hasMatch(email)
@@ -172,7 +172,15 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
     _form = FormGroup({});
     _formModel = MailingListForm(widget.model, _form, null);
 
-    _form.addAll(_formModel.formElements().controls);
+    final elements = _formModel.formElements();
+    _form.setValidators(elements.validators);
+    _form.setAsyncValidators(elements.asyncValidators);
+
+    if (elements.disabled) {
+      _form.markAsDisabled();
+    }
+
+    _form.addAll(elements.controls);
 
     super.initState();
   }

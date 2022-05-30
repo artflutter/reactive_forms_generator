@@ -106,7 +106,15 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
     _form = FormGroup({});
     _formModel = LoginForm(widget.model, _form, null);
 
-    _form.addAll(_formModel.formElements().controls);
+    final elements = _formModel.formElements();
+    _form.setValidators(elements.validators);
+    _form.setAsyncValidators(elements.asyncValidators);
+
+    if (elements.disabled) {
+      _form.markAsDisabled();
+    }
+
+    _form.addAll(elements.controls);
 
     super.initState();
   }
@@ -480,7 +488,9 @@ class LoginForm implements FormModel<Login> {
             disabled: false,
             touched: false)
       },
-          validators: [],
+          validators: [
+            allFieldsRequired
+          ],
           asyncValidators: [],
           asyncValidatorsDebounceTime: 250,
           disabled: false);

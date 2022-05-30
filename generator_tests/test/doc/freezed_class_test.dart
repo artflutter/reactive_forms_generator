@@ -157,7 +157,15 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
     _form = FormGroup({});
     _formModel = FreezedClassForm(widget.model, _form, null);
 
-    _form.addAll(_formModel.formElements().controls);
+    final elements = _formModel.formElements();
+    _form.setValidators(elements.validators);
+    _form.setAsyncValidators(elements.asyncValidators);
+
+    if (elements.disabled) {
+      _form.markAsDisabled();
+    }
+
+    _form.addAll(elements.controls);
 
     super.initState();
   }

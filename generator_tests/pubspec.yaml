@@ -39,6 +39,7 @@ dev_dependencies:
   freezed: ^2.0.3+1
   flutter_test:
     sdk: flutter
+  test: ^1.21.1
   logging: ^1.0.2
   reactive_forms_generator:
     path: ../packages/reactive_forms_generator
