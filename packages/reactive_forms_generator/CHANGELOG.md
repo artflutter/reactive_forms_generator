@@ -1,6 +1,7 @@
-## [0.14.2-beta]
+## [0.15.0-beta]
 
 * bugfix: FormGroupAnnotation params were skipped
+* bugfix: updated initialization flow
 
 ## [0.14.1-beta]
 
