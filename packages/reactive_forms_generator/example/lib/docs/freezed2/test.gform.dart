@@ -240,7 +240,15 @@ class TestForm implements FormModel<Test> {
   FormControl<String>? get descriptionControl => containsDescription
       ? form.control(descriptionControlPath()) as FormControl<String>?
       : null;
-  Test get model => Test(title: titleValue, description: descriptionValue);
+  Test get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return Test(title: titleValue, description: descriptionValue);
+  }
+
   void updateValue(Test value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(

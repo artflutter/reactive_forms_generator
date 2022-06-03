@@ -514,11 +514,19 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     ));
   }
 
-  ArrayNullable get model => ArrayNullable(
-      emailList: emailListValue,
-      fruitList: fruitListValue,
-      vegetablesList: vegetablesListValue,
-      someList: someListValue);
+  ArrayNullable get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return ArrayNullable(
+        emailList: emailListValue,
+        fruitList: fruitListValue,
+        vegetablesList: vegetablesListValue,
+        someList: someListValue);
+  }
+
   void updateValue(ArrayNullable value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(

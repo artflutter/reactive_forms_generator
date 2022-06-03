@@ -50,7 +50,6 @@ dev_dependencies:
 
 dependency_overrides:
   reactive_forms: ^13.0.0
-  path: 1.8.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

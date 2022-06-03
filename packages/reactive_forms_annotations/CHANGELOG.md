@@ -1,3 +1,7 @@
+## [0.10.0-beta]
+
+* typed validators for FormGroup
+
 ## [0.9.0-beta]
 
 * reactive_forms 13

@@ -434,8 +434,16 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   FormControl<double>? get yearControl => containsYear
       ? form.control(yearControlPath()) as FormControl<double>?
       : null;
-  FreezedClass get model =>
-      FreezedClass(genderValue, id: idValue, name: nameValue, year: yearValue);
+  FreezedClass get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return FreezedClass(genderValue,
+        id: idValue, name: nameValue, year: yearValue);
+  }
+
   void updateValue(FreezedClass value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(

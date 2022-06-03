@@ -542,8 +542,16 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     value.map((e) => addClientListItem(e));
   }
 
-  DeliveryList get model => DeliveryList(
-      deliveryList: deliveryListValue, clientList: clientListValue);
+  DeliveryList get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return DeliveryList(
+        deliveryList: deliveryListValue, clientList: clientListValue);
+  }
+
   void updateValue(DeliveryList value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -700,8 +708,15 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
       form.control(nameControlPath()) as FormControl<String>;
   FormGroup? get addressControl =>
       containsAddress ? form.control(addressControlPath()) as FormGroup? : null;
-  DeliveryPoint get model =>
-      DeliveryPoint(name: nameValue, address: addressValue);
+  DeliveryPoint get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return DeliveryPoint(name: nameValue, address: addressValue);
+  }
+
   void updateValue(DeliveryPoint value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -869,7 +884,15 @@ class AddressForm implements FormModel<Address> {
   FormControl<String>? get cityControl => containsCity
       ? form.control(cityControlPath()) as FormControl<String>?
       : null;
-  Address get model => Address(street: streetValue, city: cityValue);
+  Address get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return Address(street: streetValue, city: cityValue);
+  }
+
   void updateValue(Address? value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -1078,8 +1101,16 @@ class ClientForm implements FormModel<Client> {
   FormControl<String>? get notesControl => containsNotes
       ? form.control(notesControlPath()) as FormControl<String>?
       : null;
-  Client get model =>
-      Client(clientType: clientTypeValue, name: nameValue, notes: notesValue);
+  Client get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return Client(
+        clientType: clientTypeValue, name: nameValue, notes: notesValue);
+  }
+
   void updateValue(Client value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -1496,8 +1527,15 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
       form.control(nameControlPath()) as FormControl<String>;
   FormGroup? get addressControl =>
       containsAddress ? form.control(addressControlPath()) as FormGroup? : null;
-  DeliveryPoint get model =>
-      DeliveryPoint(name: nameValue, address: addressValue);
+  DeliveryPoint get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return DeliveryPoint(name: nameValue, address: addressValue);
+  }
+
   void updateValue(DeliveryPoint value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(

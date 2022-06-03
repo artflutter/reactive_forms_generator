@@ -337,12 +337,20 @@ class UserProfileForm implements FormModel<UserProfile> {
   FormGroup get homeControl => form.control(homeControlPath()) as FormGroup;
   FormGroup? get officeControl =>
       containsOffice ? form.control(officeControlPath()) as FormGroup? : null;
-  UserProfile get model => UserProfile(
-      id: userProfile.id,
-      firstName: firstNameValue,
-      lastName: lastNameValue,
-      home: homeValue,
-      office: officeValue);
+  UserProfile get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return UserProfile(
+        id: userProfile.id,
+        firstName: firstNameValue,
+        lastName: lastNameValue,
+        home: homeValue,
+        office: officeValue);
+  }
+
   void updateValue(UserProfile value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -580,8 +588,15 @@ class AddressForm implements FormModel<Address> {
   FormControl<String>? get zipControl => containsZip
       ? form.control(zipControlPath()) as FormControl<String>?
       : null;
-  Address get model =>
-      Address(street: streetValue, city: cityValue, zip: zipValue);
+  Address get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return Address(street: streetValue, city: cityValue, zip: zipValue);
+  }
+
   void updateValue(Address value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(

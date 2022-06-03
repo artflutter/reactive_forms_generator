@@ -120,6 +120,38 @@ abstract class FormElementGenerator {
     return [];
   }
 
+  List<String> syncValidatorTypedList(TypeChecker typeChecker) {
+    if (typeChecker.hasAnnotationOfExact(fieldElement)) {
+      final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
+      return annotation
+              ?.getField('validatorsTyped')
+              ?.toListValue()
+              ?.map((e) {
+                return validatorName(e.toFunctionValue());
+              })
+              .whereType<String>()
+              .toList() ??
+          [];
+    }
+    return [];
+  }
+
+  List<String> asyncValidatorTypedList(TypeChecker typeChecker) {
+    if (typeChecker.hasAnnotationOfExact(fieldElement)) {
+      final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
+      return annotation
+              ?.getField('asyncValidatorsTyped')
+              ?.toListValue()
+              ?.map((e) {
+                return validatorName(e.toFunctionValue());
+              })
+              .whereType<String>()
+              .toList() ??
+          [];
+    }
+    return [];
+  }
+
   List<String> itemAsyncValidatorList(TypeChecker typeChecker) {
     if (typeChecker.hasAnnotationOfExact(fieldElement)) {
       final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
