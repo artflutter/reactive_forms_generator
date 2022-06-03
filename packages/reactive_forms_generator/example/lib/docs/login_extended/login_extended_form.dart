@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
-import 'package:example/docs/login_nullable/login_nullable.dart';
+
+import 'package:example/docs/login_extended/login_extended.dart';
 import 'package:example/helpers.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
@@ -8,15 +9,22 @@ import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_touch_spin/reactive_touch_spin.dart';
 
-class LoginNullableFormWidget extends StatelessWidget {
-  const LoginNullableFormWidget({Key? key}) : super(key: key);
+class LoginFormWidget extends StatelessWidget {
+  const LoginFormWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
-      title: const Text('Login nullable'),
-      body: LoginNullableFormBuilder(
-        model: LoginNullable(),
+      title: const Text('Login'),
+      body: LoginExtendedFormBuilder(
+        model: LoginExtended(
+          password: '1234',
+          timeout: 3,
+          theme: 'dark',
+          height: 150,
+          mode: UserMode.admin,
+          rememberMe: false,
+        ),
         builder: (context, formModel, child) {
           return Column(
             children: [
@@ -56,14 +64,14 @@ class LoginNullableFormWidget extends StatelessWidget {
               const SizedBox(height: 16.0),
               ReactiveDropdownSearch<String, String>(
                 formControl: formModel.themeControl,
+                popupProps: const PopupProps.menu(),
                 decoration: const InputDecoration(
-                  hintText: "Select a theme",
-                  labelText: "Theme",
+                  labelText: 'Theme',
+                  hintText: 'Select a theme',
                   helperText: '',
                   contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
                   border: OutlineInputBorder(),
                 ),
-                popupProps: const PopupProps.menu(),
                 // showSelectedItem: true,
                 items: const [
                   "light",
@@ -74,14 +82,14 @@ class LoginNullableFormWidget extends StatelessWidget {
               const SizedBox(height: 16.0),
               ReactiveDropdownSearch<UserMode, UserMode>(
                 formControl: formModel.modeControl,
-                popupProps: const PopupProps.menu(),
                 decoration: const InputDecoration(
-                  hintText: "Select a mode",
-                  labelText: "Mode",
+                  hintText: "Select a theme",
+                  labelText: "Theme",
                   helperText: '',
                   contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
                   border: OutlineInputBorder(),
                 ),
+                popupProps: const PopupProps.menu(),
                 // showSelectedItem: true,
                 items: const [
                   UserMode.admin,
@@ -101,34 +109,68 @@ class LoginNullableFormWidget extends StatelessWidget {
                 min: 0,
                 max: 10,
               ),
-              ListTile(
+              ReactiveSwitchListTile(
+                formControl: formModel.rememberMeControl,
                 title: const Text('remember me'),
-                trailing: ReactiveSwitch(
-                  formControl: formModel.rememberMeControl,
-                ),
+                controlAffinity: ListTileControlAffinity.trailing,
               ),
               ReactiveSlider(
                 formControl: formModel.heightControl,
                 min: 120,
                 max: 220,
               ),
+              ReactiveLoginExtendedFormConsumer(
+                builder: (context, formModel, child) {
+                  print(formModel.form.errors);
+                  return Container();
+                },
+              ),
               ElevatedButton(
                 onPressed: () {
                   if (formModel.form.valid) {
                     print(formModel.model);
+                    print(formModel.model.email);
                   } else {
                     formModel.form.markAllAsTouched();
                   }
                 },
                 child: const Text('Sign Up'),
               ),
-              ReactiveLoginNullableFormConsumer(
-                builder: (context, formModel, child) {
-                  return ElevatedButton(
-                    onPressed: formModel.form.valid ? () {} : null,
-                    child: const Text('Submit'),
-                  );
-                },
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ReactiveLoginExtendedFormConsumer(
+                    builder: (context, formModel, child) {
+                      return ElevatedButton(
+                        onPressed: formModel.form.valid
+                            ? () {
+                                formModel.updateValue(LoginExtended(
+                                  email: 'some@e.mail',
+                                  password: 'a',
+                                  timeout: 3,
+                                  theme: 'light',
+                                  height: 130,
+                                  mode: UserMode.user,
+                                  rememberMe: true,
+                                ));
+                              }
+                            : null,
+                        child: const Text('Update'),
+                      );
+                    },
+                  ),
+                  const SizedBox(width: 16),
+                  ReactiveLoginExtendedFormConsumer(
+                    builder: (context, formModel, child) {
+                      return ElevatedButton(
+                        onPressed: formModel.form.valid
+                            ? () => formModel.reset()
+                            : null,
+                        child: const Text('Reset'),
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           );

@@ -1,4 +1,4 @@
-import 'package:example/docs/login/login.dart';
+import 'package:example/docs/login_extended/login_extended.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 Map<String, dynamic>? allFieldsRequired(AbstractControl<dynamic> control) {
@@ -12,7 +12,7 @@ Map<String, dynamic>? allFieldsRequired(AbstractControl<dynamic> control) {
   return null;
 }
 
-Map<String, dynamic>? allFieldsRequiredTyped(LoginForm form) {
+Map<String, dynamic>? allFieldsRequiredTyped(LoginExtendedForm form) {
   final errors = <String, dynamic>{};
   if (!form.emailControl.valid) {
     errors.addAll(<String, dynamic>{'emailError': true});

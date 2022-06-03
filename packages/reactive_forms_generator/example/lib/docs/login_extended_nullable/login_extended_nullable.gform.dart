@@ -1,132 +1,77 @@
-@Timeout(Duration(seconds: 145))
-import 'package:test/test.dart';
-
-import '../helpers.dart';
-
-const fileName = 'login_nullable';
-
-void main() {
-  group('reactive_forms_generator', () {
-    test(
-      'Form with simple nullable types',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
-            import 'package:flutter/material.dart';
-            import 'package:reactive_forms/reactive_forms.dart';
-            import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-            
-            part '$fileName.gform.dart';
-            
-            enum UserMode { user, admin }
-            
-            @ReactiveFormAnnotation()
-            class LoginNullable {
-              final String? email;
-            
-              final String? password;
-            
-              final bool? rememberMe;
-            
-              final String? theme;
-            
-              final UserMode? mode;
-                        
-              final int? timeout;
-            
-              final double? height;
-            
-              LoginNullable({
-                @FormControlAnnotation<String>(validators: []) this.email,
-                @FormControlAnnotation(validators: []) this.password,
-                @FormControlAnnotation<bool>() this.rememberMe,
-                @FormControlAnnotation<String>() this.theme,
-                @FormControlAnnotation<UserMode>() this.mode,
-                @FormControlAnnotation<int>() this.timeout,
-                @FormControlAnnotation<double>() this.height,
-              });
-            }
-          ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
-  });
-}
-
-const generatedFile = r'''// coverage:ignore-file
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
 // ignore_for_file:
 
-part of 'login_nullable.dart';
+part of 'login_extended_nullable.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-class ReactiveLoginNullableFormConsumer extends StatelessWidget {
-  const ReactiveLoginNullableFormConsumer(
+class ReactiveLoginExtendedNullableFormConsumer extends StatelessWidget {
+  const ReactiveLoginExtendedNullableFormConsumer(
       {Key? key, required this.builder, this.child})
       : super(key: key);
 
   final Widget? child;
 
-  final Widget Function(
-      BuildContext context, LoginNullableForm formModel, Widget? child) builder;
+  final Widget Function(BuildContext context,
+      LoginExtendedNullableForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveLoginNullableForm.of(context);
+    final formModel = ReactiveLoginExtendedNullableForm.of(context);
 
-    if (formModel is! LoginNullableForm) {
+    if (formModel is! LoginExtendedNullableForm) {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, formModel, child);
   }
 }
 
-class LoginNullableFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const LoginNullableFormInheritedStreamer(
+class LoginExtendedNullableFormInheritedStreamer
+    extends InheritedStreamer<dynamic> {
+  const LoginExtendedNullableFormInheritedStreamer(
       {Key? key,
       required this.form,
       required Stream<dynamic> stream,
       required Widget child})
       : super(stream, child, key: key);
 
-  final LoginNullableForm form;
+  final LoginExtendedNullableForm form;
 }
 
-class ReactiveLoginNullableForm extends StatelessWidget {
-  const ReactiveLoginNullableForm(
+class ReactiveLoginExtendedNullableForm extends StatelessWidget {
+  const ReactiveLoginExtendedNullableForm(
       {Key? key, required this.form, required this.child, this.onWillPop})
       : super(key: key);
 
   final Widget child;
 
-  final LoginNullableForm form;
+  final LoginExtendedNullableForm form;
 
   final WillPopCallback? onWillPop;
 
-  static LoginNullableForm? of(BuildContext context, {bool listen = true}) {
+  static LoginExtendedNullableForm? of(BuildContext context,
+      {bool listen = true}) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
-              LoginNullableFormInheritedStreamer>()
+              LoginExtendedNullableFormInheritedStreamer>()
           ?.form;
     }
 
     final element = context.getElementForInheritedWidgetOfExactType<
-        LoginNullableFormInheritedStreamer>();
+        LoginExtendedNullableFormInheritedStreamer>();
     return element == null
         ? null
-        : (element.widget as LoginNullableFormInheritedStreamer).form;
+        : (element.widget as LoginExtendedNullableFormInheritedStreamer).form;
   }
 
   @override
   Widget build(BuildContext context) {
-    return LoginNullableFormInheritedStreamer(
+    return LoginExtendedNullableFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
       child: WillPopScope(
@@ -137,34 +82,35 @@ class ReactiveLoginNullableForm extends StatelessWidget {
   }
 }
 
-class LoginNullableFormBuilder extends StatefulWidget {
-  const LoginNullableFormBuilder(
+class LoginExtendedNullableFormBuilder extends StatefulWidget {
+  const LoginExtendedNullableFormBuilder(
       {Key? key, this.model, this.child, this.onWillPop, required this.builder})
       : super(key: key);
 
-  final LoginNullable? model;
+  final LoginExtendedNullable? model;
 
   final Widget? child;
 
   final WillPopCallback? onWillPop;
 
-  final Widget Function(
-      BuildContext context, LoginNullableForm formModel, Widget? child) builder;
+  final Widget Function(BuildContext context,
+      LoginExtendedNullableForm formModel, Widget? child) builder;
 
   @override
-  _LoginNullableFormBuilderState createState() =>
-      _LoginNullableFormBuilderState();
+  _LoginExtendedNullableFormBuilderState createState() =>
+      _LoginExtendedNullableFormBuilderState();
 }
 
-class _LoginNullableFormBuilderState extends State<LoginNullableFormBuilder> {
+class _LoginExtendedNullableFormBuilderState
+    extends State<LoginExtendedNullableFormBuilder> {
   late FormGroup _form;
 
-  late LoginNullableForm _formModel;
+  late LoginExtendedNullableForm _formModel;
 
   @override
   void initState() {
     _form = FormGroup({});
-    _formModel = LoginNullableForm(widget.model, _form, null);
+    _formModel = LoginExtendedNullableForm(widget.model, _form, null);
 
     final elements = _formModel.formElements();
     _form.setValidators(elements.validators);
@@ -181,7 +127,7 @@ class _LoginNullableFormBuilderState extends State<LoginNullableFormBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveLoginNullableForm(
+    return ReactiveLoginExtendedNullableForm(
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
@@ -195,8 +141,8 @@ class _LoginNullableFormBuilderState extends State<LoginNullableFormBuilder> {
   }
 }
 
-class LoginNullableForm implements FormModel<LoginNullable> {
-  LoginNullableForm(this.loginNullable, this.form, this.path) {}
+class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
+  LoginExtendedNullableForm(this.loginExtendedNullable, this.form, this.path) {}
 
   static String emailControlName = "email";
 
@@ -212,7 +158,7 @@ class LoginNullableForm implements FormModel<LoginNullable> {
 
   static String heightControlName = "height";
 
-  final LoginNullable? loginNullable;
+  final LoginExtendedNullable? loginExtendedNullable;
 
   final FormGroup form;
 
@@ -624,13 +570,13 @@ class LoginNullableForm implements FormModel<LoginNullable> {
   FormControl<double>? get heightControl => containsHeight
       ? form.control(heightControlPath()) as FormControl<double>?
       : null;
-  LoginNullable get model {
+  LoginExtendedNullable get model {
     if (!form.valid) {
       debugPrint(
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return LoginNullable(
+    return LoginExtendedNullable(
         email: emailValue,
         password: passwordValue,
         rememberMe: rememberMeValue,
@@ -640,16 +586,18 @@ class LoginNullableForm implements FormModel<LoginNullable> {
         height: heightValue);
   }
 
-  void updateValue(LoginNullable value,
+  void updateValue(LoginExtendedNullable value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
-          LoginNullableForm(value, FormGroup({}), null).formElements().rawValue,
+          LoginExtendedNullableForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(LoginNullable value,
+  void resetValue(LoginExtendedNullable value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.reset(
-          value: LoginNullableForm(value, FormGroup({}), null)
+          value: LoginExtendedNullableForm(value, FormGroup({}), null)
               .formElements()
               .rawValue,
           updateParent: updateParent,
@@ -662,49 +610,49 @@ class LoginNullableForm implements FormModel<LoginNullable> {
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
         emailControlName: FormControl<String>(
-            value: loginNullable?.email,
+            value: loginExtendedNullable?.email,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
-            value: loginNullable?.password,
+            value: loginExtendedNullable?.password,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         rememberMeControlName: FormControl<bool>(
-            value: loginNullable?.rememberMe,
+            value: loginExtendedNullable?.rememberMe,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         themeControlName: FormControl<String>(
-            value: loginNullable?.theme,
+            value: loginExtendedNullable?.theme,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         modeControlName: FormControl<UserMode>(
-            value: loginNullable?.mode,
+            value: loginExtendedNullable?.mode,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         timeoutControlName: FormControl<int>(
-            value: loginNullable?.timeout,
+            value: loginExtendedNullable?.timeout,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         heightControlName: FormControl<double>(
-            value: loginNullable?.height,
+            value: loginExtendedNullable?.height,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -717,8 +665,8 @@ class LoginNullableForm implements FormModel<LoginNullable> {
           disabled: false);
 }
 
-class ReactiveLoginNullableFormArrayBuilder<T> extends StatelessWidget {
-  const ReactiveLoginNullableFormArrayBuilder(
+class ReactiveLoginExtendedNullableFormArrayBuilder<T> extends StatelessWidget {
+  const ReactiveLoginExtendedNullableFormArrayBuilder(
       {Key? key,
       this.control,
       this.formControl,
@@ -730,18 +678,17 @@ class ReactiveLoginNullableFormArrayBuilder<T> extends StatelessWidget {
 
   final FormArray<T>? formControl;
 
-  final FormArray<T>? Function(LoginNullableForm formModel)? control;
+  final FormArray<T>? Function(LoginExtendedNullableForm formModel)? control;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
-      LoginNullableForm formModel)? builder;
+      LoginExtendedNullableForm formModel)? builder;
 
-  final Widget Function(
-          BuildContext context, int i, T? item, LoginNullableForm formModel)
-      itemBuilder;
+  final Widget Function(BuildContext context, int i, T? item,
+      LoginExtendedNullableForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveLoginNullableForm.of(context);
+    final formModel = ReactiveLoginExtendedNullableForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
@@ -777,9 +724,9 @@ class ReactiveLoginNullableFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveLoginNullableFormFormGroupArrayBuilder<V>
+class ReactiveLoginExtendedNullableFormFormGroupArrayBuilder<V>
     extends StatelessWidget {
-  const ReactiveLoginNullableFormFormGroupArrayBuilder(
+  const ReactiveLoginExtendedNullableFormFormGroupArrayBuilder(
       {Key? key,
       this.extended,
       this.getExtended,
@@ -792,18 +739,17 @@ class ReactiveLoginNullableFormFormGroupArrayBuilder<V>
   final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
 
   final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
-      LoginNullableForm formModel)? getExtended;
+      LoginExtendedNullableForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
-      LoginNullableForm formModel)? builder;
+      LoginExtendedNullableForm formModel)? builder;
 
-  final Widget Function(
-          BuildContext context, int i, V? item, LoginNullableForm formModel)
-      itemBuilder;
+  final Widget Function(BuildContext context, int i, V? item,
+      LoginExtendedNullableForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveLoginNullableForm.of(context);
+    final formModel = ReactiveLoginExtendedNullableForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
@@ -838,4 +784,3 @@ class ReactiveLoginNullableFormFormGroupArrayBuilder<V>
     );
   }
 }
-''';

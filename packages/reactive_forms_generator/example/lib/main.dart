@@ -5,9 +5,9 @@ import 'package:example/docs/freezed/freezed_form.dart';
 import 'package:example/docs/user_profile/user_profile_form.dart';
 import 'package:example/docs/array_nullable/array_nullable_form.dart';
 import 'package:example/docs/group/group_form.dart';
+import 'package:example/docs/login_extended/login_extended_form.dart';
+import 'package:example/docs/login_extended_nullable/login_extended_nullable_form.dart';
 import 'package:example/docs/login/login_form.dart';
-import 'package:example/docs/login_nullable/login_nullable_form.dart';
-import 'package:example/docs/basic/basic_form.dart';
 import 'package:flutter/material.dart';
 
 void main() {
