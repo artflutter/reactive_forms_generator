@@ -507,11 +507,19 @@ class GroupForm implements FormModel<Group> {
   FormGroup? get address2Control => containsAddress2
       ? form.control(address2ControlPath()) as FormGroup?
       : null;
-  Group get model => Group(
-      personal: personalValue,
-      phone: phoneValue,
-      address: addressValue,
-      address2: address2Value);
+  Group get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return Group(
+        personal: personalValue,
+        phone: phoneValue,
+        address: addressValue,
+        address2: address2Value);
+  }
+
   void updateValue(Group value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -671,7 +679,15 @@ class PersonalForm implements FormModel<Personal> {
   FormControl<String>? get emailControl => containsEmail
       ? form.control(emailControlPath()) as FormControl<String>?
       : null;
-  Personal get model => Personal(name: nameValue, email: emailValue);
+  Personal get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return Personal(name: nameValue, email: emailValue);
+  }
+
   void updateValue(Personal? value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -842,8 +858,15 @@ class PhoneForm implements FormModel<Phone> {
   FormControl<String>? get countryIsoControl => containsCountryIso
       ? form.control(countryIsoControlPath()) as FormControl<String>?
       : null;
-  Phone get model =>
-      Phone(phoneNumber: phoneNumberValue, countryIso: countryIsoValue);
+  Phone get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return Phone(phoneNumber: phoneNumberValue, countryIso: countryIsoValue);
+  }
+
   void updateValue(Phone? value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -1073,8 +1096,15 @@ class AddressForm implements FormModel<Address> {
   FormControl<String>? get zipControl => containsZip
       ? form.control(zipControlPath()) as FormControl<String>?
       : null;
-  Address get model =>
-      Address(street: streetValue, city: cityValue, zip: zipValue);
+  Address get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return Address(street: streetValue, city: cityValue, zip: zipValue);
+  }
+
   void updateValue(Address? value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(

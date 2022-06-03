@@ -1,3 +1,7 @@
+## [0.16.0-beta]
+
+* typed validators for FormGroup
+
 ## [0.15.0-beta]
 
 * bugfix: FormGroupAnnotation params were skipped

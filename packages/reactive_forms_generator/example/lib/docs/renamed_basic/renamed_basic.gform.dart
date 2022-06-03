@@ -219,8 +219,15 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
       form.control(emailControlPath()) as FormControl<String>;
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
-  RenamedBasic get model =>
-      RenamedBasic(email: emailValue, password: passwordValue);
+  RenamedBasic get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return RenamedBasic(email: emailValue, password: passwordValue);
+  }
+
   void updateValue(RenamedBasic value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(

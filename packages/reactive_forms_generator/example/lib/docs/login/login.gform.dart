@@ -396,15 +396,23 @@ class LoginForm implements FormModel<Login> {
       form.control(timeoutControlPath()) as FormControl<int>;
   FormControl<double> get heightControl =>
       form.control(heightControlPath()) as FormControl<double>;
-  Login get model => Login(
-      email: emailValue,
-      password: passwordValue,
-      rememberMe: rememberMeValue,
-      theme: themeValue,
-      mode: modeValue,
-      timeout: timeoutValue,
-      height: heightValue,
-      unAnnotated: login?.unAnnotated);
+  Login get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return Login(
+        email: emailValue,
+        password: passwordValue,
+        rememberMe: rememberMeValue,
+        theme: themeValue,
+        mode: modeValue,
+        timeout: timeoutValue,
+        height: heightValue,
+        unAnnotated: login?.unAnnotated);
+  }
+
   void updateValue(Login value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -489,7 +497,9 @@ class LoginForm implements FormModel<Login> {
             touched: false)
       },
           validators: [
-            allFieldsRequired
+            allFieldsRequired,
+            (control) => allFieldsRequiredTyped(
+                LoginForm(login, control as FormGroup, path))
           ],
           asyncValidators: [],
           asyncValidatorsDebounceTime: 250,

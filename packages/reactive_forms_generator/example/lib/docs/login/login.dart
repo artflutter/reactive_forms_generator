@@ -6,9 +6,12 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 part 'login.gform.dart';
 
 @ReactiveFormAnnotation()
-@FormGroupAnnotation(
+@FormGroupAnnotation<LoginForm>(
   validators: [
     allFieldsRequired,
+  ],
+  validatorsTyped: [
+    allFieldsRequiredTyped,
   ],
 )
 class Login {

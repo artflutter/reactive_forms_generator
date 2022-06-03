@@ -766,16 +766,24 @@ class ProfileForm implements FormModel<Profile> {
   FormGroup get thresholdControl =>
       form.control(thresholdControlPath()) as FormGroup;
   FormGroup get timerControl => form.control(timerControlPath()) as FormGroup;
-  Profile get model => Profile(
-      id: profile.id,
-      name: nameValue,
-      chartingOrder: chartingOrderValue,
-      numberingStandard: numberingStandardValue,
-      incidenceFilter: incidenceFilterValue,
-      measurementType: measurementTypeValue,
-      threshold: thresholdValue,
-      timer: timerValue,
-      audioGuidance: audioGuidanceValue);
+  Profile get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return Profile(
+        id: profile.id,
+        name: nameValue,
+        chartingOrder: chartingOrderValue,
+        numberingStandard: numberingStandardValue,
+        incidenceFilter: incidenceFilterValue,
+        measurementType: measurementTypeValue,
+        threshold: thresholdValue,
+        timer: timerValue,
+        audioGuidance: audioGuidanceValue);
+  }
+
   void updateValue(Profile value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -1075,13 +1083,21 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
       form.control(isCalculusEnabledControlPath()) as FormControl<bool>;
   FormControl<bool> get isPlaqueEnabledControl =>
       form.control(isPlaqueEnabledControlPath()) as FormControl<bool>;
-  IncidenceFilter get model => IncidenceFilter(
-      isMobilityEnabled: isMobilityEnabledValue,
-      isFurcationEnabled: isFurcationEnabledValue,
-      isBleedingEnabled: isBleedingEnabledValue,
-      isSuppurationEnabled: isSuppurationEnabledValue,
-      isCalculusEnabled: isCalculusEnabledValue,
-      isPlaqueEnabled: isPlaqueEnabledValue);
+  IncidenceFilter get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return IncidenceFilter(
+        isMobilityEnabled: isMobilityEnabledValue,
+        isFurcationEnabled: isFurcationEnabledValue,
+        isBleedingEnabled: isBleedingEnabledValue,
+        isSuppurationEnabled: isSuppurationEnabledValue,
+        isCalculusEnabled: isCalculusEnabledValue,
+        isPlaqueEnabled: isPlaqueEnabledValue);
+  }
+
   void updateValue(IncidenceFilter value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -1235,8 +1251,15 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
       form.control(isEnabledControlPath()) as FormControl<bool>;
   FormControl<int> get valueControl =>
       form.control(valueControlPath()) as FormControl<int>;
-  ThresholdSetting get model =>
-      ThresholdSetting(isEnabled: isEnabledValue, value: valueValue);
+  ThresholdSetting get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return ThresholdSetting(isEnabled: isEnabledValue, value: valueValue);
+  }
+
   void updateValue(ThresholdSetting value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -1362,8 +1385,15 @@ class TimerSettingForm implements FormModel<TimerSetting> {
       form.control(isEnabledControlPath()) as FormControl<bool>;
   FormControl<int> get valueControl =>
       form.control(valueControlPath()) as FormControl<int>;
-  TimerSetting get model =>
-      TimerSetting(isEnabled: isEnabledValue, value: valueValue);
+  TimerSetting get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return TimerSetting(isEnabled: isEnabledValue, value: valueValue);
+  }
+
   void updateValue(TimerSetting value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(

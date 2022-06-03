@@ -477,9 +477,13 @@ class FormGenerator {
             ..name = 'model'
             ..returns = Reference(element.name)
             ..type = MethodType.getter
-            ..lambda = true
             ..body = Code('''
-              ${element.name}(${parameterValues.join(', ')})
+              if (!form.valid) {
+                debugPrint(
+                  'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+                );
+              }
+              return ${element.name}(${parameterValues.join(', ')});
             ''');
         },
       );

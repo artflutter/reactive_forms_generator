@@ -267,7 +267,15 @@ class BasicForm implements FormModel<Basic> {
       form.control(emailControlPath()) as FormControl<String>;
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
-  Basic get model => Basic(email: emailValue, password: passwordValue);
+  Basic get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return Basic(email: emailValue, password: passwordValue);
+  }
+
   void updateValue(Basic value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(

@@ -285,7 +285,15 @@ class MailingListForm implements FormModel<MailingList> {
     ));
   }
 
-  MailingList get model => MailingList(emailList: emailListValue);
+  MailingList get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return MailingList(emailList: emailListValue);
+  }
+
   void updateValue(MailingList value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(

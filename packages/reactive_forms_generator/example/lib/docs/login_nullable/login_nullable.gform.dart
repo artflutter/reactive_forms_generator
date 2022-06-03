@@ -567,14 +567,22 @@ class LoginNullableForm implements FormModel<LoginNullable> {
   FormControl<double>? get heightControl => containsHeight
       ? form.control(heightControlPath()) as FormControl<double>?
       : null;
-  LoginNullable get model => LoginNullable(
-      email: emailValue,
-      password: passwordValue,
-      rememberMe: rememberMeValue,
-      theme: themeValue,
-      mode: modeValue,
-      timeout: timeoutValue,
-      height: heightValue);
+  LoginNullable get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return LoginNullable(
+        email: emailValue,
+        password: passwordValue,
+        rememberMe: rememberMeValue,
+        theme: themeValue,
+        mode: modeValue,
+        timeout: timeoutValue,
+        height: heightValue);
+  }
+
   void updateValue(LoginNullable value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
