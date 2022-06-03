@@ -6,74 +6,19 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 part 'login.gform.dart';
 
 @ReactiveFormAnnotation()
-@FormGroupAnnotation<LoginForm>(
-  validators: [
-    allFieldsRequired,
-  ],
-  validatorsTyped: [
-    allFieldsRequiredTyped,
-  ],
-)
-class Login {
+class Basic {
   final String email;
 
   final String password;
 
-  final bool rememberMe;
-
-  final String theme;
-
-  final UserMode mode;
-
-  final int timeout;
-
-  final double height;
-
-  final String? unAnnotated;
-
-  Login({
-    @FormControlAnnotation<String>(
-      validators: [
-        requiredValidator,
-      ],
+  Basic({
+    @FormControlAnnotation(
+      validators: [requiredValidator],
     )
         this.email = '',
-    @FormControlAnnotation<String>(
-      validators: [
-        requiredValidator,
-      ],
+    @FormControlAnnotation(
+      validators: [requiredValidator],
     )
-        required this.password,
-    @FormControlAnnotation<bool>(
-      validators: [
-        requiredValidator,
-      ],
-    )
-        required this.rememberMe,
-    @FormControlAnnotation<String>(
-      validators: [
-        requiredValidator,
-      ],
-    )
-        required this.theme,
-    @FormControlAnnotation<UserMode>(
-      validators: [
-        requiredValidator,
-      ],
-    )
-        required this.mode,
-    @FormControlAnnotation<int>(
-      validators: [
-        requiredValidator,
-      ],
-    )
-        required this.timeout,
-    @FormControlAnnotation<double>(
-      validators: [
-        requiredValidator,
-      ],
-    )
-        required this.height,
-    this.unAnnotated,
+        this.password = '',
   });
 }

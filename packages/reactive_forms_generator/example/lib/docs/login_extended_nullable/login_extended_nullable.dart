@@ -3,10 +3,10 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:example/helpers.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
-part 'login_nullable.gform.dart';
+part 'login_extended_nullable.gform.dart';
 
 @ReactiveFormAnnotation()
-class LoginNullable {
+class LoginExtendedNullable {
   final String? email;
 
   final String? password;
@@ -21,7 +21,7 @@ class LoginNullable {
 
   final double? height;
 
-  LoginNullable({
+  LoginExtendedNullable({
     @FormControlAnnotation<String>(validators: []) this.email,
     @FormControlAnnotation() this.password,
     @FormControlAnnotation<bool>() this.rememberMe,
