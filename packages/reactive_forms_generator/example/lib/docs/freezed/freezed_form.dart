@@ -47,8 +47,8 @@ class FreezedFormWidget extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   if (formModel.form.valid) {
-                    print(formModel.model);
-                    print(formModel.model.year);
+                    debugPrint(formModel.model.toString());
+                    debugPrint(formModel.model.year.toString());
                   } else {
                     formModel.form.markAllAsTouched();
                   }

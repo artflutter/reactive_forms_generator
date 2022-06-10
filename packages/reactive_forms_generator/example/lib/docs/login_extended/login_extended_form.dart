@@ -9,8 +9,8 @@ import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_touch_spin/reactive_touch_spin.dart';
 
-class LoginFormWidget extends StatelessWidget {
-  const LoginFormWidget({Key? key}) : super(key: key);
+class LoginExtendedFormWidget extends StatelessWidget {
+  const LoginExtendedFormWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -121,15 +121,15 @@ class LoginFormWidget extends StatelessWidget {
               ),
               ReactiveLoginExtendedFormConsumer(
                 builder: (context, formModel, child) {
-                  print(formModel.form.errors);
+                  debugPrint(formModel.form.errors.toString());
                   return Container();
                 },
               ),
               ElevatedButton(
                 onPressed: () {
                   if (formModel.form.valid) {
-                    print(formModel.model);
-                    print(formModel.model.email);
+                    debugPrint(formModel.model.toString());
+                    debugPrint(formModel.model.email);
                   } else {
                     formModel.form.markAllAsTouched();
                   }
