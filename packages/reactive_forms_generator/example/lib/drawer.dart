@@ -12,15 +12,15 @@ class AppDrawer extends StatelessWidget {
         child: ListView(
           children: [
             ListTile(
-              title: const Text('Login'),
+              title: const Text('Login extended'),
               onTap: () => Navigator.of(context).pushReplacementNamed(
                 Routes.login,
               ),
             ),
             ListTile(
-              title: const Text('Login nullable'),
+              title: const Text('Login extended nullable'),
               onTap: () => Navigator.of(context).pushReplacementNamed(
-                Routes.loginNullable,
+                Routes.loginExtendedNullable,
               ),
             ),
             ListTile(
@@ -36,9 +36,9 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: const Text('Basic form'),
+              title: const Text('Login form'),
               onTap: () => Navigator.of(context).pushReplacementNamed(
-                Routes.basic,
+                Routes.login,
               ),
             ),
             ListTile(

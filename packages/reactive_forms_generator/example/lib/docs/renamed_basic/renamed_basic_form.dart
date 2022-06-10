@@ -52,9 +52,11 @@ class BasicFormWidget extends StatelessWidget {
                     onPressed: formModel.form.valid
                         ? () {
                             // ignore: unnecessary_cast
-                            print((formModel as FormModel<RenamedBasic>).model);
-                            print(formModel.model.email);
-                            print(formModel.model.password);
+                            debugPrint((formModel as FormModel<RenamedBasic>)
+                                .model
+                                .toString());
+                            debugPrint(formModel.model.email);
+                            debugPrint(formModel.model.password);
                           }
                         : null,
                     child: const Text('Submit'),

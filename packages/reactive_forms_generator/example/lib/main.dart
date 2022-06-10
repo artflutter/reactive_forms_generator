@@ -15,9 +15,9 @@ void main() {
 }
 
 class Routes {
-  static const login = '/login';
+  static const loginExtended = '/login-extended';
 
-  static const basic = '/basic';
+  static const login = '/login';
 
   static const mailingList = '/mailing-list';
 
@@ -29,7 +29,7 @@ class Routes {
 
   static const deliveryPoint = '/delivery-point';
 
-  static const loginNullable = '/login-nullable';
+  static const loginExtendedNullable = '/login-extended-nullable';
 
   static const arrayNullable = '/array-nullable';
 
@@ -48,18 +48,19 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: <String, WidgetBuilder>{
+        Routes.loginExtended: (_) => const LoginExtendedFormWidget(),
         Routes.login: (_) => const LoginFormWidget(),
-        Routes.basic: (_) => const BasicFormWidget(),
         Routes.mailingList: (_) => const MailingListFormWidget(),
         Routes.userProfile: (_) => const UserProfileFormWidget(),
-        Routes.loginNullable: (_) => const LoginNullableFormWidget(),
+        Routes.loginExtendedNullable: (_) =>
+            const LoginExtendedNullableFormWidget(),
         Routes.arrayNullable: (_) => ArrayNullableFormWidget(),
         Routes.group: (_) => const GroupFormWidget(),
         Routes.deliveryList: (_) => const DeliveryListFormWidget(),
         Routes.deliveryPoint: (_) => const DeliveryPointWidget(),
         Routes.freezed: (_) => const FreezedFormWidget(),
       },
-      home: const MailingListFormWidget(),
+      home: const LoginFormWidget(),
     );
   }
 }

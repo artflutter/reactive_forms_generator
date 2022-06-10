@@ -4,15 +4,14 @@ import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
-class BasicFormWidget extends StatelessWidget {
-  const BasicFormWidget({Key? key}) : super(key: key);
+class LoginFormWidget extends StatelessWidget {
+  const LoginFormWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
-      title: const Text('Basic'),
+      title: const Text('Login'),
       body: BasicFormBuilder(
-        // model: Basic(),
         builder: (context, formModel, child) {
           return Column(
             children: [
@@ -21,6 +20,7 @@ class BasicFormWidget extends StatelessWidget {
                 validationMessages: (control) => {
                   ValidationMessage.required: 'The email must not be empty',
                 },
+                showErrors: (_) => false,
                 decoration: const InputDecoration(
                   labelText: 'Email',
                   helperText: '',
@@ -32,6 +32,7 @@ class BasicFormWidget extends StatelessWidget {
               ReactiveTextField<String>(
                 formControl: formModel.passwordControl,
                 obscureText: true,
+                showErrors: (_) => false,
                 validationMessages: (control) => {
                   ValidationMessage.required: 'The password must not be empty',
                 },
@@ -43,6 +44,17 @@ class BasicFormWidget extends StatelessWidget {
                   errorStyle: TextStyle(height: 0.7),
                 ),
               ),
+              ReactiveBasicFormConsumer(
+                builder: (context, formModel, child) {
+                  // debugPrint(formModel.passwordControl.errors);
+                  // debugPrint(formModel.form);
+                  debugPrint('dirty => ${formModel.form.dirty}');
+                  debugPrint(
+                      'passwordDirty => ${formModel.passwordControl.dirty}');
+
+                  return Text(formModel.emailControl.errors.toString());
+                },
+              ),
               const SizedBox(height: 8.0),
               ReactiveBasicFormConsumer(
                 builder: (context, formModel, child) {
@@ -50,11 +62,13 @@ class BasicFormWidget extends StatelessWidget {
                     onPressed: formModel.form.valid
                         ? () {
                             // ignore: unnecessary_cast, avoid_print
-                            print((formModel as FormModel<Basic>).model);
+                            debugPrint((formModel as FormModel<Basic>)
+                                .model
+                                .toString());
                             // ignore: avoid_print
-                            print(formModel.model.email);
+                            debugPrint(formModel.model.email);
                             // ignore: avoid_print
-                            print(formModel.model.password);
+                            debugPrint(formModel.model.password);
                           }
                         : null,
                     child: const Text('Submit'),

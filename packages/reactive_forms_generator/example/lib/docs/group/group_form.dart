@@ -149,9 +149,9 @@ class GroupFormWidget extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   if (formModel.form.valid) {
-                    print(formModel.model);
-                    print(formModel.model.personal?.name);
-                    print(formModel.model.personal?.email);
+                    debugPrint(formModel.model.toString());
+                    debugPrint(formModel.model.personal?.name);
+                    debugPrint(formModel.model.personal?.email);
                   } else {
                     formModel.form.markAllAsTouched();
                   }

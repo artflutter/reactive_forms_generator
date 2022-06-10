@@ -1,3 +1,7 @@
+## [0.17.0-beta]
+
+* update generator name for easier configuration in build.yaml
+
 ## [0.16.0-beta]
 
 * typed validators for FormGroup

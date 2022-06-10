@@ -8,8 +8,8 @@ import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_touch_spin/reactive_touch_spin.dart';
 
-class LoginNullableFormWidget extends StatelessWidget {
-  const LoginNullableFormWidget({Key? key}) : super(key: key);
+class LoginExtendedNullableFormWidget extends StatelessWidget {
+  const LoginExtendedNullableFormWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +115,7 @@ class LoginNullableFormWidget extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   if (formModel.form.valid) {
-                    print(formModel.model);
+                    debugPrint(formModel.model.toString());
                   } else {
                     formModel.form.markAllAsTouched();
                   }

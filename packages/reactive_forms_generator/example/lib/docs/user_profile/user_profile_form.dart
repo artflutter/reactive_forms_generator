@@ -141,7 +141,7 @@ class UserProfileFormWidget extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       if (formModel.form.valid) {
-                        print(formModel.model);
+                        debugPrint(formModel.model.toString());
                       } else {
                         formModel.form.markAllAsTouched();
                       }
@@ -153,8 +153,8 @@ class UserProfileFormWidget extends StatelessWidget {
                       return ElevatedButton(
                         onPressed: formModel.form.valid
                             ? () {
-                                print(formModel.model.firstName);
-                                print(formModel.model.lastName);
+                                debugPrint(formModel.model.firstName);
+                                debugPrint(formModel.model.lastName);
                               }
                             : null,
                         child: const Text('Submit'),

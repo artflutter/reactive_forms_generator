@@ -86,7 +86,7 @@ class ArrayNullableFormWidget extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   if (formModel.form.valid) {
-                    print(formModel.model);
+                    debugPrint(formModel.model.toString());
                   } else {
                     formModel.form.markAllAsTouched();
                   }
