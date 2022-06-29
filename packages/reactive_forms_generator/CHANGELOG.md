@@ -1,3 +1,7 @@
+## [0.17.1-beta]
+
+* dispose form
+
 ## [0.17.0-beta]
 
 * update generator name for easier configuration in build.yaml

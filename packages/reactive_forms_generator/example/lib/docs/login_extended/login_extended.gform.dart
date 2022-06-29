@@ -123,6 +123,12 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
   }
 
   @override
+  void dispose() {
+    _form.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ReactiveLoginExtendedForm(
       form: _formModel,

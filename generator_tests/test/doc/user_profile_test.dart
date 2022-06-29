@@ -205,6 +205,12 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
   }
 
   @override
+  void dispose() {
+    _form.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ReactiveUserProfileForm(
       form: _formModel,

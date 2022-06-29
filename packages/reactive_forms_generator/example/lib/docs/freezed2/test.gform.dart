@@ -120,6 +120,12 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
   }
 
   @override
+  void dispose() {
+    _form.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ReactiveTestForm(
       form: _formModel,
