@@ -120,6 +120,12 @@ class _BasicFormBuilderState extends State<BasicFormBuilder> {
   }
 
   @override
+  void dispose() {
+    _form.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ReactiveBasicForm(
       form: _formModel,

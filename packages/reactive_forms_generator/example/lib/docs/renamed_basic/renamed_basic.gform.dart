@@ -123,6 +123,12 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
   }
 
   @override
+  void dispose() {
+    _form.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ReactiveSomeWiredNameForm(
       form: _formModel,

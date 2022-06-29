@@ -145,6 +145,16 @@ class ReactiveFormBuilder {
         ),
         Method(
           (b) => b
+            ..name = 'dispose'
+            ..annotations.add(const CodeExpression(Code('override')))
+            ..returns = const Reference('void')
+            ..body = Code('''
+                _form.dispose();
+                super.dispose();
+              '''),
+        ),
+        Method(
+          (b) => b
             ..name = 'build'
             ..annotations.add(const CodeExpression(Code('override')))
             ..returns = const Reference('Widget')

@@ -120,6 +120,12 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
   }
 
   @override
+  void dispose() {
+    _form.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ReactiveGroupForm(
       form: _formModel,
