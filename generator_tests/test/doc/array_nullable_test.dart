@@ -181,6 +181,12 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
   }
 
   @override
+  void dispose() {
+    _form.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ReactiveArrayNullableForm(
       form: _formModel,

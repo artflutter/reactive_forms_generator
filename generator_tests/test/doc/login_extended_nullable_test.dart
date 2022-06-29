@@ -183,6 +183,12 @@ class _LoginExtendedNullableFormBuilderState
   }
 
   @override
+  void dispose() {
+    _form.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ReactiveLoginExtendedNullableForm(
       form: _formModel,

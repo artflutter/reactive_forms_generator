@@ -122,6 +122,12 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
   }
 
   @override
+  void dispose() {
+    _form.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ReactiveMailingListForm(
       form: _formModel,

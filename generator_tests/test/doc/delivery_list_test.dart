@@ -215,6 +215,12 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
   }
 
   @override
+  void dispose() {
+    _form.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ReactiveDeliveryListForm(
       form: _formModel,
@@ -1485,6 +1491,12 @@ class _StandaloneDeliveryPointFormBuilderState
     _form.addAll(elements.controls);
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _form.dispose();
+    super.dispose();
   }
 
   @override

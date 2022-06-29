@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 import '../helpers.dart';
 
-const fileName = 'basic';
+const fileName = 'login';
 
 void main() {
   group('doc', () {
@@ -54,7 +54,7 @@ const generatedFile = r'''// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file:
 
-part of 'basic.dart';
+part of 'login.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
@@ -168,6 +168,12 @@ class _BasicFormBuilderState extends State<BasicFormBuilder> {
     _form.addAll(elements.controls);
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _form.dispose();
+    super.dispose();
   }
 
   @override
