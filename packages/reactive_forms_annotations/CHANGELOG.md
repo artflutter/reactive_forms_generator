@@ -1,3 +1,7 @@
+## [0.11.0-beta]
+
+* re-export flutter/widgets.dart
+
 ## [0.10.0-beta]
 
 * typed validators for FormGroup
