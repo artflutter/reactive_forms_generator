@@ -441,6 +441,10 @@ class GroupForm implements FormModel<Group> {
         address2: address2Value);
   }
 
+  GroupForm copyWithPath(String? path) {
+    return GroupForm(group, form, path);
+  }
+
   void updateValue(Group value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -607,6 +611,10 @@ class PersonalForm implements FormModel<Personal> {
       );
     }
     return Personal(name: nameValue, email: emailValue);
+  }
+
+  PersonalForm copyWithPath(String? path) {
+    return PersonalForm(personal, form, path);
   }
 
   void updateValue(Personal? value,
@@ -786,6 +794,10 @@ class PhoneForm implements FormModel<Phone> {
       );
     }
     return Phone(phoneNumber: phoneNumberValue, countryIso: countryIsoValue);
+  }
+
+  PhoneForm copyWithPath(String? path) {
+    return PhoneForm(phone, form, path);
   }
 
   void updateValue(Phone? value,
@@ -1024,6 +1036,10 @@ class AddressForm implements FormModel<Address> {
       );
     }
     return Address(street: streetValue, city: cityValue, zip: zipValue);
+  }
+
+  AddressForm copyWithPath(String? path) {
+    return AddressForm(address, form, path);
   }
 
   void updateValue(Address? value,

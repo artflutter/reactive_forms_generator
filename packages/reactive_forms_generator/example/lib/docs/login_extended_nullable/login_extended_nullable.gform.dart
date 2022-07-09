@@ -592,6 +592,10 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
         height: heightValue);
   }
 
+  LoginExtendedNullableForm copyWithPath(String? path) {
+    return LoginExtendedNullableForm(loginExtendedNullable, form, path);
+  }
+
   void updateValue(LoginExtendedNullable value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(

@@ -31,14 +31,17 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
 
   @override
   Method? formGroupArrayMethod() {
-    final typeParameter = (field.type as ParameterizedType).typeArguments.first;
-
     final code = '''${field.name}${field.className}
           .asMap()
-          .map((k, v) => MapEntry(k,${typeParameter}Form(
-              v.model, v.form, pathBuilder("${field.name}.\$k")).model))
-          .values
-          .toList()''';
+          .map((k, v) => MapEntry(
+            k,
+            v.copyWithPath(
+              pathBuilder("${field.name}.\$k"),
+            ).model,
+          ),
+        )
+        .values
+        .toList()''';
 
     return methodEntity.rebuild(
       (b) => b..body = Code(code),

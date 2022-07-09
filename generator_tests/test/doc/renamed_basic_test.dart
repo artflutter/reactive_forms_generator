@@ -285,6 +285,10 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
     return RenamedBasic(email: emailValue, password: passwordValue);
   }
 
+  SomeWiredNameForm copyWithPath(String? path) {
+    return SomeWiredNameForm(renamedBasic, form, path);
+  }
+
   void updateValue(RenamedBasic value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(

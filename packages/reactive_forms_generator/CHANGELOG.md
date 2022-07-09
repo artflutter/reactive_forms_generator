@@ -1,3 +1,7 @@
+## [0.17.2-beta]
+
+* copyWithPath method to reduce `model` calls which could be unsafe on non valid form
+
 ## [0.17.1-beta]
 
 * dispose form

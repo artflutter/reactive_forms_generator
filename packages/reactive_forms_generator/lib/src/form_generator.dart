@@ -304,8 +304,6 @@ class FormGenerator {
     final formField = '${field.name}${formGroupGenerator.className}';
     final controlField = '${field.fieldControlName}${field.nullabilitySuffix}';
 
-    final typeParameter = (field.type as ParameterizedType).typeArguments.first;
-
     return Method(
       (b) => b
         ..name = field.removeListItemName
@@ -324,7 +322,7 @@ class FormGenerator {
                 $formField.removeAt(i);
                 
                 $formField.asMap().forEach((k, v) {
-                  $formField[k] = ${typeParameter}Form(v.model, v.form, pathBuilder("${field.name}.\$k"));
+                  $formField[k] = v.copyWithPath(pathBuilder("${field.name}.\$k"));
                 });
                 
                 $controlField.removeAt(i);
@@ -484,6 +482,24 @@ class FormGenerator {
                 );
               }
               return ${element.name}(${parameterValues.join(', ')});
+            ''');
+        },
+      );
+
+  Method get copyWithPath => Method(
+        (b) {
+          b
+            ..name = 'copyWithPath'
+            ..returns = Reference(className)
+            ..requiredParameters.add(
+              Parameter(
+                (b) => b
+                  ..name = 'path'
+                  ..type = const Reference('String?'),
+              ),
+            )
+            ..body = Code('''
+              return $className(${element.name.camelCase}, form, path);
             ''');
         },
       );
@@ -650,6 +666,7 @@ class FormGenerator {
                 ...removeGroupControlMethodList,
                 ...addGroupControlListMethodList,
                 modelMethod,
+                copyWithPath,
                 updateValueMethod,
                 resetValueMethod,
                 resetMethod,

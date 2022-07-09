@@ -1,3 +1,7 @@
+## [0.12.0-beta]
+
+* re-export reactive_forms
+
 ## [0.11.0-beta]
 
 * re-export flutter/widgets.dart

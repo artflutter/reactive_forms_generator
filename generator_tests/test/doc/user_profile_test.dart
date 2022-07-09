@@ -436,6 +436,10 @@ class UserProfileForm implements FormModel<UserProfile> {
         office: officeValue);
   }
 
+  UserProfileForm copyWithPath(String? path) {
+    return UserProfileForm(userProfile, form, path);
+  }
+
   void updateValue(UserProfile value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -680,6 +684,10 @@ class AddressForm implements FormModel<Address> {
       );
     }
     return Address(street: streetValue, city: cityValue, zip: zipValue);
+  }
+
+  AddressForm copyWithPath(String? path) {
+    return AddressForm(address, form, path);
   }
 
   void updateValue(Address value,

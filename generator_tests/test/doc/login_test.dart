@@ -282,6 +282,10 @@ class BasicForm implements FormModel<Basic> {
     return Basic(email: emailValue, password: passwordValue);
   }
 
+  BasicForm copyWithPath(String? path) {
+    return BasicForm(basic, form, path);
+  }
+
   void updateValue(Basic value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(

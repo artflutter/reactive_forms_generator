@@ -236,6 +236,10 @@ class MailingListForm implements FormModel<MailingList> {
     return MailingList(emailList: emailListValue);
   }
 
+  MailingListForm copyWithPath(String? path) {
+    return MailingListForm(mailingList, form, path);
+  }
+
   void updateValue(MailingList value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(

@@ -475,6 +475,10 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
         someList: someListValue);
   }
 
+  ArrayNullableForm copyWithPath(String? path) {
+    return ArrayNullableForm(arrayNullable, form, path);
+  }
+
   void updateValue(ArrayNullable value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
