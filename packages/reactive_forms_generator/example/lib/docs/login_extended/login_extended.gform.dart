@@ -422,6 +422,10 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
         unAnnotated: loginExtended?.unAnnotated);
   }
 
+  LoginExtendedForm copyWithPath(String? path) {
+    return LoginExtendedForm(loginExtended, form, path);
+  }
+
   void updateValue(LoginExtended value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(

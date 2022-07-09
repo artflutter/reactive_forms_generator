@@ -1,4 +1,3 @@
-import 'package:reactive_forms/reactive_forms.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 

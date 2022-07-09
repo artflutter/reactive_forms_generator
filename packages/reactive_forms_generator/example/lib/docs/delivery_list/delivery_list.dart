@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:example/helpers.dart';
 

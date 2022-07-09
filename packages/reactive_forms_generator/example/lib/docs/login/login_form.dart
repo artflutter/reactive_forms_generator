@@ -1,7 +1,6 @@
 import 'package:example/docs/login/login.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
-import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 class LoginFormWidget extends StatelessWidget {

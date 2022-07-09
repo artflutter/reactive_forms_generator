@@ -790,6 +790,10 @@ class ProfileForm implements FormModel<Profile> {
         audioGuidance: audioGuidanceValue);
   }
 
+  ProfileForm copyWithPath(String? path) {
+    return ProfileForm(profile, form, path);
+  }
+
   void updateValue(Profile value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -1104,6 +1108,10 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
         isPlaqueEnabled: isPlaqueEnabledValue);
   }
 
+  IncidenceFilterForm copyWithPath(String? path) {
+    return IncidenceFilterForm(incidenceFilter, form, path);
+  }
+
   void updateValue(IncidenceFilter value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -1266,6 +1274,10 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
     return ThresholdSetting(isEnabled: isEnabledValue, value: valueValue);
   }
 
+  ThresholdSettingForm copyWithPath(String? path) {
+    return ThresholdSettingForm(thresholdSetting, form, path);
+  }
+
   void updateValue(ThresholdSetting value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(
@@ -1398,6 +1410,10 @@ class TimerSettingForm implements FormModel<TimerSetting> {
       );
     }
     return TimerSetting(isEnabled: isEnabledValue, value: valueValue);
+  }
+
+  TimerSettingForm copyWithPath(String? path) {
+    return TimerSettingForm(timerSetting, form, path);
   }
 
   void updateValue(TimerSetting value,

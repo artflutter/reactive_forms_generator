@@ -255,6 +255,10 @@ class TestForm implements FormModel<Test> {
     return Test(title: titleValue, description: descriptionValue);
   }
 
+  TestForm copyWithPath(String? path) {
+    return TestForm(test, form, path);
+  }
+
   void updateValue(Test value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(

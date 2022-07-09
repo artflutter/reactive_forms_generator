@@ -1,0 +1,24 @@
+name: PR check [reactive_form_generator] test
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+    types:
+      - opened
+      - reopened
+      - edited
+      - synchronize
+
+jobs:
+  pr-check-reactive_form_generator-test:
+    runs-on: ubuntu-latest
+    container:
+      image: cirrusci/flutter:3.0.0
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: reactive_forms_generator => Code generation tests
+        run: cd generator_tests && flutter pub get && dart test && cd ../

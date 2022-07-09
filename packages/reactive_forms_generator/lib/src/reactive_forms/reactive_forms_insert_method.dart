@@ -24,9 +24,7 @@ class ReactiveFormInsertMethod extends ReactiveFormGeneratorMethod {
   
       ${field.name}${field.className}.asMap().forEach((k, v) {
         if (k > i) {
-          ${field.name}${field.className}[k] = ${field.className}(
-            v.model,
-            form,
+          ${field.name}${field.className}[k] = v.copyWithPath(
             pathBuilder("${field.fieldName}.\$k"),
           );
         }

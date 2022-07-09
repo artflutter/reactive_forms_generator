@@ -402,6 +402,10 @@ class FreezedClassForm implements FormModel<FreezedClass> {
         id: idValue, name: nameValue, year: yearValue);
   }
 
+  FreezedClassForm copyWithPath(String? path) {
+    return FreezedClassForm(freezedClass, form, path);
+  }
+
   void updateValue(FreezedClass value,
           {bool updateParent = true, bool emitEvent = true}) =>
       form.updateValue(

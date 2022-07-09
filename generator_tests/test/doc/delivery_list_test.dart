@@ -270,16 +270,30 @@ class DeliveryListForm implements FormModel<DeliveryList> {
   String clientListControlPath() => pathBuilder(clientListControlName);
   List<DeliveryPoint> get deliveryListValue => deliveryListDeliveryPointForm
       .asMap()
-      .map((k, v) => MapEntry(
+      .map(
+        (k, v) => MapEntry(
           k,
-          DeliveryPointForm(v.model, v.form, pathBuilder("deliveryList.$k"))
-              .model))
+          v
+              .copyWithPath(
+                pathBuilder("deliveryList.$k"),
+              )
+              .model,
+        ),
+      )
       .values
       .toList();
   List<Client>? get clientListValue => clientListClientForm
       .asMap()
-      .map((k, v) => MapEntry(
-          k, ClientForm(v.model, v.form, pathBuilder("clientList.$k")).model))
+      .map(
+        (k, v) => MapEntry(
+          k,
+          v
+              .copyWithPath(
+                pathBuilder("clientList.$k"),
+              )
+              .model,
+        ),
+      )
       .values
       .toList();
   bool get containsDeliveryList {
@@ -442,9 +456,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
 
     deliveryListDeliveryPointForm.asMap().forEach((k, v) {
       if (k > i) {
-        deliveryListDeliveryPointForm[k] = DeliveryPointForm(
-          v.model,
-          form,
+        deliveryListDeliveryPointForm[k] = v.copyWithPath(
           pathBuilder("deliveryList.$k"),
         );
       }
@@ -475,9 +487,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
 
     clientListClientForm.asMap().forEach((k, v) {
       if (k > i) {
-        clientListClientForm[k] = ClientForm(
-          v.model,
-          form,
+        clientListClientForm[k] = v.copyWithPath(
           pathBuilder("clientList.$k"),
         );
       }
@@ -611,7 +621,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
 
       deliveryListDeliveryPointForm.asMap().forEach((k, v) {
         deliveryListDeliveryPointForm[k] =
-            DeliveryPointForm(v.model, v.form, pathBuilder("deliveryList.$k"));
+            v.copyWithPath(pathBuilder("deliveryList.$k"));
       });
 
       deliveryListControl.removeAt(i);
@@ -624,8 +634,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
       clientListClientForm.removeAt(i);
 
       clientListClientForm.asMap().forEach((k, v) {
-        clientListClientForm[k] =
-            ClientForm(v.model, v.form, pathBuilder("clientList.$k"));
+        clientListClientForm[k] = v.copyWithPath(pathBuilder("clientList.$k"));
       });
 
       clientListControl?.removeAt(i);
@@ -648,6 +657,10 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     }
     return DeliveryList(
         deliveryList: deliveryListValue, clientList: clientListValue);
+  }
+
+  DeliveryListForm copyWithPath(String? path) {
+    return DeliveryListForm(deliveryList, form, path);
   }
 
   void updateValue(DeliveryList value,
@@ -813,6 +826,10 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
       );
     }
     return DeliveryPoint(name: nameValue, address: addressValue);
+  }
+
+  DeliveryPointForm copyWithPath(String? path) {
+    return DeliveryPointForm(deliveryPoint, form, path);
   }
 
   void updateValue(DeliveryPoint value,
@@ -989,6 +1006,10 @@ class AddressForm implements FormModel<Address> {
       );
     }
     return Address(street: streetValue, city: cityValue);
+  }
+
+  AddressForm copyWithPath(String? path) {
+    return AddressForm(address, form, path);
   }
 
   void updateValue(Address? value,
@@ -1207,6 +1228,10 @@ class ClientForm implements FormModel<Client> {
     }
     return Client(
         clientType: clientTypeValue, name: nameValue, notes: notesValue);
+  }
+
+  ClientForm copyWithPath(String? path) {
+    return ClientForm(client, form, path);
   }
 
   void updateValue(Client value,
@@ -1638,6 +1663,10 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
       );
     }
     return DeliveryPoint(name: nameValue, address: addressValue);
+  }
+
+  StandaloneDeliveryPointForm copyWithPath(String? path) {
+    return StandaloneDeliveryPointForm(deliveryPoint, form, path);
   }
 
   void updateValue(DeliveryPoint value,

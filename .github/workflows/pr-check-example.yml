@@ -1,4 +1,4 @@
-name: PR check
+name: PR check [example]
 on:
   pull_request:
     branches:
@@ -11,7 +11,7 @@ on:
       - synchronize
 
 jobs:
-  pr-check:
+  pr-check-example:
     runs-on: ubuntu-latest
     container:
       image: cirrusci/flutter:3.0.0
@@ -19,9 +19,6 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-
-      - name: reactive_forms_generator => Code generation tests
-        run: cd generator_tests && flutter pub get && dart test && cd ../
 
       - name: reactive_forms_generator => example => build_runner
         run: cd packages/reactive_forms_generator/example && flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
@@ -34,15 +31,3 @@ jobs:
 
       - name: reactive_forms_generator => example => test
         run: cd packages/reactive_forms_generator/example && flutter pub get && flutter test
-
-      - name: reactive_forms_annotations => analyze
-        run: cd packages/reactive_forms_annotations && flutter pub get && flutter analyze
-
-      - name: reactive_forms_annotations => code formatting
-        run: cd packages/reactive_forms_annotations && flutter pub get && flutter format --set-exit-if-changed lib
-
-      - name: reactive_forms_generator => analyze
-        run: cd packages/reactive_forms_generator && flutter pub get && flutter analyze
-
-      - name: reactive_forms_generator => code formatting
-        run: cd packages/reactive_forms_generator && flutter pub get && flutter format --set-exit-if-changed lib
