@@ -71,6 +71,12 @@ class AppDrawer extends StatelessWidget {
                 Routes.freezed,
               ),
             ),
+            ListTile(
+              title: const Text('Animated URL list form'),
+              onTap: () => Navigator.of(context).pushReplacementNamed(
+                Routes.animatedUrlList,
+              ),
+            ),
           ],
         ),
       ),

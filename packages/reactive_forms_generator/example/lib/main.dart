@@ -1,3 +1,4 @@
+import 'package:example/docs/animated_url_list/url_list_form.dart';
 import 'package:example/docs/delivery_list/delivery_point_route_form.dart';
 import 'package:example/docs/delivery_list/delivery_route_form.dart';
 import 'package:example/docs/mailing_list/mailing_list_form.dart';
@@ -34,6 +35,8 @@ class Routes {
   static const arrayNullable = '/array-nullable';
 
   static const freezed = '/freezed';
+
+  static const animatedUrlList = '/animated-url-list';
 }
 
 class MyApp extends StatelessWidget {
@@ -59,6 +62,7 @@ class MyApp extends StatelessWidget {
         Routes.deliveryList: (_) => const DeliveryListFormWidget(),
         Routes.deliveryPoint: (_) => const DeliveryPointWidget(),
         Routes.freezed: (_) => const FreezedFormWidget(),
+        Routes.animatedUrlList: (_) => UrlListForm(),
       },
       home: const LoginFormWidget(),
     );

@@ -7,12 +7,14 @@
   <h1><b>ReactiveFormsGenerator</b></h1>
 </p>
 
-Welcome to [ReactiveFormsGenerator](https://pub.dev/packages/reactive_forms_generator), code generator for [reactive_forms](https://pub.dev/packages/reactive_forms)
+Welcome to [ReactiveFormsGenerator](https://pub.dev/packages/reactive_forms_generator), code generator
+for [reactive_forms](https://pub.dev/packages/reactive_forms)
 which will save you tons of time and make your forms type safe.
 
 **There is no reason write code manually! Let the code generation work for you.**
 
 # Table of Contents
+
 - [Motivation](#motivation)
 - [How to use](#how-to-use)
     - [Minimum Requirements](#minimum-requirements)
@@ -45,10 +47,12 @@ which will save you tons of time and make your forms type safe.
         - [Validation](#frezzed-validation)
         - [Form](#frezzed-form)
     - [Subforms](#subforms)
+    - [Animated list](#subforms)
 
 # Motivation
 
-One of the goals of this package is to make [reactive_forms](https://pub.dev/packages/reactive_forms) package even more cool and fun to use.
+One of the goals of this package is to make [reactive_forms](https://pub.dev/packages/reactive_forms) package even more
+cool and fun to use.
 
 Let's see what issues this package tries to mitigate.
 
@@ -56,13 +60,14 @@ Here is how typical `reactive_forms` form looks like
 
 ```dart
 /// form instantiation
-FormGroup buildForm() => fb.group(<String, Object>{
-  'email': FormControl<String>(
-    validators: [Validators.required, Validators.email],
-  ),
-  'password': ['', Validators.required, Validators.minLength(8)],
-  'rememberMe': false,
-});
+FormGroup buildForm() =>
+    fb.group(<String, Object>{
+      'email': FormControl<String>(
+        validators: [Validators.required, Validators.email],
+      ),
+      'password': ['', Validators.required, Validators.minLength(8)],
+      'rememberMe': false,
+    });
 
 /// form itself
 final form = ReactiveFormBuilder(
@@ -89,11 +94,12 @@ final form = ReactiveFormBuilder(
           child: const Text('Sign Up'),
         ),
         ElevatedButton(
-          onPressed: () => form.resetState({
-            'email': ControlState<String>(value: null),
-            'password': ControlState<String>(value: null),
-            'rememberMe': ControlState<bool>(value: false),
-          }, removeFocus: true),
+          onPressed: () =>
+              form.resetState({
+                'email': ControlState<String>(value: null),
+                'password': ControlState<String>(value: null),
+                'rememberMe': ControlState<bool>(value: false),
+              }, removeFocus: true),
           child: const Text('Reset all'),
         ),
       ],
@@ -103,16 +109,21 @@ final form = ReactiveFormBuilder(
 ```
 
 1. First issue is `String` identifiers which is used to define fields. Technically you can extract them into separate
-   class, enum or whatever you like. But this is manual work which you have to do each time you create the form. The other
-   disadvantage is when you refer to any field by his `String` identifier you loos static type check. There is no way for
+   class, enum or whatever you like. But this is manual work which you have to do each time you create the form. The
+   other
+   disadvantage is when you refer to any field by his `String` identifier you loos static type check. There is no way
+   for
    static analyser to check if some random field name `login` is suitable to put in particular widget. So you can easily
    get the form which looks `ok` but fails to build due to the typo in field names and putting `login` field into
    `ReactiveCheckbox` field. **Isn't it better the code generation to do it for you?**
 
 
-2. Second issue is output which is always `Map<String, Object>`. It is ok for languages like JS. But for the typed language
+2. Second issue is output which is always `Map<String, Object>`. It is ok for languages like JS. But for the typed
+   language
    you would prefer to get the output fom the form like model. And avoid manual type casting like this one.
+
 ```dart
+
 final document = DocumentInput(
   subTypeId: form.value["subType"] as DocumentSubTypeMixin,
   documentNumber: form.value["documentNumber"] as String,
@@ -155,7 +166,8 @@ This installs three packages:
 - [build_runner](https://pub.dev/packages/build_runner), the tool to run code-generators
 - [reactive_forms](https://pub.dev/packages/reactive_forms), form engine itself
 - [reactive_forms_generator](https://pub.dev/packages/reactive_forms_generator), the code generator
-- [reactive_forms_annotation](https://pub.dev/packages/reactive_forms_annotation), a package containing annotations for [reactive_forms_generator].
+- [reactive_forms_annotation](https://pub.dev/packages/reactive_forms_annotation), a package containing annotations
+  for [reactive_forms_generator].
 
 ## Ignore lint warnings on generated files
 
@@ -202,6 +214,7 @@ Let's start from simple login form.
 First we need to define our form model
 
 #### Model <a name="basics-model" />
+
 ```dart
 class Basic {
   final String email;
@@ -228,11 +241,9 @@ class Basic {
   final String password;
 
   Basic({
-    @FormControlAnnotation()
-    this.email = '',
+    @FormControlAnnotation() this.email = '',
 
-    @FormControlAnnotation()
-    this.password = '',
+    @FormControlAnnotation() this.password = '',
   });
 }
 ```
@@ -242,7 +253,8 @@ class Basic {
 
 #### Validation <a name="basics-validation" />
 
-The login form should not proceed if there is any empty values. We need to modify our code to add some `required` validators.
+The login form should not proceed if there is any empty values. We need to modify our code to add some `required`
+validators.
 
 ```dart
 import 'package:example/helpers.dart';
@@ -257,25 +269,26 @@ class Basic {
   Basic({
     @FormControlAnnotation(
       validators: const [requiredValidator],
-    )
-    this.email = '',
+    ) this.email = '',
     @FormControlAnnotation(
       validators: const [requiredValidator],
-    )
-    this.password = '',
+    ) this.password = '',
   });
 }
 ```
 
 As far as we are using annotations - validators should be top level functions or static class fields.
 
-Now we are ready to run our form generator. You can check output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/basics/basic.gform.dart).
+Now we are ready to run our form generator. You can check
+output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/basics/basic.gform.dart)
+.
 
 #### Form <a name="basics-form" />
 
 Let's build our form based on generated code
 
 ```dart
+
 final form = BasicFormBuilder(
   // setup form model with initial data
   model: Basic(),
@@ -285,7 +298,8 @@ final form = BasicFormBuilder(
       children: [
         ReactiveTextField<String>(
           formControl: formModel.emailControl,
-          validationMessages: (control) => {
+          validationMessages: (control) =>
+          {
             ValidationMessage.required: 'The email must not be empty',
           },
           decoration: const InputDecoration(labelText: 'Email'),
@@ -294,7 +308,8 @@ final form = BasicFormBuilder(
         ReactiveTextField<String>(
           formControl: formModel.passwordControl,
           obscureText: true,
-          validationMessages: (control) => {
+          validationMessages: (control) =>
+          {
             ValidationMessage.required: 'The password must not be empty',
           },
           textInputAction: TextInputAction.done,
@@ -332,6 +347,7 @@ The next example will show how to build dynamic forms. We will create a mailing 
 and basic validation.
 
 #### Model <a name="array-model" />
+
 The model is pretty simple.
 
 ```dart
@@ -366,8 +382,7 @@ class MailingList {
       // itemValidators: [
       //   emailValidator,
       // ],
-    )
-    this.emailList = const [],
+    ) this.emailList = const [],
   });
 }
 ```
@@ -413,7 +428,9 @@ Map<String, dynamic>? mailingListValidator(AbstractControl control) {
 
 As far as we are using annotations - validators should be top level functions or static class fields.
 
-Now we are ready to run our form generator. You can check output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/arrays/mailing_list.gform.dart).
+Now we are ready to run our form generator. You can check
+output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/arrays/mailing_list.gform.dart)
+.
 
 #### Form <a name="array-form" />
 
@@ -434,24 +451,26 @@ final form = MailingListFormBuilder(
               // renders list of fields corresponding to added elements
               child: ReactiveFormArray<String>(
                 formArray: formModel.emailListControl,
-                builder: (context, formArray, child) => Column(
-                  children: formModel.emailListValue
-                      .asMap()
-                      .map((i, email) {
-                    return MapEntry(
-                        i,
-                        ReactiveTextField<String>(
-                          formControlName: i.toString(),
-                          validationMessages: (_) => {
-                            'email': 'Invalid email',
-                          },
-                          decoration: InputDecoration(
-                              labelText: 'Email ${i}'),
-                        ));
-                  })
-                      .values
-                      .toList(),
-                ),
+                builder: (context, formArray, child) =>
+                    Column(
+                      children: formModel.emailListValue
+                          .asMap()
+                          .map((i, email) {
+                        return MapEntry(
+                            i,
+                            ReactiveTextField<String>(
+                              formControlName: i.toString(),
+                              validationMessages: (_) =>
+                              {
+                                'email': 'Invalid email',
+                              },
+                              decoration: InputDecoration(
+                                  labelText: 'Email ${i}'),
+                            ));
+                      })
+                          .values
+                          .toList(),
+                    ),
               ),
             ),
             SizedBox(width: 16),
@@ -535,6 +554,7 @@ The next example will show how to build nested forms. We will create a user prof
 and home/office addresses. Address will contain city/street/zip fields.
 
 #### Model <a name="group-model" />
+
 The model will be separated on two parts `UserProfile` and `Address`
 
 ```dart
@@ -592,12 +612,10 @@ class UserProfile {
   UserProfile({
     @FormControlAnnotation(
       validators: const [requiredValidator],
-    )
-    this.firstName = '',
+    ) this.firstName = '',
     @FormControlAnnotation(
       validators: const [requiredValidator],
-    )
-    this.lastName = '',
+    ) this.lastName = '',
     this.home,
     this.office,
   });
@@ -612,14 +630,11 @@ class Address {
   final String? zip;
 
   Address({
-    @FormControlAnnotation()
-    this.street,
+    @FormControlAnnotation() this.street,
     @FormControlAnnotation(
       validators: const [requiredValidator],
-    )
-    this.city,
-    @FormControlAnnotation()
-    this.zip,
+    ) this.city,
+    @FormControlAnnotation() this.zip,
   });
 }
 ```
@@ -639,7 +654,9 @@ Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
 
 As far as we are using annotations - validators should be top level functions or static class fields.
 
-Now we are ready to run our form generator. You can check output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/group/user_profile.gform.dart).
+Now we are ready to run our form generator. You can check
+output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/group/user_profile.gform.dart)
+.
 
 #### Form <a name="group-form" />
 
@@ -656,7 +673,8 @@ final form = UserProfileFormBuilder(
         children: [
           ReactiveTextField<String>(
             formControl: formModel.firstNameControl,
-            validationMessages: (control) => {
+            validationMessages: (control) =>
+            {
               ValidationMessage.required: 'Must not be empty',
             },
             decoration: const InputDecoration(
@@ -666,7 +684,8 @@ final form = UserProfileFormBuilder(
           const SizedBox(height: 8.0),
           ReactiveTextField<String>(
             formControl: formModel.lastNameControl,
-            validationMessages: (control) => {
+            validationMessages: (control) =>
+            {
               ValidationMessage.required: 'Must not be empty',
             },
             decoration: const InputDecoration(
@@ -677,7 +696,8 @@ final form = UserProfileFormBuilder(
           Text('Home address', style: TextStyle(fontSize: 18)),
           ReactiveTextField<String>(
             formControl: formModel.homeForm.cityControl,
-            validationMessages: (control) => {
+            validationMessages: (control) =>
+            {
               ValidationMessage.required: 'Must not be empty',
             },
             decoration: const InputDecoration(
@@ -687,7 +707,8 @@ final form = UserProfileFormBuilder(
           const SizedBox(height: 8.0),
           ReactiveTextField<String>(
             formControl: formModel.homeForm.streetControl,
-            validationMessages: (control) => {
+            validationMessages: (control) =>
+            {
               ValidationMessage.required: 'Must not be empty',
             },
             decoration: const InputDecoration(
@@ -697,7 +718,8 @@ final form = UserProfileFormBuilder(
           const SizedBox(height: 8.0),
           ReactiveTextField<String>(
             formControl: formModel.homeForm.zipControl,
-            validationMessages: (control) => {
+            validationMessages: (control) =>
+            {
               ValidationMessage.required: 'Must not be empty',
             },
             textInputAction: TextInputAction.done,
@@ -710,7 +732,8 @@ final form = UserProfileFormBuilder(
           const SizedBox(height: 8.0),
           ReactiveTextField<String>(
             formControl: formModel.officeForm.cityControl,
-            validationMessages: (control) => {
+            validationMessages: (control) =>
+            {
               ValidationMessage.required: 'Must not be empty',
             },
             decoration: const InputDecoration(
@@ -720,7 +743,8 @@ final form = UserProfileFormBuilder(
           const SizedBox(height: 8.0),
           ReactiveTextField<String>(
             formControl: formModel.officeForm.streetControl,
-            validationMessages: (control) => {
+            validationMessages: (control) =>
+            {
               ValidationMessage.required: 'Must not be empty',
             },
             decoration: const InputDecoration(
@@ -730,7 +754,8 @@ final form = UserProfileFormBuilder(
           const SizedBox(height: 8.0),
           ReactiveTextField<String>(
             formControl: formModel.officeForm.zipControl,
-            validationMessages: (control) => {
+            validationMessages: (control) =>
+            {
               ValidationMessage.required: 'Must not be empty',
             },
             decoration: const InputDecoration(
@@ -773,6 +798,7 @@ The next example will show how to build nested forms. We will create a delivery 
 form group for `address`; Address will contain city/street fields.
 
 #### Model <a name="array-group-model" />
+
 The model will be separated on three parts `DeliveryList`, `DeliveryPoint` and `Address`
 
 ```dart
@@ -830,8 +856,7 @@ class DeliveryPoint {
   DeliveryPoint({
     @FormControlAnnotation(
       validators: const [requiredValidator],
-    )
-    this.name = '',
+    ) this.name = '',
     this.address,
   });
 }
@@ -845,10 +870,8 @@ class Address {
   Address({
     @FormControlAnnotation(
       validators: const [requiredValidator],
-    )
-    this.street,
-    @FormControlAnnotation()
-    this.city,
+    ) this.street,
+    @FormControlAnnotation() this.city,
   });
 }
 ```
@@ -856,7 +879,9 @@ class Address {
 `ReactiveFormAnnotation` - tells the generator that we want to Form based on this model.
 `FormGroupAnnotation` - describes the nested form.
 
-Now we are ready to run our form generator. You can check output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/array_group/delivery_list.gform.dart).
+Now we are ready to run our form generator. You can check
+output [here](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/array_group/delivery_list.gform.dart)
+.
 
 #### Form <a name="array-group-form" />
 
@@ -886,7 +911,8 @@ final form = DeliveryListFormBuilder(
                             children: [
                               ReactiveTextField<String>(
                                 formControlName: '${i}.name',
-                                validationMessages: (_) => {
+                                validationMessages: (_) =>
+                                {
                                   ValidationMessage.required:
                                   'Must not be empty',
                                 },
@@ -897,7 +923,8 @@ final form = DeliveryListFormBuilder(
                               ReactiveTextField<String>(
                                 formControlName:
                                 '${i}.address.street',
-                                validationMessages: (_) => {
+                                validationMessages: (_) =>
+                                {
                                   ValidationMessage.required:
                                   'Must not be empty',
                                 },
@@ -907,7 +934,8 @@ final form = DeliveryListFormBuilder(
                               ),
                               ReactiveTextField<String>(
                                 formControlName: '${i}.address.city',
-                                validationMessages: (_) => {
+                                validationMessages: (_) =>
+                                {
                                   ValidationMessage.required:
                                   'Must not be empty',
                                 },
@@ -996,11 +1024,13 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'freezed_class.g.dart';
+
 part 'freezed_class.freezed.dart';
 
 @freezed
 @ReactiveFormAnnotation()
-class FreezedClass with _$FreezedClass {
+class FreezedClass
+    with _$FreezedClass {
   const factory FreezedClass({
     @FormControlAnnotation() String? id,
     @FormControlAnnotation() String? name,
@@ -1021,6 +1051,7 @@ You can add validations the same way as in [basics](#basics-validation) example
 Let's build our form based on generated code
 
 ```dart
+
 final form = FreezedClassFormBuilder(
   model: FreezedClass(),
   builder: (context, formModel, child) {
@@ -1084,7 +1115,8 @@ There could be the case when some of your nested entities will have to have thei
 Let's refer to our previous example of [Nested forms with array of FormGroups](#nested-forms-with-array-of-formgroups)
 
 We used `DeliveryPoint` entity to create a list for points for delivery.
-If you want to have the set of form classes to be generated for `DeliveryPoint` just add and additional `ReactiveFormAnnotation` annotation
+If you want to have the set of form classes to be generated for `DeliveryPoint` just add and
+additional `ReactiveFormAnnotation` annotation
 
 ```dart
 @ReactiveFormAnnotation()
@@ -1097,10 +1129,14 @@ class DeliveryPoint {
   DeliveryPoint({
     @FormControlAnnotation(
       validators: const [requiredValidator],
-    )
-        this.name = '',
+    ) this.name = '',
     this.address,
   });
 }
 ```
 
+### Animated list
+
+Check the `Animated URL list` form sample to see how to deal with forms utilizing `AnimatedList`.
+There is a small trick which requires passing down the `FormControl` elements due to the fact 
+that we need to provide same widget to animate removal while actual form item is missing in form.  
