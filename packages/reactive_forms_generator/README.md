@@ -47,7 +47,7 @@ which will save you tons of time and make your forms type safe.
         - [Validation](#frezzed-validation)
         - [Form](#frezzed-form)
     - [Subforms](#subforms)
-    - [Animated list](#subforms)
+    - [Animated list](#animated-list)
 
 # Motivation
 
@@ -1137,6 +1137,8 @@ class DeliveryPoint {
 
 ### Animated list
 
-Check the `Animated URL list` form sample to see how to deal with forms utilizing `AnimatedList`.
-There is a small trick which requires passing down the `FormControl` elements due to the fact 
+Check
+the [`Animated URL list`](https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/animated_url_list/url_list_form.dart)
+form sample to see how to deal with forms utilizing `AnimatedList`.
+There is a small trick which requires passing down the `FormControl` elements due to the fact
 that we need to provide same widget to animate removal while actual form item is missing in form.  
