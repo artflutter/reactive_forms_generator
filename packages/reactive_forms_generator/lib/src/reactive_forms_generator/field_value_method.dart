@@ -51,11 +51,22 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
   @override
   Method? defaultMethod() {
     String code = '${field.fieldControlName}${field.nullabilitySuffix}.value';
+    String codeTypeCast = ' as ${field.type}';
 
     // do not add additional cast if the field is nullable to avoid
     // unnecessary_cast notes
     if (field.type.nullabilitySuffix == NullabilitySuffix.none) {
-      code += ' as ${field.type}';
+      if (field.hasDefaultValue) {
+        final constantValueObject = field.computeConstantValue();
+        if (constantValueObject?.type?.isDartCoreString ?? false) {
+          final constantValue = constantValueObject?.toStringValue() ?? '';
+          code += ' ?? "$constantValue"';
+        } else {
+          code += codeTypeCast;
+        }
+      } else {
+        code += codeTypeCast;
+      }
     }
 
     return methodEntity.rebuild((b) => b..body = Code(code));

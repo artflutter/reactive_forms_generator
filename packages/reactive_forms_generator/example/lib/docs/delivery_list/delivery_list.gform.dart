@@ -82,7 +82,12 @@ class ReactiveDeliveryListForm extends StatelessWidget {
 
 class DeliveryListFormBuilder extends StatefulWidget {
   const DeliveryListFormBuilder(
-      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
+      {Key? key,
+      this.model,
+      this.child,
+      this.onWillPop,
+      required this.builder,
+      this.initState})
       : super(key: key);
 
   final DeliveryList? model;
@@ -93,6 +98,9 @@ class DeliveryListFormBuilder extends StatefulWidget {
 
   final Widget Function(
       BuildContext context, DeliveryListForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, DeliveryListForm formModel)?
+      initState;
 
   @override
   _DeliveryListFormBuilderState createState() =>
@@ -118,6 +126,8 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
     }
 
     _form.addAll(elements.controls);
+
+    widget.initState?.call(context, _formModel);
 
     super.initState();
   }
@@ -176,7 +186,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
 
   String deliveryListControlPath() => pathBuilder(deliveryListControlName);
   String clientListControlPath() => pathBuilder(clientListControlName);
-  List<DeliveryPoint> get deliveryListValue => deliveryListDeliveryPointForm
+  List<DeliveryPoint> get _deliveryListValue => deliveryListDeliveryPointForm
       .asMap()
       .map(
         (k, v) => MapEntry(
@@ -190,7 +200,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
       )
       .values
       .toList();
-  List<Client>? get clientListValue => clientListClientForm
+  List<Client>? get _clientListValue => clientListClientForm
       .asMap()
       .map(
         (k, v) => MapEntry(
@@ -494,6 +504,36 @@ class DeliveryListForm implements FormModel<DeliveryList> {
       ? form.control(clientListControlPath())
           as FormArray<Map<String, Object?>>?
       : null;
+  void deliveryListSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      deliveryListControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      deliveryListControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void clientListSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      clientListControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      clientListControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   ExtendedControl<List<Map<String, Object?>?>, List<DeliveryPointForm>>
       get deliveryListExtendedControl =>
           ExtendedControl<List<Map<String, Object?>?>, List<DeliveryPointForm>>(
@@ -564,7 +604,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
       );
     }
     return DeliveryList(
-        deliveryList: deliveryListValue, clientList: clientListValue);
+        deliveryList: _deliveryListValue, clientList: _clientListValue);
   }
 
   DeliveryListForm copyWithPath(String? path) {
@@ -631,8 +671,8 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
 
   String nameControlPath() => pathBuilder(nameControlName);
   String addressControlPath() => pathBuilder(addressControlName);
-  String get nameValue => nameControl.value as String;
-  Address? get addressValue => addressForm.model;
+  String get _nameValue => nameControl.value ?? "";
+  Address? get _addressValue => addressForm.model;
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -727,13 +767,43 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
       form.control(nameControlPath()) as FormControl<String>;
   FormGroup? get addressControl =>
       containsAddress ? form.control(addressControlPath()) as FormGroup? : null;
+  void nameSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      nameControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      nameControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void addressSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      addressControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      addressControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   DeliveryPoint get model {
     if (!form.valid) {
       debugPrint(
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return DeliveryPoint(name: nameValue, address: addressValue);
+    return DeliveryPoint(name: _nameValue, address: _addressValue);
   }
 
   DeliveryPointForm copyWithPath(String? path) {
@@ -793,8 +863,8 @@ class AddressForm implements FormModel<Address> {
 
   String streetControlPath() => pathBuilder(streetControlName);
   String cityControlPath() => pathBuilder(cityControlName);
-  String? get streetValue => streetControl?.value;
-  String? get cityValue => cityControl?.value;
+  String? get _streetValue => streetControl?.value;
+  String? get _cityValue => cityControl?.value;
   bool get containsStreet {
     try {
       form.control(streetControlPath());
@@ -907,13 +977,43 @@ class AddressForm implements FormModel<Address> {
   FormControl<String>? get cityControl => containsCity
       ? form.control(cityControlPath()) as FormControl<String>?
       : null;
+  void streetSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      streetControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      streetControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void citySetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      cityControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      cityControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   Address get model {
     if (!form.valid) {
       debugPrint(
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return Address(street: streetValue, city: cityValue);
+    return Address(street: _streetValue, city: _cityValue);
   }
 
   AddressForm copyWithPath(String? path) {
@@ -981,9 +1081,9 @@ class ClientForm implements FormModel<Client> {
   String clientTypeControlPath() => pathBuilder(clientTypeControlName);
   String nameControlPath() => pathBuilder(nameControlName);
   String notesControlPath() => pathBuilder(notesControlName);
-  ClientType get clientTypeValue => clientTypeControl.value as ClientType;
-  String? get nameValue => nameControl?.value;
-  String? get notesValue => notesControl?.value;
+  ClientType get _clientTypeValue => clientTypeControl.value as ClientType;
+  String? get _nameValue => nameControl?.value;
+  String? get _notesValue => notesControl?.value;
   bool get containsClientType {
     try {
       form.control(clientTypeControlPath());
@@ -1128,6 +1228,51 @@ class ClientForm implements FormModel<Client> {
   FormControl<String>? get notesControl => containsNotes
       ? form.control(notesControlPath()) as FormControl<String>?
       : null;
+  void clientTypeSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      clientTypeControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      clientTypeControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void nameSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      nameControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      nameControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void notesSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      notesControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      notesControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   Client get model {
     if (!form.valid) {
       debugPrint(
@@ -1135,7 +1280,7 @@ class ClientForm implements FormModel<Client> {
       );
     }
     return Client(
-        clientType: clientTypeValue, name: nameValue, notes: notesValue);
+        clientType: _clientTypeValue, name: _nameValue, notes: _notesValue);
   }
 
   ClientForm copyWithPath(String? path) {
@@ -1385,7 +1530,12 @@ class ReactiveStandaloneDeliveryPointForm extends StatelessWidget {
 
 class StandaloneDeliveryPointFormBuilder extends StatefulWidget {
   const StandaloneDeliveryPointFormBuilder(
-      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
+      {Key? key,
+      this.model,
+      this.child,
+      this.onWillPop,
+      required this.builder,
+      this.initState})
       : super(key: key);
 
   final DeliveryPoint? model;
@@ -1396,6 +1546,9 @@ class StandaloneDeliveryPointFormBuilder extends StatefulWidget {
 
   final Widget Function(BuildContext context,
       StandaloneDeliveryPointForm formModel, Widget? child) builder;
+
+  final void Function(
+      BuildContext context, StandaloneDeliveryPointForm formModel)? initState;
 
   @override
   _StandaloneDeliveryPointFormBuilderState createState() =>
@@ -1422,6 +1575,8 @@ class _StandaloneDeliveryPointFormBuilderState
     }
 
     _form.addAll(elements.controls);
+
+    widget.initState?.call(context, _formModel);
 
     super.initState();
   }
@@ -1468,8 +1623,8 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
 
   String nameControlPath() => pathBuilder(nameControlName);
   String addressControlPath() => pathBuilder(addressControlName);
-  String get nameValue => nameControl.value as String;
-  Address? get addressValue => addressForm.model;
+  String get _nameValue => nameControl.value ?? "";
+  Address? get _addressValue => addressForm.model;
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -1564,13 +1719,43 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
       form.control(nameControlPath()) as FormControl<String>;
   FormGroup? get addressControl =>
       containsAddress ? form.control(addressControlPath()) as FormGroup? : null;
+  void nameSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      nameControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      nameControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void addressSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      addressControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      addressControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   DeliveryPoint get model {
     if (!form.valid) {
       debugPrint(
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return DeliveryPoint(name: nameValue, address: addressValue);
+    return DeliveryPoint(name: _nameValue, address: _addressValue);
   }
 
   StandaloneDeliveryPointForm copyWithPath(String? path) {

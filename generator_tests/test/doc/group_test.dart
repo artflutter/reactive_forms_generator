@@ -165,7 +165,12 @@ class ReactiveGroupForm extends StatelessWidget {
 
 class GroupFormBuilder extends StatefulWidget {
   const GroupFormBuilder(
-      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
+      {Key? key,
+      this.model,
+      this.child,
+      this.onWillPop,
+      required this.builder,
+      this.initState})
       : super(key: key);
 
   final Group? model;
@@ -176,6 +181,8 @@ class GroupFormBuilder extends StatefulWidget {
 
   final Widget Function(
       BuildContext context, GroupForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, GroupForm formModel)? initState;
 
   @override
   _GroupFormBuilderState createState() => _GroupFormBuilderState();
@@ -200,6 +207,8 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
     }
 
     _form.addAll(elements.controls);
+
+    widget.initState?.call(context, _formModel);
 
     super.initState();
   }
@@ -260,10 +269,10 @@ class GroupForm implements FormModel<Group> {
   String phoneControlPath() => pathBuilder(phoneControlName);
   String addressControlPath() => pathBuilder(addressControlName);
   String address2ControlPath() => pathBuilder(address2ControlName);
-  Personal? get personalValue => personalForm.model;
-  Phone? get phoneValue => phoneForm.model;
-  Address? get addressValue => addressForm.model;
-  Address? get address2Value => address2Form.model;
+  Personal? get _personalValue => personalForm.model;
+  Phone? get _phoneValue => phoneForm.model;
+  Address? get _addressValue => addressForm.model;
+  Address? get _address2Value => address2Form.model;
   bool get containsPersonal {
     try {
       form.control(personalControlPath());
@@ -513,6 +522,66 @@ class GroupForm implements FormModel<Group> {
   FormGroup? get address2Control => containsAddress2
       ? form.control(address2ControlPath()) as FormGroup?
       : null;
+  void personalSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      personalControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      personalControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void phoneSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      phoneControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      phoneControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void addressSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      addressControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      addressControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void address2SetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      address2Control?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      address2Control?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   Group get model {
     if (!form.valid) {
       debugPrint(
@@ -520,10 +589,10 @@ class GroupForm implements FormModel<Group> {
       );
     }
     return Group(
-        personal: personalValue,
-        phone: phoneValue,
-        address: addressValue,
-        address2: address2Value);
+        personal: _personalValue,
+        phone: _phoneValue,
+        address: _addressValue,
+        address2: _address2Value);
   }
 
   GroupForm copyWithPath(String? path) {
@@ -575,8 +644,8 @@ class PersonalForm implements FormModel<Personal> {
 
   String nameControlPath() => pathBuilder(nameControlName);
   String emailControlPath() => pathBuilder(emailControlName);
-  String? get nameValue => nameControl?.value;
-  String? get emailValue => emailControl?.value;
+  String? get _nameValue => nameControl?.value;
+  String? get _emailValue => emailControl?.value;
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -689,13 +758,43 @@ class PersonalForm implements FormModel<Personal> {
   FormControl<String>? get emailControl => containsEmail
       ? form.control(emailControlPath()) as FormControl<String>?
       : null;
+  void nameSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      nameControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      nameControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void emailSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      emailControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      emailControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   Personal get model {
     if (!form.valid) {
       debugPrint(
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return Personal(name: nameValue, email: emailValue);
+    return Personal(name: _nameValue, email: _emailValue);
   }
 
   PersonalForm copyWithPath(String? path) {
@@ -758,8 +857,8 @@ class PhoneForm implements FormModel<Phone> {
 
   String phoneNumberControlPath() => pathBuilder(phoneNumberControlName);
   String countryIsoControlPath() => pathBuilder(countryIsoControlName);
-  String? get phoneNumberValue => phoneNumberControl?.value;
-  String? get countryIsoValue => countryIsoControl?.value;
+  String? get _phoneNumberValue => phoneNumberControl?.value;
+  String? get _countryIsoValue => countryIsoControl?.value;
   bool get containsPhoneNumber {
     try {
       form.control(phoneNumberControlPath());
@@ -872,13 +971,43 @@ class PhoneForm implements FormModel<Phone> {
   FormControl<String>? get countryIsoControl => containsCountryIso
       ? form.control(countryIsoControlPath()) as FormControl<String>?
       : null;
+  void phoneNumberSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      phoneNumberControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      phoneNumberControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void countryIsoSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      countryIsoControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      countryIsoControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   Phone get model {
     if (!form.valid) {
       debugPrint(
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return Phone(phoneNumber: phoneNumberValue, countryIso: countryIsoValue);
+    return Phone(phoneNumber: _phoneNumberValue, countryIso: _countryIsoValue);
   }
 
   PhoneForm copyWithPath(String? path) {
@@ -943,9 +1072,9 @@ class AddressForm implements FormModel<Address> {
   String streetControlPath() => pathBuilder(streetControlName);
   String cityControlPath() => pathBuilder(cityControlName);
   String zipControlPath() => pathBuilder(zipControlName);
-  String? get streetValue => streetControl?.value;
-  String? get cityValue => cityControl?.value;
-  String? get zipValue => zipControl?.value;
+  String? get _streetValue => streetControl?.value;
+  String? get _cityValue => cityControl?.value;
+  String? get _zipValue => zipControl?.value;
   bool get containsStreet {
     try {
       form.control(streetControlPath());
@@ -1114,13 +1243,58 @@ class AddressForm implements FormModel<Address> {
   FormControl<String>? get zipControl => containsZip
       ? form.control(zipControlPath()) as FormControl<String>?
       : null;
+  void streetSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      streetControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      streetControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void citySetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      cityControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      cityControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void zipSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      zipControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      zipControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   Address get model {
     if (!form.valid) {
       debugPrint(
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return Address(street: streetValue, city: cityValue, zip: zipValue);
+    return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
   }
 
   AddressForm copyWithPath(String? path) {

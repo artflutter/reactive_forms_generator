@@ -86,7 +86,8 @@ class UserProfileFormBuilder extends StatefulWidget {
       required this.model,
       this.child,
       this.onWillPop,
-      required this.builder})
+      required this.builder,
+      this.initState})
       : super(key: key);
 
   final UserProfile model;
@@ -97,6 +98,9 @@ class UserProfileFormBuilder extends StatefulWidget {
 
   final Widget Function(
       BuildContext context, UserProfileForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, UserProfileForm formModel)?
+      initState;
 
   @override
   _UserProfileFormBuilderState createState() => _UserProfileFormBuilderState();
@@ -121,6 +125,8 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
     }
 
     _form.addAll(elements.controls);
+
+    widget.initState?.call(context, _formModel);
 
     super.initState();
   }
@@ -175,10 +181,10 @@ class UserProfileForm implements FormModel<UserProfile> {
   String lastNameControlPath() => pathBuilder(lastNameControlName);
   String homeControlPath() => pathBuilder(homeControlName);
   String officeControlPath() => pathBuilder(officeControlName);
-  String get firstNameValue => firstNameControl.value as String;
-  String get lastNameValue => lastNameControl.value as String;
-  Address get homeValue => homeForm.model;
-  Address? get officeValue => officeForm.model;
+  String get _firstNameValue => firstNameControl.value ?? "";
+  String get _lastNameValue => lastNameControl.value ?? "";
+  Address get _homeValue => homeForm.model;
+  Address? get _officeValue => officeForm.model;
   bool get containsFirstName {
     try {
       form.control(firstNameControlPath());
@@ -343,6 +349,66 @@ class UserProfileForm implements FormModel<UserProfile> {
   FormGroup get homeControl => form.control(homeControlPath()) as FormGroup;
   FormGroup? get officeControl =>
       containsOffice ? form.control(officeControlPath()) as FormGroup? : null;
+  void firstNameSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      firstNameControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      firstNameControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void lastNameSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      lastNameControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      lastNameControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void homeSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      homeControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      homeControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void officeSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      officeControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      officeControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   UserProfile get model {
     if (!form.valid) {
       debugPrint(
@@ -351,10 +417,10 @@ class UserProfileForm implements FormModel<UserProfile> {
     }
     return UserProfile(
         id: userProfile.id,
-        firstName: firstNameValue,
-        lastName: lastNameValue,
-        home: homeValue,
-        office: officeValue);
+        firstName: _firstNameValue,
+        lastName: _lastNameValue,
+        home: _homeValue,
+        office: _officeValue);
   }
 
   UserProfileForm copyWithPath(String? path) {
@@ -427,9 +493,9 @@ class AddressForm implements FormModel<Address> {
   String streetControlPath() => pathBuilder(streetControlName);
   String cityControlPath() => pathBuilder(cityControlName);
   String zipControlPath() => pathBuilder(zipControlName);
-  String? get streetValue => streetControl?.value;
-  String? get cityValue => cityControl?.value;
-  String? get zipValue => zipControl?.value;
+  String? get _streetValue => streetControl?.value;
+  String? get _cityValue => cityControl?.value;
+  String? get _zipValue => zipControl?.value;
   bool get containsStreet {
     try {
       form.control(streetControlPath());
@@ -598,13 +664,58 @@ class AddressForm implements FormModel<Address> {
   FormControl<String>? get zipControl => containsZip
       ? form.control(zipControlPath()) as FormControl<String>?
       : null;
+  void streetSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      streetControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      streetControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void citySetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      cityControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      cityControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void zipSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      zipControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      zipControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   Address get model {
     if (!form.valid) {
       debugPrint(
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return Address(street: streetValue, city: cityValue, zip: zipValue);
+    return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
   }
 
   AddressForm copyWithPath(String? path) {

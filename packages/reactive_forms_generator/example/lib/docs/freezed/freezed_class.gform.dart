@@ -82,7 +82,12 @@ class ReactiveFreezedClassForm extends StatelessWidget {
 
 class FreezedClassFormBuilder extends StatefulWidget {
   const FreezedClassFormBuilder(
-      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
+      {Key? key,
+      this.model,
+      this.child,
+      this.onWillPop,
+      required this.builder,
+      this.initState})
       : super(key: key);
 
   final FreezedClass? model;
@@ -93,6 +98,9 @@ class FreezedClassFormBuilder extends StatefulWidget {
 
   final Widget Function(
       BuildContext context, FreezedClassForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, FreezedClassForm formModel)?
+      initState;
 
   @override
   _FreezedClassFormBuilderState createState() =>
@@ -118,6 +126,8 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
     }
 
     _form.addAll(elements.controls);
+
+    widget.initState?.call(context, _formModel);
 
     super.initState();
   }
@@ -165,10 +175,10 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   String idControlPath() => pathBuilder(idControlName);
   String nameControlPath() => pathBuilder(nameControlName);
   String yearControlPath() => pathBuilder(yearControlName);
-  String? get genderValue => genderControl?.value;
-  String? get idValue => idControl?.value;
-  String? get nameValue => nameControl?.value;
-  double? get yearValue => yearControl?.value;
+  String? get _genderValue => genderControl?.value;
+  String? get _idValue => idControl?.value;
+  String? get _nameValue => nameControl?.value;
+  double? get _yearValue => yearControl?.value;
   bool get containsGender {
     try {
       form.control(genderControlPath());
@@ -392,14 +402,74 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   FormControl<double>? get yearControl => containsYear
       ? form.control(yearControlPath()) as FormControl<double>?
       : null;
+  void genderSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      genderControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      genderControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void idSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      idControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      idControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void nameSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      nameControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      nameControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void yearSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      yearControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      yearControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   FreezedClass get model {
     if (!form.valid) {
       debugPrint(
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return FreezedClass(genderValue,
-        id: idValue, name: nameValue, year: yearValue);
+    return FreezedClass(_genderValue,
+        id: _idValue, name: _nameValue, year: _yearValue);
   }
 
   FreezedClassForm copyWithPath(String? path) {

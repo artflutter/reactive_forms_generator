@@ -450,5 +450,76 @@ void main() {
         expect(testModel, equals(model));
       },
     );
+
+    testWidgets(
+      'Enable/disable',
+      (WidgetTester tester) async {
+        late DeliveryList testModel;
+        await tester.pumpWidget(
+          MaterialApp(
+            home: DeliveryListFormWidget(
+              onChange: (model) => testModel = model,
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        final submitButton = find.text(submit.name);
+
+        final addButton = find.text(add.name);
+        await tester.ensureVisible(addButton);
+        await tester.tap(addButton);
+        await tester.pumpAndSettle();
+
+        final toggleEnableDisableButton =
+            find.byKey(toggleEnableDisable.itemKey);
+
+        final nameTextField = find.byKey(name.itemIndexKey(0));
+        final streetTextField = find.byKey(street.itemIndexKey(0));
+
+        await tester.tap(streetTextField);
+        await tester.enterText(
+          streetTextField,
+          model.deliveryList.first.address?.street ?? '',
+        );
+        FocusManager.instance.primaryFocus?.unfocus();
+        await tester.pumpAndSettle();
+
+        await tester.tap(toggleEnableDisableButton);
+        await tester.tap(nameTextField);
+        await tester.enterText(
+          nameTextField,
+          model.deliveryList.first.name,
+        );
+        FocusManager.instance.primaryFocus?.unfocus();
+        await tester.pumpAndSettle();
+
+        await tester.tap(submitButton);
+        await tester.pump();
+
+        expect(testModel.deliveryList.isNotEmpty, equals(true));
+        expect(testModel.deliveryList.length, equals(1));
+        expect(testModel.deliveryList.first.name, '');
+
+        await tester.tap(toggleEnableDisableButton);
+        await tester.pumpAndSettle();
+        FocusManager.instance.primaryFocus?.unfocus();
+        await tester.enterText(
+          nameTextField,
+          model.deliveryList.first.name,
+        );
+        await tester.pumpAndSettle();
+
+        await tester.tap(submitButton);
+        await tester.pump();
+
+        expect(testModel.deliveryList.isNotEmpty, equals(true));
+        expect(testModel.deliveryList.length, equals(1));
+        expect(
+          testModel.deliveryList.first.name,
+          model.deliveryList.first.name,
+        );
+      },
+    );
   });
 }

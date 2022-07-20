@@ -85,7 +85,8 @@ class ProfileFormBuilder extends StatefulWidget {
       required this.model,
       this.child,
       this.onWillPop,
-      required this.builder})
+      required this.builder,
+      this.initState})
       : super(key: key);
 
   final Profile model;
@@ -96,6 +97,8 @@ class ProfileFormBuilder extends StatefulWidget {
 
   final Widget Function(
       BuildContext context, ProfileForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, ProfileForm formModel)? initState;
 
   @override
   _ProfileFormBuilderState createState() => _ProfileFormBuilderState();
@@ -120,6 +123,8 @@ class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
     }
 
     _form.addAll(elements.controls);
+
+    widget.initState?.call(context, _formModel);
 
     super.initState();
   }
@@ -194,17 +199,17 @@ class ProfileForm implements FormModel<Profile> {
       pathBuilder(incidenceFilterControlName);
   String thresholdControlPath() => pathBuilder(thresholdControlName);
   String timerControlPath() => pathBuilder(timerControlName);
-  String get nameValue => nameControl.value as String;
-  ChartingOrderValue get chartingOrderValue =>
+  String get _nameValue => nameControl.value as String;
+  ChartingOrderValue get _chartingOrderValue =>
       chartingOrderControl.value as ChartingOrderValue;
-  NumberingStandard get numberingStandardValue =>
+  NumberingStandard get _numberingStandardValue =>
       numberingStandardControl.value as NumberingStandard;
-  MeasurementType get measurementTypeValue =>
+  MeasurementType get _measurementTypeValue =>
       measurementTypeControl.value as MeasurementType;
-  bool get audioGuidanceValue => audioGuidanceControl.value as bool;
-  IncidenceFilter get incidenceFilterValue => incidenceFilterForm.model;
-  ThresholdSetting get thresholdValue => thresholdForm.model;
-  TimerSetting get timerValue => timerForm.model;
+  bool get _audioGuidanceValue => audioGuidanceControl.value as bool;
+  IncidenceFilter get _incidenceFilterValue => incidenceFilterForm.model;
+  ThresholdSetting get _thresholdValue => thresholdForm.model;
+  TimerSetting get _timerValue => timerForm.model;
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -489,6 +494,126 @@ class ProfileForm implements FormModel<Profile> {
   FormGroup get thresholdControl =>
       form.control(thresholdControlPath()) as FormGroup;
   FormGroup get timerControl => form.control(timerControlPath()) as FormGroup;
+  void nameSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      nameControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      nameControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void chartingOrderSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      chartingOrderControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      chartingOrderControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void numberingStandardSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      numberingStandardControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      numberingStandardControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void measurementTypeSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      measurementTypeControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      measurementTypeControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void audioGuidanceSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      audioGuidanceControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      audioGuidanceControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void incidenceFilterSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      incidenceFilterControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      incidenceFilterControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void thresholdSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      thresholdControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      thresholdControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void timerSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      timerControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      timerControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   Profile get model {
     if (!form.valid) {
       debugPrint(
@@ -497,14 +622,14 @@ class ProfileForm implements FormModel<Profile> {
     }
     return Profile(
         id: profile.id,
-        name: nameValue,
-        chartingOrder: chartingOrderValue,
-        numberingStandard: numberingStandardValue,
-        incidenceFilter: incidenceFilterValue,
-        measurementType: measurementTypeValue,
-        threshold: thresholdValue,
-        timer: timerValue,
-        audioGuidance: audioGuidanceValue);
+        name: _nameValue,
+        chartingOrder: _chartingOrderValue,
+        numberingStandard: _numberingStandardValue,
+        incidenceFilter: _incidenceFilterValue,
+        measurementType: _measurementTypeValue,
+        threshold: _thresholdValue,
+        timer: _timerValue,
+        audioGuidance: _audioGuidanceValue);
   }
 
   ProfileForm copyWithPath(String? path) {
@@ -609,13 +734,13 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
       pathBuilder(isCalculusEnabledControlName);
   String isPlaqueEnabledControlPath() =>
       pathBuilder(isPlaqueEnabledControlName);
-  bool get isMobilityEnabledValue => isMobilityEnabledControl.value as bool;
-  bool get isFurcationEnabledValue => isFurcationEnabledControl.value as bool;
-  bool get isBleedingEnabledValue => isBleedingEnabledControl.value as bool;
-  bool get isSuppurationEnabledValue =>
+  bool get _isMobilityEnabledValue => isMobilityEnabledControl.value as bool;
+  bool get _isFurcationEnabledValue => isFurcationEnabledControl.value as bool;
+  bool get _isBleedingEnabledValue => isBleedingEnabledControl.value as bool;
+  bool get _isSuppurationEnabledValue =>
       isSuppurationEnabledControl.value as bool;
-  bool get isCalculusEnabledValue => isCalculusEnabledControl.value as bool;
-  bool get isPlaqueEnabledValue => isPlaqueEnabledControl.value as bool;
+  bool get _isCalculusEnabledValue => isCalculusEnabledControl.value as bool;
+  bool get _isPlaqueEnabledValue => isPlaqueEnabledControl.value as bool;
   bool get containsIsMobilityEnabled {
     try {
       form.control(isMobilityEnabledControlPath());
@@ -810,6 +935,96 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
       form.control(isCalculusEnabledControlPath()) as FormControl<bool>;
   FormControl<bool> get isPlaqueEnabledControl =>
       form.control(isPlaqueEnabledControlPath()) as FormControl<bool>;
+  void isMobilityEnabledSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      isMobilityEnabledControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      isMobilityEnabledControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void isFurcationEnabledSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      isFurcationEnabledControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      isFurcationEnabledControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void isBleedingEnabledSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      isBleedingEnabledControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      isBleedingEnabledControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void isSuppurationEnabledSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      isSuppurationEnabledControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      isSuppurationEnabledControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void isCalculusEnabledSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      isCalculusEnabledControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      isCalculusEnabledControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void isPlaqueEnabledSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      isPlaqueEnabledControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      isPlaqueEnabledControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   IncidenceFilter get model {
     if (!form.valid) {
       debugPrint(
@@ -817,12 +1032,12 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
       );
     }
     return IncidenceFilter(
-        isMobilityEnabled: isMobilityEnabledValue,
-        isFurcationEnabled: isFurcationEnabledValue,
-        isBleedingEnabled: isBleedingEnabledValue,
-        isSuppurationEnabled: isSuppurationEnabledValue,
-        isCalculusEnabled: isCalculusEnabledValue,
-        isPlaqueEnabled: isPlaqueEnabledValue);
+        isMobilityEnabled: _isMobilityEnabledValue,
+        isFurcationEnabled: _isFurcationEnabledValue,
+        isBleedingEnabled: _isBleedingEnabledValue,
+        isSuppurationEnabled: _isSuppurationEnabledValue,
+        isCalculusEnabled: _isCalculusEnabledValue,
+        isPlaqueEnabled: _isPlaqueEnabledValue);
   }
 
   IncidenceFilterForm copyWithPath(String? path) {
@@ -916,8 +1131,8 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
 
   String isEnabledControlPath() => pathBuilder(isEnabledControlName);
   String valueControlPath() => pathBuilder(valueControlName);
-  bool get isEnabledValue => isEnabledControl.value as bool;
-  int get valueValue => valueControl.value as int;
+  bool get _isEnabledValue => isEnabledControl.value as bool;
+  int get _valueValue => valueControl.value as int;
   bool get containsIsEnabled {
     try {
       form.control(isEnabledControlPath());
@@ -982,13 +1197,43 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
       form.control(isEnabledControlPath()) as FormControl<bool>;
   FormControl<int> get valueControl =>
       form.control(valueControlPath()) as FormControl<int>;
+  void isEnabledSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      isEnabledControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      isEnabledControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void valueSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      valueControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      valueControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   ThresholdSetting get model {
     if (!form.valid) {
       debugPrint(
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return ThresholdSetting(isEnabled: isEnabledValue, value: valueValue);
+    return ThresholdSetting(isEnabled: _isEnabledValue, value: _valueValue);
   }
 
   ThresholdSettingForm copyWithPath(String? path) {
@@ -1054,8 +1299,8 @@ class TimerSettingForm implements FormModel<TimerSetting> {
 
   String isEnabledControlPath() => pathBuilder(isEnabledControlName);
   String valueControlPath() => pathBuilder(valueControlName);
-  bool get isEnabledValue => isEnabledControl.value as bool;
-  int get valueValue => valueControl.value as int;
+  bool get _isEnabledValue => isEnabledControl.value as bool;
+  int get _valueValue => valueControl.value as int;
   bool get containsIsEnabled {
     try {
       form.control(isEnabledControlPath());
@@ -1120,13 +1365,43 @@ class TimerSettingForm implements FormModel<TimerSetting> {
       form.control(isEnabledControlPath()) as FormControl<bool>;
   FormControl<int> get valueControl =>
       form.control(valueControlPath()) as FormControl<int>;
+  void isEnabledSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      isEnabledControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      isEnabledControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void valueSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      valueControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      valueControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   TimerSetting get model {
     if (!form.valid) {
       debugPrint(
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return TimerSetting(isEnabled: isEnabledValue, value: valueValue);
+    return TimerSetting(isEnabled: _isEnabledValue, value: _valueValue);
   }
 
   TimerSettingForm copyWithPath(String? path) {

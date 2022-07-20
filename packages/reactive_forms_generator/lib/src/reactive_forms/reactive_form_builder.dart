@@ -68,6 +68,10 @@ class ReactiveFormBuilder {
                   ..toThis = true
                   ..required = true,
               ),
+              Parameter((b) => b
+                ..name = 'initState'
+                ..named = true
+                ..toThis = true),
             ],
           ),
       );
@@ -108,6 +112,14 @@ class ReactiveFormBuilder {
             )
             ..modifier = FieldModifier.final$,
         ),
+        Field(
+          (b) => b
+            ..name = 'initState'
+            ..type = Reference(
+              'void Function(BuildContext context, ${reactiveForm.reactiveInheritedStreamer.formGenerator.className} formModel)?',
+            )
+            ..modifier = FieldModifier.final$,
+        ),
       ];
 
   Class get _widget => Class(
@@ -139,6 +151,7 @@ class ReactiveFormBuilder {
 
                 _form.addAll(elements.controls);
 
+                 widget.initState?.call(context, _formModel);
                 
                 super.initState();              
               '''),
@@ -148,7 +161,7 @@ class ReactiveFormBuilder {
             ..name = 'dispose'
             ..annotations.add(const CodeExpression(Code('override')))
             ..returns = const Reference('void')
-            ..body = Code('''
+            ..body = const Code('''
                 _form.dispose();
                 super.dispose();
               '''),

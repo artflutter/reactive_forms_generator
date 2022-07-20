@@ -146,7 +146,12 @@ class ReactiveMailingListForm extends StatelessWidget {
 
 class MailingListFormBuilder extends StatefulWidget {
   const MailingListFormBuilder(
-      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
+      {Key? key,
+      this.model,
+      this.child,
+      this.onWillPop,
+      required this.builder,
+      this.initState})
       : super(key: key);
 
   final MailingList? model;
@@ -157,6 +162,9 @@ class MailingListFormBuilder extends StatefulWidget {
 
   final Widget Function(
       BuildContext context, MailingListForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, MailingListForm formModel)?
+      initState;
 
   @override
   _MailingListFormBuilderState createState() => _MailingListFormBuilderState();
@@ -181,6 +189,8 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
     }
 
     _form.addAll(elements.controls);
+
+    widget.initState?.call(context, _formModel);
 
     super.initState();
   }
@@ -219,7 +229,7 @@ class MailingListForm implements FormModel<MailingList> {
   final String? path;
 
   String emailListControlPath() => pathBuilder(emailListControlName);
-  List<String?> get emailListValue =>
+  List<String?> get _emailListValue =>
       emailListControl.value?.whereType<String?>().toList() ?? [];
   bool get containsEmailList {
     try {
@@ -253,6 +263,21 @@ class MailingListForm implements FormModel<MailingList> {
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormArray<String> get emailListControl =>
       form.control(emailListControlPath()) as FormArray<String>;
+  void emailListSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      emailListControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      emailListControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   void addEmailListItem(String value,
       {List<AsyncValidatorFunction>? asyncValidators,
       List<ValidatorFunction>? validators,
@@ -297,7 +322,7 @@ class MailingListForm implements FormModel<MailingList> {
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return MailingList(emailList: emailListValue);
+    return MailingList(emailList: _emailListValue);
   }
 
   MailingListForm copyWithPath(String? path) {

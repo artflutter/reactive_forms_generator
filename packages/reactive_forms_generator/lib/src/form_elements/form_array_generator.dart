@@ -14,72 +14,76 @@ class FormArrayGenerator extends FormElementGenerator {
       (field.type as ParameterizedType).typeArguments.first;
 
   String get displayType {
-    String _displayType = typeParameter.getDisplayString(withNullability: true);
+    String getDisplayString =
+        typeParameter.getDisplayString(withNullability: true);
 
     // we need to trim last NullabilitySuffix.question cause FormControl modifies
     // generic T => T?
     if (typeParameter.nullabilitySuffix == NullabilitySuffix.question) {
-      _displayType = _displayType.substring(0, _displayType.length - 1);
+      getDisplayString =
+          getDisplayString.substring(0, getDisplayString.length - 1);
     }
 
-    return _displayType;
+    return getDisplayString;
   }
 
   List<String> get validators {
-    List<String> _validators = syncValidatorList(formArrayChecker);
+    List<String> formArrayValidators = syncValidatorList(formArrayChecker);
 
     if (annotationTyped(formArrayChecker)) {
-      _validators = _validators
+      formArrayValidators = formArrayValidators
           .map(
             (e) => '(control) => $e(control as FormArray<$displayType>)',
           )
           .toList();
     }
 
-    return _validators;
+    return formArrayValidators;
   }
 
   List<String> get asyncValidators {
-    List<String> _asyncValidators = asyncValidatorList(formArrayChecker);
+    List<String> formArrayAsyncValidators =
+        asyncValidatorList(formArrayChecker);
 
     if (annotationTyped(formArrayChecker)) {
-      _asyncValidators = _asyncValidators
+      formArrayAsyncValidators = formArrayAsyncValidators
           .map(
             (e) => '(control) => $e(control as FormArray<$displayType>)',
           )
           .toList();
     }
 
-    return _asyncValidators;
+    return formArrayAsyncValidators;
   }
 
   List<String> get itemValidators {
-    List<String> _itemValidators = itemSyncValidatorList(formArrayChecker);
+    List<String> formArrayItemValidators =
+        itemSyncValidatorList(formArrayChecker);
 
     if (annotationTyped(formArrayChecker)) {
-      _itemValidators = _itemValidators
+      formArrayItemValidators = formArrayItemValidators
           .map(
             (e) => '(control) => $e(control as FormControl<$displayType>)',
           )
           .toList();
     }
 
-    return _itemValidators;
+    return formArrayItemValidators;
   }
 
   List<String> get itemAsyncValidators {
-    List<String> _itemAsyncValidators =
+    List<String> formArrayItemAsyncValidators =
         itemAsyncValidatorList(formArrayChecker);
 
     if (annotationTyped(formArrayChecker)) {
-      _itemAsyncValidators = _itemAsyncValidators
+      formArrayItemAsyncValidators = formArrayItemAsyncValidators
           .map(
             (e) => '(control) => $e(control as FormControl<$displayType>)',
           )
           .toList();
     }
 
-    return _itemAsyncValidators;
+    return formArrayItemAsyncValidators;
   }
 
   // String get annotationType =>
@@ -100,12 +104,13 @@ class FormArrayGenerator extends FormElementGenerator {
       withNullability: false,
     );
 
-    final _annotationType = annotationType(formArrayChecker);
-    final _annotationTyped = annotationTyped(formArrayChecker);
+    final formArrayAnnotationType = annotationType(formArrayChecker);
+    final formArrayAnnotationTyped = annotationTyped(formArrayChecker);
 
-    if (_annotationTyped && _annotationType != typeParameterType) {
+    if (formArrayAnnotationTyped &&
+        formArrayAnnotationType != typeParameterType) {
       throw Exception(
-        'Annotation and field type mismatch. Annotation is typed as `$_annotationType` and field(`${field.name}`) as `$typeParameterType`.',
+        'Annotation and field type mismatch. Annotation is typed as `$formArrayAnnotationType` and field(`${field.name}`) as `$typeParameterType`.',
       );
     }
 

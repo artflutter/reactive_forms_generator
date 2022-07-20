@@ -42,36 +42,38 @@ class FormGroupGenerator extends FormElementGenerator {
           .toList();
 
   List<String> get validators {
-    List<String> _validators = syncValidatorList(formGroupChecker);
-    List<String> _validatorsTyped = syncValidatorTypedList(formGroupChecker);
+    List<String> formGroupValidators = syncValidatorList(formGroupChecker);
+    List<String> formGroupValidatorsTyped =
+        syncValidatorTypedList(formGroupChecker);
 
-    _validatorsTyped = _validatorsTyped
+    formGroupValidatorsTyped = formGroupValidatorsTyped
         .map(
           (e) =>
               '(control) => $e(${field.className}(${(field.type.element as ClassElement).name.camelCase}, control as FormGroup, path))',
         )
         .toList();
 
-    return [..._validators, ..._validatorsTyped];
+    return [...formGroupValidators, ...formGroupValidatorsTyped];
   }
 
   List<String> get asyncValidators {
-    List<String> _asyncValidators = asyncValidatorList(formGroupChecker);
-    List<String> _asyncValidatorsTyped =
+    List<String> formGroupAsyncValidators =
+        asyncValidatorList(formGroupChecker);
+    List<String> formGroupAsyncValidatorsTyped =
         asyncValidatorTypedList(formGroupChecker);
 
-    _asyncValidators = _asyncValidators
+    formGroupAsyncValidators = formGroupAsyncValidators
         .map(
           (e) => '(control) => $e(this)',
         )
         .toList();
 
-    return [..._asyncValidators, ..._asyncValidatorsTyped];
+    return [...formGroupAsyncValidators, ...formGroupAsyncValidatorsTyped];
   }
 
   @override
   String element() {
-    final _formElements = formElements
+    final formElementsList = formElements
         .map(
           (f) {
             FormElementGenerator? formElementGenerator;
@@ -94,7 +96,7 @@ class FormGroupGenerator extends FormElementGenerator {
         .whereType<String>()
         .toList();
 
-    _formElements.addAll(
+    formElementsList.addAll(
       nestedFormElements.map(
         (f) {
           // final nullabilitySuffix = root.isNullable ? '?' : '';
@@ -105,7 +107,7 @@ class FormGroupGenerator extends FormElementGenerator {
     );
 
     final props = [
-      '{${_formElements.join(',')}}',
+      '{${formElementsList.join(',')}}',
       'validators: [${validators.join(',')}]',
       'asyncValidators: [${asyncValidators.join(',')}]',
       'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formGroupChecker)}',

@@ -80,7 +80,12 @@ class ReactiveTestForm extends StatelessWidget {
 
 class TestFormBuilder extends StatefulWidget {
   const TestFormBuilder(
-      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
+      {Key? key,
+      this.model,
+      this.child,
+      this.onWillPop,
+      required this.builder,
+      this.initState})
       : super(key: key);
 
   final Test? model;
@@ -91,6 +96,8 @@ class TestFormBuilder extends StatefulWidget {
 
   final Widget Function(BuildContext context, TestForm formModel, Widget? child)
       builder;
+
+  final void Function(BuildContext context, TestForm formModel)? initState;
 
   @override
   _TestFormBuilderState createState() => _TestFormBuilderState();
@@ -115,6 +122,8 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
     }
 
     _form.addAll(elements.controls);
+
+    widget.initState?.call(context, _formModel);
 
     super.initState();
   }
@@ -156,8 +165,8 @@ class TestForm implements FormModel<Test> {
 
   String titleControlPath() => pathBuilder(titleControlName);
   String descriptionControlPath() => pathBuilder(descriptionControlName);
-  String get titleValue => titleControl.value as String;
-  String? get descriptionValue => descriptionControl?.value;
+  String get _titleValue => titleControl.value as String;
+  String? get _descriptionValue => descriptionControl?.value;
   bool get containsTitle {
     try {
       form.control(titleControlPath());
@@ -246,13 +255,43 @@ class TestForm implements FormModel<Test> {
   FormControl<String>? get descriptionControl => containsDescription
       ? form.control(descriptionControlPath()) as FormControl<String>?
       : null;
+  void titleSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      titleControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      titleControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void descriptionSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      descriptionControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      descriptionControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   Test get model {
     if (!form.valid) {
       debugPrint(
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return Test(title: titleValue, description: descriptionValue);
+    return Test(title: _titleValue, description: _descriptionValue);
   }
 
   TestForm copyWithPath(String? path) {
