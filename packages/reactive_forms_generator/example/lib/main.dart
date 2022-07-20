@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
         Routes.freezed: (_) => const FreezedFormWidget(),
         Routes.animatedUrlList: (_) => UrlListForm(),
       },
-      home: const LoginFormWidget(),
+      home: const DeliveryListFormWidget(),
     );
   }
 }

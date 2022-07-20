@@ -97,9 +97,9 @@ abstract class FormElementGenerator {
           .toString();
 
   bool annotationTyped(TypeChecker typeChecker) {
-    final _annotationType = annotationType(typeChecker);
+    final typeAnnotationType = annotationType(typeChecker);
 
-    return _annotationType != 'dynamic' && _annotationType != 'Never';
+    return typeAnnotationType != 'dynamic' && typeAnnotationType != 'Never';
   }
 
   Element get fieldElement => field;

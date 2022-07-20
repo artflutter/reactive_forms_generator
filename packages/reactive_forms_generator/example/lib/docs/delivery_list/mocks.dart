@@ -1,9 +1,9 @@
 import 'package:example/docs/delivery_list/delivery_list.dart';
 
 const mockedDeliveryPoint1 = DeliveryPoint(
-  name: 'hi1',
+  name: 'name 1',
   address: Address(
-    street: 'fi1',
+    street: 'street 1',
   ),
 );
 

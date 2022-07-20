@@ -217,7 +217,12 @@ class ReactiveLoginExtendedForm extends StatelessWidget {
 
 class LoginExtendedFormBuilder extends StatefulWidget {
   const LoginExtendedFormBuilder(
-      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
+      {Key? key,
+      this.model,
+      this.child,
+      this.onWillPop,
+      required this.builder,
+      this.initState})
       : super(key: key);
 
   final LoginExtended? model;
@@ -228,6 +233,9 @@ class LoginExtendedFormBuilder extends StatefulWidget {
 
   final Widget Function(
       BuildContext context, LoginExtendedForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, LoginExtendedForm formModel)?
+      initState;
 
   @override
   _LoginExtendedFormBuilderState createState() =>
@@ -253,6 +261,8 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
     }
 
     _form.addAll(elements.controls);
+
+    widget.initState?.call(context, _formModel);
 
     super.initState();
   }
@@ -309,13 +319,13 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   String modeControlPath() => pathBuilder(modeControlName);
   String timeoutControlPath() => pathBuilder(timeoutControlName);
   String heightControlPath() => pathBuilder(heightControlName);
-  String get emailValue => emailControl.value as String;
-  String get passwordValue => passwordControl.value as String;
-  bool get rememberMeValue => rememberMeControl.value as bool;
-  String get themeValue => themeControl.value as String;
-  UserMode get modeValue => modeControl.value as UserMode;
-  int get timeoutValue => timeoutControl.value as int;
-  double get heightValue => heightControl.value as double;
+  String get _emailValue => emailControl.value ?? "";
+  String get _passwordValue => passwordControl.value as String;
+  bool get _rememberMeValue => rememberMeControl.value as bool;
+  String get _themeValue => themeControl.value as String;
+  UserMode get _modeValue => modeControl.value as UserMode;
+  int get _timeoutValue => timeoutControl.value as int;
+  double get _heightValue => heightControl.value as double;
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -540,6 +550,111 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
       form.control(timeoutControlPath()) as FormControl<int>;
   FormControl<double> get heightControl =>
       form.control(heightControlPath()) as FormControl<double>;
+  void emailSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      emailControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      emailControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void passwordSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      passwordControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      passwordControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void rememberMeSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      rememberMeControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      rememberMeControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void themeSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      themeControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      themeControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void modeSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      modeControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      modeControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void timeoutSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      timeoutControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      timeoutControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void heightSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      heightControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      heightControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   LoginExtended get model {
     if (!form.valid) {
       debugPrint(
@@ -547,13 +662,13 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
       );
     }
     return LoginExtended(
-        email: emailValue,
-        password: passwordValue,
-        rememberMe: rememberMeValue,
-        theme: themeValue,
-        mode: modeValue,
-        timeout: timeoutValue,
-        height: heightValue,
+        email: _emailValue,
+        password: _passwordValue,
+        rememberMe: _rememberMeValue,
+        theme: _themeValue,
+        mode: _modeValue,
+        timeout: _timeoutValue,
+        height: _heightValue,
         unAnnotated: loginExtended?.unAnnotated);
   }
 

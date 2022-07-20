@@ -131,7 +131,12 @@ class ReactiveBasicForm extends StatelessWidget {
 
 class BasicFormBuilder extends StatefulWidget {
   const BasicFormBuilder(
-      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
+      {Key? key,
+      this.model,
+      this.child,
+      this.onWillPop,
+      required this.builder,
+      this.initState})
       : super(key: key);
 
   final Basic? model;
@@ -142,6 +147,8 @@ class BasicFormBuilder extends StatefulWidget {
 
   final Widget Function(
       BuildContext context, BasicForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, BasicForm formModel)? initState;
 
   @override
   _BasicFormBuilderState createState() => _BasicFormBuilderState();
@@ -166,6 +173,8 @@ class _BasicFormBuilderState extends State<BasicFormBuilder> {
     }
 
     _form.addAll(elements.controls);
+
+    widget.initState?.call(context, _formModel);
 
     super.initState();
   }
@@ -207,8 +216,8 @@ class BasicForm implements FormModel<Basic> {
 
   String emailControlPath() => pathBuilder(emailControlName);
   String passwordControlPath() => pathBuilder(passwordControlName);
-  String get emailValue => emailControl.value as String;
-  String get passwordValue => passwordControl.value as String;
+  String get _emailValue => emailControl.value ?? "";
+  String get _passwordValue => passwordControl.value ?? "";
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -273,13 +282,43 @@ class BasicForm implements FormModel<Basic> {
       form.control(emailControlPath()) as FormControl<String>;
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
+  void emailSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      emailControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      emailControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void passwordSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      passwordControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      passwordControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   Basic get model {
     if (!form.valid) {
       debugPrint(
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return Basic(email: emailValue, password: passwordValue);
+    return Basic(email: _emailValue, password: _passwordValue);
   }
 
   BasicForm copyWithPath(String? path) {

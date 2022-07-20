@@ -13,4 +13,5 @@ const update = Naming('Update');
 const empty = Naming('Empty');
 const clear = Naming('Clear');
 const remove = Naming('Remove');
+const toggleEnableDisable = Naming('Toggle enable/disable');
 const insertAt = Naming('Insert at');

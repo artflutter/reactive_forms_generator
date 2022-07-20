@@ -140,7 +140,12 @@ class ReactiveArrayNullableForm extends StatelessWidget {
 
 class ArrayNullableFormBuilder extends StatefulWidget {
   const ArrayNullableFormBuilder(
-      {Key? key, this.model, this.child, this.onWillPop, required this.builder})
+      {Key? key,
+      this.model,
+      this.child,
+      this.onWillPop,
+      required this.builder,
+      this.initState})
       : super(key: key);
 
   final ArrayNullable? model;
@@ -151,6 +156,9 @@ class ArrayNullableFormBuilder extends StatefulWidget {
 
   final Widget Function(
       BuildContext context, ArrayNullableForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, ArrayNullableForm formModel)?
+      initState;
 
   @override
   _ArrayNullableFormBuilderState createState() =>
@@ -176,6 +184,8 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
     }
 
     _form.addAll(elements.controls);
+
+    widget.initState?.call(context, _formModel);
 
     super.initState();
   }
@@ -223,12 +233,12 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   String emailListControlPath() => pathBuilder(emailListControlName);
   String fruitListControlPath() => pathBuilder(fruitListControlName);
   String vegetablesListControlPath() => pathBuilder(vegetablesListControlName);
-  List<String?>? get someListValue => someListControl?.value;
-  List<String> get emailListValue =>
+  List<String?>? get _someListValue => someListControl?.value;
+  List<String> get _emailListValue =>
       emailListControl.value?.whereType<String>().toList() ?? [];
-  List<bool?> get fruitListValue =>
+  List<bool?> get _fruitListValue =>
       fruitListControl.value?.whereType<bool?>().toList() ?? [];
-  List<String?>? get vegetablesListValue =>
+  List<String?>? get _vegetablesListValue =>
       vegetablesListControl?.value?.whereType<String?>().toList() ?? [];
   bool get containsSomeList {
     try {
@@ -406,6 +416,66 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   FormArray<String>? get vegetablesListControl => containsVegetablesList
       ? form.control(vegetablesListControlPath()) as FormArray<String>?
       : null;
+  void someListSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      someListControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      someListControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void emailListSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      emailListControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      emailListControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void fruitListSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      fruitListControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      fruitListControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void vegetablesListSetDisabled(bool disabled,
+      {bool updateParent = true, bool emitEvent = true}) {
+    if (disabled) {
+      vegetablesListControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      vegetablesListControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   void addEmailListItem(String value,
       {List<AsyncValidatorFunction>? asyncValidators,
       List<ValidatorFunction>? validators,
@@ -527,10 +597,10 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
       );
     }
     return ArrayNullable(
-        emailList: emailListValue,
-        fruitList: fruitListValue,
-        vegetablesList: vegetablesListValue,
-        someList: someListValue);
+        emailList: _emailListValue,
+        fruitList: _fruitListValue,
+        vegetablesList: _vegetablesListValue,
+        someList: _someListValue);
   }
 
   ArrayNullableForm copyWithPath(String? path) {

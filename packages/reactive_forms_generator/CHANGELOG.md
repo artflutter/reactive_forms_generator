@@ -1,3 +1,11 @@
+## [0.18.0-beta]
+
+* initState method for *FormBuilder class
+* *SetDisabled helper methods for all controls
+* *ControlValue accessors are private now because it is unsafe to call them on non valid form
+* added additional failsafe by falling back to default values on required fields which have default value in model(for
+  strings only)
+
 ## [0.17.2-beta]
 
 * copyWithPath method to reduce `model` calls which could be unsafe on non valid form

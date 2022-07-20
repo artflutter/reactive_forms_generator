@@ -32,18 +32,40 @@ class DeliveryListFormWidget extends StatelessWidget {
                       itemBuilder: (context, i, formItem, _) {
                         return Column(
                           children: [
-                            ReactiveTextField<String>(
-                              key: name.itemIndexKey(i),
-                              formControl: formItem?.nameControl,
-                              validationMessages: (_) => {
-                                ValidationMessage.required: name.itemError(
-                                  i,
-                                  errorRequired,
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: ReactiveTextField<String>(
+                                    key: name.itemIndexKey(i),
+                                    formControl: formItem?.nameControl,
+                                    validationMessages: (_) => {
+                                      ValidationMessage.required:
+                                          name.itemError(
+                                        i,
+                                        errorRequired,
+                                      ),
+                                    },
+                                    decoration: InputDecoration(
+                                      labelText: name.itemIndex(i),
+                                    ),
+                                  ),
                                 ),
-                              },
-                              decoration: InputDecoration(
-                                labelText: name.itemIndex(i),
-                              ),
+                                IconButton(
+                                  key: toggleEnableDisable.itemKey,
+                                  onPressed: () {
+                                    formModel.deliveryListDeliveryPointForm[i]
+                                        .nameSetDisabled(
+                                      !formModel
+                                          .deliveryListDeliveryPointForm[i]
+                                          .nameControl
+                                          .disabled,
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    Icons.disabled_by_default_rounded,
+                                  ),
+                                ),
+                              ],
                             ),
                             ReactiveTextField<String>(
                               key: street.itemIndexKey(i),
@@ -103,8 +125,6 @@ class DeliveryListFormWidget extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () {
                             if (formModel.form.valid) {
-                              debugPrint(
-                                  formModel.deliveryListValue.toString());
                               debugPrint(formModel.model.toString());
                               onChange?.call(formModel.model);
                             } else {

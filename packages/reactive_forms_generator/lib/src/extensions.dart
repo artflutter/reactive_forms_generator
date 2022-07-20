@@ -69,7 +69,7 @@ extension ParameterElementExt on ParameterElement {
 
   String get addListItemListName => 'add${fieldName.pascalCase}ItemList';
 
-  String get fieldValueName => '${fieldName}Value';
+  String get fieldValueName => '_${fieldName}Value';
 
   String get fieldControlForm => '${fieldName}Form';
 
@@ -90,6 +90,8 @@ extension ParameterElementExt on ParameterElement {
   String get removeMethodName => '${fieldName}Remove';
 
   String get resetMethodName => '${fieldName}ValueReset';
+
+  String get setDisabledMethodName => '${fieldName}SetDisabled';
 
   bool get isNullable => type.nullabilitySuffix == NullabilitySuffix.question;
 
@@ -181,9 +183,9 @@ extension ParameterElementExt on ParameterElement {
   }
 
   bool get isForm => formChecker.hasAnnotationOfExact(this);
-  //
-  // bool get hasNoReactiveFormAnnotation =>
-  //     !isFormGroup && !isForm && !isFormArray && !isFormControl;
+//
+// bool get hasNoReactiveFormAnnotation =>
+//     !isFormGroup && !isForm && !isFormArray && !isFormControl;
 }
 
 extension FieldElementExt on FieldElement {
@@ -229,11 +231,11 @@ extension FieldElementExt on FieldElement {
   bool get isForm => formChecker.hasAnnotationOfExact(this);
 }
 
-typedef _IterableFunction<T, U> = U Function(T i);
-typedef _MergeableFunction<T> = T Function(T oldT, T newT);
+typedef IterableFunction<T, U> = U Function(T i);
+typedef MergeableFunction<T> = T Function(T oldT, T newT);
 
-Iterable<T> _mergeDuplicatesBy<T, U>(Iterable<T> list,
-    _IterableFunction<T, U> fn, _MergeableFunction<T> mergeFn) {
+Iterable<T> _mergeDuplicatesBy<T, U>(
+    Iterable<T> list, IterableFunction<T, U> fn, MergeableFunction<T> mergeFn) {
   final values = <U, T>{};
   for (var i in list) {
     final value = fn(i);
@@ -243,7 +245,7 @@ Iterable<T> _mergeDuplicatesBy<T, U>(Iterable<T> list,
 }
 
 Iterable<T> _removeDuplicatedBy<T, U>(
-    Iterable<T> list, _IterableFunction<T, U> fn) {
+    Iterable<T> list, IterableFunction<T, U> fn) {
   final values = <U, bool>{};
   return list.where((i) {
     final value = fn(i);
@@ -257,11 +259,11 @@ extension ExtensionsOnIterable<T, U> on Iterable<T> {
   /// Merge multiple values from an iterable given a predicate without modifying
   /// the original iterable.
   Iterable<T> mergeDuplicatesBy(
-          _IterableFunction<T, U> fn, _MergeableFunction<T> mergeFn) =>
+          IterableFunction<T, U> fn, MergeableFunction<T> mergeFn) =>
       _mergeDuplicatesBy(this, fn, mergeFn);
 
   /// Remove duplicated values from an iterable given a predicate without
   /// modifying the original iterable.
-  Iterable<T> removeDuplicatedBy(_IterableFunction<T, U> fn) =>
+  Iterable<T> removeDuplicatedBy(IterableFunction<T, U> fn) =>
       _removeDuplicatedBy(this, fn);
 }

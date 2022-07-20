@@ -22,6 +22,7 @@ import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_patch
 import 'package:reactive_forms_generator/src/reactive_forms_generator/contains_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/control_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/control_path_method.dart';
+import 'package:reactive_forms_generator/src/reactive_forms_generator/control_set_enabled_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/errors_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/extended_control_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/field_value_method.dart';
@@ -660,6 +661,7 @@ class FormGenerator {
                 ...fieldPatchMethodList,
                 ...fieldResetMethodList,
                 ...controlMethodList,
+                ...controlSetDisabledMethodList,
                 ...extendedControlMethodList,
                 ...addArrayControlMethodList,
                 ...addGroupControlMethodList,
@@ -775,6 +777,11 @@ class FormGenerator {
 
   List<Method> get controlMethodList =>
       all.map((e) => ControlMethod(e).method()).whereType<Method>().toList();
+
+  List<Method> get controlSetDisabledMethodList => all
+      .map((e) => ControlSetDisableMethod(e).method())
+      .whereType<Method>()
+      .toList();
 
   List<Method> get extendedControlMethodList => all
       .map((e) => ExtendedControlMethod(e).method())
