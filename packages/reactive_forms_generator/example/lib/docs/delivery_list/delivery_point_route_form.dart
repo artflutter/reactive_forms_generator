@@ -22,8 +22,8 @@ class DeliveryPointWidget extends StatelessWidget {
                 children: [
                   ReactiveTextField<String>(
                     formControl: formModel.nameControl,
-                    validationMessages: (_) => {
-                      ValidationMessage.required: 'Must not be empty',
+                    validationMessages: {
+                      ValidationMessage.required: (_) => 'Required'
                     },
                     decoration: const InputDecoration(
                       labelText: 'Name',
@@ -31,8 +31,8 @@ class DeliveryPointWidget extends StatelessWidget {
                   ),
                   ReactiveTextField<String>(
                     formControl: formModel.addressForm.streetControl,
-                    validationMessages: (_) => {
-                      ValidationMessage.required: 'Must not be empty',
+                    validationMessages: {
+                      ValidationMessage.required: (_) => 'Required'
                     },
                     decoration: const InputDecoration(
                       labelText: 'Street',
@@ -40,8 +40,8 @@ class DeliveryPointWidget extends StatelessWidget {
                   ),
                   ReactiveTextField<String>(
                     formControl: formModel.addressForm.cityControl,
-                    validationMessages: (_) => {
-                      ValidationMessage.required: 'Must not be empty',
+                    validationMessages: {
+                      ValidationMessage.required: (_) => 'Required'
                     },
                     decoration: const InputDecoration(
                       labelText: 'City',

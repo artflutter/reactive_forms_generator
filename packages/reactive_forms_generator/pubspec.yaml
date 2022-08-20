@@ -23,10 +23,10 @@ environment:
 dependencies:
   build: ^2.3.0
   source_gen: ^1.2.2
-  analyzer: ^4.1.0
+  analyzer: ^4.6.0
   path: ^1.8.1
-  build_runner: ^2.1.11
-  code_builder: ^4.1.0
+  build_runner: ^2.2.0
+  code_builder: ^4.2.0
   dart_style: ^2.2.3
   recase: ^4.0.0
 

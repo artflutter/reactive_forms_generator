@@ -343,7 +343,9 @@ class _$_Profile extends _Profile {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProfileToJson(this);
+    return _$$_ProfileToJson(
+      this,
+    );
   }
 }
 
@@ -368,28 +370,28 @@ abstract class _Profile extends Profile {
   factory _Profile.fromJson(Map<String, dynamic> json) = _$_Profile.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
   @FormControlAnnotation<String>()
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
   @FormControlAnnotation<ChartingOrderValue>()
-  ChartingOrderValue get chartingOrder => throw _privateConstructorUsedError;
+  ChartingOrderValue get chartingOrder;
   @override
   @FormControlAnnotation<NumberingStandard>()
-  NumberingStandard get numberingStandard => throw _privateConstructorUsedError;
+  NumberingStandard get numberingStandard;
   @override
-  IncidenceFilter get incidenceFilter => throw _privateConstructorUsedError;
+  IncidenceFilter get incidenceFilter;
   @override
   @FormControlAnnotation<MeasurementType>()
-  MeasurementType get measurementType => throw _privateConstructorUsedError;
+  MeasurementType get measurementType;
   @override
-  ThresholdSetting get threshold => throw _privateConstructorUsedError;
+  ThresholdSetting get threshold;
   @override
-  TimerSetting get timer => throw _privateConstructorUsedError;
+  TimerSetting get timer;
   @override
   @FormControlAnnotation<bool>()
-  bool get audioGuidance => throw _privateConstructorUsedError;
+  bool get audioGuidance;
   @override
   @JsonKey(ignore: true)
   _$$_ProfileCopyWith<_$_Profile> get copyWith =>
@@ -538,7 +540,9 @@ class _$_ThresholdSetting implements _ThresholdSetting {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ThresholdSettingToJson(this);
+    return _$$_ThresholdSettingToJson(
+      this,
+    );
   }
 }
 
@@ -552,10 +556,10 @@ abstract class _ThresholdSetting implements ThresholdSetting {
 
   @override
   @FormControlAnnotation<bool>()
-  bool get isEnabled => throw _privateConstructorUsedError;
+  bool get isEnabled;
   @override
   @FormControlAnnotation<int>()
-  int get value => throw _privateConstructorUsedError;
+  int get value;
   @override
   @JsonKey(ignore: true)
   _$$_ThresholdSettingCopyWith<_$_ThresholdSetting> get copyWith =>
@@ -703,7 +707,9 @@ class _$_TimerSetting implements _TimerSetting {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TimerSettingToJson(this);
+    return _$$_TimerSettingToJson(
+      this,
+    );
   }
 }
 
@@ -717,10 +723,10 @@ abstract class _TimerSetting implements TimerSetting {
 
   @override
   @FormControlAnnotation<bool>()
-  bool get isEnabled => throw _privateConstructorUsedError;
+  bool get isEnabled;
   @override
   @FormControlAnnotation<int>()
-  int get value => throw _privateConstructorUsedError;
+  int get value;
   @override
   @JsonKey(ignore: true)
   _$$_TimerSettingCopyWith<_$_TimerSetting> get copyWith =>
@@ -959,7 +965,9 @@ class _$_IncidenceFilter implements _IncidenceFilter {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_IncidenceFilterToJson(this);
+    return _$$_IncidenceFilterToJson(
+      this,
+    );
   }
 }
 
@@ -978,22 +986,22 @@ abstract class _IncidenceFilter implements IncidenceFilter {
 
   @override
   @FormControlAnnotation<bool>()
-  bool get isMobilityEnabled => throw _privateConstructorUsedError;
+  bool get isMobilityEnabled;
   @override
   @FormControlAnnotation<bool>()
-  bool get isFurcationEnabled => throw _privateConstructorUsedError;
+  bool get isFurcationEnabled;
   @override
   @FormControlAnnotation<bool>()
-  bool get isBleedingEnabled => throw _privateConstructorUsedError;
+  bool get isBleedingEnabled;
   @override
   @FormControlAnnotation<bool>()
-  bool get isSuppurationEnabled => throw _privateConstructorUsedError;
+  bool get isSuppurationEnabled;
   @override
   @FormControlAnnotation<bool>()
-  bool get isCalculusEnabled => throw _privateConstructorUsedError;
+  bool get isCalculusEnabled;
   @override
   @FormControlAnnotation<bool>()
-  bool get isPlaqueEnabled => throw _privateConstructorUsedError;
+  bool get isPlaqueEnabled;
   @override
   @JsonKey(ignore: true)
   _$$_IncidenceFilterCopyWith<_$_IncidenceFilter> get copyWith =>
@@ -1263,7 +1271,9 @@ class _$ArchScanOrder implements ArchScanOrder {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ArchScanOrderToJson(this);
+    return _$$ArchScanOrderToJson(
+      this,
+    );
   }
 }
 
@@ -1275,11 +1285,11 @@ abstract class ArchScanOrder implements ScanOrder {
   factory ArchScanOrder.fromJson(Map<String, dynamic> json) =
       _$ArchScanOrder.fromJson;
 
-  Jaw get jaw => throw _privateConstructorUsedError;
+  Jaw get jaw;
   @override
-  Direction get direction => throw _privateConstructorUsedError;
+  Direction get direction;
   @override
-  ToothSide get toothSide => throw _privateConstructorUsedError;
+  ToothSide get toothSide;
   @override
   @JsonKey(ignore: true)
   _$$ArchScanOrderCopyWith<_$ArchScanOrder> get copyWith =>
@@ -1449,7 +1459,9 @@ class _$QuadrantScanOrder implements QuadrantScanOrder {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$QuadrantScanOrderToJson(this);
+    return _$$QuadrantScanOrderToJson(
+      this,
+    );
   }
 }
 
@@ -1461,11 +1473,11 @@ abstract class QuadrantScanOrder implements ScanOrder {
   factory QuadrantScanOrder.fromJson(Map<String, dynamic> json) =
       _$QuadrantScanOrder.fromJson;
 
-  Quadrant get quadrant => throw _privateConstructorUsedError;
+  Quadrant get quadrant;
   @override
-  Direction get direction => throw _privateConstructorUsedError;
+  Direction get direction;
   @override
-  ToothSide get toothSide => throw _privateConstructorUsedError;
+  ToothSide get toothSide;
   @override
   @JsonKey(ignore: true)
   _$$QuadrantScanOrderCopyWith<_$QuadrantScanOrder> get copyWith =>
@@ -1636,7 +1648,9 @@ class _$_ChartingOrderValue implements _ChartingOrderValue {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ChartingOrderValueToJson(this);
+    return _$$_ChartingOrderValueToJson(
+      this,
+    );
   }
 }
 
@@ -1650,11 +1664,11 @@ abstract class _ChartingOrderValue implements ChartingOrderValue {
       _$_ChartingOrderValue.fromJson;
 
   @override
-  ChartingOrderType get chartingOrder => throw _privateConstructorUsedError;
+  ChartingOrderType get chartingOrder;
   @override
-  int get selectedOption => throw _privateConstructorUsedError;
+  int get selectedOption;
   @override
-  List<List<ScanOrder>> get order => throw _privateConstructorUsedError;
+  List<List<ScanOrder>> get order;
   @override
   @JsonKey(ignore: true)
   _$$_ChartingOrderValueCopyWith<_$_ChartingOrderValue> get copyWith =>

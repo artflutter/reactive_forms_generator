@@ -25,8 +25,8 @@ class UserProfileFormWidget extends StatelessWidget {
                 children: [
                   ReactiveTextField<String>(
                     formControl: formModel.firstNameControl,
-                    validationMessages: (control) => {
-                      ValidationMessage.required: 'Must not be empty',
+                    validationMessages: {
+                      ValidationMessage.required: (_) => 'Required'
                     },
                     decoration: const InputDecoration(
                       labelText: 'First name',
@@ -38,8 +38,8 @@ class UserProfileFormWidget extends StatelessWidget {
                   const SizedBox(height: 8.0),
                   ReactiveTextField<String>(
                     formControl: formModel.lastNameControl,
-                    validationMessages: (control) => {
-                      ValidationMessage.required: 'Must not be empty',
+                    validationMessages: {
+                      ValidationMessage.required: (_) => 'Required'
                     },
                     textInputAction: TextInputAction.done,
                     decoration: const InputDecoration(
@@ -56,8 +56,8 @@ class UserProfileFormWidget extends StatelessWidget {
                   ),
                   ReactiveTextField<String>(
                     formControl: formModel.homeForm.cityControl,
-                    validationMessages: (control) => {
-                      ValidationMessage.required: 'Must not be empty',
+                    validationMessages: {
+                      ValidationMessage.required: (_) => 'Required'
                     },
                     decoration: const InputDecoration(
                       labelText: 'Home city',
@@ -69,8 +69,8 @@ class UserProfileFormWidget extends StatelessWidget {
                   const SizedBox(height: 8.0),
                   ReactiveTextField<String>(
                     formControl: formModel.homeForm.streetControl,
-                    validationMessages: (control) => {
-                      ValidationMessage.required: 'Must not be empty',
+                    validationMessages: {
+                      ValidationMessage.required: (_) => 'Required'
                     },
                     textInputAction: TextInputAction.done,
                     decoration: const InputDecoration(
@@ -83,8 +83,8 @@ class UserProfileFormWidget extends StatelessWidget {
                   const SizedBox(height: 8.0),
                   ReactiveTextField<String>(
                     formControl: formModel.homeForm.zipControl,
-                    validationMessages: (control) => {
-                      ValidationMessage.required: 'Must not be empty',
+                    validationMessages: {
+                      ValidationMessage.required: (_) => 'Required'
                     },
                     textInputAction: TextInputAction.done,
                     decoration: const InputDecoration(
@@ -99,8 +99,8 @@ class UserProfileFormWidget extends StatelessWidget {
                   const SizedBox(height: 8.0),
                   ReactiveTextField<String>(
                     formControl: formModel.officeForm.cityControl,
-                    validationMessages: (control) => {
-                      ValidationMessage.required: 'Must not be empty',
+                    validationMessages: {
+                      ValidationMessage.required: (_) => 'Required'
                     },
                     textInputAction: TextInputAction.done,
                     decoration: const InputDecoration(
@@ -113,8 +113,8 @@ class UserProfileFormWidget extends StatelessWidget {
                   const SizedBox(height: 8.0),
                   ReactiveTextField<String>(
                     formControl: formModel.officeForm.streetControl,
-                    validationMessages: (control) => {
-                      ValidationMessage.required: 'Must not be empty',
+                    validationMessages: {
+                      ValidationMessage.required: (_) => 'Required'
                     },
                     textInputAction: TextInputAction.done,
                     decoration: const InputDecoration(
@@ -127,8 +127,8 @@ class UserProfileFormWidget extends StatelessWidget {
                   const SizedBox(height: 8.0),
                   ReactiveTextField<String>(
                     formControl: formModel.officeForm.zipControl,
-                    validationMessages: (control) => {
-                      ValidationMessage.required: 'Must not be empty',
+                    validationMessages: {
+                      ValidationMessage.required: (_) => 'Required'
                     },
                     textInputAction: TextInputAction.done,
                     decoration: const InputDecoration(

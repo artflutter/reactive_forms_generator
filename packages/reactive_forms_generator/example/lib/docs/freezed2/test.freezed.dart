@@ -147,10 +147,10 @@ abstract class _Test extends Test {
 
   @override
   @FormControlAnnotation<String>()
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @override
   @FormControlAnnotation<String>()
-  String? get description => throw _privateConstructorUsedError;
+  String? get description;
   @override
   @JsonKey(ignore: true)
   _$$_TestCopyWith<_$_Test> get copyWith => throw _privateConstructorUsedError;

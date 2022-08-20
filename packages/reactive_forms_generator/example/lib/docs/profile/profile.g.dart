@@ -29,9 +29,9 @@ Map<String, dynamic> _$$_ProfileToJson(_$_Profile instance) =>
       'name': instance.name,
       'chartingOrder': instance.chartingOrder,
       'numberingStandard':
-          _$NumberingStandardEnumMap[instance.numberingStandard],
+          _$NumberingStandardEnumMap[instance.numberingStandard]!,
       'incidenceFilter': instance.incidenceFilter,
-      'measurementType': _$MeasurementTypeEnumMap[instance.measurementType],
+      'measurementType': _$MeasurementTypeEnumMap[instance.measurementType]!,
       'threshold': instance.threshold,
       'timer': instance.timer,
       'audioGuidance': instance.audioGuidance,
@@ -101,9 +101,9 @@ _$ArchScanOrder _$$ArchScanOrderFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$ArchScanOrderToJson(_$ArchScanOrder instance) =>
     <String, dynamic>{
-      'jaw': _$JawEnumMap[instance.jaw],
-      'direction': _$DirectionEnumMap[instance.direction],
-      'toothSide': _$ToothSideEnumMap[instance.toothSide],
+      'jaw': _$JawEnumMap[instance.jaw]!,
+      'direction': _$DirectionEnumMap[instance.direction]!,
+      'toothSide': _$ToothSideEnumMap[instance.toothSide]!,
       'runtimeType': instance.$type,
     };
 
@@ -132,9 +132,9 @@ _$QuadrantScanOrder _$$QuadrantScanOrderFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$QuadrantScanOrderToJson(_$QuadrantScanOrder instance) =>
     <String, dynamic>{
-      'quadrant': _$QuadrantEnumMap[instance.quadrant],
-      'direction': _$DirectionEnumMap[instance.direction],
-      'toothSide': _$ToothSideEnumMap[instance.toothSide],
+      'quadrant': _$QuadrantEnumMap[instance.quadrant]!,
+      'direction': _$DirectionEnumMap[instance.direction]!,
+      'toothSide': _$ToothSideEnumMap[instance.toothSide]!,
       'runtimeType': instance.$type,
     };
 
@@ -162,7 +162,7 @@ _$_ChartingOrderValue _$$_ChartingOrderValueFromJson(
 Map<String, dynamic> _$$_ChartingOrderValueToJson(
         _$_ChartingOrderValue instance) =>
     <String, dynamic>{
-      'chartingOrder': _$ChartingOrderTypeEnumMap[instance.chartingOrder],
+      'chartingOrder': _$ChartingOrderTypeEnumMap[instance.chartingOrder]!,
       'selectedOption': instance.selectedOption,
       'order': instance.order,
     };
