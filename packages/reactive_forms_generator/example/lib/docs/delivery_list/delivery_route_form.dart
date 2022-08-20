@@ -38,12 +38,12 @@ class DeliveryListFormWidget extends StatelessWidget {
                                   child: ReactiveTextField<String>(
                                     key: name.itemIndexKey(i),
                                     formControl: formItem?.nameControl,
-                                    validationMessages: (_) => {
-                                      ValidationMessage.required:
+                                    validationMessages: {
+                                      ValidationMessage.required: (_) =>
                                           name.itemError(
-                                        i,
-                                        errorRequired,
-                                      ),
+                                            i,
+                                            errorRequired,
+                                          ),
                                     },
                                     decoration: InputDecoration(
                                       labelText: name.itemIndex(i),
@@ -70,11 +70,12 @@ class DeliveryListFormWidget extends StatelessWidget {
                             ReactiveTextField<String>(
                               key: street.itemIndexKey(i),
                               formControl: formItem?.addressForm.streetControl,
-                              validationMessages: (_) => {
-                                ValidationMessage.required: street.itemError(
-                                  i,
-                                  errorRequired,
-                                ),
+                              validationMessages: {
+                                ValidationMessage.required: (error) =>
+                                    street.itemError(
+                                      i,
+                                      errorRequired,
+                                    ),
                               },
                               decoration: InputDecoration(
                                 labelText: street.itemIndex(i),

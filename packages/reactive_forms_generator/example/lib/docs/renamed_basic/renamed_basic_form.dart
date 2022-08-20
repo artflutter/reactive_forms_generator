@@ -19,8 +19,8 @@ class BasicFormWidget extends StatelessWidget {
             children: [
               ReactiveTextField<String>(
                 formControl: formModel.emailControl,
-                validationMessages: (control) => {
-                  ValidationMessage.required: 'The email must not be empty',
+                validationMessages: {
+                  ValidationMessage.required: (_) => 'Required'
                 },
                 decoration: const InputDecoration(
                   labelText: 'Email',
@@ -33,8 +33,8 @@ class BasicFormWidget extends StatelessWidget {
               ReactiveTextField<String>(
                 formControl: formModel.passwordControl,
                 obscureText: true,
-                validationMessages: (control) => {
-                  ValidationMessage.required: 'The password must not be empty',
+                validationMessages: {
+                  ValidationMessage.required: (_) => 'Required'
                 },
                 textInputAction: TextInputAction.done,
                 decoration: const InputDecoration(

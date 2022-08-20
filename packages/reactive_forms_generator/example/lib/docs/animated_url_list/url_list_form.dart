@@ -236,9 +236,7 @@ class UrlListItemContent extends StatelessWidget {
           ReactiveTextField<String>(
             key: ValueKey(labelControl),
             formControl: labelControl,
-            validationMessages: (_) => {
-              ValidationMessage.required: 'Required',
-            },
+            validationMessages: {ValidationMessage.required: (_) => 'Required'},
             maxLength: 30,
             decoration: const InputDecoration(
               labelText: 'Label *',
@@ -248,9 +246,7 @@ class UrlListItemContent extends StatelessWidget {
           ReactiveTextField<String>(
             key: ValueKey(urlControl),
             formControl: urlControl,
-            validationMessages: (_) => {
-              ValidationMessage.required: 'Required',
-            },
+            validationMessages: {ValidationMessage.required: (_) => 'Required'},
             decoration: const InputDecoration(
                 labelText: 'e.g https://www.example.com *'),
           ),

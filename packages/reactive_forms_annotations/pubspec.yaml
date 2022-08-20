@@ -22,7 +22,7 @@ environment:
   sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
-  reactive_forms: ^13.0.0
+  reactive_forms: ^14.1.0
   flutter:
     sdk: flutter
 

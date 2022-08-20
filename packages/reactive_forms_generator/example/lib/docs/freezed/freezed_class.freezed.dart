@@ -193,7 +193,9 @@ class _$_FreezedClass extends _FreezedClass {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FreezedClassToJson(this);
+    return _$$_FreezedClassToJson(
+      this,
+    );
   }
 }
 
@@ -209,16 +211,16 @@ abstract class _FreezedClass extends FreezedClass {
 
   @override
   @FormControlAnnotation<String>()
-  String? get gender => throw _privateConstructorUsedError;
+  String? get gender;
   @override
   @FormControlAnnotation<String>()
-  String? get id => throw _privateConstructorUsedError;
+  String? get id;
   @override
   @FormControlAnnotation<String>()
-  String? get name => throw _privateConstructorUsedError;
+  String? get name;
   @override
   @FormControlAnnotation<double>()
-  double? get year => throw _privateConstructorUsedError;
+  double? get year;
   @override
   @JsonKey(ignore: true)
   _$$_FreezedClassCopyWith<_$_FreezedClass> get copyWith =>

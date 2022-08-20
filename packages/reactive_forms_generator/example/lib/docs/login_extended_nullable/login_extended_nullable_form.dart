@@ -22,11 +22,12 @@ class LoginExtendedNullableFormWidget extends StatelessWidget {
             children: [
               ReactiveTextField<String>(
                 formControl: formModel.emailControl,
-                validationMessages: (control) => {
-                  ValidationMessage.required: 'The email must not be empty',
-                  ValidationMessage.email:
+                validationMessages: {
+                  ValidationMessage.required: (control) =>
+                      'The email must not be empty',
+                  ValidationMessage.email: (control) =>
                       'The email value must be a valid email',
-                  'unique': 'This email is already in use',
+                  'unique': (control) => 'This email is already in use',
                 },
                 textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(
@@ -40,9 +41,10 @@ class LoginExtendedNullableFormWidget extends StatelessWidget {
               ReactiveTextField<String>(
                 formControl: formModel.passwordControl,
                 obscureText: true,
-                validationMessages: (control) => {
-                  ValidationMessage.required: 'The password must not be empty',
-                  ValidationMessage.minLength:
+                validationMessages: {
+                  ValidationMessage.required: (control) =>
+                      'The password must not be empty',
+                  ValidationMessage.minLength: (control) =>
                       'The password must be at least 8 characters',
                 },
                 textInputAction: TextInputAction.done,
@@ -56,12 +58,14 @@ class LoginExtendedNullableFormWidget extends StatelessWidget {
               const SizedBox(height: 16.0),
               ReactiveDropdownSearch<String, String>(
                 formControl: formModel.themeControl,
-                decoration: const InputDecoration(
-                  hintText: "Select a theme",
-                  labelText: "Theme",
-                  helperText: '',
-                  contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
-                  border: OutlineInputBorder(),
+                dropdownDecoratorProps: const DropDownDecoratorProps(
+                  dropdownSearchDecoration: InputDecoration(
+                    hintText: "Select a theme",
+                    labelText: "Theme",
+                    helperText: '',
+                    contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+                    border: OutlineInputBorder(),
+                  ),
                 ),
                 popupProps: const PopupProps.menu(),
                 // showSelectedItem: true,
@@ -75,12 +79,14 @@ class LoginExtendedNullableFormWidget extends StatelessWidget {
               ReactiveDropdownSearch<UserMode, UserMode>(
                 formControl: formModel.modeControl,
                 popupProps: const PopupProps.menu(),
-                decoration: const InputDecoration(
-                  hintText: "Select a mode",
-                  labelText: "Mode",
-                  helperText: '',
-                  contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
-                  border: OutlineInputBorder(),
+                dropdownDecoratorProps: const DropDownDecoratorProps(
+                  dropdownSearchDecoration: InputDecoration(
+                    hintText: "Select a mode",
+                    labelText: "Mode",
+                    helperText: '',
+                    contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+                    border: OutlineInputBorder(),
+                  ),
                 ),
                 // showSelectedItem: true,
                 items: const [

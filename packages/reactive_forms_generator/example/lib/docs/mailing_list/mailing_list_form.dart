@@ -29,8 +29,8 @@ class MailingListFormWidget extends StatelessWidget {
                       itemBuilder: (context, i, item, formModel) {
                         return ReactiveTextField<String>(
                           formControlName: i.toString(),
-                          validationMessages: (_) => {
-                            'email': 'Invalid email',
+                          validationMessages: {
+                            'email': (_) => 'Invalid email',
                           },
                           decoration: InputDecoration(
                             labelText: 'Email $i',

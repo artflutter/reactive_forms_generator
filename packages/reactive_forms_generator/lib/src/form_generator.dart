@@ -22,6 +22,7 @@ import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_patch
 import 'package:reactive_forms_generator/src/reactive_forms_generator/contains_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/control_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/control_path_method.dart';
+import 'package:reactive_forms_generator/src/reactive_forms_generator/control_private_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/control_set_enabled_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/errors_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/extended_control_method.dart';
@@ -62,7 +63,7 @@ class FormGenerator {
     for (var e in formGroups) {
       formGroupGenerators[e.name] = FormGenerator(
         root,
-        e.type.element! as ClassElement,
+        e.type.element2! as ClassElement,
         e.type,
       );
     }
@@ -76,7 +77,7 @@ class FormGenerator {
 
       nestedFormGroupGenerators[e.name] = FormGenerator(
         root,
-        typeParameter.element! as ClassElement,
+        typeParameter.element2! as ClassElement,
         e.type,
       );
     }
@@ -274,8 +275,8 @@ class FormGenerator {
   Method addGroupControl(ParameterElement field) {
     final type = field.typeParameter.getDisplayString(withNullability: false);
 
-    final formGroupGenerator = FormGenerator(
-        root, field.typeParameter.element as ClassElement, field.typeParameter);
+    final formGroupGenerator = FormGenerator(root,
+        field.typeParameter.element2 as ClassElement, field.typeParameter);
 
     return Method(
       (b) => b
@@ -299,8 +300,8 @@ class FormGenerator {
   }
 
   Method removeGroupControl(ParameterElement field) {
-    final formGroupGenerator = FormGenerator(
-        root, field.typeParameter.element as ClassElement, field.typeParameter);
+    final formGroupGenerator = FormGenerator(root,
+        field.typeParameter.element2 as ClassElement, field.typeParameter);
 
     final formField = '${field.name}${formGroupGenerator.className}';
     final controlField = '${field.fieldControlName}${field.nullabilitySuffix}';
@@ -529,7 +530,7 @@ class FormGenerator {
 
                 final formGenerator = FormGenerator(
                   root,
-                  typeParameter.element! as ClassElement,
+                  typeParameter.element2! as ClassElement,
                   type,
                 );
                 return '''${e.name}${formGenerator.className} = (${element.name.camelCase}$nullabilitySuffix.${e.name} $defaultValue)
@@ -603,8 +604,8 @@ class FormGenerator {
                       displayType = parameterizedType.getDisplayString(
                           withNullability: false);
 
-                      if (parameterizedType.element is ClassElement &&
-                          (parameterizedType.element as ClassElement)
+                      if (parameterizedType.element2 is ClassElement &&
+                          (parameterizedType.element2 as ClassElement)
                               .isNullable) {
                         displayType = '$displayType?';
                       }
@@ -634,7 +635,7 @@ class FormGenerator {
                         (e.type as ParameterizedType).typeArguments.first;
 
                     final formGenerator = FormGenerator(
-                        root, typeParameter.element! as ClassElement, type);
+                        root, typeParameter.element2! as ClassElement, type);
 
                     return Field(
                       (b) => b
@@ -661,6 +662,7 @@ class FormGenerator {
                 ...fieldPatchMethodList,
                 ...fieldResetMethodList,
                 ...controlMethodList,
+                // ...controlPrivateMethodList,
                 ...controlSetDisabledMethodList,
                 ...extendedControlMethodList,
                 ...addArrayControlMethodList,
@@ -702,13 +704,13 @@ class FormGenerator {
                             nameOffset: 20,
                             parameterKind: u.ParameterKind.REQUIRED,
                           )..type = t.InterfaceTypeImpl(
-                              element: element,
+                              element2: element,
                               typeArguments: [],
                               nullabilitySuffix: NullabilitySuffix.none,
                             ),
                           type ??
                               t.InterfaceTypeImpl(
-                                element: element,
+                                element2: element,
                                 typeArguments: element.thisType.typeArguments,
                                 nullabilitySuffix: element.isNullable
                                     ? NullabilitySuffix.question
@@ -777,6 +779,11 @@ class FormGenerator {
 
   List<Method> get controlMethodList =>
       all.map((e) => ControlMethod(e).method()).whereType<Method>().toList();
+
+  List<Method> get controlPrivateMethodList => all
+      .map((e) => ControlPrivateMethod(e).method())
+      .whereType<Method>()
+      .toList();
 
   List<Method> get controlSetDisabledMethodList => all
       .map((e) => ControlSetDisableMethod(e).method())
