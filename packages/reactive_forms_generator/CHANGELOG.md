@@ -1,3 +1,7 @@
+## [0.19.0-beta]
+
+* package update
+
 ## [0.18.0-beta]
 
 * initState method for *FormBuilder class
