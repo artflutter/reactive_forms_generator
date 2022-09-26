@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
+import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
 
@@ -11,6 +12,20 @@ extension ConstructorElementExt on ConstructorElement {
 }
 
 extension ClassElementExt on ClassElement {
+  String get fullTypeName => thisType.toString();
+
+  String get generics {
+    final generics = thisType.typeArguments.join(', ');
+
+    return generics.isNotEmpty ? "<$generics>" : "";
+  }
+
+  Iterable<Reference> get genericTypes => thisType.typeArguments.map(
+        (e) => Reference(
+          e.getDisplayString(withNullability: false),
+        ),
+      );
+
   List<ParameterElement> get annotatedParameters {
     final annotatedConstructors =
         constructors.where((e) => e.hasReactiveFormAnnotatedParameters);
