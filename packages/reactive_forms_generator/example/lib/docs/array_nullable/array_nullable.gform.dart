@@ -10,9 +10,11 @@ part of 'array_nullable.dart';
 // **************************************************************************
 
 class ReactiveArrayNullableFormConsumer extends StatelessWidget {
-  const ReactiveArrayNullableFormConsumer(
-      {Key? key, required this.builder, this.child})
-      : super(key: key);
+  const ReactiveArrayNullableFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
 
   final Widget? child;
 
@@ -31,20 +33,27 @@ class ReactiveArrayNullableFormConsumer extends StatelessWidget {
 }
 
 class ArrayNullableFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const ArrayNullableFormInheritedStreamer(
-      {Key? key,
-      required this.form,
-      required Stream<dynamic> stream,
-      required Widget child})
-      : super(stream, child, key: key);
+  const ArrayNullableFormInheritedStreamer({
+    Key? key,
+    required this.form,
+    required Stream<dynamic> stream,
+    required Widget child,
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
 
   final ArrayNullableForm form;
 }
 
 class ReactiveArrayNullableForm extends StatelessWidget {
-  const ReactiveArrayNullableForm(
-      {Key? key, required this.form, required this.child, this.onWillPop})
-      : super(key: key);
+  const ReactiveArrayNullableForm({
+    Key? key,
+    required this.form,
+    required this.child,
+    this.onWillPop,
+  }) : super(key: key);
 
   final Widget child;
 
@@ -52,7 +61,10 @@ class ReactiveArrayNullableForm extends StatelessWidget {
 
   final WillPopCallback? onWillPop;
 
-  static ArrayNullableForm? of(BuildContext context, {bool listen = true}) {
+  static ArrayNullableForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
@@ -81,14 +93,14 @@ class ReactiveArrayNullableForm extends StatelessWidget {
 }
 
 class ArrayNullableFormBuilder extends StatefulWidget {
-  const ArrayNullableFormBuilder(
-      {Key? key,
-      this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder,
-      this.initState})
-      : super(key: key);
+  const ArrayNullableFormBuilder({
+    Key? key,
+    this.model,
+    this.child,
+    this.onWillPop,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
 
   final ArrayNullable? model;
 
@@ -155,7 +167,11 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
 }
 
 class ArrayNullableForm implements FormModel<ArrayNullable> {
-  ArrayNullableForm(this.arrayNullable, this.form, this.path) {}
+  ArrayNullableForm(
+    this.arrayNullable,
+    this.form,
+    this.path,
+  ) {}
 
   static String emailListControlName = "emailList";
 
@@ -226,7 +242,10 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   void get emailListFocus => form.focus(emailListControlPath());
   void get fruitListFocus => form.focus(fruitListControlPath());
   void get vegetablesListFocus => form.focus(vegetablesListControlPath());
-  void someListRemove({bool updateParent = true, bool emitEvent = true}) {
+  void someListRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsSomeList) {
       final controlPath = path;
       if (controlPath == null) {
@@ -249,7 +268,10 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     }
   }
 
-  void vegetablesListRemove({bool updateParent = true, bool emitEvent = true}) {
+  void vegetablesListRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsVegetablesList) {
       final controlPath = path;
       if (controlPath == null) {
@@ -272,80 +294,112 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     }
   }
 
-  void someListValueUpdate(List<String?>? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void someListValueUpdate(
+    List<String?>? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     someListControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void emailListValueUpdate(List<String> value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void emailListValueUpdate(
+    List<String> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     emailListControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void fruitListValueUpdate(List<bool?> value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void fruitListValueUpdate(
+    List<bool?> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     fruitListControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void vegetablesListValueUpdate(List<String?>? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void vegetablesListValueUpdate(
+    List<String?>? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     vegetablesListControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void someListValuePatch(List<String?>? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void someListValuePatch(
+    List<String?>? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     someListControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void emailListValuePatch(List<String> value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void emailListValuePatch(
+    List<String> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     emailListControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void fruitListValuePatch(List<bool?> value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void fruitListValuePatch(
+    List<bool?> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     fruitListControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void vegetablesListValuePatch(List<String?>? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void vegetablesListValuePatch(
+    List<String?>? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     vegetablesListControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void someListValueReset(List<String?>? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void someListValueReset(
+    List<String?>? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       someListControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void emailListValueReset(List<String> value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void emailListValueReset(
+    List<String> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       emailListControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void fruitListValueReset(List<bool?> value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void fruitListValueReset(
+    List<bool?> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       fruitListControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void vegetablesListValueReset(List<String?>? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void vegetablesListValueReset(
+    List<String?>? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       vegetablesListControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<List<String?>>? get someListControl => containsSomeList
@@ -358,8 +412,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   FormArray<String>? get vegetablesListControl => containsVegetablesList
       ? form.control(vegetablesListControlPath()) as FormArray<String>?
       : null;
-  void someListSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void someListSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       someListControl?.markAsDisabled(
         updateParent: updateParent,
@@ -373,8 +430,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     }
   }
 
-  void emailListSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void emailListSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       emailListControl.markAsDisabled(
         updateParent: updateParent,
@@ -388,8 +448,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     }
   }
 
-  void fruitListSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void fruitListSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       fruitListControl.markAsDisabled(
         updateParent: updateParent,
@@ -403,8 +466,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     }
   }
 
-  void vegetablesListSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void vegetablesListSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       vegetablesListControl?.markAsDisabled(
         updateParent: updateParent,
@@ -418,12 +484,14 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     }
   }
 
-  void addEmailListItem(String value,
-      {List<AsyncValidatorFunction>? asyncValidators,
-      List<ValidatorFunction>? validators,
-      int? asyncValidatorsDebounceTime,
-      bool? disabled,
-      ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge}) {
+  void addEmailListItem(
+    String value, {
+    List<AsyncValidatorFunction>? asyncValidators,
+    List<ValidatorFunction>? validators,
+    int? asyncValidatorsDebounceTime,
+    bool? disabled,
+    ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
+  }) {
     List<ValidatorFunction> resultingValidators = [];
     List<AsyncValidatorFunction> resultingAsyncValidators = [];
 
@@ -456,12 +524,14 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     ));
   }
 
-  void addFruitListItem(bool value,
-      {List<AsyncValidatorFunction>? asyncValidators,
-      List<ValidatorFunction>? validators,
-      int? asyncValidatorsDebounceTime,
-      bool? disabled,
-      ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge}) {
+  void addFruitListItem(
+    bool value, {
+    List<AsyncValidatorFunction>? asyncValidators,
+    List<ValidatorFunction>? validators,
+    int? asyncValidatorsDebounceTime,
+    bool? disabled,
+    ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
+  }) {
     List<ValidatorFunction> resultingValidators = [];
     List<AsyncValidatorFunction> resultingAsyncValidators = [];
 
@@ -494,12 +564,14 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     ));
   }
 
-  void addVegetablesListItem(String value,
-      {List<AsyncValidatorFunction>? asyncValidators,
-      List<ValidatorFunction>? validators,
-      int? asyncValidatorsDebounceTime,
-      bool? disabled,
-      ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge}) {
+  void addVegetablesListItem(
+    String value, {
+    List<AsyncValidatorFunction>? asyncValidators,
+    List<ValidatorFunction>? validators,
+    int? asyncValidatorsDebounceTime,
+    bool? disabled,
+    ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
+  }) {
     List<ValidatorFunction> resultingValidators = [];
     List<AsyncValidatorFunction> resultingAsyncValidators = [];
 
@@ -549,24 +621,34 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     return ArrayNullableForm(arrayNullable, form, path);
   }
 
-  void updateValue(ArrayNullable value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void updateValue(
+    ArrayNullable value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.updateValue(
           ArrayNullableForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(ArrayNullable value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void resetValue(
+    ArrayNullable value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.reset(
           value: ArrayNullableForm(value, FormGroup({}), null)
               .formElements()
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: formElements().rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent);
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
@@ -630,13 +712,13 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
 }
 
 class ReactiveArrayNullableFormArrayBuilder<T> extends StatelessWidget {
-  const ReactiveArrayNullableFormArrayBuilder(
-      {Key? key,
-      this.control,
-      this.formControl,
-      this.builder,
-      required this.itemBuilder})
-      : assert(control != null || formControl != null,
+  const ReactiveArrayNullableFormArrayBuilder({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(control != null || formControl != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
@@ -691,13 +773,13 @@ class ReactiveArrayNullableFormArrayBuilder<T> extends StatelessWidget {
 
 class ReactiveArrayNullableFormFormGroupArrayBuilder<V>
     extends StatelessWidget {
-  const ReactiveArrayNullableFormFormGroupArrayBuilder(
-      {Key? key,
-      this.extended,
-      this.getExtended,
-      this.builder,
-      required this.itemBuilder})
-      : assert(extended != null || getExtended != null,
+  const ReactiveArrayNullableFormFormGroupArrayBuilder({
+    Key? key,
+    this.extended,
+    this.getExtended,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(extended != null || getExtended != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 

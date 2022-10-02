@@ -95,8 +95,11 @@ part of 'group.dart';
 // **************************************************************************
 
 class ReactiveGroupFormConsumer extends StatelessWidget {
-  const ReactiveGroupFormConsumer({Key? key, required this.builder, this.child})
-      : super(key: key);
+  const ReactiveGroupFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
 
   final Widget? child;
 
@@ -115,20 +118,27 @@ class ReactiveGroupFormConsumer extends StatelessWidget {
 }
 
 class GroupFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const GroupFormInheritedStreamer(
-      {Key? key,
-      required this.form,
-      required Stream<dynamic> stream,
-      required Widget child})
-      : super(stream, child, key: key);
+  const GroupFormInheritedStreamer({
+    Key? key,
+    required this.form,
+    required Stream<dynamic> stream,
+    required Widget child,
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
 
   final GroupForm form;
 }
 
 class ReactiveGroupForm extends StatelessWidget {
-  const ReactiveGroupForm(
-      {Key? key, required this.form, required this.child, this.onWillPop})
-      : super(key: key);
+  const ReactiveGroupForm({
+    Key? key,
+    required this.form,
+    required this.child,
+    this.onWillPop,
+  }) : super(key: key);
 
   final Widget child;
 
@@ -136,7 +146,10 @@ class ReactiveGroupForm extends StatelessWidget {
 
   final WillPopCallback? onWillPop;
 
-  static GroupForm? of(BuildContext context, {bool listen = true}) {
+  static GroupForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<GroupFormInheritedStreamer>()
@@ -164,14 +177,14 @@ class ReactiveGroupForm extends StatelessWidget {
 }
 
 class GroupFormBuilder extends StatefulWidget {
-  const GroupFormBuilder(
-      {Key? key,
-      this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder,
-      this.initState})
-      : super(key: key);
+  const GroupFormBuilder({
+    Key? key,
+    this.model,
+    this.child,
+    this.onWillPop,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
 
   final Group? model;
 
@@ -236,7 +249,11 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
 }
 
 class GroupForm implements FormModel<Group> {
-  GroupForm(this.group, this.form, this.path) {
+  GroupForm(
+    this.group,
+    this.form,
+    this.path,
+  ) {
     personalForm = PersonalForm(group?.personal, form, pathBuilder('personal'));
     phoneForm = PhoneForm(group?.phone, form, pathBuilder('phone'));
     addressForm = AddressForm(group?.address, form, pathBuilder('address'));
@@ -317,7 +334,10 @@ class GroupForm implements FormModel<Group> {
   void get phoneFocus => form.focus(phoneControlPath());
   void get addressFocus => form.focus(addressControlPath());
   void get address2Focus => form.focus(address2ControlPath());
-  void personalRemove({bool updateParent = true, bool emitEvent = true}) {
+  void personalRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsPersonal) {
       final controlPath = path;
       if (controlPath == null) {
@@ -340,7 +360,10 @@ class GroupForm implements FormModel<Group> {
     }
   }
 
-  void phoneRemove({bool updateParent = true, bool emitEvent = true}) {
+  void phoneRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsPhone) {
       final controlPath = path;
       if (controlPath == null) {
@@ -363,7 +386,10 @@ class GroupForm implements FormModel<Group> {
     }
   }
 
-  void addressRemove({bool updateParent = true, bool emitEvent = true}) {
+  void addressRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsAddress) {
       final controlPath = path;
       if (controlPath == null) {
@@ -386,7 +412,10 @@ class GroupForm implements FormModel<Group> {
     }
   }
 
-  void address2Remove({bool updateParent = true, bool emitEvent = true}) {
+  void address2Remove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsAddress2) {
       final controlPath = path;
       if (controlPath == null) {
@@ -409,104 +438,136 @@ class GroupForm implements FormModel<Group> {
     }
   }
 
-  void personalValueUpdate(Personal? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void personalValueUpdate(
+    Personal? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     personalControl?.updateValue(
         PersonalForm(value, FormGroup({}), null).formElements().rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
 
-  void phoneValueUpdate(Phone? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void phoneValueUpdate(
+    Phone? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     phoneControl?.updateValue(
         PhoneForm(value, FormGroup({}), null).formElements().rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
 
-  void addressValueUpdate(Address? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void addressValueUpdate(
+    Address? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     addressControl?.updateValue(
         AddressForm(value, FormGroup({}), null).formElements().rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
 
-  void address2ValueUpdate(Address? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void address2ValueUpdate(
+    Address? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     address2Control?.updateValue(
         AddressForm(value, FormGroup({}), null).formElements().rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
 
-  void personalValuePatch(Personal? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void personalValuePatch(
+    Personal? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     personalControl?.updateValue(
         PersonalForm(value, form, null).formElements().rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
 
-  void phoneValuePatch(Phone? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void phoneValuePatch(
+    Phone? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     phoneControl?.updateValue(
         PhoneForm(value, form, null).formElements().rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
 
-  void addressValuePatch(Address? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void addressValuePatch(
+    Address? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     addressControl?.updateValue(
         AddressForm(value, form, null).formElements().rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
 
-  void address2ValuePatch(Address? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void address2ValuePatch(
+    Address? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     address2Control?.updateValue(
         AddressForm(value, form, null).formElements().rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
 
-  void personalValueReset(Personal? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void personalValueReset(
+    Personal? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       personalControl?.reset(
           value:
               PersonalForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void phoneValueReset(Phone? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void phoneValueReset(
+    Phone? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       phoneControl?.reset(
           value: PhoneForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void addressValueReset(Address? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void addressValueReset(
+    Address? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       addressControl?.reset(
           value:
               AddressForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void address2ValueReset(Address? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void address2ValueReset(
+    Address? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       address2Control?.reset(
           value:
               AddressForm(value, FormGroup({}), null).formElements().rawValue,
@@ -522,8 +583,11 @@ class GroupForm implements FormModel<Group> {
   FormGroup? get address2Control => containsAddress2
       ? form.control(address2ControlPath()) as FormGroup?
       : null;
-  void personalSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void personalSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       personalControl?.markAsDisabled(
         updateParent: updateParent,
@@ -537,8 +601,11 @@ class GroupForm implements FormModel<Group> {
     }
   }
 
-  void phoneSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void phoneSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       phoneControl?.markAsDisabled(
         updateParent: updateParent,
@@ -552,8 +619,11 @@ class GroupForm implements FormModel<Group> {
     }
   }
 
-  void addressSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void addressSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       addressControl?.markAsDisabled(
         updateParent: updateParent,
@@ -567,8 +637,11 @@ class GroupForm implements FormModel<Group> {
     }
   }
 
-  void address2SetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void address2SetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       address2Control?.markAsDisabled(
         updateParent: updateParent,
@@ -599,22 +672,32 @@ class GroupForm implements FormModel<Group> {
     return GroupForm(group, form, path);
   }
 
-  void updateValue(Group value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void updateValue(
+    Group value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.updateValue(
           GroupForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(Group value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void resetValue(
+    Group value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.reset(
           value: GroupForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: formElements().rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent);
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
@@ -630,7 +713,11 @@ class GroupForm implements FormModel<Group> {
 }
 
 class PersonalForm implements FormModel<Personal> {
-  PersonalForm(this.personal, this.form, this.path) {}
+  PersonalForm(
+    this.personal,
+    this.form,
+    this.path,
+  ) {}
 
   static String nameControlName = "name";
 
@@ -668,7 +755,10 @@ class PersonalForm implements FormModel<Personal> {
   Object? get emailErrors => emailControl?.errors;
   void get nameFocus => form.focus(nameControlPath());
   void get emailFocus => form.focus(emailControlPath());
-  void nameRemove({bool updateParent = true, bool emitEvent = true}) {
+  void nameRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsName) {
       final controlPath = path;
       if (controlPath == null) {
@@ -691,7 +781,10 @@ class PersonalForm implements FormModel<Personal> {
     }
   }
 
-  void emailRemove({bool updateParent = true, bool emitEvent = true}) {
+  void emailRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsEmail) {
       final controlPath = path;
       if (controlPath == null) {
@@ -714,42 +807,58 @@ class PersonalForm implements FormModel<Personal> {
     }
   }
 
-  void nameValueUpdate(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void nameValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     nameControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void emailValueUpdate(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void emailValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     emailControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void nameValuePatch(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void nameValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     nameControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void emailValuePatch(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void emailValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     emailControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void nameValueReset(String? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void nameValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       nameControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void emailValueReset(String? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void emailValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       emailControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String>? get nameControl => containsName
@@ -758,8 +867,11 @@ class PersonalForm implements FormModel<Personal> {
   FormControl<String>? get emailControl => containsEmail
       ? form.control(emailControlPath()) as FormControl<String>?
       : null;
-  void nameSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void nameSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       nameControl?.markAsDisabled(
         updateParent: updateParent,
@@ -773,8 +885,11 @@ class PersonalForm implements FormModel<Personal> {
     }
   }
 
-  void emailSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void emailSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       emailControl?.markAsDisabled(
         updateParent: updateParent,
@@ -801,23 +916,33 @@ class PersonalForm implements FormModel<Personal> {
     return PersonalForm(personal, form, path);
   }
 
-  void updateValue(Personal? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void updateValue(
+    Personal? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.updateValue(
           PersonalForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(Personal? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void resetValue(
+    Personal? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.reset(
           value:
               PersonalForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: formElements().rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent);
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
@@ -843,7 +968,11 @@ class PersonalForm implements FormModel<Personal> {
 }
 
 class PhoneForm implements FormModel<Phone> {
-  PhoneForm(this.phone, this.form, this.path) {}
+  PhoneForm(
+    this.phone,
+    this.form,
+    this.path,
+  ) {}
 
   static String phoneNumberControlName = "phoneNumber";
 
@@ -881,7 +1010,10 @@ class PhoneForm implements FormModel<Phone> {
   Object? get countryIsoErrors => countryIsoControl?.errors;
   void get phoneNumberFocus => form.focus(phoneNumberControlPath());
   void get countryIsoFocus => form.focus(countryIsoControlPath());
-  void phoneNumberRemove({bool updateParent = true, bool emitEvent = true}) {
+  void phoneNumberRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsPhoneNumber) {
       final controlPath = path;
       if (controlPath == null) {
@@ -904,7 +1036,10 @@ class PhoneForm implements FormModel<Phone> {
     }
   }
 
-  void countryIsoRemove({bool updateParent = true, bool emitEvent = true}) {
+  void countryIsoRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsCountryIso) {
       final controlPath = path;
       if (controlPath == null) {
@@ -927,42 +1062,58 @@ class PhoneForm implements FormModel<Phone> {
     }
   }
 
-  void phoneNumberValueUpdate(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void phoneNumberValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     phoneNumberControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void countryIsoValueUpdate(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void countryIsoValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     countryIsoControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void phoneNumberValuePatch(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void phoneNumberValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     phoneNumberControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void countryIsoValuePatch(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void countryIsoValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     countryIsoControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void phoneNumberValueReset(String? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void phoneNumberValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       phoneNumberControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void countryIsoValueReset(String? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void countryIsoValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       countryIsoControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String>? get phoneNumberControl => containsPhoneNumber
@@ -971,8 +1122,11 @@ class PhoneForm implements FormModel<Phone> {
   FormControl<String>? get countryIsoControl => containsCountryIso
       ? form.control(countryIsoControlPath()) as FormControl<String>?
       : null;
-  void phoneNumberSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void phoneNumberSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       phoneNumberControl?.markAsDisabled(
         updateParent: updateParent,
@@ -986,8 +1140,11 @@ class PhoneForm implements FormModel<Phone> {
     }
   }
 
-  void countryIsoSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void countryIsoSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       countryIsoControl?.markAsDisabled(
         updateParent: updateParent,
@@ -1014,22 +1171,32 @@ class PhoneForm implements FormModel<Phone> {
     return PhoneForm(phone, form, path);
   }
 
-  void updateValue(Phone? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void updateValue(
+    Phone? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.updateValue(
           PhoneForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(Phone? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void resetValue(
+    Phone? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.reset(
           value: PhoneForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: formElements().rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent);
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
@@ -1055,7 +1222,11 @@ class PhoneForm implements FormModel<Phone> {
 }
 
 class AddressForm implements FormModel<Address> {
-  AddressForm(this.address, this.form, this.path) {}
+  AddressForm(
+    this.address,
+    this.form,
+    this.path,
+  ) {}
 
   static String streetControlName = "street";
 
@@ -1108,7 +1279,10 @@ class AddressForm implements FormModel<Address> {
   void get streetFocus => form.focus(streetControlPath());
   void get cityFocus => form.focus(cityControlPath());
   void get zipFocus => form.focus(zipControlPath());
-  void streetRemove({bool updateParent = true, bool emitEvent = true}) {
+  void streetRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsStreet) {
       final controlPath = path;
       if (controlPath == null) {
@@ -1131,7 +1305,10 @@ class AddressForm implements FormModel<Address> {
     }
   }
 
-  void cityRemove({bool updateParent = true, bool emitEvent = true}) {
+  void cityRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsCity) {
       final controlPath = path;
       if (controlPath == null) {
@@ -1154,7 +1331,10 @@ class AddressForm implements FormModel<Address> {
     }
   }
 
-  void zipRemove({bool updateParent = true, bool emitEvent = true}) {
+  void zipRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsZip) {
       final controlPath = path;
       if (controlPath == null) {
@@ -1177,61 +1357,85 @@ class AddressForm implements FormModel<Address> {
     }
   }
 
-  void streetValueUpdate(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void streetValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     streetControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void cityValueUpdate(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void cityValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     cityControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void zipValueUpdate(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void zipValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     zipControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void streetValuePatch(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void streetValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     streetControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void cityValuePatch(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void cityValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     cityControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void zipValuePatch(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void zipValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     zipControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void streetValueReset(String? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void streetValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       streetControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void cityValueReset(String? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void cityValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       cityControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void zipValueReset(String? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void zipValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       zipControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String>? get streetControl => containsStreet
@@ -1243,8 +1447,11 @@ class AddressForm implements FormModel<Address> {
   FormControl<String>? get zipControl => containsZip
       ? form.control(zipControlPath()) as FormControl<String>?
       : null;
-  void streetSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void streetSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       streetControl?.markAsDisabled(
         updateParent: updateParent,
@@ -1258,8 +1465,11 @@ class AddressForm implements FormModel<Address> {
     }
   }
 
-  void citySetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void citySetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       cityControl?.markAsDisabled(
         updateParent: updateParent,
@@ -1273,8 +1483,11 @@ class AddressForm implements FormModel<Address> {
     }
   }
 
-  void zipSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void zipSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       zipControl?.markAsDisabled(
         updateParent: updateParent,
@@ -1301,23 +1514,33 @@ class AddressForm implements FormModel<Address> {
     return AddressForm(address, form, path);
   }
 
-  void updateValue(Address? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void updateValue(
+    Address? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.updateValue(
           AddressForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(Address? value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void resetValue(
+    Address? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.reset(
           value:
               AddressForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: formElements().rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent);
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
@@ -1350,13 +1573,13 @@ class AddressForm implements FormModel<Address> {
 }
 
 class ReactiveGroupFormArrayBuilder<T> extends StatelessWidget {
-  const ReactiveGroupFormArrayBuilder(
-      {Key? key,
-      this.control,
-      this.formControl,
-      this.builder,
-      required this.itemBuilder})
-      : assert(control != null || formControl != null,
+  const ReactiveGroupFormArrayBuilder({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(control != null || formControl != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
@@ -1410,13 +1633,13 @@ class ReactiveGroupFormArrayBuilder<T> extends StatelessWidget {
 }
 
 class ReactiveGroupFormFormGroupArrayBuilder<V> extends StatelessWidget {
-  const ReactiveGroupFormFormGroupArrayBuilder(
-      {Key? key,
-      this.extended,
-      this.getExtended,
-      this.builder,
-      required this.itemBuilder})
-      : assert(extended != null || getExtended != null,
+  const ReactiveGroupFormFormGroupArrayBuilder({
+    Key? key,
+    this.extended,
+    this.getExtended,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(extended != null || getExtended != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 

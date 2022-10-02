@@ -10,8 +10,11 @@ part of 'url.dart';
 // **************************************************************************
 
 class ReactiveUrlFormConsumer extends StatelessWidget {
-  const ReactiveUrlFormConsumer({Key? key, required this.builder, this.child})
-      : super(key: key);
+  const ReactiveUrlFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
 
   final Widget? child;
 
@@ -30,20 +33,27 @@ class ReactiveUrlFormConsumer extends StatelessWidget {
 }
 
 class UrlFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const UrlFormInheritedStreamer(
-      {Key? key,
-      required this.form,
-      required Stream<dynamic> stream,
-      required Widget child})
-      : super(stream, child, key: key);
+  const UrlFormInheritedStreamer({
+    Key? key,
+    required this.form,
+    required Stream<dynamic> stream,
+    required Widget child,
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
 
   final UrlForm form;
 }
 
 class ReactiveUrlForm extends StatelessWidget {
-  const ReactiveUrlForm(
-      {Key? key, required this.form, required this.child, this.onWillPop})
-      : super(key: key);
+  const ReactiveUrlForm({
+    Key? key,
+    required this.form,
+    required this.child,
+    this.onWillPop,
+  }) : super(key: key);
 
   final Widget child;
 
@@ -51,7 +61,10 @@ class ReactiveUrlForm extends StatelessWidget {
 
   final WillPopCallback? onWillPop;
 
-  static UrlForm? of(BuildContext context, {bool listen = true}) {
+  static UrlForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<UrlFormInheritedStreamer>()
@@ -79,14 +92,14 @@ class ReactiveUrlForm extends StatelessWidget {
 }
 
 class UrlFormBuilder extends StatefulWidget {
-  const UrlFormBuilder(
-      {Key? key,
-      this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder,
-      this.initState})
-      : super(key: key);
+  const UrlFormBuilder({
+    Key? key,
+    this.model,
+    this.child,
+    this.onWillPop,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
 
   final Url? model;
 
@@ -151,7 +164,11 @@ class _UrlFormBuilderState extends State<UrlFormBuilder> {
 }
 
 class UrlForm implements FormModel<Url> {
-  UrlForm(this.url, this.form, this.path) {
+  UrlForm(
+    this.url,
+    this.form,
+    this.path,
+  ) {
     urlListUrlEntityForm = (url?.urlList ?? [])
         .asMap()
         .map((k, v) =>
@@ -196,8 +213,11 @@ class UrlForm implements FormModel<Url> {
 
   Object? get urlListErrors => urlListControl.errors;
   void get urlListFocus => form.focus(urlListControlPath());
-  void urlListValueUpdate(List<UrlEntity> value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void urlListValueUpdate(
+    List<UrlEntity> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if ((value).isEmpty) {
       urlListClear(updateParent: updateParent, emitEvent: emitEvent);
 
@@ -245,8 +265,12 @@ class UrlForm implements FormModel<Url> {
     }
   }
 
-  void urlListInsert(int i, UrlEntity value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void urlListInsert(
+    int i,
+    UrlEntity value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (urlListUrlEntityForm.length < i) {
       addUrlListItem(value);
       return;
@@ -276,13 +300,19 @@ class UrlForm implements FormModel<Url> {
     );
   }
 
-  void urlListClear({bool updateParent = true, bool emitEvent = true}) {
+  void urlListClear({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     urlListUrlEntityForm.clear();
     urlListControl.clear(updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void urlListValuePatch(List<UrlEntity> value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void urlListValuePatch(
+    List<UrlEntity> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     final keys = urlListUrlEntityForm.asMap().keys;
 
     final toPatch = <UrlEntityForm>[];
@@ -302,11 +332,13 @@ class UrlForm implements FormModel<Url> {
         emitEvent: emitEvent);
   }
 
-  void urlListValueReset(List<UrlEntity> value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void urlListValueReset(
+    List<UrlEntity> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       urlListControl.reset(
           value: value
               .map((e) =>
@@ -316,8 +348,11 @@ class UrlForm implements FormModel<Url> {
           emitEvent: emitEvent);
   FormArray<Map<String, Object?>> get urlListControl =>
       form.control(urlListControlPath()) as FormArray<Map<String, Object?>>;
-  void urlListSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void urlListSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       urlListControl.markAsDisabled(
         updateParent: updateParent,
@@ -375,22 +410,32 @@ class UrlForm implements FormModel<Url> {
     return UrlForm(url, form, path);
   }
 
-  void updateValue(Url value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void updateValue(
+    Url value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.updateValue(
           UrlForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(Url value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void resetValue(
+    Url value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.reset(
           value: UrlForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: formElements().rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent);
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
@@ -408,7 +453,11 @@ class UrlForm implements FormModel<Url> {
 }
 
 class UrlEntityForm implements FormModel<UrlEntity> {
-  UrlEntityForm(this.urlEntity, this.form, this.path) {}
+  UrlEntityForm(
+    this.urlEntity,
+    this.form,
+    this.path,
+  ) {}
 
   static String labelControlName = "label";
 
@@ -446,50 +495,69 @@ class UrlEntityForm implements FormModel<UrlEntity> {
   Object? get urlErrors => urlControl.errors;
   void get labelFocus => form.focus(labelControlPath());
   void get urlFocus => form.focus(urlControlPath());
-  void labelValueUpdate(String value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void labelValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     labelControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void urlValueUpdate(String value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void urlValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     urlControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void labelValuePatch(String value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void labelValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     labelControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void urlValuePatch(String value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void urlValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     urlControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void labelValueReset(String value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void labelValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       labelControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void urlValueReset(String value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void urlValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       urlControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String> get labelControl =>
       form.control(labelControlPath()) as FormControl<String>;
   FormControl<String> get urlControl =>
       form.control(urlControlPath()) as FormControl<String>;
-  void labelSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void labelSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       labelControl.markAsDisabled(
         updateParent: updateParent,
@@ -503,8 +571,11 @@ class UrlEntityForm implements FormModel<UrlEntity> {
     }
   }
 
-  void urlSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void urlSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       urlControl.markAsDisabled(
         updateParent: updateParent,
@@ -531,23 +602,33 @@ class UrlEntityForm implements FormModel<UrlEntity> {
     return UrlEntityForm(urlEntity, form, path);
   }
 
-  void updateValue(UrlEntity value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void updateValue(
+    UrlEntity value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.updateValue(
           UrlEntityForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(UrlEntity value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void resetValue(
+    UrlEntity value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.reset(
           value:
               UrlEntityForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: formElements().rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent);
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
@@ -577,13 +658,13 @@ class UrlEntityForm implements FormModel<UrlEntity> {
 }
 
 class ReactiveUrlFormArrayBuilder<T> extends StatelessWidget {
-  const ReactiveUrlFormArrayBuilder(
-      {Key? key,
-      this.control,
-      this.formControl,
-      this.builder,
-      required this.itemBuilder})
-      : assert(control != null || formControl != null,
+  const ReactiveUrlFormArrayBuilder({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(control != null || formControl != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
@@ -636,13 +717,13 @@ class ReactiveUrlFormArrayBuilder<T> extends StatelessWidget {
 }
 
 class ReactiveUrlFormFormGroupArrayBuilder<V> extends StatelessWidget {
-  const ReactiveUrlFormFormGroupArrayBuilder(
-      {Key? key,
-      this.extended,
-      this.getExtended,
-      this.builder,
-      required this.itemBuilder})
-      : assert(extended != null || getExtended != null,
+  const ReactiveUrlFormFormGroupArrayBuilder({
+    Key? key,
+    this.extended,
+    this.getExtended,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(extended != null || getExtended != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 

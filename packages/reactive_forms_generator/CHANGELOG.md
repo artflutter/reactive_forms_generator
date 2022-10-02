@@ -1,3 +1,8 @@
+## [0.20.0-beta]
+
+* generics support
+* package update
+
 ## [0.19.0-beta]
 
 * package update

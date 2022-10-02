@@ -10,9 +10,11 @@ part of 'freezed_class.dart';
 // **************************************************************************
 
 class ReactiveFreezedClassFormConsumer extends StatelessWidget {
-  const ReactiveFreezedClassFormConsumer(
-      {Key? key, required this.builder, this.child})
-      : super(key: key);
+  const ReactiveFreezedClassFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
 
   final Widget? child;
 
@@ -31,20 +33,27 @@ class ReactiveFreezedClassFormConsumer extends StatelessWidget {
 }
 
 class FreezedClassFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const FreezedClassFormInheritedStreamer(
-      {Key? key,
-      required this.form,
-      required Stream<dynamic> stream,
-      required Widget child})
-      : super(stream, child, key: key);
+  const FreezedClassFormInheritedStreamer({
+    Key? key,
+    required this.form,
+    required Stream<dynamic> stream,
+    required Widget child,
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
 
   final FreezedClassForm form;
 }
 
 class ReactiveFreezedClassForm extends StatelessWidget {
-  const ReactiveFreezedClassForm(
-      {Key? key, required this.form, required this.child, this.onWillPop})
-      : super(key: key);
+  const ReactiveFreezedClassForm({
+    Key? key,
+    required this.form,
+    required this.child,
+    this.onWillPop,
+  }) : super(key: key);
 
   final Widget child;
 
@@ -52,7 +61,10 @@ class ReactiveFreezedClassForm extends StatelessWidget {
 
   final WillPopCallback? onWillPop;
 
-  static FreezedClassForm? of(BuildContext context, {bool listen = true}) {
+  static FreezedClassForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
@@ -81,14 +93,14 @@ class ReactiveFreezedClassForm extends StatelessWidget {
 }
 
 class FreezedClassFormBuilder extends StatefulWidget {
-  const FreezedClassFormBuilder(
-      {Key? key,
-      this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder,
-      this.initState})
-      : super(key: key);
+  const FreezedClassFormBuilder({
+    Key? key,
+    this.model,
+    this.child,
+    this.onWillPop,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
 
   final FreezedClass? model;
 
@@ -155,7 +167,11 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
 }
 
 class FreezedClassForm implements FormModel<FreezedClass> {
-  FreezedClassForm(this.freezedClass, this.form, this.path) {}
+  FreezedClassForm(
+    this.freezedClass,
+    this.form,
+    this.path,
+  ) {}
 
   static String genderControlName = "gender";
 
@@ -223,7 +239,10 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   void get idFocus => form.focus(idControlPath());
   void get nameFocus => form.focus(nameControlPath());
   void get yearFocus => form.focus(yearControlPath());
-  void genderRemove({bool updateParent = true, bool emitEvent = true}) {
+  void genderRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsGender) {
       final controlPath = path;
       if (controlPath == null) {
@@ -246,7 +265,10 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     }
   }
 
-  void idRemove({bool updateParent = true, bool emitEvent = true}) {
+  void idRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsId) {
       final controlPath = path;
       if (controlPath == null) {
@@ -269,7 +291,10 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     }
   }
 
-  void nameRemove({bool updateParent = true, bool emitEvent = true}) {
+  void nameRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsName) {
       final controlPath = path;
       if (controlPath == null) {
@@ -292,7 +317,10 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     }
   }
 
-  void yearRemove({bool updateParent = true, bool emitEvent = true}) {
+  void yearRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsYear) {
       final controlPath = path;
       if (controlPath == null) {
@@ -315,80 +343,112 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     }
   }
 
-  void genderValueUpdate(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void genderValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     genderControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void idValueUpdate(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void idValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     idControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void nameValueUpdate(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void nameValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     nameControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void yearValueUpdate(double? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void yearValueUpdate(
+    double? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     yearControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void genderValuePatch(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void genderValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     genderControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void idValuePatch(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void idValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     idControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void nameValuePatch(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void nameValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     nameControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void yearValuePatch(double? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void yearValuePatch(
+    double? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     yearControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void genderValueReset(String? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void genderValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       genderControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void idValueReset(String? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void idValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       idControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void nameValueReset(String? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void nameValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       nameControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void yearValueReset(double? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void yearValueReset(
+    double? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       yearControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String>? get genderControl => containsGender
@@ -402,8 +462,11 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   FormControl<double>? get yearControl => containsYear
       ? form.control(yearControlPath()) as FormControl<double>?
       : null;
-  void genderSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void genderSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       genderControl?.markAsDisabled(
         updateParent: updateParent,
@@ -417,8 +480,11 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     }
   }
 
-  void idSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void idSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       idControl?.markAsDisabled(
         updateParent: updateParent,
@@ -432,8 +498,11 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     }
   }
 
-  void nameSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void nameSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       nameControl?.markAsDisabled(
         updateParent: updateParent,
@@ -447,8 +516,11 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     }
   }
 
-  void yearSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void yearSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       yearControl?.markAsDisabled(
         updateParent: updateParent,
@@ -476,24 +548,34 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     return FreezedClassForm(freezedClass, form, path);
   }
 
-  void updateValue(FreezedClass value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void updateValue(
+    FreezedClass value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.updateValue(
           FreezedClassForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(FreezedClass value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void resetValue(
+    FreezedClass value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.reset(
           value: FreezedClassForm(value, FormGroup({}), null)
               .formElements()
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: formElements().rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent);
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
@@ -533,13 +615,13 @@ class FreezedClassForm implements FormModel<FreezedClass> {
 }
 
 class ReactiveFreezedClassFormArrayBuilder<T> extends StatelessWidget {
-  const ReactiveFreezedClassFormArrayBuilder(
-      {Key? key,
-      this.control,
-      this.formControl,
-      this.builder,
-      required this.itemBuilder})
-      : assert(control != null || formControl != null,
+  const ReactiveFreezedClassFormArrayBuilder({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(control != null || formControl != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
@@ -593,13 +675,13 @@ class ReactiveFreezedClassFormArrayBuilder<T> extends StatelessWidget {
 }
 
 class ReactiveFreezedClassFormFormGroupArrayBuilder<V> extends StatelessWidget {
-  const ReactiveFreezedClassFormFormGroupArrayBuilder(
-      {Key? key,
-      this.extended,
-      this.getExtended,
-      this.builder,
-      required this.itemBuilder})
-      : assert(extended != null || getExtended != null,
+  const ReactiveFreezedClassFormFormGroupArrayBuilder({
+    Key? key,
+    this.extended,
+    this.getExtended,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(extended != null || getExtended != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 

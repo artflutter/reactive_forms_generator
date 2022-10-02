@@ -10,8 +10,11 @@ part of 'generic.dart';
 // **************************************************************************
 
 class ReactiveTagsFormConsumer extends StatelessWidget {
-  const ReactiveTagsFormConsumer({Key? key, required this.builder, this.child})
-      : super(key: key);
+  const ReactiveTagsFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
 
   final Widget? child;
 
@@ -30,20 +33,27 @@ class ReactiveTagsFormConsumer extends StatelessWidget {
 }
 
 class TagsFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const TagsFormInheritedStreamer(
-      {Key? key,
-      required this.form,
-      required Stream<dynamic> stream,
-      required Widget child})
-      : super(stream, child, key: key);
+  const TagsFormInheritedStreamer({
+    Key? key,
+    required this.form,
+    required Stream<dynamic> stream,
+    required Widget child,
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
 
   final TagsForm form;
 }
 
 class ReactiveTagsForm extends StatelessWidget {
-  const ReactiveTagsForm(
-      {Key? key, required this.form, required this.child, this.onWillPop})
-      : super(key: key);
+  const ReactiveTagsForm({
+    Key? key,
+    required this.form,
+    required this.child,
+    this.onWillPop,
+  }) : super(key: key);
 
   final Widget child;
 
@@ -51,7 +61,10 @@ class ReactiveTagsForm extends StatelessWidget {
 
   final WillPopCallback? onWillPop;
 
-  static TagsForm? of(BuildContext context, {bool listen = true}) {
+  static TagsForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<TagsFormInheritedStreamer>()
@@ -79,14 +92,14 @@ class ReactiveTagsForm extends StatelessWidget {
 }
 
 class TagsFormBuilder<T> extends StatefulWidget {
-  const TagsFormBuilder(
-      {Key? key,
-      this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder,
-      this.initState})
-      : super(key: key);
+  const TagsFormBuilder({
+    Key? key,
+    this.model,
+    this.child,
+    this.onWillPop,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
 
   final Tags<T>? model;
 
@@ -151,7 +164,11 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
 }
 
 class TagsForm<T> implements FormModel<Tags<T>> {
-  TagsForm(this.tags, this.form, this.path) {}
+  TagsForm(
+    this.tags,
+    this.form,
+    this.path,
+  ) {}
 
   static String tagsControlName = "tags";
 
@@ -174,7 +191,10 @@ class TagsForm<T> implements FormModel<Tags<T>> {
 
   Object? get tagsErrors => tagsControl?.errors;
   void get tagsFocus => form.focus(tagsControlPath());
-  void tagsRemove({bool updateParent = true, bool emitEvent = true}) {
+  void tagsRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsTags) {
       final controlPath = path;
       if (controlPath == null) {
@@ -197,30 +217,41 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     }
   }
 
-  void tagsValueUpdate(List<T>? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void tagsValueUpdate(
+    List<T>? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     tagsControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void tagsValuePatch(List<T>? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void tagsValuePatch(
+    List<T>? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     tagsControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void tagsValueReset(List<T>? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void tagsValueReset(
+    List<T>? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       tagsControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<List<T>>? get tagsControl => containsTags
       ? form.control(tagsControlPath()) as FormControl<List<T>>?
       : null;
-  void tagsSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void tagsSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       tagsControl?.markAsDisabled(
         updateParent: updateParent,
@@ -247,23 +278,33 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     return TagsForm<T>(tags, form, path);
   }
 
-  void updateValue(Tags<T> value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void updateValue(
+    Tags<T> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.updateValue(
           TagsForm<T>(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(Tags<T> value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void resetValue(
+    Tags<T> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.reset(
           value:
               TagsForm<T>(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: formElements().rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent);
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
@@ -282,13 +323,13 @@ class TagsForm<T> implements FormModel<Tags<T>> {
 }
 
 class ReactiveTagsFormArrayBuilder<T> extends StatelessWidget {
-  const ReactiveTagsFormArrayBuilder(
-      {Key? key,
-      this.control,
-      this.formControl,
-      this.builder,
-      required this.itemBuilder})
-      : assert(control != null || formControl != null,
+  const ReactiveTagsFormArrayBuilder({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(control != null || formControl != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
@@ -341,13 +382,13 @@ class ReactiveTagsFormArrayBuilder<T> extends StatelessWidget {
 }
 
 class ReactiveTagsFormFormGroupArrayBuilder<V> extends StatelessWidget {
-  const ReactiveTagsFormFormGroupArrayBuilder(
-      {Key? key,
-      this.extended,
-      this.getExtended,
-      this.builder,
-      required this.itemBuilder})
-      : assert(extended != null || getExtended != null,
+  const ReactiveTagsFormFormGroupArrayBuilder({
+    Key? key,
+    this.extended,
+    this.getExtended,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(extended != null || getExtended != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 

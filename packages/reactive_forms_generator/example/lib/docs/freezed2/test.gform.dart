@@ -10,8 +10,11 @@ part of 'test.dart';
 // **************************************************************************
 
 class ReactiveTestFormConsumer extends StatelessWidget {
-  const ReactiveTestFormConsumer({Key? key, required this.builder, this.child})
-      : super(key: key);
+  const ReactiveTestFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
 
   final Widget? child;
 
@@ -30,20 +33,27 @@ class ReactiveTestFormConsumer extends StatelessWidget {
 }
 
 class TestFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const TestFormInheritedStreamer(
-      {Key? key,
-      required this.form,
-      required Stream<dynamic> stream,
-      required Widget child})
-      : super(stream, child, key: key);
+  const TestFormInheritedStreamer({
+    Key? key,
+    required this.form,
+    required Stream<dynamic> stream,
+    required Widget child,
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
 
   final TestForm form;
 }
 
 class ReactiveTestForm extends StatelessWidget {
-  const ReactiveTestForm(
-      {Key? key, required this.form, required this.child, this.onWillPop})
-      : super(key: key);
+  const ReactiveTestForm({
+    Key? key,
+    required this.form,
+    required this.child,
+    this.onWillPop,
+  }) : super(key: key);
 
   final Widget child;
 
@@ -51,7 +61,10 @@ class ReactiveTestForm extends StatelessWidget {
 
   final WillPopCallback? onWillPop;
 
-  static TestForm? of(BuildContext context, {bool listen = true}) {
+  static TestForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<TestFormInheritedStreamer>()
@@ -79,14 +92,14 @@ class ReactiveTestForm extends StatelessWidget {
 }
 
 class TestFormBuilder extends StatefulWidget {
-  const TestFormBuilder(
-      {Key? key,
-      this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder,
-      this.initState})
-      : super(key: key);
+  const TestFormBuilder({
+    Key? key,
+    this.model,
+    this.child,
+    this.onWillPop,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
 
   final Test? model;
 
@@ -151,7 +164,11 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
 }
 
 class TestForm implements FormModel<Test> {
-  TestForm(this.test, this.form, this.path) {}
+  TestForm(
+    this.test,
+    this.form,
+    this.path,
+  ) {}
 
   static String titleControlName = "title";
 
@@ -189,7 +206,10 @@ class TestForm implements FormModel<Test> {
   Object? get descriptionErrors => descriptionControl?.errors;
   void get titleFocus => form.focus(titleControlPath());
   void get descriptionFocus => form.focus(descriptionControlPath());
-  void descriptionRemove({bool updateParent = true, bool emitEvent = true}) {
+  void descriptionRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsDescription) {
       final controlPath = path;
       if (controlPath == null) {
@@ -212,42 +232,58 @@ class TestForm implements FormModel<Test> {
     }
   }
 
-  void titleValueUpdate(String value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void titleValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     titleControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void descriptionValueUpdate(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void descriptionValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     descriptionControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void titleValuePatch(String value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void titleValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     titleControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void descriptionValuePatch(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void descriptionValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     descriptionControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void titleValueReset(String value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void titleValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       titleControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void descriptionValueReset(String? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void descriptionValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       descriptionControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String> get titleControl =>
@@ -255,8 +291,11 @@ class TestForm implements FormModel<Test> {
   FormControl<String>? get descriptionControl => containsDescription
       ? form.control(descriptionControlPath()) as FormControl<String>?
       : null;
-  void titleSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void titleSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       titleControl.markAsDisabled(
         updateParent: updateParent,
@@ -270,8 +309,11 @@ class TestForm implements FormModel<Test> {
     }
   }
 
-  void descriptionSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void descriptionSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       descriptionControl?.markAsDisabled(
         updateParent: updateParent,
@@ -298,22 +340,32 @@ class TestForm implements FormModel<Test> {
     return TestForm(test, form, path);
   }
 
-  void updateValue(Test value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void updateValue(
+    Test value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.updateValue(
           TestForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(Test value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void resetValue(
+    Test value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.reset(
           value: TestForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: formElements().rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent);
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
@@ -339,13 +391,13 @@ class TestForm implements FormModel<Test> {
 }
 
 class ReactiveTestFormArrayBuilder<T> extends StatelessWidget {
-  const ReactiveTestFormArrayBuilder(
-      {Key? key,
-      this.control,
-      this.formControl,
-      this.builder,
-      required this.itemBuilder})
-      : assert(control != null || formControl != null,
+  const ReactiveTestFormArrayBuilder({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(control != null || formControl != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
@@ -398,13 +450,13 @@ class ReactiveTestFormArrayBuilder<T> extends StatelessWidget {
 }
 
 class ReactiveTestFormFormGroupArrayBuilder<V> extends StatelessWidget {
-  const ReactiveTestFormFormGroupArrayBuilder(
-      {Key? key,
-      this.extended,
-      this.getExtended,
-      this.builder,
-      required this.itemBuilder})
-      : assert(extended != null || getExtended != null,
+  const ReactiveTestFormFormGroupArrayBuilder({
+    Key? key,
+    this.extended,
+    this.getExtended,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(extended != null || getExtended != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 

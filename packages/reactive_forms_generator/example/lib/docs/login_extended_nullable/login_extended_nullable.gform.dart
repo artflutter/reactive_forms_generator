@@ -10,9 +10,11 @@ part of 'login_extended_nullable.dart';
 // **************************************************************************
 
 class ReactiveLoginExtendedNullableFormConsumer extends StatelessWidget {
-  const ReactiveLoginExtendedNullableFormConsumer(
-      {Key? key, required this.builder, this.child})
-      : super(key: key);
+  const ReactiveLoginExtendedNullableFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
 
   final Widget? child;
 
@@ -32,20 +34,27 @@ class ReactiveLoginExtendedNullableFormConsumer extends StatelessWidget {
 
 class LoginExtendedNullableFormInheritedStreamer
     extends InheritedStreamer<dynamic> {
-  const LoginExtendedNullableFormInheritedStreamer(
-      {Key? key,
-      required this.form,
-      required Stream<dynamic> stream,
-      required Widget child})
-      : super(stream, child, key: key);
+  const LoginExtendedNullableFormInheritedStreamer({
+    Key? key,
+    required this.form,
+    required Stream<dynamic> stream,
+    required Widget child,
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
 
   final LoginExtendedNullableForm form;
 }
 
 class ReactiveLoginExtendedNullableForm extends StatelessWidget {
-  const ReactiveLoginExtendedNullableForm(
-      {Key? key, required this.form, required this.child, this.onWillPop})
-      : super(key: key);
+  const ReactiveLoginExtendedNullableForm({
+    Key? key,
+    required this.form,
+    required this.child,
+    this.onWillPop,
+  }) : super(key: key);
 
   final Widget child;
 
@@ -53,8 +62,10 @@ class ReactiveLoginExtendedNullableForm extends StatelessWidget {
 
   final WillPopCallback? onWillPop;
 
-  static LoginExtendedNullableForm? of(BuildContext context,
-      {bool listen = true}) {
+  static LoginExtendedNullableForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
@@ -83,14 +94,14 @@ class ReactiveLoginExtendedNullableForm extends StatelessWidget {
 }
 
 class LoginExtendedNullableFormBuilder extends StatefulWidget {
-  const LoginExtendedNullableFormBuilder(
-      {Key? key,
-      this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder,
-      this.initState})
-      : super(key: key);
+  const LoginExtendedNullableFormBuilder({
+    Key? key,
+    this.model,
+    this.child,
+    this.onWillPop,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
 
   final LoginExtendedNullable? model;
 
@@ -158,7 +169,11 @@ class _LoginExtendedNullableFormBuilderState
 }
 
 class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
-  LoginExtendedNullableForm(this.loginExtendedNullable, this.form, this.path) {}
+  LoginExtendedNullableForm(
+    this.loginExtendedNullable,
+    this.form,
+    this.path,
+  ) {}
 
   static String emailControlName = "email";
 
@@ -271,7 +286,10 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
   void get modeFocus => form.focus(modeControlPath());
   void get timeoutFocus => form.focus(timeoutControlPath());
   void get heightFocus => form.focus(heightControlPath());
-  void emailRemove({bool updateParent = true, bool emitEvent = true}) {
+  void emailRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsEmail) {
       final controlPath = path;
       if (controlPath == null) {
@@ -294,7 +312,10 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     }
   }
 
-  void passwordRemove({bool updateParent = true, bool emitEvent = true}) {
+  void passwordRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsPassword) {
       final controlPath = path;
       if (controlPath == null) {
@@ -317,7 +338,10 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     }
   }
 
-  void rememberMeRemove({bool updateParent = true, bool emitEvent = true}) {
+  void rememberMeRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsRememberMe) {
       final controlPath = path;
       if (controlPath == null) {
@@ -340,7 +364,10 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     }
   }
 
-  void themeRemove({bool updateParent = true, bool emitEvent = true}) {
+  void themeRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsTheme) {
       final controlPath = path;
       if (controlPath == null) {
@@ -363,7 +390,10 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     }
   }
 
-  void modeRemove({bool updateParent = true, bool emitEvent = true}) {
+  void modeRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsMode) {
       final controlPath = path;
       if (controlPath == null) {
@@ -386,7 +416,10 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     }
   }
 
-  void timeoutRemove({bool updateParent = true, bool emitEvent = true}) {
+  void timeoutRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsTimeout) {
       final controlPath = path;
       if (controlPath == null) {
@@ -409,7 +442,10 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     }
   }
 
-  void heightRemove({bool updateParent = true, bool emitEvent = true}) {
+  void heightRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsHeight) {
       final controlPath = path;
       if (controlPath == null) {
@@ -432,137 +468,193 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     }
   }
 
-  void emailValueUpdate(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void emailValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     emailControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void passwordValueUpdate(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void passwordValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     passwordControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void rememberMeValueUpdate(bool? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void rememberMeValueUpdate(
+    bool? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     rememberMeControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void themeValueUpdate(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void themeValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     themeControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void modeValueUpdate(UserMode? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void modeValueUpdate(
+    UserMode? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     modeControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void timeoutValueUpdate(int? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void timeoutValueUpdate(
+    int? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     timeoutControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void heightValueUpdate(double? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void heightValueUpdate(
+    double? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     heightControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void emailValuePatch(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void emailValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     emailControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void passwordValuePatch(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void passwordValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     passwordControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void rememberMeValuePatch(bool? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void rememberMeValuePatch(
+    bool? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     rememberMeControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void themeValuePatch(String? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void themeValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     themeControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void modeValuePatch(UserMode? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void modeValuePatch(
+    UserMode? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     modeControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void timeoutValuePatch(int? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void timeoutValuePatch(
+    int? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     timeoutControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void heightValuePatch(double? value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void heightValuePatch(
+    double? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     heightControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void emailValueReset(String? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void emailValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       emailControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void passwordValueReset(String? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void passwordValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       passwordControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void rememberMeValueReset(bool? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void rememberMeValueReset(
+    bool? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       rememberMeControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void themeValueReset(String? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void themeValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       themeControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void modeValueReset(UserMode? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void modeValueReset(
+    UserMode? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       modeControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void timeoutValueReset(int? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void timeoutValueReset(
+    int? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       timeoutControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void heightValueReset(double? value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void heightValueReset(
+    double? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       heightControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String>? get emailControl => containsEmail
@@ -586,8 +678,11 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
   FormControl<double>? get heightControl => containsHeight
       ? form.control(heightControlPath()) as FormControl<double>?
       : null;
-  void emailSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void emailSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       emailControl?.markAsDisabled(
         updateParent: updateParent,
@@ -601,8 +696,11 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     }
   }
 
-  void passwordSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void passwordSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       passwordControl?.markAsDisabled(
         updateParent: updateParent,
@@ -616,8 +714,11 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     }
   }
 
-  void rememberMeSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void rememberMeSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       rememberMeControl?.markAsDisabled(
         updateParent: updateParent,
@@ -631,8 +732,11 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     }
   }
 
-  void themeSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void themeSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       themeControl?.markAsDisabled(
         updateParent: updateParent,
@@ -646,8 +750,11 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     }
   }
 
-  void modeSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void modeSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       modeControl?.markAsDisabled(
         updateParent: updateParent,
@@ -661,8 +768,11 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     }
   }
 
-  void timeoutSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void timeoutSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       timeoutControl?.markAsDisabled(
         updateParent: updateParent,
@@ -676,8 +786,11 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     }
   }
 
-  void heightSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void heightSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       heightControl?.markAsDisabled(
         updateParent: updateParent,
@@ -711,26 +824,36 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     return LoginExtendedNullableForm(loginExtendedNullable, form, path);
   }
 
-  void updateValue(LoginExtendedNullable value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void updateValue(
+    LoginExtendedNullable value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.updateValue(
           LoginExtendedNullableForm(value, FormGroup({}), null)
               .formElements()
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(LoginExtendedNullable value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void resetValue(
+    LoginExtendedNullable value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.reset(
           value: LoginExtendedNullableForm(value, FormGroup({}), null)
               .formElements()
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: formElements().rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent);
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
@@ -791,13 +914,13 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
 }
 
 class ReactiveLoginExtendedNullableFormArrayBuilder<T> extends StatelessWidget {
-  const ReactiveLoginExtendedNullableFormArrayBuilder(
-      {Key? key,
-      this.control,
-      this.formControl,
-      this.builder,
-      required this.itemBuilder})
-      : assert(control != null || formControl != null,
+  const ReactiveLoginExtendedNullableFormArrayBuilder({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(control != null || formControl != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
@@ -851,13 +974,13 @@ class ReactiveLoginExtendedNullableFormArrayBuilder<T> extends StatelessWidget {
 
 class ReactiveLoginExtendedNullableFormFormGroupArrayBuilder<V>
     extends StatelessWidget {
-  const ReactiveLoginExtendedNullableFormFormGroupArrayBuilder(
-      {Key? key,
-      this.extended,
-      this.getExtended,
-      this.builder,
-      required this.itemBuilder})
-      : assert(extended != null || getExtended != null,
+  const ReactiveLoginExtendedNullableFormFormGroupArrayBuilder({
+    Key? key,
+    this.extended,
+    this.getExtended,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(extended != null || getExtended != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
