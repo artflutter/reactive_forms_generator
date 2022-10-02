@@ -36,10 +36,10 @@ dependencies:
 dev_dependencies:
   json_serializable:
   build_test: ^2.1.5
-  freezed: ^2.0.3+1
+  freezed: ^2.1.1
   flutter_test:
     sdk: flutter
-  test: ^1.21.1
+  test: ^1.21.6
   logging: ^1.0.2
   reactive_forms_generator:
     path: ../packages/reactive_forms_generator
