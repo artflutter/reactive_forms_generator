@@ -1,3 +1,4 @@
+import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form.dart';
@@ -10,6 +11,9 @@ class ReactiveFormBuilder {
   String get _baseName =>
       reactiveForm.reactiveInheritedStreamer.formGenerator.className;
 
+  ClassElement get _element =>
+      reactiveForm.reactiveInheritedStreamer.formGenerator.element;
+
   String get className => '${_baseName}Builder';
 
   String get stateClassName => '_${_baseName}BuilderState';
@@ -20,8 +24,8 @@ class ReactiveFormBuilder {
           ..lambda = true
           ..type
           ..annotations.add(const CodeExpression(Code('override')))
-          ..returns = Reference(stateClassName)
-          ..body = Code('$stateClassName()'),
+          ..returns = Reference('$stateClassName${_element.generics}')
+          ..body = Code('$stateClassName${_element.generics}()'),
       );
 
   Constructor get _widgetConstructor => Constructor(
@@ -77,14 +81,11 @@ class ReactiveFormBuilder {
       );
 
   Field get _model {
-    final element =
-        reactiveForm.reactiveInheritedStreamer.formGenerator.element;
-
     return Field(
       (b) => b
         ..name = 'model'
         ..type = Reference(
-          '${element.name}${element.isNullable ? '?' : ''}',
+          '${_element.fullTypeName}${_element.isNullable ? '?' : ''}',
         )
         ..modifier = FieldModifier.final$,
     );
@@ -124,6 +125,7 @@ class ReactiveFormBuilder {
 
   Class get _widget => Class(
         (b) => b
+          ..types.addAll(_element.genericTypes)
           ..name = className
           ..extend = const Reference('StatefulWidget')
           ..fields.addAll(_widgetFields)
@@ -139,7 +141,7 @@ class ReactiveFormBuilder {
             ..returns = const Reference('void')
             ..body = Code('''
                 _form = FormGroup({});
-                _formModel = ${reactiveForm.reactiveInheritedStreamer.formGenerator.className}(widget.model, _form, null);
+                _formModel = ${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull}(widget.model, _form, null);
     
                 final elements = _formModel.formElements();
                 _form.setValidators(elements.validators);
@@ -197,8 +199,9 @@ class ReactiveFormBuilder {
 
   Class get _state => Class(
         (b) => b
+          ..types.addAll(_element.genericTypes)
           ..name = stateClassName
-          ..extend = Reference('State<$className>')
+          ..extend = Reference('State<$className${_element.generics}>')
           ..fields.addAll(
             [
               Field(

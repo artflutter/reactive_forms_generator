@@ -3,14 +3,14 @@
 // ignore_for_file: type=lint
 // ignore_for_file:
 
-part of 'mailing_list.dart';
+part of 'generic.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-class ReactiveMailingListFormConsumer extends StatelessWidget {
-  const ReactiveMailingListFormConsumer({
+class ReactiveTagsFormConsumer extends StatelessWidget {
+  const ReactiveTagsFormConsumer({
     Key? key,
     required this.builder,
     this.child,
@@ -18,22 +18,22 @@ class ReactiveMailingListFormConsumer extends StatelessWidget {
 
   final Widget? child;
 
-  final Widget Function(
-      BuildContext context, MailingListForm formModel, Widget? child) builder;
+  final Widget Function(BuildContext context, TagsForm formModel, Widget? child)
+      builder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveMailingListForm.of(context);
+    final formModel = ReactiveTagsForm.of(context);
 
-    if (formModel is! MailingListForm) {
+    if (formModel is! TagsForm) {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, formModel, child);
   }
 }
 
-class MailingListFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const MailingListFormInheritedStreamer({
+class TagsFormInheritedStreamer extends InheritedStreamer<dynamic> {
+  const TagsFormInheritedStreamer({
     Key? key,
     required this.form,
     required Stream<dynamic> stream,
@@ -44,11 +44,11 @@ class MailingListFormInheritedStreamer extends InheritedStreamer<dynamic> {
           key: key,
         );
 
-  final MailingListForm form;
+  final TagsForm form;
 }
 
-class ReactiveMailingListForm extends StatelessWidget {
-  const ReactiveMailingListForm({
+class ReactiveTagsForm extends StatelessWidget {
+  const ReactiveTagsForm({
     Key? key,
     required this.form,
     required this.child,
@@ -57,31 +57,30 @@ class ReactiveMailingListForm extends StatelessWidget {
 
   final Widget child;
 
-  final MailingListForm form;
+  final TagsForm form;
 
   final WillPopCallback? onWillPop;
 
-  static MailingListForm? of(
+  static TagsForm? of(
     BuildContext context, {
     bool listen = true,
   }) {
     if (listen) {
       return context
-          .dependOnInheritedWidgetOfExactType<
-              MailingListFormInheritedStreamer>()
+          .dependOnInheritedWidgetOfExactType<TagsFormInheritedStreamer>()
           ?.form;
     }
 
-    final element = context.getElementForInheritedWidgetOfExactType<
-        MailingListFormInheritedStreamer>();
+    final element = context
+        .getElementForInheritedWidgetOfExactType<TagsFormInheritedStreamer>();
     return element == null
         ? null
-        : (element.widget as MailingListFormInheritedStreamer).form;
+        : (element.widget as TagsFormInheritedStreamer).form;
   }
 
   @override
   Widget build(BuildContext context) {
-    return MailingListFormInheritedStreamer(
+    return TagsFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
       child: WillPopScope(
@@ -92,8 +91,8 @@ class ReactiveMailingListForm extends StatelessWidget {
   }
 }
 
-class MailingListFormBuilder extends StatefulWidget {
-  const MailingListFormBuilder({
+class TagsFormBuilder<T> extends StatefulWidget {
+  const TagsFormBuilder({
     Key? key,
     this.model,
     this.child,
@@ -102,31 +101,30 @@ class MailingListFormBuilder extends StatefulWidget {
     this.initState,
   }) : super(key: key);
 
-  final MailingList? model;
+  final Tags<T>? model;
 
   final Widget? child;
 
   final WillPopCallback? onWillPop;
 
-  final Widget Function(
-      BuildContext context, MailingListForm formModel, Widget? child) builder;
+  final Widget Function(BuildContext context, TagsForm formModel, Widget? child)
+      builder;
 
-  final void Function(BuildContext context, MailingListForm formModel)?
-      initState;
+  final void Function(BuildContext context, TagsForm formModel)? initState;
 
   @override
-  _MailingListFormBuilderState createState() => _MailingListFormBuilderState();
+  _TagsFormBuilderState<T> createState() => _TagsFormBuilderState<T>();
 }
 
-class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
+class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
   late FormGroup _form;
 
-  late MailingListForm _formModel;
+  late TagsForm _formModel;
 
   @override
   void initState() {
     _form = FormGroup({});
-    _formModel = MailingListForm(widget.model, _form, null);
+    _formModel = TagsForm<T>(widget.model, _form, null);
 
     final elements = _formModel.formElements();
     _form.setValidators(elements.validators);
@@ -151,7 +149,7 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveMailingListForm(
+    return ReactiveTagsForm(
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
@@ -165,153 +163,138 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
   }
 }
 
-class MailingListForm implements FormModel<MailingList> {
-  MailingListForm(
-    this.mailingList,
+class TagsForm<T> implements FormModel<Tags<T>> {
+  TagsForm(
+    this.tags,
     this.form,
     this.path,
   ) {}
 
-  static String emailListControlName = "emailList";
+  static String tagsControlName = "tags";
 
-  final MailingList? mailingList;
+  final Tags<T>? tags;
 
   final FormGroup form;
 
   final String? path;
 
-  String emailListControlPath() => pathBuilder(emailListControlName);
-  List<String?> get _emailListValue =>
-      emailListControl.value?.whereType<String?>().toList() ?? [];
-  bool get containsEmailList {
+  String tagsControlPath() => pathBuilder(tagsControlName);
+  List<T>? get _tagsValue => tagsControl?.value;
+  bool get containsTags {
     try {
-      form.control(emailListControlPath());
+      form.control(tagsControlPath());
       return true;
     } catch (e) {
       return false;
     }
   }
 
-  Object? get emailListErrors => emailListControl.errors;
-  void get emailListFocus => form.focus(emailListControlPath());
-  void emailListValueUpdate(
-    List<String?> value, {
+  Object? get tagsErrors => tagsControl?.errors;
+  void get tagsFocus => form.focus(tagsControlPath());
+  void tagsRemove({
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailListControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    if (containsTags) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          tagsControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            tagsControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
   }
 
-  void emailListValuePatch(
-    List<String?> value, {
+  void tagsValueUpdate(
+    List<T>? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailListControl.patchValue(value,
+    tagsControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void emailListValueReset(
-    List<String?> value, {
+  void tagsValuePatch(
+    List<T>? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    tagsControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void tagsValueReset(
+    List<T>? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      emailListControl.reset(
+      tagsControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormArray<String> get emailListControl =>
-      form.control(emailListControlPath()) as FormArray<String>;
-  void emailListSetDisabled(
+  FormControl<List<T>>? get tagsControl => containsTags
+      ? form.control(tagsControlPath()) as FormControl<List<T>>?
+      : null;
+  void tagsSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      emailListControl.markAsDisabled(
+      tagsControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      emailListControl.markAsEnabled(
+      tagsControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     }
   }
 
-  void addEmailListItem(
-    String value, {
-    List<AsyncValidatorFunction>? asyncValidators,
-    List<ValidatorFunction>? validators,
-    int? asyncValidatorsDebounceTime,
-    bool? disabled,
-    ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
-  }) {
-    List<ValidatorFunction> resultingValidators = [emailValidator];
-    List<AsyncValidatorFunction> resultingAsyncValidators = [];
-
-    switch (validatorsApplyMode) {
-      case ValidatorsApplyMode.merge:
-        if (validators != null) {
-          resultingValidators.addAll(validators);
-        }
-        if (asyncValidators != null) {
-          resultingAsyncValidators.addAll(asyncValidators);
-        }
-        break;
-      case ValidatorsApplyMode.override:
-        if (validators != null) {
-          resultingValidators = validators;
-        }
-
-        if (asyncValidators != null) {
-          resultingAsyncValidators = asyncValidators;
-        }
-        break;
-    }
-
-    emailListControl.add(FormControl<String>(
-      value: value,
-      validators: resultingValidators,
-      asyncValidators: resultingAsyncValidators,
-      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
-      disabled: disabled ?? false,
-    ));
-  }
-
-  MailingList get model {
+  Tags<T> get model {
     if (!form.valid) {
       debugPrint(
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return MailingList(emailList: _emailListValue);
+    return Tags<T>(tags: _tagsValue);
   }
 
-  MailingListForm copyWithPath(String? path) {
-    return MailingListForm(mailingList, form, path);
+  TagsForm<T> copyWithPath(String? path) {
+    return TagsForm<T>(tags, form, path);
   }
 
   void updateValue(
-    MailingList value, {
+    Tags<T> value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.updateValue(
-          MailingListForm(value, FormGroup({}), null).formElements().rawValue,
+          TagsForm<T>(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   void resetValue(
-    MailingList value, {
+    Tags<T> value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: MailingListForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
+          value:
+              TagsForm<T>(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   void reset({
@@ -325,21 +308,13 @@ class MailingListForm implements FormModel<MailingList> {
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
-        emailListControlName: FormArray<String>(
-            mailingList?.emailList
-                    .map((e) => FormControl<String>(
-                          value: e,
-                          validators: [emailValidator],
-                          asyncValidators: [],
-                          asyncValidatorsDebounceTime: 250,
-                          disabled: false,
-                        ))
-                    .toList() ??
-                [],
-            validators: [mailingListValidator],
+        tagsControlName: FormControl<List<T>>(
+            value: tags?.tags,
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
-            disabled: false)
+            disabled: false,
+            touched: false)
       },
           validators: [],
           asyncValidators: [],
@@ -347,8 +322,8 @@ class MailingListForm implements FormModel<MailingList> {
           disabled: false);
 }
 
-class ReactiveMailingListFormArrayBuilder<T> extends StatelessWidget {
-  const ReactiveMailingListFormArrayBuilder({
+class ReactiveTagsFormArrayBuilder<T> extends StatelessWidget {
+  const ReactiveTagsFormArrayBuilder({
     Key? key,
     this.control,
     this.formControl,
@@ -360,18 +335,17 @@ class ReactiveMailingListFormArrayBuilder<T> extends StatelessWidget {
 
   final FormArray<T>? formControl;
 
-  final FormArray<T>? Function(MailingListForm formModel)? control;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      MailingListForm formModel)? builder;
+  final FormArray<T>? Function(TagsForm formModel)? control;
 
   final Widget Function(
-          BuildContext context, int i, T? item, MailingListForm formModel)
-      itemBuilder;
+      BuildContext context, List<Widget> itemList, TagsForm formModel)? builder;
+
+  final Widget Function(
+      BuildContext context, int i, T? item, TagsForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveMailingListForm.of(context);
+    final formModel = ReactiveTagsForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
@@ -407,8 +381,8 @@ class ReactiveMailingListFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveMailingListFormFormGroupArrayBuilder<V> extends StatelessWidget {
-  const ReactiveMailingListFormFormGroupArrayBuilder({
+class ReactiveTagsFormFormGroupArrayBuilder<V> extends StatelessWidget {
+  const ReactiveTagsFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
@@ -421,18 +395,17 @@ class ReactiveMailingListFormFormGroupArrayBuilder<V> extends StatelessWidget {
   final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
 
   final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
-      MailingListForm formModel)? getExtended;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      MailingListForm formModel)? builder;
+      TagsForm formModel)? getExtended;
 
   final Widget Function(
-          BuildContext context, int i, V? item, MailingListForm formModel)
-      itemBuilder;
+      BuildContext context, List<Widget> itemList, TagsForm formModel)? builder;
+
+  final Widget Function(
+      BuildContext context, int i, V? item, TagsForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveMailingListForm.of(context);
+    final formModel = ReactiveTagsForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);

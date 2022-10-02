@@ -14,7 +14,7 @@ jobs:
   pr-check-reactive_form_generator-test:
     runs-on: ubuntu-latest
     container:
-      image: cirrusci/flutter:3.0.0
+      image: cirrusci/flutter:3.3.3
 
     steps:
       - name: Check out repository code

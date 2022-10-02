@@ -61,9 +61,11 @@ part of 'renamed_basic.dart';
 // **************************************************************************
 
 class ReactiveSomeWiredNameFormConsumer extends StatelessWidget {
-  const ReactiveSomeWiredNameFormConsumer(
-      {Key? key, required this.builder, this.child})
-      : super(key: key);
+  const ReactiveSomeWiredNameFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
 
   final Widget? child;
 
@@ -82,20 +84,27 @@ class ReactiveSomeWiredNameFormConsumer extends StatelessWidget {
 }
 
 class SomeWiredNameFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const SomeWiredNameFormInheritedStreamer(
-      {Key? key,
-      required this.form,
-      required Stream<dynamic> stream,
-      required Widget child})
-      : super(stream, child, key: key);
+  const SomeWiredNameFormInheritedStreamer({
+    Key? key,
+    required this.form,
+    required Stream<dynamic> stream,
+    required Widget child,
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
 
   final SomeWiredNameForm form;
 }
 
 class ReactiveSomeWiredNameForm extends StatelessWidget {
-  const ReactiveSomeWiredNameForm(
-      {Key? key, required this.form, required this.child, this.onWillPop})
-      : super(key: key);
+  const ReactiveSomeWiredNameForm({
+    Key? key,
+    required this.form,
+    required this.child,
+    this.onWillPop,
+  }) : super(key: key);
 
   final Widget child;
 
@@ -103,7 +112,10 @@ class ReactiveSomeWiredNameForm extends StatelessWidget {
 
   final WillPopCallback? onWillPop;
 
-  static SomeWiredNameForm? of(BuildContext context, {bool listen = true}) {
+  static SomeWiredNameForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
@@ -132,14 +144,14 @@ class ReactiveSomeWiredNameForm extends StatelessWidget {
 }
 
 class SomeWiredNameFormBuilder extends StatefulWidget {
-  const SomeWiredNameFormBuilder(
-      {Key? key,
-      this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder,
-      this.initState})
-      : super(key: key);
+  const SomeWiredNameFormBuilder({
+    Key? key,
+    this.model,
+    this.child,
+    this.onWillPop,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
 
   final RenamedBasic? model;
 
@@ -206,7 +218,11 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
 }
 
 class SomeWiredNameForm implements FormModel<RenamedBasic> {
-  SomeWiredNameForm(this.renamedBasic, this.form, this.path) {}
+  SomeWiredNameForm(
+    this.renamedBasic,
+    this.form,
+    this.path,
+  ) {}
 
   static String emailControlName = "email";
 
@@ -244,50 +260,69 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
   Object? get passwordErrors => passwordControl.errors;
   void get emailFocus => form.focus(emailControlPath());
   void get passwordFocus => form.focus(passwordControlPath());
-  void emailValueUpdate(String value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void emailValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     emailControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void passwordValueUpdate(String value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void passwordValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     passwordControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void emailValuePatch(String value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void emailValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     emailControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void passwordValuePatch(String value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void passwordValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     passwordControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void emailValueReset(String value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void emailValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       emailControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void passwordValueReset(String value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void passwordValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       passwordControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
-  void emailSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void emailSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       emailControl.markAsDisabled(
         updateParent: updateParent,
@@ -301,8 +336,11 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
     }
   }
 
-  void passwordSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void passwordSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       passwordControl.markAsDisabled(
         updateParent: updateParent,
@@ -329,24 +367,34 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
     return SomeWiredNameForm(renamedBasic, form, path);
   }
 
-  void updateValue(RenamedBasic value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void updateValue(
+    RenamedBasic value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.updateValue(
           SomeWiredNameForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(RenamedBasic value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void resetValue(
+    RenamedBasic value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.reset(
           value: SomeWiredNameForm(value, FormGroup({}), null)
               .formElements()
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: formElements().rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent);
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
@@ -376,13 +424,13 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
 }
 
 class ReactiveSomeWiredNameFormArrayBuilder<T> extends StatelessWidget {
-  const ReactiveSomeWiredNameFormArrayBuilder(
-      {Key? key,
-      this.control,
-      this.formControl,
-      this.builder,
-      required this.itemBuilder})
-      : assert(control != null || formControl != null,
+  const ReactiveSomeWiredNameFormArrayBuilder({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(control != null || formControl != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
@@ -437,13 +485,13 @@ class ReactiveSomeWiredNameFormArrayBuilder<T> extends StatelessWidget {
 
 class ReactiveSomeWiredNameFormFormGroupArrayBuilder<V>
     extends StatelessWidget {
-  const ReactiveSomeWiredNameFormFormGroupArrayBuilder(
-      {Key? key,
-      this.extended,
-      this.getExtended,
-      this.builder,
-      required this.itemBuilder})
-      : assert(extended != null || getExtended != null,
+  const ReactiveSomeWiredNameFormFormGroupArrayBuilder({
+    Key? key,
+    this.extended,
+    this.getExtended,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(extended != null || getExtended != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 

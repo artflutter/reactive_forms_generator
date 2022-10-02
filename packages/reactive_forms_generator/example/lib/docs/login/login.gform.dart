@@ -10,8 +10,11 @@ part of 'login.dart';
 // **************************************************************************
 
 class ReactiveBasicFormConsumer extends StatelessWidget {
-  const ReactiveBasicFormConsumer({Key? key, required this.builder, this.child})
-      : super(key: key);
+  const ReactiveBasicFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
 
   final Widget? child;
 
@@ -30,20 +33,27 @@ class ReactiveBasicFormConsumer extends StatelessWidget {
 }
 
 class BasicFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const BasicFormInheritedStreamer(
-      {Key? key,
-      required this.form,
-      required Stream<dynamic> stream,
-      required Widget child})
-      : super(stream, child, key: key);
+  const BasicFormInheritedStreamer({
+    Key? key,
+    required this.form,
+    required Stream<dynamic> stream,
+    required Widget child,
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
 
   final BasicForm form;
 }
 
 class ReactiveBasicForm extends StatelessWidget {
-  const ReactiveBasicForm(
-      {Key? key, required this.form, required this.child, this.onWillPop})
-      : super(key: key);
+  const ReactiveBasicForm({
+    Key? key,
+    required this.form,
+    required this.child,
+    this.onWillPop,
+  }) : super(key: key);
 
   final Widget child;
 
@@ -51,7 +61,10 @@ class ReactiveBasicForm extends StatelessWidget {
 
   final WillPopCallback? onWillPop;
 
-  static BasicForm? of(BuildContext context, {bool listen = true}) {
+  static BasicForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<BasicFormInheritedStreamer>()
@@ -79,14 +92,14 @@ class ReactiveBasicForm extends StatelessWidget {
 }
 
 class BasicFormBuilder extends StatefulWidget {
-  const BasicFormBuilder(
-      {Key? key,
-      this.model,
-      this.child,
-      this.onWillPop,
-      required this.builder,
-      this.initState})
-      : super(key: key);
+  const BasicFormBuilder({
+    Key? key,
+    this.model,
+    this.child,
+    this.onWillPop,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
 
   final Basic? model;
 
@@ -151,7 +164,11 @@ class _BasicFormBuilderState extends State<BasicFormBuilder> {
 }
 
 class BasicForm implements FormModel<Basic> {
-  BasicForm(this.basic, this.form, this.path) {}
+  BasicForm(
+    this.basic,
+    this.form,
+    this.path,
+  ) {}
 
   static String emailControlName = "email";
 
@@ -189,50 +206,69 @@ class BasicForm implements FormModel<Basic> {
   Object? get passwordErrors => passwordControl.errors;
   void get emailFocus => form.focus(emailControlPath());
   void get passwordFocus => form.focus(passwordControlPath());
-  void emailValueUpdate(String value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void emailValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     emailControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void passwordValueUpdate(String value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void passwordValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     passwordControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void emailValuePatch(String value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void emailValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     emailControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void passwordValuePatch(String value,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void passwordValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     passwordControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void emailValueReset(String value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void emailValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       emailControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void passwordValueReset(String value,
-          {bool updateParent = true,
-          bool emitEvent = true,
-          bool removeFocus = false,
-          bool? disabled}) =>
+  void passwordValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
       passwordControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
-  void emailSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void emailSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       emailControl.markAsDisabled(
         updateParent: updateParent,
@@ -246,8 +282,11 @@ class BasicForm implements FormModel<Basic> {
     }
   }
 
-  void passwordSetDisabled(bool disabled,
-      {bool updateParent = true, bool emitEvent = true}) {
+  void passwordSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (disabled) {
       passwordControl.markAsDisabled(
         updateParent: updateParent,
@@ -274,22 +313,32 @@ class BasicForm implements FormModel<Basic> {
     return BasicForm(basic, form, path);
   }
 
-  void updateValue(Basic value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void updateValue(
+    Basic value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.updateValue(
           BasicForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void resetValue(Basic value,
-          {bool updateParent = true, bool emitEvent = true}) =>
+  void resetValue(
+    Basic value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.reset(
           value: BasicForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  void reset({bool updateParent = true, bool emitEvent = true}) => form.reset(
-      value: formElements().rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent);
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
@@ -315,13 +364,13 @@ class BasicForm implements FormModel<Basic> {
 }
 
 class ReactiveBasicFormArrayBuilder<T> extends StatelessWidget {
-  const ReactiveBasicFormArrayBuilder(
-      {Key? key,
-      this.control,
-      this.formControl,
-      this.builder,
-      required this.itemBuilder})
-      : assert(control != null || formControl != null,
+  const ReactiveBasicFormArrayBuilder({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(control != null || formControl != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
@@ -375,13 +424,13 @@ class ReactiveBasicFormArrayBuilder<T> extends StatelessWidget {
 }
 
 class ReactiveBasicFormFormGroupArrayBuilder<V> extends StatelessWidget {
-  const ReactiveBasicFormFormGroupArrayBuilder(
-      {Key? key,
-      this.extended,
-      this.getExtended,
-      this.builder,
-      required this.itemBuilder})
-      : assert(extended != null || getExtended != null,
+  const ReactiveBasicFormFormGroupArrayBuilder({
+    Key? key,
+    this.extended,
+    this.getExtended,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(extended != null || getExtended != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 

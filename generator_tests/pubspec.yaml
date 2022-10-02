@@ -22,13 +22,13 @@ environment:
   sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
-  build: ^2.3.0
-  source_gen: ^1.2.2
+  build: ^2.3.1
+  source_gen: ^1.2.5
   path: ^1.8.2
-  build_runner: ^2.1.11
-  code_builder: ^4.1.0
-  dart_style: ^2.2.3
-  recase: ^4.0.0
+  build_runner: ^2.2.1
+  code_builder: ^4.3.0
+  dart_style: ^2.2.4
+  recase: ^4.1.0
   reactive_forms_annotations:
     path: ../packages/reactive_forms_annotations
   freezed_annotation: ^2.0.3
@@ -44,11 +44,6 @@ dev_dependencies:
   reactive_forms_generator:
     path: ../packages/reactive_forms_generator
   flutter_lints: ^2.0.1
-
-dependency_overrides:
-  meta: ^1.8.0
-  path: ^1.8.2
-  test_api: 0.4.9
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
