@@ -43,7 +43,8 @@ mixin _$Profile {
 /// @nodoc
 abstract class $ProfileCopyWith<$Res> {
   factory $ProfileCopyWith(Profile value, $Res Function(Profile) then) =
-      _$ProfileCopyWithImpl<$Res>;
+      _$ProfileCopyWithImpl<$Res, Profile>;
+  @useResult
   $Res call(
       {String id,
       @FormControlAnnotation<String>()
@@ -67,90 +68,97 @@ abstract class $ProfileCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ProfileCopyWithImpl<$Res> implements $ProfileCopyWith<$Res> {
+class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
+    implements $ProfileCopyWith<$Res> {
   _$ProfileCopyWithImpl(this._value, this._then);
 
-  final Profile _value;
   // ignore: unused_field
-  final $Res Function(Profile) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? chartingOrder = freezed,
-    Object? numberingStandard = freezed,
-    Object? incidenceFilter = freezed,
-    Object? measurementType = freezed,
-    Object? threshold = freezed,
-    Object? timer = freezed,
-    Object? audioGuidance = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? chartingOrder = null,
+    Object? numberingStandard = null,
+    Object? incidenceFilter = null,
+    Object? measurementType = null,
+    Object? threshold = null,
+    Object? timer = null,
+    Object? audioGuidance = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      chartingOrder: chartingOrder == freezed
+      chartingOrder: null == chartingOrder
           ? _value.chartingOrder
           : chartingOrder // ignore: cast_nullable_to_non_nullable
               as ChartingOrderValue,
-      numberingStandard: numberingStandard == freezed
+      numberingStandard: null == numberingStandard
           ? _value.numberingStandard
           : numberingStandard // ignore: cast_nullable_to_non_nullable
               as NumberingStandard,
-      incidenceFilter: incidenceFilter == freezed
+      incidenceFilter: null == incidenceFilter
           ? _value.incidenceFilter
           : incidenceFilter // ignore: cast_nullable_to_non_nullable
               as IncidenceFilter,
-      measurementType: measurementType == freezed
+      measurementType: null == measurementType
           ? _value.measurementType
           : measurementType // ignore: cast_nullable_to_non_nullable
               as MeasurementType,
-      threshold: threshold == freezed
+      threshold: null == threshold
           ? _value.threshold
           : threshold // ignore: cast_nullable_to_non_nullable
               as ThresholdSetting,
-      timer: timer == freezed
+      timer: null == timer
           ? _value.timer
           : timer // ignore: cast_nullable_to_non_nullable
               as TimerSetting,
-      audioGuidance: audioGuidance == freezed
+      audioGuidance: null == audioGuidance
           ? _value.audioGuidance
           : audioGuidance // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $ChartingOrderValueCopyWith<$Res> get chartingOrder {
     return $ChartingOrderValueCopyWith<$Res>(_value.chartingOrder, (value) {
-      return _then(_value.copyWith(chartingOrder: value));
+      return _then(_value.copyWith(chartingOrder: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $IncidenceFilterCopyWith<$Res> get incidenceFilter {
     return $IncidenceFilterCopyWith<$Res>(_value.incidenceFilter, (value) {
-      return _then(_value.copyWith(incidenceFilter: value));
+      return _then(_value.copyWith(incidenceFilter: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $ThresholdSettingCopyWith<$Res> get threshold {
     return $ThresholdSettingCopyWith<$Res>(_value.threshold, (value) {
-      return _then(_value.copyWith(threshold: value));
+      return _then(_value.copyWith(threshold: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $TimerSettingCopyWith<$Res> get timer {
     return $TimerSettingCopyWith<$Res>(_value.timer, (value) {
-      return _then(_value.copyWith(timer: value));
+      return _then(_value.copyWith(timer: value) as $Val);
     });
   }
 }
@@ -161,6 +169,7 @@ abstract class _$$_ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
           _$_Profile value, $Res Function(_$_Profile) then) =
       __$$_ProfileCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       @FormControlAnnotation<String>()
@@ -188,60 +197,59 @@ abstract class _$$_ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
+class __$$_ProfileCopyWithImpl<$Res>
+    extends _$ProfileCopyWithImpl<$Res, _$_Profile>
     implements _$$_ProfileCopyWith<$Res> {
   __$$_ProfileCopyWithImpl(_$_Profile _value, $Res Function(_$_Profile) _then)
-      : super(_value, (v) => _then(v as _$_Profile));
+      : super(_value, _then);
 
-  @override
-  _$_Profile get _value => super._value as _$_Profile;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? chartingOrder = freezed,
-    Object? numberingStandard = freezed,
-    Object? incidenceFilter = freezed,
-    Object? measurementType = freezed,
-    Object? threshold = freezed,
-    Object? timer = freezed,
-    Object? audioGuidance = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? chartingOrder = null,
+    Object? numberingStandard = null,
+    Object? incidenceFilter = null,
+    Object? measurementType = null,
+    Object? threshold = null,
+    Object? timer = null,
+    Object? audioGuidance = null,
   }) {
     return _then(_$_Profile(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      chartingOrder: chartingOrder == freezed
+      chartingOrder: null == chartingOrder
           ? _value.chartingOrder
           : chartingOrder // ignore: cast_nullable_to_non_nullable
               as ChartingOrderValue,
-      numberingStandard: numberingStandard == freezed
+      numberingStandard: null == numberingStandard
           ? _value.numberingStandard
           : numberingStandard // ignore: cast_nullable_to_non_nullable
               as NumberingStandard,
-      incidenceFilter: incidenceFilter == freezed
+      incidenceFilter: null == incidenceFilter
           ? _value.incidenceFilter
           : incidenceFilter // ignore: cast_nullable_to_non_nullable
               as IncidenceFilter,
-      measurementType: measurementType == freezed
+      measurementType: null == measurementType
           ? _value.measurementType
           : measurementType // ignore: cast_nullable_to_non_nullable
               as MeasurementType,
-      threshold: threshold == freezed
+      threshold: null == threshold
           ? _value.threshold
           : threshold // ignore: cast_nullable_to_non_nullable
               as ThresholdSetting,
-      timer: timer == freezed
+      timer: null == timer
           ? _value.timer
           : timer // ignore: cast_nullable_to_non_nullable
               as TimerSetting,
-      audioGuidance: audioGuidance == freezed
+      audioGuidance: null == audioGuidance
           ? _value.audioGuidance
           : audioGuidance // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -306,38 +314,40 @@ class _$_Profile extends _Profile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Profile &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality()
-                .equals(other.chartingOrder, chartingOrder) &&
-            const DeepCollectionEquality()
-                .equals(other.numberingStandard, numberingStandard) &&
-            const DeepCollectionEquality()
-                .equals(other.incidenceFilter, incidenceFilter) &&
-            const DeepCollectionEquality()
-                .equals(other.measurementType, measurementType) &&
-            const DeepCollectionEquality().equals(other.threshold, threshold) &&
-            const DeepCollectionEquality().equals(other.timer, timer) &&
-            const DeepCollectionEquality()
-                .equals(other.audioGuidance, audioGuidance));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.chartingOrder, chartingOrder) ||
+                other.chartingOrder == chartingOrder) &&
+            (identical(other.numberingStandard, numberingStandard) ||
+                other.numberingStandard == numberingStandard) &&
+            (identical(other.incidenceFilter, incidenceFilter) ||
+                other.incidenceFilter == incidenceFilter) &&
+            (identical(other.measurementType, measurementType) ||
+                other.measurementType == measurementType) &&
+            (identical(other.threshold, threshold) ||
+                other.threshold == threshold) &&
+            (identical(other.timer, timer) || other.timer == timer) &&
+            (identical(other.audioGuidance, audioGuidance) ||
+                other.audioGuidance == audioGuidance));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(chartingOrder),
-      const DeepCollectionEquality().hash(numberingStandard),
-      const DeepCollectionEquality().hash(incidenceFilter),
-      const DeepCollectionEquality().hash(measurementType),
-      const DeepCollectionEquality().hash(threshold),
-      const DeepCollectionEquality().hash(timer),
-      const DeepCollectionEquality().hash(audioGuidance));
+      id,
+      name,
+      chartingOrder,
+      numberingStandard,
+      incidenceFilter,
+      measurementType,
+      threshold,
+      timer,
+      audioGuidance);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ProfileCopyWith<_$_Profile> get copyWith =>
       __$$_ProfileCopyWithImpl<_$_Profile>(this, _$identity);
 
@@ -419,36 +429,39 @@ mixin _$ThresholdSetting {
 abstract class $ThresholdSettingCopyWith<$Res> {
   factory $ThresholdSettingCopyWith(
           ThresholdSetting value, $Res Function(ThresholdSetting) then) =
-      _$ThresholdSettingCopyWithImpl<$Res>;
+      _$ThresholdSettingCopyWithImpl<$Res, ThresholdSetting>;
+  @useResult
   $Res call(
       {@FormControlAnnotation<bool>() bool isEnabled,
       @FormControlAnnotation<int>() int value});
 }
 
 /// @nodoc
-class _$ThresholdSettingCopyWithImpl<$Res>
+class _$ThresholdSettingCopyWithImpl<$Res, $Val extends ThresholdSetting>
     implements $ThresholdSettingCopyWith<$Res> {
   _$ThresholdSettingCopyWithImpl(this._value, this._then);
 
-  final ThresholdSetting _value;
   // ignore: unused_field
-  final $Res Function(ThresholdSetting) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isEnabled = freezed,
-    Object? value = freezed,
+    Object? isEnabled = null,
+    Object? value = null,
   }) {
     return _then(_value.copyWith(
-      isEnabled: isEnabled == freezed
+      isEnabled: null == isEnabled
           ? _value.isEnabled
           : isEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
-      value: value == freezed
+      value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -459,6 +472,7 @@ abstract class _$$_ThresholdSettingCopyWith<$Res>
           _$_ThresholdSetting value, $Res Function(_$_ThresholdSetting) then) =
       __$$_ThresholdSettingCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@FormControlAnnotation<bool>() bool isEnabled,
       @FormControlAnnotation<int>() int value});
@@ -466,26 +480,24 @@ abstract class _$$_ThresholdSettingCopyWith<$Res>
 
 /// @nodoc
 class __$$_ThresholdSettingCopyWithImpl<$Res>
-    extends _$ThresholdSettingCopyWithImpl<$Res>
+    extends _$ThresholdSettingCopyWithImpl<$Res, _$_ThresholdSetting>
     implements _$$_ThresholdSettingCopyWith<$Res> {
   __$$_ThresholdSettingCopyWithImpl(
       _$_ThresholdSetting _value, $Res Function(_$_ThresholdSetting) _then)
-      : super(_value, (v) => _then(v as _$_ThresholdSetting));
+      : super(_value, _then);
 
-  @override
-  _$_ThresholdSetting get _value => super._value as _$_ThresholdSetting;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isEnabled = freezed,
-    Object? value = freezed,
+    Object? isEnabled = null,
+    Object? value = null,
   }) {
     return _then(_$_ThresholdSetting(
-      isEnabled: isEnabled == freezed
+      isEnabled: null == isEnabled
           ? _value.isEnabled
           : isEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
-      value: value == freezed
+      value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as int,
@@ -522,19 +534,18 @@ class _$_ThresholdSetting implements _ThresholdSetting {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ThresholdSetting &&
-            const DeepCollectionEquality().equals(other.isEnabled, isEnabled) &&
-            const DeepCollectionEquality().equals(other.value, value));
+            (identical(other.isEnabled, isEnabled) ||
+                other.isEnabled == isEnabled) &&
+            (identical(other.value, value) || other.value == value));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(isEnabled),
-      const DeepCollectionEquality().hash(value));
+  int get hashCode => Object.hash(runtimeType, isEnabled, value);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ThresholdSettingCopyWith<_$_ThresholdSetting> get copyWith =>
       __$$_ThresholdSettingCopyWithImpl<_$_ThresholdSetting>(this, _$identity);
 
@@ -587,35 +598,39 @@ mixin _$TimerSetting {
 abstract class $TimerSettingCopyWith<$Res> {
   factory $TimerSettingCopyWith(
           TimerSetting value, $Res Function(TimerSetting) then) =
-      _$TimerSettingCopyWithImpl<$Res>;
+      _$TimerSettingCopyWithImpl<$Res, TimerSetting>;
+  @useResult
   $Res call(
       {@FormControlAnnotation<bool>() bool isEnabled,
       @FormControlAnnotation<int>() int value});
 }
 
 /// @nodoc
-class _$TimerSettingCopyWithImpl<$Res> implements $TimerSettingCopyWith<$Res> {
+class _$TimerSettingCopyWithImpl<$Res, $Val extends TimerSetting>
+    implements $TimerSettingCopyWith<$Res> {
   _$TimerSettingCopyWithImpl(this._value, this._then);
 
-  final TimerSetting _value;
   // ignore: unused_field
-  final $Res Function(TimerSetting) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isEnabled = freezed,
-    Object? value = freezed,
+    Object? isEnabled = null,
+    Object? value = null,
   }) {
     return _then(_value.copyWith(
-      isEnabled: isEnabled == freezed
+      isEnabled: null == isEnabled
           ? _value.isEnabled
           : isEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
-      value: value == freezed
+      value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -626,6 +641,7 @@ abstract class _$$_TimerSettingCopyWith<$Res>
           _$_TimerSetting value, $Res Function(_$_TimerSetting) then) =
       __$$_TimerSettingCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@FormControlAnnotation<bool>() bool isEnabled,
       @FormControlAnnotation<int>() int value});
@@ -633,26 +649,24 @@ abstract class _$$_TimerSettingCopyWith<$Res>
 
 /// @nodoc
 class __$$_TimerSettingCopyWithImpl<$Res>
-    extends _$TimerSettingCopyWithImpl<$Res>
+    extends _$TimerSettingCopyWithImpl<$Res, _$_TimerSetting>
     implements _$$_TimerSettingCopyWith<$Res> {
   __$$_TimerSettingCopyWithImpl(
       _$_TimerSetting _value, $Res Function(_$_TimerSetting) _then)
-      : super(_value, (v) => _then(v as _$_TimerSetting));
+      : super(_value, _then);
 
-  @override
-  _$_TimerSetting get _value => super._value as _$_TimerSetting;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isEnabled = freezed,
-    Object? value = freezed,
+    Object? isEnabled = null,
+    Object? value = null,
   }) {
     return _then(_$_TimerSetting(
-      isEnabled: isEnabled == freezed
+      isEnabled: null == isEnabled
           ? _value.isEnabled
           : isEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
-      value: value == freezed
+      value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as int,
@@ -689,19 +703,18 @@ class _$_TimerSetting implements _TimerSetting {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TimerSetting &&
-            const DeepCollectionEquality().equals(other.isEnabled, isEnabled) &&
-            const DeepCollectionEquality().equals(other.value, value));
+            (identical(other.isEnabled, isEnabled) ||
+                other.isEnabled == isEnabled) &&
+            (identical(other.value, value) || other.value == value));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(isEnabled),
-      const DeepCollectionEquality().hash(value));
+  int get hashCode => Object.hash(runtimeType, isEnabled, value);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TimerSettingCopyWith<_$_TimerSetting> get copyWith =>
       __$$_TimerSettingCopyWithImpl<_$_TimerSetting>(this, _$identity);
 
@@ -762,7 +775,8 @@ mixin _$IncidenceFilter {
 abstract class $IncidenceFilterCopyWith<$Res> {
   factory $IncidenceFilterCopyWith(
           IncidenceFilter value, $Res Function(IncidenceFilter) then) =
-      _$IncidenceFilterCopyWithImpl<$Res>;
+      _$IncidenceFilterCopyWithImpl<$Res, IncidenceFilter>;
+  @useResult
   $Res call(
       {@FormControlAnnotation<bool>() bool isMobilityEnabled,
       @FormControlAnnotation<bool>() bool isFurcationEnabled,
@@ -773,49 +787,51 @@ abstract class $IncidenceFilterCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$IncidenceFilterCopyWithImpl<$Res>
+class _$IncidenceFilterCopyWithImpl<$Res, $Val extends IncidenceFilter>
     implements $IncidenceFilterCopyWith<$Res> {
   _$IncidenceFilterCopyWithImpl(this._value, this._then);
 
-  final IncidenceFilter _value;
   // ignore: unused_field
-  final $Res Function(IncidenceFilter) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isMobilityEnabled = freezed,
-    Object? isFurcationEnabled = freezed,
-    Object? isBleedingEnabled = freezed,
-    Object? isSuppurationEnabled = freezed,
-    Object? isCalculusEnabled = freezed,
-    Object? isPlaqueEnabled = freezed,
+    Object? isMobilityEnabled = null,
+    Object? isFurcationEnabled = null,
+    Object? isBleedingEnabled = null,
+    Object? isSuppurationEnabled = null,
+    Object? isCalculusEnabled = null,
+    Object? isPlaqueEnabled = null,
   }) {
     return _then(_value.copyWith(
-      isMobilityEnabled: isMobilityEnabled == freezed
+      isMobilityEnabled: null == isMobilityEnabled
           ? _value.isMobilityEnabled
           : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
-      isFurcationEnabled: isFurcationEnabled == freezed
+      isFurcationEnabled: null == isFurcationEnabled
           ? _value.isFurcationEnabled
           : isFurcationEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
-      isBleedingEnabled: isBleedingEnabled == freezed
+      isBleedingEnabled: null == isBleedingEnabled
           ? _value.isBleedingEnabled
           : isBleedingEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSuppurationEnabled: isSuppurationEnabled == freezed
+      isSuppurationEnabled: null == isSuppurationEnabled
           ? _value.isSuppurationEnabled
           : isSuppurationEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
-      isCalculusEnabled: isCalculusEnabled == freezed
+      isCalculusEnabled: null == isCalculusEnabled
           ? _value.isCalculusEnabled
           : isCalculusEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
-      isPlaqueEnabled: isPlaqueEnabled == freezed
+      isPlaqueEnabled: null == isPlaqueEnabled
           ? _value.isPlaqueEnabled
           : isPlaqueEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -826,6 +842,7 @@ abstract class _$$_IncidenceFilterCopyWith<$Res>
           _$_IncidenceFilter value, $Res Function(_$_IncidenceFilter) then) =
       __$$_IncidenceFilterCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@FormControlAnnotation<bool>() bool isMobilityEnabled,
       @FormControlAnnotation<bool>() bool isFurcationEnabled,
@@ -837,46 +854,44 @@ abstract class _$$_IncidenceFilterCopyWith<$Res>
 
 /// @nodoc
 class __$$_IncidenceFilterCopyWithImpl<$Res>
-    extends _$IncidenceFilterCopyWithImpl<$Res>
+    extends _$IncidenceFilterCopyWithImpl<$Res, _$_IncidenceFilter>
     implements _$$_IncidenceFilterCopyWith<$Res> {
   __$$_IncidenceFilterCopyWithImpl(
       _$_IncidenceFilter _value, $Res Function(_$_IncidenceFilter) _then)
-      : super(_value, (v) => _then(v as _$_IncidenceFilter));
+      : super(_value, _then);
 
-  @override
-  _$_IncidenceFilter get _value => super._value as _$_IncidenceFilter;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isMobilityEnabled = freezed,
-    Object? isFurcationEnabled = freezed,
-    Object? isBleedingEnabled = freezed,
-    Object? isSuppurationEnabled = freezed,
-    Object? isCalculusEnabled = freezed,
-    Object? isPlaqueEnabled = freezed,
+    Object? isMobilityEnabled = null,
+    Object? isFurcationEnabled = null,
+    Object? isBleedingEnabled = null,
+    Object? isSuppurationEnabled = null,
+    Object? isCalculusEnabled = null,
+    Object? isPlaqueEnabled = null,
   }) {
     return _then(_$_IncidenceFilter(
-      isMobilityEnabled: isMobilityEnabled == freezed
+      isMobilityEnabled: null == isMobilityEnabled
           ? _value.isMobilityEnabled
           : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
-      isFurcationEnabled: isFurcationEnabled == freezed
+      isFurcationEnabled: null == isFurcationEnabled
           ? _value.isFurcationEnabled
           : isFurcationEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
-      isBleedingEnabled: isBleedingEnabled == freezed
+      isBleedingEnabled: null == isBleedingEnabled
           ? _value.isBleedingEnabled
           : isBleedingEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSuppurationEnabled: isSuppurationEnabled == freezed
+      isSuppurationEnabled: null == isSuppurationEnabled
           ? _value.isSuppurationEnabled
           : isSuppurationEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
-      isCalculusEnabled: isCalculusEnabled == freezed
+      isCalculusEnabled: null == isCalculusEnabled
           ? _value.isCalculusEnabled
           : isCalculusEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
-      isPlaqueEnabled: isPlaqueEnabled == freezed
+      isPlaqueEnabled: null == isPlaqueEnabled
           ? _value.isPlaqueEnabled
           : isPlaqueEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -933,33 +948,34 @@ class _$_IncidenceFilter implements _IncidenceFilter {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_IncidenceFilter &&
-            const DeepCollectionEquality()
-                .equals(other.isMobilityEnabled, isMobilityEnabled) &&
-            const DeepCollectionEquality()
-                .equals(other.isFurcationEnabled, isFurcationEnabled) &&
-            const DeepCollectionEquality()
-                .equals(other.isBleedingEnabled, isBleedingEnabled) &&
-            const DeepCollectionEquality()
-                .equals(other.isSuppurationEnabled, isSuppurationEnabled) &&
-            const DeepCollectionEquality()
-                .equals(other.isCalculusEnabled, isCalculusEnabled) &&
-            const DeepCollectionEquality()
-                .equals(other.isPlaqueEnabled, isPlaqueEnabled));
+            (identical(other.isMobilityEnabled, isMobilityEnabled) ||
+                other.isMobilityEnabled == isMobilityEnabled) &&
+            (identical(other.isFurcationEnabled, isFurcationEnabled) ||
+                other.isFurcationEnabled == isFurcationEnabled) &&
+            (identical(other.isBleedingEnabled, isBleedingEnabled) ||
+                other.isBleedingEnabled == isBleedingEnabled) &&
+            (identical(other.isSuppurationEnabled, isSuppurationEnabled) ||
+                other.isSuppurationEnabled == isSuppurationEnabled) &&
+            (identical(other.isCalculusEnabled, isCalculusEnabled) ||
+                other.isCalculusEnabled == isCalculusEnabled) &&
+            (identical(other.isPlaqueEnabled, isPlaqueEnabled) ||
+                other.isPlaqueEnabled == isPlaqueEnabled));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(isMobilityEnabled),
-      const DeepCollectionEquality().hash(isFurcationEnabled),
-      const DeepCollectionEquality().hash(isBleedingEnabled),
-      const DeepCollectionEquality().hash(isSuppurationEnabled),
-      const DeepCollectionEquality().hash(isCalculusEnabled),
-      const DeepCollectionEquality().hash(isPlaqueEnabled));
+      isMobilityEnabled,
+      isFurcationEnabled,
+      isBleedingEnabled,
+      isSuppurationEnabled,
+      isCalculusEnabled,
+      isPlaqueEnabled);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_IncidenceFilterCopyWith<_$_IncidenceFilter> get copyWith =>
       __$$_IncidenceFilterCopyWithImpl<_$_IncidenceFilter>(this, _$identity);
 
@@ -1036,8 +1052,8 @@ mixin _$ScanOrder {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Jaw jaw, Direction direction, ToothSide toothSide)? arch,
-    TResult Function(
+    TResult? Function(Jaw jaw, Direction direction, ToothSide toothSide)? arch,
+    TResult? Function(
             Quadrant quadrant, Direction direction, ToothSide toothSide)?
         quadrant,
   }) =>
@@ -1059,8 +1075,8 @@ mixin _$ScanOrder {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ArchScanOrder value)? arch,
-    TResult Function(QuadrantScanOrder value)? quadrant,
+    TResult? Function(ArchScanOrder value)? arch,
+    TResult? Function(QuadrantScanOrder value)? quadrant,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1079,33 +1095,37 @@ mixin _$ScanOrder {
 /// @nodoc
 abstract class $ScanOrderCopyWith<$Res> {
   factory $ScanOrderCopyWith(ScanOrder value, $Res Function(ScanOrder) then) =
-      _$ScanOrderCopyWithImpl<$Res>;
+      _$ScanOrderCopyWithImpl<$Res, ScanOrder>;
+  @useResult
   $Res call({Direction direction, ToothSide toothSide});
 }
 
 /// @nodoc
-class _$ScanOrderCopyWithImpl<$Res> implements $ScanOrderCopyWith<$Res> {
+class _$ScanOrderCopyWithImpl<$Res, $Val extends ScanOrder>
+    implements $ScanOrderCopyWith<$Res> {
   _$ScanOrderCopyWithImpl(this._value, this._then);
 
-  final ScanOrder _value;
   // ignore: unused_field
-  final $Res Function(ScanOrder) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? direction = freezed,
-    Object? toothSide = freezed,
+    Object? direction = null,
+    Object? toothSide = null,
   }) {
     return _then(_value.copyWith(
-      direction: direction == freezed
+      direction: null == direction
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
               as Direction,
-      toothSide: toothSide == freezed
+      toothSide: null == toothSide
           ? _value.toothSide
           : toothSide // ignore: cast_nullable_to_non_nullable
               as ToothSide,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1116,35 +1136,35 @@ abstract class _$$ArchScanOrderCopyWith<$Res>
           _$ArchScanOrder value, $Res Function(_$ArchScanOrder) then) =
       __$$ArchScanOrderCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({Jaw jaw, Direction direction, ToothSide toothSide});
 }
 
 /// @nodoc
-class __$$ArchScanOrderCopyWithImpl<$Res> extends _$ScanOrderCopyWithImpl<$Res>
+class __$$ArchScanOrderCopyWithImpl<$Res>
+    extends _$ScanOrderCopyWithImpl<$Res, _$ArchScanOrder>
     implements _$$ArchScanOrderCopyWith<$Res> {
   __$$ArchScanOrderCopyWithImpl(
       _$ArchScanOrder _value, $Res Function(_$ArchScanOrder) _then)
-      : super(_value, (v) => _then(v as _$ArchScanOrder));
+      : super(_value, _then);
 
-  @override
-  _$ArchScanOrder get _value => super._value as _$ArchScanOrder;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? jaw = freezed,
-    Object? direction = freezed,
-    Object? toothSide = freezed,
+    Object? jaw = null,
+    Object? direction = null,
+    Object? toothSide = null,
   }) {
     return _then(_$ArchScanOrder(
-      jaw == freezed
+      null == jaw
           ? _value.jaw
           : jaw // ignore: cast_nullable_to_non_nullable
               as Jaw,
-      direction: direction == freezed
+      direction: null == direction
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
               as Direction,
-      toothSide: toothSide == freezed
+      toothSide: null == toothSide
           ? _value.toothSide
           : toothSide // ignore: cast_nullable_to_non_nullable
               as ToothSide,
@@ -1182,21 +1202,20 @@ class _$ArchScanOrder implements ArchScanOrder {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ArchScanOrder &&
-            const DeepCollectionEquality().equals(other.jaw, jaw) &&
-            const DeepCollectionEquality().equals(other.direction, direction) &&
-            const DeepCollectionEquality().equals(other.toothSide, toothSide));
+            (identical(other.jaw, jaw) || other.jaw == jaw) &&
+            (identical(other.direction, direction) ||
+                other.direction == direction) &&
+            (identical(other.toothSide, toothSide) ||
+                other.toothSide == toothSide));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(jaw),
-      const DeepCollectionEquality().hash(direction),
-      const DeepCollectionEquality().hash(toothSide));
+  int get hashCode => Object.hash(runtimeType, jaw, direction, toothSide);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ArchScanOrderCopyWith<_$ArchScanOrder> get copyWith =>
       __$$ArchScanOrderCopyWithImpl<_$ArchScanOrder>(this, _$identity);
 
@@ -1215,8 +1234,8 @@ class _$ArchScanOrder implements ArchScanOrder {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Jaw jaw, Direction direction, ToothSide toothSide)? arch,
-    TResult Function(
+    TResult? Function(Jaw jaw, Direction direction, ToothSide toothSide)? arch,
+    TResult? Function(
             Quadrant quadrant, Direction direction, ToothSide toothSide)?
         quadrant,
   }) {
@@ -1250,8 +1269,8 @@ class _$ArchScanOrder implements ArchScanOrder {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ArchScanOrder value)? arch,
-    TResult Function(QuadrantScanOrder value)? quadrant,
+    TResult? Function(ArchScanOrder value)? arch,
+    TResult? Function(QuadrantScanOrder value)? quadrant,
   }) {
     return arch?.call(this);
   }
@@ -1303,36 +1322,35 @@ abstract class _$$QuadrantScanOrderCopyWith<$Res>
           _$QuadrantScanOrder value, $Res Function(_$QuadrantScanOrder) then) =
       __$$QuadrantScanOrderCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({Quadrant quadrant, Direction direction, ToothSide toothSide});
 }
 
 /// @nodoc
 class __$$QuadrantScanOrderCopyWithImpl<$Res>
-    extends _$ScanOrderCopyWithImpl<$Res>
+    extends _$ScanOrderCopyWithImpl<$Res, _$QuadrantScanOrder>
     implements _$$QuadrantScanOrderCopyWith<$Res> {
   __$$QuadrantScanOrderCopyWithImpl(
       _$QuadrantScanOrder _value, $Res Function(_$QuadrantScanOrder) _then)
-      : super(_value, (v) => _then(v as _$QuadrantScanOrder));
+      : super(_value, _then);
 
-  @override
-  _$QuadrantScanOrder get _value => super._value as _$QuadrantScanOrder;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? quadrant = freezed,
-    Object? direction = freezed,
-    Object? toothSide = freezed,
+    Object? quadrant = null,
+    Object? direction = null,
+    Object? toothSide = null,
   }) {
     return _then(_$QuadrantScanOrder(
-      quadrant == freezed
+      null == quadrant
           ? _value.quadrant
           : quadrant // ignore: cast_nullable_to_non_nullable
               as Quadrant,
-      direction: direction == freezed
+      direction: null == direction
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
               as Direction,
-      toothSide: toothSide == freezed
+      toothSide: null == toothSide
           ? _value.toothSide
           : toothSide // ignore: cast_nullable_to_non_nullable
               as ToothSide,
@@ -1370,21 +1388,21 @@ class _$QuadrantScanOrder implements QuadrantScanOrder {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$QuadrantScanOrder &&
-            const DeepCollectionEquality().equals(other.quadrant, quadrant) &&
-            const DeepCollectionEquality().equals(other.direction, direction) &&
-            const DeepCollectionEquality().equals(other.toothSide, toothSide));
+            (identical(other.quadrant, quadrant) ||
+                other.quadrant == quadrant) &&
+            (identical(other.direction, direction) ||
+                other.direction == direction) &&
+            (identical(other.toothSide, toothSide) ||
+                other.toothSide == toothSide));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(quadrant),
-      const DeepCollectionEquality().hash(direction),
-      const DeepCollectionEquality().hash(toothSide));
+  int get hashCode => Object.hash(runtimeType, quadrant, direction, toothSide);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$QuadrantScanOrderCopyWith<_$QuadrantScanOrder> get copyWith =>
       __$$QuadrantScanOrderCopyWithImpl<_$QuadrantScanOrder>(this, _$identity);
 
@@ -1403,8 +1421,8 @@ class _$QuadrantScanOrder implements QuadrantScanOrder {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Jaw jaw, Direction direction, ToothSide toothSide)? arch,
-    TResult Function(
+    TResult? Function(Jaw jaw, Direction direction, ToothSide toothSide)? arch,
+    TResult? Function(
             Quadrant quadrant, Direction direction, ToothSide toothSide)?
         quadrant,
   }) {
@@ -1438,8 +1456,8 @@ class _$QuadrantScanOrder implements QuadrantScanOrder {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ArchScanOrder value)? arch,
-    TResult Function(QuadrantScanOrder value)? quadrant,
+    TResult? Function(ArchScanOrder value)? arch,
+    TResult? Function(QuadrantScanOrder value)? quadrant,
   }) {
     return quadrant?.call(this);
   }
@@ -1504,7 +1522,8 @@ mixin _$ChartingOrderValue {
 abstract class $ChartingOrderValueCopyWith<$Res> {
   factory $ChartingOrderValueCopyWith(
           ChartingOrderValue value, $Res Function(ChartingOrderValue) then) =
-      _$ChartingOrderValueCopyWithImpl<$Res>;
+      _$ChartingOrderValueCopyWithImpl<$Res, ChartingOrderValue>;
+  @useResult
   $Res call(
       {ChartingOrderType chartingOrder,
       int selectedOption,
@@ -1512,34 +1531,36 @@ abstract class $ChartingOrderValueCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ChartingOrderValueCopyWithImpl<$Res>
+class _$ChartingOrderValueCopyWithImpl<$Res, $Val extends ChartingOrderValue>
     implements $ChartingOrderValueCopyWith<$Res> {
   _$ChartingOrderValueCopyWithImpl(this._value, this._then);
 
-  final ChartingOrderValue _value;
   // ignore: unused_field
-  final $Res Function(ChartingOrderValue) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? chartingOrder = freezed,
-    Object? selectedOption = freezed,
-    Object? order = freezed,
+    Object? chartingOrder = null,
+    Object? selectedOption = null,
+    Object? order = null,
   }) {
     return _then(_value.copyWith(
-      chartingOrder: chartingOrder == freezed
+      chartingOrder: null == chartingOrder
           ? _value.chartingOrder
           : chartingOrder // ignore: cast_nullable_to_non_nullable
               as ChartingOrderType,
-      selectedOption: selectedOption == freezed
+      selectedOption: null == selectedOption
           ? _value.selectedOption
           : selectedOption // ignore: cast_nullable_to_non_nullable
               as int,
-      order: order == freezed
+      order: null == order
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as List<List<ScanOrder>>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1550,6 +1571,7 @@ abstract class _$$_ChartingOrderValueCopyWith<$Res>
           $Res Function(_$_ChartingOrderValue) then) =
       __$$_ChartingOrderValueCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {ChartingOrderType chartingOrder,
       int selectedOption,
@@ -1558,31 +1580,29 @@ abstract class _$$_ChartingOrderValueCopyWith<$Res>
 
 /// @nodoc
 class __$$_ChartingOrderValueCopyWithImpl<$Res>
-    extends _$ChartingOrderValueCopyWithImpl<$Res>
+    extends _$ChartingOrderValueCopyWithImpl<$Res, _$_ChartingOrderValue>
     implements _$$_ChartingOrderValueCopyWith<$Res> {
   __$$_ChartingOrderValueCopyWithImpl(
       _$_ChartingOrderValue _value, $Res Function(_$_ChartingOrderValue) _then)
-      : super(_value, (v) => _then(v as _$_ChartingOrderValue));
+      : super(_value, _then);
 
-  @override
-  _$_ChartingOrderValue get _value => super._value as _$_ChartingOrderValue;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? chartingOrder = freezed,
-    Object? selectedOption = freezed,
-    Object? order = freezed,
+    Object? chartingOrder = null,
+    Object? selectedOption = null,
+    Object? order = null,
   }) {
     return _then(_$_ChartingOrderValue(
-      chartingOrder: chartingOrder == freezed
+      chartingOrder: null == chartingOrder
           ? _value.chartingOrder
           : chartingOrder // ignore: cast_nullable_to_non_nullable
               as ChartingOrderType,
-      selectedOption: selectedOption == freezed
+      selectedOption: null == selectedOption
           ? _value.selectedOption
           : selectedOption // ignore: cast_nullable_to_non_nullable
               as int,
-      order: order == freezed
+      order: null == order
           ? _value._order
           : order // ignore: cast_nullable_to_non_nullable
               as List<List<ScanOrder>>,
@@ -1625,23 +1645,21 @@ class _$_ChartingOrderValue implements _ChartingOrderValue {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ChartingOrderValue &&
-            const DeepCollectionEquality()
-                .equals(other.chartingOrder, chartingOrder) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedOption, selectedOption) &&
+            (identical(other.chartingOrder, chartingOrder) ||
+                other.chartingOrder == chartingOrder) &&
+            (identical(other.selectedOption, selectedOption) ||
+                other.selectedOption == selectedOption) &&
             const DeepCollectionEquality().equals(other._order, _order));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(chartingOrder),
-      const DeepCollectionEquality().hash(selectedOption),
+  int get hashCode => Object.hash(runtimeType, chartingOrder, selectedOption,
       const DeepCollectionEquality().hash(_order));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ChartingOrderValueCopyWith<_$_ChartingOrderValue> get copyWith =>
       __$$_ChartingOrderValueCopyWithImpl<_$_ChartingOrderValue>(
           this, _$identity);

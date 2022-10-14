@@ -28,35 +28,39 @@ mixin _$Test {
 /// @nodoc
 abstract class $TestCopyWith<$Res> {
   factory $TestCopyWith(Test value, $Res Function(Test) then) =
-      _$TestCopyWithImpl<$Res>;
+      _$TestCopyWithImpl<$Res, Test>;
+  @useResult
   $Res call(
       {@FormControlAnnotation<String>() String title,
       @FormControlAnnotation<String>() String? description});
 }
 
 /// @nodoc
-class _$TestCopyWithImpl<$Res> implements $TestCopyWith<$Res> {
+class _$TestCopyWithImpl<$Res, $Val extends Test>
+    implements $TestCopyWith<$Res> {
   _$TestCopyWithImpl(this._value, this._then);
 
-  final Test _value;
   // ignore: unused_field
-  final $Res Function(Test) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = freezed,
+    Object? title = null,
     Object? description = freezed,
   }) {
     return _then(_value.copyWith(
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -65,31 +69,30 @@ abstract class _$$_TestCopyWith<$Res> implements $TestCopyWith<$Res> {
   factory _$$_TestCopyWith(_$_Test value, $Res Function(_$_Test) then) =
       __$$_TestCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@FormControlAnnotation<String>() String title,
       @FormControlAnnotation<String>() String? description});
 }
 
 /// @nodoc
-class __$$_TestCopyWithImpl<$Res> extends _$TestCopyWithImpl<$Res>
+class __$$_TestCopyWithImpl<$Res> extends _$TestCopyWithImpl<$Res, _$_Test>
     implements _$$_TestCopyWith<$Res> {
   __$$_TestCopyWithImpl(_$_Test _value, $Res Function(_$_Test) _then)
-      : super(_value, (v) => _then(v as _$_Test));
+      : super(_value, _then);
 
-  @override
-  _$_Test get _value => super._value as _$_Test;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = freezed,
+    Object? title = null,
     Object? description = freezed,
   }) {
     return _then(_$_Test(
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -122,19 +125,17 @@ class _$_Test extends _Test {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Test &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description));
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(description));
+  int get hashCode => Object.hash(runtimeType, title, description);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TestCopyWith<_$_Test> get copyWith =>
       __$$_TestCopyWithImpl<_$_Test>(this, _$identity);
 }
