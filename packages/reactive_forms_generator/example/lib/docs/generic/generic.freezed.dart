@@ -26,28 +26,32 @@ mixin _$Tags<T> {
 /// @nodoc
 abstract class $TagsCopyWith<T, $Res> {
   factory $TagsCopyWith(Tags<T> value, $Res Function(Tags<T>) then) =
-      _$TagsCopyWithImpl<T, $Res>;
+      _$TagsCopyWithImpl<T, $Res, Tags<T>>;
+  @useResult
   $Res call({@FormControlAnnotation() List<T>? tags});
 }
 
 /// @nodoc
-class _$TagsCopyWithImpl<T, $Res> implements $TagsCopyWith<T, $Res> {
+class _$TagsCopyWithImpl<T, $Res, $Val extends Tags<T>>
+    implements $TagsCopyWith<T, $Res> {
   _$TagsCopyWithImpl(this._value, this._then);
 
-  final Tags<T> _value;
   // ignore: unused_field
-  final $Res Function(Tags<T>) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? tags = freezed,
   }) {
     return _then(_value.copyWith(
-      tags: tags == freezed
+      tags: freezed == tags
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<T>?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -56,24 +60,24 @@ abstract class _$$_TagsCopyWith<T, $Res> implements $TagsCopyWith<T, $Res> {
   factory _$$_TagsCopyWith(_$_Tags<T> value, $Res Function(_$_Tags<T>) then) =
       __$$_TagsCopyWithImpl<T, $Res>;
   @override
+  @useResult
   $Res call({@FormControlAnnotation() List<T>? tags});
 }
 
 /// @nodoc
-class __$$_TagsCopyWithImpl<T, $Res> extends _$TagsCopyWithImpl<T, $Res>
+class __$$_TagsCopyWithImpl<T, $Res>
+    extends _$TagsCopyWithImpl<T, $Res, _$_Tags<T>>
     implements _$$_TagsCopyWith<T, $Res> {
   __$$_TagsCopyWithImpl(_$_Tags<T> _value, $Res Function(_$_Tags<T>) _then)
-      : super(_value, (v) => _then(v as _$_Tags<T>));
+      : super(_value, _then);
 
-  @override
-  _$_Tags<T> get _value => super._value as _$_Tags<T>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? tags = freezed,
   }) {
     return _then(_$_Tags<T>(
-      tags: tags == freezed
+      tags: freezed == tags
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<T>?,
@@ -117,6 +121,7 @@ class _$_Tags<T> extends _Tags<T> {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TagsCopyWith<T, _$_Tags<T>> get copyWith =>
       __$$_TagsCopyWithImpl<T, _$_Tags<T>>(this, _$identity);
 }

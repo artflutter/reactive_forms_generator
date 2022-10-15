@@ -1,3 +1,7 @@
+## [0.21.0-beta]
+
+* analyzer 5
+
 ## [0.20.0-beta]
 
 * generics support

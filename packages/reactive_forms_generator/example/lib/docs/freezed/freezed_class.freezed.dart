@@ -39,7 +39,8 @@ mixin _$FreezedClass {
 abstract class $FreezedClassCopyWith<$Res> {
   factory $FreezedClassCopyWith(
           FreezedClass value, $Res Function(FreezedClass) then) =
-      _$FreezedClassCopyWithImpl<$Res>;
+      _$FreezedClassCopyWithImpl<$Res, FreezedClass>;
+  @useResult
   $Res call(
       {@FormControlAnnotation<String>() String? gender,
       @FormControlAnnotation<String>() String? id,
@@ -48,13 +49,16 @@ abstract class $FreezedClassCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$FreezedClassCopyWithImpl<$Res> implements $FreezedClassCopyWith<$Res> {
+class _$FreezedClassCopyWithImpl<$Res, $Val extends FreezedClass>
+    implements $FreezedClassCopyWith<$Res> {
   _$FreezedClassCopyWithImpl(this._value, this._then);
 
-  final FreezedClass _value;
   // ignore: unused_field
-  final $Res Function(FreezedClass) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? gender = freezed,
@@ -63,23 +67,23 @@ class _$FreezedClassCopyWithImpl<$Res> implements $FreezedClassCopyWith<$Res> {
     Object? year = freezed,
   }) {
     return _then(_value.copyWith(
-      gender: gender == freezed
+      gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      year: year == freezed
+      year: freezed == year
           ? _value.year
           : year // ignore: cast_nullable_to_non_nullable
               as double?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -90,6 +94,7 @@ abstract class _$$_FreezedClassCopyWith<$Res>
           _$_FreezedClass value, $Res Function(_$_FreezedClass) then) =
       __$$_FreezedClassCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@FormControlAnnotation<String>() String? gender,
       @FormControlAnnotation<String>() String? id,
@@ -99,15 +104,13 @@ abstract class _$$_FreezedClassCopyWith<$Res>
 
 /// @nodoc
 class __$$_FreezedClassCopyWithImpl<$Res>
-    extends _$FreezedClassCopyWithImpl<$Res>
+    extends _$FreezedClassCopyWithImpl<$Res, _$_FreezedClass>
     implements _$$_FreezedClassCopyWith<$Res> {
   __$$_FreezedClassCopyWithImpl(
       _$_FreezedClass _value, $Res Function(_$_FreezedClass) _then)
-      : super(_value, (v) => _then(v as _$_FreezedClass));
+      : super(_value, _then);
 
-  @override
-  _$_FreezedClass get _value => super._value as _$_FreezedClass;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? gender = freezed,
@@ -116,19 +119,19 @@ class __$$_FreezedClassCopyWithImpl<$Res>
     Object? year = freezed,
   }) {
     return _then(_$_FreezedClass(
-      gender == freezed
+      freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      year: year == freezed
+      year: freezed == year
           ? _value.year
           : year // ignore: cast_nullable_to_non_nullable
               as double?,
@@ -171,23 +174,19 @@ class _$_FreezedClass extends _FreezedClass {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_FreezedClass &&
-            const DeepCollectionEquality().equals(other.gender, gender) &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.year, year));
+            (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.year, year) || other.year == year));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(gender),
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(year));
+  int get hashCode => Object.hash(runtimeType, gender, id, name, year);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FreezedClassCopyWith<_$_FreezedClass> get copyWith =>
       __$$_FreezedClassCopyWithImpl<_$_FreezedClass>(this, _$identity);
 
