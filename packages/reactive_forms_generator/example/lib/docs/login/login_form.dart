@@ -54,6 +54,13 @@ class LoginFormWidget extends StatelessWidget {
                   return Text(formModel.emailControl.errors.toString());
                 },
               ),
+              ElevatedButton(
+                onPressed: () {
+                  debugPrint(formModel.model.email);
+                  debugPrint(formModel.model.password);
+                },
+                child: const Text('Submit raw'),
+              ),
               const SizedBox(height: 8.0),
               ReactiveBasicFormConsumer(
                 builder: (context, formModel, child) {
