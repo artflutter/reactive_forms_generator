@@ -12,10 +12,10 @@ class FormGroupGenerator extends FormElementGenerator {
       : super(root, field, type);
 
   @override
-  Element get fieldElement => field.type.element2!;
+  Element get fieldElement => field.type.element!;
 
   List<ParameterElement> get formElements =>
-      (field.type.element2 as ClassElement)
+      (field.type.element as ClassElement)
           .constructors
           .where((e) => e.hasReactiveFormAnnotatedParameters)
           .first
@@ -28,16 +28,16 @@ class FormGroupGenerator extends FormElementGenerator {
           .toList();
 
   List<ParameterElement> get nestedFormElements =>
-      (field.type.element2 as ClassElement)
+      (field.type.element as ClassElement)
           .constructors
           .where((e) => e.hasReactiveFormAnnotatedParameters)
           .first
           .parameters
           .where(
-            (e) => e.type.element2 is ClassElement,
+            (e) => e.type.element is ClassElement,
           )
           .where(
-            (e) => formGroupChecker.hasAnnotationOfExact(e.type.element2!),
+            (e) => formGroupChecker.hasAnnotationOfExact(e.type.element!),
           )
           .toList();
 
@@ -49,7 +49,7 @@ class FormGroupGenerator extends FormElementGenerator {
     formGroupValidatorsTyped = formGroupValidatorsTyped
         .map(
           (e) =>
-              '(control) => $e(${field.className}(${(field.type.element2 as ClassElement).name.camelCase}, control as FormGroup, path))',
+              '(control) => $e(${field.className}(${(field.type.element as ClassElement).name.camelCase}, control as FormGroup, path))',
         )
         .toList();
 

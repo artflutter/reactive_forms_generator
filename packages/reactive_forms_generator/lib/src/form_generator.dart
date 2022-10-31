@@ -59,7 +59,7 @@ class FormGenerator {
     for (var e in formGroups) {
       formGroupGenerators[e.name] = FormGenerator(
         root,
-        e.type.element2! as ClassElement,
+        e.type.element! as ClassElement,
         e.type,
       );
     }
@@ -73,7 +73,7 @@ class FormGenerator {
 
       nestedFormGroupGenerators[e.name] = FormGenerator(
         root,
-        typeParameter.element2! as ClassElement,
+        typeParameter.element! as ClassElement,
         e.type,
       );
     }
@@ -277,8 +277,8 @@ class FormGenerator {
   Method addGroupControl(ParameterElement field) {
     final type = field.typeParameter.getDisplayString(withNullability: false);
 
-    final formGroupGenerator = FormGenerator(root,
-        field.typeParameter.element2 as ClassElement, field.typeParameter);
+    final formGroupGenerator = FormGenerator(
+        root, field.typeParameter.element as ClassElement, field.typeParameter);
 
     return Method(
       (b) => b
@@ -302,8 +302,8 @@ class FormGenerator {
   }
 
   Method removeGroupControl(ParameterElement field) {
-    final formGroupGenerator = FormGenerator(root,
-        field.typeParameter.element2 as ClassElement, field.typeParameter);
+    final formGroupGenerator = FormGenerator(
+        root, field.typeParameter.element as ClassElement, field.typeParameter);
 
     final formField = '${field.name}${formGroupGenerator.className}';
     final controlField = '${field.fieldControlName}${field.nullabilitySuffix}';
@@ -532,7 +532,7 @@ class FormGenerator {
 
                 final formGenerator = FormGenerator(
                   root,
-                  typeParameter.element2! as ClassElement,
+                  typeParameter.element! as ClassElement,
                   type,
                 );
                 return '''${e.name}${formGenerator.className} = (${element.name.camelCase}$nullabilitySuffix.${e.name} $defaultValue)
@@ -608,8 +608,8 @@ class FormGenerator {
                     displayType = parameterizedType.getDisplayString(
                         withNullability: false);
 
-                    if (parameterizedType.element2 is ClassElement &&
-                        (parameterizedType.element2 as ClassElement)
+                    if (parameterizedType.element is ClassElement &&
+                        (parameterizedType.element as ClassElement)
                             .isNullable) {
                       displayType = '$displayType?';
                     }
@@ -639,7 +639,7 @@ class FormGenerator {
                       (e.type as ParameterizedType).typeArguments.first;
 
                   final formGenerator = FormGenerator(
-                      root, typeParameter.element2! as ClassElement, type);
+                      root, typeParameter.element! as ClassElement, type);
 
                   return Field(
                     (b) => b
@@ -708,13 +708,13 @@ class FormGenerator {
                           nameOffset: 20,
                           parameterKind: u.ParameterKind.REQUIRED,
                         )..type = t.InterfaceTypeImpl(
-                            element2: element,
+                            element: element,
                             typeArguments: element.thisType.typeArguments,
                             nullabilitySuffix: NullabilitySuffix.none,
                           ),
                         type ??
                             t.InterfaceTypeImpl(
-                              element2: element,
+                              element: element,
                               typeArguments: element.thisType.typeArguments,
                               nullabilitySuffix: element.isNullable
                                   ? NullabilitySuffix.question

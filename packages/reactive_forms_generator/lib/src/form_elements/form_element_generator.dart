@@ -15,8 +15,7 @@ abstract class FormElementGenerator {
 
   String get value {
     final enclosingElement =
-        (fieldElement.enclosingElement3 as ConstructorElement)
-            .enclosingElement3;
+        (fieldElement.enclosingElement as ConstructorElement).enclosingElement;
 
     // final optionalChaining =
     //     type?.nullabilitySuffix != NullabilitySuffix.question ||
@@ -60,7 +59,7 @@ abstract class FormElementGenerator {
     var name = e?.name;
 
     if (e is MethodElement) {
-      name = '${e.enclosingElement3.name}.$name';
+      name = '${e.enclosingElement.name}.$name';
     }
 
     return name;
