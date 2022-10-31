@@ -52,7 +52,7 @@ extension ClassElementExt on ClassElement {
     // return false;
     return annotatedParameters.fold(true, (acc, e) {
       if (e.isNotReactiveFormAnnotatedAndNullable) {
-        final element = e.type.element2;
+        final element = e.type.element;
         if (element is ClassElement) {
           if (element.annotatedParameters.isEmpty) {
             return acc && false;
@@ -123,7 +123,7 @@ extension ParameterElementExt on ParameterElement {
       ((isRequiredPositional || isRequiredNamed) && !hasDefaultValue);
 
   String get className {
-    final element = type.element2 as ClassElement;
+    final element = type.element as ClassElement;
 
     String baseName = '';
 
@@ -135,7 +135,7 @@ extension ParameterElementExt on ParameterElement {
     baseName = element.name;
 
     if (isFormGroupArray) {
-      final element = typeParameter.element2 as ClassElement;
+      final element = typeParameter.element as ClassElement;
 
       if (formChecker.hasAnnotationOfExact(element)) {
         final annotation = formChecker.firstAnnotationOfExact(element);
@@ -171,8 +171,8 @@ extension ParameterElementExt on ParameterElement {
 
     final typeParameter = typeArguments.first;
 
-    return typeParameter.element2 is ClassElement &&
-        formGroupChecker.hasAnnotationOf(typeParameter.element2!);
+    return typeParameter.element is ClassElement &&
+        formGroupChecker.hasAnnotationOf(typeParameter.element!);
   }
 
   bool get isFormArray {
@@ -186,14 +186,14 @@ extension ParameterElementExt on ParameterElement {
 
     final typeParameter = typeArguments.first;
 
-    return typeParameter.element2 is ClassElement &&
-        !formGroupChecker.hasAnnotationOf(typeParameter.element2!);
+    return typeParameter.element is ClassElement &&
+        !formGroupChecker.hasAnnotationOf(typeParameter.element!);
   }
 
   bool get isFormControl => formControlChecker.hasAnnotationOfExact(this);
 
   bool get isFormGroup {
-    final element = type.element2;
+    final element = type.element;
     return element != null
         ? formGroupChecker.hasAnnotationOfExact(element)
         : false;
@@ -230,8 +230,8 @@ extension FieldElementExt on FieldElement {
 
     final typeParameter = typeArguments.first;
 
-    return typeParameter.element2 is ClassElement &&
-        formGroupChecker.hasAnnotationOf(typeParameter.element2!);
+    return typeParameter.element is ClassElement &&
+        formGroupChecker.hasAnnotationOf(typeParameter.element!);
   }
 
   bool get isFormArray => formArrayChecker.hasAnnotationOfExact(this);
@@ -239,7 +239,7 @@ extension FieldElementExt on FieldElement {
   bool get isFormControl => formControlChecker.hasAnnotationOfExact(this);
 
   bool get isFormGroup {
-    final element = type.element2;
+    final element = type.element;
     return element != null
         ? formGroupChecker.hasAnnotationOfExact(element)
         : false;

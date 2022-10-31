@@ -124,7 +124,7 @@ class FormArrayGenerator extends FormElementGenerator {
     if (field.isFormGroupArray) {
       final formGenerator = FormGenerator(
         root,
-        typeParameter.element2! as ClassElement,
+        typeParameter.element! as ClassElement,
         field.type,
       );
 

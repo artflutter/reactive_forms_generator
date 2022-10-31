@@ -1,3 +1,7 @@
+## [0.22.0-beta]
+
+* analyzer 5.2.0
+
 ## [0.21.0-beta]
 
 * analyzer 5
