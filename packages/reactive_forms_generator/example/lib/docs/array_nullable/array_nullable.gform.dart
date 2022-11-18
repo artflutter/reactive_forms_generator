@@ -179,6 +179,8 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
 
   static String vegetablesListControlName = "vegetablesList";
 
+  static String modeListControlName = "modeList";
+
   static String someListControlName = "someList";
 
   final ArrayNullable? arrayNullable;
@@ -191,6 +193,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   String emailListControlPath() => pathBuilder(emailListControlName);
   String fruitListControlPath() => pathBuilder(fruitListControlName);
   String vegetablesListControlPath() => pathBuilder(vegetablesListControlName);
+  String modeListControlPath() => pathBuilder(modeListControlName);
   List<String?>? get _someListValue => someListControl?.value;
   List<String> get _emailListValue =>
       emailListControl.value?.whereType<String>().toList() ?? [];
@@ -198,6 +201,8 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
       fruitListControl.value?.whereType<bool?>().toList() ?? [];
   List<String?>? get _vegetablesListValue =>
       vegetablesListControl?.value?.whereType<String?>().toList() ?? [];
+  List<UserMode?>? get _modeListValue =>
+      modeListControl?.value?.whereType<UserMode?>().toList() ?? [];
   bool get containsSomeList {
     try {
       form.control(someListControlPath());
@@ -234,14 +239,25 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     }
   }
 
+  bool get containsModeList {
+    try {
+      form.control(modeListControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get someListErrors => someListControl?.errors;
   Object? get emailListErrors => emailListControl.errors;
   Object? get fruitListErrors => fruitListControl.errors;
   Object? get vegetablesListErrors => vegetablesListControl?.errors;
+  Object? get modeListErrors => modeListControl?.errors;
   void get someListFocus => form.focus(someListControlPath());
   void get emailListFocus => form.focus(emailListControlPath());
   void get fruitListFocus => form.focus(fruitListControlPath());
   void get vegetablesListFocus => form.focus(vegetablesListControlPath());
+  void get modeListFocus => form.focus(modeListControlPath());
   void someListRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -294,6 +310,32 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     }
   }
 
+  void modeListRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsModeList) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          modeListControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            modeListControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void someListValueUpdate(
     List<String?>? value, {
     bool updateParent = true,
@@ -327,6 +369,15 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     bool emitEvent = true,
   }) {
     vegetablesListControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void modeListValueUpdate(
+    List<UserMode?>? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    modeListControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -366,6 +417,15 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void modeListValuePatch(
+    List<UserMode?>? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    modeListControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void someListValueReset(
     List<String?>? value, {
     bool updateParent = true,
@@ -402,6 +462,15 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }) =>
       vegetablesListControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void modeListValueReset(
+    List<UserMode?>? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      modeListControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<List<String?>>? get someListControl => containsSomeList
       ? form.control(someListControlPath()) as FormControl<List<String?>>?
       : null;
@@ -411,6 +480,9 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
       form.control(fruitListControlPath()) as FormArray<bool>;
   FormArray<String>? get vegetablesListControl => containsVegetablesList
       ? form.control(vegetablesListControlPath()) as FormArray<String>?
+      : null;
+  FormArray<UserMode>? get modeListControl => containsModeList
+      ? form.control(modeListControlPath()) as FormArray<UserMode>?
       : null;
   void someListSetDisabled(
     bool disabled, {
@@ -478,6 +550,24 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
       );
     } else {
       vegetablesListControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void modeListSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      modeListControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      modeListControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -604,6 +694,46 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     ));
   }
 
+  void addModeListItem(
+    UserMode value, {
+    List<AsyncValidatorFunction>? asyncValidators,
+    List<ValidatorFunction>? validators,
+    int? asyncValidatorsDebounceTime,
+    bool? disabled,
+    ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
+  }) {
+    List<ValidatorFunction> resultingValidators = [];
+    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+
+    switch (validatorsApplyMode) {
+      case ValidatorsApplyMode.merge:
+        if (validators != null) {
+          resultingValidators.addAll(validators);
+        }
+        if (asyncValidators != null) {
+          resultingAsyncValidators.addAll(asyncValidators);
+        }
+        break;
+      case ValidatorsApplyMode.override:
+        if (validators != null) {
+          resultingValidators = validators;
+        }
+
+        if (asyncValidators != null) {
+          resultingAsyncValidators = asyncValidators;
+        }
+        break;
+    }
+
+    modeListControl?.add(FormControl<UserMode>(
+      value: value,
+      validators: resultingValidators,
+      asyncValidators: resultingAsyncValidators,
+      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+      disabled: disabled ?? false,
+    ));
+  }
+
   ArrayNullable get model {
     if (!form.valid) {
       debugPrint(
@@ -614,6 +744,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
         emailList: _emailListValue,
         fruitList: _fruitListValue,
         vegetablesList: _vegetablesListValue,
+        modeList: _modeListValue,
         someList: _someListValue);
   }
 
@@ -685,6 +816,21 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
         vegetablesListControlName: FormArray<String>(
             arrayNullable?.vegetablesList
                     ?.map((e) => FormControl<String>(
+                          value: e,
+                          validators: [],
+                          asyncValidators: [],
+                          asyncValidatorsDebounceTime: 250,
+                          disabled: false,
+                        ))
+                    .toList() ??
+                [],
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false),
+        modeListControlName: FormArray<UserMode>(
+            arrayNullable?.modeList
+                    ?.map((e) => FormControl<UserMode>(
                           value: e,
                           validators: [],
                           asyncValidators: [],

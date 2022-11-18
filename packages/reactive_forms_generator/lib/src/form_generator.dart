@@ -1,10 +1,13 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
+
 // ignore: implementation_imports
 import 'package:analyzer/src/dart/element/element.dart' as e;
+
 // ignore: implementation_imports
 import 'package:analyzer/src/dart/element/type.dart' as t;
+
 // ignore: implementation_imports
 import 'package:analyzer/src/generated/utilities_dart.dart' as u;
 import 'package:code_builder/code_builder.dart';
@@ -591,13 +594,6 @@ class FormGenerator {
                           element.fullTypeName;
 
                   displayType = '$displayType$nullabilitySuffix';
-
-                  // if (className == 'AddressForm') {
-                  //   print(type?.getDisplayString(withNullability: true));
-                  //   print(root.isNullable);
-                  //   print(displayType);
-                  //   print('==//==');
-                  // }
 
                   if (type != null &&
                       type is ParameterizedType &&

@@ -47,9 +47,6 @@ extension ClassElementExt on ClassElement {
   }
 
   bool get isNullable {
-    // print(
-    //     constructors.where((e) => e.hasReactiveFormAnnotatedParameters).first);
-    // return false;
     return annotatedParameters.fold(true, (acc, e) {
       if (e.isNotReactiveFormAnnotatedAndNullable) {
         final element = e.type.element;
@@ -57,12 +54,6 @@ extension ClassElementExt on ClassElement {
           if (element.annotatedParameters.isEmpty) {
             return acc && false;
           } else {
-            // print('=====');
-            // print(element.name);
-            // print('isDartCoreObject => ${e.type.isDartCoreObject}');
-            // print('isDartCoreString => ${e.type.isDartCoreString}');
-            // print('isDartCoreSymbol => ${e.type.isDartCoreSymbol}');
-            // print(element);
             acc = acc && element.isNullable;
           }
         }
@@ -186,7 +177,8 @@ extension ParameterElementExt on ParameterElement {
 
     final typeParameter = typeArguments.first;
 
-    return typeParameter.element is ClassElement &&
+    return (typeParameter.element is ClassElement ||
+            typeParameter.element is EnumElement) &&
         !formGroupChecker.hasAnnotationOf(typeParameter.element!);
   }
 
