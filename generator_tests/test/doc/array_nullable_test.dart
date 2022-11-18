@@ -26,16 +26,18 @@ void main() {
             @ReactiveFormAnnotation()
             class ArrayNullable {
               final List<String> emailList;
-             
+            
               final List<bool?> fruitList;
             
               final List<String?>? vegetablesList;
             
               final List<String?>? someList;
             
+              final List<UserMode?>? modeList;
+            
               ArrayNullable({
                 @FormArrayAnnotation(
-                  validators: const [
+                  validators: [
                     requiredValidator,
                   ],
                 )
@@ -44,6 +46,8 @@ void main() {
                     this.fruitList = const [],
                 @FormArrayAnnotation()
                     this.vegetablesList,
+                @FormArrayAnnotation()
+                    this.modeList,
                 @FormControlAnnotation<List<String?>>()
                     this.someList,
               });
@@ -672,6 +676,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
         emailList: _emailListValue,
         fruitList: _fruitListValue,
         vegetablesList: _vegetablesListValue,
+        modeList: arrayNullable?.modeList,
         someList: _someListValue);
   }
 
@@ -743,6 +748,21 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
         vegetablesListControlName: FormArray<String>(
             arrayNullable?.vegetablesList
                     ?.map((e) => FormControl<String>(
+                          value: e,
+                          validators: [],
+                          asyncValidators: [],
+                          asyncValidatorsDebounceTime: 250,
+                          disabled: false,
+                        ))
+                    .toList() ??
+                [],
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false),
+        modeListControlName: FormArray<dynamic>(
+            arrayNullable?.modeList
+                    ?.map((e) => FormControl<dynamic>(
                           value: e,
                           validators: [],
                           asyncValidators: [],

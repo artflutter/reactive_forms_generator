@@ -13,6 +13,8 @@ class ArrayNullable {
 
   final List<String?>? someList;
 
+  final List<UserMode?>? modeList;
+
   ArrayNullable({
     @FormArrayAnnotation(
       validators: [
@@ -24,6 +26,8 @@ class ArrayNullable {
         this.fruitList = const [],
     @FormArrayAnnotation()
         this.vegetablesList,
+    @FormArrayAnnotation()
+        this.modeList,
     @FormControlAnnotation<List<String?>>()
         this.someList,
   });

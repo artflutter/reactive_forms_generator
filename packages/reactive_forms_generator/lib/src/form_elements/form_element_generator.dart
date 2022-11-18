@@ -27,30 +27,8 @@ abstract class FormElementGenerator {
     final optionalChaining = (enclosingElement == root &&
                 type?.nullabilitySuffix != NullabilitySuffix.question) ||
             (enclosingElement == root && !root.isNullable)
-        // (enclosingElement != root && !root.isNullable) ||
-        // !root.isNullable
         ? ''
         : '?';
-
-    // if (enclosingElement.name.camelCase == 'incidenceFilter') {
-    //   print('root => $root');
-    //   print('root isNullable => ${root.isNullable}');
-    //   print('enclosingElement => ${enclosingElement}');
-    //   print(optionalChaining);
-    //   print(
-    //       '${enclosingElement.name.camelCase}$optionalChaining.${field.name}');
-    //   print('----------');
-    // }
-
-    // print('field => $field');
-    // print('type => $type');
-    // print('root => $root');
-    // print('----------');
-
-    // print(enclosingElement.hasNonAnnotatedRequiredParameters);
-    // print(enclosingElement.thisType.getDisplayString(withNullability: true));
-    // print('${enclosingElement.name.camelCase}$optionalChaining.${field.name}');
-    // print('----------');
 
     return '${enclosingElement.name.camelCase}$optionalChaining.${fieldElement.name}';
   }
