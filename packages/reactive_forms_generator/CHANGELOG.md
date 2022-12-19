@@ -1,3 +1,7 @@
+## [0.23.0]
+
+* release
+
 ## [0.23.0-beta]
 
 * fix for https://github.com/artflutter/reactive_forms_generator/issues/59
