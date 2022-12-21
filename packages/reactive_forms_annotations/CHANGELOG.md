@@ -1,3 +1,7 @@
+## [0.13.0]
+
+* release
+
 ## [0.13.0-beta]
 
 * package update
