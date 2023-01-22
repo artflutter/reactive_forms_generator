@@ -91,3 +91,27 @@ class NumValueAccessor extends ControlValueAccessor<int, num> {
     return viewValue?.toInt();
   }
 }
+
+Map<String, dynamic>? mustMatch(AbstractControl<dynamic> control) {
+  const email = 'email';
+  const password = 'password';
+
+  final form = control as FormGroup;
+
+  final formControl = form.control(email);
+  final matchingFormControl = form.control(password);
+
+  if (formControl.value != matchingFormControl.value) {
+    matchingFormControl.setErrors(<String, dynamic>{
+      ...matchingFormControl.errors,
+      ...<String, dynamic>{'mustMatch': true},
+    });
+
+    // force messages to show up as soon as possible
+    matchingFormControl.markAsTouched();
+  } else {
+    matchingFormControl.removeError('mustMatch');
+  }
+
+  return null;
+}

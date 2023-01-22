@@ -19,7 +19,7 @@ class LoginFormWidget extends StatelessWidget {
                 validationMessages: {
                   ValidationMessage.required: (_) => 'Required'
                 },
-                showErrors: (_) => false,
+                // showErrors: (_) => false,
                 decoration: const InputDecoration(
                   labelText: 'Email',
                   helperText: '',
@@ -31,9 +31,10 @@ class LoginFormWidget extends StatelessWidget {
               ReactiveTextField<String>(
                 formControl: formModel.passwordControl,
                 obscureText: true,
-                showErrors: (_) => false,
+                // showErrors: (_) => false,
                 validationMessages: {
-                  ValidationMessage.required: (_) => 'Required'
+                  ValidationMessage.required: (_) => 'Required',
+                  'mustMatch': (_) => 'Must match validator demo',
                 },
                 textInputAction: TextInputAction.done,
                 decoration: const InputDecoration(
@@ -51,13 +52,19 @@ class LoginFormWidget extends StatelessWidget {
                   debugPrint(
                       'passwordDirty => ${formModel.passwordControl.dirty}');
 
-                  return Text(formModel.emailControl.errors.toString());
+                  return Column(
+                    children: [
+                      Text(formModel.emailControl.errors.toString()),
+                      Text(formModel.passwordControl.errors.toString()),
+                    ],
+                  );
                 },
               ),
               ElevatedButton(
                 onPressed: () {
-                  debugPrint(formModel.model.email);
-                  debugPrint(formModel.model.password);
+                  // debugPrint(formModel.model.email);
+                  // debugPrint(formModel.model.password);
+                  formModel.form.markAllAsTouched();
                 },
                 child: const Text('Submit raw'),
               ),

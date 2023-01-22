@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         Routes.generic: (_) => const GenericFormWidget(),
         Routes.animatedUrlList: (_) => UrlListForm(),
       },
-      home: const DeliveryListFormWidget(),
+      home: const LoginFormWidget(),
     );
   }
 }
