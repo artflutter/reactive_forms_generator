@@ -7,12 +7,12 @@ part 'login.gform.dart';
 @FormGroupAnnotation(
   validators: [mustMatch],
 )
-class Basic {
+class Login {
   final String email;
 
   final String password;
 
-  Basic({
+  Login({
     @FormControlAnnotation(
       validators: [requiredValidator],
     )

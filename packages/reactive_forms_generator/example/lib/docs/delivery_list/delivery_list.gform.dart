@@ -145,6 +145,18 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
   }
 
   @override
+  void didUpdateWidget(covariant DeliveryListFormBuilder oldWidget) {
+    _formModel = DeliveryListForm(widget.model, _form, null);
+    final elements = _formModel.formElements();
+
+    _form.updateValue(elements.rawValue);
+    _form.setValidators(elements.validators);
+    _form.setAsyncValidators(elements.asyncValidators);
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   void dispose() {
     _form.dispose();
     super.dispose();
@@ -1789,6 +1801,18 @@ class _StandaloneDeliveryPointFormBuilderState
     widget.initState?.call(context, _formModel);
 
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant StandaloneDeliveryPointFormBuilder oldWidget) {
+    _formModel = StandaloneDeliveryPointForm(widget.model, _form, null);
+    final elements = _formModel.formElements();
+
+    _form.updateValue(elements.rawValue);
+    _form.setValidators(elements.validators);
+    _form.setAsyncValidators(elements.asyncValidators);
+
+    super.didUpdateWidget(oldWidget);
   }
 
   @override

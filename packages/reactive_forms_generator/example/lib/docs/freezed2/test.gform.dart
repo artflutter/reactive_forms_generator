@@ -142,6 +142,18 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
   }
 
   @override
+  void didUpdateWidget(covariant TestFormBuilder oldWidget) {
+    _formModel = TestForm(widget.model, _form, null);
+    final elements = _formModel.formElements();
+
+    _form.updateValue(elements.rawValue);
+    _form.setValidators(elements.validators);
+    _form.setAsyncValidators(elements.asyncValidators);
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   void dispose() {
     _form.dispose();
     super.dispose();

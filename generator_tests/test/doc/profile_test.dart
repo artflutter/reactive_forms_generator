@@ -425,6 +425,18 @@ class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
   }
 
   @override
+  void didUpdateWidget(covariant ProfileFormBuilder oldWidget) {
+    _formModel = ProfileForm(widget.model, _form, null);
+    final elements = _formModel.formElements();
+
+    _form.updateValue(elements.rawValue);
+    _form.setValidators(elements.validators);
+    _form.setAsyncValidators(elements.asyncValidators);
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   void dispose() {
     _form.dispose();
     super.dispose();
