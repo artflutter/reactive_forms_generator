@@ -5,6 +5,8 @@ import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
 
+import '../utils.dart';
+
 extension ConstructorElementExt on ConstructorElement {
   bool get hasReactiveFormAnnotatedParameters => parameters.any(
         (e) => e.isReactiveFormAnnotated,
@@ -182,7 +184,20 @@ extension ParameterElementExt on ParameterElement {
         !formGroupChecker.hasAnnotationOf(typeParameter.element!);
   }
 
-  bool get isFormControl => formControlChecker.hasAnnotationOfExact(this);
+  bool get isFormControl {
+    final isFormControl = formControlChecker.hasAnnotationOfExact(this);
+    final isFormGroup = this.isFormGroup;
+
+    if (isFormControl && isFormGroup) {}
+
+    throwIf(
+      isFormControl && isFormGroup,
+      "Field `$name` can't be annotated with @FormControlAnnotation and @FromGroupAnnotation at the same time.",
+      element: this,
+    );
+
+    return formControlChecker.hasAnnotationOfExact(this);
+  }
 
   bool get isFormGroup {
     final element = type.element;
