@@ -142,6 +142,18 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
   }
 
   @override
+  void didUpdateWidget(covariant GroupFormBuilder oldWidget) {
+    _formModel = GroupForm(widget.model, _form, null);
+    final elements = _formModel.formElements();
+
+    _form.updateValue(elements.rawValue);
+    _form.setValidators(elements.validators);
+    _form.setAsyncValidators(elements.asyncValidators);
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   void dispose() {
     _form.dispose();
     super.dispose();

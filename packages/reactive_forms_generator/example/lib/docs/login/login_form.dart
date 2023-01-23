@@ -3,14 +3,22 @@ import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
-class LoginFormWidget extends StatelessWidget {
+class LoginFormWidget extends StatefulWidget {
   const LoginFormWidget({Key? key}) : super(key: key);
+
+  @override
+  State<LoginFormWidget> createState() => _LoginFormWidgetState();
+}
+
+class _LoginFormWidgetState extends State<LoginFormWidget> {
+  Login _emptyModel = Login(email: '', password: '');
 
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
       title: const Text('Login'),
-      body: BasicFormBuilder(
+      body: LoginFormBuilder(
+        model: _emptyModel,
         builder: (context, formModel, child) {
           return Column(
             children: [
@@ -44,7 +52,7 @@ class LoginFormWidget extends StatelessWidget {
                   errorStyle: TextStyle(height: 0.7),
                 ),
               ),
-              ReactiveBasicFormConsumer(
+              ReactiveLoginFormConsumer(
                 builder: (context, formModel, child) {
                   // debugPrint(formModel.passwordControl.errors);
                   // debugPrint(formModel.form);
@@ -72,19 +80,28 @@ class LoginFormWidget extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   formModel.updateValue(
-                    Basic(email: 'some@e.mail', password: 'xx'),
+                    Login(email: 'some@e.mail', password: 'xx'),
                   );
+                  setState(() {
+                    _emptyModel = Login(email: 'some@e.mail', password: 'xx');
+                  });
                 },
                 child: const Text('Update model'),
               ),
+              ElevatedButton(
+                onPressed: () {
+                  formModel.reset();
+                },
+                child: const Text('Reset'),
+              ),
               const SizedBox(height: 8.0),
-              ReactiveBasicFormConsumer(
+              ReactiveLoginFormConsumer(
                 builder: (context, formModel, child) {
                   return ElevatedButton(
                     onPressed: formModel.form.valid
                         ? () {
                             // ignore: unnecessary_cast, avoid_print
-                            debugPrint((formModel as FormModel<Basic>)
+                            debugPrint((formModel as FormModel<Login>)
                                 .model
                                 .toString());
                             // ignore: avoid_print

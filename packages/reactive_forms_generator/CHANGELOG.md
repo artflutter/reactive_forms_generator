@@ -1,3 +1,7 @@
+## [0.23.2]
+
+* didUpdateWidget for form builders
+
 ## [0.23.1]
 
 * https://github.com/artflutter/reactive_forms_generator/issues/72

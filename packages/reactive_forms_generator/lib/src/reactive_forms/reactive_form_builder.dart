@@ -160,6 +160,30 @@ class ReactiveFormBuilder {
         ),
         Method(
           (b) => b
+            ..name = 'didUpdateWidget'
+            ..annotations.add(const CodeExpression(Code('override')))
+            ..returns = const Reference('void')
+            ..requiredParameters.add(
+              Parameter(
+                (b) => b
+                  ..name = 'oldWidget'
+                  ..type = Reference('$className${_element.generics}')
+                  ..covariant = true,
+              ),
+            )
+            ..body = Code('''
+                _formModel = ${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull}(widget.model, _form, null);
+                final elements = _formModel.formElements();
+                
+                _form.updateValue(elements.rawValue);
+                _form.setValidators(elements.validators);
+                _form.setAsyncValidators(elements.asyncValidators);
+            
+                super.didUpdateWidget(oldWidget);
+              '''),
+        ),
+        Method(
+          (b) => b
             ..name = 'dispose'
             ..annotations.add(const CodeExpression(Code('override')))
             ..returns = const Reference('void')

@@ -180,6 +180,18 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
   }
 
   @override
+  void didUpdateWidget(covariant TagsFormBuilder<T> oldWidget) {
+    _formModel = TagsForm<T>(widget.model, _form, null);
+    final elements = _formModel.formElements();
+
+    _form.updateValue(elements.rawValue);
+    _form.setValidators(elements.validators);
+    _form.setAsyncValidators(elements.asyncValidators);
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   void dispose() {
     _form.dispose();
     super.dispose();
