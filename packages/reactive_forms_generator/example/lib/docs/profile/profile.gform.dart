@@ -736,8 +736,8 @@ class ProfileForm implements FormModel<Profile> {
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return Profile(
-        id: profile.id,
+    return Profile(profile.id,
+        anotherId: profile.anotherId,
         name: _nameValue,
         chartingOrder: _chartingOrderValue,
         numberingStandard: _numberingStandardValue,

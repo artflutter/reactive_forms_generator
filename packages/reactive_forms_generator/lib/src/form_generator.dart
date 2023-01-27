@@ -464,18 +464,34 @@ class FormGenerator {
   Method get modelMethod => Method(
         (b) {
           final parameterValues = parameters.map((e) {
-            if (!e.isReactiveFormAnnotated) {
-              final nullabilitySuffix = element.isNullable ? '?' : '';
-              return '${e.fieldName}:${element.name.camelCase}$nullabilitySuffix.${e.fieldName}';
-            }
+            final nullabilitySuffix = element.isNullable ? '?' : '';
+            final fieldValueName =
+                '${element.name.camelCase}$nullabilitySuffix.${e.fieldName}';
+
+            // if (!e.isReactiveFormAnnotated) {
+            //   final nullabilitySuffix = element.isNullable ? '?' : '';
+            //   final fieldValueName = '${element.name.camelCase}$nullabilitySuffix.${e.fieldName}';
+            //   return '${e.fieldName}:${element.name.camelCase}$nullabilitySuffix.${e.fieldName}';
+            // }
+
+            // if (e.fieldValueName == 'id') {
+
+            // }
 
             if (e.isPositional ||
                 e.isRequiredPositional ||
                 (e.isOptional && e.isPositional)) {
-              return e.fieldValueName;
+              if (e.isReactiveFormAnnotated) {
+                return e.fieldValueName;
+              } else {
+                return fieldValueName;
+              }
             }
 
-            return '${e.fieldName}:${e.fieldValueName}';
+            if (e.isReactiveFormAnnotated) {
+              return '${e.fieldName}:${e.fieldValueName}';
+            }
+            return '${e.fieldName}:$fieldValueName';
           });
 
           b

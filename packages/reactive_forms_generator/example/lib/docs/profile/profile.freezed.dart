@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'profile.dart';
 
@@ -21,6 +21,7 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Profile {
   String get id => throw _privateConstructorUsedError;
+  String get anotherId => throw _privateConstructorUsedError;
   @FormControlAnnotation<String>()
   String get name => throw _privateConstructorUsedError;
   @FormControlAnnotation<ChartingOrderValue>()
@@ -47,6 +48,7 @@ abstract class $ProfileCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String anotherId,
       @FormControlAnnotation<String>()
           String name,
       @FormControlAnnotation<ChartingOrderValue>()
@@ -81,6 +83,7 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
   @override
   $Res call({
     Object? id = null,
+    Object? anotherId = null,
     Object? name = null,
     Object? chartingOrder = null,
     Object? numberingStandard = null,
@@ -94,6 +97,10 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      anotherId: null == anotherId
+          ? _value.anotherId
+          : anotherId // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -172,6 +179,7 @@ abstract class _$$_ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String anotherId,
       @FormControlAnnotation<String>()
           String name,
       @FormControlAnnotation<ChartingOrderValue>()
@@ -207,6 +215,7 @@ class __$$_ProfileCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? anotherId = null,
     Object? name = null,
     Object? chartingOrder = null,
     Object? numberingStandard = null,
@@ -217,9 +226,13 @@ class __$$_ProfileCopyWithImpl<$Res>
     Object? audioGuidance = null,
   }) {
     return _then(_$_Profile(
-      id: null == id
+      null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      anotherId: null == anotherId
+          ? _value.anotherId
+          : anotherId // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -261,7 +274,8 @@ class __$$_ProfileCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Profile extends _Profile {
   _$_Profile(
-      {required this.id,
+      this.id,
+      {required this.anotherId,
       @FormControlAnnotation<String>()
           required this.name,
       @FormControlAnnotation<ChartingOrderValue>()
@@ -282,6 +296,8 @@ class _$_Profile extends _Profile {
 
   @override
   final String id;
+  @override
+  final String anotherId;
   @override
   @FormControlAnnotation<String>()
   final String name;
@@ -306,7 +322,7 @@ class _$_Profile extends _Profile {
 
   @override
   String toString() {
-    return 'Profile(id: $id, name: $name, chartingOrder: $chartingOrder, numberingStandard: $numberingStandard, incidenceFilter: $incidenceFilter, measurementType: $measurementType, threshold: $threshold, timer: $timer, audioGuidance: $audioGuidance)';
+    return 'Profile(id: $id, anotherId: $anotherId, name: $name, chartingOrder: $chartingOrder, numberingStandard: $numberingStandard, incidenceFilter: $incidenceFilter, measurementType: $measurementType, threshold: $threshold, timer: $timer, audioGuidance: $audioGuidance)';
   }
 
   @override
@@ -315,6 +331,8 @@ class _$_Profile extends _Profile {
         (other.runtimeType == runtimeType &&
             other is _$_Profile &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.anotherId, anotherId) ||
+                other.anotherId == anotherId) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.chartingOrder, chartingOrder) ||
                 other.chartingOrder == chartingOrder) &&
@@ -336,6 +354,7 @@ class _$_Profile extends _Profile {
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      anotherId,
       name,
       chartingOrder,
       numberingStandard,
@@ -361,7 +380,8 @@ class _$_Profile extends _Profile {
 
 abstract class _Profile extends Profile {
   factory _Profile(
-      {required final String id,
+      final String id,
+      {required final String anotherId,
       @FormControlAnnotation<String>()
           required final String name,
       @FormControlAnnotation<ChartingOrderValue>()
@@ -381,6 +401,8 @@ abstract class _Profile extends Profile {
 
   @override
   String get id;
+  @override
+  String get anotherId;
   @override
   @FormControlAnnotation<String>()
   String get name;
@@ -1631,6 +1653,7 @@ class _$_ChartingOrderValue implements _ChartingOrderValue {
   final List<List<ScanOrder>> _order;
   @override
   List<List<ScanOrder>> get order {
+    if (_order is EqualUnmodifiableListView) return _order;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_order);
   }

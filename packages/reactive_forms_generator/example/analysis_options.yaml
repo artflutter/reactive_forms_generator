@@ -1,9 +1,5 @@
 include: package:flutter_lints/flutter.yaml
 
-linter:
-  rules:
-    close_sink: false
-
 analyzer:
   exclude:
     - "**/*.g.dart"

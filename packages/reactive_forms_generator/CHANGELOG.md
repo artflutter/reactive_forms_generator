@@ -1,3 +1,7 @@
+## [0.23.3]
+
+* fix for positional unannotated fields
+
 ## [0.23.2]
 
 * didUpdateWidget for form builders

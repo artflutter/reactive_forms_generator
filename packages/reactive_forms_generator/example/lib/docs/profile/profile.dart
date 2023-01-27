@@ -4,9 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'profile.freezed.dart';
-
 part 'profile.g.dart';
-
 part 'profile.gform.dart';
 
 enum NumberingStandard { ada, fdi }
@@ -49,8 +47,9 @@ extension NumberingStandardExt on NumberingStandard {
 class Profile with _$Profile {
   const Profile._();
 
-  factory Profile({
-    required String id,
+  factory Profile(
+    String id, {
+    required String anotherId,
     @FormControlAnnotation<String>() required String name,
     @FormControlAnnotation<ChartingOrderValue>()
         required ChartingOrderValue chartingOrder,

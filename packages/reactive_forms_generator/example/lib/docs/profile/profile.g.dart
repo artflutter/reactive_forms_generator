@@ -7,7 +7,8 @@ part of 'profile.dart';
 // **************************************************************************
 
 _$_Profile _$$_ProfileFromJson(Map<String, dynamic> json) => _$_Profile(
-      id: json['id'] as String,
+      json['id'] as String,
+      anotherId: json['anotherId'] as String,
       name: json['name'] as String,
       chartingOrder: ChartingOrderValue.fromJson(
           json['chartingOrder'] as Map<String, dynamic>),
@@ -26,6 +27,7 @@ _$_Profile _$$_ProfileFromJson(Map<String, dynamic> json) => _$_Profile(
 Map<String, dynamic> _$$_ProfileToJson(_$_Profile instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'anotherId': instance.anotherId,
       'name': instance.name,
       'chartingOrder': instance.chartingOrder,
       'numberingStandard':
