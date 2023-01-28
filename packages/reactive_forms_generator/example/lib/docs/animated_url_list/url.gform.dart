@@ -143,12 +143,14 @@ class _UrlFormBuilderState extends State<UrlFormBuilder> {
 
   @override
   void didUpdateWidget(covariant UrlFormBuilder oldWidget) {
-    _formModel = UrlForm(widget.model, _form, null);
-    final elements = _formModel.formElements();
+    if (widget.model != oldWidget.model) {
+      _formModel = UrlForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
 
-    _form.updateValue(elements.rawValue);
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
 
     super.didUpdateWidget(oldWidget);
   }
@@ -409,6 +411,7 @@ class UrlForm implements FormModel<Url> {
     value.map((e) => addUrlListItem(e));
   }
 
+  @override
   Url get model {
     if (!form.valid) {
       debugPrint(
@@ -422,6 +425,7 @@ class UrlForm implements FormModel<Url> {
     return UrlForm(url, form, path);
   }
 
+  @override
   void updateValue(
     Url value, {
     bool updateParent = true,
@@ -431,6 +435,7 @@ class UrlForm implements FormModel<Url> {
           UrlForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     Url value, {
     bool updateParent = true,
@@ -440,6 +445,7 @@ class UrlForm implements FormModel<Url> {
           value: UrlForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,
@@ -601,6 +607,7 @@ class UrlEntityForm implements FormModel<UrlEntity> {
     }
   }
 
+  @override
   UrlEntity get model {
     if (!form.valid) {
       debugPrint(
@@ -614,6 +621,7 @@ class UrlEntityForm implements FormModel<UrlEntity> {
     return UrlEntityForm(urlEntity, form, path);
   }
 
+  @override
   void updateValue(
     UrlEntity value, {
     bool updateParent = true,
@@ -623,6 +631,7 @@ class UrlEntityForm implements FormModel<UrlEntity> {
           UrlEntityForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     UrlEntity value, {
     bool updateParent = true,
@@ -633,6 +642,7 @@ class UrlEntityForm implements FormModel<UrlEntity> {
               UrlEntityForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,

@@ -146,12 +146,14 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
 
   @override
   void didUpdateWidget(covariant DeliveryListFormBuilder oldWidget) {
-    _formModel = DeliveryListForm(widget.model, _form, null);
-    final elements = _formModel.formElements();
+    if (widget.model != oldWidget.model) {
+      _formModel = DeliveryListForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
 
-    _form.updateValue(elements.rawValue);
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
 
     super.didUpdateWidget(oldWidget);
   }
@@ -664,6 +666,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     value.map((e) => addClientListItem(e));
   }
 
+  @override
   DeliveryList get model {
     if (!form.valid) {
       debugPrint(
@@ -678,6 +681,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     return DeliveryListForm(deliveryList, form, path);
   }
 
+  @override
   void updateValue(
     DeliveryList value, {
     bool updateParent = true,
@@ -687,6 +691,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
           DeliveryListForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     DeliveryList value, {
     bool updateParent = true,
@@ -698,6 +703,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,
@@ -903,6 +909,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
     }
   }
 
+  @override
   DeliveryPoint get model {
     if (!form.valid) {
       debugPrint(
@@ -916,6 +923,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
     return DeliveryPointForm(deliveryPoint, form, path);
   }
 
+  @override
   void updateValue(
     DeliveryPoint value, {
     bool updateParent = true,
@@ -925,6 +933,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
           DeliveryPointForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     DeliveryPoint value, {
     bool updateParent = true,
@@ -936,6 +945,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1155,6 +1165,7 @@ class AddressForm implements FormModel<Address> {
     }
   }
 
+  @override
   Address get model {
     if (!form.valid) {
       debugPrint(
@@ -1168,6 +1179,7 @@ class AddressForm implements FormModel<Address> {
     return AddressForm(address, form, path);
   }
 
+  @override
   void updateValue(
     Address? value, {
     bool updateParent = true,
@@ -1177,6 +1189,7 @@ class AddressForm implements FormModel<Address> {
           AddressForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     Address? value, {
     bool updateParent = true,
@@ -1187,6 +1200,7 @@ class AddressForm implements FormModel<Address> {
               AddressForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1474,6 +1488,7 @@ class ClientForm implements FormModel<Client> {
     }
   }
 
+  @override
   Client get model {
     if (!form.valid) {
       debugPrint(
@@ -1488,6 +1503,7 @@ class ClientForm implements FormModel<Client> {
     return ClientForm(client, form, path);
   }
 
+  @override
   void updateValue(
     Client value, {
     bool updateParent = true,
@@ -1497,6 +1513,7 @@ class ClientForm implements FormModel<Client> {
           ClientForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     Client value, {
     bool updateParent = true,
@@ -1506,6 +1523,7 @@ class ClientForm implements FormModel<Client> {
           value: ClientForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1805,12 +1823,14 @@ class _StandaloneDeliveryPointFormBuilderState
 
   @override
   void didUpdateWidget(covariant StandaloneDeliveryPointFormBuilder oldWidget) {
-    _formModel = StandaloneDeliveryPointForm(widget.model, _form, null);
-    final elements = _formModel.formElements();
+    if (widget.model != oldWidget.model) {
+      _formModel = StandaloneDeliveryPointForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
 
-    _form.updateValue(elements.rawValue);
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
 
     super.didUpdateWidget(oldWidget);
   }
@@ -2012,6 +2032,7 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
     }
   }
 
+  @override
   DeliveryPoint get model {
     if (!form.valid) {
       debugPrint(
@@ -2025,6 +2046,7 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
     return StandaloneDeliveryPointForm(deliveryPoint, form, path);
   }
 
+  @override
   void updateValue(
     DeliveryPoint value, {
     bool updateParent = true,
@@ -2036,6 +2058,7 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     DeliveryPoint value, {
     bool updateParent = true,
@@ -2047,6 +2070,7 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,

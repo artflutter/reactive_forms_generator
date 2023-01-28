@@ -1,3 +1,7 @@
+## [0.13.2]
+
+* more methods in FormModel interface
+
 ## [0.13.1]
 
 * fix for https://github.com/artflutter/reactive_forms_generator/issues/66

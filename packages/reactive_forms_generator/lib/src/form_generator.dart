@@ -172,6 +172,7 @@ class FormGenerator {
       (b) => b
         ..name = 'updateValue'
         ..lambda = true
+        ..annotations.add(const CodeExpression(Code('override')))
         ..requiredParameters.add(
           Parameter(
             (b) => b
@@ -219,6 +220,7 @@ class FormGenerator {
       (b) => b
         ..name = 'resetValue'
         ..lambda = true
+        ..annotations.add(const CodeExpression(Code('override')))
         ..requiredParameters.add(
           Parameter(
             (b) => b
@@ -254,6 +256,7 @@ class FormGenerator {
       (b) => b
         ..name = 'reset'
         ..lambda = true
+        ..annotations.add(const CodeExpression(Code('override')))
         ..optionalParameters.addAll([
           Parameter(
             (b) => b
@@ -497,6 +500,7 @@ class FormGenerator {
           b
             ..name = 'model'
             ..returns = Reference(element.fullTypeName)
+            ..annotations.add(const CodeExpression(Code('override')))
             ..type = MethodType.getter
             ..body = Code('''
               if (!form.valid) {

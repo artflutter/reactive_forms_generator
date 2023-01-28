@@ -194,12 +194,14 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
 
   @override
   void didUpdateWidget(covariant FreezedClassFormBuilder oldWidget) {
-    _formModel = FreezedClassForm(widget.model, _form, null);
-    final elements = _formModel.formElements();
+    if (widget.model != oldWidget.model) {
+      _formModel = FreezedClassForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
 
-    _form.updateValue(elements.rawValue);
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
 
     super.didUpdateWidget(oldWidget);
   }
@@ -594,6 +596,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     }
   }
 
+  @override
   FreezedClass get model {
     if (!form.valid) {
       debugPrint(
@@ -608,6 +611,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     return FreezedClassForm(freezedClass, form, path);
   }
 
+  @override
   void updateValue(
     FreezedClass value, {
     bool updateParent = true,
@@ -617,6 +621,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
           FreezedClassForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     FreezedClass value, {
     bool updateParent = true,
@@ -628,6 +633,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,

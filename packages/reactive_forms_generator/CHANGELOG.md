@@ -1,3 +1,7 @@
+## [0.23.4]
+
+* bugfix for https://github.com/artflutter/reactive_forms_generator/issues/76
+
 ## [0.23.3]
 
 * fix for positional unannotated fields

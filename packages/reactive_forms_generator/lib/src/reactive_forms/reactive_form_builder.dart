@@ -172,12 +172,14 @@ class ReactiveFormBuilder {
               ),
             )
             ..body = Code('''
-                _formModel = ${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull}(widget.model, _form, null);
-                final elements = _formModel.formElements();
-                
-                _form.updateValue(elements.rawValue);
-                _form.setValidators(elements.validators);
-                _form.setAsyncValidators(elements.asyncValidators);
+                if (widget.model != oldWidget.model) {
+                  _formModel = ${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull}(widget.model, _form, null);
+                  final elements = _formModel.formElements();
+                  
+                  _form.updateValue(elements.rawValue);
+                  _form.setValidators(elements.validators);
+                  _form.setAsyncValidators(elements.asyncValidators);
+                }
             
                 super.didUpdateWidget(oldWidget);
               '''),

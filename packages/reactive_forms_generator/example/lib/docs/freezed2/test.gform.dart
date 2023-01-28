@@ -143,12 +143,14 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
 
   @override
   void didUpdateWidget(covariant TestFormBuilder oldWidget) {
-    _formModel = TestForm(widget.model, _form, null);
-    final elements = _formModel.formElements();
+    if (widget.model != oldWidget.model) {
+      _formModel = TestForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
 
-    _form.updateValue(elements.rawValue);
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
 
     super.didUpdateWidget(oldWidget);
   }
@@ -339,6 +341,7 @@ class TestForm implements FormModel<Test> {
     }
   }
 
+  @override
   Test get model {
     if (!form.valid) {
       debugPrint(
@@ -352,6 +355,7 @@ class TestForm implements FormModel<Test> {
     return TestForm(test, form, path);
   }
 
+  @override
   void updateValue(
     Test value, {
     bool updateParent = true,
@@ -361,6 +365,7 @@ class TestForm implements FormModel<Test> {
           TestForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     Test value, {
     bool updateParent = true,
@@ -370,6 +375,7 @@ class TestForm implements FormModel<Test> {
           value: TestForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,

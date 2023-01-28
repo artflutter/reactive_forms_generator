@@ -145,12 +145,14 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
 
   @override
   void didUpdateWidget(covariant UserProfileFormBuilder oldWidget) {
-    _formModel = UserProfileForm(widget.model, _form, null);
-    final elements = _formModel.formElements();
+    if (widget.model != oldWidget.model) {
+      _formModel = UserProfileForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
 
-    _form.updateValue(elements.rawValue);
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
 
     super.didUpdateWidget(oldWidget);
   }
@@ -484,6 +486,7 @@ class UserProfileForm implements FormModel<UserProfile> {
     }
   }
 
+  @override
   UserProfile get model {
     if (!form.valid) {
       debugPrint(
@@ -502,6 +505,7 @@ class UserProfileForm implements FormModel<UserProfile> {
     return UserProfileForm(userProfile, form, path);
   }
 
+  @override
   void updateValue(
     UserProfile value, {
     bool updateParent = true,
@@ -511,6 +515,7 @@ class UserProfileForm implements FormModel<UserProfile> {
           UserProfileForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     UserProfile value, {
     bool updateParent = true,
@@ -522,6 +527,7 @@ class UserProfileForm implements FormModel<UserProfile> {
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,
@@ -840,6 +846,7 @@ class AddressForm implements FormModel<Address> {
     }
   }
 
+  @override
   Address get model {
     if (!form.valid) {
       debugPrint(
@@ -853,6 +860,7 @@ class AddressForm implements FormModel<Address> {
     return AddressForm(address, form, path);
   }
 
+  @override
   void updateValue(
     Address value, {
     bool updateParent = true,
@@ -862,6 +870,7 @@ class AddressForm implements FormModel<Address> {
           AddressForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     Address value, {
     bool updateParent = true,
@@ -872,6 +881,7 @@ class AddressForm implements FormModel<Address> {
               AddressForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,
