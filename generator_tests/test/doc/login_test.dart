@@ -221,12 +221,14 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
 
   @override
   void didUpdateWidget(covariant LoginFormBuilder oldWidget) {
-    _formModel = LoginForm(widget.model, _form, null);
-    final elements = _formModel.formElements();
+    if (widget.model != oldWidget.model) {
+      _formModel = LoginForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
 
-    _form.updateValue(elements.rawValue);
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
 
     super.didUpdateWidget(oldWidget);
   }
@@ -390,6 +392,7 @@ class LoginForm implements FormModel<Login> {
     }
   }
 
+  @override
   Login get model {
     if (!form.valid) {
       debugPrint(
@@ -403,6 +406,7 @@ class LoginForm implements FormModel<Login> {
     return LoginForm(login, form, path);
   }
 
+  @override
   void updateValue(
     Login value, {
     bool updateParent = true,
@@ -412,6 +416,7 @@ class LoginForm implements FormModel<Login> {
           LoginForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     Login value, {
     bool updateParent = true,
@@ -421,6 +426,7 @@ class LoginForm implements FormModel<Login> {
           value: LoginForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,

@@ -146,12 +146,14 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
 
   @override
   void didUpdateWidget(covariant SomeWiredNameFormBuilder oldWidget) {
-    _formModel = SomeWiredNameForm(widget.model, _form, null);
-    final elements = _formModel.formElements();
+    if (widget.model != oldWidget.model) {
+      _formModel = SomeWiredNameForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
 
-    _form.updateValue(elements.rawValue);
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
 
     super.didUpdateWidget(oldWidget);
   }
@@ -315,6 +317,7 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
     }
   }
 
+  @override
   RenamedBasic get model {
     if (!form.valid) {
       debugPrint(
@@ -328,6 +331,7 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
     return SomeWiredNameForm(renamedBasic, form, path);
   }
 
+  @override
   void updateValue(
     RenamedBasic value, {
     bool updateParent = true,
@@ -337,6 +341,7 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
           SomeWiredNameForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     RenamedBasic value, {
     bool updateParent = true,
@@ -348,6 +353,7 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,

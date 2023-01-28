@@ -143,12 +143,14 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
 
   @override
   void didUpdateWidget(covariant GroupFormBuilder oldWidget) {
-    _formModel = GroupForm(widget.model, _form, null);
-    final elements = _formModel.formElements();
+    if (widget.model != oldWidget.model) {
+      _formModel = GroupForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
 
-    _form.updateValue(elements.rawValue);
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
 
     super.didUpdateWidget(oldWidget);
   }
@@ -582,6 +584,7 @@ class GroupForm implements FormModel<Group> {
     }
   }
 
+  @override
   Group get model {
     if (!form.valid) {
       debugPrint(
@@ -599,6 +602,7 @@ class GroupForm implements FormModel<Group> {
     return GroupForm(group, form, path);
   }
 
+  @override
   void updateValue(
     Group value, {
     bool updateParent = true,
@@ -608,6 +612,7 @@ class GroupForm implements FormModel<Group> {
           GroupForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     Group value, {
     bool updateParent = true,
@@ -617,6 +622,7 @@ class GroupForm implements FormModel<Group> {
           value: GroupForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,
@@ -830,6 +836,7 @@ class PersonalForm implements FormModel<Personal> {
     }
   }
 
+  @override
   Personal get model {
     if (!form.valid) {
       debugPrint(
@@ -843,6 +850,7 @@ class PersonalForm implements FormModel<Personal> {
     return PersonalForm(personal, form, path);
   }
 
+  @override
   void updateValue(
     Personal? value, {
     bool updateParent = true,
@@ -852,6 +860,7 @@ class PersonalForm implements FormModel<Personal> {
           PersonalForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     Personal? value, {
     bool updateParent = true,
@@ -862,6 +871,7 @@ class PersonalForm implements FormModel<Personal> {
               PersonalForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1085,6 +1095,7 @@ class PhoneForm implements FormModel<Phone> {
     }
   }
 
+  @override
   Phone get model {
     if (!form.valid) {
       debugPrint(
@@ -1098,6 +1109,7 @@ class PhoneForm implements FormModel<Phone> {
     return PhoneForm(phone, form, path);
   }
 
+  @override
   void updateValue(
     Phone? value, {
     bool updateParent = true,
@@ -1107,6 +1119,7 @@ class PhoneForm implements FormModel<Phone> {
           PhoneForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     Phone? value, {
     bool updateParent = true,
@@ -1116,6 +1129,7 @@ class PhoneForm implements FormModel<Phone> {
           value: PhoneForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1428,6 +1442,7 @@ class AddressForm implements FormModel<Address> {
     }
   }
 
+  @override
   Address get model {
     if (!form.valid) {
       debugPrint(
@@ -1441,6 +1456,7 @@ class AddressForm implements FormModel<Address> {
     return AddressForm(address, form, path);
   }
 
+  @override
   void updateValue(
     Address? value, {
     bool updateParent = true,
@@ -1450,6 +1466,7 @@ class AddressForm implements FormModel<Address> {
           AddressForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     Address? value, {
     bool updateParent = true,
@@ -1460,6 +1477,7 @@ class AddressForm implements FormModel<Address> {
               AddressForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,

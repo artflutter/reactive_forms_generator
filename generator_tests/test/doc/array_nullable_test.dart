@@ -210,12 +210,14 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
 
   @override
   void didUpdateWidget(covariant ArrayNullableFormBuilder oldWidget) {
-    _formModel = ArrayNullableForm(widget.model, _form, null);
-    final elements = _formModel.formElements();
+    if (widget.model != oldWidget.model) {
+      _formModel = ArrayNullableForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
 
-    _form.updateValue(elements.rawValue);
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
 
     super.didUpdateWidget(oldWidget);
   }
@@ -810,6 +812,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     ));
   }
 
+  @override
   ArrayNullable get model {
     if (!form.valid) {
       debugPrint(
@@ -828,6 +831,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     return ArrayNullableForm(arrayNullable, form, path);
   }
 
+  @override
   void updateValue(
     ArrayNullable value, {
     bool updateParent = true,
@@ -837,6 +841,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
           ArrayNullableForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     ArrayNullable value, {
     bool updateParent = true,
@@ -848,6 +853,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,

@@ -281,12 +281,14 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
 
   @override
   void didUpdateWidget(covariant LoginExtendedFormBuilder oldWidget) {
-    _formModel = LoginExtendedForm(widget.model, _form, null);
-    final elements = _formModel.formElements();
+    if (widget.model != oldWidget.model) {
+      _formModel = LoginExtendedForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
 
-    _form.updateValue(elements.rawValue);
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
 
     super.didUpdateWidget(oldWidget);
   }
@@ -760,6 +762,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     }
   }
 
+  @override
   LoginExtended get model {
     if (!form.valid) {
       debugPrint(
@@ -781,6 +784,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     return LoginExtendedForm(loginExtended, form, path);
   }
 
+  @override
   void updateValue(
     LoginExtended value, {
     bool updateParent = true,
@@ -790,6 +794,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
           LoginExtendedForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     LoginExtended value, {
     bool updateParent = true,
@@ -801,6 +806,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,

@@ -181,12 +181,14 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
 
   @override
   void didUpdateWidget(covariant TagsFormBuilder<T> oldWidget) {
-    _formModel = TagsForm<T>(widget.model, _form, null);
-    final elements = _formModel.formElements();
+    if (widget.model != oldWidget.model) {
+      _formModel = TagsForm<T>(widget.model, _form, null);
+      final elements = _formModel.formElements();
 
-    _form.updateValue(elements.rawValue);
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
 
     super.didUpdateWidget(oldWidget);
   }
@@ -315,6 +317,7 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     }
   }
 
+  @override
   Tags<T> get model {
     if (!form.valid) {
       debugPrint(
@@ -328,6 +331,7 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     return TagsForm<T>(tags, form, path);
   }
 
+  @override
   void updateValue(
     Tags<T> value, {
     bool updateParent = true,
@@ -337,6 +341,7 @@ class TagsForm<T> implements FormModel<Tags<T>> {
           TagsForm<T>(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     Tags<T> value, {
     bool updateParent = true,
@@ -347,6 +352,7 @@ class TagsForm<T> implements FormModel<Tags<T>> {
               TagsForm<T>(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,

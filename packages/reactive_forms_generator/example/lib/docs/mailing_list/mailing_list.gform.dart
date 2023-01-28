@@ -145,12 +145,14 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
 
   @override
   void didUpdateWidget(covariant MailingListFormBuilder oldWidget) {
-    _formModel = MailingListForm(widget.model, _form, null);
-    final elements = _formModel.formElements();
+    if (widget.model != oldWidget.model) {
+      _formModel = MailingListForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
 
-    _form.updateValue(elements.rawValue);
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
 
     super.didUpdateWidget(oldWidget);
   }
@@ -293,6 +295,7 @@ class MailingListForm implements FormModel<MailingList> {
     ));
   }
 
+  @override
   MailingList get model {
     if (!form.valid) {
       debugPrint(
@@ -306,6 +309,7 @@ class MailingListForm implements FormModel<MailingList> {
     return MailingListForm(mailingList, form, path);
   }
 
+  @override
   void updateValue(
     MailingList value, {
     bool updateParent = true,
@@ -315,6 +319,7 @@ class MailingListForm implements FormModel<MailingList> {
           MailingListForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     MailingList value, {
     bool updateParent = true,
@@ -326,6 +331,7 @@ class MailingListForm implements FormModel<MailingList> {
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,

@@ -143,12 +143,14 @@ class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
 
   @override
   void didUpdateWidget(covariant ProfileFormBuilder oldWidget) {
-    _formModel = ProfileForm(widget.model, _form, null);
-    final elements = _formModel.formElements();
+    if (widget.model != oldWidget.model) {
+      _formModel = ProfileForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
 
-    _form.updateValue(elements.rawValue);
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
 
     super.didUpdateWidget(oldWidget);
   }
@@ -730,6 +732,7 @@ class ProfileForm implements FormModel<Profile> {
     }
   }
 
+  @override
   Profile get model {
     if (!form.valid) {
       debugPrint(
@@ -752,6 +755,7 @@ class ProfileForm implements FormModel<Profile> {
     return ProfileForm(profile, form, path);
   }
 
+  @override
   void updateValue(
     Profile value, {
     bool updateParent = true,
@@ -761,6 +765,7 @@ class ProfileForm implements FormModel<Profile> {
           ProfileForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     Profile value, {
     bool updateParent = true,
@@ -771,6 +776,7 @@ class ProfileForm implements FormModel<Profile> {
               ProfileForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1221,6 +1227,7 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
     }
   }
 
+  @override
   IncidenceFilter get model {
     if (!form.valid) {
       debugPrint(
@@ -1240,6 +1247,7 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
     return IncidenceFilterForm(incidenceFilter, form, path);
   }
 
+  @override
   void updateValue(
     IncidenceFilter value, {
     bool updateParent = true,
@@ -1251,6 +1259,7 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     IncidenceFilter value, {
     bool updateParent = true,
@@ -1262,6 +1271,7 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1459,6 +1469,7 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
     }
   }
 
+  @override
   ThresholdSetting get model {
     if (!form.valid) {
       debugPrint(
@@ -1472,6 +1483,7 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
     return ThresholdSettingForm(thresholdSetting, form, path);
   }
 
+  @override
   void updateValue(
     ThresholdSetting value, {
     bool updateParent = true,
@@ -1483,6 +1495,7 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     ThresholdSetting value, {
     bool updateParent = true,
@@ -1494,6 +1507,7 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1663,6 +1677,7 @@ class TimerSettingForm implements FormModel<TimerSetting> {
     }
   }
 
+  @override
   TimerSetting get model {
     if (!form.valid) {
       debugPrint(
@@ -1676,6 +1691,7 @@ class TimerSettingForm implements FormModel<TimerSetting> {
     return TimerSettingForm(timerSetting, form, path);
   }
 
+  @override
   void updateValue(
     TimerSetting value, {
     bool updateParent = true,
@@ -1685,6 +1701,7 @@ class TimerSettingForm implements FormModel<TimerSetting> {
           TimerSettingForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void resetValue(
     TimerSetting value, {
     bool updateParent = true,
@@ -1696,6 +1713,7 @@ class TimerSettingForm implements FormModel<TimerSetting> {
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  @override
   void reset({
     bool updateParent = true,
     bool emitEvent = true,
