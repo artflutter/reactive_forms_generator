@@ -183,24 +183,16 @@ class MailingListFormBuilder extends StatefulWidget {
 }
 
 class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
-  late FormGroup _form;
-
   late MailingListForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = MailingListForm(widget.model, _form, null);
+    _formModel = MailingListForm(
+        widget.model, MailingListForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -210,12 +202,12 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
   @override
   void didUpdateWidget(covariant MailingListFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = MailingListForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = MailingListForm(
+          widget.model, MailingListForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
     }
 
     super.didUpdateWidget(oldWidget);
@@ -223,19 +215,20 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveMailingListForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -379,45 +372,31 @@ class MailingListForm implements FormModel<MailingList> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          MailingListForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    MailingList value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: MailingListForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(MailingListForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    MailingList? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(MailingList? mailingList) => FormGroup({
         emailListControlName: FormArray<String>(
-            mailingList?.emailList
-                    .map((e) => FormControl<String>(
-                          value: e,
-                          validators: [emailValidator],
-                          asyncValidators: [],
-                          asyncValidatorsDebounceTime: 250,
-                          disabled: false,
-                        ))
-                    .toList() ??
-                [],
+            (mailingList?.emailList ?? [])
+                .map((e) => FormControl<String>(
+                      value: e,
+                      validators: [emailValidator],
+                      asyncValidators: [],
+                      asyncValidatorsDebounceTime: 250,
+                      disabled: false,
+                    ))
+                .toList(),
             validators: [mailingListValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

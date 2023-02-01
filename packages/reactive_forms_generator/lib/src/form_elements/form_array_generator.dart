@@ -2,9 +2,9 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
-import 'package:reactive_forms_generator/src/form_generator.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
+import 'package:recase/recase.dart';
 
 class FormArrayGenerator extends FormElementGenerator {
   FormArrayGenerator(ClassElement root, ParameterElement field, DartType? type)
@@ -12,6 +12,27 @@ class FormArrayGenerator extends FormElementGenerator {
 
   DartType get typeParameter =>
       (field.type as ParameterizedType).typeArguments.first;
+
+  @override
+  String get value {
+    final enclosingElement =
+        (fieldElement.enclosingElement as ConstructorElement).enclosingElement;
+
+    // final optionalChaining =
+    //     type?.nullabilitySuffix != NullabilitySuffix.question ||
+    //             (enclosingElement == root && !root.isNullable) ||
+    //             (enclosingElement != root && !root.isNullable)
+    //         ? ''
+    //         : '?';
+
+    final optionalChaining = (enclosingElement == root &&
+                type?.nullabilitySuffix != NullabilitySuffix.question) ||
+            (enclosingElement == root && !root.isNullable)
+        ? ''
+        : '?';
+
+    return '(${enclosingElement.name.camelCase}$optionalChaining.${fieldElement.name}${optionalChaining != '' ? '?? []' : ''})';
+  }
 
   String get displayType {
     String getDisplayString =
@@ -94,11 +115,11 @@ class FormArrayGenerator extends FormElementGenerator {
 
   @override
   String element() {
-    final optionalChaining =
-        field.type.nullabilitySuffix == NullabilitySuffix.question ? '?' : '';
+    // final optionalChaining =
+    //     field.type.nullabilitySuffix == NullabilitySuffix.question ? '?' : '';
 
-    final defaultValue =
-        type?.nullabilitySuffix == NullabilitySuffix.question ? '?? []' : '';
+    // final defaultValue =
+    //     type?.nullabilitySuffix == NullabilitySuffix.question ? '?? []' : '';
 
     final typeParameterType = typeParameter.getDisplayString(
       withNullability: false,
@@ -122,27 +143,29 @@ class FormArrayGenerator extends FormElementGenerator {
     ];
 
     if (field.isFormGroupArray) {
-      final formGenerator = FormGenerator(
-        root,
-        typeParameter.element! as ClassElement,
-        field.type,
-      );
+      // final formGenerator = FormGenerator(
+      //   root,
+      //   typeParameter.element! as ClassElement,
+      //   field.type,
+      // );
 
       final props = [
-        '${field.name}${formGenerator.className}.map((e) => e.formElements()).toList()',
+        '$value.map((e) => ${field.className}.formElements(e)).toList()',
+        // (url?.urlList ?? []).map((e) => UrlEntityForm.formElements(e)).toList(),
+        // '${field.name}${formGenerator.className}.map((e) => e.formElementsS()).toList()',
         ...partialProps
       ].join(', ');
 
       return 'FormArray($props)';
     } else {
       final props = [
-        '''$value$optionalChaining.map((e) => FormControl<$displayType>(
+        '''$value.map((e) => FormControl<$displayType>(
               value: e,
               validators: $itemValidators,
               asyncValidators: $itemAsyncValidators,
               asyncValidatorsDebounceTime: ${itemAsyncValidatorsDebounceTime(formArrayChecker)},
               disabled: ${itemDisabled(formArrayChecker)},
-            )).toList() $defaultValue''',
+            )).toList()''',
         ...partialProps
       ].join(', ');
 

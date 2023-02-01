@@ -198,24 +198,16 @@ class UserProfileFormBuilder extends StatefulWidget {
 }
 
 class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
-  late FormGroup _form;
-
   late UserProfileForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = UserProfileForm(widget.model, _form, null);
+    _formModel = UserProfileForm(
+        widget.model, UserProfileForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -225,12 +217,12 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
   @override
   void didUpdateWidget(covariant UserProfileFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = UserProfileForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = UserProfileForm(
+          widget.model, UserProfileForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
     }
 
     super.didUpdateWidget(oldWidget);
@@ -238,19 +230,20 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveUserProfileForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -387,10 +380,8 @@ class UserProfileForm implements FormModel<UserProfile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    homeControl.updateValue(
-        AddressForm(value, FormGroup({}), null).formElements().rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent);
+    homeControl.updateValue(AddressForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void officeValueUpdate(
@@ -398,10 +389,8 @@ class UserProfileForm implements FormModel<UserProfile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    officeControl?.updateValue(
-        AddressForm(value, FormGroup({}), null).formElements().rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent);
+    officeControl?.updateValue(AddressForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void firstNameValuePatch(
@@ -427,10 +416,8 @@ class UserProfileForm implements FormModel<UserProfile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    homeControl.updateValue(
-        AddressForm(value, form, null).formElements().rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent);
+    homeControl.updateValue(AddressForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void officeValuePatch(
@@ -438,10 +425,8 @@ class UserProfileForm implements FormModel<UserProfile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    officeControl?.updateValue(
-        AddressForm(value, form, null).formElements().rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent);
+    officeControl?.updateValue(AddressForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void firstNameValueReset(
@@ -470,8 +455,7 @@ class UserProfileForm implements FormModel<UserProfile> {
     bool? disabled,
   }) =>
       homeControl.reset(
-          value:
-              AddressForm(value, FormGroup({}), null).formElements().rawValue,
+          value: AddressForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   void officeValueReset(
@@ -482,8 +466,7 @@ class UserProfileForm implements FormModel<UserProfile> {
     bool? disabled,
   }) =>
       officeControl?.reset(
-          value:
-              AddressForm(value, FormGroup({}), null).formElements().rawValue,
+          value: AddressForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   FormControl<String> get firstNameControl =>
@@ -590,34 +573,21 @@ class UserProfileForm implements FormModel<UserProfile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          UserProfileForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    UserProfile value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: UserProfileForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(UserProfileForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    UserProfile? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(UserProfile userProfile) => FormGroup({
         firstNameControlName: FormControl<String>(
             value: userProfile.firstName,
             validators: [
@@ -636,8 +606,8 @@ class UserProfileForm implements FormModel<UserProfile> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        homeControlName: homeForm.formElements(),
-        officeControlName: officeForm.formElements()
+        homeControlName: AddressForm.formElements(userProfile.home),
+        officeControlName: AddressForm.formElements(userProfile.office)
       },
           validators: [],
           asyncValidators: [],
@@ -945,33 +915,21 @@ class AddressForm implements FormModel<Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          AddressForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    Address value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value:
-              AddressForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(AddressForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    Address? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(Address? address) => FormGroup({
         streetControlName: FormControl<String>(
             value: address?.street,
             validators: [],

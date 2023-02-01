@@ -40,9 +40,9 @@ class MyApp extends StatelessWidget {
         Routes.deliveryPoint: (_) => const DeliveryPointWidget(),
         Routes.freezed: (_) => const FreezedFormWidget(),
         Routes.generic: (_) => const GenericFormWidget(),
-        Routes.animatedUrlList: (_) => UrlListForm(),
+        Routes.animatedUrlList: (_) => const UrlListForm(),
       },
-      home: const LoginFormWidget(),
+      home: const UrlListForm(),
     );
   }
 }

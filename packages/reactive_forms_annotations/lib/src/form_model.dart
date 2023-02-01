@@ -13,13 +13,8 @@ abstract class FormModel<TModel> {
     bool emitEvent = true,
   });
 
-  void resetValue(
-    TModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  });
-
   reset({
+    TModel? value,
     bool updateParent = true,
     bool emitEvent = true,
   });

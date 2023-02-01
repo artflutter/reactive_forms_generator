@@ -17,13 +17,6 @@ abstract class FormElementGenerator {
     final enclosingElement =
         (fieldElement.enclosingElement as ConstructorElement).enclosingElement;
 
-    // final optionalChaining =
-    //     type?.nullabilitySuffix != NullabilitySuffix.question ||
-    //             (enclosingElement == root && !root.isNullable) ||
-    //             (enclosingElement != root && !root.isNullable)
-    //         ? ''
-    //         : '?';
-
     final optionalChaining = (enclosingElement == root &&
                 type?.nullabilitySuffix != NullabilitySuffix.question) ||
             (enclosingElement == root && !root.isNullable)

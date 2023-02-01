@@ -23,6 +23,10 @@ void main() {
             part '$fileName.g.dart';
             part '$fileName.freezed.dart';
             
+            Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
+              return Validators.required(control);
+            }
+            
             @freezed
             @ReactiveFormAnnotation()
             class FreezedClass with _\$FreezedClass {
@@ -30,13 +34,15 @@ void main() {
             
               factory FreezedClass(
                 @FormControlAnnotation<String>() String? gender, {
-                @FormControlAnnotation<String>() String? id,
+                @FormControlAnnotation<String>(validators: [requiredValidator]) String? id,
                 @FormControlAnnotation<String>() String? name,
                 @FormControlAnnotation<double>() double? year,
               }) = _FreezedClass;
             
               factory FreezedClass.fromJson(Map<String, dynamic> json) =>
                   _\$FreezedClassFromJson(json);
+            
+              bool method() => false;
             }
           ''',
           generatedFile: generatedFile,
@@ -168,24 +174,16 @@ class FreezedClassFormBuilder extends StatefulWidget {
 }
 
 class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
-  late FormGroup _form;
-
   late FreezedClassForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = FreezedClassForm(widget.model, _form, null);
+    _formModel = FreezedClassForm(
+        widget.model, FreezedClassForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -195,12 +193,12 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
   @override
   void didUpdateWidget(covariant FreezedClassFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = FreezedClassForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = FreezedClassForm(
+          widget.model, FreezedClassForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
     }
 
     super.didUpdateWidget(oldWidget);
@@ -208,19 +206,20 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveFreezedClassForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -617,34 +616,21 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          FreezedClassForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    FreezedClass value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: FreezedClassForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(FreezedClassForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    FreezedClass? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(FreezedClass? freezedClass) => FormGroup({
         genderControlName: FormControl<String>(
             value: freezedClass?.gender,
             validators: [],
@@ -654,7 +640,9 @@ class FreezedClassForm implements FormModel<FreezedClass> {
             touched: false),
         idControlName: FormControl<String>(
             value: freezedClass?.id,
-            validators: [],
+            validators: [
+              (control) => requiredValidator(control as FormControl<String>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

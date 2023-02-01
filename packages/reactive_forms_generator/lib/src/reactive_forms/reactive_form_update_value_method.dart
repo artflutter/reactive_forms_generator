@@ -2,6 +2,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
+import 'package:recase/recase.dart';
 
 class ReactiveFormUpdateValueMethod extends ReactiveFormGeneratorMethod {
   ReactiveFormUpdateValueMethod(ParameterElement field) : super(field);
@@ -43,14 +44,14 @@ class ReactiveFormUpdateValueMethod extends ReactiveFormGeneratorMethod {
     
         if (toUpdate.isNotEmpty) {
           ${field.fieldControlName}${field.nullabilitySuffix}.updateValue(
-              toUpdate.map((e) => e.formElements().rawValue).toList(),
+              toUpdate.map((e) => ${field.className}.formElements(e.${field.elementClassName.camelCase}).rawValue).toList(),
               updateParent: updateParent,
               emitEvent: emitEvent);
         }
     
         if (toAdd.isNotEmpty) {
           toAdd.forEach((e) {
-            ${field.fieldControlName}${field.nullabilitySuffix}.add(e.formElements(),
+            ${field.fieldControlName}${field.nullabilitySuffix}.add(${field.className}.formElements(e.${field.elementClassName.camelCase}),
                 updateParent: updateParent, emitEvent: emitEvent);
           });
         }
@@ -63,7 +64,7 @@ class ReactiveFormUpdateValueMethod extends ReactiveFormGeneratorMethod {
   Method formGroupMethod() {
     return methodEntity.rebuild(
       (b) => b.body = Code(
-        '${field.fieldControlName}${field.nullabilitySuffix}.updateValue(${field.className}(value, FormGroup({}), null).formElements().rawValue, updateParent: updateParent, emitEvent:emitEvent);',
+        '${field.fieldControlName}${field.nullabilitySuffix}.updateValue(${field.className}.formElements(value).rawValue, updateParent: updateParent, emitEvent:emitEvent);',
       ),
     );
   }

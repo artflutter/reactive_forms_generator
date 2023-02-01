@@ -140,20 +140,13 @@ class ReactiveFormBuilder {
             ..annotations.add(const CodeExpression(Code('override')))
             ..returns = const Reference('void')
             ..body = Code('''
-                _form = FormGroup({});
-                _formModel = ${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull}(widget.model, _form, null);
-    
-                final elements = _formModel.formElements();
-                _form.setValidators(elements.validators);
-                _form.setAsyncValidators(elements.asyncValidators);
-                
-                if (elements.disabled) {
-                  _form.markAsDisabled();
+                _formModel = ${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull}(widget.model, ${reactiveForm.reactiveInheritedStreamer.formGenerator.className}.formElements${reactiveForm.reactiveInheritedStreamer.formGenerator.element.generics}(widget.model), null);
+
+                if (_formModel.form.disabled) {
+                  _formModel.form.markAsDisabled();
                 }
-
-                _form.addAll(elements.controls);
-
-                 widget.initState?.call(context, _formModel);
+            
+                widget.initState?.call(context, _formModel);
                 
                 super.initState();              
               '''),
@@ -173,12 +166,11 @@ class ReactiveFormBuilder {
             )
             ..body = Code('''
                 if (widget.model != oldWidget.model) {
-                  _formModel = ${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull}(widget.model, _form, null);
-                  final elements = _formModel.formElements();
-                  
-                  _form.updateValue(elements.rawValue);
-                  _form.setValidators(elements.validators);
-                  _form.setAsyncValidators(elements.asyncValidators);
+                  _formModel = ${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull}(widget.model, ${reactiveForm.reactiveInheritedStreamer.formGenerator.className}.formElements${reactiveForm.reactiveInheritedStreamer.formGenerator.element.generics}(widget.model), null);
+
+                  if (_formModel.form.disabled) {
+                    _formModel.form.markAsDisabled();
+                  }
                 }
             
                 super.didUpdateWidget(oldWidget);
@@ -190,7 +182,7 @@ class ReactiveFormBuilder {
             ..annotations.add(const CodeExpression(Code('override')))
             ..returns = const Reference('void')
             ..body = const Code('''
-                _form.dispose();
+                _formModel.form.dispose();
                 super.dispose();
               '''),
         ),
@@ -209,12 +201,13 @@ class ReactiveFormBuilder {
             ..body = Code(
               '''
                 return ${reactiveForm.className}(
+                  key: ObjectKey(_formModel),
                   form: _formModel,
                   onWillPop: widget.onWillPop,
                   child: ReactiveFormBuilder(
-                    form: () => _form,
+                    form: () => _formModel.form,
                     onWillPop: widget.onWillPop,
-                    builder: (BuildContext context, FormGroup formGroup, Widget? child) => widget.builder(context, _formModel, widget.child),
+                    builder: (context, formGroup, child) => widget.builder(context, _formModel, widget.child),
                     child: widget.child,
                   ),
                 );
@@ -230,12 +223,12 @@ class ReactiveFormBuilder {
           ..extend = Reference('State<$className${_element.generics}>')
           ..fields.addAll(
             [
-              Field(
-                (b) => b
-                  ..name = '_form'
-                  ..late = true
-                  ..type = const Reference('FormGroup'),
-              ),
+              // Field(
+              //   (b) => b
+              //     ..name = '_form'
+              //     ..late = true
+              //     ..type = const Reference('FormGroup'),
+              // ),
               Field(
                 (b) => b
                   ..name = '_formModel'

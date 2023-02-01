@@ -32,7 +32,7 @@ class ReactiveFormInsertMethod extends ReactiveFormGeneratorMethod {
   
       ${field.fieldControlName}${field.nullabilitySuffix}.insert(
         i,
-        item.formElements(),
+        ${field.className}.formElements(value),
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
