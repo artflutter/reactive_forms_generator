@@ -22,7 +22,7 @@ FreezedClass _$FreezedClassFromJson(Map<String, dynamic> json) {
 mixin _$FreezedClass {
   @FormControlAnnotation<String>()
   String? get gender => throw _privateConstructorUsedError;
-  @FormControlAnnotation<String>()
+  @FormControlAnnotation<String>(validators: [requiredValidator])
   String? get id => throw _privateConstructorUsedError;
   @FormControlAnnotation<String>()
   String? get name => throw _privateConstructorUsedError;
@@ -42,10 +42,14 @@ abstract class $FreezedClassCopyWith<$Res> {
       _$FreezedClassCopyWithImpl<$Res, FreezedClass>;
   @useResult
   $Res call(
-      {@FormControlAnnotation<String>() String? gender,
-      @FormControlAnnotation<String>() String? id,
-      @FormControlAnnotation<String>() String? name,
-      @FormControlAnnotation<double>() double? year});
+      {@FormControlAnnotation<String>()
+          String? gender,
+      @FormControlAnnotation<String>(validators: [requiredValidator])
+          String? id,
+      @FormControlAnnotation<String>()
+          String? name,
+      @FormControlAnnotation<double>()
+          double? year});
 }
 
 /// @nodoc
@@ -96,10 +100,14 @@ abstract class _$$_FreezedClassCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@FormControlAnnotation<String>() String? gender,
-      @FormControlAnnotation<String>() String? id,
-      @FormControlAnnotation<String>() String? name,
-      @FormControlAnnotation<double>() double? year});
+      {@FormControlAnnotation<String>()
+          String? gender,
+      @FormControlAnnotation<String>(validators: [requiredValidator])
+          String? id,
+      @FormControlAnnotation<String>()
+          String? name,
+      @FormControlAnnotation<double>()
+          double? year});
 }
 
 /// @nodoc
@@ -143,7 +151,7 @@ class __$$_FreezedClassCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_FreezedClass extends _FreezedClass {
   _$_FreezedClass(@FormControlAnnotation<String>() this.gender,
-      {@FormControlAnnotation<String>() this.id,
+      {@FormControlAnnotation<String>(validators: [requiredValidator]) this.id,
       @FormControlAnnotation<String>() this.name,
       @FormControlAnnotation<double>() this.year})
       : super._();
@@ -155,7 +163,7 @@ class _$_FreezedClass extends _FreezedClass {
   @FormControlAnnotation<String>()
   final String? gender;
   @override
-  @FormControlAnnotation<String>()
+  @FormControlAnnotation<String>(validators: [requiredValidator])
   final String? id;
   @override
   @FormControlAnnotation<String>()
@@ -199,10 +207,15 @@ class _$_FreezedClass extends _FreezedClass {
 }
 
 abstract class _FreezedClass extends FreezedClass {
-  factory _FreezedClass(@FormControlAnnotation<String>() final String? gender,
-      {@FormControlAnnotation<String>() final String? id,
-      @FormControlAnnotation<String>() final String? name,
-      @FormControlAnnotation<double>() final double? year}) = _$_FreezedClass;
+  factory _FreezedClass(
+      @FormControlAnnotation<String>()
+          final String? gender,
+      {@FormControlAnnotation<String>(validators: [requiredValidator])
+          final String? id,
+      @FormControlAnnotation<String>()
+          final String? name,
+      @FormControlAnnotation<double>()
+          final double? year}) = _$_FreezedClass;
   _FreezedClass._() : super._();
 
   factory _FreezedClass.fromJson(Map<String, dynamic> json) =
@@ -212,7 +225,7 @@ abstract class _FreezedClass extends FreezedClass {
   @FormControlAnnotation<String>()
   String? get gender;
   @override
-  @FormControlAnnotation<String>()
+  @FormControlAnnotation<String>(validators: [requiredValidator])
   String? get id;
   @override
   @FormControlAnnotation<String>()

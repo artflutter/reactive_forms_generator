@@ -1,3 +1,4 @@
+import 'package:example/helpers.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
@@ -14,7 +15,7 @@ class FreezedClass with _$FreezedClass {
 
   factory FreezedClass(
     @FormControlAnnotation<String>() String? gender, {
-    @FormControlAnnotation<String>() String? id,
+    @FormControlAnnotation<String>(validators: [requiredValidator]) String? id,
     @FormControlAnnotation<String>() String? name,
     @FormControlAnnotation<double>() double? year,
   }) = _FreezedClass;

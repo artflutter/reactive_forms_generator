@@ -20,6 +20,9 @@ class FreezedFormWidget extends StatelessWidget {
               ReactiveTextField<String>(
                 formControl: formModel.idControl,
                 textInputAction: TextInputAction.next,
+                validationMessages: {
+                  ValidationMessage.required: (_) => 'Required'
+                },
                 decoration: const InputDecoration(
                   labelText: 'ID',
                   helperText: '',
