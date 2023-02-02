@@ -179,24 +179,16 @@ class LoginExtendedNullableFormBuilder extends StatefulWidget {
 
 class _LoginExtendedNullableFormBuilderState
     extends State<LoginExtendedNullableFormBuilder> {
-  late FormGroup _form;
-
   late LoginExtendedNullableForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = LoginExtendedNullableForm(widget.model, _form, null);
+    _formModel = LoginExtendedNullableForm(widget.model,
+        LoginExtendedNullableForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -206,12 +198,12 @@ class _LoginExtendedNullableFormBuilderState
   @override
   void didUpdateWidget(covariant LoginExtendedNullableFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = LoginExtendedNullableForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = LoginExtendedNullableForm(widget.model,
+          LoginExtendedNullableForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
     }
 
     super.didUpdateWidget(oldWidget);
@@ -219,19 +211,20 @@ class _LoginExtendedNullableFormBuilderState
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveLoginExtendedNullableForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -902,36 +895,22 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          LoginExtendedNullableForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    LoginExtendedNullable value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: LoginExtendedNullableForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(LoginExtendedNullableForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    LoginExtendedNullable? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(LoginExtendedNullable? loginExtendedNullable) =>
+      FormGroup({
         emailControlName: FormControl<String>(
             value: loginExtendedNullable?.email,
             validators: [],

@@ -1,3 +1,7 @@
+## [0.14.0-beta]
+
+* fixes and refactoring
+
 ## [0.13.2]
 
 * more methods in FormModel interface

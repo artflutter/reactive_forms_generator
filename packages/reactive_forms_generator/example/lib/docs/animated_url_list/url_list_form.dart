@@ -3,12 +3,18 @@ import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class UrlListForm extends StatelessWidget {
-  final GlobalKey<AnimatedListState> _animatedListKeyForm = GlobalKey();
-
-  UrlListForm({
+class UrlListForm extends StatefulWidget {
+  const UrlListForm({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<UrlListForm> createState() => _UrlListFormState();
+}
+
+class _UrlListFormState extends State<UrlListForm> {
+  Url? _url;
+  GlobalKey<AnimatedListState> _animatedListKeyForm = GlobalKey();
 
   void _handleUrlRemove(
     UrlForm formModel,
@@ -71,6 +77,7 @@ class UrlListForm extends StatelessWidget {
       body: Container(
         constraints: const BoxConstraints(maxHeight: 500),
         child: UrlFormBuilder(
+          model: _url,
           builder: (context, formModel, child) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -123,16 +130,50 @@ class UrlListForm extends StatelessWidget {
                     },
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ReactiveUrlFormConsumer(
-                    builder: (context, formModel, child) {
-                      return ElevatedButton(
-                        onPressed: formModel.form.valid ? () {} : null,
-                        child: const Text('Add'),
-                      );
-                    },
-                  ),
+                ReactiveUrlFormConsumer(
+                  builder: (context, formModel, child) {
+                    return ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _animatedListKeyForm = GlobalKey();
+                          _url = Url(
+                            urlList: [
+                              UrlEntity(label: 'l1', url: 'https://url1.com'),
+                              UrlEntity(label: 'l2', url: 'https://url2.com'),
+                            ],
+                          );
+                        });
+                      },
+                      child: const Text('Update `setState` with 2pcs'),
+                    );
+                  },
+                ),
+                ReactiveUrlFormConsumer(
+                  builder: (context, formModel, child) {
+                    return ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _animatedListKeyForm = GlobalKey();
+                          _url = Url(
+                            urlList: [
+                              UrlEntity(label: 'l1', url: 'https://url1.com'),
+                              UrlEntity(label: 'l2', url: 'https://url2.com'),
+                              UrlEntity(label: 'l3', url: 'https://url3.com'),
+                            ],
+                          );
+                        });
+                      },
+                      child: const Text('Update `setState` with 3pcs'),
+                    );
+                  },
+                ),
+                ReactiveUrlFormConsumer(
+                  builder: (context, formModel, child) {
+                    return ElevatedButton(
+                      onPressed: formModel.form.valid ? () {} : null,
+                      child: const Text('Submit'),
+                    );
+                  },
                 ),
               ],
             );
@@ -200,7 +241,7 @@ class UrlListItemHeader extends StatelessWidget {
         Expanded(
           child: Text(
             'URL',
-            style: Theme.of(context).textTheme.caption?.copyWith(
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
           ),

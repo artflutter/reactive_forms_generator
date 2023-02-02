@@ -155,24 +155,16 @@ class TagsFormBuilder<T> extends StatefulWidget {
 }
 
 class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
-  late FormGroup _form;
-
   late TagsForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = TagsForm<T>(widget.model, _form, null);
+    _formModel =
+        TagsForm<T>(widget.model, TagsForm.formElements<T>(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -182,12 +174,12 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
   @override
   void didUpdateWidget(covariant TagsFormBuilder<T> oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = TagsForm<T>(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = TagsForm<T>(
+          widget.model, TagsForm.formElements<T>(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
     }
 
     super.didUpdateWidget(oldWidget);
@@ -195,19 +187,20 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveTagsForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -337,33 +330,21 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          TagsForm<T>(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    Tags<T> value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value:
-              TagsForm<T>(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(TagsForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    Tags<T>? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements<T>(Tags<T>? tags) => FormGroup({
         tagsControlName: FormControl<List<T>>(
             value: tags?.tags,
             validators: [],

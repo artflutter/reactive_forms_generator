@@ -117,24 +117,16 @@ class TestFormBuilder extends StatefulWidget {
 }
 
 class _TestFormBuilderState extends State<TestFormBuilder> {
-  late FormGroup _form;
-
   late TestForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = TestForm(widget.model, _form, null);
+    _formModel =
+        TestForm(widget.model, TestForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -144,12 +136,12 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
   @override
   void didUpdateWidget(covariant TestFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = TestForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel =
+          TestForm(widget.model, TestForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
     }
 
     super.didUpdateWidget(oldWidget);
@@ -157,19 +149,20 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveTestForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -361,32 +354,21 @@ class TestForm implements FormModel<Test> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          TestForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    Test value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: TestForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(TestForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    Test? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(Test? test) => FormGroup({
         titleControlName: FormControl<String>(
             value: test?.title,
             validators: [],

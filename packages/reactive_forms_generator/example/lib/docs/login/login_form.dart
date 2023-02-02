@@ -70,8 +70,8 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // debugPrint(formModel.model.email);
-                  // debugPrint(formModel.model.password);
+                  debugPrint(formModel.model.email);
+                  debugPrint(formModel.model.password);
                   formModel.form.markAllAsTouched();
                 },
                 child: const Text('Submit raw'),

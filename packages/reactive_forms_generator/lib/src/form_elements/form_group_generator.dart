@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_array_generator.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_control_generator.dart';
@@ -12,7 +13,53 @@ class FormGroupGenerator extends FormElementGenerator {
       : super(root, field, type);
 
   @override
-  Element get fieldElement => field.type.element!;
+  String get value {
+    final enclosingElement =
+        (fieldElement.enclosingElement as ConstructorElement).enclosingElement;
+
+    final optionalChaining = (enclosingElement == root &&
+                type?.nullabilitySuffix != NullabilitySuffix.question) ||
+            (enclosingElement == root && !root.isNullable)
+        ? ''
+        : '?';
+
+    return '${enclosingElement.name.camelCase}$optionalChaining';
+  }
+
+  // @override
+  // Element get fieldElement => field.type.element!;
+
+  // @override
+  // String get value {
+  //   // print('==========');
+  //   // print(field.name);
+  //   // print('==========');
+  //
+  //   // if (super.fieldElement.enclosingElement is ConstructorElement) {
+  //   //   print('***********');
+  //   //   print(fieldElement);
+  //   //   print(super.fieldElement);
+  //   //   print('***********');
+  //   // }
+  //   //
+  //   // return '';
+  //   final enclosingElement =
+  //       (super.fieldElement.enclosingElement as ConstructorElement)
+  //           .enclosingElement;
+  //
+  //   final optionalChaining = (enclosingElement == root &&
+  //               type?.nullabilitySuffix != NullabilitySuffix.question) ||
+  //           (enclosingElement == root && !root.isNullable)
+  //       ? ''
+  //       : '?';
+  //
+  //   print('***********');
+  //   print(
+  //       '${enclosingElement.name.camelCase}$optionalChaining.${fieldElement.name}');
+  //   print('***********');
+  //
+  //   return '${enclosingElement.name.camelCase}$optionalChaining.${fieldElement.name}';
+  // }
 
   List<ParameterElement> get formElements =>
       (field.type.element as ClassElement)
@@ -49,7 +96,7 @@ class FormGroupGenerator extends FormElementGenerator {
     formGroupValidatorsTyped = formGroupValidatorsTyped
         .map(
           (e) =>
-              '(control) => $e(${field.className}(${(field.type.element as ClassElement).name.camelCase}, control as FormGroup, path))',
+              '(control) => $e(${field.className}(${(field.type.element as ClassElement).name.camelCase}, path))',
         )
         .toList();
 
@@ -99,9 +146,7 @@ class FormGroupGenerator extends FormElementGenerator {
     formElementsList.addAll(
       nestedFormElements.map(
         (f) {
-          // final nullabilitySuffix = root.isNullable ? '?' : '';
-          // return '${f.fieldControlNameName}: ${f.name}Form$nullabilitySuffix.formElements()';
-          return '${f.fieldControlNameName}: ${f.name}Form.formElements()';
+          return '${f.fieldControlNameName}: ${f.className}.formElements($value.${f.name})';
         },
       ),
     );

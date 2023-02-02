@@ -68,6 +68,9 @@ extension ClassElementExt on ClassElement {
   }
 }
 
+// extension ClassElementExt on ClassElement {
+//
+// }
 extension ParameterElementExt on ParameterElement {
   String get fieldName => name;
 
@@ -115,7 +118,9 @@ extension ParameterElementExt on ParameterElement {
       type.nullabilitySuffix == NullabilitySuffix.none &&
       ((isRequiredPositional || isRequiredNamed) && !hasDefaultValue);
 
-  String get className {
+  String get className => '${elementClassName}Form';
+
+  String get elementClassName {
     final element = type.element as ClassElement;
 
     String baseName = '';
@@ -139,7 +144,7 @@ extension ParameterElementExt on ParameterElement {
       baseName = element.name;
     }
 
-    return '${baseName}Form';
+    return baseName;
   }
 
   String get valueUpdateMethodName => '${name}ValueUpdate';

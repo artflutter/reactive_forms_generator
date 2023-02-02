@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: reactive_forms_annotations => analyze
         run: cd packages/reactive_forms_annotations && flutter pub get && flutter analyze

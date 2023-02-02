@@ -5,18 +5,25 @@ import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 
-class MailingListFormWidget extends StatelessWidget {
+class MailingListFormWidget extends StatefulWidget {
   const MailingListFormWidget({Key? key}) : super(key: key);
+
+  @override
+  State<MailingListFormWidget> createState() => _MailingListFormWidgetState();
+}
+
+class _MailingListFormWidgetState extends State<MailingListFormWidget> {
+  MailingList _model = MailingList(emailList: [
+    'test@gmail.com',
+    'wrong email',
+  ]);
 
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
       title: const Text('Mailing list'),
       body: MailingListFormBuilder(
-        model: MailingList(emailList: [
-          'test@gmail.com',
-          'wrong email',
-        ]),
+        model: _model,
         builder: (context, formModel, child) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,12 +83,44 @@ class MailingListFormWidget extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      formModel.resetValue(MailingList(emailList: [
-                        'test@gmail.com2',
-                        'wrond email3',
-                      ]));
+                      formModel.reset();
                     },
                     child: const Text('Reset'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _model = MailingList(emailList: [
+                          'updateSetState1@gmail.com',
+                          'updateSetState2@email.com',
+                        ]);
+                      });
+                    },
+                    child: const Text('Update `setState` 2 pcs.'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _model = MailingList(emailList: [
+                          'updateSetState1@gmail.com',
+                          'updateSetState2@email.com',
+                          'updateSetState3@email.com',
+                        ]);
+                      });
+                    },
+                    child: const Text('Update `setState` 3 pcs.'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      formModel.reset(
+                        value: MailingList(emailList: [
+                          'update1@gmail.com2',
+                          'update2@email.com',
+                          'update3@email.com',
+                        ]),
+                      );
+                    },
+                    child: const Text('Update'),
                   ),
                   ElevatedButton(
                     onPressed: () {

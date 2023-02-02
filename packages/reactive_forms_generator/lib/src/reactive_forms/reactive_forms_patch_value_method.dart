@@ -2,6 +2,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
+import 'package:recase/recase.dart';
 
 class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
   ReactiveFormPatchValueMethod(ParameterElement field) : super(field);
@@ -24,7 +25,7 @@ class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
       );
     
       ${field.fieldControlName}${field.nullabilitySuffix}.patchValue(
-        toPatch.map((e) => e.formElements().rawValue).toList(), 
+        toPatch.map((e) => ${field.className}.formElements(e.${field.elementClassName.camelCase}).rawValue).toList(), 
         updateParent: updateParent, 
         emitEvent:emitEvent);
     ''';
@@ -36,7 +37,7 @@ class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
   Method formGroupMethod() {
     return methodEntity.rebuild(
       (b) => b.body = Code(
-        '${field.fieldControlName}${field.nullabilitySuffix}.updateValue(${field.className}(value, form, null).formElements().rawValue, updateParent: updateParent, emitEvent:emitEvent);',
+        '${field.fieldControlName}${field.nullabilitySuffix}.updateValue(${field.className}.formElements(value).rawValue, updateParent: updateParent, emitEvent:emitEvent);',
       ),
     );
   }
