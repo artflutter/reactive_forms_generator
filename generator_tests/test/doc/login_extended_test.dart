@@ -862,7 +862,11 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
             disabled: false,
             touched: false)
       },
-          validators: [],
+          validators: [
+            allFieldsRequired,
+            (control) => allFieldsRequiredTyped(
+                LoginExtendedForm(loginExtended, control as FormGroup, null))
+          ],
           asyncValidators: [],
           asyncValidatorsDebounceTime: 250,
           disabled: false);

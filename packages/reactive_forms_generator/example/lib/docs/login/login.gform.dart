@@ -357,7 +357,9 @@ class LoginForm implements FormModel<Login> {
             disabled: false,
             touched: false)
       },
-          validators: [],
+          validators: [
+            mustMatch
+          ],
           asyncValidators: [],
           asyncValidatorsDebounceTime: 250,
           disabled: false);
