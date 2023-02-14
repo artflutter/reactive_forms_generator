@@ -14,8 +14,7 @@ class FormGroupGenerator extends FormElementGenerator {
 
   @override
   String get value {
-    final enclosingElement =
-        (fieldElement.enclosingElement as ConstructorElement).enclosingElement;
+    final enclosingElement = constructorElement.enclosingElement;
 
     final optionalChaining = (enclosingElement == root &&
                 type?.nullabilitySuffix != NullabilitySuffix.question) ||
@@ -26,67 +25,35 @@ class FormGroupGenerator extends FormElementGenerator {
     return '${enclosingElement.name.camelCase}$optionalChaining';
   }
 
-  // @override
-  // Element get fieldElement => field.type.element!;
+  @override
+  ConstructorElement get constructorElement =>
+      field.enclosingElement as ConstructorElement;
 
-  // @override
-  // String get value {
-  //   // print('==========');
-  //   // print(field.name);
-  //   // print('==========');
-  //
-  //   // if (super.fieldElement.enclosingElement is ConstructorElement) {
-  //   //   print('***********');
-  //   //   print(fieldElement);
-  //   //   print(super.fieldElement);
-  //   //   print('***********');
-  //   // }
-  //   //
-  //   // return '';
-  //   final enclosingElement =
-  //       (super.fieldElement.enclosingElement as ConstructorElement)
-  //           .enclosingElement;
-  //
-  //   final optionalChaining = (enclosingElement == root &&
-  //               type?.nullabilitySuffix != NullabilitySuffix.question) ||
-  //           (enclosingElement == root && !root.isNullable)
-  //       ? ''
-  //       : '?';
-  //
-  //   print('***********');
-  //   print(
-  //       '${enclosingElement.name.camelCase}$optionalChaining.${fieldElement.name}');
-  //   print('***********');
-  //
-  //   return '${enclosingElement.name.camelCase}$optionalChaining.${fieldElement.name}';
-  // }
+  @override
+  Element get fieldElement => field.type.element!;
 
-  List<ParameterElement> get formElements =>
-      (field.type.element as ClassElement)
-          .constructors
-          .where((e) => e.hasReactiveFormAnnotatedParameters)
-          .first
-          .parameters
-          .where(
-            (e) =>
-                formControlChecker.hasAnnotationOfExact(e) ||
-                formArrayChecker.hasAnnotationOfExact(e),
-          )
-          .toList();
+  ClassElement get classElement => field.type.element as ClassElement;
 
-  List<ParameterElement> get nestedFormElements =>
-      (field.type.element as ClassElement)
-          .constructors
-          .where((e) => e.hasReactiveFormAnnotatedParameters)
-          .first
-          .parameters
-          .where(
-            (e) => e.type.element is ClassElement,
-          )
-          .where(
-            (e) => formGroupChecker.hasAnnotationOfExact(e.type.element!),
-          )
-          .toList();
+  List<ParameterElement> get formElements => classElement.constructors
+      .where((e) => e.hasReactiveFormAnnotatedParameters)
+      .first
+      .parameters
+      .where(
+        (e) =>
+            formControlChecker.hasAnnotationOfExact(e) ||
+            formArrayChecker.hasAnnotationOfExact(e),
+      )
+      .toList();
+
+  List<ParameterElement> get nestedFormElements => classElement.constructors
+      .where((e) => e.hasReactiveFormAnnotatedParameters)
+      .first
+      .parameters
+      .where((e) => e.type.element is ClassElement)
+      .where(
+        (e) => formGroupChecker.hasAnnotationOfExact(e.type.element!),
+      )
+      .toList();
 
   List<String> get validators {
     List<String> formGroupValidators = syncValidatorList(formGroupChecker);
@@ -96,7 +63,7 @@ class FormGroupGenerator extends FormElementGenerator {
     formGroupValidatorsTyped = formGroupValidatorsTyped
         .map(
           (e) =>
-              '(control) => $e(${field.className}(${(field.type.element as ClassElement).name.camelCase}, path))',
+              '(control) => $e(${field.className}(${classElement.name.camelCase}, control as FormGroup, null))',
         )
         .toList();
 

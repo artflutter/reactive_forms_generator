@@ -14,8 +14,7 @@ abstract class FormElementGenerator {
   FormElementGenerator(this.root, this.field, this.type);
 
   String get value {
-    final enclosingElement =
-        (fieldElement.enclosingElement as ConstructorElement).enclosingElement;
+    final enclosingElement = constructorElement.enclosingElement;
 
     final optionalChaining = (enclosingElement == root &&
                 type?.nullabilitySuffix != NullabilitySuffix.question) ||
@@ -74,6 +73,9 @@ abstract class FormElementGenerator {
   }
 
   Element get fieldElement => field;
+
+  ConstructorElement get constructorElement =>
+      fieldElement.enclosingElement as ConstructorElement;
 
   List<String> syncValidatorList(TypeChecker typeChecker) {
     if (typeChecker.hasAnnotationOfExact(fieldElement)) {
