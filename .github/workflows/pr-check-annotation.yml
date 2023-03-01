@@ -14,7 +14,7 @@ jobs:
   pr-check-reactive_form_annotation:
     runs-on: ubuntu-latest
     container:
-      image: cirrusci/flutter:3.3.10
+      image: cirrusci/flutter:3.7.5
 
     steps:
       - name: Check out repository code

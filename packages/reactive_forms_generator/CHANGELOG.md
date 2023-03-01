@@ -1,3 +1,7 @@
+## [0.24.2-beta]
+
+* fix for https://github.com/artflutter/reactive_forms_generator/issues/88
+
 ## [0.24.1-beta]
 
 * fix for https://github.com/artflutter/reactive_forms_generator/issues/84

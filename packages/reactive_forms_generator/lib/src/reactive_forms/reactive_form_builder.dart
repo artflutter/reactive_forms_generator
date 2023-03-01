@@ -171,6 +171,8 @@ class ReactiveFormBuilder {
                   if (_formModel.form.disabled) {
                     _formModel.form.markAsDisabled();
                   }
+                  
+                  widget.initState?.call(context, _formModel);
                 }
             
                 super.didUpdateWidget(oldWidget);
