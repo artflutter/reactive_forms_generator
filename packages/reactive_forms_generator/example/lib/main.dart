@@ -9,6 +9,9 @@ import 'package:example/docs/login/login_form.dart';
 import 'package:example/docs/login_extended/login_extended_form.dart';
 import 'package:example/docs/login_extended_nullable/login_extended_nullable_form.dart';
 import 'package:example/docs/mailing_list/mailing_list_form.dart';
+import 'package:example/docs/model_extends/model_extends.dart';
+import 'package:example/docs/model_extends/model_extends_form.dart';
+import 'package:example/docs/model_implements/model_implements_form.dart';
 import 'package:example/docs/user_profile/user_profile_form.dart';
 import 'package:flutter/material.dart';
 
@@ -41,6 +44,8 @@ class MyApp extends StatelessWidget {
         Routes.freezed: (_) => const FreezedFormWidget(),
         Routes.generic: (_) => const GenericFormWidget(),
         Routes.animatedUrlList: (_) => const UrlListForm(),
+        Routes.modelExtends: (_) => const ModelExtendsWidget(),
+        Routes.modelImplements: (_) => const ModelImplementsWidget(),
       },
       home: const UrlListForm(),
     );
@@ -71,4 +76,8 @@ class Routes {
   static const generic = '/generic';
 
   static const animatedUrlList = '/animated-url-list';
+
+  static const modelExtends = '/model-extends';
+
+  static const modelImplements = '/model-implements';
 }

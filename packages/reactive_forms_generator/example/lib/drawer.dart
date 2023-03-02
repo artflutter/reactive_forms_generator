@@ -77,6 +77,18 @@ class AppDrawer extends StatelessWidget {
                 Routes.animatedUrlList,
               ),
             ),
+            ListTile(
+              title: const Text('Model extends'),
+              onTap: () => Navigator.of(context).pushReplacementNamed(
+                Routes.modelExtends,
+              ),
+            ),
+            ListTile(
+              title: const Text('Model implements'),
+              onTap: () => Navigator.of(context).pushReplacementNamed(
+                Routes.modelImplements,
+              ),
+            ),
           ],
         ),
       ),
