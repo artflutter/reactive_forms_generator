@@ -1,17 +1,21 @@
+import 'package:example/docs/login/labels.dart';
 import 'package:example/docs/login/login.dart';
+import 'package:example/docs/login/mocks.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 class LoginFormWidget extends StatefulWidget {
-  const LoginFormWidget({Key? key}) : super(key: key);
+  final ValueChanged<Login>? onChange;
+
+  const LoginFormWidget({Key? key, this.onChange}) : super(key: key);
 
   @override
   State<LoginFormWidget> createState() => _LoginFormWidgetState();
 }
 
 class _LoginFormWidgetState extends State<LoginFormWidget> {
-  Login _emptyModel = Login(email: '', password: '');
+  Login _emptyModel = mockedLoginEmpty;
 
   @override
   Widget build(BuildContext context) {
@@ -23,96 +27,111 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
           return Column(
             children: [
               ReactiveTextField<String>(
+                key: email.itemKey,
                 formControl: formModel.emailControl,
                 validationMessages: {
-                  ValidationMessage.required: (_) => 'Required'
+                  ValidationMessage.required: (_) => errorRequired
                 },
-                // showErrors: (_) => false,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
+                decoration: InputDecoration(
+                  labelText: email.name,
                   helperText: '',
-                  helperStyle: TextStyle(height: 0.7),
-                  errorStyle: TextStyle(height: 0.7),
+                  helperStyle: const TextStyle(height: 0.8),
+                  errorStyle: const TextStyle(height: 0.8),
                 ),
               ),
               const SizedBox(height: 8.0),
               ReactiveTextField<String>(
+                key: password.itemKey,
                 formControl: formModel.passwordControl,
                 obscureText: true,
-                // showErrors: (_) => false,
                 validationMessages: {
-                  ValidationMessage.required: (_) => 'Required',
-                  'mustMatch': (_) => 'Must match validator demo',
+                  ValidationMessage.required: (_) => errorRequired,
+                  'mustMatch': (_) => errorMustMatch,
                 },
                 textInputAction: TextInputAction.done,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
+                decoration: InputDecoration(
+                  labelText: password.name,
                   helperText: '',
-                  helperStyle: TextStyle(height: 0.7),
-                  errorStyle: TextStyle(height: 0.7),
+                  helperStyle: const TextStyle(height: 0.8),
+                  errorStyle: const TextStyle(height: 0.8),
                 ),
               ),
-              ReactiveLoginFormConsumer(
-                builder: (context, formModel, child) {
-                  // debugPrint(formModel.passwordControl.errors);
-                  // debugPrint(formModel.form);
-                  debugPrint('dirty => ${formModel.form.dirty}');
-                  debugPrint(
-                      'passwordDirty => ${formModel.passwordControl.dirty}');
-
-                  return Column(
+              // ReactiveLoginFormConsumer(
+              //   builder: (context, formModel, child) {
+              //     // debugPrint(formModel.passwordControl.errors);
+              //     // debugPrint(formModel.form);
+              //     debugPrint('dirty => ${formModel.form.dirty}');
+              //     debugPrint(
+              //         'passwordDirty => ${formModel.passwordControl.dirty}');
+              //
+              //     return Column(
+              //       children: [
+              //         Text(formModel.emailControl.errors.toString()),
+              //         Text(formModel.passwordControl.errors.toString()),
+              //       ],
+              //     );
+              //   },
+              // ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
                     children: [
-                      Text(formModel.emailControl.errors.toString()),
-                      Text(formModel.passwordControl.errors.toString()),
-                    ],
-                  );
-                },
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  debugPrint(formModel.model.email);
-                  debugPrint(formModel.model.password);
-                  formModel.form.markAllAsTouched();
-                },
-                child: const Text('Submit raw'),
-              ),
-              const SizedBox(height: 8.0),
-              ElevatedButton(
-                onPressed: () {
-                  formModel.updateValue(
-                    Login(email: 'some@e.mail', password: 'xx'),
-                  );
-                  setState(() {
-                    _emptyModel = Login(email: 'some@e.mail', password: 'xx');
-                  });
-                },
-                child: const Text('Update model'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  formModel.reset();
-                },
-                child: const Text('Reset'),
-              ),
-              const SizedBox(height: 8.0),
-              ReactiveLoginFormConsumer(
-                builder: (context, formModel, child) {
-                  return ElevatedButton(
-                    onPressed: formModel.form.valid
-                        ? () {
-                            // ignore: unnecessary_cast, avoid_print
-                            debugPrint((formModel as FormModel<Login>)
-                                .model
-                                .toString());
-                            // ignore: avoid_print
+                      Expanded(
+                        child: ElevatedButton(
+                          key: submitRaw.itemKey,
+                          onPressed: () {
                             debugPrint(formModel.model.email);
-                            // ignore: avoid_print
                             debugPrint(formModel.model.password);
-                          }
-                        : null,
-                    child: const Text('Submit'),
-                  );
-                },
+                            formModel.form.markAllAsTouched();
+                            widget.onChange?.call(formModel.model);
+                          },
+                          child: const Text('Submit raw'),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: ReactiveLoginFormConsumer(
+                          builder: (context, formModel, child) {
+                            return ElevatedButton(
+                              key: submit.itemKey,
+                              onPressed: formModel.form.valid
+                                  ? () {
+                                      debugPrint((formModel).model.toString());
+                                      debugPrint(formModel.model.email);
+                                      debugPrint(formModel.model.password);
+                                      widget.onChange?.call(formModel.model);
+                                    }
+                                  : null,
+                              child: const Text('Submit'),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          key: updateModel.itemKey,
+                          onPressed: () {
+                            setState(() => _emptyModel = mockedLogin);
+                          },
+                          child: const Text('Update model'),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: ElevatedButton(
+                          key: reset.itemKey,
+                          onPressed: () => formModel.reset(),
+                          child: const Text('Reset'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           );
