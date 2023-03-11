@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:example/docs/delivery_list/delivery_list.dart';
 import 'package:example/docs/delivery_list/labels.dart';
 import 'package:example/docs/delivery_list/mocks.dart';

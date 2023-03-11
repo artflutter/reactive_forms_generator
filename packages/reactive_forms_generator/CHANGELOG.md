@@ -1,3 +1,7 @@
+## [1.0.0]
+
+* Internal refactoring. Everything should work as previously but there is a small chance of breaking changes
+
 ## [0.24.2-beta]
 
 * fix for https://github.com/artflutter/reactive_forms_generator/issues/88
