@@ -106,9 +106,6 @@ Map<String, dynamic>? mustMatch(AbstractControl<dynamic> control) {
       ...matchingFormControl.errors,
       ...<String, dynamic>{'mustMatch': true},
     });
-
-    // force messages to show up as soon as possible
-    matchingFormControl.markAsTouched();
   } else {
     matchingFormControl.removeError('mustMatch');
   }

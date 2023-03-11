@@ -9,6 +9,8 @@ typedef FormControlAsyncValidatorFunctionTyped<T>
 class FormControlAnnotation<T> {
   final List<FormControlValidatorFunctionTyped<T>> validators;
 
+  final List<Validator<T>> validatorsTest;
+
   final List<FormControlAsyncValidatorFunctionTyped<T>> asyncValidators;
 
   final int asyncValidatorsDebounceTime;
@@ -19,6 +21,7 @@ class FormControlAnnotation<T> {
 
   const FormControlAnnotation({
     this.validators = const [],
+    this.validatorsTest = const [],
     this.asyncValidators = const [],
     this.asyncValidatorsDebounceTime = 250,
     this.touched = false,

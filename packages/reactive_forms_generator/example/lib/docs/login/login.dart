@@ -16,6 +16,7 @@ class Login extends Equatable {
   const Login({
     @FormControlAnnotation(
       validators: [requiredValidator],
+      validatorsTest: [RequiredValidator<String>()],
     )
         this.email = '',
     @FormControlAnnotation(

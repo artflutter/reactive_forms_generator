@@ -121,8 +121,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
-        LoginForm(widget.model, LoginForm.formElements(widget.model), null);
+    _formModel = LoginForm(widget.model, null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -136,8 +135,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
   @override
   void didUpdateWidget(covariant LoginFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          LoginForm(widget.model, LoginForm.formElements(widget.model), null);
+      _formModel = LoginForm(widget.model, null);
 
       if (_formModel.form.disabled) {
         _formModel.form.markAsDisabled();
@@ -175,9 +173,10 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
 class LoginForm implements FormModel<Login> {
   LoginForm(
     this.login,
-    this.form,
     this.path,
-  ) {}
+  ) {
+    form = LoginForm.formElementsNew(login, this);
+  }
 
   static String emailControlName = "email";
 
@@ -185,14 +184,18 @@ class LoginForm implements FormModel<Login> {
 
   final Login? login;
 
-  final FormGroup form;
+  late FormGroup form;
 
   final String? path;
 
   String emailControlPath() => pathBuilder(emailControlName);
+
   String passwordControlPath() => pathBuilder(passwordControlName);
+
   String get _emailValue => emailControl.value ?? "";
+
   String get _passwordValue => passwordControl.value ?? "";
+
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -212,9 +215,13 @@ class LoginForm implements FormModel<Login> {
   }
 
   Object? get emailErrors => emailControl.errors;
+
   Object? get passwordErrors => passwordControl.errors;
+
   void get emailFocus => form.focus(emailControlPath());
+
   void get passwordFocus => form.focus(passwordControlPath());
+
   void emailValueUpdate(
     String value, {
     bool updateParent = true,
@@ -260,6 +267,7 @@ class LoginForm implements FormModel<Login> {
   }) =>
       emailControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void passwordValueReset(
     String value, {
     bool updateParent = true,
@@ -269,10 +277,13 @@ class LoginForm implements FormModel<Login> {
   }) =>
       passwordControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
+
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
+
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -320,7 +331,7 @@ class LoginForm implements FormModel<Login> {
   }
 
   LoginForm copyWithPath(String? path) {
-    return LoginForm(login, form, path);
+    return LoginForm(login, path);
   }
 
   @override
@@ -331,6 +342,7 @@ class LoginForm implements FormModel<Login> {
   }) =>
       form.updateValue(LoginForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Login? value,
@@ -341,9 +353,35 @@ class LoginForm implements FormModel<Login> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Login? login) => FormGroup({
+        emailControlName: FormControl<String>(
+            value: login?.email,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        passwordControlName: FormControl<String>(
+            value: login?.password,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false)
+      },
+          validators: [
+            mustMatch
+          ],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
+
+  static FormGroup formElementsNew(Login? login, LoginForm loginForm) =>
+      FormGroup({
         emailControlName: FormControl<String>(
             value: login?.email,
             validators: [requiredValidator],
