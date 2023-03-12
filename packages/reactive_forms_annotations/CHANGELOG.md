@@ -1,3 +1,7 @@
+## [1.0.0]
+
+* Internal refactoring. Everything should work as previously but there is a small chance of breaking changes
+
 ## [0.14.0-beta]
 
 * fixes and refactoring
