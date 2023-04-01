@@ -26,6 +26,9 @@ mixin _$FreezedClass {
   String? get id => throw _privateConstructorUsedError;
   @FormControlAnnotation<String>()
   String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'logo_image')
+  @FormControlAnnotation<String>()
+  String? get logoImage => throw _privateConstructorUsedError;
   @FormControlAnnotation<double>()
   double? get year => throw _privateConstructorUsedError;
 
@@ -48,6 +51,9 @@ abstract class $FreezedClassCopyWith<$Res> {
           String? id,
       @FormControlAnnotation<String>()
           String? name,
+      @JsonKey(name: 'logo_image')
+      @FormControlAnnotation<String>()
+          String? logoImage,
       @FormControlAnnotation<double>()
           double? year});
 }
@@ -68,6 +74,7 @@ class _$FreezedClassCopyWithImpl<$Res, $Val extends FreezedClass>
     Object? gender = freezed,
     Object? id = freezed,
     Object? name = freezed,
+    Object? logoImage = freezed,
     Object? year = freezed,
   }) {
     return _then(_value.copyWith(
@@ -82,6 +89,10 @@ class _$FreezedClassCopyWithImpl<$Res, $Val extends FreezedClass>
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      logoImage: freezed == logoImage
+          ? _value.logoImage
+          : logoImage // ignore: cast_nullable_to_non_nullable
               as String?,
       year: freezed == year
           ? _value.year
@@ -106,6 +117,9 @@ abstract class _$$_FreezedClassCopyWith<$Res>
           String? id,
       @FormControlAnnotation<String>()
           String? name,
+      @JsonKey(name: 'logo_image')
+      @FormControlAnnotation<String>()
+          String? logoImage,
       @FormControlAnnotation<double>()
           double? year});
 }
@@ -124,6 +138,7 @@ class __$$_FreezedClassCopyWithImpl<$Res>
     Object? gender = freezed,
     Object? id = freezed,
     Object? name = freezed,
+    Object? logoImage = freezed,
     Object? year = freezed,
   }) {
     return _then(_$_FreezedClass(
@@ -139,6 +154,10 @@ class __$$_FreezedClassCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
+      logoImage: freezed == logoImage
+          ? _value.logoImage
+          : logoImage // ignore: cast_nullable_to_non_nullable
+              as String?,
       year: freezed == year
           ? _value.year
           : year // ignore: cast_nullable_to_non_nullable
@@ -150,10 +169,18 @@ class __$$_FreezedClassCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_FreezedClass extends _FreezedClass {
-  _$_FreezedClass(@FormControlAnnotation<String>() this.gender,
-      {@FormControlAnnotation<String>(validators: [requiredValidator]) this.id,
-      @FormControlAnnotation<String>() this.name,
-      @FormControlAnnotation<double>() this.year})
+  _$_FreezedClass(
+      @FormControlAnnotation<String>()
+          this.gender,
+      {@FormControlAnnotation<String>(validators: [requiredValidator])
+          this.id,
+      @FormControlAnnotation<String>()
+          this.name,
+      @JsonKey(name: 'logo_image')
+      @FormControlAnnotation<String>()
+          this.logoImage,
+      @FormControlAnnotation<double>()
+          this.year})
       : super._();
 
   factory _$_FreezedClass.fromJson(Map<String, dynamic> json) =>
@@ -169,12 +196,16 @@ class _$_FreezedClass extends _FreezedClass {
   @FormControlAnnotation<String>()
   final String? name;
   @override
+  @JsonKey(name: 'logo_image')
+  @FormControlAnnotation<String>()
+  final String? logoImage;
+  @override
   @FormControlAnnotation<double>()
   final double? year;
 
   @override
   String toString() {
-    return 'FreezedClass(gender: $gender, id: $id, name: $name, year: $year)';
+    return 'FreezedClass(gender: $gender, id: $id, name: $name, logoImage: $logoImage, year: $year)';
   }
 
   @override
@@ -185,12 +216,15 @@ class _$_FreezedClass extends _FreezedClass {
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.logoImage, logoImage) ||
+                other.logoImage == logoImage) &&
             (identical(other.year, year) || other.year == year));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, gender, id, name, year);
+  int get hashCode =>
+      Object.hash(runtimeType, gender, id, name, logoImage, year);
 
   @JsonKey(ignore: true)
   @override
@@ -214,6 +248,9 @@ abstract class _FreezedClass extends FreezedClass {
           final String? id,
       @FormControlAnnotation<String>()
           final String? name,
+      @JsonKey(name: 'logo_image')
+      @FormControlAnnotation<String>()
+          final String? logoImage,
       @FormControlAnnotation<double>()
           final double? year}) = _$_FreezedClass;
   _FreezedClass._() : super._();
@@ -230,6 +267,10 @@ abstract class _FreezedClass extends FreezedClass {
   @override
   @FormControlAnnotation<String>()
   String? get name;
+  @override
+  @JsonKey(name: 'logo_image')
+  @FormControlAnnotation<String>()
+  String? get logoImage;
   @override
   @FormControlAnnotation<double>()
   double? get year;

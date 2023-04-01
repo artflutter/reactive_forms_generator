@@ -11,6 +11,7 @@ _$_FreezedClass _$$_FreezedClassFromJson(Map<String, dynamic> json) =>
       json['gender'] as String?,
       id: json['id'] as String?,
       name: json['name'] as String?,
+      logoImage: json['logo_image'] as String?,
       year: (json['year'] as num?)?.toDouble(),
     );
 
@@ -19,5 +20,6 @@ Map<String, dynamic> _$$_FreezedClassToJson(_$_FreezedClass instance) =>
       'gender': instance.gender,
       'id': instance.id,
       'name': instance.name,
+      'logo_image': instance.logoImage,
       'year': instance.year,
     };

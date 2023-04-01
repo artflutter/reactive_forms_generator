@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
 
+import 'dart:convert';
+
 import 'package:example/docs/freezed/freezed_class.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
@@ -50,6 +52,7 @@ class FreezedFormWidget extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   if (formModel.form.valid) {
+                    debugPrint(jsonEncode(formModel.model.toJson()));
                     debugPrint(formModel.model.toString());
                     debugPrint(formModel.model.year.toString());
                   } else {

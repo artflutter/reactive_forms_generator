@@ -17,6 +17,9 @@ class FreezedClass with _$FreezedClass {
     @FormControlAnnotation<String>() String? gender, {
     @FormControlAnnotation<String>(validators: [requiredValidator]) String? id,
     @FormControlAnnotation<String>() String? name,
+    @JsonKey(name: 'logo_image')
+    @FormControlAnnotation<String>()
+        String? logoImage,
     @FormControlAnnotation<double>() double? year,
   }) = _FreezedClass;
 
