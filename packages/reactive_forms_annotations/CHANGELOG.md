@@ -1,3 +1,7 @@
+## [1.1.0]
+
+* RF 14.3.0
+
 ## [1.0.0]
 
 * Internal refactoring. Everything should work as previously but there is a small chance of breaking changes
