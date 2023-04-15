@@ -241,19 +241,19 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     this.path,
   ) {}
 
-  static String emailControlName = "email";
+  static const String emailControlName = "email";
 
-  static String passwordControlName = "password";
+  static const String passwordControlName = "password";
 
-  static String rememberMeControlName = "rememberMe";
+  static const String rememberMeControlName = "rememberMe";
 
-  static String themeControlName = "theme";
+  static const String themeControlName = "theme";
 
-  static String modeControlName = "mode";
+  static const String modeControlName = "mode";
 
-  static String timeoutControlName = "timeout";
+  static const String timeoutControlName = "timeout";
 
-  static String heightControlName = "height";
+  static const String heightControlName = "height";
 
   final LoginExtendedNullable? loginExtendedNullable;
 

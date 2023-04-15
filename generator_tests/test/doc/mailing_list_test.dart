@@ -245,7 +245,7 @@ class MailingListForm implements FormModel<MailingList> {
     this.path,
   ) {}
 
-  static String emailListControlName = "emailList";
+  static const String emailListControlName = "emailList";
 
   final MailingList? mailingList;
 

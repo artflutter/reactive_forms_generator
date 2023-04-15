@@ -195,9 +195,9 @@ class DeliveryListForm implements FormModel<DeliveryList> {
         .toList();
   }
 
-  static String deliveryListControlName = "deliveryList";
+  static const String deliveryListControlName = "deliveryList";
 
-  static String clientListControlName = "clientList";
+  static const String clientListControlName = "clientList";
 
   final DeliveryList? deliveryList;
 
@@ -734,9 +734,9 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
         AddressForm(deliveryPoint?.address, form, pathBuilder('address'));
   }
 
-  static String nameControlName = "name";
+  static const String nameControlName = "name";
 
-  static String addressControlName = "address";
+  static const String addressControlName = "address";
 
   late AddressForm addressForm;
 
@@ -953,9 +953,9 @@ class AddressForm implements FormModel<Address> {
     this.path,
   ) {}
 
-  static String streetControlName = "street";
+  static const String streetControlName = "street";
 
-  static String cityControlName = "city";
+  static const String cityControlName = "city";
 
   final Address? address;
 
@@ -1202,11 +1202,11 @@ class ClientForm implements FormModel<Client> {
     this.path,
   ) {}
 
-  static String clientTypeControlName = "clientType";
+  static const String clientTypeControlName = "clientType";
 
-  static String nameControlName = "name";
+  static const String nameControlName = "name";
 
-  static String notesControlName = "notes";
+  static const String notesControlName = "notes";
 
   final Client? client;
 
@@ -1811,9 +1811,9 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
         AddressForm(deliveryPoint?.address, form, pathBuilder('address'));
   }
 
-  static String nameControlName = "name";
+  static const String nameControlName = "name";
 
-  static String addressControlName = "address";
+  static const String addressControlName = "address";
 
   late AddressForm addressForm;
 

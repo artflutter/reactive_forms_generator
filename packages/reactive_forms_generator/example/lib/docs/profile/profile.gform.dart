@@ -185,21 +185,21 @@ class ProfileForm implements FormModel<Profile> {
     timerForm = TimerSettingForm(profile.timer, form, pathBuilder('timer'));
   }
 
-  static String nameControlName = "name";
+  static const String nameControlName = "name";
 
-  static String chartingOrderControlName = "chartingOrder";
+  static const String chartingOrderControlName = "chartingOrder";
 
-  static String numberingStandardControlName = "numberingStandard";
+  static const String numberingStandardControlName = "numberingStandard";
 
-  static String incidenceFilterControlName = "incidenceFilter";
+  static const String incidenceFilterControlName = "incidenceFilter";
 
-  static String measurementTypeControlName = "measurementType";
+  static const String measurementTypeControlName = "measurementType";
 
-  static String thresholdControlName = "threshold";
+  static const String thresholdControlName = "threshold";
 
-  static String timerControlName = "timer";
+  static const String timerControlName = "timer";
 
-  static String audioGuidanceControlName = "audioGuidance";
+  static const String audioGuidanceControlName = "audioGuidance";
 
   late IncidenceFilterForm incidenceFilterForm;
 
@@ -813,17 +813,17 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
     this.path,
   ) {}
 
-  static String isMobilityEnabledControlName = "isMobilityEnabled";
+  static const String isMobilityEnabledControlName = "isMobilityEnabled";
 
-  static String isFurcationEnabledControlName = "isFurcationEnabled";
+  static const String isFurcationEnabledControlName = "isFurcationEnabled";
 
-  static String isBleedingEnabledControlName = "isBleedingEnabled";
+  static const String isBleedingEnabledControlName = "isBleedingEnabled";
 
-  static String isSuppurationEnabledControlName = "isSuppurationEnabled";
+  static const String isSuppurationEnabledControlName = "isSuppurationEnabled";
 
-  static String isCalculusEnabledControlName = "isCalculusEnabled";
+  static const String isCalculusEnabledControlName = "isCalculusEnabled";
 
-  static String isPlaqueEnabledControlName = "isPlaqueEnabled";
+  static const String isPlaqueEnabledControlName = "isPlaqueEnabled";
 
   final IncidenceFilter? incidenceFilter;
 
@@ -1297,9 +1297,9 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
     this.path,
   ) {}
 
-  static String isEnabledControlName = "isEnabled";
+  static const String isEnabledControlName = "isEnabled";
 
-  static String valueControlName = "value";
+  static const String valueControlName = "value";
 
   final ThresholdSetting? thresholdSetting;
 
@@ -1491,9 +1491,9 @@ class TimerSettingForm implements FormModel<TimerSetting> {
     this.path,
   ) {}
 
-  static String isEnabledControlName = "isEnabled";
+  static const String isEnabledControlName = "isEnabled";
 
-  static String valueControlName = "value";
+  static const String valueControlName = "value";
 
   final TimerSetting? timerSetting;
 

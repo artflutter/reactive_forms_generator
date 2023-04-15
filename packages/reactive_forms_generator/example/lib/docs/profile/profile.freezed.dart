@@ -21,32 +21,22 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Profile {
   String get id => throw _privateConstructorUsedError;
-
   String get anotherId => throw _privateConstructorUsedError;
-
   @FormControlAnnotation<String>()
   String get name => throw _privateConstructorUsedError;
-
   @FormControlAnnotation<ChartingOrderValue>()
   ChartingOrderValue get chartingOrder => throw _privateConstructorUsedError;
-
   @FormControlAnnotation<NumberingStandard>()
   NumberingStandard get numberingStandard => throw _privateConstructorUsedError;
-
   IncidenceFilter get incidenceFilter => throw _privateConstructorUsedError;
-
   @FormControlAnnotation<MeasurementType>()
   MeasurementType get measurementType => throw _privateConstructorUsedError;
-
   ThresholdSetting get threshold => throw _privateConstructorUsedError;
-
   TimerSetting get timer => throw _privateConstructorUsedError;
-
   @FormControlAnnotation<bool>()
   bool get audioGuidance => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $ProfileCopyWith<Profile> get copyWith => throw _privateConstructorUsedError;
 }
@@ -55,7 +45,6 @@ mixin _$Profile {
 abstract class $ProfileCopyWith<$Res> {
   factory $ProfileCopyWith(Profile value, $Res Function(Profile) then) =
       _$ProfileCopyWithImpl<$Res, Profile>;
-
   @useResult
   $Res call(
       {String id,
@@ -75,11 +64,8 @@ abstract class $ProfileCopyWith<$Res> {
           bool audioGuidance});
 
   $ChartingOrderValueCopyWith<$Res> get chartingOrder;
-
   $IncidenceFilterCopyWith<$Res> get incidenceFilter;
-
   $ThresholdSettingCopyWith<$Res> get threshold;
-
   $TimerSettingCopyWith<$Res> get timer;
 }
 
@@ -90,7 +76,6 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -190,7 +175,6 @@ abstract class _$$_ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
   factory _$$_ProfileCopyWith(
           _$_Profile value, $Res Function(_$_Profile) then) =
       __$$_ProfileCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -212,13 +196,10 @@ abstract class _$$_ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
 
   @override
   $ChartingOrderValueCopyWith<$Res> get chartingOrder;
-
   @override
   $IncidenceFilterCopyWith<$Res> get incidenceFilter;
-
   @override
   $ThresholdSettingCopyWith<$Res> get threshold;
-
   @override
   $TimerSettingCopyWith<$Res> get timer;
 }
@@ -414,46 +395,35 @@ abstract class _Profile extends Profile {
       required final TimerSetting timer,
       @FormControlAnnotation<bool>()
           required final bool audioGuidance}) = _$_Profile;
-
   _Profile._() : super._();
 
   factory _Profile.fromJson(Map<String, dynamic> json) = _$_Profile.fromJson;
 
   @override
   String get id;
-
   @override
   String get anotherId;
-
   @override
   @FormControlAnnotation<String>()
   String get name;
-
   @override
   @FormControlAnnotation<ChartingOrderValue>()
   ChartingOrderValue get chartingOrder;
-
   @override
   @FormControlAnnotation<NumberingStandard>()
   NumberingStandard get numberingStandard;
-
   @override
   IncidenceFilter get incidenceFilter;
-
   @override
   @FormControlAnnotation<MeasurementType>()
   MeasurementType get measurementType;
-
   @override
   ThresholdSetting get threshold;
-
   @override
   TimerSetting get timer;
-
   @override
   @FormControlAnnotation<bool>()
   bool get audioGuidance;
-
   @override
   @JsonKey(ignore: true)
   _$$_ProfileCopyWith<_$_Profile> get copyWith =>
@@ -468,12 +438,10 @@ ThresholdSetting _$ThresholdSettingFromJson(Map<String, dynamic> json) {
 mixin _$ThresholdSetting {
   @FormControlAnnotation<bool>()
   bool get isEnabled => throw _privateConstructorUsedError;
-
   @FormControlAnnotation<int>()
   int get value => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $ThresholdSettingCopyWith<ThresholdSetting> get copyWith =>
       throw _privateConstructorUsedError;
@@ -484,7 +452,6 @@ abstract class $ThresholdSettingCopyWith<$Res> {
   factory $ThresholdSettingCopyWith(
           ThresholdSetting value, $Res Function(ThresholdSetting) then) =
       _$ThresholdSettingCopyWithImpl<$Res, ThresholdSetting>;
-
   @useResult
   $Res call(
       {@FormControlAnnotation<bool>() bool isEnabled,
@@ -498,7 +465,6 @@ class _$ThresholdSettingCopyWithImpl<$Res, $Val extends ThresholdSetting>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -527,7 +493,6 @@ abstract class _$$_ThresholdSettingCopyWith<$Res>
   factory _$$_ThresholdSettingCopyWith(
           _$_ThresholdSetting value, $Res Function(_$_ThresholdSetting) then) =
       __$$_ThresholdSettingCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -625,11 +590,9 @@ abstract class _ThresholdSetting implements ThresholdSetting {
   @override
   @FormControlAnnotation<bool>()
   bool get isEnabled;
-
   @override
   @FormControlAnnotation<int>()
   int get value;
-
   @override
   @JsonKey(ignore: true)
   _$$_ThresholdSettingCopyWith<_$_ThresholdSetting> get copyWith =>
@@ -644,12 +607,10 @@ TimerSetting _$TimerSettingFromJson(Map<String, dynamic> json) {
 mixin _$TimerSetting {
   @FormControlAnnotation<bool>()
   bool get isEnabled => throw _privateConstructorUsedError;
-
   @FormControlAnnotation<int>()
   int get value => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $TimerSettingCopyWith<TimerSetting> get copyWith =>
       throw _privateConstructorUsedError;
@@ -660,7 +621,6 @@ abstract class $TimerSettingCopyWith<$Res> {
   factory $TimerSettingCopyWith(
           TimerSetting value, $Res Function(TimerSetting) then) =
       _$TimerSettingCopyWithImpl<$Res, TimerSetting>;
-
   @useResult
   $Res call(
       {@FormControlAnnotation<bool>() bool isEnabled,
@@ -674,7 +634,6 @@ class _$TimerSettingCopyWithImpl<$Res, $Val extends TimerSetting>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -703,7 +662,6 @@ abstract class _$$_TimerSettingCopyWith<$Res>
   factory _$$_TimerSettingCopyWith(
           _$_TimerSetting value, $Res Function(_$_TimerSetting) then) =
       __$$_TimerSettingCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -801,11 +759,9 @@ abstract class _TimerSetting implements TimerSetting {
   @override
   @FormControlAnnotation<bool>()
   bool get isEnabled;
-
   @override
   @FormControlAnnotation<int>()
   int get value;
-
   @override
   @JsonKey(ignore: true)
   _$$_TimerSettingCopyWith<_$_TimerSetting> get copyWith =>
@@ -820,24 +776,18 @@ IncidenceFilter _$IncidenceFilterFromJson(Map<String, dynamic> json) {
 mixin _$IncidenceFilter {
   @FormControlAnnotation<bool>()
   bool get isMobilityEnabled => throw _privateConstructorUsedError;
-
   @FormControlAnnotation<bool>()
   bool get isFurcationEnabled => throw _privateConstructorUsedError;
-
   @FormControlAnnotation<bool>()
   bool get isBleedingEnabled => throw _privateConstructorUsedError;
-
   @FormControlAnnotation<bool>()
   bool get isSuppurationEnabled => throw _privateConstructorUsedError;
-
   @FormControlAnnotation<bool>()
   bool get isCalculusEnabled => throw _privateConstructorUsedError;
-
   @FormControlAnnotation<bool>()
   bool get isPlaqueEnabled => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   $IncidenceFilterCopyWith<IncidenceFilter> get copyWith =>
       throw _privateConstructorUsedError;
@@ -848,7 +798,6 @@ abstract class $IncidenceFilterCopyWith<$Res> {
   factory $IncidenceFilterCopyWith(
           IncidenceFilter value, $Res Function(IncidenceFilter) then) =
       _$IncidenceFilterCopyWithImpl<$Res, IncidenceFilter>;
-
   @useResult
   $Res call(
       {@FormControlAnnotation<bool>() bool isMobilityEnabled,
@@ -866,7 +815,6 @@ class _$IncidenceFilterCopyWithImpl<$Res, $Val extends IncidenceFilter>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -915,7 +863,6 @@ abstract class _$$_IncidenceFilterCopyWith<$Res>
   factory _$$_IncidenceFilterCopyWith(
           _$_IncidenceFilter value, $Res Function(_$_IncidenceFilter) then) =
       __$$_IncidenceFilterCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -1078,27 +1025,21 @@ abstract class _IncidenceFilter implements IncidenceFilter {
   @override
   @FormControlAnnotation<bool>()
   bool get isMobilityEnabled;
-
   @override
   @FormControlAnnotation<bool>()
   bool get isFurcationEnabled;
-
   @override
   @FormControlAnnotation<bool>()
   bool get isBleedingEnabled;
-
   @override
   @FormControlAnnotation<bool>()
   bool get isSuppurationEnabled;
-
   @override
   @FormControlAnnotation<bool>()
   bool get isCalculusEnabled;
-
   @override
   @FormControlAnnotation<bool>()
   bool get isPlaqueEnabled;
-
   @override
   @JsonKey(ignore: true)
   _$$_IncidenceFilterCopyWith<_$_IncidenceFilter> get copyWith =>
@@ -1121,9 +1062,7 @@ ScanOrder _$ScanOrderFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ScanOrder {
   Direction get direction => throw _privateConstructorUsedError;
-
   ToothSide get toothSide => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Jaw jaw, Direction direction, ToothSide toothSide)
@@ -1133,7 +1072,6 @@ mixin _$ScanOrder {
         quadrant,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Jaw jaw, Direction direction, ToothSide toothSide)? arch,
@@ -1151,14 +1089,12 @@ mixin _$ScanOrder {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ArchScanOrder value) arch,
     required TResult Function(QuadrantScanOrder value) quadrant,
   }) =>
       throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ArchScanOrder value)? arch,
@@ -1191,9 +1127,9 @@ class _$ScanOrderCopyWithImpl<$Res, $Val extends ScanOrder>
     implements $ScanOrderCopyWith<$Res> {
   _$ScanOrderCopyWithImpl(this._value, this._then);
 
-// ignore: unused_field
+  // ignore: unused_field
   final $Val _value;
-// ignore: unused_field
+  // ignore: unused_field
   final $Res Function($Val) _then;
 
   @pragma('vm:prefer-inline')
@@ -1621,9 +1557,9 @@ class _$ChartingOrderValueCopyWithImpl<$Res, $Val extends ChartingOrderValue>
     implements $ChartingOrderValueCopyWith<$Res> {
   _$ChartingOrderValueCopyWithImpl(this._value, this._then);
 
-// ignore: unused_field
+  // ignore: unused_field
   final $Val _value;
-// ignore: unused_field
+  // ignore: unused_field
   final $Res Function($Val) _then;
 
   @pragma('vm:prefer-inline')
@@ -1718,7 +1654,7 @@ class _$_ChartingOrderValue implements _ChartingOrderValue {
   @override
   List<List<ScanOrder>> get order {
     if (_order is EqualUnmodifiableListView) return _order;
-// ignore: implicit_dynamic_type
+    // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_order);
   }
 

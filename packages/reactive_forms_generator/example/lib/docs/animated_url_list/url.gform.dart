@@ -186,7 +186,7 @@ class UrlForm implements FormModel<Url> {
         .toList();
   }
 
-  static String urlListControlName = "urlList";
+  static const String urlListControlName = "urlList";
 
   final Url? url;
 
@@ -465,9 +465,9 @@ class UrlEntityForm implements FormModel<UrlEntity> {
     this.path,
   ) {}
 
-  static String labelControlName = "label";
+  static const String labelControlName = "label";
 
-  static String urlControlName = "url";
+  static const String urlControlName = "url";
 
   final UrlEntity? urlEntity;
 

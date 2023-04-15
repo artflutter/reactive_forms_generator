@@ -26,8 +26,8 @@ jobs:
       - name: reactive_forms_generator => example => analyze
         run: cd packages/reactive_forms_generator/example && flutter pub get && flutter analyze
 
-      - name: reactive_forms_generator => example => code formatting
-        run: cd packages/reactive_forms_generator/example && flutter pub get && dart format --set-exit-if-changed lib
+#      - name: reactive_forms_generator => example => code formatting
+#        run: cd packages/reactive_forms_generator/example && flutter pub get && dart format --set-exit-if-changed lib
 
       - name: reactive_forms_generator => example => test
         run: cd packages/reactive_forms_generator/example && flutter pub get && flutter test

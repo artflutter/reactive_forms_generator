@@ -217,7 +217,7 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     this.path,
   ) {}
 
-  static String tagsControlName = "tags";
+  static const String tagsControlName = "tags";
 
   final Tags<T>? tags;
 

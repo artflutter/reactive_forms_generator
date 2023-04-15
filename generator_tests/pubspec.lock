@@ -5,18 +5,18 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-      sha256: e440ac42679dfc04bbbefb58ed225c994bc7e07fccc8a68ec7d3631a127e5da9
+      sha256: a36ec4843dc30ea6bf652bf25e3448db6c5e8bcf4aa55f063a5d1dad216d8214
       url: "https://pub.dev"
     source: hosted
-    version: "54.0.0"
+    version: "58.0.0"
   analyzer:
     dependency: transitive
     description:
       name: analyzer
-      sha256: "2c2e3721ee9fb36de92faa060f3480c81b23e904352b087e5c64224b1a044427"
+      sha256: cc4242565347e98424ce9945c819c192ec0838cb9d1f6aa4a97cc96becbc5b27
       url: "https://pub.dev"
     source: hosted
-    version: "5.6.0"
+    version: "5.10.0"
   args:
     dependency: transitive
     description:
@@ -189,10 +189,10 @@ packages:
     dependency: "direct main"
     description:
       name: dart_style
-      sha256: "7a03456c3490394c8e7665890333e91ae8a49be43542b616e414449ac358acd4"
+      sha256: "6d691edde054969f0e0f26abb1b30834b5138b963793e56f69d3a9a4435e6352"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.4"
+    version: "2.3.0"
   fake_async:
     dependency: transitive
     description:
@@ -439,24 +439,24 @@ packages:
     dependency: transitive
     description:
       name: reactive_forms
-      sha256: f81d29d633efcd254aaa18e877c1851e767e02d4fd2ee0b32de1e1574ef075d7
+      sha256: "5aa9c48a0626c20d00a005e597cb10efbdebbfeecb9c4227b03a5945fbb91ec4"
       url: "https://pub.dev"
     source: hosted
-    version: "14.2.0"
+    version: "14.3.0"
   reactive_forms_annotations:
     dependency: "direct main"
     description:
       path: "../packages/reactive_forms_annotations"
       relative: true
     source: path
-    version: "0.14.0-beta"
+    version: "1.1.0"
   reactive_forms_generator:
     dependency: "direct dev"
     description:
       path: "../packages/reactive_forms_generator"
       relative: true
     source: path
-    version: "0.24.2-beta"
+    version: "1.0.1"
   recase:
     dependency: "direct main"
     description:
