@@ -263,13 +263,13 @@ class UserProfileForm implements FormModel<UserProfile> {
     officeForm = AddressForm(userProfile.office, form, pathBuilder('office'));
   }
 
-  static String firstNameControlName = "firstName";
+  static const String firstNameControlName = "firstName";
 
-  static String lastNameControlName = "lastName";
+  static const String lastNameControlName = "lastName";
 
-  static String homeControlName = "home";
+  static const String homeControlName = "home";
 
-  static String officeControlName = "office";
+  static const String officeControlName = "office";
 
   late AddressForm homeForm;
 
@@ -624,11 +624,11 @@ class AddressForm implements FormModel<Address> {
     this.path,
   ) {}
 
-  static String streetControlName = "street";
+  static const String streetControlName = "street";
 
-  static String cityControlName = "city";
+  static const String cityControlName = "city";
 
-  static String zipControlName = "zip";
+  static const String zipControlName = "zip";
 
   final Address? address;
 

@@ -36,6 +36,9 @@ void main() {
                 @FormControlAnnotation<String>() String? gender, {
                 @FormControlAnnotation<String>(validators: [requiredValidator]) String? id,
                 @FormControlAnnotation<String>() String? name,
+                @JsonKey(name: 'logo_image')
+                @FormControlAnnotation<String>()
+                    String? logoImage,
                 @FormControlAnnotation<double>() double? year,
               }) = _FreezedClass;
             
@@ -236,13 +239,15 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     this.path,
   ) {}
 
-  static String genderControlName = "gender";
+  static const String genderControlName = "gender";
 
-  static String idControlName = "id";
+  static const String idControlName = "id";
 
-  static String nameControlName = "name";
+  static const String nameControlName = "name";
 
-  static String yearControlName = "year";
+  static const String logoImageControlName = "logoImage";
+
+  static const String yearControlName = "year";
 
   final FreezedClass? freezedClass;
 
@@ -253,10 +258,12 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   String genderControlPath() => pathBuilder(genderControlName);
   String idControlPath() => pathBuilder(idControlName);
   String nameControlPath() => pathBuilder(nameControlName);
+  String logoImageControlPath() => pathBuilder(logoImageControlName);
   String yearControlPath() => pathBuilder(yearControlName);
   String? get _genderValue => genderControl?.value;
   String? get _idValue => idControl?.value;
   String? get _nameValue => nameControl?.value;
+  String? get _logoImageValue => logoImageControl?.value;
   double? get _yearValue => yearControl?.value;
   bool get containsGender {
     try {
@@ -285,6 +292,15 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     }
   }
 
+  bool get containsLogoImage {
+    try {
+      form.control(logoImageControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   bool get containsYear {
     try {
       form.control(yearControlPath());
@@ -297,10 +313,12 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   Object? get genderErrors => genderControl?.errors;
   Object? get idErrors => idControl?.errors;
   Object? get nameErrors => nameControl?.errors;
+  Object? get logoImageErrors => logoImageControl?.errors;
   Object? get yearErrors => yearControl?.errors;
   void get genderFocus => form.focus(genderControlPath());
   void get idFocus => form.focus(idControlPath());
   void get nameFocus => form.focus(nameControlPath());
+  void get logoImageFocus => form.focus(logoImageControlPath());
   void get yearFocus => form.focus(yearControlPath());
   void genderRemove({
     bool updateParent = true,
@@ -380,6 +398,32 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     }
   }
 
+  void logoImageRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsLogoImage) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          logoImageControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            logoImageControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void yearRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -433,6 +477,15 @@ class FreezedClassForm implements FormModel<FreezedClass> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void logoImageValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    logoImageControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void yearValueUpdate(
     double? value, {
     bool updateParent = true,
@@ -466,6 +519,15 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     bool emitEvent = true,
   }) {
     nameControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void logoImageValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    logoImageControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -505,6 +567,15 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       nameControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void logoImageValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      logoImageControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void yearValueReset(
     double? value, {
     bool updateParent = true,
@@ -521,6 +592,9 @@ class FreezedClassForm implements FormModel<FreezedClass> {
       containsId ? form.control(idControlPath()) as FormControl<String>? : null;
   FormControl<String>? get nameControl => containsName
       ? form.control(nameControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get logoImageControl => containsLogoImage
+      ? form.control(logoImageControlPath()) as FormControl<String>?
       : null;
   FormControl<double>? get yearControl => containsYear
       ? form.control(yearControlPath()) as FormControl<double>?
@@ -579,6 +653,24 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     }
   }
 
+  void logoImageSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      logoImageControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      logoImageControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   void yearSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -605,7 +697,10 @@ class FreezedClassForm implements FormModel<FreezedClass> {
       );
     }
     return FreezedClass(_genderValue,
-        id: _idValue, name: _nameValue, year: _yearValue);
+        id: _idValue,
+        name: _nameValue,
+        logoImage: _logoImageValue,
+        year: _yearValue);
   }
 
   FreezedClassForm copyWithPath(String? path) {
@@ -651,6 +746,13 @@ class FreezedClassForm implements FormModel<FreezedClass> {
             touched: false),
         nameControlName: FormControl<String>(
             value: freezedClass?.name,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        logoImageControlName: FormControl<String>(
+            value: freezedClass?.logoImage,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

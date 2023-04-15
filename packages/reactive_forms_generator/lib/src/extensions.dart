@@ -224,7 +224,7 @@ extension FieldElementExt on FieldElement {
 
   String get fieldControlName => '${fieldName}Control';
 
-  String get fieldControlNameName => '${fieldName}ControlName';
+  // String get fieldControlNameName => '${fieldName}ControlName';
 
   String get fieldControlPath => '${fieldName}ControlPath';
 

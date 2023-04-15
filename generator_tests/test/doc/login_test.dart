@@ -257,9 +257,9 @@ class LoginForm implements FormModel<Login> {
     this.path,
   ) {}
 
-  static String emailControlName = "email";
+  static const String emailControlName = "email";
 
-  static String passwordControlName = "password";
+  static const String passwordControlName = "password";
 
   final Login? login;
 

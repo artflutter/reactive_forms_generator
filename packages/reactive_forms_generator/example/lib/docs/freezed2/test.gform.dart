@@ -179,9 +179,9 @@ class TestForm implements FormModel<Test> {
     this.path,
   ) {}
 
-  static String titleControlName = "title";
+  static const String titleControlName = "title";
 
-  static String descriptionControlName = "description";
+  static const String descriptionControlName = "description";
 
   final Test? test;
 

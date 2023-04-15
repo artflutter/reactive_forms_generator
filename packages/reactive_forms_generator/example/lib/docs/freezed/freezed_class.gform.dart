@@ -182,15 +182,15 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     this.path,
   ) {}
 
-  static String genderControlName = "gender";
+  static const String genderControlName = "gender";
 
-  static String idControlName = "id";
+  static const String idControlName = "id";
 
-  static String nameControlName = "name";
+  static const String nameControlName = "name";
 
-  static String logoImageControlName = "logoImage";
+  static const String logoImageControlName = "logoImage";
 
-  static String yearControlName = "year";
+  static const String yearControlName = "year";
 
   final FreezedClass? freezedClass;
 

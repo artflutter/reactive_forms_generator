@@ -129,6 +129,7 @@ class FormGenerator {
   Field staticFieldName(ParameterElement field) => Field(
         (b) => b
           ..static = true
+          ..modifier = FieldModifier.constant
           ..type = stringRef
           ..name = field.fieldControlNameName
           ..assignment = Code('"${field.fieldName}"'),

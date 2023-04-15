@@ -269,13 +269,13 @@ class GroupForm implements FormModel<Group> {
     address2Form = AddressForm(group?.address2, form, pathBuilder('address2'));
   }
 
-  static String personalControlName = "personal";
+  static const String personalControlName = "personal";
 
-  static String phoneControlName = "phone";
+  static const String phoneControlName = "phone";
 
-  static String addressControlName = "address";
+  static const String addressControlName = "address";
 
-  static String address2ControlName = "address2";
+  static const String address2ControlName = "address2";
 
   late PersonalForm personalForm;
 
@@ -702,9 +702,9 @@ class PersonalForm implements FormModel<Personal> {
     this.path,
   ) {}
 
-  static String nameControlName = "name";
+  static const String nameControlName = "name";
 
-  static String emailControlName = "email";
+  static const String emailControlName = "email";
 
   final Personal? personal;
 
@@ -949,9 +949,9 @@ class PhoneForm implements FormModel<Phone> {
     this.path,
   ) {}
 
-  static String phoneNumberControlName = "phoneNumber";
+  static const String phoneNumberControlName = "phoneNumber";
 
-  static String countryIsoControlName = "countryIso";
+  static const String countryIsoControlName = "countryIso";
 
   final Phone? phone;
 
@@ -1196,11 +1196,11 @@ class AddressForm implements FormModel<Address> {
     this.path,
   ) {}
 
-  static String streetControlName = "street";
+  static const String streetControlName = "street";
 
-  static String cityControlName = "city";
+  static const String cityControlName = "city";
 
-  static String zipControlName = "zip";
+  static const String zipControlName = "zip";
 
   final Address? address;
 

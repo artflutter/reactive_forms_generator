@@ -246,15 +246,15 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     this.path,
   ) {}
 
-  static String emailListControlName = "emailList";
+  static const String emailListControlName = "emailList";
 
-  static String fruitListControlName = "fruitList";
+  static const String fruitListControlName = "fruitList";
 
-  static String vegetablesListControlName = "vegetablesList";
+  static const String vegetablesListControlName = "vegetablesList";
 
-  static String modeListControlName = "modeList";
+  static const String modeListControlName = "modeList";
 
-  static String someListControlName = "someList";
+  static const String someListControlName = "someList";
 
   final ArrayNullable? arrayNullable;
 
