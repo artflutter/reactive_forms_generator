@@ -30,13 +30,18 @@ class ExtendedControlMethod extends ReactiveFormGeneratorMethod {
 
   @override
   Method? formGroupArrayMethod() {
-    final type = (field.type as ParameterizedType).typeArguments.first;
+    final classElement = ((field.type as ParameterizedType)
+        .typeArguments
+        .first
+        .element as ClassElement);
+
+    final generics = classElement.generics;
 
     final typeReference =
-        'ExtendedControl<List<Map<String, Object?>?>, List<${type}Form>>';
+        'ExtendedControl<List<Map<String, Object?>?>, List<${classElement.name}Form$generics>>';
 
     final body = '''
-      ExtendedControl<List<Map<String, Object?>?>, List<${type}Form>>(
+      ExtendedControl<List<Map<String, Object?>?>, List<${classElement.name}Form$generics>>(
           form.control(${field.fieldControlPath}())
               as FormArray<Map<String, Object?>>,
           () => ${field.name}${field.className})
@@ -52,63 +57,63 @@ class ExtendedControlMethod extends ReactiveFormGeneratorMethod {
     );
   }
 
-  // @override
-  // Method? formArrayMethod() {
-  //   final type = (field.type as ParameterizedType).typeArguments.first;
-  //
-  //   String displayType = type.getDisplayString(withNullability: true);
-  //
-  //   // we need to trim last NullabilitySuffix.question cause FormControl modifies
-  //   // generic T => T?
-  //   if (type.nullabilitySuffix == NullabilitySuffix.question) {
-  //     displayType = displayType.substring(0, displayType.length - 1);
-  //   }
-  //
-  //   String typeReference = 'FormArray<$displayType>${field.nullabilitySuffix}';
-  //
-  //   String body = 'form.control(${field.fieldControlPath}()) as $typeReference';
-  //
-  //   if (field.isNullable) {
-  //     body =
-  //     '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $typeReference : null';
-  //   }
-  //
-  //   return Method(
-  //         (b) => b
-  //       ..name = field.fieldExtendedControlName
-  //       ..lambda = true
-  //       ..type = MethodType.getter
-  //       ..returns = Reference(typeReference)
-  //       ..body = Code(body),
-  //   );
-  // }
-  //
-  // @override
-  // Method? formControlMethod() {
-  //   String displayType = field.type.getDisplayString(withNullability: true);
-  //
-  //   // we need to trim last NullabilitySuffix.question cause FormControl modifies
-  //   // generic T => T?
-  //   if (field.type.nullabilitySuffix == NullabilitySuffix.question) {
-  //     displayType = displayType.substring(0, displayType.length - 1);
-  //   }
-  //
-  //   final reference = 'FormControl<$displayType>${field.nullabilitySuffix}';
-  //
-  //   String body = 'form.control(${field.fieldControlPath}()) as $reference';
-  //
-  //   if (field.isNullable) {
-  //     body =
-  //     '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $reference : null';
-  //   }
-  //
-  //   return Method(
-  //         (b) => b
-  //       ..name = field.fieldExtendedControlName
-  //       ..lambda = true
-  //       ..type = MethodType.getter
-  //       ..returns = Reference(reference)
-  //       ..body = Code(body),
-  //   );
-  // }
+// @override
+// Method? formArrayMethod() {
+//   final type = (field.type as ParameterizedType).typeArguments.first;
+//
+//   String displayType = type.getDisplayString(withNullability: true);
+//
+//   // we need to trim last NullabilitySuffix.question cause FormControl modifies
+//   // generic T => T?
+//   if (type.nullabilitySuffix == NullabilitySuffix.question) {
+//     displayType = displayType.substring(0, displayType.length - 1);
+//   }
+//
+//   String typeReference = 'FormArray<$displayType>${field.nullabilitySuffix}';
+//
+//   String body = 'form.control(${field.fieldControlPath}()) as $typeReference';
+//
+//   if (field.isNullable) {
+//     body =
+//     '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $typeReference : null';
+//   }
+//
+//   return Method(
+//         (b) => b
+//       ..name = field.fieldExtendedControlName
+//       ..lambda = true
+//       ..type = MethodType.getter
+//       ..returns = Reference(typeReference)
+//       ..body = Code(body),
+//   );
+// }
+//
+// @override
+// Method? formControlMethod() {
+//   String displayType = field.type.getDisplayString(withNullability: true);
+//
+//   // we need to trim last NullabilitySuffix.question cause FormControl modifies
+//   // generic T => T?
+//   if (field.type.nullabilitySuffix == NullabilitySuffix.question) {
+//     displayType = displayType.substring(0, displayType.length - 1);
+//   }
+//
+//   final reference = 'FormControl<$displayType>${field.nullabilitySuffix}';
+//
+//   String body = 'form.control(${field.fieldControlPath}()) as $reference';
+//
+//   if (field.isNullable) {
+//     body =
+//     '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $reference : null';
+//   }
+//
+//   return Method(
+//         (b) => b
+//       ..name = field.fieldExtendedControlName
+//       ..lambda = true
+//       ..type = MethodType.getter
+//       ..returns = Reference(reference)
+//       ..body = Code(body),
+//   );
+// }
 }

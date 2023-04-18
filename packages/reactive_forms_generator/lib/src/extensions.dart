@@ -13,6 +13,17 @@ extension ConstructorElementExt on ConstructorElement {
       );
 }
 
+extension DartTypeExt on DartType {
+  String get listTypeName {
+    final type = (this as ParameterizedType).typeArguments.first;
+    return type
+        .getDisplayString(withNullability: true)
+        .replaceAll('<', '')
+        .replaceAll('>', '')
+        .replaceAll('?', 'Q');
+  }
+}
+
 extension ClassElementExt on ClassElement {
   String get fullTypeName => thisType.toString();
 
