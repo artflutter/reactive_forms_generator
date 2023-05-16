@@ -18,6 +18,7 @@ class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
         (k, v) {
           if(keys.contains(k)) {
             final patch = ${field.className}(v, form, pathBuilder("${field.fieldName}.\$k"));
+            // final patch = ${field.formGroupArrayClassName}(v, form, pathBuilder("${field.fieldName}.\$k"));
             ${field.name}${field.className}[k] = patch;
             toPatch.add(patch);
           }
@@ -25,7 +26,7 @@ class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
       );
     
       ${field.fieldControlName}${field.nullabilitySuffix}.patchValue(
-        toPatch.map((e) => ${field.className}.formElements(e.${field.elementClassName.camelCase}).rawValue).toList(), 
+        toPatch.map((e) => ${field.className}.formElements${field.formGroupArrayGenerics}(e.${field.elementClassName.camelCase}).rawValue).toList(), 
         updateParent: updateParent, 
         emitEvent:emitEvent);
     ''';

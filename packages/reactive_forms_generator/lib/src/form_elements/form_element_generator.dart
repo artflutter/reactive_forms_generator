@@ -18,9 +18,25 @@ abstract class FormElementGenerator {
 
     final optionalChaining = (enclosingElement == root &&
                 type?.nullabilitySuffix != NullabilitySuffix.question) ||
+            // (enclosingElement != root &&
+            //     type != null &&
+            //     !(type?.getDisplayString(withNullability: true) ?? '')
+            //         .endsWith('?')) ||
             (enclosingElement == root && !root.isNullable)
         ? ''
         : '?';
+
+    // if (type?.getDisplayString(withNullability: true) == 'Address') {
+    //   print('///////////////////////');
+    //   print(type);
+    //   print(
+    //       '${enclosingElement.name.camelCase}$optionalChaining.${fieldElement.name}');
+    //   // print(enclosingElement.name);
+    //   // print(enclosingElement.thisType
+    //   //     .getDisplayString(withNullability: true)
+    //   //     .endsWith('?'));
+    //   print('///////////////////////');
+    // }
 
     return '${enclosingElement.name.camelCase}$optionalChaining.${fieldElement.name}';
   }

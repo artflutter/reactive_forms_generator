@@ -22,6 +22,7 @@ class ReactiveFormUpdateValueMethod extends ReactiveFormGeneratorMethod {
           (k, v) => MapEntry(
             k,
             ${field.className}(v, form, pathBuilder("${field.fieldName}.\$k")),
+            // ${field.formGroupArrayClassName}(v, form, pathBuilder("${field.fieldName}.\$k")),
           ),
         )
         .values
@@ -44,14 +45,14 @@ class ReactiveFormUpdateValueMethod extends ReactiveFormGeneratorMethod {
     
         if (toUpdate.isNotEmpty) {
           ${field.fieldControlName}${field.nullabilitySuffix}.updateValue(
-              toUpdate.map((e) => ${field.className}.formElements(e.${field.elementClassName.camelCase}).rawValue).toList(),
+              toUpdate.map((e) => ${field.className}.formElements${field.formGroupArrayGenerics}(e.${field.elementClassName.camelCase}).rawValue).toList(),
               updateParent: updateParent,
               emitEvent: emitEvent);
         }
     
         if (toAdd.isNotEmpty) {
           toAdd.forEach((e) {
-            ${field.fieldControlName}${field.nullabilitySuffix}.add(${field.className}.formElements(e.${field.elementClassName.camelCase}),
+            ${field.fieldControlName}${field.nullabilitySuffix}.add(${field.className}.formElements${field.formGroupArrayGenerics}(e.${field.elementClassName.camelCase}),
                 updateParent: updateParent, emitEvent: emitEvent);
           });
         }

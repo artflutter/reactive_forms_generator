@@ -11,7 +11,7 @@ class ResetMethod extends ReactiveFormGeneratorMethod {
     final code = '''
       ${field.fieldControlName}${field.nullabilitySuffix}.reset(
         value: value${field.nullabilitySuffix}.map(
-          (e) => ${field.className}.formElements(e).rawValue
+          (e) => ${field.className}.formElements${field.formGroupArrayGenerics}(e).rawValue
         ).toList(), 
         updateParent: updateParent, 
         emitEvent:emitEvent)

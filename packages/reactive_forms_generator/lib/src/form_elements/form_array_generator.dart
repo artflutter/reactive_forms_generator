@@ -150,7 +150,7 @@ class FormArrayGenerator extends FormElementGenerator {
       // );
 
       final props = [
-        '$value.map((e) => ${field.className}.formElements(e)).toList()',
+        '$value.map((e) => ${field.className}.formElements${field.formGroupArrayGenerics}(e)).toList()',
         // (url?.urlList ?? []).map((e) => UrlEntityForm.formElements(e)).toList(),
         // '${field.name}${formGenerator.className}.map((e) => e.formElementsS()).toList()',
         ...partialProps

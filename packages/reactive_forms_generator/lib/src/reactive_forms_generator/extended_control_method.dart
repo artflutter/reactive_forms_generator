@@ -30,18 +30,24 @@ class ExtendedControlMethod extends ReactiveFormGeneratorMethod {
 
   @override
   Method? formGroupArrayMethod() {
-    final classElement = ((field.type as ParameterizedType)
-        .typeArguments
-        .first
-        .element as ClassElement);
+    final type = (field.type as ParameterizedType).typeArguments.first;
+    String formType = '${type}Form';
 
-    final generics = classElement.generics;
+    if (type is ParameterizedType) {
+      final generics = type.typeArguments.isNotEmpty
+          ? '<${type.typeArguments.join(', ')}>'
+          : '';
+      formType = '${type.element?.name ?? ''}Form$generics';
+    }
+    // print('===========');
+    // print(formType);
+    // print('===========');
 
     final typeReference =
-        'ExtendedControl<List<Map<String, Object?>?>, List<${classElement.name}Form$generics>>';
+        'ExtendedControl<List<Map<String, Object?>?>, List<$formType>>';
 
     final body = '''
-      ExtendedControl<List<Map<String, Object?>?>, List<${classElement.name}Form$generics>>(
+      ExtendedControl<List<Map<String, Object?>?>, List<$formType>>(
           form.control(${field.fieldControlPath}())
               as FormArray<Map<String, Object?>>,
           () => ${field.name}${field.className})

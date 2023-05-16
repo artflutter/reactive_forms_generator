@@ -185,12 +185,14 @@ class DeliveryListForm implements FormModel<DeliveryList> {
         .asMap()
         .map((k, v) => MapEntry(
             k, DeliveryPointForm(v, form, pathBuilder("deliveryList.$k"))))
+        // .map((k, v) => MapEntry(k, List<DeliveryPoint>Form(v, form, pathBuilder("deliveryList.$k"))))
         .values
         .toList();
     clientListClientForm = (deliveryList?.clientList ?? [])
         .asMap()
         .map((k, v) =>
             MapEntry(k, ClientForm(v, form, pathBuilder("clientList.$k"))))
+        // .map((k, v) => MapEntry(k, List<Client>?Form(v, form, pathBuilder("clientList.$k"))))
         .values
         .toList();
   }
@@ -304,6 +306,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
           (k, v) => MapEntry(
             k,
             DeliveryPointForm(v, form, pathBuilder("deliveryList.$k")),
+            // List<DeliveryPoint>Form(v, form, pathBuilder("deliveryList.$k")),
           ),
         )
         .values
@@ -359,6 +362,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
           (k, v) => MapEntry(
             k,
             ClientForm(v, form, pathBuilder("clientList.$k")),
+            // List<Client>?Form(v, form, pathBuilder("clientList.$k")),
           ),
         )
         .values
@@ -407,6 +411,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
       return;
     }
 
+    // final item = List<DeliveryPoint>Form(
     final item = DeliveryPointForm(
       value,
       form,
@@ -442,6 +447,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
       return;
     }
 
+    // final item = List<Client>?Form(
     final item = ClientForm(
       value,
       form,
@@ -495,6 +501,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
         if (keys.contains(k)) {
           final patch =
               DeliveryPointForm(v, form, pathBuilder("deliveryList.$k"));
+          // final patch = List<DeliveryPoint>Form(v, form, pathBuilder("deliveryList.$k"));
           deliveryListDeliveryPointForm[k] = patch;
           toPatch.add(patch);
         }
@@ -522,6 +529,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
       (k, v) {
         if (keys.contains(k)) {
           final patch = ClientForm(v, form, pathBuilder("clientList.$k"));
+          // final patch = List<Client>?Form(v, form, pathBuilder("clientList.$k"));
           clientListClientForm[k] = patch;
           toPatch.add(patch);
         }
@@ -617,6 +625,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
   void addDeliveryListItem(DeliveryPoint value) {
     final formClass = DeliveryPointForm(value, form,
         pathBuilder('deliveryList.${deliveryListDeliveryPointForm.length}'));
+    // final formClass = List<DeliveryPoint>Form(value, form, pathBuilder('deliveryList.${deliveryListDeliveryPointForm.length}'));
 
     deliveryListDeliveryPointForm.add(formClass);
     deliveryListControl.add(DeliveryPointForm.formElements(value));
@@ -625,6 +634,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
   void addClientListItem(Client value) {
     final formClass = ClientForm(
         value, form, pathBuilder('clientList.${clientListClientForm.length}'));
+    // final formClass = List<Client>?Form(value, form, pathBuilder('clientList.${clientListClientForm.length}'));
 
     clientListClientForm.add(formClass);
     clientListControl?.add(ClientForm.formElements(value));
@@ -740,7 +750,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
 
   late AddressForm addressForm;
 
-  final DeliveryPoint? deliveryPoint;
+  final DeliveryPoint deliveryPoint;
 
   final FormGroup form;
 
@@ -928,7 +938,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  static FormGroup formElements(DeliveryPoint? deliveryPoint) => FormGroup({
+  static FormGroup formElements(DeliveryPoint deliveryPoint) => FormGroup({
         nameControlName: FormControl<String>(
             value: deliveryPoint?.name,
             validators: [
@@ -1208,7 +1218,7 @@ class ClientForm implements FormModel<Client> {
 
   static const String notesControlName = "notes";
 
-  final Client? client;
+  final Client client;
 
   final FormGroup form;
 
@@ -1483,7 +1493,7 @@ class ClientForm implements FormModel<Client> {
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  static FormGroup formElements(Client? client) => FormGroup({
+  static FormGroup formElements(Client client) => FormGroup({
         clientTypeControlName: FormControl<ClientType>(
             value: client?.clientType,
             validators: [],

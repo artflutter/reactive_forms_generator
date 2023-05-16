@@ -14,6 +14,7 @@ class ReactiveFormInsertMethod extends ReactiveFormGeneratorMethod {
         return;
       }
   
+      // final item = ${field.formGroupArrayClassName}(
       final item = ${field.className}(
         value,
         form,
@@ -32,7 +33,7 @@ class ReactiveFormInsertMethod extends ReactiveFormGeneratorMethod {
   
       ${field.fieldControlName}${field.nullabilitySuffix}.insert(
         i,
-        ${field.className}.formElements(value),
+        ${field.className}.formElements${field.formGroupArrayGenerics}(value),
         updateParent: updateParent,
         emitEvent: emitEvent,
       );

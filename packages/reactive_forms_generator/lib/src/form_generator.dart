@@ -159,6 +159,7 @@ class FormGenerator {
   Method get updateValueMethod {
     String displayType =
         type?.getDisplayString(withNullability: true) ?? element.fullTypeName;
+    String generics = '';
 
     if (type != null &&
         type is ParameterizedType &&
@@ -167,6 +168,9 @@ class FormGenerator {
           .typeArguments
           .first
           .getDisplayString(withNullability: true);
+
+      // generics =
+      //     '<${((type as ParameterizedType).typeArguments.first as ParameterizedType).typeArguments.join(', ')}>';
     }
 
     return Method(
@@ -199,7 +203,7 @@ class FormGenerator {
         ])
         ..returns = const Reference('void')
         ..body = Code(
-          'form.updateValue($className.formElements(value).rawValue, updateParent: updateParent, emitEvent:emitEvent)',
+          'form.updateValue($className.formElements${generics}(value).rawValue, updateParent: updateParent, emitEvent:emitEvent)',
         ),
     );
   }
@@ -255,6 +259,7 @@ class FormGenerator {
   Method get resetMethod {
     String displayType =
         type?.getDisplayString(withNullability: false) ?? element.fullTypeName;
+    String generics = '';
 
     if (type != null &&
         type is ParameterizedType &&
@@ -263,6 +268,9 @@ class FormGenerator {
           .typeArguments
           .first
           .getDisplayString(withNullability: false);
+
+      // generics =
+      //     '<${((type as ParameterizedType).typeArguments.first as ParameterizedType).typeArguments.join(', ')}>';
     }
 
     return Method(
@@ -292,8 +300,8 @@ class FormGenerator {
           ),
         ])
         ..returns = const Reference('void')
-        ..body = const Code(
-          'form.reset(value: value != null ? formElements(value).rawValue : null, updateParent: updateParent, emitEvent:emitEvent)',
+        ..body = Code(
+          'form.reset(value: value != null ? formElements$generics(value).rawValue : null, updateParent: updateParent, emitEvent:emitEvent)',
         ),
     );
   }
@@ -302,7 +310,10 @@ class FormGenerator {
     final type = field.typeParameter.getDisplayString(withNullability: false);
 
     final formGroupGenerator = FormGenerator(
-        root, field.typeParameter.element as ClassElement, field.typeParameter);
+      root,
+      field.typeParameter.element as ClassElement,
+      field.typeParameter,
+    );
 
     return Method(
       (b) => b
@@ -318,9 +329,10 @@ class FormGenerator {
         ..body = Code(
           '''
               final formClass = ${formGroupGenerator.className}(value, form, pathBuilder('${field.fieldName}.\${${field.name}${formGroupGenerator.className}.length}'));
+              // final formClass = ${field.formGroupArrayClassName}(value, form, pathBuilder('${field.fieldName}.\${${field.name}${formGroupGenerator.className}.length}'));
 
               ${field.name}${formGroupGenerator.className}.add(formClass);             
-              ${field.fieldControlName}${field.nullabilitySuffix}.add(${formGroupGenerator.className}.formElements${formGroupGenerator.element.generics}(value));''',
+              ${field.fieldControlName}${field.nullabilitySuffix}.add(${formGroupGenerator.className}.formElements${field.formGroupArrayGenerics}(value));''',
         ),
     );
   }
@@ -485,7 +497,14 @@ class FormGenerator {
   Method get modelMethod => Method(
         (b) {
           final parameterValues = parameters.map((e) {
-            final nullabilitySuffix = element.isNullable ? '?' : '';
+            // print('********+++');
+            // print(e.type.getDisplayString(withNullability: true).endsWith('?'));
+            // print(element);
+            // print('********+++');
+            final nullabilitySuffix =
+                e.type.getDisplayString(withNullability: true).endsWith('?')
+                    ? '?'
+                    : '';
             final fieldValueName =
                 '${element.name.camelCase}$nullabilitySuffix.${e.fieldName}';
 
@@ -579,6 +598,7 @@ class FormGenerator {
                 return '''${e.name}${formGenerator.className} = (${element.name.camelCase}$nullabilitySuffix.${e.name} $defaultValue)
                   .asMap()
                   .map((k, v) => MapEntry(k, ${formGenerator.className}(v, form, pathBuilder("${e.name}.\$k"))))
+                  // .map((k, v) => MapEntry(k, ${e.formGroupArrayClassName}(v, form, pathBuilder("${e.name}.\$k"))))
                   .values
                   .toList();
                 ''';
@@ -624,13 +644,30 @@ class FormGenerator {
         (type as ParameterizedType).typeArguments.isNotEmpty) {
       final parameterizedType = (type as ParameterizedType).typeArguments.first;
 
-      displayType = parameterizedType.getDisplayString(withNullability: false);
+      displayType =
+          '${(parameterizedType.element as ClassElement).name}${(parameterizedType.element as ClassElement).generics}'; //parameterizedType.getDisplayString(withNullability: false);
 
-      if (parameterizedType.element is ClassElement &&
-          (parameterizedType.element as ClassElement).isNullable) {
+      // if (displayType.startsWith('Test')) {
+      //   print('here');
+      //   print(displayType);
+      //   // print(parameterizedType);
+      //   print((parameterizedType.element as ClassElement).name);
+      //   print((parameterizedType.element as ClassElement).generics);
+      //   print('here');
+      // }
+
+      if (parameterizedType
+          .getDisplayString(withNullability: true)
+          .endsWith('?')) {
         displayType = '$displayType?';
       }
     }
+
+    // if (displayType.startsWith('Test')) {
+    //   print('++++++++++');
+    //   print(displayType);
+    //   print('++++++++++');
+    // }
 
     return displayType;
   }
@@ -727,6 +764,13 @@ class FormGenerator {
               ),
               Method(
                 (b) {
+                  // if (modelDisplayType == 'Test<A, B, C>') {
+                  //   print('*************');
+                  //   print(modelDisplayType);
+                  //   print(element);
+                  //   print('*************');
+                  // }
+
                   b
                     ..name = 'formElements${element.generics}'
                     ..static = true
@@ -753,13 +797,15 @@ class FormGenerator {
                           ..type = t.InterfaceTypeImpl(
                             element: element,
                             typeArguments: element.thisType.typeArguments,
-                            nullabilitySuffix: NullabilitySuffix.none,
+                            nullabilitySuffix: modelDisplayType.endsWith('?')
+                                ? NullabilitySuffix.question
+                                : NullabilitySuffix.none,
                           ),
                         type ??
                             t.InterfaceTypeImpl(
                               element: element,
                               typeArguments: element.thisType.typeArguments,
-                              nullabilitySuffix: element.isNullable
+                              nullabilitySuffix: modelDisplayType.endsWith('?')
                                   ? NullabilitySuffix.question
                                   : NullabilitySuffix.none,
                             ),

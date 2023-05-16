@@ -131,6 +131,28 @@ extension ParameterElementExt on ParameterElement {
 
   String get className => '${elementClassName}Form';
 
+  String get formGroupArrayClassName {
+    final t = (type as ParameterizedType).typeArguments.first;
+    String formType = '${type}Form';
+
+    if (t is ParameterizedType && t.typeArguments.isNotEmpty) {
+      formType = '${t.element?.name ?? ''}Form<${t.typeArguments.join(', ')}>';
+    }
+
+    return formType;
+  }
+
+  String get formGroupArrayGenerics {
+    final t = (type as ParameterizedType).typeArguments.first;
+    String formType = '';
+
+    if (t is ParameterizedType && t.typeArguments.isNotEmpty) {
+      formType = '<${t.typeArguments.join(', ')}>';
+    }
+
+    return formType;
+  }
+
   String get elementClassName {
     final element = type.element as ClassElement;
 
