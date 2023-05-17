@@ -5,6 +5,6 @@ analyzer:
     /**/*.freezed.dart,
     /**/*.g.dart,
   ]
-  strong-mode:
-    implicit-casts: false
-    implicit-dynamic: false
+  language:
+    strict-casts: true
+    strict-raw-types: true

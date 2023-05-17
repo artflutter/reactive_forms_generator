@@ -1,3 +1,7 @@
+## [1.0.2]
+
+* fix for https://github.com/artflutter/reactive_forms_generator/issues/107
+
 ## [1.0.1]
 
 * make field names const

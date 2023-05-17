@@ -473,10 +473,11 @@ class UserProfileForm implements FormModel<UserProfile> {
 
   @override
   UserProfile get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'UserProfileForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return UserProfile(
         id: userProfile.id,
@@ -820,10 +821,11 @@ class AddressForm implements FormModel<Address> {
 
   @override
   Address get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
   }

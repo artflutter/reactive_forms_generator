@@ -634,10 +634,11 @@ class FreezedClassForm implements FormModel<FreezedClass> {
 
   @override
   FreezedClass get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'FreezedClassForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return FreezedClass(_genderValue,
         id: _idValue,
