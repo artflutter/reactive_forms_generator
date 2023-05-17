@@ -124,8 +124,8 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
 
   @override
   void initState() {
-    _formModel = SomeWiredNameForm(
-        widget.model, SomeWiredNameForm.formElements(widget.model), null);
+    _formModel =
+        SomeWiredNameForm(SomeWiredNameForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -139,8 +139,8 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
   @override
   void didUpdateWidget(covariant SomeWiredNameFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = SomeWiredNameForm(
-          widget.model, SomeWiredNameForm.formElements(widget.model), null);
+      _formModel =
+          SomeWiredNameForm(SomeWiredNameForm.formElements(widget.model), null);
 
       if (_formModel.form.disabled) {
         _formModel.form.markAsDisabled();
@@ -177,16 +177,13 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
 
 class SomeWiredNameForm implements FormModel<RenamedBasic> {
   SomeWiredNameForm(
-    this.renamedBasic,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String emailControlName = "email";
 
   static const String passwordControlName = "password";
-
-  final RenamedBasic? renamedBasic;
 
   final FormGroup form;
 
@@ -321,10 +318,6 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
           '[${path ?? 'SomeWiredNameForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return RenamedBasic(email: _emailValue, password: _passwordValue);
-  }
-
-  SomeWiredNameForm copyWithPath(String? path) {
-    return SomeWiredNameForm(renamedBasic, form, path);
   }
 
   @override

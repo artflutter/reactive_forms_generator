@@ -128,7 +128,7 @@ class _ModelImplementsFormBuilderState
   @override
   void initState() {
     _formModel = ModelImplementsForm(
-        widget.model, ModelImplementsForm.formElements(widget.model), null);
+        ModelImplementsForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -143,7 +143,7 @@ class _ModelImplementsFormBuilderState
   void didUpdateWidget(covariant ModelImplementsFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
       _formModel = ModelImplementsForm(
-          widget.model, ModelImplementsForm.formElements(widget.model), null);
+          ModelImplementsForm.formElements(widget.model), null);
 
       if (_formModel.form.disabled) {
         _formModel.form.markAsDisabled();
@@ -180,16 +180,13 @@ class _ModelImplementsFormBuilderState
 
 class ModelImplementsForm implements FormModel<ModelImplements> {
   ModelImplementsForm(
-    this.modelImplements,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String emailControlName = "email";
 
   static const String passwordControlName = "password";
-
-  final ModelImplements? modelImplements;
 
   final FormGroup form;
 
@@ -324,10 +321,6 @@ class ModelImplementsForm implements FormModel<ModelImplements> {
           '[${path ?? 'ModelImplementsForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return ModelImplements(email: _emailValue, password: _passwordValue);
-  }
-
-  ModelImplementsForm copyWithPath(String? path) {
-    return ModelImplementsForm(modelImplements, form, path);
   }
 
   @override

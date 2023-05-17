@@ -2,7 +2,6 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
-import 'package:recase/recase.dart';
 
 class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
   ReactiveFormPatchValueMethod(ParameterElement field) : super(field);
@@ -12,20 +11,18 @@ class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
     final code = '''
       final keys = ${field.name}${field.className}.asMap().keys;
       
-      final toPatch = <${field.className}>[];
+      final toPatch = <${field.typeParameter}>[];
       (value ${field.isNullable ? '?? []' : ''}).asMap()
       .forEach(
         (k, v) {
           if(keys.contains(k)) {
-            final patch = ${field.className}(v, form, pathBuilder("${field.fieldName}.\$k"));
-            ${field.name}${field.className}[k] = patch;
-            toPatch.add(patch);
+            toPatch.add(v);
           }
         },
       );
     
       ${field.fieldControlName}${field.nullabilitySuffix}.patchValue(
-        toPatch.map((e) => ${field.className}.formElements(e.${field.elementClassName.camelCase}).rawValue).toList(), 
+        toPatch.map((e) => ${field.className}.formElements(e).rawValue).toList(), 
         updateParent: updateParent, 
         emitEvent:emitEvent);
     ''';

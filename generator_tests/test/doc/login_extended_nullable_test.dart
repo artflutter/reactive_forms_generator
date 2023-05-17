@@ -183,7 +183,7 @@ class _LoginExtendedNullableFormBuilderState
 
   @override
   void initState() {
-    _formModel = LoginExtendedNullableForm(widget.model,
+    _formModel = LoginExtendedNullableForm(
         LoginExtendedNullableForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
@@ -198,7 +198,7 @@ class _LoginExtendedNullableFormBuilderState
   @override
   void didUpdateWidget(covariant LoginExtendedNullableFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = LoginExtendedNullableForm(widget.model,
+      _formModel = LoginExtendedNullableForm(
           LoginExtendedNullableForm.formElements(widget.model), null);
 
       if (_formModel.form.disabled) {
@@ -236,10 +236,9 @@ class _LoginExtendedNullableFormBuilderState
 
 class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
   LoginExtendedNullableForm(
-    this.loginExtendedNullable,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String emailControlName = "email";
 
@@ -254,8 +253,6 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
   static const String timeoutControlName = "timeout";
 
   static const String heightControlName = "height";
-
-  final LoginExtendedNullable? loginExtendedNullable;
 
   final FormGroup form;
 
@@ -886,10 +883,6 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
         mode: _modeValue,
         timeout: _timeoutValue,
         height: _heightValue);
-  }
-
-  LoginExtendedNullableForm copyWithPath(String? path) {
-    return LoginExtendedNullableForm(loginExtendedNullable, form, path);
   }
 
   @override

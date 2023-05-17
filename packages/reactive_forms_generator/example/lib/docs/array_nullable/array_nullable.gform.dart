@@ -124,8 +124,8 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
 
   @override
   void initState() {
-    _formModel = ArrayNullableForm(
-        widget.model, ArrayNullableForm.formElements(widget.model), null);
+    _formModel =
+        ArrayNullableForm(ArrayNullableForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -139,8 +139,8 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
   @override
   void didUpdateWidget(covariant ArrayNullableFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = ArrayNullableForm(
-          widget.model, ArrayNullableForm.formElements(widget.model), null);
+      _formModel =
+          ArrayNullableForm(ArrayNullableForm.formElements(widget.model), null);
 
       if (_formModel.form.disabled) {
         _formModel.form.markAsDisabled();
@@ -177,10 +177,9 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
 
 class ArrayNullableForm implements FormModel<ArrayNullable> {
   ArrayNullableForm(
-    this.arrayNullable,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String emailListControlName = "emailList";
 
@@ -191,8 +190,6 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   static const String modeListControlName = "modeList";
 
   static const String someListControlName = "someList";
-
-  final ArrayNullable? arrayNullable;
 
   final FormGroup form;
 
@@ -757,10 +754,6 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
         vegetablesList: _vegetablesListValue,
         modeList: _modeListValue,
         someList: _someListValue);
-  }
-
-  ArrayNullableForm copyWithPath(String? path) {
-    return ArrayNullableForm(arrayNullable, form, path);
   }
 
   @override

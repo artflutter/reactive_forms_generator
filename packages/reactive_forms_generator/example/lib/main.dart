@@ -11,6 +11,7 @@ import 'package:example/docs/login_extended_nullable/login_extended_nullable_for
 import 'package:example/docs/mailing_list/mailing_list_form.dart';
 import 'package:example/docs/model_extends/model_extends_form.dart';
 import 'package:example/docs/model_implements/model_implements_form.dart';
+import 'package:example/docs/nested/nested_form.dart';
 import 'package:example/docs/user_profile/user_profile_form.dart';
 import 'package:flutter/material.dart';
 
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         Routes.animatedUrlList: (_) => const UrlListForm(),
         Routes.modelExtends: (_) => const ModelExtendsWidget(),
         Routes.modelImplements: (_) => const ModelImplementsWidget(),
+        Routes.nested: (_) => const NestedFormWidget(),
       },
       home: const LoginFormWidget(),
     );
@@ -79,4 +81,6 @@ class Routes {
   static const modelExtends = '/model-extends';
 
   static const modelImplements = '/model-implements';
+
+  static const nested = '/nested';
 }

@@ -181,8 +181,8 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
 
   @override
   void initState() {
-    _formModel = FreezedClassForm(
-        widget.model, FreezedClassForm.formElements(widget.model), null);
+    _formModel =
+        FreezedClassForm(FreezedClassForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -196,8 +196,8 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
   @override
   void didUpdateWidget(covariant FreezedClassFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = FreezedClassForm(
-          widget.model, FreezedClassForm.formElements(widget.model), null);
+      _formModel =
+          FreezedClassForm(FreezedClassForm.formElements(widget.model), null);
 
       if (_formModel.form.disabled) {
         _formModel.form.markAsDisabled();
@@ -234,10 +234,9 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
 
 class FreezedClassForm implements FormModel<FreezedClass> {
   FreezedClassForm(
-    this.freezedClass,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String genderControlName = "gender";
 
@@ -248,8 +247,6 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   static const String logoImageControlName = "logoImage";
 
   static const String yearControlName = "year";
-
-  final FreezedClass? freezedClass;
 
   final FormGroup form;
 
@@ -702,10 +699,6 @@ class FreezedClassForm implements FormModel<FreezedClass> {
         name: _nameValue,
         logoImage: _logoImageValue,
         year: _yearValue);
-  }
-
-  FreezedClassForm copyWithPath(String? path) {
-    return FreezedClassForm(freezedClass, form, path);
   }
 
   @override

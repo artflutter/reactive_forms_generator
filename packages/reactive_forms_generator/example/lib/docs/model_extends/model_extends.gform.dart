@@ -124,8 +124,8 @@ class _ModelExtendsFormBuilderState extends State<ModelExtendsFormBuilder> {
 
   @override
   void initState() {
-    _formModel = ModelExtendsForm(
-        widget.model, ModelExtendsForm.formElements(widget.model), null);
+    _formModel =
+        ModelExtendsForm(ModelExtendsForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -139,8 +139,8 @@ class _ModelExtendsFormBuilderState extends State<ModelExtendsFormBuilder> {
   @override
   void didUpdateWidget(covariant ModelExtendsFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = ModelExtendsForm(
-          widget.model, ModelExtendsForm.formElements(widget.model), null);
+      _formModel =
+          ModelExtendsForm(ModelExtendsForm.formElements(widget.model), null);
 
       if (_formModel.form.disabled) {
         _formModel.form.markAsDisabled();
@@ -177,16 +177,13 @@ class _ModelExtendsFormBuilderState extends State<ModelExtendsFormBuilder> {
 
 class ModelExtendsForm implements FormModel<ModelExtends> {
   ModelExtendsForm(
-    this.modelExtends,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String emailControlName = "email";
 
   static const String passwordControlName = "password";
-
-  final ModelExtends? modelExtends;
 
   final FormGroup form;
 
@@ -321,10 +318,6 @@ class ModelExtendsForm implements FormModel<ModelExtends> {
           '[${path ?? 'ModelExtendsForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return ModelExtends(email: _emailValue, password: _passwordValue);
-  }
-
-  ModelExtendsForm copyWithPath(String? path) {
-    return ModelExtendsForm(modelExtends, form, path);
   }
 
   @override

@@ -50,9 +50,7 @@ class FormGroupGenerator extends FormElementGenerator {
       .first
       .parameters
       .where((e) => e.type.element is ClassElement)
-      .where(
-        (e) => formGroupChecker.hasAnnotationOfExact(e.type.element!),
-      )
+      .where((e) => e.isFormGroup)
       .toList();
 
   List<String> get validators {
@@ -63,7 +61,7 @@ class FormGroupGenerator extends FormElementGenerator {
     formGroupValidatorsTyped = formGroupValidatorsTyped
         .map(
           (e) =>
-              '(control) => $e(${field.className}(${classElement.name.camelCase}, control as FormGroup, null))',
+              '(control) => $e(${field.className}(control as FormGroup, null))',
         )
         .toList();
 

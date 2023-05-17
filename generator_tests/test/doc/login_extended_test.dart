@@ -259,8 +259,8 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
 
   @override
   void initState() {
-    _formModel = LoginExtendedForm(
-        widget.model, LoginExtendedForm.formElements(widget.model), null);
+    _formModel =
+        LoginExtendedForm(LoginExtendedForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -274,8 +274,8 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
   @override
   void didUpdateWidget(covariant LoginExtendedFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = LoginExtendedForm(
-          widget.model, LoginExtendedForm.formElements(widget.model), null);
+      _formModel =
+          LoginExtendedForm(LoginExtendedForm.formElements(widget.model), null);
 
       if (_formModel.form.disabled) {
         _formModel.form.markAsDisabled();
@@ -312,10 +312,9 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
 
 class LoginExtendedForm implements FormModel<LoginExtended> {
   LoginExtendedForm(
-    this.loginExtended,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String emailControlName = "email";
 
@@ -331,7 +330,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
 
   static const String heightControlName = "height";
 
-  final LoginExtended? loginExtended;
+  static const String unAnnotatedControlName = "unAnnotated";
 
   final FormGroup form;
 
@@ -344,6 +343,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   String modeControlPath() => pathBuilder(modeControlName);
   String timeoutControlPath() => pathBuilder(timeoutControlName);
   String heightControlPath() => pathBuilder(heightControlName);
+  String unAnnotatedControlPath() => pathBuilder(unAnnotatedControlName);
   String get _emailValue => emailControl.value ?? "";
   String get _passwordValue => passwordControl.value as String;
   bool get _rememberMeValue => rememberMeControl.value as bool;
@@ -351,6 +351,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   UserMode get _modeValue => modeControl.value as UserMode;
   int get _timeoutValue => timeoutControl.value as int;
   double get _heightValue => heightControl.value as double;
+  String? get _unAnnotatedValue => unAnnotatedControl?.value;
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -414,6 +415,15 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     }
   }
 
+  bool get containsUnAnnotated {
+    try {
+      form.control(unAnnotatedControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get emailErrors => emailControl.errors;
   Object? get passwordErrors => passwordControl.errors;
   Object? get rememberMeErrors => rememberMeControl.errors;
@@ -421,6 +431,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   Object? get modeErrors => modeControl.errors;
   Object? get timeoutErrors => timeoutControl.errors;
   Object? get heightErrors => heightControl.errors;
+  Object? get unAnnotatedErrors => unAnnotatedControl?.errors;
   void get emailFocus => form.focus(emailControlPath());
   void get passwordFocus => form.focus(passwordControlPath());
   void get rememberMeFocus => form.focus(rememberMeControlPath());
@@ -428,6 +439,33 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   void get modeFocus => form.focus(modeControlPath());
   void get timeoutFocus => form.focus(timeoutControlPath());
   void get heightFocus => form.focus(heightControlPath());
+  void get unAnnotatedFocus => form.focus(unAnnotatedControlPath());
+  void unAnnotatedRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsUnAnnotated) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          unAnnotatedControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            unAnnotatedControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void emailValueUpdate(
     String value, {
     bool updateParent = true,
@@ -488,6 +526,15 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     bool emitEvent = true,
   }) {
     heightControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void unAnnotatedValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    unAnnotatedControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -554,6 +601,15 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void unAnnotatedValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    unAnnotatedControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void emailValueReset(
     String value, {
     bool updateParent = true,
@@ -617,6 +673,15 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   }) =>
       heightControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void unAnnotatedValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      unAnnotatedControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
   FormControl<String> get passwordControl =>
@@ -631,6 +696,9 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
       form.control(timeoutControlPath()) as FormControl<int>;
   FormControl<double> get heightControl =>
       form.control(heightControlPath()) as FormControl<double>;
+  FormControl<String>? get unAnnotatedControl => containsUnAnnotated
+      ? form.control(unAnnotatedControlPath()) as FormControl<String>?
+      : null;
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -757,6 +825,24 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     }
   }
 
+  void unAnnotatedSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      unAnnotatedControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      unAnnotatedControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   @override
   LoginExtended get model {
     final currentForm = path == null ? form : form.control(path!);
@@ -773,11 +859,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
         mode: _modeValue,
         timeout: _timeoutValue,
         height: _heightValue,
-        unAnnotated: loginExtended?.unAnnotated);
-  }
-
-  LoginExtendedForm copyWithPath(String? path) {
-    return LoginExtendedForm(loginExtended, form, path);
+        unAnnotated: _unAnnotatedValue);
   }
 
   @override
@@ -868,7 +950,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
           validators: [
             allFieldsRequired,
             (control) => allFieldsRequiredTyped(
-                LoginExtendedForm(loginExtended, control as FormGroup, null))
+                LoginExtendedForm(control as FormGroup, null))
           ],
           asyncValidators: [],
           asyncValidatorsDebounceTime: 250,
