@@ -17,7 +17,8 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const issue_number = context.issue.number;
-            const comment_body = 'This issue has been closed. Thanks for your contributions!';
+            const issue_creator = context.issue.user.login;
+            const comment_body = `This issue has been closed. Thanks for your contributions, @${issue_creator}!`;
             
             github.rest.issues.createComment({
               owner: context.repo.owner,
