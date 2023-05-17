@@ -1000,10 +1000,11 @@ class ProfileForm implements FormModel<Profile> {
 
   @override
   Profile get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'ProfileForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Profile(profile.id,
         anotherId: profile.anotherId,
@@ -1485,10 +1486,11 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
 
   @override
   IncidenceFilter get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'IncidenceFilterForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return IncidenceFilter(
         isMobilityEnabled: _isMobilityEnabledValue,
@@ -1712,10 +1714,11 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
 
   @override
   ThresholdSetting get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'ThresholdSettingForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return ThresholdSetting(isEnabled: _isEnabledValue, value: _valueValue);
   }
@@ -1906,10 +1909,11 @@ class TimerSettingForm implements FormModel<TimerSetting> {
 
   @override
   TimerSetting get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'TimerSettingForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return TimerSetting(isEnabled: _isEnabledValue, value: _valueValue);
   }

@@ -521,10 +521,10 @@ class FormGenerator {
             ..annotations.add(const CodeExpression(Code('override')))
             ..type = MethodType.getter
             ..body = Code('''
-              if (!form.valid) {
-                debugPrint(
-                  'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-                );
+              final currentForm = path == null ? form : form.control(path!);
+            
+              if (!currentForm.valid) {
+                debugPrint('[\${path ?? '$classNameFull'}]\\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
               }
               return ${element.fullTypeName}(${parameterValues.join(', ')});
             ''');
