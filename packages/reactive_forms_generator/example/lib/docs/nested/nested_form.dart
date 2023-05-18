@@ -31,7 +31,8 @@ class _NestedFormWidgetState extends State<NestedFormWidget> {
                 child: ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      formModel.reset();
+                      formModel.groupListValueUpdate([]);
+
                       formModel.addGroupListItem(const Group(
                         id: 'id_1',
                         subGroupList: [],
@@ -64,7 +65,7 @@ class _NestedFormWidgetState extends State<NestedFormWidget> {
                 child: ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      formModel.reset();
+                      formModel.groupListValueUpdate([]);
                       formModel.addGroupListItem(const Group(
                         id: 'id_1',
                         subGroupList: [
