@@ -121,8 +121,7 @@ class _UrlFormBuilderState extends State<UrlFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
-        UrlForm(widget.model, UrlForm.formElements(widget.model), null);
+    _formModel = UrlForm(UrlForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -136,8 +135,7 @@ class _UrlFormBuilderState extends State<UrlFormBuilder> {
   @override
   void didUpdateWidget(covariant UrlFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          UrlForm(widget.model, UrlForm.formElements(widget.model), null);
+      _formModel = UrlForm(UrlForm.formElements(widget.model), null);
 
       if (_formModel.form.disabled) {
         _formModel.form.markAsDisabled();
@@ -174,43 +172,19 @@ class _UrlFormBuilderState extends State<UrlFormBuilder> {
 
 class UrlForm implements FormModel<Url> {
   UrlForm(
-    this.url,
     this.form,
     this.path,
-  ) {
-    urlListUrlEntityForm = (url?.urlList ?? [])
-        .asMap()
-        .map((k, v) =>
-            MapEntry(k, UrlEntityForm(v, form, pathBuilder("urlList.$k"))))
-        .values
-        .toList();
-  }
+  );
 
   static const String urlListControlName = "urlList";
-
-  final Url? url;
 
   final FormGroup form;
 
   final String? path;
 
-  late List<UrlEntityForm> urlListUrlEntityForm;
-
   String urlListControlPath() => pathBuilder(urlListControlName);
-  List<UrlEntity> get _urlListValue => urlListUrlEntityForm
-      .asMap()
-      .map(
-        (k, v) => MapEntry(
-          k,
-          v
-              .copyWithPath(
-                pathBuilder("urlList.$k"),
-              )
-              .model,
-        ),
-      )
-      .values
-      .toList();
+  List<UrlEntity> get _urlListValue =>
+      urlListUrlEntityForm.map((e) => e.model).toList();
   bool get containsUrlList {
     try {
       form.control(urlListControlPath());
@@ -227,30 +201,17 @@ class UrlForm implements FormModel<Url> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    if ((value).isEmpty) {
+    final localValue = (value);
+    if (localValue.isEmpty) {
       urlListClear(updateParent: updateParent, emitEvent: emitEvent);
 
       return;
     }
 
-    final updateList = (value)
-        .asMap()
-        .map(
-          (k, v) => MapEntry(
-            k,
-            UrlEntityForm(v, form, pathBuilder("urlList.$k")),
-          ),
-        )
-        .values
-        .toList();
+    final toUpdate = <UrlEntity>[];
+    final toAdd = <UrlEntity>[];
 
-    urlListUrlEntityForm.clear();
-    urlListUrlEntityForm.addAll(updateList);
-
-    final toUpdate = <UrlEntityForm>[];
-    final toAdd = <UrlEntityForm>[];
-
-    updateList.asMap().forEach((k, v) {
+    localValue.asMap().forEach((k, v) {
       if (urlListUrlEntityForm.asMap().containsKey(k) &&
           (urlListControl.value ?? []).asMap().containsKey(k)) {
         toUpdate.add(v);
@@ -261,16 +222,14 @@ class UrlForm implements FormModel<Url> {
 
     if (toUpdate.isNotEmpty) {
       urlListControl.updateValue(
-          toUpdate
-              .map((e) => UrlEntityForm.formElements(e.urlEntity).rawValue)
-              .toList(),
+          toUpdate.map((e) => UrlEntityForm.formElements(e).rawValue).toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
     }
 
     if (toAdd.isNotEmpty) {
       toAdd.forEach((e) {
-        urlListControl.add(UrlEntityForm.formElements(e.urlEntity),
+        urlListControl.add(UrlEntityForm.formElements(e),
             updateParent: updateParent, emitEvent: emitEvent);
       });
     }
@@ -282,26 +241,10 @@ class UrlForm implements FormModel<Url> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    if (urlListUrlEntityForm.length < i) {
+    if ((urlListControl.value ?? []).length < i) {
       addUrlListItem(value);
       return;
     }
-
-    final item = UrlEntityForm(
-      value,
-      form,
-      pathBuilder('urlList.$i'),
-    );
-
-    urlListUrlEntityForm.insert(i, item);
-
-    urlListUrlEntityForm.asMap().forEach((k, v) {
-      if (k > i) {
-        urlListUrlEntityForm[k] = v.copyWithPath(
-          pathBuilder("urlList.$k"),
-        );
-      }
-    });
 
     urlListControl.insert(
       i,
@@ -326,21 +269,17 @@ class UrlForm implements FormModel<Url> {
   }) {
     final keys = urlListUrlEntityForm.asMap().keys;
 
-    final toPatch = <UrlEntityForm>[];
+    final toPatch = <UrlEntity>[];
     (value).asMap().forEach(
       (k, v) {
         if (keys.contains(k)) {
-          final patch = UrlEntityForm(v, form, pathBuilder("urlList.$k"));
-          urlListUrlEntityForm[k] = patch;
-          toPatch.add(patch);
+          toPatch.add(v);
         }
       },
     );
 
     urlListControl.patchValue(
-        toPatch
-            .map((e) => UrlEntityForm.formElements(e.urlEntity).rawValue)
-            .toList(),
+        toPatch.map((e) => UrlEntityForm.formElements(e).rawValue).toList(),
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
@@ -359,6 +298,12 @@ class UrlForm implements FormModel<Url> {
           emitEvent: emitEvent);
   FormArray<Map<String, Object?>> get urlListControl =>
       form.control(urlListControlPath()) as FormArray<Map<String, Object?>>;
+  List<UrlEntityForm> get urlListUrlEntityForm => (urlListControl.value ?? [])
+      .asMap()
+      .map(
+          (k, v) => MapEntry(k, UrlEntityForm(form, pathBuilder("urlList.$k"))))
+      .values
+      .toList();
   void urlListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -384,22 +329,11 @@ class UrlForm implements FormModel<Url> {
                   as FormArray<Map<String, Object?>>,
               () => urlListUrlEntityForm);
   void addUrlListItem(UrlEntity value) {
-    final formClass = UrlEntityForm(
-        value, form, pathBuilder('urlList.${urlListUrlEntityForm.length}'));
-
-    urlListUrlEntityForm.add(formClass);
     urlListControl.add(UrlEntityForm.formElements(value));
   }
 
   void removeUrlListItemAtIndex(int i) {
-    if (urlListUrlEntityForm.asMap().containsKey(i) &&
-        (urlListControl.value ?? []).asMap().containsKey(i)) {
-      urlListUrlEntityForm.removeAt(i);
-
-      urlListUrlEntityForm.asMap().forEach((k, v) {
-        urlListUrlEntityForm[k] = v.copyWithPath(pathBuilder("urlList.$k"));
-      });
-
+    if ((urlListControl.value ?? []).length > i) {
       urlListControl.removeAt(i);
     }
   }
@@ -417,10 +351,6 @@ class UrlForm implements FormModel<Url> {
           '[${path ?? 'UrlForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Url(urlList: _urlListValue);
-  }
-
-  UrlForm copyWithPath(String? path) {
-    return UrlForm(url, form, path);
   }
 
   @override
@@ -461,16 +391,13 @@ class UrlForm implements FormModel<Url> {
 
 class UrlEntityForm implements FormModel<UrlEntity> {
   UrlEntityForm(
-    this.urlEntity,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String labelControlName = "label";
 
   static const String urlControlName = "url";
-
-  final UrlEntity? urlEntity;
 
   final FormGroup form;
 
@@ -605,10 +532,6 @@ class UrlEntityForm implements FormModel<UrlEntity> {
           '[${path ?? 'UrlEntityForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return UrlEntity(label: _labelValue, url: _urlValue);
-  }
-
-  UrlEntityForm copyWithPath(String? path) {
-    return UrlEntityForm(urlEntity, form, path);
   }
 
   @override

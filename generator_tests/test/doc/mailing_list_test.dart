@@ -187,8 +187,8 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
 
   @override
   void initState() {
-    _formModel = MailingListForm(
-        widget.model, MailingListForm.formElements(widget.model), null);
+    _formModel =
+        MailingListForm(MailingListForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -202,8 +202,8 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
   @override
   void didUpdateWidget(covariant MailingListFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = MailingListForm(
-          widget.model, MailingListForm.formElements(widget.model), null);
+      _formModel =
+          MailingListForm(MailingListForm.formElements(widget.model), null);
 
       if (_formModel.form.disabled) {
         _formModel.form.markAsDisabled();
@@ -240,14 +240,11 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
 
 class MailingListForm implements FormModel<MailingList> {
   MailingListForm(
-    this.mailingList,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String emailListControlName = "emailList";
-
-  final MailingList? mailingList;
 
   final FormGroup form;
 
@@ -363,10 +360,6 @@ class MailingListForm implements FormModel<MailingList> {
           '[${path ?? 'MailingListForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return MailingList(emailList: _emailListValue);
-  }
-
-  MailingListForm copyWithPath(String? path) {
-    return MailingListForm(mailingList, form, path);
   }
 
   @override

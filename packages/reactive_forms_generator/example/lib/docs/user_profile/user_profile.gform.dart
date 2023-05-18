@@ -95,14 +95,14 @@ class ReactiveUserProfileForm extends StatelessWidget {
 class UserProfileFormBuilder extends StatefulWidget {
   const UserProfileFormBuilder({
     Key? key,
-    required this.model,
+    this.model,
     this.child,
     this.onWillPop,
     required this.builder,
     this.initState,
   }) : super(key: key);
 
-  final UserProfile model;
+  final UserProfile? model;
 
   final Widget? child;
 
@@ -123,8 +123,8 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
 
   @override
   void initState() {
-    _formModel = UserProfileForm(
-        widget.model, UserProfileForm.formElements(widget.model), null);
+    _formModel =
+        UserProfileForm(UserProfileForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -138,8 +138,8 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
   @override
   void didUpdateWidget(covariant UserProfileFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = UserProfileForm(
-          widget.model, UserProfileForm.formElements(widget.model), null);
+      _formModel =
+          UserProfileForm(UserProfileForm.formElements(widget.model), null);
 
       if (_formModel.form.disabled) {
         _formModel.form.markAsDisabled();
@@ -176,13 +176,11 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
 
 class UserProfileForm implements FormModel<UserProfile> {
   UserProfileForm(
-    this.userProfile,
     this.form,
     this.path,
-  ) {
-    homeForm = AddressForm(userProfile.home, form, pathBuilder('home'));
-    officeForm = AddressForm(userProfile.office, form, pathBuilder('office'));
-  }
+  );
+
+  static const String idControlName = "id";
 
   static const String firstNameControlName = "firstName";
 
@@ -192,24 +190,29 @@ class UserProfileForm implements FormModel<UserProfile> {
 
   static const String officeControlName = "office";
 
-  late AddressForm homeForm;
-
-  late AddressForm officeForm;
-
-  final UserProfile userProfile;
-
   final FormGroup form;
 
   final String? path;
 
+  String idControlPath() => pathBuilder(idControlName);
   String firstNameControlPath() => pathBuilder(firstNameControlName);
   String lastNameControlPath() => pathBuilder(lastNameControlName);
   String homeControlPath() => pathBuilder(homeControlName);
   String officeControlPath() => pathBuilder(officeControlName);
+  String get _idValue => idControl.value as String;
   String get _firstNameValue => firstNameControl.value ?? "";
   String get _lastNameValue => lastNameControl.value ?? "";
   Address get _homeValue => homeForm.model;
   Address? get _officeValue => officeForm.model;
+  bool get containsId {
+    try {
+      form.control(idControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   bool get containsFirstName {
     try {
       form.control(firstNameControlPath());
@@ -246,10 +249,12 @@ class UserProfileForm implements FormModel<UserProfile> {
     }
   }
 
+  Object? get idErrors => idControl.errors;
   Object? get firstNameErrors => firstNameControl.errors;
   Object? get lastNameErrors => lastNameControl.errors;
   Object? get homeErrors => homeControl.errors;
   Object? get officeErrors => officeControl?.errors;
+  void get idFocus => form.focus(idControlPath());
   void get firstNameFocus => form.focus(firstNameControlPath());
   void get lastNameFocus => form.focus(lastNameControlPath());
   void get homeFocus => form.focus(homeControlPath());
@@ -278,6 +283,15 @@ class UserProfileForm implements FormModel<UserProfile> {
         }
       }
     }
+  }
+
+  void idValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    idControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void firstNameValueUpdate(
@@ -313,6 +327,15 @@ class UserProfileForm implements FormModel<UserProfile> {
     bool emitEvent = true,
   }) {
     officeControl?.updateValue(AddressForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void idValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    idControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -352,6 +375,15 @@ class UserProfileForm implements FormModel<UserProfile> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void idValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      idControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void firstNameValueReset(
     String value, {
     bool updateParent = true,
@@ -392,6 +424,8 @@ class UserProfileForm implements FormModel<UserProfile> {
           value: AddressForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  FormControl<String> get idControl =>
+      form.control(idControlPath()) as FormControl<String>;
   FormControl<String> get firstNameControl =>
       form.control(firstNameControlPath()) as FormControl<String>;
   FormControl<String> get lastNameControl =>
@@ -399,6 +433,26 @@ class UserProfileForm implements FormModel<UserProfile> {
   FormGroup get homeControl => form.control(homeControlPath()) as FormGroup;
   FormGroup? get officeControl =>
       containsOffice ? form.control(officeControlPath()) as FormGroup? : null;
+  AddressForm get homeForm => AddressForm(form, pathBuilder('home'));
+  AddressForm get officeForm => AddressForm(form, pathBuilder('office'));
+  void idSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      idControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      idControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   void firstNameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -480,15 +534,11 @@ class UserProfileForm implements FormModel<UserProfile> {
           '[${path ?? 'UserProfileForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return UserProfile(
-        id: userProfile.id,
+        id: _idValue,
         firstName: _firstNameValue,
         lastName: _lastNameValue,
         home: _homeValue,
         office: _officeValue);
-  }
-
-  UserProfileForm copyWithPath(String? path) {
-    return UserProfileForm(userProfile, form, path);
   }
 
   @override
@@ -511,9 +561,9 @@ class UserProfileForm implements FormModel<UserProfile> {
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  static FormGroup formElements(UserProfile userProfile) => FormGroup({
+  static FormGroup formElements(UserProfile? userProfile) => FormGroup({
         firstNameControlName: FormControl<String>(
-            value: userProfile.firstName,
+            value: userProfile?.firstName,
             validators: [
               (control) => requiredValidator(control as FormControl<String>)
             ],
@@ -522,7 +572,7 @@ class UserProfileForm implements FormModel<UserProfile> {
             disabled: false,
             touched: false),
         lastNameControlName: FormControl<String>(
-            value: userProfile.lastName,
+            value: userProfile?.lastName,
             validators: [
               (control) => requiredValidator(control as FormControl<String>)
             ],
@@ -530,8 +580,8 @@ class UserProfileForm implements FormModel<UserProfile> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        homeControlName: AddressForm.formElements(userProfile.home),
-        officeControlName: AddressForm.formElements(userProfile.office)
+        homeControlName: AddressForm.formElements(userProfile?.home),
+        officeControlName: AddressForm.formElements(userProfile?.office)
       },
           validators: [],
           asyncValidators: [],
@@ -541,18 +591,15 @@ class UserProfileForm implements FormModel<UserProfile> {
 
 class AddressForm implements FormModel<Address> {
   AddressForm(
-    this.address,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String streetControlName = "street";
 
   static const String cityControlName = "city";
 
   static const String zipControlName = "zip";
-
-  final Address? address;
 
   final FormGroup form;
 
@@ -828,10 +875,6 @@ class AddressForm implements FormModel<Address> {
           '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
-  }
-
-  AddressForm copyWithPath(String? path) {
-    return AddressForm(address, form, path);
   }
 
   @override

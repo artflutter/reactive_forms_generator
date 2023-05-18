@@ -121,8 +121,7 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
 
   @override
   void initState() {
-    _formModel =
-        TagsForm<T>(widget.model, TagsForm.formElements<T>(widget.model), null);
+    _formModel = TagsForm<T>(TagsForm.formElements<T>(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -136,8 +135,7 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
   @override
   void didUpdateWidget(covariant TagsFormBuilder<T> oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = TagsForm<T>(
-          widget.model, TagsForm.formElements<T>(widget.model), null);
+      _formModel = TagsForm<T>(TagsForm.formElements<T>(widget.model), null);
 
       if (_formModel.form.disabled) {
         _formModel.form.markAsDisabled();
@@ -174,14 +172,11 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
 
 class TagsForm<T> implements FormModel<Tags<T>> {
   TagsForm(
-    this.tags,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String tagsControlName = "tags";
-
-  final Tags<T>? tags;
 
   final FormGroup form;
 
@@ -283,10 +278,6 @@ class TagsForm<T> implements FormModel<Tags<T>> {
           '[${path ?? 'TagsForm<T>'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Tags<T>(tags: _tagsValue);
-  }
-
-  TagsForm<T> copyWithPath(String? path) {
-    return TagsForm<T>(tags, form, path);
   }
 
   @override

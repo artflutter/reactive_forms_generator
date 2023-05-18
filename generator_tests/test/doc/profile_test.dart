@@ -377,14 +377,14 @@ class ReactiveProfileForm extends StatelessWidget {
 class ProfileFormBuilder extends StatefulWidget {
   const ProfileFormBuilder({
     Key? key,
-    required this.model,
+    this.model,
     this.child,
     this.onWillPop,
     required this.builder,
     this.initState,
   }) : super(key: key);
 
-  final Profile model;
+  final Profile? model;
 
   final Widget? child;
 
@@ -404,8 +404,7 @@ class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
-        ProfileForm(widget.model, ProfileForm.formElements(widget.model), null);
+    _formModel = ProfileForm(ProfileForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -419,8 +418,7 @@ class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
   @override
   void didUpdateWidget(covariant ProfileFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = ProfileForm(
-          widget.model, ProfileForm.formElements(widget.model), null);
+      _formModel = ProfileForm(ProfileForm.formElements(widget.model), null);
 
       if (_formModel.form.disabled) {
         _formModel.form.markAsDisabled();
@@ -457,16 +455,13 @@ class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
 
 class ProfileForm implements FormModel<Profile> {
   ProfileForm(
-    this.profile,
     this.form,
     this.path,
-  ) {
-    incidenceFilterForm = IncidenceFilterForm(
-        profile.incidenceFilter, form, pathBuilder('incidenceFilter'));
-    thresholdForm =
-        ThresholdSettingForm(profile.threshold, form, pathBuilder('threshold'));
-    timerForm = TimerSettingForm(profile.timer, form, pathBuilder('timer'));
-  }
+  );
+
+  static const String idControlName = "id";
+
+  static const String anotherIdControlName = "anotherId";
 
   static const String nameControlName = "name";
 
@@ -484,18 +479,12 @@ class ProfileForm implements FormModel<Profile> {
 
   static const String audioGuidanceControlName = "audioGuidance";
 
-  late IncidenceFilterForm incidenceFilterForm;
-
-  late ThresholdSettingForm thresholdForm;
-
-  late TimerSettingForm timerForm;
-
-  final Profile profile;
-
   final FormGroup form;
 
   final String? path;
 
+  String idControlPath() => pathBuilder(idControlName);
+  String anotherIdControlPath() => pathBuilder(anotherIdControlName);
   String nameControlPath() => pathBuilder(nameControlName);
   String chartingOrderControlPath() => pathBuilder(chartingOrderControlName);
   String numberingStandardControlPath() =>
@@ -507,6 +496,8 @@ class ProfileForm implements FormModel<Profile> {
       pathBuilder(incidenceFilterControlName);
   String thresholdControlPath() => pathBuilder(thresholdControlName);
   String timerControlPath() => pathBuilder(timerControlName);
+  String get _idValue => idControl.value as String;
+  String get _anotherIdValue => anotherIdControl.value as String;
   String get _nameValue => nameControl.value as String;
   ChartingOrderValue get _chartingOrderValue =>
       chartingOrderControl.value as ChartingOrderValue;
@@ -518,6 +509,24 @@ class ProfileForm implements FormModel<Profile> {
   IncidenceFilter get _incidenceFilterValue => incidenceFilterForm.model;
   ThresholdSetting get _thresholdValue => thresholdForm.model;
   TimerSetting get _timerValue => timerForm.model;
+  bool get containsId {
+    try {
+      form.control(idControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsAnotherId {
+    try {
+      form.control(anotherIdControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -590,6 +599,8 @@ class ProfileForm implements FormModel<Profile> {
     }
   }
 
+  Object? get idErrors => idControl.errors;
+  Object? get anotherIdErrors => anotherIdControl.errors;
   Object? get nameErrors => nameControl.errors;
   Object? get chartingOrderErrors => chartingOrderControl.errors;
   Object? get numberingStandardErrors => numberingStandardControl.errors;
@@ -598,6 +609,8 @@ class ProfileForm implements FormModel<Profile> {
   Object? get incidenceFilterErrors => incidenceFilterControl.errors;
   Object? get thresholdErrors => thresholdControl.errors;
   Object? get timerErrors => timerControl.errors;
+  void get idFocus => form.focus(idControlPath());
+  void get anotherIdFocus => form.focus(anotherIdControlPath());
   void get nameFocus => form.focus(nameControlPath());
   void get chartingOrderFocus => form.focus(chartingOrderControlPath());
   void get numberingStandardFocus => form.focus(numberingStandardControlPath());
@@ -606,6 +619,24 @@ class ProfileForm implements FormModel<Profile> {
   void get incidenceFilterFocus => form.focus(incidenceFilterControlPath());
   void get thresholdFocus => form.focus(thresholdControlPath());
   void get timerFocus => form.focus(timerControlPath());
+  void idValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    idControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void anotherIdValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    anotherIdControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void nameValueUpdate(
     String value, {
     bool updateParent = true,
@@ -679,6 +710,24 @@ class ProfileForm implements FormModel<Profile> {
     bool emitEvent = true,
   }) {
     timerControl.updateValue(TimerSettingForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void idValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    idControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void anotherIdValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    anotherIdControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -758,6 +807,24 @@ class ProfileForm implements FormModel<Profile> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void idValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      idControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void anotherIdValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      anotherIdControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void nameValueReset(
     String value, {
     bool updateParent = true,
@@ -836,6 +903,10 @@ class ProfileForm implements FormModel<Profile> {
           value: TimerSettingForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+  FormControl<String> get idControl =>
+      form.control(idControlPath()) as FormControl<String>;
+  FormControl<String> get anotherIdControl =>
+      form.control(anotherIdControlPath()) as FormControl<String>;
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
   FormControl<ChartingOrderValue> get chartingOrderControl =>
@@ -854,6 +925,48 @@ class ProfileForm implements FormModel<Profile> {
   FormGroup get thresholdControl =>
       form.control(thresholdControlPath()) as FormGroup;
   FormGroup get timerControl => form.control(timerControlPath()) as FormGroup;
+  IncidenceFilterForm get incidenceFilterForm =>
+      IncidenceFilterForm(form, pathBuilder('incidenceFilter'));
+  ThresholdSettingForm get thresholdForm =>
+      ThresholdSettingForm(form, pathBuilder('threshold'));
+  TimerSettingForm get timerForm =>
+      TimerSettingForm(form, pathBuilder('timer'));
+  void idSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      idControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      idControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void anotherIdSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      anotherIdControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      anotherIdControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   void nameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1006,8 +1119,8 @@ class ProfileForm implements FormModel<Profile> {
       debugPrint(
           '[${path ?? 'ProfileForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
-    return Profile(profile.id,
-        anotherId: profile.anotherId,
+    return Profile(_idValue,
+        anotherId: _anotherIdValue,
         name: _nameValue,
         chartingOrder: _chartingOrderValue,
         numberingStandard: _numberingStandardValue,
@@ -1016,10 +1129,6 @@ class ProfileForm implements FormModel<Profile> {
         threshold: _thresholdValue,
         timer: _timerValue,
         audioGuidance: _audioGuidanceValue);
-  }
-
-  ProfileForm copyWithPath(String? path) {
-    return ProfileForm(profile, form, path);
   }
 
   @override
@@ -1042,47 +1151,47 @@ class ProfileForm implements FormModel<Profile> {
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  static FormGroup formElements(Profile profile) => FormGroup({
+  static FormGroup formElements(Profile? profile) => FormGroup({
         nameControlName: FormControl<String>(
-            value: profile.name,
+            value: profile?.name,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         chartingOrderControlName: FormControl<ChartingOrderValue>(
-            value: profile.chartingOrder,
+            value: profile?.chartingOrder,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         numberingStandardControlName: FormControl<NumberingStandard>(
-            value: profile.numberingStandard,
+            value: profile?.numberingStandard,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         measurementTypeControlName: FormControl<MeasurementType>(
-            value: profile.measurementType,
+            value: profile?.measurementType,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         audioGuidanceControlName: FormControl<bool>(
-            value: profile.audioGuidance,
+            value: profile?.audioGuidance,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         incidenceFilterControlName:
-            IncidenceFilterForm.formElements(profile.incidenceFilter),
+            IncidenceFilterForm.formElements(profile?.incidenceFilter),
         thresholdControlName:
-            ThresholdSettingForm.formElements(profile.threshold),
-        timerControlName: TimerSettingForm.formElements(profile.timer)
+            ThresholdSettingForm.formElements(profile?.threshold),
+        timerControlName: TimerSettingForm.formElements(profile?.timer)
       },
           validators: [],
           asyncValidators: [],
@@ -1092,10 +1201,9 @@ class ProfileForm implements FormModel<Profile> {
 
 class IncidenceFilterForm implements FormModel<IncidenceFilter> {
   IncidenceFilterForm(
-    this.incidenceFilter,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String isMobilityEnabledControlName = "isMobilityEnabled";
 
@@ -1108,8 +1216,6 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
   static const String isCalculusEnabledControlName = "isCalculusEnabled";
 
   static const String isPlaqueEnabledControlName = "isPlaqueEnabled";
-
-  final IncidenceFilter? incidenceFilter;
 
   final FormGroup form;
 
@@ -1501,10 +1607,6 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
         isPlaqueEnabled: _isPlaqueEnabledValue);
   }
 
-  IncidenceFilterForm copyWithPath(String? path) {
-    return IncidenceFilterForm(incidenceFilter, form, path);
-  }
-
   @override
   void updateValue(
     IncidenceFilter value, {
@@ -1577,16 +1679,13 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
 
 class ThresholdSettingForm implements FormModel<ThresholdSetting> {
   ThresholdSettingForm(
-    this.thresholdSetting,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String isEnabledControlName = "isEnabled";
 
   static const String valueControlName = "value";
-
-  final ThresholdSetting? thresholdSetting;
 
   final FormGroup form;
 
@@ -1723,10 +1822,6 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
     return ThresholdSetting(isEnabled: _isEnabledValue, value: _valueValue);
   }
 
-  ThresholdSettingForm copyWithPath(String? path) {
-    return ThresholdSettingForm(thresholdSetting, form, path);
-  }
-
   @override
   void updateValue(
     ThresholdSetting value, {
@@ -1772,16 +1867,13 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
 
 class TimerSettingForm implements FormModel<TimerSetting> {
   TimerSettingForm(
-    this.timerSetting,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String isEnabledControlName = "isEnabled";
 
   static const String valueControlName = "value";
-
-  final TimerSetting? timerSetting;
 
   final FormGroup form;
 
@@ -1916,10 +2008,6 @@ class TimerSettingForm implements FormModel<TimerSetting> {
           '[${path ?? 'TimerSettingForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return TimerSetting(isEnabled: _isEnabledValue, value: _valueValue);
-  }
-
-  TimerSettingForm copyWithPath(String? path) {
-    return TimerSettingForm(timerSetting, form, path);
   }
 
   @override

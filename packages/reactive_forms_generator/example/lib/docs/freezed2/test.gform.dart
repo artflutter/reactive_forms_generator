@@ -121,8 +121,7 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
-        TestForm(widget.model, TestForm.formElements(widget.model), null);
+    _formModel = TestForm(TestForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -136,8 +135,7 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
   @override
   void didUpdateWidget(covariant TestFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          TestForm(widget.model, TestForm.formElements(widget.model), null);
+      _formModel = TestForm(TestForm.formElements(widget.model), null);
 
       if (_formModel.form.disabled) {
         _formModel.form.markAsDisabled();
@@ -174,16 +172,13 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
 
 class TestForm implements FormModel<Test> {
   TestForm(
-    this.test,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String titleControlName = "title";
 
   static const String descriptionControlName = "description";
-
-  final Test? test;
 
   final FormGroup form;
 
@@ -345,10 +340,6 @@ class TestForm implements FormModel<Test> {
           '[${path ?? 'TestForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Test(title: _titleValue, description: _descriptionValue);
-  }
-
-  TestForm copyWithPath(String? path) {
-    return TestForm(test, form, path);
   }
 
   @override

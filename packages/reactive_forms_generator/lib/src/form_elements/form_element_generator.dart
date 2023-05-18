@@ -61,15 +61,17 @@ abstract class FormElementGenerator {
   }
 
   String? annotationType(TypeChecker typeChecker) =>
-      (annotation(typeChecker)?.type as ParameterizedType)
-          .typeArguments
+      (annotation(typeChecker)?.type as ParameterizedType?)
+          ?.typeArguments
           .first
           .toString();
 
   bool annotationTyped(TypeChecker typeChecker) {
     final typeAnnotationType = annotationType(typeChecker);
 
-    return typeAnnotationType != 'dynamic' && typeAnnotationType != 'Never';
+    return typeAnnotationType != null &&
+        typeAnnotationType != 'dynamic' &&
+        typeAnnotationType != 'Never';
   }
 
   Element get fieldElement => field;

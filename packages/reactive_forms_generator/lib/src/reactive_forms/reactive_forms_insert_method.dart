@@ -9,26 +9,10 @@ class ReactiveFormInsertMethod extends ReactiveFormGeneratorMethod {
   @override
   Method? formGroupArrayMethod() {
     return methodEntity.rebuild((b) => b..body = Code('''
-      if (${field.name}${field.className}.length < i) {
+      if ((${field.fieldControlName}${field.nullabilitySuffix}.value ?? []).length < i) {
         ${field.addListItemName}(value);
         return;
       }
-  
-      final item = ${field.className}(
-        value,
-        form,
-        pathBuilder('${field.fieldName}.\$i'),
-      );
-  
-      ${field.name}${field.className}.insert(i, item);
-  
-      ${field.name}${field.className}.asMap().forEach((k, v) {
-        if (k > i) {
-          ${field.name}${field.className}[k] = v.copyWithPath(
-            pathBuilder("${field.fieldName}.\$k"),
-          );
-        }
-      });
   
       ${field.fieldControlName}${field.nullabilitySuffix}.insert(
         i,

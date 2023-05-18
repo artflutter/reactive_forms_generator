@@ -124,8 +124,8 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
 
   @override
   void initState() {
-    _formModel = DeliveryListForm(
-        widget.model, DeliveryListForm.formElements(widget.model), null);
+    _formModel =
+        DeliveryListForm(DeliveryListForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -139,8 +139,8 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
   @override
   void didUpdateWidget(covariant DeliveryListFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = DeliveryListForm(
-          widget.model, DeliveryListForm.formElements(widget.model), null);
+      _formModel =
+          DeliveryListForm(DeliveryListForm.formElements(widget.model), null);
 
       if (_formModel.form.disabled) {
         _formModel.form.markAsDisabled();
@@ -177,68 +177,24 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
 
 class DeliveryListForm implements FormModel<DeliveryList> {
   DeliveryListForm(
-    this.deliveryList,
     this.form,
     this.path,
-  ) {
-    deliveryListDeliveryPointForm = (deliveryList?.deliveryList ?? [])
-        .asMap()
-        .map((k, v) => MapEntry(
-            k, DeliveryPointForm(v, form, pathBuilder("deliveryList.$k"))))
-        .values
-        .toList();
-    clientListClientForm = (deliveryList?.clientList ?? [])
-        .asMap()
-        .map((k, v) =>
-            MapEntry(k, ClientForm(v, form, pathBuilder("clientList.$k"))))
-        .values
-        .toList();
-  }
+  );
 
   static const String deliveryListControlName = "deliveryList";
 
   static const String clientListControlName = "clientList";
 
-  final DeliveryList? deliveryList;
-
   final FormGroup form;
 
   final String? path;
 
-  late List<DeliveryPointForm> deliveryListDeliveryPointForm;
-
-  late List<ClientForm> clientListClientForm;
-
   String deliveryListControlPath() => pathBuilder(deliveryListControlName);
   String clientListControlPath() => pathBuilder(clientListControlName);
-  List<DeliveryPoint> get _deliveryListValue => deliveryListDeliveryPointForm
-      .asMap()
-      .map(
-        (k, v) => MapEntry(
-          k,
-          v
-              .copyWithPath(
-                pathBuilder("deliveryList.$k"),
-              )
-              .model,
-        ),
-      )
-      .values
-      .toList();
-  List<Client>? get _clientListValue => clientListClientForm
-      .asMap()
-      .map(
-        (k, v) => MapEntry(
-          k,
-          v
-              .copyWithPath(
-                pathBuilder("clientList.$k"),
-              )
-              .model,
-        ),
-      )
-      .values
-      .toList();
+  List<DeliveryPoint> get _deliveryListValue =>
+      deliveryListDeliveryPointForm.map((e) => e.model).toList();
+  List<Client>? get _clientListValue =>
+      clientListClientForm.map((e) => e.model).toList();
   bool get containsDeliveryList {
     try {
       form.control(deliveryListControlPath());
@@ -292,30 +248,17 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    if ((value).isEmpty) {
+    final localValue = (value);
+    if (localValue.isEmpty) {
       deliveryListClear(updateParent: updateParent, emitEvent: emitEvent);
 
       return;
     }
 
-    final updateList = (value)
-        .asMap()
-        .map(
-          (k, v) => MapEntry(
-            k,
-            DeliveryPointForm(v, form, pathBuilder("deliveryList.$k")),
-          ),
-        )
-        .values
-        .toList();
+    final toUpdate = <DeliveryPoint>[];
+    final toAdd = <DeliveryPoint>[];
 
-    deliveryListDeliveryPointForm.clear();
-    deliveryListDeliveryPointForm.addAll(updateList);
-
-    final toUpdate = <DeliveryPointForm>[];
-    final toAdd = <DeliveryPointForm>[];
-
-    updateList.asMap().forEach((k, v) {
+    localValue.asMap().forEach((k, v) {
       if (deliveryListDeliveryPointForm.asMap().containsKey(k) &&
           (deliveryListControl.value ?? []).asMap().containsKey(k)) {
         toUpdate.add(v);
@@ -327,8 +270,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     if (toUpdate.isNotEmpty) {
       deliveryListControl.updateValue(
           toUpdate
-              .map((e) =>
-                  DeliveryPointForm.formElements(e.deliveryPoint).rawValue)
+              .map((e) => DeliveryPointForm.formElements(e).rawValue)
               .toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
@@ -336,7 +278,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
 
     if (toAdd.isNotEmpty) {
       toAdd.forEach((e) {
-        deliveryListControl.add(DeliveryPointForm.formElements(e.deliveryPoint),
+        deliveryListControl.add(DeliveryPointForm.formElements(e),
             updateParent: updateParent, emitEvent: emitEvent);
       });
     }
@@ -347,30 +289,17 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    if ((value ?? []).isEmpty) {
+    final localValue = (value ?? []);
+    if (localValue.isEmpty) {
       clientListClear(updateParent: updateParent, emitEvent: emitEvent);
 
       return;
     }
 
-    final updateList = (value ?? [])
-        .asMap()
-        .map(
-          (k, v) => MapEntry(
-            k,
-            ClientForm(v, form, pathBuilder("clientList.$k")),
-          ),
-        )
-        .values
-        .toList();
+    final toUpdate = <Client>[];
+    final toAdd = <Client>[];
 
-    clientListClientForm.clear();
-    clientListClientForm.addAll(updateList);
-
-    final toUpdate = <ClientForm>[];
-    final toAdd = <ClientForm>[];
-
-    updateList.asMap().forEach((k, v) {
+    localValue.asMap().forEach((k, v) {
       if (clientListClientForm.asMap().containsKey(k) &&
           (clientListControl?.value ?? []).asMap().containsKey(k)) {
         toUpdate.add(v);
@@ -381,16 +310,14 @@ class DeliveryListForm implements FormModel<DeliveryList> {
 
     if (toUpdate.isNotEmpty) {
       clientListControl?.updateValue(
-          toUpdate
-              .map((e) => ClientForm.formElements(e.client).rawValue)
-              .toList(),
+          toUpdate.map((e) => ClientForm.formElements(e).rawValue).toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
     }
 
     if (toAdd.isNotEmpty) {
       toAdd.forEach((e) {
-        clientListControl?.add(ClientForm.formElements(e.client),
+        clientListControl?.add(ClientForm.formElements(e),
             updateParent: updateParent, emitEvent: emitEvent);
       });
     }
@@ -402,26 +329,10 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    if (deliveryListDeliveryPointForm.length < i) {
+    if ((deliveryListControl.value ?? []).length < i) {
       addDeliveryListItem(value);
       return;
     }
-
-    final item = DeliveryPointForm(
-      value,
-      form,
-      pathBuilder('deliveryList.$i'),
-    );
-
-    deliveryListDeliveryPointForm.insert(i, item);
-
-    deliveryListDeliveryPointForm.asMap().forEach((k, v) {
-      if (k > i) {
-        deliveryListDeliveryPointForm[k] = v.copyWithPath(
-          pathBuilder("deliveryList.$k"),
-        );
-      }
-    });
 
     deliveryListControl.insert(
       i,
@@ -437,26 +348,10 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    if (clientListClientForm.length < i) {
+    if ((clientListControl?.value ?? []).length < i) {
       addClientListItem(value);
       return;
     }
-
-    final item = ClientForm(
-      value,
-      form,
-      pathBuilder('clientList.$i'),
-    );
-
-    clientListClientForm.insert(i, item);
-
-    clientListClientForm.asMap().forEach((k, v) {
-      if (k > i) {
-        clientListClientForm[k] = v.copyWithPath(
-          pathBuilder("clientList.$k"),
-        );
-      }
-    });
 
     clientListControl?.insert(
       i,
@@ -489,23 +384,17 @@ class DeliveryListForm implements FormModel<DeliveryList> {
   }) {
     final keys = deliveryListDeliveryPointForm.asMap().keys;
 
-    final toPatch = <DeliveryPointForm>[];
+    final toPatch = <DeliveryPoint>[];
     (value).asMap().forEach(
       (k, v) {
         if (keys.contains(k)) {
-          final patch =
-              DeliveryPointForm(v, form, pathBuilder("deliveryList.$k"));
-          deliveryListDeliveryPointForm[k] = patch;
-          toPatch.add(patch);
+          toPatch.add(v);
         }
       },
     );
 
     deliveryListControl.patchValue(
-        toPatch
-            .map(
-                (e) => DeliveryPointForm.formElements(e.deliveryPoint).rawValue)
-            .toList(),
+        toPatch.map((e) => DeliveryPointForm.formElements(e).rawValue).toList(),
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
@@ -517,19 +406,17 @@ class DeliveryListForm implements FormModel<DeliveryList> {
   }) {
     final keys = clientListClientForm.asMap().keys;
 
-    final toPatch = <ClientForm>[];
+    final toPatch = <Client>[];
     (value ?? []).asMap().forEach(
       (k, v) {
         if (keys.contains(k)) {
-          final patch = ClientForm(v, form, pathBuilder("clientList.$k"));
-          clientListClientForm[k] = patch;
-          toPatch.add(patch);
+          toPatch.add(v);
         }
       },
     );
 
     clientListControl?.patchValue(
-        toPatch.map((e) => ClientForm.formElements(e.client).rawValue).toList(),
+        toPatch.map((e) => ClientForm.formElements(e).rawValue).toList(),
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
@@ -566,6 +453,19 @@ class DeliveryListForm implements FormModel<DeliveryList> {
       ? form.control(clientListControlPath())
           as FormArray<Map<String, Object?>>?
       : null;
+  List<DeliveryPointForm> get deliveryListDeliveryPointForm =>
+      (deliveryListControl.value ?? [])
+          .asMap()
+          .map((k, v) => MapEntry(
+              k, DeliveryPointForm(form, pathBuilder("deliveryList.$k"))))
+          .values
+          .toList();
+  List<ClientForm> get clientListClientForm => (clientListControl?.value ?? [])
+      .asMap()
+      .map(
+          (k, v) => MapEntry(k, ClientForm(form, pathBuilder("clientList.$k"))))
+      .values
+      .toList();
   void deliveryListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -615,44 +515,21 @@ class DeliveryListForm implements FormModel<DeliveryList> {
                   as FormArray<Map<String, Object?>>,
               () => clientListClientForm);
   void addDeliveryListItem(DeliveryPoint value) {
-    final formClass = DeliveryPointForm(value, form,
-        pathBuilder('deliveryList.${deliveryListDeliveryPointForm.length}'));
-
-    deliveryListDeliveryPointForm.add(formClass);
     deliveryListControl.add(DeliveryPointForm.formElements(value));
   }
 
   void addClientListItem(Client value) {
-    final formClass = ClientForm(
-        value, form, pathBuilder('clientList.${clientListClientForm.length}'));
-
-    clientListClientForm.add(formClass);
     clientListControl?.add(ClientForm.formElements(value));
   }
 
   void removeDeliveryListItemAtIndex(int i) {
-    if (deliveryListDeliveryPointForm.asMap().containsKey(i) &&
-        (deliveryListControl.value ?? []).asMap().containsKey(i)) {
-      deliveryListDeliveryPointForm.removeAt(i);
-
-      deliveryListDeliveryPointForm.asMap().forEach((k, v) {
-        deliveryListDeliveryPointForm[k] =
-            v.copyWithPath(pathBuilder("deliveryList.$k"));
-      });
-
+    if ((deliveryListControl.value ?? []).length > i) {
       deliveryListControl.removeAt(i);
     }
   }
 
   void removeClientListItemAtIndex(int i) {
-    if (clientListClientForm.asMap().containsKey(i) &&
-        (clientListControl?.value ?? []).asMap().containsKey(i)) {
-      clientListClientForm.removeAt(i);
-
-      clientListClientForm.asMap().forEach((k, v) {
-        clientListClientForm[k] = v.copyWithPath(pathBuilder("clientList.$k"));
-      });
-
+    if ((clientListControl?.value ?? []).length > i) {
       clientListControl?.removeAt(i);
     }
   }
@@ -675,10 +552,6 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     }
     return DeliveryList(
         deliveryList: _deliveryListValue, clientList: _clientListValue);
-  }
-
-  DeliveryListForm copyWithPath(String? path) {
-    return DeliveryListForm(deliveryList, form, path);
   }
 
   @override
@@ -727,21 +600,13 @@ class DeliveryListForm implements FormModel<DeliveryList> {
 
 class DeliveryPointForm implements FormModel<DeliveryPoint> {
   DeliveryPointForm(
-    this.deliveryPoint,
     this.form,
     this.path,
-  ) {
-    addressForm =
-        AddressForm(deliveryPoint?.address, form, pathBuilder('address'));
-  }
+  );
 
   static const String nameControlName = "name";
 
   static const String addressControlName = "address";
-
-  late AddressForm addressForm;
-
-  final DeliveryPoint? deliveryPoint;
 
   final FormGroup form;
 
@@ -859,6 +724,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
       form.control(nameControlPath()) as FormControl<String>;
   FormGroup? get addressControl =>
       containsAddress ? form.control(addressControlPath()) as FormGroup? : null;
+  AddressForm get addressForm => AddressForm(form, pathBuilder('address'));
   void nameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -906,10 +772,6 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
     return DeliveryPoint(name: _nameValue, address: _addressValue);
   }
 
-  DeliveryPointForm copyWithPath(String? path) {
-    return DeliveryPointForm(deliveryPoint, form, path);
-  }
-
   @override
   void updateValue(
     DeliveryPoint value, {
@@ -950,16 +812,13 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
 
 class AddressForm implements FormModel<Address> {
   AddressForm(
-    this.address,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String streetControlName = "street";
 
   static const String cityControlName = "city";
-
-  final Address? address;
 
   final FormGroup form;
 
@@ -1150,10 +1009,6 @@ class AddressForm implements FormModel<Address> {
     return Address(street: _streetValue, city: _cityValue);
   }
 
-  AddressForm copyWithPath(String? path) {
-    return AddressForm(address, form, path);
-  }
-
   @override
   void updateValue(
     Address? value, {
@@ -1200,18 +1055,15 @@ class AddressForm implements FormModel<Address> {
 
 class ClientForm implements FormModel<Client> {
   ClientForm(
-    this.client,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String clientTypeControlName = "clientType";
 
   static const String nameControlName = "name";
 
   static const String notesControlName = "notes";
-
-  final Client? client;
 
   final FormGroup form;
 
@@ -1461,10 +1313,6 @@ class ClientForm implements FormModel<Client> {
     }
     return Client(
         clientType: _clientTypeValue, name: _nameValue, notes: _notesValue);
-  }
-
-  ClientForm copyWithPath(String? path) {
-    return ClientForm(client, form, path);
   }
 
   @override
@@ -1754,7 +1602,7 @@ class _StandaloneDeliveryPointFormBuilderState
 
   @override
   void initState() {
-    _formModel = StandaloneDeliveryPointForm(widget.model,
+    _formModel = StandaloneDeliveryPointForm(
         StandaloneDeliveryPointForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
@@ -1769,7 +1617,7 @@ class _StandaloneDeliveryPointFormBuilderState
   @override
   void didUpdateWidget(covariant StandaloneDeliveryPointFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = StandaloneDeliveryPointForm(widget.model,
+      _formModel = StandaloneDeliveryPointForm(
           StandaloneDeliveryPointForm.formElements(widget.model), null);
 
       if (_formModel.form.disabled) {
@@ -1807,21 +1655,13 @@ class _StandaloneDeliveryPointFormBuilderState
 
 class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
   StandaloneDeliveryPointForm(
-    this.deliveryPoint,
     this.form,
     this.path,
-  ) {
-    addressForm =
-        AddressForm(deliveryPoint?.address, form, pathBuilder('address'));
-  }
+  );
 
   static const String nameControlName = "name";
 
   static const String addressControlName = "address";
-
-  late AddressForm addressForm;
-
-  final DeliveryPoint? deliveryPoint;
 
   final FormGroup form;
 
@@ -1939,6 +1779,7 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
       form.control(nameControlPath()) as FormControl<String>;
   FormGroup? get addressControl =>
       containsAddress ? form.control(addressControlPath()) as FormGroup? : null;
+  AddressForm get addressForm => AddressForm(form, pathBuilder('address'));
   void nameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1984,10 +1825,6 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
           '[${path ?? 'StandaloneDeliveryPointForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return DeliveryPoint(name: _nameValue, address: _addressValue);
-  }
-
-  StandaloneDeliveryPointForm copyWithPath(String? path) {
-    return StandaloneDeliveryPointForm(deliveryPoint, form, path);
   }
 
   @override

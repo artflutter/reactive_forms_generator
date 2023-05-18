@@ -110,8 +110,10 @@ extension ParameterElementExt on ParameterElement {
 
   String get nullabilitySuffix => isNullable ? '?' : '';
 
-  bool get isReactiveFormAnnotated =>
-      isFormGroupArray || isFormGroup || isFormControl || isFormArray;
+  // consider refactoring to remove the usage of this
+  bool get isReactiveFormAnnotated => true;
+
+  // isFormGroupArray || isFormGroup || isFormControl || isFormArray;
 
   bool get isNotReactiveFormAnnotatedAndNullable =>
       !isReactiveFormAnnotated &&
@@ -190,10 +192,10 @@ extension ParameterElementExt on ParameterElement {
   }
 
   bool get isFormControl {
-    final isFormControl = formControlChecker.hasAnnotationOfExact(this);
-    final isFormGroup = this.isFormGroup;
+    final isFormControl =
+        !this.isFormGroup && !isFormGroupArray && !isFormArray;
 
-    if (isFormControl && isFormGroup) {}
+    final isFormGroup = this.isFormGroup;
 
     throwIf(
       isFormControl && isFormGroup,
@@ -201,7 +203,7 @@ extension ParameterElementExt on ParameterElement {
       element: this,
     );
 
-    return formControlChecker.hasAnnotationOfExact(this);
+    return isFormControl;
   }
 
   bool get isFormGroup {

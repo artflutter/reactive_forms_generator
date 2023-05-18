@@ -121,8 +121,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
-        LoginForm(widget.model, LoginForm.formElements(widget.model), null);
+    _formModel = LoginForm(LoginForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -136,8 +135,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
   @override
   void didUpdateWidget(covariant LoginFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          LoginForm(widget.model, LoginForm.formElements(widget.model), null);
+      _formModel = LoginForm(LoginForm.formElements(widget.model), null);
 
       if (_formModel.form.disabled) {
         _formModel.form.markAsDisabled();
@@ -174,16 +172,13 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
 
 class LoginForm implements FormModel<Login> {
   LoginForm(
-    this.login,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String emailControlName = "email";
 
   static const String passwordControlName = "password";
-
-  final Login? login;
 
   final FormGroup form;
 
@@ -318,10 +313,6 @@ class LoginForm implements FormModel<Login> {
           '[${path ?? 'LoginForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Login(email: _emailValue, password: _passwordValue);
-  }
-
-  LoginForm copyWithPath(String? path) {
-    return LoginForm(login, form, path);
   }
 
   @override

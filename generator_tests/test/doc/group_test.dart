@@ -206,8 +206,7 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
-        GroupForm(widget.model, GroupForm.formElements(widget.model), null);
+    _formModel = GroupForm(GroupForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -221,8 +220,7 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
   @override
   void didUpdateWidget(covariant GroupFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          GroupForm(widget.model, GroupForm.formElements(widget.model), null);
+      _formModel = GroupForm(GroupForm.formElements(widget.model), null);
 
       if (_formModel.form.disabled) {
         _formModel.form.markAsDisabled();
@@ -259,15 +257,9 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
 
 class GroupForm implements FormModel<Group> {
   GroupForm(
-    this.group,
     this.form,
     this.path,
-  ) {
-    personalForm = PersonalForm(group?.personal, form, pathBuilder('personal'));
-    phoneForm = PhoneForm(group?.phone, form, pathBuilder('phone'));
-    addressForm = AddressForm(group?.address, form, pathBuilder('address'));
-    address2Form = AddressForm(group?.address2, form, pathBuilder('address2'));
-  }
+  );
 
   static const String personalControlName = "personal";
 
@@ -276,16 +268,6 @@ class GroupForm implements FormModel<Group> {
   static const String addressControlName = "address";
 
   static const String address2ControlName = "address2";
-
-  late PersonalForm personalForm;
-
-  late PhoneForm phoneForm;
-
-  late AddressForm addressForm;
-
-  late AddressForm address2Form;
-
-  final Group? group;
 
   final FormGroup form;
 
@@ -573,6 +555,10 @@ class GroupForm implements FormModel<Group> {
   FormGroup? get address2Control => containsAddress2
       ? form.control(address2ControlPath()) as FormGroup?
       : null;
+  PersonalForm get personalForm => PersonalForm(form, pathBuilder('personal'));
+  PhoneForm get phoneForm => PhoneForm(form, pathBuilder('phone'));
+  AddressForm get addressForm => AddressForm(form, pathBuilder('address'));
+  AddressForm get address2Form => AddressForm(form, pathBuilder('address2'));
   void personalSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -660,10 +646,6 @@ class GroupForm implements FormModel<Group> {
         address2: _address2Value);
   }
 
-  GroupForm copyWithPath(String? path) {
-    return GroupForm(group, form, path);
-  }
-
   @override
   void updateValue(
     Group value, {
@@ -698,16 +680,13 @@ class GroupForm implements FormModel<Group> {
 
 class PersonalForm implements FormModel<Personal> {
   PersonalForm(
-    this.personal,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String nameControlName = "name";
 
   static const String emailControlName = "email";
-
-  final Personal? personal;
 
   final FormGroup form;
 
@@ -898,10 +877,6 @@ class PersonalForm implements FormModel<Personal> {
     return Personal(name: _nameValue, email: _emailValue);
   }
 
-  PersonalForm copyWithPath(String? path) {
-    return PersonalForm(personal, form, path);
-  }
-
   @override
   void updateValue(
     Personal? value, {
@@ -946,16 +921,13 @@ class PersonalForm implements FormModel<Personal> {
 
 class PhoneForm implements FormModel<Phone> {
   PhoneForm(
-    this.phone,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String phoneNumberControlName = "phoneNumber";
 
   static const String countryIsoControlName = "countryIso";
-
-  final Phone? phone;
 
   final FormGroup form;
 
@@ -1146,10 +1118,6 @@ class PhoneForm implements FormModel<Phone> {
     return Phone(phoneNumber: _phoneNumberValue, countryIso: _countryIsoValue);
   }
 
-  PhoneForm copyWithPath(String? path) {
-    return PhoneForm(phone, form, path);
-  }
-
   @override
   void updateValue(
     Phone? value, {
@@ -1194,18 +1162,15 @@ class PhoneForm implements FormModel<Phone> {
 
 class AddressForm implements FormModel<Address> {
   AddressForm(
-    this.address,
     this.form,
     this.path,
-  ) {}
+  );
 
   static const String streetControlName = "street";
 
   static const String cityControlName = "city";
 
   static const String zipControlName = "zip";
-
-  final Address? address;
 
   final FormGroup form;
 
@@ -1481,10 +1446,6 @@ class AddressForm implements FormModel<Address> {
           '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
-  }
-
-  AddressForm copyWithPath(String? path) {
-    return AddressForm(address, form, path);
   }
 
   @override
