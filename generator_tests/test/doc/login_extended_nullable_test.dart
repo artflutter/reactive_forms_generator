@@ -885,6 +885,18 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
         height: _heightValue);
   }
 
+  void submit({
+    required void Function(LoginExtendedNullable model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     LoginExtendedNullable value, {

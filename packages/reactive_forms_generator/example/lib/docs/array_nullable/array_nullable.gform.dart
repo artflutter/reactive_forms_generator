@@ -756,6 +756,18 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
         someList: _someListValue);
   }
 
+  void submit({
+    required void Function(ArrayNullable model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     ArrayNullable value, {

@@ -554,6 +554,18 @@ class DeliveryListForm implements FormModel<DeliveryList> {
         deliveryList: _deliveryListValue, clientList: _clientListValue);
   }
 
+  void submit({
+    required void Function(DeliveryList model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     DeliveryList value, {
@@ -770,6 +782,18 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
           '[${path ?? 'DeliveryPointForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return DeliveryPoint(name: _nameValue, address: _addressValue);
+  }
+
+  void submit({
+    required void Function(DeliveryPoint model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
   }
 
   @override
@@ -1007,6 +1031,18 @@ class AddressForm implements FormModel<Address> {
           '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Address(street: _streetValue, city: _cityValue);
+  }
+
+  void submit({
+    required void Function(Address model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
   }
 
   @override
@@ -1313,6 +1349,18 @@ class ClientForm implements FormModel<Client> {
     }
     return Client(
         clientType: _clientTypeValue, name: _nameValue, notes: _notesValue);
+  }
+
+  void submit({
+    required void Function(Client model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
   }
 
   @override
@@ -1825,6 +1873,18 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
           '[${path ?? 'StandaloneDeliveryPointForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return DeliveryPoint(name: _nameValue, address: _addressValue);
+  }
+
+  void submit({
+    required void Function(DeliveryPoint model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
   }
 
   @override

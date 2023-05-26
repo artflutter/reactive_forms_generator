@@ -486,6 +486,40 @@ class FormGenerator {
         },
       );
 
+  Method get submitMethod => Method(
+        (b) {
+          b
+            ..name = 'submit'
+            ..returns = const Reference('void')
+            ..optionalParameters.addAll(
+              [
+                Parameter(
+                  (b) => b
+                    ..name = 'onValid'
+                    ..named = true
+                    ..required = true
+                    ..type = Reference(
+                        'void Function(${element.fullTypeName} model)'),
+                ),
+                Parameter(
+                  (b) => b
+                    ..name = 'onNotValid'
+                    ..named = true
+                    ..type = const Reference('void Function()?'),
+                ),
+              ],
+            )
+            ..body = const Code('''
+              form.markAllAsTouched();
+              if (form.valid) {
+                onValid(model);
+              } else {
+                onNotValid?.call();
+              }
+            ''');
+        },
+      );
+
   Constructor get _constructor => Constructor(
         (b) => b
           ..requiredParameters.addAll(
@@ -575,6 +609,7 @@ class FormGenerator {
               ...removeGroupControlMethodList,
               ...addGroupControlListMethodList,
               modelMethod,
+              submitMethod,
               updateValueMethod,
               resetMethod,
               Method(

@@ -1131,6 +1131,18 @@ class ProfileForm implements FormModel<Profile> {
         audioGuidance: _audioGuidanceValue);
   }
 
+  void submit({
+    required void Function(Profile model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     Profile value, {
@@ -1607,6 +1619,18 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
         isPlaqueEnabled: _isPlaqueEnabledValue);
   }
 
+  void submit({
+    required void Function(IncidenceFilter model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     IncidenceFilter value, {
@@ -1822,6 +1846,18 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
     return ThresholdSetting(isEnabled: _isEnabledValue, value: _valueValue);
   }
 
+  void submit({
+    required void Function(ThresholdSetting model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     ThresholdSetting value, {
@@ -2008,6 +2044,18 @@ class TimerSettingForm implements FormModel<TimerSetting> {
           '[${path ?? 'TimerSettingForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return TimerSetting(isEnabled: _isEnabledValue, value: _valueValue);
+  }
+
+  void submit({
+    required void Function(TimerSetting model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
   }
 
   @override

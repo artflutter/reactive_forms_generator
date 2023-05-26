@@ -701,6 +701,18 @@ class FreezedClassForm implements FormModel<FreezedClass> {
         year: _yearValue);
   }
 
+  void submit({
+    required void Function(FreezedClass model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     FreezedClass value, {

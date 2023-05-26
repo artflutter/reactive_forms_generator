@@ -541,6 +541,18 @@ class UserProfileForm implements FormModel<UserProfile> {
         office: _officeValue);
   }
 
+  void submit({
+    required void Function(UserProfile model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     UserProfile value, {
@@ -875,6 +887,18 @@ class AddressForm implements FormModel<Address> {
           '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
+  }
+
+  void submit({
+    required void Function(Address model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
   }
 
   @override

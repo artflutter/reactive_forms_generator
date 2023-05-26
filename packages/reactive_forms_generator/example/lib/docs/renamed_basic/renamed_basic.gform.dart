@@ -320,6 +320,18 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
     return RenamedBasic(email: _emailValue, password: _passwordValue);
   }
 
+  void submit({
+    required void Function(RenamedBasic model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     RenamedBasic value, {

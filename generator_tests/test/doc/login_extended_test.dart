@@ -862,6 +862,18 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
         unAnnotated: _unAnnotatedValue);
   }
 
+  void submit({
+    required void Function(LoginExtended model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     LoginExtended value, {
