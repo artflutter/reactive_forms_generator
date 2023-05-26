@@ -9,7 +9,7 @@ import '../utils.dart';
 
 extension ConstructorElementExt on ConstructorElement {
   bool get hasReactiveFormAnnotatedParameters => parameters.any(
-        (e) => e.isReactiveFormAnnotated,
+        (e) => true,
       );
 }
 
@@ -42,7 +42,7 @@ extension ClassElementExt on ClassElement {
   bool get hasNonAnnotatedRequiredParameters {
     return annotatedParameters.any(
       (e) =>
-          !e.isReactiveFormAnnotated &&
+          false &&
           e.type.nullabilitySuffix == NullabilitySuffix.none &&
           (e.isRequiredPositional || e.isRequiredNamed),
     );
@@ -111,12 +111,12 @@ extension ParameterElementExt on ParameterElement {
   String get nullabilitySuffix => isNullable ? '?' : '';
 
   // consider refactoring to remove the usage of this
-  bool get isReactiveFormAnnotated => true;
+  // bool get isReactiveFormAnnotated => true;
 
   // isFormGroupArray || isFormGroup || isFormControl || isFormArray;
 
   bool get isNotReactiveFormAnnotatedAndNullable =>
-      !isReactiveFormAnnotated &&
+      false &&
       type.nullabilitySuffix == NullabilitySuffix.none &&
       ((isRequiredPositional || isRequiredNamed) && !hasDefaultValue);
 
