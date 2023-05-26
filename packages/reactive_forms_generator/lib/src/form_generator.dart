@@ -452,20 +452,20 @@ class FormGenerator {
             // if (!e.isReactiveFormAnnotated) {
             //   return null;
             // }
-            final nullabilitySuffix = element.isNullable ? '?' : '';
-            final fieldValueName =
-                '${element.name.camelCase}$nullabilitySuffix.${e.fieldName}';
+            // final nullabilitySuffix = element.isNullable ? '?' : '';
+            // final fieldValueName =
+            //     '${element.name.camelCase}$nullabilitySuffix.${e.fieldName}';
 
             if (e.isPositional ||
                 e.isRequiredPositional ||
                 (e.isOptional && e.isPositional)) {
               // if (e.isReactiveFormAnnotated) {
-                return e.fieldValueName;
+              return e.fieldValueName;
               // }
             }
 
             // if (e.isReactiveFormAnnotated) {
-              return '${e.fieldName}:${e.fieldValueName}';
+            return '${e.fieldName}:${e.fieldValueName}';
             // }
             // return '${e.fieldName}:$fieldValueName';
           }).whereType<String>();

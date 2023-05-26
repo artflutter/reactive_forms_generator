@@ -39,29 +39,29 @@ extension ClassElementExt on ClassElement {
     return [];
   }
 
-  bool get hasNonAnnotatedRequiredParameters {
-    return annotatedParameters.any(
-      (e) =>
-          false &&
-          e.type.nullabilitySuffix == NullabilitySuffix.none &&
-          (e.isRequiredPositional || e.isRequiredNamed),
-    );
-  }
+  // bool get hasNonAnnotatedRequiredParameters {
+  //   return annotatedParameters.any(
+  //     (e) =>
+  //         false &&
+  //         e.type.nullabilitySuffix == NullabilitySuffix.none &&
+  //         (e.isRequiredPositional || e.isRequiredNamed),
+  //   );
+  // }
 
   bool get isNullable {
     return annotatedParameters.fold(true, (acc, e) {
-      if (e.isNotReactiveFormAnnotatedAndNullable) {
-        final element = e.type.element;
-        if (element is ClassElement) {
-          if (element.annotatedParameters.isEmpty) {
-            return acc && false;
-          } else {
-            acc = acc && element.isNullable;
-          }
-        }
-
-        return acc;
-      }
+      // if (e.isNotReactiveFormAnnotatedAndNullable) {
+      //   final element = e.type.element;
+      //   if (element is ClassElement) {
+      //     if (element.annotatedParameters.isEmpty) {
+      //       return acc && false;
+      //     } else {
+      //       acc = acc && element.isNullable;
+      //     }
+      //   }
+      //
+      //   return acc;
+      // }
 
       return acc;
     });
@@ -115,10 +115,10 @@ extension ParameterElementExt on ParameterElement {
 
   // isFormGroupArray || isFormGroup || isFormControl || isFormArray;
 
-  bool get isNotReactiveFormAnnotatedAndNullable =>
-      false &&
-      type.nullabilitySuffix == NullabilitySuffix.none &&
-      ((isRequiredPositional || isRequiredNamed) && !hasDefaultValue);
+  // bool get isNotReactiveFormAnnotatedAndNullable =>
+  //     false &&
+  //     type.nullabilitySuffix == NullabilitySuffix.none &&
+  //     ((isRequiredPositional || isRequiredNamed) && !hasDefaultValue);
 
   String get className => '${elementClassName}Form';
 

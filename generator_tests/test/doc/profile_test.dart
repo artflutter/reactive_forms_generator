@@ -1164,6 +1164,20 @@ class ProfileForm implements FormModel<Profile> {
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   static FormGroup formElements(Profile? profile) => FormGroup({
+        idControlName: FormControl<String>(
+            value: profile?.id,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        anotherIdControlName: FormControl<String>(
+            value: profile?.anotherId,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
         nameControlName: FormControl<String>(
             value: profile?.name,
             validators: [],
