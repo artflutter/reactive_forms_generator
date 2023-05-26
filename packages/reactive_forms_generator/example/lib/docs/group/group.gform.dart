@@ -561,6 +561,18 @@ class GroupForm implements FormModel<Group> {
         address2: _address2Value);
   }
 
+  void submit({
+    required void Function(Group model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     Group value, {
@@ -790,6 +802,18 @@ class PersonalForm implements FormModel<Personal> {
           '[${path ?? 'PersonalForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Personal(name: _nameValue, email: _emailValue);
+  }
+
+  void submit({
+    required void Function(Personal model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
   }
 
   @override
@@ -1031,6 +1055,18 @@ class PhoneForm implements FormModel<Phone> {
           '[${path ?? 'PhoneForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Phone(phoneNumber: _phoneNumberValue, countryIso: _countryIsoValue);
+  }
+
+  void submit({
+    required void Function(Phone model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
   }
 
   @override
@@ -1361,6 +1397,18 @@ class AddressForm implements FormModel<Address> {
           '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
+  }
+
+  void submit({
+    required void Function(Address model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
   }
 
   @override

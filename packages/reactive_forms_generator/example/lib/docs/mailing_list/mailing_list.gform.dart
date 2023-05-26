@@ -298,6 +298,18 @@ class MailingListForm implements FormModel<MailingList> {
     return MailingList(emailList: _emailListValue);
   }
 
+  void submit({
+    required void Function(MailingList model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     MailingList value, {

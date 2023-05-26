@@ -253,6 +253,18 @@ class SubGroupForm implements FormModel<SubGroup> {
     return SubGroup(id: _idValue);
   }
 
+  void submit({
+    required void Function(SubGroup model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     SubGroup value, {
@@ -817,6 +829,18 @@ class GroupForm implements FormModel<Group> {
     return Group(id: _idValue, subGroupList: _subGroupListValue);
   }
 
+  void submit({
+    required void Function(Group model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     Group value, {
@@ -1321,6 +1345,18 @@ class NestedForm implements FormModel<Nested> {
           '[${path ?? 'NestedForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Nested(groupList: _groupListValue);
+  }
+
+  void submit({
+    required void Function(Nested model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
   }
 
   @override

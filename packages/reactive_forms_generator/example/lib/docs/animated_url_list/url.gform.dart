@@ -353,6 +353,18 @@ class UrlForm implements FormModel<Url> {
     return Url(urlList: _urlListValue);
   }
 
+  void submit({
+    required void Function(Url model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     Url value, {
@@ -532,6 +544,18 @@ class UrlEntityForm implements FormModel<UrlEntity> {
           '[${path ?? 'UrlEntityForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return UrlEntity(label: _labelValue, url: _urlValue);
+  }
+
+  void submit({
+    required void Function(UrlEntity model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
   }
 
   @override

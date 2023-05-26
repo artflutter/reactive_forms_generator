@@ -114,6 +114,21 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                     children: [
                       Expanded(
                         child: ElevatedButton(
+                          key: submitRaw.itemKey,
+                          onPressed: () => formModel.submit(
+                            onValid: (_) => debugPrint('FormValid'),
+                            onNotValid: () => debugPrint('FormInvalid'),
+                          ),
+                          child: const Text('Submit method'),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
                           key: updateModel.itemKey,
                           onPressed: () {
                             setState(() => _emptyModel = mockedLogin);

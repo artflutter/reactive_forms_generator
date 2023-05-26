@@ -315,6 +315,18 @@ class LoginForm implements FormModel<Login> {
     return Login(email: _emailValue, password: _passwordValue);
   }
 
+  void submit({
+    required void Function(Login model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     Login value, {

@@ -280,6 +280,18 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     return Tags<T>(tags: _tagsValue);
   }
 
+  void submit({
+    required void Function(Tags<T> model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     Tags<T> value, {

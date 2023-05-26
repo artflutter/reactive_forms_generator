@@ -320,6 +320,18 @@ class ModelExtendsForm implements FormModel<ModelExtends> {
     return ModelExtends(email: _emailValue, password: _passwordValue);
   }
 
+  void submit({
+    required void Function(ModelExtends model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     ModelExtends value, {

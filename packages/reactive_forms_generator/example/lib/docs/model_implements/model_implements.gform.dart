@@ -323,6 +323,18 @@ class ModelImplementsForm implements FormModel<ModelImplements> {
     return ModelImplements(email: _emailValue, password: _passwordValue);
   }
 
+  void submit({
+    required void Function(ModelImplements model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     ModelImplements value, {

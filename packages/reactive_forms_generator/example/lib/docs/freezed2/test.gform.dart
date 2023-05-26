@@ -342,6 +342,18 @@ class TestForm implements FormModel<Test> {
     return Test(title: _titleValue, description: _descriptionValue);
   }
 
+  void submit({
+    required void Function(Test model) onValid,
+    void Function()? onNotValid,
+  }) {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onValid(model);
+    } else {
+      onNotValid?.call();
+    }
+  }
+
   @override
   void updateValue(
     Test value, {
