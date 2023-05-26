@@ -18,6 +18,12 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             ListTile(
+              title: const Text('Annotateless'),
+              onTap: () => Navigator.of(context).pushReplacementNamed(
+                Routes.annotateless,
+              ),
+            ),
+            ListTile(
               title: const Text('Login extended nullable'),
               onTap: () => Navigator.of(context).pushReplacementNamed(
                 Routes.loginExtendedNullable,
