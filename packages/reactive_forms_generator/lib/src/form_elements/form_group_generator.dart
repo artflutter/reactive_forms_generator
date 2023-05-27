@@ -47,7 +47,6 @@ class FormGroupGenerator extends FormElementGenerator {
       .where((e) => e.hasReactiveFormAnnotatedParameters)
       .first
       .parameters
-      // .where((e) => e.type.element is ClassElement)
       .where((e) => e.isFormGroup)
       .toList();
 

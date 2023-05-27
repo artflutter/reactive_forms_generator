@@ -39,38 +39,13 @@ extension ClassElementExt on ClassElement {
     return [];
   }
 
-  // bool get hasNonAnnotatedRequiredParameters {
-  //   return annotatedParameters.any(
-  //     (e) =>
-  //         false &&
-  //         e.type.nullabilitySuffix == NullabilitySuffix.none &&
-  //         (e.isRequiredPositional || e.isRequiredNamed),
-  //   );
-  // }
-
   bool get isNullable {
     return annotatedParameters.fold(true, (acc, e) {
-      // if (e.isNotReactiveFormAnnotatedAndNullable) {
-      //   final element = e.type.element;
-      //   if (element is ClassElement) {
-      //     if (element.annotatedParameters.isEmpty) {
-      //       return acc && false;
-      //     } else {
-      //       acc = acc && element.isNullable;
-      //     }
-      //   }
-      //
-      //   return acc;
-      // }
-
       return acc;
     });
   }
 }
 
-// extension ClassElementExt on ClassElement {
-//
-// }
 extension ParameterElementExt on ParameterElement {
   String get fieldName => name;
 
@@ -109,16 +84,6 @@ extension ParameterElementExt on ParameterElement {
   bool get isNullable => type.nullabilitySuffix == NullabilitySuffix.question;
 
   String get nullabilitySuffix => isNullable ? '?' : '';
-
-  // consider refactoring to remove the usage of this
-  // bool get isReactiveFormAnnotated => true;
-
-  // isFormGroupArray || isFormGroup || isFormControl || isFormArray;
-
-  // bool get isNotReactiveFormAnnotatedAndNullable =>
-  //     false &&
-  //     type.nullabilitySuffix == NullabilitySuffix.none &&
-  //     ((isRequiredPositional || isRequiredNamed) && !hasDefaultValue);
 
   String get className => '${elementClassName}Form';
 
@@ -214,9 +179,6 @@ extension ParameterElementExt on ParameterElement {
   }
 
   bool get isForm => formChecker.hasAnnotationOfExact(this);
-//
-// bool get hasNoReactiveFormAnnotation =>
-//     !isFormGroup && !isForm && !isFormArray && !isFormControl;
 }
 
 extension FieldElementExt on FieldElement {
@@ -226,31 +188,10 @@ extension FieldElementExt on FieldElement {
 
   String get fieldControlName => '${fieldName}Control';
 
-  // String get fieldControlNameName => '${fieldName}ControlName';
-
   String get fieldControlPath => '${fieldName}ControlPath';
 
   // needs careful usage and possibly refactoring
   DartType get typeParameter => (type as ParameterizedType).typeArguments.first;
-
-  // bool get isFormGroupArray {
-  //   if (!isFormArray) {
-  //     return false;
-  //   }
-  //
-  //   final type = this.type;
-  //   final typeArguments =
-  //       type is ParameterizedType ? type.typeArguments : const <DartType>[];
-  //
-  //   final typeParameter = typeArguments.first;
-  //
-  //   return typeParameter.element is ClassElement &&
-  //       formGroupChecker.hasAnnotationOf(typeParameter.element!);
-  // }
-
-  // bool get isFormArray => formArrayChecker.hasAnnotationOfExact(this);
-  //
-  // bool get isFormControl => formControlChecker.hasAnnotationOfExact(this);
 
   bool get isFormGroup {
     final element = type.element;

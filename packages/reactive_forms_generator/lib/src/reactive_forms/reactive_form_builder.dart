@@ -225,12 +225,6 @@ class ReactiveFormBuilder {
           ..extend = Reference('State<$className${_element.generics}>')
           ..fields.addAll(
             [
-              // Field(
-              //   (b) => b
-              //     ..name = '_form'
-              //     ..late = true
-              //     ..type = const Reference('FormGroup'),
-              // ),
               Field(
                 (b) => b
                   ..name = '_formModel'
