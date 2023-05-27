@@ -30,7 +30,7 @@ dependencies:
   dart_style: ^2.2.4
   recase: ^4.1.0
   reactive_forms_annotations:
-    path: ../packages/reactive_forms_annotations
+    path: ../reactive_forms_annotations
   freezed_annotation: ^2.2.0
 
 dev_dependencies:
@@ -42,7 +42,7 @@ dev_dependencies:
   test: ^1.21.1
   logging: ^1.0.2
   reactive_forms_generator:
-    path: ../packages/reactive_forms_generator
+    path: ../reactive_forms_generator
   flutter_lints: ^2.0.1
 
 dependency_overrides:

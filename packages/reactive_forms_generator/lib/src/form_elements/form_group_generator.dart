@@ -39,7 +39,7 @@ class FormGroupGenerator extends FormElementGenerator {
       .first
       .parameters
       .where(
-        (e) => (e.isFormControl || formArrayChecker.hasAnnotationOfExact(e)),
+        (e) => (e.isFormControl || e.isFormArray || e.isFormGroupArray),
       )
       .toList();
 
@@ -47,7 +47,7 @@ class FormGroupGenerator extends FormElementGenerator {
       .where((e) => e.hasReactiveFormAnnotatedParameters)
       .first
       .parameters
-      .where((e) => e.type.element is ClassElement)
+      // .where((e) => e.type.element is ClassElement)
       .where((e) => e.isFormGroup)
       .toList();
 
@@ -92,7 +92,7 @@ class FormGroupGenerator extends FormElementGenerator {
               formElementGenerator = FormControlGenerator(root, f, type);
             }
 
-            if (formArrayChecker.hasAnnotationOfExact(f)) {
+            if (f.isFormArray || f.isFormGroupArray) {
               formElementGenerator = FormArrayGenerator(root, f, type);
             }
 

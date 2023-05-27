@@ -446,17 +446,17 @@ packages:
   reactive_forms_annotations:
     dependency: "direct main"
     description:
-      path: "../packages/reactive_forms_annotations"
+      path: "../reactive_forms_annotations"
       relative: true
     source: path
     version: "1.1.0"
   reactive_forms_generator:
     dependency: "direct dev"
     description:
-      path: "../packages/reactive_forms_generator"
+      path: "../reactive_forms_generator"
       relative: true
     source: path
-    version: "1.0.2"
+    version: "1.1.2-beta"
   recase:
     dependency: "direct main"
     description:

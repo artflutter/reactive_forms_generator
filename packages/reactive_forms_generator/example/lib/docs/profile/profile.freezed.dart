@@ -273,8 +273,7 @@ class __$$_ProfileCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Profile extends _Profile {
-  _$_Profile(
-      this.id,
+  _$_Profile(this.id,
       {required this.anotherId,
       @FormControlAnnotation<String>()
           required this.name,
@@ -379,8 +378,7 @@ class _$_Profile extends _Profile {
 }
 
 abstract class _Profile extends Profile {
-  factory _Profile(
-      final String id,
+  factory _Profile(final String id,
       {required final String anotherId,
       @FormControlAnnotation<String>()
           required final String name,
