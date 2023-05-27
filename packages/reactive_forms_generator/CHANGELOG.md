@@ -1,3 +1,12 @@
+## [1.2.0]
+
+* internal refactoring
+* all unannotated fields will be passes through the RF as simple controls
+* you can now skip ReactiveFormControl annotation if you do not need validators
+* annotateless form controls
+* fix for https://github.com/artflutter/reactive_forms_generator/issues/112
+* fix for https://github.com/artflutter/reactive_forms_generator/issues/110
+
 ## [1.1.2-beta]
 
 * annotateless form controls
