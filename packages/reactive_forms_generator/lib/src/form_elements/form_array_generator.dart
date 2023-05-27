@@ -18,13 +18,6 @@ class FormArrayGenerator extends FormElementGenerator {
     final enclosingElement =
         (fieldElement.enclosingElement as ConstructorElement).enclosingElement;
 
-    // final optionalChaining =
-    //     type?.nullabilitySuffix != NullabilitySuffix.question ||
-    //             (enclosingElement == root && !root.isNullable) ||
-    //             (enclosingElement != root && !root.isNullable)
-    //         ? ''
-    //         : '?';
-
     final optionalChaining = (enclosingElement == root &&
                 type?.nullabilitySuffix != NullabilitySuffix.question) ||
             (enclosingElement == root && !root.isNullable)
@@ -107,20 +100,8 @@ class FormArrayGenerator extends FormElementGenerator {
     return formArrayItemAsyncValidators;
   }
 
-  // String get annotationType =>
-  //     (annotation(formArrayChecker)?.type as ParameterizedType)
-  //         .typeArguments
-  //         .first
-  //         .toString();
-
   @override
   String element() {
-    // final optionalChaining =
-    //     field.type.nullabilitySuffix == NullabilitySuffix.question ? '?' : '';
-
-    // final defaultValue =
-    //     type?.nullabilitySuffix == NullabilitySuffix.question ? '?? []' : '';
-
     final typeParameterType = typeParameter.getDisplayString(
       withNullability: false,
     );
@@ -143,16 +124,8 @@ class FormArrayGenerator extends FormElementGenerator {
     ];
 
     if (field.isFormGroupArray) {
-      // final formGenerator = FormGenerator(
-      //   root,
-      //   typeParameter.element! as ClassElement,
-      //   field.type,
-      // );
-
       final props = [
         '$value.map((e) => ${field.className}.formElements(e)).toList()',
-        // (url?.urlList ?? []).map((e) => UrlEntityForm.formElements(e)).toList(),
-        // '${field.name}${formGenerator.className}.map((e) => e.formElementsS()).toList()',
         ...partialProps
       ].join(', ');
 

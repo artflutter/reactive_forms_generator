@@ -108,8 +108,6 @@ class FormGenerator {
   String get className => '${baseName}Form';
 
   String get classNameFull {
-    // final generics = element.thisType.typeArguments.join(', ');
-
     return '$className${element.generics}';
   }
 
@@ -181,54 +179,6 @@ class FormGenerator {
         ),
     );
   }
-
-  // Method get resetValueMethod {
-  //   String displayType =
-  //       type?.getDisplayString(withNullability: true) ?? element.fullTypeName;
-  //
-  //   if (type != null &&
-  //       type is ParameterizedType &&
-  //       (type as ParameterizedType).typeArguments.isNotEmpty) {
-  //     displayType = (type as ParameterizedType)
-  //         .typeArguments
-  //         .first
-  //         .getDisplayString(withNullability: true);
-  //   }
-  //
-  //   return Method(
-  //     (b) => b
-  //       ..name = 'resetValue'
-  //       ..lambda = true
-  //       ..annotations.add(const CodeExpression(Code('override')))
-  //       ..requiredParameters.add(
-  //         Parameter(
-  //           (b) => b
-  //             ..name = 'value'
-  //             ..type = Reference(displayType),
-  //         ),
-  //       )
-  //       ..optionalParameters.addAll([
-  //         Parameter(
-  //           (b) => b
-  //             ..name = 'updateParent'
-  //             ..named = true
-  //             ..defaultTo = const Code('true')
-  //             ..type = const Reference('bool'),
-  //         ),
-  //         Parameter(
-  //           (b) => b
-  //             ..name = 'emitEvent'
-  //             ..named = true
-  //             ..defaultTo = const Code('true')
-  //             ..type = const Reference('bool'),
-  //         ),
-  //       ])
-  //       ..returns = const Reference('void')
-  //       ..body = Code(
-  //         'form.reset(value: $className.formElements${element.generics}(value).rawValue, updateParent: updateParent, emitEvent:emitEvent)',
-  //       ),
-  //   );
-  // }
 
   Method get resetMethod {
     String displayType =
@@ -449,25 +399,13 @@ class FormGenerator {
   Method get modelMethod => Method(
         (b) {
           final parameterValues = parameters.map<String?>((e) {
-            // if (!e.isReactiveFormAnnotated) {
-            //   return null;
-            // }
-            // final nullabilitySuffix = element.isNullable ? '?' : '';
-            // final fieldValueName =
-            //     '${element.name.camelCase}$nullabilitySuffix.${e.fieldName}';
-
             if (e.isPositional ||
                 e.isRequiredPositional ||
                 (e.isOptional && e.isPositional)) {
-              // if (e.isReactiveFormAnnotated) {
               return e.fieldValueName;
-              // }
             }
 
-            // if (e.isReactiveFormAnnotated) {
             return '${e.fieldName}:${e.fieldValueName}';
-            // }
-            // return '${e.fieldName}:$fieldValueName';
           }).whereType<String>();
 
           b

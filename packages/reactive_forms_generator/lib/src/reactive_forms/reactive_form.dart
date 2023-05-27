@@ -52,14 +52,6 @@ class ReactiveForm {
           ),
       );
 
-  // List<Spec> get imports => [
-  //       Directive.import('package:flutter/foundation.dart'),
-  //       Directive.import('package:flutter/material.dart'),
-  //       Directive.import('package:reactive_forms/reactive_forms.dart'),
-  //       Directive.import(
-  //           'package:reactive_forms/src/widgets/inherited_streamer.dart'),
-  //     ];
-
   Class get reactiveForm => Class(
         (b) => b
           ..name = className

@@ -20,8 +20,6 @@ List<Spec> generateLibrary(ClassElement element) {
   final reactiveFormArrayBuilder = ReactiveFormArrayBuilder(formGenerator);
   final reactiveFormGroupArrayBuilder =
       ReactiveFormGroupArrayBuilder(formGenerator);
-  // final reactiveFormFormArrayBuilder =
-  //     ReactiveFormGroupArrayBuilder(formGenerator);
 
   return [
     reactiveFormConsumer.generate,
