@@ -233,24 +233,24 @@ extension FieldElementExt on FieldElement {
   // needs careful usage and possibly refactoring
   DartType get typeParameter => (type as ParameterizedType).typeArguments.first;
 
-  bool get isFormGroupArray {
-    if (!isFormArray) {
-      return false;
-    }
+  // bool get isFormGroupArray {
+  //   if (!isFormArray) {
+  //     return false;
+  //   }
+  //
+  //   final type = this.type;
+  //   final typeArguments =
+  //       type is ParameterizedType ? type.typeArguments : const <DartType>[];
+  //
+  //   final typeParameter = typeArguments.first;
+  //
+  //   return typeParameter.element is ClassElement &&
+  //       formGroupChecker.hasAnnotationOf(typeParameter.element!);
+  // }
 
-    final type = this.type;
-    final typeArguments =
-        type is ParameterizedType ? type.typeArguments : const <DartType>[];
-
-    final typeParameter = typeArguments.first;
-
-    return typeParameter.element is ClassElement &&
-        formGroupChecker.hasAnnotationOf(typeParameter.element!);
-  }
-
-  bool get isFormArray => formArrayChecker.hasAnnotationOfExact(this);
-
-  bool get isFormControl => formControlChecker.hasAnnotationOfExact(this);
+  // bool get isFormArray => formArrayChecker.hasAnnotationOfExact(this);
+  //
+  // bool get isFormControl => formControlChecker.hasAnnotationOfExact(this);
 
   bool get isFormGroup {
     final element = type.element;
