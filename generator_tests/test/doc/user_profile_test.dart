@@ -653,6 +653,13 @@ class UserProfileForm implements FormModel<UserProfile> {
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   static FormGroup formElements(UserProfile? userProfile) => FormGroup({
+        idControlName: FormControl<String>(
+            value: userProfile?.id,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
         firstNameControlName: FormControl<String>(
             value: userProfile?.firstName,
             validators: [

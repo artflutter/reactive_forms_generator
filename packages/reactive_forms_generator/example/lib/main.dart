@@ -1,4 +1,5 @@
 import 'package:example/docs/animated_url_list/url_list_form.dart';
+import 'package:example/docs/annotateless/annotateless_form.dart';
 import 'package:example/docs/array_nullable/array_nullable_form.dart';
 import 'package:example/docs/delivery_list/delivery_point_route_form.dart';
 import 'package:example/docs/delivery_list/delivery_route_form.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         Routes.loginExtended: (_) => const LoginExtendedFormWidget(),
         Routes.login: (_) => const LoginFormWidget(),
+        Routes.annotateless: (_) => const AnnotatelessFormWidget(),
         Routes.mailingList: (_) => const MailingListFormWidget(),
         Routes.userProfile: (_) => const UserProfileFormWidget(),
         Routes.loginExtendedNullable: (_) =>
@@ -48,7 +50,7 @@ class MyApp extends StatelessWidget {
         Routes.modelImplements: (_) => const ModelImplementsWidget(),
         Routes.nested: (_) => const NestedFormWidget(),
       },
-      home: const LoginFormWidget(),
+      home: const AnnotatelessFormWidget(),
     );
   }
 }
@@ -57,6 +59,8 @@ class Routes {
   static const loginExtended = '/login-extended';
 
   static const login = '/login';
+
+  static const annotateless = '/annotateless';
 
   static const mailingList = '/mailing-list';
 

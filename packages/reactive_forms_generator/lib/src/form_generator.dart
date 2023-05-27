@@ -116,7 +116,7 @@ class FormGenerator {
   List<ParameterElement> get parameters => element.annotatedParameters;
 
   Iterable<ParameterElement> get annotatedParameters =>
-      parameters.where((e) => e.isReactiveFormAnnotated);
+      parameters.where((e) => true);
 
   Field staticFieldName(ParameterElement field) => Field(
         (b) => b
@@ -449,25 +449,25 @@ class FormGenerator {
   Method get modelMethod => Method(
         (b) {
           final parameterValues = parameters.map<String?>((e) {
-            if (!e.isReactiveFormAnnotated) {
-              return null;
-            }
-            final nullabilitySuffix = element.isNullable ? '?' : '';
-            final fieldValueName =
-                '${element.name.camelCase}$nullabilitySuffix.${e.fieldName}';
+            // if (!e.isReactiveFormAnnotated) {
+            //   return null;
+            // }
+            // final nullabilitySuffix = element.isNullable ? '?' : '';
+            // final fieldValueName =
+            //     '${element.name.camelCase}$nullabilitySuffix.${e.fieldName}';
 
             if (e.isPositional ||
                 e.isRequiredPositional ||
                 (e.isOptional && e.isPositional)) {
-              if (e.isReactiveFormAnnotated) {
-                return e.fieldValueName;
-              }
+              // if (e.isReactiveFormAnnotated) {
+              return e.fieldValueName;
+              // }
             }
 
-            if (e.isReactiveFormAnnotated) {
-              return '${e.fieldName}:${e.fieldValueName}';
-            }
-            return '${e.fieldName}:$fieldValueName';
+            // if (e.isReactiveFormAnnotated) {
+            return '${e.fieldName}:${e.fieldValueName}';
+            // }
+            // return '${e.fieldName}:$fieldValueName';
           }).whereType<String>();
 
           b

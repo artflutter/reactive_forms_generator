@@ -957,6 +957,13 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
+            touched: false),
+        unAnnotatedControlName: FormControl<String>(
+            value: loginExtended?.unAnnotated,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
             touched: false)
       },
           validators: [

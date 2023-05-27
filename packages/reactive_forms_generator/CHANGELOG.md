@@ -1,3 +1,11 @@
+## [1.1.2-beta]
+
+* annotateless form controls
+
+## [1.1.1-beta]
+
+* fix for https://github.com/artflutter/reactive_forms_generator/issues/112
+
 ## [1.1.0-beta]
 
 * fix for https://github.com/artflutter/reactive_forms_generator/issues/110
