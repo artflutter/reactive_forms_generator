@@ -1,3 +1,5 @@
+// ignore_for_file: implementation_imports
+import 'package:reactive_forms/src/validators/email_validator.dart';
 import 'package:example/helpers.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
@@ -9,13 +11,9 @@ class MailingList {
 
   MailingList({
     @FormArrayAnnotation(
-      validators: [
-        mailingListValidator,
-      ],
-      itemValidators: [
-        emailValidator,
-      ],
+      validators: [MailingListValidator()],
+      itemValidators: [EmailValidator()],
     )
-        this.emailList = const [],
+    this.emailList = const [],
   });
 }

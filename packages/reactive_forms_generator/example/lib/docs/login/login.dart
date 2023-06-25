@@ -1,12 +1,14 @@
-import 'package:equatable/equatable.dart';
+// ignore_for_file: implementation_imports
 import 'package:example/helpers.dart';
+import 'package:reactive_forms/src/validators/required_validator.dart';
+import 'package:equatable/equatable.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'login.gform.dart';
 
 @ReactiveFormAnnotation()
 @FormGroupAnnotation(
-  validators: [mustMatch],
+  validators: [MustMatchValidator()],
 )
 class Login extends Equatable {
   final String email;
@@ -15,11 +17,11 @@ class Login extends Equatable {
 
   const Login({
     @FormControlAnnotation(
-      validators: [requiredValidator],
+      validators: [RequiredValidator()],
     )
         this.email = '',
     @FormControlAnnotation(
-      validators: [requiredValidator],
+      validators: [RequiredValidator()],
     )
         this.password = '',
   });

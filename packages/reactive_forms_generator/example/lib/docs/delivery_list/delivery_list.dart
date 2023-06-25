@@ -1,6 +1,7 @@
+// ignore_for_file: implementation_imports
+import 'package:reactive_forms/src/validators/required_validator.dart';
 import 'package:equatable/equatable.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:example/helpers.dart';
 
 part 'delivery_list.gform.dart';
 
@@ -26,10 +27,10 @@ class DeliveryPoint extends Equatable {
   final Address? address;
 
   const DeliveryPoint({
-    @FormControlAnnotation<String>(
-      validators: [requiredValidator],
+    @FormControlAnnotation(
+      validators: [RequiredValidator()],
     )
-        this.name = '',
+    this.name = '',
     this.address,
   });
 
@@ -64,12 +65,11 @@ class Address extends Equatable {
   final String? city;
 
   const Address({
-    @FormControlAnnotation<String>(
-      validators: [requiredValidator],
+    @FormControlAnnotation(
+      validators: [RequiredValidator()],
     )
-        this.street,
-    @FormControlAnnotation<String>()
-        this.city,
+    this.street,
+    @FormControlAnnotation<String>() this.city,
   });
 
   @override

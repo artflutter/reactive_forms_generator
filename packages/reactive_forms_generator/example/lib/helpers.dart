@@ -1,36 +1,22 @@
-import 'package:example/docs/login_extended/login_extended.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-Map<String, dynamic>? allFieldsRequired(AbstractControl<dynamic> control) {
-  final email = control.value['email'] as String?;
-  final password = control.value['password'] as String?;
+class AllFieldsRequired extends Validator<dynamic> {
+  const AllFieldsRequired() : super();
 
-  if (email == null || password == null || email.isEmpty || password.isEmpty) {
-    return <String, dynamic>{'allFieldsRequired': true};
-  }
+  @override
+  Map<String, dynamic>? validate(AbstractControl<dynamic> control) {
+    final email = control.value['email'] as String?;
+    final password = control.value['password'] as String?;
 
-  return null;
-}
+    if (email == null ||
+        password == null ||
+        email.isEmpty ||
+        password.isEmpty) {
+      return <String, dynamic>{'allFieldsRequired': true};
+    }
 
-Map<String, dynamic>? allFieldsRequiredTyped(LoginExtendedForm form) {
-  final errors = <String, dynamic>{};
-  if (!form.emailControl.valid) {
-    errors.addAll(<String, dynamic>{'emailError': true});
-  }
-
-  if (!form.passwordControl.valid) {
-    errors.addAll(<String, dynamic>{'passwordError': true});
-  }
-
-  if (errors.isEmpty) {
     return null;
   }
-
-  return <String, dynamic>{'form': errors};
-}
-
-Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
-  return Validators.required(control);
 }
 
 final emailRegex = RegExp(
@@ -61,15 +47,51 @@ Map<String, dynamic> emailValidator(AbstractControl<dynamic> control) {
 // }
 
 // validates that at least one email is selected
-Map<String, dynamic>? mailingListValidator(AbstractControl control) {
-  final formArray = control as FormArray<String>;
-  final emails = formArray.value ?? [];
-  final test = <String>{};
+class MailingListValidator extends Validator<dynamic> {
+  const MailingListValidator() : super();
 
-  final result = emails.fold<bool>(true,
-      (previousValue, element) => previousValue && test.add(element ?? ''));
+  @override
+  Map<String, dynamic>? validate(AbstractControl control) {
+    final formArray = control as FormArray<String>;
+    final emails = formArray.value ?? [];
+    final test = <String>{};
 
-  return result ? null : <String, dynamic>{'emailDuplicates': true};
+    final result = emails.fold<bool>(true,
+        (previousValue, element) => previousValue && test.add(element ?? ''));
+
+    return result ? null : <String, dynamic>{'emailDuplicates': true};
+  }
+}
+
+/// Validator that validates the user's email is unique, sending a request to
+/// the Server.
+class UniqueEmailAsyncValidator extends AsyncValidator<dynamic> {
+  const UniqueEmailAsyncValidator() : super();
+
+  @override
+  Future<Map<String, dynamic>?> validate(
+      AbstractControl<dynamic> control) async {
+    final error = {'unique': false};
+
+    final isUniqueEmail = await _getIsUniqueEmail(control.value.toString());
+    if (!isUniqueEmail) {
+      control.markAsTouched();
+      return error;
+    }
+
+    return null;
+  }
+
+  /// Simulates a time consuming operation (i.e. a Server request)
+  Future<bool> _getIsUniqueEmail(String email) {
+    // simple array that simulates emails stored in the Server DB.
+    final storedEmails = ['johndoe@email.com', 'john@email.com'];
+
+    return Future.delayed(
+      const Duration(seconds: 5),
+      () => !storedEmails.contains(email),
+    );
+  }
 }
 
 enum UserMode { user, admin }
@@ -92,26 +114,31 @@ class NumValueAccessor extends ControlValueAccessor<int, num> {
   }
 }
 
-Map<String, dynamic>? mustMatch(AbstractControl<dynamic> control) {
-  const email = 'email';
-  const password = 'password';
+class MustMatchValidator extends Validator<dynamic> {
+  const MustMatchValidator() : super();
 
-  final form = control as FormGroup;
+  @override
+  Map<String, dynamic>? validate(AbstractControl<dynamic> control) {
+    const email = 'email';
+    const password = 'password';
 
-  final formControl = form.control(email);
-  final matchingFormControl = form.control(password);
+    final form = control as FormGroup;
 
-  if (formControl.value != matchingFormControl.value) {
-    matchingFormControl.setErrors(<String, dynamic>{
-      ...matchingFormControl.errors,
-      ...<String, dynamic>{'mustMatch': true},
-    });
+    final formControl = form.control(email);
+    final matchingFormControl = form.control(password);
 
-    // force messages to show up as soon as possible
-    matchingFormControl.markAsTouched();
-  } else {
-    matchingFormControl.removeError('mustMatch');
+    if (formControl.value != matchingFormControl.value) {
+      matchingFormControl.setErrors(<String, dynamic>{
+        ...matchingFormControl.errors,
+        ...<String, dynamic>{'mustMatch': true},
+      });
+
+      // force messages to show up as soon as possible
+      matchingFormControl.markAsTouched();
+    } else {
+      matchingFormControl.removeError('mustMatch');
+    }
+
+    return null;
   }
-
-  return null;
 }

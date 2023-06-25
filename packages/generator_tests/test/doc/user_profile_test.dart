@@ -15,13 +15,10 @@ void main() {
           model: '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
+            import 'package:reactive_forms/src/validators/required_validator.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
             part '$fileName.gform.dart';
-            
-            Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
-              return Validators.required(control);
-            }
             
             @ReactiveFormAnnotation()
             class UserProfile {
@@ -32,19 +29,19 @@ void main() {
               final String lastName;
             
               final Address home;
-                        
+            
               final Address? office;
             
               UserProfile({
                 required this.id,
-                @FormControlAnnotation<String>(
-                  validators: [requiredValidator],
+                @FormControlAnnotation(
+                  validators: [RequiredValidator()],
                 )
-                    this.firstName = '',
-                @FormControlAnnotation<String>(
-                  validators: [requiredValidator],
+                this.firstName = '',
+                @FormControlAnnotation(
+                  validators: [RequiredValidator()],
                 )
-                    this.lastName = '',
+                this.lastName = '',
                 required this.home,
                 this.office,
               });
@@ -59,14 +56,12 @@ void main() {
               final String? zip;
             
               Address({
-                @FormControlAnnotation<String>()
-                    this.street,
-                @FormControlAnnotation<String>(
-                  validators: [requiredValidator],
+                @FormControlAnnotation<String>() this.street,
+                @FormControlAnnotation(
+                  validators: [RequiredValidator()],
                 )
-                    this.city,
-                @FormControlAnnotation<String>()
-                    this.zip,
+                this.city,
+                @FormControlAnnotation<String>() this.zip,
               });
             }
           ''',
@@ -662,18 +657,14 @@ class UserProfileForm implements FormModel<UserProfile> {
             touched: false),
         firstNameControlName: FormControl<String>(
             value: userProfile?.firstName,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         lastNameControlName: FormControl<String>(
             value: userProfile?.lastName,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -1017,9 +1008,7 @@ class AddressForm implements FormModel<Address> {
             touched: false),
         cityControlName: FormControl<String>(
             value: address?.city,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

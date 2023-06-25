@@ -355,14 +355,14 @@ class ModelExtendsForm implements FormModel<ModelExtends> {
   static FormGroup formElements(ModelExtends? modelExtends) => FormGroup({
         emailControlName: FormControl<String>(
             value: modelExtends?.email,
-            validators: [requiredValidator],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
             value: modelExtends?.password,
-            validators: [requiredValidator],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

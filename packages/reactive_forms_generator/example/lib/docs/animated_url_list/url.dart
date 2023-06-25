@@ -1,4 +1,5 @@
-import 'package:example/helpers.dart';
+// ignore_for_file: implementation_imports
+import 'package:reactive_forms/src/validators/required_validator.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'url.gform.dart';
@@ -16,9 +17,13 @@ class UrlEntity {
   final String url;
 
   UrlEntity({
-    @FormControlAnnotation<String>(validators: [requiredValidator])
-        this.label = '',
-    @FormControlAnnotation<String>(validators: [requiredValidator])
-        this.url = '',
+    @FormControlAnnotation(validators: [
+      RequiredValidator(),
+    ])
+    this.label = '',
+    @FormControlAnnotation(validators: [
+      RequiredValidator(),
+    ])
+    this.url = '',
   });
 }

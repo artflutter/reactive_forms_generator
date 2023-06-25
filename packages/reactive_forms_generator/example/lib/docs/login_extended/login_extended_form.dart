@@ -4,10 +4,8 @@ import 'package:example/docs/login_extended/login_extended.dart';
 import 'package:example/helpers.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
-import 'package:intl/intl.dart';
 import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_touch_spin/reactive_touch_spin.dart';
 
 class LoginExtendedFormWidget extends StatelessWidget {
   const LoginExtendedFormWidget({Key? key}) : super(key: key);
@@ -104,16 +102,6 @@ class LoginExtendedFormWidget extends StatelessWidget {
                 compareFn: (item, selectedItem) => item == selectedItem,
 
                 showClearButton: true,
-              ),
-              ReactiveTouchSpin<int>(
-                formControl: formModel.timeoutControl,
-                decoration: const InputDecoration(
-                  labelText: 'Logout timeout mins.',
-                ),
-                valueAccessor: NumValueAccessor(),
-                displayFormat: NumberFormat()..minimumFractionDigits = 0,
-                min: 0,
-                max: 10,
               ),
               ReactiveSwitchListTile(
                 formControl: formModel.rememberMeControl,

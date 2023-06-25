@@ -1,3 +1,5 @@
+// ignore_for_file: implementation_imports
+
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
@@ -5,6 +7,7 @@ import 'package:reactive_forms_generator/src/form_elements/form_element_generato
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:recase/recase.dart';
+import 'package:source_gen/src/type_checker.dart';
 
 class FormArrayGenerator extends FormElementGenerator {
   FormArrayGenerator(ClassElement root, ParameterElement field, DartType? type)
@@ -41,73 +44,14 @@ class FormArrayGenerator extends FormElementGenerator {
     return getDisplayString;
   }
 
-  List<String> get validators {
-    List<String> formArrayValidators = syncValidatorList(formArrayChecker);
-
-    if (annotationTyped(formArrayChecker)) {
-      formArrayValidators = formArrayValidators
-          .map(
-            (e) => '(control) => $e(control as FormArray<$displayType>)',
-          )
-          .toList();
-    }
-
-    return formArrayValidators;
-  }
-
-  List<String> get asyncValidators {
-    List<String> formArrayAsyncValidators =
-        asyncValidatorList(formArrayChecker);
-
-    if (annotationTyped(formArrayChecker)) {
-      formArrayAsyncValidators = formArrayAsyncValidators
-          .map(
-            (e) => '(control) => $e(control as FormArray<$displayType>)',
-          )
-          .toList();
-    }
-
-    return formArrayAsyncValidators;
-  }
-
-  List<String> get itemValidators {
-    List<String> formArrayItemValidators =
-        itemSyncValidatorList(formArrayChecker);
-
-    if (annotationTyped(formArrayChecker)) {
-      formArrayItemValidators = formArrayItemValidators
-          .map(
-            (e) => '(control) => $e(control as FormControl<$displayType>)',
-          )
-          .toList();
-    }
-
-    return formArrayItemValidators;
-  }
-
-  List<String> get itemAsyncValidators {
-    List<String> formArrayItemAsyncValidators =
-        itemAsyncValidatorList(formArrayChecker);
-
-    if (annotationTyped(formArrayChecker)) {
-      formArrayItemAsyncValidators = formArrayItemAsyncValidators
-          .map(
-            (e) => '(control) => $e(control as FormControl<$displayType>)',
-          )
-          .toList();
-    }
-
-    return formArrayItemAsyncValidators;
-  }
-
   @override
   String element() {
     final typeParameterType = typeParameter.getDisplayString(
       withNullability: false,
     );
 
-    final formArrayAnnotationType = annotationType(formArrayChecker);
-    final formArrayAnnotationTyped = annotationTyped(formArrayChecker);
+    final formArrayAnnotationType = annotationType;
+    final formArrayAnnotationTyped = annotationTyped;
 
     if (formArrayAnnotationTyped &&
         formArrayAnnotationType != typeParameterType) {
@@ -117,10 +61,10 @@ class FormArrayGenerator extends FormElementGenerator {
     }
 
     final partialProps = [
-      'validators: [${validators.join(',')}]',
-      'asyncValidators: [${asyncValidators.join(',')}]',
-      'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formArrayChecker)}',
-      'disabled: ${disabled(formArrayChecker)}',
+      'validators: $validators',
+      'asyncValidators: $asyncValidators',
+      'asyncValidatorsDebounceTime: $asyncValidatorsDebounceTime',
+      'disabled: $disabled',
     ];
 
     if (field.isFormGroupArray) {
@@ -136,8 +80,8 @@ class FormArrayGenerator extends FormElementGenerator {
               value: e,
               validators: $itemValidators,
               asyncValidators: $itemAsyncValidators,
-              asyncValidatorsDebounceTime: ${itemAsyncValidatorsDebounceTime(formArrayChecker)},
-              disabled: ${itemDisabled(formArrayChecker)},
+              asyncValidatorsDebounceTime: $itemAsyncValidatorsDebounceTime,
+              disabled: $itemDisabled,
             )).toList()''',
         ...partialProps
       ].join(', ');
@@ -145,4 +89,7 @@ class FormArrayGenerator extends FormElementGenerator {
       return 'FormArray<$displayType>($props)';
     }
   }
+
+  @override
+  TypeChecker get typeChecker => formArrayChecker;
 }

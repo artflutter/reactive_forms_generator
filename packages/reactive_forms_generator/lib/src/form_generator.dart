@@ -305,8 +305,8 @@ class FormGenerator {
     final asyncValidators = formArrayGenerator.itemAsyncValidators;
 
     final asyncValidatorsDebounceTime =
-        formArrayGenerator.itemAsyncValidatorsDebounceTime(formArrayChecker);
-    final disabled = formArrayGenerator.itemDisabled(formArrayChecker);
+        formArrayGenerator.itemAsyncValidatorsDebounceTime;
+    final disabled = formArrayGenerator.itemDisabled;
 
     return Method(
       (b) => b
@@ -323,7 +323,7 @@ class FormGenerator {
             (b) => b
               ..name = 'asyncValidators'
               ..named = true
-              ..type = const Reference('List<AsyncValidatorFunction>?'),
+              ..type = const Reference('List<AsyncValidator<dynamic>>?'),
           ),
         )
         ..optionalParameters.add(
@@ -331,7 +331,7 @@ class FormGenerator {
             (b) => b
               ..name = 'validators'
               ..named = true
-              ..type = const Reference('List<ValidatorFunction>?'),
+              ..type = const Reference('List<Validator<dynamic>>?'),
           ),
         )
         ..optionalParameters.add(
@@ -362,8 +362,8 @@ class FormGenerator {
         ..returns = const Reference('void')
         ..body = Code(
           '''
-              List<ValidatorFunction> resultingValidators = $validators; 
-              List<AsyncValidatorFunction> resultingAsyncValidators = $asyncValidators;
+              List<Validator<dynamic>> resultingValidators = $validators; 
+              List<AsyncValidator<dynamic>> resultingAsyncValidators = $asyncValidators;
               
               switch(validatorsApplyMode) { 
                 case ValidatorsApplyMode.merge:

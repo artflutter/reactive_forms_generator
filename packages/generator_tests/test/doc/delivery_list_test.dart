@@ -15,20 +15,17 @@ void main() {
           model: '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
+            import 'package:reactive_forms/src/validators/required_validator.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
             part '$fileName.gform.dart';
-            
-            Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
-              return Validators.required(control);
-            }
             
             @ReactiveFormAnnotation()
             class DeliveryList {
               final List<DeliveryPoint> deliveryList;
               final List<Client>? clientList;
             
-              DeliveryList({
+              const DeliveryList({
                 @FormArrayAnnotation() this.deliveryList = const [],
                 @FormArrayAnnotation() this.clientList,
               });
@@ -42,10 +39,10 @@ void main() {
               final Address? address;
             
               const DeliveryPoint({
-                @FormControlAnnotation<String>(
-                  validators: [requiredValidator],
+                @FormControlAnnotation(
+                  validators: [RequiredValidator()],
                 )
-                    this.name = '',
+                this.name = '',
                 this.address,
               });
             }
@@ -74,12 +71,11 @@ void main() {
               final String? city;
             
               const Address({
-                @FormControlAnnotation<String>(
-                  validators: [requiredValidator],
+                @FormControlAnnotation(
+                  validators: [RequiredValidator()],
                 )
-                    this.street,
-                @FormControlAnnotation<String>()
-                    this.city,
+                this.street,
+                @FormControlAnnotation<String>() this.city,
               });
             }
           ''',
@@ -911,9 +907,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
   static FormGroup formElements(DeliveryPoint? deliveryPoint) => FormGroup({
         nameControlName: FormControl<String>(
             value: deliveryPoint?.name,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -1160,9 +1154,7 @@ class AddressForm implements FormModel<Address> {
   static FormGroup formElements(Address? address) => FormGroup({
         streetControlName: FormControl<String>(
             value: address?.street,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -2002,9 +1994,7 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
   static FormGroup formElements(DeliveryPoint? deliveryPoint) => FormGroup({
         nameControlName: FormControl<String>(
             value: deliveryPoint?.name,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

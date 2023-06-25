@@ -686,9 +686,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
             touched: false),
         idControlName: FormControl<String>(
             value: freezedClass?.id,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

@@ -15,52 +15,34 @@ void main() {
           model: '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
+            import 'package:reactive_forms/src/validators/required_validator.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
             part '$fileName.gform.dart';
-          
-            Map<String, dynamic>? allFieldsRequired(AbstractControl<dynamic> control) {
-              final email = control.value['email'] as String?;
-              final password = control.value['password'] as String?;
             
-              if (email == null || password == null || email.isEmpty || password.isEmpty) {
-                return <String, dynamic>{'allFieldsRequired': true};
-              }
+            class AllFieldsRequired extends Validator<dynamic> {
+              const AllFieldsRequired() : super();
             
-              return null;
-            }
-            
-            Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
-              return Validators.required(control);
-            }
-            
-            Map<String, dynamic>? allFieldsRequiredTyped(LoginExtendedForm form) {
-              final errors = <String, dynamic>{};
-              if (!form.emailControl.valid) {
-                errors.addAll(<String, dynamic>{'emailError': true});
-              }
-            
-              if (!form.passwordControl.valid) {
-                errors.addAll(<String, dynamic>{'passwordError': true});
-              }
-            
-              if (errors.isEmpty) {
+              @override
+              Map<String, dynamic>? validate(AbstractControl<dynamic> control) {
                 return null;
               }
-            
-              return <String, dynamic>{'form': errors};
             }
-              
-            enum UserMode { user, admin }
             
+            class UniqueEmailAsyncValidator extends AsyncValidator<dynamic> {
+              const UniqueEmailAsyncValidator() : super();
+            
+              @override
+              Future<Map<String, dynamic>?> validate(
+                  AbstractControl<dynamic> control) async {
+              }
+            }
+            
+            enum UserMode { user, admin }
+          
             @ReactiveFormAnnotation()
-            @FormGroupAnnotation<LoginExtendedForm>(
-              validators: [
-                allFieldsRequired,
-              ],
-              validatorsTyped: [
-                allFieldsRequiredTyped,
-              ],
+            @FormGroupAnnotation(
+              validators: [AllFieldsRequired()],
             )
             class LoginExtended {
               final String email;
@@ -80,48 +62,35 @@ void main() {
               final String? unAnnotated;
             
               LoginExtended({
-                @FormControlAnnotation<String>(
-                  validators: [
-                    requiredValidator,
-                  ],
+                @FormControlAnnotation(
+                  validators: [RequiredValidator()],
+                  asyncValidators: [UniqueEmailAsyncValidator()],
                 )
-                    this.email = '',
-                @FormControlAnnotation<String>(
-                  validators: [
-                    requiredValidator,
-                  ],
+                this.email = '',
+                @FormControlAnnotation(
+                  validators: [RequiredValidator()],
                 )
-                    required this.password,
-                @FormControlAnnotation<bool>(
-                  validators: [
-                    requiredValidator,
-                  ],
+                required this.password,
+                @FormControlAnnotation(
+                  validators: [RequiredValidator()],
                 )
-                    required this.rememberMe,
-                @FormControlAnnotation<String>(
-                  validators: [
-                    requiredValidator,
-                  ],
+                required this.rememberMe,
+                @FormControlAnnotation(
+                  validators: [RequiredValidator()],
                 )
-                    required this.theme,
-                @FormControlAnnotation<UserMode>(
-                  validators: [
-                    requiredValidator,
-                  ],
+                required this.theme,
+                @FormControlAnnotation(
+                  validators: [RequiredValidator()],
                 )
-                    required this.mode,
-                @FormControlAnnotation<int>(
-                  validators: [
-                    requiredValidator,
-                  ],
+                required this.mode,
+                @FormControlAnnotation(
+                  validators: [RequiredValidator()],
                 )
-                    required this.timeout,
-                @FormControlAnnotation<double>(
-                  validators: [
-                    requiredValidator,
-                  ],
+                required this.timeout,
+                @FormControlAnnotation(
+                  validators: [RequiredValidator()],
                 )
-                    required this.height,
+                required this.height,
                 this.unAnnotated,
               });
             }
@@ -897,63 +866,49 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   static FormGroup formElements(LoginExtended? loginExtended) => FormGroup({
         emailControlName: FormControl<String>(
             value: loginExtended?.email,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
-            asyncValidators: [],
+            validators: [RequiredValidator()],
+            asyncValidators: [UniqueEmailAsyncValidator()],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
             value: loginExtended?.password,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         rememberMeControlName: FormControl<bool>(
             value: loginExtended?.rememberMe,
-            validators: [
-              (control) => requiredValidator(control as FormControl<bool>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         themeControlName: FormControl<String>(
             value: loginExtended?.theme,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         modeControlName: FormControl<UserMode>(
             value: loginExtended?.mode,
-            validators: [
-              (control) => requiredValidator(control as FormControl<UserMode>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         timeoutControlName: FormControl<int>(
             value: loginExtended?.timeout,
-            validators: [
-              (control) => requiredValidator(control as FormControl<int>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         heightControlName: FormControl<double>(
             value: loginExtended?.height,
-            validators: [
-              (control) => requiredValidator(control as FormControl<double>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -967,9 +922,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
             touched: false)
       },
           validators: [
-            allFieldsRequired,
-            (control) => allFieldsRequiredTyped(
-                LoginExtendedForm(control as FormGroup, null))
+            AllFieldsRequired()
           ],
           asyncValidators: [],
           asyncValidatorsDebounceTime: 250,

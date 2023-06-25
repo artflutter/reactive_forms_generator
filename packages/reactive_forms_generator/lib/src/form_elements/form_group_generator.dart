@@ -7,6 +7,7 @@ import 'package:reactive_forms_generator/src/form_elements/form_element_generato
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:recase/recase.dart';
+import 'package:source_gen/source_gen.dart';
 
 class FormGroupGenerator extends FormElementGenerator {
   FormGroupGenerator(ClassElement root, ParameterElement field, DartType? type)
@@ -50,35 +51,9 @@ class FormGroupGenerator extends FormElementGenerator {
       .where((e) => e.isFormGroup)
       .toList();
 
-  List<String> get validators {
-    List<String> formGroupValidators = syncValidatorList(formGroupChecker);
-    List<String> formGroupValidatorsTyped =
-        syncValidatorTypedList(formGroupChecker);
+  // String get validators => syncValidators(formControlChecker);
 
-    formGroupValidatorsTyped = formGroupValidatorsTyped
-        .map(
-          (e) =>
-              '(control) => $e(${field.className}(control as FormGroup, null))',
-        )
-        .toList();
-
-    return [...formGroupValidators, ...formGroupValidatorsTyped];
-  }
-
-  List<String> get asyncValidators {
-    List<String> formGroupAsyncValidators =
-        asyncValidatorList(formGroupChecker);
-    List<String> formGroupAsyncValidatorsTyped =
-        asyncValidatorTypedList(formGroupChecker);
-
-    formGroupAsyncValidators = formGroupAsyncValidators
-        .map(
-          (e) => '(control) => $e(this)',
-        )
-        .toList();
-
-    return [...formGroupAsyncValidators, ...formGroupAsyncValidatorsTyped];
-  }
+  // String get asyncValidators => asyncValidatorList(formGroupChecker);
 
   @override
   String element() {
@@ -115,12 +90,15 @@ class FormGroupGenerator extends FormElementGenerator {
 
     final props = [
       '{${formElementsList.join(',')}}',
-      'validators: [${validators.join(',')}]',
-      'asyncValidators: [${asyncValidators.join(',')}]',
-      'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formGroupChecker)}',
-      'disabled: ${disabled(formGroupChecker)}',
+      'validators: $validators',
+      'asyncValidators: $asyncValidators',
+      'asyncValidatorsDebounceTime: $asyncValidatorsDebounceTime',
+      'disabled: $disabled',
     ].join(',');
 
     return 'FormGroup($props)';
   }
+
+  @override
+  TypeChecker get typeChecker => formGroupChecker;
 }

@@ -1,4 +1,5 @@
-import 'package:example/helpers.dart';
+// ignore_for_file: implementation_imports
+import 'package:reactive_forms/src/validators/required_validator.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'model_extends.gform.dart';
@@ -15,12 +16,12 @@ class ModelExtends extends Email {
 
   ModelExtends({
     @FormControlAnnotation(
-      validators: [requiredValidator],
+      validators: [RequiredValidator()],
     )
-        super.email = '',
+    super.email = '',
     @FormControlAnnotation(
-      validators: [requiredValidator],
+      validators: [RequiredValidator()],
     )
-        this.password = '',
+    this.password = '',
   });
 }

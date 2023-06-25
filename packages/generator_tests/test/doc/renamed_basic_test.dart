@@ -15,14 +15,11 @@ void main() {
           model: '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
+            import 'package:reactive_forms/src/validators/required_validator.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             import 'package:example/helpers.dart';
             
             part '$fileName.gform.dart';
-            
-            Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
-              return Validators.required(control);
-            }
             
             @ReactiveFormAnnotation(name: 'SomeWiredName')
             class RenamedBasic {
@@ -31,14 +28,14 @@ void main() {
               final String password;
             
               RenamedBasic({
-                @FormControlAnnotation<String>(
-                  validators: [requiredValidator],
+                @FormControlAnnotation(
+                  validators: [RequiredValidator()],
                 )
-                    this.email = '',
-                @FormControlAnnotation<String>(
-                  validators: [requiredValidator],
+                this.email = '',
+                @FormControlAnnotation(
+                  validators: [RequiredValidator()],
                 )
-                    this.password = '',
+                this.password = '',
               });
             }
           ''',
@@ -406,18 +403,14 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
   static FormGroup formElements(RenamedBasic? renamedBasic) => FormGroup({
         emailControlName: FormControl<String>(
             value: renamedBasic?.email,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
             value: renamedBasic?.password,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

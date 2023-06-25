@@ -15,6 +15,7 @@ void main() {
           model: '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
+            import 'package:reactive_forms/src/validators/required_validator.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             import 'package:freezed_annotation/freezed_annotation.dart';
             import 'package:example/helpers.dart';
@@ -23,10 +24,6 @@ void main() {
             part '$fileName.g.dart';
             part '$fileName.freezed.dart';
             
-            Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
-              return Validators.required(control);
-            }
-            
             @freezed
             @ReactiveFormAnnotation()
             class FreezedClass with _\$FreezedClass {
@@ -34,11 +31,11 @@ void main() {
             
               factory FreezedClass(
                 @FormControlAnnotation<String>() String? gender, {
-                @FormControlAnnotation<String>(validators: [requiredValidator]) String? id,
+                @FormControlAnnotation(validators: [RequiredValidator()]) String? id,
                 @FormControlAnnotation<String>() String? name,
                 @JsonKey(name: 'logo_image')
                 @FormControlAnnotation<String>()
-                    String? logoImage,
+                String? logoImage,
                 @FormControlAnnotation<double>() double? year,
               }) = _FreezedClass;
             
@@ -743,9 +740,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
             touched: false),
         idControlName: FormControl<String>(
             value: freezedClass?.id,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

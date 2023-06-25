@@ -1,16 +1,13 @@
+// ignore_for_file: implementation_imports
+import 'package:reactive_forms/src/validators/required_validator.dart';
 import 'package:example/helpers.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'login_extended.gform.dart';
 
 @ReactiveFormAnnotation()
-@FormGroupAnnotation<LoginExtendedForm>(
-  validators: [
-    allFieldsRequired,
-  ],
-  validatorsTyped: [
-    allFieldsRequiredTyped,
-  ],
+@FormGroupAnnotation(
+  validators: [AllFieldsRequired()],
 )
 class LoginExtended {
   final String email;
@@ -30,48 +27,35 @@ class LoginExtended {
   final String? unAnnotated;
 
   LoginExtended({
-    @FormControlAnnotation<String>(
-      validators: [
-        requiredValidator,
-      ],
+    @FormControlAnnotation(
+      validators: [RequiredValidator()],
+      asyncValidators: [UniqueEmailAsyncValidator()],
     )
-        this.email = '',
-    @FormControlAnnotation<String>(
-      validators: [
-        requiredValidator,
-      ],
+    this.email = '',
+    @FormControlAnnotation(
+      validators: [RequiredValidator()],
     )
-        required this.password,
-    @FormControlAnnotation<bool>(
-      validators: [
-        requiredValidator,
-      ],
+    required this.password,
+    @FormControlAnnotation(
+      validators: [RequiredValidator()],
     )
-        required this.rememberMe,
-    @FormControlAnnotation<String>(
-      validators: [
-        requiredValidator,
-      ],
+    required this.rememberMe,
+    @FormControlAnnotation(
+      validators: [RequiredValidator()],
     )
-        required this.theme,
-    @FormControlAnnotation<UserMode>(
-      validators: [
-        requiredValidator,
-      ],
+    required this.theme,
+    @FormControlAnnotation(
+      validators: [RequiredValidator()],
     )
-        required this.mode,
-    @FormControlAnnotation<int>(
-      validators: [
-        requiredValidator,
-      ],
+    required this.mode,
+    @FormControlAnnotation(
+      validators: [RequiredValidator()],
     )
-        required this.timeout,
-    @FormControlAnnotation<double>(
-      validators: [
-        requiredValidator,
-      ],
+    required this.timeout,
+    @FormControlAnnotation(
+      validators: [RequiredValidator()],
     )
-        required this.height,
+    required this.height,
     this.unAnnotated,
   });
 }

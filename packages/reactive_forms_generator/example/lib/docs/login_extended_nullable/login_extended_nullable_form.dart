@@ -3,10 +3,8 @@ import 'package:example/docs/login_extended_nullable/login_extended_nullable.dar
 import 'package:example/helpers.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
-import 'package:intl/intl.dart';
 import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_touch_spin/reactive_touch_spin.dart';
 
 class LoginExtendedNullableFormWidget extends StatelessWidget {
   const LoginExtendedNullableFormWidget({Key? key}) : super(key: key);
@@ -96,16 +94,6 @@ class LoginExtendedNullableFormWidget extends StatelessWidget {
                 compareFn: (item, selectedItem) => item == selectedItem,
 
                 showClearButton: true,
-              ),
-              ReactiveTouchSpin<int>(
-                formControl: formModel.timeoutControl,
-                decoration: const InputDecoration(
-                  labelText: 'Logout timeout mins.',
-                ),
-                valueAccessor: NumValueAccessor(),
-                displayFormat: NumberFormat()..minimumFractionDigits = 0,
-                min: 0,
-                max: 10,
               ),
               ListTile(
                 title: const Text('remember me'),

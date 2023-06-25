@@ -26,19 +26,18 @@ dependencies:
     sdk: flutter
   reactive_forms_annotations:
     path: ../../reactive_forms_annotations
-  reactive_forms: ^14.3.0
+  reactive_forms: ^15.0.0
   intl: ^0.18.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.5
-  reactive_touch_spin: ^0.8.0
-  reactive_dropdown_search: ^1.0.0
+  reactive_dropdown_search: ^2.0.0
   freezed_annotation: ^2.2.0
   dartz: ^0.10.1
   json_annotation: ^4.8.0
-  reactive_text_field: ^0.6.0
+  reactive_text_field: ^1.0.0
   equatable: ^2.0.5
-  reactive_forms_lbc: ^0.4.0
+  reactive_forms_lbc: ^1.0.0
 
 dev_dependencies:
   reactive_forms_generator:
