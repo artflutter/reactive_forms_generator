@@ -196,10 +196,10 @@ class UrlListAddItem extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(4),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
+        child: const Padding(
+          padding: EdgeInsets.symmetric(vertical: 16),
           child: Row(
-            children: const [
+            children: [
               Icon(Icons.add_circle),
               SizedBox(width: 8),
               Text('URL'),

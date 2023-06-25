@@ -1,3 +1,7 @@
+## [3.0.0]
+
+* rf 16 migration
+
 ## [2.0.0]
 
 * rf 15 migration

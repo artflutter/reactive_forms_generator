@@ -3,8 +3,7 @@ import 'package:example/docs/delivery_list/labels.dart';
 import 'package:example/docs/delivery_list/mocks.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
-import 'package:reactive_forms/reactive_forms.dart' hide ReactiveTextField;
-import 'package:reactive_text_field/reactive_text_field.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 class DeliveryListFormWidget extends StatelessWidget {
   final ValueChanged<DeliveryList>? onChange;

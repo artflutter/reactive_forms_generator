@@ -4,7 +4,6 @@ import 'package:example/docs/login_extended/login_extended.dart';
 import 'package:example/helpers.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
-import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class LoginExtendedFormWidget extends StatelessWidget {
@@ -62,47 +61,6 @@ class LoginExtendedFormWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16.0),
-              ReactiveDropdownSearch<String, String>(
-                formControl: formModel.themeControl,
-                popupProps: const PopupProps.menu(),
-                dropdownDecoratorProps: const DropDownDecoratorProps(
-                  dropdownSearchDecoration: InputDecoration(
-                    labelText: 'Theme',
-                    hintText: 'Select a theme',
-                    helperText: '',
-                    contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                // showSelectedItem: true,
-                items: const [
-                  "light",
-                  "dark",
-                ],
-                showClearButton: true,
-              ),
-              const SizedBox(height: 16.0),
-              ReactiveDropdownSearch<UserMode, UserMode>(
-                formControl: formModel.modeControl,
-                dropdownDecoratorProps: const DropDownDecoratorProps(
-                  dropdownSearchDecoration: InputDecoration(
-                    hintText: "Select a theme",
-                    labelText: "Theme",
-                    helperText: '',
-                    contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                popupProps: const PopupProps.menu(),
-                // showSelectedItem: true,
-                items: const [
-                  UserMode.admin,
-                  UserMode.user,
-                ],
-                compareFn: (item, selectedItem) => item == selectedItem,
-
-                showClearButton: true,
-              ),
               ReactiveSwitchListTile(
                 formControl: formModel.rememberMeControl,
                 title: const Text('remember me'),

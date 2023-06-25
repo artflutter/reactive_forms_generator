@@ -1,8 +1,7 @@
-// ignore_for_file: implementation_imports
 import 'package:example/helpers.dart';
-import 'package:reactive_forms/src/validators/required_validator.dart';
 import 'package:equatable/equatable.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:reactive_forms_annotations/reactive_forms_annotations.dart'
+    hide MustMatchValidator;
 
 part 'login.gform.dart';
 
@@ -19,11 +18,11 @@ class Login extends Equatable {
     @FormControlAnnotation(
       validators: [RequiredValidator()],
     )
-        this.email = '',
+    this.email = '',
     @FormControlAnnotation(
       validators: [RequiredValidator()],
     )
-        this.password = '',
+    this.password = '',
   });
 
   @override
