@@ -1,3 +1,7 @@
+## [2.0.0]
+
+* rf 15 migration
+
 ## [1.2.0]
 
 * internal refactoring
