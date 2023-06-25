@@ -1,4 +1,5 @@
-import 'package:example/helpers.dart';
+// ignore_for_file: implementation_imports
+import 'package:reactive_forms/src/validators/required_validator.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'renamed_basic.gform.dart';
@@ -10,13 +11,13 @@ class RenamedBasic {
   final String password;
 
   RenamedBasic({
-    @FormControlAnnotation<String>(
-      validators: [requiredValidator],
+    @FormControlAnnotation(
+      validators: [RequiredValidator()],
     )
-        this.email = '',
-    @FormControlAnnotation<String>(
-      validators: [requiredValidator],
+    this.email = '',
+    @FormControlAnnotation(
+      validators: [RequiredValidator()],
     )
-        this.password = '',
+    this.password = '',
   });
 }

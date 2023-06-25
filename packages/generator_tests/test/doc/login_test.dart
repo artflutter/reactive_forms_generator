@@ -15,55 +15,37 @@ void main() {
           model: '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
+            import 'package:reactive_forms/src/validators/required_validator.dart';
             import 'package:example/helpers.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
             part '$fileName.gform.dart';
             
-            Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
-              return Validators.required(control);
-            }
+            class MustMatchValidator extends Validator<dynamic> {
+              const MustMatchValidator() : super();
             
-            Map<String, dynamic>? mustMatch(AbstractControl<dynamic> control) {
-              const email = 'email';
-              const password = 'password';
-            
-              final form = control as FormGroup;
-            
-              final formControl = form.control(email);
-              final matchingFormControl = form.control(password);
-            
-              if (formControl.value != matchingFormControl.value) {
-                matchingFormControl.setErrors(<String, dynamic>{
-                  ...matchingFormControl.errors,
-                  ...<String, dynamic>{'mustMatch': true},
-                });
-            
-                // force messages to show up as soon as possible
-                matchingFormControl.markAsTouched();
-              } else {
-                matchingFormControl.removeError('mustMatch');
+              @override
+              Map<String, dynamic>? validate(AbstractControl<dynamic> control) {
+                return null;
               }
-            
-              return null;
             }
             
             @ReactiveFormAnnotation()
             @FormGroupAnnotation(
-              validators: [mustMatch],
+              validators: [MustMatchValidator()],
             )
             class Login {
               final String email;
             
               final String password;
             
-              Login({
+              const Login({
                 @FormControlAnnotation(
-                  validators: [requiredValidator],
+                  validators: [RequiredValidator()],
                 )
                     this.email = '',
                 @FormControlAnnotation(
-                  validators: [requiredValidator],
+                  validators: [RequiredValidator()],
                 )
                     this.password = '',
               });
@@ -428,21 +410,21 @@ class LoginForm implements FormModel<Login> {
   static FormGroup formElements(Login? login) => FormGroup({
         emailControlName: FormControl<String>(
             value: login?.email,
-            validators: [requiredValidator],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
             value: login?.password,
-            validators: [requiredValidator],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false)
       },
           validators: [
-            mustMatch
+            MustMatchValidator()
           ],
           asyncValidators: [],
           asyncValidatorsDebounceTime: 250,

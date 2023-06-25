@@ -350,21 +350,21 @@ class LoginForm implements FormModel<Login> {
   static FormGroup formElements(Login? login) => FormGroup({
         emailControlName: FormControl<String>(
             value: login?.email,
-            validators: [requiredValidator],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
             value: login?.password,
-            validators: [requiredValidator],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false)
       },
           validators: [
-            mustMatch
+            MustMatchValidator()
           ],
           asyncValidators: [],
           asyncValidatorsDebounceTime: 250,

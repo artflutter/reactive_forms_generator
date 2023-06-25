@@ -15,27 +15,18 @@ void main() {
           model: '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
+            import 'package:reactive_forms/src/validators/email_validator.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
             part '$fileName.gform.dart';
             
-            Map<String, dynamic>? mailingListValidator(AbstractControl control) {
-              final formArray = control as FormArray<String>;
-              final emails = formArray.value ?? [];
-              final test = Set<String>();
+            class MailingListValidator extends Validator<dynamic> {
+              const MailingListValidator() : super();
             
-              final result = emails.fold<bool>(true,
-                  (previousValue, element) => previousValue && test.add(element ?? ''));
-            
-              return result ? null : <String, dynamic>{'emailDuplicates': true};
-            }
-            
-              Map<String, dynamic> emailValidator(AbstractControl<dynamic> control) {
-              final email = control.value as String?;
-            
-              return email != null && emailRegex.hasMatch(email)
-                  ? <String, dynamic>{}
-                  : <String, dynamic>{ValidationMessage.email: true};
+              @override
+              Map<String, dynamic>? validate(AbstractControl control) {
+                return null;
+              }
             }
             
             @ReactiveFormAnnotation()
@@ -44,14 +35,10 @@ void main() {
             
               MailingList({
                 @FormArrayAnnotation(
-                  validators: const [
-                    mailingListValidator,
-                  ],
-                  itemValidators: [
-                    emailValidator,
-                  ],
+                  validators: [MailingListValidator()],
+                  itemValidators: [EmailValidator()],
                 )
-                    this.emailList = const [],
+                this.emailList = const [],
               });
             }
           ''',
@@ -313,14 +300,14 @@ class MailingListForm implements FormModel<MailingList> {
 
   void addEmailListItem(
     String value, {
-    List<AsyncValidatorFunction>? asyncValidators,
-    List<ValidatorFunction>? validators,
+    List<AsyncValidator<dynamic>>? asyncValidators,
+    List<Validator<dynamic>>? validators,
     int? asyncValidatorsDebounceTime,
     bool? disabled,
     ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
   }) {
-    List<ValidatorFunction> resultingValidators = [emailValidator];
-    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+    List<Validator<dynamic>> resultingValidators = [EmailValidator()];
+    List<AsyncValidator<dynamic>> resultingAsyncValidators = [];
 
     switch (validatorsApplyMode) {
       case ValidatorsApplyMode.merge:
@@ -399,13 +386,13 @@ class MailingListForm implements FormModel<MailingList> {
             (mailingList?.emailList ?? [])
                 .map((e) => FormControl<String>(
                       value: e,
-                      validators: [emailValidator],
+                      validators: [EmailValidator()],
                       asyncValidators: [],
                       asyncValidatorsDebounceTime: 250,
                       disabled: false,
                     ))
                 .toList(),
-            validators: [mailingListValidator],
+            validators: [MailingListValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false)

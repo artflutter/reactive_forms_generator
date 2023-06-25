@@ -22,7 +22,7 @@ FreezedClass _$FreezedClassFromJson(Map<String, dynamic> json) {
 mixin _$FreezedClass {
   @FormControlAnnotation<String>()
   String? get gender => throw _privateConstructorUsedError;
-  @FormControlAnnotation<String>(validators: [requiredValidator])
+  @FormControlAnnotation(validators: [RequiredValidator()])
   String? get id => throw _privateConstructorUsedError;
   @FormControlAnnotation<String>()
   String? get name => throw _privateConstructorUsedError;
@@ -47,7 +47,7 @@ abstract class $FreezedClassCopyWith<$Res> {
   $Res call(
       {@FormControlAnnotation<String>()
           String? gender,
-      @FormControlAnnotation<String>(validators: [requiredValidator])
+      @FormControlAnnotation(validators: [RequiredValidator()])
           String? id,
       @FormControlAnnotation<String>()
           String? name,
@@ -113,7 +113,7 @@ abstract class _$$_FreezedClassCopyWith<$Res>
   $Res call(
       {@FormControlAnnotation<String>()
           String? gender,
-      @FormControlAnnotation<String>(validators: [requiredValidator])
+      @FormControlAnnotation(validators: [RequiredValidator()])
           String? id,
       @FormControlAnnotation<String>()
           String? name,
@@ -172,7 +172,7 @@ class _$_FreezedClass extends _FreezedClass {
   _$_FreezedClass(
       @FormControlAnnotation<String>()
           this.gender,
-      {@FormControlAnnotation<String>(validators: [requiredValidator])
+      {@FormControlAnnotation(validators: [RequiredValidator()])
           this.id,
       @FormControlAnnotation<String>()
           this.name,
@@ -190,7 +190,7 @@ class _$_FreezedClass extends _FreezedClass {
   @FormControlAnnotation<String>()
   final String? gender;
   @override
-  @FormControlAnnotation<String>(validators: [requiredValidator])
+  @FormControlAnnotation(validators: [RequiredValidator()])
   final String? id;
   @override
   @FormControlAnnotation<String>()
@@ -244,7 +244,7 @@ abstract class _FreezedClass extends FreezedClass {
   factory _FreezedClass(
       @FormControlAnnotation<String>()
           final String? gender,
-      {@FormControlAnnotation<String>(validators: [requiredValidator])
+      {@FormControlAnnotation(validators: [RequiredValidator()])
           final String? id,
       @FormControlAnnotation<String>()
           final String? name,
@@ -262,7 +262,7 @@ abstract class _FreezedClass extends FreezedClass {
   @FormControlAnnotation<String>()
   String? get gender;
   @override
-  @FormControlAnnotation<String>(validators: [requiredValidator])
+  @FormControlAnnotation(validators: [RequiredValidator()])
   String? get id;
   @override
   @FormControlAnnotation<String>()

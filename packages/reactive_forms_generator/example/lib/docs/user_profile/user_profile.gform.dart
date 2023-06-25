@@ -583,18 +583,14 @@ class UserProfileForm implements FormModel<UserProfile> {
             touched: false),
         firstNameControlName: FormControl<String>(
             value: userProfile?.firstName,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         lastNameControlName: FormControl<String>(
             value: userProfile?.lastName,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -938,9 +934,7 @@ class AddressForm implements FormModel<Address> {
             touched: false),
         cityControlName: FormControl<String>(
             value: address?.city,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

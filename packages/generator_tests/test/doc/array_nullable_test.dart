@@ -15,13 +15,10 @@ void main() {
           model: '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
+            import 'package:reactive_forms/src/validators/required_validator.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
             part '$fileName.gform.dart';
-            
-            Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
-              return Validators.required(control);
-            }
             
             enum UserMode { user, admin }
 
@@ -39,19 +36,13 @@ void main() {
             
               ArrayNullable({
                 @FormArrayAnnotation(
-                  validators: [
-                    requiredValidator,
-                  ],
+                  validators: [RequiredValidator()],
                 )
-                    required this.emailList,
-                @FormArrayAnnotation()
-                    this.fruitList = const [],
-                @FormArrayAnnotation()
-                    this.vegetablesList,
-                @FormArrayAnnotation()
-                    this.modeList,
-                @FormControlAnnotation<List<String?>>()
-                    this.someList,
+                required this.emailList,
+                @FormArrayAnnotation() this.fruitList = const [],
+                @FormArrayAnnotation() this.vegetablesList,
+                @FormArrayAnnotation() this.modeList,
+                @FormControlAnnotation<List<String?>>() this.someList,
               });
             }
           ''',
@@ -646,14 +637,14 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
 
   void addEmailListItem(
     String value, {
-    List<AsyncValidatorFunction>? asyncValidators,
-    List<ValidatorFunction>? validators,
+    List<AsyncValidator<dynamic>>? asyncValidators,
+    List<Validator<dynamic>>? validators,
     int? asyncValidatorsDebounceTime,
     bool? disabled,
     ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
   }) {
-    List<ValidatorFunction> resultingValidators = [];
-    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+    List<Validator<dynamic>> resultingValidators = [];
+    List<AsyncValidator<dynamic>> resultingAsyncValidators = [];
 
     switch (validatorsApplyMode) {
       case ValidatorsApplyMode.merge:
@@ -686,14 +677,14 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
 
   void addFruitListItem(
     bool value, {
-    List<AsyncValidatorFunction>? asyncValidators,
-    List<ValidatorFunction>? validators,
+    List<AsyncValidator<dynamic>>? asyncValidators,
+    List<Validator<dynamic>>? validators,
     int? asyncValidatorsDebounceTime,
     bool? disabled,
     ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
   }) {
-    List<ValidatorFunction> resultingValidators = [];
-    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+    List<Validator<dynamic>> resultingValidators = [];
+    List<AsyncValidator<dynamic>> resultingAsyncValidators = [];
 
     switch (validatorsApplyMode) {
       case ValidatorsApplyMode.merge:
@@ -726,14 +717,14 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
 
   void addVegetablesListItem(
     String value, {
-    List<AsyncValidatorFunction>? asyncValidators,
-    List<ValidatorFunction>? validators,
+    List<AsyncValidator<dynamic>>? asyncValidators,
+    List<Validator<dynamic>>? validators,
     int? asyncValidatorsDebounceTime,
     bool? disabled,
     ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
   }) {
-    List<ValidatorFunction> resultingValidators = [];
-    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+    List<Validator<dynamic>> resultingValidators = [];
+    List<AsyncValidator<dynamic>> resultingAsyncValidators = [];
 
     switch (validatorsApplyMode) {
       case ValidatorsApplyMode.merge:
@@ -766,14 +757,14 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
 
   void addModeListItem(
     UserMode value, {
-    List<AsyncValidatorFunction>? asyncValidators,
-    List<ValidatorFunction>? validators,
+    List<AsyncValidator<dynamic>>? asyncValidators,
+    List<Validator<dynamic>>? validators,
     int? asyncValidatorsDebounceTime,
     bool? disabled,
     ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
   }) {
-    List<ValidatorFunction> resultingValidators = [];
-    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+    List<Validator<dynamic>> resultingValidators = [];
+    List<AsyncValidator<dynamic>> resultingAsyncValidators = [];
 
     switch (validatorsApplyMode) {
       case ValidatorsApplyMode.merge:
@@ -863,7 +854,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
                       disabled: false,
                     ))
                 .toList(),
-            validators: [requiredValidator],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false),

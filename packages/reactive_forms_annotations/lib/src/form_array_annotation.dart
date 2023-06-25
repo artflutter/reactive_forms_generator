@@ -5,24 +5,18 @@ enum ValidatorsApplyMode {
   override,
 }
 
-typedef FormArrayValidatorFunctionTyped<T> = Map<String, dynamic>? Function(
-    FormArray<T> control);
-
-typedef FormArrayAsyncValidatorFunctionTyped<T> = Future<Map<String, dynamic>?>
-    Function(FormArray<T> control);
-
 class FormArrayAnnotation<T> {
-  final List<FormArrayValidatorFunctionTyped<T>> validators;
+  final List<Validator<T>> validators;
 
-  final List<FormArrayAsyncValidatorFunctionTyped<T>> asyncValidators;
+  final List<AsyncValidator<T>> asyncValidators;
 
   final int asyncValidatorsDebounceTime;
 
   final bool disabled;
 
-  final List<FormControlValidatorFunctionTyped<T>> itemValidators;
+  final List<Validator<T>> itemValidators;
 
-  final List<FormControlAsyncValidatorFunctionTyped<T>> itemAsyncValidators;
+  final List<AsyncValidator<T>> itemAsyncValidators;
 
   final int itemAsyncValidatorsDebounceTime;
 

@@ -1,3 +1,5 @@
+// ignore_for_file: implementation_imports
+import 'package:reactive_forms/src/validators/required_validator.dart';
 import 'package:example/helpers.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
@@ -17,18 +19,12 @@ class ArrayNullable {
 
   ArrayNullable({
     @FormArrayAnnotation(
-      validators: [
-        requiredValidator,
-      ],
+      validators: [RequiredValidator()],
     )
-        required this.emailList,
-    @FormArrayAnnotation()
-        this.fruitList = const [],
-    @FormArrayAnnotation()
-        this.vegetablesList,
-    @FormArrayAnnotation()
-        this.modeList,
-    @FormControlAnnotation<List<String?>>()
-        this.someList,
+    required this.emailList,
+    @FormArrayAnnotation() this.fruitList = const [],
+    @FormArrayAnnotation() this.vegetablesList,
+    @FormArrayAnnotation() this.modeList,
+    @FormControlAnnotation<List<String?>>() this.someList,
   });
 }

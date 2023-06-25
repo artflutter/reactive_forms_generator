@@ -19,7 +19,7 @@ version: 1.0.0+1
 
 environment:
   flutter: ">=3.0.0"
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=2.19.0 <3.0.0"
 
 dependencies:
   build: ^2.3.1
@@ -44,11 +44,6 @@ dev_dependencies:
   reactive_forms_generator:
     path: ../reactive_forms_generator
   flutter_lints: ^2.0.1
-
-dependency_overrides:
-  test_api: ^0.4.15
-  build_resolvers: ^2.0.10
-  source_helper: ^1.3.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -762,63 +762,49 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   static FormGroup formElements(LoginExtended? loginExtended) => FormGroup({
         emailControlName: FormControl<String>(
             value: loginExtended?.email,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
-            asyncValidators: [],
+            validators: [RequiredValidator()],
+            asyncValidators: [UniqueEmailAsyncValidator()],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
             value: loginExtended?.password,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         rememberMeControlName: FormControl<bool>(
             value: loginExtended?.rememberMe,
-            validators: [
-              (control) => requiredValidator(control as FormControl<bool>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         themeControlName: FormControl<String>(
             value: loginExtended?.theme,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         modeControlName: FormControl<UserMode>(
             value: loginExtended?.mode,
-            validators: [
-              (control) => requiredValidator(control as FormControl<UserMode>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         timeoutControlName: FormControl<int>(
             value: loginExtended?.timeout,
-            validators: [
-              (control) => requiredValidator(control as FormControl<int>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         heightControlName: FormControl<double>(
             value: loginExtended?.height,
-            validators: [
-              (control) => requiredValidator(control as FormControl<double>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -832,9 +818,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
             touched: false)
       },
           validators: [
-            allFieldsRequired,
-            (control) => allFieldsRequiredTyped(
-                LoginExtendedForm(control as FormGroup, null))
+            AllFieldsRequired()
           ],
           asyncValidators: [],
           asyncValidatorsDebounceTime: 250,

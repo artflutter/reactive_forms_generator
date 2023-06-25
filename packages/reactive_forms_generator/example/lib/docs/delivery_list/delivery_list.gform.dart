@@ -819,9 +819,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
   static FormGroup formElements(DeliveryPoint? deliveryPoint) => FormGroup({
         nameControlName: FormControl<String>(
             value: deliveryPoint?.name,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -1068,9 +1066,7 @@ class AddressForm implements FormModel<Address> {
   static FormGroup formElements(Address? address) => FormGroup({
         streetControlName: FormControl<String>(
             value: address?.street,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -1910,9 +1906,7 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
   static FormGroup formElements(DeliveryPoint? deliveryPoint) => FormGroup({
         nameControlName: FormControl<String>(
             value: deliveryPoint?.name,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

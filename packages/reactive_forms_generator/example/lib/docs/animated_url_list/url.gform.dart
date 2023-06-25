@@ -581,18 +581,14 @@ class UrlEntityForm implements FormModel<UrlEntity> {
   static FormGroup formElements(UrlEntity? urlEntity) => FormGroup({
         labelControlName: FormControl<String>(
             value: urlEntity?.label,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         urlControlName: FormControl<String>(
             value: urlEntity?.url,
-            validators: [
-              (control) => requiredValidator(control as FormControl<String>)
-            ],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

@@ -358,14 +358,14 @@ class ModelImplementsForm implements FormModel<ModelImplements> {
   static FormGroup formElements(ModelImplements? modelImplements) => FormGroup({
         emailControlName: FormControl<String>(
             value: modelImplements?.email,
-            validators: [requiredValidator],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         passwordControlName: FormControl<String>(
             value: modelImplements?.password,
-            validators: [requiredValidator],
+            validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

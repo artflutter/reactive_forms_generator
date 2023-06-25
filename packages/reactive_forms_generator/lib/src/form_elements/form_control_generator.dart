@@ -3,6 +3,7 @@ import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
 import 'package:reactive_forms_generator/src/types.dart';
+import 'package:source_gen/source_gen.dart';
 
 class FormControlGenerator extends FormElementGenerator {
   FormControlGenerator(
@@ -19,41 +20,24 @@ class FormControlGenerator extends FormElementGenerator {
       displayType = displayType.substring(0, displayType.length - 1);
     }
 
-    final formControlAnnotationType = annotationType(formControlChecker);
-    final formControlAnnotationTyped = annotationTyped(formControlChecker);
-
-    if (formControlAnnotationTyped &&
-        formControlAnnotationType != displayType) {
+    if (annotationTyped && annotationType != displayType) {
       throw Exception(
-        'Annotation and field type mismatch. Annotation is typed as `$formControlAnnotationType` and field(`${field.name}`) as `$displayType`.',
+        'Annotation and field type mismatch. Annotation is typed as `$annotationType` and field(`${field.name}`) as `$displayType`.',
       );
-    }
-
-    List<String> validators = syncValidatorList(formControlChecker);
-    List<String> asyncValidators = asyncValidatorList(formControlChecker);
-
-    if (formControlAnnotationTyped) {
-      validators = validators
-          .map(
-            (e) => '(control) => $e(control as FormControl<$displayType>)',
-          )
-          .toList();
-      asyncValidators = asyncValidators
-          .map(
-            (e) => '(control) => $e(control as FormControl<$displayType>)',
-          )
-          .toList();
     }
 
     final props = [
       'value: $value',
-      'validators: [${validators.join(',')}]',
-      'asyncValidators: [${asyncValidators.join(',')}]',
-      'asyncValidatorsDebounceTime: ${asyncValidatorsDebounceTime(formControlChecker)}',
-      'disabled: ${disabled(formControlChecker)}',
-      'touched: ${touched(formControlChecker)}',
-    ].join(',');
+      'validators: $validators',
+      'asyncValidators: $asyncValidators',
+      'asyncValidatorsDebounceTime: $asyncValidatorsDebounceTime',
+      'disabled: $disabled',
+      'touched: $touched',
+    ];
 
-    return 'FormControl<$displayType>($props)';
+    return 'FormControl<$displayType>(${props.join(',')})';
   }
+
+  @override
+  TypeChecker get typeChecker => formControlChecker;
 }

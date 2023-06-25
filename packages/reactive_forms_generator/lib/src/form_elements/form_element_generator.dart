@@ -35,23 +35,19 @@ abstract class FormElementGenerator {
     return name;
   }
 
-  List<String> itemSyncValidatorList(TypeChecker typeChecker) {
-    if (typeChecker.hasAnnotationOfExact(fieldElement)) {
-      final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
-      return annotation
-              ?.getField('itemValidators')
-              ?.toListValue()
-              ?.map((e) {
-                return validatorName(e.toFunctionValue());
-              })
-              .whereType<String>()
-              .toList() ??
-          [];
-    }
-    return [];
+  TypeChecker get typeChecker;
+
+  String get itemValidators {
+    final params = annotationParams
+        .where((e) => e.startsWith('itemValidators'))
+        .map((e) => e.split(":"))
+        .expand((e) => e)
+        .toList();
+
+    return params.length == 2 ? params.last : '[]';
   }
 
-  DartObject? annotation(TypeChecker typeChecker) {
+  DartObject? get annotation {
     if (typeChecker.hasAnnotationOfExact(fieldElement)) {
       final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
 
@@ -60,18 +56,13 @@ abstract class FormElementGenerator {
     return null;
   }
 
-  String? annotationType(TypeChecker typeChecker) =>
-      (annotation(typeChecker)?.type as ParameterizedType?)
-          ?.typeArguments
-          .first
-          .toString();
+  String? get annotationType =>
+      (annotation?.type as ParameterizedType?)?.typeArguments.first.toString();
 
-  bool annotationTyped(TypeChecker typeChecker) {
-    final typeAnnotationType = annotationType(typeChecker);
-
-    return typeAnnotationType != null &&
-        typeAnnotationType != 'dynamic' &&
-        typeAnnotationType != 'Never';
+  bool get annotationTyped {
+    return annotationType != null &&
+        annotationType != 'dynamic' &&
+        annotationType != 'Never';
   }
 
   Element get fieldElement => field;
@@ -79,87 +70,117 @@ abstract class FormElementGenerator {
   ConstructorElement get constructorElement =>
       fieldElement.enclosingElement as ConstructorElement;
 
-  List<String> syncValidatorList(TypeChecker typeChecker) {
+  List<String> get annotationParams {
     if (typeChecker.hasAnnotationOfExact(fieldElement)) {
-      final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
-      return annotation
-              ?.getField('validators')
-              ?.toListValue()
-              ?.map((e) {
-                return validatorName(e.toFunctionValue());
-              })
-              .whereType<String>()
-              .toList() ??
-          [];
+      for (final meta in fieldElement.metadata) {
+        final obj = meta.computeConstantValue()!;
+        if (typeChecker.isExactlyType(obj.type!)) {
+          final regExp = RegExp(
+            r'@\S+\((?<params>[\s\S]*)\)',
+            multiLine: true,
+            caseSensitive: true,
+          );
+
+          final match =
+              regExp.firstMatch(meta.toSource())?.namedGroup('params');
+
+          return match?.split(',').map((e) => e.trim()).toList() ?? [];
+        }
+      }
     }
+
     return [];
   }
 
-  List<String> syncValidatorTypedList(TypeChecker typeChecker) {
-    if (typeChecker.hasAnnotationOfExact(fieldElement)) {
-      final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
-      return annotation
-              ?.getField('validatorsTyped')
-              ?.toListValue()
-              ?.map((e) {
-                return validatorName(e.toFunctionValue());
-              })
-              .whereType<String>()
-              .toList() ??
-          [];
-    }
-    return [];
+  String get validators {
+    final params = annotationParams
+        .where((e) => e.startsWith('validators'))
+        .map((e) => e.split(":"))
+        .expand((e) => e)
+        .toList();
+
+    return params.length == 2 ? params.last : '[]';
+
+    // if (typeChecker.hasAnnotationOfExact(fieldElement)) {
+    //   for (final meta in fieldElement.metadata) {
+    //     final obj = meta.computeConstantValue()!;
+    //     if (typeChecker.isExactlyType(obj.type!)) {
+    //       final regExp = RegExp(
+    //         r'@FormControlAnnotation\((?<params>[\s\S]*)\)',
+    //         multiLine: true,
+    //         caseSensitive: true,
+    //       );
+    //       final params = regExp
+    //           .firstMatch(meta.toSource())
+    //           ?.namedGroup('params')
+    //           ?.split(',')
+    //           .map((e) => e.trim())
+    //           .where((e) => e.startsWith('validators'))
+    //           .map((e) => e.split(":"))
+    //           .expand((e) => e)
+    //           .toList() ??
+    //           [];
+    //
+    //       return params.length == 2 ? params[1] : '[]';
+    //     }
+    //   }
+    // }
+    // return '[]';
   }
 
-  List<String> asyncValidatorTypedList(TypeChecker typeChecker) {
-    if (typeChecker.hasAnnotationOfExact(fieldElement)) {
-      final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
-      return annotation
-              ?.getField('asyncValidatorsTyped')
-              ?.toListValue()
-              ?.map((e) {
-                return validatorName(e.toFunctionValue());
-              })
-              .whereType<String>()
-              .toList() ??
-          [];
-    }
-    return [];
+  // List<String> syncValidatorTypedList(TypeChecker typeChecker) {
+  //   if (typeChecker.hasAnnotationOfExact(fieldElement)) {
+  //     final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
+  //     return annotation
+  //             ?.getField('validatorsTyped')
+  //             ?.toListValue()
+  //             ?.map((e) {
+  //               return validatorName(e.toFunctionValue());
+  //             })
+  //             .whereType<String>()
+  //             .toList() ??
+  //         [];
+  //   }
+  //   return [];
+  // }
+
+  // List<String> asyncValidatorTypedList(TypeChecker typeChecker) {
+  //   if (typeChecker.hasAnnotationOfExact(fieldElement)) {
+  //     final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
+  //     return annotation
+  //             ?.getField('asyncValidatorsTyped')
+  //             ?.toListValue()
+  //             ?.map((e) {
+  //               return validatorName(e.toFunctionValue());
+  //             })
+  //             .whereType<String>()
+  //             .toList() ??
+  //         [];
+  //   }
+  //   return [];
+  // }
+
+  String get itemAsyncValidators {
+    final params = annotationParams
+        .where((e) => e.startsWith('itemAsyncValidators'))
+        .map((e) => e.split(":"))
+        .expand((e) => e)
+        .toList();
+
+    return params.length == 2 ? params.last : '[]';
   }
 
-  List<String> itemAsyncValidatorList(TypeChecker typeChecker) {
-    if (typeChecker.hasAnnotationOfExact(fieldElement)) {
-      final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
-      return annotation
-              ?.getField('itemAsyncValidators')
-              ?.toListValue()
-              ?.map((e) {
-                return validatorName(e.toFunctionValue());
-              })
-              .whereType<String>()
-              .toList() ??
-          [];
-    }
-    return [];
+  String get asyncValidators {
+    final params = annotationParams
+        .where((e) => e.startsWith('asyncValidators'))
+        .map((e) => e.split(":"))
+        .expand((e) => e)
+        .toList();
+
+    return params.length == 2 ? params.last : '[]';
   }
 
-  List<String> asyncValidatorList(TypeChecker typeChecker) {
-    if (typeChecker.hasAnnotationOfExact(fieldElement)) {
-      final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
-      return annotation
-              ?.getField('asyncValidators')
-              ?.toListValue()
-              ?.map((e) {
-                return validatorName(e.toFunctionValue());
-              })
-              .whereType<String>()
-              .toList() ??
-          [];
-    }
-    return [];
-  }
-
-  int asyncValidatorsDebounceTime(TypeChecker typeChecker) {
+  int get asyncValidatorsDebounceTime {
     int? debounceTime;
     if (typeChecker.hasAnnotationOfExact(fieldElement)) {
       final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
@@ -172,7 +193,7 @@ abstract class FormElementGenerator {
     return debounceTime ?? 250;
   }
 
-  int itemAsyncValidatorsDebounceTime(TypeChecker typeChecker) {
+  int get itemAsyncValidatorsDebounceTime {
     int? debounceTime;
     if (typeChecker.hasAnnotationOfExact(fieldElement)) {
       final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
@@ -185,7 +206,7 @@ abstract class FormElementGenerator {
     return debounceTime ?? 250;
   }
 
-  bool itemDisabled(TypeChecker typeChecker) {
+  bool get itemDisabled {
     bool? disabled;
     if (typeChecker.hasAnnotationOfExact(fieldElement)) {
       final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
@@ -198,30 +219,21 @@ abstract class FormElementGenerator {
     return disabled ?? false;
   }
 
-  bool disabled(TypeChecker typeChecker) {
-    bool? disabled;
+  bool get disabled {
     if (typeChecker.hasAnnotationOfExact(fieldElement)) {
       final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
-      disabled = annotation
-          ?.getField(
-            'disabled',
-          )
-          ?.toBoolValue();
+      return annotation?.getField('disabled')?.toBoolValue() ?? false;
     }
-    return disabled ?? false;
+    return false;
   }
 
-  bool touched(TypeChecker typeChecker) {
-    bool? touched;
+  bool get touched {
     if (typeChecker.hasAnnotationOfExact(fieldElement)) {
       final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
-      touched = annotation
-          ?.getField(
-            'touched',
-          )
-          ?.toBoolValue();
+      return annotation?.getField('touched')?.toBoolValue() ?? false;
     }
-    return touched ?? false;
+
+    return false;
   }
 
   String element();

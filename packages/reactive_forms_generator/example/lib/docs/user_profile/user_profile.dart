@@ -1,4 +1,5 @@
-import 'package:example/helpers.dart';
+// ignore_for_file: implementation_imports
+import 'package:reactive_forms/src/validators/required_validator.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'user_profile.gform.dart';
@@ -17,14 +18,14 @@ class UserProfile {
 
   UserProfile({
     required this.id,
-    @FormControlAnnotation<String>(
-      validators: [requiredValidator],
+    @FormControlAnnotation(
+      validators: [RequiredValidator()],
     )
-        this.firstName = '',
-    @FormControlAnnotation<String>(
-      validators: [requiredValidator],
+    this.firstName = '',
+    @FormControlAnnotation(
+      validators: [RequiredValidator()],
     )
-        this.lastName = '',
+    this.lastName = '',
     required this.home,
     this.office,
   });
@@ -39,13 +40,11 @@ class Address {
   final String? zip;
 
   Address({
-    @FormControlAnnotation<String>()
-        this.street,
-    @FormControlAnnotation<String>(
-      validators: [requiredValidator],
+    @FormControlAnnotation<String>() this.street,
+    @FormControlAnnotation(
+      validators: [RequiredValidator()],
     )
-        this.city,
-    @FormControlAnnotation<String>()
-        this.zip,
+    this.city,
+    @FormControlAnnotation<String>() this.zip,
   });
 }

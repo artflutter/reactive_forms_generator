@@ -249,14 +249,14 @@ class MailingListForm implements FormModel<MailingList> {
 
   void addEmailListItem(
     String value, {
-    List<AsyncValidatorFunction>? asyncValidators,
-    List<ValidatorFunction>? validators,
+    List<AsyncValidator<dynamic>>? asyncValidators,
+    List<Validator<dynamic>>? validators,
     int? asyncValidatorsDebounceTime,
     bool? disabled,
     ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
   }) {
-    List<ValidatorFunction> resultingValidators = [emailValidator];
-    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+    List<Validator<dynamic>> resultingValidators = [EmailValidator()];
+    List<AsyncValidator<dynamic>> resultingAsyncValidators = [];
 
     switch (validatorsApplyMode) {
       case ValidatorsApplyMode.merge:
@@ -335,13 +335,13 @@ class MailingListForm implements FormModel<MailingList> {
             (mailingList?.emailList ?? [])
                 .map((e) => FormControl<String>(
                       value: e,
-                      validators: [emailValidator],
+                      validators: [EmailValidator()],
                       asyncValidators: [],
                       asyncValidatorsDebounceTime: 250,
                       disabled: false,
                     ))
                 .toList(),
-            validators: [mailingListValidator],
+            validators: [MailingListValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false)
