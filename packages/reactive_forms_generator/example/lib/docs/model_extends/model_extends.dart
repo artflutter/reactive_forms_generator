@@ -1,5 +1,3 @@
-// ignore_for_file: implementation_imports
-import 'package:reactive_forms/src/validators/required_validator.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'model_extends.gform.dart';

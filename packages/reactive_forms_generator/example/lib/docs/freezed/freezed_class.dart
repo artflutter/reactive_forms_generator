@@ -1,5 +1,4 @@
-// ignore_for_file: invalid_annotation_target, implementation_imports
-import 'package:reactive_forms/src/validators/required_validator.dart';
+// ignore_for_file: invalid_annotation_target
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
