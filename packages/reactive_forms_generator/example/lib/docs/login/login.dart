@@ -16,13 +16,11 @@ class Login extends Equatable {
 
   const Login({
     @FormControlAnnotation(
-      validators: [RequiredValidator()],
-    )
-    this.email = '',
+      validators: [RequiredValidator(), RequiredValidator()],
+    ) this.email = '',
     @FormControlAnnotation(
       validators: [RequiredValidator()],
-    )
-    this.password = '',
+    ) this.password = '',
   });
 
   @override
