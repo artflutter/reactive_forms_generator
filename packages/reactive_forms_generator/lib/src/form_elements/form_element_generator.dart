@@ -37,15 +37,7 @@ abstract class FormElementGenerator {
 
   TypeChecker get typeChecker;
 
-  String get itemValidators {
-    final params = annotationParams
-        .where((e) => e.startsWith('itemValidators'))
-        .map((e) => e.split(":"))
-        .expand((e) => e)
-        .toList();
-
-    return params.length == 2 ? params.last : '[]';
-  }
+  String get itemValidators => param('itemValidators') ?? '[]';
 
   DartObject? get annotation {
     if (typeChecker.hasAnnotationOfExact(fieldElement)) {
@@ -84,7 +76,7 @@ abstract class FormElementGenerator {
           final match =
               regExp.firstMatch(meta.toSource())?.namedGroup('params');
 
-          return match?.split(',').map((e) => e.trim()).toList() ?? [];
+          return match?.split(':').map((e) => e.trim()).toList() ?? [];
         }
       }
     }
@@ -92,93 +84,29 @@ abstract class FormElementGenerator {
     return [];
   }
 
-  String get validators {
-    final params = annotationParams
-        .where((e) => e.startsWith('validators'))
-        .map((e) => e.split(":"))
-        .expand((e) => e)
-        .toList();
+  String? param(String name) {
+    final index = annotationParams
+        .indexWhere((e) => e.startsWith(name) || e.endsWith(name));
+    if (index != -1) {
+      final paramItem = annotationParams[index + 1];
+      final regExp = RegExp(
+        r'(?<param>\[[\s\S]*\])',
+        multiLine: true,
+        caseSensitive: true,
+      );
 
-    return params.length == 2 ? params.last : '[]';
+      final match = regExp.firstMatch(paramItem)?.namedGroup('param');
 
-    // if (typeChecker.hasAnnotationOfExact(fieldElement)) {
-    //   for (final meta in fieldElement.metadata) {
-    //     final obj = meta.computeConstantValue()!;
-    //     if (typeChecker.isExactlyType(obj.type!)) {
-    //       final regExp = RegExp(
-    //         r'@FormControlAnnotation\((?<params>[\s\S]*)\)',
-    //         multiLine: true,
-    //         caseSensitive: true,
-    //       );
-    //       final params = regExp
-    //           .firstMatch(meta.toSource())
-    //           ?.namedGroup('params')
-    //           ?.split(',')
-    //           .map((e) => e.trim())
-    //           .where((e) => e.startsWith('validators'))
-    //           .map((e) => e.split(":"))
-    //           .expand((e) => e)
-    //           .toList() ??
-    //           [];
-    //
-    //       return params.length == 2 ? params[1] : '[]';
-    //     }
-    //   }
-    // }
-    // return '[]';
+      return match;
+    }
+    return null;
   }
 
-  // List<String> syncValidatorTypedList(TypeChecker typeChecker) {
-  //   if (typeChecker.hasAnnotationOfExact(fieldElement)) {
-  //     final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
-  //     return annotation
-  //             ?.getField('validatorsTyped')
-  //             ?.toListValue()
-  //             ?.map((e) {
-  //               return validatorName(e.toFunctionValue());
-  //             })
-  //             .whereType<String>()
-  //             .toList() ??
-  //         [];
-  //   }
-  //   return [];
-  // }
+  String get validators => param('validators') ?? '[]';
 
-  // List<String> asyncValidatorTypedList(TypeChecker typeChecker) {
-  //   if (typeChecker.hasAnnotationOfExact(fieldElement)) {
-  //     final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
-  //     return annotation
-  //             ?.getField('asyncValidatorsTyped')
-  //             ?.toListValue()
-  //             ?.map((e) {
-  //               return validatorName(e.toFunctionValue());
-  //             })
-  //             .whereType<String>()
-  //             .toList() ??
-  //         [];
-  //   }
-  //   return [];
-  // }
+  String get itemAsyncValidators => param('itemAsyncValidators') ?? '[]';
 
-  String get itemAsyncValidators {
-    final params = annotationParams
-        .where((e) => e.startsWith('itemAsyncValidators'))
-        .map((e) => e.split(":"))
-        .expand((e) => e)
-        .toList();
-
-    return params.length == 2 ? params.last : '[]';
-  }
-
-  String get asyncValidators {
-    final params = annotationParams
-        .where((e) => e.startsWith('asyncValidators'))
-        .map((e) => e.split(":"))
-        .expand((e) => e)
-        .toList();
-
-    return params.length == 2 ? params.last : '[]';
-  }
+  String get asyncValidators => param('asyncValidators') ?? '[]';
 
   int get asyncValidatorsDebounceTime {
     int? debounceTime;
