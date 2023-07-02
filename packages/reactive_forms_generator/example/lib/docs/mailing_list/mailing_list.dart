@@ -3,12 +3,12 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'mailing_list.gform.dart';
 
-@ReactiveFormAnnotation()
+@Rf()
 class MailingList {
   final List<String?> emailList;
 
   MailingList({
-    @FormArrayAnnotation(
+    @RfArray(
       validators: [MailingListValidator()],
       itemValidators: [EmailValidator()],
     )

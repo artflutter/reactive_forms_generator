@@ -2,24 +2,24 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'url.gform.dart';
 
-@ReactiveFormAnnotation()
+@Rf()
 class Url {
   final List<UrlEntity> urlList;
 
-  Url({@FormArrayAnnotation() this.urlList = const []});
+  Url({@RfArray() this.urlList = const []});
 }
 
-@FormGroupAnnotation()
+@RfGroup()
 class UrlEntity {
   final String label;
   final String url;
 
   UrlEntity({
-    @FormControlAnnotation(validators: [
+    @RfControl(validators: [
       RequiredValidator(),
     ])
     this.label = '',
-    @FormControlAnnotation(validators: [
+    @RfControl(validators: [
       RequiredValidator(),
     ])
     this.url = '',

@@ -30,8 +30,8 @@ void main() {
               }
             }
             
-            @ReactiveFormAnnotation()
-            @FormGroupAnnotation(
+            @Rf()
+            @RfGroup(
               validators: [MustMatchValidator()],
             )
             class Login {
@@ -40,11 +40,11 @@ void main() {
               final String password;
             
               const Login({
-                @FormControlAnnotation(
+                @RfControl(
                   validators: [RequiredValidator(), RequiredValidator()],
                 )
                     this.email = '',
-                @FormControlAnnotation(
+                @RfControl(
                   validators: [RequiredValidator()],
                 )
                     this.password = '',

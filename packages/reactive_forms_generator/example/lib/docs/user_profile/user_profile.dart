@@ -2,7 +2,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'user_profile.gform.dart';
 
-@ReactiveFormAnnotation()
+@Rf()
 class UserProfile {
   final String id;
 
@@ -16,11 +16,11 @@ class UserProfile {
 
   UserProfile({
     required this.id,
-    @FormControlAnnotation(
+    @RfControl(
       validators: [RequiredValidator()],
     )
     this.firstName = '',
-    @FormControlAnnotation(
+    @RfControl(
       validators: [RequiredValidator()],
     )
     this.lastName = '',
@@ -29,7 +29,7 @@ class UserProfile {
   });
 }
 
-@FormGroupAnnotation()
+@RfGroup()
 class Address {
   final String? street;
 
@@ -38,11 +38,11 @@ class Address {
   final String? zip;
 
   Address({
-    @FormControlAnnotation<String>() this.street,
-    @FormControlAnnotation(
+    @RfControl<String>() this.street,
+    @RfControl(
       validators: [RequiredValidator()],
     )
     this.city,
-    @FormControlAnnotation<String>() this.zip,
+    @RfControl<String>() this.zip,
   });
 }

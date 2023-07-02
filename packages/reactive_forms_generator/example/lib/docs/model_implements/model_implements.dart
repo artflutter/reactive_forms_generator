@@ -14,7 +14,7 @@ abstract class Password {
   Password({this.password = ''});
 }
 
-@ReactiveFormAnnotation()
+@Rf()
 class ModelImplements implements Email, Password {
   @override
   final String email;
@@ -23,11 +23,11 @@ class ModelImplements implements Email, Password {
   final String password;
 
   ModelImplements({
-    @FormControlAnnotation(
+    @RfControl(
       validators: [RequiredValidator()],
     )
     this.email = '',
-    @FormControlAnnotation(
+    @RfControl(
       validators: [RequiredValidator()],
     )
     this.password = '',

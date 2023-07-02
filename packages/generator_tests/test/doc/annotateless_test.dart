@@ -9,7 +9,7 @@ void main() {
   group('reactive_forms_generator', () {
     test(
       'Form with annotateless fields',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -19,14 +19,14 @@ void main() {
             
             part '$fileName.gform.dart';
             
-            @ReactiveFormAnnotation()
+            @Rf()
             class Annotateless {
               final String email;
             
               final String password;
             
               const Annotateless({
-                @FormControlAnnotation() this.email = '',
+                @RfControl() this.email = '',
                 this.password = '',
               });
             }

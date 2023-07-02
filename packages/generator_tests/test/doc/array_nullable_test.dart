@@ -22,7 +22,7 @@ void main() {
             
             enum UserMode { user, admin }
 
-            @ReactiveFormAnnotation()
+            @Rf()
             class ArrayNullable {
               final List<String> emailList;
             
@@ -35,14 +35,14 @@ void main() {
               final List<UserMode?>? modeList;
             
               ArrayNullable({
-                @FormArrayAnnotation(
+                @RfArray(
                   validators: [RequiredValidator()],
                 )
                 required this.emailList,
-                @FormArrayAnnotation() this.fruitList = const [],
-                @FormArrayAnnotation() this.vegetablesList,
-                @FormArrayAnnotation() this.modeList,
-                @FormControlAnnotation<List<String?>>() this.someList,
+                @RfArray() this.fruitList = const [],
+                @RfArray() this.vegetablesList,
+                @RfArray() this.modeList,
+                @RfControl<List<String?>>() this.someList,
               });
             }
           ''',

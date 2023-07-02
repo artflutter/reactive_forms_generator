@@ -234,16 +234,16 @@ The next step is to add annotations to help generator do his job.
 ```dart
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
-@ReactiveFormAnnotation()
+@Rf()
 class Basic {
   final String email;
 
   final String password;
 
   Basic({
-    @FormControlAnnotation() this.email = '',
+    @RfControl() this.email = '',
 
-    @FormControlAnnotation() this.password = '',
+    @RfControl() this.password = '',
   });
 }
 ```
@@ -260,17 +260,17 @@ validators.
 import 'package:example/helpers.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
-@ReactiveFormAnnotation()
+@Rf()
 class Basic {
   final String email;
 
   final String password;
 
   Basic({
-    @FormControlAnnotation(
+    @RfControl(
       validators: const [requiredValidator],
     ) this.email = '',
-    @FormControlAnnotation(
+    @RfControl(
       validators: const [requiredValidator],
     ) this.password = '',
   });
@@ -368,12 +368,12 @@ The next step is to add annotations to help generator do his job.
 import 'package:example/helpers.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
-@ReactiveFormAnnotation()
+@Rf()
 class MailingList {
   final List<String?> emailList;
 
   MailingList({
-    @FormArrayAnnotation(
+    @RfArray(
       validators: const [
         mailingListValidator,
       ],
@@ -599,7 +599,7 @@ The next step is to add annotations to help generator do his job.
 import 'package:example/helpers.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
-@ReactiveFormAnnotation()
+@Rf()
 class UserProfile {
   final String firstName;
 
@@ -610,10 +610,10 @@ class UserProfile {
   final Address? office;
 
   UserProfile({
-    @FormControlAnnotation(
+    @RfControl(
       validators: const [requiredValidator],
     ) this.firstName = '',
-    @FormControlAnnotation(
+    @RfControl(
       validators: const [requiredValidator],
     ) this.lastName = '',
     this.home,
@@ -621,7 +621,7 @@ class UserProfile {
   });
 }
 
-@FormGroupAnnotation()
+@RfGroup()
 class Address {
   final String? street;
 
@@ -630,11 +630,11 @@ class Address {
   final String? zip;
 
   Address({
-    @FormControlAnnotation() this.street,
-    @FormControlAnnotation(
+    @RfControl() this.street,
+    @RfControl(
       validators: const [requiredValidator],
     ) this.city,
-    @FormControlAnnotation() this.zip,
+    @RfControl() this.zip,
   });
 }
 ```
@@ -838,40 +838,40 @@ class Address {
 The next step is to add annotations to help generator do his job.
 
 ```dart
-@ReactiveFormAnnotation()
+@Rf()
 class DeliveryList {
   final List<DeliveryPoint> deliveryList;
 
   DeliveryList({
-    @FormArrayAnnotation() this.deliveryList = const [],
+    @RfArray() this.deliveryList = const [],
   });
 }
 
-@FormGroupAnnotation()
+@RfGroup()
 class DeliveryPoint {
   final String name;
 
   final Address? address;
 
   DeliveryPoint({
-    @FormControlAnnotation(
+    @RfControl(
       validators: const [requiredValidator],
     ) this.name = '',
     this.address,
   });
 }
 
-@FormGroupAnnotation()
+@RfGroup()
 class Address {
   final String? street;
 
   final String? city;
 
   Address({
-    @FormControlAnnotation(
+    @RfControl(
       validators: const [requiredValidator],
     ) this.street,
-    @FormControlAnnotation() this.city,
+    @RfControl() this.city,
   });
 }
 ```
@@ -1028,13 +1028,13 @@ part 'freezed_class.g.dart';
 part 'freezed_class.freezed.dart';
 
 @freezed
-@ReactiveFormAnnotation()
+@Rf()
 class FreezedClass
     with _$FreezedClass {
   const factory FreezedClass({
-    @FormControlAnnotation() String? id,
-    @FormControlAnnotation() String? name,
-    @FormControlAnnotation() double? year,
+    @RfControl() String? id,
+    @RfControl() String? name,
+    @RfControl() double? year,
   }) = _FreezedClass;
 
   factory FreezedClass.fromJson(Map<String, dynamic> json) =>
@@ -1119,15 +1119,15 @@ If you want to have the set of form classes to be generated for `DeliveryPoint` 
 additional `ReactiveFormAnnotation` annotation
 
 ```dart
-@ReactiveFormAnnotation()
-@FormGroupAnnotation()
+@Rf()
+@RfGroup()
 class DeliveryPoint {
   final String name;
 
   final Address? address;
 
   DeliveryPoint({
-    @FormControlAnnotation(
+    @RfControl(
       validators: const [requiredValidator],
     ) this.name = '',
     this.address,

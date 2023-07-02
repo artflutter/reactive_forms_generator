@@ -20,7 +20,7 @@ void main() {
             
             part '$fileName.gform.dart';
             
-            @ReactiveFormAnnotation()
+            @Rf()
             class UserProfile {
               final String id;
             
@@ -34,11 +34,11 @@ void main() {
             
               UserProfile({
                 required this.id,
-                @FormControlAnnotation(
+                @RfControl(
                   validators: [RequiredValidator()],
                 )
                 this.firstName = '',
-                @FormControlAnnotation(
+                @RfControl(
                   validators: [RequiredValidator()],
                 )
                 this.lastName = '',
@@ -47,7 +47,7 @@ void main() {
               });
             }
             
-            @FormGroupAnnotation()
+            @RfGroup()
             class Address {
               final String? street;
             
@@ -56,12 +56,12 @@ void main() {
               final String? zip;
             
               Address({
-                @FormControlAnnotation<String>() this.street,
-                @FormControlAnnotation(
+                @RfControl<String>() this.street,
+                @RfControl(
                   validators: [RequiredValidator()],
                 )
                 this.city,
-                @FormControlAnnotation<String>() this.zip,
+                @RfControl<String>() this.zip,
               });
             }
           ''',

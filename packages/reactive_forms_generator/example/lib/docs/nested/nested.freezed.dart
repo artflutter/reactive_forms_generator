@@ -20,7 +20,7 @@ SubGroup _$SubGroupFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SubGroup {
-  @FormControlAnnotation()
+  @RfControl()
   String get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ abstract class $SubGroupCopyWith<$Res> {
   factory $SubGroupCopyWith(SubGroup value, $Res Function(SubGroup) then) =
       _$SubGroupCopyWithImpl<$Res, SubGroup>;
   @useResult
-  $Res call({@FormControlAnnotation() String id});
+  $Res call({@RfControl() String id});
 }
 
 /// @nodoc
@@ -68,7 +68,7 @@ abstract class _$$_SubGroupCopyWith<$Res> implements $SubGroupCopyWith<$Res> {
       __$$_SubGroupCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@FormControlAnnotation() String id});
+  $Res call({@RfControl() String id});
 }
 
 /// @nodoc
@@ -96,13 +96,13 @@ class __$$_SubGroupCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_SubGroup implements _SubGroup {
-  const _$_SubGroup({@FormControlAnnotation() required this.id});
+  const _$_SubGroup({@RfControl() required this.id});
 
   factory _$_SubGroup.fromJson(Map<String, dynamic> json) =>
       _$$_SubGroupFromJson(json);
 
   @override
-  @FormControlAnnotation()
+  @RfControl()
   final String id;
 
   @override
@@ -137,13 +137,13 @@ class _$_SubGroup implements _SubGroup {
 }
 
 abstract class _SubGroup implements SubGroup {
-  const factory _SubGroup({@FormControlAnnotation() required final String id}) =
+  const factory _SubGroup({@RfControl() required final String id}) =
       _$_SubGroup;
 
   factory _SubGroup.fromJson(Map<String, dynamic> json) = _$_SubGroup.fromJson;
 
   @override
-  @FormControlAnnotation()
+  @RfControl()
   String get id;
   @override
   @JsonKey(ignore: true)
@@ -157,9 +157,9 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Group {
-  @FormControlAnnotation()
+  @RfControl()
   String get id => throw _privateConstructorUsedError;
-  @FormArrayAnnotation<dynamic>()
+  @RfArray<dynamic>()
   List<SubGroup> get subGroupList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -173,8 +173,8 @@ abstract class $GroupCopyWith<$Res> {
       _$GroupCopyWithImpl<$Res, Group>;
   @useResult
   $Res call(
-      {@FormControlAnnotation() String id,
-      @FormArrayAnnotation<dynamic>() List<SubGroup> subGroupList});
+      {@RfControl() String id,
+      @RfArray<dynamic>() List<SubGroup> subGroupList});
 }
 
 /// @nodoc
@@ -213,8 +213,8 @@ abstract class _$$_GroupCopyWith<$Res> implements $GroupCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@FormControlAnnotation() String id,
-      @FormArrayAnnotation<dynamic>() List<SubGroup> subGroupList});
+      {@RfControl() String id,
+      @RfArray<dynamic>() List<SubGroup> subGroupList});
 }
 
 /// @nodoc
@@ -246,21 +246,19 @@ class __$$_GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res, _$_Group>
 @JsonSerializable()
 class _$_Group implements _Group {
   const _$_Group(
-      {@FormControlAnnotation()
-          required this.id,
-      @FormArrayAnnotation<dynamic>()
-          required final List<SubGroup> subGroupList})
+      {@RfControl() required this.id,
+      @RfArray<dynamic>() required final List<SubGroup> subGroupList})
       : _subGroupList = subGroupList;
 
   factory _$_Group.fromJson(Map<String, dynamic> json) =>
       _$$_GroupFromJson(json);
 
   @override
-  @FormControlAnnotation()
+  @RfControl()
   final String id;
   final List<SubGroup> _subGroupList;
   @override
-  @FormArrayAnnotation<dynamic>()
+  @RfArray<dynamic>()
   List<SubGroup> get subGroupList {
     if (_subGroupList is EqualUnmodifiableListView) return _subGroupList;
     // ignore: implicit_dynamic_type
@@ -303,18 +301,17 @@ class _$_Group implements _Group {
 
 abstract class _Group implements Group {
   const factory _Group(
-      {@FormControlAnnotation()
-          required final String id,
-      @FormArrayAnnotation<dynamic>()
-          required final List<SubGroup> subGroupList}) = _$_Group;
+          {@RfControl() required final String id,
+          @RfArray<dynamic>() required final List<SubGroup> subGroupList}) =
+      _$_Group;
 
   factory _Group.fromJson(Map<String, dynamic> json) = _$_Group.fromJson;
 
   @override
-  @FormControlAnnotation()
+  @RfControl()
   String get id;
   @override
-  @FormArrayAnnotation<dynamic>()
+  @RfArray<dynamic>()
   List<SubGroup> get subGroupList;
   @override
   @JsonKey(ignore: true)
@@ -328,7 +325,7 @@ Nested _$NestedFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Nested {
-  @FormArrayAnnotation<dynamic>()
+  @RfArray<dynamic>()
   List<Group> get groupList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -341,7 +338,7 @@ abstract class $NestedCopyWith<$Res> {
   factory $NestedCopyWith(Nested value, $Res Function(Nested) then) =
       _$NestedCopyWithImpl<$Res, Nested>;
   @useResult
-  $Res call({@FormArrayAnnotation<dynamic>() List<Group> groupList});
+  $Res call({@RfArray<dynamic>() List<Group> groupList});
 }
 
 /// @nodoc
@@ -374,7 +371,7 @@ abstract class _$$_NestedCopyWith<$Res> implements $NestedCopyWith<$Res> {
       __$$_NestedCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@FormArrayAnnotation<dynamic>() List<Group> groupList});
+  $Res call({@RfArray<dynamic>() List<Group> groupList});
 }
 
 /// @nodoc
@@ -401,8 +398,7 @@ class __$$_NestedCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Nested implements _Nested {
-  const _$_Nested(
-      {@FormArrayAnnotation<dynamic>() required final List<Group> groupList})
+  const _$_Nested({@RfArray<dynamic>() required final List<Group> groupList})
       : _groupList = groupList;
 
   factory _$_Nested.fromJson(Map<String, dynamic> json) =>
@@ -410,7 +406,7 @@ class _$_Nested implements _Nested {
 
   final List<Group> _groupList;
   @override
-  @FormArrayAnnotation<dynamic>()
+  @RfArray<dynamic>()
   List<Group> get groupList {
     if (_groupList is EqualUnmodifiableListView) return _groupList;
     // ignore: implicit_dynamic_type
@@ -452,13 +448,12 @@ class _$_Nested implements _Nested {
 
 abstract class _Nested implements Nested {
   const factory _Nested(
-      {@FormArrayAnnotation<dynamic>()
-          required final List<Group> groupList}) = _$_Nested;
+      {@RfArray<dynamic>() required final List<Group> groupList}) = _$_Nested;
 
   factory _Nested.fromJson(Map<String, dynamic> json) = _$_Nested.fromJson;
 
   @override
-  @FormArrayAnnotation<dynamic>()
+  @RfArray<dynamic>()
   List<Group> get groupList;
   @override
   @JsonKey(ignore: true)

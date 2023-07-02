@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Tags<T> {
-  @FormControlAnnotation()
+  @RfControl()
   List<T>? get tags => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -28,7 +28,7 @@ abstract class $TagsCopyWith<T, $Res> {
   factory $TagsCopyWith(Tags<T> value, $Res Function(Tags<T>) then) =
       _$TagsCopyWithImpl<T, $Res, Tags<T>>;
   @useResult
-  $Res call({@FormControlAnnotation() List<T>? tags});
+  $Res call({@RfControl() List<T>? tags});
 }
 
 /// @nodoc
@@ -61,7 +61,7 @@ abstract class _$$_TagsCopyWith<T, $Res> implements $TagsCopyWith<T, $Res> {
       __$$_TagsCopyWithImpl<T, $Res>;
   @override
   @useResult
-  $Res call({@FormControlAnnotation() List<T>? tags});
+  $Res call({@RfControl() List<T>? tags});
 }
 
 /// @nodoc
@@ -88,13 +88,13 @@ class __$$_TagsCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$_Tags<T> extends _Tags<T> {
-  _$_Tags({@FormControlAnnotation() required final List<T>? tags})
+  _$_Tags({@RfControl() required final List<T>? tags})
       : _tags = tags,
         super._();
 
   final List<T>? _tags;
   @override
-  @FormControlAnnotation()
+  @RfControl()
   List<T>? get tags {
     final value = _tags;
     if (value == null) return null;
@@ -128,12 +128,11 @@ class _$_Tags<T> extends _Tags<T> {
 }
 
 abstract class _Tags<T> extends Tags<T> {
-  factory _Tags({@FormControlAnnotation() required final List<T>? tags}) =
-      _$_Tags<T>;
+  factory _Tags({@RfControl() required final List<T>? tags}) = _$_Tags<T>;
   _Tags._() : super._();
 
   @override
-  @FormControlAnnotation()
+  @RfControl()
   List<T>? get tags;
   @override
   @JsonKey(ignore: true)

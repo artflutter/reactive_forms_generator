@@ -21,18 +21,18 @@ void main() {
             
             part '$fileName.gform.dart';
             
-            @ReactiveFormAnnotation(name: 'SomeWiredName')
+            @Rf(name: 'SomeWiredName')
             class RenamedBasic {
               final String email;
             
               final String password;
             
               RenamedBasic({
-                @FormControlAnnotation(
+                @RfControl(
                   validators: [RequiredValidator()],
                 )
                 this.email = '',
-                @FormControlAnnotation(
+                @RfControl(
                   validators: [RequiredValidator()],
                 )
                 this.password = '',

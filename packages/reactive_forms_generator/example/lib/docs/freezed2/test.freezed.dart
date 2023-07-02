@@ -16,9 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Test {
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   String get title => throw _privateConstructorUsedError;
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   String? get description => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,8 +31,8 @@ abstract class $TestCopyWith<$Res> {
       _$TestCopyWithImpl<$Res, Test>;
   @useResult
   $Res call(
-      {@FormControlAnnotation<String>() String title,
-      @FormControlAnnotation<String>() String? description});
+      {@RfControl<String>() String title,
+      @RfControl<String>() String? description});
 }
 
 /// @nodoc
@@ -71,8 +71,8 @@ abstract class _$$_TestCopyWith<$Res> implements $TestCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@FormControlAnnotation<String>() String title,
-      @FormControlAnnotation<String>() String? description});
+      {@RfControl<String>() String title,
+      @RfControl<String>() String? description});
 }
 
 /// @nodoc
@@ -104,15 +104,15 @@ class __$$_TestCopyWithImpl<$Res> extends _$TestCopyWithImpl<$Res, _$_Test>
 
 class _$_Test extends _Test {
   const _$_Test(
-      {@FormControlAnnotation<String>() required this.title,
-      @FormControlAnnotation<String>() this.description})
+      {@RfControl<String>() required this.title,
+      @RfControl<String>() this.description})
       : super._();
 
   @override
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   final String title;
   @override
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   final String? description;
 
   @override
@@ -142,15 +142,15 @@ class _$_Test extends _Test {
 
 abstract class _Test extends Test {
   const factory _Test(
-      {@FormControlAnnotation<String>() required final String title,
-      @FormControlAnnotation<String>() final String? description}) = _$_Test;
+      {@RfControl<String>() required final String title,
+      @RfControl<String>() final String? description}) = _$_Test;
   const _Test._() : super._();
 
   @override
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   String get title;
   @override
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   String? get description;
   @override
   @JsonKey(ignore: true)

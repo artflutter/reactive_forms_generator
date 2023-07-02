@@ -9,6 +9,7 @@ import 'package:dart_style/dart_style.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:source_gen/source_gen.dart';
+
 // ignore: implementation_imports
 import 'package:source_gen/src/output_helpers.dart';
 
@@ -28,7 +29,7 @@ class ReactiveFormsGenerator extends Generator {
       useNullSafetySyntax: true,
     );
 
-    for (var annotatedElement in library.annotatedWith(formChecker)) {
+    for (var annotatedElement in library.rfAnnotated) {
       specList.addAll(
         generateForAnnotatedElement(
           annotatedElement.element,

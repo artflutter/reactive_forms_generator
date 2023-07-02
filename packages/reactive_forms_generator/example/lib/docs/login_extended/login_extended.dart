@@ -3,8 +3,8 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'login_extended.gform.dart';
 
-@ReactiveFormAnnotation()
-@FormGroupAnnotation(
+@Rf()
+@RfGroup(
   validators: [AllFieldsRequired()],
 )
 class LoginExtended {
@@ -25,32 +25,32 @@ class LoginExtended {
   final String? unAnnotated;
 
   LoginExtended({
-    @FormControlAnnotation(
+    @RfControl(
       validators: [RequiredValidator()],
       asyncValidators: [UniqueEmailAsyncValidator()],
     )
     this.email = '',
-    @FormControlAnnotation(
+    @RfControl(
       validators: [RequiredValidator()],
     )
     required this.password,
-    @FormControlAnnotation(
+    @RfControl(
       validators: [RequiredValidator()],
     )
     required this.rememberMe,
-    @FormControlAnnotation(
+    @RfControl(
       validators: [RequiredValidator()],
     )
     required this.theme,
-    @FormControlAnnotation(
+    @RfControl(
       validators: [RequiredValidator()],
     )
     required this.mode,
-    @FormControlAnnotation(
+    @RfControl(
       validators: [RequiredValidator()],
     )
     required this.timeout,
-    @FormControlAnnotation(
+    @RfControl(
       validators: [RequiredValidator()],
     )
     required this.height,

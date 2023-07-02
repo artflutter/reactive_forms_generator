@@ -25,18 +25,18 @@ void main() {
             part '$fileName.freezed.dart';
             
             @freezed
-            @ReactiveFormAnnotation()
+            @Rf()
             class FreezedClass with _\$FreezedClass {
               FreezedClass._();
             
               factory FreezedClass(
-                @FormControlAnnotation<String>() String? gender, {
-                @FormControlAnnotation(validators: [RequiredValidator()]) String? id,
-                @FormControlAnnotation<String>() String? name,
+                @RfControl<String>() String? gender, {
+                @RfControl(validators: [RequiredValidator()]) String? id,
+                @RfControl<String>() String? name,
                 @JsonKey(name: 'logo_image')
-                @FormControlAnnotation<String>()
+                @RfControl<String>()
                 String? logoImage,
-                @FormControlAnnotation<double>() double? year,
+                @RfControl<double>() double? year,
               }) = _FreezedClass;
             
               factory FreezedClass.fromJson(Map<String, dynamic> json) =>

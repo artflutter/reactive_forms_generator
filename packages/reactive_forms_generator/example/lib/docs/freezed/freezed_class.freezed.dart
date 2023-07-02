@@ -20,16 +20,16 @@ FreezedClass _$FreezedClassFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$FreezedClass {
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   String? get gender => throw _privateConstructorUsedError;
-  @FormControlAnnotation(validators: [RequiredValidator()])
+  @RfControl(validators: [RequiredValidator()])
   String? get id => throw _privateConstructorUsedError;
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'logo_image')
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   String? get logoImage => throw _privateConstructorUsedError;
-  @FormControlAnnotation<double>()
+  @RfControl<double>()
   double? get year => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,17 +45,11 @@ abstract class $FreezedClassCopyWith<$Res> {
       _$FreezedClassCopyWithImpl<$Res, FreezedClass>;
   @useResult
   $Res call(
-      {@FormControlAnnotation<String>()
-          String? gender,
-      @FormControlAnnotation(validators: [RequiredValidator()])
-          String? id,
-      @FormControlAnnotation<String>()
-          String? name,
-      @JsonKey(name: 'logo_image')
-      @FormControlAnnotation<String>()
-          String? logoImage,
-      @FormControlAnnotation<double>()
-          double? year});
+      {@RfControl<String>() String? gender,
+      @RfControl(validators: [RequiredValidator()]) String? id,
+      @RfControl<String>() String? name,
+      @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
+      @RfControl<double>() double? year});
 }
 
 /// @nodoc
@@ -111,17 +105,11 @@ abstract class _$$_FreezedClassCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@FormControlAnnotation<String>()
-          String? gender,
-      @FormControlAnnotation(validators: [RequiredValidator()])
-          String? id,
-      @FormControlAnnotation<String>()
-          String? name,
-      @JsonKey(name: 'logo_image')
-      @FormControlAnnotation<String>()
-          String? logoImage,
-      @FormControlAnnotation<double>()
-          double? year});
+      {@RfControl<String>() String? gender,
+      @RfControl(validators: [RequiredValidator()]) String? id,
+      @RfControl<String>() String? name,
+      @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
+      @RfControl<double>() double? year});
 }
 
 /// @nodoc
@@ -169,38 +157,31 @@ class __$$_FreezedClassCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_FreezedClass extends _FreezedClass {
-  _$_FreezedClass(
-      @FormControlAnnotation<String>()
-          this.gender,
-      {@FormControlAnnotation(validators: [RequiredValidator()])
-          this.id,
-      @FormControlAnnotation<String>()
-          this.name,
-      @JsonKey(name: 'logo_image')
-      @FormControlAnnotation<String>()
-          this.logoImage,
-      @FormControlAnnotation<double>()
-          this.year})
+  _$_FreezedClass(@RfControl<String>() this.gender,
+      {@RfControl(validators: [RequiredValidator()]) this.id,
+      @RfControl<String>() this.name,
+      @JsonKey(name: 'logo_image') @RfControl<String>() this.logoImage,
+      @RfControl<double>() this.year})
       : super._();
 
   factory _$_FreezedClass.fromJson(Map<String, dynamic> json) =>
       _$$_FreezedClassFromJson(json);
 
   @override
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   final String? gender;
   @override
-  @FormControlAnnotation(validators: [RequiredValidator()])
+  @RfControl(validators: [RequiredValidator()])
   final String? id;
   @override
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   final String? name;
   @override
   @JsonKey(name: 'logo_image')
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   final String? logoImage;
   @override
-  @FormControlAnnotation<double>()
+  @RfControl<double>()
   final double? year;
 
   @override
@@ -241,38 +222,31 @@ class _$_FreezedClass extends _FreezedClass {
 }
 
 abstract class _FreezedClass extends FreezedClass {
-  factory _FreezedClass(
-      @FormControlAnnotation<String>()
-          final String? gender,
-      {@FormControlAnnotation(validators: [RequiredValidator()])
-          final String? id,
-      @FormControlAnnotation<String>()
-          final String? name,
-      @JsonKey(name: 'logo_image')
-      @FormControlAnnotation<String>()
-          final String? logoImage,
-      @FormControlAnnotation<double>()
-          final double? year}) = _$_FreezedClass;
+  factory _FreezedClass(@RfControl<String>() final String? gender,
+      {@RfControl(validators: [RequiredValidator()]) final String? id,
+      @RfControl<String>() final String? name,
+      @JsonKey(name: 'logo_image') @RfControl<String>() final String? logoImage,
+      @RfControl<double>() final double? year}) = _$_FreezedClass;
   _FreezedClass._() : super._();
 
   factory _FreezedClass.fromJson(Map<String, dynamic> json) =
       _$_FreezedClass.fromJson;
 
   @override
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   String? get gender;
   @override
-  @FormControlAnnotation(validators: [RequiredValidator()])
+  @RfControl(validators: [RequiredValidator()])
   String? get id;
   @override
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   String? get name;
   @override
   @JsonKey(name: 'logo_image')
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   String? get logoImage;
   @override
-  @FormControlAnnotation<double>()
+  @RfControl<double>()
   double? get year;
   @override
   @JsonKey(ignore: true)

@@ -51,8 +51,8 @@ class FormGenerator {
   final Map<String, FormGenerator> nestedFormGroupGenerators = {};
 
   String get baseName {
-    if (formChecker.hasAnnotationOfExact(element) && root == element) {
-      final annotation = formChecker.firstAnnotationOfExact(element);
+    if (element.hasRfAnnotation && root == element) {
+      final annotation = element.rfAnnotation;
       return annotation?.getField('name')?.toStringValue() ?? element.name;
     }
     return element.name;

@@ -23,9 +23,7 @@ extension ClassElementExt on ClassElement {
   }
 
   Iterable<Reference> get genericTypes => thisType.typeArguments.map(
-        (e) => Reference(
-          e.getDisplayString(withNullability: false),
-        ),
+        (e) => Reference(e.getDisplayString(withNullability: false)),
       );
 
   List<ParameterElement> get annotatedParameters {
@@ -39,11 +37,7 @@ extension ClassElementExt on ClassElement {
     return [];
   }
 
-  bool get isNullable {
-    return annotatedParameters.fold(true, (acc, e) {
-      return acc;
-    });
-  }
+  bool get isNullable => annotatedParameters.fold(true, (acc, e) => acc);
 }
 
 extension ParameterElementExt on ParameterElement {
@@ -92,8 +86,8 @@ extension ParameterElementExt on ParameterElement {
 
     String baseName = '';
 
-    if (formChecker.hasAnnotationOfExact(element)) {
-      final annotation = formChecker.firstAnnotationOfExact(element);
+    if (element.hasRfAnnotation) {
+      final annotation = element.rfAnnotation;
       baseName = annotation?.getField('name')?.toStringValue() ?? element.name;
     }
 
@@ -102,8 +96,8 @@ extension ParameterElementExt on ParameterElement {
     if (isFormGroupArray) {
       final element = typeParameter.element as ClassElement;
 
-      if (formChecker.hasAnnotationOfExact(element)) {
-        final annotation = formChecker.firstAnnotationOfExact(element);
+      if (element.hasRfAnnotation) {
+        final annotation = element.rfAnnotation;
         baseName =
             annotation?.getField('name')?.toStringValue() ?? element.name;
       }
@@ -126,7 +120,7 @@ extension ParameterElementExt on ParameterElement {
   DartType get typeParameter => (type as ParameterizedType).typeArguments.first;
 
   bool get isFormGroupArray {
-    if (!formArrayChecker.hasAnnotationOfExact(this)) {
+    if (!hasRfArrayAnnotation) {
       return false;
     }
 
@@ -137,11 +131,11 @@ extension ParameterElementExt on ParameterElement {
     final typeParameter = typeArguments.first;
 
     return typeParameter.element is ClassElement &&
-        formGroupChecker.hasAnnotationOf(typeParameter.element!);
+        typeParameter.element!.hasRfGroupAnnotation;
   }
 
   bool get isFormArray {
-    if (!formArrayChecker.hasAnnotationOfExact(this)) {
+    if (!hasRfArrayAnnotation) {
       return false;
     }
 
@@ -153,7 +147,7 @@ extension ParameterElementExt on ParameterElement {
 
     return (typeParameter.element is ClassElement ||
             typeParameter.element is EnumElement) &&
-        !formGroupChecker.hasAnnotationOf(typeParameter.element!);
+        !typeParameter.element!.hasRfGroupAnnotation;
   }
 
   bool get isFormControl {
@@ -164,21 +158,16 @@ extension ParameterElementExt on ParameterElement {
 
     throwIf(
       isFormControl && isFormGroup,
-      "Field `$name` can't be annotated with @FormControlAnnotation and @FromGroupAnnotation at the same time.",
+      "Field `$name` can't be annotated with @RfControl and @FromGroupAnnotation at the same time.",
       element: this,
     );
 
     return isFormControl;
   }
 
-  bool get isFormGroup {
-    final element = type.element;
-    return element != null
-        ? formGroupChecker.hasAnnotationOfExact(element)
-        : false;
-  }
+  bool get isFormGroup => type.element?.hasRfGroupAnnotation ?? false;
 
-  bool get isForm => formChecker.hasAnnotationOfExact(this);
+  bool get isForm => hasRfAnnotation;
 }
 
 extension FieldElementExt on FieldElement {
@@ -193,14 +182,9 @@ extension FieldElementExt on FieldElement {
   // needs careful usage and possibly refactoring
   DartType get typeParameter => (type as ParameterizedType).typeArguments.first;
 
-  bool get isFormGroup {
-    final element = type.element;
-    return element != null
-        ? formGroupChecker.hasAnnotationOfExact(element)
-        : false;
-  }
+  bool get isFormGroup => type.element?.hasRfGroupAnnotation ?? false;
 
-  bool get isForm => formChecker.hasAnnotationOfExact(this);
+  bool get isForm => hasRfAnnotation;
 }
 
 typedef IterableFunction<T, U> = U Function(T i);

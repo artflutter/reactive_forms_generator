@@ -3,7 +3,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'login_extended_nullable.gform.dart';
 
-@ReactiveFormAnnotation()
+@Rf()
 class LoginExtendedNullable {
   final String? email;
 
@@ -20,12 +20,12 @@ class LoginExtendedNullable {
   final double? height;
 
   LoginExtendedNullable({
-    @FormControlAnnotation<String>(validators: []) this.email,
-    @FormControlAnnotation() this.password,
-    @FormControlAnnotation<bool>() this.rememberMe,
-    @FormControlAnnotation<String>() this.theme,
-    @FormControlAnnotation<UserMode>() this.mode,
-    @FormControlAnnotation<int>() this.timeout,
-    @FormControlAnnotation<double>() this.height,
+    @RfControl<String>(validators: []) this.email,
+    @RfControl() this.password,
+    @RfControl<bool>() this.rememberMe,
+    @RfControl<String>() this.theme,
+    @RfControl<UserMode>() this.mode,
+    @RfControl<int>() this.timeout,
+    @RfControl<double>() this.height,
   });
 }

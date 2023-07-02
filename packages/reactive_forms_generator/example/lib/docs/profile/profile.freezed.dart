@@ -22,18 +22,18 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) {
 mixin _$Profile {
   String get id => throw _privateConstructorUsedError;
   String get anotherId => throw _privateConstructorUsedError;
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   String get name => throw _privateConstructorUsedError;
-  @FormControlAnnotation<ChartingOrderValue>()
+  @RfControl<ChartingOrderValue>()
   ChartingOrderValue get chartingOrder => throw _privateConstructorUsedError;
-  @FormControlAnnotation<NumberingStandard>()
+  @RfControl<NumberingStandard>()
   NumberingStandard get numberingStandard => throw _privateConstructorUsedError;
   IncidenceFilter get incidenceFilter => throw _privateConstructorUsedError;
-  @FormControlAnnotation<MeasurementType>()
+  @RfControl<MeasurementType>()
   MeasurementType get measurementType => throw _privateConstructorUsedError;
   ThresholdSetting get threshold => throw _privateConstructorUsedError;
   TimerSetting get timer => throw _privateConstructorUsedError;
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get audioGuidance => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,19 +49,14 @@ abstract class $ProfileCopyWith<$Res> {
   $Res call(
       {String id,
       String anotherId,
-      @FormControlAnnotation<String>()
-          String name,
-      @FormControlAnnotation<ChartingOrderValue>()
-          ChartingOrderValue chartingOrder,
-      @FormControlAnnotation<NumberingStandard>()
-          NumberingStandard numberingStandard,
+      @RfControl<String>() String name,
+      @RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,
+      @RfControl<NumberingStandard>() NumberingStandard numberingStandard,
       IncidenceFilter incidenceFilter,
-      @FormControlAnnotation<MeasurementType>()
-          MeasurementType measurementType,
+      @RfControl<MeasurementType>() MeasurementType measurementType,
       ThresholdSetting threshold,
       TimerSetting timer,
-      @FormControlAnnotation<bool>()
-          bool audioGuidance});
+      @RfControl<bool>() bool audioGuidance});
 
   $ChartingOrderValueCopyWith<$Res> get chartingOrder;
   $IncidenceFilterCopyWith<$Res> get incidenceFilter;
@@ -180,19 +175,14 @@ abstract class _$$_ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
   $Res call(
       {String id,
       String anotherId,
-      @FormControlAnnotation<String>()
-          String name,
-      @FormControlAnnotation<ChartingOrderValue>()
-          ChartingOrderValue chartingOrder,
-      @FormControlAnnotation<NumberingStandard>()
-          NumberingStandard numberingStandard,
+      @RfControl<String>() String name,
+      @RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,
+      @RfControl<NumberingStandard>() NumberingStandard numberingStandard,
       IncidenceFilter incidenceFilter,
-      @FormControlAnnotation<MeasurementType>()
-          MeasurementType measurementType,
+      @RfControl<MeasurementType>() MeasurementType measurementType,
       ThresholdSetting threshold,
       TimerSetting timer,
-      @FormControlAnnotation<bool>()
-          bool audioGuidance});
+      @RfControl<bool>() bool audioGuidance});
 
   @override
   $ChartingOrderValueCopyWith<$Res> get chartingOrder;
@@ -275,19 +265,14 @@ class __$$_ProfileCopyWithImpl<$Res>
 class _$_Profile extends _Profile {
   _$_Profile(this.id,
       {required this.anotherId,
-      @FormControlAnnotation<String>()
-          required this.name,
-      @FormControlAnnotation<ChartingOrderValue>()
-          required this.chartingOrder,
-      @FormControlAnnotation<NumberingStandard>()
-          required this.numberingStandard,
+      @RfControl<String>() required this.name,
+      @RfControl<ChartingOrderValue>() required this.chartingOrder,
+      @RfControl<NumberingStandard>() required this.numberingStandard,
       required this.incidenceFilter,
-      @FormControlAnnotation<MeasurementType>()
-          required this.measurementType,
+      @RfControl<MeasurementType>() required this.measurementType,
       required this.threshold,
       required this.timer,
-      @FormControlAnnotation<bool>()
-          required this.audioGuidance})
+      @RfControl<bool>() required this.audioGuidance})
       : super._();
 
   factory _$_Profile.fromJson(Map<String, dynamic> json) =>
@@ -298,25 +283,25 @@ class _$_Profile extends _Profile {
   @override
   final String anotherId;
   @override
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   final String name;
   @override
-  @FormControlAnnotation<ChartingOrderValue>()
+  @RfControl<ChartingOrderValue>()
   final ChartingOrderValue chartingOrder;
   @override
-  @FormControlAnnotation<NumberingStandard>()
+  @RfControl<NumberingStandard>()
   final NumberingStandard numberingStandard;
   @override
   final IncidenceFilter incidenceFilter;
   @override
-  @FormControlAnnotation<MeasurementType>()
+  @RfControl<MeasurementType>()
   final MeasurementType measurementType;
   @override
   final ThresholdSetting threshold;
   @override
   final TimerSetting timer;
   @override
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   final bool audioGuidance;
 
   @override
@@ -380,18 +365,18 @@ class _$_Profile extends _Profile {
 abstract class _Profile extends Profile {
   factory _Profile(final String id,
       {required final String anotherId,
-      @FormControlAnnotation<String>()
+      @RfControl<String>()
           required final String name,
-      @FormControlAnnotation<ChartingOrderValue>()
+      @RfControl<ChartingOrderValue>()
           required final ChartingOrderValue chartingOrder,
-      @FormControlAnnotation<NumberingStandard>()
+      @RfControl<NumberingStandard>()
           required final NumberingStandard numberingStandard,
       required final IncidenceFilter incidenceFilter,
-      @FormControlAnnotation<MeasurementType>()
+      @RfControl<MeasurementType>()
           required final MeasurementType measurementType,
       required final ThresholdSetting threshold,
       required final TimerSetting timer,
-      @FormControlAnnotation<bool>()
+      @RfControl<bool>()
           required final bool audioGuidance}) = _$_Profile;
   _Profile._() : super._();
 
@@ -402,25 +387,25 @@ abstract class _Profile extends Profile {
   @override
   String get anotherId;
   @override
-  @FormControlAnnotation<String>()
+  @RfControl<String>()
   String get name;
   @override
-  @FormControlAnnotation<ChartingOrderValue>()
+  @RfControl<ChartingOrderValue>()
   ChartingOrderValue get chartingOrder;
   @override
-  @FormControlAnnotation<NumberingStandard>()
+  @RfControl<NumberingStandard>()
   NumberingStandard get numberingStandard;
   @override
   IncidenceFilter get incidenceFilter;
   @override
-  @FormControlAnnotation<MeasurementType>()
+  @RfControl<MeasurementType>()
   MeasurementType get measurementType;
   @override
   ThresholdSetting get threshold;
   @override
   TimerSetting get timer;
   @override
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get audioGuidance;
   @override
   @JsonKey(ignore: true)
@@ -434,9 +419,9 @@ ThresholdSetting _$ThresholdSettingFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ThresholdSetting {
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get isEnabled => throw _privateConstructorUsedError;
-  @FormControlAnnotation<int>()
+  @RfControl<int>()
   int get value => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -451,9 +436,7 @@ abstract class $ThresholdSettingCopyWith<$Res> {
           ThresholdSetting value, $Res Function(ThresholdSetting) then) =
       _$ThresholdSettingCopyWithImpl<$Res, ThresholdSetting>;
   @useResult
-  $Res call(
-      {@FormControlAnnotation<bool>() bool isEnabled,
-      @FormControlAnnotation<int>() int value});
+  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
 }
 
 /// @nodoc
@@ -493,9 +476,7 @@ abstract class _$$_ThresholdSettingCopyWith<$Res>
       __$$_ThresholdSettingCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@FormControlAnnotation<bool>() bool isEnabled,
-      @FormControlAnnotation<int>() int value});
+  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
 }
 
 /// @nodoc
@@ -529,19 +510,19 @@ class __$$_ThresholdSettingCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ThresholdSetting implements _ThresholdSetting {
   const _$_ThresholdSetting(
-      {@FormControlAnnotation<bool>() this.isEnabled = true,
-      @FormControlAnnotation<int>() this.value = 2});
+      {@RfControl<bool>() this.isEnabled = true,
+      @RfControl<int>() this.value = 2});
 
   factory _$_ThresholdSetting.fromJson(Map<String, dynamic> json) =>
       _$$_ThresholdSettingFromJson(json);
 
   @override
   @JsonKey()
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   final bool isEnabled;
   @override
   @JsonKey()
-  @FormControlAnnotation<int>()
+  @RfControl<int>()
   final int value;
 
   @override
@@ -579,17 +560,17 @@ class _$_ThresholdSetting implements _ThresholdSetting {
 
 abstract class _ThresholdSetting implements ThresholdSetting {
   const factory _ThresholdSetting(
-      {@FormControlAnnotation<bool>() final bool isEnabled,
-      @FormControlAnnotation<int>() final int value}) = _$_ThresholdSetting;
+      {@RfControl<bool>() final bool isEnabled,
+      @RfControl<int>() final int value}) = _$_ThresholdSetting;
 
   factory _ThresholdSetting.fromJson(Map<String, dynamic> json) =
       _$_ThresholdSetting.fromJson;
 
   @override
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get isEnabled;
   @override
-  @FormControlAnnotation<int>()
+  @RfControl<int>()
   int get value;
   @override
   @JsonKey(ignore: true)
@@ -603,9 +584,9 @@ TimerSetting _$TimerSettingFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TimerSetting {
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get isEnabled => throw _privateConstructorUsedError;
-  @FormControlAnnotation<int>()
+  @RfControl<int>()
   int get value => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -620,9 +601,7 @@ abstract class $TimerSettingCopyWith<$Res> {
           TimerSetting value, $Res Function(TimerSetting) then) =
       _$TimerSettingCopyWithImpl<$Res, TimerSetting>;
   @useResult
-  $Res call(
-      {@FormControlAnnotation<bool>() bool isEnabled,
-      @FormControlAnnotation<int>() int value});
+  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
 }
 
 /// @nodoc
@@ -662,9 +641,7 @@ abstract class _$$_TimerSettingCopyWith<$Res>
       __$$_TimerSettingCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@FormControlAnnotation<bool>() bool isEnabled,
-      @FormControlAnnotation<int>() int value});
+  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
 }
 
 /// @nodoc
@@ -698,19 +675,19 @@ class __$$_TimerSettingCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TimerSetting implements _TimerSetting {
   const _$_TimerSetting(
-      {@FormControlAnnotation<bool>() this.isEnabled = false,
-      @FormControlAnnotation<int>() this.value = 5});
+      {@RfControl<bool>() this.isEnabled = false,
+      @RfControl<int>() this.value = 5});
 
   factory _$_TimerSetting.fromJson(Map<String, dynamic> json) =>
       _$$_TimerSettingFromJson(json);
 
   @override
   @JsonKey()
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   final bool isEnabled;
   @override
   @JsonKey()
-  @FormControlAnnotation<int>()
+  @RfControl<int>()
   final int value;
 
   @override
@@ -748,17 +725,17 @@ class _$_TimerSetting implements _TimerSetting {
 
 abstract class _TimerSetting implements TimerSetting {
   const factory _TimerSetting(
-      {@FormControlAnnotation<bool>() final bool isEnabled,
-      @FormControlAnnotation<int>() final int value}) = _$_TimerSetting;
+      {@RfControl<bool>() final bool isEnabled,
+      @RfControl<int>() final int value}) = _$_TimerSetting;
 
   factory _TimerSetting.fromJson(Map<String, dynamic> json) =
       _$_TimerSetting.fromJson;
 
   @override
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get isEnabled;
   @override
-  @FormControlAnnotation<int>()
+  @RfControl<int>()
   int get value;
   @override
   @JsonKey(ignore: true)
@@ -772,17 +749,17 @@ IncidenceFilter _$IncidenceFilterFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$IncidenceFilter {
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get isMobilityEnabled => throw _privateConstructorUsedError;
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get isFurcationEnabled => throw _privateConstructorUsedError;
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get isBleedingEnabled => throw _privateConstructorUsedError;
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get isSuppurationEnabled => throw _privateConstructorUsedError;
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get isCalculusEnabled => throw _privateConstructorUsedError;
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get isPlaqueEnabled => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -798,12 +775,12 @@ abstract class $IncidenceFilterCopyWith<$Res> {
       _$IncidenceFilterCopyWithImpl<$Res, IncidenceFilter>;
   @useResult
   $Res call(
-      {@FormControlAnnotation<bool>() bool isMobilityEnabled,
-      @FormControlAnnotation<bool>() bool isFurcationEnabled,
-      @FormControlAnnotation<bool>() bool isBleedingEnabled,
-      @FormControlAnnotation<bool>() bool isSuppurationEnabled,
-      @FormControlAnnotation<bool>() bool isCalculusEnabled,
-      @FormControlAnnotation<bool>() bool isPlaqueEnabled});
+      {@RfControl<bool>() bool isMobilityEnabled,
+      @RfControl<bool>() bool isFurcationEnabled,
+      @RfControl<bool>() bool isBleedingEnabled,
+      @RfControl<bool>() bool isSuppurationEnabled,
+      @RfControl<bool>() bool isCalculusEnabled,
+      @RfControl<bool>() bool isPlaqueEnabled});
 }
 
 /// @nodoc
@@ -864,12 +841,12 @@ abstract class _$$_IncidenceFilterCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@FormControlAnnotation<bool>() bool isMobilityEnabled,
-      @FormControlAnnotation<bool>() bool isFurcationEnabled,
-      @FormControlAnnotation<bool>() bool isBleedingEnabled,
-      @FormControlAnnotation<bool>() bool isSuppurationEnabled,
-      @FormControlAnnotation<bool>() bool isCalculusEnabled,
-      @FormControlAnnotation<bool>() bool isPlaqueEnabled});
+      {@RfControl<bool>() bool isMobilityEnabled,
+      @RfControl<bool>() bool isFurcationEnabled,
+      @RfControl<bool>() bool isBleedingEnabled,
+      @RfControl<bool>() bool isSuppurationEnabled,
+      @RfControl<bool>() bool isCalculusEnabled,
+      @RfControl<bool>() bool isPlaqueEnabled});
 }
 
 /// @nodoc
@@ -923,39 +900,39 @@ class __$$_IncidenceFilterCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_IncidenceFilter implements _IncidenceFilter {
   const _$_IncidenceFilter(
-      {@FormControlAnnotation<bool>() this.isMobilityEnabled = true,
-      @FormControlAnnotation<bool>() this.isFurcationEnabled = true,
-      @FormControlAnnotation<bool>() this.isBleedingEnabled = true,
-      @FormControlAnnotation<bool>() this.isSuppurationEnabled = true,
-      @FormControlAnnotation<bool>() this.isCalculusEnabled = true,
-      @FormControlAnnotation<bool>() this.isPlaqueEnabled = true});
+      {@RfControl<bool>() this.isMobilityEnabled = true,
+      @RfControl<bool>() this.isFurcationEnabled = true,
+      @RfControl<bool>() this.isBleedingEnabled = true,
+      @RfControl<bool>() this.isSuppurationEnabled = true,
+      @RfControl<bool>() this.isCalculusEnabled = true,
+      @RfControl<bool>() this.isPlaqueEnabled = true});
 
   factory _$_IncidenceFilter.fromJson(Map<String, dynamic> json) =>
       _$$_IncidenceFilterFromJson(json);
 
   @override
   @JsonKey()
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   final bool isMobilityEnabled;
   @override
   @JsonKey()
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   final bool isFurcationEnabled;
   @override
   @JsonKey()
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   final bool isBleedingEnabled;
   @override
   @JsonKey()
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   final bool isSuppurationEnabled;
   @override
   @JsonKey()
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   final bool isCalculusEnabled;
   @override
   @JsonKey()
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   final bool isPlaqueEnabled;
 
   @override
@@ -1009,34 +986,33 @@ class _$_IncidenceFilter implements _IncidenceFilter {
 
 abstract class _IncidenceFilter implements IncidenceFilter {
   const factory _IncidenceFilter(
-          {@FormControlAnnotation<bool>() final bool isMobilityEnabled,
-          @FormControlAnnotation<bool>() final bool isFurcationEnabled,
-          @FormControlAnnotation<bool>() final bool isBleedingEnabled,
-          @FormControlAnnotation<bool>() final bool isSuppurationEnabled,
-          @FormControlAnnotation<bool>() final bool isCalculusEnabled,
-          @FormControlAnnotation<bool>() final bool isPlaqueEnabled}) =
-      _$_IncidenceFilter;
+      {@RfControl<bool>() final bool isMobilityEnabled,
+      @RfControl<bool>() final bool isFurcationEnabled,
+      @RfControl<bool>() final bool isBleedingEnabled,
+      @RfControl<bool>() final bool isSuppurationEnabled,
+      @RfControl<bool>() final bool isCalculusEnabled,
+      @RfControl<bool>() final bool isPlaqueEnabled}) = _$_IncidenceFilter;
 
   factory _IncidenceFilter.fromJson(Map<String, dynamic> json) =
       _$_IncidenceFilter.fromJson;
 
   @override
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get isMobilityEnabled;
   @override
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get isFurcationEnabled;
   @override
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get isBleedingEnabled;
   @override
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get isSuppurationEnabled;
   @override
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get isCalculusEnabled;
   @override
-  @FormControlAnnotation<bool>()
+  @RfControl<bool>()
   bool get isPlaqueEnabled;
   @override
   @JsonKey(ignore: true)

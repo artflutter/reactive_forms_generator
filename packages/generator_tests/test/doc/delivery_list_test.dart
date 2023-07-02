@@ -20,26 +20,26 @@ void main() {
             
             part '$fileName.gform.dart';
             
-            @ReactiveFormAnnotation()
+            @Rf()
             class DeliveryList {
               final List<DeliveryPoint> deliveryList;
               final List<Client>? clientList;
             
               const DeliveryList({
-                @FormArrayAnnotation() this.deliveryList = const [],
-                @FormArrayAnnotation() this.clientList,
+                @RfArray() this.deliveryList = const [],
+                @RfArray() this.clientList,
               });
             }
             
-            @ReactiveFormAnnotation(name: 'StandaloneDeliveryPoint')
-            @FormGroupAnnotation()
+            @Rf(name: 'StandaloneDeliveryPoint')
+            @RfGroup()
             class DeliveryPoint {
               final String name;
             
               final Address? address;
             
               const DeliveryPoint({
-                @FormControlAnnotation(
+                @RfControl(
                   validators: [RequiredValidator()],
                 )
                 this.name = '',
@@ -49,7 +49,7 @@ void main() {
             
             enum ClientType { home, office }
             
-            @FormGroupAnnotation()
+            @RfGroup()
             class Client {
               final ClientType clientType;
             
@@ -58,24 +58,24 @@ void main() {
               final String? notes;
             
               const Client({
-                @FormControlAnnotation<ClientType>() required this.clientType,
-                @FormControlAnnotation<String>() this.name,
-                @FormControlAnnotation<String>() this.notes,
+                @RfControl<ClientType>() required this.clientType,
+                @RfControl<String>() this.name,
+                @RfControl<String>() this.notes,
               });
             }
             
-            @FormGroupAnnotation()
+            @RfGroup()
             class Address {
               final String? street;
             
               final String? city;
             
               const Address({
-                @FormControlAnnotation(
+                @RfControl(
                   validators: [RequiredValidator()],
                 )
                 this.street,
-                @FormControlAnnotation<String>() this.city,
+                @RfControl<String>() this.city,
               });
             }
           ''',
