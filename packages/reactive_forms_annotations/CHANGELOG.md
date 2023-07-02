@@ -1,6 +1,7 @@
-## [3.1.0]
+## [4.0.0]
 
-* annotation shorthands support
+* annotation shorthands support - this is non-breaking change, old annotations will continue working.
+  just a major bump for preventing unexpected auto updates
 
 ## [3.0.0]
 
