@@ -9,18 +9,16 @@ part 'freezed_class.freezed.dart';
 part 'freezed_class.gform.dart';
 
 @freezed
-@ReactiveFormAnnotation()
+@Rf()
 class FreezedClass with _$FreezedClass {
   FreezedClass._();
 
   factory FreezedClass(
-    @FormControlAnnotation<String>() String? gender, {
-    @FormControlAnnotation(validators: [RequiredValidator()]) String? id,
-    @FormControlAnnotation<String>() String? name,
-    @JsonKey(name: 'logo_image')
-    @FormControlAnnotation<String>()
-    String? logoImage,
-    @FormControlAnnotation<double>() double? year,
+    @RfControl<String>() String? gender, {
+    @RfControl(validators: [RequiredValidator()]) String? id,
+    @RfControl<String>() String? name,
+    @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
+    @RfControl<double>() double? year,
   }) = _FreezedClass;
 
   factory FreezedClass.fromJson(Map<String, dynamic> json) =>

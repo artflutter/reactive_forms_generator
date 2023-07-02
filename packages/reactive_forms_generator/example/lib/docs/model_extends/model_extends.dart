@@ -8,16 +8,16 @@ abstract class Email {
   Email({this.email = ''});
 }
 
-@ReactiveFormAnnotation()
+@Rf()
 class ModelExtends extends Email {
   final String password;
 
   ModelExtends({
-    @FormControlAnnotation(
+    @RfControl(
       validators: [RequiredValidator()],
     )
     super.email = '',
-    @FormControlAnnotation(
+    @RfControl(
       validators: [RequiredValidator()],
     )
     this.password = '',

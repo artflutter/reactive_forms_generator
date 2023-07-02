@@ -21,18 +21,18 @@ const model = r'''
     return Validators.required(control);
   }
   
-  @ReactiveFormAnnotation()
+  @Rf()
   class Basic {
     final String email;
   
     final String password;
   
     Basic({
-      @FormControlAnnotation<double>(
+      @RfControl<double>(
         validators: const [requiredValidator],
       )
           this.email = '',
-      @FormControlAnnotation(
+      @RfControl(
         validators: const [requiredValidator],
       )
           this.password = '',

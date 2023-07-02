@@ -6,14 +6,14 @@
 //
 // part 'shop.gform.dart';
 //
-// @ReactiveFormAnnotation()
+// @Rf()
 // class Shop extends Equatable {
 //   final Address? shopAddress;
 //   final List<Client>? clientList;
 //
 //   const Shop({
 //     this.shopAddress,
-//     @FormArrayAnnotation() this.clientList,
+//     @RfArray() this.clientList,
 //   });
 //
 //   @override
@@ -22,7 +22,7 @@
 //
 // enum ClientType { home, office }
 //
-// @FormGroupAnnotation()
+// @RfGroup()
 // class Client extends Equatable {
 //   final ClientType clientType;
 //
@@ -33,17 +33,17 @@
 //   final List<Address> addressList;
 //
 //   const Client({
-//     @FormControlAnnotation() required this.clientType,
-//     @FormArrayAnnotation() this.addressList = const [],
-//     @FormControlAnnotation() this.name,
-//     @FormControlAnnotation() this.notes,
+//     @RfControl() required this.clientType,
+//     @RfArray() this.addressList = const [],
+//     @RfControl() this.name,
+//     @RfControl() this.notes,
 //   });
 //
 //   @override
 //   List<Object?> get props => [name, notes];
 // }
 //
-// @FormGroupAnnotation()
+// @RfGroup()
 // class Address extends Equatable {
 //   final String? type;
 //
@@ -52,15 +52,15 @@
 //   final String? city;
 //
 //   const Address({
-//     @FormControlAnnotation(
+//     @RfControl(
 //       validators: [requiredValidator],
 //     )
 //         this.type,
-//     @FormControlAnnotation(
+//     @RfControl(
 //       validators: [requiredValidator],
 //     )
 //         this.street,
-//     @FormControlAnnotation()
+//     @RfControl()
 //         this.city,
 //   });
 //

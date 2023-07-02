@@ -2,7 +2,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'group.gform.dart';
 
-@ReactiveFormAnnotation()
+@Rf()
 class Group {
   final Personal? personal;
 
@@ -20,31 +20,31 @@ class Group {
   });
 }
 
-@FormGroupAnnotation()
+@RfGroup()
 class Personal {
   final String? name;
 
   final String? email;
 
   Personal({
-    @FormControlAnnotation<String>() this.name,
-    @FormControlAnnotation<String>() this.email,
+    @RfControl<String>() this.name,
+    @RfControl<String>() this.email,
   });
 }
 
-@FormGroupAnnotation()
+@RfGroup()
 class Phone {
   final String? phoneNumber;
 
   final String? countryIso;
 
   Phone({
-    @FormControlAnnotation<String>() this.phoneNumber,
-    @FormControlAnnotation<String>() this.countryIso,
+    @RfControl<String>() this.phoneNumber,
+    @RfControl<String>() this.countryIso,
   });
 }
 
-@FormGroupAnnotation()
+@RfGroup()
 class Address {
   final String? street;
 
@@ -53,8 +53,8 @@ class Address {
   final String? zip;
 
   Address({
-    @FormControlAnnotation<String>() this.street,
-    @FormControlAnnotation<String>() this.city,
-    @FormControlAnnotation<String>() this.zip,
+    @RfControl<String>() this.street,
+    @RfControl<String>() this.city,
+    @RfControl<String>() this.zip,
   });
 }

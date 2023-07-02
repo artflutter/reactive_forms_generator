@@ -20,10 +20,10 @@ void main() {
             part '$fileName.gform.dart';
             
             @freezed
-            @ReactiveFormAnnotation()
+            @Rf()
             class Tags<T> with _$Tags<T> {
               factory Tags({
-                @FormControlAnnotation() required List<T>? tags,
+                @RfControl() required List<T>? tags,
               }) = _Tags;
             
               const Tags._();

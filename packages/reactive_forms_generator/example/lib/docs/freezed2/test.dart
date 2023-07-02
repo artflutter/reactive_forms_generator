@@ -7,13 +7,13 @@ part 'test.freezed.dart';
 part 'test.gform.dart';
 
 @freezed
-@ReactiveFormAnnotation()
+@Rf()
 class Test with _$Test {
   const Test._();
 
   const factory Test({
-    @FormControlAnnotation<String>() required String title,
-    @FormControlAnnotation<String>() String? description,
+    @RfControl<String>() required String title,
+    @RfControl<String>() String? description,
   }) = _Test;
 
   factory Test.empty() => const Test(

@@ -1,3 +1,7 @@
+## [3.1.0]
+
+* annotation shorthands support
+
 ## [3.0.1]
 
 * bugfix

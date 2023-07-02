@@ -3,14 +3,14 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'annotateless.gform.dart';
 
-@ReactiveFormAnnotation()
+@Rf()
 class Annotateless extends Equatable {
   final String email;
 
   final String password;
 
   const Annotateless({
-    @FormControlAnnotation() this.email = '',
+    @RfControl() this.email = '',
     this.password = '',
   });
 

@@ -29,12 +29,12 @@ void main() {
               }
             }
             
-            @ReactiveFormAnnotation()
+            @Rf()
             class MailingList {
               final List<String?> emailList;
             
               MailingList({
-                @FormArrayAnnotation(
+                @RfArray(
                   validators: [MailingListValidator()],
                   itemValidators: [EmailValidator()],
                 )

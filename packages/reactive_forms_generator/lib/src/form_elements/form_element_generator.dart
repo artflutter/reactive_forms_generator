@@ -35,18 +35,15 @@ abstract class FormElementGenerator {
     return name;
   }
 
-  TypeChecker get typeChecker;
+  List<TypeChecker> get typeChecker;
+
+  TypeChecker? get _typeChecker => typeChecker
+      .where((e) => e.hasAnnotationOfExact(fieldElement))
+      .firstOrNull;
+
+  DartObject? get annotation => _typeChecker?.firstAnnotationOf(fieldElement);
 
   String get itemValidators => param('itemValidators') ?? '[]';
-
-  DartObject? get annotation {
-    if (typeChecker.hasAnnotationOfExact(fieldElement)) {
-      final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
-
-      return annotation;
-    }
-    return null;
-  }
 
   String? get annotationType =>
       (annotation?.type as ParameterizedType?)?.typeArguments.first.toString();
@@ -63,10 +60,10 @@ abstract class FormElementGenerator {
       fieldElement.enclosingElement as ConstructorElement;
 
   List<String> get annotationParams {
-    if (typeChecker.hasAnnotationOfExact(fieldElement)) {
+    if (annotation != null) {
       for (final meta in fieldElement.metadata) {
         final obj = meta.computeConstantValue()!;
-        if (typeChecker.isExactlyType(obj.type!)) {
+        if (_typeChecker?.isExactlyType(obj.type!) == true) {
           final regExp = RegExp(
             r'@\S+\((?<params>[\s\S]*)\)',
             multiLine: true,
@@ -108,61 +105,19 @@ abstract class FormElementGenerator {
 
   String get asyncValidators => param('asyncValidators') ?? '[]';
 
-  int get asyncValidatorsDebounceTime {
-    int? debounceTime;
-    if (typeChecker.hasAnnotationOfExact(fieldElement)) {
-      final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
-      debounceTime = annotation
-          ?.getField(
-            'asyncValidatorsDebounceTime',
-          )
-          ?.toIntValue();
-    }
-    return debounceTime ?? 250;
-  }
+  int get asyncValidatorsDebounceTime =>
+      annotation?.getField('asyncValidatorsDebounceTime')?.toIntValue() ?? 250;
 
-  int get itemAsyncValidatorsDebounceTime {
-    int? debounceTime;
-    if (typeChecker.hasAnnotationOfExact(fieldElement)) {
-      final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
-      debounceTime = annotation
-          ?.getField(
-            'itemAsyncValidatorsDebounceTime',
-          )
-          ?.toIntValue();
-    }
-    return debounceTime ?? 250;
-  }
+  int get itemAsyncValidatorsDebounceTime =>
+      annotation?.getField('itemAsyncValidatorsDebounceTime')?.toIntValue() ??
+      250;
 
-  bool get itemDisabled {
-    bool? disabled;
-    if (typeChecker.hasAnnotationOfExact(fieldElement)) {
-      final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
-      disabled = annotation
-          ?.getField(
-            'itemDisabled',
-          )
-          ?.toBoolValue();
-    }
-    return disabled ?? false;
-  }
+  bool get itemDisabled =>
+      annotation?.getField('itemDisabled')?.toBoolValue() ?? false;
 
-  bool get disabled {
-    if (typeChecker.hasAnnotationOfExact(fieldElement)) {
-      final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
-      return annotation?.getField('disabled')?.toBoolValue() ?? false;
-    }
-    return false;
-  }
+  bool get disabled => annotation?.getField('disabled')?.toBoolValue() ?? false;
 
-  bool get touched {
-    if (typeChecker.hasAnnotationOfExact(fieldElement)) {
-      final annotation = typeChecker.firstAnnotationOfExact(fieldElement);
-      return annotation?.getField('touched')?.toBoolValue() ?? false;
-    }
-
-    return false;
-  }
+  bool get touched => annotation?.getField('touched')?.toBoolValue() ?? false;
 
   String element();
 }

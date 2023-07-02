@@ -3,29 +3,29 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'delivery_list.gform.dart';
 
-@ReactiveFormAnnotation()
+@Rf()
 class DeliveryList extends Equatable {
   final List<DeliveryPoint> deliveryList;
   final List<Client>? clientList;
 
   const DeliveryList({
-    @FormArrayAnnotation() this.deliveryList = const [],
-    @FormArrayAnnotation() this.clientList,
+    @RfArray() this.deliveryList = const [],
+    @RfArray() this.clientList,
   });
 
   @override
   List<Object?> get props => [deliveryList, clientList];
 }
 
-@ReactiveFormAnnotation(name: 'StandaloneDeliveryPoint')
-@FormGroupAnnotation()
+@Rf(name: 'StandaloneDeliveryPoint')
+@RfGroup()
 class DeliveryPoint extends Equatable {
   final String name;
 
   final Address? address;
 
   const DeliveryPoint({
-    @FormControlAnnotation(
+    @RfControl(
       validators: [RequiredValidator()],
     )
     this.name = '',
@@ -38,7 +38,7 @@ class DeliveryPoint extends Equatable {
 
 enum ClientType { home, office }
 
-@FormGroupAnnotation()
+@RfGroup()
 class Client extends Equatable {
   final ClientType clientType;
 
@@ -47,27 +47,27 @@ class Client extends Equatable {
   final String? notes;
 
   const Client({
-    @FormControlAnnotation<ClientType>() required this.clientType,
-    @FormControlAnnotation<String>() this.name,
-    @FormControlAnnotation<String>() this.notes,
+    @RfControl<ClientType>() required this.clientType,
+    @RfControl<String>() this.name,
+    @RfControl<String>() this.notes,
   });
 
   @override
   List<Object?> get props => [name, notes];
 }
 
-@FormGroupAnnotation()
+@RfGroup()
 class Address extends Equatable {
   final String? street;
 
   final String? city;
 
   const Address({
-    @FormControlAnnotation(
+    @RfControl(
       validators: [RequiredValidator()],
     )
     this.street,
-    @FormControlAnnotation<String>() this.city,
+    @RfControl<String>() this.city,
   });
 
   @override

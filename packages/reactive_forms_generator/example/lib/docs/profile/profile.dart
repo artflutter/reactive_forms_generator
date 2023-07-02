@@ -4,7 +4,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'profile.freezed.dart';
+
 part 'profile.g.dart';
+
 part 'profile.gform.dart';
 
 enum NumberingStandard { ada, fdi }
@@ -43,24 +45,22 @@ extension NumberingStandardExt on NumberingStandard {
 }
 
 @freezed
-@ReactiveFormAnnotation()
+@Rf()
 class Profile with _$Profile {
   const Profile._();
 
   factory Profile(
     String id, {
     required String anotherId,
-    @FormControlAnnotation<String>() required String name,
-    @FormControlAnnotation<ChartingOrderValue>()
-        required ChartingOrderValue chartingOrder,
-    @FormControlAnnotation<NumberingStandard>()
-        required NumberingStandard numberingStandard,
+    @RfControl<String>() required String name,
+    @RfControl<ChartingOrderValue>() required ChartingOrderValue chartingOrder,
+    @RfControl<NumberingStandard>()
+    required NumberingStandard numberingStandard,
     required IncidenceFilter incidenceFilter,
-    @FormControlAnnotation<MeasurementType>()
-        required MeasurementType measurementType,
+    @RfControl<MeasurementType>() required MeasurementType measurementType,
     required ThresholdSetting threshold,
     required TimerSetting timer,
-    @FormControlAnnotation<bool>() required bool audioGuidance,
+    @RfControl<bool>() required bool audioGuidance,
   }) = _Profile;
 
   factory Profile.fromJson(Map<String, dynamic> json) =>
@@ -68,13 +68,13 @@ class Profile with _$Profile {
 }
 
 @freezed
-@FormGroupAnnotation()
+@RfGroup()
 class ThresholdSetting with _$ThresholdSetting {
   static const values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const factory ThresholdSetting({
-    @FormControlAnnotation<bool>() @Default(true) bool isEnabled,
-    @FormControlAnnotation<int>() @Default(2) int value,
+    @RfControl<bool>() @Default(true) bool isEnabled,
+    @RfControl<int>() @Default(2) int value,
   }) = _ThresholdSetting;
 
   factory ThresholdSetting.fromJson(Map<String, dynamic> json) =>
@@ -82,29 +82,29 @@ class ThresholdSetting with _$ThresholdSetting {
 }
 
 @freezed
-@FormGroupAnnotation()
+@RfGroup()
 class TimerSetting with _$TimerSetting {
   static const values = [1, 2, 3, 4, 5, 6];
 
   const factory TimerSetting({
-    @FormControlAnnotation<bool>() @Default(false) bool isEnabled,
-    @FormControlAnnotation<int>() @Default(5) int value,
+    @RfControl<bool>() @Default(false) bool isEnabled,
+    @RfControl<int>() @Default(5) int value,
   }) = _TimerSetting;
 
   factory TimerSetting.fromJson(Map<String, dynamic> json) =>
       _$TimerSettingFromJson(json);
 }
 
-@FormGroupAnnotation()
+@RfGroup()
 @freezed
 class IncidenceFilter with _$IncidenceFilter {
   const factory IncidenceFilter({
-    @FormControlAnnotation<bool>() @Default(true) bool isMobilityEnabled,
-    @FormControlAnnotation<bool>() @Default(true) bool isFurcationEnabled,
-    @FormControlAnnotation<bool>() @Default(true) bool isBleedingEnabled,
-    @FormControlAnnotation<bool>() @Default(true) bool isSuppurationEnabled,
-    @FormControlAnnotation<bool>() @Default(true) bool isCalculusEnabled,
-    @FormControlAnnotation<bool>() @Default(true) bool isPlaqueEnabled,
+    @RfControl<bool>() @Default(true) bool isMobilityEnabled,
+    @RfControl<bool>() @Default(true) bool isFurcationEnabled,
+    @RfControl<bool>() @Default(true) bool isBleedingEnabled,
+    @RfControl<bool>() @Default(true) bool isSuppurationEnabled,
+    @RfControl<bool>() @Default(true) bool isCalculusEnabled,
+    @RfControl<bool>() @Default(true) bool isPlaqueEnabled,
   }) = _IncidenceFilter;
 
   factory IncidenceFilter.fromJson(Map<String, dynamic> json) =>

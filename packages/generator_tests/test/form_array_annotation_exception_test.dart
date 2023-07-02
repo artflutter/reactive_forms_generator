@@ -18,12 +18,12 @@ const model = '''
   
   part '$fileName.gform.dart';
   
-  @ReactiveFormAnnotation()
+  @Rf()
   class ArrayNullable {
     final List<String> emailList;
   
     ArrayNullable({
-      @FormArrayAnnotation<double>(
+      @RfArray<double>(
         validators: [
           requiredValidator,
         ],
