@@ -36,7 +36,7 @@ dependencies:
   json_annotation: ^4.8.0
   #  reactive_text_field: ^1.0.0
   equatable: ^2.0.5
-  reactive_forms_lbc: ^2.0.0
+  reactive_forms_lbc: ^3.0.0
 
 dev_dependencies:
   reactive_forms_generator:

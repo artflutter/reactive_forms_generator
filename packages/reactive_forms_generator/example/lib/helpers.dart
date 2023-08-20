@@ -19,16 +19,16 @@ class AllFieldsRequired extends Validator<dynamic> {
   }
 }
 
-final emailRegex = RegExp(
-    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+// final emailRegex = RegExp(
+//     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
 
-Map<String, dynamic> emailValidator(AbstractControl<dynamic> control) {
-  final email = control.value as String?;
-
-  return email != null && emailRegex.hasMatch(email)
-      ? <String, dynamic>{}
-      : <String, dynamic>{ValidationMessage.email: true};
-}
+// Map<String, dynamic> emailValidator(AbstractControl<dynamic> control) {
+//   final email = control.value as String?;
+//
+//   return email != null && emailRegex.hasMatch(email)
+//       ? <String, dynamic>{}
+//       : <String, dynamic>{ValidationMessage.email: true};
+// }
 
 // // validates that at least one email is selected
 // Map<String, dynamic>? mailingComplexListValidator(AbstractControl control) {
@@ -88,7 +88,7 @@ class UniqueEmailAsyncValidator extends AsyncValidator<dynamic> {
     final storedEmails = ['johndoe@email.com', 'john@email.com'];
 
     return Future.delayed(
-      const Duration(seconds: 5),
+      const Duration(milliseconds: 300),
       () => !storedEmails.contains(email),
     );
   }
