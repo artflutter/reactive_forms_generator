@@ -1,3 +1,7 @@
+## [5.0.0]
+
+* analyzer bump
+
 ## [4.0.0]
 
 * annotation shorthands support - this is non-breaking change, old annotations will continue working.
