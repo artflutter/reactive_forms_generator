@@ -1,3 +1,7 @@
+## [4.0.1]
+
+* fix the add list item value parameter to nullability
+
 ## [4.0.0]
 
 * annotation shorthands support - this is non-breaking change, old annotations will continue working.

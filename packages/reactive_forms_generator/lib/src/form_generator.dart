@@ -296,7 +296,10 @@ class FormGenerator {
 
   Method addArrayControl(ParameterElement field) {
     // until https://github.com/joanpablo/reactive_forms/issues/204 is somehow resolved
-    final type = field.typeParameter.getDisplayString(withNullability: false);
+    final formControlType =
+        field.typeParameter.getDisplayString(withNullability: false);
+    final valueType =
+        field.typeParameter.getDisplayString(withNullability: true);
 
     final formArrayGenerator =
         FormArrayGenerator(element, field, field.typeParameter);
@@ -315,7 +318,7 @@ class FormGenerator {
           Parameter(
             (b) => b
               ..name = 'value'
-              ..type = Reference(type),
+              ..type = Reference(valueType),
           ),
         )
         ..optionalParameters.add(
@@ -385,7 +388,7 @@ class FormGenerator {
                   break;
               }
                
-              ${field.fieldControlName}${field.nullabilitySuffix}.add(FormControl<$type>(
+              ${field.fieldControlName}${field.nullabilitySuffix}.add(FormControl<$formControlType>(
                 value: value, 
                 validators: resultingValidators,
                 asyncValidators: resultingAsyncValidators,

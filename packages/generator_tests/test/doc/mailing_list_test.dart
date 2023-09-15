@@ -299,7 +299,7 @@ class MailingListForm implements FormModel<MailingList> {
   }
 
   void addEmailListItem(
-    String value, {
+    String? value, {
     List<AsyncValidator<dynamic>>? asyncValidators,
     List<Validator<dynamic>>? validators,
     int? asyncValidatorsDebounceTime,
