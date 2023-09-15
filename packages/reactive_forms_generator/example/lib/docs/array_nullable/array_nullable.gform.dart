@@ -621,7 +621,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }
 
   void addFruitListItem(
-    bool value, {
+    bool? value, {
     List<AsyncValidator<dynamic>>? asyncValidators,
     List<Validator<dynamic>>? validators,
     int? asyncValidatorsDebounceTime,
@@ -661,7 +661,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }
 
   void addVegetablesListItem(
-    String value, {
+    String? value, {
     List<AsyncValidator<dynamic>>? asyncValidators,
     List<Validator<dynamic>>? validators,
     int? asyncValidatorsDebounceTime,
@@ -701,7 +701,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }
 
   void addModeListItem(
-    UserMode value, {
+    UserMode? value, {
     List<AsyncValidator<dynamic>>? asyncValidators,
     List<Validator<dynamic>>? validators,
     int? asyncValidatorsDebounceTime,

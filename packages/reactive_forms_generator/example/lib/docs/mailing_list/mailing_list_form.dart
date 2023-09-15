@@ -14,6 +14,7 @@ class MailingListFormWidget extends StatefulWidget {
 
 class _MailingListFormWidgetState extends State<MailingListFormWidget> {
   MailingList _model = MailingList(emailList: [
+    null,
     'test@gmail.com',
     'wrong email',
   ]);

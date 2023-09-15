@@ -365,19 +365,17 @@ class _$_Profile extends _Profile {
 abstract class _Profile extends Profile {
   factory _Profile(final String id,
       {required final String anotherId,
-      @RfControl<String>()
-          required final String name,
+      @RfControl<String>() required final String name,
       @RfControl<ChartingOrderValue>()
-          required final ChartingOrderValue chartingOrder,
+      required final ChartingOrderValue chartingOrder,
       @RfControl<NumberingStandard>()
-          required final NumberingStandard numberingStandard,
+      required final NumberingStandard numberingStandard,
       required final IncidenceFilter incidenceFilter,
       @RfControl<MeasurementType>()
-          required final MeasurementType measurementType,
+      required final MeasurementType measurementType,
       required final ThresholdSetting threshold,
       required final TimerSetting timer,
-      @RfControl<bool>()
-          required final bool audioGuidance}) = _$_Profile;
+      @RfControl<bool>() required final bool audioGuidance}) = _$_Profile;
   _Profile._() : super._();
 
   factory _Profile.fromJson(Map<String, dynamic> json) = _$_Profile.fromJson;
