@@ -166,7 +166,7 @@ This installs three packages:
 - [build_runner](https://pub.dev/packages/build_runner), the tool to run code-generators
 - [reactive_forms](https://pub.dev/packages/reactive_forms), form engine itself
 - [reactive_forms_generator](https://pub.dev/packages/reactive_forms_generator), the code generator
-- [reactive_forms_annotation](https://pub.dev/packages/reactive_forms_annotation), a package containing annotations
+- [reactive_forms_annotations](https://pub.dev/packages/reactive_forms_annotations), a package containing annotations
   for [reactive_forms_generator].
 
 ## Ignore lint warnings on generated files
