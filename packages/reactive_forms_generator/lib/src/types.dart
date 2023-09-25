@@ -54,8 +54,14 @@ extension ParameterElementAnnotationExt on ParameterElement {
   }
 
   bool get hasRfArrayAnnotation {
-    return formArrayChecker.hasAnnotationOfExact(this) ||
-        formArrayCheckerRf.hasAnnotationOfExact(this);
+    return formArrayChecker.hasAnnotationOfExact(
+          this,
+          throwOnUnresolved: false,
+        ) ||
+        formArrayCheckerRf.hasAnnotationOfExact(
+          this,
+          throwOnUnresolved: false,
+        );
   }
 }
 
