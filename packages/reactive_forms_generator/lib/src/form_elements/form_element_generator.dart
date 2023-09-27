@@ -1,3 +1,4 @@
+// ignore_for_file: implementation_imports
 import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
@@ -5,6 +6,8 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:recase/recase.dart';
+import 'package:analyzer/src/dart/element/element.dart';
+import 'package:analyzer/src/dart/ast/ast.dart';
 
 abstract class FormElementGenerator {
   final ClassElement root;
@@ -43,7 +46,7 @@ abstract class FormElementGenerator {
 
   DartObject? get annotation => _typeChecker?.firstAnnotationOf(fieldElement);
 
-  String get itemValidators => param('itemValidators') ?? '[]';
+  String get itemValidators => annotationParams['itemValidators'] ?? '[]';
 
   String? get annotationType =>
       (annotation?.type as ParameterizedType?)?.typeArguments.first.toString();
@@ -59,51 +62,62 @@ abstract class FormElementGenerator {
   ConstructorElement get constructorElement =>
       fieldElement.enclosingElement as ConstructorElement;
 
-  List<String> get annotationParams {
-    if (annotation != null) {
-      for (final meta in fieldElement.metadata) {
-        final obj = meta.computeConstantValue()!;
-        if (_typeChecker?.isExactlyType(obj.type!) == true) {
-          final regExp = RegExp(
-            r'@\S+\((?<params>[\s\S]*)\)',
-            multiLine: true,
-            caseSensitive: true,
-          );
+  Map<String, String> get annotationParams {
+    final result = <String, String>{};
+    try {
+      if (annotation != null) {
+        for (final meta in fieldElement.metadata) {
+          final obj = meta.computeConstantValue()!;
 
-          final match =
-              regExp.firstMatch(meta.toSource())?.namedGroup('params');
-
-          return match?.split(':').map((e) => e.trim()).toList() ?? [];
+          if (_typeChecker?.isExactlyType(obj.type!) == true) {
+            final argumentList = (meta as ElementAnnotationImpl)
+                .annotationAst
+                .arguments as ArgumentListImpl;
+            for (var argument in argumentList.arguments) {
+              final argumentNamedExpression = argument as NamedExpressionImpl;
+              result.addEntries(
+                [
+                  MapEntry(
+                    argumentNamedExpression.name.label.toSource(),
+                    argumentNamedExpression.expression.toSource(),
+                  ),
+                ],
+              );
+            }
+          }
         }
       }
-    }
 
-    return [];
+      return result;
+    } catch (e) {
+      return result;
+    }
   }
 
-  String? param(String name) {
-    final index = annotationParams
-        .indexWhere((e) => e.startsWith(name) || e.endsWith(name));
-    if (index != -1) {
-      final paramItem = annotationParams[index + 1];
-      final regExp = RegExp(
-        r'(?<param>\[[\s\S]*\])',
-        multiLine: true,
-        caseSensitive: true,
-      );
+  // String? param(String name) {
+  //   final index = annotationParams
+  //       .indexWhere((e) => e.startsWith(name) || e.endsWith(name));
+  //   if (index != -1) {
+  //     final paramItem = annotationParams[index + 1];
+  //     final regExp = RegExp(
+  //       r'(?<param>\[[\s\S]*\])',
+  //       multiLine: true,
+  //       caseSensitive: true,
+  //     );
+  //
+  //     final match = regExp.firstMatch(paramItem)?.namedGroup('param');
+  //
+  //     return match;
+  //   }
+  //   return null;
+  // }
 
-      final match = regExp.firstMatch(paramItem)?.namedGroup('param');
+  String get validators => annotationParams['validators'] ?? '[]';
 
-      return match;
-    }
-    return null;
-  }
+  String get itemAsyncValidators =>
+      annotationParams['itemAsyncValidators'] ?? '[]';
 
-  String get validators => param('validators') ?? '[]';
-
-  String get itemAsyncValidators => param('itemAsyncValidators') ?? '[]';
-
-  String get asyncValidators => param('asyncValidators') ?? '[]';
+  String get asyncValidators => annotationParams['asyncValidators'] ?? '[]';
 
   int get asyncValidatorsDebounceTime =>
       annotation?.getField('asyncValidatorsDebounceTime')?.toIntValue() ?? 250;
