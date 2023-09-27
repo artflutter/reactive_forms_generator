@@ -1,3 +1,7 @@
+## [4.0.2]
+
+* fix https://github.com/artflutter/reactive_forms_generator/issues/133
+
 ## [4.0.1]
 
 * fix the add list item value parameter to nullability
