@@ -23,7 +23,7 @@ environment:
 dependencies:
   build: ^2.3.1
   source_gen: ^1.2.7
-  analyzer: ^5.7.1
+  analyzer: ">=5.12.0 <7.0.0"
   path: ^1.8.1
   build_runner: ^2.3.3
   code_builder: ^4.4.0
@@ -31,9 +31,7 @@ dependencies:
   recase: ^4.1.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  build_test: ^2.1.6
+  build_test: ^2.2.0
   logging: ^1.1.1
   flutter_lints: ^2.0.1
 
