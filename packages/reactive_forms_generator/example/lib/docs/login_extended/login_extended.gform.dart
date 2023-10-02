@@ -885,7 +885,7 @@ class ReactiveLoginExtendedFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveLoginExtendedFormFormGroupArrayBuilder<V>
+class ReactiveLoginExtendedFormFormGroupArrayBuilder<T>
     extends StatelessWidget {
   const ReactiveLoginExtendedFormFormGroupArrayBuilder({
     Key? key,
@@ -897,16 +897,16 @@ class ReactiveLoginExtendedFormFormGroupArrayBuilder<V>
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
       LoginExtendedForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       LoginExtendedForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, V? item, LoginExtendedForm formModel)
+          BuildContext context, int i, T? item, LoginExtendedForm formModel)
       itemBuilder;
 
   @override
@@ -922,7 +922,7 @@ class ReactiveLoginExtendedFormFormGroupArrayBuilder<V>
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <V>[])
+        final itemList = (value.value() ?? <T>[])
             .asMap()
             .map((i, item) => MapEntry(
                   i,

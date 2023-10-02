@@ -57,13 +57,18 @@ class ReactiveInheritedStreamer {
         (b) => b
           ..name = className
           ..extend = const Reference('InheritedStreamer<dynamic>')
+          ..types.addAll(
+            formGenerator.element.thisType.typeArguments.map(
+              (e) => Reference(e.toString()),
+            ),
+          )
           ..constructors.add(_constructor)
           ..fields.add(
             Field(
               (b) => b
                 ..name = 'form'
                 ..modifier = FieldModifier.final$
-                ..type = Reference(formGenerator.className),
+                ..type = Reference(formGenerator.classNameFull),
             ),
           ),
       );

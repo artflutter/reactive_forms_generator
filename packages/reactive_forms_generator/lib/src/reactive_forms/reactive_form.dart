@@ -1,4 +1,5 @@
 import 'package:code_builder/code_builder.dart';
+import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/form_generator.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_inherited_streamer.dart';
 
@@ -56,6 +57,11 @@ class ReactiveForm {
         (b) => b
           ..name = className
           ..extend = const Reference('StatelessWidget')
+          ..types.addAll(
+            formGenerator.element.thisType.typeArguments.map(
+              (e) => Reference(e.toString()),
+            ),
+          )
           ..constructors.add(_constructor)
           ..fields.addAll([
             Field(
@@ -68,7 +74,7 @@ class ReactiveForm {
               (b) => b
                 ..name = 'form'
                 ..modifier = FieldModifier.final$
-                ..type = Reference(formGenerator.className),
+                ..type = Reference(formGenerator.classNameFull),
             ),
             Field(
               (b) => b
@@ -83,7 +89,12 @@ class ReactiveForm {
                 (b) => b
                   ..name = 'of'
                   ..static = true
-                  ..returns = Reference('${formGenerator.className}?')
+                  ..types.addAll(
+                    formGenerator.element.thisType.typeArguments.map(
+                      (e) => Reference(e.toString()),
+                    ),
+                  )
+                  ..returns = Reference('${formGenerator.classNameFull}?')
                   ..requiredParameters.add(
                     Parameter(
                       (b) => b
@@ -103,15 +114,15 @@ class ReactiveForm {
                   ..body = Code('''
                   if (listen) {
                     return context
-                        .dependOnInheritedWidgetOfExactType<${reactiveInheritedStreamer.className}>()
+                        .dependOnInheritedWidgetOfExactType<${reactiveInheritedStreamer.className}${formGenerator.element.generics}>()
                         ?.form;
                   }
               
                   final element = context.getElementForInheritedWidgetOfExactType<
-                      ${reactiveInheritedStreamer.className}>();
+                      ${reactiveInheritedStreamer.className}${formGenerator.element.generics}>();
                   return element == null
                       ? null
-                      : (element.widget as ${reactiveInheritedStreamer.className}).form;
+                      : (element.widget as ${reactiveInheritedStreamer.className}${formGenerator.element.generics}).form;
                 '''),
               ),
               Method(
