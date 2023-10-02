@@ -1,4 +1,5 @@
 import 'package:code_builder/code_builder.dart';
+import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/form_generator.dart';
 
 class ReactiveFormArrayBuilder {
@@ -72,7 +73,7 @@ class ReactiveFormArrayBuilder {
             const CodeExpression(Code('override')),
           )
           ..body = Code('''
-            final formModel = Reactive${formGenerator.className}.of(context);
+            final formModel = Reactive${formGenerator.className}.of${formGenerator.element.generics}(context);
         
             if (formModel == null) {
               throw FormControlParentNotFoundException(this);
@@ -122,7 +123,7 @@ class ReactiveFormArrayBuilder {
             ..name = 'control'
             ..modifier = FieldModifier.final$
             ..type = Reference(
-              'FormArray<T>? Function(${formGenerator.className} formModel)?',
+              'FormArray<T>? Function(${formGenerator.classNameFull} formModel)?',
             ),
         ),
         Field(
@@ -130,7 +131,7 @@ class ReactiveFormArrayBuilder {
             ..name = 'builder'
             ..modifier = FieldModifier.final$
             ..type = Reference(
-              'Widget Function(BuildContext context, List<Widget> itemList, ${formGenerator.className} formModel)?',
+              'Widget Function(BuildContext context, List<Widget> itemList, ${formGenerator.classNameFull} formModel)?',
             ),
         ),
         Field(
@@ -138,7 +139,7 @@ class ReactiveFormArrayBuilder {
             ..name = 'itemBuilder'
             ..modifier = FieldModifier.final$
             ..type = Reference(
-                'Widget Function(BuildContext context, int i, T? item, ${formGenerator.className} formModel)'),
+                'Widget Function(BuildContext context, int i, T? item, ${formGenerator.classNameFull} formModel)'),
         ),
       ];
 

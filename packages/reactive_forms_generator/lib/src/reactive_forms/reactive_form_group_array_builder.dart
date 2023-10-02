@@ -1,4 +1,5 @@
 import 'package:code_builder/code_builder.dart';
+import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/form_generator.dart';
 
 class ReactiveFormGroupArrayBuilder {
@@ -72,7 +73,7 @@ class ReactiveFormGroupArrayBuilder {
             const CodeExpression(Code('override')),
           )
           ..body = Code('''
-            final formModel = Reactive${formGenerator.className}.of(context);
+            final formModel = Reactive${formGenerator.className}.of${formGenerator.element.generics}(context);
         
             if (formModel == null) {
               throw FormControlParentNotFoundException(this);
@@ -83,7 +84,7 @@ class ReactiveFormGroupArrayBuilder {
             return StreamBuilder<List<Map<String, Object?>?>?>(
               stream: value.control.valueChanges,
               builder: (context, snapshot) {
-                final itemList = (value.value() ?? <V>[])
+                final itemList = (value.value() ?? <T>[])
                     .asMap()
                     .map((i, item) => MapEntry(
                   i,
@@ -114,7 +115,7 @@ class ReactiveFormGroupArrayBuilder {
             ..name = 'extended'
             ..modifier = FieldModifier.final$
             ..type = const Reference(
-              'ExtendedControl<List<Map<String, Object?>?>, List<V>>?',
+              'ExtendedControl<List<Map<String, Object?>?>, List<T>>?',
             ),
         ),
         Field(
@@ -122,14 +123,14 @@ class ReactiveFormGroupArrayBuilder {
             ..name = 'getExtended'
             ..modifier = FieldModifier.final$
             ..type = Reference(
-                'ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(${formGenerator.className} formModel)?'),
+                'ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(${formGenerator.classNameFull} formModel)?'),
         ),
         Field(
           (b) => b
             ..name = 'builder'
             ..modifier = FieldModifier.final$
             ..type = Reference(
-              'Widget Function(BuildContext context, List<Widget> itemList, ${formGenerator.className} formModel)?',
+              'Widget Function(BuildContext context, List<Widget> itemList, ${formGenerator.classNameFull} formModel)?',
             ),
         ),
         Field(
@@ -137,7 +138,7 @@ class ReactiveFormGroupArrayBuilder {
             ..name = 'itemBuilder'
             ..modifier = FieldModifier.final$
             ..type = Reference(
-                'Widget Function(BuildContext context, int i, V? item, ${formGenerator.className} formModel)'),
+                'Widget Function(BuildContext context, int i, T? item, ${formGenerator.classNameFull} formModel)'),
         ),
       ];
 
@@ -145,7 +146,7 @@ class ReactiveFormGroupArrayBuilder {
     return Class(
       (b) => b
         ..name = 'Reactive${formGenerator.className}FormGroupArrayBuilder'
-        ..types.add(const Reference('V'))
+        ..types.add(const Reference('T'))
         ..extend = const Reference('StatelessWidget')
         ..constructors.add(_constructor)
         ..methods.add(_buildMethod)

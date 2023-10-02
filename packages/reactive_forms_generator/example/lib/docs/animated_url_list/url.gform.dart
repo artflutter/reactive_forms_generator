@@ -183,8 +183,10 @@ class UrlForm implements FormModel<Url> {
   final String? path;
 
   String urlListControlPath() => pathBuilder(urlListControlName);
+
   List<UrlEntity> get _urlListValue =>
       urlListUrlEntityForm.map((e) => e.model).toList();
+
   bool get containsUrlList {
     try {
       form.control(urlListControlPath());
@@ -195,7 +197,9 @@ class UrlForm implements FormModel<Url> {
   }
 
   Object? get urlListErrors => urlListControl.errors;
+
   void get urlListFocus => form.focus(urlListControlPath());
+
   void urlListValueUpdate(
     List<UrlEntity> value, {
     bool updateParent = true,
@@ -296,14 +300,17 @@ class UrlForm implements FormModel<Url> {
               value.map((e) => UrlEntityForm.formElements(e).rawValue).toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   FormArray<Map<String, Object?>> get urlListControl =>
       form.control(urlListControlPath()) as FormArray<Map<String, Object?>>;
+
   List<UrlEntityForm> get urlListUrlEntityForm => (urlListControl.value ?? [])
       .asMap()
       .map(
           (k, v) => MapEntry(k, UrlEntityForm(form, pathBuilder("urlList.$k"))))
       .values
       .toList();
+
   void urlListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -328,6 +335,7 @@ class UrlForm implements FormModel<Url> {
               form.control(urlListControlPath())
                   as FormArray<Map<String, Object?>>,
               () => urlListUrlEntityForm);
+
   void addUrlListItem(UrlEntity value) {
     urlListControl.add(UrlEntityForm.formElements(value));
   }
@@ -373,6 +381,7 @@ class UrlForm implements FormModel<Url> {
   }) =>
       form.updateValue(UrlForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Url? value,
@@ -383,8 +392,10 @@ class UrlForm implements FormModel<Url> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Url? url) => FormGroup({
         urlListControlName: FormArray(
             (url?.urlList ?? [])
@@ -416,9 +427,13 @@ class UrlEntityForm implements FormModel<UrlEntity> {
   final String? path;
 
   String labelControlPath() => pathBuilder(labelControlName);
+
   String urlControlPath() => pathBuilder(urlControlName);
+
   String get _labelValue => labelControl.value ?? "";
+
   String get _urlValue => urlControl.value ?? "";
+
   bool get containsLabel {
     try {
       form.control(labelControlPath());
@@ -438,9 +453,13 @@ class UrlEntityForm implements FormModel<UrlEntity> {
   }
 
   Object? get labelErrors => labelControl.errors;
+
   Object? get urlErrors => urlControl.errors;
+
   void get labelFocus => form.focus(labelControlPath());
+
   void get urlFocus => form.focus(urlControlPath());
+
   void labelValueUpdate(
     String value, {
     bool updateParent = true,
@@ -486,6 +505,7 @@ class UrlEntityForm implements FormModel<UrlEntity> {
   }) =>
       labelControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void urlValueReset(
     String value, {
     bool updateParent = true,
@@ -495,10 +515,13 @@ class UrlEntityForm implements FormModel<UrlEntity> {
   }) =>
       urlControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String> get labelControl =>
       form.control(labelControlPath()) as FormControl<String>;
+
   FormControl<String> get urlControl =>
       form.control(urlControlPath()) as FormControl<String>;
+
   void labelSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -566,6 +589,7 @@ class UrlEntityForm implements FormModel<UrlEntity> {
   }) =>
       form.updateValue(UrlEntityForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     UrlEntity? value,
@@ -576,8 +600,10 @@ class UrlEntityForm implements FormModel<UrlEntity> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(UrlEntity? urlEntity) => FormGroup({
         labelControlName: FormControl<String>(
             value: urlEntity?.label,
@@ -659,7 +685,7 @@ class ReactiveUrlFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveUrlFormFormGroupArrayBuilder<V> extends StatelessWidget {
+class ReactiveUrlFormFormGroupArrayBuilder<T> extends StatelessWidget {
   const ReactiveUrlFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -670,15 +696,15 @@ class ReactiveUrlFormFormGroupArrayBuilder<V> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
       UrlForm formModel)? getExtended;
 
   final Widget Function(
       BuildContext context, List<Widget> itemList, UrlForm formModel)? builder;
 
-  final Widget Function(BuildContext context, int i, V? item, UrlForm formModel)
+  final Widget Function(BuildContext context, int i, T? item, UrlForm formModel)
       itemBuilder;
 
   @override
@@ -694,7 +720,7 @@ class ReactiveUrlFormFormGroupArrayBuilder<V> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <V>[])
+        final itemList = (value.value() ?? <T>[])
             .asMap()
             .map((i, item) => MapEntry(
                   i,

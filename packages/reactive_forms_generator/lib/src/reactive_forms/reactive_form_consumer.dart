@@ -1,4 +1,5 @@
 import 'package:code_builder/code_builder.dart';
+import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form.dart';
 
 class ReactiveFormConsumer {
@@ -55,9 +56,9 @@ class ReactiveFormConsumer {
             const CodeExpression(Code('override')),
           )
           ..body = Code('''
-            final formModel = ${reactiveForm.className}.of(context);
+            final formModel = ${reactiveForm.className}.of${reactiveForm.formGenerator.element.generics}(context);
             
-            if (formModel is! ${reactiveForm.formGenerator.className}) {
+            if (formModel is! ${reactiveForm.formGenerator.classNameFull}) {
               throw FormControlParentNotFoundException(this);
             }
             return builder(context, formModel, child);
@@ -76,7 +77,7 @@ class ReactiveFormConsumer {
             ..name = 'builder'
             ..modifier = FieldModifier.final$
             ..type = Reference(
-              'Widget Function(BuildContext context, ${reactiveForm.formGenerator.className} formModel, Widget? child)',
+              'Widget Function(BuildContext context, ${reactiveForm.formGenerator.classNameFull} formModel, Widget? child)',
             ),
         ),
       ];
@@ -84,6 +85,11 @@ class ReactiveFormConsumer {
   Class get generate => Class(
         (b) => b
           ..name = '${reactiveForm.className}Consumer'
+          ..types.addAll(
+            reactiveForm.formGenerator.element.thisType.typeArguments.map(
+              (e) => Reference(e.toString()),
+            ),
+          )
           ..extend = const Reference('StatelessWidget')
           ..constructors.add(_constructor)
           ..methods.add(_buildMethod)
