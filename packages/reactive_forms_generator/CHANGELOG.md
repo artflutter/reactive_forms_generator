@@ -1,3 +1,7 @@
+## [4.1.0]
+
+* improved generic form handling
+
 ## [4.0.2]
 
 * fix https://github.com/artflutter/reactive_forms_generator/issues/133

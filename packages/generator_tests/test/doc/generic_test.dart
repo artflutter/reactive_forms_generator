@@ -47,7 +47,7 @@ part of 'generic.dart';
 // ReactiveFormsGenerator
 // **************************************************************************
 
-class ReactiveTagsFormConsumer extends StatelessWidget {
+class ReactiveTagsFormConsumer<T> extends StatelessWidget {
   const ReactiveTagsFormConsumer({
     Key? key,
     required this.builder,
@@ -56,21 +56,21 @@ class ReactiveTagsFormConsumer extends StatelessWidget {
 
   final Widget? child;
 
-  final Widget Function(BuildContext context, TagsForm formModel, Widget? child)
-      builder;
+  final Widget Function(
+      BuildContext context, TagsForm<T> formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveTagsForm.of(context);
+    final formModel = ReactiveTagsForm.of<T>(context);
 
-    if (formModel is! TagsForm) {
+    if (formModel is! TagsForm<T>) {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, formModel, child);
   }
 }
 
-class TagsFormInheritedStreamer extends InheritedStreamer<dynamic> {
+class TagsFormInheritedStreamer<T> extends InheritedStreamer<dynamic> {
   const TagsFormInheritedStreamer({
     Key? key,
     required this.form,
@@ -82,10 +82,10 @@ class TagsFormInheritedStreamer extends InheritedStreamer<dynamic> {
           key: key,
         );
 
-  final TagsForm form;
+  final TagsForm<T> form;
 }
 
-class ReactiveTagsForm extends StatelessWidget {
+class ReactiveTagsForm<T> extends StatelessWidget {
   const ReactiveTagsForm({
     Key? key,
     required this.form,
@@ -95,25 +95,25 @@ class ReactiveTagsForm extends StatelessWidget {
 
   final Widget child;
 
-  final TagsForm form;
+  final TagsForm<T> form;
 
   final WillPopCallback? onWillPop;
 
-  static TagsForm? of(
+  static TagsForm<T>? of<T>(
     BuildContext context, {
     bool listen = true,
   }) {
     if (listen) {
       return context
-          .dependOnInheritedWidgetOfExactType<TagsFormInheritedStreamer>()
+          .dependOnInheritedWidgetOfExactType<TagsFormInheritedStreamer<T>>()
           ?.form;
     }
 
-    final element = context
-        .getElementForInheritedWidgetOfExactType<TagsFormInheritedStreamer>();
+    final element = context.getElementForInheritedWidgetOfExactType<
+        TagsFormInheritedStreamer<T>>();
     return element == null
         ? null
-        : (element.widget as TagsFormInheritedStreamer).form;
+        : (element.widget as TagsFormInheritedStreamer<T>).form;
   }
 
   @override
@@ -145,17 +145,17 @@ class TagsFormBuilder<T> extends StatefulWidget {
 
   final WillPopCallback? onWillPop;
 
-  final Widget Function(BuildContext context, TagsForm formModel, Widget? child)
-      builder;
+  final Widget Function(
+      BuildContext context, TagsForm<T> formModel, Widget? child) builder;
 
-  final void Function(BuildContext context, TagsForm formModel)? initState;
+  final void Function(BuildContext context, TagsForm<T> formModel)? initState;
 
   @override
   _TagsFormBuilderState<T> createState() => _TagsFormBuilderState<T>();
 }
 
 class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
-  late TagsForm _formModel;
+  late TagsForm<T> _formModel;
 
   @override
   void initState() {
@@ -378,17 +378,18 @@ class ReactiveTagsFormArrayBuilder<T> extends StatelessWidget {
 
   final FormArray<T>? formControl;
 
-  final FormArray<T>? Function(TagsForm formModel)? control;
+  final FormArray<T>? Function(TagsForm<T> formModel)? control;
 
   final Widget Function(
-      BuildContext context, List<Widget> itemList, TagsForm formModel)? builder;
+          BuildContext context, List<Widget> itemList, TagsForm<T> formModel)?
+      builder;
 
   final Widget Function(
-      BuildContext context, int i, T? item, TagsForm formModel) itemBuilder;
+      BuildContext context, int i, T? item, TagsForm<T> formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveTagsForm.of(context);
+    final formModel = ReactiveTagsForm.of<T>(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
@@ -424,7 +425,7 @@ class ReactiveTagsFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveTagsFormFormGroupArrayBuilder<V> extends StatelessWidget {
+class ReactiveTagsFormFormGroupArrayBuilder<T> extends StatelessWidget {
   const ReactiveTagsFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -435,20 +436,21 @@ class ReactiveTagsFormFormGroupArrayBuilder<V> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
-      TagsForm formModel)? getExtended;
-
-  final Widget Function(
-      BuildContext context, List<Widget> itemList, TagsForm formModel)? builder;
+  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
+      TagsForm<T> formModel)? getExtended;
 
   final Widget Function(
-      BuildContext context, int i, V? item, TagsForm formModel) itemBuilder;
+          BuildContext context, List<Widget> itemList, TagsForm<T> formModel)?
+      builder;
+
+  final Widget Function(
+      BuildContext context, int i, T? item, TagsForm<T> formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveTagsForm.of(context);
+    final formModel = ReactiveTagsForm.of<T>(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
@@ -459,7 +461,7 @@ class ReactiveTagsFormFormGroupArrayBuilder<V> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <V>[])
+        final itemList = (value.value() ?? <T>[])
             .asMap()
             .map((i, item) => MapEntry(
                   i,

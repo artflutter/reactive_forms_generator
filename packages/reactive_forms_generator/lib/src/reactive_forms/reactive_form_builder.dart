@@ -109,7 +109,7 @@ class ReactiveFormBuilder {
           (b) => b
             ..name = 'builder'
             ..type = Reference(
-              'Widget Function(BuildContext context, ${reactiveForm.reactiveInheritedStreamer.formGenerator.className} formModel, Widget? child)',
+              'Widget Function(BuildContext context, ${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull} formModel, Widget? child)',
             )
             ..modifier = FieldModifier.final$,
         ),
@@ -117,7 +117,7 @@ class ReactiveFormBuilder {
           (b) => b
             ..name = 'initState'
             ..type = Reference(
-              'void Function(BuildContext context, ${reactiveForm.reactiveInheritedStreamer.formGenerator.className} formModel)?',
+              'void Function(BuildContext context, ${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull} formModel)?',
             )
             ..modifier = FieldModifier.final$,
         ),
@@ -231,7 +231,7 @@ class ReactiveFormBuilder {
                   ..late = true
                   ..type = Reference(
                     reactiveForm
-                        .reactiveInheritedStreamer.formGenerator.className,
+                        .reactiveInheritedStreamer.formGenerator.classNameFull,
                   ),
               ),
             ],

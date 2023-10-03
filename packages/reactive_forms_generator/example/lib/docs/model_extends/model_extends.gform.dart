@@ -434,7 +434,7 @@ class ReactiveModelExtendsFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveModelExtendsFormFormGroupArrayBuilder<V> extends StatelessWidget {
+class ReactiveModelExtendsFormFormGroupArrayBuilder<T> extends StatelessWidget {
   const ReactiveModelExtendsFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -445,16 +445,16 @@ class ReactiveModelExtendsFormFormGroupArrayBuilder<V> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
       ModelExtendsForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       ModelExtendsForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, V? item, ModelExtendsForm formModel)
+          BuildContext context, int i, T? item, ModelExtendsForm formModel)
       itemBuilder;
 
   @override
@@ -470,7 +470,7 @@ class ReactiveModelExtendsFormFormGroupArrayBuilder<V> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <V>[])
+        final itemList = (value.value() ?? <T>[])
             .asMap()
             .map((i, item) => MapEntry(
                   i,

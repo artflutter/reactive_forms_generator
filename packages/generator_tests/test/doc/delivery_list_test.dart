@@ -1556,7 +1556,7 @@ class ReactiveDeliveryListFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveDeliveryListFormFormGroupArrayBuilder<V> extends StatelessWidget {
+class ReactiveDeliveryListFormFormGroupArrayBuilder<T> extends StatelessWidget {
   const ReactiveDeliveryListFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -1567,16 +1567,16 @@ class ReactiveDeliveryListFormFormGroupArrayBuilder<V> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
       DeliveryListForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       DeliveryListForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, V? item, DeliveryListForm formModel)
+          BuildContext context, int i, T? item, DeliveryListForm formModel)
       itemBuilder;
 
   @override
@@ -1592,7 +1592,7 @@ class ReactiveDeliveryListFormFormGroupArrayBuilder<V> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <V>[])
+        final itemList = (value.value() ?? <T>[])
             .asMap()
             .map((i, item) => MapEntry(
                   i,
@@ -2067,7 +2067,7 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder<T>
   }
 }
 
-class ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilder<V>
+class ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilder<T>
     extends StatelessWidget {
   const ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilder({
     Key? key,
@@ -2079,15 +2079,15 @@ class ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilder<V>
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
       StandaloneDeliveryPointForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       StandaloneDeliveryPointForm formModel)? builder;
 
-  final Widget Function(BuildContext context, int i, V? item,
+  final Widget Function(BuildContext context, int i, T? item,
       StandaloneDeliveryPointForm formModel) itemBuilder;
 
   @override
@@ -2103,7 +2103,7 @@ class ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilder<V>
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <V>[])
+        final itemList = (value.value() ?? <T>[])
             .asMap()
             .map((i, item) => MapEntry(
                   i,

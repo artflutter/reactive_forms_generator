@@ -1891,7 +1891,7 @@ class ReactiveProfileFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveProfileFormFormGroupArrayBuilder<V> extends StatelessWidget {
+class ReactiveProfileFormFormGroupArrayBuilder<T> extends StatelessWidget {
   const ReactiveProfileFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -1902,9 +1902,9 @@ class ReactiveProfileFormFormGroupArrayBuilder<V> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
       ProfileForm formModel)? getExtended;
 
   final Widget Function(
@@ -1912,7 +1912,7 @@ class ReactiveProfileFormFormGroupArrayBuilder<V> extends StatelessWidget {
       builder;
 
   final Widget Function(
-      BuildContext context, int i, V? item, ProfileForm formModel) itemBuilder;
+      BuildContext context, int i, T? item, ProfileForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1927,7 +1927,7 @@ class ReactiveProfileFormFormGroupArrayBuilder<V> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <V>[])
+        final itemList = (value.value() ?? <T>[])
             .asMap()
             .map((i, item) => MapEntry(
                   i,

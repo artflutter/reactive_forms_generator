@@ -51,7 +51,7 @@ class MailingListValidator extends Validator<dynamic> {
   const MailingListValidator() : super();
 
   @override
-  Map<String, dynamic>? validate(AbstractControl control) {
+  Map<String, dynamic>? validate(AbstractControl<dynamic> control) {
     final formArray = control as FormArray<String>;
     final emails = formArray.value ?? [];
     final test = <String>{};

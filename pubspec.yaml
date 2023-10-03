@@ -1,4 +1,4 @@
-name: mobile_platforms
+name: reactive_forms_generator_monorepo
 
 environment:
   sdk: ">=2.18.0 <4.0.0"
