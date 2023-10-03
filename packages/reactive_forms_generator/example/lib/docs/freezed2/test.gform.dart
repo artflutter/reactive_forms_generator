@@ -342,6 +342,7 @@ class TestForm implements FormModel<Test> {
     return Test(title: _titleValue, description: _descriptionValue);
   }
 
+  @override
   void submit({
     required void Function(Test model) onValid,
     void Function()? onNotValid,

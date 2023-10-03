@@ -320,6 +320,7 @@ class AnnotatelessForm implements FormModel<Annotateless> {
     return Annotateless(email: _emailValue, password: _passwordValue);
   }
 
+  @override
   void submit({
     required void Function(Annotateless model) onValid,
     void Function()? onNotValid,

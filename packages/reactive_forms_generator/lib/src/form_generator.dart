@@ -431,6 +431,7 @@ class FormGenerator {
         (b) {
           b
             ..name = 'submit'
+            ..annotations.add(const CodeExpression(Code('override')))
             ..returns = const Reference('void')
             ..optionalParameters.addAll(
               [

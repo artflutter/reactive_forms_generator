@@ -644,6 +644,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
         year: _yearValue);
   }
 
+  @override
   void submit({
     required void Function(FreezedClass model) onValid,
     void Function()? onNotValid,

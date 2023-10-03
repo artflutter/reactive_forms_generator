@@ -1131,6 +1131,7 @@ class ProfileForm implements FormModel<Profile> {
         audioGuidance: _audioGuidanceValue);
   }
 
+  @override
   void submit({
     required void Function(Profile model) onValid,
     void Function()? onNotValid,
@@ -1633,6 +1634,7 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
         isPlaqueEnabled: _isPlaqueEnabledValue);
   }
 
+  @override
   void submit({
     required void Function(IncidenceFilter model) onValid,
     void Function()? onNotValid,
@@ -1860,6 +1862,7 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
     return ThresholdSetting(isEnabled: _isEnabledValue, value: _valueValue);
   }
 
+  @override
   void submit({
     required void Function(ThresholdSetting model) onValid,
     void Function()? onNotValid,
@@ -2060,6 +2063,7 @@ class TimerSettingForm implements FormModel<TimerSetting> {
     return TimerSetting(isEnabled: _isEnabledValue, value: _valueValue);
   }
 
+  @override
   void submit({
     required void Function(TimerSetting model) onValid,
     void Function()? onNotValid,

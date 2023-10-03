@@ -320,6 +320,7 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
     return RenamedBasic(email: _emailValue, password: _passwordValue);
   }
 
+  @override
   void submit({
     required void Function(RenamedBasic model) onValid,
     void Function()? onNotValid,

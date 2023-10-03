@@ -280,6 +280,7 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     return Tags<T>(tags: _tagsValue);
   }
 
+  @override
   void submit({
     required void Function(Tags<T> model) onValid,
     void Function()? onNotValid,

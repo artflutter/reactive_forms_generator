@@ -353,6 +353,7 @@ class UrlForm implements FormModel<Url> {
     return Url(urlList: _urlListValue);
   }
 
+  @override
   void submit({
     required void Function(Url model) onValid,
     void Function()? onNotValid,
@@ -546,6 +547,7 @@ class UrlEntityForm implements FormModel<UrlEntity> {
     return UrlEntity(label: _labelValue, url: _urlValue);
   }
 
+  @override
   void submit({
     required void Function(UrlEntity model) onValid,
     void Function()? onNotValid,

@@ -561,6 +561,7 @@ class GroupForm implements FormModel<Group> {
         address2: _address2Value);
   }
 
+  @override
   void submit({
     required void Function(Group model) onValid,
     void Function()? onNotValid,
@@ -804,6 +805,7 @@ class PersonalForm implements FormModel<Personal> {
     return Personal(name: _nameValue, email: _emailValue);
   }
 
+  @override
   void submit({
     required void Function(Personal model) onValid,
     void Function()? onNotValid,
@@ -1057,6 +1059,7 @@ class PhoneForm implements FormModel<Phone> {
     return Phone(phoneNumber: _phoneNumberValue, countryIso: _countryIsoValue);
   }
 
+  @override
   void submit({
     required void Function(Phone model) onValid,
     void Function()? onNotValid,
@@ -1399,6 +1402,7 @@ class AddressForm implements FormModel<Address> {
     return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
   }
 
+  @override
   void submit({
     required void Function(Address model) onValid,
     void Function()? onNotValid,

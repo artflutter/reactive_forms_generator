@@ -323,6 +323,7 @@ class ModelImplementsForm implements FormModel<ModelImplements> {
     return ModelImplements(email: _emailValue, password: _passwordValue);
   }
 
+  @override
   void submit({
     required void Function(ModelImplements model) onValid,
     void Function()? onNotValid,

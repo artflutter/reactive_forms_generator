@@ -7,6 +7,11 @@ abstract class FormModel<TModel> {
 
   TModel get model;
 
+  void submit({
+    required void Function(TModel model) onValid,
+    void Function()? onNotValid,
+  });
+
   void updateValue(
     TModel value, {
     bool updateParent = true,
