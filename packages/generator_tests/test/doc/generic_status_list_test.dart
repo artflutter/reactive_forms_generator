@@ -58,7 +58,7 @@ class ReactiveStatusListFormConsumer<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveStatusListForm.of(context);
+    final formModel = ReactiveStatusListForm.of<T>(context);
 
     if (formModel is! StatusListForm<T>) {
       throw FormControlParentNotFoundException(this);

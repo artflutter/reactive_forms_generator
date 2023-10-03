@@ -61,7 +61,7 @@ class ReactiveTagsFormConsumer<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveTagsForm.of(context);
+    final formModel = ReactiveTagsForm.of<T>(context);
 
     if (formModel is! TagsForm<T>) {
       throw FormControlParentNotFoundException(this);
