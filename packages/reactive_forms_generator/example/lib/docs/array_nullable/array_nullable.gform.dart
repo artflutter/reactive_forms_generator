@@ -756,6 +756,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
         someList: _someListValue);
   }
 
+  @override
   void submit({
     required void Function(ArrayNullable model) onValid,
     void Function()? onNotValid,

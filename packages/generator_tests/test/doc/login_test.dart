@@ -9,7 +9,7 @@ void main() {
   group('doc', () {
     test(
       'Login',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -375,6 +375,7 @@ class LoginForm implements FormModel<Login> {
     return Login(email: _emailValue, password: _passwordValue);
   }
 
+  @override
   void submit({
     required void Function(Login model) onValid,
     void Function()? onNotValid,

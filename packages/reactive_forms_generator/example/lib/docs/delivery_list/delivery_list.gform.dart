@@ -554,6 +554,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
         deliveryList: _deliveryListValue, clientList: _clientListValue);
   }
 
+  @override
   void submit({
     required void Function(DeliveryList model) onValid,
     void Function()? onNotValid,
@@ -784,6 +785,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
     return DeliveryPoint(name: _nameValue, address: _addressValue);
   }
 
+  @override
   void submit({
     required void Function(DeliveryPoint model) onValid,
     void Function()? onNotValid,
@@ -1031,6 +1033,7 @@ class AddressForm implements FormModel<Address> {
     return Address(street: _streetValue, city: _cityValue);
   }
 
+  @override
   void submit({
     required void Function(Address model) onValid,
     void Function()? onNotValid,
@@ -1347,6 +1350,7 @@ class ClientForm implements FormModel<Client> {
         clientType: _clientTypeValue, name: _nameValue, notes: _notesValue);
   }
 
+  @override
   void submit({
     required void Function(Client model) onValid,
     void Function()? onNotValid,
@@ -1871,6 +1875,7 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
     return DeliveryPoint(name: _nameValue, address: _addressValue);
   }
 
+  @override
   void submit({
     required void Function(DeliveryPoint model) onValid,
     void Function()? onNotValid,

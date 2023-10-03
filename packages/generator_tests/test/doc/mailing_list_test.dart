@@ -349,6 +349,7 @@ class MailingListForm implements FormModel<MailingList> {
     return MailingList(emailList: _emailListValue);
   }
 
+  @override
   void submit({
     required void Function(MailingList model) onValid,
     void Function()? onNotValid,

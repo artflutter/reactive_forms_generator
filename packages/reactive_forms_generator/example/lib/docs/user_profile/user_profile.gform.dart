@@ -541,6 +541,7 @@ class UserProfileForm implements FormModel<UserProfile> {
         office: _officeValue);
   }
 
+  @override
   void submit({
     required void Function(UserProfile model) onValid,
     void Function()? onNotValid,
@@ -892,6 +893,7 @@ class AddressForm implements FormModel<Address> {
     return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
   }
 
+  @override
   void submit({
     required void Function(Address model) onValid,
     void Function()? onNotValid,

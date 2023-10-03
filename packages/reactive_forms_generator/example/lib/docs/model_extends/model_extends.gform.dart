@@ -320,6 +320,7 @@ class ModelExtendsForm implements FormModel<ModelExtends> {
     return ModelExtends(email: _emailValue, password: _passwordValue);
   }
 
+  @override
   void submit({
     required void Function(ModelExtends model) onValid,
     void Function()? onNotValid,

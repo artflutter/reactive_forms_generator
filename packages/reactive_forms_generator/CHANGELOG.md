@@ -1,3 +1,7 @@
+## [4.2.0]
+
+* FormModel submit
+
 ## [4.1.0]
 
 * improved generic form handling

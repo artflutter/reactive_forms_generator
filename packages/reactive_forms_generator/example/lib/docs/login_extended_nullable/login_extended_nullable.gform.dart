@@ -828,6 +828,7 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
         height: _heightValue);
   }
 
+  @override
   void submit({
     required void Function(LoginExtendedNullable model) onValid,
     void Function()? onNotValid,
