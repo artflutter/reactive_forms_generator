@@ -527,8 +527,6 @@ class UserProfileForm implements FormModel<UserProfile> {
 
   @override
   UserProfile get model {
-    final currentForm = path == null ? form : form.control(path!);
-
     if (!currentForm.valid) {
       debugPrint(
           '[${path ?? 'UserProfileForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -546,12 +544,16 @@ class UserProfileForm implements FormModel<UserProfile> {
     required void Function(UserProfile model) onValid,
     void Function()? onNotValid,
   }) {
-    form.markAllAsTouched();
-    if (form.valid) {
+    currentForm.markAllAsTouched();
+    if (currentForm.valid) {
       onValid(model);
     } else {
       onNotValid?.call();
     }
+  }
+
+  AbstractControl<dynamic> get currentForm {
+    return path == null ? form : form.control(path!);
   }
 
   @override
@@ -884,8 +886,6 @@ class AddressForm implements FormModel<Address> {
 
   @override
   Address get model {
-    final currentForm = path == null ? form : form.control(path!);
-
     if (!currentForm.valid) {
       debugPrint(
           '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -898,12 +898,16 @@ class AddressForm implements FormModel<Address> {
     required void Function(Address model) onValid,
     void Function()? onNotValid,
   }) {
-    form.markAllAsTouched();
-    if (form.valid) {
+    currentForm.markAllAsTouched();
+    if (currentForm.valid) {
       onValid(model);
     } else {
       onNotValid?.call();
     }
+  }
+
+  AbstractControl<dynamic> get currentForm {
+    return path == null ? form : form.control(path!);
   }
 
   @override

@@ -244,8 +244,6 @@ class SubGroupForm implements FormModel<SubGroup> {
 
   @override
   SubGroup get model {
-    final currentForm = path == null ? form : form.control(path!);
-
     if (!currentForm.valid) {
       debugPrint(
           '[${path ?? 'SubGroupForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -258,12 +256,16 @@ class SubGroupForm implements FormModel<SubGroup> {
     required void Function(SubGroup model) onValid,
     void Function()? onNotValid,
   }) {
-    form.markAllAsTouched();
-    if (form.valid) {
+    currentForm.markAllAsTouched();
+    if (currentForm.valid) {
       onValid(model);
     } else {
       onNotValid?.call();
     }
+  }
+
+  AbstractControl<dynamic> get currentForm {
+    return path == null ? form : form.control(path!);
   }
 
   @override
@@ -821,8 +823,6 @@ class GroupForm implements FormModel<Group> {
 
   @override
   Group get model {
-    final currentForm = path == null ? form : form.control(path!);
-
     if (!currentForm.valid) {
       debugPrint(
           '[${path ?? 'GroupForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -835,12 +835,16 @@ class GroupForm implements FormModel<Group> {
     required void Function(Group model) onValid,
     void Function()? onNotValid,
   }) {
-    form.markAllAsTouched();
-    if (form.valid) {
+    currentForm.markAllAsTouched();
+    if (currentForm.valid) {
       onValid(model);
     } else {
       onNotValid?.call();
     }
+  }
+
+  AbstractControl<dynamic> get currentForm {
+    return path == null ? form : form.control(path!);
   }
 
   @override
@@ -1340,8 +1344,6 @@ class NestedForm implements FormModel<Nested> {
 
   @override
   Nested get model {
-    final currentForm = path == null ? form : form.control(path!);
-
     if (!currentForm.valid) {
       debugPrint(
           '[${path ?? 'NestedForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -1354,12 +1356,16 @@ class NestedForm implements FormModel<Nested> {
     required void Function(Nested model) onValid,
     void Function()? onNotValid,
   }) {
-    form.markAllAsTouched();
-    if (form.valid) {
+    currentForm.markAllAsTouched();
+    if (currentForm.valid) {
       onValid(model);
     } else {
       onNotValid?.call();
     }
+  }
+
+  AbstractControl<dynamic> get currentForm {
+    return path == null ? form : form.control(path!);
   }
 
   @override

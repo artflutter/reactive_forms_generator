@@ -417,12 +417,22 @@ class FormGenerator {
             ..annotations.add(const CodeExpression(Code('override')))
             ..type = MethodType.getter
             ..body = Code('''
-              final currentForm = path == null ? form : form.control(path!);
-            
               if (!currentForm.valid) {
                 debugPrint('[\${path ?? '$classNameFull'}]\\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
               }
               return ${element.fullTypeName}(${parameterValues.join(', ')});
+            ''');
+        },
+      );
+
+  Method get currentFormMethod => Method(
+        (b) {
+          b
+            ..name = 'currentForm'
+            ..type = MethodType.getter
+            ..returns = const Reference('AbstractControl<dynamic>')
+            ..body = const Code('''
+              return path == null ? form : form.control(path!);
             ''');
         },
       );
@@ -452,8 +462,8 @@ class FormGenerator {
               ],
             )
             ..body = const Code('''
-              form.markAllAsTouched();
-              if (form.valid) {
+              currentForm.markAllAsTouched();
+              if (currentForm.valid) {
                 onValid(model);
               } else {
                 onNotValid?.call();
@@ -552,6 +562,7 @@ class FormGenerator {
               ...addGroupControlListMethodList,
               modelMethod,
               submitMethod,
+              currentFormMethod,
               updateValueMethod,
               resetMethod,
               Method(

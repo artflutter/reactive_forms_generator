@@ -344,8 +344,6 @@ class UrlForm implements FormModel<Url> {
 
   @override
   Url get model {
-    final currentForm = path == null ? form : form.control(path!);
-
     if (!currentForm.valid) {
       debugPrint(
           '[${path ?? 'UrlForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -358,12 +356,16 @@ class UrlForm implements FormModel<Url> {
     required void Function(Url model) onValid,
     void Function()? onNotValid,
   }) {
-    form.markAllAsTouched();
-    if (form.valid) {
+    currentForm.markAllAsTouched();
+    if (currentForm.valid) {
       onValid(model);
     } else {
       onNotValid?.call();
     }
+  }
+
+  AbstractControl<dynamic> get currentForm {
+    return path == null ? form : form.control(path!);
   }
 
   @override
@@ -538,8 +540,6 @@ class UrlEntityForm implements FormModel<UrlEntity> {
 
   @override
   UrlEntity get model {
-    final currentForm = path == null ? form : form.control(path!);
-
     if (!currentForm.valid) {
       debugPrint(
           '[${path ?? 'UrlEntityForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -552,12 +552,16 @@ class UrlEntityForm implements FormModel<UrlEntity> {
     required void Function(UrlEntity model) onValid,
     void Function()? onNotValid,
   }) {
-    form.markAllAsTouched();
-    if (form.valid) {
+    currentForm.markAllAsTouched();
+    if (currentForm.valid) {
       onValid(model);
     } else {
       onNotValid?.call();
     }
+  }
+
+  AbstractControl<dynamic> get currentForm {
+    return path == null ? form : form.control(path!);
   }
 
   @override
