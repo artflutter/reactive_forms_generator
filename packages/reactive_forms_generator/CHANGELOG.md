@@ -1,3 +1,8 @@
+## [4.3.0]
+
+* currentForm getter
+* fix for submit method to take currentForm
+
 ## [4.2.0]
 
 * FormModel submit
