@@ -11,7 +11,7 @@ Welcome to [ReactiveFormsGenerator](https://pub.dev/packages/reactive_forms_gene
 for [reactive_forms](https://pub.dev/packages/reactive_forms)
 which will save you tons of time and make your forms type safe.
 
-**There is no reason write code manually! Let the code generation work for you.**
+**There is no reason to write code manually! Let the code generation work for you.**
 
 # Table of Contents
 
@@ -108,20 +108,19 @@ final form = ReactiveFormBuilder(
 );
 ```
 
-1. First issue is `String` identifiers which is used to define fields. Technically you can extract them into separate
+1. First issue is `String` identifiers which are used to define fields. Technically you can extract them into separate
    class, enum or whatever you like. But this is manual work which you have to do each time you create the form. The
    other
-   disadvantage is when you refer to any field by his `String` identifier you loos static type check. There is no way
+   disadvantage is when you refer to any field by this `String` identifier you loose static type check. There is no way
    for
    static analyser to check if some random field name `login` is suitable to put in particular widget. So you can easily
-   get the form which looks `ok` but fails to build due to the typo in field names and putting `login` field into
-   `ReactiveCheckbox` field. **Isn't it better the code generation to do it for you?**
+   get the form which looks `ok` but fails to build due to the typo in field names and putting the `login` field into
+   `ReactiveCheckbox` field. **Isn't it better to let the code generation to do it for you?**
 
 
 2. Second issue is output which is always `Map<String, Object>`. It is ok for languages like JS. But for the typed
    language
    you would prefer to get the output fom the form like model. And avoid manual type casting like this one.
-
 ```dart
 
 final document = DocumentInput(
@@ -134,7 +133,7 @@ final document = DocumentInput(
 );
 ```
 
-This is two main issues that forced me to write this generator.
+These are two main issues that forced me to write this generator.
 In the next chapters of documentation you'll see how we define and annotate the model which describes the form state and
 how easy and elegant it works with a bit of magic from code generation.
 
