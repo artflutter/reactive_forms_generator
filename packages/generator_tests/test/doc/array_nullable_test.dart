@@ -194,14 +194,7 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
   @override
   void didUpdateWidget(covariant ArrayNullableFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          ArrayNullableForm(ArrayNullableForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -828,7 +821,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
 
   @override
   void updateValue(
-    ArrayNullable value, {
+    ArrayNullable? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>

@@ -189,14 +189,7 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
   @override
   void didUpdateWidget(covariant MailingListFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          MailingListForm(MailingListForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -366,7 +359,7 @@ class MailingListForm implements FormModel<MailingList> {
 
   @override
   void updateValue(
-    MailingList value, {
+    MailingList? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>

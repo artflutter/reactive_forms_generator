@@ -174,14 +174,7 @@ class _StatusListFormBuilderState<T> extends State<StatusListFormBuilder<T>> {
   @override
   void didUpdateWidget(covariant StatusListFormBuilder<T> oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          StatusListForm<T>(StatusListForm.formElements<T>(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -350,7 +343,7 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
 
   @override
   void updateValue(
-    StatusList<T> value, {
+    StatusList<T>? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>

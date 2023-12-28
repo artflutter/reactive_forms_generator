@@ -13,7 +13,7 @@ abstract class FormModel<TModel> {
   });
 
   void updateValue(
-    TModel value, {
+    TModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   });

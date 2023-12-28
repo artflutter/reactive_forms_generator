@@ -212,14 +212,7 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
   @override
   void didUpdateWidget(covariant UserProfileFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          UserProfileForm(UserProfileForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -632,7 +625,7 @@ class UserProfileForm implements FormModel<UserProfile> {
 
   @override
   void updateValue(
-    UserProfile value, {
+    UserProfile? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
@@ -986,7 +979,7 @@ class AddressForm implements FormModel<Address> {
 
   @override
   void updateValue(
-    Address value, {
+    Address? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>

@@ -164,17 +164,11 @@ class ReactiveFormBuilder {
                   ..covariant = true,
               ),
             )
-            ..body = Code('''
+            ..body = const Code('''
                 if (widget.model != oldWidget.model) {
-                  _formModel = ${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull}(${reactiveForm.reactiveInheritedStreamer.formGenerator.className}.formElements${reactiveForm.reactiveInheritedStreamer.formGenerator.element.generics}(widget.model), null);
-
-                  if (_formModel.form.disabled) {
-                    _formModel.form.markAsDisabled();
-                  }
-                  
-                  widget.initState?.call(context, _formModel);
+                  _formModel.updateValue(widget.model);
                 }
-            
+                
                 super.didUpdateWidget(oldWidget);
               '''),
         ),

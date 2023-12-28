@@ -135,13 +135,7 @@ class _SubGroupFormBuilderState extends State<SubGroupFormBuilder> {
   @override
   void didUpdateWidget(covariant SubGroupFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = SubGroupForm(SubGroupForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -183,7 +177,9 @@ class SubGroupForm implements FormModel<SubGroup> {
   final String? path;
 
   String idControlPath() => pathBuilder(idControlName);
+
   String get _idValue => idControl.value as String;
+
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -194,7 +190,9 @@ class SubGroupForm implements FormModel<SubGroup> {
   }
 
   Object? get idErrors => idControl.errors;
+
   void get idFocus => form.focus(idControlPath());
+
   void idValueUpdate(
     String value, {
     bool updateParent = true,
@@ -222,8 +220,10 @@ class SubGroupForm implements FormModel<SubGroup> {
   }) =>
       idControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
+
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -270,12 +270,13 @@ class SubGroupForm implements FormModel<SubGroup> {
 
   @override
   void updateValue(
-    SubGroup value, {
+    SubGroup? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.updateValue(SubGroupForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     SubGroup? value,
@@ -286,8 +287,10 @@ class SubGroupForm implements FormModel<SubGroup> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(SubGroup? subGroup) => FormGroup({
         idControlName: FormControl<String>(
             value: subGroup?.id,
@@ -550,13 +553,7 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
   @override
   void didUpdateWidget(covariant GroupFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = GroupForm(GroupForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -600,10 +597,14 @@ class GroupForm implements FormModel<Group> {
   final String? path;
 
   String idControlPath() => pathBuilder(idControlName);
+
   String subGroupListControlPath() => pathBuilder(subGroupListControlName);
+
   String get _idValue => idControl.value as String;
+
   List<SubGroup> get _subGroupListValue =>
       subGroupListSubGroupForm.map((e) => e.model).toList();
+
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -623,9 +624,13 @@ class GroupForm implements FormModel<Group> {
   }
 
   Object? get idErrors => idControl.errors;
+
   Object? get subGroupListErrors => subGroupListControl.errors;
+
   void get idFocus => form.focus(idControlPath());
+
   void get subGroupListFocus => form.focus(subGroupListControlPath());
+
   void idValueUpdate(
     String value, {
     bool updateParent = true,
@@ -741,6 +746,7 @@ class GroupForm implements FormModel<Group> {
   }) =>
       idControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void subGroupListValueReset(
     List<SubGroup> value, {
     bool updateParent = true,
@@ -753,11 +759,14 @@ class GroupForm implements FormModel<Group> {
               value.map((e) => SubGroupForm.formElements(e).rawValue).toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
+
   FormArray<Map<String, Object?>> get subGroupListControl =>
       form.control(subGroupListControlPath())
           as FormArray<Map<String, Object?>>;
+
   List<SubGroupForm> get subGroupListSubGroupForm =>
       (subGroupListControl.value ?? [])
           .asMap()
@@ -765,6 +774,7 @@ class GroupForm implements FormModel<Group> {
               MapEntry(k, SubGroupForm(form, pathBuilder("subGroupList.$k"))))
           .values
           .toList();
+
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -807,6 +817,7 @@ class GroupForm implements FormModel<Group> {
               form.control(subGroupListControlPath())
                   as FormArray<Map<String, Object?>>,
               () => subGroupListSubGroupForm);
+
   void addSubGroupListItem(SubGroup value) {
     subGroupListControl.add(SubGroupForm.formElements(value));
   }
@@ -849,12 +860,13 @@ class GroupForm implements FormModel<Group> {
 
   @override
   void updateValue(
-    Group value, {
+    Group? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.updateValue(GroupForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Group? value,
@@ -865,8 +877,10 @@ class GroupForm implements FormModel<Group> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Group? group) => FormGroup({
         idControlName: FormControl<String>(
             value: group?.id,
@@ -1137,13 +1151,7 @@ class _NestedFormBuilderState extends State<NestedFormBuilder> {
   @override
   void didUpdateWidget(covariant NestedFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = NestedForm(NestedForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -1185,8 +1193,10 @@ class NestedForm implements FormModel<Nested> {
   final String? path;
 
   String groupListControlPath() => pathBuilder(groupListControlName);
+
   List<Group> get _groupListValue =>
       groupListGroupForm.map((e) => e.model).toList();
+
   bool get containsGroupList {
     try {
       form.control(groupListControlPath());
@@ -1197,7 +1207,9 @@ class NestedForm implements FormModel<Nested> {
   }
 
   Object? get groupListErrors => groupListControl.errors;
+
   void get groupListFocus => form.focus(groupListControlPath());
+
   void groupListValueUpdate(
     List<Group> value, {
     bool updateParent = true,
@@ -1297,13 +1309,16 @@ class NestedForm implements FormModel<Nested> {
           value: value.map((e) => GroupForm.formElements(e).rawValue).toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   FormArray<Map<String, Object?>> get groupListControl =>
       form.control(groupListControlPath()) as FormArray<Map<String, Object?>>;
+
   List<GroupForm> get groupListGroupForm => (groupListControl.value ?? [])
       .asMap()
       .map((k, v) => MapEntry(k, GroupForm(form, pathBuilder("groupList.$k"))))
       .values
       .toList();
+
   void groupListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1328,6 +1343,7 @@ class NestedForm implements FormModel<Nested> {
               form.control(groupListControlPath())
                   as FormArray<Map<String, Object?>>,
               () => groupListGroupForm);
+
   void addGroupListItem(Group value) {
     groupListControl.add(GroupForm.formElements(value));
   }
@@ -1370,12 +1386,13 @@ class NestedForm implements FormModel<Nested> {
 
   @override
   void updateValue(
-    Nested value, {
+    Nested? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.updateValue(NestedForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Nested? value,
@@ -1386,8 +1403,10 @@ class NestedForm implements FormModel<Nested> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Nested? nested) => FormGroup({
         groupListControlName: FormArray(
             (nested?.groupList ?? [])

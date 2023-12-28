@@ -134,15 +134,21 @@ class FormGenerator {
 
   Method get updateValueMethod {
     String displayType =
-        type?.getDisplayString(withNullability: true) ?? element.fullTypeName;
+        type?.getDisplayString(withNullability: false) ?? element.fullTypeName;
 
-    if (type != null &&
-        type is ParameterizedType &&
-        (type as ParameterizedType).typeArguments.isNotEmpty) {
+    if (type is ParameterizedType &&
+        (type as ParameterizedType).isDartCoreList) {
       displayType = (type as ParameterizedType)
           .typeArguments
           .first
-          .getDisplayString(withNullability: true);
+          .getDisplayString(withNullability: false);
+    }
+
+    final isNullable = type?.nullabilitySuffix == NullabilitySuffix.question ||
+        element.isNullable;
+
+    if (isNullable) {
+      displayType += '?';
     }
 
     return Method(

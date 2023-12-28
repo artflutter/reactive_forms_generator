@@ -193,14 +193,7 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
   @override
   void didUpdateWidget(covariant FreezedClassFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          FreezedClassForm(FreezedClassForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -715,7 +708,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
 
   @override
   void updateValue(
-    FreezedClass value, {
+    FreezedClass? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>

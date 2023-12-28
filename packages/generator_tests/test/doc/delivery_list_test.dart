@@ -227,14 +227,7 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
   @override
   void didUpdateWidget(covariant DeliveryListFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          DeliveryListForm(DeliveryListForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -659,7 +652,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
 
   @override
   void updateValue(
-    DeliveryList value, {
+    DeliveryList? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
@@ -892,7 +885,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
 
   @override
   void updateValue(
-    DeliveryPoint value, {
+    DeliveryPoint? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
@@ -1461,7 +1454,7 @@ class ClientForm implements FormModel<Client> {
 
   @override
   void updateValue(
-    Client value, {
+    Client? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
@@ -1761,14 +1754,7 @@ class _StandaloneDeliveryPointFormBuilderState
   @override
   void didUpdateWidget(covariant StandaloneDeliveryPointFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = StandaloneDeliveryPointForm(
-          StandaloneDeliveryPointForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -1988,7 +1974,7 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
 
   @override
   void updateValue(
-    DeliveryPoint value, {
+    DeliveryPoint? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>

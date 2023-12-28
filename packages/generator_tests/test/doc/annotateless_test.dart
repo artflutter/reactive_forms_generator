@@ -179,14 +179,7 @@ class _AnnotatelessFormBuilderState extends State<AnnotatelessFormBuilder> {
   @override
   void didUpdateWidget(covariant AnnotatelessFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          AnnotatelessForm(AnnotatelessForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -377,7 +370,7 @@ class AnnotatelessForm implements FormModel<Annotateless> {
 
   @override
   void updateValue(
-    Annotateless value, {
+    Annotateless? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>

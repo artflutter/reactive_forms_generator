@@ -56,19 +56,21 @@ class _$TagsCopyWithImpl<T, $Res, $Val extends Tags<T>>
 }
 
 /// @nodoc
-abstract class _$$_TagsCopyWith<T, $Res> implements $TagsCopyWith<T, $Res> {
-  factory _$$_TagsCopyWith(_$_Tags<T> value, $Res Function(_$_Tags<T>) then) =
-      __$$_TagsCopyWithImpl<T, $Res>;
+abstract class _$$TagsImplCopyWith<T, $Res> implements $TagsCopyWith<T, $Res> {
+  factory _$$TagsImplCopyWith(
+          _$TagsImpl<T> value, $Res Function(_$TagsImpl<T>) then) =
+      __$$TagsImplCopyWithImpl<T, $Res>;
   @override
   @useResult
   $Res call({@RfControl() List<T>? tags});
 }
 
 /// @nodoc
-class __$$_TagsCopyWithImpl<T, $Res>
-    extends _$TagsCopyWithImpl<T, $Res, _$_Tags<T>>
-    implements _$$_TagsCopyWith<T, $Res> {
-  __$$_TagsCopyWithImpl(_$_Tags<T> _value, $Res Function(_$_Tags<T>) _then)
+class __$$TagsImplCopyWithImpl<T, $Res>
+    extends _$TagsCopyWithImpl<T, $Res, _$TagsImpl<T>>
+    implements _$$TagsImplCopyWith<T, $Res> {
+  __$$TagsImplCopyWithImpl(
+      _$TagsImpl<T> _value, $Res Function(_$TagsImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -76,7 +78,7 @@ class __$$_TagsCopyWithImpl<T, $Res>
   $Res call({
     Object? tags = freezed,
   }) {
-    return _then(_$_Tags<T>(
+    return _then(_$TagsImpl<T>(
       tags: freezed == tags
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
@@ -87,8 +89,8 @@ class __$$_TagsCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$_Tags<T> extends _Tags<T> {
-  _$_Tags({@RfControl() required final List<T>? tags})
+class _$TagsImpl<T> extends _Tags<T> {
+  _$TagsImpl({@RfControl() required final List<T>? tags})
       : _tags = tags,
         super._();
 
@@ -109,10 +111,10 @@ class _$_Tags<T> extends _Tags<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Tags<T> &&
+            other is _$TagsImpl<T> &&
             const DeepCollectionEquality().equals(other._tags, _tags));
   }
 
@@ -123,12 +125,12 @@ class _$_Tags<T> extends _Tags<T> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TagsCopyWith<T, _$_Tags<T>> get copyWith =>
-      __$$_TagsCopyWithImpl<T, _$_Tags<T>>(this, _$identity);
+  _$$TagsImplCopyWith<T, _$TagsImpl<T>> get copyWith =>
+      __$$TagsImplCopyWithImpl<T, _$TagsImpl<T>>(this, _$identity);
 }
 
 abstract class _Tags<T> extends Tags<T> {
-  factory _Tags({@RfControl() required final List<T>? tags}) = _$_Tags<T>;
+  factory _Tags({@RfControl() required final List<T>? tags}) = _$TagsImpl<T>;
   _Tags._() : super._();
 
   @override
@@ -136,6 +138,6 @@ abstract class _Tags<T> extends Tags<T> {
   List<T>? get tags;
   @override
   @JsonKey(ignore: true)
-  _$$_TagsCopyWith<T, _$_Tags<T>> get copyWith =>
+  _$$TagsImplCopyWith<T, _$TagsImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
