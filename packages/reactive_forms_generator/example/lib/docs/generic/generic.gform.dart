@@ -135,13 +135,7 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
   @override
   void didUpdateWidget(covariant TagsFormBuilder<T> oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = TagsForm<T>(TagsForm.formElements<T>(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -183,7 +177,9 @@ class TagsForm<T> implements FormModel<Tags<T>> {
   final String? path;
 
   String tagsControlPath() => pathBuilder(tagsControlName);
+
   List<T>? get _tagsValue => tagsControl?.value;
+
   bool get containsTags {
     try {
       form.control(tagsControlPath());
@@ -194,7 +190,9 @@ class TagsForm<T> implements FormModel<Tags<T>> {
   }
 
   Object? get tagsErrors => tagsControl?.errors;
+
   void get tagsFocus => form.focus(tagsControlPath());
+
   void tagsRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -248,9 +246,11 @@ class TagsForm<T> implements FormModel<Tags<T>> {
   }) =>
       tagsControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<List<T>>? get tagsControl => containsTags
       ? form.control(tagsControlPath()) as FormControl<List<T>>?
       : null;
+
   void tagsSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -297,12 +297,13 @@ class TagsForm<T> implements FormModel<Tags<T>> {
 
   @override
   void updateValue(
-    Tags<T> value, {
+    Tags<T>? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.updateValue(TagsForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Tags<T>? value,
@@ -313,8 +314,10 @@ class TagsForm<T> implements FormModel<Tags<T>> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements<T>(Tags<T>? tags) => FormGroup({
         tagsControlName: FormControl<List<T>>(
             value: tags?.tags,

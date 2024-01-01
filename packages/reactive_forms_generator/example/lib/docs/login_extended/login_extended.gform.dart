@@ -139,14 +139,7 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
   @override
   void didUpdateWidget(covariant LoginExtendedFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          LoginExtendedForm(LoginExtendedForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -202,21 +195,37 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   final String? path;
 
   String emailControlPath() => pathBuilder(emailControlName);
+
   String passwordControlPath() => pathBuilder(passwordControlName);
+
   String rememberMeControlPath() => pathBuilder(rememberMeControlName);
+
   String themeControlPath() => pathBuilder(themeControlName);
+
   String modeControlPath() => pathBuilder(modeControlName);
+
   String timeoutControlPath() => pathBuilder(timeoutControlName);
+
   String heightControlPath() => pathBuilder(heightControlName);
+
   String unAnnotatedControlPath() => pathBuilder(unAnnotatedControlName);
+
   String get _emailValue => emailControl.value ?? "";
+
   String get _passwordValue => passwordControl.value as String;
+
   bool get _rememberMeValue => rememberMeControl.value as bool;
+
   String get _themeValue => themeControl.value as String;
+
   UserMode get _modeValue => modeControl.value as UserMode;
+
   int get _timeoutValue => timeoutControl.value as int;
+
   double get _heightValue => heightControl.value as double;
+
   String? get _unAnnotatedValue => unAnnotatedControl?.value;
+
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -290,21 +299,37 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   }
 
   Object? get emailErrors => emailControl.errors;
+
   Object? get passwordErrors => passwordControl.errors;
+
   Object? get rememberMeErrors => rememberMeControl.errors;
+
   Object? get themeErrors => themeControl.errors;
+
   Object? get modeErrors => modeControl.errors;
+
   Object? get timeoutErrors => timeoutControl.errors;
+
   Object? get heightErrors => heightControl.errors;
+
   Object? get unAnnotatedErrors => unAnnotatedControl?.errors;
+
   void get emailFocus => form.focus(emailControlPath());
+
   void get passwordFocus => form.focus(passwordControlPath());
+
   void get rememberMeFocus => form.focus(rememberMeControlPath());
+
   void get themeFocus => form.focus(themeControlPath());
+
   void get modeFocus => form.focus(modeControlPath());
+
   void get timeoutFocus => form.focus(timeoutControlPath());
+
   void get heightFocus => form.focus(heightControlPath());
+
   void get unAnnotatedFocus => form.focus(unAnnotatedControlPath());
+
   void unAnnotatedRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -484,6 +509,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   }) =>
       emailControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void passwordValueReset(
     String value, {
     bool updateParent = true,
@@ -493,6 +519,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   }) =>
       passwordControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void rememberMeValueReset(
     bool value, {
     bool updateParent = true,
@@ -502,6 +529,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   }) =>
       rememberMeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void themeValueReset(
     String value, {
     bool updateParent = true,
@@ -511,6 +539,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   }) =>
       themeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void modeValueReset(
     UserMode value, {
     bool updateParent = true,
@@ -520,6 +549,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   }) =>
       modeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void timeoutValueReset(
     int value, {
     bool updateParent = true,
@@ -529,6 +559,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   }) =>
       timeoutControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void heightValueReset(
     double value, {
     bool updateParent = true,
@@ -538,6 +569,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   }) =>
       heightControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void unAnnotatedValueReset(
     String? value, {
     bool updateParent = true,
@@ -547,23 +579,32 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   }) =>
       unAnnotatedControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
+
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
+
   FormControl<bool> get rememberMeControl =>
       form.control(rememberMeControlPath()) as FormControl<bool>;
+
   FormControl<String> get themeControl =>
       form.control(themeControlPath()) as FormControl<String>;
+
   FormControl<UserMode> get modeControl =>
       form.control(modeControlPath()) as FormControl<UserMode>;
+
   FormControl<int> get timeoutControl =>
       form.control(timeoutControlPath()) as FormControl<int>;
+
   FormControl<double> get heightControl =>
       form.control(heightControlPath()) as FormControl<double>;
+
   FormControl<String>? get unAnnotatedControl => containsUnAnnotated
       ? form.control(unAnnotatedControlPath()) as FormControl<String>?
       : null;
+
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -744,12 +785,13 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
 
   @override
   void updateValue(
-    LoginExtended value, {
+    LoginExtended? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.updateValue(LoginExtendedForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     LoginExtended? value,
@@ -760,8 +802,10 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(LoginExtended? loginExtended) => FormGroup({
         emailControlName: FormControl<String>(
             value: loginExtended?.email,

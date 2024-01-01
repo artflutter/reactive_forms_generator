@@ -139,14 +139,7 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
   @override
   void didUpdateWidget(covariant FreezedClassFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          FreezedClassForm(FreezedClassForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -196,15 +189,25 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   final String? path;
 
   String genderControlPath() => pathBuilder(genderControlName);
+
   String idControlPath() => pathBuilder(idControlName);
+
   String nameControlPath() => pathBuilder(nameControlName);
+
   String logoImageControlPath() => pathBuilder(logoImageControlName);
+
   String yearControlPath() => pathBuilder(yearControlName);
+
   String? get _genderValue => genderControl?.value;
+
   String? get _idValue => idControl?.value;
+
   String? get _nameValue => nameControl?.value;
+
   String? get _logoImageValue => logoImageControl?.value;
+
   double? get _yearValue => yearControl?.value;
+
   bool get containsGender {
     try {
       form.control(genderControlPath());
@@ -251,15 +254,25 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }
 
   Object? get genderErrors => genderControl?.errors;
+
   Object? get idErrors => idControl?.errors;
+
   Object? get nameErrors => nameControl?.errors;
+
   Object? get logoImageErrors => logoImageControl?.errors;
+
   Object? get yearErrors => yearControl?.errors;
+
   void get genderFocus => form.focus(genderControlPath());
+
   void get idFocus => form.focus(idControlPath());
+
   void get nameFocus => form.focus(nameControlPath());
+
   void get logoImageFocus => form.focus(logoImageControlPath());
+
   void get yearFocus => form.focus(yearControlPath());
+
   void genderRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -489,6 +502,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       genderControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void idValueReset(
     String? value, {
     bool updateParent = true,
@@ -498,6 +512,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       idControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void nameValueReset(
     String? value, {
     bool updateParent = true,
@@ -507,6 +522,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       nameControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void logoImageValueReset(
     String? value, {
     bool updateParent = true,
@@ -516,6 +532,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       logoImageControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void yearValueReset(
     double? value, {
     bool updateParent = true,
@@ -525,20 +542,26 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       yearControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String>? get genderControl => containsGender
       ? form.control(genderControlPath()) as FormControl<String>?
       : null;
+
   FormControl<String>? get idControl =>
       containsId ? form.control(idControlPath()) as FormControl<String>? : null;
+
   FormControl<String>? get nameControl => containsName
       ? form.control(nameControlPath()) as FormControl<String>?
       : null;
+
   FormControl<String>? get logoImageControl => containsLogoImage
       ? form.control(logoImageControlPath()) as FormControl<String>?
       : null;
+
   FormControl<double>? get yearControl => containsYear
       ? form.control(yearControlPath()) as FormControl<double>?
       : null;
+
   void genderSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -661,12 +684,13 @@ class FreezedClassForm implements FormModel<FreezedClass> {
 
   @override
   void updateValue(
-    FreezedClass value, {
+    FreezedClass? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.updateValue(FreezedClassForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     FreezedClass? value,
@@ -677,8 +701,10 @@ class FreezedClassForm implements FormModel<FreezedClass> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(FreezedClass? freezedClass) => FormGroup({
         genderControlName: FormControl<String>(
             value: freezedClass?.gender,

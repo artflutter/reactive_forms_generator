@@ -195,13 +195,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
   @override
   void didUpdateWidget(covariant LoginFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = LoginForm(LoginForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -392,7 +386,7 @@ class LoginForm implements FormModel<Login> {
 
   @override
   void updateValue(
-    Login value, {
+    Login? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>

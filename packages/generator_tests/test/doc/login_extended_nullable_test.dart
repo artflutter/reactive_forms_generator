@@ -198,14 +198,7 @@ class _LoginExtendedNullableFormBuilderState
   @override
   void didUpdateWidget(covariant LoginExtendedNullableFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = LoginExtendedNullableForm(
-          LoginExtendedNullableForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -902,7 +895,7 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
 
   @override
   void updateValue(
-    LoginExtendedNullable value, {
+    LoginExtendedNullable? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>

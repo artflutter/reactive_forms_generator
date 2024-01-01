@@ -173,13 +173,7 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
   @override
   void didUpdateWidget(covariant TagsFormBuilder<T> oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = TagsForm<T>(TagsForm.formElements<T>(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -335,7 +329,7 @@ class TagsForm<T> implements FormModel<Tags<T>> {
 
   @override
   void updateValue(
-    Tags<T> value, {
+    Tags<T>? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>

@@ -62,21 +62,22 @@ class _$SubGroupCopyWithImpl<$Res, $Val extends SubGroup>
 }
 
 /// @nodoc
-abstract class _$$_SubGroupCopyWith<$Res> implements $SubGroupCopyWith<$Res> {
-  factory _$$_SubGroupCopyWith(
-          _$_SubGroup value, $Res Function(_$_SubGroup) then) =
-      __$$_SubGroupCopyWithImpl<$Res>;
+abstract class _$$SubGroupImplCopyWith<$Res>
+    implements $SubGroupCopyWith<$Res> {
+  factory _$$SubGroupImplCopyWith(
+          _$SubGroupImpl value, $Res Function(_$SubGroupImpl) then) =
+      __$$SubGroupImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@RfControl() String id});
 }
 
 /// @nodoc
-class __$$_SubGroupCopyWithImpl<$Res>
-    extends _$SubGroupCopyWithImpl<$Res, _$_SubGroup>
-    implements _$$_SubGroupCopyWith<$Res> {
-  __$$_SubGroupCopyWithImpl(
-      _$_SubGroup _value, $Res Function(_$_SubGroup) _then)
+class __$$SubGroupImplCopyWithImpl<$Res>
+    extends _$SubGroupCopyWithImpl<$Res, _$SubGroupImpl>
+    implements _$$SubGroupImplCopyWith<$Res> {
+  __$$SubGroupImplCopyWithImpl(
+      _$SubGroupImpl _value, $Res Function(_$SubGroupImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -84,7 +85,7 @@ class __$$_SubGroupCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
   }) {
-    return _then(_$_SubGroup(
+    return _then(_$SubGroupImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -95,11 +96,11 @@ class __$$_SubGroupCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SubGroup implements _SubGroup {
-  const _$_SubGroup({@RfControl() required this.id});
+class _$SubGroupImpl implements _SubGroup {
+  const _$SubGroupImpl({@RfControl() required this.id});
 
-  factory _$_SubGroup.fromJson(Map<String, dynamic> json) =>
-      _$$_SubGroupFromJson(json);
+  factory _$SubGroupImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SubGroupImplFromJson(json);
 
   @override
   @RfControl()
@@ -111,10 +112,10 @@ class _$_SubGroup implements _SubGroup {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SubGroup &&
+            other is _$SubGroupImpl &&
             (identical(other.id, id) || other.id == id));
   }
 
@@ -125,12 +126,12 @@ class _$_SubGroup implements _SubGroup {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SubGroupCopyWith<_$_SubGroup> get copyWith =>
-      __$$_SubGroupCopyWithImpl<_$_SubGroup>(this, _$identity);
+  _$$SubGroupImplCopyWith<_$SubGroupImpl> get copyWith =>
+      __$$SubGroupImplCopyWithImpl<_$SubGroupImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SubGroupToJson(
+    return _$$SubGroupImplToJson(
       this,
     );
   }
@@ -138,16 +139,17 @@ class _$_SubGroup implements _SubGroup {
 
 abstract class _SubGroup implements SubGroup {
   const factory _SubGroup({@RfControl() required final String id}) =
-      _$_SubGroup;
+      _$SubGroupImpl;
 
-  factory _SubGroup.fromJson(Map<String, dynamic> json) = _$_SubGroup.fromJson;
+  factory _SubGroup.fromJson(Map<String, dynamic> json) =
+      _$SubGroupImpl.fromJson;
 
   @override
   @RfControl()
   String get id;
   @override
   @JsonKey(ignore: true)
-  _$$_SubGroupCopyWith<_$_SubGroup> get copyWith =>
+  _$$SubGroupImplCopyWith<_$SubGroupImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -207,9 +209,10 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
 }
 
 /// @nodoc
-abstract class _$$_GroupCopyWith<$Res> implements $GroupCopyWith<$Res> {
-  factory _$$_GroupCopyWith(_$_Group value, $Res Function(_$_Group) then) =
-      __$$_GroupCopyWithImpl<$Res>;
+abstract class _$$GroupImplCopyWith<$Res> implements $GroupCopyWith<$Res> {
+  factory _$$GroupImplCopyWith(
+          _$GroupImpl value, $Res Function(_$GroupImpl) then) =
+      __$$GroupImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -218,9 +221,11 @@ abstract class _$$_GroupCopyWith<$Res> implements $GroupCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res, _$_Group>
-    implements _$$_GroupCopyWith<$Res> {
-  __$$_GroupCopyWithImpl(_$_Group _value, $Res Function(_$_Group) _then)
+class __$$GroupImplCopyWithImpl<$Res>
+    extends _$GroupCopyWithImpl<$Res, _$GroupImpl>
+    implements _$$GroupImplCopyWith<$Res> {
+  __$$GroupImplCopyWithImpl(
+      _$GroupImpl _value, $Res Function(_$GroupImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -229,7 +234,7 @@ class __$$_GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res, _$_Group>
     Object? id = null,
     Object? subGroupList = null,
   }) {
-    return _then(_$_Group(
+    return _then(_$GroupImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -244,14 +249,14 @@ class __$$_GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res, _$_Group>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Group implements _Group {
-  const _$_Group(
+class _$GroupImpl implements _Group {
+  const _$GroupImpl(
       {@RfControl() required this.id,
       @RfArray<dynamic>() required final List<SubGroup> subGroupList})
       : _subGroupList = subGroupList;
 
-  factory _$_Group.fromJson(Map<String, dynamic> json) =>
-      _$$_GroupFromJson(json);
+  factory _$GroupImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GroupImplFromJson(json);
 
   @override
   @RfControl()
@@ -271,10 +276,10 @@ class _$_Group implements _Group {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Group &&
+            other is _$GroupImpl &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality()
                 .equals(other._subGroupList, _subGroupList));
@@ -288,12 +293,12 @@ class _$_Group implements _Group {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GroupCopyWith<_$_Group> get copyWith =>
-      __$$_GroupCopyWithImpl<_$_Group>(this, _$identity);
+  _$$GroupImplCopyWith<_$GroupImpl> get copyWith =>
+      __$$GroupImplCopyWithImpl<_$GroupImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GroupToJson(
+    return _$$GroupImplToJson(
       this,
     );
   }
@@ -303,9 +308,9 @@ abstract class _Group implements Group {
   const factory _Group(
           {@RfControl() required final String id,
           @RfArray<dynamic>() required final List<SubGroup> subGroupList}) =
-      _$_Group;
+      _$GroupImpl;
 
-  factory _Group.fromJson(Map<String, dynamic> json) = _$_Group.fromJson;
+  factory _Group.fromJson(Map<String, dynamic> json) = _$GroupImpl.fromJson;
 
   @override
   @RfControl()
@@ -315,7 +320,7 @@ abstract class _Group implements Group {
   List<SubGroup> get subGroupList;
   @override
   @JsonKey(ignore: true)
-  _$$_GroupCopyWith<_$_Group> get copyWith =>
+  _$$GroupImplCopyWith<_$GroupImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -366,19 +371,21 @@ class _$NestedCopyWithImpl<$Res, $Val extends Nested>
 }
 
 /// @nodoc
-abstract class _$$_NestedCopyWith<$Res> implements $NestedCopyWith<$Res> {
-  factory _$$_NestedCopyWith(_$_Nested value, $Res Function(_$_Nested) then) =
-      __$$_NestedCopyWithImpl<$Res>;
+abstract class _$$NestedImplCopyWith<$Res> implements $NestedCopyWith<$Res> {
+  factory _$$NestedImplCopyWith(
+          _$NestedImpl value, $Res Function(_$NestedImpl) then) =
+      __$$NestedImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@RfArray<dynamic>() List<Group> groupList});
 }
 
 /// @nodoc
-class __$$_NestedCopyWithImpl<$Res>
-    extends _$NestedCopyWithImpl<$Res, _$_Nested>
-    implements _$$_NestedCopyWith<$Res> {
-  __$$_NestedCopyWithImpl(_$_Nested _value, $Res Function(_$_Nested) _then)
+class __$$NestedImplCopyWithImpl<$Res>
+    extends _$NestedCopyWithImpl<$Res, _$NestedImpl>
+    implements _$$NestedImplCopyWith<$Res> {
+  __$$NestedImplCopyWithImpl(
+      _$NestedImpl _value, $Res Function(_$NestedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -386,7 +393,7 @@ class __$$_NestedCopyWithImpl<$Res>
   $Res call({
     Object? groupList = null,
   }) {
-    return _then(_$_Nested(
+    return _then(_$NestedImpl(
       groupList: null == groupList
           ? _value._groupList
           : groupList // ignore: cast_nullable_to_non_nullable
@@ -397,12 +404,12 @@ class __$$_NestedCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Nested implements _Nested {
-  const _$_Nested({@RfArray<dynamic>() required final List<Group> groupList})
+class _$NestedImpl implements _Nested {
+  const _$NestedImpl({@RfArray<dynamic>() required final List<Group> groupList})
       : _groupList = groupList;
 
-  factory _$_Nested.fromJson(Map<String, dynamic> json) =>
-      _$$_NestedFromJson(json);
+  factory _$NestedImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NestedImplFromJson(json);
 
   final List<Group> _groupList;
   @override
@@ -419,10 +426,10 @@ class _$_Nested implements _Nested {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Nested &&
+            other is _$NestedImpl &&
             const DeepCollectionEquality()
                 .equals(other._groupList, _groupList));
   }
@@ -435,12 +442,12 @@ class _$_Nested implements _Nested {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NestedCopyWith<_$_Nested> get copyWith =>
-      __$$_NestedCopyWithImpl<_$_Nested>(this, _$identity);
+  _$$NestedImplCopyWith<_$NestedImpl> get copyWith =>
+      __$$NestedImplCopyWithImpl<_$NestedImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_NestedToJson(
+    return _$$NestedImplToJson(
       this,
     );
   }
@@ -448,15 +455,16 @@ class _$_Nested implements _Nested {
 
 abstract class _Nested implements Nested {
   const factory _Nested(
-      {@RfArray<dynamic>() required final List<Group> groupList}) = _$_Nested;
+          {@RfArray<dynamic>() required final List<Group> groupList}) =
+      _$NestedImpl;
 
-  factory _Nested.fromJson(Map<String, dynamic> json) = _$_Nested.fromJson;
+  factory _Nested.fromJson(Map<String, dynamic> json) = _$NestedImpl.fromJson;
 
   @override
   @RfArray<dynamic>()
   List<Group> get groupList;
   @override
   @JsonKey(ignore: true)
-  _$$_NestedCopyWith<_$_Nested> get copyWith =>
+  _$$NestedImplCopyWith<_$NestedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -139,14 +139,7 @@ class _ModelExtendsFormBuilderState extends State<ModelExtendsFormBuilder> {
   @override
   void didUpdateWidget(covariant ModelExtendsFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          ModelExtendsForm(ModelExtendsForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -190,9 +183,13 @@ class ModelExtendsForm implements FormModel<ModelExtends> {
   final String? path;
 
   String emailControlPath() => pathBuilder(emailControlName);
+
   String passwordControlPath() => pathBuilder(passwordControlName);
+
   String get _emailValue => emailControl.value ?? "";
+
   String get _passwordValue => passwordControl.value ?? "";
+
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -212,9 +209,13 @@ class ModelExtendsForm implements FormModel<ModelExtends> {
   }
 
   Object? get emailErrors => emailControl.errors;
+
   Object? get passwordErrors => passwordControl.errors;
+
   void get emailFocus => form.focus(emailControlPath());
+
   void get passwordFocus => form.focus(passwordControlPath());
+
   void emailValueUpdate(
     String value, {
     bool updateParent = true,
@@ -260,6 +261,7 @@ class ModelExtendsForm implements FormModel<ModelExtends> {
   }) =>
       emailControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void passwordValueReset(
     String value, {
     bool updateParent = true,
@@ -269,10 +271,13 @@ class ModelExtendsForm implements FormModel<ModelExtends> {
   }) =>
       passwordControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
+
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
+
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -337,12 +342,13 @@ class ModelExtendsForm implements FormModel<ModelExtends> {
 
   @override
   void updateValue(
-    ModelExtends value, {
+    ModelExtends? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.updateValue(ModelExtendsForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     ModelExtends? value,
@@ -353,8 +359,10 @@ class ModelExtendsForm implements FormModel<ModelExtends> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(ModelExtends? modelExtends) => FormGroup({
         emailControlName: FormControl<String>(
             value: modelExtends?.email,

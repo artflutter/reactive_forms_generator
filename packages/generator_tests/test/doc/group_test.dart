@@ -220,13 +220,7 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
   @override
   void didUpdateWidget(covariant GroupFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = GroupForm(GroupForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -663,7 +657,7 @@ class GroupForm implements FormModel<Group> {
 
   @override
   void updateValue(
-    Group value, {
+    Group? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>

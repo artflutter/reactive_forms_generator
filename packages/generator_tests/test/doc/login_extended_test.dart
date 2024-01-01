@@ -243,14 +243,7 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
   @override
   void didUpdateWidget(covariant LoginExtendedFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          LoginExtendedForm(LoginExtendedForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -848,7 +841,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
 
   @override
   void updateValue(
-    LoginExtended value, {
+    LoginExtended? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>

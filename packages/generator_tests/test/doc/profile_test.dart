@@ -418,13 +418,7 @@ class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
   @override
   void didUpdateWidget(covariant ProfileFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = ProfileForm(ProfileForm.formElements(widget.model), null);
-
-      if (_formModel.form.disabled) {
-        _formModel.form.markAsDisabled();
-      }
-
-      widget.initState?.call(context, _formModel);
+      _formModel.updateValue(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -1148,7 +1142,7 @@ class ProfileForm implements FormModel<Profile> {
 
   @override
   void updateValue(
-    Profile value, {
+    Profile? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
@@ -1653,7 +1647,7 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
 
   @override
   void updateValue(
-    IncidenceFilter value, {
+    IncidenceFilter? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
@@ -1883,7 +1877,7 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
 
   @override
   void updateValue(
-    ThresholdSetting value, {
+    ThresholdSetting? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
@@ -2086,7 +2080,7 @@ class TimerSettingForm implements FormModel<TimerSetting> {
 
   @override
   void updateValue(
-    TimerSetting value, {
+    TimerSetting? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
