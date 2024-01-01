@@ -1,3 +1,7 @@
+## [4.3.0]
+
+* fix for https://github.com/artflutter/reactive_forms_generator/issues/143
+
 ## [4.2.0]
 
 * FormModel submit
