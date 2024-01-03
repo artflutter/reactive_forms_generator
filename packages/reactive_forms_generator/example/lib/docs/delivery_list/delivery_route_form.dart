@@ -51,12 +51,10 @@ class DeliveryListFormWidget extends StatelessWidget {
                                   key: toggleEnableDisable.itemKey,
                                   onPressed: () {
                                     formModel.deliveryListDeliveryPointForm[i]
-                                        .nameSetDisabled(
-                                      !formModel
-                                          .deliveryListDeliveryPointForm[i]
-                                          .nameControl
-                                          .disabled,
-                                    );
+                                        .nameSetDisabled(!formModel
+                                            .deliveryListDeliveryPointForm[i]
+                                            .nameControl
+                                            .disabled);
                                   },
                                   icon: const Icon(
                                     Icons.disabled_by_default_rounded,
@@ -85,31 +83,40 @@ class DeliveryListFormWidget extends StatelessWidget {
                                 labelText: city.itemIndex(i),
                               ),
                             ),
-                            ElevatedButton(
-                              onPressed: () =>
-                                  formModel.removeDeliveryListItemAtIndex(i),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  const Icon(Icons.arrow_upward),
-                                  Text(remove.itemIndex(i)),
-                                  const Icon(Icons.arrow_upward),
-                                ],
-                              ),
-                            )
+                            ReactiveDeliveryListFormConsumer(
+                                builder: (context, formModel, child) {
+                              return ElevatedButton(
+                                onPressed: formModel.deliveryListControl.enabled
+                                    ? () => formModel
+                                        .removeDeliveryListItemAtIndex(i)
+                                    : null,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    const Icon(Icons.arrow_upward),
+                                    Text(remove.itemIndex(i)),
+                                    const Icon(Icons.arrow_upward),
+                                  ],
+                                ),
+                              );
+                            }),
                           ],
                         );
                       },
                     ),
                   ),
                   const SizedBox(width: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      formModel.addDeliveryListItem(emptyDeliveryPoint);
-                    },
-                    child: Text(add.name),
-                  )
+                  ReactiveDeliveryListFormConsumer(
+                      builder: (context, formModel, child) {
+                    return ElevatedButton(
+                      onPressed: formModel.deliveryListControl.enabled
+                          ? () =>
+                              formModel.addDeliveryListItem(emptyDeliveryPoint)
+                          : null,
+                      child: Text(add.name),
+                    );
+                  }),
                 ],
               ),
               const SizedBox(height: 16),
@@ -167,6 +174,27 @@ class DeliveryListFormWidget extends StatelessWidget {
                               },
                             );
                           },
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            formModel.form.markAsEnabled();
+                          },
+                          child: const Text('Enable'),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            formModel.form.markAsDisabled();
+                          },
+                          child: const Text('Disable'),
                         ),
                       ),
                     ],

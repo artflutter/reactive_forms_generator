@@ -180,10 +180,8 @@ class MailingListForm implements FormModel<MailingList> {
   final String? path;
 
   String emailListControlPath() => pathBuilder(emailListControlName);
-
   List<String?> get _emailListValue =>
       emailListControl.value?.whereType<String?>().toList() ?? [];
-
   bool get containsEmailList {
     try {
       form.control(emailListControlPath());
@@ -194,9 +192,7 @@ class MailingListForm implements FormModel<MailingList> {
   }
 
   Object? get emailListErrors => emailListControl.errors;
-
   void get emailListFocus => form.focus(emailListControlPath());
-
   void emailListValueUpdate(
     List<String?> value, {
     bool updateParent = true,
@@ -224,10 +220,8 @@ class MailingListForm implements FormModel<MailingList> {
   }) =>
       emailListControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-
   FormArray<String> get emailListControl =>
       form.control(emailListControlPath()) as FormArray<String>;
-
   void emailListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -320,7 +314,6 @@ class MailingListForm implements FormModel<MailingList> {
   }) =>
       form.updateValue(MailingListForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
-
   @override
   void reset({
     MailingList? value,
@@ -331,10 +324,8 @@ class MailingListForm implements FormModel<MailingList> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
-
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-
   static FormGroup formElements(MailingList? mailingList) => FormGroup({
         emailListControlName: FormArray<String>(
             (mailingList?.emailList ?? [])
@@ -390,7 +381,8 @@ class ReactiveMailingListFormArrayBuilder<T> extends StatelessWidget {
     return ReactiveFormArray<T>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final itemList = (formArray.value ?? [])
+        final values = formArray.controls.map((e) => e.value).toList();
+        final itemList = values
             .asMap()
             .map((i, item) {
               return MapEntry(

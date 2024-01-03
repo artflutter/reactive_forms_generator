@@ -1,3 +1,7 @@
+## [4.5.0]
+
+* fix for cases with disabled fields for arrays, the disabled items were thrown off the `value` which caused issues.
+
 ## [4.4.0]
 
 * fix for https://github.com/artflutter/reactive_forms_generator/issues/143

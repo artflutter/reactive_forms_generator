@@ -179,13 +179,9 @@ class TestForm implements FormModel<Test> {
   final String? path;
 
   String titleControlPath() => pathBuilder(titleControlName);
-
   String descriptionControlPath() => pathBuilder(descriptionControlName);
-
   String get _titleValue => titleControl.value as String;
-
   String? get _descriptionValue => descriptionControl?.value;
-
   bool get containsTitle {
     try {
       form.control(titleControlPath());
@@ -205,13 +201,9 @@ class TestForm implements FormModel<Test> {
   }
 
   Object? get titleErrors => titleControl.errors;
-
   Object? get descriptionErrors => descriptionControl?.errors;
-
   void get titleFocus => form.focus(titleControlPath());
-
   void get descriptionFocus => form.focus(descriptionControlPath());
-
   void descriptionRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -283,7 +275,6 @@ class TestForm implements FormModel<Test> {
   }) =>
       titleControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-
   void descriptionValueReset(
     String? value, {
     bool updateParent = true,
@@ -293,14 +284,11 @@ class TestForm implements FormModel<Test> {
   }) =>
       descriptionControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-
   FormControl<String> get titleControl =>
       form.control(titleControlPath()) as FormControl<String>;
-
   FormControl<String>? get descriptionControl => containsDescription
       ? form.control(descriptionControlPath()) as FormControl<String>?
       : null;
-
   void titleSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -371,7 +359,6 @@ class TestForm implements FormModel<Test> {
   }) =>
       form.updateValue(TestForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
-
   @override
   void reset({
     Test? value,
@@ -382,10 +369,8 @@ class TestForm implements FormModel<Test> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
-
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-
   static FormGroup formElements(Test? test) => FormGroup({
         titleControlName: FormControl<String>(
             value: test?.title,
@@ -440,7 +425,8 @@ class ReactiveTestFormArrayBuilder<T> extends StatelessWidget {
     return ReactiveFormArray<T>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final itemList = (formArray.value ?? [])
+        final values = formArray.controls.map((e) => e.value).toList();
+        final itemList = values
             .asMap()
             .map((i, item) {
               return MapEntry(

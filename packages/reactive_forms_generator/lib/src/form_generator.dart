@@ -669,17 +669,18 @@ class FormGenerator {
 
         return Method(
           (b) => b
-            ..lambda = true
             ..returns = Reference('List<${generator.className}>')
             ..name = '${e.name}${generator.className}'
             ..type = MethodType.getter
             ..body = Code(
               '''
-                (${e.fieldControlName}${e.nullabilitySuffix}.value ?? [])
+                final values = (${e.fieldControlName}${e.nullabilitySuffix}.controls ${e.isNullable ? '?? []' : ''}).map((e) => e.value).toList();
+                
+                return values
                 .asMap()
                 .map((k, v) => MapEntry(k, ${generator.className}(form, pathBuilder("${e.name}.\$k"))))
                 .values
-                .toList()
+                .toList();
               ''',
             ),
         );
