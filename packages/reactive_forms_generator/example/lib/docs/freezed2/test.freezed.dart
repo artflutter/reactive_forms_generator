@@ -65,10 +65,9 @@ class _$TestCopyWithImpl<$Res, $Val extends Test>
 }
 
 /// @nodoc
-abstract class _$$TestImplCopyWith<$Res> implements $TestCopyWith<$Res> {
-  factory _$$TestImplCopyWith(
-          _$TestImpl value, $Res Function(_$TestImpl) then) =
-      __$$TestImplCopyWithImpl<$Res>;
+abstract class _$$_TestCopyWith<$Res> implements $TestCopyWith<$Res> {
+  factory _$$_TestCopyWith(_$_Test value, $Res Function(_$_Test) then) =
+      __$$_TestCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -77,10 +76,9 @@ abstract class _$$TestImplCopyWith<$Res> implements $TestCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$TestImplCopyWithImpl<$Res>
-    extends _$TestCopyWithImpl<$Res, _$TestImpl>
-    implements _$$TestImplCopyWith<$Res> {
-  __$$TestImplCopyWithImpl(_$TestImpl _value, $Res Function(_$TestImpl) _then)
+class __$$_TestCopyWithImpl<$Res> extends _$TestCopyWithImpl<$Res, _$_Test>
+    implements _$$_TestCopyWith<$Res> {
+  __$$_TestCopyWithImpl(_$_Test _value, $Res Function(_$_Test) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -89,7 +87,7 @@ class __$$TestImplCopyWithImpl<$Res>
     Object? title = null,
     Object? description = freezed,
   }) {
-    return _then(_$TestImpl(
+    return _then(_$_Test(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -104,8 +102,8 @@ class __$$TestImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TestImpl extends _Test {
-  const _$TestImpl(
+class _$_Test extends _Test {
+  const _$_Test(
       {@RfControl<String>() required this.title,
       @RfControl<String>() this.description})
       : super._();
@@ -123,10 +121,10 @@ class _$TestImpl extends _Test {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TestImpl &&
+            other is _$_Test &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description));
@@ -138,14 +136,14 @@ class _$TestImpl extends _Test {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TestImplCopyWith<_$TestImpl> get copyWith =>
-      __$$TestImplCopyWithImpl<_$TestImpl>(this, _$identity);
+  _$$_TestCopyWith<_$_Test> get copyWith =>
+      __$$_TestCopyWithImpl<_$_Test>(this, _$identity);
 }
 
 abstract class _Test extends Test {
   const factory _Test(
       {@RfControl<String>() required final String title,
-      @RfControl<String>() final String? description}) = _$TestImpl;
+      @RfControl<String>() final String? description}) = _$_Test;
   const _Test._() : super._();
 
   @override
@@ -156,6 +154,5 @@ abstract class _Test extends Test {
   String? get description;
   @override
   @JsonKey(ignore: true)
-  _$$TestImplCopyWith<_$TestImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_TestCopyWith<_$_Test> get copyWith => throw _privateConstructorUsedError;
 }

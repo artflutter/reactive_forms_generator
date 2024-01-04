@@ -9,7 +9,8 @@ class ReactiveFormInsertMethod extends ReactiveFormGeneratorMethod {
   @override
   Method? formGroupArrayMethod() {
     return methodEntity.rebuild((b) => b..body = Code('''
-      if ((${field.fieldControlName}${field.nullabilitySuffix}.value ?? []).length < i) {
+      final values = (${field.fieldControlName}${field.nullabilitySuffix}.controls ${field.isNullable ? '?? []' : ''}).map((e) => e.value).toList();
+      if (values.length < i) {
         ${field.addListItemName}(value);
         return;
       }

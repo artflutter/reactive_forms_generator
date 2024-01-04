@@ -266,6 +266,7 @@ void main() {
           findsOneWidget,
         );
 
+        await tester.ensureVisible(submitButton);
         await tester.tap(submitButton);
         await tester.pump();
 
@@ -309,6 +310,7 @@ void main() {
         await tester.tap(updateDeliveryListButton);
         await tester.pumpAndSettle();
 
+        await tester.ensureVisible(submitButton);
         await tester.tap(submitButton);
         await tester.pump();
 

@@ -340,8 +340,11 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     final toAdd = <DeliveryPoint>[];
 
     localValue.asMap().forEach((k, v) {
+      final values =
+          (deliveryListControl.controls).map((e) => e.value).toList();
+
       if (deliveryListDeliveryPointForm.asMap().containsKey(k) &&
-          (deliveryListControl.value ?? []).asMap().containsKey(k)) {
+          values.asMap().containsKey(k)) {
         toUpdate.add(v);
       } else {
         toAdd.add(v);
@@ -381,8 +384,11 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     final toAdd = <Client>[];
 
     localValue.asMap().forEach((k, v) {
+      final values =
+          (clientListControl?.controls ?? []).map((e) => e.value).toList();
+
       if (clientListClientForm.asMap().containsKey(k) &&
-          (clientListControl?.value ?? []).asMap().containsKey(k)) {
+          values.asMap().containsKey(k)) {
         toUpdate.add(v);
       } else {
         toAdd.add(v);
@@ -410,7 +416,8 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    if ((deliveryListControl.value ?? []).length < i) {
+    final values = (deliveryListControl.controls).map((e) => e.value).toList();
+    if (values.length < i) {
       addDeliveryListItem(value);
       return;
     }
@@ -429,7 +436,9 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    if ((clientListControl?.value ?? []).length < i) {
+    final values =
+        (clientListControl?.controls ?? []).map((e) => e.value).toList();
+    if (values.length < i) {
       addClientListItem(value);
       return;
     }
@@ -534,19 +543,29 @@ class DeliveryListForm implements FormModel<DeliveryList> {
       ? form.control(clientListControlPath())
           as FormArray<Map<String, Object?>>?
       : null;
-  List<DeliveryPointForm> get deliveryListDeliveryPointForm =>
-      (deliveryListControl.value ?? [])
-          .asMap()
-          .map((k, v) => MapEntry(
-              k, DeliveryPointForm(form, pathBuilder("deliveryList.$k"))))
-          .values
-          .toList();
-  List<ClientForm> get clientListClientForm => (clientListControl?.value ?? [])
-      .asMap()
-      .map(
-          (k, v) => MapEntry(k, ClientForm(form, pathBuilder("clientList.$k"))))
-      .values
-      .toList();
+  List<DeliveryPointForm> get deliveryListDeliveryPointForm {
+    final values = (deliveryListControl.controls).map((e) => e.value).toList();
+
+    return values
+        .asMap()
+        .map((k, v) => MapEntry(
+            k, DeliveryPointForm(form, pathBuilder("deliveryList.$k"))))
+        .values
+        .toList();
+  }
+
+  List<ClientForm> get clientListClientForm {
+    final values =
+        (clientListControl?.controls ?? []).map((e) => e.value).toList();
+
+    return values
+        .asMap()
+        .map((k, v) =>
+            MapEntry(k, ClientForm(form, pathBuilder("clientList.$k"))))
+        .values
+        .toList();
+  }
+
   void deliveryListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1534,7 +1553,8 @@ class ReactiveDeliveryListFormArrayBuilder<T> extends StatelessWidget {
     return ReactiveFormArray<T>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final itemList = (formArray.value ?? [])
+        final values = formArray.controls.map((e) => e.value).toList();
+        final itemList = values
             .asMap()
             .map((i, item) {
               return MapEntry(
@@ -2041,7 +2061,8 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder<T>
     return ReactiveFormArray<T>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final itemList = (formArray.value ?? [])
+        final values = formArray.controls.map((e) => e.value).toList();
+        final itemList = values
             .asMap()
             .map((i, item) {
               return MapEntry(

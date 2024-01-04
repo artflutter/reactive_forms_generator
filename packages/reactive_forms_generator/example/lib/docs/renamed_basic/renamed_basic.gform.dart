@@ -183,13 +183,9 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
   final String? path;
 
   String emailControlPath() => pathBuilder(emailControlName);
-
   String passwordControlPath() => pathBuilder(passwordControlName);
-
   String get _emailValue => emailControl.value ?? "";
-
   String get _passwordValue => passwordControl.value ?? "";
-
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -209,13 +205,9 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
   }
 
   Object? get emailErrors => emailControl.errors;
-
   Object? get passwordErrors => passwordControl.errors;
-
   void get emailFocus => form.focus(emailControlPath());
-
   void get passwordFocus => form.focus(passwordControlPath());
-
   void emailValueUpdate(
     String value, {
     bool updateParent = true,
@@ -261,7 +253,6 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
   }) =>
       emailControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-
   void passwordValueReset(
     String value, {
     bool updateParent = true,
@@ -271,13 +262,10 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
   }) =>
       passwordControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
-
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
-
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -348,7 +336,6 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
   }) =>
       form.updateValue(SomeWiredNameForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
-
   @override
   void reset({
     RenamedBasic? value,
@@ -359,10 +346,8 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
-
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-
   static FormGroup formElements(RenamedBasic? renamedBasic) => FormGroup({
         emailControlName: FormControl<String>(
             value: renamedBasic?.email,
@@ -418,7 +403,8 @@ class ReactiveSomeWiredNameFormArrayBuilder<T> extends StatelessWidget {
     return ReactiveFormArray<T>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final itemList = (formArray.value ?? [])
+        final values = formArray.controls.map((e) => e.value).toList();
+        final itemList = values
             .asMap()
             .map((i, item) {
               return MapEntry(

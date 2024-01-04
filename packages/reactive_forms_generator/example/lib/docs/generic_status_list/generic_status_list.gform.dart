@@ -181,9 +181,7 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
   final String? path;
 
   String listControlPath() => pathBuilder(listControlName);
-
   List<T?> get _listValue => listControl.value?.whereType<T?>().toList() ?? [];
-
   bool get containsList {
     try {
       form.control(listControlPath());
@@ -194,9 +192,7 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
   }
 
   Object? get listErrors => listControl.errors;
-
   void get listFocus => form.focus(listControlPath());
-
   void listValueUpdate(
     List<T?> value, {
     bool updateParent = true,
@@ -224,10 +220,8 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
   }) =>
       listControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-
   FormArray<T> get listControl =>
       form.control(listControlPath()) as FormArray<T>;
-
   void listSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -320,7 +314,6 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
   }) =>
       form.updateValue(StatusListForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
-
   @override
   void reset({
     StatusList<T>? value,
@@ -331,10 +324,8 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
-
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-
   static FormGroup formElements<T>(StatusList<T>? statusList) => FormGroup({
         listControlName: FormArray<T>(
             (statusList?.list ?? [])
@@ -390,7 +381,8 @@ class ReactiveStatusListFormArrayBuilder<T> extends StatelessWidget {
     return ReactiveFormArray<T>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final itemList = (formArray.value ?? [])
+        final values = formArray.controls.map((e) => e.value).toList();
+        final itemList = values
             .asMap()
             .map((i, item) {
               return MapEntry(

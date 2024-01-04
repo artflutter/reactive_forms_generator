@@ -9,7 +9,7 @@ void main() {
   group('doc', () {
     test(
       'Renamed basic',
-      () async {
+          () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -451,7 +451,8 @@ class ReactiveSomeWiredNameFormArrayBuilder<T> extends StatelessWidget {
     return ReactiveFormArray<T>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final itemList = (formArray.value ?? [])
+        final values = formArray.controls.map((e) => e.value).toList();
+        final itemList = values
             .asMap()
             .map((i, item) {
               return MapEntry(
