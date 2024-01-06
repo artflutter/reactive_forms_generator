@@ -143,6 +143,13 @@ class ReactiveMailingListForm extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveMailingListFormExt on BuildContext {
+  MailingListForm? mailingListFormWatch() => ReactiveMailingListForm.of(this);
+
+  MailingListForm? mailingListFormRead() =>
+      ReactiveMailingListForm.of(this, listen: false);
+}
+
 class MailingListFormBuilder extends StatefulWidget {
   const MailingListFormBuilder({
     Key? key,
@@ -334,8 +341,9 @@ class MailingListForm implements FormModel<MailingList> {
   @override
   MailingList get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'MailingListForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'MailingListForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return MailingList(emailList: _emailListValue);
   }

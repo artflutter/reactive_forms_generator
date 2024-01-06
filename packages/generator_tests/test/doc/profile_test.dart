@@ -374,6 +374,12 @@ class ReactiveProfileForm extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveProfileFormExt on BuildContext {
+  ProfileForm? profileFormWatch() => ReactiveProfileForm.of(this);
+
+  ProfileForm? profileFormRead() => ReactiveProfileForm.of(this, listen: false);
+}
+
 class ProfileFormBuilder extends StatefulWidget {
   const ProfileFormBuilder({
     Key? key,
@@ -1108,8 +1114,9 @@ class ProfileForm implements FormModel<Profile> {
   @override
   Profile get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'ProfileForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'ProfileForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Profile(_idValue,
         anotherId: _anotherIdValue,
@@ -1616,8 +1623,9 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
   @override
   IncidenceFilter get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'IncidenceFilterForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'IncidenceFilterForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return IncidenceFilter(
         isMobilityEnabled: _isMobilityEnabledValue,
@@ -1852,8 +1860,9 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
   @override
   ThresholdSetting get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'ThresholdSettingForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'ThresholdSettingForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return ThresholdSetting(isEnabled: _isEnabledValue, value: _valueValue);
   }
@@ -2055,8 +2064,9 @@ class TimerSettingForm implements FormModel<TimerSetting> {
   @override
   TimerSetting get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'TimerSettingForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'TimerSettingForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return TimerSetting(isEnabled: _isEnabledValue, value: _valueValue);
   }

@@ -180,6 +180,14 @@ class ReactiveDeliveryListForm extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveDeliveryListFormExt on BuildContext {
+  DeliveryListForm? deliveryListFormWatch() =>
+      ReactiveDeliveryListForm.of(this);
+
+  DeliveryListForm? deliveryListFormRead() =>
+      ReactiveDeliveryListForm.of(this, listen: false);
+}
+
 class DeliveryListFormBuilder extends StatefulWidget {
   const DeliveryListFormBuilder({
     Key? key,
@@ -645,8 +653,9 @@ class DeliveryListForm implements FormModel<DeliveryList> {
   @override
   DeliveryList get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'DeliveryListForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'DeliveryListForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return DeliveryList(
         deliveryList: _deliveryListValue, clientList: _clientListValue);
@@ -879,8 +888,9 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
   @override
   DeliveryPoint get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'DeliveryPointForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'DeliveryPointForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return DeliveryPoint(name: _nameValue, address: _addressValue);
   }
@@ -1129,8 +1139,9 @@ class AddressForm implements FormModel<Address> {
   @override
   Address get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Address(street: _streetValue, city: _cityValue);
   }
@@ -1447,8 +1458,9 @@ class ClientForm implements FormModel<Client> {
   @override
   Client get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'ClientForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'ClientForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Client(
         clientType: _clientTypeValue, name: _nameValue, notes: _notesValue);
@@ -1726,6 +1738,14 @@ class ReactiveStandaloneDeliveryPointForm extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveStandaloneDeliveryPointFormExt on BuildContext {
+  StandaloneDeliveryPointForm? standaloneDeliveryPointFormWatch() =>
+      ReactiveStandaloneDeliveryPointForm.of(this);
+
+  StandaloneDeliveryPointForm? standaloneDeliveryPointFormRead() =>
+      ReactiveStandaloneDeliveryPointForm.of(this, listen: false);
+}
+
 class StandaloneDeliveryPointFormBuilder extends StatefulWidget {
   const StandaloneDeliveryPointFormBuilder({
     Key? key,
@@ -1969,8 +1989,9 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
   @override
   DeliveryPoint get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'StandaloneDeliveryPointForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'StandaloneDeliveryPointForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return DeliveryPoint(name: _nameValue, address: _addressValue);
   }

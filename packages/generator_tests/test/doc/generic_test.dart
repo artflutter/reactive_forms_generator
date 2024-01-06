@@ -129,6 +129,12 @@ class ReactiveTagsForm<T> extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveTagsFormExt on BuildContext {
+  TagsForm<T>? tagsFormWatch<T>() => ReactiveTagsForm.of<T>(this);
+
+  TagsForm<T>? tagsFormRead<T>() => ReactiveTagsForm.of<T>(this, listen: false);
+}
+
 class TagsFormBuilder<T> extends StatefulWidget {
   const TagsFormBuilder({
     Key? key,
@@ -304,8 +310,9 @@ class TagsForm<T> implements FormModel<Tags<T>> {
   @override
   Tags<T> get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'TagsForm<T>'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'TagsForm<T>'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Tags<T>(tags: _tagsValue);
   }

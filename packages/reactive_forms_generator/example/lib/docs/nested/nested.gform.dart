@@ -91,6 +91,13 @@ class ReactiveSubGroupForm extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveSubGroupFormExt on BuildContext {
+  SubGroupForm? subGroupFormWatch() => ReactiveSubGroupForm.of(this);
+
+  SubGroupForm? subGroupFormRead() =>
+      ReactiveSubGroupForm.of(this, listen: false);
+}
+
 class SubGroupFormBuilder extends StatefulWidget {
   const SubGroupFormBuilder({
     Key? key,
@@ -239,8 +246,9 @@ class SubGroupForm implements FormModel<SubGroup> {
   @override
   SubGroup get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'SubGroupForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'SubGroupForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return SubGroup(id: _idValue);
   }
@@ -499,6 +507,12 @@ class ReactiveGroupForm extends StatelessWidget {
       ),
     );
   }
+}
+
+extension ReactiveReactiveGroupFormExt on BuildContext {
+  GroupForm? groupFormWatch() => ReactiveGroupForm.of(this);
+
+  GroupForm? groupFormRead() => ReactiveGroupForm.of(this, listen: false);
 }
 
 class GroupFormBuilder extends StatefulWidget {
@@ -821,8 +835,9 @@ class GroupForm implements FormModel<Group> {
   @override
   Group get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'GroupForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'GroupForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Group(id: _idValue, subGroupList: _subGroupListValue);
   }
@@ -1091,6 +1106,12 @@ class ReactiveNestedForm extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveNestedFormExt on BuildContext {
+  NestedForm? nestedFormWatch() => ReactiveNestedForm.of(this);
+
+  NestedForm? nestedFormRead() => ReactiveNestedForm.of(this, listen: false);
+}
+
 class NestedFormBuilder extends StatefulWidget {
   const NestedFormBuilder({
     Key? key,
@@ -1346,8 +1367,9 @@ class NestedForm implements FormModel<Nested> {
   @override
   Nested get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'NestedForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'NestedForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Nested(groupList: _groupListValue);
   }

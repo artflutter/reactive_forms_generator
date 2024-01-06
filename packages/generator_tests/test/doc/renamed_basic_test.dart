@@ -9,7 +9,7 @@ void main() {
   group('doc', () {
     test(
       'Renamed basic',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -138,6 +138,14 @@ class ReactiveSomeWiredNameForm extends StatelessWidget {
       ),
     );
   }
+}
+
+extension ReactiveReactiveSomeWiredNameFormExt on BuildContext {
+  SomeWiredNameForm? someWiredNameFormWatch() =>
+      ReactiveSomeWiredNameForm.of(this);
+
+  SomeWiredNameForm? someWiredNameFormRead() =>
+      ReactiveSomeWiredNameForm.of(this, listen: false);
 }
 
 class SomeWiredNameFormBuilder extends StatefulWidget {
@@ -353,8 +361,9 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
   @override
   RenamedBasic get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'SomeWiredNameForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'SomeWiredNameForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return RenamedBasic(email: _emailValue, password: _passwordValue);
   }

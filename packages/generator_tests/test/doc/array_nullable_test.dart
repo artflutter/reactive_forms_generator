@@ -147,6 +147,14 @@ class ReactiveArrayNullableForm extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveArrayNullableFormExt on BuildContext {
+  ArrayNullableForm? arrayNullableFormWatch() =>
+      ReactiveArrayNullableForm.of(this);
+
+  ArrayNullableForm? arrayNullableFormRead() =>
+      ReactiveArrayNullableForm.of(this, listen: false);
+}
+
 class ArrayNullableFormBuilder extends StatefulWidget {
   const ArrayNullableFormBuilder({
     Key? key,
@@ -791,8 +799,9 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   @override
   ArrayNullable get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'ArrayNullableForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'ArrayNullableForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return ArrayNullable(
         emailList: _emailListValue,
