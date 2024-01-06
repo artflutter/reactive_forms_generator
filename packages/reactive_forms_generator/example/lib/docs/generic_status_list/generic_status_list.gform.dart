@@ -92,6 +92,14 @@ class ReactiveStatusListForm<T> extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveStatusListFormExt on BuildContext {
+  StatusListForm<T>? statusListFormWatch<T>() =>
+      ReactiveStatusListForm.of<T>(this);
+
+  StatusListForm<T>? statusListFormRead<T>() =>
+      ReactiveStatusListForm.of<T>(this, listen: false);
+}
+
 class StatusListFormBuilder<T> extends StatefulWidget {
   const StatusListFormBuilder({
     Key? key,
@@ -283,8 +291,9 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
   @override
   StatusList<T> get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'StatusListForm<T>'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'StatusListForm<T>'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return StatusList<T>(list: _listValue);
   }

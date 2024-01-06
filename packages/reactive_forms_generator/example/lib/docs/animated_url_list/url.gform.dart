@@ -91,6 +91,12 @@ class ReactiveUrlForm extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveUrlFormExt on BuildContext {
+  UrlForm? urlFormWatch() => ReactiveUrlForm.of(this);
+
+  UrlForm? urlFormRead() => ReactiveUrlForm.of(this, listen: false);
+}
+
 class UrlFormBuilder extends StatefulWidget {
   const UrlFormBuilder({
     Key? key,
@@ -347,8 +353,9 @@ class UrlForm implements FormModel<Url> {
   @override
   Url get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'UrlForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'UrlForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Url(urlList: _urlListValue);
   }
@@ -543,8 +550,9 @@ class UrlEntityForm implements FormModel<UrlEntity> {
   @override
   UrlEntity get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'UrlEntityForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'UrlEntityForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return UrlEntity(label: _labelValue, url: _urlValue);
   }

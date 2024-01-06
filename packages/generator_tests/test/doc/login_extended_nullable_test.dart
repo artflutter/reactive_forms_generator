@@ -150,6 +150,14 @@ class ReactiveLoginExtendedNullableForm extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveLoginExtendedNullableFormExt on BuildContext {
+  LoginExtendedNullableForm? loginExtendedNullableFormWatch() =>
+      ReactiveLoginExtendedNullableForm.of(this);
+
+  LoginExtendedNullableForm? loginExtendedNullableFormRead() =>
+      ReactiveLoginExtendedNullableForm.of(this, listen: false);
+}
+
 class LoginExtendedNullableFormBuilder extends StatefulWidget {
   const LoginExtendedNullableFormBuilder({
     Key? key,
@@ -863,8 +871,9 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
   @override
   LoginExtendedNullable get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'LoginExtendedNullableForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'LoginExtendedNullableForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return LoginExtendedNullable(
         email: _emailValue,

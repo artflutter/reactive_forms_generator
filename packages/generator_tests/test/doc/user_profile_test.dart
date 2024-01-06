@@ -166,6 +166,13 @@ class ReactiveUserProfileForm extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveUserProfileFormExt on BuildContext {
+  UserProfileForm? userProfileFormWatch() => ReactiveUserProfileForm.of(this);
+
+  UserProfileForm? userProfileFormRead() =>
+      ReactiveUserProfileForm.of(this, listen: false);
+}
+
 class UserProfileFormBuilder extends StatefulWidget {
   const UserProfileFormBuilder({
     Key? key,
@@ -595,8 +602,9 @@ class UserProfileForm implements FormModel<UserProfile> {
   @override
   UserProfile get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'UserProfileForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'UserProfileForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return UserProfile(
         id: _idValue,
@@ -954,8 +962,9 @@ class AddressForm implements FormModel<Address> {
   @override
   Address get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
   }

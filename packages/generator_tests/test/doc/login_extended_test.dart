@@ -196,6 +196,14 @@ class ReactiveLoginExtendedForm extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveLoginExtendedFormExt on BuildContext {
+  LoginExtendedForm? loginExtendedFormWatch() =>
+      ReactiveLoginExtendedForm.of(this);
+
+  LoginExtendedForm? loginExtendedFormRead() =>
+      ReactiveLoginExtendedForm.of(this, listen: false);
+}
+
 class LoginExtendedFormBuilder extends StatefulWidget {
   const LoginExtendedFormBuilder({
     Key? key,
@@ -808,8 +816,9 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   @override
   LoginExtended get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'LoginExtendedForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'LoginExtendedForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return LoginExtended(
         email: _emailValue,

@@ -91,6 +91,12 @@ class ReactiveTestForm extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveTestFormExt on BuildContext {
+  TestForm? testFormWatch() => ReactiveTestForm.of(this);
+
+  TestForm? testFormRead() => ReactiveTestForm.of(this, listen: false);
+}
+
 class TestFormBuilder extends StatefulWidget {
   const TestFormBuilder({
     Key? key,
@@ -328,8 +334,9 @@ class TestForm implements FormModel<Test> {
   @override
   Test get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'TestForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'TestForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Test(title: _titleValue, description: _descriptionValue);
   }

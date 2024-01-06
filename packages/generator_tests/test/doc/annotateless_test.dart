@@ -132,6 +132,14 @@ class ReactiveAnnotatelessForm extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveAnnotatelessFormExt on BuildContext {
+  AnnotatelessForm? annotatelessFormWatch() =>
+      ReactiveAnnotatelessForm.of(this);
+
+  AnnotatelessForm? annotatelessFormRead() =>
+      ReactiveAnnotatelessForm.of(this, listen: false);
+}
+
 class AnnotatelessFormBuilder extends StatefulWidget {
   const AnnotatelessFormBuilder({
     Key? key,
@@ -345,8 +353,9 @@ class AnnotatelessForm implements FormModel<Annotateless> {
   @override
   Annotateless get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'AnnotatelessForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'AnnotatelessForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Annotateless(email: _emailValue, password: _passwordValue);
   }

@@ -92,6 +92,14 @@ class ReactiveFreezedClassForm extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveFreezedClassFormExt on BuildContext {
+  FreezedClassForm? freezedClassFormWatch() =>
+      ReactiveFreezedClassForm.of(this);
+
+  FreezedClassForm? freezedClassFormRead() =>
+      ReactiveFreezedClassForm.of(this, listen: false);
+}
+
 class FreezedClassFormBuilder extends StatefulWidget {
   const FreezedClassFormBuilder({
     Key? key,
@@ -625,8 +633,9 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   @override
   FreezedClass get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'FreezedClassForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'FreezedClassForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return FreezedClass(_genderValue,
         id: _idValue,

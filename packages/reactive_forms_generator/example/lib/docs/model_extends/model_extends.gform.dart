@@ -92,6 +92,14 @@ class ReactiveModelExtendsForm extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveModelExtendsFormExt on BuildContext {
+  ModelExtendsForm? modelExtendsFormWatch() =>
+      ReactiveModelExtendsForm.of(this);
+
+  ModelExtendsForm? modelExtendsFormRead() =>
+      ReactiveModelExtendsForm.of(this, listen: false);
+}
+
 class ModelExtendsFormBuilder extends StatefulWidget {
   const ModelExtendsFormBuilder({
     Key? key,
@@ -305,8 +313,9 @@ class ModelExtendsForm implements FormModel<ModelExtends> {
   @override
   ModelExtends get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'ModelExtendsForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'ModelExtendsForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return ModelExtends(email: _emailValue, password: _passwordValue);
   }

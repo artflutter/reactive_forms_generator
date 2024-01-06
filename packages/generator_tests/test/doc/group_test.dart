@@ -176,6 +176,12 @@ class ReactiveGroupForm extends StatelessWidget {
   }
 }
 
+extension ReactiveReactiveGroupFormExt on BuildContext {
+  GroupForm? groupFormWatch() => ReactiveGroupForm.of(this);
+
+  GroupForm? groupFormRead() => ReactiveGroupForm.of(this, listen: false);
+}
+
 class GroupFormBuilder extends StatefulWidget {
   const GroupFormBuilder({
     Key? key,
@@ -628,8 +634,9 @@ class GroupForm implements FormModel<Group> {
   @override
   Group get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'GroupForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'GroupForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Group(
         personal: _personalValue,
@@ -878,8 +885,9 @@ class PersonalForm implements FormModel<Personal> {
   @override
   Personal get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'PersonalForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'PersonalForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Personal(name: _nameValue, email: _emailValue);
   }
@@ -1134,8 +1142,9 @@ class PhoneForm implements FormModel<Phone> {
   @override
   Phone get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'PhoneForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'PhoneForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Phone(phoneNumber: _phoneNumberValue, countryIso: _countryIsoValue);
   }
@@ -1479,8 +1488,9 @@ class AddressForm implements FormModel<Address> {
   @override
   Address get model {
     if (!currentForm.valid) {
-      debugPrint(
-          '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      debugPrintStack(
+          label:
+              '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
   }
