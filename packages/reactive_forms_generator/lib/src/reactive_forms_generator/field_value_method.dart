@@ -48,7 +48,8 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
       if (field.hasDefaultValue) {
         final constantValueObject = field.computeConstantValue();
         if (constantValueObject?.type?.isDartCoreString ?? false) {
-          code += ' ?? ""';
+          final constantValue = constantValueObject?.toStringValue() ?? '';
+          code += ' ?? "$constantValue"';
         } else if (constantValueObject?.type?.isDartCoreList ?? false) {
           code += ' ?? []';
         } else {

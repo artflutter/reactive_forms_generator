@@ -1,3 +1,7 @@
+## [4.5.3]
+
+* revert potential breaking change introduced in 4.5.2
+
 ## [4.5.2]
 
 * default empty array value for non nullable lists
