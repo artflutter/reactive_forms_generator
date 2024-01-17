@@ -23,6 +23,7 @@ class LoginExtended {
   final double height;
 
   final String? unAnnotated;
+  final List<int> someIntList;
 
   LoginExtended({
     @RfControl(
@@ -55,5 +56,6 @@ class LoginExtended {
     )
     required this.height,
     this.unAnnotated,
+    this.someIntList = const [],
   });
 }

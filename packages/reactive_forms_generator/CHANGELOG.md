@@ -1,11 +1,12 @@
-## [4.5.0]
+## [4.5.2]
 
-* fix for cases with disabled fields for arrays, the disabled items were thrown off the `value` which caused issues.
-* debugLog replaced with debugLogStackTrace for warnings when calling model on non-valid form
+* default empty array value for non nullable lists
 
 ## [4.5.1]
 
 * generate BuildContext extension for listening and watching the form
+* fix for cases with disabled fields for arrays, the disabled items were thrown off the `value` which caused issues.
+* debugLog replaced with debugLogStackTrace for warnings when calling model on non-valid form
 
 ## [4.5.0]
 
