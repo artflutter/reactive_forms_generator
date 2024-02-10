@@ -49,9 +49,17 @@ class ReactiveFormBuilder {
                 (b) => b
                   ..name = 'model'
                   ..named = true
+                  ..toThis = true,
+              ),
+              Parameter(
+                (b) => b
+                  ..name = 'formModel'
+                  ..named = true
                   ..toThis = true
-                  ..required = !reactiveForm.reactiveInheritedStreamer
-                      .formGenerator.element.isNullable,
+                  ..docs.addAll([
+                    '/// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over',
+                    '/// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.',
+                  ]),
               ),
               Parameter(
                 (b) => b
@@ -72,10 +80,12 @@ class ReactiveFormBuilder {
                   ..toThis = true
                   ..required = true,
               ),
-              Parameter((b) => b
-                ..name = 'initState'
-                ..named = true
-                ..toThis = true),
+              Parameter(
+                (b) => b
+                  ..name = 'initState'
+                  ..named = true
+                  ..toThis = true,
+              ),
             ],
           ),
       );
@@ -85,14 +95,30 @@ class ReactiveFormBuilder {
       (b) => b
         ..name = 'model'
         ..type = Reference(
-          '${_element.fullTypeName}${_element.isNullable ? '?' : ''}',
+          '${_element.fullTypeName}?',
         )
         ..modifier = FieldModifier.final$,
     );
   }
 
+  Field get _formModel {
+    return Field(
+      (b) => b
+        ..name = 'formModel'
+        ..type = Reference(
+          '${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull}?',
+        )
+        ..modifier = FieldModifier.final$
+        ..docs.addAll([
+          '/// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over',
+          '/// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.',
+        ]),
+    );
+  }
+
   List<Field> get _widgetFields => [
         _model,
+        _formModel,
         Field(
           (b) => b
             ..name = 'child'
@@ -140,15 +166,27 @@ class ReactiveFormBuilder {
             ..annotations.add(const CodeExpression(Code('override')))
             ..returns = const Reference('void')
             ..body = Code('''
-                _formModel = ${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull}(${reactiveForm.reactiveInheritedStreamer.formGenerator.className}.formElements${reactiveForm.reactiveInheritedStreamer.formGenerator.element.generics}(widget.model), null);
+                super.initState();
 
+                ${!_element.isNullable ? '''
+                if (widget.model == null && widget.formModel == null) {
+                  throw ArgumentError('Must supply either model or formModel.');
+                }
+                ''' : ''}
+
+                if (widget.model != null && widget.formModel != null) {
+                  throw ArgumentError('Cannot provide both model and formModel.');
+                }
+
+                _formModel = widget.formModel ?? ${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull}(
+                  ${reactiveForm.reactiveInheritedStreamer.formGenerator.className}.formElements(widget.model), null
+                );
+                
                 if (_formModel.form.disabled) {
                   _formModel.form.markAsDisabled();
                 }
             
                 widget.initState?.call(context, _formModel);
-                
-                super.initState();              
               '''),
         ),
         Method(
@@ -165,11 +203,19 @@ class ReactiveFormBuilder {
               ),
             )
             ..body = const Code('''
+                super.didUpdateWidget(oldWidget);
+
                 if (widget.model != oldWidget.model) {
                   _formModel.updateValue(widget.model);
                 }
                 
-                super.didUpdateWidget(oldWidget);
+                if (widget.formModel != oldWidget.formModel) {
+                  if (widget.formModel == null) {
+                    throw ArgumentError('formModel must not be set to null');
+                  }
+
+                  _formModel = widget.formModel!;
+                }
               '''),
         ),
         Method(
@@ -178,7 +224,10 @@ class ReactiveFormBuilder {
             ..annotations.add(const CodeExpression(Code('override')))
             ..returns = const Reference('void')
             ..body = const Code('''
-                _formModel.form.dispose();
+                if (widget.formModel == null) {
+                  _formModel.form.dispose();
+                } 
+                
                 super.dispose();
               '''),
         ),

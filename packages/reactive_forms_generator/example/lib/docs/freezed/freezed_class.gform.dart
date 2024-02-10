@@ -104,6 +104,10 @@ class FreezedClassFormBuilder extends StatefulWidget {
   const FreezedClassFormBuilder({
     Key? key,
     this.model,
+
+    /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+    /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+    this.formModel,
     this.child,
     this.onWillPop,
     required this.builder,
@@ -111,6 +115,10 @@ class FreezedClassFormBuilder extends StatefulWidget {
   }) : super(key: key);
 
   final FreezedClass? model;
+
+  /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+  /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+  final FreezedClassForm? formModel;
 
   final Widget? child;
 
@@ -132,7 +140,13 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
+    super.initState();
+
+    if (widget.model != null && widget.formModel != null) {
+      throw ArgumentError('Cannot provide both model and formModel.');
+    }
+
+    _formModel = widget.formModel ??
         FreezedClassForm(FreezedClassForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
@@ -140,22 +154,31 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
-
-    super.initState();
   }
 
   @override
   void didUpdateWidget(covariant FreezedClassFormBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
     if (widget.model != oldWidget.model) {
       _formModel.updateValue(widget.model);
     }
 
-    super.didUpdateWidget(oldWidget);
+    if (widget.formModel != oldWidget.formModel) {
+      if (widget.formModel == null) {
+        throw ArgumentError('formModel must not be set to null');
+      }
+
+      _formModel = widget.formModel!;
+    }
   }
 
   @override
   void dispose() {
-    _formModel.form.dispose();
+    if (widget.formModel == null) {
+      _formModel.form.dispose();
+    }
+
     super.dispose();
   }
 
@@ -197,15 +220,25 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   final String? path;
 
   String genderControlPath() => pathBuilder(genderControlName);
+
   String idControlPath() => pathBuilder(idControlName);
+
   String nameControlPath() => pathBuilder(nameControlName);
+
   String logoImageControlPath() => pathBuilder(logoImageControlName);
+
   String yearControlPath() => pathBuilder(yearControlName);
+
   String? get _genderValue => genderControl?.value;
+
   String? get _idValue => idControl?.value;
+
   String? get _nameValue => nameControl?.value;
+
   String? get _logoImageValue => logoImageControl?.value;
+
   double? get _yearValue => yearControl?.value;
+
   bool get containsGender {
     try {
       form.control(genderControlPath());
@@ -252,15 +285,25 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }
 
   Object? get genderErrors => genderControl?.errors;
+
   Object? get idErrors => idControl?.errors;
+
   Object? get nameErrors => nameControl?.errors;
+
   Object? get logoImageErrors => logoImageControl?.errors;
+
   Object? get yearErrors => yearControl?.errors;
+
   void get genderFocus => form.focus(genderControlPath());
+
   void get idFocus => form.focus(idControlPath());
+
   void get nameFocus => form.focus(nameControlPath());
+
   void get logoImageFocus => form.focus(logoImageControlPath());
+
   void get yearFocus => form.focus(yearControlPath());
+
   void genderRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -490,6 +533,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       genderControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void idValueReset(
     String? value, {
     bool updateParent = true,
@@ -499,6 +543,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       idControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void nameValueReset(
     String? value, {
     bool updateParent = true,
@@ -508,6 +553,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       nameControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void logoImageValueReset(
     String? value, {
     bool updateParent = true,
@@ -517,6 +563,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       logoImageControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void yearValueReset(
     double? value, {
     bool updateParent = true,
@@ -526,20 +573,26 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       yearControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String>? get genderControl => containsGender
       ? form.control(genderControlPath()) as FormControl<String>?
       : null;
+
   FormControl<String>? get idControl =>
       containsId ? form.control(idControlPath()) as FormControl<String>? : null;
+
   FormControl<String>? get nameControl => containsName
       ? form.control(nameControlPath()) as FormControl<String>?
       : null;
+
   FormControl<String>? get logoImageControl => containsLogoImage
       ? form.control(logoImageControlPath()) as FormControl<String>?
       : null;
+
   FormControl<double>? get yearControl => containsYear
       ? form.control(yearControlPath()) as FormControl<double>?
       : null;
+
   void genderSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -669,6 +722,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       form.updateValue(FreezedClassForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     FreezedClass? value,
@@ -679,8 +733,10 @@ class FreezedClassForm implements FormModel<FreezedClass> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(FreezedClass? freezedClass) => FormGroup({
         genderControlName: FormControl<String>(
             value: freezedClass?.gender,

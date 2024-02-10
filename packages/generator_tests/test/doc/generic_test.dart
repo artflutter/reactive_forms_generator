@@ -139,6 +139,10 @@ class TagsFormBuilder<T> extends StatefulWidget {
   const TagsFormBuilder({
     Key? key,
     this.model,
+
+    /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+    /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+    this.formModel,
     this.child,
     this.onWillPop,
     required this.builder,
@@ -146,6 +150,10 @@ class TagsFormBuilder<T> extends StatefulWidget {
   }) : super(key: key);
 
   final Tags<T>? model;
+
+  /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+  /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+  final TagsForm<T>? formModel;
 
   final Widget? child;
 
@@ -165,29 +173,45 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
 
   @override
   void initState() {
-    _formModel = TagsForm<T>(TagsForm.formElements<T>(widget.model), null);
+    super.initState();
+
+    if (widget.model != null && widget.formModel != null) {
+      throw ArgumentError('Cannot provide both model and formModel.');
+    }
+
+    _formModel = widget.formModel ??
+        TagsForm<T>(TagsForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
     }
 
     widget.initState?.call(context, _formModel);
-
-    super.initState();
   }
 
   @override
   void didUpdateWidget(covariant TagsFormBuilder<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
     if (widget.model != oldWidget.model) {
       _formModel.updateValue(widget.model);
     }
 
-    super.didUpdateWidget(oldWidget);
+    if (widget.formModel != oldWidget.formModel) {
+      if (widget.formModel == null) {
+        throw ArgumentError('formModel must not be set to null');
+      }
+
+      _formModel = widget.formModel!;
+    }
   }
 
   @override
   void dispose() {
-    _formModel.form.dispose();
+    if (widget.formModel == null) {
+      _formModel.form.dispose();
+    }
+
     super.dispose();
   }
 

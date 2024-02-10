@@ -102,6 +102,10 @@ class SubGroupFormBuilder extends StatefulWidget {
   const SubGroupFormBuilder({
     Key? key,
     this.model,
+
+    /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+    /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+    this.formModel,
     this.child,
     this.onWillPop,
     required this.builder,
@@ -109,6 +113,10 @@ class SubGroupFormBuilder extends StatefulWidget {
   }) : super(key: key);
 
   final SubGroup? model;
+
+  /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+  /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+  final SubGroupForm? formModel;
 
   final Widget? child;
 
@@ -128,29 +136,45 @@ class _SubGroupFormBuilderState extends State<SubGroupFormBuilder> {
 
   @override
   void initState() {
-    _formModel = SubGroupForm(SubGroupForm.formElements(widget.model), null);
+    super.initState();
+
+    if (widget.model != null && widget.formModel != null) {
+      throw ArgumentError('Cannot provide both model and formModel.');
+    }
+
+    _formModel = widget.formModel ??
+        SubGroupForm(SubGroupForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
     }
 
     widget.initState?.call(context, _formModel);
-
-    super.initState();
   }
 
   @override
   void didUpdateWidget(covariant SubGroupFormBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
     if (widget.model != oldWidget.model) {
       _formModel.updateValue(widget.model);
     }
 
-    super.didUpdateWidget(oldWidget);
+    if (widget.formModel != oldWidget.formModel) {
+      if (widget.formModel == null) {
+        throw ArgumentError('formModel must not be set to null');
+      }
+
+      _formModel = widget.formModel!;
+    }
   }
 
   @override
   void dispose() {
-    _formModel.form.dispose();
+    if (widget.formModel == null) {
+      _formModel.form.dispose();
+    }
+
     super.dispose();
   }
 
@@ -184,7 +208,9 @@ class SubGroupForm implements FormModel<SubGroup> {
   final String? path;
 
   String idControlPath() => pathBuilder(idControlName);
+
   String get _idValue => idControl.value as String;
+
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -195,7 +221,9 @@ class SubGroupForm implements FormModel<SubGroup> {
   }
 
   Object? get idErrors => idControl.errors;
+
   void get idFocus => form.focus(idControlPath());
+
   void idValueUpdate(
     String value, {
     bool updateParent = true,
@@ -223,8 +251,10 @@ class SubGroupForm implements FormModel<SubGroup> {
   }) =>
       idControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
+
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -278,6 +308,7 @@ class SubGroupForm implements FormModel<SubGroup> {
   }) =>
       form.updateValue(SubGroupForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     SubGroup? value,
@@ -288,8 +319,10 @@ class SubGroupForm implements FormModel<SubGroup> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(SubGroup? subGroup) => FormGroup({
         idControlName: FormControl<String>(
             value: subGroup?.id,
@@ -519,6 +552,10 @@ class GroupFormBuilder extends StatefulWidget {
   const GroupFormBuilder({
     Key? key,
     this.model,
+
+    /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+    /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+    this.formModel,
     this.child,
     this.onWillPop,
     required this.builder,
@@ -526,6 +563,10 @@ class GroupFormBuilder extends StatefulWidget {
   }) : super(key: key);
 
   final Group? model;
+
+  /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+  /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+  final GroupForm? formModel;
 
   final Widget? child;
 
@@ -545,29 +586,45 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
 
   @override
   void initState() {
-    _formModel = GroupForm(GroupForm.formElements(widget.model), null);
+    super.initState();
+
+    if (widget.model != null && widget.formModel != null) {
+      throw ArgumentError('Cannot provide both model and formModel.');
+    }
+
+    _formModel = widget.formModel ??
+        GroupForm(GroupForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
     }
 
     widget.initState?.call(context, _formModel);
-
-    super.initState();
   }
 
   @override
   void didUpdateWidget(covariant GroupFormBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
     if (widget.model != oldWidget.model) {
       _formModel.updateValue(widget.model);
     }
 
-    super.didUpdateWidget(oldWidget);
+    if (widget.formModel != oldWidget.formModel) {
+      if (widget.formModel == null) {
+        throw ArgumentError('formModel must not be set to null');
+      }
+
+      _formModel = widget.formModel!;
+    }
   }
 
   @override
   void dispose() {
-    _formModel.form.dispose();
+    if (widget.formModel == null) {
+      _formModel.form.dispose();
+    }
+
     super.dispose();
   }
 
@@ -603,10 +660,14 @@ class GroupForm implements FormModel<Group> {
   final String? path;
 
   String idControlPath() => pathBuilder(idControlName);
+
   String subGroupListControlPath() => pathBuilder(subGroupListControlName);
+
   String get _idValue => idControl.value as String;
+
   List<SubGroup> get _subGroupListValue =>
       subGroupListSubGroupForm.map((e) => e.model).toList();
+
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -626,9 +687,13 @@ class GroupForm implements FormModel<Group> {
   }
 
   Object? get idErrors => idControl.errors;
+
   Object? get subGroupListErrors => subGroupListControl.errors;
+
   void get idFocus => form.focus(idControlPath());
+
   void get subGroupListFocus => form.focus(subGroupListControlPath());
+
   void idValueUpdate(
     String value, {
     bool updateParent = true,
@@ -748,6 +813,7 @@ class GroupForm implements FormModel<Group> {
   }) =>
       idControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void subGroupListValueReset(
     List<SubGroup> value, {
     bool updateParent = true,
@@ -760,11 +826,14 @@ class GroupForm implements FormModel<Group> {
               value.map((e) => SubGroupForm.formElements(e).rawValue).toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
+
   FormArray<Map<String, Object?>> get subGroupListControl =>
       form.control(subGroupListControlPath())
           as FormArray<Map<String, Object?>>;
+
   List<SubGroupForm> get subGroupListSubGroupForm {
     final values = (subGroupListControl.controls).map((e) => e.value).toList();
 
@@ -818,6 +887,7 @@ class GroupForm implements FormModel<Group> {
               form.control(subGroupListControlPath())
                   as FormArray<Map<String, Object?>>,
               () => subGroupListSubGroupForm);
+
   void addSubGroupListItem(SubGroup value) {
     subGroupListControl.add(SubGroupForm.formElements(value));
   }
@@ -867,6 +937,7 @@ class GroupForm implements FormModel<Group> {
   }) =>
       form.updateValue(GroupForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Group? value,
@@ -877,8 +948,10 @@ class GroupForm implements FormModel<Group> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Group? group) => FormGroup({
         idControlName: FormControl<String>(
             value: group?.id,
@@ -1116,6 +1189,10 @@ class NestedFormBuilder extends StatefulWidget {
   const NestedFormBuilder({
     Key? key,
     this.model,
+
+    /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+    /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+    this.formModel,
     this.child,
     this.onWillPop,
     required this.builder,
@@ -1123,6 +1200,10 @@ class NestedFormBuilder extends StatefulWidget {
   }) : super(key: key);
 
   final Nested? model;
+
+  /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+  /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+  final NestedForm? formModel;
 
   final Widget? child;
 
@@ -1142,29 +1223,45 @@ class _NestedFormBuilderState extends State<NestedFormBuilder> {
 
   @override
   void initState() {
-    _formModel = NestedForm(NestedForm.formElements(widget.model), null);
+    super.initState();
+
+    if (widget.model != null && widget.formModel != null) {
+      throw ArgumentError('Cannot provide both model and formModel.');
+    }
+
+    _formModel = widget.formModel ??
+        NestedForm(NestedForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
     }
 
     widget.initState?.call(context, _formModel);
-
-    super.initState();
   }
 
   @override
   void didUpdateWidget(covariant NestedFormBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
     if (widget.model != oldWidget.model) {
       _formModel.updateValue(widget.model);
     }
 
-    super.didUpdateWidget(oldWidget);
+    if (widget.formModel != oldWidget.formModel) {
+      if (widget.formModel == null) {
+        throw ArgumentError('formModel must not be set to null');
+      }
+
+      _formModel = widget.formModel!;
+    }
   }
 
   @override
   void dispose() {
-    _formModel.form.dispose();
+    if (widget.formModel == null) {
+      _formModel.form.dispose();
+    }
+
     super.dispose();
   }
 
@@ -1198,8 +1295,10 @@ class NestedForm implements FormModel<Nested> {
   final String? path;
 
   String groupListControlPath() => pathBuilder(groupListControlName);
+
   List<Group> get _groupListValue =>
       groupListGroupForm.map((e) => e.model).toList();
+
   bool get containsGroupList {
     try {
       form.control(groupListControlPath());
@@ -1210,7 +1309,9 @@ class NestedForm implements FormModel<Nested> {
   }
 
   Object? get groupListErrors => groupListControl.errors;
+
   void get groupListFocus => form.focus(groupListControlPath());
+
   void groupListValueUpdate(
     List<Group> value, {
     bool updateParent = true,
@@ -1313,8 +1414,10 @@ class NestedForm implements FormModel<Nested> {
           value: value.map((e) => GroupForm.formElements(e).rawValue).toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   FormArray<Map<String, Object?>> get groupListControl =>
       form.control(groupListControlPath()) as FormArray<Map<String, Object?>>;
+
   List<GroupForm> get groupListGroupForm {
     final values = (groupListControl.controls).map((e) => e.value).toList();
 
@@ -1350,6 +1453,7 @@ class NestedForm implements FormModel<Nested> {
               form.control(groupListControlPath())
                   as FormArray<Map<String, Object?>>,
               () => groupListGroupForm);
+
   void addGroupListItem(Group value) {
     groupListControl.add(GroupForm.formElements(value));
   }
@@ -1399,6 +1503,7 @@ class NestedForm implements FormModel<Nested> {
   }) =>
       form.updateValue(NestedForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Nested? value,
@@ -1409,8 +1514,10 @@ class NestedForm implements FormModel<Nested> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Nested? nested) => FormGroup({
         groupListControlName: FormArray(
             (nested?.groupList ?? [])

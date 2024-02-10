@@ -161,6 +161,10 @@ class LoginFormBuilder extends StatefulWidget {
   const LoginFormBuilder({
     Key? key,
     this.model,
+
+    /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+    /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+    this.formModel,
     this.child,
     this.onWillPop,
     required this.builder,
@@ -168,6 +172,10 @@ class LoginFormBuilder extends StatefulWidget {
   }) : super(key: key);
 
   final Login? model;
+
+  /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+  /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+  final LoginForm? formModel;
 
   final Widget? child;
 
@@ -187,29 +195,45 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
 
   @override
   void initState() {
-    _formModel = LoginForm(LoginForm.formElements(widget.model), null);
+    super.initState();
+
+    if (widget.model != null && widget.formModel != null) {
+      throw ArgumentError('Cannot provide both model and formModel.');
+    }
+
+    _formModel = widget.formModel ??
+        LoginForm(LoginForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
     }
 
     widget.initState?.call(context, _formModel);
-
-    super.initState();
   }
 
   @override
   void didUpdateWidget(covariant LoginFormBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
     if (widget.model != oldWidget.model) {
       _formModel.updateValue(widget.model);
     }
 
-    super.didUpdateWidget(oldWidget);
+    if (widget.formModel != oldWidget.formModel) {
+      if (widget.formModel == null) {
+        throw ArgumentError('formModel must not be set to null');
+      }
+
+      _formModel = widget.formModel!;
+    }
   }
 
   @override
   void dispose() {
-    _formModel.form.dispose();
+    if (widget.formModel == null) {
+      _formModel.form.dispose();
+    }
+
     super.dispose();
   }
 

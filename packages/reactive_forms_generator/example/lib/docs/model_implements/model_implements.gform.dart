@@ -105,6 +105,10 @@ class ModelImplementsFormBuilder extends StatefulWidget {
   const ModelImplementsFormBuilder({
     Key? key,
     this.model,
+
+    /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+    /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+    this.formModel,
     this.child,
     this.onWillPop,
     required this.builder,
@@ -112,6 +116,10 @@ class ModelImplementsFormBuilder extends StatefulWidget {
   }) : super(key: key);
 
   final ModelImplements? model;
+
+  /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+  /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+  final ModelImplementsForm? formModel;
 
   final Widget? child;
 
@@ -135,30 +143,46 @@ class _ModelImplementsFormBuilderState
 
   @override
   void initState() {
-    _formModel = ModelImplementsForm(
-        ModelImplementsForm.formElements(widget.model), null);
+    super.initState();
+
+    if (widget.model != null && widget.formModel != null) {
+      throw ArgumentError('Cannot provide both model and formModel.');
+    }
+
+    _formModel = widget.formModel ??
+        ModelImplementsForm(
+            ModelImplementsForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
     }
 
     widget.initState?.call(context, _formModel);
-
-    super.initState();
   }
 
   @override
   void didUpdateWidget(covariant ModelImplementsFormBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
     if (widget.model != oldWidget.model) {
       _formModel.updateValue(widget.model);
     }
 
-    super.didUpdateWidget(oldWidget);
+    if (widget.formModel != oldWidget.formModel) {
+      if (widget.formModel == null) {
+        throw ArgumentError('formModel must not be set to null');
+      }
+
+      _formModel = widget.formModel!;
+    }
   }
 
   @override
   void dispose() {
-    _formModel.form.dispose();
+    if (widget.formModel == null) {
+      _formModel.form.dispose();
+    }
+
     super.dispose();
   }
 
@@ -194,9 +218,13 @@ class ModelImplementsForm implements FormModel<ModelImplements> {
   final String? path;
 
   String emailControlPath() => pathBuilder(emailControlName);
+
   String passwordControlPath() => pathBuilder(passwordControlName);
+
   String get _emailValue => emailControl.value ?? "";
+
   String get _passwordValue => passwordControl.value ?? "";
+
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -216,9 +244,13 @@ class ModelImplementsForm implements FormModel<ModelImplements> {
   }
 
   Object? get emailErrors => emailControl.errors;
+
   Object? get passwordErrors => passwordControl.errors;
+
   void get emailFocus => form.focus(emailControlPath());
+
   void get passwordFocus => form.focus(passwordControlPath());
+
   void emailValueUpdate(
     String value, {
     bool updateParent = true,
@@ -264,6 +296,7 @@ class ModelImplementsForm implements FormModel<ModelImplements> {
   }) =>
       emailControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void passwordValueReset(
     String value, {
     bool updateParent = true,
@@ -273,10 +306,13 @@ class ModelImplementsForm implements FormModel<ModelImplements> {
   }) =>
       passwordControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
+
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
+
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -348,6 +384,7 @@ class ModelImplementsForm implements FormModel<ModelImplements> {
   }) =>
       form.updateValue(ModelImplementsForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     ModelImplements? value,
@@ -358,8 +395,10 @@ class ModelImplementsForm implements FormModel<ModelImplements> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(ModelImplements? modelImplements) => FormGroup({
         emailControlName: FormControl<String>(
             value: modelImplements?.email,
