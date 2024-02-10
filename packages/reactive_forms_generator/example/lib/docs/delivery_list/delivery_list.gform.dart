@@ -104,6 +104,10 @@ class DeliveryListFormBuilder extends StatefulWidget {
   const DeliveryListFormBuilder({
     Key? key,
     this.model,
+
+    /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+    /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+    this.formModel,
     this.child,
     this.onWillPop,
     required this.builder,
@@ -111,6 +115,10 @@ class DeliveryListFormBuilder extends StatefulWidget {
   }) : super(key: key);
 
   final DeliveryList? model;
+
+  /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+  /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+  final DeliveryListForm? formModel;
 
   final Widget? child;
 
@@ -132,7 +140,13 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
+    super.initState();
+
+    if (widget.model != null && widget.formModel != null) {
+      throw ArgumentError('Cannot provide both model and formModel.');
+    }
+
+    _formModel = widget.formModel ??
         DeliveryListForm(DeliveryListForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
@@ -140,22 +154,31 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
-
-    super.initState();
   }
 
   @override
   void didUpdateWidget(covariant DeliveryListFormBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
     if (widget.model != oldWidget.model) {
       _formModel.updateValue(widget.model);
     }
 
-    super.didUpdateWidget(oldWidget);
+    if (widget.formModel != oldWidget.formModel) {
+      if (widget.formModel == null) {
+        throw ArgumentError('formModel must not be set to null');
+      }
+
+      _formModel = widget.formModel!;
+    }
   }
 
   @override
   void dispose() {
-    _formModel.form.dispose();
+    if (widget.formModel == null) {
+      _formModel.form.dispose();
+    }
+
     super.dispose();
   }
 
@@ -191,11 +214,15 @@ class DeliveryListForm implements FormModel<DeliveryList> {
   final String? path;
 
   String deliveryListControlPath() => pathBuilder(deliveryListControlName);
+
   String clientListControlPath() => pathBuilder(clientListControlName);
+
   List<DeliveryPoint> get _deliveryListValue =>
       deliveryListDeliveryPointForm.map((e) => e.model).toList();
+
   List<Client>? get _clientListValue =>
       clientListClientForm.map((e) => e.model).toList();
+
   bool get containsDeliveryList {
     try {
       form.control(deliveryListControlPath());
@@ -215,9 +242,13 @@ class DeliveryListForm implements FormModel<DeliveryList> {
   }
 
   Object? get deliveryListErrors => deliveryListControl.errors;
+
   Object? get clientListErrors => clientListControl?.errors;
+
   void get deliveryListFocus => form.focus(deliveryListControlPath());
+
   void get clientListFocus => form.focus(clientListControlPath());
+
   void clientListRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -444,6 +475,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
               .toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   void clientListValueReset(
     List<Client>? value, {
     bool updateParent = true,
@@ -456,13 +488,16 @@ class DeliveryListForm implements FormModel<DeliveryList> {
               value?.map((e) => ClientForm.formElements(e).rawValue).toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   FormArray<Map<String, Object?>> get deliveryListControl =>
       form.control(deliveryListControlPath())
           as FormArray<Map<String, Object?>>;
+
   FormArray<Map<String, Object?>>? get clientListControl => containsClientList
       ? form.control(clientListControlPath())
           as FormArray<Map<String, Object?>>?
       : null;
+
   List<DeliveryPointForm> get deliveryListDeliveryPointForm {
     final values = (deliveryListControl.controls).map((e) => e.value).toList();
 
@@ -528,12 +563,14 @@ class DeliveryListForm implements FormModel<DeliveryList> {
               form.control(deliveryListControlPath())
                   as FormArray<Map<String, Object?>>,
               () => deliveryListDeliveryPointForm);
+
   ExtendedControl<List<Map<String, Object?>?>, List<ClientForm>>
       get clientListExtendedControl =>
           ExtendedControl<List<Map<String, Object?>?>, List<ClientForm>>(
               form.control(clientListControlPath())
                   as FormArray<Map<String, Object?>>,
               () => clientListClientForm);
+
   void addDeliveryListItem(DeliveryPoint value) {
     deliveryListControl.add(DeliveryPointForm.formElements(value));
   }
@@ -598,6 +635,7 @@ class DeliveryListForm implements FormModel<DeliveryList> {
   }) =>
       form.updateValue(DeliveryListForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     DeliveryList? value,
@@ -608,8 +646,10 @@ class DeliveryListForm implements FormModel<DeliveryList> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(DeliveryList? deliveryList) => FormGroup({
         deliveryListControlName: FormArray(
             (deliveryList?.deliveryList ?? [])
@@ -649,9 +689,13 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
   final String? path;
 
   String nameControlPath() => pathBuilder(nameControlName);
+
   String addressControlPath() => pathBuilder(addressControlName);
+
   String get _nameValue => nameControl.value ?? "";
+
   Address? get _addressValue => addressForm.model;
+
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -671,9 +715,13 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
   }
 
   Object? get nameErrors => nameControl.errors;
+
   Object? get addressErrors => addressControl?.errors;
+
   void get nameFocus => form.focus(nameControlPath());
+
   void get addressFocus => form.focus(addressControlPath());
+
   void addressRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -745,6 +793,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
   }) =>
       nameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void addressValueReset(
     Address? value, {
     bool updateParent = true,
@@ -756,11 +805,15 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
           value: AddressForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
+
   FormGroup? get addressControl =>
       containsAddress ? form.control(addressControlPath()) as FormGroup? : null;
+
   AddressForm get addressForm => AddressForm(form, pathBuilder('address'));
+
   void nameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -832,6 +885,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
   }) =>
       form.updateValue(DeliveryPointForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     DeliveryPoint? value,
@@ -842,8 +896,10 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(DeliveryPoint? deliveryPoint) => FormGroup({
         nameControlName: FormControl<String>(
             value: deliveryPoint?.name,
@@ -875,9 +931,13 @@ class AddressForm implements FormModel<Address> {
   final String? path;
 
   String streetControlPath() => pathBuilder(streetControlName);
+
   String cityControlPath() => pathBuilder(cityControlName);
+
   String? get _streetValue => streetControl?.value;
+
   String? get _cityValue => cityControl?.value;
+
   bool get containsStreet {
     try {
       form.control(streetControlPath());
@@ -897,9 +957,13 @@ class AddressForm implements FormModel<Address> {
   }
 
   Object? get streetErrors => streetControl?.errors;
+
   Object? get cityErrors => cityControl?.errors;
+
   void get streetFocus => form.focus(streetControlPath());
+
   void get cityFocus => form.focus(cityControlPath());
+
   void streetRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -997,6 +1061,7 @@ class AddressForm implements FormModel<Address> {
   }) =>
       streetControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void cityValueReset(
     String? value, {
     bool updateParent = true,
@@ -1006,12 +1071,15 @@ class AddressForm implements FormModel<Address> {
   }) =>
       cityControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String>? get streetControl => containsStreet
       ? form.control(streetControlPath()) as FormControl<String>?
       : null;
+
   FormControl<String>? get cityControl => containsCity
       ? form.control(cityControlPath()) as FormControl<String>?
       : null;
+
   void streetSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1083,6 +1151,7 @@ class AddressForm implements FormModel<Address> {
   }) =>
       form.updateValue(AddressForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Address? value,
@@ -1093,8 +1162,10 @@ class AddressForm implements FormModel<Address> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Address? address) => FormGroup({
         streetControlName: FormControl<String>(
             value: address?.street,
@@ -1134,11 +1205,17 @@ class ClientForm implements FormModel<Client> {
   final String? path;
 
   String clientTypeControlPath() => pathBuilder(clientTypeControlName);
+
   String nameControlPath() => pathBuilder(nameControlName);
+
   String notesControlPath() => pathBuilder(notesControlName);
+
   ClientType get _clientTypeValue => clientTypeControl.value as ClientType;
+
   String? get _nameValue => nameControl?.value;
+
   String? get _notesValue => notesControl?.value;
+
   bool get containsClientType {
     try {
       form.control(clientTypeControlPath());
@@ -1167,11 +1244,17 @@ class ClientForm implements FormModel<Client> {
   }
 
   Object? get clientTypeErrors => clientTypeControl.errors;
+
   Object? get nameErrors => nameControl?.errors;
+
   Object? get notesErrors => notesControl?.errors;
+
   void get clientTypeFocus => form.focus(clientTypeControlPath());
+
   void get nameFocus => form.focus(nameControlPath());
+
   void get notesFocus => form.focus(notesControlPath());
+
   void nameRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1287,6 +1370,7 @@ class ClientForm implements FormModel<Client> {
   }) =>
       clientTypeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void nameValueReset(
     String? value, {
     bool updateParent = true,
@@ -1296,6 +1380,7 @@ class ClientForm implements FormModel<Client> {
   }) =>
       nameControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void notesValueReset(
     String? value, {
     bool updateParent = true,
@@ -1305,14 +1390,18 @@ class ClientForm implements FormModel<Client> {
   }) =>
       notesControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<ClientType> get clientTypeControl =>
       form.control(clientTypeControlPath()) as FormControl<ClientType>;
+
   FormControl<String>? get nameControl => containsName
       ? form.control(nameControlPath()) as FormControl<String>?
       : null;
+
   FormControl<String>? get notesControl => containsNotes
       ? form.control(notesControlPath()) as FormControl<String>?
       : null;
+
   void clientTypeSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1403,6 +1492,7 @@ class ClientForm implements FormModel<Client> {
   }) =>
       form.updateValue(ClientForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Client? value,
@@ -1413,8 +1503,10 @@ class ClientForm implements FormModel<Client> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Client? client) => FormGroup({
         clientTypeControlName: FormControl<ClientType>(
             value: client?.clientType,
@@ -1662,6 +1754,10 @@ class StandaloneDeliveryPointFormBuilder extends StatefulWidget {
   const StandaloneDeliveryPointFormBuilder({
     Key? key,
     this.model,
+
+    /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+    /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+    this.formModel,
     this.child,
     this.onWillPop,
     required this.builder,
@@ -1669,6 +1765,10 @@ class StandaloneDeliveryPointFormBuilder extends StatefulWidget {
   }) : super(key: key);
 
   final DeliveryPoint? model;
+
+  /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+  /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+  final StandaloneDeliveryPointForm? formModel;
 
   final Widget? child;
 
@@ -1691,30 +1791,46 @@ class _StandaloneDeliveryPointFormBuilderState
 
   @override
   void initState() {
-    _formModel = StandaloneDeliveryPointForm(
-        StandaloneDeliveryPointForm.formElements(widget.model), null);
+    super.initState();
+
+    if (widget.model != null && widget.formModel != null) {
+      throw ArgumentError('Cannot provide both model and formModel.');
+    }
+
+    _formModel = widget.formModel ??
+        StandaloneDeliveryPointForm(
+            StandaloneDeliveryPointForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
     }
 
     widget.initState?.call(context, _formModel);
-
-    super.initState();
   }
 
   @override
   void didUpdateWidget(covariant StandaloneDeliveryPointFormBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
     if (widget.model != oldWidget.model) {
       _formModel.updateValue(widget.model);
     }
 
-    super.didUpdateWidget(oldWidget);
+    if (widget.formModel != oldWidget.formModel) {
+      if (widget.formModel == null) {
+        throw ArgumentError('formModel must not be set to null');
+      }
+
+      _formModel = widget.formModel!;
+    }
   }
 
   @override
   void dispose() {
-    _formModel.form.dispose();
+    if (widget.formModel == null) {
+      _formModel.form.dispose();
+    }
+
     super.dispose();
   }
 
@@ -1750,9 +1866,13 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
   final String? path;
 
   String nameControlPath() => pathBuilder(nameControlName);
+
   String addressControlPath() => pathBuilder(addressControlName);
+
   String get _nameValue => nameControl.value ?? "";
+
   Address? get _addressValue => addressForm.model;
+
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -1772,9 +1892,13 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
   }
 
   Object? get nameErrors => nameControl.errors;
+
   Object? get addressErrors => addressControl?.errors;
+
   void get nameFocus => form.focus(nameControlPath());
+
   void get addressFocus => form.focus(addressControlPath());
+
   void addressRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1846,6 +1970,7 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
   }) =>
       nameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void addressValueReset(
     Address? value, {
     bool updateParent = true,
@@ -1857,11 +1982,15 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
           value: AddressForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
+
   FormGroup? get addressControl =>
       containsAddress ? form.control(addressControlPath()) as FormGroup? : null;
+
   AddressForm get addressForm => AddressForm(form, pathBuilder('address'));
+
   void nameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1933,6 +2062,7 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
   }) =>
       form.updateValue(StandaloneDeliveryPointForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     DeliveryPoint? value,
@@ -1943,8 +2073,10 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(DeliveryPoint? deliveryPoint) => FormGroup({
         nameControlName: FormControl<String>(
             value: deliveryPoint?.name,

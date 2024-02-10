@@ -104,6 +104,10 @@ class StatusListFormBuilder<T> extends StatefulWidget {
   const StatusListFormBuilder({
     Key? key,
     this.model,
+
+    /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+    /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+    this.formModel,
     this.child,
     this.onWillPop,
     required this.builder,
@@ -111,6 +115,10 @@ class StatusListFormBuilder<T> extends StatefulWidget {
   }) : super(key: key);
 
   final StatusList<T>? model;
+
+  /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+  /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+  final StatusListForm<T>? formModel;
 
   final Widget? child;
 
@@ -132,30 +140,45 @@ class _StatusListFormBuilderState<T> extends State<StatusListFormBuilder<T>> {
 
   @override
   void initState() {
-    _formModel =
-        StatusListForm<T>(StatusListForm.formElements<T>(widget.model), null);
+    super.initState();
+
+    if (widget.model != null && widget.formModel != null) {
+      throw ArgumentError('Cannot provide both model and formModel.');
+    }
+
+    _formModel = widget.formModel ??
+        StatusListForm<T>(StatusListForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
     }
 
     widget.initState?.call(context, _formModel);
-
-    super.initState();
   }
 
   @override
   void didUpdateWidget(covariant StatusListFormBuilder<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
     if (widget.model != oldWidget.model) {
       _formModel.updateValue(widget.model);
     }
 
-    super.didUpdateWidget(oldWidget);
+    if (widget.formModel != oldWidget.formModel) {
+      if (widget.formModel == null) {
+        throw ArgumentError('formModel must not be set to null');
+      }
+
+      _formModel = widget.formModel!;
+    }
   }
 
   @override
   void dispose() {
-    _formModel.form.dispose();
+    if (widget.formModel == null) {
+      _formModel.form.dispose();
+    }
+
     super.dispose();
   }
 
@@ -189,7 +212,9 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
   final String? path;
 
   String listControlPath() => pathBuilder(listControlName);
+
   List<T?> get _listValue => listControl.value?.whereType<T?>().toList() ?? [];
+
   bool get containsList {
     try {
       form.control(listControlPath());
@@ -200,7 +225,9 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
   }
 
   Object? get listErrors => listControl.errors;
+
   void get listFocus => form.focus(listControlPath());
+
   void listValueUpdate(
     List<T?> value, {
     bool updateParent = true,
@@ -228,8 +255,10 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
   }) =>
       listControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormArray<T> get listControl =>
       form.control(listControlPath()) as FormArray<T>;
+
   void listSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -323,6 +352,7 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
   }) =>
       form.updateValue(StatusListForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     StatusList<T>? value,
@@ -333,8 +363,10 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements<T>(StatusList<T>? statusList) => FormGroup({
         listControlName: FormArray<T>(
             (statusList?.list ?? [])

@@ -152,6 +152,10 @@ class SomeWiredNameFormBuilder extends StatefulWidget {
   const SomeWiredNameFormBuilder({
     Key? key,
     this.model,
+
+    /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+    /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+    this.formModel,
     this.child,
     this.onWillPop,
     required this.builder,
@@ -159,6 +163,10 @@ class SomeWiredNameFormBuilder extends StatefulWidget {
   }) : super(key: key);
 
   final RenamedBasic? model;
+
+  /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+  /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+  final SomeWiredNameForm? formModel;
 
   final Widget? child;
 
@@ -180,7 +188,13 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
+    super.initState();
+
+    if (widget.model != null && widget.formModel != null) {
+      throw ArgumentError('Cannot provide both model and formModel.');
+    }
+
+    _formModel = widget.formModel ??
         SomeWiredNameForm(SomeWiredNameForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
@@ -188,22 +202,31 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
-
-    super.initState();
   }
 
   @override
   void didUpdateWidget(covariant SomeWiredNameFormBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
     if (widget.model != oldWidget.model) {
       _formModel.updateValue(widget.model);
     }
 
-    super.didUpdateWidget(oldWidget);
+    if (widget.formModel != oldWidget.formModel) {
+      if (widget.formModel == null) {
+        throw ArgumentError('formModel must not be set to null');
+      }
+
+      _formModel = widget.formModel!;
+    }
   }
 
   @override
   void dispose() {
-    _formModel.form.dispose();
+    if (widget.formModel == null) {
+      _formModel.form.dispose();
+    }
+
     super.dispose();
   }
 

@@ -101,6 +101,10 @@ class TestFormBuilder extends StatefulWidget {
   const TestFormBuilder({
     Key? key,
     this.model,
+
+    /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+    /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+    this.formModel,
     this.child,
     this.onWillPop,
     required this.builder,
@@ -108,6 +112,10 @@ class TestFormBuilder extends StatefulWidget {
   }) : super(key: key);
 
   final Test? model;
+
+  /// Prefer using `model` for automatic lifecycle management. Use `formModel` only when manual control over
+  /// the form lifecycle is needed. See `initState` and `dispose` for examples of manual control.
+  final TestForm? formModel;
 
   final Widget? child;
 
@@ -127,29 +135,45 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
 
   @override
   void initState() {
-    _formModel = TestForm(TestForm.formElements(widget.model), null);
+    super.initState();
+
+    if (widget.model != null && widget.formModel != null) {
+      throw ArgumentError('Cannot provide both model and formModel.');
+    }
+
+    _formModel =
+        widget.formModel ?? TestForm(TestForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
     }
 
     widget.initState?.call(context, _formModel);
-
-    super.initState();
   }
 
   @override
   void didUpdateWidget(covariant TestFormBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
     if (widget.model != oldWidget.model) {
       _formModel.updateValue(widget.model);
     }
 
-    super.didUpdateWidget(oldWidget);
+    if (widget.formModel != oldWidget.formModel) {
+      if (widget.formModel == null) {
+        throw ArgumentError('formModel must not be set to null');
+      }
+
+      _formModel = widget.formModel!;
+    }
   }
 
   @override
   void dispose() {
-    _formModel.form.dispose();
+    if (widget.formModel == null) {
+      _formModel.form.dispose();
+    }
+
     super.dispose();
   }
 
@@ -185,9 +209,13 @@ class TestForm implements FormModel<Test> {
   final String? path;
 
   String titleControlPath() => pathBuilder(titleControlName);
+
   String descriptionControlPath() => pathBuilder(descriptionControlName);
+
   String get _titleValue => titleControl.value as String;
+
   String? get _descriptionValue => descriptionControl?.value;
+
   bool get containsTitle {
     try {
       form.control(titleControlPath());
@@ -207,9 +235,13 @@ class TestForm implements FormModel<Test> {
   }
 
   Object? get titleErrors => titleControl.errors;
+
   Object? get descriptionErrors => descriptionControl?.errors;
+
   void get titleFocus => form.focus(titleControlPath());
+
   void get descriptionFocus => form.focus(descriptionControlPath());
+
   void descriptionRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -281,6 +313,7 @@ class TestForm implements FormModel<Test> {
   }) =>
       titleControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void descriptionValueReset(
     String? value, {
     bool updateParent = true,
@@ -290,11 +323,14 @@ class TestForm implements FormModel<Test> {
   }) =>
       descriptionControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String> get titleControl =>
       form.control(titleControlPath()) as FormControl<String>;
+
   FormControl<String>? get descriptionControl => containsDescription
       ? form.control(descriptionControlPath()) as FormControl<String>?
       : null;
+
   void titleSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -366,6 +402,7 @@ class TestForm implements FormModel<Test> {
   }) =>
       form.updateValue(TestForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Test? value,
@@ -376,8 +413,10 @@ class TestForm implements FormModel<Test> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Test? test) => FormGroup({
         titleControlName: FormControl<String>(
             value: test?.title,
