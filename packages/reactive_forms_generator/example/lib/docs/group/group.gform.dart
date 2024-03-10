@@ -188,6 +188,8 @@ class GroupForm implements FormModel<Group> {
 
   final String? path;
 
+  final Map<String, bool> _disabled = {};
+
   String personalControlPath() => pathBuilder(personalControlName);
   String phoneControlPath() => pathBuilder(phoneControlName);
   String addressControlPath() => pathBuilder(addressControlName);
@@ -548,7 +550,9 @@ class GroupForm implements FormModel<Group> {
 
   @override
   Group get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'GroupForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -558,6 +562,46 @@ class GroupForm implements FormModel<Group> {
         phone: _phoneValue,
         address: _addressValue,
         address2: _address2Value);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      personalForm.toggleDisabled();
+      phoneForm.toggleDisabled();
+      addressForm.toggleDisabled();
+      address2Form.toggleDisabled();
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      personalForm.toggleDisabled();
+      phoneForm.toggleDisabled();
+      addressForm.toggleDisabled();
+      address2Form.toggleDisabled();
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -622,6 +666,8 @@ class PersonalForm implements FormModel<Personal> {
   final FormGroup form;
 
   final String? path;
+
+  final Map<String, bool> _disabled = {};
 
   String nameControlPath() => pathBuilder(nameControlName);
   String emailControlPath() => pathBuilder(emailControlName);
@@ -799,12 +845,46 @@ class PersonalForm implements FormModel<Personal> {
 
   @override
   Personal get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'PersonalForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Personal(name: _nameValue, email: _emailValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -879,6 +959,8 @@ class PhoneForm implements FormModel<Phone> {
   final FormGroup form;
 
   final String? path;
+
+  final Map<String, bool> _disabled = {};
 
   String phoneNumberControlPath() => pathBuilder(phoneNumberControlName);
   String countryIsoControlPath() => pathBuilder(countryIsoControlName);
@@ -1056,12 +1138,46 @@ class PhoneForm implements FormModel<Phone> {
 
   @override
   Phone get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'PhoneForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Phone(phoneNumber: _phoneNumberValue, countryIso: _countryIsoValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -1138,6 +1254,8 @@ class AddressForm implements FormModel<Address> {
   final FormGroup form;
 
   final String? path;
+
+  final Map<String, bool> _disabled = {};
 
   String streetControlPath() => pathBuilder(streetControlName);
   String cityControlPath() => pathBuilder(cityControlName);
@@ -1402,12 +1520,46 @@ class AddressForm implements FormModel<Address> {
 
   @override
   Address get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override

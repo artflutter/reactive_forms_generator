@@ -200,6 +200,8 @@ class ProfileForm implements FormModel<Profile> {
 
   final String? path;
 
+  final Map<String, bool> _disabled = {};
+
   String idControlPath() => pathBuilder(idControlName);
   String anotherIdControlPath() => pathBuilder(anotherIdControlName);
   String nameControlPath() => pathBuilder(nameControlName);
@@ -830,7 +832,9 @@ class ProfileForm implements FormModel<Profile> {
 
   @override
   Profile get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'ProfileForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -845,6 +849,44 @@ class ProfileForm implements FormModel<Profile> {
         threshold: _thresholdValue,
         timer: _timerValue,
         audioGuidance: _audioGuidanceValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      incidenceFilterForm.toggleDisabled();
+      thresholdForm.toggleDisabled();
+      timerForm.toggleDisabled();
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      incidenceFilterForm.toggleDisabled();
+      thresholdForm.toggleDisabled();
+      timerForm.toggleDisabled();
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -967,6 +1009,8 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
   final FormGroup form;
 
   final String? path;
+
+  final Map<String, bool> _disabled = {};
 
   String isMobilityEnabledControlPath() =>
       pathBuilder(isMobilityEnabledControlName);
@@ -1339,7 +1383,9 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
 
   @override
   IncidenceFilter get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'IncidenceFilterForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -1351,6 +1397,38 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
         isSuppurationEnabled: _isSuppurationEnabledValue,
         isCalculusEnabled: _isCalculusEnabledValue,
         isPlaqueEnabled: _isPlaqueEnabledValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -1453,6 +1531,8 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
   final FormGroup form;
 
   final String? path;
+
+  final Map<String, bool> _disabled = {};
 
   String isEnabledControlPath() => pathBuilder(isEnabledControlName);
   String valueControlPath() => pathBuilder(valueControlName);
@@ -1576,12 +1656,46 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
 
   @override
   ThresholdSetting get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'ThresholdSettingForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return ThresholdSetting(isEnabled: _isEnabledValue, value: _valueValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -1657,6 +1771,8 @@ class TimerSettingForm implements FormModel<TimerSetting> {
   final FormGroup form;
 
   final String? path;
+
+  final Map<String, bool> _disabled = {};
 
   String isEnabledControlPath() => pathBuilder(isEnabledControlName);
   String valueControlPath() => pathBuilder(valueControlName);
@@ -1780,12 +1896,46 @@ class TimerSettingForm implements FormModel<TimerSetting> {
 
   @override
   TimerSetting get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'TimerSettingForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return TimerSetting(isEnabled: _isEnabledValue, value: _valueValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override

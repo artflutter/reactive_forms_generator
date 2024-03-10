@@ -83,7 +83,8 @@ class _AnnotatelessFormWidgetState extends State<AnnotatelessFormWidget> {
                           onPressed: () {
                             debugPrint(formModel.model.email);
                             debugPrint(formModel.model.password);
-                            formModel.form.markAllAsTouched();
+
+                            formModel.form.markAsDisabled();
                             widget.onChange?.call(formModel.model);
                           },
                           child: const Text('Submit raw'),
