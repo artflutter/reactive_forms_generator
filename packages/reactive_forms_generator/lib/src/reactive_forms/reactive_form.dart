@@ -58,9 +58,7 @@ class ReactiveForm {
           ..name = className
           ..extend = const Reference('StatelessWidget')
           ..types.addAll(
-            formGenerator.element.thisType.typeArguments.map(
-              (e) => Reference(e.toString()),
-            ),
+            formGenerator.element.fullGenericTypes,
           )
           ..constructors.add(_constructor)
           ..fields.addAll([

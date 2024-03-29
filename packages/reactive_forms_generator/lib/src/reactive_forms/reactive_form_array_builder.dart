@@ -79,7 +79,7 @@ class ReactiveFormArrayBuilder {
               throw FormControlParentNotFoundException(this);
             }
         
-            return ReactiveFormArray<T>(
+            return ReactiveFormArray<$T>(
               formArray: formControl ?? control?.call(formModel),
               builder: (context, formArray, child) {
                 final values = formArray.controls.map((e) => e.value).toList();
@@ -115,8 +115,8 @@ class ReactiveFormArrayBuilder {
           (b) => b
             ..name = 'formControl'
             ..modifier = FieldModifier.final$
-            ..type = const Reference(
-              'FormArray<T>?',
+            ..type = Reference(
+              'FormArray<$T>?',
             ),
         ),
         Field(
@@ -124,7 +124,7 @@ class ReactiveFormArrayBuilder {
             ..name = 'control'
             ..modifier = FieldModifier.final$
             ..type = Reference(
-              'FormArray<T>? Function(${formGenerator.classNameFull} formModel)?',
+              'FormArray<$T>? Function(${formGenerator.classNameFull} formModel)?',
             ),
         ),
         Field(
@@ -140,15 +140,22 @@ class ReactiveFormArrayBuilder {
             ..name = 'itemBuilder'
             ..modifier = FieldModifier.final$
             ..type = Reference(
-                'Widget Function(BuildContext context, int i, T? item, ${formGenerator.classNameFull} formModel)'),
+                'Widget Function(BuildContext context, int i, $T? item, ${formGenerator.classNameFull} formModel)'),
         ),
       ];
+
+  String get T => 'Reactive${formGenerator.className}ArrayBuilderT';
 
   Class get generate {
     return Class(
       (b) => b
         ..name = 'Reactive${formGenerator.className}ArrayBuilder'
-        ..types.add(const Reference('T'))
+        ..types.addAll(
+          [
+            Reference(T),
+            ...formGenerator.element.fullGenericTypes,
+          ],
+        )
         ..extend = const Reference('StatelessWidget')
         ..constructors.add(_constructor)
         ..methods.add(_buildMethod)

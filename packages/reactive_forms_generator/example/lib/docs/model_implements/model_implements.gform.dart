@@ -418,7 +418,8 @@ class ModelImplementsForm implements FormModel<ModelImplements> {
           disabled: false);
 }
 
-class ReactiveModelImplementsFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveModelImplementsFormArrayBuilder<
+    ReactiveModelImplementsFormArrayBuilderT> extends StatelessWidget {
   const ReactiveModelImplementsFormArrayBuilder({
     Key? key,
     this.control,
@@ -429,16 +430,19 @@ class ReactiveModelImplementsFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveModelImplementsFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(ModelImplementsForm formModel)? control;
+  final FormArray<ReactiveModelImplementsFormArrayBuilderT>? Function(
+      ModelImplementsForm formModel)? control;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       ModelImplementsForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, ModelImplementsForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveModelImplementsFormArrayBuilderT? item,
+      ModelImplementsForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -448,7 +452,7 @@ class ReactiveModelImplementsFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveModelImplementsFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -479,8 +483,8 @@ class ReactiveModelImplementsFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveModelImplementsFormFormGroupArrayBuilder<T>
-    extends StatelessWidget {
+class ReactiveModelImplementsFormFormGroupArrayBuilder<
+    ReactiveModelImplementsFormFormGroupArrayBuilderT> extends StatelessWidget {
   const ReactiveModelImplementsFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -491,17 +495,21 @@ class ReactiveModelImplementsFormFormGroupArrayBuilder<T>
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveModelImplementsFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      ModelImplementsForm formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveModelImplementsFormFormGroupArrayBuilderT>>
+      Function(ModelImplementsForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       ModelImplementsForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, ModelImplementsForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveModelImplementsFormFormGroupArrayBuilderT? item,
+      ModelImplementsForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -516,7 +524,8 @@ class ReactiveModelImplementsFormFormGroupArrayBuilder<T>
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
+        final itemList = (value.value() ??
+                <ReactiveModelImplementsFormFormGroupArrayBuilderT>[])
             .asMap()
             .map((i, item) => MapEntry(
                   i,

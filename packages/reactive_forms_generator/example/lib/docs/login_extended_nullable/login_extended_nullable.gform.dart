@@ -959,7 +959,8 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
           disabled: false);
 }
 
-class ReactiveLoginExtendedNullableFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveLoginExtendedNullableFormArrayBuilder<
+    ReactiveLoginExtendedNullableFormArrayBuilderT> extends StatelessWidget {
   const ReactiveLoginExtendedNullableFormArrayBuilder({
     Key? key,
     this.control,
@@ -970,14 +971,18 @@ class ReactiveLoginExtendedNullableFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveLoginExtendedNullableFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(LoginExtendedNullableForm formModel)? control;
+  final FormArray<ReactiveLoginExtendedNullableFormArrayBuilderT>? Function(
+      LoginExtendedNullableForm formModel)? control;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       LoginExtendedNullableForm formModel)? builder;
 
-  final Widget Function(BuildContext context, int i, T? item,
+  final Widget Function(
+      BuildContext context,
+      int i,
+      ReactiveLoginExtendedNullableFormArrayBuilderT? item,
       LoginExtendedNullableForm formModel) itemBuilder;
 
   @override
@@ -988,7 +993,7 @@ class ReactiveLoginExtendedNullableFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveLoginExtendedNullableFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -1019,7 +1024,8 @@ class ReactiveLoginExtendedNullableFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveLoginExtendedNullableFormFormGroupArrayBuilder<T>
+class ReactiveLoginExtendedNullableFormFormGroupArrayBuilder<
+        ReactiveLoginExtendedNullableFormFormGroupArrayBuilderT>
     extends StatelessWidget {
   const ReactiveLoginExtendedNullableFormFormGroupArrayBuilder({
     Key? key,
@@ -1031,15 +1037,20 @@ class ReactiveLoginExtendedNullableFormFormGroupArrayBuilder<T>
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveLoginExtendedNullableFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      LoginExtendedNullableForm formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveLoginExtendedNullableFormFormGroupArrayBuilderT>>
+      Function(LoginExtendedNullableForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       LoginExtendedNullableForm formModel)? builder;
 
-  final Widget Function(BuildContext context, int i, T? item,
+  final Widget Function(
+      BuildContext context,
+      int i,
+      ReactiveLoginExtendedNullableFormFormGroupArrayBuilderT? item,
       LoginExtendedNullableForm formModel) itemBuilder;
 
   @override
@@ -1055,7 +1066,8 @@ class ReactiveLoginExtendedNullableFormFormGroupArrayBuilder<T>
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
+        final itemList = (value.value() ??
+                <ReactiveLoginExtendedNullableFormFormGroupArrayBuilderT>[])
             .asMap()
             .map((i, item) => MapEntry(
                   i,

@@ -84,7 +84,7 @@ class ReactiveFormGroupArrayBuilder {
             return StreamBuilder<List<Map<String, Object?>?>?>(
               stream: value.control.valueChanges,
               builder: (context, snapshot) {
-                final itemList = (value.value() ?? <T>[])
+                final itemList = (value.value() ?? <$T>[])
                     .asMap()
                     .map((i, item) => MapEntry(
                   i,
@@ -114,8 +114,8 @@ class ReactiveFormGroupArrayBuilder {
           (b) => b
             ..name = 'extended'
             ..modifier = FieldModifier.final$
-            ..type = const Reference(
-              'ExtendedControl<List<Map<String, Object?>?>, List<T>>?',
+            ..type = Reference(
+              'ExtendedControl<List<Map<String, Object?>?>, List<$T>>?',
             ),
         ),
         Field(
@@ -123,7 +123,7 @@ class ReactiveFormGroupArrayBuilder {
             ..name = 'getExtended'
             ..modifier = FieldModifier.final$
             ..type = Reference(
-                'ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(${formGenerator.classNameFull} formModel)?'),
+                'ExtendedControl<List<Map<String, Object?>?>, List<$T>> Function(${formGenerator.classNameFull} formModel)?'),
         ),
         Field(
           (b) => b
@@ -138,15 +138,22 @@ class ReactiveFormGroupArrayBuilder {
             ..name = 'itemBuilder'
             ..modifier = FieldModifier.final$
             ..type = Reference(
-                'Widget Function(BuildContext context, int i, T? item, ${formGenerator.classNameFull} formModel)'),
+                'Widget Function(BuildContext context, int i, $T? item, ${formGenerator.classNameFull} formModel)'),
         ),
       ];
+
+  String get T => 'Reactive${formGenerator.className}FormGroupArrayBuilderT';
 
   Class get generate {
     return Class(
       (b) => b
         ..name = 'Reactive${formGenerator.className}FormGroupArrayBuilder'
-        ..types.add(const Reference('T'))
+        ..types.addAll(
+          [
+            Reference(T),
+            ...formGenerator.element.fullGenericTypes,
+          ],
+        )
         ..extend = const Reference('StatelessWidget')
         ..constructors.add(_constructor)
         ..methods.add(_buildMethod)

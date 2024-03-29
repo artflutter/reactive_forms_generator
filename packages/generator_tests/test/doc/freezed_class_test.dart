@@ -814,7 +814,8 @@ class FreezedClassForm implements FormModel<FreezedClass> {
           disabled: false);
 }
 
-class ReactiveFreezedClassFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveFreezedClassFormArrayBuilder<
+    ReactiveFreezedClassFormArrayBuilderT> extends StatelessWidget {
   const ReactiveFreezedClassFormArrayBuilder({
     Key? key,
     this.control,
@@ -825,16 +826,19 @@ class ReactiveFreezedClassFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveFreezedClassFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(FreezedClassForm formModel)? control;
+  final FormArray<ReactiveFreezedClassFormArrayBuilderT>? Function(
+      FreezedClassForm formModel)? control;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       FreezedClassForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, FreezedClassForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveFreezedClassFormArrayBuilderT? item,
+      FreezedClassForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -844,7 +848,7 @@ class ReactiveFreezedClassFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveFreezedClassFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -875,7 +879,8 @@ class ReactiveFreezedClassFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveFreezedClassFormFormGroupArrayBuilder<T> extends StatelessWidget {
+class ReactiveFreezedClassFormFormGroupArrayBuilder<
+    ReactiveFreezedClassFormFormGroupArrayBuilderT> extends StatelessWidget {
   const ReactiveFreezedClassFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -886,17 +891,21 @@ class ReactiveFreezedClassFormFormGroupArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveFreezedClassFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      FreezedClassForm formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveFreezedClassFormFormGroupArrayBuilderT>>
+      Function(FreezedClassForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       FreezedClassForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, FreezedClassForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveFreezedClassFormFormGroupArrayBuilderT? item,
+      FreezedClassForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -911,7 +920,8 @@ class ReactiveFreezedClassFormFormGroupArrayBuilder<T> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
+        final itemList = (value.value() ??
+                <ReactiveFreezedClassFormFormGroupArrayBuilderT>[])
             .asMap()
             .map((i, item) => MapEntry(
                   i,

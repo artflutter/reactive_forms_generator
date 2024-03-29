@@ -1,3 +1,7 @@
+## [4.8.0-beta.0]
+
+* fix for https://github.com/artflutter/reactive_forms_generator/issues/155
+
 ## [4.6.0]
 
 * toggleEnabled method added.

@@ -193,9 +193,7 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
   final Map<String, bool> _disabled = {};
 
   String listControlPath() => pathBuilder(listControlName);
-
   List<T?> get _listValue => listControl.value?.whereType<T?>().toList() ?? [];
-
   bool get containsList {
     try {
       form.control(listControlPath());
@@ -206,9 +204,7 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
   }
 
   Object? get listErrors => listControl.errors;
-
   void get listFocus => form.focus(listControlPath());
-
   void listValueUpdate(
     List<T?> value, {
     bool updateParent = true,
@@ -236,10 +232,8 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
   }) =>
       listControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-
   FormArray<T> get listControl =>
       form.control(listControlPath()) as FormArray<T>;
-
   void listSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -367,7 +361,6 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
   }) =>
       form.updateValue(StatusListForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
-
   @override
   void reset({
     StatusList<T>? value,
@@ -378,10 +371,8 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
-
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-
   static FormGroup formElements<T extends Enum>(StatusList<T>? statusList) =>
       FormGroup({
         listControlName: FormArray<T>(
@@ -405,8 +396,8 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
           disabled: false);
 }
 
-class ReactiveStatusListFormArrayBuilder<T extends Enum>
-    extends StatelessWidget {
+class ReactiveStatusListFormArrayBuilder<ReactiveStatusListFormArrayBuilderT,
+    T extends Enum> extends StatelessWidget {
   const ReactiveStatusListFormArrayBuilder({
     Key? key,
     this.control,
@@ -417,16 +408,19 @@ class ReactiveStatusListFormArrayBuilder<T extends Enum>
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveStatusListFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(StatusListForm<T> formModel)? control;
+  final FormArray<ReactiveStatusListFormArrayBuilderT>? Function(
+      StatusListForm<T> formModel)? control;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       StatusListForm<T> formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, StatusListForm<T> formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveStatusListFormArrayBuilderT? item,
+      StatusListForm<T> formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -436,7 +430,7 @@ class ReactiveStatusListFormArrayBuilder<T extends Enum>
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveStatusListFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -467,8 +461,9 @@ class ReactiveStatusListFormArrayBuilder<T extends Enum>
   }
 }
 
-class ReactiveStatusListFormFormGroupArrayBuilder<T extends Enum>
-    extends StatelessWidget {
+class ReactiveStatusListFormFormGroupArrayBuilder<
+    ReactiveStatusListFormFormGroupArrayBuilderT,
+    T extends Enum> extends StatelessWidget {
   const ReactiveStatusListFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -479,17 +474,21 @@ class ReactiveStatusListFormFormGroupArrayBuilder<T extends Enum>
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveStatusListFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      StatusListForm<T> formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveStatusListFormFormGroupArrayBuilderT>>
+      Function(StatusListForm<T> formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       StatusListForm<T> formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, StatusListForm<T> formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveStatusListFormFormGroupArrayBuilderT? item,
+      StatusListForm<T> formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -504,19 +503,20 @@ class ReactiveStatusListFormFormGroupArrayBuilder<T extends Enum>
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ?? <ReactiveStatusListFormFormGroupArrayBuilderT>[])
+                .asMap()
+                .map((i, item) => MapEntry(
+                      i,
+                      itemBuilder(
+                        context,
+                        i,
+                        item,
+                        formModel,
+                      ),
+                    ))
+                .values
+                .toList();
 
         return builder?.call(
               context,

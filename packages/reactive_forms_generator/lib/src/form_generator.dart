@@ -682,7 +682,7 @@ class FormGenerator {
               Method(
                 (b) {
                   b
-                    ..name = 'formElements${element.generics}'
+                    ..name = 'formElements${element.fullGenerics}'
                     ..static = true
                     ..lambda = true
                     ..requiredParameters.add(

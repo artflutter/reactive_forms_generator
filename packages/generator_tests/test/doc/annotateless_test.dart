@@ -455,7 +455,8 @@ class AnnotatelessForm implements FormModel<Annotateless> {
           disabled: false);
 }
 
-class ReactiveAnnotatelessFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveAnnotatelessFormArrayBuilder<
+    ReactiveAnnotatelessFormArrayBuilderT> extends StatelessWidget {
   const ReactiveAnnotatelessFormArrayBuilder({
     Key? key,
     this.control,
@@ -466,16 +467,19 @@ class ReactiveAnnotatelessFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveAnnotatelessFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(AnnotatelessForm formModel)? control;
+  final FormArray<ReactiveAnnotatelessFormArrayBuilderT>? Function(
+      AnnotatelessForm formModel)? control;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       AnnotatelessForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, AnnotatelessForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveAnnotatelessFormArrayBuilderT? item,
+      AnnotatelessForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -485,7 +489,7 @@ class ReactiveAnnotatelessFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveAnnotatelessFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -516,7 +520,8 @@ class ReactiveAnnotatelessFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveAnnotatelessFormFormGroupArrayBuilder<T> extends StatelessWidget {
+class ReactiveAnnotatelessFormFormGroupArrayBuilder<
+    ReactiveAnnotatelessFormFormGroupArrayBuilderT> extends StatelessWidget {
   const ReactiveAnnotatelessFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -527,17 +532,21 @@ class ReactiveAnnotatelessFormFormGroupArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveAnnotatelessFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      AnnotatelessForm formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveAnnotatelessFormFormGroupArrayBuilderT>>
+      Function(AnnotatelessForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       AnnotatelessForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, AnnotatelessForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveAnnotatelessFormFormGroupArrayBuilderT? item,
+      AnnotatelessForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -552,7 +561,8 @@ class ReactiveAnnotatelessFormFormGroupArrayBuilder<T> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
+        final itemList = (value.value() ??
+                <ReactiveAnnotatelessFormFormGroupArrayBuilderT>[])
             .asMap()
             .map((i, item) => MapEntry(
                   i,
