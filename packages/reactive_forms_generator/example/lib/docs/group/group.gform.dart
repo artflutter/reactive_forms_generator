@@ -127,7 +127,8 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
 
   @override
   void initState() {
-    _formModel = GroupForm(GroupForm.formElements(widget.model), null);
+    _formModel =
+        GroupForm(GroupForm.formElements(widget.model ?? Group()), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();

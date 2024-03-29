@@ -103,14 +103,14 @@ extension ReactiveReactiveLoginExtendedFormExt on BuildContext {
 class LoginExtendedFormBuilder extends StatefulWidget {
   const LoginExtendedFormBuilder({
     Key? key,
-    this.model,
+    required this.model,
     this.child,
     this.onWillPop,
     required this.builder,
     this.initState,
   }) : super(key: key);
 
-  final LoginExtended? model;
+  final LoginExtended model;
 
   final Widget? child;
 

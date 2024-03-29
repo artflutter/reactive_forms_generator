@@ -132,8 +132,8 @@ class _StatusListFormBuilderState<T> extends State<StatusListFormBuilder<T>> {
 
   @override
   void initState() {
-    _formModel =
-        StatusListForm<T>(StatusListForm.formElements<T>(widget.model), null);
+    _formModel = StatusListForm<T>(
+        StatusListForm.formElements<T>(widget.model ?? StatusList<T>()), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();

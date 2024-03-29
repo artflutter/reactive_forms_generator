@@ -102,14 +102,14 @@ extension ReactiveReactiveUserProfileFormExt on BuildContext {
 class UserProfileFormBuilder extends StatefulWidget {
   const UserProfileFormBuilder({
     Key? key,
-    this.model,
+    required this.model,
     this.child,
     this.onWillPop,
     required this.builder,
     this.initState,
   }) : super(key: key);
 
-  final UserProfile? model;
+  final UserProfile model;
 
   final Widget? child;
 

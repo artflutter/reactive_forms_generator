@@ -1,3 +1,7 @@
+## [4.7.0-beta.0]
+
+* detect if model required for builder
+
 ## [4.6.0-beta.2]
 
 * updated the error check method to prevent throwing useless stack traces

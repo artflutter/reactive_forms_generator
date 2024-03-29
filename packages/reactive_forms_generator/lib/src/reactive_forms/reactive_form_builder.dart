@@ -50,8 +50,8 @@ class ReactiveFormBuilder {
                   ..name = 'model'
                   ..named = true
                   ..toThis = true
-                  ..required = !reactiveForm.reactiveInheritedStreamer
-                      .formGenerator.element.isNullable,
+                  ..required = reactiveForm.reactiveInheritedStreamer
+                      .formGenerator.element.isModelRequired,
               ),
               Parameter(
                 (b) => b
@@ -85,7 +85,7 @@ class ReactiveFormBuilder {
       (b) => b
         ..name = 'model'
         ..type = Reference(
-          '${_element.fullTypeName}${_element.isNullable ? '?' : ''}',
+          '${_element.fullTypeName}${_element.isModelRequired ? '' : '?'}',
         )
         ..modifier = FieldModifier.final$,
     );
@@ -135,12 +135,23 @@ class ReactiveFormBuilder {
 
   List<Method> get _stateMethods => [
         Method(
-          (b) => b
-            ..name = 'initState'
-            ..annotations.add(const CodeExpression(Code('override')))
-            ..returns = const Reference('void')
-            ..body = Code('''
-                _formModel = ${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull}(${reactiveForm.reactiveInheritedStreamer.formGenerator.className}.formElements${reactiveForm.reactiveInheritedStreamer.formGenerator.element.generics}(widget.model), null);
+          (b) {
+            final classNameFull = reactiveForm
+                .reactiveInheritedStreamer.formGenerator.classNameFull;
+            final className =
+                reactiveForm.reactiveInheritedStreamer.formGenerator.className;
+            final fullTypeName = _element.fullTypeName;
+            final isModelRequired = reactiveForm.reactiveInheritedStreamer
+                .formGenerator.element.isModelRequired;
+            final generics = reactiveForm
+                .reactiveInheritedStreamer.formGenerator.element.generics;
+
+            b
+              ..name = 'initState'
+              ..annotations.add(const CodeExpression(Code('override')))
+              ..returns = const Reference('void')
+              ..body = Code('''
+                _formModel = $classNameFull($className.formElements$generics(widget.model ${isModelRequired ? '' : '?? $fullTypeName()'}), null);
 
                 if (_formModel.form.disabled) {
                   _formModel.form.markAsDisabled();
@@ -149,7 +160,8 @@ class ReactiveFormBuilder {
                 widget.initState?.call(context, _formModel);
                 
                 super.initState();              
-              '''),
+              ''');
+          },
         ),
         Method(
           (b) => b

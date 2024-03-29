@@ -132,8 +132,8 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
-        DeliveryListForm(DeliveryListForm.formElements(widget.model), null);
+    _formModel = DeliveryListForm(
+        DeliveryListForm.formElements(widget.model ?? DeliveryList()), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -1844,7 +1844,9 @@ class _StandaloneDeliveryPointFormBuilderState
   @override
   void initState() {
     _formModel = StandaloneDeliveryPointForm(
-        StandaloneDeliveryPointForm.formElements(widget.model), null);
+        StandaloneDeliveryPointForm.formElements(
+            widget.model ?? DeliveryPoint()),
+        null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();

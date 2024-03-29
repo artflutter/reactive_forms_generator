@@ -36,7 +36,7 @@ class Group with _$Group {
 @freezed
 class Nested with _$Nested {
   const factory Nested({
-    @RfArray<dynamic>() required List<Group> groupList,
+    @RfArray<dynamic>() @Default([]) List<Group> groupList,
   }) = _Nested;
 
   factory Nested.fromJson(Map<String, dynamic> json) => _$NestedFromJson(json);
