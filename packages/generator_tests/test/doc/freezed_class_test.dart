@@ -250,6 +250,8 @@ class FreezedClassForm implements FormModel<FreezedClass> {
 
   final String? path;
 
+  final Map<String, bool> _disabled = {};
+
   String genderControlPath() => pathBuilder(genderControlName);
   String idControlPath() => pathBuilder(idControlName);
   String nameControlPath() => pathBuilder(nameControlName);
@@ -686,7 +688,9 @@ class FreezedClassForm implements FormModel<FreezedClass> {
 
   @override
   FreezedClass get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'FreezedClassForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -696,6 +700,38 @@ class FreezedClassForm implements FormModel<FreezedClass> {
         name: _nameValue,
         logoImage: _logoImageValue,
         year: _yearValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override

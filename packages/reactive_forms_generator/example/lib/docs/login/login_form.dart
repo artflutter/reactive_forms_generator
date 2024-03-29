@@ -117,7 +117,9 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                           key: submitRaw.itemKey,
                           onPressed: () => formModel.submit(
                             onValid: (_) => debugPrint('FormValid'),
-                            onNotValid: () => debugPrint('FormInvalid'),
+                            onNotValid: () {
+                              debugPrint('FormInvalid');
+                            },
                           ),
                           child: const Text('Submit method'),
                         ),
@@ -142,6 +144,24 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                           key: reset.itemKey,
                           onPressed: () => formModel.reset(),
                           child: const Text('Reset'),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () =>
+                              formModel.emailControl.markAsDisabled(),
+                          child: const Text('Disable Email'),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () => formModel.toggleDisabled(),
+                          child: const Text('Toggle Disabled'),
                         ),
                       ),
                     ],
