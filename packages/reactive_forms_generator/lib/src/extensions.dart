@@ -17,14 +17,31 @@ extension ClassElementExt on ClassElement {
   String get fullTypeName => thisType.toString();
 
   String get generics {
-    final generics = thisType.typeArguments.join(', ');
+    final generics = genericTypes.map((e) => e.symbol).join(', ');
 
     return generics.isNotEmpty ? "<$generics>" : "";
   }
 
-  Iterable<Reference> get genericTypes => thisType.typeArguments.map(
-        (e) => Reference(e.getDisplayString(withNullability: false)),
-      );
+  String get fullGenerics {
+    final generics = thisType.typeArguments
+        .map((e) => e.element)
+        .whereType<Element>()
+        .join(', ');
+
+    return generics.isNotEmpty ? "<$generics>" : "";
+  }
+
+  Iterable<Reference> get genericTypes {
+    return thisType.typeArguments.map(
+      (e) => Reference(e.getDisplayString(withNullability: false)),
+    );
+  }
+
+  Iterable<Reference> get fullGenericTypes {
+    return thisType.typeArguments.map(
+      (e) => Reference(e.element?.getDisplayString(withNullability: false)),
+    );
+  }
 
   List<ParameterElement> get annotatedParameters {
     final annotatedConstructors =

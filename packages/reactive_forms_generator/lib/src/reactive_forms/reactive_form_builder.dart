@@ -125,7 +125,7 @@ class ReactiveFormBuilder {
 
   Class get _widget => Class(
         (b) => b
-          ..types.addAll(_element.genericTypes)
+          ..types.addAll(_element.fullGenericTypes)
           ..name = className
           ..extend = const Reference('StatefulWidget')
           ..fields.addAll(_widgetFields)
@@ -214,7 +214,7 @@ class ReactiveFormBuilder {
 
   Class get _state => Class(
         (b) => b
-          ..types.addAll(_element.genericTypes)
+          ..types.addAll(_element.fullGenericTypes)
           ..name = stateClassName
           ..extend = Reference('State<$className${_element.generics}>')
           ..fields.addAll(

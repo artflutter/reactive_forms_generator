@@ -90,9 +90,7 @@ class ReactiveForm {
                   ..name = 'of'
                   ..static = true
                   ..types.addAll(
-                    formGenerator.element.thisType.typeArguments.map(
-                      (e) => Reference(e.toString()),
-                    ),
+                    formGenerator.element.fullGenericTypes,
                   )
                   ..returns = Reference('${formGenerator.classNameFull}?')
                   ..requiredParameters.add(

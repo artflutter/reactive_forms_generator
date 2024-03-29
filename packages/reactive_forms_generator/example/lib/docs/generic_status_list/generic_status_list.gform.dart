@@ -9,7 +9,7 @@ part of 'generic_status_list.dart';
 // ReactiveFormsGenerator
 // **************************************************************************
 
-class ReactiveStatusListFormConsumer<T> extends StatelessWidget {
+class ReactiveStatusListFormConsumer<T extends Enum> extends StatelessWidget {
   const ReactiveStatusListFormConsumer({
     Key? key,
     required this.builder,
@@ -32,7 +32,8 @@ class ReactiveStatusListFormConsumer<T> extends StatelessWidget {
   }
 }
 
-class StatusListFormInheritedStreamer<T> extends InheritedStreamer<dynamic> {
+class StatusListFormInheritedStreamer<T extends Enum>
+    extends InheritedStreamer<dynamic> {
   const StatusListFormInheritedStreamer({
     Key? key,
     required this.form,
@@ -47,7 +48,7 @@ class StatusListFormInheritedStreamer<T> extends InheritedStreamer<dynamic> {
   final StatusListForm<T> form;
 }
 
-class ReactiveStatusListForm<T> extends StatelessWidget {
+class ReactiveStatusListForm<T extends Enum> extends StatelessWidget {
   const ReactiveStatusListForm({
     Key? key,
     required this.form,
@@ -61,7 +62,7 @@ class ReactiveStatusListForm<T> extends StatelessWidget {
 
   final WillPopCallback? onWillPop;
 
-  static StatusListForm<T>? of<T>(
+  static StatusListForm<T>? of<T extends Enum>(
     BuildContext context, {
     bool listen = true,
   }) {
@@ -93,14 +94,14 @@ class ReactiveStatusListForm<T> extends StatelessWidget {
 }
 
 extension ReactiveReactiveStatusListFormExt on BuildContext {
-  StatusListForm<T>? statusListFormWatch<T>() =>
+  StatusListForm<T>? statusListFormWatch<T extends Enum>() =>
       ReactiveStatusListForm.of<T>(this);
 
-  StatusListForm<T>? statusListFormRead<T>() =>
+  StatusListForm<T>? statusListFormRead<T extends Enum>() =>
       ReactiveStatusListForm.of<T>(this, listen: false);
 }
 
-class StatusListFormBuilder<T> extends StatefulWidget {
+class StatusListFormBuilder<T extends Enum> extends StatefulWidget {
   const StatusListFormBuilder({
     Key? key,
     this.model,
@@ -127,7 +128,8 @@ class StatusListFormBuilder<T> extends StatefulWidget {
       _StatusListFormBuilderState<T>();
 }
 
-class _StatusListFormBuilderState<T> extends State<StatusListFormBuilder<T>> {
+class _StatusListFormBuilderState<T extends Enum>
+    extends State<StatusListFormBuilder<T>> {
   late StatusListForm<T> _formModel;
 
   @override
@@ -176,7 +178,7 @@ class _StatusListFormBuilderState<T> extends State<StatusListFormBuilder<T>> {
   }
 }
 
-class StatusListForm<T> implements FormModel<StatusList<T>> {
+class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
   StatusListForm(
     this.form,
     this.path,
@@ -191,7 +193,9 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
   final Map<String, bool> _disabled = {};
 
   String listControlPath() => pathBuilder(listControlName);
+
   List<T?> get _listValue => listControl.value?.whereType<T?>().toList() ?? [];
+
   bool get containsList {
     try {
       form.control(listControlPath());
@@ -202,7 +206,9 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
   }
 
   Object? get listErrors => listControl.errors;
+
   void get listFocus => form.focus(listControlPath());
+
   void listValueUpdate(
     List<T?> value, {
     bool updateParent = true,
@@ -230,8 +236,10 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
   }) =>
       listControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormArray<T> get listControl =>
       form.control(listControlPath()) as FormArray<T>;
+
   void listSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -359,6 +367,7 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
   }) =>
       form.updateValue(StatusListForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     StatusList<T>? value,
@@ -369,9 +378,12 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  static FormGroup formElements<T>(StatusList<T>? statusList) => FormGroup({
+
+  static FormGroup formElements<T extends Enum>(StatusList<T>? statusList) =>
+      FormGroup({
         listControlName: FormArray<T>(
             (statusList?.list ?? [])
                 .map((e) => FormControl<T>(
@@ -393,7 +405,8 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
           disabled: false);
 }
 
-class ReactiveStatusListFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveStatusListFormArrayBuilder<T extends Enum>
+    extends StatelessWidget {
   const ReactiveStatusListFormArrayBuilder({
     Key? key,
     this.control,
@@ -454,7 +467,8 @@ class ReactiveStatusListFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveStatusListFormFormGroupArrayBuilder<T> extends StatelessWidget {
+class ReactiveStatusListFormFormGroupArrayBuilder<T extends Enum>
+    extends StatelessWidget {
   const ReactiveStatusListFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
