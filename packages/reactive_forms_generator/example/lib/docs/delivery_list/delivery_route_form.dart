@@ -134,7 +134,6 @@ class DeliveryListFormWidget extends StatelessWidget {
                               onChange?.call(formModel.model);
                             } else {
                               formModel.form.markAllAsTouched();
-                              print(formModel.form.errors);
                             }
                           },
                           child: Text(submit.name),

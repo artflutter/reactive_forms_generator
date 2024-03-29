@@ -118,7 +118,6 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                           onPressed: () => formModel.submit(
                             onValid: (_) => debugPrint('FormValid'),
                             onNotValid: () {
-                              print(formModel.form.errors);
                               debugPrint('FormInvalid');
                             },
                           ),

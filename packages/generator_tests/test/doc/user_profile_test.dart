@@ -268,6 +268,8 @@ class UserProfileForm implements FormModel<UserProfile> {
 
   final String? path;
 
+  final Map<String, bool> _disabled = {};
+
   String idControlPath() => pathBuilder(idControlName);
   String firstNameControlPath() => pathBuilder(firstNameControlName);
   String lastNameControlPath() => pathBuilder(lastNameControlName);
@@ -601,7 +603,9 @@ class UserProfileForm implements FormModel<UserProfile> {
 
   @override
   UserProfile get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'UserProfileForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -612,6 +616,42 @@ class UserProfileForm implements FormModel<UserProfile> {
         lastName: _lastNameValue,
         home: _homeValue,
         office: _officeValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      homeForm.toggleDisabled();
+      officeForm.toggleDisabled();
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      homeForm.toggleDisabled();
+      officeForm.toggleDisabled();
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -697,6 +737,8 @@ class AddressForm implements FormModel<Address> {
   final FormGroup form;
 
   final String? path;
+
+  final Map<String, bool> _disabled = {};
 
   String streetControlPath() => pathBuilder(streetControlName);
   String cityControlPath() => pathBuilder(cityControlName);
@@ -961,12 +1003,46 @@ class AddressForm implements FormModel<Address> {
 
   @override
   Address get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override

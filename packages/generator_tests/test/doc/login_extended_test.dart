@@ -9,7 +9,7 @@ void main() {
   group('reactive_forms_generator', () {
     test(
       'Form with simple non-nullable types',
-      () async {
+          () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -310,6 +310,8 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   final FormGroup form;
 
   final String? path;
+
+  final Map<String, bool> _disabled = {};
 
   String emailControlPath() => pathBuilder(emailControlName);
   String passwordControlPath() => pathBuilder(passwordControlName);
@@ -880,7 +882,9 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
 
   @override
   LoginExtended get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'LoginExtendedForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -895,6 +899,38 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
         height: _heightValue,
         unAnnotated: _unAnnotatedValue,
         someIntList: _someIntListValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
