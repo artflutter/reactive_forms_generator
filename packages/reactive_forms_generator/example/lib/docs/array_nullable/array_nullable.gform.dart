@@ -103,14 +103,14 @@ extension ReactiveReactiveArrayNullableFormExt on BuildContext {
 class ArrayNullableFormBuilder extends StatefulWidget {
   const ArrayNullableFormBuilder({
     Key? key,
-    required this.model,
+    this.model,
     this.child,
     this.onWillPop,
     required this.builder,
     this.initState,
   }) : super(key: key);
 
-  final ArrayNullable model;
+  final ArrayNullable? model;
 
   final Widget? child;
 

@@ -127,8 +127,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
-        LoginForm(LoginForm.formElements(widget.model ?? Login()), null);
+    _formModel = LoginForm(LoginForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();

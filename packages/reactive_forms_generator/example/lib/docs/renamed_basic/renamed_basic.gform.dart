@@ -132,8 +132,8 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
 
   @override
   void initState() {
-    _formModel = SomeWiredNameForm(
-        SomeWiredNameForm.formElements(widget.model ?? RenamedBasic()), null);
+    _formModel =
+        SomeWiredNameForm(SomeWiredNameForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();

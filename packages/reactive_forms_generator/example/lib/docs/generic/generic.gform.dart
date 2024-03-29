@@ -100,14 +100,14 @@ extension ReactiveReactiveTagsFormExt on BuildContext {
 class TagsFormBuilder<T> extends StatefulWidget {
   const TagsFormBuilder({
     Key? key,
-    required this.model,
+    this.model,
     this.child,
     this.onWillPop,
     required this.builder,
     this.initState,
   }) : super(key: key);
 
-  final Tags<T> model;
+  final Tags<T>? model;
 
   final Widget? child;
 

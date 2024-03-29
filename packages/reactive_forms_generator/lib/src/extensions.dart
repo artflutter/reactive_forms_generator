@@ -38,17 +38,6 @@ extension ClassElementExt on ClassElement {
   }
 
   bool get isNullable => annotatedParameters.fold(true, (acc, e) => acc);
-
-  bool get isModelRequired {
-    final x = annotatedParameters.fold(
-      false,
-      (acc, e) {
-        return acc || e.isRequiredNonNullableWithoutDefaultValue;
-      },
-    );
-
-    return x;
-  }
 }
 
 extension ParameterElementExt on ParameterElement {
@@ -180,14 +169,6 @@ extension ParameterElementExt on ParameterElement {
   bool get isFormGroup => type.element?.hasRfGroupAnnotation ?? false;
 
   bool get isForm => hasRfAnnotation;
-
-  bool get isRequiredNonNullableWithoutDefaultValue {
-    if (isPositional || isRequiredNamed && !hasDefaultValue) {
-      return true;
-    }
-
-    return false;
-  }
 }
 
 extension FieldElementExt on FieldElement {

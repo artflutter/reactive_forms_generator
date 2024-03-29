@@ -103,14 +103,14 @@ extension ReactiveReactiveFreezedClassFormExt on BuildContext {
 class FreezedClassFormBuilder extends StatefulWidget {
   const FreezedClassFormBuilder({
     Key? key,
-    required this.model,
+    this.model,
     this.child,
     this.onWillPop,
     required this.builder,
     this.initState,
   }) : super(key: key);
 
-  final FreezedClass model;
+  final FreezedClass? model;
 
   final Widget? child;
 

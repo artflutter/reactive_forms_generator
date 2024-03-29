@@ -136,8 +136,7 @@ class _ModelImplementsFormBuilderState
   @override
   void initState() {
     _formModel = ModelImplementsForm(
-        ModelImplementsForm.formElements(widget.model ?? ModelImplements()),
-        null);
+        ModelImplementsForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();

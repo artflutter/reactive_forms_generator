@@ -12,7 +12,7 @@ part of 'profile.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Profile _$ProfileFromJson(Map<String, dynamic> json) {
   return _Profile.fromJson(json);
@@ -166,10 +166,10 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
 }
 
 /// @nodoc
-abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
-  factory _$$ProfileImplCopyWith(
-          _$ProfileImpl value, $Res Function(_$ProfileImpl) then) =
-      __$$ProfileImplCopyWithImpl<$Res>;
+abstract class _$$_ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
+  factory _$$_ProfileCopyWith(
+          _$_Profile value, $Res Function(_$_Profile) then) =
+      __$$_ProfileCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -195,11 +195,10 @@ abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$ProfileImplCopyWithImpl<$Res>
-    extends _$ProfileCopyWithImpl<$Res, _$ProfileImpl>
-    implements _$$ProfileImplCopyWith<$Res> {
-  __$$ProfileImplCopyWithImpl(
-      _$ProfileImpl _value, $Res Function(_$ProfileImpl) _then)
+class __$$_ProfileCopyWithImpl<$Res>
+    extends _$ProfileCopyWithImpl<$Res, _$_Profile>
+    implements _$$_ProfileCopyWith<$Res> {
+  __$$_ProfileCopyWithImpl(_$_Profile _value, $Res Function(_$_Profile) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -216,7 +215,7 @@ class __$$ProfileImplCopyWithImpl<$Res>
     Object? timer = null,
     Object? audioGuidance = null,
   }) {
-    return _then(_$ProfileImpl(
+    return _then(_$_Profile(
       null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -263,8 +262,8 @@ class __$$ProfileImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ProfileImpl extends _Profile {
-  _$ProfileImpl(this.id,
+class _$_Profile extends _Profile {
+  _$_Profile(this.id,
       {required this.anotherId,
       @RfControl<String>() required this.name,
       @RfControl<ChartingOrderValue>() required this.chartingOrder,
@@ -276,8 +275,8 @@ class _$ProfileImpl extends _Profile {
       @RfControl<bool>() required this.audioGuidance})
       : super._();
 
-  factory _$ProfileImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ProfileImplFromJson(json);
+  factory _$_Profile.fromJson(Map<String, dynamic> json) =>
+      _$$_ProfileFromJson(json);
 
   @override
   final String id;
@@ -311,10 +310,10 @@ class _$ProfileImpl extends _Profile {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProfileImpl &&
+            other is _$_Profile &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.anotherId, anotherId) ||
                 other.anotherId == anotherId) &&
@@ -352,12 +351,12 @@ class _$ProfileImpl extends _Profile {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith =>
-      __$$ProfileImplCopyWithImpl<_$ProfileImpl>(this, _$identity);
+  _$$_ProfileCopyWith<_$_Profile> get copyWith =>
+      __$$_ProfileCopyWithImpl<_$_Profile>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ProfileImplToJson(
+    return _$$_ProfileToJson(
       this,
     );
   }
@@ -376,10 +375,10 @@ abstract class _Profile extends Profile {
       required final MeasurementType measurementType,
       required final ThresholdSetting threshold,
       required final TimerSetting timer,
-      @RfControl<bool>() required final bool audioGuidance}) = _$ProfileImpl;
+      @RfControl<bool>() required final bool audioGuidance}) = _$_Profile;
   _Profile._() : super._();
 
-  factory _Profile.fromJson(Map<String, dynamic> json) = _$ProfileImpl.fromJson;
+  factory _Profile.fromJson(Map<String, dynamic> json) = _$_Profile.fromJson;
 
   @override
   String get id;
@@ -408,7 +407,7 @@ abstract class _Profile extends Profile {
   bool get audioGuidance;
   @override
   @JsonKey(ignore: true)
-  _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith =>
+  _$$_ProfileCopyWith<_$_Profile> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -468,22 +467,22 @@ class _$ThresholdSettingCopyWithImpl<$Res, $Val extends ThresholdSetting>
 }
 
 /// @nodoc
-abstract class _$$ThresholdSettingImplCopyWith<$Res>
+abstract class _$$_ThresholdSettingCopyWith<$Res>
     implements $ThresholdSettingCopyWith<$Res> {
-  factory _$$ThresholdSettingImplCopyWith(_$ThresholdSettingImpl value,
-          $Res Function(_$ThresholdSettingImpl) then) =
-      __$$ThresholdSettingImplCopyWithImpl<$Res>;
+  factory _$$_ThresholdSettingCopyWith(
+          _$_ThresholdSetting value, $Res Function(_$_ThresholdSetting) then) =
+      __$$_ThresholdSettingCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
 }
 
 /// @nodoc
-class __$$ThresholdSettingImplCopyWithImpl<$Res>
-    extends _$ThresholdSettingCopyWithImpl<$Res, _$ThresholdSettingImpl>
-    implements _$$ThresholdSettingImplCopyWith<$Res> {
-  __$$ThresholdSettingImplCopyWithImpl(_$ThresholdSettingImpl _value,
-      $Res Function(_$ThresholdSettingImpl) _then)
+class __$$_ThresholdSettingCopyWithImpl<$Res>
+    extends _$ThresholdSettingCopyWithImpl<$Res, _$_ThresholdSetting>
+    implements _$$_ThresholdSettingCopyWith<$Res> {
+  __$$_ThresholdSettingCopyWithImpl(
+      _$_ThresholdSetting _value, $Res Function(_$_ThresholdSetting) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -492,7 +491,7 @@ class __$$ThresholdSettingImplCopyWithImpl<$Res>
     Object? isEnabled = null,
     Object? value = null,
   }) {
-    return _then(_$ThresholdSettingImpl(
+    return _then(_$_ThresholdSetting(
       isEnabled: null == isEnabled
           ? _value.isEnabled
           : isEnabled // ignore: cast_nullable_to_non_nullable
@@ -507,13 +506,13 @@ class __$$ThresholdSettingImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ThresholdSettingImpl implements _ThresholdSetting {
-  const _$ThresholdSettingImpl(
+class _$_ThresholdSetting implements _ThresholdSetting {
+  const _$_ThresholdSetting(
       {@RfControl<bool>() this.isEnabled = true,
       @RfControl<int>() this.value = 2});
 
-  factory _$ThresholdSettingImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ThresholdSettingImplFromJson(json);
+  factory _$_ThresholdSetting.fromJson(Map<String, dynamic> json) =>
+      _$$_ThresholdSettingFromJson(json);
 
   @override
   @JsonKey()
@@ -530,10 +529,10 @@ class _$ThresholdSettingImpl implements _ThresholdSetting {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ThresholdSettingImpl &&
+            other is _$_ThresholdSetting &&
             (identical(other.isEnabled, isEnabled) ||
                 other.isEnabled == isEnabled) &&
             (identical(other.value, value) || other.value == value));
@@ -546,13 +545,12 @@ class _$ThresholdSettingImpl implements _ThresholdSetting {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ThresholdSettingImplCopyWith<_$ThresholdSettingImpl> get copyWith =>
-      __$$ThresholdSettingImplCopyWithImpl<_$ThresholdSettingImpl>(
-          this, _$identity);
+  _$$_ThresholdSettingCopyWith<_$_ThresholdSetting> get copyWith =>
+      __$$_ThresholdSettingCopyWithImpl<_$_ThresholdSetting>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ThresholdSettingImplToJson(
+    return _$$_ThresholdSettingToJson(
       this,
     );
   }
@@ -561,10 +559,10 @@ class _$ThresholdSettingImpl implements _ThresholdSetting {
 abstract class _ThresholdSetting implements ThresholdSetting {
   const factory _ThresholdSetting(
       {@RfControl<bool>() final bool isEnabled,
-      @RfControl<int>() final int value}) = _$ThresholdSettingImpl;
+      @RfControl<int>() final int value}) = _$_ThresholdSetting;
 
   factory _ThresholdSetting.fromJson(Map<String, dynamic> json) =
-      _$ThresholdSettingImpl.fromJson;
+      _$_ThresholdSetting.fromJson;
 
   @override
   @RfControl<bool>()
@@ -574,7 +572,7 @@ abstract class _ThresholdSetting implements ThresholdSetting {
   int get value;
   @override
   @JsonKey(ignore: true)
-  _$$ThresholdSettingImplCopyWith<_$ThresholdSettingImpl> get copyWith =>
+  _$$_ThresholdSettingCopyWith<_$_ThresholdSetting> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -634,22 +632,22 @@ class _$TimerSettingCopyWithImpl<$Res, $Val extends TimerSetting>
 }
 
 /// @nodoc
-abstract class _$$TimerSettingImplCopyWith<$Res>
+abstract class _$$_TimerSettingCopyWith<$Res>
     implements $TimerSettingCopyWith<$Res> {
-  factory _$$TimerSettingImplCopyWith(
-          _$TimerSettingImpl value, $Res Function(_$TimerSettingImpl) then) =
-      __$$TimerSettingImplCopyWithImpl<$Res>;
+  factory _$$_TimerSettingCopyWith(
+          _$_TimerSetting value, $Res Function(_$_TimerSetting) then) =
+      __$$_TimerSettingCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
 }
 
 /// @nodoc
-class __$$TimerSettingImplCopyWithImpl<$Res>
-    extends _$TimerSettingCopyWithImpl<$Res, _$TimerSettingImpl>
-    implements _$$TimerSettingImplCopyWith<$Res> {
-  __$$TimerSettingImplCopyWithImpl(
-      _$TimerSettingImpl _value, $Res Function(_$TimerSettingImpl) _then)
+class __$$_TimerSettingCopyWithImpl<$Res>
+    extends _$TimerSettingCopyWithImpl<$Res, _$_TimerSetting>
+    implements _$$_TimerSettingCopyWith<$Res> {
+  __$$_TimerSettingCopyWithImpl(
+      _$_TimerSetting _value, $Res Function(_$_TimerSetting) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -658,7 +656,7 @@ class __$$TimerSettingImplCopyWithImpl<$Res>
     Object? isEnabled = null,
     Object? value = null,
   }) {
-    return _then(_$TimerSettingImpl(
+    return _then(_$_TimerSetting(
       isEnabled: null == isEnabled
           ? _value.isEnabled
           : isEnabled // ignore: cast_nullable_to_non_nullable
@@ -673,13 +671,13 @@ class __$$TimerSettingImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$TimerSettingImpl implements _TimerSetting {
-  const _$TimerSettingImpl(
+class _$_TimerSetting implements _TimerSetting {
+  const _$_TimerSetting(
       {@RfControl<bool>() this.isEnabled = false,
       @RfControl<int>() this.value = 5});
 
-  factory _$TimerSettingImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TimerSettingImplFromJson(json);
+  factory _$_TimerSetting.fromJson(Map<String, dynamic> json) =>
+      _$$_TimerSettingFromJson(json);
 
   @override
   @JsonKey()
@@ -696,10 +694,10 @@ class _$TimerSettingImpl implements _TimerSetting {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TimerSettingImpl &&
+            other is _$_TimerSetting &&
             (identical(other.isEnabled, isEnabled) ||
                 other.isEnabled == isEnabled) &&
             (identical(other.value, value) || other.value == value));
@@ -712,12 +710,12 @@ class _$TimerSettingImpl implements _TimerSetting {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TimerSettingImplCopyWith<_$TimerSettingImpl> get copyWith =>
-      __$$TimerSettingImplCopyWithImpl<_$TimerSettingImpl>(this, _$identity);
+  _$$_TimerSettingCopyWith<_$_TimerSetting> get copyWith =>
+      __$$_TimerSettingCopyWithImpl<_$_TimerSetting>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TimerSettingImplToJson(
+    return _$$_TimerSettingToJson(
       this,
     );
   }
@@ -726,10 +724,10 @@ class _$TimerSettingImpl implements _TimerSetting {
 abstract class _TimerSetting implements TimerSetting {
   const factory _TimerSetting(
       {@RfControl<bool>() final bool isEnabled,
-      @RfControl<int>() final int value}) = _$TimerSettingImpl;
+      @RfControl<int>() final int value}) = _$_TimerSetting;
 
   factory _TimerSetting.fromJson(Map<String, dynamic> json) =
-      _$TimerSettingImpl.fromJson;
+      _$_TimerSetting.fromJson;
 
   @override
   @RfControl<bool>()
@@ -739,7 +737,7 @@ abstract class _TimerSetting implements TimerSetting {
   int get value;
   @override
   @JsonKey(ignore: true)
-  _$$TimerSettingImplCopyWith<_$TimerSettingImpl> get copyWith =>
+  _$$_TimerSettingCopyWith<_$_TimerSetting> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -833,11 +831,11 @@ class _$IncidenceFilterCopyWithImpl<$Res, $Val extends IncidenceFilter>
 }
 
 /// @nodoc
-abstract class _$$IncidenceFilterImplCopyWith<$Res>
+abstract class _$$_IncidenceFilterCopyWith<$Res>
     implements $IncidenceFilterCopyWith<$Res> {
-  factory _$$IncidenceFilterImplCopyWith(_$IncidenceFilterImpl value,
-          $Res Function(_$IncidenceFilterImpl) then) =
-      __$$IncidenceFilterImplCopyWithImpl<$Res>;
+  factory _$$_IncidenceFilterCopyWith(
+          _$_IncidenceFilter value, $Res Function(_$_IncidenceFilter) then) =
+      __$$_IncidenceFilterCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -850,11 +848,11 @@ abstract class _$$IncidenceFilterImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$IncidenceFilterImplCopyWithImpl<$Res>
-    extends _$IncidenceFilterCopyWithImpl<$Res, _$IncidenceFilterImpl>
-    implements _$$IncidenceFilterImplCopyWith<$Res> {
-  __$$IncidenceFilterImplCopyWithImpl(
-      _$IncidenceFilterImpl _value, $Res Function(_$IncidenceFilterImpl) _then)
+class __$$_IncidenceFilterCopyWithImpl<$Res>
+    extends _$IncidenceFilterCopyWithImpl<$Res, _$_IncidenceFilter>
+    implements _$$_IncidenceFilterCopyWith<$Res> {
+  __$$_IncidenceFilterCopyWithImpl(
+      _$_IncidenceFilter _value, $Res Function(_$_IncidenceFilter) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -867,7 +865,7 @@ class __$$IncidenceFilterImplCopyWithImpl<$Res>
     Object? isCalculusEnabled = null,
     Object? isPlaqueEnabled = null,
   }) {
-    return _then(_$IncidenceFilterImpl(
+    return _then(_$_IncidenceFilter(
       isMobilityEnabled: null == isMobilityEnabled
           ? _value.isMobilityEnabled
           : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
@@ -898,8 +896,8 @@ class __$$IncidenceFilterImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$IncidenceFilterImpl implements _IncidenceFilter {
-  const _$IncidenceFilterImpl(
+class _$_IncidenceFilter implements _IncidenceFilter {
+  const _$_IncidenceFilter(
       {@RfControl<bool>() this.isMobilityEnabled = true,
       @RfControl<bool>() this.isFurcationEnabled = true,
       @RfControl<bool>() this.isBleedingEnabled = true,
@@ -907,8 +905,8 @@ class _$IncidenceFilterImpl implements _IncidenceFilter {
       @RfControl<bool>() this.isCalculusEnabled = true,
       @RfControl<bool>() this.isPlaqueEnabled = true});
 
-  factory _$IncidenceFilterImpl.fromJson(Map<String, dynamic> json) =>
-      _$$IncidenceFilterImplFromJson(json);
+  factory _$_IncidenceFilter.fromJson(Map<String, dynamic> json) =>
+      _$$_IncidenceFilterFromJson(json);
 
   @override
   @JsonKey()
@@ -941,10 +939,10 @@ class _$IncidenceFilterImpl implements _IncidenceFilter {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$IncidenceFilterImpl &&
+            other is _$_IncidenceFilter &&
             (identical(other.isMobilityEnabled, isMobilityEnabled) ||
                 other.isMobilityEnabled == isMobilityEnabled) &&
             (identical(other.isFurcationEnabled, isFurcationEnabled) ||
@@ -973,13 +971,12 @@ class _$IncidenceFilterImpl implements _IncidenceFilter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$IncidenceFilterImplCopyWith<_$IncidenceFilterImpl> get copyWith =>
-      __$$IncidenceFilterImplCopyWithImpl<_$IncidenceFilterImpl>(
-          this, _$identity);
+  _$$_IncidenceFilterCopyWith<_$_IncidenceFilter> get copyWith =>
+      __$$_IncidenceFilterCopyWithImpl<_$_IncidenceFilter>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$IncidenceFilterImplToJson(
+    return _$$_IncidenceFilterToJson(
       this,
     );
   }
@@ -992,10 +989,10 @@ abstract class _IncidenceFilter implements IncidenceFilter {
       @RfControl<bool>() final bool isBleedingEnabled,
       @RfControl<bool>() final bool isSuppurationEnabled,
       @RfControl<bool>() final bool isCalculusEnabled,
-      @RfControl<bool>() final bool isPlaqueEnabled}) = _$IncidenceFilterImpl;
+      @RfControl<bool>() final bool isPlaqueEnabled}) = _$_IncidenceFilter;
 
   factory _IncidenceFilter.fromJson(Map<String, dynamic> json) =
-      _$IncidenceFilterImpl.fromJson;
+      _$_IncidenceFilter.fromJson;
 
   @override
   @RfControl<bool>()
@@ -1017,7 +1014,7 @@ abstract class _IncidenceFilter implements IncidenceFilter {
   bool get isPlaqueEnabled;
   @override
   @JsonKey(ignore: true)
-  _$$IncidenceFilterImplCopyWith<_$IncidenceFilterImpl> get copyWith =>
+  _$$_IncidenceFilterCopyWith<_$_IncidenceFilter> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1127,22 +1124,22 @@ class _$ScanOrderCopyWithImpl<$Res, $Val extends ScanOrder>
 }
 
 /// @nodoc
-abstract class _$$ArchScanOrderImplCopyWith<$Res>
+abstract class _$$ArchScanOrderCopyWith<$Res>
     implements $ScanOrderCopyWith<$Res> {
-  factory _$$ArchScanOrderImplCopyWith(
-          _$ArchScanOrderImpl value, $Res Function(_$ArchScanOrderImpl) then) =
-      __$$ArchScanOrderImplCopyWithImpl<$Res>;
+  factory _$$ArchScanOrderCopyWith(
+          _$ArchScanOrder value, $Res Function(_$ArchScanOrder) then) =
+      __$$ArchScanOrderCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Jaw jaw, Direction direction, ToothSide toothSide});
 }
 
 /// @nodoc
-class __$$ArchScanOrderImplCopyWithImpl<$Res>
-    extends _$ScanOrderCopyWithImpl<$Res, _$ArchScanOrderImpl>
-    implements _$$ArchScanOrderImplCopyWith<$Res> {
-  __$$ArchScanOrderImplCopyWithImpl(
-      _$ArchScanOrderImpl _value, $Res Function(_$ArchScanOrderImpl) _then)
+class __$$ArchScanOrderCopyWithImpl<$Res>
+    extends _$ScanOrderCopyWithImpl<$Res, _$ArchScanOrder>
+    implements _$$ArchScanOrderCopyWith<$Res> {
+  __$$ArchScanOrderCopyWithImpl(
+      _$ArchScanOrder _value, $Res Function(_$ArchScanOrder) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1152,7 +1149,7 @@ class __$$ArchScanOrderImplCopyWithImpl<$Res>
     Object? direction = null,
     Object? toothSide = null,
   }) {
-    return _then(_$ArchScanOrderImpl(
+    return _then(_$ArchScanOrder(
       null == jaw
           ? _value.jaw
           : jaw // ignore: cast_nullable_to_non_nullable
@@ -1171,13 +1168,13 @@ class __$$ArchScanOrderImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ArchScanOrderImpl implements ArchScanOrder {
-  const _$ArchScanOrderImpl(this.jaw,
+class _$ArchScanOrder implements ArchScanOrder {
+  const _$ArchScanOrder(this.jaw,
       {required this.direction, required this.toothSide, final String? $type})
       : $type = $type ?? 'arch';
 
-  factory _$ArchScanOrderImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ArchScanOrderImplFromJson(json);
+  factory _$ArchScanOrder.fromJson(Map<String, dynamic> json) =>
+      _$$ArchScanOrderFromJson(json);
 
   @override
   final Jaw jaw;
@@ -1195,10 +1192,10 @@ class _$ArchScanOrderImpl implements ArchScanOrder {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ArchScanOrderImpl &&
+            other is _$ArchScanOrder &&
             (identical(other.jaw, jaw) || other.jaw == jaw) &&
             (identical(other.direction, direction) ||
                 other.direction == direction) &&
@@ -1213,8 +1210,8 @@ class _$ArchScanOrderImpl implements ArchScanOrder {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ArchScanOrderImplCopyWith<_$ArchScanOrderImpl> get copyWith =>
-      __$$ArchScanOrderImplCopyWithImpl<_$ArchScanOrderImpl>(this, _$identity);
+  _$$ArchScanOrderCopyWith<_$ArchScanOrder> get copyWith =>
+      __$$ArchScanOrderCopyWithImpl<_$ArchScanOrder>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1287,7 +1284,7 @@ class _$ArchScanOrderImpl implements ArchScanOrder {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ArchScanOrderImplToJson(
+    return _$$ArchScanOrderToJson(
       this,
     );
   }
@@ -1296,10 +1293,10 @@ class _$ArchScanOrderImpl implements ArchScanOrder {
 abstract class ArchScanOrder implements ScanOrder {
   const factory ArchScanOrder(final Jaw jaw,
       {required final Direction direction,
-      required final ToothSide toothSide}) = _$ArchScanOrderImpl;
+      required final ToothSide toothSide}) = _$ArchScanOrder;
 
   factory ArchScanOrder.fromJson(Map<String, dynamic> json) =
-      _$ArchScanOrderImpl.fromJson;
+      _$ArchScanOrder.fromJson;
 
   Jaw get jaw;
   @override
@@ -1308,27 +1305,27 @@ abstract class ArchScanOrder implements ScanOrder {
   ToothSide get toothSide;
   @override
   @JsonKey(ignore: true)
-  _$$ArchScanOrderImplCopyWith<_$ArchScanOrderImpl> get copyWith =>
+  _$$ArchScanOrderCopyWith<_$ArchScanOrder> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$QuadrantScanOrderImplCopyWith<$Res>
+abstract class _$$QuadrantScanOrderCopyWith<$Res>
     implements $ScanOrderCopyWith<$Res> {
-  factory _$$QuadrantScanOrderImplCopyWith(_$QuadrantScanOrderImpl value,
-          $Res Function(_$QuadrantScanOrderImpl) then) =
-      __$$QuadrantScanOrderImplCopyWithImpl<$Res>;
+  factory _$$QuadrantScanOrderCopyWith(
+          _$QuadrantScanOrder value, $Res Function(_$QuadrantScanOrder) then) =
+      __$$QuadrantScanOrderCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Quadrant quadrant, Direction direction, ToothSide toothSide});
 }
 
 /// @nodoc
-class __$$QuadrantScanOrderImplCopyWithImpl<$Res>
-    extends _$ScanOrderCopyWithImpl<$Res, _$QuadrantScanOrderImpl>
-    implements _$$QuadrantScanOrderImplCopyWith<$Res> {
-  __$$QuadrantScanOrderImplCopyWithImpl(_$QuadrantScanOrderImpl _value,
-      $Res Function(_$QuadrantScanOrderImpl) _then)
+class __$$QuadrantScanOrderCopyWithImpl<$Res>
+    extends _$ScanOrderCopyWithImpl<$Res, _$QuadrantScanOrder>
+    implements _$$QuadrantScanOrderCopyWith<$Res> {
+  __$$QuadrantScanOrderCopyWithImpl(
+      _$QuadrantScanOrder _value, $Res Function(_$QuadrantScanOrder) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1338,7 +1335,7 @@ class __$$QuadrantScanOrderImplCopyWithImpl<$Res>
     Object? direction = null,
     Object? toothSide = null,
   }) {
-    return _then(_$QuadrantScanOrderImpl(
+    return _then(_$QuadrantScanOrder(
       null == quadrant
           ? _value.quadrant
           : quadrant // ignore: cast_nullable_to_non_nullable
@@ -1357,13 +1354,13 @@ class __$$QuadrantScanOrderImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$QuadrantScanOrderImpl implements QuadrantScanOrder {
-  const _$QuadrantScanOrderImpl(this.quadrant,
+class _$QuadrantScanOrder implements QuadrantScanOrder {
+  const _$QuadrantScanOrder(this.quadrant,
       {required this.direction, required this.toothSide, final String? $type})
       : $type = $type ?? 'quadrant';
 
-  factory _$QuadrantScanOrderImpl.fromJson(Map<String, dynamic> json) =>
-      _$$QuadrantScanOrderImplFromJson(json);
+  factory _$QuadrantScanOrder.fromJson(Map<String, dynamic> json) =>
+      _$$QuadrantScanOrderFromJson(json);
 
   @override
   final Quadrant quadrant;
@@ -1381,10 +1378,10 @@ class _$QuadrantScanOrderImpl implements QuadrantScanOrder {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$QuadrantScanOrderImpl &&
+            other is _$QuadrantScanOrder &&
             (identical(other.quadrant, quadrant) ||
                 other.quadrant == quadrant) &&
             (identical(other.direction, direction) ||
@@ -1400,9 +1397,8 @@ class _$QuadrantScanOrderImpl implements QuadrantScanOrder {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$QuadrantScanOrderImplCopyWith<_$QuadrantScanOrderImpl> get copyWith =>
-      __$$QuadrantScanOrderImplCopyWithImpl<_$QuadrantScanOrderImpl>(
-          this, _$identity);
+  _$$QuadrantScanOrderCopyWith<_$QuadrantScanOrder> get copyWith =>
+      __$$QuadrantScanOrderCopyWithImpl<_$QuadrantScanOrder>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1475,7 +1471,7 @@ class _$QuadrantScanOrderImpl implements QuadrantScanOrder {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$QuadrantScanOrderImplToJson(
+    return _$$QuadrantScanOrderToJson(
       this,
     );
   }
@@ -1484,10 +1480,10 @@ class _$QuadrantScanOrderImpl implements QuadrantScanOrder {
 abstract class QuadrantScanOrder implements ScanOrder {
   const factory QuadrantScanOrder(final Quadrant quadrant,
       {required final Direction direction,
-      required final ToothSide toothSide}) = _$QuadrantScanOrderImpl;
+      required final ToothSide toothSide}) = _$QuadrantScanOrder;
 
   factory QuadrantScanOrder.fromJson(Map<String, dynamic> json) =
-      _$QuadrantScanOrderImpl.fromJson;
+      _$QuadrantScanOrder.fromJson;
 
   Quadrant get quadrant;
   @override
@@ -1496,7 +1492,7 @@ abstract class QuadrantScanOrder implements ScanOrder {
   ToothSide get toothSide;
   @override
   @JsonKey(ignore: true)
-  _$$QuadrantScanOrderImplCopyWith<_$QuadrantScanOrderImpl> get copyWith =>
+  _$$QuadrantScanOrderCopyWith<_$QuadrantScanOrder> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1563,11 +1559,11 @@ class _$ChartingOrderValueCopyWithImpl<$Res, $Val extends ChartingOrderValue>
 }
 
 /// @nodoc
-abstract class _$$ChartingOrderValueImplCopyWith<$Res>
+abstract class _$$_ChartingOrderValueCopyWith<$Res>
     implements $ChartingOrderValueCopyWith<$Res> {
-  factory _$$ChartingOrderValueImplCopyWith(_$ChartingOrderValueImpl value,
-          $Res Function(_$ChartingOrderValueImpl) then) =
-      __$$ChartingOrderValueImplCopyWithImpl<$Res>;
+  factory _$$_ChartingOrderValueCopyWith(_$_ChartingOrderValue value,
+          $Res Function(_$_ChartingOrderValue) then) =
+      __$$_ChartingOrderValueCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1577,11 +1573,11 @@ abstract class _$$ChartingOrderValueImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ChartingOrderValueImplCopyWithImpl<$Res>
-    extends _$ChartingOrderValueCopyWithImpl<$Res, _$ChartingOrderValueImpl>
-    implements _$$ChartingOrderValueImplCopyWith<$Res> {
-  __$$ChartingOrderValueImplCopyWithImpl(_$ChartingOrderValueImpl _value,
-      $Res Function(_$ChartingOrderValueImpl) _then)
+class __$$_ChartingOrderValueCopyWithImpl<$Res>
+    extends _$ChartingOrderValueCopyWithImpl<$Res, _$_ChartingOrderValue>
+    implements _$$_ChartingOrderValueCopyWith<$Res> {
+  __$$_ChartingOrderValueCopyWithImpl(
+      _$_ChartingOrderValue _value, $Res Function(_$_ChartingOrderValue) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1591,7 +1587,7 @@ class __$$ChartingOrderValueImplCopyWithImpl<$Res>
     Object? selectedOption = null,
     Object? order = null,
   }) {
-    return _then(_$ChartingOrderValueImpl(
+    return _then(_$_ChartingOrderValue(
       chartingOrder: null == chartingOrder
           ? _value.chartingOrder
           : chartingOrder // ignore: cast_nullable_to_non_nullable
@@ -1610,15 +1606,15 @@ class __$$ChartingOrderValueImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ChartingOrderValueImpl implements _ChartingOrderValue {
-  const _$ChartingOrderValueImpl(
+class _$_ChartingOrderValue implements _ChartingOrderValue {
+  const _$_ChartingOrderValue(
       {this.chartingOrder = ChartingOrderType.arch,
       this.selectedOption = 0,
       required final List<List<ScanOrder>> order})
       : _order = order;
 
-  factory _$ChartingOrderValueImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ChartingOrderValueImplFromJson(json);
+  factory _$_ChartingOrderValue.fromJson(Map<String, dynamic> json) =>
+      _$$_ChartingOrderValueFromJson(json);
 
   @override
   @JsonKey()
@@ -1640,10 +1636,10 @@ class _$ChartingOrderValueImpl implements _ChartingOrderValue {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ChartingOrderValueImpl &&
+            other is _$_ChartingOrderValue &&
             (identical(other.chartingOrder, chartingOrder) ||
                 other.chartingOrder == chartingOrder) &&
             (identical(other.selectedOption, selectedOption) ||
@@ -1659,13 +1655,13 @@ class _$ChartingOrderValueImpl implements _ChartingOrderValue {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ChartingOrderValueImplCopyWith<_$ChartingOrderValueImpl> get copyWith =>
-      __$$ChartingOrderValueImplCopyWithImpl<_$ChartingOrderValueImpl>(
+  _$$_ChartingOrderValueCopyWith<_$_ChartingOrderValue> get copyWith =>
+      __$$_ChartingOrderValueCopyWithImpl<_$_ChartingOrderValue>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ChartingOrderValueImplToJson(
+    return _$$_ChartingOrderValueToJson(
       this,
     );
   }
@@ -1675,10 +1671,10 @@ abstract class _ChartingOrderValue implements ChartingOrderValue {
   const factory _ChartingOrderValue(
       {final ChartingOrderType chartingOrder,
       final int selectedOption,
-      required final List<List<ScanOrder>> order}) = _$ChartingOrderValueImpl;
+      required final List<List<ScanOrder>> order}) = _$_ChartingOrderValue;
 
   factory _ChartingOrderValue.fromJson(Map<String, dynamic> json) =
-      _$ChartingOrderValueImpl.fromJson;
+      _$_ChartingOrderValue.fromJson;
 
   @override
   ChartingOrderType get chartingOrder;
@@ -1688,6 +1684,6 @@ abstract class _ChartingOrderValue implements ChartingOrderValue {
   List<List<ScanOrder>> get order;
   @override
   @JsonKey(ignore: true)
-  _$$ChartingOrderValueImplCopyWith<_$ChartingOrderValueImpl> get copyWith =>
+  _$$_ChartingOrderValueCopyWith<_$_ChartingOrderValue> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -135,9 +135,7 @@ class _LoginExtendedNullableFormBuilderState
   @override
   void initState() {
     _formModel = LoginExtendedNullableForm(
-        LoginExtendedNullableForm.formElements(
-            widget.model ?? LoginExtendedNullable()),
-        null);
+        LoginExtendedNullableForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();

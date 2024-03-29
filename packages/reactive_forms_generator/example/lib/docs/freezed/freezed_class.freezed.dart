@@ -12,7 +12,7 @@ part of 'freezed_class.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 FreezedClass _$FreezedClassFromJson(Map<String, dynamic> json) {
   return _FreezedClass.fromJson(json);
@@ -97,11 +97,11 @@ class _$FreezedClassCopyWithImpl<$Res, $Val extends FreezedClass>
 }
 
 /// @nodoc
-abstract class _$$FreezedClassImplCopyWith<$Res>
+abstract class _$$_FreezedClassCopyWith<$Res>
     implements $FreezedClassCopyWith<$Res> {
-  factory _$$FreezedClassImplCopyWith(
-          _$FreezedClassImpl value, $Res Function(_$FreezedClassImpl) then) =
-      __$$FreezedClassImplCopyWithImpl<$Res>;
+  factory _$$_FreezedClassCopyWith(
+          _$_FreezedClass value, $Res Function(_$_FreezedClass) then) =
+      __$$_FreezedClassCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -113,11 +113,11 @@ abstract class _$$FreezedClassImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$FreezedClassImplCopyWithImpl<$Res>
-    extends _$FreezedClassCopyWithImpl<$Res, _$FreezedClassImpl>
-    implements _$$FreezedClassImplCopyWith<$Res> {
-  __$$FreezedClassImplCopyWithImpl(
-      _$FreezedClassImpl _value, $Res Function(_$FreezedClassImpl) _then)
+class __$$_FreezedClassCopyWithImpl<$Res>
+    extends _$FreezedClassCopyWithImpl<$Res, _$_FreezedClass>
+    implements _$$_FreezedClassCopyWith<$Res> {
+  __$$_FreezedClassCopyWithImpl(
+      _$_FreezedClass _value, $Res Function(_$_FreezedClass) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -129,7 +129,7 @@ class __$$FreezedClassImplCopyWithImpl<$Res>
     Object? logoImage = freezed,
     Object? year = freezed,
   }) {
-    return _then(_$FreezedClassImpl(
+    return _then(_$_FreezedClass(
       freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
@@ -156,16 +156,16 @@ class __$$FreezedClassImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$FreezedClassImpl extends _FreezedClass {
-  _$FreezedClassImpl(@RfControl<String>() this.gender,
+class _$_FreezedClass extends _FreezedClass {
+  _$_FreezedClass(@RfControl<String>() this.gender,
       {@RfControl(validators: [RequiredValidator()]) this.id,
       @RfControl<String>() this.name,
       @JsonKey(name: 'logo_image') @RfControl<String>() this.logoImage,
       @RfControl<double>() this.year})
       : super._();
 
-  factory _$FreezedClassImpl.fromJson(Map<String, dynamic> json) =>
-      _$$FreezedClassImplFromJson(json);
+  factory _$_FreezedClass.fromJson(Map<String, dynamic> json) =>
+      _$$_FreezedClassFromJson(json);
 
   @override
   @RfControl<String>()
@@ -190,10 +190,10 @@ class _$FreezedClassImpl extends _FreezedClass {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FreezedClassImpl &&
+            other is _$_FreezedClass &&
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
@@ -210,12 +210,12 @@ class _$FreezedClassImpl extends _FreezedClass {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FreezedClassImplCopyWith<_$FreezedClassImpl> get copyWith =>
-      __$$FreezedClassImplCopyWithImpl<_$FreezedClassImpl>(this, _$identity);
+  _$$_FreezedClassCopyWith<_$_FreezedClass> get copyWith =>
+      __$$_FreezedClassCopyWithImpl<_$_FreezedClass>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$FreezedClassImplToJson(
+    return _$$_FreezedClassToJson(
       this,
     );
   }
@@ -226,11 +226,11 @@ abstract class _FreezedClass extends FreezedClass {
       {@RfControl(validators: [RequiredValidator()]) final String? id,
       @RfControl<String>() final String? name,
       @JsonKey(name: 'logo_image') @RfControl<String>() final String? logoImage,
-      @RfControl<double>() final double? year}) = _$FreezedClassImpl;
+      @RfControl<double>() final double? year}) = _$_FreezedClass;
   _FreezedClass._() : super._();
 
   factory _FreezedClass.fromJson(Map<String, dynamic> json) =
-      _$FreezedClassImpl.fromJson;
+      _$_FreezedClass.fromJson;
 
   @override
   @RfControl<String>()
@@ -250,6 +250,6 @@ abstract class _FreezedClass extends FreezedClass {
   double? get year;
   @override
   @JsonKey(ignore: true)
-  _$$FreezedClassImplCopyWith<_$FreezedClassImpl> get copyWith =>
+  _$$_FreezedClassCopyWith<_$_FreezedClass> get copyWith =>
       throw _privateConstructorUsedError;
 }

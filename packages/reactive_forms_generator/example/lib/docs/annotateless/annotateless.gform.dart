@@ -132,8 +132,8 @@ class _AnnotatelessFormBuilderState extends State<AnnotatelessFormBuilder> {
 
   @override
   void initState() {
-    _formModel = AnnotatelessForm(
-        AnnotatelessForm.formElements(widget.model ?? Annotateless()), null);
+    _formModel =
+        AnnotatelessForm(AnnotatelessForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();

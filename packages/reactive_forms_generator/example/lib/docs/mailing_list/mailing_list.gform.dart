@@ -130,8 +130,8 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
 
   @override
   void initState() {
-    _formModel = MailingListForm(
-        MailingListForm.formElements(widget.model ?? MailingList()), null);
+    _formModel =
+        MailingListForm(MailingListForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();

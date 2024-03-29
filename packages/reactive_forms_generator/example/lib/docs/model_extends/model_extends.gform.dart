@@ -132,8 +132,8 @@ class _ModelExtendsFormBuilderState extends State<ModelExtendsFormBuilder> {
 
   @override
   void initState() {
-    _formModel = ModelExtendsForm(
-        ModelExtendsForm.formElements(widget.model ?? ModelExtends()), null);
+    _formModel =
+        ModelExtendsForm(ModelExtendsForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();

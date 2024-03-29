@@ -127,7 +127,7 @@ class _UrlFormBuilderState extends State<UrlFormBuilder> {
 
   @override
   void initState() {
-    _formModel = UrlForm(UrlForm.formElements(widget.model ?? Url()), null);
+    _formModel = UrlForm(UrlForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();

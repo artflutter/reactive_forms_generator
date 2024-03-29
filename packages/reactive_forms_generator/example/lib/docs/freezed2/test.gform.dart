@@ -100,14 +100,14 @@ extension ReactiveReactiveTestFormExt on BuildContext {
 class TestFormBuilder extends StatefulWidget {
   const TestFormBuilder({
     Key? key,
-    required this.model,
+    this.model,
     this.child,
     this.onWillPop,
     required this.builder,
     this.initState,
   }) : super(key: key);
 
-  final Test model;
+  final Test? model;
 
   final Widget? child;
 
