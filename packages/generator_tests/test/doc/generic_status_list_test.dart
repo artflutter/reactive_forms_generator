@@ -18,7 +18,7 @@ void main() {
             part '$fileName.gform.dart';
             
             @Rf()
-            class StatusList<T> {
+            class StatusList<T extends Enum> {
               final List<T?> list;
             
               StatusList({
@@ -44,7 +44,7 @@ part of 'generic_status_list.dart';
 // ReactiveFormsGenerator
 // **************************************************************************
 
-class ReactiveStatusListFormConsumer<T> extends StatelessWidget {
+class ReactiveStatusListFormConsumer<T extends Enum> extends StatelessWidget {
   const ReactiveStatusListFormConsumer({
     Key? key,
     required this.builder,
@@ -67,7 +67,8 @@ class ReactiveStatusListFormConsumer<T> extends StatelessWidget {
   }
 }
 
-class StatusListFormInheritedStreamer<T> extends InheritedStreamer<dynamic> {
+class StatusListFormInheritedStreamer<T extends Enum>
+    extends InheritedStreamer<dynamic> {
   const StatusListFormInheritedStreamer({
     Key? key,
     required this.form,
@@ -82,7 +83,7 @@ class StatusListFormInheritedStreamer<T> extends InheritedStreamer<dynamic> {
   final StatusListForm<T> form;
 }
 
-class ReactiveStatusListForm<T> extends StatelessWidget {
+class ReactiveStatusListForm<T extends Enum> extends StatelessWidget {
   const ReactiveStatusListForm({
     Key? key,
     required this.form,
@@ -96,7 +97,7 @@ class ReactiveStatusListForm<T> extends StatelessWidget {
 
   final WillPopCallback? onWillPop;
 
-  static StatusListForm<T>? of<T>(
+  static StatusListForm<T>? of<T extends Enum>(
     BuildContext context, {
     bool listen = true,
   }) {
@@ -128,14 +129,14 @@ class ReactiveStatusListForm<T> extends StatelessWidget {
 }
 
 extension ReactiveReactiveStatusListFormExt on BuildContext {
-  StatusListForm<T>? statusListFormWatch<T>() =>
+  StatusListForm<T>? statusListFormWatch<T extends Enum>() =>
       ReactiveStatusListForm.of<T>(this);
 
-  StatusListForm<T>? statusListFormRead<T>() =>
+  StatusListForm<T>? statusListFormRead<T extends Enum>() =>
       ReactiveStatusListForm.of<T>(this, listen: false);
 }
 
-class StatusListFormBuilder<T> extends StatefulWidget {
+class StatusListFormBuilder<T extends Enum> extends StatefulWidget {
   const StatusListFormBuilder({
     Key? key,
     this.model,
@@ -162,7 +163,8 @@ class StatusListFormBuilder<T> extends StatefulWidget {
       _StatusListFormBuilderState<T>();
 }
 
-class _StatusListFormBuilderState<T> extends State<StatusListFormBuilder<T>> {
+class _StatusListFormBuilderState<T extends Enum>
+    extends State<StatusListFormBuilder<T>> {
   late StatusListForm<T> _formModel;
 
   @override
@@ -211,7 +213,7 @@ class _StatusListFormBuilderState<T> extends State<StatusListFormBuilder<T>> {
   }
 }
 
-class StatusListForm<T> implements FormModel<StatusList<T>> {
+class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
   StatusListForm(
     this.form,
     this.path,
@@ -406,7 +408,8 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  static FormGroup formElements<T>(StatusList<T>? statusList) => FormGroup({
+  static FormGroup formElements<T extends Enum>(StatusList<T>? statusList) =>
+      FormGroup({
         listControlName: FormArray<T>(
             (statusList?.list ?? [])
                 .map((e) => FormControl<T>(
@@ -428,7 +431,8 @@ class StatusListForm<T> implements FormModel<StatusList<T>> {
           disabled: false);
 }
 
-class ReactiveStatusListFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveStatusListFormArrayBuilder<ReactiveStatusListFormArrayBuilderT,
+    T extends Enum> extends StatelessWidget {
   const ReactiveStatusListFormArrayBuilder({
     Key? key,
     this.control,
@@ -439,16 +443,19 @@ class ReactiveStatusListFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveStatusListFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(StatusListForm<T> formModel)? control;
+  final FormArray<ReactiveStatusListFormArrayBuilderT>? Function(
+      StatusListForm<T> formModel)? control;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       StatusListForm<T> formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, StatusListForm<T> formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveStatusListFormArrayBuilderT? item,
+      StatusListForm<T> formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -458,7 +465,7 @@ class ReactiveStatusListFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveStatusListFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -489,7 +496,9 @@ class ReactiveStatusListFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveStatusListFormFormGroupArrayBuilder<T> extends StatelessWidget {
+class ReactiveStatusListFormFormGroupArrayBuilder<
+    ReactiveStatusListFormFormGroupArrayBuilderT,
+    T extends Enum> extends StatelessWidget {
   const ReactiveStatusListFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -500,17 +509,21 @@ class ReactiveStatusListFormFormGroupArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveStatusListFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      StatusListForm<T> formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveStatusListFormFormGroupArrayBuilderT>>
+      Function(StatusListForm<T> formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       StatusListForm<T> formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, StatusListForm<T> formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveStatusListFormFormGroupArrayBuilderT? item,
+      StatusListForm<T> formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -525,19 +538,20 @@ class ReactiveStatusListFormFormGroupArrayBuilder<T> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ?? <ReactiveStatusListFormFormGroupArrayBuilderT>[])
+                .asMap()
+                .map((i, item) => MapEntry(
+                      i,
+                      itemBuilder(
+                        context,
+                        i,
+                        item,
+                        formModel,
+                      ),
+                    ))
+                .values
+                .toList();
 
         return builder?.call(
               context,

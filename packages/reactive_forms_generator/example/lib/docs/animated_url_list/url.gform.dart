@@ -692,7 +692,8 @@ class UrlEntityForm implements FormModel<UrlEntity> {
           disabled: false);
 }
 
-class ReactiveUrlFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveUrlFormArrayBuilder<ReactiveUrlFormArrayBuilderT>
+    extends StatelessWidget {
   const ReactiveUrlFormArrayBuilder({
     Key? key,
     this.control,
@@ -703,15 +704,16 @@ class ReactiveUrlFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveUrlFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(UrlForm formModel)? control;
+  final FormArray<ReactiveUrlFormArrayBuilderT>? Function(UrlForm formModel)?
+      control;
 
   final Widget Function(
       BuildContext context, List<Widget> itemList, UrlForm formModel)? builder;
 
-  final Widget Function(BuildContext context, int i, T? item, UrlForm formModel)
-      itemBuilder;
+  final Widget Function(BuildContext context, int i,
+      ReactiveUrlFormArrayBuilderT? item, UrlForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -721,7 +723,7 @@ class ReactiveUrlFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveUrlFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -752,7 +754,8 @@ class ReactiveUrlFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveUrlFormFormGroupArrayBuilder<T> extends StatelessWidget {
+class ReactiveUrlFormFormGroupArrayBuilder<
+    ReactiveUrlFormFormGroupArrayBuilderT> extends StatelessWidget {
   const ReactiveUrlFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -763,16 +766,21 @@ class ReactiveUrlFormFormGroupArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveUrlFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      UrlForm formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveUrlFormFormGroupArrayBuilderT>>
+      Function(UrlForm formModel)? getExtended;
 
   final Widget Function(
       BuildContext context, List<Widget> itemList, UrlForm formModel)? builder;
 
-  final Widget Function(BuildContext context, int i, T? item, UrlForm formModel)
-      itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      ReactiveUrlFormFormGroupArrayBuilderT? item,
+      UrlForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -787,19 +795,20 @@ class ReactiveUrlFormFormGroupArrayBuilder<T> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ?? <ReactiveUrlFormFormGroupArrayBuilderT>[])
+                .asMap()
+                .map((i, item) => MapEntry(
+                      i,
+                      itemBuilder(
+                        context,
+                        i,
+                        item,
+                        formModel,
+                      ),
+                    ))
+                .values
+                .toList();
 
         return builder?.call(
               context,

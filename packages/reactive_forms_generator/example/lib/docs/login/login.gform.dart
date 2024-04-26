@@ -411,7 +411,8 @@ class LoginForm implements FormModel<Login> {
           disabled: false);
 }
 
-class ReactiveLoginFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveLoginFormArrayBuilder<ReactiveLoginFormArrayBuilderT>
+    extends StatelessWidget {
   const ReactiveLoginFormArrayBuilder({
     Key? key,
     this.control,
@@ -422,16 +423,17 @@ class ReactiveLoginFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveLoginFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(LoginForm formModel)? control;
+  final FormArray<ReactiveLoginFormArrayBuilderT>? Function(
+      LoginForm formModel)? control;
 
   final Widget Function(
           BuildContext context, List<Widget> itemList, LoginForm formModel)?
       builder;
 
-  final Widget Function(
-      BuildContext context, int i, T? item, LoginForm formModel) itemBuilder;
+  final Widget Function(BuildContext context, int i,
+      ReactiveLoginFormArrayBuilderT? item, LoginForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -441,7 +443,7 @@ class ReactiveLoginFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveLoginFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -472,7 +474,8 @@ class ReactiveLoginFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveLoginFormFormGroupArrayBuilder<T> extends StatelessWidget {
+class ReactiveLoginFormFormGroupArrayBuilder<
+    ReactiveLoginFormFormGroupArrayBuilderT> extends StatelessWidget {
   const ReactiveLoginFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -483,17 +486,22 @@ class ReactiveLoginFormFormGroupArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveLoginFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      LoginForm formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveLoginFormFormGroupArrayBuilderT>>
+      Function(LoginForm formModel)? getExtended;
 
   final Widget Function(
           BuildContext context, List<Widget> itemList, LoginForm formModel)?
       builder;
 
   final Widget Function(
-      BuildContext context, int i, T? item, LoginForm formModel) itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveLoginFormFormGroupArrayBuilderT? item,
+      LoginForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -508,19 +516,20 @@ class ReactiveLoginFormFormGroupArrayBuilder<T> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ?? <ReactiveLoginFormFormGroupArrayBuilderT>[])
+                .asMap()
+                .map((i, item) => MapEntry(
+                      i,
+                      itemBuilder(
+                        context,
+                        i,
+                        item,
+                        formModel,
+                      ),
+                    ))
+                .values
+                .toList();
 
         return builder?.call(
               context,

@@ -86,9 +86,7 @@ class ReactiveFormConsumer {
         (b) => b
           ..name = '${reactiveForm.className}Consumer'
           ..types.addAll(
-            reactiveForm.formGenerator.element.thisType.typeArguments.map(
-              (e) => Reference(e.toString()),
-            ),
+            reactiveForm.formGenerator.element.fullGenericTypes,
           )
           ..extend = const Reference('StatelessWidget')
           ..constructors.add(_constructor)

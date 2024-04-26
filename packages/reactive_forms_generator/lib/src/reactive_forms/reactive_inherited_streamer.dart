@@ -1,4 +1,5 @@
 import 'package:code_builder/code_builder.dart';
+import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/form_generator.dart';
 
 class ReactiveInheritedStreamer {
@@ -58,9 +59,7 @@ class ReactiveInheritedStreamer {
           ..name = className
           ..extend = const Reference('InheritedStreamer<dynamic>')
           ..types.addAll(
-            formGenerator.element.thisType.typeArguments.map(
-              (e) => Reference(e.toString()),
-            ),
+            formGenerator.element.fullGenericTypes,
           )
           ..constructors.add(_constructor)
           ..fields.add(

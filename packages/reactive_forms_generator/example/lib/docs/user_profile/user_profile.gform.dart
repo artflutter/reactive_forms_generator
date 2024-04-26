@@ -1037,7 +1037,8 @@ class AddressForm implements FormModel<Address> {
           disabled: false);
 }
 
-class ReactiveUserProfileFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveUserProfileFormArrayBuilder<ReactiveUserProfileFormArrayBuilderT>
+    extends StatelessWidget {
   const ReactiveUserProfileFormArrayBuilder({
     Key? key,
     this.control,
@@ -1048,16 +1049,19 @@ class ReactiveUserProfileFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveUserProfileFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(UserProfileForm formModel)? control;
+  final FormArray<ReactiveUserProfileFormArrayBuilderT>? Function(
+      UserProfileForm formModel)? control;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       UserProfileForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, UserProfileForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveUserProfileFormArrayBuilderT? item,
+      UserProfileForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1067,7 +1071,7 @@ class ReactiveUserProfileFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveUserProfileFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -1098,7 +1102,8 @@ class ReactiveUserProfileFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveUserProfileFormFormGroupArrayBuilder<T> extends StatelessWidget {
+class ReactiveUserProfileFormFormGroupArrayBuilder<
+    ReactiveUserProfileFormFormGroupArrayBuilderT> extends StatelessWidget {
   const ReactiveUserProfileFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -1109,17 +1114,21 @@ class ReactiveUserProfileFormFormGroupArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveUserProfileFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      UserProfileForm formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveUserProfileFormFormGroupArrayBuilderT>>
+      Function(UserProfileForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       UserProfileForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, UserProfileForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveUserProfileFormFormGroupArrayBuilderT? item,
+      UserProfileForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1134,19 +1143,20 @@ class ReactiveUserProfileFormFormGroupArrayBuilder<T> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ?? <ReactiveUserProfileFormFormGroupArrayBuilderT>[])
+                .asMap()
+                .map((i, item) => MapEntry(
+                      i,
+                      itemBuilder(
+                        context,
+                        i,
+                        item,
+                        formModel,
+                      ),
+                    ))
+                .values
+                .toList();
 
         return builder?.call(
               context,

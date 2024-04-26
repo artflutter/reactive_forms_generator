@@ -608,7 +608,7 @@ class FormGenerator {
       Class(
         (b) => b
           ..name = className
-          ..types.addAll(element.genericTypes)
+          ..types.addAll(element.fullGenericTypes)
           ..implements.add(Reference('FormModel<${element.fullTypeName}>'))
           ..fields.addAll(
             [
@@ -682,7 +682,7 @@ class FormGenerator {
               Method(
                 (b) {
                   b
-                    ..name = 'formElements${element.generics}'
+                    ..name = 'formElements${element.fullGenerics}'
                     ..static = true
                     ..lambda = true
                     ..requiredParameters.add(
