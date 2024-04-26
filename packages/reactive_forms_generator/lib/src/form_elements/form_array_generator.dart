@@ -9,8 +9,7 @@ import 'package:recase/recase.dart';
 import 'package:source_gen/src/type_checker.dart';
 
 class FormArrayGenerator extends FormElementGenerator {
-  FormArrayGenerator(ClassElement root, ParameterElement field, DartType? type)
-      : super(root, field, type);
+  FormArrayGenerator(super.root, super.field, super.type);
 
   DartType get typeParameter =>
       (field.type as ParameterizedType).typeArguments.first;

@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class UrlListForm extends StatefulWidget {
-  const UrlListForm({
-    Key? key,
-  }) : super(key: key);
+  const UrlListForm({super.key});
 
   @override
   State<UrlListForm> createState() => _UrlListFormState();
@@ -187,7 +185,7 @@ class _UrlListFormState extends State<UrlListForm> {
 class UrlListAddItem extends StatelessWidget {
   final VoidCallback onTap;
 
-  const UrlListAddItem({Key? key, required this.onTap}) : super(key: key);
+  const UrlListAddItem({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -215,7 +213,7 @@ class UrlListItem extends StatelessWidget {
   final Widget? header;
   final Widget? content;
 
-  const UrlListItem({Key? key, this.header, this.content}) : super(key: key);
+  const UrlListItem({super.key, this.header, this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -231,7 +229,7 @@ class UrlListItem extends StatelessWidget {
 class UrlListItemHeader extends StatelessWidget {
   final VoidCallback? onTap;
 
-  const UrlListItemHeader({Key? key, this.onTap}) : super(key: key);
+  const UrlListItemHeader({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -262,11 +260,11 @@ class UrlListItemContent extends StatelessWidget {
   final FormControl<String> urlControl;
 
   const UrlListItemContent({
-    Key? key,
+    super.key,
     this.header,
     required this.labelControl,
     required this.urlControl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

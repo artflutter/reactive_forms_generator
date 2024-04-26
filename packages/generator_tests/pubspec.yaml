@@ -41,7 +41,7 @@ dev_dependencies:
   logging: ^1.0.2
   reactive_forms_generator:
     path: ../reactive_forms_generator
-  flutter_lints: ^2.0.1
+  flutter_lints: ^3.0.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

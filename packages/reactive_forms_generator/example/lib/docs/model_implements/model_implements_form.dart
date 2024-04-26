@@ -4,7 +4,7 @@ import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 class ModelImplementsWidget extends StatefulWidget {
-  const ModelImplementsWidget({Key? key}) : super(key: key);
+  const ModelImplementsWidget({super.key});
 
   @override
   State<ModelImplementsWidget> createState() => _ModelImplementsWidgetState();

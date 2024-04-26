@@ -7,7 +7,7 @@ import 'package:flutter/material.dart' hide ProgressIndicator;
 class NestedFormWidget extends StatefulWidget {
   final ValueChanged<Nested>? onChange;
 
-  const NestedFormWidget({Key? key, this.onChange}) : super(key: key);
+  const NestedFormWidget({super.key, this.onChange});
 
   @override
   State<NestedFormWidget> createState() => _NestedFormWidgetState();

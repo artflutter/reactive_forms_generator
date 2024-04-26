@@ -22,12 +22,12 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  reactive_forms: ^16.0.1
+  reactive_forms: ^17.0.0
   flutter:
     sdk: flutter
 
 dev_dependencies:
-  flutter_lints: ^2.0.2
+  flutter_lints: ^3.0.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

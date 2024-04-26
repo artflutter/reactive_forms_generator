@@ -7,7 +7,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'generic.dart';
 
 class GenericFormWidget extends StatefulWidget {
-  const GenericFormWidget({Key? key}) : super(key: key);
+  const GenericFormWidget({super.key});
 
   @override
   GenericFormWidgetState createState() => GenericFormWidgetState();
@@ -49,8 +49,7 @@ class GenericFormWidgetState extends State<GenericFormWidget> {
                               field.didChange(newList);
                             }),
                         ...(field.value ?? ['first tag'])
-                            .map((e) => Text(e.toString()))
-                            .toList(),
+                            .map((e) => Text(e.toString())),
                         Text('field value type: ${field.value.runtimeType}'),
                         Text(tagsAsString)
                       ],
@@ -100,9 +99,7 @@ class GenericFormWidgetState extends State<GenericFormWidget> {
                                     ..removeLast();
                               field.didChange(newList);
                             }),
-                        ...(field.value ?? [0])
-                            .map((e) => Text(e.toString()))
-                            .toList(),
+                        ...(field.value ?? [0]).map((e) => Text(e.toString())),
                         Text('field value type: ${field.value.runtimeType}'),
                         Text(tagsAsInt)
                       ],
