@@ -1,11 +1,10 @@
-import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class RemoveMethod extends ReactiveFormGeneratorMethod {
-  RemoveMethod(ParameterElement field) : super(field);
+  RemoveMethod(super.field);
 
   @override
   Method? defaultMethod() {

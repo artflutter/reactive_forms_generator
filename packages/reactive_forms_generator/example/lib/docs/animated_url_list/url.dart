@@ -1,5 +1,6 @@
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
+
 part 'url.gform.dart';
 
 @Rf()
@@ -17,11 +18,9 @@ class UrlEntity {
   UrlEntity({
     @RfControl(validators: [
       RequiredValidator(),
-    ])
-    this.label = '',
+    ]) this.label = '',
     @RfControl(validators: [
       RequiredValidator(),
-    ])
-    this.url = '',
+    ]) this.url = '',
   });
 }

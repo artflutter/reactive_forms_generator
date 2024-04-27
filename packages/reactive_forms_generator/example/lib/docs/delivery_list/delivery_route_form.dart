@@ -8,7 +8,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 class DeliveryListFormWidget extends StatelessWidget {
   final ValueChanged<DeliveryList>? onChange;
 
-  const DeliveryListFormWidget({Key? key, this.onChange}) : super(key: key);
+  const DeliveryListFormWidget({super.key, this.onChange});
 
   @override
   Widget build(BuildContext context) {

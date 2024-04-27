@@ -2,6 +2,14 @@
 
 * fix for https://github.com/artflutter/reactive_forms_generator/issues/155
 
+## [5.0.0]
+
+* rf17
+
+## [4.8.0]
+
+* toggleEnabled method added.
+
 ## [4.6.0]
 
 * toggleEnabled method added.

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 
 class DeliveryPointWidget extends StatelessWidget {
-  const DeliveryPointWidget({Key? key}) : super(key: key);
+  const DeliveryPointWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

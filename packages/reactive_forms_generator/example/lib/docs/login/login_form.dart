@@ -8,7 +8,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 class LoginFormWidget extends StatefulWidget {
   final ValueChanged<Login>? onChange;
 
-  const LoginFormWidget({Key? key, this.onChange}) : super(key: key);
+  const LoginFormWidget({super.key, this.onChange});
 
   @override
   State<LoginFormWidget> createState() => _LoginFormWidgetState();

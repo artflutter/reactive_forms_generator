@@ -1,11 +1,10 @@
-import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class ExtendedControlMethod extends ReactiveFormGeneratorMethod {
-  ExtendedControlMethod(ParameterElement field) : super(field);
+  ExtendedControlMethod(super.field);
 
   @override
   Method? formGroupArrayMethod() {

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 
 class GroupFormWidget extends StatelessWidget {
-  const GroupFormWidget({Key? key}) : super(key: key);
+  const GroupFormWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

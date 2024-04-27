@@ -39,7 +39,13 @@ class ReactiveForm {
               ),
               Parameter(
                 (b) => b
-                  ..name = 'onWillPop'
+                  ..name = 'canPop'
+                  ..toThis = true
+                  ..named = true,
+              ),
+              Parameter(
+                (b) => b
+                  ..name = 'onPopInvoked'
                   ..toThis = true
                   ..named = true,
               ),
@@ -76,10 +82,17 @@ class ReactiveForm {
             ),
             Field(
               (b) => b
-                ..name = 'onWillPop'
+                ..name = 'canPop'
                 ..modifier = FieldModifier.final$
-                ..type = const Reference('WillPopCallback?'),
-            )
+                ..type = const Reference('bool Function(FormGroup formGroup)?'),
+            ),
+            Field(
+              (b) => b
+                ..name = 'onPopInvoked'
+                ..modifier = FieldModifier.final$
+                ..type = const Reference(
+                    'void Function(FormGroup formGroup, bool didPop)?'),
+            ),
           ])
           ..methods.addAll(
             [
@@ -139,8 +152,9 @@ class ReactiveForm {
                     return ${reactiveInheritedStreamer.className}(
                       form: form,
                       stream: form.form.statusChanged,
-                      child: WillPopScope(
-                        onWillPop: onWillPop,
+                      child: ReactiveFormPopScope(
+                        canPop: canPop,
+                        onPopInvoked: onPopInvoked,
                         child: child,
                       ),
                     );

@@ -8,7 +8,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 class AnnotatelessFormWidget extends StatefulWidget {
   final ValueChanged<Annotateless>? onChange;
 
-  const AnnotatelessFormWidget({Key? key, this.onChange}) : super(key: key);
+  const AnnotatelessFormWidget({super.key, this.onChange});
 
   @override
   State<AnnotatelessFormWidget> createState() => _AnnotatelessFormWidgetState();

@@ -1,14 +1,10 @@
-import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
-import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:source_gen/source_gen.dart';
 
 class FormControlGenerator extends FormElementGenerator {
-  FormControlGenerator(
-      ClassElement root, ParameterElement field, DartType? type)
-      : super(root, field, type);
+  FormControlGenerator(super.root, super.field, super.type);
 
   @override
   String element() {

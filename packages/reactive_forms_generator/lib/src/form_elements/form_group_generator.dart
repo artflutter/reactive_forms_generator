@@ -1,6 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
-import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_array_generator.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_control_generator.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
@@ -10,8 +9,7 @@ import 'package:recase/recase.dart';
 import 'package:source_gen/source_gen.dart';
 
 class FormGroupGenerator extends FormElementGenerator {
-  FormGroupGenerator(ClassElement root, ParameterElement field, DartType? type)
-      : super(root, field, type);
+  FormGroupGenerator(super.root, super.field, super.type);
 
   @override
   String get value {
