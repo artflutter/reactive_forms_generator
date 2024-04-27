@@ -206,15 +206,25 @@ class UserProfileForm implements FormModel<UserProfile> {
   final Map<String, bool> _disabled = {};
 
   String idControlPath() => pathBuilder(idControlName);
+
   String firstNameControlPath() => pathBuilder(firstNameControlName);
+
   String lastNameControlPath() => pathBuilder(lastNameControlName);
+
   String homeControlPath() => pathBuilder(homeControlName);
+
   String officeControlPath() => pathBuilder(officeControlName);
+
   String get _idValue => idControl.value as String;
+
   String get _firstNameValue => firstNameControl.value ?? "";
+
   String get _lastNameValue => lastNameControl.value ?? "";
+
   Address get _homeValue => homeForm.model;
+
   Address? get _officeValue => officeForm.model;
+
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -261,15 +271,25 @@ class UserProfileForm implements FormModel<UserProfile> {
   }
 
   Object? get idErrors => idControl.errors;
+
   Object? get firstNameErrors => firstNameControl.errors;
+
   Object? get lastNameErrors => lastNameControl.errors;
+
   Object? get homeErrors => homeControl.errors;
+
   Object? get officeErrors => officeControl?.errors;
+
   void get idFocus => form.focus(idControlPath());
+
   void get firstNameFocus => form.focus(firstNameControlPath());
+
   void get lastNameFocus => form.focus(lastNameControlPath());
+
   void get homeFocus => form.focus(homeControlPath());
+
   void get officeFocus => form.focus(officeControlPath());
+
   void officeRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -395,6 +415,7 @@ class UserProfileForm implements FormModel<UserProfile> {
   }) =>
       idControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void firstNameValueReset(
     String value, {
     bool updateParent = true,
@@ -404,6 +425,7 @@ class UserProfileForm implements FormModel<UserProfile> {
   }) =>
       firstNameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void lastNameValueReset(
     String value, {
     bool updateParent = true,
@@ -413,6 +435,7 @@ class UserProfileForm implements FormModel<UserProfile> {
   }) =>
       lastNameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void homeValueReset(
     Address value, {
     bool updateParent = true,
@@ -424,6 +447,7 @@ class UserProfileForm implements FormModel<UserProfile> {
           value: AddressForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   void officeValueReset(
     Address? value, {
     bool updateParent = true,
@@ -435,17 +459,25 @@ class UserProfileForm implements FormModel<UserProfile> {
           value: AddressForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
+
   FormControl<String> get firstNameControl =>
       form.control(firstNameControlPath()) as FormControl<String>;
+
   FormControl<String> get lastNameControl =>
       form.control(lastNameControlPath()) as FormControl<String>;
+
   FormGroup get homeControl => form.control(homeControlPath()) as FormGroup;
+
   FormGroup? get officeControl =>
       containsOffice ? form.control(officeControlPath()) as FormGroup? : null;
+
   AddressForm get homeForm => AddressForm(form, pathBuilder('home'));
+
   AddressForm get officeForm => AddressForm(form, pathBuilder('office'));
+
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -614,6 +646,7 @@ class UserProfileForm implements FormModel<UserProfile> {
   }) =>
       form.updateValue(UserProfileForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     UserProfile? value,
@@ -624,8 +657,10 @@ class UserProfileForm implements FormModel<UserProfile> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(UserProfile? userProfile) => FormGroup({
         idControlName: FormControl<String>(
             value: userProfile?.id,
@@ -676,11 +711,17 @@ class AddressForm implements FormModel<Address> {
   final Map<String, bool> _disabled = {};
 
   String streetControlPath() => pathBuilder(streetControlName);
+
   String cityControlPath() => pathBuilder(cityControlName);
+
   String zipControlPath() => pathBuilder(zipControlName);
+
   String? get _streetValue => streetControl?.value;
+
   String? get _cityValue => cityControl?.value;
+
   String? get _zipValue => zipControl?.value;
+
   bool get containsStreet {
     try {
       form.control(streetControlPath());
@@ -709,11 +750,17 @@ class AddressForm implements FormModel<Address> {
   }
 
   Object? get streetErrors => streetControl?.errors;
+
   Object? get cityErrors => cityControl?.errors;
+
   Object? get zipErrors => zipControl?.errors;
+
   void get streetFocus => form.focus(streetControlPath());
+
   void get cityFocus => form.focus(cityControlPath());
+
   void get zipFocus => form.focus(zipControlPath());
+
   void streetRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -855,6 +902,7 @@ class AddressForm implements FormModel<Address> {
   }) =>
       streetControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void cityValueReset(
     String? value, {
     bool updateParent = true,
@@ -864,6 +912,7 @@ class AddressForm implements FormModel<Address> {
   }) =>
       cityControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void zipValueReset(
     String? value, {
     bool updateParent = true,
@@ -873,15 +922,19 @@ class AddressForm implements FormModel<Address> {
   }) =>
       zipControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String>? get streetControl => containsStreet
       ? form.control(streetControlPath()) as FormControl<String>?
       : null;
+
   FormControl<String>? get cityControl => containsCity
       ? form.control(cityControlPath()) as FormControl<String>?
       : null;
+
   FormControl<String>? get zipControl => containsZip
       ? form.control(zipControlPath()) as FormControl<String>?
       : null;
+
   void streetSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1005,6 +1058,7 @@ class AddressForm implements FormModel<Address> {
   }) =>
       form.updateValue(AddressForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Address? value,
@@ -1015,8 +1069,10 @@ class AddressForm implements FormModel<Address> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Address? address) => FormGroup({
         streetControlName: FormControl<String>(
             value: address?.street,

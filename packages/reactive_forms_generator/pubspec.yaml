@@ -22,17 +22,17 @@ environment:
 
 dependencies:
   build: ^2.3.1
-  source_gen: ^1.2.7
+  source_gen: ^1.5.0
   analyzer: ">=5.12.0 <7.0.0"
   path: ^1.8.1
-  build_runner: ^2.3.3
-  code_builder: ^4.4.0
-  dart_style: ^2.2.5
+  build_runner: ^2.4.9
+  code_builder: ^4.10.0
+  dart_style: ^2.3.6
   recase: ^4.1.0
 
 dev_dependencies:
-  build_test: ^2.2.0
-  logging: ^1.1.1
+  build_test: ^2.2.2
+  logging: ^1.2.0
   flutter_lints: ^3.0.2
 
 #dependency_overrides:

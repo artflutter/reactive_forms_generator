@@ -198,8 +198,10 @@ class MailingListForm implements FormModel<MailingList> {
   final Map<String, bool> _disabled = {};
 
   String emailListControlPath() => pathBuilder(emailListControlName);
+
   List<String?> get _emailListValue =>
       emailListControl.value?.whereType<String?>().toList() ?? [];
+
   bool get containsEmailList {
     try {
       form.control(emailListControlPath());
@@ -210,7 +212,9 @@ class MailingListForm implements FormModel<MailingList> {
   }
 
   Object? get emailListErrors => emailListControl.errors;
+
   void get emailListFocus => form.focus(emailListControlPath());
+
   void emailListValueUpdate(
     List<String?> value, {
     bool updateParent = true,
@@ -238,8 +242,10 @@ class MailingListForm implements FormModel<MailingList> {
   }) =>
       emailListControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormArray<String> get emailListControl =>
       form.control(emailListControlPath()) as FormArray<String>;
+
   void emailListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -367,6 +373,7 @@ class MailingListForm implements FormModel<MailingList> {
   }) =>
       form.updateValue(MailingListForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     MailingList? value,
@@ -377,8 +384,10 @@ class MailingListForm implements FormModel<MailingList> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(MailingList? mailingList) => FormGroup({
         emailListControlName: FormArray<String>(
             (mailingList?.emailList ?? [])

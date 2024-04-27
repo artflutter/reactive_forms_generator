@@ -202,7 +202,9 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
   final Map<String, bool> _disabled = {};
 
   String listControlPath() => pathBuilder(listControlName);
+
   List<T?> get _listValue => listControl.value?.whereType<T?>().toList() ?? [];
+
   bool get containsList {
     try {
       form.control(listControlPath());
@@ -213,7 +215,9 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
   }
 
   Object? get listErrors => listControl.errors;
+
   void get listFocus => form.focus(listControlPath());
+
   void listValueUpdate(
     List<T?> value, {
     bool updateParent = true,
@@ -241,8 +245,10 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
   }) =>
       listControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormArray<T> get listControl =>
       form.control(listControlPath()) as FormArray<T>;
+
   void listSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -370,6 +376,7 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
   }) =>
       form.updateValue(StatusListForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     StatusList<T>? value,
@@ -380,8 +387,10 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements<T extends Enum>(StatusList<T>? statusList) =>
       FormGroup({
         listControlName: FormArray<T>(

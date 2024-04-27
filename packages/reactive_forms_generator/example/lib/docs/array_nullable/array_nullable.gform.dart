@@ -208,19 +208,29 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   final Map<String, bool> _disabled = {};
 
   String someListControlPath() => pathBuilder(someListControlName);
+
   String emailListControlPath() => pathBuilder(emailListControlName);
+
   String fruitListControlPath() => pathBuilder(fruitListControlName);
+
   String vegetablesListControlPath() => pathBuilder(vegetablesListControlName);
+
   String modeListControlPath() => pathBuilder(modeListControlName);
+
   List<String?>? get _someListValue => someListControl?.value;
+
   List<String> get _emailListValue =>
       emailListControl.value?.whereType<String>().toList() ?? [];
+
   List<bool?> get _fruitListValue =>
       fruitListControl.value?.whereType<bool?>().toList() ?? [];
+
   List<String?>? get _vegetablesListValue =>
       vegetablesListControl?.value?.whereType<String?>().toList() ?? [];
+
   List<UserMode?>? get _modeListValue =>
       modeListControl?.value?.whereType<UserMode?>().toList() ?? [];
+
   bool get containsSomeList {
     try {
       form.control(someListControlPath());
@@ -267,15 +277,25 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }
 
   Object? get someListErrors => someListControl?.errors;
+
   Object? get emailListErrors => emailListControl.errors;
+
   Object? get fruitListErrors => fruitListControl.errors;
+
   Object? get vegetablesListErrors => vegetablesListControl?.errors;
+
   Object? get modeListErrors => modeListControl?.errors;
+
   void get someListFocus => form.focus(someListControlPath());
+
   void get emailListFocus => form.focus(emailListControlPath());
+
   void get fruitListFocus => form.focus(fruitListControlPath());
+
   void get vegetablesListFocus => form.focus(vegetablesListControlPath());
+
   void get modeListFocus => form.focus(modeListControlPath());
+
   void someListRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -453,6 +473,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }) =>
       someListControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void emailListValueReset(
     List<String> value, {
     bool updateParent = true,
@@ -462,6 +483,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }) =>
       emailListControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void fruitListValueReset(
     List<bool?> value, {
     bool updateParent = true,
@@ -471,6 +493,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }) =>
       fruitListControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void vegetablesListValueReset(
     List<String?>? value, {
     bool updateParent = true,
@@ -480,6 +503,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }) =>
       vegetablesListControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void modeListValueReset(
     List<UserMode?>? value, {
     bool updateParent = true,
@@ -489,19 +513,25 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }) =>
       modeListControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<List<String?>>? get someListControl => containsSomeList
       ? form.control(someListControlPath()) as FormControl<List<String?>>?
       : null;
+
   FormArray<String> get emailListControl =>
       form.control(emailListControlPath()) as FormArray<String>;
+
   FormArray<bool> get fruitListControl =>
       form.control(fruitListControlPath()) as FormArray<bool>;
+
   FormArray<String>? get vegetablesListControl => containsVegetablesList
       ? form.control(vegetablesListControlPath()) as FormArray<String>?
       : null;
+
   FormArray<UserMode>? get modeListControl => containsModeList
       ? form.control(modeListControlPath()) as FormArray<UserMode>?
       : null;
+
   void someListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -826,6 +856,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }) =>
       form.updateValue(ArrayNullableForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     ArrayNullable? value,
@@ -836,8 +867,10 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(ArrayNullable? arrayNullable) => FormGroup({
         emailListControlName: FormArray<String>(
             (arrayNullable?.emailList ?? [])
