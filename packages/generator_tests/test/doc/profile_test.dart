@@ -495,31 +495,51 @@ class ProfileForm implements FormModel<Profile> {
   final Map<String, bool> _disabled = {};
 
   String idControlPath() => pathBuilder(idControlName);
+
   String anotherIdControlPath() => pathBuilder(anotherIdControlName);
+
   String nameControlPath() => pathBuilder(nameControlName);
+
   String chartingOrderControlPath() => pathBuilder(chartingOrderControlName);
+
   String numberingStandardControlPath() =>
       pathBuilder(numberingStandardControlName);
+
   String measurementTypeControlPath() =>
       pathBuilder(measurementTypeControlName);
+
   String audioGuidanceControlPath() => pathBuilder(audioGuidanceControlName);
+
   String incidenceFilterControlPath() =>
       pathBuilder(incidenceFilterControlName);
+
   String thresholdControlPath() => pathBuilder(thresholdControlName);
+
   String timerControlPath() => pathBuilder(timerControlName);
+
   String get _idValue => idControl.value as String;
+
   String get _anotherIdValue => anotherIdControl.value as String;
+
   String get _nameValue => nameControl.value as String;
+
   ChartingOrderValue get _chartingOrderValue =>
       chartingOrderControl.value as ChartingOrderValue;
+
   NumberingStandard get _numberingStandardValue =>
       numberingStandardControl.value as NumberingStandard;
+
   MeasurementType get _measurementTypeValue =>
       measurementTypeControl.value as MeasurementType;
+
   bool get _audioGuidanceValue => audioGuidanceControl.value as bool;
+
   IncidenceFilter get _incidenceFilterValue => incidenceFilterForm.model;
+
   ThresholdSetting get _thresholdValue => thresholdForm.model;
+
   TimerSetting get _timerValue => timerForm.model;
+
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -611,25 +631,45 @@ class ProfileForm implements FormModel<Profile> {
   }
 
   Object? get idErrors => idControl.errors;
+
   Object? get anotherIdErrors => anotherIdControl.errors;
+
   Object? get nameErrors => nameControl.errors;
+
   Object? get chartingOrderErrors => chartingOrderControl.errors;
+
   Object? get numberingStandardErrors => numberingStandardControl.errors;
+
   Object? get measurementTypeErrors => measurementTypeControl.errors;
+
   Object? get audioGuidanceErrors => audioGuidanceControl.errors;
+
   Object? get incidenceFilterErrors => incidenceFilterControl.errors;
+
   Object? get thresholdErrors => thresholdControl.errors;
+
   Object? get timerErrors => timerControl.errors;
+
   void get idFocus => form.focus(idControlPath());
+
   void get anotherIdFocus => form.focus(anotherIdControlPath());
+
   void get nameFocus => form.focus(nameControlPath());
+
   void get chartingOrderFocus => form.focus(chartingOrderControlPath());
+
   void get numberingStandardFocus => form.focus(numberingStandardControlPath());
+
   void get measurementTypeFocus => form.focus(measurementTypeControlPath());
+
   void get audioGuidanceFocus => form.focus(audioGuidanceControlPath());
+
   void get incidenceFilterFocus => form.focus(incidenceFilterControlPath());
+
   void get thresholdFocus => form.focus(thresholdControlPath());
+
   void get timerFocus => form.focus(timerControlPath());
+
   void idValueUpdate(
     String value, {
     bool updateParent = true,
@@ -827,6 +867,7 @@ class ProfileForm implements FormModel<Profile> {
   }) =>
       idControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void anotherIdValueReset(
     String value, {
     bool updateParent = true,
@@ -836,6 +877,7 @@ class ProfileForm implements FormModel<Profile> {
   }) =>
       anotherIdControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void nameValueReset(
     String value, {
     bool updateParent = true,
@@ -845,6 +887,7 @@ class ProfileForm implements FormModel<Profile> {
   }) =>
       nameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void chartingOrderValueReset(
     ChartingOrderValue value, {
     bool updateParent = true,
@@ -854,6 +897,7 @@ class ProfileForm implements FormModel<Profile> {
   }) =>
       chartingOrderControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void numberingStandardValueReset(
     NumberingStandard value, {
     bool updateParent = true,
@@ -863,6 +907,7 @@ class ProfileForm implements FormModel<Profile> {
   }) =>
       numberingStandardControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void measurementTypeValueReset(
     MeasurementType value, {
     bool updateParent = true,
@@ -872,6 +917,7 @@ class ProfileForm implements FormModel<Profile> {
   }) =>
       measurementTypeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void audioGuidanceValueReset(
     bool value, {
     bool updateParent = true,
@@ -881,6 +927,7 @@ class ProfileForm implements FormModel<Profile> {
   }) =>
       audioGuidanceControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void incidenceFilterValueReset(
     IncidenceFilter value, {
     bool updateParent = true,
@@ -892,6 +939,7 @@ class ProfileForm implements FormModel<Profile> {
           value: IncidenceFilterForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   void thresholdValueReset(
     ThresholdSetting value, {
     bool updateParent = true,
@@ -903,6 +951,7 @@ class ProfileForm implements FormModel<Profile> {
           value: ThresholdSettingForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   void timerValueReset(
     TimerSetting value, {
     bool updateParent = true,
@@ -914,34 +963,48 @@ class ProfileForm implements FormModel<Profile> {
           value: TimerSettingForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
+
   FormControl<String> get anotherIdControl =>
       form.control(anotherIdControlPath()) as FormControl<String>;
+
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
+
   FormControl<ChartingOrderValue> get chartingOrderControl =>
       form.control(chartingOrderControlPath())
           as FormControl<ChartingOrderValue>;
+
   FormControl<NumberingStandard> get numberingStandardControl =>
       form.control(numberingStandardControlPath())
           as FormControl<NumberingStandard>;
+
   FormControl<MeasurementType> get measurementTypeControl =>
       form.control(measurementTypeControlPath())
           as FormControl<MeasurementType>;
+
   FormControl<bool> get audioGuidanceControl =>
       form.control(audioGuidanceControlPath()) as FormControl<bool>;
+
   FormGroup get incidenceFilterControl =>
       form.control(incidenceFilterControlPath()) as FormGroup;
+
   FormGroup get thresholdControl =>
       form.control(thresholdControlPath()) as FormGroup;
+
   FormGroup get timerControl => form.control(timerControlPath()) as FormGroup;
+
   IncidenceFilterForm get incidenceFilterForm =>
       IncidenceFilterForm(form, pathBuilder('incidenceFilter'));
+
   ThresholdSettingForm get thresholdForm =>
       ThresholdSettingForm(form, pathBuilder('threshold'));
+
   TimerSettingForm get timerForm =>
       TimerSettingForm(form, pathBuilder('timer'));
+
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1206,6 +1269,7 @@ class ProfileForm implements FormModel<Profile> {
   }) =>
       form.updateValue(ProfileForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Profile? value,
@@ -1216,8 +1280,10 @@ class ProfileForm implements FormModel<Profile> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Profile? profile) => FormGroup({
         idControlName: FormControl<String>(
             value: profile?.id,
@@ -1306,23 +1372,35 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
 
   String isMobilityEnabledControlPath() =>
       pathBuilder(isMobilityEnabledControlName);
+
   String isFurcationEnabledControlPath() =>
       pathBuilder(isFurcationEnabledControlName);
+
   String isBleedingEnabledControlPath() =>
       pathBuilder(isBleedingEnabledControlName);
+
   String isSuppurationEnabledControlPath() =>
       pathBuilder(isSuppurationEnabledControlName);
+
   String isCalculusEnabledControlPath() =>
       pathBuilder(isCalculusEnabledControlName);
+
   String isPlaqueEnabledControlPath() =>
       pathBuilder(isPlaqueEnabledControlName);
+
   bool get _isMobilityEnabledValue => isMobilityEnabledControl.value as bool;
+
   bool get _isFurcationEnabledValue => isFurcationEnabledControl.value as bool;
+
   bool get _isBleedingEnabledValue => isBleedingEnabledControl.value as bool;
+
   bool get _isSuppurationEnabledValue =>
       isSuppurationEnabledControl.value as bool;
+
   bool get _isCalculusEnabledValue => isCalculusEnabledControl.value as bool;
+
   bool get _isPlaqueEnabledValue => isPlaqueEnabledControl.value as bool;
+
   bool get containsIsMobilityEnabled {
     try {
       form.control(isMobilityEnabledControlPath());
@@ -1378,19 +1456,31 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
   }
 
   Object? get isMobilityEnabledErrors => isMobilityEnabledControl.errors;
+
   Object? get isFurcationEnabledErrors => isFurcationEnabledControl.errors;
+
   Object? get isBleedingEnabledErrors => isBleedingEnabledControl.errors;
+
   Object? get isSuppurationEnabledErrors => isSuppurationEnabledControl.errors;
+
   Object? get isCalculusEnabledErrors => isCalculusEnabledControl.errors;
+
   Object? get isPlaqueEnabledErrors => isPlaqueEnabledControl.errors;
+
   void get isMobilityEnabledFocus => form.focus(isMobilityEnabledControlPath());
+
   void get isFurcationEnabledFocus =>
       form.focus(isFurcationEnabledControlPath());
+
   void get isBleedingEnabledFocus => form.focus(isBleedingEnabledControlPath());
+
   void get isSuppurationEnabledFocus =>
       form.focus(isSuppurationEnabledControlPath());
+
   void get isCalculusEnabledFocus => form.focus(isCalculusEnabledControlPath());
+
   void get isPlaqueEnabledFocus => form.focus(isPlaqueEnabledControlPath());
+
   void isMobilityEnabledValueUpdate(
     bool value, {
     bool updateParent = true,
@@ -1508,6 +1598,7 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
   }) =>
       isMobilityEnabledControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void isFurcationEnabledValueReset(
     bool value, {
     bool updateParent = true,
@@ -1517,6 +1608,7 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
   }) =>
       isFurcationEnabledControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void isBleedingEnabledValueReset(
     bool value, {
     bool updateParent = true,
@@ -1526,6 +1618,7 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
   }) =>
       isBleedingEnabledControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void isSuppurationEnabledValueReset(
     bool value, {
     bool updateParent = true,
@@ -1535,6 +1628,7 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
   }) =>
       isSuppurationEnabledControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void isCalculusEnabledValueReset(
     bool value, {
     bool updateParent = true,
@@ -1544,6 +1638,7 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
   }) =>
       isCalculusEnabledControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void isPlaqueEnabledValueReset(
     bool value, {
     bool updateParent = true,
@@ -1553,18 +1648,25 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
   }) =>
       isPlaqueEnabledControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<bool> get isMobilityEnabledControl =>
       form.control(isMobilityEnabledControlPath()) as FormControl<bool>;
+
   FormControl<bool> get isFurcationEnabledControl =>
       form.control(isFurcationEnabledControlPath()) as FormControl<bool>;
+
   FormControl<bool> get isBleedingEnabledControl =>
       form.control(isBleedingEnabledControlPath()) as FormControl<bool>;
+
   FormControl<bool> get isSuppurationEnabledControl =>
       form.control(isSuppurationEnabledControlPath()) as FormControl<bool>;
+
   FormControl<bool> get isCalculusEnabledControl =>
       form.control(isCalculusEnabledControlPath()) as FormControl<bool>;
+
   FormControl<bool> get isPlaqueEnabledControl =>
       form.control(isPlaqueEnabledControlPath()) as FormControl<bool>;
+
   void isMobilityEnabledSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1748,6 +1850,7 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
   }) =>
       form.updateValue(IncidenceFilterForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     IncidenceFilter? value,
@@ -1758,8 +1861,10 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(IncidenceFilter? incidenceFilter) => FormGroup({
         isMobilityEnabledControlName: FormControl<bool>(
             value: incidenceFilter?.isMobilityEnabled,
@@ -1827,9 +1932,13 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
   final Map<String, bool> _disabled = {};
 
   String isEnabledControlPath() => pathBuilder(isEnabledControlName);
+
   String valueControlPath() => pathBuilder(valueControlName);
+
   bool get _isEnabledValue => isEnabledControl.value as bool;
+
   int get _valueValue => valueControl.value as int;
+
   bool get containsIsEnabled {
     try {
       form.control(isEnabledControlPath());
@@ -1849,9 +1958,13 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
   }
 
   Object? get isEnabledErrors => isEnabledControl.errors;
+
   Object? get valueErrors => valueControl.errors;
+
   void get isEnabledFocus => form.focus(isEnabledControlPath());
+
   void get valueFocus => form.focus(valueControlPath());
+
   void isEnabledValueUpdate(
     bool value, {
     bool updateParent = true,
@@ -1897,6 +2010,7 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
   }) =>
       isEnabledControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void valueValueReset(
     int value, {
     bool updateParent = true,
@@ -1906,10 +2020,13 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
   }) =>
       valueControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<bool> get isEnabledControl =>
       form.control(isEnabledControlPath()) as FormControl<bool>;
+
   FormControl<int> get valueControl =>
       form.control(valueControlPath()) as FormControl<int>;
+
   void isEnabledSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2015,6 +2132,7 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
   }) =>
       form.updateValue(ThresholdSettingForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     ThresholdSetting? value,
@@ -2025,8 +2143,10 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(ThresholdSetting? thresholdSetting) =>
       FormGroup({
         isEnabledControlName: FormControl<bool>(
@@ -2067,9 +2187,13 @@ class TimerSettingForm implements FormModel<TimerSetting> {
   final Map<String, bool> _disabled = {};
 
   String isEnabledControlPath() => pathBuilder(isEnabledControlName);
+
   String valueControlPath() => pathBuilder(valueControlName);
+
   bool get _isEnabledValue => isEnabledControl.value as bool;
+
   int get _valueValue => valueControl.value as int;
+
   bool get containsIsEnabled {
     try {
       form.control(isEnabledControlPath());
@@ -2089,9 +2213,13 @@ class TimerSettingForm implements FormModel<TimerSetting> {
   }
 
   Object? get isEnabledErrors => isEnabledControl.errors;
+
   Object? get valueErrors => valueControl.errors;
+
   void get isEnabledFocus => form.focus(isEnabledControlPath());
+
   void get valueFocus => form.focus(valueControlPath());
+
   void isEnabledValueUpdate(
     bool value, {
     bool updateParent = true,
@@ -2137,6 +2265,7 @@ class TimerSettingForm implements FormModel<TimerSetting> {
   }) =>
       isEnabledControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void valueValueReset(
     int value, {
     bool updateParent = true,
@@ -2146,10 +2275,13 @@ class TimerSettingForm implements FormModel<TimerSetting> {
   }) =>
       valueControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<bool> get isEnabledControl =>
       form.control(isEnabledControlPath()) as FormControl<bool>;
+
   FormControl<int> get valueControl =>
       form.control(valueControlPath()) as FormControl<int>;
+
   void isEnabledSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2255,6 +2387,7 @@ class TimerSettingForm implements FormModel<TimerSetting> {
   }) =>
       form.updateValue(TimerSettingForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     TimerSetting? value,
@@ -2265,8 +2398,10 @@ class TimerSettingForm implements FormModel<TimerSetting> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(TimerSetting? timerSetting) => FormGroup({
         isEnabledControlName: FormControl<bool>(
             value: timerSetting?.isEnabled,

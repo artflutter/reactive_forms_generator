@@ -271,19 +271,33 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
   final Map<String, bool> _disabled = {};
 
   String emailControlPath() => pathBuilder(emailControlName);
+
   String passwordControlPath() => pathBuilder(passwordControlName);
+
   String rememberMeControlPath() => pathBuilder(rememberMeControlName);
+
   String themeControlPath() => pathBuilder(themeControlName);
+
   String modeControlPath() => pathBuilder(modeControlName);
+
   String timeoutControlPath() => pathBuilder(timeoutControlName);
+
   String heightControlPath() => pathBuilder(heightControlName);
+
   String? get _emailValue => emailControl?.value;
+
   String? get _passwordValue => passwordControl?.value;
+
   bool? get _rememberMeValue => rememberMeControl?.value;
+
   String? get _themeValue => themeControl?.value;
+
   UserMode? get _modeValue => modeControl?.value;
+
   int? get _timeoutValue => timeoutControl?.value;
+
   double? get _heightValue => heightControl?.value;
+
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -348,19 +362,33 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
   }
 
   Object? get emailErrors => emailControl?.errors;
+
   Object? get passwordErrors => passwordControl?.errors;
+
   Object? get rememberMeErrors => rememberMeControl?.errors;
+
   Object? get themeErrors => themeControl?.errors;
+
   Object? get modeErrors => modeControl?.errors;
+
   Object? get timeoutErrors => timeoutControl?.errors;
+
   Object? get heightErrors => heightControl?.errors;
+
   void get emailFocus => form.focus(emailControlPath());
+
   void get passwordFocus => form.focus(passwordControlPath());
+
   void get rememberMeFocus => form.focus(rememberMeControlPath());
+
   void get themeFocus => form.focus(themeControlPath());
+
   void get modeFocus => form.focus(modeControlPath());
+
   void get timeoutFocus => form.focus(timeoutControlPath());
+
   void get heightFocus => form.focus(heightControlPath());
+
   void emailRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -678,6 +706,7 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
   }) =>
       emailControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void passwordValueReset(
     String? value, {
     bool updateParent = true,
@@ -687,6 +716,7 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
   }) =>
       passwordControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void rememberMeValueReset(
     bool? value, {
     bool updateParent = true,
@@ -696,6 +726,7 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
   }) =>
       rememberMeControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void themeValueReset(
     String? value, {
     bool updateParent = true,
@@ -705,6 +736,7 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
   }) =>
       themeControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void modeValueReset(
     UserMode? value, {
     bool updateParent = true,
@@ -714,6 +746,7 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
   }) =>
       modeControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void timeoutValueReset(
     int? value, {
     bool updateParent = true,
@@ -723,6 +756,7 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
   }) =>
       timeoutControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void heightValueReset(
     double? value, {
     bool updateParent = true,
@@ -732,27 +766,35 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
   }) =>
       heightControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String>? get emailControl => containsEmail
       ? form.control(emailControlPath()) as FormControl<String>?
       : null;
+
   FormControl<String>? get passwordControl => containsPassword
       ? form.control(passwordControlPath()) as FormControl<String>?
       : null;
+
   FormControl<bool>? get rememberMeControl => containsRememberMe
       ? form.control(rememberMeControlPath()) as FormControl<bool>?
       : null;
+
   FormControl<String>? get themeControl => containsTheme
       ? form.control(themeControlPath()) as FormControl<String>?
       : null;
+
   FormControl<UserMode>? get modeControl => containsMode
       ? form.control(modeControlPath()) as FormControl<UserMode>?
       : null;
+
   FormControl<int>? get timeoutControl => containsTimeout
       ? form.control(timeoutControlPath()) as FormControl<int>?
       : null;
+
   FormControl<double>? get heightControl => containsHeight
       ? form.control(heightControlPath()) as FormControl<double>?
       : null;
+
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -955,6 +997,7 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
   }) =>
       form.updateValue(LoginExtendedNullableForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     LoginExtendedNullable? value,
@@ -965,8 +1008,10 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(LoginExtendedNullable? loginExtendedNullable) =>
       FormGroup({
         emailControlName: FormControl<String>(
