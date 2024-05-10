@@ -52,14 +52,17 @@ class ReactiveFreezedClassForm extends StatelessWidget {
     Key? key,
     required this.form,
     required this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
   }) : super(key: key);
 
   final Widget child;
 
   final FreezedClassForm form;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   static FreezedClassForm? of(
     BuildContext context, {
@@ -84,8 +87,9 @@ class ReactiveFreezedClassForm extends StatelessWidget {
     return FreezedClassFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
-      child: WillPopScope(
-        onWillPop: onWillPop,
+      child: ReactiveFormPopScope(
+        canPop: canPop,
+        onPopInvoked: onPopInvoked,
         child: child,
       ),
     );
@@ -105,7 +109,8 @@ class FreezedClassFormBuilder extends StatefulWidget {
     Key? key,
     this.model,
     this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -114,7 +119,9 @@ class FreezedClassFormBuilder extends StatefulWidget {
 
   final Widget? child;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
       BuildContext context, FreezedClassForm formModel, Widget? child) builder;
@@ -164,10 +171,12 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
     return ReactiveFreezedClassForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      onWillPop: widget.onWillPop,
+      canPop: widget.canPop,
+      onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
-        onWillPop: widget.onWillPop,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -196,16 +205,28 @@ class FreezedClassForm implements FormModel<FreezedClass> {
 
   final String? path;
 
+  final Map<String, bool> _disabled = {};
+
   String genderControlPath() => pathBuilder(genderControlName);
+
   String idControlPath() => pathBuilder(idControlName);
+
   String nameControlPath() => pathBuilder(nameControlName);
+
   String logoImageControlPath() => pathBuilder(logoImageControlName);
+
   String yearControlPath() => pathBuilder(yearControlName);
+
   String? get _genderValue => genderControl?.value;
+
   String? get _idValue => idControl?.value;
+
   String? get _nameValue => nameControl?.value;
+
   String? get _logoImageValue => logoImageControl?.value;
+
   double? get _yearValue => yearControl?.value;
+
   bool get containsGender {
     try {
       form.control(genderControlPath());
@@ -252,15 +273,25 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }
 
   Object? get genderErrors => genderControl?.errors;
+
   Object? get idErrors => idControl?.errors;
+
   Object? get nameErrors => nameControl?.errors;
+
   Object? get logoImageErrors => logoImageControl?.errors;
+
   Object? get yearErrors => yearControl?.errors;
+
   void get genderFocus => form.focus(genderControlPath());
+
   void get idFocus => form.focus(idControlPath());
+
   void get nameFocus => form.focus(nameControlPath());
+
   void get logoImageFocus => form.focus(logoImageControlPath());
+
   void get yearFocus => form.focus(yearControlPath());
+
   void genderRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -490,6 +521,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       genderControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void idValueReset(
     String? value, {
     bool updateParent = true,
@@ -499,6 +531,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       idControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void nameValueReset(
     String? value, {
     bool updateParent = true,
@@ -508,6 +541,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       nameControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void logoImageValueReset(
     String? value, {
     bool updateParent = true,
@@ -517,6 +551,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       logoImageControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void yearValueReset(
     double? value, {
     bool updateParent = true,
@@ -526,20 +561,26 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       yearControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String>? get genderControl => containsGender
       ? form.control(genderControlPath()) as FormControl<String>?
       : null;
+
   FormControl<String>? get idControl =>
       containsId ? form.control(idControlPath()) as FormControl<String>? : null;
+
   FormControl<String>? get nameControl => containsName
       ? form.control(nameControlPath()) as FormControl<String>?
       : null;
+
   FormControl<String>? get logoImageControl => containsLogoImage
       ? form.control(logoImageControlPath()) as FormControl<String>?
       : null;
+
   FormControl<double>? get yearControl => containsYear
       ? form.control(yearControlPath()) as FormControl<double>?
       : null;
+
   void genderSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -632,7 +673,9 @@ class FreezedClassForm implements FormModel<FreezedClass> {
 
   @override
   FreezedClass get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'FreezedClassForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -642,6 +685,38 @@ class FreezedClassForm implements FormModel<FreezedClass> {
         name: _nameValue,
         logoImage: _logoImageValue,
         year: _yearValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -669,6 +744,7 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }) =>
       form.updateValue(FreezedClassForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     FreezedClass? value,
@@ -679,8 +755,10 @@ class FreezedClassForm implements FormModel<FreezedClass> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(FreezedClass? freezedClass) => FormGroup({
         genderControlName: FormControl<String>(
             value: freezedClass?.gender,
@@ -724,7 +802,8 @@ class FreezedClassForm implements FormModel<FreezedClass> {
           disabled: false);
 }
 
-class ReactiveFreezedClassFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveFreezedClassFormArrayBuilder<
+    ReactiveFreezedClassFormArrayBuilderT> extends StatelessWidget {
   const ReactiveFreezedClassFormArrayBuilder({
     Key? key,
     this.control,
@@ -735,16 +814,19 @@ class ReactiveFreezedClassFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveFreezedClassFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(FreezedClassForm formModel)? control;
+  final FormArray<ReactiveFreezedClassFormArrayBuilderT>? Function(
+      FreezedClassForm formModel)? control;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       FreezedClassForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, FreezedClassForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveFreezedClassFormArrayBuilderT? item,
+      FreezedClassForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -754,7 +836,7 @@ class ReactiveFreezedClassFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveFreezedClassFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -785,7 +867,8 @@ class ReactiveFreezedClassFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveFreezedClassFormFormGroupArrayBuilder<T> extends StatelessWidget {
+class ReactiveFreezedClassFormFormGroupArrayBuilder<
+    ReactiveFreezedClassFormFormGroupArrayBuilderT> extends StatelessWidget {
   const ReactiveFreezedClassFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -796,17 +879,21 @@ class ReactiveFreezedClassFormFormGroupArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveFreezedClassFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      FreezedClassForm formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveFreezedClassFormFormGroupArrayBuilderT>>
+      Function(FreezedClassForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       FreezedClassForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, FreezedClassForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveFreezedClassFormFormGroupArrayBuilderT? item,
+      FreezedClassForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -821,7 +908,8 @@ class ReactiveFreezedClassFormFormGroupArrayBuilder<T> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
+        final itemList = (value.value() ??
+                <ReactiveFreezedClassFormFormGroupArrayBuilderT>[])
             .asMap()
             .map((i, item) => MapEntry(
                   i,

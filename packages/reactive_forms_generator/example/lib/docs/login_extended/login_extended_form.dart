@@ -7,7 +7,7 @@ import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 
 class LoginExtendedFormWidget extends StatelessWidget {
-  const LoginExtendedFormWidget({Key? key}) : super(key: key);
+  const LoginExtendedFormWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

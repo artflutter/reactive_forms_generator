@@ -1,3 +1,31 @@
+## [4.8.0-beta.0]
+
+* fix for https://github.com/artflutter/reactive_forms_generator/issues/155
+
+## [5.0.0]
+
+* rf17
+
+## [4.8.0]
+
+* toggleEnabled method added.
+
+## [4.6.0]
+
+* toggleEnabled method added.
+
+## [4.6.0-beta.2]
+
+* updated the error check method to prevent throwing useless stack traces
+
+## [4.6.0-beta.1]
+
+* updated the error check method to prevent throwing useless stack traces
+
+## [4.6.0-beta.0]
+
+* toggleEnabled method added.
+
 ## [4.5.2]
 
 * default empty array value for non nullable lists

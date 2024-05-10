@@ -6,7 +6,7 @@ import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 
 class UserProfileFormWidget extends StatelessWidget {
-  const UserProfileFormWidget({Key? key}) : super(key: key);
+  const UserProfileFormWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

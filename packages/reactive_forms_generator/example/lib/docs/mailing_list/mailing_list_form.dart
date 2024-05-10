@@ -6,7 +6,7 @@ import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 
 class MailingListFormWidget extends StatefulWidget {
-  const MailingListFormWidget({Key? key}) : super(key: key);
+  const MailingListFormWidget({super.key});
 
   @override
   State<MailingListFormWidget> createState() => _MailingListFormWidgetState();
@@ -39,7 +39,8 @@ class _MailingListFormWidgetState extends State<MailingListFormWidget> {
                           children: [
                             Expanded(
                               child: ReactiveTextField<String>(
-                                key: ValueKey(formModel.emailListControl.controls[i]),
+                                key: ValueKey(
+                                    formModel.emailListControl.controls[i]),
                                 formControlName: i.toString(),
                                 validationMessages: {
                                   'email': (_) => 'Invalid email',

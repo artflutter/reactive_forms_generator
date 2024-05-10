@@ -423,10 +423,94 @@ class FormGenerator {
             ..annotations.add(const CodeExpression(Code('override')))
             ..type = MethodType.getter
             ..body = Code('''
-              if (!currentForm.valid) {
+              final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+              if (!isValid) {
                 debugPrintStack(label: '[\${path ?? '$classNameFull'}]\\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
               }
               return ${element.fullTypeName}(${parameterValues.join(', ')});
+            ''');
+        },
+      );
+
+  Method get toggleDisabledMethod => Method(
+        (b) {
+          final formGroupsToggleDisabled = formGroups
+              .map((e) {
+                return '${e.fieldControlForm}.toggleDisabled();';
+              })
+              .toList()
+              .join('');
+
+          final formGroupArraysToggleDisabled = formGroupArrays
+              .map((e) {
+                final type = e.type;
+                final typeArguments = type is ParameterizedType
+                    ? type.typeArguments
+                    : const <DartType>[];
+
+                final generator = FormGenerator(
+                  root,
+                  typeArguments.first.element! as ClassElement,
+                  e.type,
+                );
+
+                return '${e.name}${generator.className}.forEach((e) => e.toggleDisabled());';
+              })
+              .toList()
+              .join('');
+
+          b
+            ..name = 'toggleDisabled'
+            ..returns = Reference(element.fullTypeName)
+            ..annotations.add(const CodeExpression(Code('override')))
+            ..optionalParameters.addAll([
+              Parameter(
+                (b) => b
+                  ..name = 'updateParent'
+                  ..named = true
+                  ..defaultTo = const Code('true')
+                  ..type = const Reference('bool'),
+              ),
+              Parameter(
+                (b) => b
+                  ..name = 'emitEvent'
+                  ..named = true
+                  ..defaultTo = const Code('true')
+                  ..type = const Reference('bool'),
+              ),
+            ])
+            ..returns = const Reference('void')
+            ..body = Code('''
+                final currentFormInstance = currentForm;
+
+                if (currentFormInstance is! FormGroup) {
+                  return;
+                }
+                
+              if (_disabled.isEmpty) {
+                currentFormInstance.controls.forEach((key, control) {
+                  _disabled[key] = control.disabled;
+                });
+              
+                $formGroupArraysToggleDisabled
+                $formGroupsToggleDisabled
+                currentForm.markAsDisabled(
+                    updateParent: updateParent, emitEvent: emitEvent);                
+              } else {
+                $formGroupArraysToggleDisabled
+                $formGroupsToggleDisabled
+                currentFormInstance.controls.forEach((key, control) {
+                  if (_disabled[key] == false) {
+                    currentFormInstance.controls[key]?.markAsEnabled(
+                      updateParent: updateParent,
+                      emitEvent: emitEvent,
+                    );
+                  }
+                  
+                  _disabled.remove(key);
+                });
+              }
             ''');
         },
       );
@@ -524,7 +608,7 @@ class FormGenerator {
       Class(
         (b) => b
           ..name = className
-          ..types.addAll(element.genericTypes)
+          ..types.addAll(element.fullGenericTypes)
           ..implements.add(Reference('FormModel<${element.fullTypeName}>'))
           ..fields.addAll(
             [
@@ -540,6 +624,13 @@ class FormGenerator {
                   ..name = 'path'
                   ..modifier = FieldModifier.final$
                   ..type = const Reference('String?'),
+              ),
+              Field(
+                (b) => b
+                  ..name = '_disabled'
+                  ..modifier = FieldModifier.final$
+                  ..assignment = const Code('{}')
+                  ..type = const Reference('Map<String, bool>'),
               ),
             ],
           )
@@ -567,6 +658,7 @@ class FormGenerator {
               ...removeGroupControlMethodList,
               ...addGroupControlListMethodList,
               modelMethod,
+              toggleDisabledMethod,
               submitMethod,
               currentFormMethod,
               updateValueMethod,
@@ -590,7 +682,7 @@ class FormGenerator {
               Method(
                 (b) {
                   b
-                    ..name = 'formElements${element.generics}'
+                    ..name = 'formElements${element.fullGenerics}'
                     ..static = true
                     ..lambda = true
                     ..requiredParameters.add(

@@ -52,14 +52,17 @@ class ReactiveTestForm extends StatelessWidget {
     Key? key,
     required this.form,
     required this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
   }) : super(key: key);
 
   final Widget child;
 
   final TestForm form;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   static TestForm? of(
     BuildContext context, {
@@ -83,8 +86,9 @@ class ReactiveTestForm extends StatelessWidget {
     return TestFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
-      child: WillPopScope(
-        onWillPop: onWillPop,
+      child: ReactiveFormPopScope(
+        canPop: canPop,
+        onPopInvoked: onPopInvoked,
         child: child,
       ),
     );
@@ -102,7 +106,8 @@ class TestFormBuilder extends StatefulWidget {
     Key? key,
     this.model,
     this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -111,7 +116,9 @@ class TestFormBuilder extends StatefulWidget {
 
   final Widget? child;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(BuildContext context, TestForm formModel, Widget? child)
       builder;
@@ -158,10 +165,12 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
     return ReactiveTestForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      onWillPop: widget.onWillPop,
+      canPop: widget.canPop,
+      onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
-        onWillPop: widget.onWillPop,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -184,10 +193,16 @@ class TestForm implements FormModel<Test> {
 
   final String? path;
 
+  final Map<String, bool> _disabled = {};
+
   String titleControlPath() => pathBuilder(titleControlName);
+
   String descriptionControlPath() => pathBuilder(descriptionControlName);
+
   String get _titleValue => titleControl.value as String;
+
   String? get _descriptionValue => descriptionControl?.value;
+
   bool get containsTitle {
     try {
       form.control(titleControlPath());
@@ -207,9 +222,13 @@ class TestForm implements FormModel<Test> {
   }
 
   Object? get titleErrors => titleControl.errors;
+
   Object? get descriptionErrors => descriptionControl?.errors;
+
   void get titleFocus => form.focus(titleControlPath());
+
   void get descriptionFocus => form.focus(descriptionControlPath());
+
   void descriptionRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -281,6 +300,7 @@ class TestForm implements FormModel<Test> {
   }) =>
       titleControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void descriptionValueReset(
     String? value, {
     bool updateParent = true,
@@ -290,11 +310,14 @@ class TestForm implements FormModel<Test> {
   }) =>
       descriptionControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String> get titleControl =>
       form.control(titleControlPath()) as FormControl<String>;
+
   FormControl<String>? get descriptionControl => containsDescription
       ? form.control(descriptionControlPath()) as FormControl<String>?
       : null;
+
   void titleSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -333,12 +356,46 @@ class TestForm implements FormModel<Test> {
 
   @override
   Test get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'TestForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Test(title: _titleValue, description: _descriptionValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -366,6 +423,7 @@ class TestForm implements FormModel<Test> {
   }) =>
       form.updateValue(TestForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Test? value,
@@ -376,8 +434,10 @@ class TestForm implements FormModel<Test> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Test? test) => FormGroup({
         titleControlName: FormControl<String>(
             value: test?.title,
@@ -400,7 +460,8 @@ class TestForm implements FormModel<Test> {
           disabled: false);
 }
 
-class ReactiveTestFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveTestFormArrayBuilder<ReactiveTestFormArrayBuilderT>
+    extends StatelessWidget {
   const ReactiveTestFormArrayBuilder({
     Key? key,
     this.control,
@@ -411,15 +472,16 @@ class ReactiveTestFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveTestFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(TestForm formModel)? control;
+  final FormArray<ReactiveTestFormArrayBuilderT>? Function(TestForm formModel)?
+      control;
 
   final Widget Function(
       BuildContext context, List<Widget> itemList, TestForm formModel)? builder;
 
-  final Widget Function(
-      BuildContext context, int i, T? item, TestForm formModel) itemBuilder;
+  final Widget Function(BuildContext context, int i,
+      ReactiveTestFormArrayBuilderT? item, TestForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -429,7 +491,7 @@ class ReactiveTestFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveTestFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -460,7 +522,8 @@ class ReactiveTestFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveTestFormFormGroupArrayBuilder<T> extends StatelessWidget {
+class ReactiveTestFormFormGroupArrayBuilder<
+    ReactiveTestFormFormGroupArrayBuilderT> extends StatelessWidget {
   const ReactiveTestFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -471,16 +534,21 @@ class ReactiveTestFormFormGroupArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveTestFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      TestForm formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveTestFormFormGroupArrayBuilderT>>
+      Function(TestForm formModel)? getExtended;
 
   final Widget Function(
       BuildContext context, List<Widget> itemList, TestForm formModel)? builder;
 
   final Widget Function(
-      BuildContext context, int i, T? item, TestForm formModel) itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveTestFormFormGroupArrayBuilderT? item,
+      TestForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -495,19 +563,20 @@ class ReactiveTestFormFormGroupArrayBuilder<T> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ?? <ReactiveTestFormFormGroupArrayBuilderT>[])
+                .asMap()
+                .map((i, item) => MapEntry(
+                      i,
+                      itemBuilder(
+                        context,
+                        i,
+                        item,
+                        formModel,
+                      ),
+                    ))
+                .values
+                .toList();
 
         return builder?.call(
               context,

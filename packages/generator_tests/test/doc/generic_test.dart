@@ -90,14 +90,17 @@ class ReactiveTagsForm<T> extends StatelessWidget {
     Key? key,
     required this.form,
     required this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
   }) : super(key: key);
 
   final Widget child;
 
   final TagsForm<T> form;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   static TagsForm<T>? of<T>(
     BuildContext context, {
@@ -121,8 +124,9 @@ class ReactiveTagsForm<T> extends StatelessWidget {
     return TagsFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
-      child: WillPopScope(
-        onWillPop: onWillPop,
+      child: ReactiveFormPopScope(
+        canPop: canPop,
+        onPopInvoked: onPopInvoked,
         child: child,
       ),
     );
@@ -140,7 +144,8 @@ class TagsFormBuilder<T> extends StatefulWidget {
     Key? key,
     this.model,
     this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -149,7 +154,9 @@ class TagsFormBuilder<T> extends StatefulWidget {
 
   final Widget? child;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
       BuildContext context, TagsForm<T> formModel, Widget? child) builder;
@@ -196,10 +203,12 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
     return ReactiveTagsForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      onWillPop: widget.onWillPop,
+      canPop: widget.canPop,
+      onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
-        onWillPop: widget.onWillPop,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -220,8 +229,12 @@ class TagsForm<T> implements FormModel<Tags<T>> {
 
   final String? path;
 
+  final Map<String, bool> _disabled = {};
+
   String tagsControlPath() => pathBuilder(tagsControlName);
+
   List<T>? get _tagsValue => tagsControl?.value;
+
   bool get containsTags {
     try {
       form.control(tagsControlPath());
@@ -232,7 +245,9 @@ class TagsForm<T> implements FormModel<Tags<T>> {
   }
 
   Object? get tagsErrors => tagsControl?.errors;
+
   void get tagsFocus => form.focus(tagsControlPath());
+
   void tagsRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -286,9 +301,11 @@ class TagsForm<T> implements FormModel<Tags<T>> {
   }) =>
       tagsControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<List<T>>? get tagsControl => containsTags
       ? form.control(tagsControlPath()) as FormControl<List<T>>?
       : null;
+
   void tagsSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -309,12 +326,46 @@ class TagsForm<T> implements FormModel<Tags<T>> {
 
   @override
   Tags<T> get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'TagsForm<T>'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Tags<T>(tags: _tagsValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -342,6 +393,7 @@ class TagsForm<T> implements FormModel<Tags<T>> {
   }) =>
       form.updateValue(TagsForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Tags<T>? value,
@@ -352,8 +404,10 @@ class TagsForm<T> implements FormModel<Tags<T>> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements<T>(Tags<T>? tags) => FormGroup({
         tagsControlName: FormControl<List<T>>(
             value: tags?.tags,
@@ -369,7 +423,8 @@ class TagsForm<T> implements FormModel<Tags<T>> {
           disabled: false);
 }
 
-class ReactiveTagsFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveTagsFormArrayBuilder<ReactiveTagsFormArrayBuilderT, T>
+    extends StatelessWidget {
   const ReactiveTagsFormArrayBuilder({
     Key? key,
     this.control,
@@ -380,16 +435,17 @@ class ReactiveTagsFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveTagsFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(TagsForm<T> formModel)? control;
+  final FormArray<ReactiveTagsFormArrayBuilderT>? Function(
+      TagsForm<T> formModel)? control;
 
   final Widget Function(
           BuildContext context, List<Widget> itemList, TagsForm<T> formModel)?
       builder;
 
-  final Widget Function(
-      BuildContext context, int i, T? item, TagsForm<T> formModel) itemBuilder;
+  final Widget Function(BuildContext context, int i,
+      ReactiveTagsFormArrayBuilderT? item, TagsForm<T> formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -399,7 +455,7 @@ class ReactiveTagsFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveTagsFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -430,7 +486,8 @@ class ReactiveTagsFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveTagsFormFormGroupArrayBuilder<T> extends StatelessWidget {
+class ReactiveTagsFormFormGroupArrayBuilder<
+    ReactiveTagsFormFormGroupArrayBuilderT, T> extends StatelessWidget {
   const ReactiveTagsFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -441,17 +498,22 @@ class ReactiveTagsFormFormGroupArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveTagsFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      TagsForm<T> formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveTagsFormFormGroupArrayBuilderT>>
+      Function(TagsForm<T> formModel)? getExtended;
 
   final Widget Function(
           BuildContext context, List<Widget> itemList, TagsForm<T> formModel)?
       builder;
 
   final Widget Function(
-      BuildContext context, int i, T? item, TagsForm<T> formModel) itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveTagsFormFormGroupArrayBuilderT? item,
+      TagsForm<T> formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -466,19 +528,20 @@ class ReactiveTagsFormFormGroupArrayBuilder<T> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ?? <ReactiveTagsFormFormGroupArrayBuilderT>[])
+                .asMap()
+                .map((i, item) => MapEntry(
+                      i,
+                      itemBuilder(
+                        context,
+                        i,
+                        item,
+                        formModel,
+                      ),
+                    ))
+                .values
+                .toList();
 
         return builder?.call(
               context,

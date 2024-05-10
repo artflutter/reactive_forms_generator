@@ -137,14 +137,17 @@ class ReactiveGroupForm extends StatelessWidget {
     Key? key,
     required this.form,
     required this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
   }) : super(key: key);
 
   final Widget child;
 
   final GroupForm form;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   static GroupForm? of(
     BuildContext context, {
@@ -168,8 +171,9 @@ class ReactiveGroupForm extends StatelessWidget {
     return GroupFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
-      child: WillPopScope(
-        onWillPop: onWillPop,
+      child: ReactiveFormPopScope(
+        canPop: canPop,
+        onPopInvoked: onPopInvoked,
         child: child,
       ),
     );
@@ -187,7 +191,8 @@ class GroupFormBuilder extends StatefulWidget {
     Key? key,
     this.model,
     this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -196,7 +201,9 @@ class GroupFormBuilder extends StatefulWidget {
 
   final Widget? child;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
       BuildContext context, GroupForm formModel, Widget? child) builder;
@@ -243,10 +250,12 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
     return ReactiveGroupForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      onWillPop: widget.onWillPop,
+      canPop: widget.canPop,
+      onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
-        onWillPop: widget.onWillPop,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -273,14 +282,24 @@ class GroupForm implements FormModel<Group> {
 
   final String? path;
 
+  final Map<String, bool> _disabled = {};
+
   String personalControlPath() => pathBuilder(personalControlName);
+
   String phoneControlPath() => pathBuilder(phoneControlName);
+
   String addressControlPath() => pathBuilder(addressControlName);
+
   String address2ControlPath() => pathBuilder(address2ControlName);
+
   Personal? get _personalValue => personalForm.model;
+
   Phone? get _phoneValue => phoneForm.model;
+
   Address? get _addressValue => addressForm.model;
+
   Address? get _address2Value => address2Form.model;
+
   bool get containsPersonal {
     try {
       form.control(personalControlPath());
@@ -318,13 +337,21 @@ class GroupForm implements FormModel<Group> {
   }
 
   Object? get personalErrors => personalControl?.errors;
+
   Object? get phoneErrors => phoneControl?.errors;
+
   Object? get addressErrors => addressControl?.errors;
+
   Object? get address2Errors => address2Control?.errors;
+
   void get personalFocus => form.focus(personalControlPath());
+
   void get phoneFocus => form.focus(phoneControlPath());
+
   void get addressFocus => form.focus(addressControlPath());
+
   void get address2Focus => form.focus(address2ControlPath());
+
   void personalRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -512,6 +539,7 @@ class GroupForm implements FormModel<Group> {
           value: PersonalForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   void phoneValueReset(
     Phone? value, {
     bool updateParent = true,
@@ -523,6 +551,7 @@ class GroupForm implements FormModel<Group> {
           value: PhoneForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   void addressValueReset(
     Address? value, {
     bool updateParent = true,
@@ -534,6 +563,7 @@ class GroupForm implements FormModel<Group> {
           value: AddressForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   void address2ValueReset(
     Address? value, {
     bool updateParent = true,
@@ -545,20 +575,29 @@ class GroupForm implements FormModel<Group> {
           value: AddressForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   FormGroup? get personalControl => containsPersonal
       ? form.control(personalControlPath()) as FormGroup?
       : null;
+
   FormGroup? get phoneControl =>
       containsPhone ? form.control(phoneControlPath()) as FormGroup? : null;
+
   FormGroup? get addressControl =>
       containsAddress ? form.control(addressControlPath()) as FormGroup? : null;
+
   FormGroup? get address2Control => containsAddress2
       ? form.control(address2ControlPath()) as FormGroup?
       : null;
+
   PersonalForm get personalForm => PersonalForm(form, pathBuilder('personal'));
+
   PhoneForm get phoneForm => PhoneForm(form, pathBuilder('phone'));
+
   AddressForm get addressForm => AddressForm(form, pathBuilder('address'));
+
   AddressForm get address2Form => AddressForm(form, pathBuilder('address2'));
+
   void personalSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -633,7 +672,9 @@ class GroupForm implements FormModel<Group> {
 
   @override
   Group get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'GroupForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -643,6 +684,46 @@ class GroupForm implements FormModel<Group> {
         phone: _phoneValue,
         address: _addressValue,
         address2: _address2Value);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      personalForm.toggleDisabled();
+      phoneForm.toggleDisabled();
+      addressForm.toggleDisabled();
+      address2Form.toggleDisabled();
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      personalForm.toggleDisabled();
+      phoneForm.toggleDisabled();
+      addressForm.toggleDisabled();
+      address2Form.toggleDisabled();
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -670,6 +751,7 @@ class GroupForm implements FormModel<Group> {
   }) =>
       form.updateValue(GroupForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Group? value,
@@ -680,8 +762,10 @@ class GroupForm implements FormModel<Group> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Group? group) => FormGroup({
         personalControlName: PersonalForm.formElements(group?.personal),
         phoneControlName: PhoneForm.formElements(group?.phone),
@@ -708,10 +792,16 @@ class PersonalForm implements FormModel<Personal> {
 
   final String? path;
 
+  final Map<String, bool> _disabled = {};
+
   String nameControlPath() => pathBuilder(nameControlName);
+
   String emailControlPath() => pathBuilder(emailControlName);
+
   String? get _nameValue => nameControl?.value;
+
   String? get _emailValue => emailControl?.value;
+
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -731,9 +821,13 @@ class PersonalForm implements FormModel<Personal> {
   }
 
   Object? get nameErrors => nameControl?.errors;
+
   Object? get emailErrors => emailControl?.errors;
+
   void get nameFocus => form.focus(nameControlPath());
+
   void get emailFocus => form.focus(emailControlPath());
+
   void nameRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -831,6 +925,7 @@ class PersonalForm implements FormModel<Personal> {
   }) =>
       nameControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void emailValueReset(
     String? value, {
     bool updateParent = true,
@@ -840,12 +935,15 @@ class PersonalForm implements FormModel<Personal> {
   }) =>
       emailControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String>? get nameControl => containsName
       ? form.control(nameControlPath()) as FormControl<String>?
       : null;
+
   FormControl<String>? get emailControl => containsEmail
       ? form.control(emailControlPath()) as FormControl<String>?
       : null;
+
   void nameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -884,12 +982,46 @@ class PersonalForm implements FormModel<Personal> {
 
   @override
   Personal get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'PersonalForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Personal(name: _nameValue, email: _emailValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -917,6 +1049,7 @@ class PersonalForm implements FormModel<Personal> {
   }) =>
       form.updateValue(PersonalForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Personal? value,
@@ -927,8 +1060,10 @@ class PersonalForm implements FormModel<Personal> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Personal? personal) => FormGroup({
         nameControlName: FormControl<String>(
             value: personal?.name,
@@ -965,10 +1100,16 @@ class PhoneForm implements FormModel<Phone> {
 
   final String? path;
 
+  final Map<String, bool> _disabled = {};
+
   String phoneNumberControlPath() => pathBuilder(phoneNumberControlName);
+
   String countryIsoControlPath() => pathBuilder(countryIsoControlName);
+
   String? get _phoneNumberValue => phoneNumberControl?.value;
+
   String? get _countryIsoValue => countryIsoControl?.value;
+
   bool get containsPhoneNumber {
     try {
       form.control(phoneNumberControlPath());
@@ -988,9 +1129,13 @@ class PhoneForm implements FormModel<Phone> {
   }
 
   Object? get phoneNumberErrors => phoneNumberControl?.errors;
+
   Object? get countryIsoErrors => countryIsoControl?.errors;
+
   void get phoneNumberFocus => form.focus(phoneNumberControlPath());
+
   void get countryIsoFocus => form.focus(countryIsoControlPath());
+
   void phoneNumberRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1088,6 +1233,7 @@ class PhoneForm implements FormModel<Phone> {
   }) =>
       phoneNumberControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void countryIsoValueReset(
     String? value, {
     bool updateParent = true,
@@ -1097,12 +1243,15 @@ class PhoneForm implements FormModel<Phone> {
   }) =>
       countryIsoControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String>? get phoneNumberControl => containsPhoneNumber
       ? form.control(phoneNumberControlPath()) as FormControl<String>?
       : null;
+
   FormControl<String>? get countryIsoControl => containsCountryIso
       ? form.control(countryIsoControlPath()) as FormControl<String>?
       : null;
+
   void phoneNumberSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1141,12 +1290,46 @@ class PhoneForm implements FormModel<Phone> {
 
   @override
   Phone get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'PhoneForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Phone(phoneNumber: _phoneNumberValue, countryIso: _countryIsoValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -1174,6 +1357,7 @@ class PhoneForm implements FormModel<Phone> {
   }) =>
       form.updateValue(PhoneForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Phone? value,
@@ -1184,8 +1368,10 @@ class PhoneForm implements FormModel<Phone> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Phone? phone) => FormGroup({
         phoneNumberControlName: FormControl<String>(
             value: phone?.phoneNumber,
@@ -1224,12 +1410,20 @@ class AddressForm implements FormModel<Address> {
 
   final String? path;
 
+  final Map<String, bool> _disabled = {};
+
   String streetControlPath() => pathBuilder(streetControlName);
+
   String cityControlPath() => pathBuilder(cityControlName);
+
   String zipControlPath() => pathBuilder(zipControlName);
+
   String? get _streetValue => streetControl?.value;
+
   String? get _cityValue => cityControl?.value;
+
   String? get _zipValue => zipControl?.value;
+
   bool get containsStreet {
     try {
       form.control(streetControlPath());
@@ -1258,11 +1452,17 @@ class AddressForm implements FormModel<Address> {
   }
 
   Object? get streetErrors => streetControl?.errors;
+
   Object? get cityErrors => cityControl?.errors;
+
   Object? get zipErrors => zipControl?.errors;
+
   void get streetFocus => form.focus(streetControlPath());
+
   void get cityFocus => form.focus(cityControlPath());
+
   void get zipFocus => form.focus(zipControlPath());
+
   void streetRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1404,6 +1604,7 @@ class AddressForm implements FormModel<Address> {
   }) =>
       streetControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void cityValueReset(
     String? value, {
     bool updateParent = true,
@@ -1413,6 +1614,7 @@ class AddressForm implements FormModel<Address> {
   }) =>
       cityControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void zipValueReset(
     String? value, {
     bool updateParent = true,
@@ -1422,15 +1624,19 @@ class AddressForm implements FormModel<Address> {
   }) =>
       zipControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String>? get streetControl => containsStreet
       ? form.control(streetControlPath()) as FormControl<String>?
       : null;
+
   FormControl<String>? get cityControl => containsCity
       ? form.control(cityControlPath()) as FormControl<String>?
       : null;
+
   FormControl<String>? get zipControl => containsZip
       ? form.control(zipControlPath()) as FormControl<String>?
       : null;
+
   void streetSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1487,12 +1693,46 @@ class AddressForm implements FormModel<Address> {
 
   @override
   Address get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -1520,6 +1760,7 @@ class AddressForm implements FormModel<Address> {
   }) =>
       form.updateValue(AddressForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Address? value,
@@ -1530,8 +1771,10 @@ class AddressForm implements FormModel<Address> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Address? address) => FormGroup({
         streetControlName: FormControl<String>(
             value: address?.street,
@@ -1561,7 +1804,8 @@ class AddressForm implements FormModel<Address> {
           disabled: false);
 }
 
-class ReactiveGroupFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveGroupFormArrayBuilder<ReactiveGroupFormArrayBuilderT>
+    extends StatelessWidget {
   const ReactiveGroupFormArrayBuilder({
     Key? key,
     this.control,
@@ -1572,16 +1816,17 @@ class ReactiveGroupFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveGroupFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(GroupForm formModel)? control;
+  final FormArray<ReactiveGroupFormArrayBuilderT>? Function(
+      GroupForm formModel)? control;
 
   final Widget Function(
           BuildContext context, List<Widget> itemList, GroupForm formModel)?
       builder;
 
-  final Widget Function(
-      BuildContext context, int i, T? item, GroupForm formModel) itemBuilder;
+  final Widget Function(BuildContext context, int i,
+      ReactiveGroupFormArrayBuilderT? item, GroupForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1591,7 +1836,7 @@ class ReactiveGroupFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveGroupFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -1622,7 +1867,8 @@ class ReactiveGroupFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveGroupFormFormGroupArrayBuilder<T> extends StatelessWidget {
+class ReactiveGroupFormFormGroupArrayBuilder<
+    ReactiveGroupFormFormGroupArrayBuilderT> extends StatelessWidget {
   const ReactiveGroupFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -1633,17 +1879,22 @@ class ReactiveGroupFormFormGroupArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveGroupFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      GroupForm formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveGroupFormFormGroupArrayBuilderT>>
+      Function(GroupForm formModel)? getExtended;
 
   final Widget Function(
           BuildContext context, List<Widget> itemList, GroupForm formModel)?
       builder;
 
   final Widget Function(
-      BuildContext context, int i, T? item, GroupForm formModel) itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveGroupFormFormGroupArrayBuilderT? item,
+      GroupForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1658,19 +1909,20 @@ class ReactiveGroupFormFormGroupArrayBuilder<T> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ?? <ReactiveGroupFormFormGroupArrayBuilderT>[])
+                .asMap()
+                .map((i, item) => MapEntry(
+                      i,
+                      itemBuilder(
+                        context,
+                        i,
+                        item,
+                        formModel,
+                      ),
+                    ))
+                .values
+                .toList();
 
         return builder?.call(
               context,

@@ -107,14 +107,17 @@ class ReactiveArrayNullableForm extends StatelessWidget {
     Key? key,
     required this.form,
     required this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
   }) : super(key: key);
 
   final Widget child;
 
   final ArrayNullableForm form;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   static ArrayNullableForm? of(
     BuildContext context, {
@@ -139,8 +142,9 @@ class ReactiveArrayNullableForm extends StatelessWidget {
     return ArrayNullableFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
-      child: WillPopScope(
-        onWillPop: onWillPop,
+      child: ReactiveFormPopScope(
+        canPop: canPop,
+        onPopInvoked: onPopInvoked,
         child: child,
       ),
     );
@@ -160,7 +164,8 @@ class ArrayNullableFormBuilder extends StatefulWidget {
     Key? key,
     this.model,
     this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -169,7 +174,9 @@ class ArrayNullableFormBuilder extends StatefulWidget {
 
   final Widget? child;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
       BuildContext context, ArrayNullableForm formModel, Widget? child) builder;
@@ -219,10 +226,12 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
     return ReactiveArrayNullableForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      onWillPop: widget.onWillPop,
+      canPop: widget.canPop,
+      onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
-        onWillPop: widget.onWillPop,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -251,20 +260,32 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
 
   final String? path;
 
+  final Map<String, bool> _disabled = {};
+
   String someListControlPath() => pathBuilder(someListControlName);
+
   String emailListControlPath() => pathBuilder(emailListControlName);
+
   String fruitListControlPath() => pathBuilder(fruitListControlName);
+
   String vegetablesListControlPath() => pathBuilder(vegetablesListControlName);
+
   String modeListControlPath() => pathBuilder(modeListControlName);
+
   List<String?>? get _someListValue => someListControl?.value;
+
   List<String> get _emailListValue =>
       emailListControl.value?.whereType<String>().toList() ?? [];
+
   List<bool?> get _fruitListValue =>
       fruitListControl.value?.whereType<bool?>().toList() ?? [];
+
   List<String?>? get _vegetablesListValue =>
       vegetablesListControl?.value?.whereType<String?>().toList() ?? [];
+
   List<UserMode?>? get _modeListValue =>
       modeListControl?.value?.whereType<UserMode?>().toList() ?? [];
+
   bool get containsSomeList {
     try {
       form.control(someListControlPath());
@@ -311,15 +332,25 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }
 
   Object? get someListErrors => someListControl?.errors;
+
   Object? get emailListErrors => emailListControl.errors;
+
   Object? get fruitListErrors => fruitListControl.errors;
+
   Object? get vegetablesListErrors => vegetablesListControl?.errors;
+
   Object? get modeListErrors => modeListControl?.errors;
+
   void get someListFocus => form.focus(someListControlPath());
+
   void get emailListFocus => form.focus(emailListControlPath());
+
   void get fruitListFocus => form.focus(fruitListControlPath());
+
   void get vegetablesListFocus => form.focus(vegetablesListControlPath());
+
   void get modeListFocus => form.focus(modeListControlPath());
+
   void someListRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -497,6 +528,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }) =>
       someListControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void emailListValueReset(
     List<String> value, {
     bool updateParent = true,
@@ -506,6 +538,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }) =>
       emailListControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void fruitListValueReset(
     List<bool?> value, {
     bool updateParent = true,
@@ -515,6 +548,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }) =>
       fruitListControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void vegetablesListValueReset(
     List<String?>? value, {
     bool updateParent = true,
@@ -524,6 +558,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }) =>
       vegetablesListControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void modeListValueReset(
     List<UserMode?>? value, {
     bool updateParent = true,
@@ -533,19 +568,25 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }) =>
       modeListControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<List<String?>>? get someListControl => containsSomeList
       ? form.control(someListControlPath()) as FormControl<List<String?>>?
       : null;
+
   FormArray<String> get emailListControl =>
       form.control(emailListControlPath()) as FormArray<String>;
+
   FormArray<bool> get fruitListControl =>
       form.control(fruitListControlPath()) as FormArray<bool>;
+
   FormArray<String>? get vegetablesListControl => containsVegetablesList
       ? form.control(vegetablesListControlPath()) as FormArray<String>?
       : null;
+
   FormArray<UserMode>? get modeListControl => containsModeList
       ? form.control(modeListControlPath()) as FormArray<UserMode>?
       : null;
+
   void someListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -798,7 +839,9 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
 
   @override
   ArrayNullable get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'ArrayNullableForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -809,6 +852,38 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
         vegetablesList: _vegetablesListValue,
         modeList: _modeListValue,
         someList: _someListValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -836,6 +911,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }) =>
       form.updateValue(ArrayNullableForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     ArrayNullable? value,
@@ -846,8 +922,10 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(ArrayNullable? arrayNullable) => FormGroup({
         emailListControlName: FormArray<String>(
             (arrayNullable?.emailList ?? [])
@@ -919,7 +997,8 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
           disabled: false);
 }
 
-class ReactiveArrayNullableFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveArrayNullableFormArrayBuilder<
+    ReactiveArrayNullableFormArrayBuilderT> extends StatelessWidget {
   const ReactiveArrayNullableFormArrayBuilder({
     Key? key,
     this.control,
@@ -930,16 +1009,19 @@ class ReactiveArrayNullableFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveArrayNullableFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(ArrayNullableForm formModel)? control;
+  final FormArray<ReactiveArrayNullableFormArrayBuilderT>? Function(
+      ArrayNullableForm formModel)? control;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       ArrayNullableForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, ArrayNullableForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveArrayNullableFormArrayBuilderT? item,
+      ArrayNullableForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -949,7 +1031,7 @@ class ReactiveArrayNullableFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveArrayNullableFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -980,8 +1062,8 @@ class ReactiveArrayNullableFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveArrayNullableFormFormGroupArrayBuilder<T>
-    extends StatelessWidget {
+class ReactiveArrayNullableFormFormGroupArrayBuilder<
+    ReactiveArrayNullableFormFormGroupArrayBuilderT> extends StatelessWidget {
   const ReactiveArrayNullableFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -992,17 +1074,21 @@ class ReactiveArrayNullableFormFormGroupArrayBuilder<T>
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveArrayNullableFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      ArrayNullableForm formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveArrayNullableFormFormGroupArrayBuilderT>>
+      Function(ArrayNullableForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       ArrayNullableForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, ArrayNullableForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveArrayNullableFormFormGroupArrayBuilderT? item,
+      ArrayNullableForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1017,7 +1103,8 @@ class ReactiveArrayNullableFormFormGroupArrayBuilder<T>
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
+        final itemList = (value.value() ??
+                <ReactiveArrayNullableFormFormGroupArrayBuilderT>[])
             .asMap()
             .map((i, item) => MapEntry(
                   i,

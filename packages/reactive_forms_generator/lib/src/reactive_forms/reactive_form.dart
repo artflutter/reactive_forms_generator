@@ -39,7 +39,13 @@ class ReactiveForm {
               ),
               Parameter(
                 (b) => b
-                  ..name = 'onWillPop'
+                  ..name = 'canPop'
+                  ..toThis = true
+                  ..named = true,
+              ),
+              Parameter(
+                (b) => b
+                  ..name = 'onPopInvoked'
                   ..toThis = true
                   ..named = true,
               ),
@@ -58,9 +64,7 @@ class ReactiveForm {
           ..name = className
           ..extend = const Reference('StatelessWidget')
           ..types.addAll(
-            formGenerator.element.thisType.typeArguments.map(
-              (e) => Reference(e.toString()),
-            ),
+            formGenerator.element.fullGenericTypes,
           )
           ..constructors.add(_constructor)
           ..fields.addAll([
@@ -78,10 +82,17 @@ class ReactiveForm {
             ),
             Field(
               (b) => b
-                ..name = 'onWillPop'
+                ..name = 'canPop'
                 ..modifier = FieldModifier.final$
-                ..type = const Reference('WillPopCallback?'),
-            )
+                ..type = const Reference('bool Function(FormGroup formGroup)?'),
+            ),
+            Field(
+              (b) => b
+                ..name = 'onPopInvoked'
+                ..modifier = FieldModifier.final$
+                ..type = const Reference(
+                    'void Function(FormGroup formGroup, bool didPop)?'),
+            ),
           ])
           ..methods.addAll(
             [
@@ -90,9 +101,7 @@ class ReactiveForm {
                   ..name = 'of'
                   ..static = true
                   ..types.addAll(
-                    formGenerator.element.thisType.typeArguments.map(
-                      (e) => Reference(e.toString()),
-                    ),
+                    formGenerator.element.fullGenericTypes,
                   )
                   ..returns = Reference('${formGenerator.classNameFull}?')
                   ..requiredParameters.add(
@@ -143,8 +152,9 @@ class ReactiveForm {
                     return ${reactiveInheritedStreamer.className}(
                       form: form,
                       stream: form.form.statusChanged,
-                      child: WillPopScope(
-                        onWillPop: onWillPop,
+                      child: ReactiveFormPopScope(
+                        canPop: canPop,
+                        onPopInvoked: onPopInvoked,
                         child: child,
                       ),
                     );

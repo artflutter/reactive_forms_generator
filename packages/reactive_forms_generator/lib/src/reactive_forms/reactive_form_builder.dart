@@ -61,7 +61,13 @@ class ReactiveFormBuilder {
               ),
               Parameter(
                 (b) => b
-                  ..name = 'onWillPop'
+                  ..name = 'canPop'
+                  ..named = true
+                  ..toThis = true,
+              ),
+              Parameter(
+                (b) => b
+                  ..name = 'onPopInvoked'
                   ..named = true
                   ..toThis = true,
               ),
@@ -101,8 +107,15 @@ class ReactiveFormBuilder {
         ),
         Field(
           (b) => b
-            ..name = 'onWillPop'
-            ..type = const Reference('WillPopCallback?')
+            ..name = 'canPop'
+            ..type = const Reference('bool Function(FormGroup formGroup)?')
+            ..modifier = FieldModifier.final$,
+        ),
+        Field(
+          (b) => b
+            ..name = 'onPopInvoked'
+            ..type = const Reference(
+                'void Function(FormGroup formGroup, bool didPop)?')
             ..modifier = FieldModifier.final$,
         ),
         Field(
@@ -125,7 +138,7 @@ class ReactiveFormBuilder {
 
   Class get _widget => Class(
         (b) => b
-          ..types.addAll(_element.genericTypes)
+          ..types.addAll(_element.fullGenericTypes)
           ..name = className
           ..extend = const Reference('StatefulWidget')
           ..fields.addAll(_widgetFields)
@@ -199,10 +212,12 @@ class ReactiveFormBuilder {
                 return ${reactiveForm.className}(
                   key: ObjectKey(_formModel),
                   form: _formModel,
-                  onWillPop: widget.onWillPop,
+                  canPop: widget.canPop,
+                  onPopInvoked: widget.onPopInvoked,
                   child: ReactiveFormBuilder(
                     form: () => _formModel.form,
-                    onWillPop: widget.onWillPop,
+                    canPop: widget.canPop,
+                    onPopInvoked: widget.onPopInvoked,
                     builder: (context, formGroup, child) => widget.builder(context, _formModel, widget.child),
                     child: widget.child,
                   ),
@@ -214,7 +229,7 @@ class ReactiveFormBuilder {
 
   Class get _state => Class(
         (b) => b
-          ..types.addAll(_element.genericTypes)
+          ..types.addAll(_element.fullGenericTypes)
           ..name = stateClassName
           ..extend = Reference('State<$className${_element.generics}>')
           ..fields.addAll(

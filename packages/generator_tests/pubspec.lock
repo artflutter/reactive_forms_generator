@@ -77,10 +77,10 @@ packages:
     dependency: "direct main"
     description:
       name: build_runner
-      sha256: "10c6bcdbf9d049a0b666702cf1cee4ddfdc38f02a19d35ae392863b47519848b"
+      sha256: "3ac61a79bfb6f6cc11f693591063a7f19a7af628dc52f141743edac5c16e8c22"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.6"
+    version: "2.4.9"
   build_runner_core:
     dependency: transitive
     description:
@@ -141,10 +141,10 @@ packages:
     dependency: "direct main"
     description:
       name: code_builder
-      sha256: "315a598c7fbe77f22de1c9da7cfd6fd21816312f16ffa124453b4fc679e540f1"
+      sha256: f692079e25e7869c14132d39f223f8eec9830eb76131925143b2129c4bb01b37
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.0"
+    version: "4.10.0"
   collection:
     dependency: transitive
     description:
@@ -189,10 +189,10 @@ packages:
     dependency: "direct main"
     description:
       name: dart_style
-      sha256: "1efa911ca7086affd35f463ca2fc1799584fb6aa89883cf0af8e3664d6a02d55"
+      sha256: "99e066ce75c89d6b29903d788a7bb9369cf754f7b24bf70bf4b6d6d6b26853b9"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.2"
+    version: "2.3.6"
   file:
     dependency: transitive
     description:
@@ -218,10 +218,10 @@ packages:
     dependency: "direct dev"
     description:
       name: flutter_lints
-      sha256: a25a15ebbdfc33ab1cd26c63a6ee519df92338a9c10f122adda92938253bef04
+      sha256: "9e8c3858111da373efc5aa341de011d9bd23e2c5c5e0c62bccf32438e192d7b1"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.3"
+    version: "3.0.2"
   freezed:
     dependency: "direct dev"
     description:
@@ -290,10 +290,10 @@ packages:
     dependency: transitive
     description:
       name: intl
-      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
+      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
       url: "https://pub.dev"
     source: hosted
-    version: "0.18.1"
+    version: "0.19.0"
   io:
     dependency: transitive
     description:
@@ -330,10 +330,10 @@ packages:
     dependency: transitive
     description:
       name: lints
-      sha256: "0a217c6c989d21039f1498c3ed9f3ed71b354e69873f13a8dfc3c9fe76f1b452"
+      sha256: cbf8d4b858bb0134ef3ef87841abdf8d63bfc255c266b7bf6b39daa1085c4290
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.1"
+    version: "3.0.0"
   logging:
     dependency: "direct dev"
     description:
@@ -354,18 +354,18 @@ packages:
     dependency: transitive
     description:
       name: material_color_utilities
-      sha256: "9528f2f296073ff54cb9fee677df673ace1218163c3bc7628093e7eed5203d41"
+      sha256: "0e0a020085b65b6083975e499759762399b4475f766c21668c4ecca34ea74e5a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.0"
+    version: "0.8.0"
   meta:
     dependency: transitive
     description:
       name: meta
-      sha256: a6e590c838b18133bb482a2745ad77c5bb7715fb0451209e1a7567d416678b8e
+      sha256: d584fa6707a52763a52446f02cc621b077888fb63b93bbcb1143a7be5a0c0c04
       url: "https://pub.dev"
     source: hosted
-    version: "1.10.0"
+    version: "1.11.0"
   mime:
     dependency: transitive
     description:
@@ -426,24 +426,24 @@ packages:
     dependency: transitive
     description:
       name: reactive_forms
-      sha256: "74f221052d43ba2f0661e7fda4177ed219fc3aa1fc613c9d981690e51156b418"
+      sha256: "10771b3b8f7df3dc6942928cc55b2abb49c0a5eb56ca8ab1ff4084b2bd968044"
       url: "https://pub.dev"
     source: hosted
-    version: "16.1.0"
+    version: "17.0.0"
   reactive_forms_annotations:
     dependency: "direct main"
     description:
       path: "../reactive_forms_annotations"
       relative: true
     source: path
-    version: "4.3.0"
+    version: "5.0.0"
   reactive_forms_generator:
     dependency: "direct dev"
     description:
       path: "../reactive_forms_generator"
       relative: true
     source: path
-    version: "4.5.1"
+    version: "5.0.0"
   recase:
     dependency: "direct main"
     description:
@@ -493,10 +493,10 @@ packages:
     dependency: "direct main"
     description:
       name: source_gen
-      sha256: fc0da689e5302edb6177fdd964efcb7f58912f43c28c2047a808f5bfff643d16
+      sha256: "14658ba5f669685cd3d63701d01b31ea748310f7ab854e471962670abcf57832"
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.0"
+    version: "1.5.0"
   source_helper:
     dependency: transitive
     description:
@@ -633,14 +633,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
-  web:
-    dependency: transitive
-    description:
-      name: web
-      sha256: afe077240a270dcfd2aafe77602b4113645af95d0ad31128cc02bce5ac5d5152
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.0"
   web_socket_channel:
     dependency: transitive
     description:
@@ -666,5 +658,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.2.0-194.0.dev <4.0.0"
-  flutter: ">=3.10.0"
+  dart: ">=3.2.0 <4.0.0"
+  flutter: ">=3.16.0"

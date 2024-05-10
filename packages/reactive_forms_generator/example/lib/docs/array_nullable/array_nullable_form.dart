@@ -17,7 +17,7 @@ class ArrayNullableFormWidget extends StatelessWidget {
     'orange',
   ];
 
-  ArrayNullableFormWidget({Key? key}) : super(key: key);
+  ArrayNullableFormWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

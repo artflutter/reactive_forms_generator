@@ -1,7 +1,9 @@
 import 'package:reactive_forms/reactive_forms.dart';
 
 abstract class FormModel<TModel> {
-  FormModel({required this.form});
+  FormModel({
+    required this.form,
+  });
 
   final FormGroup form;
 
@@ -20,6 +22,11 @@ abstract class FormModel<TModel> {
 
   reset({
     TModel? value,
+    bool updateParent = true,
+    bool emitEvent = true,
+  });
+
+  void toggleDisabled({
     bool updateParent = true,
     bool emitEvent = true,
   });

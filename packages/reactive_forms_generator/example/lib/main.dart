@@ -21,7 +21,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
         Routes.modelImplements: (_) => const ModelImplementsWidget(),
         Routes.nested: (_) => const NestedFormWidget(),
       },
-      home: const AnnotatelessFormWidget(),
+      home: const GroupFormWidget(),
     );
   }
 }

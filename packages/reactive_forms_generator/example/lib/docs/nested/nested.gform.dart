@@ -52,14 +52,17 @@ class ReactiveSubGroupForm extends StatelessWidget {
     Key? key,
     required this.form,
     required this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
   }) : super(key: key);
 
   final Widget child;
 
   final SubGroupForm form;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   static SubGroupForm? of(
     BuildContext context, {
@@ -83,8 +86,9 @@ class ReactiveSubGroupForm extends StatelessWidget {
     return SubGroupFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
-      child: WillPopScope(
-        onWillPop: onWillPop,
+      child: ReactiveFormPopScope(
+        canPop: canPop,
+        onPopInvoked: onPopInvoked,
         child: child,
       ),
     );
@@ -103,7 +107,8 @@ class SubGroupFormBuilder extends StatefulWidget {
     Key? key,
     this.model,
     this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -112,7 +117,9 @@ class SubGroupFormBuilder extends StatefulWidget {
 
   final Widget? child;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
       BuildContext context, SubGroupForm formModel, Widget? child) builder;
@@ -159,10 +166,12 @@ class _SubGroupFormBuilderState extends State<SubGroupFormBuilder> {
     return ReactiveSubGroupForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      onWillPop: widget.onWillPop,
+      canPop: widget.canPop,
+      onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
-        onWillPop: widget.onWillPop,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -183,8 +192,12 @@ class SubGroupForm implements FormModel<SubGroup> {
 
   final String? path;
 
+  final Map<String, bool> _disabled = {};
+
   String idControlPath() => pathBuilder(idControlName);
+
   String get _idValue => idControl.value as String;
+
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -195,7 +208,9 @@ class SubGroupForm implements FormModel<SubGroup> {
   }
 
   Object? get idErrors => idControl.errors;
+
   void get idFocus => form.focus(idControlPath());
+
   void idValueUpdate(
     String value, {
     bool updateParent = true,
@@ -223,8 +238,10 @@ class SubGroupForm implements FormModel<SubGroup> {
   }) =>
       idControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
+
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -245,12 +262,46 @@ class SubGroupForm implements FormModel<SubGroup> {
 
   @override
   SubGroup get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'SubGroupForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return SubGroup(id: _idValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -278,6 +329,7 @@ class SubGroupForm implements FormModel<SubGroup> {
   }) =>
       form.updateValue(SubGroupForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     SubGroup? value,
@@ -288,8 +340,10 @@ class SubGroupForm implements FormModel<SubGroup> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(SubGroup? subGroup) => FormGroup({
         idControlName: FormControl<String>(
             value: subGroup?.id,
@@ -305,7 +359,8 @@ class SubGroupForm implements FormModel<SubGroup> {
           disabled: false);
 }
 
-class ReactiveSubGroupFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveSubGroupFormArrayBuilder<ReactiveSubGroupFormArrayBuilderT>
+    extends StatelessWidget {
   const ReactiveSubGroupFormArrayBuilder({
     Key? key,
     this.control,
@@ -316,16 +371,20 @@ class ReactiveSubGroupFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveSubGroupFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(SubGroupForm formModel)? control;
+  final FormArray<ReactiveSubGroupFormArrayBuilderT>? Function(
+      SubGroupForm formModel)? control;
 
   final Widget Function(
           BuildContext context, List<Widget> itemList, SubGroupForm formModel)?
       builder;
 
   final Widget Function(
-      BuildContext context, int i, T? item, SubGroupForm formModel) itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveSubGroupFormArrayBuilderT? item,
+      SubGroupForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -335,7 +394,7 @@ class ReactiveSubGroupFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveSubGroupFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -366,7 +425,8 @@ class ReactiveSubGroupFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveSubGroupFormFormGroupArrayBuilder<T> extends StatelessWidget {
+class ReactiveSubGroupFormFormGroupArrayBuilder<
+    ReactiveSubGroupFormFormGroupArrayBuilderT> extends StatelessWidget {
   const ReactiveSubGroupFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -377,17 +437,22 @@ class ReactiveSubGroupFormFormGroupArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveSubGroupFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      SubGroupForm formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveSubGroupFormFormGroupArrayBuilderT>>
+      Function(SubGroupForm formModel)? getExtended;
 
   final Widget Function(
           BuildContext context, List<Widget> itemList, SubGroupForm formModel)?
       builder;
 
   final Widget Function(
-      BuildContext context, int i, T? item, SubGroupForm formModel) itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveSubGroupFormFormGroupArrayBuilderT? item,
+      SubGroupForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -402,19 +467,20 @@ class ReactiveSubGroupFormFormGroupArrayBuilder<T> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ?? <ReactiveSubGroupFormFormGroupArrayBuilderT>[])
+                .asMap()
+                .map((i, item) => MapEntry(
+                      i,
+                      itemBuilder(
+                        context,
+                        i,
+                        item,
+                        formModel,
+                      ),
+                    ))
+                .values
+                .toList();
 
         return builder?.call(
               context,
@@ -470,14 +536,17 @@ class ReactiveGroupForm extends StatelessWidget {
     Key? key,
     required this.form,
     required this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
   }) : super(key: key);
 
   final Widget child;
 
   final GroupForm form;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   static GroupForm? of(
     BuildContext context, {
@@ -501,8 +570,9 @@ class ReactiveGroupForm extends StatelessWidget {
     return GroupFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
-      child: WillPopScope(
-        onWillPop: onWillPop,
+      child: ReactiveFormPopScope(
+        canPop: canPop,
+        onPopInvoked: onPopInvoked,
         child: child,
       ),
     );
@@ -520,7 +590,8 @@ class GroupFormBuilder extends StatefulWidget {
     Key? key,
     this.model,
     this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -529,7 +600,9 @@ class GroupFormBuilder extends StatefulWidget {
 
   final Widget? child;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
       BuildContext context, GroupForm formModel, Widget? child) builder;
@@ -576,10 +649,12 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
     return ReactiveGroupForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      onWillPop: widget.onWillPop,
+      canPop: widget.canPop,
+      onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
-        onWillPop: widget.onWillPop,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -602,11 +677,17 @@ class GroupForm implements FormModel<Group> {
 
   final String? path;
 
+  final Map<String, bool> _disabled = {};
+
   String idControlPath() => pathBuilder(idControlName);
+
   String subGroupListControlPath() => pathBuilder(subGroupListControlName);
+
   String get _idValue => idControl.value as String;
+
   List<SubGroup> get _subGroupListValue =>
       subGroupListSubGroupForm.map((e) => e.model).toList();
+
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -626,9 +707,13 @@ class GroupForm implements FormModel<Group> {
   }
 
   Object? get idErrors => idControl.errors;
+
   Object? get subGroupListErrors => subGroupListControl.errors;
+
   void get idFocus => form.focus(idControlPath());
+
   void get subGroupListFocus => form.focus(subGroupListControlPath());
+
   void idValueUpdate(
     String value, {
     bool updateParent = true,
@@ -748,6 +833,7 @@ class GroupForm implements FormModel<Group> {
   }) =>
       idControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+
   void subGroupListValueReset(
     List<SubGroup> value, {
     bool updateParent = true,
@@ -760,11 +846,14 @@ class GroupForm implements FormModel<Group> {
               value.map((e) => SubGroupForm.formElements(e).rawValue).toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
+
   FormArray<Map<String, Object?>> get subGroupListControl =>
       form.control(subGroupListControlPath())
           as FormArray<Map<String, Object?>>;
+
   List<SubGroupForm> get subGroupListSubGroupForm {
     final values = (subGroupListControl.controls).map((e) => e.value).toList();
 
@@ -818,6 +907,7 @@ class GroupForm implements FormModel<Group> {
               form.control(subGroupListControlPath())
                   as FormArray<Map<String, Object?>>,
               () => subGroupListSubGroupForm);
+
   void addSubGroupListItem(SubGroup value) {
     subGroupListControl.add(SubGroupForm.formElements(value));
   }
@@ -834,12 +924,50 @@ class GroupForm implements FormModel<Group> {
 
   @override
   Group get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'GroupForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Group(id: _idValue, subGroupList: _subGroupListValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      subGroupListSubGroupForm.forEach((e) => e.toggleDisabled());
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      subGroupListSubGroupForm.forEach((e) => e.toggleDisabled());
+
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -867,6 +995,7 @@ class GroupForm implements FormModel<Group> {
   }) =>
       form.updateValue(GroupForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Group? value,
@@ -877,8 +1006,10 @@ class GroupForm implements FormModel<Group> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Group? group) => FormGroup({
         idControlName: FormControl<String>(
             value: group?.id,
@@ -902,7 +1033,8 @@ class GroupForm implements FormModel<Group> {
           disabled: false);
 }
 
-class ReactiveGroupFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveGroupFormArrayBuilder<ReactiveGroupFormArrayBuilderT>
+    extends StatelessWidget {
   const ReactiveGroupFormArrayBuilder({
     Key? key,
     this.control,
@@ -913,16 +1045,17 @@ class ReactiveGroupFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveGroupFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(GroupForm formModel)? control;
+  final FormArray<ReactiveGroupFormArrayBuilderT>? Function(
+      GroupForm formModel)? control;
 
   final Widget Function(
           BuildContext context, List<Widget> itemList, GroupForm formModel)?
       builder;
 
-  final Widget Function(
-      BuildContext context, int i, T? item, GroupForm formModel) itemBuilder;
+  final Widget Function(BuildContext context, int i,
+      ReactiveGroupFormArrayBuilderT? item, GroupForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -932,7 +1065,7 @@ class ReactiveGroupFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveGroupFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -963,7 +1096,8 @@ class ReactiveGroupFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveGroupFormFormGroupArrayBuilder<T> extends StatelessWidget {
+class ReactiveGroupFormFormGroupArrayBuilder<
+    ReactiveGroupFormFormGroupArrayBuilderT> extends StatelessWidget {
   const ReactiveGroupFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -974,17 +1108,22 @@ class ReactiveGroupFormFormGroupArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveGroupFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      GroupForm formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveGroupFormFormGroupArrayBuilderT>>
+      Function(GroupForm formModel)? getExtended;
 
   final Widget Function(
           BuildContext context, List<Widget> itemList, GroupForm formModel)?
       builder;
 
   final Widget Function(
-      BuildContext context, int i, T? item, GroupForm formModel) itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveGroupFormFormGroupArrayBuilderT? item,
+      GroupForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -999,19 +1138,20 @@ class ReactiveGroupFormFormGroupArrayBuilder<T> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ?? <ReactiveGroupFormFormGroupArrayBuilderT>[])
+                .asMap()
+                .map((i, item) => MapEntry(
+                      i,
+                      itemBuilder(
+                        context,
+                        i,
+                        item,
+                        formModel,
+                      ),
+                    ))
+                .values
+                .toList();
 
         return builder?.call(
               context,
@@ -1067,14 +1207,17 @@ class ReactiveNestedForm extends StatelessWidget {
     Key? key,
     required this.form,
     required this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
   }) : super(key: key);
 
   final Widget child;
 
   final NestedForm form;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   static NestedForm? of(
     BuildContext context, {
@@ -1098,8 +1241,9 @@ class ReactiveNestedForm extends StatelessWidget {
     return NestedFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
-      child: WillPopScope(
-        onWillPop: onWillPop,
+      child: ReactiveFormPopScope(
+        canPop: canPop,
+        onPopInvoked: onPopInvoked,
         child: child,
       ),
     );
@@ -1117,7 +1261,8 @@ class NestedFormBuilder extends StatefulWidget {
     Key? key,
     this.model,
     this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -1126,7 +1271,9 @@ class NestedFormBuilder extends StatefulWidget {
 
   final Widget? child;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
       BuildContext context, NestedForm formModel, Widget? child) builder;
@@ -1173,10 +1320,12 @@ class _NestedFormBuilderState extends State<NestedFormBuilder> {
     return ReactiveNestedForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      onWillPop: widget.onWillPop,
+      canPop: widget.canPop,
+      onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
-        onWillPop: widget.onWillPop,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -1197,9 +1346,13 @@ class NestedForm implements FormModel<Nested> {
 
   final String? path;
 
+  final Map<String, bool> _disabled = {};
+
   String groupListControlPath() => pathBuilder(groupListControlName);
+
   List<Group> get _groupListValue =>
       groupListGroupForm.map((e) => e.model).toList();
+
   bool get containsGroupList {
     try {
       form.control(groupListControlPath());
@@ -1210,7 +1363,9 @@ class NestedForm implements FormModel<Nested> {
   }
 
   Object? get groupListErrors => groupListControl.errors;
+
   void get groupListFocus => form.focus(groupListControlPath());
+
   void groupListValueUpdate(
     List<Group> value, {
     bool updateParent = true,
@@ -1313,8 +1468,10 @@ class NestedForm implements FormModel<Nested> {
           value: value.map((e) => GroupForm.formElements(e).rawValue).toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   FormArray<Map<String, Object?>> get groupListControl =>
       form.control(groupListControlPath()) as FormArray<Map<String, Object?>>;
+
   List<GroupForm> get groupListGroupForm {
     final values = (groupListControl.controls).map((e) => e.value).toList();
 
@@ -1350,6 +1507,7 @@ class NestedForm implements FormModel<Nested> {
               form.control(groupListControlPath())
                   as FormArray<Map<String, Object?>>,
               () => groupListGroupForm);
+
   void addGroupListItem(Group value) {
     groupListControl.add(GroupForm.formElements(value));
   }
@@ -1366,12 +1524,50 @@ class NestedForm implements FormModel<Nested> {
 
   @override
   Nested get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'NestedForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Nested(groupList: _groupListValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      groupListGroupForm.forEach((e) => e.toggleDisabled());
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      groupListGroupForm.forEach((e) => e.toggleDisabled());
+
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -1399,6 +1595,7 @@ class NestedForm implements FormModel<Nested> {
   }) =>
       form.updateValue(NestedForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
+
   @override
   void reset({
     Nested? value,
@@ -1409,8 +1606,10 @@ class NestedForm implements FormModel<Nested> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
+
   static FormGroup formElements(Nested? nested) => FormGroup({
         groupListControlName: FormArray(
             (nested?.groupList ?? [])
@@ -1427,7 +1626,8 @@ class NestedForm implements FormModel<Nested> {
           disabled: false);
 }
 
-class ReactiveNestedFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveNestedFormArrayBuilder<ReactiveNestedFormArrayBuilderT>
+    extends StatelessWidget {
   const ReactiveNestedFormArrayBuilder({
     Key? key,
     this.control,
@@ -1438,16 +1638,17 @@ class ReactiveNestedFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveNestedFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(NestedForm formModel)? control;
+  final FormArray<ReactiveNestedFormArrayBuilderT>? Function(
+      NestedForm formModel)? control;
 
   final Widget Function(
           BuildContext context, List<Widget> itemList, NestedForm formModel)?
       builder;
 
-  final Widget Function(
-      BuildContext context, int i, T? item, NestedForm formModel) itemBuilder;
+  final Widget Function(BuildContext context, int i,
+      ReactiveNestedFormArrayBuilderT? item, NestedForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1457,7 +1658,7 @@ class ReactiveNestedFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveNestedFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -1488,7 +1689,8 @@ class ReactiveNestedFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveNestedFormFormGroupArrayBuilder<T> extends StatelessWidget {
+class ReactiveNestedFormFormGroupArrayBuilder<
+    ReactiveNestedFormFormGroupArrayBuilderT> extends StatelessWidget {
   const ReactiveNestedFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -1499,17 +1701,22 @@ class ReactiveNestedFormFormGroupArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveNestedFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      NestedForm formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveNestedFormFormGroupArrayBuilderT>>
+      Function(NestedForm formModel)? getExtended;
 
   final Widget Function(
           BuildContext context, List<Widget> itemList, NestedForm formModel)?
       builder;
 
   final Widget Function(
-      BuildContext context, int i, T? item, NestedForm formModel) itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveNestedFormFormGroupArrayBuilderT? item,
+      NestedForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1524,19 +1731,20 @@ class ReactiveNestedFormFormGroupArrayBuilder<T> extends StatelessWidget {
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ?? <ReactiveNestedFormFormGroupArrayBuilderT>[])
+                .asMap()
+                .map((i, item) => MapEntry(
+                      i,
+                      itemBuilder(
+                        context,
+                        i,
+                        item,
+                        formModel,
+                      ),
+                    ))
+                .values
+                .toList();
 
         return builder?.call(
               context,
