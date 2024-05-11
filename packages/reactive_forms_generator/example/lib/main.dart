@@ -3,6 +3,7 @@ import 'package:example/docs/annotateless/annotateless_form.dart';
 import 'package:example/docs/array_nullable/array_nullable_form.dart';
 import 'package:example/docs/delivery_list/delivery_point_route_form.dart';
 import 'package:example/docs/delivery_list/delivery_route_form.dart';
+import 'package:example/docs/conditional_form/conditional_form.dart';
 import 'package:example/docs/freezed/freezed_form.dart';
 import 'package:example/docs/generic/generic_form.dart';
 import 'package:example/docs/group/group_form.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         Routes.loginExtended: (_) => const LoginExtendedFormWidget(),
         Routes.login: (_) => const LoginFormWidget(),
+        Routes.conditionalForm: (_) => const ConditionalFormWidget(),
         Routes.annotateless: (_) => const AnnotatelessFormWidget(),
         Routes.mailingList: (_) => const MailingListFormWidget(),
         Routes.userProfile: (_) => const UserProfileFormWidget(),
@@ -59,6 +61,8 @@ class Routes {
   static const loginExtended = '/login-extended';
 
   static const login = '/login';
+
+  static const conditionalForm = '/conditional-form';
 
   static const annotateless = '/annotateless';
 

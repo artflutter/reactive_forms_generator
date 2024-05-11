@@ -107,6 +107,12 @@ class AppDrawer extends StatelessWidget {
                 Routes.nested,
               ),
             ),
+            ListTile(
+              title: const Text('Conditional form'),
+              onTap: () => Navigator.of(context).pushReplacementNamed(
+                Routes.conditionalForm,
+              ),
+            ),
           ],
         ),
       ),

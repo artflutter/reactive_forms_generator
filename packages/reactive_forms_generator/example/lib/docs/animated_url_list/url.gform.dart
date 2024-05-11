@@ -179,6 +179,83 @@ class _UrlFormBuilderState extends State<UrlFormBuilder> {
   }
 }
 
+/// Similar to the UrlFormBuilder but opts out of automatic form lifecycle
+/// management.
+///
+/// See `UrlFormBuilder.initState` and `UrlFormBuilder.dispose` for examples
+/// of initializing/disposing the formModel.
+class UrlFormModelBuilder extends StatefulWidget {
+  const UrlFormModelBuilder({
+    Key? key,
+    required this.formModel,
+    this.child,
+    this.canPop,
+    this.onPopInvoked,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final UrlForm formModel;
+
+  final Widget? child;
+
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+
+  final Widget Function(BuildContext context, UrlForm formModel, Widget? child)
+      builder;
+
+  final void Function(BuildContext context, UrlForm formModel)? initState;
+
+  @override
+  _UrlFormModelBuilderState createState() => _UrlFormModelBuilderState();
+}
+
+class _UrlFormModelBuilderState extends State<UrlFormModelBuilder> {
+  late UrlForm _formModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formModel = widget.formModel;
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+  }
+
+  @override
+  void didUpdateWidget(covariant UrlFormModelBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.formModel != oldWidget.formModel) {
+      _formModel = widget.formModel;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveUrlForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
+      canPop: widget.canPop,
+      onPopInvoked: widget.onPopInvoked,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
 class UrlForm implements FormModel<Url> {
   UrlForm(
     this.form,
