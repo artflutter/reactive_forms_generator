@@ -5,11 +5,11 @@ import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 
 class ArrayNullableFormWidget extends StatefulWidget {
-
-  ArrayNullableFormWidget({super.key});
+  const ArrayNullableFormWidget({super.key});
 
   @override
-  State<ArrayNullableFormWidget> createState() => _ArrayNullableFormWidgetState();
+  State<ArrayNullableFormWidget> createState() =>
+      _ArrayNullableFormWidgetState();
 }
 
 class _ArrayNullableFormWidgetState extends State<ArrayNullableFormWidget> {
