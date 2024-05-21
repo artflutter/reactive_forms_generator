@@ -630,25 +630,28 @@ class ProfileForm implements FormModel<Profile> {
     }
   }
 
-  Object? get idErrors => idControl.errors;
+  Map<String, Object> get idErrors => idControl.errors;
 
-  Object? get anotherIdErrors => anotherIdControl.errors;
+  Map<String, Object> get anotherIdErrors => anotherIdControl.errors;
 
-  Object? get nameErrors => nameControl.errors;
+  Map<String, Object> get nameErrors => nameControl.errors;
 
-  Object? get chartingOrderErrors => chartingOrderControl.errors;
+  Map<String, Object> get chartingOrderErrors => chartingOrderControl.errors;
 
-  Object? get numberingStandardErrors => numberingStandardControl.errors;
+  Map<String, Object> get numberingStandardErrors =>
+      numberingStandardControl.errors;
 
-  Object? get measurementTypeErrors => measurementTypeControl.errors;
+  Map<String, Object> get measurementTypeErrors =>
+      measurementTypeControl.errors;
 
-  Object? get audioGuidanceErrors => audioGuidanceControl.errors;
+  Map<String, Object> get audioGuidanceErrors => audioGuidanceControl.errors;
 
-  Object? get incidenceFilterErrors => incidenceFilterControl.errors;
+  Map<String, Object> get incidenceFilterErrors =>
+      incidenceFilterControl.errors;
 
-  Object? get thresholdErrors => thresholdControl.errors;
+  Map<String, Object> get thresholdErrors => thresholdControl.errors;
 
-  Object? get timerErrors => timerControl.errors;
+  Map<String, Object> get timerErrors => timerControl.errors;
 
   void get idFocus => form.focus(idControlPath());
 
@@ -1455,17 +1458,23 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
     }
   }
 
-  Object? get isMobilityEnabledErrors => isMobilityEnabledControl.errors;
+  Map<String, Object> get isMobilityEnabledErrors =>
+      isMobilityEnabledControl.errors;
 
-  Object? get isFurcationEnabledErrors => isFurcationEnabledControl.errors;
+  Map<String, Object> get isFurcationEnabledErrors =>
+      isFurcationEnabledControl.errors;
 
-  Object? get isBleedingEnabledErrors => isBleedingEnabledControl.errors;
+  Map<String, Object> get isBleedingEnabledErrors =>
+      isBleedingEnabledControl.errors;
 
-  Object? get isSuppurationEnabledErrors => isSuppurationEnabledControl.errors;
+  Map<String, Object> get isSuppurationEnabledErrors =>
+      isSuppurationEnabledControl.errors;
 
-  Object? get isCalculusEnabledErrors => isCalculusEnabledControl.errors;
+  Map<String, Object> get isCalculusEnabledErrors =>
+      isCalculusEnabledControl.errors;
 
-  Object? get isPlaqueEnabledErrors => isPlaqueEnabledControl.errors;
+  Map<String, Object> get isPlaqueEnabledErrors =>
+      isPlaqueEnabledControl.errors;
 
   void get isMobilityEnabledFocus => form.focus(isMobilityEnabledControlPath());
 
@@ -1957,9 +1966,9 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
     }
   }
 
-  Object? get isEnabledErrors => isEnabledControl.errors;
+  Map<String, Object> get isEnabledErrors => isEnabledControl.errors;
 
-  Object? get valueErrors => valueControl.errors;
+  Map<String, Object> get valueErrors => valueControl.errors;
 
   void get isEnabledFocus => form.focus(isEnabledControlPath());
 
@@ -2212,9 +2221,9 @@ class TimerSettingForm implements FormModel<TimerSetting> {
     }
   }
 
-  Object? get isEnabledErrors => isEnabledControl.errors;
+  Map<String, Object> get isEnabledErrors => isEnabledControl.errors;
 
-  Object? get valueErrors => valueControl.errors;
+  Map<String, Object> get valueErrors => valueControl.errors;
 
   void get isEnabledFocus => form.focus(isEnabledControlPath());
 

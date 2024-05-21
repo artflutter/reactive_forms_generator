@@ -214,7 +214,7 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
     }
   }
 
-  Object? get listErrors => listControl.errors;
+  Map<String, Object> get listErrors => listControl.errors;
 
   void get listFocus => form.focus(listControlPath());
 

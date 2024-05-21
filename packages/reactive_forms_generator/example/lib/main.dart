@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         Routes.userProfile: (_) => const UserProfileFormWidget(),
         Routes.loginExtendedNullable: (_) =>
             const LoginExtendedNullableFormWidget(),
-        Routes.arrayNullable: (_) => ArrayNullableFormWidget(),
+        Routes.arrayNullable: (_) => const ArrayNullableFormWidget(),
         Routes.group: (_) => const GroupFormWidget(),
         Routes.deliveryList: (_) => const DeliveryListFormWidget(),
         Routes.deliveryPoint: (_) => const DeliveryPointWidget(),

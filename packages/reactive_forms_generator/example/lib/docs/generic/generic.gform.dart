@@ -206,7 +206,7 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     }
   }
 
-  Object? get tagsErrors => tagsControl?.errors;
+  Map<String, Object>? get tagsErrors => tagsControl?.errors;
 
   void get tagsFocus => form.focus(tagsControlPath());
 
