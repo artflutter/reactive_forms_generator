@@ -9,7 +9,7 @@ void main() {
   group('reactive_forms_generator', () {
     test(
       'Generic status list',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -249,7 +249,7 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
     }
   }
 
-  Object? get listErrors => listControl.errors;
+  Map<String, Object> get listErrors => listControl.errors;
 
   void get listFocus => form.focus(listControlPath());
 

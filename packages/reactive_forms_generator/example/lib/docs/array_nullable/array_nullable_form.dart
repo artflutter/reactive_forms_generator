@@ -4,7 +4,15 @@ import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 
-class ArrayNullableFormWidget extends StatelessWidget {
+class ArrayNullableFormWidget extends StatefulWidget {
+  const ArrayNullableFormWidget({super.key});
+
+  @override
+  State<ArrayNullableFormWidget> createState() =>
+      _ArrayNullableFormWidgetState();
+}
+
+class _ArrayNullableFormWidgetState extends State<ArrayNullableFormWidget> {
   final contacts = [
     'john@email.com',
     'susan@email.com',
@@ -17,17 +25,23 @@ class ArrayNullableFormWidget extends StatelessWidget {
     'orange',
   ];
 
-  ArrayNullableFormWidget({super.key});
+  late final ArrayNullable model;
+
+  @override
+  void initState() {
+    model = ArrayNullable(
+      emailList: contacts,
+      fruitList: fruits.map((e) => false).toList(),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SampleScreen(
       title: const Text('Array nullable'),
       body: ArrayNullableFormBuilder(
-        model: ArrayNullable(
-          emailList: contacts,
-          fruitList: fruits.map((e) => false).toList(),
-        ),
+        model: model,
         builder: (context, formModel, child) {
           return Column(
             children: [

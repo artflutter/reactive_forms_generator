@@ -326,15 +326,15 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     }
   }
 
-  Object? get genderErrors => genderControl?.errors;
+  Map<String, Object>? get genderErrors => genderControl?.errors;
 
-  Object? get idErrors => idControl?.errors;
+  Map<String, Object>? get idErrors => idControl?.errors;
 
-  Object? get nameErrors => nameControl?.errors;
+  Map<String, Object>? get nameErrors => nameControl?.errors;
 
-  Object? get logoImageErrors => logoImageControl?.errors;
+  Map<String, Object>? get logoImageErrors => logoImageControl?.errors;
 
-  Object? get yearErrors => yearControl?.errors;
+  Map<String, Object>? get yearErrors => yearControl?.errors;
 
   void get genderFocus => form.focus(genderControlPath());
 

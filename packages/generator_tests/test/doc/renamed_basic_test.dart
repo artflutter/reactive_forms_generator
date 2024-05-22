@@ -275,9 +275,9 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
     }
   }
 
-  Object? get emailErrors => emailControl.errors;
+  Map<String, Object> get emailErrors => emailControl.errors;
 
-  Object? get passwordErrors => passwordControl.errors;
+  Map<String, Object> get passwordErrors => passwordControl.errors;
 
   void get emailFocus => form.focus(emailControlPath());
 
