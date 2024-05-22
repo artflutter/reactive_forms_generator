@@ -328,13 +328,13 @@ class GroupForm implements FormModel<Group> {
     }
   }
 
-  Object? get personalErrors => personalControl?.errors;
+  Map<String, Object>? get personalErrors => personalControl?.errors;
 
-  Object? get phoneErrors => phoneControl?.errors;
+  Map<String, Object>? get phoneErrors => phoneControl?.errors;
 
-  Object? get addressErrors => addressControl?.errors;
+  Map<String, Object>? get addressErrors => addressControl?.errors;
 
-  Object? get address2Errors => address2Control?.errors;
+  Map<String, Object>? get address2Errors => address2Control?.errors;
 
   void get personalFocus => form.focus(personalControlPath());
 
@@ -812,9 +812,9 @@ class PersonalForm implements FormModel<Personal> {
     }
   }
 
-  Object? get nameErrors => nameControl?.errors;
+  Map<String, Object>? get nameErrors => nameControl?.errors;
 
-  Object? get emailErrors => emailControl?.errors;
+  Map<String, Object>? get emailErrors => emailControl?.errors;
 
   void get nameFocus => form.focus(nameControlPath());
 
@@ -1120,9 +1120,9 @@ class PhoneForm implements FormModel<Phone> {
     }
   }
 
-  Object? get phoneNumberErrors => phoneNumberControl?.errors;
+  Map<String, Object>? get phoneNumberErrors => phoneNumberControl?.errors;
 
-  Object? get countryIsoErrors => countryIsoControl?.errors;
+  Map<String, Object>? get countryIsoErrors => countryIsoControl?.errors;
 
   void get phoneNumberFocus => form.focus(phoneNumberControlPath());
 
@@ -1443,11 +1443,11 @@ class AddressForm implements FormModel<Address> {
     }
   }
 
-  Object? get streetErrors => streetControl?.errors;
+  Map<String, Object>? get streetErrors => streetControl?.errors;
 
-  Object? get cityErrors => cityControl?.errors;
+  Map<String, Object>? get cityErrors => cityControl?.errors;
 
-  Object? get zipErrors => zipControl?.errors;
+  Map<String, Object>? get zipErrors => zipControl?.errors;
 
   void get streetFocus => form.focus(streetControlPath());
 

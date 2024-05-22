@@ -356,15 +356,16 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     }
   }
 
-  Object? get someListErrors => someListControl?.errors;
+  Map<String, Object>? get someListErrors => someListControl?.errors;
 
-  Object? get emailListErrors => emailListControl.errors;
+  Map<String, Object> get emailListErrors => emailListControl.errors;
 
-  Object? get fruitListErrors => fruitListControl.errors;
+  Map<String, Object> get fruitListErrors => fruitListControl.errors;
 
-  Object? get vegetablesListErrors => vegetablesListControl?.errors;
+  Map<String, Object>? get vegetablesListErrors =>
+      vegetablesListControl?.errors;
 
-  Object? get modeListErrors => modeListControl?.errors;
+  Map<String, Object>? get modeListErrors => modeListControl?.errors;
 
   void get someListFocus => form.focus(someListControlPath());
 

@@ -1,10 +1,14 @@
-## [4.8.0-beta.0]
+## [5.0.1]
 
-* fix for https://github.com/artflutter/reactive_forms_generator/issues/155
+* error type fix
 
 ## [5.0.0]
 
 * rf17
+
+## [4.8.0-beta.0]
+
+* fix for https://github.com/artflutter/reactive_forms_generator/issues/155
 
 ## [4.8.0]
 

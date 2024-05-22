@@ -284,7 +284,7 @@ class UrlForm implements FormModel<Url> {
     }
   }
 
-  Object? get urlListErrors => urlListControl.errors;
+  Map<String, Object> get urlListErrors => urlListControl.errors;
 
   void get urlListFocus => form.focus(urlListControlPath());
 
@@ -591,9 +591,9 @@ class UrlEntityForm implements FormModel<UrlEntity> {
     }
   }
 
-  Object? get labelErrors => labelControl.errors;
+  Map<String, Object> get labelErrors => labelControl.errors;
 
-  Object? get urlErrors => urlControl.errors;
+  Map<String, Object> get urlErrors => urlControl.errors;
 
   void get labelFocus => form.focus(labelControlPath());
 

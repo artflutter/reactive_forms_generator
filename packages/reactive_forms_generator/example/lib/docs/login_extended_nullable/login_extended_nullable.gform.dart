@@ -385,19 +385,19 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     }
   }
 
-  Object? get emailErrors => emailControl?.errors;
+  Map<String, Object>? get emailErrors => emailControl?.errors;
 
-  Object? get passwordErrors => passwordControl?.errors;
+  Map<String, Object>? get passwordErrors => passwordControl?.errors;
 
-  Object? get rememberMeErrors => rememberMeControl?.errors;
+  Map<String, Object>? get rememberMeErrors => rememberMeControl?.errors;
 
-  Object? get themeErrors => themeControl?.errors;
+  Map<String, Object>? get themeErrors => themeControl?.errors;
 
-  Object? get modeErrors => modeControl?.errors;
+  Map<String, Object>? get modeErrors => modeControl?.errors;
 
-  Object? get timeoutErrors => timeoutControl?.errors;
+  Map<String, Object>? get timeoutErrors => timeoutControl?.errors;
 
-  Object? get heightErrors => heightControl?.errors;
+  Map<String, Object>? get heightErrors => heightControl?.errors;
 
   void get emailFocus => form.focus(emailControlPath());
 
