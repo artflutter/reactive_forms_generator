@@ -3,7 +3,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'array_nullable.gform.dart';
 
-@Rf()
+@Rf(output: false)
 class ArrayNullable {
   final List<String> emailList;
 

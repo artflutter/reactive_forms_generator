@@ -5,7 +5,7 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class ControlMethod extends ReactiveFormGeneratorMethod {
-  ControlMethod(super.field);
+  ControlMethod(super.field, super.output);
 
   @override
   Method? formGroupMethod() {
@@ -97,19 +97,22 @@ class ControlMethod extends ReactiveFormGeneratorMethod {
 
   @override
   Method? formControlMethod() {
-    String displayType = field.type.getDisplayString(withNullability: true);
+    String displayType =
+        field.type.getDisplayString(withNullability: !toOutput);
 
     // we need to trim last NullabilitySuffix.question cause FormControl modifies
     // generic T => T?
-    if (field.type.nullabilitySuffix == NullabilitySuffix.question) {
+    if (field.type.nullabilitySuffix == NullabilitySuffix.question &&
+        !toOutput) {
       displayType = displayType.substring(0, displayType.length - 1);
     }
 
-    final reference = 'FormControl<$displayType>${field.nullabilitySuffix}';
+    final reference =
+        'FormControl<$displayType>${toOutput ? '' : field.nullabilitySuffix}';
 
     String body = 'form.control(${field.fieldControlPath}()) as $reference';
 
-    if (field.isNullable) {
+    if (field.isNullable && !toOutput) {
       body =
           '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $reference : null';
     }

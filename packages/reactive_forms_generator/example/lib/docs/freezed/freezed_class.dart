@@ -9,7 +9,7 @@ part 'freezed_class.freezed.dart';
 part 'freezed_class.gform.dart';
 
 @freezed
-@Rf()
+@Rf(output: false)
 class FreezedClass with _$FreezedClass {
   FreezedClass._();
 

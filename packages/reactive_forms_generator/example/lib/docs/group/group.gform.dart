@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'group.dart';
 
@@ -132,6 +132,8 @@ class GroupFormBuilder extends StatefulWidget {
 class _GroupFormBuilderState extends State<GroupFormBuilder> {
   late GroupForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = GroupForm(GroupForm.formElements(widget.model), null);
@@ -141,6 +143,34 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logGroupForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -157,6 +187,7 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -179,7 +210,9 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
   }
 }
 
-class GroupForm implements FormModel<Group> {
+final _logGroupForm = Logger.detached('GroupForm');
+
+class GroupForm implements FormModel<Group, Group> {
   GroupForm(
     this.form,
     this.path,
@@ -590,9 +623,11 @@ class GroupForm implements FormModel<Group> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'GroupForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logGroupForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Group(
         personal: _personalValue,
@@ -662,6 +697,8 @@ class GroupForm implements FormModel<Group> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logGroupForm.info('Errors');
+      _logGroupForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -705,7 +742,9 @@ class GroupForm implements FormModel<Group> {
           disabled: false);
 }
 
-class PersonalForm implements FormModel<Personal> {
+final _logPersonalForm = Logger.detached('PersonalForm');
+
+class PersonalForm implements FormModel<Personal, Personal> {
   PersonalForm(
     this.form,
     this.path,
@@ -922,9 +961,11 @@ class PersonalForm implements FormModel<Personal> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'PersonalForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logPersonalForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Personal(name: _nameValue, email: _emailValue);
   }
@@ -982,6 +1023,8 @@ class PersonalForm implements FormModel<Personal> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logPersonalForm.info('Errors');
+      _logPersonalForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -1035,7 +1078,9 @@ class PersonalForm implements FormModel<Personal> {
           disabled: false);
 }
 
-class PhoneForm implements FormModel<Phone> {
+final _logPhoneForm = Logger.detached('PhoneForm');
+
+class PhoneForm implements FormModel<Phone, Phone> {
   PhoneForm(
     this.form,
     this.path,
@@ -1252,9 +1297,11 @@ class PhoneForm implements FormModel<Phone> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'PhoneForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logPhoneForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Phone(phoneNumber: _phoneNumberValue, countryIso: _countryIsoValue);
   }
@@ -1312,6 +1359,8 @@ class PhoneForm implements FormModel<Phone> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logPhoneForm.info('Errors');
+      _logPhoneForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -1365,7 +1414,9 @@ class PhoneForm implements FormModel<Phone> {
           disabled: false);
 }
 
-class AddressForm implements FormModel<Address> {
+final _logAddressForm = Logger.detached('AddressForm');
+
+class AddressForm implements FormModel<Address, Address> {
   AddressForm(
     this.form,
     this.path,
@@ -1682,9 +1733,11 @@ class AddressForm implements FormModel<Address> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logAddressForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
   }
@@ -1742,6 +1795,8 @@ class AddressForm implements FormModel<Address> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logAddressForm.info('Errors');
+      _logAddressForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }

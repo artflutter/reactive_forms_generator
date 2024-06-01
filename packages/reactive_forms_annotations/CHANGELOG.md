@@ -1,3 +1,27 @@
+## [6.0.0-beta.6]
+
+* export `DeepCollectionEquality`
+
+## [6.0.0-beta.5]
+
+* equalsTo method
+
+## [6.0.0-beta.3]
+
+* improved logging
+
+## [6.0.0-beta.2]
+
+* improved logging
+
+## [6.0.0-beta.1]
+
+* BREAKING CHANGE: before generating code make sure to replace @Rf() with @Rf(output: false)
+
+## [6.0.0-beta.0]
+
+* output
+
 ## [5.0.2]
 
 * equalsTo method

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'profile.dart';
 
@@ -132,6 +132,8 @@ class ProfileFormBuilder extends StatefulWidget {
 class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
   late ProfileForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = ProfileForm(ProfileForm.formElements(widget.model), null);
@@ -141,6 +143,34 @@ class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logProfileForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -157,6 +187,7 @@ class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -179,7 +210,9 @@ class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
   }
 }
 
-class ProfileForm implements FormModel<Profile> {
+final _logProfileForm = Logger.detached('ProfileForm');
+
+class ProfileForm implements FormModel<Profile, Profile> {
   ProfileForm(
     this.form,
     this.path,
@@ -945,9 +978,11 @@ class ProfileForm implements FormModel<Profile> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'ProfileForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logProfileForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Profile(_idValue,
         anotherId: _anotherIdValue,
@@ -1020,6 +1055,8 @@ class ProfileForm implements FormModel<Profile> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logProfileForm.info('Errors');
+      _logProfileForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -1113,7 +1150,10 @@ class ProfileForm implements FormModel<Profile> {
           disabled: false);
 }
 
-class IncidenceFilterForm implements FormModel<IncidenceFilter> {
+final _logIncidenceFilterForm = Logger.detached('IncidenceFilterForm');
+
+class IncidenceFilterForm
+    implements FormModel<IncidenceFilter, IncidenceFilter> {
   IncidenceFilterForm(
     this.form,
     this.path,
@@ -1583,9 +1623,11 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'IncidenceFilterForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logIncidenceFilterForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return IncidenceFilter(
         isMobilityEnabled: _isMobilityEnabledValue,
@@ -1649,6 +1691,8 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logIncidenceFilterForm.info('Errors');
+      _logIncidenceFilterForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -1730,7 +1774,10 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
           disabled: false);
 }
 
-class ThresholdSettingForm implements FormModel<ThresholdSetting> {
+final _logThresholdSettingForm = Logger.detached('ThresholdSettingForm');
+
+class ThresholdSettingForm
+    implements FormModel<ThresholdSetting, ThresholdSetting> {
   ThresholdSettingForm(
     this.form,
     this.path,
@@ -1893,9 +1940,11 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'ThresholdSettingForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logThresholdSettingForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return ThresholdSetting(isEnabled: _isEnabledValue, value: _valueValue);
   }
@@ -1953,6 +2002,8 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logThresholdSettingForm.info('Errors');
+      _logThresholdSettingForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -2007,7 +2058,9 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
           disabled: false);
 }
 
-class TimerSettingForm implements FormModel<TimerSetting> {
+final _logTimerSettingForm = Logger.detached('TimerSettingForm');
+
+class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
   TimerSettingForm(
     this.form,
     this.path,
@@ -2170,9 +2223,11 @@ class TimerSettingForm implements FormModel<TimerSetting> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'TimerSettingForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logTimerSettingForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return TimerSetting(isEnabled: _isEnabledValue, value: _valueValue);
   }
@@ -2230,6 +2285,8 @@ class TimerSettingForm implements FormModel<TimerSetting> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logTimerSettingForm.info('Errors');
+      _logTimerSettingForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }

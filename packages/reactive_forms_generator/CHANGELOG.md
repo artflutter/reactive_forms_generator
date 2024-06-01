@@ -1,3 +1,67 @@
+## [6.0.0-beta.15]
+
+* rebase on main 2
+
+* ## [6.0.0-beta.14]
+
+* rebase on main
+
+## [6.0.0-beta.13]
+
+* analyzer 6.7.0
+
+## [6.0.0-beta.12]
+
+* another fix of `rawValue` retrieval
+
+## [6.0.0-beta.11]
+
+* fix `rawValue` retrieval
+
+## [6.0.0-beta.10]
+
+* equalsTo `value` => `rawValue`
+
+## [6.0.0-beta.9]
+
+* equalsTo `mapEquals` => `DeepCollectionEquality`
+
+## [6.0.0-beta.8]
+
+* equalsTo form => currentForm
+
+## [6.0.0-beta.7]
+
+* equalsTo method
+
+## [6.0.0-beta.6]
+
+* improved logging
+
+## [6.0.0-beta.5]
+
+* improved logging
+
+## [6.0.0-beta.4]
+
+* improved logging
+
+## [6.0.0-beta.3]
+
+* InconsistentAnalysisException fix
+
+## [6.0.0-beta.2]
+
+* InconsistentAnalysisException fix
+
+## [6.0.0-beta.1]
+
+* BREAKING CHANGE: before generating code make sure to replace @Rf() with @Rf(output: false)
+
+## [6.0.0-beta.0]
+
+* output
+
 ## [5.1.2]
 
 * ...ValueReset props pass through

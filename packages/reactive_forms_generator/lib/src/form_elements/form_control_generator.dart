@@ -35,6 +35,5 @@ class FormControlGenerator extends FormElementGenerator {
   }
 
   @override
-  List<TypeChecker> get typeChecker =>
-      [formControlChecker, formControlCheckerRf];
+  TypeChecker get typeChecker => formControlChecker;
 }

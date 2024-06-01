@@ -21,7 +21,7 @@ const model = r'''
     return Validators.required(control);
   }
   
-  @Rf()
+  @Rf(output: false)
   class Basic {
     final String email;
   

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'delivery_list.dart';
 
@@ -137,6 +137,8 @@ class DeliveryListFormBuilder extends StatefulWidget {
 class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
   late DeliveryListForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -147,6 +149,34 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logDeliveryListForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -163,6 +193,7 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -185,7 +216,9 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
   }
 }
 
-class DeliveryListForm implements FormModel<DeliveryList> {
+final _logDeliveryListForm = Logger.detached('DeliveryListForm');
+
+class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
   DeliveryListForm(
     this.form,
     this.path,
@@ -592,9 +625,11 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'DeliveryListForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logDeliveryListForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return DeliveryList(
         deliveryList: _deliveryListValue, clientList: _clientListValue);
@@ -659,6 +694,8 @@ class DeliveryListForm implements FormModel<DeliveryList> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logDeliveryListForm.info('Errors');
+      _logDeliveryListForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -714,7 +751,9 @@ class DeliveryListForm implements FormModel<DeliveryList> {
           disabled: false);
 }
 
-class DeliveryPointForm implements FormModel<DeliveryPoint> {
+final _logDeliveryPointForm = Logger.detached('DeliveryPointForm');
+
+class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
   DeliveryPointForm(
     this.form,
     this.path,
@@ -902,9 +941,11 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'DeliveryPointForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logDeliveryPointForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return DeliveryPoint(name: _nameValue, address: _addressValue);
   }
@@ -964,6 +1005,8 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logDeliveryPointForm.info('Errors');
+      _logDeliveryPointForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -1011,7 +1054,9 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
           disabled: false);
 }
 
-class AddressForm implements FormModel<Address> {
+final _logAddressForm = Logger.detached('AddressForm');
+
+class AddressForm implements FormModel<Address, Address> {
   AddressForm(
     this.form,
     this.path,
@@ -1228,9 +1273,11 @@ class AddressForm implements FormModel<Address> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logAddressForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Address(street: _streetValue, city: _cityValue);
   }
@@ -1288,6 +1335,8 @@ class AddressForm implements FormModel<Address> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logAddressForm.info('Errors');
+      _logAddressForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -1341,7 +1390,9 @@ class AddressForm implements FormModel<Address> {
           disabled: false);
 }
 
-class ClientForm implements FormModel<Client> {
+final _logClientForm = Logger.detached('ClientForm');
+
+class ClientForm implements FormModel<Client, Client> {
   ClientForm(
     this.form,
     this.path,
@@ -1631,9 +1682,11 @@ class ClientForm implements FormModel<Client> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'ClientForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logClientForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Client(
         clientType: _clientTypeValue, name: _nameValue, notes: _notesValue);
@@ -1692,6 +1745,8 @@ class ClientForm implements FormModel<Client> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logClientForm.info('Errors');
+      _logClientForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -2014,6 +2069,8 @@ class _StandaloneDeliveryPointFormBuilderState
     extends State<StandaloneDeliveryPointFormBuilder> {
   late StandaloneDeliveryPointForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = StandaloneDeliveryPointForm(
@@ -2024,6 +2081,35 @@ class _StandaloneDeliveryPointFormBuilderState
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription =
+        _logStandaloneDeliveryPointForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -2040,6 +2126,7 @@ class _StandaloneDeliveryPointFormBuilderState
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -2062,7 +2149,11 @@ class _StandaloneDeliveryPointFormBuilderState
   }
 }
 
-class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
+final _logStandaloneDeliveryPointForm =
+    Logger.detached('StandaloneDeliveryPointForm');
+
+class StandaloneDeliveryPointForm
+    implements FormModel<DeliveryPoint, DeliveryPoint> {
   StandaloneDeliveryPointForm(
     this.form,
     this.path,
@@ -2250,9 +2341,11 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'StandaloneDeliveryPointForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logStandaloneDeliveryPointForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return DeliveryPoint(name: _nameValue, address: _addressValue);
   }
@@ -2312,6 +2405,8 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logStandaloneDeliveryPointForm.info('Errors');
+      _logStandaloneDeliveryPointForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }

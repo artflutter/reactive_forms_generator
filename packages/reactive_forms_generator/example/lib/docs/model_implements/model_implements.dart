@@ -14,7 +14,7 @@ abstract class Password {
   Password({this.password = ''});
 }
 
-@Rf()
+@Rf(output: false)
 class ModelImplements implements Email, Password {
   @override
   final String email;

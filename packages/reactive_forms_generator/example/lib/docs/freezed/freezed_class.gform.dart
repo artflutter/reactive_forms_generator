@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'freezed_class.dart';
 
@@ -137,6 +137,8 @@ class FreezedClassFormBuilder extends StatefulWidget {
 class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
   late FreezedClassForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -147,6 +149,34 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logFreezedClassForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -163,6 +193,7 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -185,7 +216,9 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
   }
 }
 
-class FreezedClassForm implements FormModel<FreezedClass> {
+final _logFreezedClassForm = Logger.detached('FreezedClassForm');
+
+class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
   FreezedClassForm(
     this.form,
     this.path,
@@ -701,9 +734,11 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'FreezedClassForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logFreezedClassForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return FreezedClass(_genderValue,
         id: _idValue,
@@ -765,6 +800,8 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logFreezedClassForm.info('Errors');
+      _logFreezedClassForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }

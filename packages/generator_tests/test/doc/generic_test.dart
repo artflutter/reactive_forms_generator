@@ -8,7 +8,7 @@ const fileName = 'generic';
 void main() {
   group('reactive_forms_generator', () {
     test(
-      'Freezed support',
+      'Generic',
       () async {
         return testGenerator(
           fileName: fileName,
@@ -20,7 +20,7 @@ void main() {
             part '$fileName.gform.dart';
             
             @freezed
-            @Rf()
+            @Rf(output: false)
             class Tags<T> with _$Tags<T> {
               factory Tags({
                 @RfControl() required List<T>? tags,
@@ -39,7 +39,7 @@ void main() {
 const generatedFile = r'''// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'generic.dart';
 
@@ -180,6 +180,34 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
 
     widget.initState?.call(context, _formModel);
 
+    _logTagsForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
+
     super.initState();
   }
 
@@ -217,7 +245,9 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
   }
 }
 
-class TagsForm<T> implements FormModel<Tags<T>> {
+final _logTagsForm = Logger('TagsForm<T>');
+
+class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
   TagsForm(
     this.form,
     this.path,
@@ -334,9 +364,11 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'TagsForm<T>'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logTagsForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Tags<T>(tags: _tagsValue);
   }
@@ -394,6 +426,8 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logTagsForm.info('Errors');
+      _logTagsForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }

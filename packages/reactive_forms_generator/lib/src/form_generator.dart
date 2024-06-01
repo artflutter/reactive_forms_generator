@@ -1,19 +1,19 @@
+// ignore_for_file: implementation_imports
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
-
-// ignore: implementation_imports
 import 'package:analyzer/src/dart/element/element.dart' as e;
-
-// ignore: implementation_imports
 import 'package:analyzer/src/dart/element/type.dart' as t;
-
-// ignore: implementation_imports
+import 'package:analyzer/src/dart/ast/ast.dart' as u;
 import 'package:analyzer/src/generated/utilities_dart.dart' as u;
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_array_generator.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_group_generator.dart';
+import 'package:reactive_forms_generator/src/output/helpers.dart';
+import 'package:reactive_forms_generator/src/output/rf_annotation_arguments_visitor.dart';
+import 'package:reactive_forms_generator/src/output/rf_paramater_visitor.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_update_value_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_clear_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_insert_method.dart';
@@ -47,6 +47,8 @@ class FormGenerator {
 
   final DartType? type;
 
+  final u.AstNode ast;
+
   final Map<String, FormGenerator> formGroupGenerators = {};
 
   final Map<String, FormGenerator> nestedFormGroupGenerators = {};
@@ -59,12 +61,22 @@ class FormGenerator {
     return element.name;
   }
 
-  FormGenerator(this.root, this.element, this.type) {
+  // bool get hasOutput {
+  //   if (element.hasRfAnnotation && root == element) {
+  //     final annotation = element.rfAnnotation;
+  //     return annotation?.getField('output')?.toBoolValue() ?? false;
+  //   }
+  //
+  //   return false;
+  // }
+
+  FormGenerator(this.root, this.element, this.type, this.ast) {
     for (var e in formGroups) {
       formGroupGenerators[e.name] = FormGenerator(
         root,
         e.type.element! as ClassElement,
         e.type,
+        ast,
       );
     }
 
@@ -79,6 +91,7 @@ class FormGenerator {
         root,
         typeParameter.element! as ClassElement,
         e.type,
+        ast,
       );
     }
   }
@@ -107,6 +120,8 @@ class FormGenerator {
       );
 
   String get className => '${baseName}Form';
+
+  String get log => '_log$className';
 
   String get classNameFull {
     return '$className${element.generics}';
@@ -207,7 +222,11 @@ class FormGenerator {
     final type = field.typeParameter.getDisplayString(withNullability: false);
 
     final formGroupGenerator = FormGenerator(
-        root, field.typeParameter.element as ClassElement, field.typeParameter);
+      root,
+      field.typeParameter.element as ClassElement,
+      field.typeParameter,
+      ast,
+    );
 
     return Method(
       (b) => b
@@ -388,18 +407,25 @@ class FormGenerator {
             return '${e.fieldName}:${e.fieldValueName}';
           }).whereType<String>();
 
+          final referenceType =
+              root.output ? element.toReferenceType : element.fullTypeName;
+
           b
             ..name = 'model'
-            ..returns = Reference(element.fullTypeName)
+            ..returns = Reference(referenceType)
             ..annotations.add(const CodeExpression(Code('override')))
             ..type = MethodType.getter
             ..body = Code('''
               final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
               if (!isValid) {
-                debugPrintStack(label: '[\${path ?? '$classNameFull'}]\\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+                $log.warning(
+                  'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+                  null,
+                  StackTrace.current,
+                );
               }
-              return ${element.fullTypeName}(${parameterValues.join(', ')});
+              return $referenceType(${parameterValues.join(', ')});
             ''');
         },
       );
@@ -424,6 +450,7 @@ class FormGenerator {
                   root,
                   typeArguments.first.element! as ClassElement,
                   e.type,
+                  ast,
                 );
 
                 return '${e.name}${generator.className}.forEach((e) => e.toggleDisabled());';
@@ -498,41 +525,6 @@ class FormGenerator {
         },
       );
 
-  Method get submitMethod => Method(
-        (b) {
-          b
-            ..name = 'submit'
-            ..annotations.add(const CodeExpression(Code('override')))
-            ..returns = const Reference('void')
-            ..optionalParameters.addAll(
-              [
-                Parameter(
-                  (b) => b
-                    ..name = 'onValid'
-                    ..named = true
-                    ..required = true
-                    ..type = Reference(
-                        'void Function(${element.fullTypeName} model)'),
-                ),
-                Parameter(
-                  (b) => b
-                    ..name = 'onNotValid'
-                    ..named = true
-                    ..type = const Reference('void Function()?'),
-                ),
-              ],
-            )
-            ..body = const Code('''
-              currentForm.markAllAsTouched();
-              if (currentForm.valid) {
-                onValid(model);
-              } else {
-                onNotValid?.call();
-              }
-            ''');
-        },
-      );
-
   Method get equalsToMethod => Method(
         (b) {
           b
@@ -556,6 +548,45 @@ class FormGenerator {
             ''');
         },
       );
+
+  Method get submitMethod => Method(
+        (b) {
+          b
+            ..name = 'submit'
+            ..annotations.add(const CodeExpression(Code('override')))
+            ..returns = const Reference('void')
+            ..optionalParameters.addAll(
+              [
+                Parameter(
+                  (b) => b
+                    ..name = 'onValid'
+                    ..named = true
+                    ..required = true
+                    ..type = Reference(
+                        'void Function(${root.output ? element.toReferenceType : element.fullTypeName} model)'),
+                ),
+                Parameter(
+                  (b) => b
+                    ..name = 'onNotValid'
+                    ..named = true
+                    ..type = const Reference('void Function()?'),
+                ),
+              ],
+            )
+            ..body = Code('''
+              currentForm.markAllAsTouched();
+              if (currentForm.valid) {
+                onValid(model);
+              } else {
+                $log.info('Errors');
+                $log.info('┗━━ \${form.errors}');
+                onNotValid?.call();
+              }
+            ''');
+        },
+      );
+
+  Code get logging => Code("final $log = Logger.detached('$classNameFull');");
 
   Constructor get _constructor => Constructor(
         (b) => b
@@ -607,13 +638,66 @@ class FormGenerator {
     return '$_modelDisplayTypeNonNullable?';
   }
 
+  List<Code> test() {
+    final ast = this.ast;
+
+    // final classDeclarationVisitor = ClassDeclarationVisitor(root);
+    // ast.visitChildren(classDeclarationVisitor);
+    //
+    // final classNode = classDeclarationVisitor.classDeclaration;
+
+    if (ast is! CompilationUnit) {
+      return [];
+    }
+
+    // var rfParameterVisitor = RfParameterVisitor();
+
+    // var rfAnnotationCollectorVisitor = RfAnnotationCollectorVisitor();
+    // ast.visitChildren(rfParameterVisitor);
+    // replaceR(
+    //   rfParameterVisitor.fieldDeclaration,
+    //   rfParameterVisitor.fieldFormalParameter,
+    // );
+
+    // final astDeclaration = classNode as u.ClassDeclarationImpl;
+    final renamedClass = ClassRenameVisitor();
+    ast.accept(renamedClass);
+
+    final rfParameterVisitor = RfParameterVisitor();
+    ast.accept(rfParameterVisitor);
+    replaceR(
+      rfParameterVisitor.fieldDeclaration,
+      rfParameterVisitor.fieldFormalParameter,
+    );
+
+    final x = ast.declarations;
+
+    return x
+        .where((e) =>
+            e is u.ClassDeclarationImpl &&
+            (e.hasRfAnnotation || e.hasRfGroupAnnotation))
+        .map((e) {
+      return Code(e.toSource());
+    }).toList();
+  }
+
+  List<Spec> get generate2 {
+    if (root.output) {
+      return test();
+    }
+
+    return [];
+  }
+
   List<Spec> get generate {
     return [
+      logging,
       Class(
         (b) => b
           ..name = className
           ..types.addAll(element.fullGenericTypes)
-          ..implements.add(Reference('FormModel<${element.fullTypeName}>'))
+          ..implements.add(Reference(
+              'FormModel<${element.fullTypeName}, ${root.output ? element.toReferenceType : element.fullTypeName}>'))
           ..fields.addAll(
             [
               ...staticFieldNameList,
@@ -763,6 +847,7 @@ class FormGenerator {
           root,
           typeParameter.element! as ClassElement,
           type,
+          ast,
         );
 
         return Method(
@@ -786,60 +871,70 @@ class FormGenerator {
     );
   }
 
-  Iterable<Method> get fieldContainsMethodList =>
-      all.map((e) => ContainsMethod(e).method()).whereType<Method>();
+  Iterable<Method> get fieldContainsMethodList => all
+      .map((e) => ContainsMethod(e, root.output).method())
+      .whereType<Method>();
 
-  Iterable<Method> get fieldValueMethodList =>
-      all.map((e) => FieldValueMethod(e).method()).whereType<Method>();
+  Iterable<Method> get fieldValueMethodList => all
+      .map((e) => FieldValueMethod(e, root.output).method())
+      .whereType<Method>();
 
-  Iterable<Method> get fieldControlNameMethodList =>
-      all.map((e) => ControlPathMethod(e).method()).whereType<Method>();
+  Iterable<Method> get fieldControlNameMethodList => all
+      .map((e) => ControlPathMethod(e, root.output).method())
+      .whereType<Method>();
 
   Iterable<Field> get staticFieldNameList =>
       annotatedParameters.map(staticFieldName);
 
   Iterable<Method> get fieldErrorsMethodList =>
-      all.map((e) => ErrorsMethod(e).method()).whereType<Method>();
+      all.map((e) => ErrorsMethod(e, root.output).method()).whereType<Method>();
 
   Iterable<Field> get fieldNameList => annotatedParameters.map(field);
 
   Iterable<Method> get fieldFocusMethodList =>
-      all.map((e) => FocusMethod(e).method()).whereType<Method>();
+      all.map((e) => FocusMethod(e, root.output).method()).whereType<Method>();
 
   Iterable<Method> get fieldRemoveMethodList =>
-      all.map((e) => RemoveMethod(e).method()).whereType<Method>();
+      all.map((e) => RemoveMethod(e, root.output).method()).whereType<Method>();
 
   Iterable<Method> get fieldUpdateMethodList => all
-      .map((e) => ReactiveFormUpdateValueMethod(e).method())
+      .map((e) => ReactiveFormUpdateValueMethod(e, root.output).method())
       .whereType<Method>();
 
-  Iterable<Method> get fieldInsertMethodList =>
-      all.map((e) => ReactiveFormInsertMethod(e).method()).whereType<Method>();
+  Iterable<Method> get fieldInsertMethodList => all
+      .map((e) => ReactiveFormInsertMethod(e, root.output).method())
+      .whereType<Method>();
 
-  Iterable<Method> get fieldClearMethodList =>
-      all.map((e) => ReactiveFormClearMethod(e).method()).whereType<Method>();
+  Iterable<Method> get fieldClearMethodList => all
+      .map((e) => ReactiveFormClearMethod(e, root.output).method())
+      .whereType<Method>();
 
   Iterable<Method> get fieldPatchMethodList => all
-      .map((e) => ReactiveFormPatchValueMethod(e).method())
+      .map((e) => ReactiveFormPatchValueMethod(e, root.output).method())
       .whereType<Method>();
 
   Iterable<Method> get fieldResetMethodList =>
-      all.map((e) => ResetMethod(e).method()).whereType<Method>();
+      all.map((e) => ResetMethod(e, root.output).method()).whereType<Method>();
 
-  Iterable<Method> get controlMethodList =>
-      all.map((e) => ControlMethod(e).method()).whereType<Method>();
+  Iterable<Method> get controlMethodList => all
+      .map((e) => ControlMethod(e, root.output).method())
+      .whereType<Method>();
 
-  Iterable<Method> get controlControlsMethodList =>
-      all.map((e) => ControlControlsMethod(e).method()).whereType<Method>();
+  Iterable<Method> get controlPrivateMethodList => all
+      .map((e) => ControlPrivateMethod(e, root.output).method())
+      .whereType<Method>();
 
-  Iterable<Method> get controlPrivateMethodList =>
-      all.map((e) => ControlPrivateMethod(e).method()).whereType<Method>();
+  Iterable<Method> get controlControlsMethodList => all
+      .map((e) => ControlControlsMethod(e, root.output).method())
+      .whereType<Method>();
 
-  Iterable<Method> get controlSetDisabledMethodList =>
-      all.map((e) => ControlSetDisableMethod(e).method()).whereType<Method>();
+  Iterable<Method> get controlSetDisabledMethodList => all
+      .map((e) => ControlSetDisableMethod(e, root.output).method())
+      .whereType<Method>();
 
-  Iterable<Method> get extendedControlMethodList =>
-      all.map((e) => ExtendedControlMethod(e).method()).whereType<Method>();
+  Iterable<Method> get extendedControlMethodList => all
+      .map((e) => ExtendedControlMethod(e, root.output).method())
+      .whereType<Method>();
 
   Iterable<Method> get addArrayControlMethodList =>
       formArrays.map(addArrayControl);

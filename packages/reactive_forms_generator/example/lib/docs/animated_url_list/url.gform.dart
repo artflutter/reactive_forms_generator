@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'url.dart';
 
@@ -132,6 +132,8 @@ class UrlFormBuilder extends StatefulWidget {
 class _UrlFormBuilderState extends State<UrlFormBuilder> {
   late UrlForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = UrlForm(UrlForm.formElements(widget.model), null);
@@ -141,6 +143,34 @@ class _UrlFormBuilderState extends State<UrlFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logUrlForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -157,6 +187,7 @@ class _UrlFormBuilderState extends State<UrlFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -179,7 +210,9 @@ class _UrlFormBuilderState extends State<UrlFormBuilder> {
   }
 }
 
-class UrlForm implements FormModel<Url> {
+final _logUrlForm = Logger.detached('UrlForm');
+
+class UrlForm implements FormModel<Url, Url> {
   UrlForm(
     this.form,
     this.path,
@@ -373,9 +406,11 @@ class UrlForm implements FormModel<Url> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'UrlForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logUrlForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Url(urlList: _urlListValue);
   }
@@ -437,6 +472,8 @@ class UrlForm implements FormModel<Url> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logUrlForm.info('Errors');
+      _logUrlForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -484,7 +521,9 @@ class UrlForm implements FormModel<Url> {
           disabled: false);
 }
 
-class UrlEntityForm implements FormModel<UrlEntity> {
+final _logUrlEntityForm = Logger.detached('UrlEntityForm');
+
+class UrlEntityForm implements FormModel<UrlEntity, UrlEntity> {
   UrlEntityForm(
     this.form,
     this.path,
@@ -647,9 +686,11 @@ class UrlEntityForm implements FormModel<UrlEntity> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'UrlEntityForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logUrlEntityForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return UrlEntity(label: _labelValue, url: _urlValue);
   }
@@ -707,6 +748,8 @@ class UrlEntityForm implements FormModel<UrlEntity> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logUrlEntityForm.info('Errors');
+      _logUrlEntityForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }

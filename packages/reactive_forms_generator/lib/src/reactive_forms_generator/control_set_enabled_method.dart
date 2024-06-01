@@ -3,7 +3,7 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class ControlSetDisableMethod extends ReactiveFormGeneratorMethod {
-  ControlSetDisableMethod(super.field);
+  ControlSetDisableMethod(super.field, super.output);
 
   @override
   Method? defaultMethod() {
@@ -12,13 +12,13 @@ class ControlSetDisableMethod extends ReactiveFormGeneratorMethod {
         ..body = Code(
           '''
             if(disabled) {
-              ${field.fieldControlName}${field.nullabilitySuffix}.markAsDisabled( 
+              ${field.fieldControlName}${toOutput ? '' : field.nullabilitySuffix}.markAsDisabled( 
                 updateParent: updateParent, 
                 emitEvent: emitEvent,
               );
             }
             else {
-              ${field.fieldControlName}${field.nullabilitySuffix}.markAsEnabled( 
+              ${field.fieldControlName}${toOutput ? '' : field.nullabilitySuffix}.markAsEnabled( 
                 updateParent: updateParent, 
                 emitEvent: emitEvent,
               );

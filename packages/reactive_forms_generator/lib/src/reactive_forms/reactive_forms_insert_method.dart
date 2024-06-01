@@ -3,7 +3,7 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class ReactiveFormInsertMethod extends ReactiveFormGeneratorMethod {
-  ReactiveFormInsertMethod(super.field);
+  ReactiveFormInsertMethod(super.field, super.output);
 
   @override
   Method? formGroupArrayMethod() {

@@ -21,7 +21,7 @@ void main() {
             
             part '$fileName.gform.dart';
             
-            @Rf(name: 'SomeWiredName')
+            @Rf(output: false, name: 'SomeWiredName')
             class RenamedBasic {
               final String email;
             
@@ -49,7 +49,7 @@ void main() {
 const generatedFile = r'''// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'renamed_basic.dart';
 
@@ -196,6 +196,34 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
+    _logSomeWiredNameForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
+
     super.initState();
   }
 
@@ -233,7 +261,9 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
   }
 }
 
-class SomeWiredNameForm implements FormModel<RenamedBasic> {
+final _logSomeWiredNameForm = Logger('SomeWiredNameForm');
+
+class SomeWiredNameForm implements FormModel<RenamedBasic, RenamedBasic> {
   SomeWiredNameForm(
     this.form,
     this.path,
@@ -396,9 +426,11 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'SomeWiredNameForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logSomeWiredNameForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return RenamedBasic(email: _emailValue, password: _passwordValue);
   }
@@ -456,6 +488,8 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logSomeWiredNameForm.info('Errors');
+      _logSomeWiredNameForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }

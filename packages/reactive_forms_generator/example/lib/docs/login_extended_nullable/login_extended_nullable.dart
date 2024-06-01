@@ -3,7 +3,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'login_extended_nullable.gform.dart';
 
-@Rf()
+@Rf(output: false)
 class LoginExtendedNullable {
   final String? email;
 

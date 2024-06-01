@@ -1,11 +1,13 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
+import 'package:reactive_forms_generator/src/types.dart';
 
 abstract class ReactiveFormGeneratorMethod {
   final ParameterElement field;
+  final bool output;
 
-  ReactiveFormGeneratorMethod(this.field);
+  ReactiveFormGeneratorMethod(this.field, this.output);
 
   Method? method() {
     if (field.isFormGroup) {
@@ -21,6 +23,27 @@ abstract class ReactiveFormGeneratorMethod {
     }
 
     return formControlMethod();
+  }
+
+  bool get toOutput {
+    try {
+      if (field.isFormGroup) {
+        return false;
+      }
+
+      if (field.isFormArray) {
+        return false;
+      }
+
+      if (field.isFormGroupArray) {
+        return false;
+      }
+
+      return field.annotationParams(formControlChecker).hasRequiredValidator &&
+          output;
+    } catch (e) {
+      return false;
+    }
   }
 
   Method? formControlMethod() => defaultMethod();

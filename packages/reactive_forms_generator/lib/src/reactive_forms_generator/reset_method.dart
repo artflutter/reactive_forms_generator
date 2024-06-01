@@ -3,7 +3,7 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class ResetMethod extends ReactiveFormGeneratorMethod {
-  ResetMethod(super.field);
+  ResetMethod(super.field, super.output);
 
   @override
   Method? formGroupArrayMethod() {
@@ -40,7 +40,7 @@ class ResetMethod extends ReactiveFormGeneratorMethod {
     return methodEntity.rebuild(
       (b) => b
         ..body = Code(
-          '''${field.fieldControlName}${field.nullabilitySuffix}.reset(
+          '''${field.fieldControlName}${toOutput ? '' : field.nullabilitySuffix}.reset(
                 value: value, 
                 updateParent: updateParent, 
                 emitEvent: emitEvent,

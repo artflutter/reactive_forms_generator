@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'nested.dart';
 
@@ -133,6 +133,8 @@ class SubGroupFormBuilder extends StatefulWidget {
 class _SubGroupFormBuilderState extends State<SubGroupFormBuilder> {
   late SubGroupForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = SubGroupForm(SubGroupForm.formElements(widget.model), null);
@@ -142,6 +144,34 @@ class _SubGroupFormBuilderState extends State<SubGroupFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logSubGroupForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -158,6 +188,7 @@ class _SubGroupFormBuilderState extends State<SubGroupFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -180,7 +211,9 @@ class _SubGroupFormBuilderState extends State<SubGroupFormBuilder> {
   }
 }
 
-class SubGroupForm implements FormModel<SubGroup> {
+final _logSubGroupForm = Logger.detached('SubGroupForm');
+
+class SubGroupForm implements FormModel<SubGroup, SubGroup> {
   SubGroupForm(
     this.form,
     this.path,
@@ -270,9 +303,11 @@ class SubGroupForm implements FormModel<SubGroup> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'SubGroupForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logSubGroupForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return SubGroup(id: _idValue);
   }
@@ -330,6 +365,8 @@ class SubGroupForm implements FormModel<SubGroup> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logSubGroupForm.info('Errors');
+      _logSubGroupForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -633,6 +670,8 @@ class GroupFormBuilder extends StatefulWidget {
 class _GroupFormBuilderState extends State<GroupFormBuilder> {
   late GroupForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = GroupForm(GroupForm.formElements(widget.model), null);
@@ -642,6 +681,34 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logGroupForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -658,6 +725,7 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -680,7 +748,9 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
   }
 }
 
-class GroupForm implements FormModel<Group> {
+final _logGroupForm = Logger.detached('GroupForm');
+
+class GroupForm implements FormModel<Group, Group> {
   GroupForm(
     this.form,
     this.path,
@@ -949,9 +1019,11 @@ class GroupForm implements FormModel<Group> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'GroupForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logGroupForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Group(id: _idValue, subGroupList: _subGroupListValue);
   }
@@ -1013,6 +1085,8 @@ class GroupForm implements FormModel<Group> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logGroupForm.info('Errors');
+      _logGroupForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -1321,6 +1395,8 @@ class NestedFormBuilder extends StatefulWidget {
 class _NestedFormBuilderState extends State<NestedFormBuilder> {
   late NestedForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = NestedForm(NestedForm.formElements(widget.model), null);
@@ -1330,6 +1406,34 @@ class _NestedFormBuilderState extends State<NestedFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logNestedForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -1346,6 +1450,7 @@ class _NestedFormBuilderState extends State<NestedFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -1368,7 +1473,9 @@ class _NestedFormBuilderState extends State<NestedFormBuilder> {
   }
 }
 
-class NestedForm implements FormModel<Nested> {
+final _logNestedForm = Logger.detached('NestedForm');
+
+class NestedForm implements FormModel<Nested, Nested> {
   NestedForm(
     this.form,
     this.path,
@@ -1561,9 +1668,11 @@ class NestedForm implements FormModel<Nested> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'NestedForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logNestedForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Nested(groupList: _groupListValue);
   }
@@ -1625,6 +1734,8 @@ class NestedForm implements FormModel<Nested> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logNestedForm.info('Errors');
+      _logNestedForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }

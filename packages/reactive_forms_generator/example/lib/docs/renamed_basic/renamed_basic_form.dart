@@ -51,7 +51,8 @@ class BasicFormWidget extends StatelessWidget {
                     onPressed: formModel.form.valid
                         ? () {
                             // ignore: unnecessary_cast
-                            debugPrint((formModel as FormModel<RenamedBasic>)
+                            debugPrint((formModel
+                                    as FormModel<RenamedBasic, RenamedBasic>)
                                 .model
                                 .toString());
                             debugPrint(formModel.model.email);

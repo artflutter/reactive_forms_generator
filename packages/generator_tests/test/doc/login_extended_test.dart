@@ -8,7 +8,7 @@ const fileName = 'login_extended';
 void main() {
   group('reactive_forms_generator', () {
     test(
-      'Form with simple non-nullable types',
+      'Login extended',
       () async {
         return testGenerator(
           fileName: fileName,
@@ -40,7 +40,7 @@ void main() {
             
             enum UserMode { user, admin }
           
-            @Rf()
+            @Rf(output: false)
             @RfGroup(
               validators: [AllFieldsRequired()],
             )
@@ -108,7 +108,7 @@ void main() {
 const generatedFile = r'''// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'login_extended.dart';
 
@@ -255,6 +255,34 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
+    _logLoginExtendedForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
+
     super.initState();
   }
 
@@ -292,7 +320,9 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
   }
 }
 
-class LoginExtendedForm implements FormModel<LoginExtended> {
+final _logLoginExtendedForm = Logger('LoginExtendedForm');
+
+class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
   LoginExtendedForm(
     this.form,
     this.path,
@@ -993,9 +1023,11 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'LoginExtendedForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logLoginExtendedForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return LoginExtended(
         email: _emailValue,
@@ -1062,6 +1094,8 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logLoginExtendedForm.info('Errors');
+      _logLoginExtendedForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }

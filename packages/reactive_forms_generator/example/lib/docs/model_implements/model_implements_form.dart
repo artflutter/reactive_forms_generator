@@ -100,7 +100,8 @@ class _ModelImplementsWidgetState extends State<ModelImplementsWidget> {
                     onPressed: formModel.form.valid
                         ? () {
                             // ignore: unnecessary_cast, avoid_print
-                            debugPrint((formModel as FormModel<ModelImplements>)
+                            debugPrint((formModel as FormModel<ModelImplements,
+                                    ModelImplements>)
                                 .model
                                 .toString());
                             // ignore: avoid_print

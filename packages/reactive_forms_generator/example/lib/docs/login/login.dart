@@ -5,7 +5,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart'
 
 part 'login.gform.dart';
 
-@Rf()
+@Rf(output: false)
 @RfGroup(
   validators: [MustMatchValidator()],
 )

@@ -3,7 +3,7 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
-  ReactiveFormPatchValueMethod(super.field);
+  ReactiveFormPatchValueMethod(super.field, super.output);
 
   @override
   Method formGroupArrayMethod() {
@@ -42,7 +42,7 @@ class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
   Method defaultMethod() {
     return methodEntity.rebuild(
       (b) => b.body = Code(
-        '${field.fieldControlName}${field.nullabilitySuffix}.patchValue(value, updateParent: updateParent, emitEvent:emitEvent);',
+        '${field.fieldControlName}${toOutput ? '' : field.nullabilitySuffix}.patchValue(value, updateParent: updateParent, emitEvent:emitEvent);',
       ),
     );
   }

@@ -20,7 +20,7 @@ void main() {
             
             part '$fileName.gform.dart';
             
-            @Rf()
+            @Rf(output: false)
             class UserProfile {
               final String id;
             
@@ -75,7 +75,7 @@ void main() {
 const generatedFile = r'''// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_profile.dart';
 
@@ -220,6 +220,34 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
+    _logUserProfileForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
+
     super.initState();
   }
 
@@ -257,7 +285,9 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
   }
 }
 
-class UserProfileForm implements FormModel<UserProfile> {
+final _logUserProfileForm = Logger('UserProfileForm');
+
+class UserProfileForm implements FormModel<UserProfile, UserProfile> {
   UserProfileForm(
     this.form,
     this.path,
@@ -662,9 +692,11 @@ class UserProfileForm implements FormModel<UserProfile> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'UserProfileForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logUserProfileForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return UserProfile(
         id: _idValue,
@@ -731,6 +763,8 @@ class UserProfileForm implements FormModel<UserProfile> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logUserProfileForm.info('Errors');
+      _logUserProfileForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -793,7 +827,9 @@ class UserProfileForm implements FormModel<UserProfile> {
           disabled: false);
 }
 
-class AddressForm implements FormModel<Address> {
+final _logAddressForm = Logger('AddressForm');
+
+class AddressForm implements FormModel<Address, Address> {
   AddressForm(
     this.form,
     this.path,
@@ -1110,9 +1146,11 @@ class AddressForm implements FormModel<Address> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'AddressForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logAddressForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
   }
@@ -1170,6 +1208,8 @@ class AddressForm implements FormModel<Address> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logAddressForm.info('Errors');
+      _logAddressForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }

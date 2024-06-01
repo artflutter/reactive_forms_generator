@@ -3,7 +3,7 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class FocusMethod extends ReactiveFormGeneratorMethod {
-  FocusMethod(super.field);
+  FocusMethod(super.field, super.output);
 
   @override
   Method? defaultMethod() => Method(

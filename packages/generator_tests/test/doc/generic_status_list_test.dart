@@ -17,7 +17,7 @@ void main() {
             
             part '$fileName.gform.dart';
             
-            @Rf()
+            @Rf(output: false)
             class StatusList<T extends Enum> {
               final List<T?> list;
             
@@ -36,7 +36,7 @@ void main() {
 const generatedFile = r'''// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'generic_status_list.dart';
 
@@ -185,6 +185,34 @@ class _StatusListFormBuilderState<T extends Enum>
 
     widget.initState?.call(context, _formModel);
 
+    _logStatusListForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
+
     super.initState();
   }
 
@@ -222,7 +250,10 @@ class _StatusListFormBuilderState<T extends Enum>
   }
 }
 
-class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
+final _logStatusListForm = Logger('StatusListForm<T>');
+
+class StatusListForm<T extends Enum>
+    implements FormModel<StatusList<T>, StatusList<T>> {
   StatusListForm(
     this.form,
     this.path,
@@ -355,9 +386,11 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'StatusListForm<T>'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logStatusListForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return StatusList<T>(list: _listValue);
   }
@@ -415,6 +448,8 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logStatusListForm.info('Errors');
+      _logStatusListForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }

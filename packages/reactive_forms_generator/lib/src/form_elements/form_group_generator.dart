@@ -98,5 +98,5 @@ class FormGroupGenerator extends FormElementGenerator {
   }
 
   @override
-  List<TypeChecker> get typeChecker => [formGroupChecker, formGroupCheckerRf];
+  TypeChecker get typeChecker => formGroupChecker;
 }

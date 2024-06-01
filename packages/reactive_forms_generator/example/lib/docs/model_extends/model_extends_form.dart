@@ -102,7 +102,8 @@ class _ModelExtendsWidgetState extends State<ModelExtendsWidget> {
                     onPressed: formModel.form.valid
                         ? () {
                             // ignore: unnecessary_cast, avoid_print
-                            debugPrint((formModel as FormModel<ModelExtends>)
+                            debugPrint((formModel
+                                    as FormModel<ModelExtends, ModelExtends>)
                                 .model
                                 .toString());
                             // ignore: avoid_print

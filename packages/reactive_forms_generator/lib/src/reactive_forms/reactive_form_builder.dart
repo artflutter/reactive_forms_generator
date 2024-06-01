@@ -11,6 +11,8 @@ class ReactiveFormBuilder {
   String get _baseName =>
       reactiveForm.reactiveInheritedStreamer.formGenerator.className;
 
+  String get _log => reactiveForm.reactiveInheritedStreamer.formGenerator.log;
+
   ClassElement get _element =>
       reactiveForm.reactiveInheritedStreamer.formGenerator.element;
 
@@ -161,6 +163,34 @@ class ReactiveFormBuilder {
             
                 widget.initState?.call(context, _formModel);
                 
+                _logSubscription = $_log.onRecord.listen((LogRecord e) {
+                  // use `dumpErrorToConsole` for severe messages to ensure that severe
+                  // exceptions are formatted consistently with other Flutter examples and
+                  // avoids printing duplicate exceptions
+                  if (e.level >= Level.SEVERE) {
+                    final Object? error = e.error;
+                    FlutterError.dumpErrorToConsole(
+                      FlutterErrorDetails(
+                        exception: error is Exception ? error : Exception(error),
+                        stack: e.stackTrace,
+                        library: e.loggerName,
+                        context: ErrorDescription(e.message),
+                      ),
+                    );
+                  } else {
+                    log(
+                      e.message,
+                      time: e.time,
+                      sequenceNumber: e.sequenceNumber,
+                      level: e.level.value,
+                      name: e.loggerName,
+                      zone: e.zone,
+                      error: e.error,
+                      stackTrace: e.stackTrace,
+                    );
+                  }
+                });
+                
                 super.initState();              
               '''),
         ),
@@ -192,6 +222,7 @@ class ReactiveFormBuilder {
             ..returns = const Reference('void')
             ..body = const Code('''
                 _formModel.form.dispose();
+                _logSubscription?.cancel();
                 super.dispose();
               '''),
         ),
@@ -242,6 +273,11 @@ class ReactiveFormBuilder {
                     reactiveForm
                         .reactiveInheritedStreamer.formGenerator.classNameFull,
                   ),
+              ),
+              Field(
+                (b) => b
+                  ..name = '_logSubscription'
+                  ..type = const Reference('StreamSubscription<LogRecord>?'),
               ),
             ],
           )
