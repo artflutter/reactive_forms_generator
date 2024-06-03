@@ -22,6 +22,8 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
     return SampleScreen(
       title: const Text('Login'),
       body: LoginFormBuilder(
+        canPop: (formGroup) => true,
+        onPopInvoked: (formGroup, didPop) => {},
         model: _emptyModel,
         builder: (context, formModel, child) {
           return Column(
