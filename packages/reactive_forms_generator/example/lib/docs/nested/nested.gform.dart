@@ -244,8 +244,8 @@ class _SubGroupFormModelBuilderState extends State<SubGroupFormModelBuilder> {
     return ReactiveSubGroupForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      canPop: widget.canPop,
-      onPopInvoked: widget.onPopInvoked,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -804,8 +804,8 @@ class _GroupFormModelBuilderState extends State<GroupFormModelBuilder> {
     return ReactiveGroupForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      canPop: widget.canPop,
-      onPopInvoked: widget.onPopInvoked,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
@@ -1552,8 +1552,8 @@ class _NestedFormModelBuilderState extends State<NestedFormModelBuilder> {
     return ReactiveNestedForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      canPop: widget.canPop,
-      onPopInvoked: widget.onPopInvoked,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
