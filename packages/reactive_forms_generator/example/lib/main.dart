@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
         Routes.modelImplements: (_) => const ModelImplementsWidget(),
         Routes.nested: (_) => const NestedFormWidget(),
       },
-      home: const GroupFormWidget(),
+      home: const LoginFormWidget(),
     );
   }
 }

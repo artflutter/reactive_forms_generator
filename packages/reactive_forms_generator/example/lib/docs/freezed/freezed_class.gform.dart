@@ -171,8 +171,8 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
     return ReactiveFreezedClassForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      canPop: widget.canPop,
-      onPopInvoked: widget.onPopInvoked,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,

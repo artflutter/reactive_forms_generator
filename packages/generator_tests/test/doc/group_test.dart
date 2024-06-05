@@ -9,7 +9,7 @@ void main() {
   group('reactive_forms_generator', () {
     test(
       'Form with nullable groups types',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -250,8 +250,8 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
     return ReactiveGroupForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      canPop: widget.canPop,
-      onPopInvoked: widget.onPopInvoked,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
