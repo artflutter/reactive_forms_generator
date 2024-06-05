@@ -15,6 +15,6 @@ builders:
   reactive_forms_generator:
     import: "package:reactive_forms_generator/builder.dart"
     builder_factories: [ "reactiveFormsGenerator" ]
-    build_extensions: { '.dart': [ '.gr.dart' ] }
+    build_extensions: { ".dart": [ ".gform.dart" ] }
     auto_apply: dependents
     build_to: source
