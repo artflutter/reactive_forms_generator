@@ -6,6 +6,7 @@ import 'reactive_forms_generator.dart';
 Builder reactiveFormsGenerator(BuilderOptions options) {
   return PartBuilder(
     [const ReactiveFormsGenerator()],
+    formatOutput: options.config['format'] == false ? (str) => str : null,
     '.gform.dart',
     header: '''
       // coverage:ignore-file
@@ -13,5 +14,6 @@ Builder reactiveFormsGenerator(BuilderOptions options) {
       // ignore_for_file: type=lint
       // ignore_for_file: 
     ''',
+    options: options,
   );
 }
