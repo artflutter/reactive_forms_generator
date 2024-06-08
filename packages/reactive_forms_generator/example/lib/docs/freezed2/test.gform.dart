@@ -179,6 +179,83 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
   }
 }
 
+/// Similar to the TestFormBuilder but opts out of automatic form lifecycle
+/// management.
+///
+/// See `TestFormBuilder.initState` and `TestFormBuilder.dispose` for examples
+/// of initializing/disposing the formModel.
+class TestFormModelBuilder extends StatefulWidget {
+  const TestFormModelBuilder({
+    Key? key,
+    required this.formModel,
+    this.child,
+    this.canPop,
+    this.onPopInvoked,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final TestForm formModel;
+
+  final Widget? child;
+
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+
+  final Widget Function(BuildContext context, TestForm formModel, Widget? child)
+      builder;
+
+  final void Function(BuildContext context, TestForm formModel)? initState;
+
+  @override
+  _TestFormModelBuilderState createState() => _TestFormModelBuilderState();
+}
+
+class _TestFormModelBuilderState extends State<TestFormModelBuilder> {
+  late TestForm _formModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formModel = widget.formModel;
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+  }
+
+  @override
+  void didUpdateWidget(covariant TestFormModelBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.formModel != oldWidget.formModel) {
+      _formModel = widget.formModel;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveTestForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
 class TestForm implements FormModel<Test> {
   TestForm(
     this.form,

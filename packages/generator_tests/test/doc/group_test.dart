@@ -264,6 +264,83 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
   }
 }
 
+/// Similar to the GroupFormBuilder but opts out of automatic form lifecycle
+/// management.
+///
+/// See `GroupFormBuilder.initState` and `GroupFormBuilder.dispose` for examples
+/// of initializing/disposing the formModel.
+class GroupFormModelBuilder extends StatefulWidget {
+  const GroupFormModelBuilder({
+    Key? key,
+    required this.formModel,
+    this.child,
+    this.canPop,
+    this.onPopInvoked,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final GroupForm formModel;
+
+  final Widget? child;
+
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+
+  final Widget Function(
+      BuildContext context, GroupForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, GroupForm formModel)? initState;
+
+  @override
+  _GroupFormModelBuilderState createState() => _GroupFormModelBuilderState();
+}
+
+class _GroupFormModelBuilderState extends State<GroupFormModelBuilder> {
+  late GroupForm _formModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formModel = widget.formModel;
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+  }
+
+  @override
+  void didUpdateWidget(covariant GroupFormModelBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.formModel != oldWidget.formModel) {
+      _formModel = widget.formModel;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveGroupForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
 class GroupForm implements FormModel<Group> {
   GroupForm(
     this.form,

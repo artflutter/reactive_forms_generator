@@ -239,6 +239,83 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
   }
 }
 
+/// Similar to the LoginFormBuilder but opts out of automatic form lifecycle
+/// management.
+///
+/// See `LoginFormBuilder.initState` and `LoginFormBuilder.dispose` for examples
+/// of initializing/disposing the formModel.
+class LoginFormModelBuilder extends StatefulWidget {
+  const LoginFormModelBuilder({
+    Key? key,
+    required this.formModel,
+    this.child,
+    this.canPop,
+    this.onPopInvoked,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final LoginForm formModel;
+
+  final Widget? child;
+
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+
+  final Widget Function(
+      BuildContext context, LoginForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, LoginForm formModel)? initState;
+
+  @override
+  _LoginFormModelBuilderState createState() => _LoginFormModelBuilderState();
+}
+
+class _LoginFormModelBuilderState extends State<LoginFormModelBuilder> {
+  late LoginForm _formModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formModel = widget.formModel;
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+  }
+
+  @override
+  void didUpdateWidget(covariant LoginFormModelBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.formModel != oldWidget.formModel) {
+      _formModel = widget.formModel;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveLoginForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
 class LoginForm implements FormModel<Login> {
   LoginForm(
     this.form,

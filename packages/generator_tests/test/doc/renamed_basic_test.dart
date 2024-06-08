@@ -233,6 +233,86 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
   }
 }
 
+/// Similar to the SomeWiredNameFormBuilder but opts out of automatic form lifecycle
+/// management.
+///
+/// See `SomeWiredNameFormBuilder.initState` and `SomeWiredNameFormBuilder.dispose` for examples
+/// of initializing/disposing the formModel.
+class SomeWiredNameFormModelBuilder extends StatefulWidget {
+  const SomeWiredNameFormModelBuilder({
+    Key? key,
+    required this.formModel,
+    this.child,
+    this.canPop,
+    this.onPopInvoked,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final SomeWiredNameForm formModel;
+
+  final Widget? child;
+
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+
+  final Widget Function(
+      BuildContext context, SomeWiredNameForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, SomeWiredNameForm formModel)?
+      initState;
+
+  @override
+  _SomeWiredNameFormModelBuilderState createState() =>
+      _SomeWiredNameFormModelBuilderState();
+}
+
+class _SomeWiredNameFormModelBuilderState
+    extends State<SomeWiredNameFormModelBuilder> {
+  late SomeWiredNameForm _formModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formModel = widget.formModel;
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+  }
+
+  @override
+  void didUpdateWidget(covariant SomeWiredNameFormModelBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.formModel != oldWidget.formModel) {
+      _formModel = widget.formModel;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveSomeWiredNameForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
 class SomeWiredNameForm implements FormModel<RenamedBasic> {
   SomeWiredNameForm(
     this.form,

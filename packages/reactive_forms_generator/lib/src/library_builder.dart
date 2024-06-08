@@ -7,6 +7,7 @@ import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_builde
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_consumer.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_extension.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_group_array_builder.dart';
+import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_model_builder.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_inherited_streamer.dart';
 
 const stringRef = Reference('String');
@@ -20,6 +21,7 @@ List<Spec> generateLibrary(ClassElement element) {
       ReactiveFormExtension(reactiveInheritedStreamer);
   final reactiveFormConsumer = ReactiveFormConsumer(reactiveForm);
   final reactiveFormBuilder = ReactiveFormBuilder(reactiveForm);
+  final reactiveFormModelBuilder = ReactiveFormModelBuilder(reactiveForm);
   final reactiveFormArrayBuilder = ReactiveFormArrayBuilder(formGenerator);
   final reactiveFormGroupArrayBuilder =
       ReactiveFormGroupArrayBuilder(formGenerator);
@@ -30,6 +32,7 @@ List<Spec> generateLibrary(ClassElement element) {
     reactiveForm.generate,
     reactiveFormExtension.generate,
     ...reactiveFormBuilder.generate,
+    ...reactiveFormModelBuilder.generate,
     ...formGenerator.generate,
     reactiveFormArrayBuilder.generate,
     reactiveFormGroupArrayBuilder.generate,

@@ -292,6 +292,86 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
   }
 }
 
+/// Similar to the LoginExtendedFormBuilder but opts out of automatic form lifecycle
+/// management.
+///
+/// See `LoginExtendedFormBuilder.initState` and `LoginExtendedFormBuilder.dispose` for examples
+/// of initializing/disposing the formModel.
+class LoginExtendedFormModelBuilder extends StatefulWidget {
+  const LoginExtendedFormModelBuilder({
+    Key? key,
+    required this.formModel,
+    this.child,
+    this.canPop,
+    this.onPopInvoked,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final LoginExtendedForm formModel;
+
+  final Widget? child;
+
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+
+  final Widget Function(
+      BuildContext context, LoginExtendedForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, LoginExtendedForm formModel)?
+      initState;
+
+  @override
+  _LoginExtendedFormModelBuilderState createState() =>
+      _LoginExtendedFormModelBuilderState();
+}
+
+class _LoginExtendedFormModelBuilderState
+    extends State<LoginExtendedFormModelBuilder> {
+  late LoginExtendedForm _formModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formModel = widget.formModel;
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+  }
+
+  @override
+  void didUpdateWidget(covariant LoginExtendedFormModelBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.formModel != oldWidget.formModel) {
+      _formModel = widget.formModel;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveLoginExtendedForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
 class LoginExtendedForm implements FormModel<LoginExtended> {
   LoginExtendedForm(
     this.form,

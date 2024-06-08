@@ -240,6 +240,86 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
   }
 }
 
+/// Similar to the ArrayNullableFormBuilder but opts out of automatic form lifecycle
+/// management.
+///
+/// See `ArrayNullableFormBuilder.initState` and `ArrayNullableFormBuilder.dispose` for examples
+/// of initializing/disposing the formModel.
+class ArrayNullableFormModelBuilder extends StatefulWidget {
+  const ArrayNullableFormModelBuilder({
+    Key? key,
+    required this.formModel,
+    this.child,
+    this.canPop,
+    this.onPopInvoked,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final ArrayNullableForm formModel;
+
+  final Widget? child;
+
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+
+  final Widget Function(
+      BuildContext context, ArrayNullableForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, ArrayNullableForm formModel)?
+      initState;
+
+  @override
+  _ArrayNullableFormModelBuilderState createState() =>
+      _ArrayNullableFormModelBuilderState();
+}
+
+class _ArrayNullableFormModelBuilderState
+    extends State<ArrayNullableFormModelBuilder> {
+  late ArrayNullableForm _formModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formModel = widget.formModel;
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+  }
+
+  @override
+  void didUpdateWidget(covariant ArrayNullableFormModelBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.formModel != oldWidget.formModel) {
+      _formModel = widget.formModel;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveArrayNullableForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
 class ArrayNullableForm implements FormModel<ArrayNullable> {
   ArrayNullableForm(
     this.form,

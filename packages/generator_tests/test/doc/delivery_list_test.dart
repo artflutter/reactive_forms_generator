@@ -273,6 +273,86 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
   }
 }
 
+/// Similar to the DeliveryListFormBuilder but opts out of automatic form lifecycle
+/// management.
+///
+/// See `DeliveryListFormBuilder.initState` and `DeliveryListFormBuilder.dispose` for examples
+/// of initializing/disposing the formModel.
+class DeliveryListFormModelBuilder extends StatefulWidget {
+  const DeliveryListFormModelBuilder({
+    Key? key,
+    required this.formModel,
+    this.child,
+    this.canPop,
+    this.onPopInvoked,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final DeliveryListForm formModel;
+
+  final Widget? child;
+
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+
+  final Widget Function(
+      BuildContext context, DeliveryListForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, DeliveryListForm formModel)?
+      initState;
+
+  @override
+  _DeliveryListFormModelBuilderState createState() =>
+      _DeliveryListFormModelBuilderState();
+}
+
+class _DeliveryListFormModelBuilderState
+    extends State<DeliveryListFormModelBuilder> {
+  late DeliveryListForm _formModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formModel = widget.formModel;
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+  }
+
+  @override
+  void didUpdateWidget(covariant DeliveryListFormModelBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.formModel != oldWidget.formModel) {
+      _formModel = widget.formModel;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveDeliveryListForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
 class DeliveryListForm implements FormModel<DeliveryList> {
   DeliveryListForm(
     this.form,
@@ -2051,6 +2131,87 @@ class _StandaloneDeliveryPointFormBuilderState
   void dispose() {
     _formModel.form.dispose();
     super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveStandaloneDeliveryPointForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+/// Similar to the StandaloneDeliveryPointFormBuilder but opts out of automatic form lifecycle
+/// management.
+///
+/// See `StandaloneDeliveryPointFormBuilder.initState` and `StandaloneDeliveryPointFormBuilder.dispose` for examples
+/// of initializing/disposing the formModel.
+class StandaloneDeliveryPointFormModelBuilder extends StatefulWidget {
+  const StandaloneDeliveryPointFormModelBuilder({
+    Key? key,
+    required this.formModel,
+    this.child,
+    this.canPop,
+    this.onPopInvoked,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final StandaloneDeliveryPointForm formModel;
+
+  final Widget? child;
+
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+
+  final Widget Function(BuildContext context,
+      StandaloneDeliveryPointForm formModel, Widget? child) builder;
+
+  final void Function(
+      BuildContext context, StandaloneDeliveryPointForm formModel)? initState;
+
+  @override
+  _StandaloneDeliveryPointFormModelBuilderState createState() =>
+      _StandaloneDeliveryPointFormModelBuilderState();
+}
+
+class _StandaloneDeliveryPointFormModelBuilderState
+    extends State<StandaloneDeliveryPointFormModelBuilder> {
+  late StandaloneDeliveryPointForm _formModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formModel = widget.formModel;
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+  }
+
+  @override
+  void didUpdateWidget(
+      covariant StandaloneDeliveryPointFormModelBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.formModel != oldWidget.formModel) {
+      _formModel = widget.formModel;
+    }
   }
 
   @override

@@ -225,6 +225,86 @@ class _AnnotatelessFormBuilderState extends State<AnnotatelessFormBuilder> {
   }
 }
 
+/// Similar to the AnnotatelessFormBuilder but opts out of automatic form lifecycle
+/// management.
+///
+/// See `AnnotatelessFormBuilder.initState` and `AnnotatelessFormBuilder.dispose` for examples
+/// of initializing/disposing the formModel.
+class AnnotatelessFormModelBuilder extends StatefulWidget {
+  const AnnotatelessFormModelBuilder({
+    Key? key,
+    required this.formModel,
+    this.child,
+    this.canPop,
+    this.onPopInvoked,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final AnnotatelessForm formModel;
+
+  final Widget? child;
+
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+
+  final Widget Function(
+      BuildContext context, AnnotatelessForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, AnnotatelessForm formModel)?
+      initState;
+
+  @override
+  _AnnotatelessFormModelBuilderState createState() =>
+      _AnnotatelessFormModelBuilderState();
+}
+
+class _AnnotatelessFormModelBuilderState
+    extends State<AnnotatelessFormModelBuilder> {
+  late AnnotatelessForm _formModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formModel = widget.formModel;
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+  }
+
+  @override
+  void didUpdateWidget(covariant AnnotatelessFormModelBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.formModel != oldWidget.formModel) {
+      _formModel = widget.formModel;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveAnnotatelessForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
 class AnnotatelessForm implements FormModel<Annotateless> {
   AnnotatelessForm(
     this.form,

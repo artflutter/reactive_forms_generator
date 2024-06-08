@@ -257,6 +257,86 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
   }
 }
 
+/// Similar to the UserProfileFormBuilder but opts out of automatic form lifecycle
+/// management.
+///
+/// See `UserProfileFormBuilder.initState` and `UserProfileFormBuilder.dispose` for examples
+/// of initializing/disposing the formModel.
+class UserProfileFormModelBuilder extends StatefulWidget {
+  const UserProfileFormModelBuilder({
+    Key? key,
+    required this.formModel,
+    this.child,
+    this.canPop,
+    this.onPopInvoked,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final UserProfileForm formModel;
+
+  final Widget? child;
+
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+
+  final Widget Function(
+      BuildContext context, UserProfileForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, UserProfileForm formModel)?
+      initState;
+
+  @override
+  _UserProfileFormModelBuilderState createState() =>
+      _UserProfileFormModelBuilderState();
+}
+
+class _UserProfileFormModelBuilderState
+    extends State<UserProfileFormModelBuilder> {
+  late UserProfileForm _formModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formModel = widget.formModel;
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+  }
+
+  @override
+  void didUpdateWidget(covariant UserProfileFormModelBuilder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.formModel != oldWidget.formModel) {
+      _formModel = widget.formModel;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveUserProfileForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
 class UserProfileForm implements FormModel<UserProfile> {
   UserProfileForm(
     this.form,

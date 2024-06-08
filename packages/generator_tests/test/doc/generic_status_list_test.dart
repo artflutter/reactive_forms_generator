@@ -222,6 +222,86 @@ class _StatusListFormBuilderState<T extends Enum>
   }
 }
 
+/// Similar to the StatusListFormBuilder but opts out of automatic form lifecycle
+/// management.
+///
+/// See `StatusListFormBuilder.initState` and `StatusListFormBuilder.dispose` for examples
+/// of initializing/disposing the formModel.
+class StatusListFormModelBuilder<T extends Enum> extends StatefulWidget {
+  const StatusListFormModelBuilder({
+    Key? key,
+    required this.formModel,
+    this.child,
+    this.canPop,
+    this.onPopInvoked,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final StatusListForm<T> formModel;
+
+  final Widget? child;
+
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+
+  final Widget Function(
+      BuildContext context, StatusListForm<T> formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, StatusListForm<T> formModel)?
+      initState;
+
+  @override
+  _StatusListFormModelBuilderState<T> createState() =>
+      _StatusListFormModelBuilderState<T>();
+}
+
+class _StatusListFormModelBuilderState<T extends Enum>
+    extends State<StatusListFormModelBuilder<T>> {
+  late StatusListForm<T> _formModel;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _formModel = widget.formModel;
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+  }
+
+  @override
+  void didUpdateWidget(covariant StatusListFormModelBuilder<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.formModel != oldWidget.formModel) {
+      _formModel = widget.formModel;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveStatusListForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
 class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
   StatusListForm(
     this.form,
