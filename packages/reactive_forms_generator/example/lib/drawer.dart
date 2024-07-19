@@ -107,6 +107,12 @@ class AppDrawer extends StatelessWidget {
                 Routes.nested,
               ),
             ),
+            ListTile(
+              title: const Text('Nested Generic'),
+              onTap: () => Navigator.of(context).pushReplacementNamed(
+                Routes.nestedGeneric,
+              ),
+            ),
           ],
         ),
       ),

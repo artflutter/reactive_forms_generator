@@ -13,6 +13,7 @@ import 'package:example/docs/mailing_list/mailing_list_form.dart';
 import 'package:example/docs/model_extends/model_extends_form.dart';
 import 'package:example/docs/model_implements/model_implements_form.dart';
 import 'package:example/docs/nested/nested_form.dart';
+import 'package:example/docs/nested_generics/nested_generic_form.dart';
 import 'package:example/docs/user_profile/user_profile_form.dart';
 import 'package:flutter/material.dart';
 
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         Routes.deliveryPoint: (_) => const DeliveryPointWidget(),
         Routes.freezed: (_) => const FreezedFormWidget(),
         Routes.generic: (_) => const GenericFormWidget(),
+        Routes.nestedGeneric: (_) => const NestedGenericFormWidget(),
         Routes.animatedUrlList: (_) => const UrlListForm(),
         Routes.modelExtends: (_) => const ModelExtendsWidget(),
         Routes.modelImplements: (_) => const ModelImplementsWidget(),
@@ -79,6 +81,8 @@ class Routes {
   static const freezed = '/freezed';
 
   static const generic = '/generic';
+
+  static const nestedGeneric = '/nested-generic';
 
   static const animatedUrlList = '/animated-url-list';
 

@@ -54,7 +54,7 @@ _$ThresholdSettingImpl _$$ThresholdSettingImplFromJson(
         Map<String, dynamic> json) =>
     _$ThresholdSettingImpl(
       isEnabled: json['isEnabled'] as bool? ?? true,
-      value: json['value'] as int? ?? 2,
+      value: (json['value'] as num?)?.toInt() ?? 2,
     );
 
 Map<String, dynamic> _$$ThresholdSettingImplToJson(
@@ -67,7 +67,7 @@ Map<String, dynamic> _$$ThresholdSettingImplToJson(
 _$TimerSettingImpl _$$TimerSettingImplFromJson(Map<String, dynamic> json) =>
     _$TimerSettingImpl(
       isEnabled: json['isEnabled'] as bool? ?? false,
-      value: json['value'] as int? ?? 5,
+      value: (json['value'] as num?)?.toInt() ?? 5,
     );
 
 Map<String, dynamic> _$$TimerSettingImplToJson(_$TimerSettingImpl instance) =>
@@ -160,7 +160,7 @@ _$ChartingOrderValueImpl _$$ChartingOrderValueImplFromJson(
       chartingOrder: $enumDecodeNullable(
               _$ChartingOrderTypeEnumMap, json['chartingOrder']) ??
           ChartingOrderType.arch,
-      selectedOption: json['selectedOption'] as int? ?? 0,
+      selectedOption: (json['selectedOption'] as num?)?.toInt() ?? 0,
       order: (json['order'] as List<dynamic>)
           .map((e) => (e as List<dynamic>)
               .map((e) => ScanOrder.fromJson(e as Map<String, dynamic>))
