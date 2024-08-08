@@ -1,3 +1,7 @@
+## [5.0.5]
+
+* https://github.com/artflutter/reactive_forms_generator/pull/169
+
 ## [5.0.3]
 
 * canPop and popInvoked fix
