@@ -133,24 +133,6 @@ class FormGenerator {
       );
 
   Method get updateValueMethod {
-    String displayType =
-        type?.getDisplayString(withNullability: false) ?? element.fullTypeName;
-
-    if (type is ParameterizedType &&
-        (type as ParameterizedType).isDartCoreList) {
-      displayType = (type as ParameterizedType)
-          .typeArguments
-          .first
-          .getDisplayString(withNullability: false);
-    }
-
-    final isNullable = type?.nullabilitySuffix == NullabilitySuffix.question ||
-        element.isNullable;
-
-    if (isNullable) {
-      displayType += '?';
-    }
-
     return Method(
       (b) => b
         ..name = 'updateValue'
@@ -160,7 +142,7 @@ class FormGenerator {
           Parameter(
             (b) => b
               ..name = 'value'
-              ..type = Reference(displayType),
+              ..type = Reference(_modelDisplayTypeMaybeNullable),
           ),
         )
         ..optionalParameters.addAll([
@@ -187,18 +169,6 @@ class FormGenerator {
   }
 
   Method get resetMethod {
-    String displayType =
-        type?.getDisplayString(withNullability: false) ?? element.fullTypeName;
-
-    if (type != null &&
-        type is ParameterizedType &&
-        (type as ParameterizedType).typeArguments.isNotEmpty) {
-      displayType = (type as ParameterizedType)
-          .typeArguments
-          .first
-          .getDisplayString(withNullability: false);
-    }
-
     return Method(
       (b) => b
         ..name = 'reset'
@@ -208,7 +178,7 @@ class FormGenerator {
           Parameter(
             (b) => b
               ..name = 'value'
-              ..type = Reference('$displayType?'),
+              ..type = Reference(_modelDisplayTypeNullable),
           ),
           Parameter(
             (b) => b
@@ -580,27 +550,36 @@ class FormGenerator {
           ),
       );
 
-  String get modelDisplayType {
-    final nullabilitySuffix = root.isNullable || root != element ? '?' : '';
+  String get _modelDisplayTypeNonNullable {
     String displayType =
         type?.getDisplayString(withNullability: false) ?? element.fullTypeName;
 
-    displayType = '$displayType$nullabilitySuffix';
-
-    if (type != null &&
-        type is ParameterizedType &&
-        (type as ParameterizedType).typeArguments.isNotEmpty) {
-      final parameterizedType = (type as ParameterizedType).typeArguments.first;
-
-      displayType = parameterizedType.getDisplayString(withNullability: false);
-
-      if (parameterizedType.element is ClassElement &&
-          (parameterizedType.element as ClassElement).isNullable) {
-        displayType = '$displayType?';
-      }
+    if (type is ParameterizedType &&
+        (type as ParameterizedType).isDartCoreList) {
+      displayType = (type as ParameterizedType)
+          .typeArguments
+          .first
+          .getDisplayString(withNullability: false);
     }
 
     return displayType;
+  }
+
+  String get _modelDisplayTypeMaybeNullable {
+    String displayType = _modelDisplayTypeNonNullable;
+
+    final isNullable = type?.nullabilitySuffix == NullabilitySuffix.question ||
+        element.isNullable;
+
+    if (isNullable) {
+      displayType += '?';
+    }
+
+    return displayType;
+  }
+
+  String get _modelDisplayTypeNullable {
+    return '$_modelDisplayTypeNonNullable?';
   }
 
   List<Spec> get generate {
@@ -689,7 +668,7 @@ class FormGenerator {
                       Parameter(
                         (b) => b
                           ..name = element.name.camelCase
-                          ..type = Reference(modelDisplayType),
+                          ..type = Reference(_modelDisplayTypeMaybeNullable),
                       ),
                     )
                     ..returns = const Reference('FormGroup')
@@ -738,7 +717,7 @@ class FormGenerator {
           Method(
             (b) => b
               ..lambda = true
-              ..returns = Reference(generator.className)
+              ..returns = Reference(generator.classNameFull)
               ..name = '${name}Form'
               ..type = MethodType.getter
               ..body = Code(
