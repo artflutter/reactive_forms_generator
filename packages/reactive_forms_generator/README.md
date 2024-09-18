@@ -25,8 +25,6 @@ Our top sponsors are shown below! [[Become a Sponsor](https://github.com/sponsor
             <td align="center">
                 <a href="https://www.dellaconnect.com/"><img src="https://github.com/artflutter/reactive_forms_generator/blob/master/assets/dc.png?raw=true" width="225"/></a>
             </td>
-            <td align="center"></td>
-            <td align="center"></td>
         </tr>
     </tbody>
 </table>
