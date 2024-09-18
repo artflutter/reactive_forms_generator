@@ -17,8 +17,6 @@ which will save you tons of time and make your forms type safe.
 
 ## Sponsors
 
-Our top sponsors are shown below! [[Become a Sponsor](https://github.com/sponsors/felangel)]
-
 <table border="0">
     <tbody>
         <tr>
