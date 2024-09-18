@@ -19,7 +19,7 @@ which will save you tons of time and make your forms type safe.
 
 Our top sponsors are shown below! [[Become a Sponsor](https://github.com/sponsors/felangel)]
 
-<table>
+<table border="0">
     <tbody>
         <tr>
             <td align="center">
