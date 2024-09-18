@@ -13,8 +13,6 @@ which will save you tons of time and make your forms type safe.
 
 **There is no reason to write code manually! Let the code generation work for you.**
 
----
-
 # Sponsors
 
 <table border="0">
