@@ -15,7 +15,7 @@ which will save you tons of time and make your forms type safe.
 
 ---
 
-## Sponsors
+# Sponsors
 
 <table border="0">
     <tbody>
