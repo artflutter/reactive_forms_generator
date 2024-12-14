@@ -403,6 +403,18 @@ class MailingListForm implements FormModel<MailingList> {
   }
 
   @override
+  bool equalsTo(MailingList? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      MailingListForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(MailingList model) onValid,
     void Function()? onNotValid,

@@ -965,6 +965,18 @@ class ProfileForm implements FormModel<Profile> {
   }
 
   @override
+  bool equalsTo(Profile? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      ProfileForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(Profile model) onValid,
     void Function()? onNotValid,
@@ -1552,6 +1564,18 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
   }
 
   @override
+  bool equalsTo(IncidenceFilter? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      IncidenceFilterForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(IncidenceFilter model) onValid,
     void Function()? onNotValid,
@@ -1834,6 +1858,18 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
   }
 
   @override
+  bool equalsTo(ThresholdSetting? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      ThresholdSettingForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(ThresholdSetting model) onValid,
     void Function()? onNotValid,
@@ -2086,6 +2122,18 @@ class TimerSettingForm implements FormModel<TimerSetting> {
         _disabled.remove(key);
       });
     }
+  }
+
+  @override
+  bool equalsTo(TimerSetting? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      TimerSettingForm.formElements(other).rawValue,
+    );
   }
 
   @override

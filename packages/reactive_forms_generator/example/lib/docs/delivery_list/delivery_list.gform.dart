@@ -639,6 +639,18 @@ class DeliveryListForm implements FormModel<DeliveryList> {
   }
 
   @override
+  bool equalsTo(DeliveryList? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      DeliveryListForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(DeliveryList model) onValid,
     void Function()? onNotValid,
@@ -924,6 +936,18 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
         _disabled.remove(key);
       });
     }
+  }
+
+  @override
+  bool equalsTo(DeliveryPoint? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      DeliveryPointForm.formElements(other).rawValue,
+    );
   }
 
   @override
@@ -1226,6 +1250,18 @@ class AddressForm implements FormModel<Address> {
         _disabled.remove(key);
       });
     }
+  }
+
+  @override
+  bool equalsTo(Address? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      AddressForm.formElements(other).rawValue,
+    );
   }
 
   @override
@@ -1603,6 +1639,18 @@ class ClientForm implements FormModel<Client> {
         _disabled.remove(key);
       });
     }
+  }
+
+  @override
+  bool equalsTo(Client? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      ClientForm.formElements(other).rawValue,
+    );
   }
 
   @override
@@ -2206,6 +2254,18 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
         _disabled.remove(key);
       });
     }
+  }
+
+  @override
+  bool equalsTo(DeliveryPoint? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      StandaloneDeliveryPointForm.formElements(other).rawValue,
+    );
   }
 
   @override

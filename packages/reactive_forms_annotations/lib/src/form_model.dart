@@ -14,6 +14,8 @@ abstract class FormModel<TModel> {
     void Function()? onNotValid,
   });
 
+  bool equalsTo(TModel other);
+
   void updateValue(
     TModel? value, {
     bool updateParent = true,

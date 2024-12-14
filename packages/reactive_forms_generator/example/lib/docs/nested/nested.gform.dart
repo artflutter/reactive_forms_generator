@@ -305,6 +305,18 @@ class SubGroupForm implements FormModel<SubGroup> {
   }
 
   @override
+  bool equalsTo(SubGroup? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      SubGroupForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(SubGroup model) onValid,
     void Function()? onNotValid,
@@ -971,6 +983,18 @@ class GroupForm implements FormModel<Group> {
   }
 
   @override
+  bool equalsTo(Group? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      GroupForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(Group model) onValid,
     void Function()? onNotValid,
@@ -1568,6 +1592,18 @@ class NestedForm implements FormModel<Nested> {
         _disabled.remove(key);
       });
     }
+  }
+
+  @override
+  bool equalsTo(Nested? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      NestedForm.formElements(other).rawValue,
+    );
   }
 
   @override
