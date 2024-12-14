@@ -823,8 +823,12 @@ class ReactiveUrlFormArrayBuilder<ReactiveUrlFormArrayBuilderT>
   final Widget Function(
       BuildContext context, List<Widget> itemList, UrlForm formModel)? builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveUrlFormArrayBuilderT? item, UrlForm formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveUrlFormArrayBuilderT> control,
+      ReactiveUrlFormArrayBuilderT? item,
+      UrlForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -846,6 +850,8 @@ class ReactiveUrlFormArrayBuilder<ReactiveUrlFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveUrlFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

@@ -1,3 +1,11 @@
+## [6.0.0-beta.17]
+
+* list control use `rawValue` instead of value
+
+## [6.0.0-beta.16]
+
+* expose control in itemBuilder
+
 ## [6.0.0-beta.15]
 
 * rebase on main 2

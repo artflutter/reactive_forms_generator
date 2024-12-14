@@ -1123,6 +1123,7 @@ class ReactiveLoginExtendedNullableFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveLoginExtendedNullableFormArrayBuilderT> control,
       ReactiveLoginExtendedNullableFormArrayBuilderT? item,
       LoginExtendedNullableForm formModel) itemBuilder;
 
@@ -1146,6 +1147,8 @@ class ReactiveLoginExtendedNullableFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i] as FormControl<
+                      ReactiveLoginExtendedNullableFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

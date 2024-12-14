@@ -570,8 +570,12 @@ class ReactiveLoginOFormArrayBuilder<ReactiveLoginOFormArrayBuilderT>
           BuildContext context, List<Widget> itemList, LoginOForm formModel)?
       builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveLoginOFormArrayBuilderT? item, LoginOForm formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveLoginOFormArrayBuilderT> control,
+      ReactiveLoginOFormArrayBuilderT? item,
+      LoginOForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -593,6 +597,8 @@ class ReactiveLoginOFormArrayBuilder<ReactiveLoginOFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveLoginOFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

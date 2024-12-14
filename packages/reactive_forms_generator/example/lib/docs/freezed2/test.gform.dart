@@ -539,8 +539,12 @@ class ReactiveTestFormArrayBuilder<ReactiveTestFormArrayBuilderT>
   final Widget Function(
       BuildContext context, List<Widget> itemList, TestForm formModel)? builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveTestFormArrayBuilderT? item, TestForm formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveTestFormArrayBuilderT> control,
+      ReactiveTestFormArrayBuilderT? item,
+      TestForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -562,6 +566,8 @@ class ReactiveTestFormArrayBuilder<ReactiveTestFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveTestFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

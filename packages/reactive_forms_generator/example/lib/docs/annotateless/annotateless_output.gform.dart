@@ -521,6 +521,7 @@ class ReactiveAnnotatelessOFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveAnnotatelessOFormArrayBuilderT> control,
       ReactiveAnnotatelessOFormArrayBuilderT? item,
       AnnotatelessOForm formModel) itemBuilder;
 
@@ -544,6 +545,8 @@ class ReactiveAnnotatelessOFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveAnnotatelessOFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

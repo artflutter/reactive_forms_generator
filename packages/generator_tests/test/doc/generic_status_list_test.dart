@@ -174,6 +174,8 @@ class _StatusListFormBuilderState<T extends Enum>
     extends State<StatusListFormBuilder<T>> {
   late StatusListForm<T> _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -185,7 +187,7 @@ class _StatusListFormBuilderState<T extends Enum>
 
     widget.initState?.call(context, _formModel);
 
-    _logStatusListForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logStatusListForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -228,6 +230,7 @@ class _StatusListFormBuilderState<T extends Enum>
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -250,7 +253,7 @@ class _StatusListFormBuilderState<T extends Enum>
   }
 }
 
-final _logStatusListForm = Logger('StatusListForm<T>');
+final _logStatusListForm = Logger.detached('StatusListForm<T>');
 
 class StatusListForm<T extends Enum>
     implements FormModel<StatusList<T>, StatusList<T>> {
@@ -527,6 +530,7 @@ class ReactiveStatusListFormArrayBuilder<ReactiveStatusListFormArrayBuilderT,
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveStatusListFormArrayBuilderT> control,
       ReactiveStatusListFormArrayBuilderT? item,
       StatusListForm<T> formModel) itemBuilder;
 
@@ -550,6 +554,8 @@ class ReactiveStatusListFormArrayBuilder<ReactiveStatusListFormArrayBuilderT,
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveStatusListFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

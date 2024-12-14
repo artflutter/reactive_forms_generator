@@ -437,6 +437,7 @@ class ReactiveSubGroupFormArrayBuilder<ReactiveSubGroupFormArrayBuilderT>
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveSubGroupFormArrayBuilderT> control,
       ReactiveSubGroupFormArrayBuilderT? item,
       SubGroupForm formModel) itemBuilder;
 
@@ -460,6 +461,8 @@ class ReactiveSubGroupFormArrayBuilder<ReactiveSubGroupFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveSubGroupFormArrayBuilderT>,
                   item,
                   formModel,
                 ),
@@ -1162,8 +1165,12 @@ class ReactiveGroupFormArrayBuilder<ReactiveGroupFormArrayBuilderT>
           BuildContext context, List<Widget> itemList, GroupForm formModel)?
       builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveGroupFormArrayBuilderT? item, GroupForm formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveGroupFormArrayBuilderT> control,
+      ReactiveGroupFormArrayBuilderT? item,
+      GroupForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1185,6 +1192,8 @@ class ReactiveGroupFormArrayBuilder<ReactiveGroupFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveGroupFormArrayBuilderT>,
                   item,
                   formModel,
                 ),
@@ -1804,8 +1813,12 @@ class ReactiveNestedFormArrayBuilder<ReactiveNestedFormArrayBuilderT>
           BuildContext context, List<Widget> itemList, NestedForm formModel)?
       builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveNestedFormArrayBuilderT? item, NestedForm formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveNestedFormArrayBuilderT> control,
+      ReactiveNestedFormArrayBuilderT? item,
+      NestedForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1827,6 +1840,8 @@ class ReactiveNestedFormArrayBuilder<ReactiveNestedFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveNestedFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

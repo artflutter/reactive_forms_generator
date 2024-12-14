@@ -920,6 +920,7 @@ class ReactiveProductDetailsFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveProductDetailsFormArrayBuilderT> control,
       ReactiveProductDetailsFormArrayBuilderT? item,
       ProductDetailsForm<P, C> formModel) itemBuilder;
 
@@ -943,6 +944,8 @@ class ReactiveProductDetailsFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveProductDetailsFormArrayBuilderT>,
                   item,
                   formModel,
                 ),
@@ -1259,8 +1262,12 @@ class ReactiveIdFormArrayBuilder<ReactiveIdFormArrayBuilderT, P extends Product,
           BuildContext context, List<Widget> itemList, IdForm<P, C> formModel)?
       builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveIdFormArrayBuilderT? item, IdForm<P, C> formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveIdFormArrayBuilderT> control,
+      ReactiveIdFormArrayBuilderT? item,
+      IdForm<P, C> formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1282,6 +1289,8 @@ class ReactiveIdFormArrayBuilder<ReactiveIdFormArrayBuilderT, P extends Product,
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveIdFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

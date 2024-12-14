@@ -490,6 +490,7 @@ class ReactiveMailingListFormArrayBuilder<ReactiveMailingListFormArrayBuilderT>
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveMailingListFormArrayBuilderT> control,
       ReactiveMailingListFormArrayBuilderT? item,
       MailingListForm formModel) itemBuilder;
 
@@ -513,6 +514,8 @@ class ReactiveMailingListFormArrayBuilder<ReactiveMailingListFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveMailingListFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

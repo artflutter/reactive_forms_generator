@@ -2364,6 +2364,7 @@ class ReactiveProfileFormArrayBuilder<ReactiveProfileFormArrayBuilderT>
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveProfileFormArrayBuilderT> control,
       ReactiveProfileFormArrayBuilderT? item,
       ProfileForm formModel) itemBuilder;
 
@@ -2387,6 +2388,8 @@ class ReactiveProfileFormArrayBuilder<ReactiveProfileFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveProfileFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

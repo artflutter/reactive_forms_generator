@@ -1830,6 +1830,7 @@ class ReactiveDeliveryListFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveDeliveryListFormArrayBuilderT> control,
       ReactiveDeliveryListFormArrayBuilderT? item,
       DeliveryListForm formModel) itemBuilder;
 
@@ -1853,6 +1854,8 @@ class ReactiveDeliveryListFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveDeliveryListFormArrayBuilderT>,
                   item,
                   formModel,
                 ),
@@ -2478,6 +2481,7 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveStandaloneDeliveryPointFormArrayBuilderT> control,
       ReactiveStandaloneDeliveryPointFormArrayBuilderT? item,
       StandaloneDeliveryPointForm formModel) itemBuilder;
 
@@ -2501,6 +2505,8 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i] as FormControl<
+                      ReactiveStandaloneDeliveryPointFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

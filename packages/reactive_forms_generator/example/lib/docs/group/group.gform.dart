@@ -1878,8 +1878,12 @@ class ReactiveGroupFormArrayBuilder<ReactiveGroupFormArrayBuilderT>
           BuildContext context, List<Widget> itemList, GroupForm formModel)?
       builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveGroupFormArrayBuilderT? item, GroupForm formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveGroupFormArrayBuilderT> control,
+      ReactiveGroupFormArrayBuilderT? item,
+      GroupForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1901,6 +1905,8 @@ class ReactiveGroupFormArrayBuilder<ReactiveGroupFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveGroupFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

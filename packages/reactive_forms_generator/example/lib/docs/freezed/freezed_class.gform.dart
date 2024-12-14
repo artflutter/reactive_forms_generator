@@ -899,6 +899,7 @@ class ReactiveFreezedClassFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveFreezedClassFormArrayBuilderT> control,
       ReactiveFreezedClassFormArrayBuilderT? item,
       FreezedClassForm formModel) itemBuilder;
 
@@ -922,6 +923,8 @@ class ReactiveFreezedClassFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveFreezedClassFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

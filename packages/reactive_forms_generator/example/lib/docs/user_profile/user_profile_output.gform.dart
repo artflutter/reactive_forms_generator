@@ -1272,6 +1272,7 @@ class ReactiveUserProfileOFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveUserProfileOFormArrayBuilderT> control,
       ReactiveUserProfileOFormArrayBuilderT? item,
       UserProfileOForm formModel) itemBuilder;
 
@@ -1295,6 +1296,8 @@ class ReactiveUserProfileOFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveUserProfileOFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

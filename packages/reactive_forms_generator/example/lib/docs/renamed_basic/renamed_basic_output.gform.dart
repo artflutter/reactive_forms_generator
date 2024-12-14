@@ -573,6 +573,7 @@ class ReactiveSomeWiredNameFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveSomeWiredNameFormArrayBuilderT> control,
       ReactiveSomeWiredNameFormArrayBuilderT? item,
       SomeWiredNameForm formModel) itemBuilder;
 
@@ -596,6 +597,8 @@ class ReactiveSomeWiredNameFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

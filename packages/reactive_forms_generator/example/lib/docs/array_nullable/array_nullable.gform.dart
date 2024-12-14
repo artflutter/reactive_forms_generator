@@ -1055,6 +1055,7 @@ class ReactiveArrayNullableFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveArrayNullableFormArrayBuilderT> control,
       ReactiveArrayNullableFormArrayBuilderT? item,
       ArrayNullableForm formModel) itemBuilder;
 
@@ -1078,6 +1079,8 @@ class ReactiveArrayNullableFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveArrayNullableFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

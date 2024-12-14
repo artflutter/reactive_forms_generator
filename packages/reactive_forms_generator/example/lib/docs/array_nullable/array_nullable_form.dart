@@ -50,9 +50,9 @@ class _ArrayNullableFormWidgetState extends State<ArrayNullableFormWidget> {
                   Expanded(
                     child: ReactiveArrayNullableFormArrayBuilder<String>(
                       formControl: formModel.emailListControl,
-                      itemBuilder: (context, i, item, formModel) {
+                      itemBuilder: (context, i, control, item, formModel) {
                         return ReactiveTextField<String>(
-                          formControlName: i.toString(),
+                          formControl: control,
                           decoration: const InputDecoration(labelText: 'Email'),
                         );
                       },
@@ -76,9 +76,9 @@ class _ArrayNullableFormWidgetState extends State<ArrayNullableFormWidget> {
                   Expanded(
                     child: ReactiveArrayNullableFormArrayBuilder<bool>(
                       formControl: formModel.fruitListControl,
-                      itemBuilder: (_, i, __, ___) {
+                      itemBuilder: (_, i, control, __, ___) {
                         return ReactiveCheckboxListTile(
-                          formControlName: i.toString(),
+                          formControl: control,
                           title: Text(fruits[i]),
                         );
                       },

@@ -521,6 +521,7 @@ class ReactiveModelExtendsFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveModelExtendsFormArrayBuilderT> control,
       ReactiveModelExtendsFormArrayBuilderT? item,
       ModelExtendsForm formModel) itemBuilder;
 
@@ -544,6 +545,8 @@ class ReactiveModelExtendsFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveModelExtendsFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

@@ -460,8 +460,12 @@ class ReactiveTagsFormArrayBuilder<ReactiveTagsFormArrayBuilderT, T>
           BuildContext context, List<Widget> itemList, TagsForm<T> formModel)?
       builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveTagsFormArrayBuilderT? item, TagsForm<T> formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveTagsFormArrayBuilderT> control,
+      ReactiveTagsFormArrayBuilderT? item,
+      TagsForm<T> formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -483,6 +487,8 @@ class ReactiveTagsFormArrayBuilder<ReactiveTagsFormArrayBuilderT, T>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveTagsFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

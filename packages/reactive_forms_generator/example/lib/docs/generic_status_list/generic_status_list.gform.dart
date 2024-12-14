@@ -495,6 +495,7 @@ class ReactiveStatusListFormArrayBuilder<ReactiveStatusListFormArrayBuilderT,
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveStatusListFormArrayBuilderT> control,
       ReactiveStatusListFormArrayBuilderT? item,
       StatusListForm<T> formModel) itemBuilder;
 
@@ -518,6 +519,8 @@ class ReactiveStatusListFormArrayBuilder<ReactiveStatusListFormArrayBuilderT,
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveStatusListFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

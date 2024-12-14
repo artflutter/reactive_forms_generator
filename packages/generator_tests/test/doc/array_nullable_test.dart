@@ -58,14 +58,14 @@ const generatedFile = r'''// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'array_nullable.dart';
+part of 'annotateless.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-class ReactiveArrayNullableFormConsumer extends StatelessWidget {
-  const ReactiveArrayNullableFormConsumer({
+class ReactiveAnnotatelessFormConsumer extends StatelessWidget {
+  const ReactiveAnnotatelessFormConsumer({
     Key? key,
     required this.builder,
     this.child,
@@ -74,21 +74,21 @@ class ReactiveArrayNullableFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, ArrayNullableForm formModel, Widget? child) builder;
+      BuildContext context, AnnotatelessForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveArrayNullableForm.of(context);
+    final formModel = ReactiveAnnotatelessForm.of(context);
 
-    if (formModel is! ArrayNullableForm) {
+    if (formModel is! AnnotatelessForm) {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, formModel, child);
   }
 }
 
-class ArrayNullableFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const ArrayNullableFormInheritedStreamer({
+class AnnotatelessFormInheritedStreamer extends InheritedStreamer<dynamic> {
+  const AnnotatelessFormInheritedStreamer({
     Key? key,
     required this.form,
     required Stream<dynamic> stream,
@@ -99,11 +99,11 @@ class ArrayNullableFormInheritedStreamer extends InheritedStreamer<dynamic> {
           key: key,
         );
 
-  final ArrayNullableForm form;
+  final AnnotatelessForm form;
 }
 
-class ReactiveArrayNullableForm extends StatelessWidget {
-  const ReactiveArrayNullableForm({
+class ReactiveAnnotatelessForm extends StatelessWidget {
+  const ReactiveAnnotatelessForm({
     Key? key,
     required this.form,
     required this.child,
@@ -113,13 +113,13 @@ class ReactiveArrayNullableForm extends StatelessWidget {
 
   final Widget child;
 
-  final ArrayNullableForm form;
+  final AnnotatelessForm form;
 
   final bool Function(FormGroup formGroup)? canPop;
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static ArrayNullableForm? of(
+  static AnnotatelessForm? of(
     BuildContext context, {
     bool listen = true,
   }) {
@@ -305,16 +305,16 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
   List<String?>? get _someListValue => someListControl?.value;
 
   List<String> get _emailListValue =>
-      emailListControl.rawValue.whereType<String>().toList();
+      emailListControl.value?.whereType<String>().toList() ?? [];
 
   List<bool?> get _fruitListValue =>
-      fruitListControl.rawValue.whereType<bool?>().toList();
+      fruitListControl.value?.whereType<bool?>().toList() ?? [];
 
   List<String?>? get _vegetablesListValue =>
-      vegetablesListControl?.rawValue.whereType<String?>().toList();
+      vegetablesListControl?.value?.whereType<String?>().toList() ?? [];
 
   List<UserMode?>? get _modeListValue =>
-      modeListControl?.rawValue.whereType<UserMode?>().toList();
+      modeListControl?.value?.whereType<UserMode?>().toList() ?? [];
 
   bool get containsSomeList {
     try {

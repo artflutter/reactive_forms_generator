@@ -1130,6 +1130,7 @@ class ReactiveLoginExtendedOFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveLoginExtendedOFormArrayBuilderT> control,
       ReactiveLoginExtendedOFormArrayBuilderT? item,
       LoginExtendedOForm formModel) itemBuilder;
 
@@ -1153,6 +1154,8 @@ class ReactiveLoginExtendedOFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveLoginExtendedOFormArrayBuilderT>,
                   item,
                   formModel,
                 ),
