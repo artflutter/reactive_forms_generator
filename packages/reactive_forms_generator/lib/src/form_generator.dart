@@ -19,6 +19,7 @@ import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_clear
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_insert_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_forms_patch_value_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/contains_method.dart';
+import 'package:reactive_forms_generator/src/reactive_forms_generator/control_controls_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/control_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/control_path_method.dart';
 import 'package:reactive_forms_generator/src/reactive_forms_generator/control_private_method.dart';
@@ -628,6 +629,7 @@ class FormGenerator {
               ...fieldPatchMethodList,
               ...fieldResetMethodList,
               ...controlMethodList,
+              ...controlControlsMethodList,
               ...formGroupMethodList,
               ...formArrayMethodList,
               ...controlSetDisabledMethodList,
@@ -801,6 +803,9 @@ class FormGenerator {
 
   Iterable<Method> get controlMethodList =>
       all.map((e) => ControlMethod(e).method()).whereType<Method>();
+
+  Iterable<Method> get controlControlsMethodList =>
+      all.map((e) => ControlControlsMethod(e).method()).whereType<Method>();
 
   Iterable<Method> get controlPrivateMethodList =>
       all.map((e) => ControlPrivateMethod(e).method()).whereType<Method>();

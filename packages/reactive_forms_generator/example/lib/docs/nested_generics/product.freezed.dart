@@ -21,7 +21,9 @@ mixin _$ProductDetails<P extends Product, C extends Cart> {
   @Rf()
   Id<P, C>? get id => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProductDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ProductDetailsCopyWith<P, C, ProductDetails<P, C>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +51,8 @@ class _$ProductDetailsCopyWithImpl<P extends Product, C extends Cart, $Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ProductDetails
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -67,6 +71,8 @@ class _$ProductDetailsCopyWithImpl<P extends Product, C extends Cart, $Res,
     ) as $Val);
   }
 
+  /// Create a copy of ProductDetails
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $IdCopyWith<P, C, $Res>? get id {
@@ -103,6 +109,8 @@ class __$$ProductDetailsImplCopyWithImpl<P extends Product, C extends Cart,
       $Res Function(_$ProductDetailsImpl<P, C>) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProductDetails
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -154,7 +162,9 @@ class _$ProductDetailsImpl<P extends Product, C extends Cart>
   @override
   int get hashCode => Object.hash(runtimeType, description, id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProductDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ProductDetailsImplCopyWith<P, C, _$ProductDetailsImpl<P, C>>
@@ -176,8 +186,11 @@ abstract class _ProductDetails<P extends Product, C extends Cart>
   @override
   @Rf()
   Id<P, C>? get id;
+
+  /// Create a copy of ProductDetails
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProductDetailsImplCopyWith<P, C, _$ProductDetailsImpl<P, C>>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -189,7 +202,9 @@ mixin _$Id<P extends Product, C extends Cart> {
   @RfControl()
   String? get name => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Id
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $IdCopyWith<P, C, Id<P, C>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -212,6 +227,8 @@ class _$IdCopyWithImpl<P extends Product, C extends Cart, $Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Id
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -250,6 +267,8 @@ class __$$IdImplCopyWithImpl<P extends Product, C extends Cart, $Res>
       _$IdImpl<P, C> _value, $Res Function(_$IdImpl<P, C>) _then)
       : super(_value, _then);
 
+  /// Create a copy of Id
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -299,7 +318,9 @@ class _$IdImpl<P extends Product, C extends Cart> extends _Id<P, C> {
   @override
   int get hashCode => Object.hash(runtimeType, companyName, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Id
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$IdImplCopyWith<P, C, _$IdImpl<P, C>> get copyWith =>
@@ -318,8 +339,11 @@ abstract class _Id<P extends Product, C extends Cart> extends Id<P, C> {
   @override
   @RfControl()
   String? get name;
+
+  /// Create a copy of Id
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$IdImplCopyWith<P, C, _$IdImpl<P, C>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -329,7 +353,9 @@ mixin _$Product {
   String? get companyName => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Product
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ProductCopyWith<Product> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -351,6 +377,8 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Product
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -388,6 +416,8 @@ class __$$ProductImplCopyWithImpl<$Res>
       _$ProductImpl _value, $Res Function(_$ProductImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Product
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -435,7 +465,9 @@ class _$ProductImpl extends _Product {
   @override
   int get hashCode => Object.hash(runtimeType, companyName, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Product
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>
@@ -451,8 +483,11 @@ abstract class _Product extends Product {
   String? get companyName;
   @override
   String? get name;
+
+  /// Create a copy of Product
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -462,7 +497,9 @@ mixin _$Cart {
   Product? get product => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Cart
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CartCopyWith<Cart> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -486,6 +523,8 @@ class _$CartCopyWithImpl<$Res, $Val extends Cart>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Cart
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -504,6 +543,8 @@ class _$CartCopyWithImpl<$Res, $Val extends Cart>
     ) as $Val);
   }
 
+  /// Create a copy of Cart
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProductCopyWith<$Res>? get product {
@@ -537,6 +578,8 @@ class __$$CartImplCopyWithImpl<$Res>
   __$$CartImplCopyWithImpl(_$CartImpl _value, $Res Function(_$CartImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Cart
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -584,7 +627,9 @@ class _$CartImpl extends _Cart {
   @override
   int get hashCode => Object.hash(runtimeType, product, description);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Cart
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CartImplCopyWith<_$CartImpl> get copyWith =>
@@ -600,8 +645,11 @@ abstract class _Cart extends Cart {
   Product? get product;
   @override
   String? get description;
+
+  /// Create a copy of Cart
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CartImplCopyWith<_$CartImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

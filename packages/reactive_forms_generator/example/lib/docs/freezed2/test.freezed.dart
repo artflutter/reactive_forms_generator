@@ -21,7 +21,9 @@ mixin _$Test {
   @RfControl<String>()
   String? get description => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Test
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TestCopyWith<Test> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -45,6 +47,8 @@ class _$TestCopyWithImpl<$Res, $Val extends Test>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Test
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -83,6 +87,8 @@ class __$$TestImplCopyWithImpl<$Res>
   __$$TestImplCopyWithImpl(_$TestImpl _value, $Res Function(_$TestImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Test
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -135,7 +141,9 @@ class _$TestImpl extends _Test {
   @override
   int get hashCode => Object.hash(runtimeType, title, description);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Test
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TestImplCopyWith<_$TestImpl> get copyWith =>
@@ -154,8 +162,11 @@ abstract class _Test extends Test {
   @override
   @RfControl<String>()
   String? get description;
+
+  /// Create a copy of Test
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TestImplCopyWith<_$TestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

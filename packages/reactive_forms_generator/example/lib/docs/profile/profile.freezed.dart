@@ -36,8 +36,12 @@ mixin _$Profile {
   @RfControl<bool>()
   bool get audioGuidance => throw _privateConstructorUsedError;
 
+  /// Serializes this Profile to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ProfileCopyWith<Profile> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -74,6 +78,8 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,6 +138,8 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
     ) as $Val);
   }
 
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ChartingOrderValueCopyWith<$Res> get chartingOrder {
@@ -140,6 +148,8 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
     });
   }
 
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $IncidenceFilterCopyWith<$Res> get incidenceFilter {
@@ -148,6 +158,8 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
     });
   }
 
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ThresholdSettingCopyWith<$Res> get threshold {
@@ -156,6 +168,8 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
     });
   }
 
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TimerSettingCopyWith<$Res> get timer {
@@ -202,6 +216,8 @@ class __$$ProfileImplCopyWithImpl<$Res>
       _$ProfileImpl _value, $Res Function(_$ProfileImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -334,7 +350,7 @@ class _$ProfileImpl extends _Profile {
                 other.audioGuidance == audioGuidance));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -349,7 +365,9 @@ class _$ProfileImpl extends _Profile {
       timer,
       audioGuidance);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith =>
@@ -406,8 +424,11 @@ abstract class _Profile extends Profile {
   @override
   @RfControl<bool>()
   bool get audioGuidance;
+
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -423,8 +444,12 @@ mixin _$ThresholdSetting {
   @RfControl<int>()
   int get value => throw _privateConstructorUsedError;
 
+  /// Serializes this ThresholdSetting to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ThresholdSetting
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ThresholdSettingCopyWith<ThresholdSetting> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -448,6 +473,8 @@ class _$ThresholdSettingCopyWithImpl<$Res, $Val extends ThresholdSetting>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ThresholdSetting
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -486,6 +513,8 @@ class __$$ThresholdSettingImplCopyWithImpl<$Res>
       $Res Function(_$ThresholdSettingImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ThresholdSetting
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -539,11 +568,13 @@ class _$ThresholdSettingImpl implements _ThresholdSetting {
             (identical(other.value, value) || other.value == value));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, isEnabled, value);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ThresholdSetting
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ThresholdSettingImplCopyWith<_$ThresholdSettingImpl> get copyWith =>
@@ -572,8 +603,11 @@ abstract class _ThresholdSetting implements ThresholdSetting {
   @override
   @RfControl<int>()
   int get value;
+
+  /// Create a copy of ThresholdSetting
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ThresholdSettingImplCopyWith<_$ThresholdSettingImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -589,8 +623,12 @@ mixin _$TimerSetting {
   @RfControl<int>()
   int get value => throw _privateConstructorUsedError;
 
+  /// Serializes this TimerSetting to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TimerSetting
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TimerSettingCopyWith<TimerSetting> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -614,6 +652,8 @@ class _$TimerSettingCopyWithImpl<$Res, $Val extends TimerSetting>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TimerSetting
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -652,6 +692,8 @@ class __$$TimerSettingImplCopyWithImpl<$Res>
       _$TimerSettingImpl _value, $Res Function(_$TimerSettingImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TimerSetting
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -705,11 +747,13 @@ class _$TimerSettingImpl implements _TimerSetting {
             (identical(other.value, value) || other.value == value));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, isEnabled, value);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TimerSetting
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TimerSettingImplCopyWith<_$TimerSettingImpl> get copyWith =>
@@ -737,8 +781,11 @@ abstract class _TimerSetting implements TimerSetting {
   @override
   @RfControl<int>()
   int get value;
+
+  /// Create a copy of TimerSetting
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TimerSettingImplCopyWith<_$TimerSettingImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -762,8 +809,12 @@ mixin _$IncidenceFilter {
   @RfControl<bool>()
   bool get isPlaqueEnabled => throw _privateConstructorUsedError;
 
+  /// Serializes this IncidenceFilter to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of IncidenceFilter
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $IncidenceFilterCopyWith<IncidenceFilter> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -793,6 +844,8 @@ class _$IncidenceFilterCopyWithImpl<$Res, $Val extends IncidenceFilter>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of IncidenceFilter
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -857,6 +910,8 @@ class __$$IncidenceFilterImplCopyWithImpl<$Res>
       _$IncidenceFilterImpl _value, $Res Function(_$IncidenceFilterImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of IncidenceFilter
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -959,7 +1014,7 @@ class _$IncidenceFilterImpl implements _IncidenceFilter {
                 other.isPlaqueEnabled == isPlaqueEnabled));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -970,7 +1025,9 @@ class _$IncidenceFilterImpl implements _IncidenceFilter {
       isCalculusEnabled,
       isPlaqueEnabled);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of IncidenceFilter
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$IncidenceFilterImplCopyWith<_$IncidenceFilterImpl> get copyWith =>
@@ -1015,8 +1072,11 @@ abstract class _IncidenceFilter implements IncidenceFilter {
   @override
   @RfControl<bool>()
   bool get isPlaqueEnabled;
+
+  /// Create a copy of IncidenceFilter
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$IncidenceFilterImplCopyWith<_$IncidenceFilterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1083,8 +1143,13 @@ mixin _$ScanOrder {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this ScanOrder to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ScanOrder
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ScanOrderCopyWith<ScanOrder> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1107,6 +1172,8 @@ class _$ScanOrderCopyWithImpl<$Res, $Val extends ScanOrder>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ScanOrder
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1145,6 +1212,8 @@ class __$$ArchScanOrderImplCopyWithImpl<$Res>
       _$ArchScanOrderImpl _value, $Res Function(_$ArchScanOrderImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ScanOrder
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1206,11 +1275,13 @@ class _$ArchScanOrderImpl implements ArchScanOrder {
                 other.toothSide == toothSide));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, jaw, direction, toothSide);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ScanOrder
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ArchScanOrderImplCopyWith<_$ArchScanOrderImpl> get copyWith =>
@@ -1306,8 +1377,11 @@ abstract class ArchScanOrder implements ScanOrder {
   Direction get direction;
   @override
   ToothSide get toothSide;
+
+  /// Create a copy of ScanOrder
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ArchScanOrderImplCopyWith<_$ArchScanOrderImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1331,6 +1405,8 @@ class __$$QuadrantScanOrderImplCopyWithImpl<$Res>
       $Res Function(_$QuadrantScanOrderImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ScanOrder
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1393,11 +1469,13 @@ class _$QuadrantScanOrderImpl implements QuadrantScanOrder {
                 other.toothSide == toothSide));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, quadrant, direction, toothSide);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ScanOrder
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$QuadrantScanOrderImplCopyWith<_$QuadrantScanOrderImpl> get copyWith =>
@@ -1494,8 +1572,11 @@ abstract class QuadrantScanOrder implements ScanOrder {
   Direction get direction;
   @override
   ToothSide get toothSide;
+
+  /// Create a copy of ScanOrder
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$QuadrantScanOrderImplCopyWith<_$QuadrantScanOrderImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1510,8 +1591,12 @@ mixin _$ChartingOrderValue {
   int get selectedOption => throw _privateConstructorUsedError;
   List<List<ScanOrder>> get order => throw _privateConstructorUsedError;
 
+  /// Serializes this ChartingOrderValue to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ChartingOrderValue
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ChartingOrderValueCopyWith<ChartingOrderValue> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1538,6 +1623,8 @@ class _$ChartingOrderValueCopyWithImpl<$Res, $Val extends ChartingOrderValue>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ChartingOrderValue
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1584,6 +1671,8 @@ class __$$ChartingOrderValueImplCopyWithImpl<$Res>
       $Res Function(_$ChartingOrderValueImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ChartingOrderValue
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1651,12 +1740,14 @@ class _$ChartingOrderValueImpl implements _ChartingOrderValue {
             const DeepCollectionEquality().equals(other._order, _order));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, chartingOrder, selectedOption,
       const DeepCollectionEquality().hash(_order));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChartingOrderValue
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChartingOrderValueImplCopyWith<_$ChartingOrderValueImpl> get copyWith =>
@@ -1686,8 +1777,11 @@ abstract class _ChartingOrderValue implements ChartingOrderValue {
   int get selectedOption;
   @override
   List<List<ScanOrder>> get order;
+
+  /// Create a copy of ChartingOrderValue
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChartingOrderValueImplCopyWith<_$ChartingOrderValueImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

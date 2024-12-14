@@ -297,6 +297,9 @@ class MailingListForm implements FormModel<MailingList> {
   FormArray<String> get emailListControl =>
       form.control(emailListControlPath()) as FormArray<String>;
 
+  List<FormControl<String>> get emailListControlControls =>
+      emailListControl.controls.cast<FormControl<String>>();
+
   void emailListSetDisabled(
     bool disabled, {
     bool updateParent = true,

@@ -533,6 +533,21 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
       ? form.control(modeListControlPath()) as FormArray<UserMode>?
       : null;
 
+  List<FormControl<String>> get emailListControlControls =>
+      emailListControl.controls.cast<FormControl<String>>();
+
+  List<FormControl<bool>> get fruitListControlControls =>
+      fruitListControl.controls.cast<FormControl<bool>>();
+
+  List<FormControl<String>?> get vegetablesListControlControls =>
+      containsVegetablesList
+          ? vegetablesListControl?.controls.cast<FormControl<String>?>() ?? []
+          : [];
+
+  List<FormControl<UserMode>?> get modeListControlControls => containsModeList
+      ? modeListControl?.controls.cast<FormControl<UserMode>?>() ?? []
+      : [];
+
   void someListSetDisabled(
     bool disabled, {
     bool updateParent = true,

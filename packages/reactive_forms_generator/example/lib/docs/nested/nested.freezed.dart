@@ -23,8 +23,12 @@ mixin _$SubGroup {
   @RfControl()
   String get id => throw _privateConstructorUsedError;
 
+  /// Serializes this SubGroup to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SubGroup
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SubGroupCopyWith<SubGroup> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$SubGroupCopyWithImpl<$Res, $Val extends SubGroup>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SubGroup
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class __$$SubGroupImplCopyWithImpl<$Res>
       _$SubGroupImpl _value, $Res Function(_$SubGroupImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SubGroup
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -119,11 +127,13 @@ class _$SubGroupImpl implements _SubGroup {
             (identical(other.id, id) || other.id == id));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SubGroup
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SubGroupImplCopyWith<_$SubGroupImpl> get copyWith =>
@@ -147,8 +157,11 @@ abstract class _SubGroup implements SubGroup {
   @override
   @RfControl()
   String get id;
+
+  /// Create a copy of SubGroup
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SubGroupImplCopyWith<_$SubGroupImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -164,8 +177,12 @@ mixin _$Group {
   @RfArray<dynamic>()
   List<SubGroup> get subGroupList => throw _privateConstructorUsedError;
 
+  /// Serializes this Group to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GroupCopyWith<Group> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -189,6 +206,8 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -228,6 +247,8 @@ class __$$GroupImplCopyWithImpl<$Res>
       _$GroupImpl _value, $Res Function(_$GroupImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -285,12 +306,14 @@ class _$GroupImpl implements _Group {
                 .equals(other._subGroupList, _subGroupList));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, const DeepCollectionEquality().hash(_subGroupList));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GroupImplCopyWith<_$GroupImpl> get copyWith =>
@@ -318,8 +341,11 @@ abstract class _Group implements Group {
   @override
   @RfArray<dynamic>()
   List<SubGroup> get subGroupList;
+
+  /// Create a copy of Group
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GroupImplCopyWith<_$GroupImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -333,8 +359,12 @@ mixin _$Nested {
   @RfArray<dynamic>()
   List<Group> get groupList => throw _privateConstructorUsedError;
 
+  /// Serializes this Nested to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Nested
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $NestedCopyWith<Nested> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -356,6 +386,8 @@ class _$NestedCopyWithImpl<$Res, $Val extends Nested>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Nested
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -388,6 +420,8 @@ class __$$NestedImplCopyWithImpl<$Res>
       _$NestedImpl _value, $Res Function(_$NestedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Nested
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -434,12 +468,14 @@ class _$NestedImpl implements _Nested {
                 .equals(other._groupList, _groupList));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_groupList));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Nested
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NestedImplCopyWith<_$NestedImpl> get copyWith =>
@@ -463,8 +499,11 @@ abstract class _Nested implements Nested {
   @override
   @RfArray<dynamic>()
   List<Group> get groupList;
+
+  /// Create a copy of Nested
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NestedImplCopyWith<_$NestedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
