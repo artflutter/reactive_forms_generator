@@ -381,6 +381,18 @@ class ModelImplementsForm implements FormModel<ModelImplements> {
   }
 
   @override
+  bool equalsTo(ModelImplements? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      ModelImplementsForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(ModelImplements model) onValid,
     void Function()? onNotValid,

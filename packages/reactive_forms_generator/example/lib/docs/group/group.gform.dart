@@ -642,6 +642,18 @@ class GroupForm implements FormModel<Group> {
   }
 
   @override
+  bool equalsTo(Group? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      GroupForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(Group model) onValid,
     void Function()? onNotValid,
@@ -937,6 +949,18 @@ class PersonalForm implements FormModel<Personal> {
         _disabled.remove(key);
       });
     }
+  }
+
+  @override
+  bool equalsTo(Personal? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      PersonalForm.formElements(other).rawValue,
+    );
   }
 
   @override
@@ -1245,6 +1269,18 @@ class PhoneForm implements FormModel<Phone> {
         _disabled.remove(key);
       });
     }
+  }
+
+  @override
+  bool equalsTo(Phone? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      PhoneForm.formElements(other).rawValue,
+    );
   }
 
   @override
@@ -1648,6 +1684,18 @@ class AddressForm implements FormModel<Address> {
         _disabled.remove(key);
       });
     }
+  }
+
+  @override
+  bool equalsTo(Address? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      AddressForm.formElements(other).rawValue,
+    );
   }
 
   @override

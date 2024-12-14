@@ -903,6 +903,18 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   }
 
   @override
+  bool equalsTo(ArrayNullable? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      ArrayNullableForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(ArrayNullable model) onValid,
     void Function()? onNotValid,

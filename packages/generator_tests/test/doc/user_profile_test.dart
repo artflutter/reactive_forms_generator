@@ -9,7 +9,7 @@ void main() {
   group('doc', () {
     test(
       'User profile',
-      () async {
+          () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -696,6 +696,18 @@ class UserProfileForm implements FormModel<UserProfile> {
   }
 
   @override
+  bool equalsTo(UserProfile? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      UserProfileForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(UserProfile model) onValid,
     void Function()? onNotValid,
@@ -1105,6 +1117,18 @@ class AddressForm implements FormModel<Address> {
         _disabled.remove(key);
       });
     }
+  }
+
+  @override
+  bool equalsTo(Address? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      AddressForm.formElements(other).rawValue,
+    );
   }
 
   @override

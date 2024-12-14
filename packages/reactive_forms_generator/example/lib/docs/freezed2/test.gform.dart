@@ -399,6 +399,18 @@ class TestForm implements FormModel<Test> {
   }
 
   @override
+  bool equalsTo(Test? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      TestForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(Test model) onValid,
     void Function()? onNotValid,

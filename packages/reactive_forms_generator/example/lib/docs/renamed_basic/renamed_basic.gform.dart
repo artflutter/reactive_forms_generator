@@ -378,6 +378,18 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
   }
 
   @override
+  bool equalsTo(RenamedBasic? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      SomeWiredNameForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(RenamedBasic model) onValid,
     void Function()? onNotValid,

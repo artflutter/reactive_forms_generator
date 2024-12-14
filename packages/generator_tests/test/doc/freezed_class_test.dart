@@ -774,6 +774,18 @@ class FreezedClassForm implements FormModel<FreezedClass> {
   }
 
   @override
+  bool equalsTo(FreezedClass? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      FreezedClassForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(FreezedClass model) onValid,
     void Function()? onNotValid,

@@ -355,6 +355,18 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
   }
 
   @override
+  bool equalsTo(StatusList<T>? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      StatusListForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(StatusList<T> model) onValid,
     void Function()? onNotValid,
