@@ -432,6 +432,18 @@ class LoginForm implements FormModel<Login> {
   }
 
   @override
+  bool equalsTo(Login? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      LoginForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(Login model) onValid,
     void Function()? onNotValid,

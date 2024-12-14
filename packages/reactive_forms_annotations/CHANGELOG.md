@@ -1,3 +1,7 @@
+## [5.0.2]
+
+* equalsTo method
+
 ## [5.0.0]
 
 * rf17
@@ -16,7 +20,8 @@
 
 ## [4.0.0]
 
-* annotation shorthands support - this is non-breaking change, old annotations will continue working.
+* annotation shorthands support - this is non-breaking change, old annotations will continue
+  working.
   just a major bump for preventing unexpected auto updates
 
 ## [3.0.0]
@@ -33,7 +38,8 @@
 
 ## [1.0.0]
 
-* Internal refactoring. Everything should work as previously but there is a small chance of breaking changes
+* Internal refactoring. Everything should work as previously but there is a small chance of breaking
+  changes
 
 ## [0.14.0-beta]
 

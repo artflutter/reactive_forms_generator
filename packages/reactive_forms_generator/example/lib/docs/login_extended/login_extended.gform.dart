@@ -890,6 +890,18 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   }
 
   @override
+  bool equalsTo(LoginExtended? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      LoginExtendedForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(LoginExtended model) onValid,
     void Function()? onNotValid,

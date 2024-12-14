@@ -378,6 +378,18 @@ class ModelExtendsForm implements FormModel<ModelExtends> {
   }
 
   @override
+  bool equalsTo(ModelExtends? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      ModelExtendsForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(ModelExtends model) onValid,
     void Function()? onNotValid,

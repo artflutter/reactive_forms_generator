@@ -973,6 +973,18 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
   }
 
   @override
+  bool equalsTo(LoginExtendedNullable? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      LoginExtendedNullableForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(LoginExtendedNullable model) onValid,
     void Function()? onNotValid,

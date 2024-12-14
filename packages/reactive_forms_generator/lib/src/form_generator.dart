@@ -533,6 +533,30 @@ class FormGenerator {
         },
       );
 
+  Method get equalsToMethod => Method(
+        (b) {
+          b
+            ..name = 'equalsTo'
+            ..annotations.add(const CodeExpression(Code('override')))
+            ..returns = const Reference('bool')
+            ..requiredParameters.add(
+              Parameter(
+                (b) => b
+                  ..name = 'other'
+                  ..type = Reference(_modelDisplayTypeMaybeNullable),
+              ),
+            )
+            ..body = Code('''
+              final currentForm = this.currentForm;
+              
+              return const DeepCollectionEquality().equals(
+                currentForm is FormControlCollection<dynamic> ? currentForm.rawValue : currentForm.value,
+                $className.formElements(other).rawValue,
+              );
+            ''');
+        },
+      );
+
   Constructor get _constructor => Constructor(
         (b) => b
           ..requiredParameters.addAll(
@@ -640,6 +664,7 @@ class FormGenerator {
               ...addGroupControlListMethodList,
               modelMethod,
               toggleDisabledMethod,
+              equalsToMethod,
               submitMethod,
               currentFormMethod,
               updateValueMethod,

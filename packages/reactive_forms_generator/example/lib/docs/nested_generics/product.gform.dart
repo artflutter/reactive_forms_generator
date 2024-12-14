@@ -445,6 +445,18 @@ class ProductDetailsForm<P extends Product, C extends Cart>
   }
 
   @override
+  bool equalsTo(ProductDetails<P, C>? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      ProductDetailsForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(ProductDetails<P, C> model) onValid,
     void Function()? onNotValid,
@@ -746,6 +758,18 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
         _disabled.remove(key);
       });
     }
+  }
+
+  @override
+  bool equalsTo(Id<P, C>? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      IdForm.formElements(other).rawValue,
+    );
   }
 
   @override

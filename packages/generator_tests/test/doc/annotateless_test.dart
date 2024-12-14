@@ -418,6 +418,18 @@ class AnnotatelessForm implements FormModel<Annotateless> {
   }
 
   @override
+  bool equalsTo(Annotateless? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      AnnotatelessForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(Annotateless model) onValid,
     void Function()? onNotValid,

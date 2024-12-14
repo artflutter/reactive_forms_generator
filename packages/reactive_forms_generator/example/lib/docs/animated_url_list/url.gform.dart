@@ -417,6 +417,18 @@ class UrlForm implements FormModel<Url> {
   }
 
   @override
+  bool equalsTo(Url? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      UrlForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(Url model) onValid,
     void Function()? onNotValid,
@@ -662,6 +674,18 @@ class UrlEntityForm implements FormModel<UrlEntity> {
         _disabled.remove(key);
       });
     }
+  }
+
+  @override
+  bool equalsTo(UrlEntity? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      UrlEntityForm.formElements(other).rawValue,
+    );
   }
 
   @override

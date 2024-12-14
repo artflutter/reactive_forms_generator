@@ -1,3 +1,7 @@
+## [5.0.7]
+
+* equalsTo method
+
 ## [5.0.6]
 
 * `[...]Controls` method for fetching typed array controls
@@ -53,12 +57,14 @@
 ## [4.5.1]
 
 * generate BuildContext extension for listening and watching the form
-* fix for cases with disabled fields for arrays, the disabled items were thrown off the `value` which caused issues.
+* fix for cases with disabled fields for arrays, the disabled items were thrown off the `value`
+  which caused issues.
 * debugLog replaced with debugLogStackTrace for warnings when calling model on non-valid form
 
 ## [4.5.0]
 
-* fix for cases with disabled fields for arrays, the disabled items were thrown off the `value` which caused issues.
+* fix for cases with disabled fields for arrays, the disabled items were thrown off the `value`
+  which caused issues.
 
 ## [4.4.0]
 
@@ -88,7 +94,8 @@
 
 ## [4.0.0]
 
-* annotation shorthands support - this is non-breaking change, old annotations will continue working.
+* annotation shorthands support - this is non-breaking change, old annotations will continue
+  working.
   just a major bump for preventing unexpected auto updates
 
 ## [3.0.1]
@@ -138,7 +145,8 @@
 
 ## [1.0.0]
 
-* Internal refactoring. Everything should work as previously but there is a small chance of breaking changes
+* Internal refactoring. Everything should work as previously but there is a small chance of breaking
+  changes
 
 ## [0.24.2-beta]
 
@@ -198,7 +206,8 @@
 * initState method for *FormBuilder class
 * *SetDisabled helper methods for all controls
 * *ControlValue accessors are private now because it is unsafe to call them on non valid form
-* added additional failsafe by falling back to default values on required fields which have default value in model(for
+* added additional failsafe by falling back to default values on required fields which have default
+  value in model(for
   strings only)
 
 ## [0.17.2-beta]
@@ -245,12 +254,14 @@
 ## [0.11.0-beta]
 
 * widget for handling array of forms items see
-  packages/reactive_forms_generator/example/lib/docs/mailing_list/delivery_route_form.dart for example of use
+  packages/reactive_forms_generator/example/lib/docs/mailing_list/delivery_route_form.dart for
+  example of use
 
 ## [0.10.0-beta]
 
 * widget for handling array of items see
-  packages/reactive_forms_generator/example/lib/docs/mailing_list/mailing_list_form.dart for example of use
+  packages/reactive_forms_generator/example/lib/docs/mailing_list/mailing_list_form.dart for example
+  of use
 
 ## [0.9.8-beta]
 

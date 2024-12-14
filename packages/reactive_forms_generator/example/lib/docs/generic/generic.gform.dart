@@ -331,6 +331,18 @@ class TagsForm<T> implements FormModel<Tags<T>> {
   }
 
   @override
+  bool equalsTo(Tags<T>? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      TagsForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(Tags<T> model) onValid,
     void Function()? onNotValid,
