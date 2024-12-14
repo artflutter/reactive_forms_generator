@@ -19,7 +19,9 @@ mixin _$Tags<T> {
   @RfControl()
   List<T>? get tags => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Tags
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TagsCopyWith<T, Tags<T>> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -41,6 +43,8 @@ class _$TagsCopyWithImpl<T, $Res, $Val extends Tags<T>>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Tags
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,6 +77,8 @@ class __$$TagsImplCopyWithImpl<T, $Res>
       _$TagsImpl<T> _value, $Res Function(_$TagsImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of Tags
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,7 +128,9 @@ class _$TagsImpl<T> extends _Tags<T> {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_tags));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Tags
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TagsImplCopyWith<T, _$TagsImpl<T>> get copyWith =>
@@ -136,8 +144,11 @@ abstract class _Tags<T> extends Tags<T> {
   @override
   @RfControl()
   List<T>? get tags;
+
+  /// Create a copy of Tags
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TagsImplCopyWith<T, _$TagsImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

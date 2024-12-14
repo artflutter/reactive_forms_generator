@@ -1,4 +1,4 @@
-library reactive_forms_generator;
+library;
 
 import 'dart:async';
 

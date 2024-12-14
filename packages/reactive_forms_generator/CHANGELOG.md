@@ -1,3 +1,7 @@
+## [5.0.6]
+
+* `[...]Controls` method for fetching typed array controls
+
 ## [5.0.5]
 
 * https://github.com/artflutter/reactive_forms_generator/pull/169

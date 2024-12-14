@@ -284,6 +284,9 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
   FormArray<T> get listControl =>
       form.control(listControlPath()) as FormArray<T>;
 
+  List<FormControl<T>> get listControlControls =>
+      listControl.controls.cast<FormControl<T>>();
+
   void listSetDisabled(
     bool disabled, {
     bool updateParent = true,
