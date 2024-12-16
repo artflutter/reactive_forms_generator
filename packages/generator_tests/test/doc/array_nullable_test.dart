@@ -9,7 +9,7 @@ void main() {
   group('reactive_forms_generator', () {
     test(
       'Form with array nullable types',
-      () async {
+          () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -275,16 +275,16 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
   List<String?>? get _someListValue => someListControl?.value;
 
   List<String> get _emailListValue =>
-      emailListControl.value?.whereType<String>().toList() ?? [];
+      emailListControl.rawValue.whereType<String>().toList();
 
   List<bool?> get _fruitListValue =>
-      fruitListControl.value?.whereType<bool?>().toList() ?? [];
+      fruitListControl.rawValue.whereType<bool?>().toList();
 
   List<String?>? get _vegetablesListValue =>
-      vegetablesListControl?.value?.whereType<String?>().toList() ?? [];
+      vegetablesListControl?.rawValue.whereType<String?>().toList();
 
   List<UserMode?>? get _modeListValue =>
-      modeListControl?.value?.whereType<UserMode?>().toList() ?? [];
+      modeListControl?.rawValue.whereType<UserMode?>().toList();
 
   bool get containsSomeList {
     try {
