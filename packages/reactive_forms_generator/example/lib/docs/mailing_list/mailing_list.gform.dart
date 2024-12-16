@@ -200,7 +200,7 @@ class MailingListForm implements FormModel<MailingList> {
   String emailListControlPath() => pathBuilder(emailListControlName);
 
   List<String?> get _emailListValue =>
-      emailListControl.value?.whereType<String?>().toList() ?? [];
+      emailListControl.rawValue.whereType<String?>().toList();
 
   bool get containsEmailList {
     try {

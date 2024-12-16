@@ -203,7 +203,7 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
 
   String listControlPath() => pathBuilder(listControlName);
 
-  List<T?> get _listValue => listControl.value?.whereType<T?>().toList() ?? [];
+  List<T?> get _listValue => listControl.rawValue.whereType<T?>().toList();
 
   bool get containsList {
     try {

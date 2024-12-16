@@ -19,9 +19,9 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
     final type = (field.type as ParameterizedType).typeArguments.first;
 
     final code =
-        '${field.fieldControlName}${field.nullabilitySuffix}.value?.whereType<${type.getDisplayString(
+        '${field.fieldControlName}${field.nullabilitySuffix}.rawValue.whereType<${type.getDisplayString(
       withNullability: true,
-    )}>().toList() ?? []';
+    )}>().toList()';
 
     return methodEntity.rebuild(
       (b) => b..body = Code(code),
