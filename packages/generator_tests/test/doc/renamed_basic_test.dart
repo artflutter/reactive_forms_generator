@@ -9,7 +9,7 @@ void main() {
   group('doc', () {
     test(
       'Renamed basic',
-      () async {
+          () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -327,7 +327,12 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
     bool? disabled,
   }) =>
       emailControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void passwordValueReset(
     String value, {
@@ -337,7 +342,12 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
     bool? disabled,
   }) =>
       passwordControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;

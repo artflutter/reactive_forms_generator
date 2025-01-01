@@ -411,7 +411,12 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     bool? disabled,
   }) =>
       descriptionControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void idValueReset(
     Id<P, C>? value, {
@@ -732,7 +737,12 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
     bool? disabled,
   }) =>
       companyNameControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void nameValueReset(
     String? value, {
@@ -742,7 +752,12 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
     bool? disabled,
   }) =>
       nameControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<String>? get companyNameControl => containsCompanyName
       ? form.control(companyNameControlPath()) as FormControl<String>?

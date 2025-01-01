@@ -922,7 +922,12 @@ class DeliveryPointForm implements FormModel<DeliveryPoint> {
     bool? disabled,
   }) =>
       nameControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void addressValueReset(
     Address? value, {
@@ -1240,7 +1245,12 @@ class AddressForm implements FormModel<Address> {
     bool? disabled,
   }) =>
       streetControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void cityValueReset(
     String? value, {
@@ -1250,7 +1260,12 @@ class AddressForm implements FormModel<Address> {
     bool? disabled,
   }) =>
       cityControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<String>? get streetControl => containsStreet
       ? form.control(streetControlPath()) as FormControl<String>?
@@ -1597,7 +1612,12 @@ class ClientForm implements FormModel<Client> {
     bool? disabled,
   }) =>
       clientTypeControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void nameValueReset(
     String? value, {
@@ -1607,7 +1627,12 @@ class ClientForm implements FormModel<Client> {
     bool? disabled,
   }) =>
       nameControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void notesValueReset(
     String? value, {
@@ -1617,7 +1642,12 @@ class ClientForm implements FormModel<Client> {
     bool? disabled,
   }) =>
       notesControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<ClientType> get clientTypeControl =>
       form.control(clientTypeControlPath()) as FormControl<ClientType>;
@@ -2240,7 +2270,12 @@ class StandaloneDeliveryPointForm implements FormModel<DeliveryPoint> {
     bool? disabled,
   }) =>
       nameControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void addressValueReset(
     Address? value, {

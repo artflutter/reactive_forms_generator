@@ -1,3 +1,7 @@
+## [5.1.2]
+
+* ...ValueReset props pass through
+
 ## [5.1.1]
 
 * list control use `rawValue` instead of value

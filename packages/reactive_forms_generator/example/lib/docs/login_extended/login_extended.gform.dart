@@ -564,7 +564,12 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     bool? disabled,
   }) =>
       emailControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void passwordValueReset(
     String value, {
@@ -574,7 +579,12 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     bool? disabled,
   }) =>
       passwordControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void rememberMeValueReset(
     bool value, {
@@ -584,7 +594,12 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     bool? disabled,
   }) =>
       rememberMeControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void themeValueReset(
     String value, {
@@ -594,7 +609,12 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     bool? disabled,
   }) =>
       themeControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void modeValueReset(
     UserMode value, {
@@ -604,7 +624,12 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     bool? disabled,
   }) =>
       modeControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void timeoutValueReset(
     int value, {
@@ -614,7 +639,12 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     bool? disabled,
   }) =>
       timeoutControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void heightValueReset(
     double value, {
@@ -624,7 +654,12 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     bool? disabled,
   }) =>
       heightControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void unAnnotatedValueReset(
     String? value, {
@@ -634,7 +669,12 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     bool? disabled,
   }) =>
       unAnnotatedControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void someIntListValueReset(
     List<int> value, {
@@ -644,7 +684,12 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     bool? disabled,
   }) =>
       someIntListControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;

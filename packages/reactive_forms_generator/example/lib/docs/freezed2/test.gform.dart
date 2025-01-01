@@ -299,7 +299,12 @@ class TestForm implements FormModel<Test> {
     bool? disabled,
   }) =>
       titleControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void descriptionValueReset(
     String? value, {
@@ -309,7 +314,12 @@ class TestForm implements FormModel<Test> {
     bool? disabled,
   }) =>
       descriptionControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<String> get titleControl =>
       form.control(titleControlPath()) as FormControl<String>;

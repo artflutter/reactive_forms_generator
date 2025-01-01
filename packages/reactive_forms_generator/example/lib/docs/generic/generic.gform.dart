@@ -262,7 +262,12 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     bool? disabled,
   }) =>
       tagsControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<List<T>>? get tagsControl => containsTags
       ? form.control(tagsControlPath()) as FormControl<List<T>>?
