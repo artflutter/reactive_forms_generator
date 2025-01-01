@@ -473,7 +473,12 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     bool? disabled,
   }) =>
       someListControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void emailListValueReset(
     List<String> value, {
@@ -483,7 +488,12 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     bool? disabled,
   }) =>
       emailListControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void fruitListValueReset(
     List<bool?> value, {
@@ -493,7 +503,12 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     bool? disabled,
   }) =>
       fruitListControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void vegetablesListValueReset(
     List<String?>? value, {
@@ -503,7 +518,12 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     bool? disabled,
   }) =>
       vegetablesListControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void modeListValueReset(
     List<UserMode?>? value, {
@@ -513,7 +533,12 @@ class ArrayNullableForm implements FormModel<ArrayNullable> {
     bool? disabled,
   }) =>
       modeListControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<List<String?>>? get someListControl => containsSomeList
       ? form.control(someListControlPath()) as FormControl<List<String?>>?

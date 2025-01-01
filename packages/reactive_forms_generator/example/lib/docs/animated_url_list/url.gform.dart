@@ -578,7 +578,12 @@ class UrlEntityForm implements FormModel<UrlEntity> {
     bool? disabled,
   }) =>
       labelControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void urlValueReset(
     String value, {
@@ -588,7 +593,12 @@ class UrlEntityForm implements FormModel<UrlEntity> {
     bool? disabled,
   }) =>
       urlControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<String> get labelControl =>
       form.control(labelControlPath()) as FormControl<String>;

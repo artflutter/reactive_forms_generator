@@ -869,7 +869,12 @@ class ProfileForm implements FormModel<Profile> {
     bool? disabled,
   }) =>
       idControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void anotherIdValueReset(
     String value, {
@@ -879,7 +884,12 @@ class ProfileForm implements FormModel<Profile> {
     bool? disabled,
   }) =>
       anotherIdControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void nameValueReset(
     String value, {
@@ -889,7 +899,12 @@ class ProfileForm implements FormModel<Profile> {
     bool? disabled,
   }) =>
       nameControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void chartingOrderValueReset(
     ChartingOrderValue value, {
@@ -899,7 +914,12 @@ class ProfileForm implements FormModel<Profile> {
     bool? disabled,
   }) =>
       chartingOrderControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void numberingStandardValueReset(
     NumberingStandard value, {
@@ -909,7 +929,12 @@ class ProfileForm implements FormModel<Profile> {
     bool? disabled,
   }) =>
       numberingStandardControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void measurementTypeValueReset(
     MeasurementType value, {
@@ -919,7 +944,12 @@ class ProfileForm implements FormModel<Profile> {
     bool? disabled,
   }) =>
       measurementTypeControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void audioGuidanceValueReset(
     bool value, {
@@ -929,7 +959,12 @@ class ProfileForm implements FormModel<Profile> {
     bool? disabled,
   }) =>
       audioGuidanceControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void incidenceFilterValueReset(
     IncidenceFilter value, {
@@ -1618,7 +1653,12 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
     bool? disabled,
   }) =>
       isMobilityEnabledControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void isFurcationEnabledValueReset(
     bool value, {
@@ -1628,7 +1668,12 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
     bool? disabled,
   }) =>
       isFurcationEnabledControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void isBleedingEnabledValueReset(
     bool value, {
@@ -1638,7 +1683,12 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
     bool? disabled,
   }) =>
       isBleedingEnabledControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void isSuppurationEnabledValueReset(
     bool value, {
@@ -1648,7 +1698,12 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
     bool? disabled,
   }) =>
       isSuppurationEnabledControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void isCalculusEnabledValueReset(
     bool value, {
@@ -1658,7 +1713,12 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
     bool? disabled,
   }) =>
       isCalculusEnabledControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void isPlaqueEnabledValueReset(
     bool value, {
@@ -1668,7 +1728,12 @@ class IncidenceFilterForm implements FormModel<IncidenceFilter> {
     bool? disabled,
   }) =>
       isPlaqueEnabledControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<bool> get isMobilityEnabledControl =>
       form.control(isMobilityEnabledControlPath()) as FormControl<bool>;
@@ -2042,7 +2107,12 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
     bool? disabled,
   }) =>
       isEnabledControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void valueValueReset(
     int value, {
@@ -2052,7 +2122,12 @@ class ThresholdSettingForm implements FormModel<ThresholdSetting> {
     bool? disabled,
   }) =>
       valueControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<bool> get isEnabledControl =>
       form.control(isEnabledControlPath()) as FormControl<bool>;
@@ -2309,7 +2384,12 @@ class TimerSettingForm implements FormModel<TimerSetting> {
     bool? disabled,
   }) =>
       isEnabledControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void valueValueReset(
     int value, {
@@ -2319,7 +2399,12 @@ class TimerSettingForm implements FormModel<TimerSetting> {
     bool? disabled,
   }) =>
       valueControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<bool> get isEnabledControl =>
       form.control(isEnabledControlPath()) as FormControl<bool>;

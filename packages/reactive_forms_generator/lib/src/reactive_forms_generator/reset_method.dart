@@ -43,7 +43,10 @@ class ResetMethod extends ReactiveFormGeneratorMethod {
           '''${field.fieldControlName}${field.nullabilitySuffix}.reset(
                 value: value, 
                 updateParent: updateParent, 
-                emitEvent:emitEvent)
+                emitEvent: emitEvent,
+                removeFocus: removeFocus,
+                disabled: disabled,
+              )
             ''',
         ),
     );

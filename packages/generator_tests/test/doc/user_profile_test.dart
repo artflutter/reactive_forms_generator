@@ -9,7 +9,7 @@ void main() {
   group('doc', () {
     test(
       'User profile',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -488,7 +488,12 @@ class UserProfileForm implements FormModel<UserProfile> {
     bool? disabled,
   }) =>
       idControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void firstNameValueReset(
     String value, {
@@ -498,7 +503,12 @@ class UserProfileForm implements FormModel<UserProfile> {
     bool? disabled,
   }) =>
       firstNameControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void lastNameValueReset(
     String value, {
@@ -508,7 +518,12 @@ class UserProfileForm implements FormModel<UserProfile> {
     bool? disabled,
   }) =>
       lastNameControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void homeValueReset(
     Address value, {
@@ -987,7 +1002,12 @@ class AddressForm implements FormModel<Address> {
     bool? disabled,
   }) =>
       streetControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void cityValueReset(
     String? value, {
@@ -997,7 +1017,12 @@ class AddressForm implements FormModel<Address> {
     bool? disabled,
   }) =>
       cityControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void zipValueReset(
     String? value, {
@@ -1007,7 +1032,12 @@ class AddressForm implements FormModel<Address> {
     bool? disabled,
   }) =>
       zipControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<String>? get streetControl => containsStreet
       ? form.control(streetControlPath()) as FormControl<String>?

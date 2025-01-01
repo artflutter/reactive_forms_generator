@@ -520,7 +520,12 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     bool? disabled,
   }) =>
       genderControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void idValueReset(
     String? value, {
@@ -530,7 +535,12 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     bool? disabled,
   }) =>
       idControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void nameValueReset(
     String? value, {
@@ -540,7 +550,12 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     bool? disabled,
   }) =>
       nameControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void logoImageValueReset(
     String? value, {
@@ -550,7 +565,12 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     bool? disabled,
   }) =>
       logoImageControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void yearValueReset(
     double? value, {
@@ -560,7 +580,12 @@ class FreezedClassForm implements FormModel<FreezedClass> {
     bool? disabled,
   }) =>
       yearControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<String>? get genderControl => containsGender
       ? form.control(genderControlPath()) as FormControl<String>?

@@ -241,7 +241,12 @@ class MailingListForm implements FormModel<MailingList> {
     bool? disabled,
   }) =>
       emailListControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormArray<String> get emailListControl =>
       form.control(emailListControlPath()) as FormArray<String>;

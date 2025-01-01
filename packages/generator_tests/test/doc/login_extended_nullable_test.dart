@@ -705,7 +705,12 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     bool? disabled,
   }) =>
       emailControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void passwordValueReset(
     String? value, {
@@ -715,7 +720,12 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     bool? disabled,
   }) =>
       passwordControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void rememberMeValueReset(
     bool? value, {
@@ -725,7 +735,12 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     bool? disabled,
   }) =>
       rememberMeControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void themeValueReset(
     String? value, {
@@ -735,7 +750,12 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     bool? disabled,
   }) =>
       themeControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void modeValueReset(
     UserMode? value, {
@@ -745,7 +765,12 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     bool? disabled,
   }) =>
       modeControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void timeoutValueReset(
     int? value, {
@@ -755,7 +780,12 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     bool? disabled,
   }) =>
       timeoutControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void heightValueReset(
     double? value, {
@@ -765,7 +795,12 @@ class LoginExtendedNullableForm implements FormModel<LoginExtendedNullable> {
     bool? disabled,
   }) =>
       heightControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<String>? get emailControl => containsEmail
       ? form.control(emailControlPath()) as FormControl<String>?

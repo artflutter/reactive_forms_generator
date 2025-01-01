@@ -244,7 +244,12 @@ class StatusListForm<T extends Enum> implements FormModel<StatusList<T>> {
     bool? disabled,
   }) =>
       listControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormArray<T> get listControl =>
       form.control(listControlPath()) as FormArray<T>;

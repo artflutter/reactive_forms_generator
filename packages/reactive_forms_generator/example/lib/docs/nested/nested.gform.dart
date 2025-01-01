@@ -237,7 +237,12 @@ class SubGroupForm implements FormModel<SubGroup> {
     bool? disabled,
   }) =>
       idControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
@@ -844,7 +849,12 @@ class GroupForm implements FormModel<Group> {
     bool? disabled,
   }) =>
       idControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void subGroupListValueReset(
     List<SubGroup> value, {
