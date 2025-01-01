@@ -47,6 +47,30 @@ extension ClassDeclarationImplExt on ClassDeclarationImpl {
   }
 }
 
+extension ListElementAnnotationImplExt on List<ElementAnnotationImpl> {
+  bool get hasRfGroupAnnotation {
+    return any((e) => e.annotationAst.name.toString() == 'RfGroup');
+  }
+
+// bool get hasRfAnnotation {
+//   return metadata.any((e) => e.name.toString() == 'Rf');
+// }
+}
+
+extension NodeListImplAnnotationImplExt on NodeListImpl<AnnotationImpl> {
+  bool get hasRfGroupAnnotation {
+    return any((e) => e.name.toString() == 'RfGroup');
+  }
+
+  bool get hasRfArrayAnnotation {
+    return any((e) => e.name.toString() == 'RfArray');
+  }
+
+  bool get hasRfAnnotation {
+    return any((e) => e.name.toString() == 'Rf');
+  }
+}
+
 extension ElementRfExt on Element {
   bool get hasRfGroupAnnotation {
     return formGroupChecker.hasAnnotationOfExact(this);

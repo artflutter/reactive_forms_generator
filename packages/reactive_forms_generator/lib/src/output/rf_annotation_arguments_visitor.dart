@@ -4,7 +4,10 @@ import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/dart/ast/token.dart';
 import 'package:analyzer/src/dart/ast/token.dart';
 import 'package:analyzer/src/dart/ast/utilities.dart';
+import 'package:reactive_forms_generator/reactive_forms_generator.dart';
 import 'package:reactive_forms_generator/src/output/extensions.dart';
+import 'package:reactive_forms_generator/src/types.dart';
+import 'package:analyzer/src/dart/element/element.dart';
 
 class RfAnnotationArgumentsVisitor extends RecursiveAstVisitor<dynamic> {
   final arguments = <String, String>{};
@@ -100,7 +103,38 @@ class ClassRenameVisitor extends RecursiveAstVisitor<void> {
                 ),
                 period: e.period,
                 name: e.name,
-                parameters: e.parameters,
+                parameters: FormalParameterListImpl(
+                  leftParenthesis: e.parameters.leftParenthesis,
+                  parameters: e.parameters.parameters.map((e) {
+                    print(e);
+
+                    return switch (e) {
+                      DefaultFormalParameterImpl() =>
+                        DefaultFormalParameterImpl(
+                          parameter: switch (e.parameter) {
+                            FieldFormalParameterImpl() => e.parameter,
+                            FunctionTypedFormalParameterImpl() => e.parameter,
+                            SimpleFormalParameterImpl() => e.parameter,
+                            // SimpleFormalParameterImpl() => SimpleFormalParameterImpl(
+                            //   type: (e.parameter as SimpleFormalParameterImpl).type
+                            // ),
+                            SuperFormalParameterImpl() => e.parameter,
+                          },
+                          kind: e.kind,
+                          separator: e.separator,
+                          defaultValue: e.defaultValue,
+                        ),
+                      FieldFormalParameterImpl() => e,
+                      FunctionTypedFormalParameterImpl() => e,
+                      SimpleFormalParameterImpl() => e,
+                      SuperFormalParameterImpl() => e,
+                    };
+                    return e;
+                  }).toList(),
+                  leftDelimiter: e.parameters.leftDelimiter,
+                  rightDelimiter: e.parameters.rightDelimiter,
+                  rightParenthesis: e.parameters.rightParenthesis,
+                ),
                 separator: e.separator,
                 initializers: e.initializers,
                 redirectedConstructor: e.redirectedConstructor != null
@@ -213,6 +247,49 @@ class ClassRenameVisitor extends RecursiveAstVisitor<void> {
       NodeReplacer.replace(node, newNode);
     }
     super.visitClassDeclaration(node);
+  }
+
+  // @override
+  // void visitSimpleFormalParameter(SimpleFormalParameter node) {
+  //   print(node);
+  //
+  //   if (node is SimpleFormalParameterImpl) {
+  //     if (node.metadata.hasRfGroupAnnotation) {}
+  //     if (node.metadata.hasRfArrayAnnotation) {
+  //       final type = node.type;
+  //       final x = switch(type) {
+  //         null => type,
+  //         GenericFunctionTypeImpl() => type,
+  //         NamedTypeImpl() => type.typeArguments NamedTypeImpl(),
+  //         RecordTypeAnnotationImpl() => type,
+  //       };
+  //     }
+  //   }
+  //   node.visitChildren(this);
+  // }
+
+  void visitNamedType(NamedType node) {
+    print(node);
+    final element = node.element;
+    if (node is NamedTypeImpl &&
+        element is ClassElementImpl &&
+        element.metadata.hasRfGroupAnnotation) {
+      final x = element.metadata;
+
+      NodeReplacer.replace(
+          node,
+          NamedTypeImpl(
+            importPrefix: node.importPrefix,
+            name2: StringToken(
+              TokenType.STRING,
+              '${node.name2}Output',
+              0,
+            ),
+            typeArguments: node.typeArguments,
+            question: node.question,
+          ));
+    }
+    node.visitChildren(this);
   }
 
   @override
