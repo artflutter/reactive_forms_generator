@@ -1,3 +1,7 @@
+## [6.0.0-beta.18]
+
+* ...ValueReset props pass through
+
 ## [6.0.0-beta.17]
 
 * list control use `rawValue` instead of value

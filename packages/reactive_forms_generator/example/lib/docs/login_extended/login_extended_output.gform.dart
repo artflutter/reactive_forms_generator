@@ -626,7 +626,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       emailControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void passwordValueReset(
     String value, {
@@ -636,7 +641,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       passwordControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void rememberMeValueReset(
     bool value, {
@@ -646,7 +656,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       rememberMeControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void themeValueReset(
     String value, {
@@ -656,7 +671,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       themeControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void modeValueReset(
     UserMode value, {
@@ -666,7 +686,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       modeControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void timeoutValueReset(
     int value, {
@@ -676,7 +701,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       timeoutControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void heightValueReset(
     double value, {
@@ -686,7 +716,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       heightControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void unAnnotatedValueReset(
     String? value, {
@@ -696,7 +731,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       unAnnotatedControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void someIntListValueReset(
     List<int> value, {
@@ -706,7 +746,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       someIntListControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
