@@ -9,7 +9,7 @@ void main() {
   group('doc', () {
     test(
       'Login',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -192,6 +192,8 @@ class LoginFormBuilder extends StatefulWidget {
 class _LoginFormBuilderState extends State<LoginFormBuilder> {
   late LoginForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = LoginForm(LoginForm.formElements(widget.model), null);
@@ -202,7 +204,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
-    _logLoginForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logLoginForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -245,6 +247,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -267,7 +270,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
   }
 }
 
-final _logLoginForm = Logger('LoginForm');
+final _logLoginForm = Logger.detached('LoginForm');
 
 class LoginForm implements FormModel<Login, Login> {
   LoginForm(
@@ -572,8 +575,12 @@ class ReactiveLoginFormArrayBuilder<ReactiveLoginFormArrayBuilderT>
           BuildContext context, List<Widget> itemList, LoginForm formModel)?
       builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveLoginFormArrayBuilderT? item, LoginForm formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveLoginFormArrayBuilderT> control,
+      ReactiveLoginFormArrayBuilderT? item,
+      LoginForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -595,6 +602,8 @@ class ReactiveLoginFormArrayBuilder<ReactiveLoginFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveLoginFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

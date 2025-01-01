@@ -1,3 +1,7 @@
+## [6.0.0-beta.7]
+
+* output `false` by default
+
 ## [6.0.0-beta.6]
 
 * export `DeepCollectionEquality`

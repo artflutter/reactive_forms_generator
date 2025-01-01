@@ -217,6 +217,8 @@ class GroupFormBuilder extends StatefulWidget {
 class _GroupFormBuilderState extends State<GroupFormBuilder> {
   late GroupForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = GroupForm(GroupForm.formElements(widget.model), null);
@@ -227,7 +229,7 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
-    _logGroupForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logGroupForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -270,6 +272,7 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -292,7 +295,7 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
   }
 }
 
-final _logGroupForm = Logger('GroupForm');
+final _logGroupForm = Logger.detached('GroupForm');
 
 class GroupForm implements FormModel<Group, Group> {
   GroupForm(
@@ -824,7 +827,7 @@ class GroupForm implements FormModel<Group, Group> {
           disabled: false);
 }
 
-final _logPersonalForm = Logger('PersonalForm');
+final _logPersonalForm = Logger.detached('PersonalForm');
 
 class PersonalForm implements FormModel<Personal, Personal> {
   PersonalForm(
@@ -1160,7 +1163,7 @@ class PersonalForm implements FormModel<Personal, Personal> {
           disabled: false);
 }
 
-final _logPhoneForm = Logger('PhoneForm');
+final _logPhoneForm = Logger.detached('PhoneForm');
 
 class PhoneForm implements FormModel<Phone, Phone> {
   PhoneForm(
@@ -1496,7 +1499,7 @@ class PhoneForm implements FormModel<Phone, Phone> {
           disabled: false);
 }
 
-final _logAddressForm = Logger('AddressForm');
+final _logAddressForm = Logger.detached('AddressForm');
 
 class AddressForm implements FormModel<Address, Address> {
   AddressForm(
@@ -1960,8 +1963,12 @@ class ReactiveGroupFormArrayBuilder<ReactiveGroupFormArrayBuilderT>
           BuildContext context, List<Widget> itemList, GroupForm formModel)?
       builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveGroupFormArrayBuilderT? item, GroupForm formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveGroupFormArrayBuilderT> control,
+      ReactiveGroupFormArrayBuilderT? item,
+      GroupForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1983,6 +1990,8 @@ class ReactiveGroupFormArrayBuilder<ReactiveGroupFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveGroupFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

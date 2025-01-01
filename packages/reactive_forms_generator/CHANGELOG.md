@@ -1,3 +1,11 @@
+## [6.0.0-beta.20]
+
+* bugfixes
+
+## [6.0.0-beta.19]
+
+* bugfixes
+
 ## [6.0.0-beta.18]
 
 * ...ValueReset props pass through

@@ -191,6 +191,8 @@ class FreezedClassOFormBuilder extends StatefulWidget {
 class _FreezedClassOFormBuilderState extends State<FreezedClassOFormBuilder> {
   late FreezedClassOForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -202,7 +204,7 @@ class _FreezedClassOFormBuilderState extends State<FreezedClassOFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
-    _logFreezedClassOForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logFreezedClassOForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -245,6 +247,7 @@ class _FreezedClassOFormBuilderState extends State<FreezedClassOFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -267,7 +270,7 @@ class _FreezedClassOFormBuilderState extends State<FreezedClassOFormBuilder> {
   }
 }
 
-final _logFreezedClassOForm = Logger('FreezedClassOForm');
+final _logFreezedClassOForm = Logger.detached('FreezedClassOForm');
 
 class FreezedClassOForm
     implements FormModel<FreezedClassO, FreezedClassOOutput> {
@@ -731,7 +734,12 @@ class FreezedClassOForm
     bool? disabled,
   }) =>
       genderControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void genderRValueReset(
     String? value, {
@@ -741,7 +749,12 @@ class FreezedClassOForm
     bool? disabled,
   }) =>
       genderRControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void idValueReset(
     String? value, {
@@ -751,7 +764,12 @@ class FreezedClassOForm
     bool? disabled,
   }) =>
       idControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void idRValueReset(
     String? value, {
@@ -761,7 +779,12 @@ class FreezedClassOForm
     bool? disabled,
   }) =>
       idRControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void nameValueReset(
     String? value, {
@@ -771,7 +794,12 @@ class FreezedClassOForm
     bool? disabled,
   }) =>
       nameControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void logoImageValueReset(
     String? value, {
@@ -781,7 +809,12 @@ class FreezedClassOForm
     bool? disabled,
   }) =>
       logoImageControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void yearValueReset(
     double? value, {
@@ -791,7 +824,12 @@ class FreezedClassOForm
     bool? disabled,
   }) =>
       yearControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<String>? get genderControl => containsGender
       ? form.control(genderControlPath()) as FormControl<String>?
@@ -996,6 +1034,18 @@ class FreezedClassOForm
   }
 
   @override
+  bool equalsTo(FreezedClassO? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      FreezedClassOForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(FreezedClassOOutput model) onValid,
     void Function()? onNotValid,
@@ -1133,6 +1183,7 @@ class ReactiveFreezedClassOFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveFreezedClassOFormArrayBuilderT> control,
       ReactiveFreezedClassOFormArrayBuilderT? item,
       FreezedClassOForm formModel) itemBuilder;
 
@@ -1156,6 +1207,8 @@ class ReactiveFreezedClassOFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveFreezedClassOFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

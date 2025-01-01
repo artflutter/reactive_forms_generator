@@ -1,21 +1,22 @@
-import 'package:example/docs/animated_url_list/url.dart';
+import 'package:example/docs/animated_url_list/animated_url_list.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class UrlListForm extends StatefulWidget {
-  const UrlListForm({super.key});
+class AnimatedUrlListFormWidget extends StatefulWidget {
+  const AnimatedUrlListFormWidget({super.key});
 
   @override
-  State<UrlListForm> createState() => _UrlListFormState();
+  State<AnimatedUrlListFormWidget> createState() =>
+      _AnimatedUrlListFormWidgetState();
 }
 
-class _UrlListFormState extends State<UrlListForm> {
-  Url? _url;
+class _AnimatedUrlListFormWidgetState extends State<AnimatedUrlListFormWidget> {
+  AnimatedUrlList? _url;
   GlobalKey<AnimatedListState> _animatedListKeyForm = GlobalKey();
 
   void _handleUrlRemove(
-    UrlForm formModel,
+    AnimatedUrlListForm formModel,
     int i,
     FormControl<String> labelControl,
     FormControl<String> urlControl,
@@ -40,7 +41,7 @@ class _UrlListFormState extends State<UrlListForm> {
   }
 
   Widget _buildUrlListItem(
-    UrlForm formModel,
+    AnimatedUrlListForm formModel,
     int i,
     FormControl<String> labelControl,
     FormControl<String> urlControl,
@@ -61,7 +62,7 @@ class _UrlListFormState extends State<UrlListForm> {
     );
   }
 
-  void _handleUrlAdd(UrlForm formModel) {
+  void _handleUrlAdd(AnimatedUrlListForm formModel) {
     formModel.addUrlListItem(UrlEntity(label: '', url: ''));
     _animatedListKeyForm.currentState?.insertItem(
       (formModel.urlListControl.value ?? []).length - 1,
@@ -74,14 +75,15 @@ class _UrlListFormState extends State<UrlListForm> {
       title: const Text('URL list'),
       body: Container(
         constraints: const BoxConstraints(maxHeight: 500),
-        child: UrlFormBuilder(
+        child: AnimatedUrlListFormBuilder(
           model: _url,
           builder: (context, formModel, child) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
-                  child: ReactiveUrlFormFormGroupArrayBuilder<UrlEntityForm>(
+                  child: ReactiveAnimatedUrlListFormFormGroupArrayBuilder<
+                      UrlEntityForm>(
                     getExtended: (formModel) =>
                         formModel.urlListExtendedControl,
                     builder: (context, itemList, formModel) {
@@ -128,13 +130,13 @@ class _UrlListFormState extends State<UrlListForm> {
                     },
                   ),
                 ),
-                ReactiveUrlFormConsumer(
+                ReactiveAnimatedUrlListFormConsumer(
                   builder: (context, formModel, child) {
                     return ElevatedButton(
                       onPressed: () {
                         setState(() {
                           _animatedListKeyForm = GlobalKey();
-                          _url = Url(
+                          _url = AnimatedUrlList(
                             urlList: [
                               UrlEntity(label: 'l1', url: 'https://url1.com'),
                               UrlEntity(label: 'l2', url: 'https://url2.com'),
@@ -146,13 +148,13 @@ class _UrlListFormState extends State<UrlListForm> {
                     );
                   },
                 ),
-                ReactiveUrlFormConsumer(
+                ReactiveAnimatedUrlListFormConsumer(
                   builder: (context, formModel, child) {
                     return ElevatedButton(
                       onPressed: () {
                         setState(() {
                           _animatedListKeyForm = GlobalKey();
-                          _url = Url(
+                          _url = AnimatedUrlList(
                             urlList: [
                               UrlEntity(label: 'l1', url: 'https://url1.com'),
                               UrlEntity(label: 'l2', url: 'https://url2.com'),
@@ -165,7 +167,7 @@ class _UrlListFormState extends State<UrlListForm> {
                     );
                   },
                 ),
-                ReactiveUrlFormConsumer(
+                ReactiveAnimatedUrlListFormConsumer(
                   builder: (context, formModel, child) {
                     return ElevatedButton(
                       onPressed: formModel.form.valid ? () {} : null,

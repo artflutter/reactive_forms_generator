@@ -7,8 +7,11 @@ import 'package:code_builder/code_builder.dart';
 import 'package:analyzer/src/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/output/x.dart';
+
+// import 'package:reactive_forms_generator/src/output/x.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 import 'package:reactive_forms_generator/src/types.dart';
+// import 'package:analyzer/src/dart/element/display_string_builder.dart';
 
 class FieldValueMethod extends ReactiveFormGeneratorMethod {
   FieldValueMethod(super.field, super.output);
@@ -98,7 +101,9 @@ extension Pare on ParameterElement {
       return type.getDisplayString(withNullability: false);
     }
 
-    var builder = ElementDisplayStringBuilder2(withNullability: true);
+    var builder = ElementDisplayStringBuilder2(
+      withNullability: true,
+    );
     (type as TypeImpl).appendTo(builder);
     return builder.toString();
   }

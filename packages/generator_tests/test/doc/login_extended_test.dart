@@ -244,6 +244,8 @@ class LoginExtendedFormBuilder extends StatefulWidget {
 class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
   late LoginExtendedForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -255,7 +257,7 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
-    _logLoginExtendedForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logLoginExtendedForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -298,6 +300,7 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -320,7 +323,7 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
   }
 }
 
-final _logLoginExtendedForm = Logger('LoginExtendedForm');
+final _logLoginExtendedForm = Logger.detached('LoginExtendedForm');
 
 class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
   LoginExtendedForm(
@@ -1223,6 +1226,7 @@ class ReactiveLoginExtendedFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveLoginExtendedFormArrayBuilderT> control,
       ReactiveLoginExtendedFormArrayBuilderT? item,
       LoginExtendedForm formModel) itemBuilder;
 
@@ -1246,6 +1250,8 @@ class ReactiveLoginExtendedFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveLoginExtendedFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

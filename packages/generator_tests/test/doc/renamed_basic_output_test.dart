@@ -21,7 +21,7 @@ void main() {
             
             part '$fileName.gform.dart';
             
-            @Rf(name: 'SomeWiredName')
+            @Rf(output: true, name: 'SomeWiredName')
             class RenamedBasicO {
               final String? email;
             
@@ -185,6 +185,8 @@ class SomeWiredNameFormBuilder extends StatefulWidget {
 class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
   late SomeWiredNameForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -196,7 +198,7 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
-    _logSomeWiredNameForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logSomeWiredNameForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -239,6 +241,7 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -261,7 +264,7 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
   }
 }
 
-final _logSomeWiredNameForm = Logger('SomeWiredNameForm');
+final _logSomeWiredNameForm = Logger.detached('SomeWiredNameForm');
 
 class SomeWiredNameForm
     implements FormModel<RenamedBasicO, RenamedBasicOOutput> {
@@ -410,7 +413,12 @@ class SomeWiredNameForm
     bool? disabled,
   }) =>
       emailControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void passwordValueReset(
     String? value, {
@@ -420,7 +428,12 @@ class SomeWiredNameForm
     bool? disabled,
   }) =>
       passwordControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
@@ -511,6 +524,18 @@ class SomeWiredNameForm
   }
 
   @override
+  bool equalsTo(RenamedBasicO? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      SomeWiredNameForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(RenamedBasicOOutput model) onValid,
     void Function()? onNotValid,
@@ -574,7 +599,7 @@ class SomeWiredNameForm
           disabled: false);
 }
 
-@Rf(name: 'SomeWiredName')
+@Rf(output: true, name: 'SomeWiredName')
 class RenamedBasicOOutput {
   final String email;
   final String password;
@@ -606,6 +631,7 @@ class ReactiveSomeWiredNameFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveSomeWiredNameFormArrayBuilderT> control,
       ReactiveSomeWiredNameFormArrayBuilderT? item,
       SomeWiredNameForm formModel) itemBuilder;
 
@@ -629,6 +655,8 @@ class ReactiveSomeWiredNameFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

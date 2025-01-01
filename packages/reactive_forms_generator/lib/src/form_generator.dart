@@ -663,13 +663,6 @@ class FormGenerator {
     final renamedClass = ClassRenameVisitor();
     ast.accept(renamedClass);
 
-    final rfParameterVisitor = RfParameterVisitor();
-    ast.accept(rfParameterVisitor);
-    replaceR(
-      rfParameterVisitor.fieldDeclaration,
-      rfParameterVisitor.fieldFormalParameter,
-    );
-
     final x = ast.declarations;
 
     return x
@@ -677,6 +670,16 @@ class FormGenerator {
             e is u.ClassDeclarationImpl &&
             (e.hasRfAnnotation || e.hasRfGroupAnnotation))
         .map((e) {
+      final rfParameterVisitor2 = RfParameterVisitor2();
+      e.accept(rfParameterVisitor2);
+
+      final rfParameterVisitor = RfParameterVisitor();
+      e.accept(rfParameterVisitor);
+      replaceR(
+        rfParameterVisitor.fieldDeclaration,
+        rfParameterVisitor.fieldFormalParameter,
+      );
+
       return Code(e.toSource());
     }).toList();
   }

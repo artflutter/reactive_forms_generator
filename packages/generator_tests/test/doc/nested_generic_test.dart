@@ -16,50 +16,50 @@ void main() {
           import 'package:freezed_annotation/freezed_annotation.dart';
           import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
-                      part '$fileName.freezed.dart';
-                      part '$fileName.gform.dart';
+          part '$fileName.freezed.dart';
+          part '$fileName.gform.dart';
 
           @freezed
-          @Rf()
-          class ProductDetails<P extends Product, C extends Cart> with _\$ProductDetails<P, C> {
+          @Rf(output: false)
+          class ProductDetails<P extends Product, C extends Cart>
+              with _\$ProductDetails<P, C> {
             factory ProductDetails({
               @RfControl() String? description,
-              @Rf() Id<P, C>? id,
+              @Rf(output: false) Id<P, C>? id,
             }) = _ProductDetails;
-
+          
             ProductDetails._();
           }
-
+          
           @freezed
-          @Rf()
+          @Rf(output: false)
           @RfGroup()
-          class Id<P extends Product, C extends Cart> 
-              with _\$Id<P, C> {
+          class Id<P extends Product, C extends Cart> with _\$Id<P, C> {
             factory Id({
               @RfControl() String? companyName,
               @RfControl() String? name,
             }) = _Id;
-
+          
             Id._();
           }
-
+          
           @freezed
           class Product with _\$Product {
             const factory Product({
-              String? companyName, 
+              String? companyName,
               String? name,
             }) = _Product;
-
+          
             const Product._();
           }
-
+          
           @freezed
           class Cart with _\$Cart {
             const factory Cart({
-              Product? product, 
+              Product? product,
               String? description,
             }) = _Cart;
-
+          
             const Cart._();
           }
           ''',
@@ -73,7 +73,7 @@ void main() {
 const generatedFile = r'''// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'product.dart';
 
@@ -216,6 +216,8 @@ class _ProductDetailsFormBuilderState<P extends Product, C extends Cart>
     extends State<ProductDetailsFormBuilder<P, C>> {
   late ProductDetailsForm<P, C> _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = ProductDetailsForm<P, C>(
@@ -226,6 +228,34 @@ class _ProductDetailsFormBuilderState<P extends Product, C extends Cart>
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logProductDetailsForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -242,6 +272,7 @@ class _ProductDetailsFormBuilderState<P extends Product, C extends Cart>
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -264,8 +295,10 @@ class _ProductDetailsFormBuilderState<P extends Product, C extends Cart>
   }
 }
 
+final _logProductDetailsForm = Logger.detached('ProductDetailsForm<P, C>');
+
 class ProductDetailsForm<P extends Product, C extends Cart>
-    implements FormModel<ProductDetails<P, C>> {
+    implements FormModel<ProductDetails<P, C>, ProductDetails<P, C>> {
   ProductDetailsForm(
     this.form,
     this.path,
@@ -480,9 +513,11 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'ProductDetailsForm<P, C>'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logProductDetailsForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return ProductDetails<P, C>(description: _descriptionValue, id: _idValue);
   }
@@ -542,6 +577,8 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logProductDetailsForm.info('Errors');
+      _logProductDetailsForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -591,7 +628,10 @@ class ProductDetailsForm<P extends Product, C extends Cart>
           disabled: false);
 }
 
-class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
+final _logIdForm = Logger.detached('IdForm<P, C>');
+
+class IdForm<P extends Product, C extends Cart>
+    implements FormModel<Id<P, C>, Id<P, C>> {
   IdForm(
     this.form,
     this.path,
@@ -808,9 +848,11 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'IdForm<P, C>'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logIdForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Id<P, C>(companyName: _companyNameValue, name: _nameValue);
   }
@@ -868,6 +910,8 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logIdForm.info('Errors');
+      _logIdForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -948,6 +992,7 @@ class ReactiveProductDetailsFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveProductDetailsFormArrayBuilderT> control,
       ReactiveProductDetailsFormArrayBuilderT? item,
       ProductDetailsForm<P, C> formModel) itemBuilder;
 
@@ -971,6 +1016,8 @@ class ReactiveProductDetailsFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveProductDetailsFormArrayBuilderT>,
                   item,
                   formModel,
                 ),
@@ -1188,6 +1235,8 @@ class _IdFormBuilderState<P extends Product, C extends Cart>
     extends State<IdFormBuilder<P, C>> {
   late IdForm<P, C> _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = IdForm<P, C>(IdForm.formElements<P, C>(widget.model), null);
@@ -1197,6 +1246,34 @@ class _IdFormBuilderState<P extends Product, C extends Cart>
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logIdForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -1213,6 +1290,7 @@ class _IdFormBuilderState<P extends Product, C extends Cart>
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -1256,8 +1334,12 @@ class ReactiveIdFormArrayBuilder<ReactiveIdFormArrayBuilderT, P extends Product,
           BuildContext context, List<Widget> itemList, IdForm<P, C> formModel)?
       builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveIdFormArrayBuilderT? item, IdForm<P, C> formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveIdFormArrayBuilderT> control,
+      ReactiveIdFormArrayBuilderT? item,
+      IdForm<P, C> formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1279,6 +1361,8 @@ class ReactiveIdFormArrayBuilder<ReactiveIdFormArrayBuilderT, P extends Product,
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveIdFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

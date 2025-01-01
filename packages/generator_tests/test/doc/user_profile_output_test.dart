@@ -20,7 +20,7 @@ void main() {
             
             part '$fileName.gform.dart';
             
-            @Rf()
+            @Rf(output: true)
             class UserProfileO {
               final String id;
             
@@ -211,6 +211,8 @@ class UserProfileOFormBuilder extends StatefulWidget {
 class _UserProfileOFormBuilderState extends State<UserProfileOFormBuilder> {
   late UserProfileOForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -222,7 +224,7 @@ class _UserProfileOFormBuilderState extends State<UserProfileOFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
-    _logUserProfileOForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logUserProfileOForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -265,6 +267,7 @@ class _UserProfileOFormBuilderState extends State<UserProfileOFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -287,7 +290,7 @@ class _UserProfileOFormBuilderState extends State<UserProfileOFormBuilder> {
   }
 }
 
-final _logUserProfileOForm = Logger('UserProfileOForm');
+final _logUserProfileOForm = Logger.detached('UserProfileOForm');
 
 class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
   UserProfileOForm(
@@ -572,7 +575,12 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
     bool? disabled,
   }) =>
       idControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void firstNameValueReset(
     String? value, {
@@ -582,7 +590,12 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
     bool? disabled,
   }) =>
       firstNameControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void lastNameValueReset(
     String? value, {
@@ -592,7 +605,12 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
     bool? disabled,
   }) =>
       lastNameControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void homeValueReset(
     AddressO value, {
@@ -782,6 +800,18 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
   }
 
   @override
+  bool equalsTo(UserProfileO? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      UserProfileOForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(UserProfileOOutput model) onValid,
     void Function()? onNotValid,
@@ -854,7 +884,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
           disabled: false);
 }
 
-final _logAddressOForm = Logger('AddressOForm');
+final _logAddressOForm = Logger.detached('AddressOForm');
 
 class AddressOForm implements FormModel<AddressO, AddressOOutput> {
   AddressOForm(
@@ -1065,7 +1095,12 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     bool? disabled,
   }) =>
       streetControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void cityValueReset(
     String? value, {
@@ -1075,7 +1110,12 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     bool? disabled,
   }) =>
       cityControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void zipValueReset(
     String? value, {
@@ -1085,7 +1125,12 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     bool? disabled,
   }) =>
       zipControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<String>? get streetControl => containsStreet
       ? form.control(streetControlPath()) as FormControl<String>?
@@ -1200,6 +1245,18 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
   }
 
   @override
+  bool equalsTo(AddressO? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      AddressOForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(AddressOOutput model) onValid,
     void Function()? onNotValid,
@@ -1270,7 +1327,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
           disabled: false);
 }
 
-@Rf()
+@Rf(output: true)
 class UserProfileOOutput {
   final String id;
   final String firstName;
@@ -1319,6 +1376,7 @@ class ReactiveUserProfileOFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveUserProfileOFormArrayBuilderT> control,
       ReactiveUserProfileOFormArrayBuilderT? item,
       UserProfileOForm formModel) itemBuilder;
 
@@ -1342,6 +1400,8 @@ class ReactiveUserProfileOFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveUserProfileOFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

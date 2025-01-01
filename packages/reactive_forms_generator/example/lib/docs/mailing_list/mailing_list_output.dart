@@ -3,7 +3,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'mailing_list_output.gform.dart';
 
-@Rf()
+@Rf(output: true)
 class MailingListO {
   final List<String?> emailList;
 

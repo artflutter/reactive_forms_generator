@@ -40,7 +40,7 @@ void main() {
             
             enum UserMode { user, admin }
           
-            @Rf()
+            @Rf(output: true)
             @RfGroup(
               validators: [AllFieldsRequired()],
             )
@@ -245,6 +245,8 @@ class LoginExtendedOFormBuilder extends StatefulWidget {
 class _LoginExtendedOFormBuilderState extends State<LoginExtendedOFormBuilder> {
   late LoginExtendedOForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -256,7 +258,7 @@ class _LoginExtendedOFormBuilderState extends State<LoginExtendedOFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
-    _logLoginExtendedOForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logLoginExtendedOForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -299,6 +301,7 @@ class _LoginExtendedOFormBuilderState extends State<LoginExtendedOFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -321,7 +324,7 @@ class _LoginExtendedOFormBuilderState extends State<LoginExtendedOFormBuilder> {
   }
 }
 
-final _logLoginExtendedOForm = Logger('LoginExtendedOForm');
+final _logLoginExtendedOForm = Logger.detached('LoginExtendedOForm');
 
 class LoginExtendedOForm
     implements FormModel<LoginExtendedO, LoginExtendedOOutput> {
@@ -729,7 +732,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       emailControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void passwordValueReset(
     String value, {
@@ -739,7 +747,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       passwordControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void rememberMeValueReset(
     bool value, {
@@ -749,7 +762,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       rememberMeControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void themeValueReset(
     String value, {
@@ -759,7 +777,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       themeControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void modeValueReset(
     UserMode value, {
@@ -769,7 +792,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       modeControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void timeoutValueReset(
     int value, {
@@ -779,7 +807,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       timeoutControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void heightValueReset(
     double value, {
@@ -789,7 +822,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       heightControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void unAnnotatedValueReset(
     String? value, {
@@ -799,7 +837,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       unAnnotatedControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void someIntListValueReset(
     List<int> value, {
@@ -809,7 +852,12 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       someIntListControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
@@ -1057,6 +1105,18 @@ class LoginExtendedOForm
   }
 
   @override
+  bool equalsTo(LoginExtendedO? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      LoginExtendedOForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(LoginExtendedOOutput model) onValid,
     void Function()? onNotValid,
@@ -1171,7 +1231,7 @@ class LoginExtendedOForm
           disabled: false);
 }
 
-@Rf()
+@Rf(output: true)
 @RfGroup(validators: [AllFieldsRequired()])
 class LoginExtendedOOutput {
   final String email;
@@ -1221,6 +1281,7 @@ class ReactiveLoginExtendedOFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveLoginExtendedOFormArrayBuilderT> control,
       ReactiveLoginExtendedOFormArrayBuilderT? item,
       LoginExtendedOForm formModel) itemBuilder;
 
@@ -1244,6 +1305,8 @@ class ReactiveLoginExtendedOFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveLoginExtendedOFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

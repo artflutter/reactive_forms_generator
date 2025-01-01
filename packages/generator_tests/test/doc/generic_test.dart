@@ -170,6 +170,8 @@ class TagsFormBuilder<T> extends StatefulWidget {
 class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
   late TagsForm<T> _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = TagsForm<T>(TagsForm.formElements<T>(widget.model), null);
@@ -180,7 +182,7 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
 
     widget.initState?.call(context, _formModel);
 
-    _logTagsForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logTagsForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -223,6 +225,7 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -245,7 +248,7 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
   }
 }
 
-final _logTagsForm = Logger('TagsForm<T>');
+final _logTagsForm = Logger.detached('TagsForm<T>');
 
 class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
   TagsForm(
@@ -495,8 +498,12 @@ class ReactiveTagsFormArrayBuilder<ReactiveTagsFormArrayBuilderT, T>
           BuildContext context, List<Widget> itemList, TagsForm<T> formModel)?
       builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveTagsFormArrayBuilderT? item, TagsForm<T> formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveTagsFormArrayBuilderT> control,
+      ReactiveTagsFormArrayBuilderT? item,
+      TagsForm<T> formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -518,6 +525,8 @@ class ReactiveTagsFormArrayBuilder<ReactiveTagsFormArrayBuilderT, T>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveTagsFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

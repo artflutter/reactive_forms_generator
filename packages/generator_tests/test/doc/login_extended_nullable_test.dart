@@ -196,6 +196,8 @@ class _LoginExtendedNullableFormBuilderState
     extends State<LoginExtendedNullableFormBuilder> {
   late LoginExtendedNullableForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = LoginExtendedNullableForm(
@@ -207,7 +209,8 @@ class _LoginExtendedNullableFormBuilderState
 
     widget.initState?.call(context, _formModel);
 
-    _logLoginExtendedNullableForm.onRecord.listen((LogRecord e) {
+    _logSubscription =
+        _logLoginExtendedNullableForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -250,6 +253,7 @@ class _LoginExtendedNullableFormBuilderState
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -272,7 +276,8 @@ class _LoginExtendedNullableFormBuilderState
   }
 }
 
-final _logLoginExtendedNullableForm = Logger('LoginExtendedNullableForm');
+final _logLoginExtendedNullableForm =
+    Logger.detached('LoginExtendedNullableForm');
 
 class LoginExtendedNullableForm
     implements FormModel<LoginExtendedNullable, LoginExtendedNullable> {
@@ -1175,6 +1180,7 @@ class ReactiveLoginExtendedNullableFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveLoginExtendedNullableFormArrayBuilderT> control,
       ReactiveLoginExtendedNullableFormArrayBuilderT? item,
       LoginExtendedNullableForm formModel) itemBuilder;
 
@@ -1198,6 +1204,8 @@ class ReactiveLoginExtendedNullableFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i] as FormControl<
+                      ReactiveLoginExtendedNullableFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

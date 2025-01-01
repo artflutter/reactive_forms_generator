@@ -209,6 +209,8 @@ class UserProfileFormBuilder extends StatefulWidget {
 class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
   late UserProfileForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -220,7 +222,7 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
-    _logUserProfileForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logUserProfileForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -263,6 +265,7 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -285,7 +288,7 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
   }
 }
 
-final _logUserProfileForm = Logger('UserProfileForm');
+final _logUserProfileForm = Logger.detached('UserProfileForm');
 
 class UserProfileForm implements FormModel<UserProfile, UserProfile> {
   UserProfileForm(
@@ -827,7 +830,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
           disabled: false);
 }
 
-final _logAddressForm = Logger('AddressForm');
+final _logAddressForm = Logger.detached('AddressForm');
 
 class AddressForm implements FormModel<Address, Address> {
   AddressForm(
@@ -1293,6 +1296,7 @@ class ReactiveUserProfileFormArrayBuilder<ReactiveUserProfileFormArrayBuilderT>
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveUserProfileFormArrayBuilderT> control,
       ReactiveUserProfileFormArrayBuilderT? item,
       UserProfileForm formModel) itemBuilder;
 
@@ -1316,6 +1320,8 @@ class ReactiveUserProfileFormArrayBuilder<ReactiveUserProfileFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveUserProfileFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

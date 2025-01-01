@@ -413,18 +413,17 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
           disabled: false);
 }
 
-@Rf()
+@Rf(output: true)
 @RfGroup()
 @freezed
 class SubGroupOOutput with _$SubGroupOOutput {
   const factory SubGroupOOutput({@RfControl() required String id}) =
       _SubGroupOOutput;
-
   factory SubGroupOOutput.fromJson(Map<String, dynamic> json) =>
       _$SubGroupOOutputFromJson(json);
 }
 
-@Rf()
+@Rf(output: true)
 @RfGroup()
 @freezed
 class GroupOOutput with _$GroupOOutput {
@@ -432,19 +431,17 @@ class GroupOOutput with _$GroupOOutput {
           {@RfControl() required String id,
           @RfArray<dynamic>() required List<SubGroupOOutput> subGroupList}) =
       _GroupOOutput;
-
   factory GroupOOutput.fromJson(Map<String, dynamic> json) =>
       _$GroupOOutputFromJson(json);
 }
 
-@Rf()
+@Rf(output: true)
 @RfGroup()
 @freezed
 class NestedOOutput with _$NestedOOutput {
   const factory NestedOOutput(
           {@RfArray<dynamic>() required List<GroupOOutput> groupList}) =
       _NestedOOutput;
-
   factory NestedOOutput.fromJson(Map<String, dynamic> json) =>
       _$NestedOOutputFromJson(json);
 }

@@ -28,6 +28,9 @@ List<Spec> generateLibrary(
   final reactiveFormGroupArrayBuilder =
       ReactiveFormGroupArrayBuilder(formGenerator);
 
+  final p = formGenerator.generate2;
+  // print(p);
+
   return [
     reactiveFormConsumer.generate,
     reactiveInheritedStreamer.generate,
@@ -35,7 +38,7 @@ List<Spec> generateLibrary(
     reactiveFormExtension.generate,
     ...reactiveFormBuilder.generate,
     ...formGenerator.generate,
-    ...formGenerator.generate2,
+    ...p,
     reactiveFormArrayBuilder.generate,
     reactiveFormGroupArrayBuilder.generate,
   ];

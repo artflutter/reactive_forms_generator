@@ -223,7 +223,7 @@ final _logLoginExtendedNullableOForm =
     Logger.detached('LoginExtendedNullableOForm');
 
 class LoginExtendedNullableOForm
-    implements FormModel<LoginExtendedNullableO, LoginExtendedNullableO> {
+    implements FormModel<LoginExtendedNullableO, LoginExtendedNullableOOutput> {
   LoginExtendedNullableOForm(
     this.form,
     this.path,
@@ -936,7 +936,7 @@ class LoginExtendedNullableOForm
   }
 
   @override
-  LoginExtendedNullableO get model {
+  LoginExtendedNullableOOutput get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
@@ -946,7 +946,7 @@ class LoginExtendedNullableOForm
         StackTrace.current,
       );
     }
-    return LoginExtendedNullableO(
+    return LoginExtendedNullableOOutput(
         email: _emailValue,
         password: _passwordValue,
         rememberMe: _rememberMeValue,
@@ -1002,7 +1002,7 @@ class LoginExtendedNullableOForm
 
   @override
   void submit({
-    required void Function(LoginExtendedNullableO model) onValid,
+    required void Function(LoginExtendedNullableOOutput model) onValid,
     void Function()? onNotValid,
   }) {
     currentForm.markAllAsTouched();
@@ -1099,6 +1099,25 @@ class LoginExtendedNullableOForm
           asyncValidators: [],
           asyncValidatorsDebounceTime: 250,
           disabled: false);
+}
+
+@Rf(output: true)
+class LoginExtendedNullableOOutput {
+  final String? email;
+  final String? password;
+  final bool? rememberMe;
+  final String? theme;
+  final UserMode? mode;
+  final int? timeout;
+  final double? height;
+  LoginExtendedNullableOOutput(
+      {@RfControl<String>(validators: []) this.email,
+      @RfControl() this.password,
+      @RfControl<bool>() this.rememberMe,
+      @RfControl<String>() this.theme,
+      @RfControl<UserMode>() this.mode,
+      @RfControl<int>() this.timeout,
+      @RfControl<double>() this.height});
 }
 
 class ReactiveLoginExtendedNullableOFormArrayBuilder<

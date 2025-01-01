@@ -469,7 +469,7 @@ class MailingListOForm implements FormModel<MailingListO, MailingListOOutput> {
           disabled: false);
 }
 
-@Rf()
+@Rf(output: true)
 class MailingListOOutput {
   final List<String?> emailList;
   MailingListOOutput(

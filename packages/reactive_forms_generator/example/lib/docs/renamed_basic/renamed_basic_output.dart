@@ -2,7 +2,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'renamed_basic_output.gform.dart';
 
-@Rf(name: 'SomeWiredName')
+@Rf(output: true, name: 'SomeWiredName')
 class RenamedBasicO {
   final String? email;
 

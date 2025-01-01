@@ -1253,7 +1253,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
           disabled: false);
 }
 
-@Rf()
+@Rf(output: true)
 class UserProfileOOutput {
   final String id;
   final String firstName;

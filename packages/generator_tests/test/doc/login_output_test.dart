@@ -30,7 +30,7 @@ void main() {
               }
             }
             
-            @Rf()
+            @Rf(output: true)
             @RfGroup(
               validators: [MustMatchValidator()],
             )
@@ -195,6 +195,8 @@ class LoginOFormBuilder extends StatefulWidget {
 class _LoginOFormBuilderState extends State<LoginOFormBuilder> {
   late LoginOForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = LoginOForm(LoginOForm.formElements(widget.model), null);
@@ -205,7 +207,7 @@ class _LoginOFormBuilderState extends State<LoginOFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
-    _logLoginOForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logLoginOForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -248,6 +250,7 @@ class _LoginOFormBuilderState extends State<LoginOFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -270,7 +273,7 @@ class _LoginOFormBuilderState extends State<LoginOFormBuilder> {
   }
 }
 
-final _logLoginOForm = Logger('LoginOForm');
+final _logLoginOForm = Logger.detached('LoginOForm');
 
 class LoginOForm implements FormModel<LoginO, LoginOOutput> {
   LoginOForm(
@@ -418,7 +421,12 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
     bool? disabled,
   }) =>
       emailControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void passwordValueReset(
     String? value, {
@@ -428,7 +436,12 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
     bool? disabled,
   }) =>
       passwordControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
@@ -519,6 +532,18 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
   }
 
   @override
+  bool equalsTo(LoginO? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      LoginOForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(LoginOOutput model) onValid,
     void Function()? onNotValid,
@@ -584,7 +609,7 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
           disabled: false);
 }
 
-@Rf()
+@Rf(output: true)
 @RfGroup(validators: [MustMatchValidator()])
 class LoginOOutput extends Equatable {
   final String email;
@@ -618,8 +643,12 @@ class ReactiveLoginOFormArrayBuilder<ReactiveLoginOFormArrayBuilderT>
           BuildContext context, List<Widget> itemList, LoginOForm formModel)?
       builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveLoginOFormArrayBuilderT? item, LoginOForm formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveLoginOFormArrayBuilderT> control,
+      ReactiveLoginOFormArrayBuilderT? item,
+      LoginOForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -641,6 +670,8 @@ class ReactiveLoginOFormArrayBuilder<ReactiveLoginOFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveLoginOFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

@@ -546,7 +546,7 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
           disabled: false);
 }
 
-@Rf()
+@Rf(output: true)
 @RfGroup(validators: [MustMatchValidator()])
 class LoginOOutput extends Equatable {
   final String email;

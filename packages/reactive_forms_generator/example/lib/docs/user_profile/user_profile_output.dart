@@ -2,7 +2,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'user_profile_output.gform.dart';
 
-@Rf()
+@Rf(output: true)
 class UserProfileO {
   final String id;
 

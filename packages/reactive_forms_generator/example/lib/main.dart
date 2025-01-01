@@ -1,4 +1,3 @@
-import 'package:example/docs/animated_url_list/url_list_form.dart';
 import 'package:example/docs/annotateless/annotateless_form.dart';
 import 'package:example/docs/array_nullable/array_nullable_form.dart';
 import 'package:example/docs/delivery_list/delivery_point_route_form.dart';
@@ -17,6 +16,8 @@ import 'package:example/docs/nested/nested_form.dart';
 import 'package:example/docs/nested_generics/nested_generic_form.dart';
 import 'package:example/docs/user_profile/user_profile_form.dart';
 import 'package:flutter/material.dart';
+
+import 'docs/animated_url_list/animated_url_list_form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,12 +50,12 @@ class MyApp extends StatelessWidget {
         Routes.freezed: (_) => const FreezedFormWidget(),
         Routes.generic: (_) => const GenericFormWidget(),
         Routes.nestedGeneric: (_) => const NestedGenericFormWidget(),
-        Routes.animatedUrlList: (_) => const UrlListForm(),
+        Routes.animatedUrlList: (_) => const AnimatedUrlListFormWidget(),
         Routes.modelExtends: (_) => const ModelExtendsWidget(),
         Routes.modelImplements: (_) => const ModelImplementsWidget(),
         Routes.nested: (_) => const NestedFormWidget(),
       },
-      home: const UrlListForm(),
+      home: const AnimatedUrlListFormWidget(),
     );
   }
 }

@@ -415,6 +415,8 @@ class ProfileFormBuilder extends StatefulWidget {
 class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
   late ProfileForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = ProfileForm(ProfileForm.formElements(widget.model), null);
@@ -425,7 +427,7 @@ class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
-    _logProfileForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logProfileForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -468,6 +470,7 @@ class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -490,7 +493,7 @@ class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
   }
 }
 
-final _logProfileForm = Logger('ProfileForm');
+final _logProfileForm = Logger.detached('ProfileForm');
 
 class ProfileForm implements FormModel<Profile, Profile> {
   ProfileForm(
@@ -1430,7 +1433,7 @@ class ProfileForm implements FormModel<Profile, Profile> {
           disabled: false);
 }
 
-final _logIncidenceFilterForm = Logger('IncidenceFilterForm');
+final _logIncidenceFilterForm = Logger.detached('IncidenceFilterForm');
 
 class IncidenceFilterForm
     implements FormModel<IncidenceFilter, IncidenceFilter> {
@@ -2054,7 +2057,7 @@ class IncidenceFilterForm
           disabled: false);
 }
 
-final _logThresholdSettingForm = Logger('ThresholdSettingForm');
+final _logThresholdSettingForm = Logger.detached('ThresholdSettingForm');
 
 class ThresholdSettingForm
     implements FormModel<ThresholdSetting, ThresholdSetting> {
@@ -2338,7 +2341,7 @@ class ThresholdSettingForm
           disabled: false);
 }
 
-final _logTimerSettingForm = Logger('TimerSettingForm');
+final _logTimerSettingForm = Logger.detached('TimerSettingForm');
 
 class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
   TimerSettingForm(
@@ -2644,6 +2647,7 @@ class ReactiveProfileFormArrayBuilder<ReactiveProfileFormArrayBuilderT>
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveProfileFormArrayBuilderT> control,
       ReactiveProfileFormArrayBuilderT? item,
       ProfileForm formModel) itemBuilder;
 
@@ -2667,6 +2671,8 @@ class ReactiveProfileFormArrayBuilder<ReactiveProfileFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveProfileFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

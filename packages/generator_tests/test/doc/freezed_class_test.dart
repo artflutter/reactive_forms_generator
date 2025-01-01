@@ -191,6 +191,8 @@ class FreezedClassFormBuilder extends StatefulWidget {
 class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
   late FreezedClassForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -202,7 +204,7 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
-    _logFreezedClassForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logFreezedClassForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -245,6 +247,7 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -267,7 +270,7 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
   }
 }
 
-final _logFreezedClassForm = Logger('FreezedClassForm');
+final _logFreezedClassForm = Logger.detached('FreezedClassForm');
 
 class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
   FreezedClassForm(
@@ -950,6 +953,7 @@ class ReactiveFreezedClassFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveFreezedClassFormArrayBuilderT> control,
       ReactiveFreezedClassFormArrayBuilderT? item,
       FreezedClassForm formModel) itemBuilder;
 
@@ -973,6 +977,8 @@ class ReactiveFreezedClassFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveFreezedClassFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

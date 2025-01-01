@@ -58,14 +58,14 @@ const generatedFile = r'''// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'annotateless.dart';
+part of 'array_nullable.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-class ReactiveAnnotatelessFormConsumer extends StatelessWidget {
-  const ReactiveAnnotatelessFormConsumer({
+class ReactiveArrayNullableFormConsumer extends StatelessWidget {
+  const ReactiveArrayNullableFormConsumer({
     Key? key,
     required this.builder,
     this.child,
@@ -74,21 +74,21 @@ class ReactiveAnnotatelessFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, AnnotatelessForm formModel, Widget? child) builder;
+      BuildContext context, ArrayNullableForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveAnnotatelessForm.of(context);
+    final formModel = ReactiveArrayNullableForm.of(context);
 
-    if (formModel is! AnnotatelessForm) {
+    if (formModel is! ArrayNullableForm) {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, formModel, child);
   }
 }
 
-class AnnotatelessFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const AnnotatelessFormInheritedStreamer({
+class ArrayNullableFormInheritedStreamer extends InheritedStreamer<dynamic> {
+  const ArrayNullableFormInheritedStreamer({
     Key? key,
     required this.form,
     required Stream<dynamic> stream,
@@ -99,11 +99,11 @@ class AnnotatelessFormInheritedStreamer extends InheritedStreamer<dynamic> {
           key: key,
         );
 
-  final AnnotatelessForm form;
+  final ArrayNullableForm form;
 }
 
-class ReactiveAnnotatelessForm extends StatelessWidget {
-  const ReactiveAnnotatelessForm({
+class ReactiveArrayNullableForm extends StatelessWidget {
+  const ReactiveArrayNullableForm({
     Key? key,
     required this.form,
     required this.child,
@@ -113,13 +113,13 @@ class ReactiveAnnotatelessForm extends StatelessWidget {
 
   final Widget child;
 
-  final AnnotatelessForm form;
+  final ArrayNullableForm form;
 
   final bool Function(FormGroup formGroup)? canPop;
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static AnnotatelessForm? of(
+  static ArrayNullableForm? of(
     BuildContext context, {
     bool listen = true,
   }) {
@@ -192,6 +192,8 @@ class ArrayNullableFormBuilder extends StatefulWidget {
 class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
   late ArrayNullableForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -203,7 +205,7 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
-    _logArrayNullableForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logArrayNullableForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -246,6 +248,7 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -268,7 +271,7 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
   }
 }
 
-final _logArrayNullableForm = Logger('ArrayNullableForm');
+final _logArrayNullableForm = Logger.detached('ArrayNullableForm');
 
 class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
   ArrayNullableForm(
@@ -305,16 +308,16 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
   List<String?>? get _someListValue => someListControl?.value;
 
   List<String> get _emailListValue =>
-      emailListControl.value?.whereType<String>().toList() ?? [];
+      emailListControl.rawValue.whereType<String>().toList();
 
   List<bool?> get _fruitListValue =>
-      fruitListControl.value?.whereType<bool?>().toList() ?? [];
+      fruitListControl.rawValue.whereType<bool?>().toList();
 
   List<String?>? get _vegetablesListValue =>
-      vegetablesListControl?.value?.whereType<String?>().toList() ?? [];
+      vegetablesListControl?.rawValue.whereType<String?>().toList();
 
   List<UserMode?>? get _modeListValue =>
-      modeListControl?.value?.whereType<UserMode?>().toList() ?? [];
+      modeListControl?.rawValue.whereType<UserMode?>().toList();
 
   bool get containsSomeList {
     try {
@@ -1107,6 +1110,7 @@ class ReactiveArrayNullableFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveArrayNullableFormArrayBuilderT> control,
       ReactiveArrayNullableFormArrayBuilderT? item,
       ArrayNullableForm formModel) itemBuilder;
 
@@ -1130,6 +1134,8 @@ class ReactiveArrayNullableFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveArrayNullableFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

@@ -1125,7 +1125,7 @@ class LoginExtendedOForm
           disabled: false);
 }
 
-@Rf()
+@Rf(output: true)
 @RfGroup(validators: [AllFieldsRequired()])
 class LoginExtendedOOutput {
   final String email;

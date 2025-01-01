@@ -11,7 +11,7 @@ class ProductDetails<P extends Product, C extends Cart>
     with _$ProductDetails<P, C> {
   factory ProductDetails({
     @RfControl() String? description,
-    @Rf() Id<P, C>? id,
+    @Rf(output: false) Id<P, C>? id,
   }) = _ProductDetails;
 
   ProductDetails._();

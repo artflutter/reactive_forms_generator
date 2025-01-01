@@ -1,12 +1,12 @@
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
-part 'url.gform.dart';
+part 'animated_url_list.gform.dart';
 
 @Rf(output: false)
-class Url {
+class AnimatedUrlList {
   final List<UrlEntity> urlList;
 
-  Url({@RfArray() this.urlList = const []});
+  AnimatedUrlList({@RfArray() this.urlList = const []});
 }
 
 @RfGroup()

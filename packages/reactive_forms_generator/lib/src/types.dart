@@ -159,3 +159,32 @@ extension ClassElementAnnotationExt on ClassElement {
     }
   }
 }
+
+// extension AnnotationExt on Annotation {
+//   bool get required {
+//     if (name.toString().startsWith('Rf')) {
+//       return arguments?.arguments.fold(false, (acc, e) {
+//             if (e is NamedExpression &&
+//                 e.name.label.name == 'validators' &&
+//                 e.expression
+//                     .toSource()
+//                     .toString()
+//                     .contains('RequiredValidator()')) {
+//               return true;
+//             }
+//
+//             return acc;
+//           }) ??
+//           false;
+//     }
+//
+//     return false;
+//   }
+// }
+//
+// extension NodeListAnnotationExt on NodeList<Annotation> {
+//   bool get required => fold(
+//         false,
+//         (acc, e) => acc || e.required,
+//       );
+// }

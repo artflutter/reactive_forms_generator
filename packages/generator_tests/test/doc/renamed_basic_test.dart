@@ -9,7 +9,7 @@ void main() {
   group('doc', () {
     test(
       'Renamed basic',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -185,6 +185,8 @@ class SomeWiredNameFormBuilder extends StatefulWidget {
 class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
   late SomeWiredNameForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -196,7 +198,7 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
-    _logSomeWiredNameForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logSomeWiredNameForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -239,6 +241,7 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -261,7 +264,7 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
   }
 }
 
-final _logSomeWiredNameForm = Logger('SomeWiredNameForm');
+final _logSomeWiredNameForm = Logger.detached('SomeWiredNameForm');
 
 class SomeWiredNameForm implements FormModel<RenamedBasic, RenamedBasic> {
   SomeWiredNameForm(
@@ -566,6 +569,7 @@ class ReactiveSomeWiredNameFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveSomeWiredNameFormArrayBuilderT> control,
       ReactiveSomeWiredNameFormArrayBuilderT? item,
       SomeWiredNameForm formModel) itemBuilder;
 
@@ -589,6 +593,8 @@ class ReactiveSomeWiredNameFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

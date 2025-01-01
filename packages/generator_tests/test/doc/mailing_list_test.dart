@@ -9,7 +9,7 @@ void main() {
   group('doc', () {
     test(
       'Mailing list',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -186,6 +186,8 @@ class MailingListFormBuilder extends StatefulWidget {
 class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
   late MailingListForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -197,7 +199,7 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
-    _logMailingListForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logMailingListForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -240,6 +242,7 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -262,7 +265,7 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
   }
 }
 
-final _logMailingListForm = Logger('MailingListForm');
+final _logMailingListForm = Logger.detached('MailingListForm');
 
 class MailingListForm implements FormModel<MailingList, MailingList> {
   MailingListForm(
@@ -538,6 +541,7 @@ class ReactiveMailingListFormArrayBuilder<ReactiveMailingListFormArrayBuilderT>
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveMailingListFormArrayBuilderT> control,
       ReactiveMailingListFormArrayBuilderT? item,
       MailingListForm formModel) itemBuilder;
 
@@ -561,6 +565,8 @@ class ReactiveMailingListFormArrayBuilder<ReactiveMailingListFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveMailingListFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

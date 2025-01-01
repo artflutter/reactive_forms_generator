@@ -551,7 +551,7 @@ class SomeWiredNameForm
           disabled: false);
 }
 
-@Rf(name: 'SomeWiredName')
+@Rf(output: true, name: 'SomeWiredName')
 class RenamedBasicOOutput {
   final String email;
   final String password;
