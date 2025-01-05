@@ -20,10 +20,13 @@ import 'package:analyzer/src/dart/element/element.dart';
 class RfParameterVisitor extends GeneralizingAstVisitor<dynamic> {
   final Map<String, FieldDeclaration> fieldDeclaration = {};
   final Map<String, FormalParameter> fieldFormalParameter = {};
+  final List<String> requiredValidators;
+
+  RfParameterVisitor({required this.requiredValidators});
 
   @override
   void visitFormalParameter(FormalParameter node) {
-    final x = node;
+    // final x = node;
 
     // final ppp = x.metadata.required;
     //
@@ -34,7 +37,7 @@ class RfParameterVisitor extends GeneralizingAstVisitor<dynamic> {
     //
     switch (node) {
       case DefaultFormalParameterImpl():
-        final p = node;
+        // final p = node;
         final hasDefaultValue =
             node.parameter.declaredElement?.hasDefaultValue == true;
         final hasDefaultAnnotation = node.parameter.metadata.fold(

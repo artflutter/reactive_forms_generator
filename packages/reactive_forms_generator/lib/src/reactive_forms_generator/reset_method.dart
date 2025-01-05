@@ -3,7 +3,11 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class ResetMethod extends ReactiveFormGeneratorMethod {
-  ResetMethod(super.field, super.output);
+  ResetMethod(
+    super.field,
+    super.output,
+    super.requiredValidators,
+  );
 
   @override
   Method? formGroupArrayMethod() {

@@ -673,7 +673,9 @@ class FormGenerator {
       final rfParameterVisitor2 = RfParameterVisitor2();
       e.accept(rfParameterVisitor2);
 
-      final rfParameterVisitor = RfParameterVisitor();
+      final rfParameterVisitor = RfParameterVisitor(
+        requiredValidators: root.requiredValidators,
+      );
       e.accept(rfParameterVisitor);
       replaceR(
         rfParameterVisitor.fieldDeclaration,
@@ -875,68 +877,136 @@ class FormGenerator {
   }
 
   Iterable<Method> get fieldContainsMethodList => all
-      .map((e) => ContainsMethod(e, root.output).method())
+      .map((e) => ContainsMethod(
+            e,
+            root.output,
+            root.requiredValidators,
+          ).method())
       .whereType<Method>();
 
   Iterable<Method> get fieldValueMethodList => all
-      .map((e) => FieldValueMethod(e, root.output).method())
+      .map((e) => FieldValueMethod(
+            e,
+            root.output,
+            root.requiredValidators,
+          ).method())
       .whereType<Method>();
 
   Iterable<Method> get fieldControlNameMethodList => all
-      .map((e) => ControlPathMethod(e, root.output).method())
+      .map((e) => ControlPathMethod(
+            e,
+            root.output,
+            root.requiredValidators,
+          ).method())
       .whereType<Method>();
 
   Iterable<Field> get staticFieldNameList =>
       annotatedParameters.map(staticFieldName);
 
-  Iterable<Method> get fieldErrorsMethodList =>
-      all.map((e) => ErrorsMethod(e, root.output).method()).whereType<Method>();
+  Iterable<Method> get fieldErrorsMethodList => all
+      .map((e) => ErrorsMethod(
+            e,
+            root.output,
+            root.requiredValidators,
+          ).method())
+      .whereType<Method>();
 
   Iterable<Field> get fieldNameList => annotatedParameters.map(field);
 
-  Iterable<Method> get fieldFocusMethodList =>
-      all.map((e) => FocusMethod(e, root.output).method()).whereType<Method>();
+  Iterable<Method> get fieldFocusMethodList => all
+      .map((e) => FocusMethod(
+            e,
+            root.output,
+            root.requiredValidators,
+          ).method())
+      .whereType<Method>();
 
-  Iterable<Method> get fieldRemoveMethodList =>
-      all.map((e) => RemoveMethod(e, root.output).method()).whereType<Method>();
+  Iterable<Method> get fieldRemoveMethodList => all
+      .map((e) => RemoveMethod(
+            e,
+            root.output,
+            root.requiredValidators,
+          ).method())
+      .whereType<Method>();
 
   Iterable<Method> get fieldUpdateMethodList => all
-      .map((e) => ReactiveFormUpdateValueMethod(e, root.output).method())
+      .map((e) => ReactiveFormUpdateValueMethod(
+            e,
+            root.output,
+            root.requiredValidators,
+          ).method())
       .whereType<Method>();
 
   Iterable<Method> get fieldInsertMethodList => all
-      .map((e) => ReactiveFormInsertMethod(e, root.output).method())
+      .map((e) => ReactiveFormInsertMethod(
+            e,
+            root.output,
+            root.requiredValidators,
+          ).method())
       .whereType<Method>();
 
   Iterable<Method> get fieldClearMethodList => all
-      .map((e) => ReactiveFormClearMethod(e, root.output).method())
+      .map((e) => ReactiveFormClearMethod(
+            e,
+            root.output,
+            root.requiredValidators,
+          ).method())
       .whereType<Method>();
 
   Iterable<Method> get fieldPatchMethodList => all
-      .map((e) => ReactiveFormPatchValueMethod(e, root.output).method())
+      .map((e) => ReactiveFormPatchValueMethod(
+            e,
+            root.output,
+            root.requiredValidators,
+          ).method())
       .whereType<Method>();
 
-  Iterable<Method> get fieldResetMethodList =>
-      all.map((e) => ResetMethod(e, root.output).method()).whereType<Method>();
+  Iterable<Method> get fieldResetMethodList => all
+      .map((e) => ResetMethod(
+            e,
+            root.output,
+            root.requiredValidators,
+          ).method())
+      .whereType<Method>();
 
   Iterable<Method> get controlMethodList => all
-      .map((e) => ControlMethod(e, root.output).method())
+      .map((e) => ControlMethod(
+            e,
+            root.output,
+            root.requiredValidators,
+          ).method())
       .whereType<Method>();
 
   Iterable<Method> get controlPrivateMethodList => all
-      .map((e) => ControlPrivateMethod(e, root.output).method())
+      .map((e) => ControlPrivateMethod(
+            e,
+            root.output,
+            root.requiredValidators,
+          ).method())
       .whereType<Method>();
 
   Iterable<Method> get controlControlsMethodList => all
-      .map((e) => ControlControlsMethod(e, root.output).method())
+      .map((e) => ControlControlsMethod(
+            e,
+            root.output,
+            root.requiredValidators,
+          ).method())
       .whereType<Method>();
 
   Iterable<Method> get controlSetDisabledMethodList => all
-      .map((e) => ControlSetDisableMethod(e, root.output).method())
+      .map((e) => ControlSetDisableMethod(
+            e,
+            root.output,
+            root.requiredValidators,
+          ).method())
       .whereType<Method>();
 
   Iterable<Method> get extendedControlMethodList => all
-      .map((e) => ExtendedControlMethod(e, root.output).method())
+      .map((e) => ExtendedControlMethod(
+            e,
+            root.output,
+            root.requiredValidators,
+          ).method())
       .whereType<Method>();
 
   Iterable<Method> get addArrayControlMethodList =>

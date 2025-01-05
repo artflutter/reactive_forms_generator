@@ -5,6 +5,7 @@ import 'package:reactive_forms_generator/src/form_elements/form_element_generato
 import 'package:source_gen/source_gen.dart';
 import 'package:analyzer/src/dart/element/element.dart';
 import 'package:analyzer/src/dart/ast/ast.dart';
+import 'package:analyzer/src/dart/constant/value.dart';
 
 const _formChecker = TypeChecker.fromUrl(
   'package:reactive_forms_annotations/src/reactive_form_annotation.dart#ReactiveFormAnnotation',
@@ -29,11 +30,19 @@ extension LibraryReaderExt on LibraryReader {
 }
 
 extension MapExt on Map<String, String> {
-  bool get hasRequiredValidator {
-    return containsKey(FormElementGenerator.validatorKey) &&
-        this[FormElementGenerator.validatorKey]
-                ?.contains('RequiredValidator()') ==
-            true;
+  bool hasRequiredValidator(List<String> requiredValidators) {
+    final p = requiredValidators.fold(false, (acc, e) {
+      final v = this[FormElementGenerator.validatorKey];
+      return acc ||
+          containsKey(FormElementGenerator.validatorKey) &&
+              v?.contains(e) == true;
+    });
+
+    return p;
+    // return containsKey(FormElementGenerator.validatorKey) &&
+    //     this[FormElementGenerator.validatorKey]
+    //             ?.contains('RequiredValidator()') ==
+    //         true;
   }
 }
 
@@ -150,12 +159,42 @@ extension ClassElementAnnotationExt on ClassElement {
     try {
       if (hasRfAnnotation) {
         final annotation = rfAnnotation;
+
         return annotation?.getField('output')?.toBoolValue() ?? false;
       }
 
       return false;
     } catch (e) {
       return false;
+    }
+  }
+
+  List<String> get requiredValidators {
+    try {
+      if (hasRfAnnotation) {
+        final annotation = rfAnnotation;
+
+        final x = annotation
+                ?.getField('requiredValidators')
+                ?.toListValue()
+                ?.map((e) {
+                  if (e is DartObjectImpl) {
+                    final s = e.state.toString();
+                    return s.substring(1, s.length - 1);
+                  }
+
+                  return null;
+                })
+                .whereType<String>()
+                .toList() ??
+            [];
+
+        return x;
+      }
+
+      return [];
+    } catch (e) {
+      return [];
     }
   }
 }

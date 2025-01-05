@@ -1,12 +1,14 @@
+const defaultRequiredValidators = ['RequiredValidator()'];
+
 class ReactiveFormAnnotation {
   final String? name;
   final bool output;
-  final String requiredValidatorName;
+  final List<String> requiredValidators;
 
   const ReactiveFormAnnotation({
     this.name,
     this.output = false,
-    this.requiredValidatorName = 'RequiredValidator',
+    this.requiredValidators = defaultRequiredValidators,
   });
 }
 

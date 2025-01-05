@@ -14,7 +14,11 @@ import 'package:reactive_forms_generator/src/types.dart';
 // import 'package:analyzer/src/dart/element/display_string_builder.dart';
 
 class FieldValueMethod extends ReactiveFormGeneratorMethod {
-  FieldValueMethod(super.field, super.output);
+  FieldValueMethod(
+    super.field,
+    super.output,
+    super.requiredValidators,
+  );
 
   @override
   Method? formGroupMethod() {
@@ -80,7 +84,9 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
             ..lambda = true
             ..type = MethodType.getter
             ..returns = Reference(
-              output ? field.toReferenceType : field.type.toString(),
+              output
+                  ? field.toReferenceType(requiredValidators)
+                  : field.type.toString(),
             );
         },
       );
@@ -95,9 +101,10 @@ extension Care on ClassElement {
 }
 
 extension Pare on ParameterElement {
-  String get toReferenceType {
+  String toReferenceType(List<String> requiredValidators) {
     if (hasRfControlAnnotation &&
-        annotationParams(formControlChecker).hasRequiredValidator) {
+        annotationParams(formControlChecker)
+            .hasRequiredValidator(requiredValidators)) {
       return type.getDisplayString(withNullability: false);
     }
 

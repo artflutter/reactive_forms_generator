@@ -3,7 +3,11 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class ReactiveFormUpdateValueMethod extends ReactiveFormGeneratorMethod {
-  ReactiveFormUpdateValueMethod(super.field, super.output);
+  ReactiveFormUpdateValueMethod(
+    super.field,
+    super.output,
+    super.requiredValidators,
+  );
 
   @override
   Method formGroupArrayMethod() {

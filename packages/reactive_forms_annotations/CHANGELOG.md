@@ -1,3 +1,7 @@
+## [6.0.0-beta.8]
+
+* requiredValidators
+
 ## [6.0.0-beta.7]
 
 * output `false` by default

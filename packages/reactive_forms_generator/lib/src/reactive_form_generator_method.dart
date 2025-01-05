@@ -6,8 +6,13 @@ import 'package:reactive_forms_generator/src/types.dart';
 abstract class ReactiveFormGeneratorMethod {
   final ParameterElement field;
   final bool output;
+  final List<String> requiredValidators;
 
-  ReactiveFormGeneratorMethod(this.field, this.output);
+  ReactiveFormGeneratorMethod(
+    this.field,
+    this.output,
+    this.requiredValidators,
+  );
 
   Method? method() {
     if (field.isFormGroup) {
@@ -39,7 +44,9 @@ abstract class ReactiveFormGeneratorMethod {
         return false;
       }
 
-      return field.annotationParams(formControlChecker).hasRequiredValidator &&
+      return field
+              .annotationParams(formControlChecker)
+              .hasRequiredValidator(requiredValidators) &&
           output;
     } catch (e) {
       return false;
