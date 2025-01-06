@@ -1,3 +1,11 @@
+## [6.0.0-beta.24]
+
+* bugfix
+
+## [6.0.0-beta.23]
+
+* requiredValidators bugfix
+
 ## [6.0.0-beta.22]
 
 * requiredValidators

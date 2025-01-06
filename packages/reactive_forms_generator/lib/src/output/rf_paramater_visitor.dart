@@ -1,6 +1,7 @@
 // ignore_for_file: implementation_imports
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/dart/element/nullability_suffix.dart';
+
+// import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 
 // import 'package:analyzer/dart/element/element.dart';
@@ -8,6 +9,7 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/src/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import "package:collection/collection.dart";
+import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
 import 'package:reactive_forms_generator/src/output/extensions.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:reactive_forms_generator/src/output/rf_annotation_arguments_visitor.dart';
@@ -57,13 +59,13 @@ class RfParameterVisitor extends GeneralizingAstVisitor<dynamic> {
         // final hasRfGroupAnnotation = node.parameter.declaredElement?.type
         //         .element?.hasRfGroupAnnotation ==
         //     true;
-        final isNullable =
-            node.parameter.declaredElement?.type.nullabilitySuffix ==
-                NullabilitySuffix.question;
+        // final isNullable =
+        //     node.parameter.declaredElement?.type.nullabilitySuffix ==
+        //         NullabilitySuffix.question;
 
-        if (!isNullable &&
+        if (/*!isNullable &&*/
             (hasRfGroupAnnotation || isList) &&
-            (hasDefaultValue || hasDefaultAnnotation)) {
+                (hasDefaultValue || hasDefaultAnnotation)) {
           NodeReplacer.replace(node, node.newParameter2);
         }
         // if (node.metadata.required) {
@@ -148,10 +150,14 @@ class RfParameterVisitor extends GeneralizingAstVisitor<dynamic> {
         e.visitChildren(rfAnnotationArguments);
       }
 
-      if (rfAnnotationArguments.arguments.containsKey('validators') &&
-          rfAnnotationArguments.arguments['validators']
-                  ?.contains('RequiredValidator()') ==
-              true) {
+      final validators =
+          rfAnnotationArguments.arguments[FormElementGenerator.validatorKey];
+
+      final p = requiredValidators.fold(false, (acc, e) {
+        return acc || validators?.contains(e) == true;
+      });
+
+      if (p) {
         fieldFormalParameter[e.name.toString()] = e;
       }
     }

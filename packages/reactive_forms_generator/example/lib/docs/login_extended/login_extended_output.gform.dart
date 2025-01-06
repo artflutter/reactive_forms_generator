@@ -229,6 +229,8 @@ class LoginExtendedOForm
 
   static const String emailControlName = "email";
 
+  static const String email2ControlName = "email2";
+
   static const String passwordControlName = "password";
 
   static const String rememberMeControlName = "rememberMe";
@@ -253,6 +255,8 @@ class LoginExtendedOForm
 
   String emailControlPath() => pathBuilder(emailControlName);
 
+  String email2ControlPath() => pathBuilder(email2ControlName);
+
   String passwordControlPath() => pathBuilder(passwordControlName);
 
   String rememberMeControlPath() => pathBuilder(rememberMeControlName);
@@ -270,6 +274,8 @@ class LoginExtendedOForm
   String someIntListControlPath() => pathBuilder(someIntListControlName);
 
   String get _emailValue => emailControl.value as String;
+
+  String get _email2Value => email2Control.value ?? "";
 
   String get _passwordValue => passwordControl.value as String;
 
@@ -290,6 +296,15 @@ class LoginExtendedOForm
   bool get containsEmail {
     try {
       form.control(emailControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsEmail2 {
+    try {
+      form.control(email2ControlPath());
       return true;
     } catch (e) {
       return false;
@@ -370,6 +385,8 @@ class LoginExtendedOForm
 
   Map<String, Object>? get emailErrors => emailControl.errors;
 
+  Map<String, Object> get email2Errors => email2Control.errors;
+
   Map<String, Object> get passwordErrors => passwordControl.errors;
 
   Map<String, Object> get rememberMeErrors => rememberMeControl.errors;
@@ -387,6 +404,8 @@ class LoginExtendedOForm
   Map<String, Object> get someIntListErrors => someIntListControl.errors;
 
   void get emailFocus => form.focus(emailControlPath());
+
+  void get email2Focus => form.focus(email2ControlPath());
 
   void get passwordFocus => form.focus(passwordControlPath());
 
@@ -462,6 +481,15 @@ class LoginExtendedOForm
     bool emitEvent = true,
   }) {
     emailControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void email2ValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    email2Control.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -546,6 +574,15 @@ class LoginExtendedOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void email2ValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    email2Control.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void passwordValuePatch(
     String value, {
     bool updateParent = true,
@@ -626,6 +663,21 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       emailControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
+
+  void email2ValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      email2Control.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -756,6 +808,9 @@ class LoginExtendedOForm
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
 
+  FormControl<String> get email2Control =>
+      form.control(email2ControlPath()) as FormControl<String>;
+
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
 
@@ -793,6 +848,24 @@ class LoginExtendedOForm
       );
     } else {
       emailControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void email2SetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      email2Control.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      email2Control.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -956,6 +1029,7 @@ class LoginExtendedOForm
     }
     return LoginExtendedOOutput(
         email: _emailValue,
+        email2: _email2Value,
         password: _passwordValue,
         rememberMe: _rememberMeValue,
         theme: _themeValue,
@@ -1060,6 +1134,13 @@ class LoginExtendedOForm
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
+        email2ControlName: FormControl<String>(
+            value: loginExtendedO?.email2,
+            validators: [RequiredValidator()],
+            asyncValidators: [UniqueEmailAsyncValidator()],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
         passwordControlName: FormControl<String>(
             value: loginExtendedO?.password,
             validators: [RequiredValidator()],
@@ -1129,6 +1210,7 @@ class LoginExtendedOForm
 @RfGroup(validators: [AllFieldsRequired()])
 class LoginExtendedOOutput {
   final String email;
+  final String email2;
   final String password;
   final bool rememberMe;
   final String theme;
@@ -1142,6 +1224,10 @@ class LoginExtendedOOutput {
           validators: [RequiredValidator()],
           asyncValidators: [UniqueEmailAsyncValidator()])
       required this.email,
+      @RfControl(
+          validators: [RequiredValidator()],
+          asyncValidators: [UniqueEmailAsyncValidator()])
+      required this.email2,
       @RfControl(validators: [RequiredValidator()]) required this.password,
       @RfControl(validators: [RequiredValidator()]) required this.rememberMe,
       @RfControl(validators: [RequiredValidator()]) required this.theme,

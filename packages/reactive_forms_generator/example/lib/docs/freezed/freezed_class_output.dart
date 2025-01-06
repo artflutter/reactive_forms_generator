@@ -18,6 +18,7 @@ class FreezedClassO with _$FreezedClassO {
     @RfControl(validators: [RequiredValidator()]) String? genderR, {
     @RfControl() String? id,
     @RfControl(validators: [RequiredValidator()]) String? idR,
+    @RfControl(validators: [RequiredValidator()]) @Default('') String idR2,
     @RfControl<String>() String? name,
     @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
     @RfControl<double>() double? year,

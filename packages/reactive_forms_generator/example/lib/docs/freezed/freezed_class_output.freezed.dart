@@ -28,6 +28,8 @@ mixin _$FreezedClassO {
   String? get id => throw _privateConstructorUsedError;
   @RfControl(validators: [RequiredValidator()])
   String? get idR => throw _privateConstructorUsedError;
+  @RfControl(validators: [RequiredValidator()])
+  String get idR2 => throw _privateConstructorUsedError;
   @RfControl<String>()
   String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'logo_image')
@@ -57,6 +59,7 @@ abstract class $FreezedClassOCopyWith<$Res> {
       @RfControl(validators: [RequiredValidator()]) String? genderR,
       @RfControl() String? id,
       @RfControl(validators: [RequiredValidator()]) String? idR,
+      @RfControl(validators: [RequiredValidator()]) String idR2,
       @RfControl<String>() String? name,
       @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
       @RfControl<double>() double? year});
@@ -81,6 +84,7 @@ class _$FreezedClassOCopyWithImpl<$Res, $Val extends FreezedClassO>
     Object? genderR = freezed,
     Object? id = freezed,
     Object? idR = freezed,
+    Object? idR2 = null,
     Object? name = freezed,
     Object? logoImage = freezed,
     Object? year = freezed,
@@ -102,6 +106,10 @@ class _$FreezedClassOCopyWithImpl<$Res, $Val extends FreezedClassO>
           ? _value.idR
           : idR // ignore: cast_nullable_to_non_nullable
               as String?,
+      idR2: null == idR2
+          ? _value.idR2
+          : idR2 // ignore: cast_nullable_to_non_nullable
+              as String,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -131,6 +139,7 @@ abstract class _$$FreezedClassOImplCopyWith<$Res>
       @RfControl(validators: [RequiredValidator()]) String? genderR,
       @RfControl() String? id,
       @RfControl(validators: [RequiredValidator()]) String? idR,
+      @RfControl(validators: [RequiredValidator()]) String idR2,
       @RfControl<String>() String? name,
       @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
       @RfControl<double>() double? year});
@@ -153,6 +162,7 @@ class __$$FreezedClassOImplCopyWithImpl<$Res>
     Object? genderR = freezed,
     Object? id = freezed,
     Object? idR = freezed,
+    Object? idR2 = null,
     Object? name = freezed,
     Object? logoImage = freezed,
     Object? year = freezed,
@@ -174,6 +184,10 @@ class __$$FreezedClassOImplCopyWithImpl<$Res>
           ? _value.idR
           : idR // ignore: cast_nullable_to_non_nullable
               as String?,
+      idR2: null == idR2
+          ? _value.idR2
+          : idR2 // ignore: cast_nullable_to_non_nullable
+              as String,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -197,6 +211,7 @@ class _$FreezedClassOImpl extends _FreezedClassO {
       @RfControl(validators: [RequiredValidator()]) this.genderR,
       {@RfControl() this.id,
       @RfControl(validators: [RequiredValidator()]) this.idR,
+      @RfControl(validators: [RequiredValidator()]) this.idR2 = '',
       @RfControl<String>() this.name,
       @JsonKey(name: 'logo_image') @RfControl<String>() this.logoImage,
       @RfControl<double>() this.year})
@@ -218,6 +233,10 @@ class _$FreezedClassOImpl extends _FreezedClassO {
   @RfControl(validators: [RequiredValidator()])
   final String? idR;
   @override
+  @JsonKey()
+  @RfControl(validators: [RequiredValidator()])
+  final String idR2;
+  @override
   @RfControl<String>()
   final String? name;
   @override
@@ -230,7 +249,7 @@ class _$FreezedClassOImpl extends _FreezedClassO {
 
   @override
   String toString() {
-    return 'FreezedClassO(gender: $gender, genderR: $genderR, id: $id, idR: $idR, name: $name, logoImage: $logoImage, year: $year)';
+    return 'FreezedClassO(gender: $gender, genderR: $genderR, id: $id, idR: $idR, idR2: $idR2, name: $name, logoImage: $logoImage, year: $year)';
   }
 
   @override
@@ -242,6 +261,7 @@ class _$FreezedClassOImpl extends _FreezedClassO {
             (identical(other.genderR, genderR) || other.genderR == genderR) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.idR, idR) || other.idR == idR) &&
+            (identical(other.idR2, idR2) || other.idR2 == idR2) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.logoImage, logoImage) ||
                 other.logoImage == logoImage) &&
@@ -250,8 +270,8 @@ class _$FreezedClassOImpl extends _FreezedClassO {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, gender, genderR, id, idR, name, logoImage, year);
+  int get hashCode => Object.hash(
+      runtimeType, gender, genderR, id, idR, idR2, name, logoImage, year);
 
   /// Create a copy of FreezedClassO
   /// with the given fields replaced by the non-null parameter values.
@@ -274,6 +294,7 @@ abstract class _FreezedClassO extends FreezedClassO {
       @RfControl(validators: [RequiredValidator()]) final String? genderR,
       {@RfControl() final String? id,
       @RfControl(validators: [RequiredValidator()]) final String? idR,
+      @RfControl(validators: [RequiredValidator()]) final String idR2,
       @RfControl<String>() final String? name,
       @JsonKey(name: 'logo_image') @RfControl<String>() final String? logoImage,
       @RfControl<double>() final double? year}) = _$FreezedClassOImpl;
@@ -294,6 +315,9 @@ abstract class _FreezedClassO extends FreezedClassO {
   @override
   @RfControl(validators: [RequiredValidator()])
   String? get idR;
+  @override
+  @RfControl(validators: [RequiredValidator()])
+  String get idR2;
   @override
   @RfControl<String>()
   String? get name;
@@ -327,6 +351,8 @@ mixin _$FreezedClassOOutput {
   String? get id => throw _privateConstructorUsedError;
   @RfControl(validators: [RequiredValidator()])
   String get idR => throw _privateConstructorUsedError;
+  @RfControl(validators: [RequiredValidator()])
+  String get idR2 => throw _privateConstructorUsedError;
   @RfControl<String>()
   String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'logo_image')
@@ -356,6 +382,7 @@ abstract class $FreezedClassOOutputCopyWith<$Res> {
       @RfControl(validators: [RequiredValidator()]) String genderR,
       @RfControl() String? id,
       @RfControl(validators: [RequiredValidator()]) String idR,
+      @RfControl(validators: [RequiredValidator()]) String idR2,
       @RfControl<String>() String? name,
       @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
       @RfControl<double>() double? year});
@@ -380,6 +407,7 @@ class _$FreezedClassOOutputCopyWithImpl<$Res, $Val extends FreezedClassOOutput>
     Object? genderR = null,
     Object? id = freezed,
     Object? idR = null,
+    Object? idR2 = null,
     Object? name = freezed,
     Object? logoImage = freezed,
     Object? year = freezed,
@@ -400,6 +428,10 @@ class _$FreezedClassOOutputCopyWithImpl<$Res, $Val extends FreezedClassOOutput>
       idR: null == idR
           ? _value.idR
           : idR // ignore: cast_nullable_to_non_nullable
+              as String,
+      idR2: null == idR2
+          ? _value.idR2
+          : idR2 // ignore: cast_nullable_to_non_nullable
               as String,
       name: freezed == name
           ? _value.name
@@ -430,6 +462,7 @@ abstract class _$$FreezedClassOOutputImplCopyWith<$Res>
       @RfControl(validators: [RequiredValidator()]) String genderR,
       @RfControl() String? id,
       @RfControl(validators: [RequiredValidator()]) String idR,
+      @RfControl(validators: [RequiredValidator()]) String idR2,
       @RfControl<String>() String? name,
       @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
       @RfControl<double>() double? year});
@@ -452,6 +485,7 @@ class __$$FreezedClassOOutputImplCopyWithImpl<$Res>
     Object? genderR = null,
     Object? id = freezed,
     Object? idR = null,
+    Object? idR2 = null,
     Object? name = freezed,
     Object? logoImage = freezed,
     Object? year = freezed,
@@ -472,6 +506,10 @@ class __$$FreezedClassOOutputImplCopyWithImpl<$Res>
       idR: null == idR
           ? _value.idR
           : idR // ignore: cast_nullable_to_non_nullable
+              as String,
+      idR2: null == idR2
+          ? _value.idR2
+          : idR2 // ignore: cast_nullable_to_non_nullable
               as String,
       name: freezed == name
           ? _value.name
@@ -496,6 +534,7 @@ class _$FreezedClassOOutputImpl extends _FreezedClassOOutput {
       @RfControl(validators: [RequiredValidator()]) this.genderR,
       {@RfControl() this.id,
       @RfControl(validators: [RequiredValidator()]) required this.idR,
+      @RfControl(validators: [RequiredValidator()]) required this.idR2,
       @RfControl<String>() this.name,
       @JsonKey(name: 'logo_image') @RfControl<String>() this.logoImage,
       @RfControl<double>() this.year})
@@ -517,6 +556,9 @@ class _$FreezedClassOOutputImpl extends _FreezedClassOOutput {
   @RfControl(validators: [RequiredValidator()])
   final String idR;
   @override
+  @RfControl(validators: [RequiredValidator()])
+  final String idR2;
+  @override
   @RfControl<String>()
   final String? name;
   @override
@@ -529,7 +571,7 @@ class _$FreezedClassOOutputImpl extends _FreezedClassOOutput {
 
   @override
   String toString() {
-    return 'FreezedClassOOutput(gender: $gender, genderR: $genderR, id: $id, idR: $idR, name: $name, logoImage: $logoImage, year: $year)';
+    return 'FreezedClassOOutput(gender: $gender, genderR: $genderR, id: $id, idR: $idR, idR2: $idR2, name: $name, logoImage: $logoImage, year: $year)';
   }
 
   @override
@@ -541,6 +583,7 @@ class _$FreezedClassOOutputImpl extends _FreezedClassOOutput {
             (identical(other.genderR, genderR) || other.genderR == genderR) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.idR, idR) || other.idR == idR) &&
+            (identical(other.idR2, idR2) || other.idR2 == idR2) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.logoImage, logoImage) ||
                 other.logoImage == logoImage) &&
@@ -549,8 +592,8 @@ class _$FreezedClassOOutputImpl extends _FreezedClassOOutput {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, gender, genderR, id, idR, name, logoImage, year);
+  int get hashCode => Object.hash(
+      runtimeType, gender, genderR, id, idR, idR2, name, logoImage, year);
 
   /// Create a copy of FreezedClassOOutput
   /// with the given fields replaced by the non-null parameter values.
@@ -574,6 +617,7 @@ abstract class _FreezedClassOOutput extends FreezedClassOOutput {
       @RfControl(validators: [RequiredValidator()]) final String genderR,
       {@RfControl() final String? id,
       @RfControl(validators: [RequiredValidator()]) required final String idR,
+      @RfControl(validators: [RequiredValidator()]) required final String idR2,
       @RfControl<String>() final String? name,
       @JsonKey(name: 'logo_image') @RfControl<String>() final String? logoImage,
       @RfControl<double>() final double? year}) = _$FreezedClassOOutputImpl;
@@ -594,6 +638,9 @@ abstract class _FreezedClassOOutput extends FreezedClassOOutput {
   @override
   @RfControl(validators: [RequiredValidator()])
   String get idR;
+  @override
+  @RfControl(validators: [RequiredValidator()])
+  String get idR2;
   @override
   @RfControl<String>()
   String? get name;

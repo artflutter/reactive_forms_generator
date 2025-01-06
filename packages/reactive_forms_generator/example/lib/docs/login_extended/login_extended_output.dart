@@ -9,6 +9,7 @@ part 'login_extended_output.gform.dart';
 )
 class LoginExtendedO {
   final String? email;
+  final String email2;
 
   final String password;
 
@@ -31,6 +32,11 @@ class LoginExtendedO {
       asyncValidators: [UniqueEmailAsyncValidator()],
     )
     this.email,
+    @RfControl(
+      validators: [RequiredValidator()],
+      asyncValidators: [UniqueEmailAsyncValidator()],
+    )
+    this.email2 = '',
     @RfControl(
       validators: [RequiredValidator()],
     )

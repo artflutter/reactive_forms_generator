@@ -19,7 +19,7 @@ void replaceR(
           NodeReplacer.replace(field, field.newField);
         }
 
-        NodeReplacer.replace(node, node.newParameter);
+        NodeReplacer.replace(node, node.newParameter2);
       }
 
       if (parameter is FieldFormalParameterImpl) {
@@ -28,7 +28,7 @@ void replaceR(
           NodeReplacer.replace(field, field.newField);
         }
 
-        NodeReplacer.replace(node, node.newParameter);
+        NodeReplacer.replace(node, node.newParameter2);
       }
     }
   });

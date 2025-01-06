@@ -5,7 +5,13 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart'
 
 part 'login_output.gform.dart';
 
-@Rf(output: true)
+@Rf(
+  output: true,
+  requiredValidators: [
+    ...defaultRequiredValidators,
+    'RequiredValidator2()',
+  ],
+)
 @RfGroup(
   validators: [MustMatchValidator()],
 )
@@ -20,7 +26,7 @@ class LoginO extends Equatable {
     )
     this.email,
     @RfControl(
-      validators: [RequiredValidator()],
+      validators: [RequiredValidator2()],
     )
     this.password,
   });

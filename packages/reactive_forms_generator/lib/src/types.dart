@@ -33,9 +33,7 @@ extension MapExt on Map<String, String> {
   bool hasRequiredValidator(List<String> requiredValidators) {
     final p = requiredValidators.fold(false, (acc, e) {
       final v = this[FormElementGenerator.validatorKey];
-      return acc ||
-          containsKey(FormElementGenerator.validatorKey) &&
-              v?.contains(e) == true;
+      return acc || v?.contains(e) == true;
     });
 
     return p;

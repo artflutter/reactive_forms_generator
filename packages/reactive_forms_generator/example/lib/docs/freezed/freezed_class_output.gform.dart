@@ -233,6 +233,8 @@ class FreezedClassOForm
 
   static const String idRControlName = "idR";
 
+  static const String idR2ControlName = "idR2";
+
   static const String nameControlName = "name";
 
   static const String logoImageControlName = "logoImage";
@@ -253,6 +255,8 @@ class FreezedClassOForm
 
   String idRControlPath() => pathBuilder(idRControlName);
 
+  String idR2ControlPath() => pathBuilder(idR2ControlName);
+
   String nameControlPath() => pathBuilder(nameControlName);
 
   String logoImageControlPath() => pathBuilder(logoImageControlName);
@@ -266,6 +270,8 @@ class FreezedClassOForm
   String? get _idValue => idControl?.value;
 
   String get _idRValue => idRControl.value as String;
+
+  String get _idR2Value => idR2Control.value as String;
 
   String? get _nameValue => nameControl?.value;
 
@@ -309,6 +315,15 @@ class FreezedClassOForm
     }
   }
 
+  bool get containsIdR2 {
+    try {
+      form.control(idR2ControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -344,6 +359,8 @@ class FreezedClassOForm
 
   Map<String, Object>? get idRErrors => idRControl.errors;
 
+  Map<String, Object> get idR2Errors => idR2Control.errors;
+
   Map<String, Object>? get nameErrors => nameControl?.errors;
 
   Map<String, Object>? get logoImageErrors => logoImageControl?.errors;
@@ -357,6 +374,8 @@ class FreezedClassOForm
   void get idFocus => form.focus(idControlPath());
 
   void get idRFocus => form.focus(idRControlPath());
+
+  void get idR2Focus => form.focus(idR2ControlPath());
 
   void get nameFocus => form.focus(nameControlPath());
 
@@ -582,6 +601,15 @@ class FreezedClassOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void idR2ValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    idR2Control.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void nameValueUpdate(
     String? value, {
     bool updateParent = true,
@@ -642,6 +670,15 @@ class FreezedClassOForm
     bool emitEvent = true,
   }) {
     idRControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void idR2ValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    idR2Control.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -732,6 +769,21 @@ class FreezedClassOForm
         disabled: disabled,
       );
 
+  void idR2ValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      idR2Control.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
+
   void nameValueReset(
     String? value, {
     bool updateParent = true,
@@ -789,6 +841,9 @@ class FreezedClassOForm
 
   FormControl<String> get idRControl =>
       form.control(idRControlPath()) as FormControl<String>;
+
+  FormControl<String> get idR2Control =>
+      form.control(idR2ControlPath()) as FormControl<String>;
 
   FormControl<String>? get nameControl => containsName
       ? form.control(nameControlPath()) as FormControl<String>?
@@ -874,6 +929,24 @@ class FreezedClassOForm
     }
   }
 
+  void idR2SetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      idR2Control.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      idR2Control.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   void nameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -942,6 +1015,7 @@ class FreezedClassOForm
     return FreezedClassOOutput(_genderValue, _genderRValue,
         id: _idValue,
         idR: _idRValue,
+        idR2: _idR2Value,
         name: _nameValue,
         logoImage: _logoImageValue,
         year: _yearValue);
@@ -1062,6 +1136,13 @@ class FreezedClassOForm
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
+        idR2ControlName: FormControl<String>(
+            value: freezedClassO?.idR2,
+            validators: [RequiredValidator()],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
         nameControlName: FormControl<String>(
             value: freezedClassO?.name,
             validators: [],
@@ -1098,6 +1179,7 @@ class FreezedClassOOutput with _$FreezedClassOOutput {
       @RfControl(validators: [RequiredValidator()]) String genderR,
       {@RfControl() String? id,
       @RfControl(validators: [RequiredValidator()]) required String idR,
+      @RfControl(validators: [RequiredValidator()]) required String idR2,
       @RfControl<String>() String? name,
       @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
       @RfControl<double>() double? year}) = _FreezedClassOOutput;

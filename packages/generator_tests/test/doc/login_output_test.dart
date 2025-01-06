@@ -30,7 +30,17 @@ void main() {
               }
             }
             
-            @Rf(output: true)
+            class RequiredValidator2 extends RequiredValidator {
+              const RequiredValidator2() : super();
+            }
+            
+            @Rf(
+              output: true,
+              requiredValidators: [
+                ...defaultRequiredValidators,
+                'RequiredValidator2()',
+              ],
+            )
             @RfGroup(
               validators: [MustMatchValidator()],
             )
@@ -45,7 +55,7 @@ void main() {
                 )
                 this.email,
                 @RfControl(
-                  validators: [RequiredValidator()],
+                  validators: [RequiredValidator2()],
                 )
                 this.password,
               });
@@ -595,7 +605,7 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
             touched: false),
         passwordControlName: FormControl<String>(
             value: loginO?.password,
-            validators: [RequiredValidator()],
+            validators: [RequiredValidator2()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -609,7 +619,9 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
           disabled: false);
 }
 
-@Rf(output: true)
+@Rf(
+    output: true,
+    requiredValidators: [...defaultRequiredValidators, 'RequiredValidator2()'])
 @RfGroup(validators: [MustMatchValidator()])
 class LoginOOutput extends Equatable {
   final String email;
@@ -617,7 +629,7 @@ class LoginOOutput extends Equatable {
   const LoginOOutput(
       {@RfControl(validators: [RequiredValidator(), RequiredValidator()])
       required this.email,
-      @RfControl(validators: [RequiredValidator()]) required this.password});
+      @RfControl(validators: [RequiredValidator2()]) required this.password});
   @override
   List<Object?> get props => [email, password];
 }
