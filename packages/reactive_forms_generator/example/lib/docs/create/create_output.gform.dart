@@ -267,11 +267,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
 
   String adminsControlPath() => pathBuilder(adminsControlName);
 
-  String? get _idValue => idControl?.value;
+  String? get _idValue => idControl.value;
 
-  String? get _businessNumberValue => businessNumberControl?.value;
+  String? get _businessNumberValue => businessNumberControl.value;
 
-  List<String>? get _fileIdsValue => fileIdsControl?.value;
+  List<String>? get _fileIdsValue => fileIdsControl.value;
 
   String get _nameValue => nameControl.value as String;
 
@@ -289,6 +289,30 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   List<AdminContactInformationOutput> get _adminsValue =>
       adminsAdminContactInformationForm.map((e) => e.model).toList();
 
+  String? get _idRawValue => idControl.value;
+
+  String? get _businessNumberRawValue => businessNumberControl.value;
+
+  List<String>? get _fileIdsRawValue => fileIdsControl.value;
+
+  String? get _nameRawValue => nameControl.value;
+
+  String? get _emailRawValue => emailControl.value;
+
+  bool get _sameMailingAddressAsCompanyRawValue =>
+      sameMailingAddressAsCompanyControl.value as bool;
+
+  Address get _companyAddressRawValue => companyAddressForm.rawModel;
+
+  PrimaryContact get _primaryContactRawValue => primaryContactForm.rawModel;
+
+  Address get _mailingAddressRawValue => mailingAddressForm.rawModel;
+
+  List<AdminContactInformation> get _adminsRawValue =>
+      adminsAdminContactInformationForm.map((e) => e.rawModel).toList();
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -298,6 +322,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsBusinessNumber {
     try {
       form.control(businessNumberControlPath());
@@ -307,6 +333,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsFileIds {
     try {
       form.control(fileIdsControlPath());
@@ -316,6 +344,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -325,6 +355,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -334,6 +366,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsSameMailingAddressAsCompany {
     try {
       form.control(sameMailingAddressAsCompanyControlPath());
@@ -343,6 +377,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsCompanyAddress {
     try {
       form.control(companyAddressControlPath());
@@ -352,6 +388,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsPrimaryContact {
     try {
       form.control(primaryContactControlPath());
@@ -361,6 +399,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsMailingAddress {
     try {
       form.control(mailingAddressControlPath());
@@ -370,6 +410,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsAdmins {
     try {
       form.control(adminsControlPath());
@@ -379,12 +421,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
-  Map<String, Object>? get idErrors => idControl?.errors;
+  Map<String, Object>? get idErrors => idControl.errors;
 
-  Map<String, Object>? get businessNumberErrors =>
-      businessNumberControl?.errors;
+  Map<String, Object>? get businessNumberErrors => businessNumberControl.errors;
 
-  Map<String, Object>? get fileIdsErrors => fileIdsControl?.errors;
+  Map<String, Object>? get fileIdsErrors => fileIdsControl.errors;
 
   Map<String, Object>? get nameErrors => nameControl.errors;
 
@@ -422,6 +463,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
 
   void get adminsFocus => form.focus(adminsControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void idRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -448,6 +491,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void businessNumberRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -474,6 +519,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void fileIdsRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -500,6 +547,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void nameRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -526,6 +575,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void emailRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -557,7 +608,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl?.updateValue(value,
+    idControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -566,7 +617,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    businessNumberControl?.updateValue(value,
+    businessNumberControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -575,7 +626,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    fileIdsControl?.updateValue(value,
+    fileIdsControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -711,7 +762,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl?.patchValue(value,
+    idControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -720,7 +771,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    businessNumberControl?.patchValue(value,
+    businessNumberControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -729,7 +780,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    fileIdsControl?.patchValue(value,
+    fileIdsControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -820,7 +871,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      idControl?.reset(
+      idControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -835,7 +886,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      businessNumberControl?.reset(
+      businessNumberControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -850,7 +901,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      fileIdsControl?.reset(
+      fileIdsControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -953,16 +1004,14 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
-  FormControl<String>? get idControl =>
-      containsId ? form.control(idControlPath()) as FormControl<String>? : null;
+  FormControl<String> get idControl =>
+      form.control(idControlPath()) as FormControl<String>;
 
-  FormControl<String>? get businessNumberControl => containsBusinessNumber
-      ? form.control(businessNumberControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get businessNumberControl =>
+      form.control(businessNumberControlPath()) as FormControl<String>;
 
-  FormControl<List<String>>? get fileIdsControl => containsFileIds
-      ? form.control(fileIdsControlPath()) as FormControl<List<String>>?
-      : null;
+  FormControl<List<String>> get fileIdsControl =>
+      form.control(fileIdsControlPath()) as FormControl<List<String>>;
 
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
@@ -1012,12 +1061,12 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      idControl?.markAsDisabled(
+      idControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      idControl?.markAsEnabled(
+      idControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1030,12 +1079,12 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      businessNumberControl?.markAsDisabled(
+      businessNumberControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      businessNumberControl?.markAsEnabled(
+      businessNumberControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1048,12 +1097,12 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      fileIdsControl?.markAsDisabled(
+      fileIdsControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      fileIdsControl?.markAsEnabled(
+      fileIdsControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1208,6 +1257,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   }
 
   @override
+  @protected
   MSICreateOutput get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -1229,6 +1279,21 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
         sameMailingAddressAsCompany: _sameMailingAddressAsCompanyValue,
         mailingAddress: _mailingAddressValue,
         admins: _adminsValue);
+  }
+
+  @override
+  MSICreate get rawModel {
+    return MSICreate(
+        id: _idRawValue,
+        businessNumber: _businessNumberRawValue,
+        fileIds: _fileIdsRawValue,
+        name: _nameRawValue,
+        companyAddress: _companyAddressRawValue,
+        email: _emailRawValue,
+        primaryContact: _primaryContactRawValue,
+        sameMailingAddressAsCompany: _sameMailingAddressAsCompanyRawValue,
+        mailingAddress: _mailingAddressRawValue,
+        admins: _adminsRawValue);
   }
 
   @override
@@ -1434,6 +1499,18 @@ class AddressForm implements FormModel<Address, AddressOutput> {
 
   ApiCountryType get _countryValue => countryControl.value as ApiCountryType;
 
+  String? get _streetRawValue => streetControl.value;
+
+  String? get _cityRawValue => cityControl.value;
+
+  String? get _stateOrProvinceRawValue => stateOrProvinceControl.value;
+
+  String? get _zipCodeRawValue => zipCodeControl.value;
+
+  ApiCountryType? get _countryRawValue => countryControl.value;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsStreet {
     try {
       form.control(streetControlPath());
@@ -1443,6 +1520,8 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsCity {
     try {
       form.control(cityControlPath());
@@ -1452,6 +1531,8 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsStateOrProvince {
     try {
       form.control(stateOrProvinceControlPath());
@@ -1461,6 +1542,8 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsZipCode {
     try {
       form.control(zipCodeControlPath());
@@ -1470,6 +1553,8 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsCountry {
     try {
       form.control(countryControlPath());
@@ -1500,6 +1585,8 @@ class AddressForm implements FormModel<Address, AddressOutput> {
 
   void get countryFocus => form.focus(countryControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void streetRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1526,6 +1613,8 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void cityRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1552,6 +1641,8 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void stateOrProvinceRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1578,6 +1669,8 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void zipCodeRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1604,6 +1697,8 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void countryRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1901,6 +1996,7 @@ class AddressForm implements FormModel<Address, AddressOutput> {
   }
 
   @override
+  @protected
   AddressOutput get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -1917,6 +2013,16 @@ class AddressForm implements FormModel<Address, AddressOutput> {
         stateOrProvince: _stateOrProvinceValue,
         zipCode: _zipCodeValue,
         country: _countryValue);
+  }
+
+  @override
+  Address get rawModel {
+    return Address(
+        street: _streetRawValue,
+        city: _cityRawValue,
+        stateOrProvince: _stateOrProvinceRawValue,
+        zipCode: _zipCodeRawValue,
+        country: _countryRawValue);
   }
 
   @override
@@ -2077,10 +2183,18 @@ class PrimaryContactForm
 
   String get _fullNameValue => fullNameControl.value as String;
 
-  String? get _jobTitleValue => jobTitleControl?.value;
+  String? get _jobTitleValue => jobTitleControl.value;
 
   String get _emailValue => emailControl.value as String;
 
+  String? get _fullNameRawValue => fullNameControl.value;
+
+  String? get _jobTitleRawValue => jobTitleControl.value;
+
+  String? get _emailRawValue => emailControl.value;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsFullName {
     try {
       form.control(fullNameControlPath());
@@ -2090,6 +2204,8 @@ class PrimaryContactForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsJobTitle {
     try {
       form.control(jobTitleControlPath());
@@ -2099,6 +2215,8 @@ class PrimaryContactForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -2110,7 +2228,7 @@ class PrimaryContactForm
 
   Map<String, Object>? get fullNameErrors => fullNameControl.errors;
 
-  Map<String, Object>? get jobTitleErrors => jobTitleControl?.errors;
+  Map<String, Object>? get jobTitleErrors => jobTitleControl.errors;
 
   Map<String, Object>? get emailErrors => emailControl.errors;
 
@@ -2120,6 +2238,8 @@ class PrimaryContactForm
 
   void get emailFocus => form.focus(emailControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void fullNameRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -2146,6 +2266,8 @@ class PrimaryContactForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void jobTitleRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -2172,6 +2294,8 @@ class PrimaryContactForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void emailRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -2212,7 +2336,7 @@ class PrimaryContactForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    jobTitleControl?.updateValue(value,
+    jobTitleControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -2239,7 +2363,7 @@ class PrimaryContactForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    jobTitleControl?.patchValue(value,
+    jobTitleControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -2274,7 +2398,7 @@ class PrimaryContactForm
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      jobTitleControl?.reset(
+      jobTitleControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -2300,9 +2424,8 @@ class PrimaryContactForm
   FormControl<String> get fullNameControl =>
       form.control(fullNameControlPath()) as FormControl<String>;
 
-  FormControl<String>? get jobTitleControl => containsJobTitle
-      ? form.control(jobTitleControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get jobTitleControl =>
+      form.control(jobTitleControlPath()) as FormControl<String>;
 
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
@@ -2331,12 +2454,12 @@ class PrimaryContactForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      jobTitleControl?.markAsDisabled(
+      jobTitleControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      jobTitleControl?.markAsEnabled(
+      jobTitleControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -2362,6 +2485,7 @@ class PrimaryContactForm
   }
 
   @override
+  @protected
   PrimaryContactOutput get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -2374,6 +2498,14 @@ class PrimaryContactForm
     }
     return PrimaryContactOutput(
         fullName: _fullNameValue, jobTitle: _jobTitleValue, email: _emailValue);
+  }
+
+  @override
+  PrimaryContact get rawModel {
+    return PrimaryContact(
+        fullName: _fullNameRawValue,
+        jobTitle: _jobTitleRawValue,
+        email: _emailRawValue);
   }
 
   @override
@@ -2526,6 +2658,14 @@ class AdminContactInformationForm
 
   String get _emailValue => emailControl.value as String;
 
+  String? get _firstNameRawValue => firstNameControl.value;
+
+  String? get _lastNameRawValue => lastNameControl.value;
+
+  String? get _emailRawValue => emailControl.value;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsFirstName {
     try {
       form.control(firstNameControlPath());
@@ -2535,6 +2675,8 @@ class AdminContactInformationForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsLastName {
     try {
       form.control(lastNameControlPath());
@@ -2544,6 +2686,8 @@ class AdminContactInformationForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -2565,6 +2709,8 @@ class AdminContactInformationForm
 
   void get emailFocus => form.focus(emailControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void firstNameRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -2591,6 +2737,8 @@ class AdminContactInformationForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void lastNameRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -2617,6 +2765,8 @@ class AdminContactInformationForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void emailRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -2806,6 +2956,7 @@ class AdminContactInformationForm
   }
 
   @override
+  @protected
   AdminContactInformationOutput get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -2820,6 +2971,14 @@ class AdminContactInformationForm
         firstName: _firstNameValue,
         lastName: _lastNameValue,
         email: _emailValue);
+  }
+
+  @override
+  AdminContactInformation get rawModel {
+    return AdminContactInformation(
+        firstName: _firstNameRawValue,
+        lastName: _lastNameRawValue,
+        email: _emailRawValue);
   }
 
   @override

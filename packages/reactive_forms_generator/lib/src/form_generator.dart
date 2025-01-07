@@ -241,13 +241,13 @@ class FormGenerator {
         ..returns = const Reference('void')
         ..body = Code(
           '''
-              ${field.fieldControlName}${field.nullabilitySuffix}.add(${formGroupGenerator.className}.formElements${formGroupGenerator.element.generics}(value));''',
+              ${field.fieldControlName}.add(${formGroupGenerator.className}.formElements${formGroupGenerator.element.generics}(value));''',
         ),
     );
   }
 
   Method removeGroupControl(ParameterElement field) {
-    final controlField = '${field.fieldControlName}${field.nullabilitySuffix}';
+    final controlField = '${field.fieldControlName}';
 
     return Method(
       (b) => b
@@ -384,7 +384,7 @@ class FormGenerator {
                   break;
               }
                
-              ${field.fieldControlName}${field.nullabilitySuffix}.add(FormControl<$formControlType>(
+              ${field.fieldControlName}.add(FormControl<$formControlType>(
                 value: value, 
                 validators: resultingValidators,
                 asyncValidators: resultingAsyncValidators,
@@ -413,7 +413,12 @@ class FormGenerator {
           b
             ..name = 'model'
             ..returns = Reference(referenceType)
-            ..annotations.add(const CodeExpression(Code('override')))
+            ..annotations.addAll(
+              [
+                const CodeExpression(Code('override')),
+                const CodeExpression(Code('protected'))
+              ],
+            )
             ..type = MethodType.getter
             ..body = Code('''
               final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
@@ -425,6 +430,31 @@ class FormGenerator {
                   StackTrace.current,
                 );
               }
+              return $referenceType(${parameterValues.join(', ')});
+            ''');
+        },
+      );
+
+  Method get rawModelMethod => Method(
+        (b) {
+          final parameterValues = parameters.map<String?>((e) {
+            if (e.isPositional ||
+                e.isRequiredPositional ||
+                (e.isOptional && e.isPositional)) {
+              return e.fieldRawValueName;
+            }
+
+            return '${e.fieldName}:${e.fieldRawValueName}';
+          }).whereType<String>();
+
+          final referenceType = element.fullTypeName;
+
+          b
+            ..name = 'rawModel'
+            ..returns = Reference(referenceType)
+            ..annotations.add(const CodeExpression(Code('override')))
+            ..type = MethodType.getter
+            ..body = Code('''
               return $referenceType(${parameterValues.join(', ')});
             ''');
         },
@@ -732,6 +762,7 @@ class FormGenerator {
             [
               ...fieldControlNameMethodList,
               ...fieldValueMethodList,
+              ...fieldRawValueMethodList,
               ...fieldContainsMethodList,
               ...fieldErrorsMethodList,
               ...fieldFocusMethodList,
@@ -752,6 +783,7 @@ class FormGenerator {
               ...removeGroupControlMethodList,
               ...addGroupControlListMethodList,
               modelMethod,
+              rawModelMethod,
               toggleDisabledMethod,
               equalsToMethod,
               submitMethod,
@@ -862,7 +894,7 @@ class FormGenerator {
             ..type = MethodType.getter
             ..body = Code(
               '''
-                final values = (${e.fieldControlName}${e.nullabilitySuffix}.controls ${e.isNullable ? '?? []' : ''}).map((e) => e.value).toList();
+                final values = (${e.fieldControlName}.controls ${e.isNullable ? '?? []' : ''}).map((e) => e.value).toList();
                 
                 return values
                 .asMap()
@@ -889,6 +921,14 @@ class FormGenerator {
             e,
             root.output,
             root.requiredValidators,
+          ).method())
+      .whereType<Method>();
+
+  Iterable<Method> get fieldRawValueMethodList => all
+      .map((e) => FieldRawValueMethod(
+            e,
+            false,
+            [],
           ).method())
       .whereType<Method>();
 

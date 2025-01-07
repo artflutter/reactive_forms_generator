@@ -253,7 +253,7 @@ class ArrayNullableOForm
 
   String modeListControlPath() => pathBuilder(modeListControlName);
 
-  List<String?>? get _someListValue => someListControl?.value;
+  List<String?>? get _someListValue => someListControl.value;
 
   List<String> get _emailListValue =>
       emailListControl.rawValue.whereType<String>().toList();
@@ -262,11 +262,27 @@ class ArrayNullableOForm
       fruitListControl.rawValue.whereType<bool?>().toList();
 
   List<String?>? get _vegetablesListValue =>
-      vegetablesListControl?.rawValue.whereType<String?>().toList();
+      vegetablesListControl.rawValue.whereType<String?>().toList();
 
   List<UserMode?>? get _modeListValue =>
-      modeListControl?.rawValue.whereType<UserMode?>().toList();
+      modeListControl.rawValue.whereType<UserMode?>().toList();
 
+  List<String?>? get _someListRawValue => someListControl.value;
+
+  List<String> get _emailListRawValue =>
+      emailListControl.rawValue.whereType<String>().toList();
+
+  List<bool?> get _fruitListRawValue =>
+      fruitListControl.rawValue.whereType<bool?>().toList();
+
+  List<String?>? get _vegetablesListRawValue =>
+      vegetablesListControl.rawValue.whereType<String?>().toList();
+
+  List<UserMode?>? get _modeListRawValue =>
+      modeListControl.rawValue.whereType<UserMode?>().toList();
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsSomeList {
     try {
       form.control(someListControlPath());
@@ -276,6 +292,8 @@ class ArrayNullableOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmailList {
     try {
       form.control(emailListControlPath());
@@ -285,6 +303,8 @@ class ArrayNullableOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsFruitList {
     try {
       form.control(fruitListControlPath());
@@ -294,6 +314,8 @@ class ArrayNullableOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsVegetablesList {
     try {
       form.control(vegetablesListControlPath());
@@ -303,6 +325,8 @@ class ArrayNullableOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsModeList {
     try {
       form.control(modeListControlPath());
@@ -312,16 +336,15 @@ class ArrayNullableOForm
     }
   }
 
-  Map<String, Object>? get someListErrors => someListControl?.errors;
+  Map<String, Object>? get someListErrors => someListControl.errors;
 
   Map<String, Object> get emailListErrors => emailListControl.errors;
 
   Map<String, Object> get fruitListErrors => fruitListControl.errors;
 
-  Map<String, Object>? get vegetablesListErrors =>
-      vegetablesListControl?.errors;
+  Map<String, Object>? get vegetablesListErrors => vegetablesListControl.errors;
 
-  Map<String, Object>? get modeListErrors => modeListControl?.errors;
+  Map<String, Object>? get modeListErrors => modeListControl.errors;
 
   void get someListFocus => form.focus(someListControlPath());
 
@@ -333,6 +356,8 @@ class ArrayNullableOForm
 
   void get modeListFocus => form.focus(modeListControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void someListRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -359,6 +384,8 @@ class ArrayNullableOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void vegetablesListRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -385,6 +412,8 @@ class ArrayNullableOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void modeListRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -416,7 +445,7 @@ class ArrayNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    someListControl?.updateValue(value,
+    someListControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -443,7 +472,7 @@ class ArrayNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    vegetablesListControl?.updateValue(value,
+    vegetablesListControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -452,7 +481,7 @@ class ArrayNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    modeListControl?.updateValue(value,
+    modeListControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -461,7 +490,7 @@ class ArrayNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    someListControl?.patchValue(value,
+    someListControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -488,7 +517,7 @@ class ArrayNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    vegetablesListControl?.patchValue(value,
+    vegetablesListControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -497,7 +526,7 @@ class ArrayNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    modeListControl?.patchValue(value,
+    modeListControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -508,7 +537,7 @@ class ArrayNullableOForm
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      someListControl?.reset(
+      someListControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -553,7 +582,7 @@ class ArrayNullableOForm
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      vegetablesListControl?.reset(
+      vegetablesListControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -568,7 +597,7 @@ class ArrayNullableOForm
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      modeListControl?.reset(
+      modeListControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -576,9 +605,8 @@ class ArrayNullableOForm
         disabled: disabled,
       );
 
-  FormControl<List<String?>>? get someListControl => containsSomeList
-      ? form.control(someListControlPath()) as FormControl<List<String?>>?
-      : null;
+  FormControl<List<String?>> get someListControl =>
+      form.control(someListControlPath()) as FormControl<List<String?>>;
 
   FormArray<String> get emailListControl =>
       form.control(emailListControlPath()) as FormArray<String>;
@@ -586,13 +614,11 @@ class ArrayNullableOForm
   FormArray<bool> get fruitListControl =>
       form.control(fruitListControlPath()) as FormArray<bool>;
 
-  FormArray<String>? get vegetablesListControl => containsVegetablesList
-      ? form.control(vegetablesListControlPath()) as FormArray<String>?
-      : null;
+  FormArray<String> get vegetablesListControl =>
+      form.control(vegetablesListControlPath()) as FormArray<String>;
 
-  FormArray<UserMode>? get modeListControl => containsModeList
-      ? form.control(modeListControlPath()) as FormArray<UserMode>?
-      : null;
+  FormArray<UserMode> get modeListControl =>
+      form.control(modeListControlPath()) as FormArray<UserMode>;
 
   List<FormControl<String>> get emailListControlControls =>
       emailListControl.controls.cast<FormControl<String>>();
@@ -601,13 +627,10 @@ class ArrayNullableOForm
       fruitListControl.controls.cast<FormControl<bool>>();
 
   List<FormControl<String>?> get vegetablesListControlControls =>
-      containsVegetablesList
-          ? vegetablesListControl?.controls.cast<FormControl<String>?>() ?? []
-          : [];
+      vegetablesListControl.controls.cast<FormControl<String>?>() ?? [];
 
-  List<FormControl<UserMode>?> get modeListControlControls => containsModeList
-      ? modeListControl?.controls.cast<FormControl<UserMode>?>() ?? []
-      : [];
+  List<FormControl<UserMode>?> get modeListControlControls =>
+      modeListControl.controls.cast<FormControl<UserMode>?>() ?? [];
 
   void someListSetDisabled(
     bool disabled, {
@@ -615,12 +638,12 @@ class ArrayNullableOForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      someListControl?.markAsDisabled(
+      someListControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      someListControl?.markAsEnabled(
+      someListControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -669,12 +692,12 @@ class ArrayNullableOForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      vegetablesListControl?.markAsDisabled(
+      vegetablesListControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      vegetablesListControl?.markAsEnabled(
+      vegetablesListControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -687,12 +710,12 @@ class ArrayNullableOForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      modeListControl?.markAsDisabled(
+      modeListControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      modeListControl?.markAsEnabled(
+      modeListControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -810,7 +833,7 @@ class ArrayNullableOForm
         break;
     }
 
-    vegetablesListControl?.add(FormControl<String>(
+    vegetablesListControl.add(FormControl<String>(
       value: value,
       validators: resultingValidators,
       asyncValidators: resultingAsyncValidators,
@@ -850,7 +873,7 @@ class ArrayNullableOForm
         break;
     }
 
-    modeListControl?.add(FormControl<UserMode>(
+    modeListControl.add(FormControl<UserMode>(
       value: value,
       validators: resultingValidators,
       asyncValidators: resultingAsyncValidators,
@@ -860,6 +883,7 @@ class ArrayNullableOForm
   }
 
   @override
+  @protected
   ArrayNullableOOutput get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -876,6 +900,16 @@ class ArrayNullableOForm
         vegetablesList: _vegetablesListValue,
         modeList: _modeListValue,
         someList: _someListValue);
+  }
+
+  @override
+  ArrayNullableO get rawModel {
+    return ArrayNullableO(
+        emailList: _emailListRawValue,
+        fruitList: _fruitListRawValue,
+        vegetablesList: _vegetablesListRawValue,
+        modeList: _modeListRawValue,
+        someList: _someListRawValue);
   }
 
   @override

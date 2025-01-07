@@ -81,11 +81,13 @@ class _AnnotatelessFormWidgetState extends State<AnnotatelessFormWidget> {
                         child: ElevatedButton(
                           key: submitRaw.itemKey,
                           onPressed: () {
-                            debugPrint(formModel.model.email);
-                            debugPrint(formModel.model.password);
+                            formModel.submit(onValid: (model) {
+                              debugPrint(model.email);
+                              debugPrint(model.password);
 
-                            formModel.form.markAsDisabled();
-                            widget.onChange?.call(formModel.model);
+                              formModel.form.markAsDisabled();
+                              widget.onChange?.call(model);
+                            });
                           },
                           child: const Text('Submit raw'),
                         ),
@@ -98,10 +100,12 @@ class _AnnotatelessFormWidgetState extends State<AnnotatelessFormWidget> {
                               key: submit.itemKey,
                               onPressed: formModel.form.valid
                                   ? () {
-                                      debugPrint((formModel).model.toString());
-                                      debugPrint(formModel.model.email);
-                                      debugPrint(formModel.model.password);
-                                      widget.onChange?.call(formModel.model);
+                                      formModel.submit(onValid: (model) {
+                                        debugPrint(model.toString());
+                                        debugPrint(model.email);
+                                        debugPrint(model.password);
+                                        widget.onChange?.call(model);
+                                      });
                                     }
                                   : null,
                               child: const Text('Submit'),

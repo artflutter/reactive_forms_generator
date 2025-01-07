@@ -290,6 +290,31 @@ class ProfileForm implements FormModel<Profile, Profile> {
 
   TimerSetting get _timerValue => timerForm.model;
 
+  String get _idRawValue => idControl.value as String;
+
+  String get _anotherIdRawValue => anotherIdControl.value as String;
+
+  String get _nameRawValue => nameControl.value as String;
+
+  ChartingOrderValue get _chartingOrderRawValue =>
+      chartingOrderControl.value as ChartingOrderValue;
+
+  NumberingStandard get _numberingStandardRawValue =>
+      numberingStandardControl.value as NumberingStandard;
+
+  MeasurementType get _measurementTypeRawValue =>
+      measurementTypeControl.value as MeasurementType;
+
+  bool get _audioGuidanceRawValue => audioGuidanceControl.value as bool;
+
+  IncidenceFilter get _incidenceFilterRawValue => incidenceFilterForm.rawModel;
+
+  ThresholdSetting get _thresholdRawValue => thresholdForm.rawModel;
+
+  TimerSetting get _timerRawValue => timerForm.rawModel;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -299,6 +324,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsAnotherId {
     try {
       form.control(anotherIdControlPath());
@@ -308,6 +335,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -317,6 +346,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsChartingOrder {
     try {
       form.control(chartingOrderControlPath());
@@ -326,6 +357,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsNumberingStandard {
     try {
       form.control(numberingStandardControlPath());
@@ -335,6 +368,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsMeasurementType {
     try {
       form.control(measurementTypeControlPath());
@@ -344,6 +379,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsAudioGuidance {
     try {
       form.control(audioGuidanceControlPath());
@@ -353,6 +390,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIncidenceFilter {
     try {
       form.control(incidenceFilterControlPath());
@@ -362,6 +401,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsThreshold {
     try {
       form.control(thresholdControlPath());
@@ -371,6 +412,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsTimer {
     try {
       form.control(timerControlPath());
@@ -974,6 +1017,7 @@ class ProfileForm implements FormModel<Profile, Profile> {
   }
 
   @override
+  @protected
   Profile get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -994,6 +1038,20 @@ class ProfileForm implements FormModel<Profile, Profile> {
         threshold: _thresholdValue,
         timer: _timerValue,
         audioGuidance: _audioGuidanceValue);
+  }
+
+  @override
+  Profile get rawModel {
+    return Profile(_idRawValue,
+        anotherId: _anotherIdRawValue,
+        name: _nameRawValue,
+        chartingOrder: _chartingOrderRawValue,
+        numberingStandard: _numberingStandardRawValue,
+        incidenceFilter: _incidenceFilterRawValue,
+        measurementType: _measurementTypeRawValue,
+        threshold: _thresholdRawValue,
+        timer: _timerRawValue,
+        audioGuidance: _audioGuidanceRawValue);
   }
 
   @override
@@ -1208,6 +1266,22 @@ class IncidenceFilterForm
 
   bool get _isPlaqueEnabledValue => isPlaqueEnabledControl.value as bool;
 
+  bool get _isMobilityEnabledRawValue => isMobilityEnabledControl.value as bool;
+
+  bool get _isFurcationEnabledRawValue =>
+      isFurcationEnabledControl.value as bool;
+
+  bool get _isBleedingEnabledRawValue => isBleedingEnabledControl.value as bool;
+
+  bool get _isSuppurationEnabledRawValue =>
+      isSuppurationEnabledControl.value as bool;
+
+  bool get _isCalculusEnabledRawValue => isCalculusEnabledControl.value as bool;
+
+  bool get _isPlaqueEnabledRawValue => isPlaqueEnabledControl.value as bool;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIsMobilityEnabled {
     try {
       form.control(isMobilityEnabledControlPath());
@@ -1217,6 +1291,8 @@ class IncidenceFilterForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIsFurcationEnabled {
     try {
       form.control(isFurcationEnabledControlPath());
@@ -1226,6 +1302,8 @@ class IncidenceFilterForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIsBleedingEnabled {
     try {
       form.control(isBleedingEnabledControlPath());
@@ -1235,6 +1313,8 @@ class IncidenceFilterForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIsSuppurationEnabled {
     try {
       form.control(isSuppurationEnabledControlPath());
@@ -1244,6 +1324,8 @@ class IncidenceFilterForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIsCalculusEnabled {
     try {
       form.control(isCalculusEnabledControlPath());
@@ -1253,6 +1335,8 @@ class IncidenceFilterForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIsPlaqueEnabled {
     try {
       form.control(isPlaqueEnabledControlPath());
@@ -1619,6 +1703,7 @@ class IncidenceFilterForm
   }
 
   @override
+  @protected
   IncidenceFilter get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -1636,6 +1721,17 @@ class IncidenceFilterForm
         isSuppurationEnabled: _isSuppurationEnabledValue,
         isCalculusEnabled: _isCalculusEnabledValue,
         isPlaqueEnabled: _isPlaqueEnabledValue);
+  }
+
+  @override
+  IncidenceFilter get rawModel {
+    return IncidenceFilter(
+        isMobilityEnabled: _isMobilityEnabledRawValue,
+        isFurcationEnabled: _isFurcationEnabledRawValue,
+        isBleedingEnabled: _isBleedingEnabledRawValue,
+        isSuppurationEnabled: _isSuppurationEnabledRawValue,
+        isCalculusEnabled: _isCalculusEnabledRawValue,
+        isPlaqueEnabled: _isPlaqueEnabledRawValue);
   }
 
   @override
@@ -1801,6 +1897,12 @@ class ThresholdSettingForm
 
   int get _valueValue => valueControl.value as int;
 
+  bool get _isEnabledRawValue => isEnabledControl.value as bool;
+
+  int get _valueRawValue => valueControl.value as int;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIsEnabled {
     try {
       form.control(isEnabledControlPath());
@@ -1810,6 +1912,8 @@ class ThresholdSettingForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsValue {
     try {
       form.control(valueControlPath());
@@ -1936,6 +2040,7 @@ class ThresholdSettingForm
   }
 
   @override
+  @protected
   ThresholdSetting get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -1947,6 +2052,12 @@ class ThresholdSettingForm
       );
     }
     return ThresholdSetting(isEnabled: _isEnabledValue, value: _valueValue);
+  }
+
+  @override
+  ThresholdSetting get rawModel {
+    return ThresholdSetting(
+        isEnabled: _isEnabledRawValue, value: _valueRawValue);
   }
 
   @override
@@ -2084,6 +2195,12 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
 
   int get _valueValue => valueControl.value as int;
 
+  bool get _isEnabledRawValue => isEnabledControl.value as bool;
+
+  int get _valueRawValue => valueControl.value as int;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIsEnabled {
     try {
       form.control(isEnabledControlPath());
@@ -2093,6 +2210,8 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsValue {
     try {
       form.control(valueControlPath());
@@ -2219,6 +2338,7 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
   }
 
   @override
+  @protected
   TimerSetting get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -2230,6 +2350,11 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
       );
     }
     return TimerSetting(isEnabled: _isEnabledValue, value: _valueValue);
+  }
+
+  @override
+  TimerSetting get rawModel {
+    return TimerSetting(isEnabled: _isEnabledRawValue, value: _valueRawValue);
   }
 
   @override

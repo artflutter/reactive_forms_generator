@@ -293,6 +293,11 @@ class AnimatedUrlListForm
   List<UrlEntity> get _urlListValue =>
       urlListUrlEntityForm.map((e) => e.model).toList();
 
+  List<UrlEntity> get _urlListRawValue =>
+      urlListUrlEntityForm.map((e) => e.rawModel).toList();
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsUrlList {
     try {
       form.control(urlListControlPath());
@@ -464,6 +469,7 @@ class AnimatedUrlListForm
   }
 
   @override
+  @protected
   AnimatedUrlList get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -475,6 +481,11 @@ class AnimatedUrlListForm
       );
     }
     return AnimatedUrlList(urlList: _urlListValue);
+  }
+
+  @override
+  AnimatedUrlList get rawModel {
+    return AnimatedUrlList(urlList: _urlListRawValue);
   }
 
   @override
@@ -609,6 +620,12 @@ class UrlEntityForm implements FormModel<UrlEntity, UrlEntity> {
 
   String get _urlValue => urlControl.value ?? "";
 
+  String get _labelRawValue => labelControl.value ?? "";
+
+  String get _urlRawValue => urlControl.value ?? "";
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsLabel {
     try {
       form.control(labelControlPath());
@@ -618,6 +635,8 @@ class UrlEntityForm implements FormModel<UrlEntity, UrlEntity> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsUrl {
     try {
       form.control(urlControlPath());
@@ -744,6 +763,7 @@ class UrlEntityForm implements FormModel<UrlEntity, UrlEntity> {
   }
 
   @override
+  @protected
   UrlEntity get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -755,6 +775,11 @@ class UrlEntityForm implements FormModel<UrlEntity, UrlEntity> {
       );
     }
     return UrlEntity(label: _labelValue, url: _urlValue);
+  }
+
+  @override
+  UrlEntity get rawModel {
+    return UrlEntity(label: _labelRawValue, url: _urlRawValue);
   }
 
   @override

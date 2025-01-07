@@ -243,6 +243,12 @@ class SomeWiredNameForm
 
   String get _passwordValue => passwordControl.value as String;
 
+  String? get _emailRawValue => emailControl.value;
+
+  String? get _passwordRawValue => passwordControl.value;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -252,6 +258,8 @@ class SomeWiredNameForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsPassword {
     try {
       form.control(passwordControlPath());
@@ -269,6 +277,8 @@ class SomeWiredNameForm
 
   void get passwordFocus => form.focus(passwordControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void emailRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -295,6 +305,8 @@ class SomeWiredNameForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void passwordRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -430,6 +442,7 @@ class SomeWiredNameForm
   }
 
   @override
+  @protected
   RenamedBasicOOutput get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -441,6 +454,11 @@ class SomeWiredNameForm
       );
     }
     return RenamedBasicOOutput(email: _emailValue, password: _passwordValue);
+  }
+
+  @override
+  RenamedBasicO get rawModel {
+    return RenamedBasicO(email: _emailRawValue, password: _passwordRawValue);
   }
 
   @override

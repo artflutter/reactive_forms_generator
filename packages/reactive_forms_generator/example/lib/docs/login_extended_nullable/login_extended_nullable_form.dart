@@ -65,11 +65,9 @@ class LoginExtendedNullableFormWidget extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  if (formModel.form.valid) {
-                    debugPrint(formModel.model.toString());
-                  } else {
-                    formModel.form.markAllAsTouched();
-                  }
+                  formModel.submit(onValid: (model) {
+                    debugPrint(model.toString());
+                  });
                 },
                 child: const Text('Sign Up'),
               ),

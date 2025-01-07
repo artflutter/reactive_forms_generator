@@ -13,7 +13,7 @@ class ReactiveFormClearMethod extends ReactiveFormGeneratorMethod {
   Method? formGroupArrayMethod() {
     return methodEntity.rebuild((b) => b..body = Code('''
       ${field.name}${field.className}.clear();
-      ${field.fieldControlName}${field.nullabilitySuffix}.clear(
+      ${field.fieldControlName}.clear(
         updateParent: updateParent,
         emitEvent: emitEvent);
     '''));

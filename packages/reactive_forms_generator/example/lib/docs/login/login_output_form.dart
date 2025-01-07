@@ -81,10 +81,11 @@ class _LoginFormWidgetState extends State<LoginOutputFormWidget> {
                         child: ElevatedButton(
                           key: submitRaw.itemKey,
                           onPressed: () {
-                            debugPrint(formModel.model.email);
-                            debugPrint(formModel.model.password);
-                            formModel.form.markAllAsTouched();
-                            widget.onChange?.call(formModel.model);
+                            formModel.submit(onValid: (model) {
+                              debugPrint(model.email);
+                              debugPrint(model.password);
+                              widget.onChange?.call(model);
+                            });
                           },
                           child: const Text('Submit raw'),
                         ),
@@ -97,10 +98,12 @@ class _LoginFormWidgetState extends State<LoginOutputFormWidget> {
                               key: submit.itemKey,
                               onPressed: formModel.form.valid
                                   ? () {
-                                      debugPrint(formModel.model.toString());
-                                      debugPrint(formModel.model.email);
-                                      debugPrint(formModel.model.password);
-                                      widget.onChange?.call(formModel.model);
+                                      formModel.submit(onValid: (model) {
+                                        debugPrint(model.toString());
+                                        debugPrint(model.email);
+                                        debugPrint(model.password);
+                                        widget.onChange?.call(model);
+                                      });
                                     }
                                   : null,
                               child: const Text('Submit'),

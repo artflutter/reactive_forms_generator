@@ -242,6 +242,12 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
 
   String get _passwordValue => passwordControl.value ?? "";
 
+  String get _emailRawValue => emailControl.value ?? "";
+
+  String get _passwordRawValue => passwordControl.value ?? "";
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -251,6 +257,8 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsPassword {
     try {
       form.control(passwordControlPath());
@@ -377,6 +385,7 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
   }
 
   @override
+  @protected
   ModelExtends get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -388,6 +397,11 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
       );
     }
     return ModelExtends(email: _emailValue, password: _passwordValue);
+  }
+
+  @override
+  ModelExtends get rawModel {
+    return ModelExtends(email: _emailRawValue, password: _passwordRawValue);
   }
 
   @override

@@ -23,7 +23,7 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
   @override
   Method? formGroupMethod() {
     return methodEntity.rebuild(
-      (b) => b..body = Code('${field.fieldName}Form.model'),
+      (b) => b..body = Code('${field.fieldName}Form.$fieldModelName'),
     );
   }
 
@@ -32,7 +32,7 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
     final type = (field.type as ParameterizedType).typeArguments.first;
 
     final code =
-        '${field.fieldControlName}${field.nullabilitySuffix}.rawValue.whereType<${type.getDisplayString(
+        '${field.fieldControlName}.rawValue.whereType<${type.getDisplayString(
       withNullability: true,
     )}>().toList()';
 
@@ -45,14 +45,13 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
   Method? formGroupArrayMethod() => methodEntity.rebuild(
         (b) => b
           ..body = Code(
-            '${field.name}${field.className}.map((e) => e.model).toList()',
+            '${field.name}${field.className}.map((e) => e.$fieldModelName).toList()',
           ),
       );
 
   @override
   Method? defaultMethod() {
-    String code =
-        '${field.fieldControlName}${toOutput ? '' : field.nullabilitySuffix}.value';
+    String code = '${field.fieldControlName}.value';
     String codeTypeCast =
         ' as ${field.type.getDisplayString(withNullability: !toOutput)}';
 
@@ -77,10 +76,14 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
     return methodEntity.rebuild((b) => b..body = Code(code));
   }
 
+  String get fieldValueName => field.fieldValueName;
+
+  String get fieldModelName => 'model';
+
   Method get methodEntity => Method(
         (b) {
           b
-            ..name = field.fieldValueName
+            ..name = fieldValueName
             ..lambda = true
             ..type = MethodType.getter
             ..returns = Reference(
@@ -90,6 +93,25 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
             );
         },
       );
+}
+
+class FieldRawValueMethod extends FieldValueMethod {
+  FieldRawValueMethod(
+    super.field,
+    super.output,
+    super.requiredValidators,
+  );
+
+  @override
+  String get fieldModelName => 'rawModel';
+
+  @override
+  String get fieldValueName => field.fieldRawValueName;
+
+  @override
+  bool get toOutput {
+    return false;
+  }
 }
 
 extension Care on ClassElement {

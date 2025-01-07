@@ -228,8 +228,12 @@ class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
 
   String tagsControlPath() => pathBuilder(tagsControlName);
 
-  List<T>? get _tagsValue => tagsControl?.value;
+  List<T>? get _tagsValue => tagsControl.value;
 
+  List<T>? get _tagsRawValue => tagsControl.value;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsTags {
     try {
       form.control(tagsControlPath());
@@ -239,10 +243,12 @@ class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
     }
   }
 
-  Map<String, Object>? get tagsErrors => tagsControl?.errors;
+  Map<String, Object>? get tagsErrors => tagsControl.errors;
 
   void get tagsFocus => form.focus(tagsControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void tagsRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -274,7 +280,7 @@ class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    tagsControl?.updateValue(value,
+    tagsControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -283,7 +289,7 @@ class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    tagsControl?.patchValue(value,
+    tagsControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -294,7 +300,7 @@ class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      tagsControl?.reset(
+      tagsControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -302,9 +308,8 @@ class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
         disabled: disabled,
       );
 
-  FormControl<List<T>>? get tagsControl => containsTags
-      ? form.control(tagsControlPath()) as FormControl<List<T>>?
-      : null;
+  FormControl<List<T>> get tagsControl =>
+      form.control(tagsControlPath()) as FormControl<List<T>>;
 
   void tagsSetDisabled(
     bool disabled, {
@@ -312,12 +317,12 @@ class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      tagsControl?.markAsDisabled(
+      tagsControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      tagsControl?.markAsEnabled(
+      tagsControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -325,6 +330,7 @@ class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
   }
 
   @override
+  @protected
   Tags<T> get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -336,6 +342,11 @@ class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
       );
     }
     return Tags<T>(tags: _tagsValue);
+  }
+
+  @override
+  Tags<T> get rawModel {
+    return Tags<T>(tags: _tagsRawValue);
   }
 
   @override

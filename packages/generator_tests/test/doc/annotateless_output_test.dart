@@ -9,7 +9,7 @@ void main() {
   group('reactive_forms_generator', () {
     test(
       'Form with annotateless fields',
-      () async {
+          () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -286,6 +286,12 @@ class AnnotatelessOForm
 
   String get _passwordValue => passwordControl.value ?? "";
 
+  String get _emailRawValue => emailControl.value ?? "";
+
+  String get _passwordRawValue => passwordControl.value ?? "";
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -295,6 +301,8 @@ class AnnotatelessOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsPassword {
     try {
       form.control(passwordControlPath());
@@ -421,6 +429,7 @@ class AnnotatelessOForm
   }
 
   @override
+  @protected
   AnnotatelessOOutput get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -432,6 +441,11 @@ class AnnotatelessOForm
       );
     }
     return AnnotatelessOOutput(email: _emailValue, password: _passwordValue);
+  }
+
+  @override
+  AnnotatelessO get rawModel {
+    return AnnotatelessO(email: _emailRawValue, password: _passwordRawValue);
   }
 
   @override

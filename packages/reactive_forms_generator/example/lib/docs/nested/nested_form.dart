@@ -30,29 +30,31 @@ class _NestedFormWidgetState extends State<NestedFormWidget> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    setState(() {
-                      formModel.groupListValueUpdate([]);
+                    formModel.submit(onValid: (model) {
+                      setState(() {
+                        formModel.groupListValueUpdate([]);
 
-                      formModel.addGroupListItem(const Group(
-                        id: 'id_1',
-                        subGroupList: [],
-                      ));
-                      formModel.groupListGroupForm
-                          .elementAt(0)
-                          .addSubGroupListItem(
-                            const SubGroup(
-                              id: 'sub_id_1',
-                            ),
-                          );
+                        formModel.addGroupListItem(const Group(
+                          id: 'id_1',
+                          subGroupList: [],
+                        ));
+                        formModel.groupListGroupForm
+                            .elementAt(0)
+                            .addSubGroupListItem(
+                              const SubGroup(
+                                id: 'sub_id_1',
+                              ),
+                            );
 
-                      final model = formModel.model;
-                      widget.onChange?.call(model);
+                        widget.onChange?.call(model);
 
-                      modelString = const JsonEncoder.withIndent('  ').convert(
-                        formModel.model.toJson(),
-                      );
-                      formValueString = const JsonEncoder.withIndent('  ')
-                          .convert(formModel.form.value);
+                        modelString =
+                            const JsonEncoder.withIndent('  ').convert(
+                          model.toJson(),
+                        );
+                        formValueString = const JsonEncoder.withIndent('  ')
+                            .convert(formModel.form.value);
+                      });
                     });
                   },
                   child: const Text(
@@ -64,25 +66,27 @@ class _NestedFormWidgetState extends State<NestedFormWidget> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    setState(() {
-                      formModel.groupListValueUpdate([]);
-                      formModel.addGroupListItem(const Group(
-                        id: 'id_1',
-                        subGroupList: [
-                          SubGroup(
-                            id: 'sub_id_1',
-                          ),
-                        ],
-                      ));
+                    formModel.submit(onValid: (model) {
+                      setState(() {
+                        formModel.groupListValueUpdate([]);
+                        formModel.addGroupListItem(const Group(
+                          id: 'id_1',
+                          subGroupList: [
+                            SubGroup(
+                              id: 'sub_id_1',
+                            ),
+                          ],
+                        ));
 
-                      final model = formModel.model;
-                      widget.onChange?.call(model);
+                        widget.onChange?.call(model);
 
-                      modelString = const JsonEncoder.withIndent('  ').convert(
-                        formModel.model.toJson(),
-                      );
-                      formValueString = const JsonEncoder.withIndent('  ')
-                          .convert(formModel.form.value);
+                        modelString =
+                            const JsonEncoder.withIndent('  ').convert(
+                          model.toJson(),
+                        );
+                        formValueString = const JsonEncoder.withIndent('  ')
+                            .convert(formModel.form.value);
+                      });
                     });
                   },
                   child: const Text('Add item'),

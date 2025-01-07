@@ -12,7 +12,7 @@ class ResetMethod extends ReactiveFormGeneratorMethod {
   @override
   Method? formGroupArrayMethod() {
     final code = '''
-      ${field.fieldControlName}${field.nullabilitySuffix}.reset(
+      ${field.fieldControlName}.reset(
         value: value${field.nullabilitySuffix}.map(
           (e) => ${field.className}.formElements(e).rawValue
         ).toList(), 
@@ -28,7 +28,7 @@ class ResetMethod extends ReactiveFormGeneratorMethod {
   @override
   Method? formGroupMethod() {
     final code = '''
-      ${field.fieldControlName}${field.nullabilitySuffix}.reset(
+      ${field.fieldControlName}.reset(
         value: ${field.className}.formElements(value).rawValue, 
         updateParent: updateParent, 
         emitEvent:emitEvent)
@@ -44,7 +44,7 @@ class ResetMethod extends ReactiveFormGeneratorMethod {
     return methodEntity.rebuild(
       (b) => b
         ..body = Code(
-          '''${field.fieldControlName}${toOutput ? '' : field.nullabilitySuffix}.reset(
+          '''${field.fieldControlName}.reset(
                 value: value, 
                 updateParent: updateParent, 
                 emitEvent: emitEvent,

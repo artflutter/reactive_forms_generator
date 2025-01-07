@@ -234,8 +234,14 @@ class TestForm implements FormModel<Test, Test> {
 
   String get _titleValue => titleControl.value as String;
 
-  String? get _descriptionValue => descriptionControl?.value;
+  String? get _descriptionValue => descriptionControl.value;
 
+  String get _titleRawValue => titleControl.value as String;
+
+  String? get _descriptionRawValue => descriptionControl.value;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsTitle {
     try {
       form.control(titleControlPath());
@@ -245,6 +251,8 @@ class TestForm implements FormModel<Test, Test> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsDescription {
     try {
       form.control(descriptionControlPath());
@@ -256,12 +264,14 @@ class TestForm implements FormModel<Test, Test> {
 
   Map<String, Object> get titleErrors => titleControl.errors;
 
-  Map<String, Object>? get descriptionErrors => descriptionControl?.errors;
+  Map<String, Object>? get descriptionErrors => descriptionControl.errors;
 
   void get titleFocus => form.focus(titleControlPath());
 
   void get descriptionFocus => form.focus(descriptionControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void descriptionRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -302,7 +312,7 @@ class TestForm implements FormModel<Test, Test> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    descriptionControl?.updateValue(value,
+    descriptionControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -320,7 +330,7 @@ class TestForm implements FormModel<Test, Test> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    descriptionControl?.patchValue(value,
+    descriptionControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -346,7 +356,7 @@ class TestForm implements FormModel<Test, Test> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      descriptionControl?.reset(
+      descriptionControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -357,9 +367,8 @@ class TestForm implements FormModel<Test, Test> {
   FormControl<String> get titleControl =>
       form.control(titleControlPath()) as FormControl<String>;
 
-  FormControl<String>? get descriptionControl => containsDescription
-      ? form.control(descriptionControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get descriptionControl =>
+      form.control(descriptionControlPath()) as FormControl<String>;
 
   void titleSetDisabled(
     bool disabled, {
@@ -385,12 +394,12 @@ class TestForm implements FormModel<Test, Test> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      descriptionControl?.markAsDisabled(
+      descriptionControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      descriptionControl?.markAsEnabled(
+      descriptionControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -398,6 +407,7 @@ class TestForm implements FormModel<Test, Test> {
   }
 
   @override
+  @protected
   Test get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -409,6 +419,11 @@ class TestForm implements FormModel<Test, Test> {
       );
     }
     return Test(title: _titleValue, description: _descriptionValue);
+  }
+
+  @override
+  Test get rawModel {
+    return Test(title: _titleRawValue, description: _descriptionRawValue);
   }
 
   @override

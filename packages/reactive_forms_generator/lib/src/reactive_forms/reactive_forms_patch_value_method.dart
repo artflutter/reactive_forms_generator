@@ -24,7 +24,7 @@ class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
         },
       );
     
-      ${field.fieldControlName}${field.nullabilitySuffix}.patchValue(
+      ${field.fieldControlName}.patchValue(
         toPatch.map((e) => ${field.className}.formElements(e).rawValue).toList(), 
         updateParent: updateParent, 
         emitEvent:emitEvent);
@@ -37,7 +37,7 @@ class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
   Method formGroupMethod() {
     return methodEntity.rebuild(
       (b) => b.body = Code(
-        '${field.fieldControlName}${field.nullabilitySuffix}.updateValue(${field.className}.formElements(value).rawValue, updateParent: updateParent, emitEvent:emitEvent);',
+        '${field.fieldControlName}.updateValue(${field.className}.formElements(value).rawValue, updateParent: updateParent, emitEvent:emitEvent);',
       ),
     );
   }
@@ -46,7 +46,7 @@ class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
   Method defaultMethod() {
     return methodEntity.rebuild(
       (b) => b.body = Code(
-        '${field.fieldControlName}${toOutput ? '' : field.nullabilitySuffix}.patchValue(value, updateParent: updateParent, emitEvent:emitEvent);',
+        '${field.fieldControlName}.patchValue(value, updateParent: updateParent, emitEvent:emitEvent);',
       ),
     );
   }

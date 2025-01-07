@@ -31,7 +31,7 @@ class ControlControlsMethod extends ReactiveFormGeneratorMethod {
 
     if (field.isNullable) {
       body =
-          '${field.containsMethodName} ? ${field.fieldControlName}?.controls.cast<$listTypeReference>() ?? [] : []';
+          '${field.fieldControlName}.controls.cast<$listTypeReference>() ?? []';
     }
 
     return Method(

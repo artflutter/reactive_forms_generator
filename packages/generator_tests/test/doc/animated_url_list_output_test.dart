@@ -293,6 +293,11 @@ class AnimatedUrlLisOForm
   List<UrlEntityOOutput> get _urlListValue =>
       urlListUrlEntityOForm.map((e) => e.model).toList();
 
+  List<UrlEntityO> get _urlListRawValue =>
+      urlListUrlEntityOForm.map((e) => e.rawModel).toList();
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsUrlList {
     try {
       form.control(urlListControlPath());
@@ -465,6 +470,7 @@ class AnimatedUrlLisOForm
   }
 
   @override
+  @protected
   AnimatedUrlLisOOutput get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -476,6 +482,11 @@ class AnimatedUrlLisOForm
       );
     }
     return AnimatedUrlLisOOutput(urlList: _urlListValue);
+  }
+
+  @override
+  AnimatedUrlLisO get rawModel {
+    return AnimatedUrlLisO(urlList: _urlListRawValue);
   }
 
   @override
@@ -610,6 +621,12 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
 
   String get _urlValue => urlControl.value as String;
 
+  String? get _labelRawValue => labelControl.value;
+
+  String? get _urlRawValue => urlControl.value;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsLabel {
     try {
       form.control(labelControlPath());
@@ -619,6 +636,8 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsUrl {
     try {
       form.control(urlControlPath());
@@ -636,6 +655,8 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
 
   void get urlFocus => form.focus(urlControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void labelRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -662,6 +683,8 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void urlRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -797,6 +820,7 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
   }
 
   @override
+  @protected
   UrlEntityOOutput get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -808,6 +832,11 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
       );
     }
     return UrlEntityOOutput(label: _labelValue, url: _urlValue);
+  }
+
+  @override
+  UrlEntityO get rawModel {
+    return UrlEntityO(label: _labelRawValue, url: _urlRawValue);
   }
 
   @override

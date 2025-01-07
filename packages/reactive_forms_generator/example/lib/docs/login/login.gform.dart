@@ -236,6 +236,12 @@ class LoginForm implements FormModel<Login, Login> {
 
   String get _passwordValue => passwordControl.value ?? "";
 
+  String get _emailRawValue => emailControl.value ?? "";
+
+  String get _passwordRawValue => passwordControl.value ?? "";
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -245,6 +251,8 @@ class LoginForm implements FormModel<Login, Login> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsPassword {
     try {
       form.control(passwordControlPath());
@@ -371,6 +379,7 @@ class LoginForm implements FormModel<Login, Login> {
   }
 
   @override
+  @protected
   Login get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -382,6 +391,11 @@ class LoginForm implements FormModel<Login, Login> {
       );
     }
     return Login(email: _emailValue, password: _passwordValue);
+  }
+
+  @override
+  Login get rawModel {
+    return Login(email: _emailRawValue, password: _passwordRawValue);
   }
 
   @override

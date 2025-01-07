@@ -148,13 +148,11 @@ class GroupFormWidget extends StatelessWidget {
               const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
-                  if (formModel.form.valid) {
-                    debugPrint(formModel.model.toString());
-                    debugPrint(formModel.model.personal?.name);
-                    debugPrint(formModel.model.personal?.email);
-                  } else {
-                    formModel.form.markAllAsTouched();
-                  }
+                  formModel.submit(onValid: (model) {
+                    debugPrint(model.toString());
+                    debugPrint(model.personal?.name);
+                    debugPrint(model.personal?.email);
+                  });
                 },
                 child: const Text('Sign Up'),
               ),

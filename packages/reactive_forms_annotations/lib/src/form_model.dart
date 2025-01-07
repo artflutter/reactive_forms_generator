@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 abstract class FormModel<TModel, TModelOutput> {
@@ -7,7 +8,10 @@ abstract class FormModel<TModel, TModelOutput> {
 
   final FormGroup form;
 
+  @protected
   TModelOutput get model;
+
+  TModel get rawModel;
 
   void submit({
     required void Function(TModelOutput model) onValid,

@@ -51,13 +51,11 @@ class FreezedFormWidget extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  if (formModel.form.valid) {
-                    debugPrint(jsonEncode(formModel.model.toJson()));
-                    debugPrint(formModel.model.toString());
-                    debugPrint(formModel.model.year.toString());
-                  } else {
-                    formModel.form.markAllAsTouched();
-                  }
+                  formModel.submit(onValid: (model) {
+                    debugPrint(jsonEncode(model.toJson()));
+                    debugPrint(model.toString());
+                    debugPrint(model.year.toString());
+                  });
                 },
                 child: const Text('Sign Up'),
               ),

@@ -68,6 +68,8 @@ extension ParameterElementExt on ParameterElement {
 
   String get fieldValueName => '_${fieldName}Value';
 
+  String get fieldRawValueName => '_${fieldName}RawValue';
+
   String get fieldControlForm => '${fieldName}Form';
 
   String get fieldControlName => '${fieldName}Control';
@@ -195,7 +197,7 @@ extension FieldElementExt on FieldElement {
 
   String get fieldValueName => '${fieldName}Value';
 
-  String get fieldControlName => '${fieldName}Control';
+  // String get fieldControlName => '${fieldName}Control';
 
   String get fieldControlPath => '${fieldName}ControlPath';
 

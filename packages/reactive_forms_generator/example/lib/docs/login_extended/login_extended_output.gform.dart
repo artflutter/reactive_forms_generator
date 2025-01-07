@@ -289,10 +289,32 @@ class LoginExtendedOForm
 
   double get _heightValue => heightControl.value as double;
 
-  String? get _unAnnotatedValue => unAnnotatedControl?.value;
+  String? get _unAnnotatedValue => unAnnotatedControl.value;
 
   List<int> get _someIntListValue => someIntListControl.value ?? [];
 
+  String? get _emailRawValue => emailControl.value;
+
+  String get _email2RawValue => email2Control.value ?? "";
+
+  String get _passwordRawValue => passwordControl.value as String;
+
+  bool get _rememberMeRawValue => rememberMeControl.value as bool;
+
+  String get _themeRawValue => themeControl.value as String;
+
+  UserMode get _modeRawValue => modeControl.value as UserMode;
+
+  int get _timeoutRawValue => timeoutControl.value as int;
+
+  double get _heightRawValue => heightControl.value as double;
+
+  String? get _unAnnotatedRawValue => unAnnotatedControl.value;
+
+  List<int> get _someIntListRawValue => someIntListControl.value ?? [];
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -302,6 +324,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmail2 {
     try {
       form.control(email2ControlPath());
@@ -311,6 +335,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsPassword {
     try {
       form.control(passwordControlPath());
@@ -320,6 +346,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsRememberMe {
     try {
       form.control(rememberMeControlPath());
@@ -329,6 +357,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsTheme {
     try {
       form.control(themeControlPath());
@@ -338,6 +368,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsMode {
     try {
       form.control(modeControlPath());
@@ -347,6 +379,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsTimeout {
     try {
       form.control(timeoutControlPath());
@@ -356,6 +390,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsHeight {
     try {
       form.control(heightControlPath());
@@ -365,6 +401,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsUnAnnotated {
     try {
       form.control(unAnnotatedControlPath());
@@ -374,6 +412,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsSomeIntList {
     try {
       form.control(someIntListControlPath());
@@ -399,7 +439,7 @@ class LoginExtendedOForm
 
   Map<String, Object> get heightErrors => heightControl.errors;
 
-  Map<String, Object>? get unAnnotatedErrors => unAnnotatedControl?.errors;
+  Map<String, Object>? get unAnnotatedErrors => unAnnotatedControl.errors;
 
   Map<String, Object> get someIntListErrors => someIntListControl.errors;
 
@@ -423,6 +463,8 @@ class LoginExtendedOForm
 
   void get someIntListFocus => form.focus(someIntListControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void emailRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -449,6 +491,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void unAnnotatedRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -552,7 +596,7 @@ class LoginExtendedOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    unAnnotatedControl?.updateValue(value,
+    unAnnotatedControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -642,7 +686,7 @@ class LoginExtendedOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    unAnnotatedControl?.patchValue(value,
+    unAnnotatedControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -782,7 +826,7 @@ class LoginExtendedOForm
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      unAnnotatedControl?.reset(
+      unAnnotatedControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -829,9 +873,8 @@ class LoginExtendedOForm
   FormControl<double> get heightControl =>
       form.control(heightControlPath()) as FormControl<double>;
 
-  FormControl<String>? get unAnnotatedControl => containsUnAnnotated
-      ? form.control(unAnnotatedControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get unAnnotatedControl =>
+      form.control(unAnnotatedControlPath()) as FormControl<String>;
 
   FormControl<List<int>> get someIntListControl =>
       form.control(someIntListControlPath()) as FormControl<List<int>>;
@@ -986,12 +1029,12 @@ class LoginExtendedOForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      unAnnotatedControl?.markAsDisabled(
+      unAnnotatedControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      unAnnotatedControl?.markAsEnabled(
+      unAnnotatedControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1017,6 +1060,7 @@ class LoginExtendedOForm
   }
 
   @override
+  @protected
   LoginExtendedOOutput get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -1038,6 +1082,21 @@ class LoginExtendedOForm
         height: _heightValue,
         unAnnotated: _unAnnotatedValue,
         someIntList: _someIntListValue);
+  }
+
+  @override
+  LoginExtendedO get rawModel {
+    return LoginExtendedO(
+        email: _emailRawValue,
+        email2: _email2RawValue,
+        password: _passwordRawValue,
+        rememberMe: _rememberMeRawValue,
+        theme: _themeRawValue,
+        mode: _modeRawValue,
+        timeout: _timeoutRawValue,
+        height: _heightRawValue,
+        unAnnotated: _unAnnotatedRawValue,
+        someIntList: _someIntListRawValue);
   }
 
   @override

@@ -13,13 +13,12 @@ class ControlPrivateMethod extends ReactiveFormGeneratorMethod {
 
   @override
   Method? formGroupMethod() {
-    final reference = 'FormGroup${field.nullabilitySuffix}';
+    final reference = 'FormGroup';
 
     String body = 'form.control(${field.fieldControlPath}()) as $reference';
 
     if (field.isNullable) {
-      body =
-          '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $reference : null';
+      body = 'form.control(${field.fieldControlPath}()) as $reference';
     }
 
     return Method(
@@ -54,8 +53,7 @@ class ControlPrivateMethod extends ReactiveFormGeneratorMethod {
     String body = 'form.control(${field.fieldControlPath}()) as $typeReference';
 
     if (field.isNullable) {
-      body =
-          '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $typeReference : null';
+      body = 'form.control(${field.fieldControlPath}()) as $typeReference';
     }
 
     return Method(
@@ -80,13 +78,12 @@ class ControlPrivateMethod extends ReactiveFormGeneratorMethod {
       displayType = displayType.substring(0, displayType.length - 1);
     }
 
-    String typeReference = 'FormArray<$displayType>${field.nullabilitySuffix}';
+    String typeReference = 'FormArray<$displayType>';
 
     String body = 'form.control(${field.fieldControlPath}()) as $typeReference';
 
     if (field.isNullable) {
-      body =
-          '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $typeReference : null';
+      body = 'form.control(${field.fieldControlPath}()) as $typeReference';
     }
 
     return Method(
@@ -109,13 +106,12 @@ class ControlPrivateMethod extends ReactiveFormGeneratorMethod {
       displayType = displayType.substring(0, displayType.length - 1);
     }
 
-    final reference = 'FormControl<$displayType>${field.nullabilitySuffix}';
+    final reference = 'FormControl<$displayType>';
 
     String body = 'form.control(${field.fieldControlPath}()) as $reference';
 
     if (field.isNullable) {
-      body =
-          '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $reference : null';
+      body = 'form.control(${field.fieldControlPath}()) as $reference';
     }
 
     return Method(

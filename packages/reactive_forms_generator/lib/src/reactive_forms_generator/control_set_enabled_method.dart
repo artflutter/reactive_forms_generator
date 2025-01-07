@@ -16,13 +16,13 @@ class ControlSetDisableMethod extends ReactiveFormGeneratorMethod {
         ..body = Code(
           '''
             if(disabled) {
-              ${field.fieldControlName}${toOutput ? '' : field.nullabilitySuffix}.markAsDisabled( 
+              ${field.fieldControlName}.markAsDisabled( 
                 updateParent: updateParent, 
                 emitEvent: emitEvent,
               );
             }
             else {
-              ${field.fieldControlName}${toOutput ? '' : field.nullabilitySuffix}.markAsEnabled( 
+              ${field.fieldControlName}.markAsEnabled( 
                 updateParent: updateParent, 
                 emitEvent: emitEvent,
               );

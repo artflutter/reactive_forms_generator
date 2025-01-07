@@ -129,12 +129,10 @@ class DeliveryListFormWidget extends StatelessWidget {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
-                            if (formModel.form.valid) {
-                              debugPrint(formModel.model.toString());
-                              onChange?.call(formModel.model);
-                            } else {
-                              formModel.form.markAllAsTouched();
-                            }
+                            formModel.submit(onValid: (model) {
+                              debugPrint(model.toString());
+                              onChange?.call(model);
+                            });
                           },
                           child: Text(submit.name),
                         ),
