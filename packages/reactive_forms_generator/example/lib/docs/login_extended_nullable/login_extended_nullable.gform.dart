@@ -971,7 +971,6 @@ class LoginExtendedNullableForm
   }
 
   @override
-  @protected
   LoginExtendedNullable get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

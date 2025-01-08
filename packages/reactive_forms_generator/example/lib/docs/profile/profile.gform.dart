@@ -1017,7 +1017,6 @@ class ProfileForm implements FormModel<Profile, Profile> {
   }
 
   @override
-  @protected
   Profile get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -1703,7 +1702,6 @@ class IncidenceFilterForm
   }
 
   @override
-  @protected
   IncidenceFilter get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -2040,7 +2038,6 @@ class ThresholdSettingForm
   }
 
   @override
-  @protected
   ThresholdSetting get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -2338,7 +2335,6 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
   }
 
   @override
-  @protected
   TimerSetting get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

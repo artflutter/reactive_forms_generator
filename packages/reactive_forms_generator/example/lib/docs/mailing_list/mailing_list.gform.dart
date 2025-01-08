@@ -351,7 +351,6 @@ class MailingListForm implements FormModel<MailingList, MailingList> {
   }
 
   @override
-  @protected
   MailingList get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

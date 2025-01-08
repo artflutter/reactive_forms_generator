@@ -276,6 +276,10 @@ class StatusListOForm<T extends Enum>
 
   List<T?> get _listValue => listControl.rawValue.whereType<T?>().toList();
 
+  List<T?> get _listRawValue => listControl.rawValue.whereType<T?>().toList();
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsList {
     try {
       form.control(listControlPath());
@@ -387,6 +391,7 @@ class StatusListOForm<T extends Enum>
   }
 
   @override
+  @protected
   StatusListOOutput<T> get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -398,6 +403,11 @@ class StatusListOForm<T extends Enum>
       );
     }
     return StatusListOOutput<T>(list: _listValue);
+  }
+
+  @override
+  StatusListO<T> get rawModel {
+    return StatusListO<T>(list: _listRawValue);
   }
 
   @override

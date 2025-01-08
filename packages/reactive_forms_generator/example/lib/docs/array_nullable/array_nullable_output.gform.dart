@@ -627,10 +627,10 @@ class ArrayNullableOForm
       fruitListControl.controls.cast<FormControl<bool>>();
 
   List<FormControl<String>?> get vegetablesListControlControls =>
-      vegetablesListControl.controls.cast<FormControl<String>?>() ?? [];
+      vegetablesListControl.controls.cast<FormControl<String>?>();
 
   List<FormControl<UserMode>?> get modeListControlControls =>
-      modeListControl.controls.cast<FormControl<UserMode>?>() ?? [];
+      modeListControl.controls.cast<FormControl<UserMode>?>();
 
   void someListSetDisabled(
     bool disabled, {

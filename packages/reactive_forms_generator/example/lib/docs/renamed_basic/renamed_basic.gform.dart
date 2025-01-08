@@ -385,7 +385,6 @@ class SomeWiredNameForm implements FormModel<RenamedBasic, RenamedBasic> {
   }
 
   @override
-  @protected
   RenamedBasic get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

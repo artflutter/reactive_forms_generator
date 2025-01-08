@@ -416,7 +416,7 @@ class FormGenerator {
             ..annotations.addAll(
               [
                 const CodeExpression(Code('override')),
-                const CodeExpression(Code('protected'))
+                if (root.output) const CodeExpression(Code('protected'))
               ],
             )
             ..type = MethodType.getter

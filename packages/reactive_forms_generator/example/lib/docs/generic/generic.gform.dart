@@ -330,7 +330,6 @@ class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
   }
 
   @override
-  @protected
   Tags<T> get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

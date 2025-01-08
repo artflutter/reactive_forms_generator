@@ -638,7 +638,6 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
   }
 
   @override
-  @protected
   UserProfile get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -1118,7 +1117,6 @@ class AddressForm implements FormModel<Address, Address> {
   }
 
   @override
-  @protected
   Address get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

@@ -385,7 +385,6 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
   }
 
   @override
-  @protected
   Annotateless get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

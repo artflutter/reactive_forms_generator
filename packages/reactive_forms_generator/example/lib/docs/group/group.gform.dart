@@ -640,7 +640,6 @@ class GroupForm implements FormModel<Group, Group> {
   }
 
   @override
-  @protected
   Group get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -998,7 +997,6 @@ class PersonalForm implements FormModel<Personal, Personal> {
   }
 
   @override
-  @protected
   Personal get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -1350,7 +1348,6 @@ class PhoneForm implements FormModel<Phone, Phone> {
   }
 
   @override
-  @protected
   Phone get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -1808,7 +1805,6 @@ class AddressForm implements FormModel<Address, Address> {
   }
 
   @override
-  @protected
   Address get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

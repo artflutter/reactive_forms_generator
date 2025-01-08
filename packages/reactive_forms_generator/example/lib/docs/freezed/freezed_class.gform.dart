@@ -756,7 +756,6 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
   }
 
   @override
-  @protected
   FreezedClass get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

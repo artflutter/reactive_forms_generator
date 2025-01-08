@@ -389,7 +389,6 @@ class ModelImplementsForm
   }
 
   @override
-  @protected
   ModelImplements get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

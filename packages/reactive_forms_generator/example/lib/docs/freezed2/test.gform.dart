@@ -407,7 +407,6 @@ class TestForm implements FormModel<Test, Test> {
   }
 
   @override
-  @protected
   Test get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

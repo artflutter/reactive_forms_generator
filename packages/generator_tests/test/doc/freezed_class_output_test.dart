@@ -318,22 +318,40 @@ class FreezedClassOForm
 
   String yearControlPath() => pathBuilder(yearControlName);
 
-  String? get _genderValue => genderControl?.value;
+  String? get _genderValue => genderControl.value;
 
   String get _genderRValue => genderRControl.value as String;
 
-  String? get _idValue => idControl?.value;
+  String? get _idValue => idControl.value;
 
   String get _idRValue => idRControl.value as String;
 
   String get _idR2Value => idR2Control.value as String;
 
-  String? get _nameValue => nameControl?.value;
+  String? get _nameValue => nameControl.value;
 
-  String? get _logoImageValue => logoImageControl?.value;
+  String? get _logoImageValue => logoImageControl.value;
 
-  double? get _yearValue => yearControl?.value;
+  double? get _yearValue => yearControl.value;
 
+  String? get _genderRawValue => genderControl.value;
+
+  String? get _genderRRawValue => genderRControl.value;
+
+  String? get _idRawValue => idControl.value;
+
+  String? get _idRRawValue => idRControl.value;
+
+  String get _idR2RawValue => idR2Control.value as String;
+
+  String? get _nameRawValue => nameControl.value;
+
+  String? get _logoImageRawValue => logoImageControl.value;
+
+  double? get _yearRawValue => yearControl.value;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsGender {
     try {
       form.control(genderControlPath());
@@ -343,6 +361,8 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsGenderR {
     try {
       form.control(genderRControlPath());
@@ -352,6 +372,8 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -361,6 +383,8 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIdR {
     try {
       form.control(idRControlPath());
@@ -370,6 +394,8 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIdR2 {
     try {
       form.control(idR2ControlPath());
@@ -379,6 +405,8 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -388,6 +416,8 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsLogoImage {
     try {
       form.control(logoImageControlPath());
@@ -397,6 +427,8 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsYear {
     try {
       form.control(yearControlPath());
@@ -406,21 +438,21 @@ class FreezedClassOForm
     }
   }
 
-  Map<String, Object>? get genderErrors => genderControl?.errors;
+  Map<String, Object>? get genderErrors => genderControl.errors;
 
   Map<String, Object>? get genderRErrors => genderRControl.errors;
 
-  Map<String, Object>? get idErrors => idControl?.errors;
+  Map<String, Object>? get idErrors => idControl.errors;
 
   Map<String, Object>? get idRErrors => idRControl.errors;
 
   Map<String, Object> get idR2Errors => idR2Control.errors;
 
-  Map<String, Object>? get nameErrors => nameControl?.errors;
+  Map<String, Object>? get nameErrors => nameControl.errors;
 
-  Map<String, Object>? get logoImageErrors => logoImageControl?.errors;
+  Map<String, Object>? get logoImageErrors => logoImageControl.errors;
 
-  Map<String, Object>? get yearErrors => yearControl?.errors;
+  Map<String, Object>? get yearErrors => yearControl.errors;
 
   void get genderFocus => form.focus(genderControlPath());
 
@@ -438,6 +470,8 @@ class FreezedClassOForm
 
   void get yearFocus => form.focus(yearControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void genderRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -464,6 +498,8 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void genderRRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -490,6 +526,8 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void idRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -516,6 +554,8 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void idRRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -542,6 +582,8 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void nameRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -568,6 +610,8 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void logoImageRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -594,6 +638,8 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void yearRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -625,7 +671,7 @@ class FreezedClassOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    genderControl?.updateValue(value,
+    genderControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -643,7 +689,7 @@ class FreezedClassOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl?.updateValue(value,
+    idControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -670,7 +716,7 @@ class FreezedClassOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl?.updateValue(value,
+    nameControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -679,7 +725,7 @@ class FreezedClassOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    logoImageControl?.updateValue(value,
+    logoImageControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -688,7 +734,7 @@ class FreezedClassOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    yearControl?.updateValue(value,
+    yearControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -697,7 +743,7 @@ class FreezedClassOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    genderControl?.patchValue(value,
+    genderControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -715,7 +761,7 @@ class FreezedClassOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl?.patchValue(value,
+    idControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -742,7 +788,7 @@ class FreezedClassOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl?.patchValue(value,
+    nameControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -751,7 +797,7 @@ class FreezedClassOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    logoImageControl?.patchValue(value,
+    logoImageControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -760,7 +806,7 @@ class FreezedClassOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    yearControl?.patchValue(value,
+    yearControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -771,7 +817,7 @@ class FreezedClassOForm
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      genderControl?.reset(
+      genderControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -801,7 +847,7 @@ class FreezedClassOForm
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      idControl?.reset(
+      idControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -846,7 +892,7 @@ class FreezedClassOForm
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      nameControl?.reset(
+      nameControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -861,7 +907,7 @@ class FreezedClassOForm
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      logoImageControl?.reset(
+      logoImageControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -876,7 +922,7 @@ class FreezedClassOForm
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      yearControl?.reset(
+      yearControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -884,15 +930,14 @@ class FreezedClassOForm
         disabled: disabled,
       );
 
-  FormControl<String>? get genderControl => containsGender
-      ? form.control(genderControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get genderControl =>
+      form.control(genderControlPath()) as FormControl<String>;
 
   FormControl<String> get genderRControl =>
       form.control(genderRControlPath()) as FormControl<String>;
 
-  FormControl<String>? get idControl =>
-      containsId ? form.control(idControlPath()) as FormControl<String>? : null;
+  FormControl<String> get idControl =>
+      form.control(idControlPath()) as FormControl<String>;
 
   FormControl<String> get idRControl =>
       form.control(idRControlPath()) as FormControl<String>;
@@ -900,17 +945,14 @@ class FreezedClassOForm
   FormControl<String> get idR2Control =>
       form.control(idR2ControlPath()) as FormControl<String>;
 
-  FormControl<String>? get nameControl => containsName
-      ? form.control(nameControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get nameControl =>
+      form.control(nameControlPath()) as FormControl<String>;
 
-  FormControl<String>? get logoImageControl => containsLogoImage
-      ? form.control(logoImageControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get logoImageControl =>
+      form.control(logoImageControlPath()) as FormControl<String>;
 
-  FormControl<double>? get yearControl => containsYear
-      ? form.control(yearControlPath()) as FormControl<double>?
-      : null;
+  FormControl<double> get yearControl =>
+      form.control(yearControlPath()) as FormControl<double>;
 
   void genderSetDisabled(
     bool disabled, {
@@ -918,12 +960,12 @@ class FreezedClassOForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      genderControl?.markAsDisabled(
+      genderControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      genderControl?.markAsEnabled(
+      genderControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -954,12 +996,12 @@ class FreezedClassOForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      idControl?.markAsDisabled(
+      idControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      idControl?.markAsEnabled(
+      idControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1008,12 +1050,12 @@ class FreezedClassOForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      nameControl?.markAsDisabled(
+      nameControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      nameControl?.markAsEnabled(
+      nameControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1026,12 +1068,12 @@ class FreezedClassOForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      logoImageControl?.markAsDisabled(
+      logoImageControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      logoImageControl?.markAsEnabled(
+      logoImageControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1044,12 +1086,12 @@ class FreezedClassOForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      yearControl?.markAsDisabled(
+      yearControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      yearControl?.markAsEnabled(
+      yearControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1057,6 +1099,7 @@ class FreezedClassOForm
   }
 
   @override
+  @protected
   FreezedClassOOutput get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -1074,6 +1117,17 @@ class FreezedClassOForm
         name: _nameValue,
         logoImage: _logoImageValue,
         year: _yearValue);
+  }
+
+  @override
+  FreezedClassO get rawModel {
+    return FreezedClassO(_genderRawValue, _genderRRawValue,
+        id: _idRawValue,
+        idR: _idRRawValue,
+        idR2: _idR2RawValue,
+        name: _nameRawValue,
+        logoImage: _logoImageRawValue,
+        year: _yearRawValue);
   }
 
   @override

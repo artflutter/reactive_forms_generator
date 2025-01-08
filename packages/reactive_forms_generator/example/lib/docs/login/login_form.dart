@@ -123,7 +123,9 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                         child: ElevatedButton(
                           key: submitRaw.itemKey,
                           onPressed: () => formModel.submit(
-                            onValid: (_) => debugPrint('FormValid'),
+                            onValid: (_) {
+                              debugPrint('FormValid');
+                            },
                             onNotValid: () {
                               debugPrint('FormInvalid');
                             },

@@ -286,6 +286,11 @@ class MailingListForm implements FormModel<MailingList, MailingList> {
   List<String?> get _emailListValue =>
       emailListControl.rawValue.whereType<String?>().toList();
 
+  List<String?> get _emailListRawValue =>
+      emailListControl.rawValue.whereType<String?>().toList();
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmailList {
     try {
       form.control(emailListControlPath());
@@ -408,6 +413,11 @@ class MailingListForm implements FormModel<MailingList, MailingList> {
       );
     }
     return MailingList(emailList: _emailListValue);
+  }
+
+  @override
+  MailingList get rawModel {
+    return MailingList(emailList: _emailListRawValue);
   }
 
   @override

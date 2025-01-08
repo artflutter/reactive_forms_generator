@@ -447,7 +447,6 @@ class ProductDetailsForm<P extends Product, C extends Cart>
   }
 
   @override
-  @protected
   ProductDetails<P, C> get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -799,7 +798,6 @@ class IdForm<P extends Product, C extends Cart>
   }
 
   @override
-  @protected
   Id<P, C> get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

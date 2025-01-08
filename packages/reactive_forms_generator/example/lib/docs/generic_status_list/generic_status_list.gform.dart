@@ -354,7 +354,6 @@ class StatusListForm<T extends Enum>
   }
 
   @override
-  @protected
   StatusList<T> get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

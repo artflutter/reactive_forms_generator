@@ -46,6 +46,7 @@ void main() {
             )
             class LoginExtendedO {
               final String? email;
+              final String email2;
             
               final String password;
             
@@ -68,6 +69,11 @@ void main() {
                   asyncValidators: [UniqueEmailAsyncValidator()],
                 )
                 this.email,
+                @RfControl(
+                  validators: [RequiredValidator()],
+                  asyncValidators: [UniqueEmailAsyncValidator()],
+                )
+                this.email2 = '',
                 @RfControl(
                   validators: [RequiredValidator()],
                 )
@@ -335,6 +341,8 @@ class LoginExtendedOForm
 
   static const String emailControlName = "email";
 
+  static const String email2ControlName = "email2";
+
   static const String passwordControlName = "password";
 
   static const String rememberMeControlName = "rememberMe";
@@ -359,6 +367,8 @@ class LoginExtendedOForm
 
   String emailControlPath() => pathBuilder(emailControlName);
 
+  String email2ControlPath() => pathBuilder(email2ControlName);
+
   String passwordControlPath() => pathBuilder(passwordControlName);
 
   String rememberMeControlPath() => pathBuilder(rememberMeControlName);
@@ -377,6 +387,8 @@ class LoginExtendedOForm
 
   String get _emailValue => emailControl.value as String;
 
+  String get _email2Value => email2Control.value ?? "";
+
   String get _passwordValue => passwordControl.value as String;
 
   bool get _rememberMeValue => rememberMeControl.value as bool;
@@ -389,10 +401,32 @@ class LoginExtendedOForm
 
   double get _heightValue => heightControl.value as double;
 
-  String? get _unAnnotatedValue => unAnnotatedControl?.value;
+  String? get _unAnnotatedValue => unAnnotatedControl.value;
 
   List<int> get _someIntListValue => someIntListControl.value ?? [];
 
+  String? get _emailRawValue => emailControl.value;
+
+  String get _email2RawValue => email2Control.value ?? "";
+
+  String get _passwordRawValue => passwordControl.value as String;
+
+  bool get _rememberMeRawValue => rememberMeControl.value as bool;
+
+  String get _themeRawValue => themeControl.value as String;
+
+  UserMode get _modeRawValue => modeControl.value as UserMode;
+
+  int get _timeoutRawValue => timeoutControl.value as int;
+
+  double get _heightRawValue => heightControl.value as double;
+
+  String? get _unAnnotatedRawValue => unAnnotatedControl.value;
+
+  List<int> get _someIntListRawValue => someIntListControl.value ?? [];
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -402,6 +436,19 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+  bool get containsEmail2 {
+    try {
+      form.control(email2ControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsPassword {
     try {
       form.control(passwordControlPath());
@@ -411,6 +458,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsRememberMe {
     try {
       form.control(rememberMeControlPath());
@@ -420,6 +469,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsTheme {
     try {
       form.control(themeControlPath());
@@ -429,6 +480,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsMode {
     try {
       form.control(modeControlPath());
@@ -438,6 +491,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsTimeout {
     try {
       form.control(timeoutControlPath());
@@ -447,6 +502,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsHeight {
     try {
       form.control(heightControlPath());
@@ -456,6 +513,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsUnAnnotated {
     try {
       form.control(unAnnotatedControlPath());
@@ -465,6 +524,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsSomeIntList {
     try {
       form.control(someIntListControlPath());
@@ -475,6 +536,8 @@ class LoginExtendedOForm
   }
 
   Map<String, Object>? get emailErrors => emailControl.errors;
+
+  Map<String, Object> get email2Errors => email2Control.errors;
 
   Map<String, Object> get passwordErrors => passwordControl.errors;
 
@@ -488,11 +551,13 @@ class LoginExtendedOForm
 
   Map<String, Object> get heightErrors => heightControl.errors;
 
-  Map<String, Object>? get unAnnotatedErrors => unAnnotatedControl?.errors;
+  Map<String, Object>? get unAnnotatedErrors => unAnnotatedControl.errors;
 
   Map<String, Object> get someIntListErrors => someIntListControl.errors;
 
   void get emailFocus => form.focus(emailControlPath());
+
+  void get email2Focus => form.focus(email2ControlPath());
 
   void get passwordFocus => form.focus(passwordControlPath());
 
@@ -510,6 +575,8 @@ class LoginExtendedOForm
 
   void get someIntListFocus => form.focus(someIntListControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void emailRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -536,6 +603,8 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void unAnnotatedRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -568,6 +637,15 @@ class LoginExtendedOForm
     bool emitEvent = true,
   }) {
     emailControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void email2ValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    email2Control.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -630,7 +708,7 @@ class LoginExtendedOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    unAnnotatedControl?.updateValue(value,
+    unAnnotatedControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -649,6 +727,15 @@ class LoginExtendedOForm
     bool emitEvent = true,
   }) {
     emailControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void email2ValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    email2Control.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -711,7 +798,7 @@ class LoginExtendedOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    unAnnotatedControl?.patchValue(value,
+    unAnnotatedControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -732,6 +819,21 @@ class LoginExtendedOForm
     bool? disabled,
   }) =>
       emailControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
+
+  void email2ValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      email2Control.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -836,7 +938,7 @@ class LoginExtendedOForm
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      unAnnotatedControl?.reset(
+      unAnnotatedControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -862,6 +964,9 @@ class LoginExtendedOForm
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
 
+  FormControl<String> get email2Control =>
+      form.control(email2ControlPath()) as FormControl<String>;
+
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
 
@@ -880,9 +985,8 @@ class LoginExtendedOForm
   FormControl<double> get heightControl =>
       form.control(heightControlPath()) as FormControl<double>;
 
-  FormControl<String>? get unAnnotatedControl => containsUnAnnotated
-      ? form.control(unAnnotatedControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get unAnnotatedControl =>
+      form.control(unAnnotatedControlPath()) as FormControl<String>;
 
   FormControl<List<int>> get someIntListControl =>
       form.control(someIntListControlPath()) as FormControl<List<int>>;
@@ -899,6 +1003,24 @@ class LoginExtendedOForm
       );
     } else {
       emailControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void email2SetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      email2Control.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      email2Control.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1019,12 +1141,12 @@ class LoginExtendedOForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      unAnnotatedControl?.markAsDisabled(
+      unAnnotatedControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      unAnnotatedControl?.markAsEnabled(
+      unAnnotatedControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1050,6 +1172,7 @@ class LoginExtendedOForm
   }
 
   @override
+  @protected
   LoginExtendedOOutput get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -1062,6 +1185,7 @@ class LoginExtendedOForm
     }
     return LoginExtendedOOutput(
         email: _emailValue,
+        email2: _email2Value,
         password: _passwordValue,
         rememberMe: _rememberMeValue,
         theme: _themeValue,
@@ -1070,6 +1194,21 @@ class LoginExtendedOForm
         height: _heightValue,
         unAnnotated: _unAnnotatedValue,
         someIntList: _someIntListValue);
+  }
+
+  @override
+  LoginExtendedO get rawModel {
+    return LoginExtendedO(
+        email: _emailRawValue,
+        email2: _email2RawValue,
+        password: _passwordRawValue,
+        rememberMe: _rememberMeRawValue,
+        theme: _themeRawValue,
+        mode: _modeRawValue,
+        timeout: _timeoutRawValue,
+        height: _heightRawValue,
+        unAnnotated: _unAnnotatedRawValue,
+        someIntList: _someIntListRawValue);
   }
 
   @override
@@ -1166,6 +1305,13 @@ class LoginExtendedOForm
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
+        email2ControlName: FormControl<String>(
+            value: loginExtendedO?.email2,
+            validators: [RequiredValidator()],
+            asyncValidators: [UniqueEmailAsyncValidator()],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
         passwordControlName: FormControl<String>(
             value: loginExtendedO?.password,
             validators: [RequiredValidator()],
@@ -1235,6 +1381,7 @@ class LoginExtendedOForm
 @RfGroup(validators: [AllFieldsRequired()])
 class LoginExtendedOOutput {
   final String email;
+  final String email2;
   final String password;
   final bool rememberMe;
   final String theme;
@@ -1248,6 +1395,10 @@ class LoginExtendedOOutput {
           validators: [RequiredValidator()],
           asyncValidators: [UniqueEmailAsyncValidator()])
       required this.email,
+      @RfControl(
+          validators: [RequiredValidator()],
+          asyncValidators: [UniqueEmailAsyncValidator()])
+      required this.email2,
       @RfControl(validators: [RequiredValidator()]) required this.password,
       @RfControl(validators: [RequiredValidator()]) required this.rememberMe,
       @RfControl(validators: [RequiredValidator()]) required this.theme,

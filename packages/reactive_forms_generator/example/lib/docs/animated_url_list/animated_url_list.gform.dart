@@ -417,7 +417,6 @@ class AnimatedUrlListForm
   }
 
   @override
-  @protected
   AnimatedUrlList get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -711,7 +710,6 @@ class UrlEntityForm implements FormModel<UrlEntity, UrlEntity> {
   }
 
   @override
-  @protected
   UrlEntity get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

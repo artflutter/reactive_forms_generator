@@ -303,7 +303,6 @@ class SubGroupForm implements FormModel<SubGroup, SubGroup> {
   }
 
   @override
-  @protected
   SubGroup get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -1037,7 +1036,6 @@ class GroupForm implements FormModel<Group, Group> {
   }
 
   @override
-  @protected
   Group get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -1703,7 +1701,6 @@ class NestedForm implements FormModel<Nested, Nested> {
   }
 
   @override
-  @protected
   Nested get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

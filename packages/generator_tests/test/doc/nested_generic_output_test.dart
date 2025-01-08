@@ -8,7 +8,7 @@ const fileName = 'product_output';
 void main() {
   group('reactive_forms_generator', () {
     test(
-      'Nested generics',
+      'Nested generics Output',
       () async {
         return testGenerator(
           fileName: fileName,
@@ -318,10 +318,16 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
 
   String idControlPath() => pathBuilder(idControlName);
 
-  String? get _descriptionValue => descriptionControl?.value;
+  String? get _descriptionValue => descriptionControl.value;
 
   IdOOutput<P, C>? get _idValue => idForm.model;
 
+  String? get _descriptionRawValue => descriptionControl.value;
+
+  IdO<P, C>? get _idRawValue => idForm.rawModel;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsDescription {
     try {
       form.control(descriptionControlPath());
@@ -331,6 +337,8 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -340,14 +348,16 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     }
   }
 
-  Map<String, Object>? get descriptionErrors => descriptionControl?.errors;
+  Map<String, Object>? get descriptionErrors => descriptionControl.errors;
 
-  Map<String, Object>? get idErrors => idControl?.errors;
+  Map<String, Object>? get idErrors => idControl.errors;
 
   void get descriptionFocus => form.focus(descriptionControlPath());
 
   void get idFocus => form.focus(idControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void descriptionRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -374,6 +384,8 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void idRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -405,7 +417,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    descriptionControl?.updateValue(value,
+    descriptionControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -414,7 +426,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl?.updateValue(IdOForm.formElements(value).rawValue,
+    idControl.updateValue(IdOForm.formElements(value).rawValue,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -423,7 +435,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    descriptionControl?.patchValue(value,
+    descriptionControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -432,7 +444,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl?.updateValue(IdOForm.formElements(value).rawValue,
+    idControl.updateValue(IdOForm.formElements(value).rawValue,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -443,7 +455,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      descriptionControl?.reset(
+      descriptionControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -458,17 +470,15 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      idControl?.reset(
+      idControl.reset(
           value: IdOForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
 
-  FormControl<String>? get descriptionControl => containsDescription
-      ? form.control(descriptionControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get descriptionControl =>
+      form.control(descriptionControlPath()) as FormControl<String>;
 
-  FormGroup? get idControl =>
-      containsId ? form.control(idControlPath()) as FormGroup? : null;
+  FormGroup get idControl => form.control(idControlPath()) as FormGroup;
 
   IdOForm<P, C> get idForm => IdOForm(form, pathBuilder('id'));
 
@@ -478,12 +488,12 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     bool emitEvent = true,
   }) {
     if (disabled) {
-      descriptionControl?.markAsDisabled(
+      descriptionControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      descriptionControl?.markAsEnabled(
+      descriptionControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -496,12 +506,12 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     bool emitEvent = true,
   }) {
     if (disabled) {
-      idControl?.markAsDisabled(
+      idControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      idControl?.markAsEnabled(
+      idControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -509,6 +519,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
   }
 
   @override
+  @protected
   ProductDetailsOOutput<P, C> get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -521,6 +532,12 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     }
     return ProductDetailsOOutput<P, C>(
         description: _descriptionValue, id: _idValue);
+  }
+
+  @override
+  ProductDetailsO<P, C> get rawModel {
+    return ProductDetailsO<P, C>(
+        description: _descriptionRawValue, id: _idRawValue);
   }
 
   @override
@@ -652,10 +669,16 @@ class IdOForm<P extends Product, C extends Cart>
 
   String nameControlPath() => pathBuilder(nameControlName);
 
-  String? get _companyNameValue => companyNameControl?.value;
+  String? get _companyNameValue => companyNameControl.value;
 
-  String? get _nameValue => nameControl?.value;
+  String? get _nameValue => nameControl.value;
 
+  String? get _companyNameRawValue => companyNameControl.value;
+
+  String? get _nameRawValue => nameControl.value;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsCompanyName {
     try {
       form.control(companyNameControlPath());
@@ -665,6 +688,8 @@ class IdOForm<P extends Product, C extends Cart>
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -674,14 +699,16 @@ class IdOForm<P extends Product, C extends Cart>
     }
   }
 
-  Map<String, Object>? get companyNameErrors => companyNameControl?.errors;
+  Map<String, Object>? get companyNameErrors => companyNameControl.errors;
 
-  Map<String, Object>? get nameErrors => nameControl?.errors;
+  Map<String, Object>? get nameErrors => nameControl.errors;
 
   void get companyNameFocus => form.focus(companyNameControlPath());
 
   void get nameFocus => form.focus(nameControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void companyNameRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -708,6 +735,8 @@ class IdOForm<P extends Product, C extends Cart>
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void nameRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -739,7 +768,7 @@ class IdOForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    companyNameControl?.updateValue(value,
+    companyNameControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -748,7 +777,7 @@ class IdOForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl?.updateValue(value,
+    nameControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -757,7 +786,7 @@ class IdOForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    companyNameControl?.patchValue(value,
+    companyNameControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -766,7 +795,7 @@ class IdOForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl?.patchValue(value,
+    nameControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -777,7 +806,7 @@ class IdOForm<P extends Product, C extends Cart>
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      companyNameControl?.reset(
+      companyNameControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -792,7 +821,7 @@ class IdOForm<P extends Product, C extends Cart>
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      nameControl?.reset(
+      nameControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -800,13 +829,11 @@ class IdOForm<P extends Product, C extends Cart>
         disabled: disabled,
       );
 
-  FormControl<String>? get companyNameControl => containsCompanyName
-      ? form.control(companyNameControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get companyNameControl =>
+      form.control(companyNameControlPath()) as FormControl<String>;
 
-  FormControl<String>? get nameControl => containsName
-      ? form.control(nameControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get nameControl =>
+      form.control(nameControlPath()) as FormControl<String>;
 
   void companyNameSetDisabled(
     bool disabled, {
@@ -814,12 +841,12 @@ class IdOForm<P extends Product, C extends Cart>
     bool emitEvent = true,
   }) {
     if (disabled) {
-      companyNameControl?.markAsDisabled(
+      companyNameControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      companyNameControl?.markAsEnabled(
+      companyNameControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -832,12 +859,12 @@ class IdOForm<P extends Product, C extends Cart>
     bool emitEvent = true,
   }) {
     if (disabled) {
-      nameControl?.markAsDisabled(
+      nameControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      nameControl?.markAsEnabled(
+      nameControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -845,6 +872,7 @@ class IdOForm<P extends Product, C extends Cart>
   }
 
   @override
+  @protected
   IdOOutput<P, C> get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -856,6 +884,11 @@ class IdOForm<P extends Product, C extends Cart>
       );
     }
     return IdOOutput<P, C>(companyName: _companyNameValue, name: _nameValue);
+  }
+
+  @override
+  IdO<P, C> get rawModel {
+    return IdO<P, C>(companyName: _companyNameRawValue, name: _nameRawValue);
   }
 
   @override

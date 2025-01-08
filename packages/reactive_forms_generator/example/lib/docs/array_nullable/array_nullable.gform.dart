@@ -624,10 +624,10 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
       fruitListControl.controls.cast<FormControl<bool>>();
 
   List<FormControl<String>?> get vegetablesListControlControls =>
-      vegetablesListControl.controls.cast<FormControl<String>?>() ?? [];
+      vegetablesListControl.controls.cast<FormControl<String>?>();
 
   List<FormControl<UserMode>?> get modeListControlControls =>
-      modeListControl.controls.cast<FormControl<UserMode>?>() ?? [];
+      modeListControl.controls.cast<FormControl<UserMode>?>();
 
   void someListSetDisabled(
     bool disabled, {
@@ -880,7 +880,6 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
   }
 
   @override
-  @protected
   ArrayNullable get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

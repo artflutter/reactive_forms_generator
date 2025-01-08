@@ -385,7 +385,6 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
   }
 
   @override
-  @protected
   ModelExtends get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

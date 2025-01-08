@@ -631,7 +631,6 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
   }
 
   @override
-  @protected
   DeliveryList get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -964,7 +963,6 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
   }
 
   @override
-  @protected
   DeliveryPoint get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -1312,7 +1310,6 @@ class AddressForm implements FormModel<Address, Address> {
   }
 
   @override
-  @protected
   Address get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -1741,7 +1738,6 @@ class ClientForm implements FormModel<Client, Client> {
   }
 
   @override
-  @protected
   Client get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -2422,7 +2418,6 @@ class StandaloneDeliveryPointForm
   }
 
   @override
-  @protected
   DeliveryPoint get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

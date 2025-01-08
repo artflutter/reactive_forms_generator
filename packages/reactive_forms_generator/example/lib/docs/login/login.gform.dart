@@ -379,7 +379,6 @@ class LoginForm implements FormModel<Login, Login> {
   }
 
   @override
-  @protected
   Login get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

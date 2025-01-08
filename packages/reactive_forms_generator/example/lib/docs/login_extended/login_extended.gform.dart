@@ -952,7 +952,6 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
   }
 
   @override
-  @protected
   LoginExtended get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 

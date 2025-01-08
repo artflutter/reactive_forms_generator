@@ -332,6 +332,14 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
   List<Client>? get _clientListValue =>
       clientListClientForm.map((e) => e.model).toList();
 
+  List<DeliveryPoint> get _deliveryListRawValue =>
+      deliveryListDeliveryPointForm.map((e) => e.rawModel).toList();
+
+  List<Client>? get _clientListRawValue =>
+      clientListClientForm.map((e) => e.rawModel).toList();
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsDeliveryList {
     try {
       form.control(deliveryListControlPath());
@@ -341,6 +349,8 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsClientList {
     try {
       form.control(clientListControlPath());
@@ -352,12 +362,14 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
 
   Map<String, Object> get deliveryListErrors => deliveryListControl.errors;
 
-  Map<String, Object>? get clientListErrors => clientListControl?.errors;
+  Map<String, Object>? get clientListErrors => clientListControl.errors;
 
   void get deliveryListFocus => form.focus(deliveryListControlPath());
 
   void get clientListFocus => form.focus(clientListControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void clientListRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -445,7 +457,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
 
     localValue.asMap().forEach((k, v) {
       final values =
-          (clientListControl?.controls ?? []).map((e) => e.value).toList();
+          (clientListControl.controls ?? []).map((e) => e.value).toList();
 
       if (clientListClientForm.asMap().containsKey(k) &&
           values.asMap().containsKey(k)) {
@@ -456,7 +468,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     });
 
     if (toUpdate.isNotEmpty) {
-      clientListControl?.updateValue(
+      clientListControl.updateValue(
           toUpdate.map((e) => ClientForm.formElements(e).rawValue).toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
@@ -464,7 +476,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
 
     if (toAdd.isNotEmpty) {
       toAdd.forEach((e) {
-        clientListControl?.add(ClientForm.formElements(e),
+        clientListControl.add(ClientForm.formElements(e),
             updateParent: updateParent, emitEvent: emitEvent);
       });
     }
@@ -497,13 +509,13 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     bool emitEvent = true,
   }) {
     final values =
-        (clientListControl?.controls ?? []).map((e) => e.value).toList();
+        (clientListControl.controls ?? []).map((e) => e.value).toList();
     if (values.length < i) {
       addClientListItem(value);
       return;
     }
 
-    clientListControl?.insert(
+    clientListControl.insert(
       i,
       ClientForm.formElements(value),
       updateParent: updateParent,
@@ -524,7 +536,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     bool emitEvent = true,
   }) {
     clientListClientForm.clear();
-    clientListControl?.clear(updateParent: updateParent, emitEvent: emitEvent);
+    clientListControl.clear(updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void deliveryListValuePatch(
@@ -565,7 +577,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
       },
     );
 
-    clientListControl?.patchValue(
+    clientListControl.patchValue(
         toPatch.map((e) => ClientForm.formElements(e).rawValue).toList(),
         updateParent: updateParent,
         emitEvent: emitEvent);
@@ -592,7 +604,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      clientListControl?.reset(
+      clientListControl.reset(
           value:
               value?.map((e) => ClientForm.formElements(e).rawValue).toList(),
           updateParent: updateParent,
@@ -602,10 +614,8 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
       form.control(deliveryListControlPath())
           as FormArray<Map<String, Object?>>;
 
-  FormArray<Map<String, Object?>>? get clientListControl => containsClientList
-      ? form.control(clientListControlPath())
-          as FormArray<Map<String, Object?>>?
-      : null;
+  FormArray<Map<String, Object?>> get clientListControl =>
+      form.control(clientListControlPath()) as FormArray<Map<String, Object?>>;
 
   List<DeliveryPointForm> get deliveryListDeliveryPointForm {
     final values = (deliveryListControl.controls).map((e) => e.value).toList();
@@ -620,7 +630,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
 
   List<ClientForm> get clientListClientForm {
     final values =
-        (clientListControl?.controls ?? []).map((e) => e.value).toList();
+        (clientListControl.controls ?? []).map((e) => e.value).toList();
 
     return values
         .asMap()
@@ -654,12 +664,12 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      clientListControl?.markAsDisabled(
+      clientListControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      clientListControl?.markAsEnabled(
+      clientListControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -685,7 +695,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
   }
 
   void addClientListItem(Client value) {
-    clientListControl?.add(ClientForm.formElements(value));
+    clientListControl.add(ClientForm.formElements(value));
   }
 
   void removeDeliveryListItemAtIndex(int i) {
@@ -695,8 +705,8 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
   }
 
   void removeClientListItemAtIndex(int i) {
-    if ((clientListControl?.value ?? []).length > i) {
-      clientListControl?.removeAt(i);
+    if ((clientListControl.value ?? []).length > i) {
+      clientListControl.removeAt(i);
     }
   }
 
@@ -721,6 +731,12 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     }
     return DeliveryList(
         deliveryList: _deliveryListValue, clientList: _clientListValue);
+  }
+
+  @override
+  DeliveryList get rawModel {
+    return DeliveryList(
+        deliveryList: _deliveryListRawValue, clientList: _clientListRawValue);
   }
 
   @override
@@ -865,6 +881,12 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
 
   Address? get _addressValue => addressForm.model;
 
+  String get _nameRawValue => nameControl.value ?? "";
+
+  Address? get _addressRawValue => addressForm.rawModel;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -874,6 +896,8 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsAddress {
     try {
       form.control(addressControlPath());
@@ -885,12 +909,14 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
 
   Map<String, Object> get nameErrors => nameControl.errors;
 
-  Map<String, Object>? get addressErrors => addressControl?.errors;
+  Map<String, Object>? get addressErrors => addressControl.errors;
 
   void get nameFocus => form.focus(nameControlPath());
 
   void get addressFocus => form.focus(addressControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void addressRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -931,7 +957,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    addressControl?.updateValue(AddressForm.formElements(value).rawValue,
+    addressControl.updateValue(AddressForm.formElements(value).rawValue,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -949,7 +975,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    addressControl?.updateValue(AddressForm.formElements(value).rawValue,
+    addressControl.updateValue(AddressForm.formElements(value).rawValue,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -975,7 +1001,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      addressControl?.reset(
+      addressControl.reset(
           value: AddressForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
@@ -983,8 +1009,8 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
 
-  FormGroup? get addressControl =>
-      containsAddress ? form.control(addressControlPath()) as FormGroup? : null;
+  FormGroup get addressControl =>
+      form.control(addressControlPath()) as FormGroup;
 
   AddressForm get addressForm => AddressForm(form, pathBuilder('address'));
 
@@ -1012,12 +1038,12 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      addressControl?.markAsDisabled(
+      addressControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      addressControl?.markAsEnabled(
+      addressControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1036,6 +1062,11 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
       );
     }
     return DeliveryPoint(name: _nameValue, address: _addressValue);
+  }
+
+  @override
+  DeliveryPoint get rawModel {
+    return DeliveryPoint(name: _nameRawValue, address: _addressRawValue);
   }
 
   @override
@@ -1164,10 +1195,16 @@ class AddressForm implements FormModel<Address, Address> {
 
   String cityControlPath() => pathBuilder(cityControlName);
 
-  String? get _streetValue => streetControl?.value;
+  String? get _streetValue => streetControl.value;
 
-  String? get _cityValue => cityControl?.value;
+  String? get _cityValue => cityControl.value;
 
+  String? get _streetRawValue => streetControl.value;
+
+  String? get _cityRawValue => cityControl.value;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsStreet {
     try {
       form.control(streetControlPath());
@@ -1177,6 +1214,8 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsCity {
     try {
       form.control(cityControlPath());
@@ -1186,14 +1225,16 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
-  Map<String, Object>? get streetErrors => streetControl?.errors;
+  Map<String, Object>? get streetErrors => streetControl.errors;
 
-  Map<String, Object>? get cityErrors => cityControl?.errors;
+  Map<String, Object>? get cityErrors => cityControl.errors;
 
   void get streetFocus => form.focus(streetControlPath());
 
   void get cityFocus => form.focus(cityControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void streetRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1220,6 +1261,8 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void cityRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1251,7 +1294,7 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    streetControl?.updateValue(value,
+    streetControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1260,7 +1303,7 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    cityControl?.updateValue(value,
+    cityControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1269,7 +1312,7 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    streetControl?.patchValue(value,
+    streetControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1278,7 +1321,7 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    cityControl?.patchValue(value,
+    cityControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1289,7 +1332,7 @@ class AddressForm implements FormModel<Address, Address> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      streetControl?.reset(
+      streetControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -1304,7 +1347,7 @@ class AddressForm implements FormModel<Address, Address> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      cityControl?.reset(
+      cityControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -1312,13 +1355,11 @@ class AddressForm implements FormModel<Address, Address> {
         disabled: disabled,
       );
 
-  FormControl<String>? get streetControl => containsStreet
-      ? form.control(streetControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get streetControl =>
+      form.control(streetControlPath()) as FormControl<String>;
 
-  FormControl<String>? get cityControl => containsCity
-      ? form.control(cityControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get cityControl =>
+      form.control(cityControlPath()) as FormControl<String>;
 
   void streetSetDisabled(
     bool disabled, {
@@ -1326,12 +1367,12 @@ class AddressForm implements FormModel<Address, Address> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      streetControl?.markAsDisabled(
+      streetControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      streetControl?.markAsEnabled(
+      streetControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1344,12 +1385,12 @@ class AddressForm implements FormModel<Address, Address> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      cityControl?.markAsDisabled(
+      cityControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      cityControl?.markAsEnabled(
+      cityControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1368,6 +1409,11 @@ class AddressForm implements FormModel<Address, Address> {
       );
     }
     return Address(street: _streetValue, city: _cityValue);
+  }
+
+  @override
+  Address get rawModel {
+    return Address(street: _streetRawValue, city: _cityRawValue);
   }
 
   @override
@@ -1506,10 +1552,18 @@ class ClientForm implements FormModel<Client, Client> {
 
   ClientType get _clientTypeValue => clientTypeControl.value as ClientType;
 
-  String? get _nameValue => nameControl?.value;
+  String? get _nameValue => nameControl.value;
 
-  String? get _notesValue => notesControl?.value;
+  String? get _notesValue => notesControl.value;
 
+  ClientType get _clientTypeRawValue => clientTypeControl.value as ClientType;
+
+  String? get _nameRawValue => nameControl.value;
+
+  String? get _notesRawValue => notesControl.value;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsClientType {
     try {
       form.control(clientTypeControlPath());
@@ -1519,6 +1573,8 @@ class ClientForm implements FormModel<Client, Client> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -1528,6 +1584,8 @@ class ClientForm implements FormModel<Client, Client> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsNotes {
     try {
       form.control(notesControlPath());
@@ -1539,9 +1597,9 @@ class ClientForm implements FormModel<Client, Client> {
 
   Map<String, Object> get clientTypeErrors => clientTypeControl.errors;
 
-  Map<String, Object>? get nameErrors => nameControl?.errors;
+  Map<String, Object>? get nameErrors => nameControl.errors;
 
-  Map<String, Object>? get notesErrors => notesControl?.errors;
+  Map<String, Object>? get notesErrors => notesControl.errors;
 
   void get clientTypeFocus => form.focus(clientTypeControlPath());
 
@@ -1549,6 +1607,8 @@ class ClientForm implements FormModel<Client, Client> {
 
   void get notesFocus => form.focus(notesControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void nameRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1575,6 +1635,8 @@ class ClientForm implements FormModel<Client, Client> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void notesRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1615,7 +1677,7 @@ class ClientForm implements FormModel<Client, Client> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl?.updateValue(value,
+    nameControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1624,7 +1686,7 @@ class ClientForm implements FormModel<Client, Client> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    notesControl?.updateValue(value,
+    notesControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1642,7 +1704,7 @@ class ClientForm implements FormModel<Client, Client> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl?.patchValue(value,
+    nameControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1651,7 +1713,7 @@ class ClientForm implements FormModel<Client, Client> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    notesControl?.patchValue(value,
+    notesControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1677,7 +1739,7 @@ class ClientForm implements FormModel<Client, Client> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      nameControl?.reset(
+      nameControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -1692,7 +1754,7 @@ class ClientForm implements FormModel<Client, Client> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      notesControl?.reset(
+      notesControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -1703,13 +1765,11 @@ class ClientForm implements FormModel<Client, Client> {
   FormControl<ClientType> get clientTypeControl =>
       form.control(clientTypeControlPath()) as FormControl<ClientType>;
 
-  FormControl<String>? get nameControl => containsName
-      ? form.control(nameControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get nameControl =>
+      form.control(nameControlPath()) as FormControl<String>;
 
-  FormControl<String>? get notesControl => containsNotes
-      ? form.control(notesControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get notesControl =>
+      form.control(notesControlPath()) as FormControl<String>;
 
   void clientTypeSetDisabled(
     bool disabled, {
@@ -1735,12 +1795,12 @@ class ClientForm implements FormModel<Client, Client> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      nameControl?.markAsDisabled(
+      nameControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      nameControl?.markAsEnabled(
+      nameControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1753,12 +1813,12 @@ class ClientForm implements FormModel<Client, Client> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      notesControl?.markAsDisabled(
+      notesControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      notesControl?.markAsEnabled(
+      notesControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1778,6 +1838,14 @@ class ClientForm implements FormModel<Client, Client> {
     }
     return Client(
         clientType: _clientTypeValue, name: _nameValue, notes: _notesValue);
+  }
+
+  @override
+  Client get rawModel {
+    return Client(
+        clientType: _clientTypeRawValue,
+        name: _nameRawValue,
+        notes: _notesRawValue);
   }
 
   @override
@@ -2268,6 +2336,12 @@ class StandaloneDeliveryPointForm
 
   Address? get _addressValue => addressForm.model;
 
+  String get _nameRawValue => nameControl.value ?? "";
+
+  Address? get _addressRawValue => addressForm.rawModel;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -2277,6 +2351,8 @@ class StandaloneDeliveryPointForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsAddress {
     try {
       form.control(addressControlPath());
@@ -2288,12 +2364,14 @@ class StandaloneDeliveryPointForm
 
   Map<String, Object> get nameErrors => nameControl.errors;
 
-  Map<String, Object>? get addressErrors => addressControl?.errors;
+  Map<String, Object>? get addressErrors => addressControl.errors;
 
   void get nameFocus => form.focus(nameControlPath());
 
   void get addressFocus => form.focus(addressControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void addressRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -2334,7 +2412,7 @@ class StandaloneDeliveryPointForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    addressControl?.updateValue(AddressForm.formElements(value).rawValue,
+    addressControl.updateValue(AddressForm.formElements(value).rawValue,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -2352,7 +2430,7 @@ class StandaloneDeliveryPointForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    addressControl?.updateValue(AddressForm.formElements(value).rawValue,
+    addressControl.updateValue(AddressForm.formElements(value).rawValue,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -2378,7 +2456,7 @@ class StandaloneDeliveryPointForm
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      addressControl?.reset(
+      addressControl.reset(
           value: AddressForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
@@ -2386,8 +2464,8 @@ class StandaloneDeliveryPointForm
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
 
-  FormGroup? get addressControl =>
-      containsAddress ? form.control(addressControlPath()) as FormGroup? : null;
+  FormGroup get addressControl =>
+      form.control(addressControlPath()) as FormGroup;
 
   AddressForm get addressForm => AddressForm(form, pathBuilder('address'));
 
@@ -2415,12 +2493,12 @@ class StandaloneDeliveryPointForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      addressControl?.markAsDisabled(
+      addressControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      addressControl?.markAsEnabled(
+      addressControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -2439,6 +2517,11 @@ class StandaloneDeliveryPointForm
       );
     }
     return DeliveryPoint(name: _nameValue, address: _addressValue);
+  }
+
+  @override
+  DeliveryPoint get rawModel {
+    return DeliveryPoint(name: _nameRawValue, address: _addressRawValue);
   }
 
   @override

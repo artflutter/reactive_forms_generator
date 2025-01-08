@@ -309,6 +309,12 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
 
   String get _passwordValue => passwordControl.value as String;
 
+  String? get _emailRawValue => emailControl.value;
+
+  String? get _passwordRawValue => passwordControl.value;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -318,6 +324,8 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsPassword {
     try {
       form.control(passwordControlPath());
@@ -335,6 +343,8 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
 
   void get passwordFocus => form.focus(passwordControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void emailRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -361,6 +371,8 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void passwordRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -496,6 +508,7 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
   }
 
   @override
+  @protected
   LoginOOutput get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
@@ -507,6 +520,11 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
       );
     }
     return LoginOOutput(email: _emailValue, password: _passwordValue);
+  }
+
+  @override
+  LoginO get rawModel {
+    return LoginO(email: _emailRawValue, password: _passwordRawValue);
   }
 
   @override
