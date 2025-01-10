@@ -13,6 +13,8 @@ class ArrayNullable {
 
   final List<String?>? someList;
 
+  final List<String> someListRequired;
+
   final List<UserMode?>? modeList;
 
   ArrayNullable({
@@ -24,5 +26,6 @@ class ArrayNullable {
     @RfArray() this.vegetablesList,
     @RfArray() this.modeList,
     @RfControl<List<String?>>() this.someList,
+    this.someListRequired = const [],
   });
 }

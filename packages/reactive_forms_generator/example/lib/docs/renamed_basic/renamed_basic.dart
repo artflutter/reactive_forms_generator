@@ -12,10 +12,10 @@ class RenamedBasic {
     @RfControl(
       validators: [RequiredValidator()],
     )
-    this.email = '',
+    this.email = "",
     @RfControl(
       validators: [RequiredValidator()],
     )
-    this.password = '',
+    this.password = "",
   });
 }

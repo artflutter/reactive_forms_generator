@@ -9,7 +9,7 @@ void main() {
   group('reactive_forms_generator', () {
     test(
       'Animated URL list Output',
-      () async {
+          () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -327,7 +327,7 @@ class AnimatedUrlLisOForm
     final toAdd = <UrlEntityO>[];
 
     localValue.asMap().forEach((k, v) {
-      final values = (urlListControl.controls).map((e) => e.value).toList();
+      final values = urlListControl.controls.map((e) => e.value).toList();
 
       if (urlListUrlEntityOForm.asMap().containsKey(k) &&
           values.asMap().containsKey(k)) {
@@ -358,7 +358,7 @@ class AnimatedUrlLisOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final values = (urlListControl.controls).map((e) => e.value).toList();
+    final values = urlListControl.controls.map((e) => e.value).toList();
     if (values.length < i) {
       addUrlListItem(value);
       return;
@@ -420,7 +420,7 @@ class AnimatedUrlLisOForm
       form.control(urlListControlPath()) as FormArray<Map<String, Object?>>;
 
   List<UrlEntityOForm> get urlListUrlEntityOForm {
-    final values = (urlListControl.controls).map((e) => e.value).toList();
+    final values = urlListControl.controls.map((e) => e.value).toList();
 
     return values
         .asMap()

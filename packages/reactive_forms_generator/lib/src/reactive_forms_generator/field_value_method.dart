@@ -10,7 +10,8 @@ import 'package:reactive_forms_generator/src/output/x.dart';
 
 // import 'package:reactive_forms_generator/src/output/x.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
-import 'package:reactive_forms_generator/src/types.dart';
+
+// import 'package:reactive_forms_generator/src/types.dart';
 // import 'package:analyzer/src/dart/element/display_string_builder.dart';
 
 class FieldValueMethod extends ReactiveFormGeneratorMethod {
@@ -58,16 +59,18 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
     // do not add additional cast if the field is nullable to avoid
     // unnecessary_cast notes
     if (field.type.nullabilitySuffix == NullabilitySuffix.none || toOutput) {
-      if (field.hasDefaultValue) {
-        final constantValueObject = field.computeConstantValue();
-        if (constantValueObject?.type?.isDartCoreString ?? false) {
-          final constantValue = constantValueObject?.toStringValue() ?? '';
-          code += ' ?? "$constantValue"';
-        } else if (constantValueObject?.type?.isDartCoreList ?? false) {
-          code += ' ?? []';
-        } else {
-          code += codeTypeCast;
-        }
+      final defaultValue = field.defaultValue;
+      if (defaultValue != null) {
+        code += ' ?? $defaultValue';
+        // final constantValueObject = field.computeConstantValue();
+        // if (constantValueObject?.type?.isDartCoreString ?? false) {
+        //   final constantValue = constantValueObject?.toStringValue() ?? '';
+        //   code += ' ?? "$constantValue"';
+        // } else if (constantValueObject?.type?.isDartCoreList ?? false) {
+        //   code += ' ?? []';
+        // } else {
+        //   code += codeTypeCast;
+        // }
       } else {
         code += codeTypeCast;
       }
@@ -122,21 +125,9 @@ extension Care on ClassElement {
   }
 }
 
-extension Pare on ParameterElement {
-  String toReferenceType(List<String> requiredValidators) {
-    if (hasRfControlAnnotation &&
-        annotationParams(formControlChecker)
-            .hasRequiredValidator(requiredValidators)) {
-      return type.getDisplayString(withNullability: false);
-    }
-
-    var builder = ElementDisplayStringBuilder2(
-      withNullability: true,
-    );
-    (type as TypeImpl).appendTo(builder);
-    return builder.toString();
-  }
-}
+// extension Pare on ParameterElement {
+//
+// }
 
 // class RfElementDisplayStringBuilder extends ElementDisplayStringBuilder {
 //   RfElementDisplayStringBuilder({required super.withNullability});

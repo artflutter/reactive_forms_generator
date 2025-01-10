@@ -241,6 +241,8 @@ class FreezedClassOForm
 
   static const String yearControlName = "year";
 
+  static const String selectedSpacesControlName = "selectedSpaces";
+
   final FormGroup form;
 
   final String? path;
@@ -263,6 +265,8 @@ class FreezedClassOForm
 
   String yearControlPath() => pathBuilder(yearControlName);
 
+  String selectedSpacesControlPath() => pathBuilder(selectedSpacesControlName);
+
   String? get _genderValue => genderControl.value;
 
   String get _genderRValue => genderRControl.value as String;
@@ -271,13 +275,15 @@ class FreezedClassOForm
 
   String get _idRValue => idRControl.value as String;
 
-  String get _idR2Value => idR2Control.value as String;
+  String get _idR2Value => idR2Control.value ?? '';
 
   String? get _nameValue => nameControl.value;
 
   String? get _logoImageValue => logoImageControl.value;
 
   double? get _yearValue => yearControl.value;
+
+  List<String> get _selectedSpacesValue => selectedSpacesControl.value ?? [];
 
   String? get _genderRawValue => genderControl.value;
 
@@ -287,13 +293,15 @@ class FreezedClassOForm
 
   String? get _idRRawValue => idRControl.value;
 
-  String get _idR2RawValue => idR2Control.value as String;
+  String get _idR2RawValue => idR2Control.value ?? '';
 
   String? get _nameRawValue => nameControl.value;
 
   String? get _logoImageRawValue => logoImageControl.value;
 
   double? get _yearRawValue => yearControl.value;
+
+  List<String> get _selectedSpacesRawValue => selectedSpacesControl.value ?? [];
 
   @Deprecated(
       'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
@@ -383,6 +391,17 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+  bool get containsSelectedSpaces {
+    try {
+      form.control(selectedSpacesControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Map<String, Object>? get genderErrors => genderControl.errors;
 
   Map<String, Object>? get genderRErrors => genderRControl.errors;
@@ -399,6 +418,8 @@ class FreezedClassOForm
 
   Map<String, Object>? get yearErrors => yearControl.errors;
 
+  Map<String, Object> get selectedSpacesErrors => selectedSpacesControl.errors;
+
   void get genderFocus => form.focus(genderControlPath());
 
   void get genderRFocus => form.focus(genderRControlPath());
@@ -414,6 +435,8 @@ class FreezedClassOForm
   void get logoImageFocus => form.focus(logoImageControlPath());
 
   void get yearFocus => form.focus(yearControlPath());
+
+  void get selectedSpacesFocus => form.focus(selectedSpacesControlPath());
 
   @Deprecated(
       'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
@@ -683,6 +706,15 @@ class FreezedClassOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void selectedSpacesValueUpdate(
+    List<String> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    selectedSpacesControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void genderValuePatch(
     String? value, {
     bool updateParent = true,
@@ -752,6 +784,15 @@ class FreezedClassOForm
     bool emitEvent = true,
   }) {
     yearControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void selectedSpacesValuePatch(
+    List<String> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    selectedSpacesControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -875,6 +916,21 @@ class FreezedClassOForm
         disabled: disabled,
       );
 
+  void selectedSpacesValueReset(
+    List<String> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      selectedSpacesControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
+
   FormControl<String> get genderControl =>
       form.control(genderControlPath()) as FormControl<String>;
 
@@ -898,6 +954,9 @@ class FreezedClassOForm
 
   FormControl<double> get yearControl =>
       form.control(yearControlPath()) as FormControl<double>;
+
+  FormControl<List<String>> get selectedSpacesControl =>
+      form.control(selectedSpacesControlPath()) as FormControl<List<String>>;
 
   void genderSetDisabled(
     bool disabled, {
@@ -1043,6 +1102,24 @@ class FreezedClassOForm
     }
   }
 
+  void selectedSpacesSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      selectedSpacesControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      selectedSpacesControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   @override
   @protected
   FreezedClassOOutput get model {
@@ -1061,7 +1138,8 @@ class FreezedClassOForm
         idR2: _idR2Value,
         name: _nameValue,
         logoImage: _logoImageValue,
-        year: _yearValue);
+        year: _yearValue,
+        selectedSpaces: _selectedSpacesValue);
   }
 
   @override
@@ -1072,7 +1150,8 @@ class FreezedClassOForm
         idR2: _idR2RawValue,
         name: _nameRawValue,
         logoImage: _logoImageRawValue,
-        year: _yearRawValue);
+        year: _yearRawValue,
+        selectedSpaces: _selectedSpacesRawValue);
   }
 
   @override
@@ -1217,6 +1296,13 @@ class FreezedClassOForm
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
+            touched: false),
+        selectedSpacesControlName: FormControl<List<String>>(
+            value: freezedClassO?.selectedSpaces,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
             touched: false)
       },
           validators: [],
@@ -1236,7 +1322,8 @@ class FreezedClassOOutput with _$FreezedClassOOutput {
       @RfControl(validators: [RequiredValidator()]) required String idR2,
       @RfControl<String>() String? name,
       @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
-      @RfControl<double>() double? year}) = _FreezedClassOOutput;
+      @RfControl<double>() double? year,
+      @Default([]) List<String> selectedSpaces}) = _FreezedClassOOutput;
   factory FreezedClassOOutput.fromJson(Map<String, dynamic> json) =>
       _$FreezedClassOOutputFromJson(json);
   bool method() => false;

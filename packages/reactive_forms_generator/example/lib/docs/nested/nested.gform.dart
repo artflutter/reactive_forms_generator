@@ -847,8 +847,7 @@ class GroupForm implements FormModel<Group, Group> {
     final toAdd = <SubGroup>[];
 
     localValue.asMap().forEach((k, v) {
-      final values =
-          (subGroupListControl.controls).map((e) => e.value).toList();
+      final values = subGroupListControl.controls.map((e) => e.value).toList();
 
       if (subGroupListSubGroupForm.asMap().containsKey(k) &&
           values.asMap().containsKey(k)) {
@@ -879,7 +878,7 @@ class GroupForm implements FormModel<Group, Group> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final values = (subGroupListControl.controls).map((e) => e.value).toList();
+    final values = subGroupListControl.controls.map((e) => e.value).toList();
     if (values.length < i) {
       addSubGroupListItem(value);
       return;
@@ -968,7 +967,7 @@ class GroupForm implements FormModel<Group, Group> {
           as FormArray<Map<String, Object?>>;
 
   List<SubGroupForm> get subGroupListSubGroupForm {
-    final values = (subGroupListControl.controls).map((e) => e.value).toList();
+    final values = subGroupListControl.controls.map((e) => e.value).toList();
 
     return values
         .asMap()
@@ -1560,7 +1559,7 @@ class NestedForm implements FormModel<Nested, Nested> {
     final toAdd = <Group>[];
 
     localValue.asMap().forEach((k, v) {
-      final values = (groupListControl.controls).map((e) => e.value).toList();
+      final values = groupListControl.controls.map((e) => e.value).toList();
 
       if (groupListGroupForm.asMap().containsKey(k) &&
           values.asMap().containsKey(k)) {
@@ -1591,7 +1590,7 @@ class NestedForm implements FormModel<Nested, Nested> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final values = (groupListControl.controls).map((e) => e.value).toList();
+    final values = groupListControl.controls.map((e) => e.value).toList();
     if (values.length < i) {
       addGroupListItem(value);
       return;
@@ -1651,7 +1650,7 @@ class NestedForm implements FormModel<Nested, Nested> {
       form.control(groupListControlPath()) as FormArray<Map<String, Object?>>;
 
   List<GroupForm> get groupListGroupForm {
-    final values = (groupListControl.controls).map((e) => e.value).toList();
+    final values = groupListControl.controls.map((e) => e.value).toList();
 
     return values
         .asMap()

@@ -42,7 +42,7 @@ void main() {
                 @RfControl(
                   validators: [RequiredValidator()],
                 )
-                this.name = '',
+                this.name = "",
                 this.address,
               });
             }
@@ -412,8 +412,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     final toAdd = <DeliveryPoint>[];
 
     localValue.asMap().forEach((k, v) {
-      final values =
-          (deliveryListControl.controls).map((e) => e.value).toList();
+      final values = deliveryListControl.controls.map((e) => e.value).toList();
 
       if (deliveryListDeliveryPointForm.asMap().containsKey(k) &&
           values.asMap().containsKey(k)) {
@@ -456,8 +455,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     final toAdd = <Client>[];
 
     localValue.asMap().forEach((k, v) {
-      final values =
-          (clientListControl.controls ?? []).map((e) => e.value).toList();
+      final values = clientListControl.controls.map((e) => e.value).toList();
 
       if (clientListClientForm.asMap().containsKey(k) &&
           values.asMap().containsKey(k)) {
@@ -488,7 +486,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final values = (deliveryListControl.controls).map((e) => e.value).toList();
+    final values = deliveryListControl.controls.map((e) => e.value).toList();
     if (values.length < i) {
       addDeliveryListItem(value);
       return;
@@ -508,8 +506,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final values =
-        (clientListControl.controls ?? []).map((e) => e.value).toList();
+    final values = clientListControl.controls.map((e) => e.value).toList();
     if (values.length < i) {
       addClientListItem(value);
       return;
@@ -618,7 +615,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
       form.control(clientListControlPath()) as FormArray<Map<String, Object?>>;
 
   List<DeliveryPointForm> get deliveryListDeliveryPointForm {
-    final values = (deliveryListControl.controls).map((e) => e.value).toList();
+    final values = deliveryListControl.controls.map((e) => e.value).toList();
 
     return values
         .asMap()
@@ -629,8 +626,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
   }
 
   List<ClientForm> get clientListClientForm {
-    final values =
-        (clientListControl.controls ?? []).map((e) => e.value).toList();
+    final values = clientListControl.controls.map((e) => e.value).toList();
 
     return values
         .asMap()

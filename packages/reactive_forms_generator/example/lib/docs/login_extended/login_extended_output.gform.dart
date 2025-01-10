@@ -291,7 +291,7 @@ class LoginExtendedOForm
 
   String? get _unAnnotatedValue => unAnnotatedControl.value;
 
-  List<int> get _someIntListValue => someIntListControl.value ?? [];
+  List<int> get _someIntListValue => someIntListControl.value ?? const [];
 
   String? get _emailRawValue => emailControl.value;
 
@@ -311,7 +311,7 @@ class LoginExtendedOForm
 
   String? get _unAnnotatedRawValue => unAnnotatedControl.value;
 
-  List<int> get _someIntListRawValue => someIntListControl.value ?? [];
+  List<int> get _someIntListRawValue => someIntListControl.value ?? const [];
 
   @Deprecated(
       'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')

@@ -1542,32 +1542,32 @@ class IncidenceFilterOForm
   String isPlaqueEnabledControlPath() =>
       pathBuilder(isPlaqueEnabledControlName);
 
-  bool get _isMobilityEnabledValue => isMobilityEnabledControl.value as bool;
+  bool get _isMobilityEnabledValue => isMobilityEnabledControl.value ?? true;
 
-  bool get _isFurcationEnabledValue => isFurcationEnabledControl.value as bool;
+  bool get _isFurcationEnabledValue => isFurcationEnabledControl.value ?? true;
 
-  bool get _isBleedingEnabledValue => isBleedingEnabledControl.value as bool;
+  bool get _isBleedingEnabledValue => isBleedingEnabledControl.value ?? true;
 
   bool get _isSuppurationEnabledValue =>
-      isSuppurationEnabledControl.value as bool;
+      isSuppurationEnabledControl.value ?? true;
 
-  bool get _isCalculusEnabledValue => isCalculusEnabledControl.value as bool;
+  bool get _isCalculusEnabledValue => isCalculusEnabledControl.value ?? true;
 
-  bool get _isPlaqueEnabledValue => isPlaqueEnabledControl.value as bool;
+  bool get _isPlaqueEnabledValue => isPlaqueEnabledControl.value ?? true;
 
-  bool get _isMobilityEnabledRawValue => isMobilityEnabledControl.value as bool;
+  bool get _isMobilityEnabledRawValue => isMobilityEnabledControl.value ?? true;
 
   bool get _isFurcationEnabledRawValue =>
-      isFurcationEnabledControl.value as bool;
+      isFurcationEnabledControl.value ?? true;
 
-  bool get _isBleedingEnabledRawValue => isBleedingEnabledControl.value as bool;
+  bool get _isBleedingEnabledRawValue => isBleedingEnabledControl.value ?? true;
 
   bool get _isSuppurationEnabledRawValue =>
-      isSuppurationEnabledControl.value as bool;
+      isSuppurationEnabledControl.value ?? true;
 
-  bool get _isCalculusEnabledRawValue => isCalculusEnabledControl.value as bool;
+  bool get _isCalculusEnabledRawValue => isCalculusEnabledControl.value ?? true;
 
-  bool get _isPlaqueEnabledRawValue => isPlaqueEnabledControl.value as bool;
+  bool get _isPlaqueEnabledRawValue => isPlaqueEnabledControl.value ?? true;
 
   @Deprecated(
       'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
@@ -2183,13 +2183,13 @@ class ThresholdSettingOForm
 
   String valueControlPath() => pathBuilder(valueControlName);
 
-  bool get _isEnabledValue => isEnabledControl.value as bool;
+  bool get _isEnabledValue => isEnabledControl.value ?? true;
 
-  int get _valueValue => valueControl.value as int;
+  int get _valueValue => valueControl.value ?? 2;
 
-  bool get _isEnabledRawValue => isEnabledControl.value as bool;
+  bool get _isEnabledRawValue => isEnabledControl.value ?? true;
 
-  int get _valueRawValue => valueControl.value as int;
+  int get _valueRawValue => valueControl.value ?? 2;
 
   @Deprecated(
       'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
@@ -2483,13 +2483,13 @@ class TimerSettingOForm
 
   String valueControlPath() => pathBuilder(valueControlName);
 
-  bool get _isEnabledValue => isEnabledControl.value as bool;
+  bool get _isEnabledValue => isEnabledControl.value ?? false;
 
-  int get _valueValue => valueControl.value as int;
+  int get _valueValue => valueControl.value ?? 5;
 
-  bool get _isEnabledRawValue => isEnabledControl.value as bool;
+  bool get _isEnabledRawValue => isEnabledControl.value ?? false;
 
-  int get _valueRawValue => valueControl.value as int;
+  int get _valueRawValue => valueControl.value ?? 5;
 
   @Deprecated(
       'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')

@@ -278,7 +278,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   String get _emailValue => emailControl.value as String;
 
   bool get _sameMailingAddressAsCompanyValue =>
-      sameMailingAddressAsCompanyControl.value as bool;
+      sameMailingAddressAsCompanyControl.value ?? false;
 
   AddressOutput get _companyAddressValue => companyAddressForm.model;
 
@@ -300,7 +300,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   String? get _emailRawValue => emailControl.value;
 
   bool get _sameMailingAddressAsCompanyRawValue =>
-      sameMailingAddressAsCompanyControl.value as bool;
+      sameMailingAddressAsCompanyControl.value ?? false;
 
   Address get _companyAddressRawValue => companyAddressForm.rawModel;
 
@@ -702,7 +702,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     final toAdd = <AdminContactInformation>[];
 
     localValue.asMap().forEach((k, v) {
-      final values = (adminsControl.controls).map((e) => e.value).toList();
+      final values = adminsControl.controls.map((e) => e.value).toList();
 
       if (adminsAdminContactInformationForm.asMap().containsKey(k) &&
           values.asMap().containsKey(k)) {
@@ -735,7 +735,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final values = (adminsControl.controls).map((e) => e.value).toList();
+    final values = adminsControl.controls.map((e) => e.value).toList();
     if (values.length < i) {
       addAdminsItem(value);
       return;
@@ -1045,7 +1045,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
       AddressForm(form, pathBuilder('mailingAddress'));
 
   List<AdminContactInformationForm> get adminsAdminContactInformationForm {
-    final values = (adminsControl.controls).map((e) => e.value).toList();
+    final values = adminsControl.controls.map((e) => e.value).toList();
 
     return values
         .asMap()
@@ -1470,8 +1470,6 @@ class AddressForm implements FormModel<Address, AddressOutput> {
 
   static const String zipCodeControlName = "zipCode";
 
-  static const String countryControlName = "country";
-
   final FormGroup form;
 
   final String? path;
@@ -1487,8 +1485,6 @@ class AddressForm implements FormModel<Address, AddressOutput> {
 
   String zipCodeControlPath() => pathBuilder(zipCodeControlName);
 
-  String countryControlPath() => pathBuilder(countryControlName);
-
   String get _streetValue => streetControl.value as String;
 
   String get _cityValue => cityControl.value as String;
@@ -1497,8 +1493,6 @@ class AddressForm implements FormModel<Address, AddressOutput> {
 
   String get _zipCodeValue => zipCodeControl.value as String;
 
-  ApiCountryType get _countryValue => countryControl.value as ApiCountryType;
-
   String? get _streetRawValue => streetControl.value;
 
   String? get _cityRawValue => cityControl.value;
@@ -1506,8 +1500,6 @@ class AddressForm implements FormModel<Address, AddressOutput> {
   String? get _stateOrProvinceRawValue => stateOrProvinceControl.value;
 
   String? get _zipCodeRawValue => zipCodeControl.value;
-
-  ApiCountryType? get _countryRawValue => countryControl.value;
 
   @Deprecated(
       'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
@@ -1553,17 +1545,6 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     }
   }
 
-  @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
-  bool get containsCountry {
-    try {
-      form.control(countryControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
   Map<String, Object>? get streetErrors => streetControl.errors;
 
   Map<String, Object>? get cityErrors => cityControl.errors;
@@ -1573,8 +1554,6 @@ class AddressForm implements FormModel<Address, AddressOutput> {
 
   Map<String, Object>? get zipCodeErrors => zipCodeControl.errors;
 
-  Map<String, Object>? get countryErrors => countryControl.errors;
-
   void get streetFocus => form.focus(streetControlPath());
 
   void get cityFocus => form.focus(cityControlPath());
@@ -1582,8 +1561,6 @@ class AddressForm implements FormModel<Address, AddressOutput> {
   void get stateOrProvinceFocus => form.focus(stateOrProvinceControlPath());
 
   void get zipCodeFocus => form.focus(zipCodeControlPath());
-
-  void get countryFocus => form.focus(countryControlPath());
 
   @Deprecated(
       'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
@@ -1697,34 +1674,6 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     }
   }
 
-  @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void countryRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (containsCountry) {
-      final controlPath = path;
-      if (controlPath == null) {
-        form.removeControl(
-          countryControlName,
-          updateParent: updateParent,
-          emitEvent: emitEvent,
-        );
-      } else {
-        final formGroup = form.control(controlPath);
-
-        if (formGroup is FormGroup) {
-          formGroup.removeControl(
-            countryControlName,
-            updateParent: updateParent,
-            emitEvent: emitEvent,
-          );
-        }
-      }
-    }
-  }
-
   void streetValueUpdate(
     String? value, {
     bool updateParent = true,
@@ -1761,15 +1710,6 @@ class AddressForm implements FormModel<Address, AddressOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void countryValueUpdate(
-    ApiCountryType? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    countryControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
   void streetValuePatch(
     String? value, {
     bool updateParent = true,
@@ -1803,15 +1743,6 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     bool emitEvent = true,
   }) {
     zipCodeControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void countryValuePatch(
-    ApiCountryType? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    countryControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1875,21 +1806,6 @@ class AddressForm implements FormModel<Address, AddressOutput> {
         disabled: disabled,
       );
 
-  void countryValueReset(
-    ApiCountryType? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      countryControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
-
   FormControl<String> get streetControl =>
       form.control(streetControlPath()) as FormControl<String>;
 
@@ -1901,9 +1817,6 @@ class AddressForm implements FormModel<Address, AddressOutput> {
 
   FormControl<String> get zipCodeControl =>
       form.control(zipCodeControlPath()) as FormControl<String>;
-
-  FormControl<ApiCountryType> get countryControl =>
-      form.control(countryControlPath()) as FormControl<ApiCountryType>;
 
   void streetSetDisabled(
     bool disabled, {
@@ -1977,24 +1890,6 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     }
   }
 
-  void countrySetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      countryControl.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      countryControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
   @override
   @protected
   AddressOutput get model {
@@ -2011,8 +1906,7 @@ class AddressForm implements FormModel<Address, AddressOutput> {
         street: _streetValue,
         city: _cityValue,
         stateOrProvince: _stateOrProvinceValue,
-        zipCode: _zipCodeValue,
-        country: _countryValue);
+        zipCode: _zipCodeValue);
   }
 
   @override
@@ -2021,8 +1915,7 @@ class AddressForm implements FormModel<Address, AddressOutput> {
         street: _streetRawValue,
         city: _cityRawValue,
         stateOrProvince: _stateOrProvinceRawValue,
-        zipCode: _zipCodeRawValue,
-        country: _countryRawValue);
+        zipCode: _zipCodeRawValue);
   }
 
   @override
@@ -2136,13 +2029,6 @@ class AddressForm implements FormModel<Address, AddressOutput> {
         zipCodeControlName: FormControl<String>(
             value: address?.zipCode,
             validators: [RequiredValidator()],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        countryControlName: FormControl<ApiCountryType>(
-            value: address?.country,
-            validators: [RequiredValidator(), MaxLengthValidator(120)],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -3127,9 +3013,8 @@ class AddressOutput with _$AddressOutput {
       required String city,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       required String stateOrProvince,
-      @RfControl(validators: [RequiredValidator()]) required String zipCode,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      required ApiCountryType country}) = _AddressOutput;
+      @RfControl(validators: [RequiredValidator()])
+      required String zipCode}) = _AddressOutput;
 }
 
 @RfGroup<PrimaryContactOutput>()

@@ -2,8 +2,10 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:code_builder/code_builder.dart';
+import 'package:reactive_forms_generator/src/output/x.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
+import 'package:analyzer/src/dart/element/type.dart';
 
 import '../utils.dart';
 
@@ -190,6 +192,36 @@ extension ParameterElementExt on ParameterElement {
   bool get isFormGroup => type.element?.hasRfGroupAnnotation ?? false;
 
   bool get isForm => hasRfAnnotation;
+
+  String? get defaultValue {
+    for (final meta in metadata) {
+      final source = meta.toSource();
+
+      if (source.startsWith('@Default(')) {
+        return source.substring('@Default('.length, source.length - 1);
+      }
+    }
+
+    if (hasDefaultValue) {
+      return defaultValueCode;
+    }
+
+    return null;
+  }
+
+  String toReferenceType(List<String> requiredValidators) {
+    if (hasRfControlAnnotation &&
+        annotationParams(formControlChecker)
+            .hasRequiredValidator(requiredValidators)) {
+      return type.getDisplayString(withNullability: false);
+    }
+
+    var builder = ElementDisplayStringBuilder2(
+      withNullability: true,
+    );
+    (type as TypeImpl).appendTo(builder);
+    return builder.toString();
+  }
 }
 
 extension FieldElementExt on FieldElement {

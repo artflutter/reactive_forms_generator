@@ -47,8 +47,7 @@ class NestedGenericFormWidgetState extends State<NestedGenericFormWidget> {
                       ],
                     );
                   },
-                  formControl:
-                      formModel.descriptionControl as FormControl<String>,
+                  formControl: formModel.descriptionControl,
                 ),
                 ReactiveProductDetailsFormConsumer(
                   builder: (context, formModel, child) {

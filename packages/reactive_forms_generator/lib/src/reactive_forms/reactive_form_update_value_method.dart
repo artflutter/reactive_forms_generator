@@ -23,7 +23,7 @@ class ReactiveFormUpdateValueMethod extends ReactiveFormGeneratorMethod {
         final toAdd = <${field.typeParameter}>[];
         
         localValue.asMap().forEach((k, v) {
-          final values = (${field.fieldControlName}.controls ${field.isNullable ? '?? []' : ''}).map((e) => e.value).toList();
+          final values = ${field.fieldControlName}.controls.map((e) => e.value).toList();
           
           if (${field.name}${field.className}.asMap().containsKey(k) &&
               values.asMap().containsKey(k)) {

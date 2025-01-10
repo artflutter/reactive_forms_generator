@@ -36,7 +36,7 @@ class LoginExtendedO {
       validators: [RequiredValidator()],
       asyncValidators: [UniqueEmailAsyncValidator()],
     )
-    this.email2 = '',
+    this.email2 = "",
     @RfControl(
       validators: [RequiredValidator()],
     )

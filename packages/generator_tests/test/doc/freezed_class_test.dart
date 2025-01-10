@@ -37,6 +37,7 @@ void main() {
                 @RfControl<String>()
                 String? logoImage,
                 @RfControl<double>() double? year,
+                @Default([]) List<String> selectedSpaces,
               }) = _FreezedClass;
             
               factory FreezedClass.fromJson(Map<String, dynamic> json) =>
@@ -288,6 +289,8 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
 
   static const String yearControlName = "year";
 
+  static const String selectedSpacesControlName = "selectedSpaces";
+
   final FormGroup form;
 
   final String? path;
@@ -304,6 +307,8 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
 
   String yearControlPath() => pathBuilder(yearControlName);
 
+  String selectedSpacesControlPath() => pathBuilder(selectedSpacesControlName);
+
   String? get _genderValue => genderControl.value;
 
   String? get _idValue => idControl.value;
@@ -314,6 +319,8 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
 
   double? get _yearValue => yearControl.value;
 
+  List<String> get _selectedSpacesValue => selectedSpacesControl.value ?? [];
+
   String? get _genderRawValue => genderControl.value;
 
   String? get _idRawValue => idControl.value;
@@ -323,6 +330,8 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
   String? get _logoImageRawValue => logoImageControl.value;
 
   double? get _yearRawValue => yearControl.value;
+
+  List<String> get _selectedSpacesRawValue => selectedSpacesControl.value ?? [];
 
   @Deprecated(
       'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
@@ -379,6 +388,17 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+  bool get containsSelectedSpaces {
+    try {
+      form.control(selectedSpacesControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Map<String, Object>? get genderErrors => genderControl.errors;
 
   Map<String, Object>? get idErrors => idControl.errors;
@@ -389,6 +409,8 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
 
   Map<String, Object>? get yearErrors => yearControl.errors;
 
+  Map<String, Object> get selectedSpacesErrors => selectedSpacesControl.errors;
+
   void get genderFocus => form.focus(genderControlPath());
 
   void get idFocus => form.focus(idControlPath());
@@ -398,6 +420,8 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
   void get logoImageFocus => form.focus(logoImageControlPath());
 
   void get yearFocus => form.focus(yearControlPath());
+
+  void get selectedSpacesFocus => form.focus(selectedSpacesControlPath());
 
   @Deprecated(
       'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
@@ -584,6 +608,15 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void selectedSpacesValueUpdate(
+    List<String> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    selectedSpacesControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void genderValuePatch(
     String? value, {
     bool updateParent = true,
@@ -626,6 +659,15 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     bool emitEvent = true,
   }) {
     yearControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void selectedSpacesValuePatch(
+    List<String> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    selectedSpacesControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -704,6 +746,21 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         disabled: disabled,
       );
 
+  void selectedSpacesValueReset(
+    List<String> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      selectedSpacesControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
+
   FormControl<String> get genderControl =>
       form.control(genderControlPath()) as FormControl<String>;
 
@@ -718,6 +775,9 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
 
   FormControl<double> get yearControl =>
       form.control(yearControlPath()) as FormControl<double>;
+
+  FormControl<List<String>> get selectedSpacesControl =>
+      form.control(selectedSpacesControlPath()) as FormControl<List<String>>;
 
   void genderSetDisabled(
     bool disabled, {
@@ -809,6 +869,24 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     }
   }
 
+  void selectedSpacesSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      selectedSpacesControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      selectedSpacesControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   @override
   FreezedClass get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
@@ -824,7 +902,8 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         id: _idValue,
         name: _nameValue,
         logoImage: _logoImageValue,
-        year: _yearValue);
+        year: _yearValue,
+        selectedSpaces: _selectedSpacesValue);
   }
 
   @override
@@ -833,7 +912,8 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         id: _idRawValue,
         name: _nameRawValue,
         logoImage: _logoImageRawValue,
-        year: _yearRawValue);
+        year: _yearRawValue,
+        selectedSpaces: _selectedSpacesRawValue);
   }
 
   @override
@@ -953,6 +1033,13 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
             touched: false),
         yearControlName: FormControl<double>(
             value: freezedClass?.year,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        selectedSpacesControlName: FormControl<List<String>>(
+            value: freezedClass?.selectedSpaces,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

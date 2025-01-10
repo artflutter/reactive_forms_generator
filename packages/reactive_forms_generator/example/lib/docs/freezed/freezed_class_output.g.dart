@@ -16,6 +16,10 @@ _$FreezedClassOImpl _$$FreezedClassOImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
       logoImage: json['logo_image'] as String?,
       year: (json['year'] as num?)?.toDouble(),
+      selectedSpaces: (json['selectedSpaces'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$FreezedClassOImplToJson(_$FreezedClassOImpl instance) =>
@@ -28,6 +32,7 @@ Map<String, dynamic> _$$FreezedClassOImplToJson(_$FreezedClassOImpl instance) =>
       'name': instance.name,
       'logo_image': instance.logoImage,
       'year': instance.year,
+      'selectedSpaces': instance.selectedSpaces,
     };
 
 _$FreezedClassOOutputImpl _$$FreezedClassOOutputImplFromJson(
@@ -41,6 +46,10 @@ _$FreezedClassOOutputImpl _$$FreezedClassOOutputImplFromJson(
       name: json['name'] as String?,
       logoImage: json['logo_image'] as String?,
       year: (json['year'] as num?)?.toDouble(),
+      selectedSpaces: (json['selectedSpaces'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$FreezedClassOOutputImplToJson(
@@ -54,4 +63,5 @@ Map<String, dynamic> _$$FreezedClassOOutputImplToJson(
       'name': instance.name,
       'logo_image': instance.logoImage,
       'year': instance.year,
+      'selectedSpaces': instance.selectedSpaces,
     };

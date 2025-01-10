@@ -43,8 +43,6 @@ class Address with _$Address {
     @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
     String? stateOrProvince,
     @RfControl(validators: [RequiredValidator()]) String? zipCode,
-    @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-    ApiCountryType? country,
   }) = _Address;
 }
 
@@ -71,26 +69,6 @@ class AdminContactInformation with _$AdminContactInformation {
     @RfControl(validators: [RequiredValidator(), EmailValidator()])
     String? email,
   }) = _AdminContactInformation;
-}
-
-enum ApiCountryType {
-  @JsonValue(r'CA')
-  CA(r'CA'),
-  @JsonValue(r'US')
-  US(r'US'),
-  @JsonValue(r'unknown_default_open_api')
-  unknownDefaultOpenApi(r'unknown_default_open_api');
-
-  const ApiCountryType(this.value);
-
-  final String value;
-
-  @override
-  String toString() => value;
-
-  static List<ApiCountryType> get valuesDefined => ApiCountryType.values
-      .where((e) => e != ApiCountryType.unknownDefaultOpenApi)
-      .toList();
 }
 
 extension AddressExt on Address {

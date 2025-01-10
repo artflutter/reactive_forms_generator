@@ -26,10 +26,10 @@ class ModelImplements implements Email, Password {
     @RfControl(
       validators: [RequiredValidator()],
     )
-    this.email = '',
+    this.email = "",
     @RfControl(
       validators: [RequiredValidator()],
     )
-    this.password = '',
+    this.password = "",
   });
 }

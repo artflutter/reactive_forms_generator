@@ -9,7 +9,7 @@ void main() {
   group('doc', () {
     test(
       'User profile',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -37,11 +37,11 @@ void main() {
                 @RfControl(
                   validators: [RequiredValidator()],
                 )
-                this.firstName = '',
+                this.firstName = "",
                 @RfControl(
                   validators: [RequiredValidator()],
                 )
-                this.lastName = '',
+                this.lastName = "",
                 required this.home,
                 this.office,
               });

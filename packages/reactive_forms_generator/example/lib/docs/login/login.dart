@@ -18,11 +18,11 @@ class Login extends Equatable {
     @RfControl(
       validators: [RequiredValidator(), RequiredValidator()],
     )
-    this.email = '',
+    this.email = "",
     @RfControl(
       validators: [RequiredValidator()],
     )
-    this.password = '',
+    this.password = "",
   });
 
   @override

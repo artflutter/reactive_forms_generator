@@ -881,8 +881,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     final toAdd = <SubGroupO>[];
 
     localValue.asMap().forEach((k, v) {
-      final values =
-          (subGroupListControl.controls).map((e) => e.value).toList();
+      final values = subGroupListControl.controls.map((e) => e.value).toList();
 
       if (subGroupListSubGroupOForm.asMap().containsKey(k) &&
           values.asMap().containsKey(k)) {
@@ -913,7 +912,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final values = (subGroupListControl.controls).map((e) => e.value).toList();
+    final values = subGroupListControl.controls.map((e) => e.value).toList();
     if (values.length < i) {
       addSubGroupListItem(value);
       return;
@@ -1002,7 +1001,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
           as FormArray<Map<String, Object?>>;
 
   List<SubGroupOForm> get subGroupListSubGroupOForm {
-    final values = (subGroupListControl.controls).map((e) => e.value).toList();
+    final values = subGroupListControl.controls.map((e) => e.value).toList();
 
     return values
         .asMap()
@@ -1595,7 +1594,7 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
     final toAdd = <GroupO>[];
 
     localValue.asMap().forEach((k, v) {
-      final values = (groupListControl.controls).map((e) => e.value).toList();
+      final values = groupListControl.controls.map((e) => e.value).toList();
 
       if (groupListGroupOForm.asMap().containsKey(k) &&
           values.asMap().containsKey(k)) {
@@ -1626,7 +1625,7 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final values = (groupListControl.controls).map((e) => e.value).toList();
+    final values = groupListControl.controls.map((e) => e.value).toList();
     if (values.length < i) {
       addGroupListItem(value);
       return;
@@ -1686,7 +1685,7 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
       form.control(groupListControlPath()) as FormArray<Map<String, Object?>>;
 
   List<GroupOForm> get groupListGroupOForm {
-    final values = (groupListControl.controls).map((e) => e.value).toList();
+    final values = groupListControl.controls.map((e) => e.value).toList();
 
     return values
         .asMap()

@@ -9,7 +9,7 @@ void main() {
   group('doc', () {
     test(
       'Delivery list Output',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -43,7 +43,7 @@ void main() {
                 @RfControl(
                   validators: [RequiredValidator()],
                 )
-                this.name = '',
+                this.name = "",
                 this.address,
               });
             
@@ -421,8 +421,7 @@ class DeliveryListOForm
     final toAdd = <DeliveryPointO>[];
 
     localValue.asMap().forEach((k, v) {
-      final values =
-          (deliveryListControl.controls).map((e) => e.value).toList();
+      final values = deliveryListControl.controls.map((e) => e.value).toList();
 
       if (deliveryListDeliveryPointOForm.asMap().containsKey(k) &&
           values.asMap().containsKey(k)) {
@@ -465,8 +464,7 @@ class DeliveryListOForm
     final toAdd = <ClientO>[];
 
     localValue.asMap().forEach((k, v) {
-      final values =
-          (clientListControl.controls ?? []).map((e) => e.value).toList();
+      final values = clientListControl.controls.map((e) => e.value).toList();
 
       if (clientListClientOForm.asMap().containsKey(k) &&
           values.asMap().containsKey(k)) {
@@ -497,7 +495,7 @@ class DeliveryListOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final values = (deliveryListControl.controls).map((e) => e.value).toList();
+    final values = deliveryListControl.controls.map((e) => e.value).toList();
     if (values.length < i) {
       addDeliveryListItem(value);
       return;
@@ -517,8 +515,7 @@ class DeliveryListOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final values =
-        (clientListControl.controls ?? []).map((e) => e.value).toList();
+    final values = clientListControl.controls.map((e) => e.value).toList();
     if (values.length < i) {
       addClientListItem(value);
       return;
@@ -629,7 +626,7 @@ class DeliveryListOForm
       form.control(clientListControlPath()) as FormArray<Map<String, Object?>>;
 
   List<DeliveryPointOForm> get deliveryListDeliveryPointOForm {
-    final values = (deliveryListControl.controls).map((e) => e.value).toList();
+    final values = deliveryListControl.controls.map((e) => e.value).toList();
 
     return values
         .asMap()
@@ -640,8 +637,7 @@ class DeliveryListOForm
   }
 
   List<ClientOForm> get clientListClientOForm {
-    final values =
-        (clientListControl.controls ?? []).map((e) => e.value).toList();
+    final values = clientListControl.controls.map((e) => e.value).toList();
 
     return values
         .asMap()

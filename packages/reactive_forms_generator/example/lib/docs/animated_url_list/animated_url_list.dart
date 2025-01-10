@@ -18,10 +18,10 @@ class UrlEntity {
     @RfControl(validators: [
       RequiredValidator(),
     ])
-    this.label = '',
+    this.label = "",
     @RfControl(validators: [
       RequiredValidator(),
     ])
-    this.url = '',
+    this.url = "",
   });
 }

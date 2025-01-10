@@ -16,10 +16,10 @@ class ModelExtends extends Email {
     @RfControl(
       validators: [RequiredValidator()],
     )
-    super.email = '',
+    super.email = "",
     @RfControl(
       validators: [RequiredValidator()],
     )
-    this.password = '',
+    this.password = "",
   });
 }

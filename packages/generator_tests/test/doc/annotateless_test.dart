@@ -26,8 +26,8 @@ void main() {
               final String password;
             
               const Annotateless({
-                @RfControl() this.email = '',
-                this.password = '',
+                @RfControl() this.email = "",
+                this.password = "",
               });
             }
           ''',

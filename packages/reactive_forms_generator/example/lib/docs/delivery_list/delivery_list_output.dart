@@ -28,7 +28,7 @@ class DeliveryPointO extends Equatable {
     @RfControl(
       validators: [RequiredValidator()],
     )
-    this.name = '',
+    this.name = "",
     this.address,
   });
 

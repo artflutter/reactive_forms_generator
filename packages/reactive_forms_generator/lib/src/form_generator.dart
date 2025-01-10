@@ -247,7 +247,7 @@ class FormGenerator {
   }
 
   Method removeGroupControl(ParameterElement field) {
-    final controlField = '${field.fieldControlName}';
+    final controlField = field.fieldControlName;
 
     return Method(
       (b) => b
@@ -894,7 +894,7 @@ class FormGenerator {
             ..type = MethodType.getter
             ..body = Code(
               '''
-                final values = (${e.fieldControlName}.controls ${e.isNullable ? '?? []' : ''}).map((e) => e.value).toList();
+                final values = ${e.fieldControlName}.controls.map((e) => e.value).toList();
                 
                 return values
                 .asMap()

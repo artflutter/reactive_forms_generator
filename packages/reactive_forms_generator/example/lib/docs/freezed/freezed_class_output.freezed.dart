@@ -37,6 +37,7 @@ mixin _$FreezedClassO {
   String? get logoImage => throw _privateConstructorUsedError;
   @RfControl<double>()
   double? get year => throw _privateConstructorUsedError;
+  List<String> get selectedSpaces => throw _privateConstructorUsedError;
 
   /// Serializes this FreezedClassO to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -62,7 +63,8 @@ abstract class $FreezedClassOCopyWith<$Res> {
       @RfControl(validators: [RequiredValidator()]) String idR2,
       @RfControl<String>() String? name,
       @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
-      @RfControl<double>() double? year});
+      @RfControl<double>() double? year,
+      List<String> selectedSpaces});
 }
 
 /// @nodoc
@@ -88,6 +90,7 @@ class _$FreezedClassOCopyWithImpl<$Res, $Val extends FreezedClassO>
     Object? name = freezed,
     Object? logoImage = freezed,
     Object? year = freezed,
+    Object? selectedSpaces = null,
   }) {
     return _then(_value.copyWith(
       gender: freezed == gender
@@ -122,6 +125,10 @@ class _$FreezedClassOCopyWithImpl<$Res, $Val extends FreezedClassO>
           ? _value.year
           : year // ignore: cast_nullable_to_non_nullable
               as double?,
+      selectedSpaces: null == selectedSpaces
+          ? _value.selectedSpaces
+          : selectedSpaces // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -142,7 +149,8 @@ abstract class _$$FreezedClassOImplCopyWith<$Res>
       @RfControl(validators: [RequiredValidator()]) String idR2,
       @RfControl<String>() String? name,
       @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
-      @RfControl<double>() double? year});
+      @RfControl<double>() double? year,
+      List<String> selectedSpaces});
 }
 
 /// @nodoc
@@ -166,6 +174,7 @@ class __$$FreezedClassOImplCopyWithImpl<$Res>
     Object? name = freezed,
     Object? logoImage = freezed,
     Object? year = freezed,
+    Object? selectedSpaces = null,
   }) {
     return _then(_$FreezedClassOImpl(
       freezed == gender
@@ -200,6 +209,10 @@ class __$$FreezedClassOImplCopyWithImpl<$Res>
           ? _value.year
           : year // ignore: cast_nullable_to_non_nullable
               as double?,
+      selectedSpaces: null == selectedSpaces
+          ? _value._selectedSpaces
+          : selectedSpaces // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -214,8 +227,10 @@ class _$FreezedClassOImpl extends _FreezedClassO {
       @RfControl(validators: [RequiredValidator()]) this.idR2 = '',
       @RfControl<String>() this.name,
       @JsonKey(name: 'logo_image') @RfControl<String>() this.logoImage,
-      @RfControl<double>() this.year})
-      : super._();
+      @RfControl<double>() this.year,
+      final List<String> selectedSpaces = const []})
+      : _selectedSpaces = selectedSpaces,
+        super._();
 
   factory _$FreezedClassOImpl.fromJson(Map<String, dynamic> json) =>
       _$$FreezedClassOImplFromJson(json);
@@ -246,10 +261,18 @@ class _$FreezedClassOImpl extends _FreezedClassO {
   @override
   @RfControl<double>()
   final double? year;
+  final List<String> _selectedSpaces;
+  @override
+  @JsonKey()
+  List<String> get selectedSpaces {
+    if (_selectedSpaces is EqualUnmodifiableListView) return _selectedSpaces;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_selectedSpaces);
+  }
 
   @override
   String toString() {
-    return 'FreezedClassO(gender: $gender, genderR: $genderR, id: $id, idR: $idR, idR2: $idR2, name: $name, logoImage: $logoImage, year: $year)';
+    return 'FreezedClassO(gender: $gender, genderR: $genderR, id: $id, idR: $idR, idR2: $idR2, name: $name, logoImage: $logoImage, year: $year, selectedSpaces: $selectedSpaces)';
   }
 
   @override
@@ -265,13 +288,24 @@ class _$FreezedClassOImpl extends _FreezedClassO {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.logoImage, logoImage) ||
                 other.logoImage == logoImage) &&
-            (identical(other.year, year) || other.year == year));
+            (identical(other.year, year) || other.year == year) &&
+            const DeepCollectionEquality()
+                .equals(other._selectedSpaces, _selectedSpaces));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, gender, genderR, id, idR, idR2, name, logoImage, year);
+      runtimeType,
+      gender,
+      genderR,
+      id,
+      idR,
+      idR2,
+      name,
+      logoImage,
+      year,
+      const DeepCollectionEquality().hash(_selectedSpaces));
 
   /// Create a copy of FreezedClassO
   /// with the given fields replaced by the non-null parameter values.
@@ -297,7 +331,8 @@ abstract class _FreezedClassO extends FreezedClassO {
       @RfControl(validators: [RequiredValidator()]) final String idR2,
       @RfControl<String>() final String? name,
       @JsonKey(name: 'logo_image') @RfControl<String>() final String? logoImage,
-      @RfControl<double>() final double? year}) = _$FreezedClassOImpl;
+      @RfControl<double>() final double? year,
+      final List<String> selectedSpaces}) = _$FreezedClassOImpl;
   _FreezedClassO._() : super._();
 
   factory _FreezedClassO.fromJson(Map<String, dynamic> json) =
@@ -328,6 +363,8 @@ abstract class _FreezedClassO extends FreezedClassO {
   @override
   @RfControl<double>()
   double? get year;
+  @override
+  List<String> get selectedSpaces;
 
   /// Create a copy of FreezedClassO
   /// with the given fields replaced by the non-null parameter values.
@@ -360,6 +397,7 @@ mixin _$FreezedClassOOutput {
   String? get logoImage => throw _privateConstructorUsedError;
   @RfControl<double>()
   double? get year => throw _privateConstructorUsedError;
+  List<String> get selectedSpaces => throw _privateConstructorUsedError;
 
   /// Serializes this FreezedClassOOutput to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -385,7 +423,8 @@ abstract class $FreezedClassOOutputCopyWith<$Res> {
       @RfControl(validators: [RequiredValidator()]) String idR2,
       @RfControl<String>() String? name,
       @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
-      @RfControl<double>() double? year});
+      @RfControl<double>() double? year,
+      List<String> selectedSpaces});
 }
 
 /// @nodoc
@@ -411,6 +450,7 @@ class _$FreezedClassOOutputCopyWithImpl<$Res, $Val extends FreezedClassOOutput>
     Object? name = freezed,
     Object? logoImage = freezed,
     Object? year = freezed,
+    Object? selectedSpaces = null,
   }) {
     return _then(_value.copyWith(
       gender: freezed == gender
@@ -445,6 +485,10 @@ class _$FreezedClassOOutputCopyWithImpl<$Res, $Val extends FreezedClassOOutput>
           ? _value.year
           : year // ignore: cast_nullable_to_non_nullable
               as double?,
+      selectedSpaces: null == selectedSpaces
+          ? _value.selectedSpaces
+          : selectedSpaces // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -465,7 +509,8 @@ abstract class _$$FreezedClassOOutputImplCopyWith<$Res>
       @RfControl(validators: [RequiredValidator()]) String idR2,
       @RfControl<String>() String? name,
       @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
-      @RfControl<double>() double? year});
+      @RfControl<double>() double? year,
+      List<String> selectedSpaces});
 }
 
 /// @nodoc
@@ -489,6 +534,7 @@ class __$$FreezedClassOOutputImplCopyWithImpl<$Res>
     Object? name = freezed,
     Object? logoImage = freezed,
     Object? year = freezed,
+    Object? selectedSpaces = null,
   }) {
     return _then(_$FreezedClassOOutputImpl(
       freezed == gender
@@ -523,6 +569,10 @@ class __$$FreezedClassOOutputImplCopyWithImpl<$Res>
           ? _value.year
           : year // ignore: cast_nullable_to_non_nullable
               as double?,
+      selectedSpaces: null == selectedSpaces
+          ? _value._selectedSpaces
+          : selectedSpaces // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -537,8 +587,10 @@ class _$FreezedClassOOutputImpl extends _FreezedClassOOutput {
       @RfControl(validators: [RequiredValidator()]) required this.idR2,
       @RfControl<String>() this.name,
       @JsonKey(name: 'logo_image') @RfControl<String>() this.logoImage,
-      @RfControl<double>() this.year})
-      : super._();
+      @RfControl<double>() this.year,
+      final List<String> selectedSpaces = const []})
+      : _selectedSpaces = selectedSpaces,
+        super._();
 
   factory _$FreezedClassOOutputImpl.fromJson(Map<String, dynamic> json) =>
       _$$FreezedClassOOutputImplFromJson(json);
@@ -568,10 +620,18 @@ class _$FreezedClassOOutputImpl extends _FreezedClassOOutput {
   @override
   @RfControl<double>()
   final double? year;
+  final List<String> _selectedSpaces;
+  @override
+  @JsonKey()
+  List<String> get selectedSpaces {
+    if (_selectedSpaces is EqualUnmodifiableListView) return _selectedSpaces;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_selectedSpaces);
+  }
 
   @override
   String toString() {
-    return 'FreezedClassOOutput(gender: $gender, genderR: $genderR, id: $id, idR: $idR, idR2: $idR2, name: $name, logoImage: $logoImage, year: $year)';
+    return 'FreezedClassOOutput(gender: $gender, genderR: $genderR, id: $id, idR: $idR, idR2: $idR2, name: $name, logoImage: $logoImage, year: $year, selectedSpaces: $selectedSpaces)';
   }
 
   @override
@@ -587,13 +647,24 @@ class _$FreezedClassOOutputImpl extends _FreezedClassOOutput {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.logoImage, logoImage) ||
                 other.logoImage == logoImage) &&
-            (identical(other.year, year) || other.year == year));
+            (identical(other.year, year) || other.year == year) &&
+            const DeepCollectionEquality()
+                .equals(other._selectedSpaces, _selectedSpaces));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, gender, genderR, id, idR, idR2, name, logoImage, year);
+      runtimeType,
+      gender,
+      genderR,
+      id,
+      idR,
+      idR2,
+      name,
+      logoImage,
+      year,
+      const DeepCollectionEquality().hash(_selectedSpaces));
 
   /// Create a copy of FreezedClassOOutput
   /// with the given fields replaced by the non-null parameter values.
@@ -620,7 +691,8 @@ abstract class _FreezedClassOOutput extends FreezedClassOOutput {
       @RfControl(validators: [RequiredValidator()]) required final String idR2,
       @RfControl<String>() final String? name,
       @JsonKey(name: 'logo_image') @RfControl<String>() final String? logoImage,
-      @RfControl<double>() final double? year}) = _$FreezedClassOOutputImpl;
+      @RfControl<double>() final double? year,
+      final List<String> selectedSpaces}) = _$FreezedClassOOutputImpl;
   _FreezedClassOOutput._() : super._();
 
   factory _FreezedClassOOutput.fromJson(Map<String, dynamic> json) =
@@ -651,6 +723,8 @@ abstract class _FreezedClassOOutput extends FreezedClassOOutput {
   @override
   @RfControl<double>()
   double? get year;
+  @override
+  List<String> get selectedSpaces;
 
   /// Create a copy of FreezedClassOOutput
   /// with the given fields replaced by the non-null parameter values.

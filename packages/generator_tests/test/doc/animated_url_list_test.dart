@@ -35,11 +35,11 @@ void main() {
                 @RfControl(validators: [
                   RequiredValidator(),
                 ])
-                this.label = '',
+                this.label = "",
                 @RfControl(validators: [
                   RequiredValidator(),
                 ])
-                this.url = '',
+                this.url = "",
               });
             }
           ''',
@@ -327,7 +327,7 @@ class AnimatedUrlListForm
     final toAdd = <UrlEntity>[];
 
     localValue.asMap().forEach((k, v) {
-      final values = (urlListControl.controls).map((e) => e.value).toList();
+      final values = urlListControl.controls.map((e) => e.value).toList();
 
       if (urlListUrlEntityForm.asMap().containsKey(k) &&
           values.asMap().containsKey(k)) {
@@ -358,7 +358,7 @@ class AnimatedUrlListForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final values = (urlListControl.controls).map((e) => e.value).toList();
+    final values = urlListControl.controls.map((e) => e.value).toList();
     if (values.length < i) {
       addUrlListItem(value);
       return;
@@ -419,7 +419,7 @@ class AnimatedUrlListForm
       form.control(urlListControlPath()) as FormArray<Map<String, Object?>>;
 
   List<UrlEntityForm> get urlListUrlEntityForm {
-    final values = (urlListControl.controls).map((e) => e.value).toList();
+    final values = urlListControl.controls.map((e) => e.value).toList();
 
     return values
         .asMap()

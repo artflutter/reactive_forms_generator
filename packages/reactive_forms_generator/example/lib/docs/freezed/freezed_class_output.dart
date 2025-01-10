@@ -22,6 +22,7 @@ class FreezedClassO with _$FreezedClassO {
     @RfControl<String>() String? name,
     @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
     @RfControl<double>() double? year,
+    @Default([]) List<String> selectedSpaces,
   }) = _FreezedClassO;
 
   factory FreezedClassO.fromJson(Map<String, dynamic> json) =>

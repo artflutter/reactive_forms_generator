@@ -441,8 +441,6 @@ mixin _$Address {
   String? get stateOrProvince => throw _privateConstructorUsedError;
   @RfControl(validators: [RequiredValidator()])
   String? get zipCode => throw _privateConstructorUsedError;
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  ApiCountryType? get country => throw _privateConstructorUsedError;
 
   /// Create a copy of Address
   /// with the given fields replaced by the non-null parameter values.
@@ -462,9 +460,7 @@ abstract class $AddressCopyWith<$Res> {
       String? city,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       String? stateOrProvince,
-      @RfControl(validators: [RequiredValidator()]) String? zipCode,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      ApiCountryType? country});
+      @RfControl(validators: [RequiredValidator()]) String? zipCode});
 }
 
 /// @nodoc
@@ -486,7 +482,6 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
     Object? city = freezed,
     Object? stateOrProvince = freezed,
     Object? zipCode = freezed,
-    Object? country = freezed,
   }) {
     return _then(_value.copyWith(
       street: freezed == street
@@ -505,10 +500,6 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
           ? _value.zipCode
           : zipCode // ignore: cast_nullable_to_non_nullable
               as String?,
-      country: freezed == country
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as ApiCountryType?,
     ) as $Val);
   }
 }
@@ -527,9 +518,7 @@ abstract class _$$AddressImplCopyWith<$Res> implements $AddressCopyWith<$Res> {
       String? city,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       String? stateOrProvince,
-      @RfControl(validators: [RequiredValidator()]) String? zipCode,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      ApiCountryType? country});
+      @RfControl(validators: [RequiredValidator()]) String? zipCode});
 }
 
 /// @nodoc
@@ -549,7 +538,6 @@ class __$$AddressImplCopyWithImpl<$Res>
     Object? city = freezed,
     Object? stateOrProvince = freezed,
     Object? zipCode = freezed,
-    Object? country = freezed,
   }) {
     return _then(_$AddressImpl(
       street: freezed == street
@@ -568,10 +556,6 @@ class __$$AddressImplCopyWithImpl<$Res>
           ? _value.zipCode
           : zipCode // ignore: cast_nullable_to_non_nullable
               as String?,
-      country: freezed == country
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as ApiCountryType?,
     ));
   }
 }
@@ -586,9 +570,7 @@ class _$AddressImpl implements _Address {
       this.city,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       this.stateOrProvince,
-      @RfControl(validators: [RequiredValidator()]) this.zipCode,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      this.country});
+      @RfControl(validators: [RequiredValidator()]) this.zipCode});
 
   @override
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
@@ -602,13 +584,10 @@ class _$AddressImpl implements _Address {
   @override
   @RfControl(validators: [RequiredValidator()])
   final String? zipCode;
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  final ApiCountryType? country;
 
   @override
   String toString() {
-    return 'Address(street: $street, city: $city, stateOrProvince: $stateOrProvince, zipCode: $zipCode, country: $country)';
+    return 'Address(street: $street, city: $city, stateOrProvince: $stateOrProvince, zipCode: $zipCode)';
   }
 
   @override
@@ -620,13 +599,12 @@ class _$AddressImpl implements _Address {
             (identical(other.city, city) || other.city == city) &&
             (identical(other.stateOrProvince, stateOrProvince) ||
                 other.stateOrProvince == stateOrProvince) &&
-            (identical(other.zipCode, zipCode) || other.zipCode == zipCode) &&
-            (identical(other.country, country) || other.country == country));
+            (identical(other.zipCode, zipCode) || other.zipCode == zipCode));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, street, city, stateOrProvince, zipCode, country);
+      Object.hash(runtimeType, street, city, stateOrProvince, zipCode);
 
   /// Create a copy of Address
   /// with the given fields replaced by the non-null parameter values.
@@ -645,9 +623,8 @@ abstract class _Address implements Address {
       final String? city,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       final String? stateOrProvince,
-      @RfControl(validators: [RequiredValidator()]) final String? zipCode,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      final ApiCountryType? country}) = _$AddressImpl;
+      @RfControl(validators: [RequiredValidator()])
+      final String? zipCode}) = _$AddressImpl;
 
   @override
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
@@ -661,9 +638,6 @@ abstract class _Address implements Address {
   @override
   @RfControl(validators: [RequiredValidator()])
   String? get zipCode;
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  ApiCountryType? get country;
 
   /// Create a copy of Address
   /// with the given fields replaced by the non-null parameter values.
@@ -1489,8 +1463,6 @@ mixin _$AddressOutput {
   String get stateOrProvince => throw _privateConstructorUsedError;
   @RfControl(validators: [RequiredValidator()])
   String get zipCode => throw _privateConstructorUsedError;
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  ApiCountryType get country => throw _privateConstructorUsedError;
 
   /// Create a copy of AddressOutput
   /// with the given fields replaced by the non-null parameter values.
@@ -1512,9 +1484,7 @@ abstract class $AddressOutputCopyWith<$Res> {
       String city,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       String stateOrProvince,
-      @RfControl(validators: [RequiredValidator()]) String zipCode,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      ApiCountryType country});
+      @RfControl(validators: [RequiredValidator()]) String zipCode});
 }
 
 /// @nodoc
@@ -1536,7 +1506,6 @@ class _$AddressOutputCopyWithImpl<$Res, $Val extends AddressOutput>
     Object? city = null,
     Object? stateOrProvince = null,
     Object? zipCode = null,
-    Object? country = null,
   }) {
     return _then(_value.copyWith(
       street: null == street
@@ -1555,10 +1524,6 @@ class _$AddressOutputCopyWithImpl<$Res, $Val extends AddressOutput>
           ? _value.zipCode
           : zipCode // ignore: cast_nullable_to_non_nullable
               as String,
-      country: null == country
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as ApiCountryType,
     ) as $Val);
   }
 }
@@ -1578,9 +1543,7 @@ abstract class _$$AddressOutputImplCopyWith<$Res>
       String city,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       String stateOrProvince,
-      @RfControl(validators: [RequiredValidator()]) String zipCode,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      ApiCountryType country});
+      @RfControl(validators: [RequiredValidator()]) String zipCode});
 }
 
 /// @nodoc
@@ -1600,7 +1563,6 @@ class __$$AddressOutputImplCopyWithImpl<$Res>
     Object? city = null,
     Object? stateOrProvince = null,
     Object? zipCode = null,
-    Object? country = null,
   }) {
     return _then(_$AddressOutputImpl(
       street: null == street
@@ -1619,10 +1581,6 @@ class __$$AddressOutputImplCopyWithImpl<$Res>
           ? _value.zipCode
           : zipCode // ignore: cast_nullable_to_non_nullable
               as String,
-      country: null == country
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as ApiCountryType,
     ));
   }
 }
@@ -1637,9 +1595,7 @@ class _$AddressOutputImpl implements _AddressOutput {
       required this.city,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       required this.stateOrProvince,
-      @RfControl(validators: [RequiredValidator()]) required this.zipCode,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      required this.country});
+      @RfControl(validators: [RequiredValidator()]) required this.zipCode});
 
   @override
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
@@ -1653,13 +1609,10 @@ class _$AddressOutputImpl implements _AddressOutput {
   @override
   @RfControl(validators: [RequiredValidator()])
   final String zipCode;
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  final ApiCountryType country;
 
   @override
   String toString() {
-    return 'AddressOutput(street: $street, city: $city, stateOrProvince: $stateOrProvince, zipCode: $zipCode, country: $country)';
+    return 'AddressOutput(street: $street, city: $city, stateOrProvince: $stateOrProvince, zipCode: $zipCode)';
   }
 
   @override
@@ -1671,13 +1624,12 @@ class _$AddressOutputImpl implements _AddressOutput {
             (identical(other.city, city) || other.city == city) &&
             (identical(other.stateOrProvince, stateOrProvince) ||
                 other.stateOrProvince == stateOrProvince) &&
-            (identical(other.zipCode, zipCode) || other.zipCode == zipCode) &&
-            (identical(other.country, country) || other.country == country));
+            (identical(other.zipCode, zipCode) || other.zipCode == zipCode));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, street, city, stateOrProvince, zipCode, country);
+      Object.hash(runtimeType, street, city, stateOrProvince, zipCode);
 
   /// Create a copy of AddressOutput
   /// with the given fields replaced by the non-null parameter values.
@@ -1697,9 +1649,7 @@ abstract class _AddressOutput implements AddressOutput {
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       required final String stateOrProvince,
       @RfControl(validators: [RequiredValidator()])
-      required final String zipCode,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      required final ApiCountryType country}) = _$AddressOutputImpl;
+      required final String zipCode}) = _$AddressOutputImpl;
 
   @override
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
@@ -1713,9 +1663,6 @@ abstract class _AddressOutput implements AddressOutput {
   @override
   @RfControl(validators: [RequiredValidator()])
   String get zipCode;
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  ApiCountryType get country;
 
   /// Create a copy of AddressOutput
   /// with the given fields replaced by the non-null parameter values.

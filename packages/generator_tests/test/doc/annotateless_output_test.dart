@@ -9,7 +9,7 @@ void main() {
   group('reactive_forms_generator', () {
     test(
       'Form with annotateless fields',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -26,8 +26,8 @@ void main() {
               final String password;
             
               const AnnotatelessO({
-                @RfControl() this.email = '',
-                this.password = '',
+                @RfControl() this.email = "",
+                this.password = "",
               });
             
               @override
@@ -560,7 +560,7 @@ class AnnotatelessOForm
 class AnnotatelessOOutput extends Equatable {
   final String email;
   final String password;
-  const AnnotatelessOOutput({@RfControl() this.email = '', this.password = ''});
+  const AnnotatelessOOutput({@RfControl() this.email = "", this.password = ""});
   @override
   List<Object?> get props => [email, password];
 }

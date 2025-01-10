@@ -31,11 +31,11 @@ const model = r'''
       @RfControl<double>(
         validators: const [requiredValidator],
       )
-          this.email = '',
+          this.email = "",
       @RfControl(
         validators: const [requiredValidator],
       )
-          this.password = '',
+          this.password = "",
     });
   }
 ''';
