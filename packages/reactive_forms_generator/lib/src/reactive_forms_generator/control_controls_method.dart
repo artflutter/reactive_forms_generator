@@ -15,7 +15,7 @@ class ControlControlsMethod extends ReactiveFormGeneratorMethod {
   Method? formArrayMethod() {
     final type = (field.type as ParameterizedType).typeArguments.first;
 
-    String displayType = type.getDisplayString(withNullability: true);
+    String displayType = type.getName(withNullability: true);
 
     // we need to trim last NullabilitySuffix.question cause FormControl modifies
     // generic T => T?

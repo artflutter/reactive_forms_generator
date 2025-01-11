@@ -219,7 +219,7 @@ class FormGenerator {
   }
 
   Method addGroupControl(ParameterElement field) {
-    final type = field.typeParameter.getDisplayString(withNullability: false);
+    final type = field.typeParameter.getName(withNullability: false);
 
     final formGroupGenerator = FormGenerator(
       root,
@@ -271,7 +271,7 @@ class FormGenerator {
   }
 
   Method addGroupControlList(ParameterElement field) {
-    final type = field.typeParameter.getDisplayString(withNullability: false);
+    final type = field.typeParameter.getName(withNullability: false);
 
     return Method(
       (b) => b
@@ -292,10 +292,8 @@ class FormGenerator {
 
   Method addArrayControl(ParameterElement field) {
     // until https://github.com/joanpablo/reactive_forms/issues/204 is somehow resolved
-    final formControlType =
-        field.typeParameter.getDisplayString(withNullability: false);
-    final valueType =
-        field.typeParameter.getDisplayString(withNullability: true);
+    final formControlType = field.typeParameter.getName(withNullability: false);
+    final valueType = field.typeParameter.getName(withNullability: true);
 
     final formArrayGenerator =
         FormArrayGenerator(element, field, field.typeParameter);
@@ -638,14 +636,14 @@ class FormGenerator {
 
   String get _modelDisplayTypeNonNullable {
     String displayType =
-        type?.getDisplayString(withNullability: false) ?? element.fullTypeName;
+        type?.getName(withNullability: false) ?? element.fullTypeName;
 
     if (type is ParameterizedType &&
         (type as ParameterizedType).isDartCoreList) {
       displayType = (type as ParameterizedType)
           .typeArguments
           .first
-          .getDisplayString(withNullability: false);
+          .getName(withNullability: false);
     }
 
     return displayType;

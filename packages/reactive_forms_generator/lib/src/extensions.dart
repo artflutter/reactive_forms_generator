@@ -5,6 +5,8 @@ import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/output/x.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
+
+// ignore: implementation_imports
 import 'package:analyzer/src/dart/element/type.dart';
 
 import '../utils.dart';
@@ -35,13 +37,13 @@ extension ClassElementExt on ClassElement {
 
   Iterable<Reference> get genericTypes {
     return thisType.typeArguments.map(
-      (e) => Reference(e.getDisplayString(withNullability: false)),
+      (e) => Reference(e.getDisplayString()),
     );
   }
 
   Iterable<Reference> get fullGenericTypes {
     return thisType.typeArguments.map(
-      (e) => Reference(e.element?.getDisplayString(withNullability: false)),
+      (e) => Reference(e.element?.getDisplayString()),
     );
   }
 
@@ -213,7 +215,7 @@ extension ParameterElementExt on ParameterElement {
     if (hasRfControlAnnotation &&
         annotationParams(formControlChecker)
             .hasRequiredValidator(requiredValidators)) {
-      return type.getDisplayString(withNullability: false);
+      return type.getName(withNullability: false);
     }
 
     var builder = ElementDisplayStringBuilder2(
@@ -276,4 +278,19 @@ extension ExtensionsOnIterable<T, U> on Iterable<T> {
   /// modifying the original iterable.
   Iterable<T> removeDuplicatedBy(IterableFunction<T, U> fn) =>
       _removeDuplicatedBy(this, fn);
+}
+
+extension DartTypeExt on DartType {
+  String getName({
+    bool withNullability = true,
+  }) {
+    final name = getDisplayString();
+
+    return switch (nullabilitySuffix) {
+      NullabilitySuffix.question =>
+        withNullability ? name : name.substring(0, name.length - 1),
+      NullabilitySuffix.star => name,
+      NullabilitySuffix.none => name,
+    };
+  }
 }

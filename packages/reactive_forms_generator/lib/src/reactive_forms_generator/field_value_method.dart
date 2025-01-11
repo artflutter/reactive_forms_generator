@@ -32,8 +32,7 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
   Method? formArrayMethod() {
     final type = (field.type as ParameterizedType).typeArguments.first;
 
-    final code =
-        '${field.fieldControlName}.rawValue.whereType<${type.getDisplayString(
+    final code = '${field.fieldControlName}.rawValue.whereType<${type.getName(
       withNullability: true,
     )}>().toList()';
 
@@ -54,7 +53,7 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
   Method? defaultMethod() {
     String code = '${field.fieldControlName}.value';
     String codeTypeCast =
-        ' as ${field.type.getDisplayString(withNullability: !toOutput)}';
+        ' as ${field.type.getName(withNullability: !toOutput)}';
 
     // do not add additional cast if the field is nullable to avoid
     // unnecessary_cast notes

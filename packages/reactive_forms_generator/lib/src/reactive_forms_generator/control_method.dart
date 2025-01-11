@@ -35,7 +35,7 @@ class ControlMethod extends ReactiveFormGeneratorMethod {
   Method? formGroupArrayMethod() {
     final type = (field.type as ParameterizedType).typeArguments.first;
 
-    String displayType = type.getDisplayString(withNullability: true);
+    String displayType = type.getName(withNullability: true);
 
     // we need to trim last NullabilitySuffix.question cause FormControl modifies
     // generic T => T?
@@ -69,7 +69,7 @@ class ControlMethod extends ReactiveFormGeneratorMethod {
   Method? formArrayMethod() {
     final type = (field.type as ParameterizedType).typeArguments.first;
 
-    String displayType = type.getDisplayString(withNullability: true);
+    String displayType = type.getName(withNullability: true);
 
     // we need to trim last NullabilitySuffix.question cause FormControl modifies
     // generic T => T?
@@ -97,8 +97,7 @@ class ControlMethod extends ReactiveFormGeneratorMethod {
 
   @override
   Method? formControlMethod() {
-    String displayType =
-        field.type.getDisplayString(withNullability: !toOutput);
+    String displayType = field.type.getName(withNullability: !toOutput);
 
     // we need to trim last NullabilitySuffix.question cause FormControl modifies
     // generic T => T?

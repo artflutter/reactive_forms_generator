@@ -44,7 +44,7 @@ class ReactiveFormInsertMethod extends ReactiveFormGeneratorMethod {
               (b) => b
                 ..name = 'value'
                 ..type = Reference(
-                  field.typeParameter.getDisplayString(withNullability: false),
+                  field.typeParameter.getName(withNullability: false),
                 ),
             ),
           ])
