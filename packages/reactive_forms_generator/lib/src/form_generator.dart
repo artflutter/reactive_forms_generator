@@ -828,7 +828,12 @@ class FormGenerator {
                         )
                           ..enclosingElement =
                               (e.ConstructorElementImpl('aa', 1)
-                                ..enclosingElement = element)
+                                ..enclosingElement = element
+                                ..enclosingElement3 = element)
+                          ..enclosingElement3 =
+                              (e.ConstructorElementImpl('aa', 1)
+                                ..enclosingElement = element
+                                ..enclosingElement3 = element)
                           ..type = t.InterfaceTypeImpl(
                             element: element,
                             typeArguments: element.thisType.typeArguments,
