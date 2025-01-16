@@ -17,7 +17,8 @@ class FormArrayGenerator extends FormElementGenerator {
   @override
   String get value {
     final enclosingElement =
-        (fieldElement.enclosingElement as ConstructorElement).enclosingElement;
+        (fieldElement.enclosingElement3 as ConstructorElement)
+            .enclosingElement3;
 
     final optionalChaining = (enclosingElement == root &&
                 type?.nullabilitySuffix != NullabilitySuffix.question) ||

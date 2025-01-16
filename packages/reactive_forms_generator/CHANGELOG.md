@@ -1,3 +1,7 @@
+## [6.0.0-beta.26]
+
+* analyzer version bump
+
 ## [6.0.0-beta.25]
 
 * default value handling

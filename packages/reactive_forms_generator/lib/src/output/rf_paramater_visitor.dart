@@ -98,33 +98,34 @@ class RfParameterVisitor extends GeneralizingAstVisitor<dynamic> {
         //   // }
         // }
         break;
-      // TODO: Handle this case.
-      case FieldFormalParameter():
-      // TODO: Handle this case.
-      case FunctionTypedFormalParameter():
-      // TODO: Handle this case.
-      case SimpleFormalParameter():
-      // TODO: Handle this case.
-      case SuperFormalParameter():
-      // TODO: Handle this case.
-      case FieldFormalParameterImpl():
-      // TODO: Handle this case.
-      case FunctionTypedFormalParameterImpl():
-      // TODO: Handle this case.
-      case SimpleFormalParameterImpl():
-      // TODO: Handle this case.
-      case SuperFormalParameterImpl():
-      // TODO: Handle this case.
-      case FieldFormalParameterImpl():
-      // TODO: Handle this case.
-      case FunctionTypedFormalParameterImpl():
-      // TODO: Handle this case.
-      case SimpleFormalParameterImpl():
-      // TODO: Handle this case.
-      case SuperFormalParameterImpl():
-      // TODO: Handle this case.
-      case DefaultFormalParameter():
-        break;
+      default:
+      // // TODO: Handle this case.
+      // case FieldFormalParameter():
+      // // TODO: Handle this case.
+      // case FunctionTypedFormalParameter():
+      // // TODO: Handle this case.
+      // case SimpleFormalParameter():
+      // // TODO: Handle this case.
+      // case SuperFormalParameter():
+      // // TODO: Handle this case.
+      // case FieldFormalParameterImpl():
+      // // TODO: Handle this case.
+      // case FunctionTypedFormalParameterImpl():
+      // // TODO: Handle this case.
+      // case SimpleFormalParameterImpl():
+      // // TODO: Handle this case.
+      // case SuperFormalParameterImpl():
+      // // TODO: Handle this case.
+      // case FieldFormalParameterImpl():
+      // // TODO: Handle this case.
+      // case FunctionTypedFormalParameterImpl():
+      // // TODO: Handle this case.
+      // case SimpleFormalParameterImpl():
+      // // TODO: Handle this case.
+      // case SuperFormalParameterImpl():
+      // // TODO: Handle this case.
+      // case DefaultFormalParameter():
+      //   break;
     }
 
     super.visitNode(node);
