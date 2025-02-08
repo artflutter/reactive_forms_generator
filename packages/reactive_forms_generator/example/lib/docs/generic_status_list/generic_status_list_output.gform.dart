@@ -19,8 +19,10 @@ class ReactiveStatusListOFormConsumer<T extends Enum> extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-          BuildContext context, StatusListOForm<T> formModel, Widget? child)
-      builder;
+    BuildContext context,
+    StatusListOForm<T> formModel,
+    Widget? child,
+  ) builder;
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +42,7 @@ class StatusListOFormInheritedStreamer<T extends Enum>
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(
-          stream,
-          child,
-          key: key,
-        );
+  }) : super(stream, child, key: key);
 
   final StatusListOForm<T> form;
 }
@@ -126,8 +124,10 @@ class StatusListOFormBuilder<T extends Enum> extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-          BuildContext context, StatusListOForm<T> formModel, Widget? child)
-      builder;
+    BuildContext context,
+    StatusListOForm<T> formModel,
+    Widget? child,
+  ) builder;
 
   final void Function(BuildContext context, StatusListOForm<T> formModel)?
       initState;
@@ -145,8 +145,10 @@ class _StatusListOFormBuilderState<T extends Enum>
 
   @override
   void initState() {
-    _formModel =
-        StatusListOForm<T>(StatusListOForm.formElements<T>(widget.model), null);
+    _formModel = StatusListOForm<T>(
+      StatusListOForm.formElements<T>(widget.model),
+      null,
+    );
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -224,10 +226,7 @@ final _logStatusListOForm = Logger.detached('StatusListOForm<T>');
 
 class StatusListOForm<T extends Enum>
     implements FormModel<StatusListO<T>, StatusListOOutput<T>> {
-  StatusListOForm(
-    this.form,
-    this.path,
-  );
+  StatusListOForm(this.form, this.path);
 
   static const String listControlName = "list";
 
@@ -244,7 +243,8 @@ class StatusListOForm<T extends Enum>
   List<T?> get _listRawValue => listControl.rawValue.whereType<T?>().toList();
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsList {
     try {
       form.control(listControlPath());
@@ -263,8 +263,11 @@ class StatusListOForm<T extends Enum>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    listControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    listControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void listValuePatch(
@@ -272,8 +275,11 @@ class StatusListOForm<T extends Enum>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    listControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    listControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void listValueReset(
@@ -346,13 +352,15 @@ class StatusListOForm<T extends Enum>
         break;
     }
 
-    listControl.add(FormControl<T>(
-      value: value,
-      validators: resultingValidators,
-      asyncValidators: resultingAsyncValidators,
-      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
-      disabled: disabled ?? false,
-    ));
+    listControl.add(
+      FormControl<T>(
+        value: value,
+        validators: resultingValidators,
+        asyncValidators: resultingAsyncValidators,
+        asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+        disabled: disabled ?? false,
+      ),
+    );
   }
 
   @override
@@ -376,10 +384,7 @@ class StatusListOForm<T extends Enum>
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -392,7 +397,9 @@ class StatusListOForm<T extends Enum>
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -444,8 +451,11 @@ class StatusListOForm<T extends Enum>
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(StatusListOForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+      form.updateValue(
+        StatusListOForm.formElements(value).rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   @override
   void reset({
@@ -454,34 +464,40 @@ class StatusListOForm<T extends Enum>
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        value: value != null ? formElements(value).rawValue : null,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
   static FormGroup formElements<T extends Enum>(StatusListO<T>? statusListO) =>
-      FormGroup({
-        listControlName: FormArray<T>(
+      FormGroup(
+        {
+          listControlName: FormArray<T>(
             (statusListO?.list ?? [])
-                .map((e) => FormControl<T>(
-                      value: e,
-                      validators: [],
-                      asyncValidators: [],
-                      asyncValidatorsDebounceTime: 250,
-                      disabled: false,
-                    ))
+                .map(
+                  (e) => FormControl<T>(
+                    value: e,
+                    validators: [],
+                    asyncValidators: [],
+                    asyncValidatorsDebounceTime: 250,
+                    disabled: false,
+                  ),
+                )
                 .toList(),
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
-            disabled: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+            disabled: false,
+          ),
+        },
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      );
 }
 
 @Rf(output: true)
@@ -498,24 +514,31 @@ class ReactiveStatusListOFormArrayBuilder<ReactiveStatusListOFormArrayBuilderT,
     this.formControl,
     this.builder,
     required this.itemBuilder,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
+  })  : assert(
+          control != null || formControl != null,
+          "You have to specify `control` or `formControl`!",
+        ),
         super(key: key);
 
   final FormArray<ReactiveStatusListOFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveStatusListOFormArrayBuilderT>? Function(
-      StatusListOForm<T> formModel)? control;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      StatusListOForm<T> formModel)? builder;
+    StatusListOForm<T> formModel,
+  )? control;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      FormControl<ReactiveStatusListOFormArrayBuilderT> control,
-      ReactiveStatusListOFormArrayBuilderT? item,
-      StatusListOForm<T> formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    StatusListOForm<T> formModel,
+  )? builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    FormControl<ReactiveStatusListOFormArrayBuilderT> control,
+    ReactiveStatusListOFormArrayBuilderT? item,
+    StatusListOForm<T> formModel,
+  ) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -547,11 +570,7 @@ class ReactiveStatusListOFormArrayBuilder<ReactiveStatusListOFormArrayBuilderT,
             .values
             .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );
@@ -567,8 +586,10 @@ class ReactiveStatusListOFormFormGroupArrayBuilder<
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(extended != null || getExtended != null,
-            "You have to specify `control` or `formControl`!"),
+  })  : assert(
+          extended != null || getExtended != null,
+          "You have to specify `control` or `formControl`!",
+        ),
         super(key: key);
 
   final ExtendedControl<List<Map<String, Object?>?>,
@@ -578,14 +599,18 @@ class ReactiveStatusListOFormFormGroupArrayBuilder<
           List<ReactiveStatusListOFormFormGroupArrayBuilderT>>
       Function(StatusListOForm<T> formModel)? getExtended;
 
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      StatusListOForm<T> formModel)? builder;
+  final Widget Function(
+    BuildContext context,
+    List<Widget> itemList,
+    StatusListOForm<T> formModel,
+  )? builder;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      ReactiveStatusListOFormFormGroupArrayBuilderT? item,
-      StatusListOForm<T> formModel) itemBuilder;
+    BuildContext context,
+    int i,
+    ReactiveStatusListOFormFormGroupArrayBuilderT? item,
+    StatusListOForm<T> formModel,
+  ) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -603,23 +628,14 @@ class ReactiveStatusListOFormFormGroupArrayBuilder<
         final itemList =
             (value.value() ?? <ReactiveStatusListOFormFormGroupArrayBuilderT>[])
                 .asMap()
-                .map((i, item) => MapEntry(
-                      i,
-                      itemBuilder(
-                        context,
-                        i,
-                        item,
-                        formModel,
-                      ),
-                    ))
+                .map(
+                  (i, item) =>
+                      MapEntry(i, itemBuilder(context, i, item, formModel)),
+                )
                 .values
                 .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );

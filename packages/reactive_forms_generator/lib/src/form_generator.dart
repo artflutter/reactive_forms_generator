@@ -826,13 +826,8 @@ class FormGenerator {
                           nameOffset: 20,
                           parameterKind: u.ParameterKind.REQUIRED,
                         )
-                          ..enclosingElement =
-                              (e.ConstructorElementImpl('aa', 1)
-                                ..enclosingElement = element
-                                ..enclosingElement3 = element)
                           ..enclosingElement3 =
                               (e.ConstructorElementImpl('aa', 1)
-                                ..enclosingElement = element
                                 ..enclosingElement3 = element)
                           ..type = t.InterfaceTypeImpl(
                             element: element,

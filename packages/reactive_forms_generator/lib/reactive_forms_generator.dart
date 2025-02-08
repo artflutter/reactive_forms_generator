@@ -60,8 +60,9 @@ class ReactiveFormsGenerator extends Generator {
 
     // final x = lib.accept(emitter).toString();
 
-    final generatedValue =
-        DartFormatter().format(lib.accept(emitter).toString());
+    final generatedValue = DartFormatter(
+      languageVersion: DartFormatter.latestLanguageVersion,
+    ).format(lib.accept(emitter).toString());
 
     final values = <String>[];
     await for (var value in normalizeGeneratorOutput(generatedValue)) {

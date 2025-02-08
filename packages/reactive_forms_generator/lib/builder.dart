@@ -1,4 +1,5 @@
 import 'package:build/build.dart';
+import 'package:dart_style/dart_style.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'reactive_forms_generator.dart';
@@ -6,7 +7,11 @@ import 'reactive_forms_generator.dart';
 Builder reactiveFormsGenerator(BuilderOptions options) {
   return PartBuilder(
     [const ReactiveFormsGenerator()],
-    formatOutput: options.config['format'] == false ? (str) => str : null,
+    formatOutput: (str, version) {
+      if (options.config['format'] == false) return str;
+
+      return DartFormatter(languageVersion: version).format(str);
+    },
     '.gform.dart',
     header: '''
       // coverage:ignore-file

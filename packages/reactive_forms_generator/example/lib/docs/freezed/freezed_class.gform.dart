@@ -19,7 +19,10 @@ class ReactiveFreezedClassFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, FreezedClassForm formModel, Widget? child) builder;
+    BuildContext context,
+    FreezedClassForm formModel,
+    Widget? child,
+  ) builder;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +41,7 @@ class FreezedClassFormInheritedStreamer extends InheritedStreamer<dynamic> {
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(
-          stream,
-          child,
-          key: key,
-        );
+  }) : super(stream, child, key: key);
 
   final FreezedClassForm form;
 }
@@ -64,10 +63,7 @@ class ReactiveFreezedClassForm extends StatelessWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static FreezedClassForm? of(
-    BuildContext context, {
-    bool listen = true,
-  }) {
+  static FreezedClassForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
@@ -124,7 +120,10 @@ class FreezedClassFormBuilder extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-      BuildContext context, FreezedClassForm formModel, Widget? child) builder;
+    BuildContext context,
+    FreezedClassForm formModel,
+    Widget? child,
+  ) builder;
 
   final void Function(BuildContext context, FreezedClassForm formModel)?
       initState;
@@ -141,8 +140,10 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
-        FreezedClassForm(FreezedClassForm.formElements(widget.model), null);
+    _formModel = FreezedClassForm(
+      FreezedClassForm.formElements(widget.model),
+      null,
+    );
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -219,10 +220,7 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
 final _logFreezedClassForm = Logger.detached('FreezedClassForm');
 
 class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
-  FreezedClassForm(
-    this.form,
-    this.path,
-  );
+  FreezedClassForm(this.form, this.path);
 
   static const String genderControlName = "gender";
 
@@ -279,7 +277,8 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
   List<String> get _selectedSpacesRawValue => selectedSpacesControl.value ?? [];
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsGender {
     try {
       form.control(genderControlPath());
@@ -290,7 +289,8 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -301,7 +301,8 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -312,7 +313,8 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsLogoImage {
     try {
       form.control(logoImageControlPath());
@@ -323,7 +325,8 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsYear {
     try {
       form.control(yearControlPath());
@@ -334,7 +337,8 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsSelectedSpaces {
     try {
       form.control(selectedSpacesControlPath());
@@ -369,11 +373,9 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
   void get selectedSpacesFocus => form.focus(selectedSpacesControlPath());
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void genderRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void genderRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsGender) {
       final controlPath = path;
       if (controlPath == null) {
@@ -397,11 +399,9 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void idRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void idRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsId) {
       final controlPath = path;
       if (controlPath == null) {
@@ -425,11 +425,9 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void nameRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void nameRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsName) {
       final controlPath = path;
       if (controlPath == null) {
@@ -453,11 +451,9 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void logoImageRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void logoImageRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsLogoImage) {
       final controlPath = path;
       if (controlPath == null) {
@@ -481,11 +477,9 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void yearRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void yearRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsYear) {
       final controlPath = path;
       if (controlPath == null) {
@@ -513,8 +507,11 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    genderControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    genderControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void idValueUpdate(
@@ -522,8 +519,11 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    idControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void nameValueUpdate(
@@ -531,8 +531,11 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    nameControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void logoImageValueUpdate(
@@ -540,8 +543,11 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    logoImageControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    logoImageControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void yearValueUpdate(
@@ -549,8 +555,11 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    yearControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    yearControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void selectedSpacesValueUpdate(
@@ -558,8 +567,11 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    selectedSpacesControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    selectedSpacesControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void genderValuePatch(
@@ -567,8 +579,11 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    genderControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    genderControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void idValuePatch(
@@ -576,8 +591,11 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    idControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void nameValuePatch(
@@ -585,8 +603,11 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    nameControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void logoImageValuePatch(
@@ -594,8 +615,11 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    logoImageControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    logoImageControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void yearValuePatch(
@@ -603,8 +627,11 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    yearControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    yearControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void selectedSpacesValuePatch(
@@ -612,8 +639,11 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    selectedSpacesControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    selectedSpacesControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void genderValueReset(
@@ -753,10 +783,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         emitEvent: emitEvent,
       );
     } else {
-      idControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+      idControl.markAsEnabled(updateParent: updateParent, emitEvent: emitEvent);
     }
   }
 
@@ -843,29 +870,30 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         StackTrace.current,
       );
     }
-    return FreezedClass(_genderValue,
-        id: _idValue,
-        name: _nameValue,
-        logoImage: _logoImageValue,
-        year: _yearValue,
-        selectedSpaces: _selectedSpacesValue);
+    return FreezedClass(
+      _genderValue,
+      id: _idValue,
+      name: _nameValue,
+      logoImage: _logoImageValue,
+      year: _yearValue,
+      selectedSpaces: _selectedSpacesValue,
+    );
   }
 
   @override
   FreezedClass get rawModel {
-    return FreezedClass(_genderRawValue,
-        id: _idRawValue,
-        name: _nameRawValue,
-        logoImage: _logoImageRawValue,
-        year: _yearRawValue,
-        selectedSpaces: _selectedSpacesRawValue);
+    return FreezedClass(
+      _genderRawValue,
+      id: _idRawValue,
+      name: _nameRawValue,
+      logoImage: _logoImageRawValue,
+      year: _yearRawValue,
+      selectedSpaces: _selectedSpacesRawValue,
+    );
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -878,7 +906,9 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -930,8 +960,11 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(FreezedClassForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+      form.updateValue(
+        FreezedClassForm.formElements(value).rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   @override
   void reset({
@@ -940,61 +973,70 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        value: value != null ? formElements(value).rawValue : null,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(FreezedClass? freezedClass) => FormGroup({
-        genderControlName: FormControl<String>(
+  static FormGroup formElements(FreezedClass? freezedClass) => FormGroup(
+        {
+          genderControlName: FormControl<String>(
             value: freezedClass?.gender,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        idControlName: FormControl<String>(
+            touched: false,
+          ),
+          idControlName: FormControl<String>(
             value: freezedClass?.id,
             validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        nameControlName: FormControl<String>(
+            touched: false,
+          ),
+          nameControlName: FormControl<String>(
             value: freezedClass?.name,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        logoImageControlName: FormControl<String>(
+            touched: false,
+          ),
+          logoImageControlName: FormControl<String>(
             value: freezedClass?.logoImage,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        yearControlName: FormControl<double>(
+            touched: false,
+          ),
+          yearControlName: FormControl<double>(
             value: freezedClass?.year,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        selectedSpacesControlName: FormControl<List<String>>(
+            touched: false,
+          ),
+          selectedSpacesControlName: FormControl<List<String>>(
             value: freezedClass?.selectedSpaces,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+            touched: false,
+          ),
+        },
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      );
 }
 
 class ReactiveFreezedClassFormArrayBuilder<
@@ -1005,24 +1047,31 @@ class ReactiveFreezedClassFormArrayBuilder<
     this.formControl,
     this.builder,
     required this.itemBuilder,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
+  })  : assert(
+          control != null || formControl != null,
+          "You have to specify `control` or `formControl`!",
+        ),
         super(key: key);
 
   final FormArray<ReactiveFreezedClassFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveFreezedClassFormArrayBuilderT>? Function(
-      FreezedClassForm formModel)? control;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      FreezedClassForm formModel)? builder;
+    FreezedClassForm formModel,
+  )? control;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      FormControl<ReactiveFreezedClassFormArrayBuilderT> control,
-      ReactiveFreezedClassFormArrayBuilderT? item,
-      FreezedClassForm formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    FreezedClassForm formModel,
+  )? builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    FormControl<ReactiveFreezedClassFormArrayBuilderT> control,
+    ReactiveFreezedClassFormArrayBuilderT? item,
+    FreezedClassForm formModel,
+  ) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1054,11 +1103,7 @@ class ReactiveFreezedClassFormArrayBuilder<
             .values
             .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );
@@ -1073,8 +1118,10 @@ class ReactiveFreezedClassFormFormGroupArrayBuilder<
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(extended != null || getExtended != null,
-            "You have to specify `control` or `formControl`!"),
+  })  : assert(
+          extended != null || getExtended != null,
+          "You have to specify `control` or `formControl`!",
+        ),
         super(key: key);
 
   final ExtendedControl<List<Map<String, Object?>?>,
@@ -1084,14 +1131,18 @@ class ReactiveFreezedClassFormFormGroupArrayBuilder<
           List<ReactiveFreezedClassFormFormGroupArrayBuilderT>>
       Function(FreezedClassForm formModel)? getExtended;
 
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      FreezedClassForm formModel)? builder;
+  final Widget Function(
+    BuildContext context,
+    List<Widget> itemList,
+    FreezedClassForm formModel,
+  )? builder;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      ReactiveFreezedClassFormFormGroupArrayBuilderT? item,
-      FreezedClassForm formModel) itemBuilder;
+    BuildContext context,
+    int i,
+    ReactiveFreezedClassFormFormGroupArrayBuilderT? item,
+    FreezedClassForm formModel,
+  ) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1109,23 +1160,14 @@ class ReactiveFreezedClassFormFormGroupArrayBuilder<
         final itemList = (value.value() ??
                 <ReactiveFreezedClassFormFormGroupArrayBuilderT>[])
             .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
+            .map(
+              (i, item) =>
+                  MapEntry(i, itemBuilder(context, i, item, formModel)),
+            )
             .values
             .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );

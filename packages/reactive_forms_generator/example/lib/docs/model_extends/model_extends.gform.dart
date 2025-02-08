@@ -19,7 +19,10 @@ class ReactiveModelExtendsFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, ModelExtendsForm formModel, Widget? child) builder;
+    BuildContext context,
+    ModelExtendsForm formModel,
+    Widget? child,
+  ) builder;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +41,7 @@ class ModelExtendsFormInheritedStreamer extends InheritedStreamer<dynamic> {
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(
-          stream,
-          child,
-          key: key,
-        );
+  }) : super(stream, child, key: key);
 
   final ModelExtendsForm form;
 }
@@ -64,10 +63,7 @@ class ReactiveModelExtendsForm extends StatelessWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static ModelExtendsForm? of(
-    BuildContext context, {
-    bool listen = true,
-  }) {
+  static ModelExtendsForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
@@ -124,7 +120,10 @@ class ModelExtendsFormBuilder extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-      BuildContext context, ModelExtendsForm formModel, Widget? child) builder;
+    BuildContext context,
+    ModelExtendsForm formModel,
+    Widget? child,
+  ) builder;
 
   final void Function(BuildContext context, ModelExtendsForm formModel)?
       initState;
@@ -141,8 +140,10 @@ class _ModelExtendsFormBuilderState extends State<ModelExtendsFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
-        ModelExtendsForm(ModelExtendsForm.formElements(widget.model), null);
+    _formModel = ModelExtendsForm(
+      ModelExtendsForm.formElements(widget.model),
+      null,
+    );
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -219,10 +220,7 @@ class _ModelExtendsFormBuilderState extends State<ModelExtendsFormBuilder> {
 final _logModelExtendsForm = Logger.detached('ModelExtendsForm');
 
 class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
-  ModelExtendsForm(
-    this.form,
-    this.path,
-  );
+  ModelExtendsForm(this.form, this.path);
 
   static const String emailControlName = "email";
 
@@ -247,7 +245,8 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
   String get _passwordRawValue => passwordControl.value ?? "";
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -258,7 +257,8 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsPassword {
     try {
       form.control(passwordControlPath());
@@ -281,8 +281,11 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void passwordValueUpdate(
@@ -290,8 +293,11 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    passwordControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    passwordControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailValuePatch(
@@ -299,8 +305,11 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void passwordValuePatch(
@@ -308,8 +317,11 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    passwordControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    passwordControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailValueReset(
@@ -404,10 +416,7 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -420,7 +429,9 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -472,8 +483,11 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ModelExtendsForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+      form.updateValue(
+        ModelExtendsForm.formElements(value).rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   @override
   void reset({
@@ -482,33 +496,38 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        value: value != null ? formElements(value).rawValue : null,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(ModelExtends? modelExtends) => FormGroup({
-        emailControlName: FormControl<String>(
+  static FormGroup formElements(ModelExtends? modelExtends) => FormGroup(
+        {
+          emailControlName: FormControl<String>(
             value: modelExtends?.email,
             validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        passwordControlName: FormControl<String>(
+            touched: false,
+          ),
+          passwordControlName: FormControl<String>(
             value: modelExtends?.password,
             validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+            touched: false,
+          ),
+        },
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      );
 }
 
 class ReactiveModelExtendsFormArrayBuilder<
@@ -519,24 +538,31 @@ class ReactiveModelExtendsFormArrayBuilder<
     this.formControl,
     this.builder,
     required this.itemBuilder,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
+  })  : assert(
+          control != null || formControl != null,
+          "You have to specify `control` or `formControl`!",
+        ),
         super(key: key);
 
   final FormArray<ReactiveModelExtendsFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveModelExtendsFormArrayBuilderT>? Function(
-      ModelExtendsForm formModel)? control;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      ModelExtendsForm formModel)? builder;
+    ModelExtendsForm formModel,
+  )? control;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      FormControl<ReactiveModelExtendsFormArrayBuilderT> control,
-      ReactiveModelExtendsFormArrayBuilderT? item,
-      ModelExtendsForm formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    ModelExtendsForm formModel,
+  )? builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    FormControl<ReactiveModelExtendsFormArrayBuilderT> control,
+    ReactiveModelExtendsFormArrayBuilderT? item,
+    ModelExtendsForm formModel,
+  ) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -568,11 +594,7 @@ class ReactiveModelExtendsFormArrayBuilder<
             .values
             .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );
@@ -587,8 +609,10 @@ class ReactiveModelExtendsFormFormGroupArrayBuilder<
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(extended != null || getExtended != null,
-            "You have to specify `control` or `formControl`!"),
+  })  : assert(
+          extended != null || getExtended != null,
+          "You have to specify `control` or `formControl`!",
+        ),
         super(key: key);
 
   final ExtendedControl<List<Map<String, Object?>?>,
@@ -598,14 +622,18 @@ class ReactiveModelExtendsFormFormGroupArrayBuilder<
           List<ReactiveModelExtendsFormFormGroupArrayBuilderT>>
       Function(ModelExtendsForm formModel)? getExtended;
 
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      ModelExtendsForm formModel)? builder;
+  final Widget Function(
+    BuildContext context,
+    List<Widget> itemList,
+    ModelExtendsForm formModel,
+  )? builder;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      ReactiveModelExtendsFormFormGroupArrayBuilderT? item,
-      ModelExtendsForm formModel) itemBuilder;
+    BuildContext context,
+    int i,
+    ReactiveModelExtendsFormFormGroupArrayBuilderT? item,
+    ModelExtendsForm formModel,
+  ) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -623,23 +651,14 @@ class ReactiveModelExtendsFormFormGroupArrayBuilder<
         final itemList = (value.value() ??
                 <ReactiveModelExtendsFormFormGroupArrayBuilderT>[])
             .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
+            .map(
+              (i, item) =>
+                  MapEntry(i, itemBuilder(context, i, item, formModel)),
+            )
             .values
             .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );
