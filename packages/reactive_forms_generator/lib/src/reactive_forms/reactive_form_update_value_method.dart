@@ -3,7 +3,11 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class ReactiveFormUpdateValueMethod extends ReactiveFormGeneratorMethod {
-  ReactiveFormUpdateValueMethod(super.field);
+  ReactiveFormUpdateValueMethod(
+    super.field,
+    super.output,
+    super.requiredValidators,
+  );
 
   @override
   Method formGroupArrayMethod() {
@@ -19,7 +23,7 @@ class ReactiveFormUpdateValueMethod extends ReactiveFormGeneratorMethod {
         final toAdd = <${field.typeParameter}>[];
         
         localValue.asMap().forEach((k, v) {
-          final values = (${field.fieldControlName}${field.nullabilitySuffix}.controls ${field.isNullable ? '?? []' : ''}).map((e) => e.value).toList();
+          final values = ${field.fieldControlName}.controls.map((e) => e.value).toList();
           
           if (${field.name}${field.className}.asMap().containsKey(k) &&
               values.asMap().containsKey(k)) {
@@ -30,7 +34,7 @@ class ReactiveFormUpdateValueMethod extends ReactiveFormGeneratorMethod {
         });
     
         if (toUpdate.isNotEmpty) {
-          ${field.fieldControlName}${field.nullabilitySuffix}.updateValue(
+          ${field.fieldControlName}.updateValue(
               toUpdate.map((e) => ${field.className}.formElements(e).rawValue).toList(),
               updateParent: updateParent,
               emitEvent: emitEvent);
@@ -38,7 +42,7 @@ class ReactiveFormUpdateValueMethod extends ReactiveFormGeneratorMethod {
     
         if (toAdd.isNotEmpty) {
           toAdd.forEach((e) {
-            ${field.fieldControlName}${field.nullabilitySuffix}.add(${field.className}.formElements(e),
+            ${field.fieldControlName}.add(${field.className}.formElements(e),
                 updateParent: updateParent, emitEvent: emitEvent);
           });
         }
@@ -51,7 +55,7 @@ class ReactiveFormUpdateValueMethod extends ReactiveFormGeneratorMethod {
   Method formGroupMethod() {
     return methodEntity.rebuild(
       (b) => b.body = Code(
-        '${field.fieldControlName}${field.nullabilitySuffix}.updateValue(${field.className}.formElements(value).rawValue, updateParent: updateParent, emitEvent:emitEvent);',
+        '${field.fieldControlName}.updateValue(${field.className}.formElements(value).rawValue, updateParent: updateParent, emitEvent:emitEvent);',
       ),
     );
   }
@@ -60,7 +64,7 @@ class ReactiveFormUpdateValueMethod extends ReactiveFormGeneratorMethod {
   Method defaultMethod() {
     return methodEntity.rebuild(
       (b) => b.body = Code(
-        '${field.fieldControlName}${field.nullabilitySuffix}.updateValue(value, updateParent: updateParent, emitEvent:emitEvent);',
+        '${field.fieldControlName}.updateValue(value, updateParent: updateParent, emitEvent:emitEvent);',
       ),
     );
   }

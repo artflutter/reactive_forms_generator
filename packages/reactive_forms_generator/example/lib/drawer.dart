@@ -18,6 +18,12 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             ListTile(
+              title: const Text('LoginOutput(beta)'),
+              onTap: () => Navigator.of(context).pushReplacementNamed(
+                Routes.loginOutput,
+              ),
+            ),
+            ListTile(
               title: const Text('Annotateless'),
               onTap: () => Navigator.of(context).pushReplacementNamed(
                 Routes.annotateless,

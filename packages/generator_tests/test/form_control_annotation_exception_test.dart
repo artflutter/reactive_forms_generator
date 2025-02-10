@@ -21,7 +21,7 @@ const model = r'''
     return Validators.required(control);
   }
   
-  @Rf()
+  @Rf(output: false)
   class Basic {
     final String email;
   
@@ -31,11 +31,11 @@ const model = r'''
       @RfControl<double>(
         validators: const [requiredValidator],
       )
-          this.email = '',
+          this.email = "",
       @RfControl(
         validators: const [requiredValidator],
       )
-          this.password = '',
+          this.password = "",
     });
   }
 ''';

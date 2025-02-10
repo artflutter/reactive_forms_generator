@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'product.dart';
 
@@ -144,6 +144,8 @@ class _ProductDetailsFormBuilderState<P extends Product, C extends Cart>
     extends State<ProductDetailsFormBuilder<P, C>> {
   late ProductDetailsForm<P, C> _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = ProductDetailsForm<P, C>(
@@ -154,6 +156,34 @@ class _ProductDetailsFormBuilderState<P extends Product, C extends Cart>
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logProductDetailsForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -170,6 +200,7 @@ class _ProductDetailsFormBuilderState<P extends Product, C extends Cart>
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -192,8 +223,10 @@ class _ProductDetailsFormBuilderState<P extends Product, C extends Cart>
   }
 }
 
+final _logProductDetailsForm = Logger.detached('ProductDetailsForm<P, C>');
+
 class ProductDetailsForm<P extends Product, C extends Cart>
-    implements FormModel<ProductDetails<P, C>> {
+    implements FormModel<ProductDetails<P, C>, ProductDetails<P, C>> {
   ProductDetailsForm(
     this.form,
     this.path,
@@ -213,10 +246,16 @@ class ProductDetailsForm<P extends Product, C extends Cart>
 
   String idControlPath() => pathBuilder(idControlName);
 
-  String? get _descriptionValue => descriptionControl?.value;
+  String? get _descriptionValue => descriptionControl.value;
 
   Id<P, C>? get _idValue => idForm.model;
 
+  String? get _descriptionRawValue => descriptionControl.value;
+
+  Id<P, C>? get _idRawValue => idForm.rawModel;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsDescription {
     try {
       form.control(descriptionControlPath());
@@ -226,6 +265,8 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -235,14 +276,16 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     }
   }
 
-  Map<String, Object>? get descriptionErrors => descriptionControl?.errors;
+  Map<String, Object>? get descriptionErrors => descriptionControl.errors;
 
-  Map<String, Object>? get idErrors => idControl?.errors;
+  Map<String, Object>? get idErrors => idControl.errors;
 
   void get descriptionFocus => form.focus(descriptionControlPath());
 
   void get idFocus => form.focus(idControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void descriptionRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -269,6 +312,8 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void idRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -300,7 +345,7 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    descriptionControl?.updateValue(value,
+    descriptionControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -309,7 +354,7 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl?.updateValue(IdForm.formElements(value).rawValue,
+    idControl.updateValue(IdForm.formElements(value).rawValue,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -318,7 +363,7 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    descriptionControl?.patchValue(value,
+    descriptionControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -327,7 +372,7 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl?.updateValue(IdForm.formElements(value).rawValue,
+    idControl.updateValue(IdForm.formElements(value).rawValue,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -338,7 +383,7 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      descriptionControl?.reset(
+      descriptionControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -353,17 +398,15 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      idControl?.reset(
+      idControl.reset(
           value: IdForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
 
-  FormControl<String>? get descriptionControl => containsDescription
-      ? form.control(descriptionControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get descriptionControl =>
+      form.control(descriptionControlPath()) as FormControl<String>;
 
-  FormGroup? get idControl =>
-      containsId ? form.control(idControlPath()) as FormGroup? : null;
+  FormGroup get idControl => form.control(idControlPath()) as FormGroup;
 
   IdForm<P, C> get idForm => IdForm(form, pathBuilder('id'));
 
@@ -373,12 +416,12 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     bool emitEvent = true,
   }) {
     if (disabled) {
-      descriptionControl?.markAsDisabled(
+      descriptionControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      descriptionControl?.markAsEnabled(
+      descriptionControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -391,12 +434,12 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     bool emitEvent = true,
   }) {
     if (disabled) {
-      idControl?.markAsDisabled(
+      idControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      idControl?.markAsEnabled(
+      idControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -408,11 +451,19 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'ProductDetailsForm<P, C>'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logProductDetailsForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return ProductDetails<P, C>(description: _descriptionValue, id: _idValue);
+  }
+
+  @override
+  ProductDetails<P, C> get rawModel {
+    return ProductDetails<P, C>(
+        description: _descriptionRawValue, id: _idRawValue);
   }
 
   @override
@@ -470,6 +521,8 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logProductDetailsForm.info('Errors');
+      _logProductDetailsForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -519,7 +572,10 @@ class ProductDetailsForm<P extends Product, C extends Cart>
           disabled: false);
 }
 
-class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
+final _logIdForm = Logger.detached('IdForm<P, C>');
+
+class IdForm<P extends Product, C extends Cart>
+    implements FormModel<Id<P, C>, Id<P, C>> {
   IdForm(
     this.form,
     this.path,
@@ -539,10 +595,16 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
 
   String nameControlPath() => pathBuilder(nameControlName);
 
-  String? get _companyNameValue => companyNameControl?.value;
+  String? get _companyNameValue => companyNameControl.value;
 
-  String? get _nameValue => nameControl?.value;
+  String? get _nameValue => nameControl.value;
 
+  String? get _companyNameRawValue => companyNameControl.value;
+
+  String? get _nameRawValue => nameControl.value;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsCompanyName {
     try {
       form.control(companyNameControlPath());
@@ -552,6 +614,8 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -561,14 +625,16 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
     }
   }
 
-  Map<String, Object>? get companyNameErrors => companyNameControl?.errors;
+  Map<String, Object>? get companyNameErrors => companyNameControl.errors;
 
-  Map<String, Object>? get nameErrors => nameControl?.errors;
+  Map<String, Object>? get nameErrors => nameControl.errors;
 
   void get companyNameFocus => form.focus(companyNameControlPath());
 
   void get nameFocus => form.focus(nameControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void companyNameRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -595,6 +661,8 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void nameRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -626,7 +694,7 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    companyNameControl?.updateValue(value,
+    companyNameControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -635,7 +703,7 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl?.updateValue(value,
+    nameControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -644,7 +712,7 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    companyNameControl?.patchValue(value,
+    companyNameControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -653,7 +721,7 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl?.patchValue(value,
+    nameControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -664,7 +732,7 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      companyNameControl?.reset(
+      companyNameControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -679,7 +747,7 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      nameControl?.reset(
+      nameControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -687,13 +755,11 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
         disabled: disabled,
       );
 
-  FormControl<String>? get companyNameControl => containsCompanyName
-      ? form.control(companyNameControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get companyNameControl =>
+      form.control(companyNameControlPath()) as FormControl<String>;
 
-  FormControl<String>? get nameControl => containsName
-      ? form.control(nameControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get nameControl =>
+      form.control(nameControlPath()) as FormControl<String>;
 
   void companyNameSetDisabled(
     bool disabled, {
@@ -701,12 +767,12 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      companyNameControl?.markAsDisabled(
+      companyNameControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      companyNameControl?.markAsEnabled(
+      companyNameControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -719,12 +785,12 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      nameControl?.markAsDisabled(
+      nameControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      nameControl?.markAsEnabled(
+      nameControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -736,11 +802,18 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'IdForm<P, C>'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logIdForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Id<P, C>(companyName: _companyNameValue, name: _nameValue);
+  }
+
+  @override
+  Id<P, C> get rawModel {
+    return Id<P, C>(companyName: _companyNameRawValue, name: _nameRawValue);
   }
 
   @override
@@ -796,6 +869,8 @@ class IdForm<P extends Product, C extends Cart> implements FormModel<Id<P, C>> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logIdForm.info('Errors');
+      _logIdForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -876,6 +951,7 @@ class ReactiveProductDetailsFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveProductDetailsFormArrayBuilderT> control,
       ReactiveProductDetailsFormArrayBuilderT? item,
       ProductDetailsForm<P, C> formModel) itemBuilder;
 
@@ -899,6 +975,8 @@ class ReactiveProductDetailsFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveProductDetailsFormArrayBuilderT>,
                   item,
                   formModel,
                 ),
@@ -1116,6 +1194,8 @@ class _IdFormBuilderState<P extends Product, C extends Cart>
     extends State<IdFormBuilder<P, C>> {
   late IdForm<P, C> _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = IdForm<P, C>(IdForm.formElements<P, C>(widget.model), null);
@@ -1125,6 +1205,34 @@ class _IdFormBuilderState<P extends Product, C extends Cart>
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logIdForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -1141,6 +1249,7 @@ class _IdFormBuilderState<P extends Product, C extends Cart>
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -1184,8 +1293,12 @@ class ReactiveIdFormArrayBuilder<ReactiveIdFormArrayBuilderT, P extends Product,
           BuildContext context, List<Widget> itemList, IdForm<P, C> formModel)?
       builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveIdFormArrayBuilderT? item, IdForm<P, C> formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveIdFormArrayBuilderT> control,
+      ReactiveIdFormArrayBuilderT? item,
+      IdForm<P, C> formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1207,6 +1320,8 @@ class ReactiveIdFormArrayBuilder<ReactiveIdFormArrayBuilderT, P extends Product,
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveIdFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

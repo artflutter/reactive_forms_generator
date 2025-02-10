@@ -2,8 +2,12 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:code_builder/code_builder.dart';
+import 'package:reactive_forms_generator/src/output/x.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
+
+// ignore: implementation_imports
+import 'package:analyzer/src/dart/element/type.dart';
 
 import '../utils.dart';
 
@@ -33,13 +37,13 @@ extension ClassElementExt on ClassElement {
 
   Iterable<Reference> get genericTypes {
     return thisType.typeArguments.map(
-      (e) => Reference(e.getDisplayString(withNullability: false)),
+      (e) => Reference(e.getDisplayString()),
     );
   }
 
   Iterable<Reference> get fullGenericTypes {
     return thisType.typeArguments.map(
-      (e) => Reference(e.element?.getDisplayString(withNullability: false)),
+      (e) => Reference(e.element?.getDisplayString()),
     );
   }
 
@@ -67,6 +71,8 @@ extension ParameterElementExt on ParameterElement {
   String get addListItemListName => 'add${fieldName.pascalCase}ItemList';
 
   String get fieldValueName => '_${fieldName}Value';
+
+  String get fieldRawValueName => '_${fieldName}RawValue';
 
   String get fieldControlForm => '${fieldName}Form';
 
@@ -188,6 +194,36 @@ extension ParameterElementExt on ParameterElement {
   bool get isFormGroup => type.element?.hasRfGroupAnnotation ?? false;
 
   bool get isForm => hasRfAnnotation;
+
+  String? get defaultValue {
+    for (final meta in metadata) {
+      final source = meta.toSource();
+
+      if (source.startsWith('@Default(')) {
+        return source.substring('@Default('.length, source.length - 1);
+      }
+    }
+
+    if (hasDefaultValue) {
+      return defaultValueCode;
+    }
+
+    return null;
+  }
+
+  String toReferenceType(List<String> requiredValidators) {
+    if (hasRfControlAnnotation &&
+        annotationParams(formControlChecker)
+            .hasRequiredValidator(requiredValidators)) {
+      return type.getName(withNullability: false);
+    }
+
+    var builder = ElementDisplayStringBuilder2(
+      withNullability: true,
+    );
+    (type as TypeImpl).appendTo(builder);
+    return builder.toString();
+  }
 }
 
 extension FieldElementExt on FieldElement {
@@ -195,7 +231,7 @@ extension FieldElementExt on FieldElement {
 
   String get fieldValueName => '${fieldName}Value';
 
-  String get fieldControlName => '${fieldName}Control';
+  // String get fieldControlName => '${fieldName}Control';
 
   String get fieldControlPath => '${fieldName}ControlPath';
 
@@ -242,4 +278,19 @@ extension ExtensionsOnIterable<T, U> on Iterable<T> {
   /// modifying the original iterable.
   Iterable<T> removeDuplicatedBy(IterableFunction<T, U> fn) =>
       _removeDuplicatedBy(this, fn);
+}
+
+extension DartTypeExt on DartType {
+  String getName({
+    bool withNullability = true,
+  }) {
+    final name = getDisplayString();
+
+    return switch (nullabilitySuffix) {
+      NullabilitySuffix.question =>
+        withNullability ? name : name.substring(0, name.length - 1),
+      NullabilitySuffix.star => name,
+      NullabilitySuffix.none => name,
+    };
+  }
 }

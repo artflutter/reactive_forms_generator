@@ -17,7 +17,8 @@ class FormArrayGenerator extends FormElementGenerator {
   @override
   String get value {
     final enclosingElement =
-        (fieldElement.enclosingElement as ConstructorElement).enclosingElement;
+        (fieldElement.enclosingElement3 as ConstructorElement)
+            .enclosingElement3;
 
     final optionalChaining = (enclosingElement == root &&
                 type?.nullabilitySuffix != NullabilitySuffix.question) ||
@@ -29,8 +30,7 @@ class FormArrayGenerator extends FormElementGenerator {
   }
 
   String get displayType {
-    String getDisplayString =
-        typeParameter.getDisplayString(withNullability: true);
+    String getDisplayString = typeParameter.getName(withNullability: true);
 
     // we need to trim last NullabilitySuffix.question cause FormControl modifies
     // generic T => T?
@@ -44,7 +44,7 @@ class FormArrayGenerator extends FormElementGenerator {
 
   @override
   String element() {
-    final typeParameterType = typeParameter.getDisplayString(
+    final typeParameterType = typeParameter.getName(
       withNullability: false,
     );
 
@@ -89,5 +89,5 @@ class FormArrayGenerator extends FormElementGenerator {
   }
 
   @override
-  List<TypeChecker> get typeChecker => [formArrayChecker, formArrayCheckerRf];
+  TypeChecker get typeChecker => formArrayChecker;
 }

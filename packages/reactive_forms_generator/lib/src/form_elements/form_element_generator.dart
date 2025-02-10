@@ -4,20 +4,21 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
+import 'package:reactive_forms_generator/src/types.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:recase/recase.dart';
-import 'package:analyzer/src/dart/element/element.dart';
-import 'package:analyzer/src/dart/ast/ast.dart';
 
 abstract class FormElementGenerator {
   final ClassElement root;
   final ParameterElement field;
   final DartType? type;
 
+  static const String validatorKey = 'validators';
+
   FormElementGenerator(this.root, this.field, this.type);
 
   String get value {
-    final enclosingElement = constructorElement.enclosingElement;
+    final enclosingElement = constructorElement.enclosingElement3;
 
     final optionalChaining = (enclosingElement == root &&
                 type?.nullabilitySuffix != NullabilitySuffix.question) ||
@@ -32,21 +33,18 @@ abstract class FormElementGenerator {
     var name = e?.name;
 
     if (e is MethodElement) {
-      name = '${e.enclosingElement.name}.$name';
+      name = '${e.enclosingElement3.name}.$name';
     }
 
     return name;
   }
 
-  List<TypeChecker> get typeChecker;
+  TypeChecker get typeChecker;
 
-  TypeChecker? get _typeChecker => typeChecker
-      .where((e) => e.hasAnnotationOfExact(fieldElement))
-      .firstOrNull;
+  DartObject? get annotation => typeChecker.firstAnnotationOf(fieldElement);
 
-  DartObject? get annotation => _typeChecker?.firstAnnotationOf(fieldElement);
-
-  String get itemValidators => annotationParams['itemValidators'] ?? '[]';
+  String get itemValidators =>
+      fieldElement.annotationParams(typeChecker)['itemValidators'] ?? '[]';
 
   String? get annotationType =>
       (annotation?.type as ParameterizedType?)?.typeArguments.first.toString();
@@ -60,64 +58,50 @@ abstract class FormElementGenerator {
   Element get fieldElement => field;
 
   ConstructorElement get constructorElement =>
-      fieldElement.enclosingElement as ConstructorElement;
+      fieldElement.enclosingElement3 as ConstructorElement;
 
-  Map<String, String> get annotationParams {
-    final result = <String, String>{};
-    try {
-      if (annotation != null) {
-        for (final meta in fieldElement.metadata) {
-          final obj = meta.computeConstantValue()!;
-
-          if (_typeChecker?.isExactlyType(obj.type!) == true) {
-            final argumentList = (meta as ElementAnnotationImpl)
-                .annotationAst
-                .arguments as ArgumentListImpl;
-            for (var argument in argumentList.arguments) {
-              final argumentNamedExpression = argument as NamedExpressionImpl;
-              result.addEntries(
-                [
-                  MapEntry(
-                    argumentNamedExpression.name.label.toSource(),
-                    argumentNamedExpression.expression.toSource(),
-                  ),
-                ],
-              );
-            }
-          }
-        }
-      }
-
-      return result;
-    } catch (e) {
-      return result;
-    }
-  }
-
-  // String? param(String name) {
-  //   final index = annotationParams
-  //       .indexWhere((e) => e.startsWith(name) || e.endsWith(name));
-  //   if (index != -1) {
-  //     final paramItem = annotationParams[index + 1];
-  //     final regExp = RegExp(
-  //       r'(?<param>\[[\s\S]*\])',
-  //       multiLine: true,
-  //       caseSensitive: true,
-  //     );
+  // Map<String, String> get annotationParams {
+  //   final result = <String, String>{};
+  //   try {
+  //     if (annotation != null) {
+  //       for (final meta in fieldElement.metadata) {
+  //         final obj = meta.computeConstantValue()!;
   //
-  //     final match = regExp.firstMatch(paramItem)?.namedGroup('param');
+  //         if (typeChecker.isExactlyType(obj.type!) == true) {
+  //           final argumentList = (meta as ElementAnnotationImpl)
+  //               .annotationAst
+  //               .arguments as ArgumentListImpl;
+  //           for (var argument in argumentList.arguments) {
+  //             final argumentNamedExpression = argument as NamedExpressionImpl;
+  //             result.addEntries(
+  //               [
+  //                 MapEntry(
+  //                   argumentNamedExpression.name.label.toSource(),
+  //                   argumentNamedExpression.expression.toSource(),
+  //                 ),
+  //               ],
+  //             );
+  //           }
+  //         }
+  //       }
+  //     }
   //
-  //     return match;
+  //     return result;
+  //   } catch (e) {
+  //     return result;
   //   }
-  //   return null;
   // }
 
-  String get validators => annotationParams['validators'] ?? '[]';
+  String get validators =>
+      fieldElement
+          .annotationParams(typeChecker)[FormElementGenerator.validatorKey] ??
+      '[]';
 
   String get itemAsyncValidators =>
-      annotationParams['itemAsyncValidators'] ?? '[]';
+      fieldElement.annotationParams(typeChecker)['itemAsyncValidators'] ?? '[]';
 
-  String get asyncValidators => annotationParams['asyncValidators'] ?? '[]';
+  String get asyncValidators =>
+      fieldElement.annotationParams(typeChecker)['asyncValidators'] ?? '[]';
 
   int get asyncValidatorsDebounceTime =>
       annotation?.getField('asyncValidatorsDebounceTime')?.toIntValue() ?? 250;

@@ -4,7 +4,11 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class ExtendedControlMethod extends ReactiveFormGeneratorMethod {
-  ExtendedControlMethod(super.field);
+  ExtendedControlMethod(
+    super.field,
+    super.output,
+    super.requiredValidators,
+  );
 
   @override
   Method? formGroupArrayMethod() {

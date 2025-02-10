@@ -50,12 +50,12 @@ class BasicFormWidget extends StatelessWidget {
                   return ElevatedButton(
                     onPressed: formModel.form.valid
                         ? () {
-                            // ignore: unnecessary_cast
-                            debugPrint((formModel as FormModel<RenamedBasic>)
-                                .model
-                                .toString());
-                            debugPrint(formModel.model.email);
-                            debugPrint(formModel.model.password);
+                            formModel.submit(onValid: (model) {
+                              // ignore: unnecessary_cast
+                              debugPrint(model.toString());
+                              debugPrint(model.email);
+                              debugPrint(model.password);
+                            });
                           }
                         : null,
                     child: const Text('Submit'),

@@ -70,9 +70,10 @@ class _ModelExtendsWidgetState extends State<ModelExtendsWidget> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  debugPrint(formModel.model.email);
-                  debugPrint(formModel.model.password);
-                  formModel.form.markAllAsTouched();
+                  formModel.submit(onValid: (model) {
+                    debugPrint(model.email);
+                    debugPrint(model.password);
+                  });
                 },
                 child: const Text('Submit raw'),
               ),
@@ -101,14 +102,11 @@ class _ModelExtendsWidgetState extends State<ModelExtendsWidget> {
                   return ElevatedButton(
                     onPressed: formModel.form.valid
                         ? () {
-                            // ignore: unnecessary_cast, avoid_print
-                            debugPrint((formModel as FormModel<ModelExtends>)
-                                .model
-                                .toString());
-                            // ignore: avoid_print
-                            debugPrint(formModel.model.email);
-                            // ignore: avoid_print
-                            debugPrint(formModel.model.password);
+                            formModel.submit(onValid: (model) {
+                              debugPrint(model.toString());
+                              debugPrint(model.email);
+                              debugPrint(model.password);
+                            });
                           }
                         : null,
                     child: const Text('Submit'),

@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProductDetails<P extends Product, C extends Cart> {
   @RfControl()
   String? get description => throw _privateConstructorUsedError;
-  @Rf()
+  @Rf(output: false)
   Id<P, C>? get id => throw _privateConstructorUsedError;
 
   /// Create a copy of ProductDetails
@@ -35,7 +35,8 @@ abstract class $ProductDetailsCopyWith<P extends Product, C extends Cart,
           $Res Function(ProductDetails<P, C>) then) =
       _$ProductDetailsCopyWithImpl<P, C, $Res, ProductDetails<P, C>>;
   @useResult
-  $Res call({@RfControl() String? description, @Rf() Id<P, C>? id});
+  $Res call(
+      {@RfControl() String? description, @Rf(output: false) Id<P, C>? id});
 
   $IdCopyWith<P, C, $Res>? get id;
 }
@@ -94,7 +95,8 @@ abstract class _$$ProductDetailsImplCopyWith<P extends Product, C extends Cart,
       __$$ProductDetailsImplCopyWithImpl<P, C, $Res>;
   @override
   @useResult
-  $Res call({@RfControl() String? description, @Rf() Id<P, C>? id});
+  $Res call(
+      {@RfControl() String? description, @Rf(output: false) Id<P, C>? id});
 
   @override
   $IdCopyWith<P, C, $Res>? get id;
@@ -134,14 +136,15 @@ class __$$ProductDetailsImplCopyWithImpl<P extends Product, C extends Cart,
 
 class _$ProductDetailsImpl<P extends Product, C extends Cart>
     extends _ProductDetails<P, C> {
-  _$ProductDetailsImpl({@RfControl() this.description, @Rf() this.id})
+  _$ProductDetailsImpl(
+      {@RfControl() this.description, @Rf(output: false) this.id})
       : super._();
 
   @override
   @RfControl()
   final String? description;
   @override
-  @Rf()
+  @Rf(output: false)
   final Id<P, C>? id;
 
   @override
@@ -177,14 +180,14 @@ abstract class _ProductDetails<P extends Product, C extends Cart>
     extends ProductDetails<P, C> {
   factory _ProductDetails(
       {@RfControl() final String? description,
-      @Rf() final Id<P, C>? id}) = _$ProductDetailsImpl<P, C>;
+      @Rf(output: false) final Id<P, C>? id}) = _$ProductDetailsImpl<P, C>;
   _ProductDetails._() : super._();
 
   @override
   @RfControl()
   String? get description;
   @override
-  @Rf()
+  @Rf(output: false)
   Id<P, C>? get id;
 
   /// Create a copy of ProductDetails

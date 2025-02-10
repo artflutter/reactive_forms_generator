@@ -34,14 +34,13 @@ class _MailingListFormWidgetState extends State<MailingListFormWidget> {
                   Expanded(
                     child: ReactiveMailingListFormArrayBuilder<String>(
                       formControl: formModel.emailListControl,
-                      itemBuilder: (context, i, item, formModel) {
+                      itemBuilder: (context, i, control, item, formModel) {
                         return Row(
                           children: [
                             Expanded(
                               child: ReactiveTextField<String>(
-                                key: ValueKey(
-                                    formModel.emailListControl.controls[i]),
-                                formControlName: i.toString(),
+                                key: ObjectKey(control),
+                                formControl: control,
                                 validationMessages: {
                                   'email': (_) => 'Invalid email',
                                 },
@@ -139,11 +138,9 @@ class _MailingListFormWidgetState extends State<MailingListFormWidget> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      if (formModel.form.valid) {
-                        debugPrint(formModel.model.toString());
-                      } else {
-                        formModel.form.markAllAsTouched();
-                      }
+                      formModel.submit(onValid: (model) {
+                        debugPrint(model.toString());
+                      });
                     },
                     child: const Text('Sign Up'),
                   ),

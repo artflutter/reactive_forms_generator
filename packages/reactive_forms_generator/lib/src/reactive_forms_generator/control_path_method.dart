@@ -4,7 +4,11 @@ import 'package:reactive_forms_generator/src/library_builder.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class ControlPathMethod extends ReactiveFormGeneratorMethod {
-  ControlPathMethod(super.field);
+  ControlPathMethod(
+    super.field,
+    super.output,
+    super.requiredValidators,
+  );
 
   @override
   Method? defaultMethod() => Method(

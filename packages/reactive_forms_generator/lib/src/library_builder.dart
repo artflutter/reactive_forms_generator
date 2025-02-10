@@ -1,3 +1,4 @@
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/form_generator.dart';
@@ -12,8 +13,11 @@ import 'package:reactive_forms_generator/src/reactive_forms/reactive_inherited_s
 const stringRef = Reference('String');
 const formGroupRef = Reference('FormGroup');
 
-List<Spec> generateLibrary(ClassElement element) {
-  final formGenerator = FormGenerator(element, element, null);
+List<Spec> generateLibrary(
+  ClassElement element,
+  AstNode ast,
+) {
+  final formGenerator = FormGenerator(element, element, null, ast);
   final reactiveInheritedStreamer = ReactiveInheritedStreamer(formGenerator);
   final reactiveForm = ReactiveForm(reactiveInheritedStreamer);
   final reactiveFormExtension =
@@ -24,6 +28,9 @@ List<Spec> generateLibrary(ClassElement element) {
   final reactiveFormGroupArrayBuilder =
       ReactiveFormGroupArrayBuilder(formGenerator);
 
+  final p = formGenerator.generate2;
+  // print(p);
+
   return [
     reactiveFormConsumer.generate,
     reactiveInheritedStreamer.generate,
@@ -31,6 +38,7 @@ List<Spec> generateLibrary(ClassElement element) {
     reactiveFormExtension.generate,
     ...reactiveFormBuilder.generate,
     ...formGenerator.generate,
+    ...p,
     reactiveFormArrayBuilder.generate,
     reactiveFormGroupArrayBuilder.generate,
   ];

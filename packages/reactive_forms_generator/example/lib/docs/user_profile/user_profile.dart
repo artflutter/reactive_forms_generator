@@ -2,7 +2,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'user_profile.gform.dart';
 
-@Rf()
+@Rf(output: false)
 class UserProfile {
   final String id;
 
@@ -19,11 +19,11 @@ class UserProfile {
     @RfControl(
       validators: [RequiredValidator()],
     )
-    this.firstName = '',
+    this.firstName = "",
     @RfControl(
       validators: [RequiredValidator()],
     )
-    this.lastName = '',
+    this.lastName = "",
     required this.home,
     this.office,
   });

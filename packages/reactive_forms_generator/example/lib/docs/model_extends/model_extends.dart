@@ -8,7 +8,7 @@ abstract class Email {
   Email({this.email = ''});
 }
 
-@Rf()
+@Rf(output: false)
 class ModelExtends extends Email {
   final String password;
 
@@ -16,10 +16,10 @@ class ModelExtends extends Email {
     @RfControl(
       validators: [RequiredValidator()],
     )
-    super.email = '',
+    super.email = "",
     @RfControl(
       validators: [RequiredValidator()],
     )
-    this.password = '',
+    this.password = "",
   });
 }

@@ -8,7 +8,7 @@ const fileName = 'login_extended';
 void main() {
   group('reactive_forms_generator', () {
     test(
-      'Form with simple non-nullable types',
+      'Login extended',
       () async {
         return testGenerator(
           fileName: fileName,
@@ -40,7 +40,7 @@ void main() {
             
             enum UserMode { user, admin }
           
-            @Rf()
+            @Rf(output: false)
             @RfGroup(
               validators: [AllFieldsRequired()],
             )
@@ -67,7 +67,7 @@ void main() {
                   validators: [RequiredValidator()],
                   asyncValidators: [UniqueEmailAsyncValidator()],
                 )
-                this.email = '',
+                this.email = "",
                 @RfControl(
                   validators: [RequiredValidator()],
                 )
@@ -108,7 +108,7 @@ void main() {
 const generatedFile = r'''// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'login_extended.dart';
 
@@ -244,6 +244,8 @@ class LoginExtendedFormBuilder extends StatefulWidget {
 class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
   late LoginExtendedForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -254,6 +256,34 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logLoginExtendedForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -270,6 +300,7 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -292,7 +323,9 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
   }
 }
 
-class LoginExtendedForm implements FormModel<LoginExtended> {
+final _logLoginExtendedForm = Logger.detached('LoginExtendedForm');
+
+class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
   LoginExtendedForm(
     this.form,
     this.path,
@@ -354,10 +387,30 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
 
   double get _heightValue => heightControl.value as double;
 
-  String? get _unAnnotatedValue => unAnnotatedControl?.value;
+  String? get _unAnnotatedValue => unAnnotatedControl.value;
 
-  List<int> get _someIntListValue => someIntListControl.value ?? [];
+  List<int> get _someIntListValue => someIntListControl.value ?? const [];
 
+  String get _emailRawValue => emailControl.value ?? "";
+
+  String get _passwordRawValue => passwordControl.value as String;
+
+  bool get _rememberMeRawValue => rememberMeControl.value as bool;
+
+  String get _themeRawValue => themeControl.value as String;
+
+  UserMode get _modeRawValue => modeControl.value as UserMode;
+
+  int get _timeoutRawValue => timeoutControl.value as int;
+
+  double get _heightRawValue => heightControl.value as double;
+
+  String? get _unAnnotatedRawValue => unAnnotatedControl.value;
+
+  List<int> get _someIntListRawValue => someIntListControl.value ?? const [];
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -367,6 +420,8 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsPassword {
     try {
       form.control(passwordControlPath());
@@ -376,6 +431,8 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsRememberMe {
     try {
       form.control(rememberMeControlPath());
@@ -385,6 +442,8 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsTheme {
     try {
       form.control(themeControlPath());
@@ -394,6 +453,8 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsMode {
     try {
       form.control(modeControlPath());
@@ -403,6 +464,8 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsTimeout {
     try {
       form.control(timeoutControlPath());
@@ -412,6 +475,8 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsHeight {
     try {
       form.control(heightControlPath());
@@ -421,6 +486,8 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsUnAnnotated {
     try {
       form.control(unAnnotatedControlPath());
@@ -430,6 +497,8 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsSomeIntList {
     try {
       form.control(someIntListControlPath());
@@ -453,7 +522,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
 
   Map<String, Object> get heightErrors => heightControl.errors;
 
-  Map<String, Object>? get unAnnotatedErrors => unAnnotatedControl?.errors;
+  Map<String, Object>? get unAnnotatedErrors => unAnnotatedControl.errors;
 
   Map<String, Object> get someIntListErrors => someIntListControl.errors;
 
@@ -475,6 +544,8 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
 
   void get someIntListFocus => form.focus(someIntListControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void unAnnotatedRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -569,7 +640,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    unAnnotatedControl?.updateValue(value,
+    unAnnotatedControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -650,7 +721,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    unAnnotatedControl?.patchValue(value,
+    unAnnotatedControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -775,7 +846,7 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      unAnnotatedControl?.reset(
+      unAnnotatedControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -819,9 +890,8 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
   FormControl<double> get heightControl =>
       form.control(heightControlPath()) as FormControl<double>;
 
-  FormControl<String>? get unAnnotatedControl => containsUnAnnotated
-      ? form.control(unAnnotatedControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get unAnnotatedControl =>
+      form.control(unAnnotatedControlPath()) as FormControl<String>;
 
   FormControl<List<int>> get someIntListControl =>
       form.control(someIntListControlPath()) as FormControl<List<int>>;
@@ -958,12 +1028,12 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      unAnnotatedControl?.markAsDisabled(
+      unAnnotatedControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      unAnnotatedControl?.markAsEnabled(
+      unAnnotatedControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -993,9 +1063,11 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'LoginExtendedForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logLoginExtendedForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return LoginExtended(
         email: _emailValue,
@@ -1007,6 +1079,20 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
         height: _heightValue,
         unAnnotated: _unAnnotatedValue,
         someIntList: _someIntListValue);
+  }
+
+  @override
+  LoginExtended get rawModel {
+    return LoginExtended(
+        email: _emailRawValue,
+        password: _passwordRawValue,
+        rememberMe: _rememberMeRawValue,
+        theme: _themeRawValue,
+        mode: _modeRawValue,
+        timeout: _timeoutRawValue,
+        height: _heightRawValue,
+        unAnnotated: _unAnnotatedRawValue,
+        someIntList: _someIntListRawValue);
   }
 
   @override
@@ -1062,6 +1148,8 @@ class LoginExtendedForm implements FormModel<LoginExtended> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logLoginExtendedForm.info('Errors');
+      _logLoginExtendedForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -1189,6 +1277,7 @@ class ReactiveLoginExtendedFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveLoginExtendedFormArrayBuilderT> control,
       ReactiveLoginExtendedFormArrayBuilderT? item,
       LoginExtendedForm formModel) itemBuilder;
 
@@ -1212,6 +1301,8 @@ class ReactiveLoginExtendedFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveLoginExtendedFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

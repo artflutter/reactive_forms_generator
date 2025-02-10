@@ -7,7 +7,7 @@ part 'nested.g.dart';
 
 part 'nested.gform.dart';
 
-@Rf()
+@Rf(output: false)
 @RfGroup()
 @freezed
 class SubGroup with _$SubGroup {
@@ -19,7 +19,7 @@ class SubGroup with _$SubGroup {
       _$SubGroupFromJson(json);
 }
 
-@Rf()
+@Rf(output: false)
 @RfGroup()
 @freezed
 class Group with _$Group {
@@ -31,7 +31,7 @@ class Group with _$Group {
   factory Group.fromJson(Map<String, dynamic> json) => _$GroupFromJson(json);
 }
 
-@Rf()
+@Rf(output: false)
 @RfGroup()
 @freezed
 class Nested with _$Nested {

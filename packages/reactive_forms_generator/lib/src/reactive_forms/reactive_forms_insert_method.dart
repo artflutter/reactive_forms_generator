@@ -3,18 +3,22 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class ReactiveFormInsertMethod extends ReactiveFormGeneratorMethod {
-  ReactiveFormInsertMethod(super.field);
+  ReactiveFormInsertMethod(
+    super.field,
+    super.output,
+    super.requiredValidators,
+  );
 
   @override
   Method? formGroupArrayMethod() {
     return methodEntity.rebuild((b) => b..body = Code('''
-      final values = (${field.fieldControlName}${field.nullabilitySuffix}.controls ${field.isNullable ? '?? []' : ''}).map((e) => e.value).toList();
+      final values = ${field.fieldControlName}.controls.map((e) => e.value).toList();
       if (values.length < i) {
         ${field.addListItemName}(value);
         return;
       }
   
-      ${field.fieldControlName}${field.nullabilitySuffix}.insert(
+      ${field.fieldControlName}.insert(
         i,
         ${field.className}.formElements(value),
         updateParent: updateParent,
@@ -40,7 +44,7 @@ class ReactiveFormInsertMethod extends ReactiveFormGeneratorMethod {
               (b) => b
                 ..name = 'value'
                 ..type = Reference(
-                  field.typeParameter.getDisplayString(withNullability: false),
+                  field.typeParameter.getName(withNullability: false),
                 ),
             ),
           ])

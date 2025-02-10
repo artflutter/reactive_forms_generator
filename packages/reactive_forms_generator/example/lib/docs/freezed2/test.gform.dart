@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'test.dart';
 
@@ -132,6 +132,8 @@ class TestFormBuilder extends StatefulWidget {
 class _TestFormBuilderState extends State<TestFormBuilder> {
   late TestForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = TestForm(TestForm.formElements(widget.model), null);
@@ -141,6 +143,34 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logTestForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -157,6 +187,7 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -179,7 +210,9 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
   }
 }
 
-class TestForm implements FormModel<Test> {
+final _logTestForm = Logger.detached('TestForm');
+
+class TestForm implements FormModel<Test, Test> {
   TestForm(
     this.form,
     this.path,
@@ -201,8 +234,14 @@ class TestForm implements FormModel<Test> {
 
   String get _titleValue => titleControl.value as String;
 
-  String? get _descriptionValue => descriptionControl?.value;
+  String? get _descriptionValue => descriptionControl.value;
 
+  String get _titleRawValue => titleControl.value as String;
+
+  String? get _descriptionRawValue => descriptionControl.value;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsTitle {
     try {
       form.control(titleControlPath());
@@ -212,6 +251,8 @@ class TestForm implements FormModel<Test> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsDescription {
     try {
       form.control(descriptionControlPath());
@@ -223,12 +264,14 @@ class TestForm implements FormModel<Test> {
 
   Map<String, Object> get titleErrors => titleControl.errors;
 
-  Map<String, Object>? get descriptionErrors => descriptionControl?.errors;
+  Map<String, Object>? get descriptionErrors => descriptionControl.errors;
 
   void get titleFocus => form.focus(titleControlPath());
 
   void get descriptionFocus => form.focus(descriptionControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void descriptionRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -269,7 +312,7 @@ class TestForm implements FormModel<Test> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    descriptionControl?.updateValue(value,
+    descriptionControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -287,7 +330,7 @@ class TestForm implements FormModel<Test> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    descriptionControl?.patchValue(value,
+    descriptionControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -313,7 +356,7 @@ class TestForm implements FormModel<Test> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      descriptionControl?.reset(
+      descriptionControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -324,9 +367,8 @@ class TestForm implements FormModel<Test> {
   FormControl<String> get titleControl =>
       form.control(titleControlPath()) as FormControl<String>;
 
-  FormControl<String>? get descriptionControl => containsDescription
-      ? form.control(descriptionControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get descriptionControl =>
+      form.control(descriptionControlPath()) as FormControl<String>;
 
   void titleSetDisabled(
     bool disabled, {
@@ -352,12 +394,12 @@ class TestForm implements FormModel<Test> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      descriptionControl?.markAsDisabled(
+      descriptionControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      descriptionControl?.markAsEnabled(
+      descriptionControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -369,11 +411,18 @@ class TestForm implements FormModel<Test> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'TestForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logTestForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Test(title: _titleValue, description: _descriptionValue);
+  }
+
+  @override
+  Test get rawModel {
+    return Test(title: _titleRawValue, description: _descriptionRawValue);
   }
 
   @override
@@ -429,6 +478,8 @@ class TestForm implements FormModel<Test> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logTestForm.info('Errors');
+      _logTestForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -502,8 +553,12 @@ class ReactiveTestFormArrayBuilder<ReactiveTestFormArrayBuilderT>
   final Widget Function(
       BuildContext context, List<Widget> itemList, TestForm formModel)? builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveTestFormArrayBuilderT? item, TestForm formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveTestFormArrayBuilderT> control,
+      ReactiveTestFormArrayBuilderT? item,
+      TestForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -525,6 +580,8 @@ class ReactiveTestFormArrayBuilder<ReactiveTestFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveTestFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

@@ -22,7 +22,9 @@ class NestedGenericFormWidgetState extends State<NestedGenericFormWidget> {
       title: const Text('Nested Generic Form'),
       body: Column(children: [
         ProductDetailsFormBuilder<Product, Cart>(
-          model: ProductDetails<Product, Cart>(id: Id<Product, Cart>(companyName: 'company', name: 'name'), description: 'description'),
+          model: ProductDetails<Product, Cart>(
+              id: Id<Product, Cart>(companyName: 'company', name: 'name'),
+              description: 'description'),
           builder: (context, formModel, child) {
             return Column(
               children: [
@@ -33,7 +35,6 @@ class NestedGenericFormWidgetState extends State<NestedGenericFormWidget> {
                         ElevatedButton(
                             child: const Text('add tag'),
                             onPressed: () {
-
                               field.didChange('new description');
                             }),
                         ElevatedButton(
@@ -46,15 +47,16 @@ class NestedGenericFormWidgetState extends State<NestedGenericFormWidget> {
                       ],
                     );
                   },
-                  formControl:
-                      formModel.descriptionControl as FormControl<String>,
+                  formControl: formModel.descriptionControl,
                 ),
                 ReactiveProductDetailsFormConsumer(
                   builder: (context, formModel, child) {
                     return ElevatedButton(
                       onPressed: () {
-                        tagsAsString = formModel.model.toString();
-                        setState(() {});
+                        formModel.submit(onValid: (model) {
+                          tagsAsString = model.toString();
+                          setState(() {});
+                        });
                       },
                       child: const Text('Submit'),
                     );

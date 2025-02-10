@@ -1,16 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-abstract class FormModel<TModel> {
+abstract class FormModel<TModel, TModelOutput> {
   FormModel({
     required this.form,
   });
 
   final FormGroup form;
 
-  TModel get model;
+  @protected
+  TModelOutput get model;
+
+  TModel get rawModel;
 
   void submit({
-    required void Function(TModel model) onValid,
+    required void Function(TModelOutput model) onValid,
     void Function()? onNotValid,
   });
 

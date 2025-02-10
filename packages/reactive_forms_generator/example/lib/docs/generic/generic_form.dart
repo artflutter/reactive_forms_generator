@@ -55,15 +55,16 @@ class GenericFormWidgetState extends State<GenericFormWidget> {
                       ],
                     );
                   },
-                  formControl:
-                      formModel.tagsControl as FormControl<List<String>>,
+                  formControl: formModel.tagsControl,
                 ),
                 ReactiveTagsFormConsumer(
                   builder: (context, formModel, child) {
                     return ElevatedButton(
                       onPressed: () {
-                        tagsAsString = formModel.model.toString();
-                        setState(() {});
+                        formModel.submit(onValid: (model) {
+                          tagsAsString = model.toString();
+                          setState(() {});
+                        });
                       },
                       child: const Text('Submit'),
                     );
@@ -105,14 +106,16 @@ class GenericFormWidgetState extends State<GenericFormWidget> {
                       ],
                     );
                   },
-                  formControl: formModel.tagsControl as FormControl<List<int>>,
+                  formControl: formModel.tagsControl,
                 ),
                 ReactiveTagsFormConsumer(
                   builder: (context, formModel, child) {
                     return ElevatedButton(
                       onPressed: () {
-                        tagsAsInt = formModel.model.toString();
-                        setState(() {});
+                        formModel.submit(onValid: (model) {
+                          tagsAsInt = model.toString();
+                          setState(() {});
+                        });
                       },
                       child: const Text('Submit'),
                     );

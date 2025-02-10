@@ -9,7 +9,7 @@ void main() {
   group('doc', () {
     test(
       'Mailing list',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -29,7 +29,7 @@ void main() {
               }
             }
             
-            @Rf()
+            @Rf(output: false)
             class MailingList {
               final List<String?> emailList;
             
@@ -52,7 +52,7 @@ void main() {
 const generatedFile = r'''// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'mailing_list.dart';
 
@@ -186,6 +186,8 @@ class MailingListFormBuilder extends StatefulWidget {
 class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
   late MailingListForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -196,6 +198,34 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logMailingListForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -212,6 +242,7 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -234,7 +265,9 @@ class _MailingListFormBuilderState extends State<MailingListFormBuilder> {
   }
 }
 
-class MailingListForm implements FormModel<MailingList> {
+final _logMailingListForm = Logger.detached('MailingListForm');
+
+class MailingListForm implements FormModel<MailingList, MailingList> {
   MailingListForm(
     this.form,
     this.path,
@@ -253,6 +286,11 @@ class MailingListForm implements FormModel<MailingList> {
   List<String?> get _emailListValue =>
       emailListControl.rawValue.whereType<String?>().toList();
 
+  List<String?> get _emailListRawValue =>
+      emailListControl.rawValue.whereType<String?>().toList();
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmailList {
     try {
       form.control(emailListControlPath());
@@ -368,11 +406,18 @@ class MailingListForm implements FormModel<MailingList> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'MailingListForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logMailingListForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return MailingList(emailList: _emailListValue);
+  }
+
+  @override
+  MailingList get rawModel {
+    return MailingList(emailList: _emailListRawValue);
   }
 
   @override
@@ -428,6 +473,8 @@ class MailingListForm implements FormModel<MailingList> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logMailingListForm.info('Errors');
+      _logMailingListForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -504,6 +551,7 @@ class ReactiveMailingListFormArrayBuilder<ReactiveMailingListFormArrayBuilderT>
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveMailingListFormArrayBuilderT> control,
       ReactiveMailingListFormArrayBuilderT? item,
       MailingListForm formModel) itemBuilder;
 
@@ -527,6 +575,8 @@ class ReactiveMailingListFormArrayBuilder<ReactiveMailingListFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveMailingListFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

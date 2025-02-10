@@ -14,7 +14,7 @@ abstract class Password {
   Password({this.password = ''});
 }
 
-@Rf()
+@Rf(output: false)
 class ModelImplements implements Email, Password {
   @override
   final String email;
@@ -26,10 +26,10 @@ class ModelImplements implements Email, Password {
     @RfControl(
       validators: [RequiredValidator()],
     )
-    this.email = '',
+    this.email = "",
     @RfControl(
       validators: [RequiredValidator()],
     )
-    this.password = '',
+    this.password = "",
   });
 }

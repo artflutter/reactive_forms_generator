@@ -1,4 +1,3 @@
-import 'package:example/docs/animated_url_list/url_list_form.dart';
 import 'package:example/docs/annotateless/annotateless_form.dart';
 import 'package:example/docs/array_nullable/array_nullable_form.dart';
 import 'package:example/docs/delivery_list/delivery_point_route_form.dart';
@@ -7,6 +6,7 @@ import 'package:example/docs/freezed/freezed_form.dart';
 import 'package:example/docs/generic/generic_form.dart';
 import 'package:example/docs/group/group_form.dart';
 import 'package:example/docs/login/login_form.dart';
+import 'package:example/docs/login/login_output_form.dart';
 import 'package:example/docs/login_extended/login_extended_form.dart';
 import 'package:example/docs/login_extended_nullable/login_extended_nullable_form.dart';
 import 'package:example/docs/mailing_list/mailing_list_form.dart';
@@ -16,6 +16,8 @@ import 'package:example/docs/nested/nested_form.dart';
 import 'package:example/docs/nested_generics/nested_generic_form.dart';
 import 'package:example/docs/user_profile/user_profile_form.dart';
 import 'package:flutter/material.dart';
+
+import 'docs/animated_url_list/animated_url_list_form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,6 +37,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         Routes.loginExtended: (_) => const LoginExtendedFormWidget(),
         Routes.login: (_) => const LoginFormWidget(),
+        Routes.loginOutput: (_) => const LoginOutputFormWidget(),
         Routes.annotateless: (_) => const AnnotatelessFormWidget(),
         Routes.mailingList: (_) => const MailingListFormWidget(),
         Routes.userProfile: (_) => const UserProfileFormWidget(),
@@ -47,12 +50,12 @@ class MyApp extends StatelessWidget {
         Routes.freezed: (_) => const FreezedFormWidget(),
         Routes.generic: (_) => const GenericFormWidget(),
         Routes.nestedGeneric: (_) => const NestedGenericFormWidget(),
-        Routes.animatedUrlList: (_) => const UrlListForm(),
+        Routes.animatedUrlList: (_) => const AnimatedUrlListFormWidget(),
         Routes.modelExtends: (_) => const ModelExtendsWidget(),
         Routes.modelImplements: (_) => const ModelImplementsWidget(),
         Routes.nested: (_) => const NestedFormWidget(),
       },
-      home: const LoginFormWidget(),
+      home: const AnimatedUrlListFormWidget(),
     );
   }
 }
@@ -61,6 +64,8 @@ class Routes {
   static const loginExtended = '/login-extended';
 
   static const login = '/login';
+
+  static const loginOutput = '/login-output';
 
   static const annotateless = '/annotateless';
 

@@ -8,7 +8,7 @@ const fileName = 'generic';
 void main() {
   group('reactive_forms_generator', () {
     test(
-      'Freezed support',
+      'Generic',
       () async {
         return testGenerator(
           fileName: fileName,
@@ -20,7 +20,7 @@ void main() {
             part '$fileName.gform.dart';
             
             @freezed
-            @Rf()
+            @Rf(output: false)
             class Tags<T> with _$Tags<T> {
               factory Tags({
                 @RfControl() required List<T>? tags,
@@ -39,7 +39,7 @@ void main() {
 const generatedFile = r'''// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'generic.dart';
 
@@ -170,6 +170,8 @@ class TagsFormBuilder<T> extends StatefulWidget {
 class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
   late TagsForm<T> _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = TagsForm<T>(TagsForm.formElements<T>(widget.model), null);
@@ -179,6 +181,34 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logTagsForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -195,6 +225,7 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -217,7 +248,9 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
   }
 }
 
-class TagsForm<T> implements FormModel<Tags<T>> {
+final _logTagsForm = Logger.detached('TagsForm<T>');
+
+class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
   TagsForm(
     this.form,
     this.path,
@@ -233,8 +266,12 @@ class TagsForm<T> implements FormModel<Tags<T>> {
 
   String tagsControlPath() => pathBuilder(tagsControlName);
 
-  List<T>? get _tagsValue => tagsControl?.value;
+  List<T>? get _tagsValue => tagsControl.value;
 
+  List<T>? get _tagsRawValue => tagsControl.value;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsTags {
     try {
       form.control(tagsControlPath());
@@ -244,10 +281,12 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     }
   }
 
-  Map<String, Object>? get tagsErrors => tagsControl?.errors;
+  Map<String, Object>? get tagsErrors => tagsControl.errors;
 
   void get tagsFocus => form.focus(tagsControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void tagsRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -279,7 +318,7 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    tagsControl?.updateValue(value,
+    tagsControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -288,7 +327,7 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    tagsControl?.patchValue(value,
+    tagsControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -299,7 +338,7 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      tagsControl?.reset(
+      tagsControl.reset(
         value: value,
         updateParent: updateParent,
         emitEvent: emitEvent,
@@ -307,9 +346,8 @@ class TagsForm<T> implements FormModel<Tags<T>> {
         disabled: disabled,
       );
 
-  FormControl<List<T>>? get tagsControl => containsTags
-      ? form.control(tagsControlPath()) as FormControl<List<T>>?
-      : null;
+  FormControl<List<T>> get tagsControl =>
+      form.control(tagsControlPath()) as FormControl<List<T>>;
 
   void tagsSetDisabled(
     bool disabled, {
@@ -317,12 +355,12 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      tagsControl?.markAsDisabled(
+      tagsControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      tagsControl?.markAsEnabled(
+      tagsControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -334,11 +372,18 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'TagsForm<T>'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logTagsForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Tags<T>(tags: _tagsValue);
+  }
+
+  @override
+  Tags<T> get rawModel {
+    return Tags<T>(tags: _tagsRawValue);
   }
 
   @override
@@ -394,6 +439,8 @@ class TagsForm<T> implements FormModel<Tags<T>> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logTagsForm.info('Errors');
+      _logTagsForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -461,8 +508,12 @@ class ReactiveTagsFormArrayBuilder<ReactiveTagsFormArrayBuilderT, T>
           BuildContext context, List<Widget> itemList, TagsForm<T> formModel)?
       builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveTagsFormArrayBuilderT? item, TagsForm<T> formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveTagsFormArrayBuilderT> control,
+      ReactiveTagsFormArrayBuilderT? item,
+      TagsForm<T> formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -484,6 +535,8 @@ class ReactiveTagsFormArrayBuilder<ReactiveTagsFormArrayBuilderT, T>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveTagsFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

@@ -3,13 +3,17 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class ReactiveFormClearMethod extends ReactiveFormGeneratorMethod {
-  ReactiveFormClearMethod(super.field);
+  ReactiveFormClearMethod(
+    super.field,
+    super.output,
+    super.requiredValidators,
+  );
 
   @override
   Method? formGroupArrayMethod() {
     return methodEntity.rebuild((b) => b..body = Code('''
       ${field.name}${field.className}.clear();
-      ${field.fieldControlName}${field.nullabilitySuffix}.clear(
+      ${field.fieldControlName}.clear(
         updateParent: updateParent,
         emitEvent: emitEvent);
     '''));

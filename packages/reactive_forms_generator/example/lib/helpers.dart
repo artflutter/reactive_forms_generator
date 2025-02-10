@@ -114,6 +114,10 @@ class NumValueAccessor extends ControlValueAccessor<int, num> {
   }
 }
 
+class RequiredValidator2 extends RequiredValidator {
+  const RequiredValidator2() : super();
+}
+
 class MustMatchValidator extends Validator<dynamic> {
   const MustMatchValidator() : super();
 

@@ -3,7 +3,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'delivery_list.gform.dart';
 
-@Rf()
+@Rf(output: false)
 class DeliveryList extends Equatable {
   final List<DeliveryPoint> deliveryList;
   final List<Client>? clientList;
@@ -17,7 +17,7 @@ class DeliveryList extends Equatable {
   List<Object?> get props => [deliveryList, clientList];
 }
 
-@Rf(name: 'StandaloneDeliveryPoint')
+@Rf(output: false, name: 'StandaloneDeliveryPoint')
 @RfGroup()
 class DeliveryPoint extends Equatable {
   final String name;
@@ -28,7 +28,7 @@ class DeliveryPoint extends Equatable {
     @RfControl(
       validators: [RequiredValidator()],
     )
-    this.name = '',
+    this.name = "",
     this.address,
   });
 

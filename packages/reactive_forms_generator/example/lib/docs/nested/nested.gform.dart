@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'nested.dart';
 
@@ -133,6 +133,8 @@ class SubGroupFormBuilder extends StatefulWidget {
 class _SubGroupFormBuilderState extends State<SubGroupFormBuilder> {
   late SubGroupForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = SubGroupForm(SubGroupForm.formElements(widget.model), null);
@@ -142,6 +144,34 @@ class _SubGroupFormBuilderState extends State<SubGroupFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logSubGroupForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -158,6 +188,7 @@ class _SubGroupFormBuilderState extends State<SubGroupFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -180,7 +211,9 @@ class _SubGroupFormBuilderState extends State<SubGroupFormBuilder> {
   }
 }
 
-class SubGroupForm implements FormModel<SubGroup> {
+final _logSubGroupForm = Logger.detached('SubGroupForm');
+
+class SubGroupForm implements FormModel<SubGroup, SubGroup> {
   SubGroupForm(
     this.form,
     this.path,
@@ -198,6 +231,10 @@ class SubGroupForm implements FormModel<SubGroup> {
 
   String get _idValue => idControl.value as String;
 
+  String get _idRawValue => idControl.value as String;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -270,11 +307,18 @@ class SubGroupForm implements FormModel<SubGroup> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'SubGroupForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logSubGroupForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return SubGroup(id: _idValue);
+  }
+
+  @override
+  SubGroup get rawModel {
+    return SubGroup(id: _idRawValue);
   }
 
   @override
@@ -330,6 +374,8 @@ class SubGroupForm implements FormModel<SubGroup> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logSubGroupForm.info('Errors');
+      _logSubGroupForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -400,6 +446,7 @@ class ReactiveSubGroupFormArrayBuilder<ReactiveSubGroupFormArrayBuilderT>
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveSubGroupFormArrayBuilderT> control,
       ReactiveSubGroupFormArrayBuilderT? item,
       SubGroupForm formModel) itemBuilder;
 
@@ -423,6 +470,8 @@ class ReactiveSubGroupFormArrayBuilder<ReactiveSubGroupFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveSubGroupFormArrayBuilderT>,
                   item,
                   formModel,
                 ),
@@ -633,6 +682,8 @@ class GroupFormBuilder extends StatefulWidget {
 class _GroupFormBuilderState extends State<GroupFormBuilder> {
   late GroupForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = GroupForm(GroupForm.formElements(widget.model), null);
@@ -642,6 +693,34 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logGroupForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -658,6 +737,7 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -680,7 +760,9 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
   }
 }
 
-class GroupForm implements FormModel<Group> {
+final _logGroupForm = Logger.detached('GroupForm');
+
+class GroupForm implements FormModel<Group, Group> {
   GroupForm(
     this.form,
     this.path,
@@ -705,6 +787,13 @@ class GroupForm implements FormModel<Group> {
   List<SubGroup> get _subGroupListValue =>
       subGroupListSubGroupForm.map((e) => e.model).toList();
 
+  String get _idRawValue => idControl.value as String;
+
+  List<SubGroup> get _subGroupListRawValue =>
+      subGroupListSubGroupForm.map((e) => e.rawModel).toList();
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -714,6 +803,8 @@ class GroupForm implements FormModel<Group> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsSubGroupList {
     try {
       form.control(subGroupListControlPath());
@@ -756,8 +847,7 @@ class GroupForm implements FormModel<Group> {
     final toAdd = <SubGroup>[];
 
     localValue.asMap().forEach((k, v) {
-      final values =
-          (subGroupListControl.controls).map((e) => e.value).toList();
+      final values = subGroupListControl.controls.map((e) => e.value).toList();
 
       if (subGroupListSubGroupForm.asMap().containsKey(k) &&
           values.asMap().containsKey(k)) {
@@ -788,7 +878,7 @@ class GroupForm implements FormModel<Group> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final values = (subGroupListControl.controls).map((e) => e.value).toList();
+    final values = subGroupListControl.controls.map((e) => e.value).toList();
     if (values.length < i) {
       addSubGroupListItem(value);
       return;
@@ -877,7 +967,7 @@ class GroupForm implements FormModel<Group> {
           as FormArray<Map<String, Object?>>;
 
   List<SubGroupForm> get subGroupListSubGroupForm {
-    final values = (subGroupListControl.controls).map((e) => e.value).toList();
+    final values = subGroupListControl.controls.map((e) => e.value).toList();
 
     return values
         .asMap()
@@ -949,11 +1039,18 @@ class GroupForm implements FormModel<Group> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'GroupForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logGroupForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Group(id: _idValue, subGroupList: _subGroupListValue);
+  }
+
+  @override
+  Group get rawModel {
+    return Group(id: _idRawValue, subGroupList: _subGroupListRawValue);
   }
 
   @override
@@ -1013,6 +1110,8 @@ class GroupForm implements FormModel<Group> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logGroupForm.info('Errors');
+      _logGroupForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -1088,8 +1187,12 @@ class ReactiveGroupFormArrayBuilder<ReactiveGroupFormArrayBuilderT>
           BuildContext context, List<Widget> itemList, GroupForm formModel)?
       builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveGroupFormArrayBuilderT? item, GroupForm formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveGroupFormArrayBuilderT> control,
+      ReactiveGroupFormArrayBuilderT? item,
+      GroupForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1111,6 +1214,8 @@ class ReactiveGroupFormArrayBuilder<ReactiveGroupFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveGroupFormArrayBuilderT>,
                   item,
                   formModel,
                 ),
@@ -1321,6 +1426,8 @@ class NestedFormBuilder extends StatefulWidget {
 class _NestedFormBuilderState extends State<NestedFormBuilder> {
   late NestedForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = NestedForm(NestedForm.formElements(widget.model), null);
@@ -1330,6 +1437,34 @@ class _NestedFormBuilderState extends State<NestedFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logNestedForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -1346,6 +1481,7 @@ class _NestedFormBuilderState extends State<NestedFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -1368,7 +1504,9 @@ class _NestedFormBuilderState extends State<NestedFormBuilder> {
   }
 }
 
-class NestedForm implements FormModel<Nested> {
+final _logNestedForm = Logger.detached('NestedForm');
+
+class NestedForm implements FormModel<Nested, Nested> {
   NestedForm(
     this.form,
     this.path,
@@ -1387,6 +1525,11 @@ class NestedForm implements FormModel<Nested> {
   List<Group> get _groupListValue =>
       groupListGroupForm.map((e) => e.model).toList();
 
+  List<Group> get _groupListRawValue =>
+      groupListGroupForm.map((e) => e.rawModel).toList();
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsGroupList {
     try {
       form.control(groupListControlPath());
@@ -1416,7 +1559,7 @@ class NestedForm implements FormModel<Nested> {
     final toAdd = <Group>[];
 
     localValue.asMap().forEach((k, v) {
-      final values = (groupListControl.controls).map((e) => e.value).toList();
+      final values = groupListControl.controls.map((e) => e.value).toList();
 
       if (groupListGroupForm.asMap().containsKey(k) &&
           values.asMap().containsKey(k)) {
@@ -1447,7 +1590,7 @@ class NestedForm implements FormModel<Nested> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final values = (groupListControl.controls).map((e) => e.value).toList();
+    final values = groupListControl.controls.map((e) => e.value).toList();
     if (values.length < i) {
       addGroupListItem(value);
       return;
@@ -1507,7 +1650,7 @@ class NestedForm implements FormModel<Nested> {
       form.control(groupListControlPath()) as FormArray<Map<String, Object?>>;
 
   List<GroupForm> get groupListGroupForm {
-    final values = (groupListControl.controls).map((e) => e.value).toList();
+    final values = groupListControl.controls.map((e) => e.value).toList();
 
     return values
         .asMap()
@@ -1561,11 +1704,18 @@ class NestedForm implements FormModel<Nested> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'NestedForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logNestedForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return Nested(groupList: _groupListValue);
+  }
+
+  @override
+  Nested get rawModel {
+    return Nested(groupList: _groupListRawValue);
   }
 
   @override
@@ -1625,6 +1775,8 @@ class NestedForm implements FormModel<Nested> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logNestedForm.info('Errors');
+      _logNestedForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -1693,8 +1845,12 @@ class ReactiveNestedFormArrayBuilder<ReactiveNestedFormArrayBuilderT>
           BuildContext context, List<Widget> itemList, NestedForm formModel)?
       builder;
 
-  final Widget Function(BuildContext context, int i,
-      ReactiveNestedFormArrayBuilderT? item, NestedForm formModel) itemBuilder;
+  final Widget Function(
+      BuildContext context,
+      int i,
+      FormControl<ReactiveNestedFormArrayBuilderT> control,
+      ReactiveNestedFormArrayBuilderT? item,
+      NestedForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1716,6 +1872,8 @@ class ReactiveNestedFormArrayBuilder<ReactiveNestedFormArrayBuilderT>
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveNestedFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

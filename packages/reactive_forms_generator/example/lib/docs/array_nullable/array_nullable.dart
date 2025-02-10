@@ -3,7 +3,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'array_nullable.gform.dart';
 
-@Rf()
+@Rf(output: false)
 class ArrayNullable {
   final List<String> emailList;
 
@@ -12,6 +12,8 @@ class ArrayNullable {
   final List<String?>? vegetablesList;
 
   final List<String?>? someList;
+
+  final List<String> someListRequired;
 
   final List<UserMode?>? modeList;
 
@@ -24,5 +26,6 @@ class ArrayNullable {
     @RfArray() this.vegetablesList,
     @RfArray() this.modeList,
     @RfControl<List<String?>>() this.someList,
+    this.someListRequired = const [],
   });
 }

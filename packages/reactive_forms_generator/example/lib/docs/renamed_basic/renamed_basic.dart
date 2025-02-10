@@ -2,7 +2,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'renamed_basic.gform.dart';
 
-@Rf(name: 'SomeWiredName')
+@Rf(output: false, name: 'SomeWiredName')
 class RenamedBasic {
   final String email;
 
@@ -12,10 +12,10 @@ class RenamedBasic {
     @RfControl(
       validators: [RequiredValidator()],
     )
-    this.email = '',
+    this.email = "",
     @RfControl(
       validators: [RequiredValidator()],
     )
-    this.password = '',
+    this.password = "",
   });
 }

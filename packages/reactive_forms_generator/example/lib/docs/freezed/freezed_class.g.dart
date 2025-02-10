@@ -13,6 +13,10 @@ _$FreezedClassImpl _$$FreezedClassImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
       logoImage: json['logo_image'] as String?,
       year: (json['year'] as num?)?.toDouble(),
+      selectedSpaces: (json['selectedSpaces'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$FreezedClassImplToJson(_$FreezedClassImpl instance) =>
@@ -22,4 +26,5 @@ Map<String, dynamic> _$$FreezedClassImplToJson(_$FreezedClassImpl instance) =>
       'name': instance.name,
       'logo_image': instance.logoImage,
       'year': instance.year,
+      'selectedSpaces': instance.selectedSpaces,
     };

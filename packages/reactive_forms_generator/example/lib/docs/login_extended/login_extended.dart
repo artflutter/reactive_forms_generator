@@ -3,7 +3,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 part 'login_extended.gform.dart';
 
-@Rf()
+@Rf(output: false)
 @RfGroup(
   validators: [AllFieldsRequired()],
 )
@@ -30,7 +30,7 @@ class LoginExtended {
       validators: [RequiredValidator()],
       asyncValidators: [UniqueEmailAsyncValidator()],
     )
-    this.email = '',
+    this.email = "",
     @RfControl(
       validators: [RequiredValidator()],
     )

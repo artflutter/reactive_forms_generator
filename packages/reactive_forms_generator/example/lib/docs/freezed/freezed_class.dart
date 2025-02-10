@@ -9,7 +9,7 @@ part 'freezed_class.freezed.dart';
 part 'freezed_class.gform.dart';
 
 @freezed
-@Rf()
+@Rf(output: false)
 class FreezedClass with _$FreezedClass {
   FreezedClass._();
 
@@ -19,6 +19,7 @@ class FreezedClass with _$FreezedClass {
     @RfControl<String>() String? name,
     @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
     @RfControl<double>() double? year,
+    @Default([]) List<String> selectedSpaces,
   }) = _FreezedClass;
 
   factory FreezedClass.fromJson(Map<String, dynamic> json) =>

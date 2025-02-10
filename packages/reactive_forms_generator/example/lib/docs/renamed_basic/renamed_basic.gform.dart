@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'renamed_basic.dart';
 
@@ -137,6 +137,8 @@ class SomeWiredNameFormBuilder extends StatefulWidget {
 class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
   late SomeWiredNameForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -147,6 +149,34 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logSomeWiredNameForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -163,6 +193,7 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -185,7 +216,9 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
   }
 }
 
-class SomeWiredNameForm implements FormModel<RenamedBasic> {
+final _logSomeWiredNameForm = Logger.detached('SomeWiredNameForm');
+
+class SomeWiredNameForm implements FormModel<RenamedBasic, RenamedBasic> {
   SomeWiredNameForm(
     this.form,
     this.path,
@@ -209,6 +242,12 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
 
   String get _passwordValue => passwordControl.value ?? "";
 
+  String get _emailRawValue => emailControl.value ?? "";
+
+  String get _passwordRawValue => passwordControl.value ?? "";
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -218,6 +257,8 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsPassword {
     try {
       form.control(passwordControlPath());
@@ -348,11 +389,18 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'SomeWiredNameForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logSomeWiredNameForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return RenamedBasic(email: _emailValue, password: _passwordValue);
+  }
+
+  @override
+  RenamedBasic get rawModel {
+    return RenamedBasic(email: _emailRawValue, password: _passwordRawValue);
   }
 
   @override
@@ -408,6 +456,8 @@ class SomeWiredNameForm implements FormModel<RenamedBasic> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logSomeWiredNameForm.info('Errors');
+      _logSomeWiredNameForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -484,6 +534,7 @@ class ReactiveSomeWiredNameFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveSomeWiredNameFormArrayBuilderT> control,
       ReactiveSomeWiredNameFormArrayBuilderT? item,
       SomeWiredNameForm formModel) itemBuilder;
 
@@ -507,6 +558,8 @@ class ReactiveSomeWiredNameFormArrayBuilder<
                 itemBuilder(
                   context,
                   i,
+                  formArray.controls[i]
+                      as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>,
                   item,
                   formModel,
                 ),

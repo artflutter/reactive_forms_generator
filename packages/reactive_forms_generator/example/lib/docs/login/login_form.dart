@@ -83,10 +83,11 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                         child: ElevatedButton(
                           key: submitRaw.itemKey,
                           onPressed: () {
-                            debugPrint(formModel.model.email);
-                            debugPrint(formModel.model.password);
                             formModel.form.markAllAsTouched();
-                            widget.onChange?.call(formModel.model);
+                            widget.onChange?.call(formModel.rawModel);
+
+                            debugPrint(formModel.rawModel.email);
+                            debugPrint(formModel.rawModel.password);
                           },
                           child: const Text('Submit raw'),
                         ),
@@ -99,10 +100,12 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                               key: submit.itemKey,
                               onPressed: formModel.form.valid
                                   ? () {
-                                      debugPrint((formModel).model.toString());
-                                      debugPrint(formModel.model.email);
-                                      debugPrint(formModel.model.password);
-                                      widget.onChange?.call(formModel.model);
+                                      formModel.submit(onValid: (model) {
+                                        debugPrint(model.toString());
+                                        debugPrint(model.email);
+                                        debugPrint(model.password);
+                                        widget.onChange?.call(model);
+                                      });
                                     }
                                   : null,
                               child: const Text('Submit'),
@@ -118,7 +121,9 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                         child: ElevatedButton(
                           key: submitRaw.itemKey,
                           onPressed: () => formModel.submit(
-                            onValid: (_) => debugPrint('FormValid'),
+                            onValid: (_) {
+                              debugPrint('FormValid');
+                            },
                             onNotValid: () {
                               debugPrint('FormInvalid');
                             },

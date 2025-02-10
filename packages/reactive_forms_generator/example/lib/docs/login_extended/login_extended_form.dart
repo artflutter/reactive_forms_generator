@@ -79,12 +79,10 @@ class LoginExtendedFormWidget extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  if (formModel.form.valid) {
-                    debugPrint(formModel.model.toString());
-                    debugPrint(formModel.model.email);
-                  } else {
-                    formModel.form.markAllAsTouched();
-                  }
+                  formModel.submit(onValid: (model) {
+                    debugPrint(model.toString());
+                    debugPrint(model.email);
+                  });
                 },
                 child: const Text('Sign Up'),
               ),

@@ -13,7 +13,7 @@ class FormGroupGenerator extends FormElementGenerator {
 
   @override
   String get value {
-    final enclosingElement = constructorElement.enclosingElement;
+    final enclosingElement = constructorElement.enclosingElement3;
 
     final optionalChaining = (enclosingElement == root &&
                 type?.nullabilitySuffix != NullabilitySuffix.question) ||
@@ -26,7 +26,7 @@ class FormGroupGenerator extends FormElementGenerator {
 
   @override
   ConstructorElement get constructorElement =>
-      field.enclosingElement as ConstructorElement;
+      field.enclosingElement3 as ConstructorElement;
 
   @override
   Element get fieldElement => field.type.element!;
@@ -98,5 +98,5 @@ class FormGroupGenerator extends FormElementGenerator {
   }
 
   @override
-  List<TypeChecker> get typeChecker => [formGroupChecker, formGroupCheckerRf];
+  TypeChecker get typeChecker => formGroupChecker;
 }

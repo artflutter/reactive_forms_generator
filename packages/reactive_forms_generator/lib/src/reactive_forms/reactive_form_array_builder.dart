@@ -91,6 +91,7 @@ class ReactiveFormArrayBuilder {
                         itemBuilder(
                           context,
                           i,
+                          formArray.controls[i] as FormControl<$T>,
                           item,
                           formModel,
                         ),
@@ -140,7 +141,7 @@ class ReactiveFormArrayBuilder {
             ..name = 'itemBuilder'
             ..modifier = FieldModifier.final$
             ..type = Reference(
-                'Widget Function(BuildContext context, int i, $T? item, ${formGenerator.classNameFull} formModel)'),
+                'Widget Function(BuildContext context, int i, FormControl<$T> control, $T? item, ${formGenerator.classNameFull} formModel)'),
         ),
       ];
 

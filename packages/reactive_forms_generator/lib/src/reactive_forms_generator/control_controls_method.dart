@@ -5,13 +5,17 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class ControlControlsMethod extends ReactiveFormGeneratorMethod {
-  ControlControlsMethod(super.field);
+  ControlControlsMethod(
+    super.field,
+    super.output,
+    super.requiredValidators,
+  );
 
   @override
   Method? formArrayMethod() {
     final type = (field.type as ParameterizedType).typeArguments.first;
 
-    String displayType = type.getDisplayString(withNullability: true);
+    String displayType = type.getName(withNullability: true);
 
     // we need to trim last NullabilitySuffix.question cause FormControl modifies
     // generic T => T?
@@ -26,8 +30,7 @@ class ControlControlsMethod extends ReactiveFormGeneratorMethod {
         '${field.fieldControlName}.controls.cast<$listTypeReference>()';
 
     if (field.isNullable) {
-      body =
-          '${field.containsMethodName} ? ${field.fieldControlName}?.controls.cast<$listTypeReference>() ?? [] : []';
+      body = '${field.fieldControlName}.controls.cast<$listTypeReference>()';
     }
 
     return Method(

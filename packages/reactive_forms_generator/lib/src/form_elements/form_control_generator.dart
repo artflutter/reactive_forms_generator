@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/nullability_suffix.dart';
+import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:source_gen/source_gen.dart';
@@ -8,7 +9,7 @@ class FormControlGenerator extends FormElementGenerator {
 
   @override
   String element() {
-    String displayType = field.type.getDisplayString(withNullability: true);
+    String displayType = field.type.getName(withNullability: true);
 
     // we need to trim last NullabilitySuffix.question cause FormControl modifies
     // generic T => T?
@@ -35,6 +36,5 @@ class FormControlGenerator extends FormElementGenerator {
   }
 
   @override
-  List<TypeChecker> get typeChecker =>
-      [formControlChecker, formControlCheckerRf];
+  TypeChecker get typeChecker => formControlChecker;
 }

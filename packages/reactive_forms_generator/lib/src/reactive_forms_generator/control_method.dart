@@ -5,17 +5,20 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class ControlMethod extends ReactiveFormGeneratorMethod {
-  ControlMethod(super.field);
+  ControlMethod(
+    super.field,
+    super.output,
+    super.requiredValidators,
+  );
 
   @override
   Method? formGroupMethod() {
-    final reference = 'FormGroup${field.nullabilitySuffix}';
+    final reference = 'FormGroup';
 
     String body = 'form.control(${field.fieldControlPath}()) as $reference';
 
     if (field.isNullable) {
-      body =
-          '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $reference : null';
+      body = 'form.control(${field.fieldControlPath}()) as $reference';
     }
 
     return Method(
@@ -32,7 +35,7 @@ class ControlMethod extends ReactiveFormGeneratorMethod {
   Method? formGroupArrayMethod() {
     final type = (field.type as ParameterizedType).typeArguments.first;
 
-    String displayType = type.getDisplayString(withNullability: true);
+    String displayType = type.getName(withNullability: true);
 
     // we need to trim last NullabilitySuffix.question cause FormControl modifies
     // generic T => T?
@@ -40,18 +43,16 @@ class ControlMethod extends ReactiveFormGeneratorMethod {
       displayType = displayType.substring(0, displayType.length - 1);
     }
 
-    String typeReference = 'FormArray<$displayType>${field.nullabilitySuffix}';
+    String typeReference = 'FormArray<$displayType>';
 
     if (field.isFormGroupArray) {
-      typeReference =
-          'FormArray<Map<String, Object?>>${field.nullabilitySuffix}';
+      typeReference = 'FormArray<Map<String, Object?>>';
     }
 
     String body = 'form.control(${field.fieldControlPath}()) as $typeReference';
 
     if (field.isNullable) {
-      body =
-          '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $typeReference : null';
+      body = 'form.control(${field.fieldControlPath}()) as $typeReference';
     }
 
     return Method(
@@ -68,7 +69,7 @@ class ControlMethod extends ReactiveFormGeneratorMethod {
   Method? formArrayMethod() {
     final type = (field.type as ParameterizedType).typeArguments.first;
 
-    String displayType = type.getDisplayString(withNullability: true);
+    String displayType = type.getName(withNullability: true);
 
     // we need to trim last NullabilitySuffix.question cause FormControl modifies
     // generic T => T?
@@ -76,13 +77,12 @@ class ControlMethod extends ReactiveFormGeneratorMethod {
       displayType = displayType.substring(0, displayType.length - 1);
     }
 
-    String typeReference = 'FormArray<$displayType>${field.nullabilitySuffix}';
+    String typeReference = 'FormArray<$displayType>';
 
     String body = 'form.control(${field.fieldControlPath}()) as $typeReference';
 
     if (field.isNullable) {
-      body =
-          '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $typeReference : null';
+      body = 'form.control(${field.fieldControlPath}()) as $typeReference';
     }
 
     return Method(
@@ -97,21 +97,21 @@ class ControlMethod extends ReactiveFormGeneratorMethod {
 
   @override
   Method? formControlMethod() {
-    String displayType = field.type.getDisplayString(withNullability: true);
+    String displayType = field.type.getName(withNullability: !toOutput);
 
     // we need to trim last NullabilitySuffix.question cause FormControl modifies
     // generic T => T?
-    if (field.type.nullabilitySuffix == NullabilitySuffix.question) {
+    if (field.type.nullabilitySuffix == NullabilitySuffix.question &&
+        !toOutput) {
       displayType = displayType.substring(0, displayType.length - 1);
     }
 
-    final reference = 'FormControl<$displayType>${field.nullabilitySuffix}';
+    final reference = 'FormControl<$displayType>';
 
     String body = 'form.control(${field.fieldControlPath}()) as $reference';
 
-    if (field.isNullable) {
-      body =
-          '${field.containsMethodName} ? form.control(${field.fieldControlPath}()) as $reference : null';
+    if (field.isNullable && !toOutput) {
+      body = 'form.control(${field.fieldControlPath}()) as $reference';
     }
 
     return Method(

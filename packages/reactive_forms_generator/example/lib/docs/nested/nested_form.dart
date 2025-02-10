@@ -45,11 +45,10 @@ class _NestedFormWidgetState extends State<NestedFormWidget> {
                             ),
                           );
 
-                      final model = formModel.model;
-                      widget.onChange?.call(model);
+                      widget.onChange?.call(formModel.rawModel);
 
                       modelString = const JsonEncoder.withIndent('  ').convert(
-                        formModel.model.toJson(),
+                        formModel.rawModel.toJson(),
                       );
                       formValueString = const JsonEncoder.withIndent('  ')
                           .convert(formModel.form.value);
@@ -75,11 +74,10 @@ class _NestedFormWidgetState extends State<NestedFormWidget> {
                         ],
                       ));
 
-                      final model = formModel.model;
-                      widget.onChange?.call(model);
+                      widget.onChange?.call(formModel.rawModel);
 
                       modelString = const JsonEncoder.withIndent('  ').convert(
-                        formModel.model.toJson(),
+                        formModel.rawModel.toJson(),
                       );
                       formValueString = const JsonEncoder.withIndent('  ')
                           .convert(formModel.form.value);

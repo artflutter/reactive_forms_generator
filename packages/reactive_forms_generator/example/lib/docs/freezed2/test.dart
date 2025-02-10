@@ -7,7 +7,7 @@ part 'test.freezed.dart';
 part 'test.gform.dart';
 
 @freezed
-@Rf()
+@Rf(output: false)
 class Test with _$Test {
   const Test._();
 
