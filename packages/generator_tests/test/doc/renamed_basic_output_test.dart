@@ -67,7 +67,10 @@ class ReactiveSomeWiredNameFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, SomeWiredNameForm formModel, Widget? child) builder;
+    BuildContext context,
+    SomeWiredNameForm formModel,
+    Widget? child,
+  ) builder;
 
   @override
   Widget build(BuildContext context) {
@@ -86,11 +89,7 @@ class SomeWiredNameFormInheritedStreamer extends InheritedStreamer<dynamic> {
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(
-          stream,
-          child,
-          key: key,
-        );
+  }) : super(stream, child, key: key);
 
   final SomeWiredNameForm form;
 }
@@ -112,10 +111,7 @@ class ReactiveSomeWiredNameForm extends StatelessWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static SomeWiredNameForm? of(
-    BuildContext context, {
-    bool listen = true,
-  }) {
+  static SomeWiredNameForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
@@ -172,7 +168,10 @@ class SomeWiredNameFormBuilder extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-      BuildContext context, SomeWiredNameForm formModel, Widget? child) builder;
+    BuildContext context,
+    SomeWiredNameForm formModel,
+    Widget? child,
+  ) builder;
 
   final void Function(BuildContext context, SomeWiredNameForm formModel)?
       initState;
@@ -189,8 +188,10 @@ class _SomeWiredNameFormBuilderState extends State<SomeWiredNameFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
-        SomeWiredNameForm(SomeWiredNameForm.formElements(widget.model), null);
+    _formModel = SomeWiredNameForm(
+      SomeWiredNameForm.formElements(widget.model),
+      null,
+    );
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -268,10 +269,7 @@ final _logSomeWiredNameForm = Logger.detached('SomeWiredNameForm');
 
 class SomeWiredNameForm
     implements FormModel<RenamedBasicO, RenamedBasicOOutput> {
-  SomeWiredNameForm(
-    this.form,
-    this.path,
-  );
+  SomeWiredNameForm(this.form, this.path);
 
   static const String emailControlName = "email";
 
@@ -296,7 +294,8 @@ class SomeWiredNameForm
   String? get _passwordRawValue => passwordControl.value;
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -307,7 +306,8 @@ class SomeWiredNameForm
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsPassword {
     try {
       form.control(passwordControlPath());
@@ -326,11 +326,9 @@ class SomeWiredNameForm
   void get passwordFocus => form.focus(passwordControlPath());
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void emailRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void emailRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsEmail) {
       final controlPath = path;
       if (controlPath == null) {
@@ -354,11 +352,9 @@ class SomeWiredNameForm
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void passwordRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void passwordRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsPassword) {
       final controlPath = path;
       if (controlPath == null) {
@@ -386,8 +382,11 @@ class SomeWiredNameForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void passwordValueUpdate(
@@ -395,8 +394,11 @@ class SomeWiredNameForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    passwordControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    passwordControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailValuePatch(
@@ -404,8 +406,11 @@ class SomeWiredNameForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void passwordValuePatch(
@@ -413,8 +418,11 @@ class SomeWiredNameForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    passwordControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    passwordControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailValueReset(
@@ -510,10 +518,7 @@ class SomeWiredNameForm
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -526,7 +531,9 @@ class SomeWiredNameForm
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -578,8 +585,11 @@ class SomeWiredNameForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(SomeWiredNameForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+      form.updateValue(
+        SomeWiredNameForm.formElements(value).rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   @override
   void reset({
@@ -588,42 +598,48 @@ class SomeWiredNameForm
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        value: value != null ? formElements(value).rawValue : null,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(RenamedBasicO? renamedBasicO) => FormGroup({
-        emailControlName: FormControl<String>(
+  static FormGroup formElements(RenamedBasicO? renamedBasicO) => FormGroup(
+        {
+          emailControlName: FormControl<String>(
             value: renamedBasicO?.email,
             validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        passwordControlName: FormControl<String>(
+            touched: false,
+          ),
+          passwordControlName: FormControl<String>(
             value: renamedBasicO?.password,
             validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+            touched: false,
+          ),
+        },
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      );
 }
 
 @Rf(output: true, name: 'SomeWiredName')
 class RenamedBasicOOutput {
   final String email;
   final String password;
-  RenamedBasicOOutput(
-      {@RfControl(validators: [RequiredValidator()]) required this.email,
-      @RfControl(validators: [RequiredValidator()]) required this.password});
+  RenamedBasicOOutput({
+    @RfControl(validators: [RequiredValidator()]) required this.email,
+    @RfControl(validators: [RequiredValidator()]) required this.password,
+  });
 }
 
 class ReactiveSomeWiredNameFormArrayBuilder<
@@ -634,24 +650,31 @@ class ReactiveSomeWiredNameFormArrayBuilder<
     this.formControl,
     this.builder,
     required this.itemBuilder,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
+  })  : assert(
+          control != null || formControl != null,
+          "You have to specify `control` or `formControl`!",
+        ),
         super(key: key);
 
   final FormArray<ReactiveSomeWiredNameFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveSomeWiredNameFormArrayBuilderT>? Function(
-      SomeWiredNameForm formModel)? control;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      SomeWiredNameForm formModel)? builder;
+    SomeWiredNameForm formModel,
+  )? control;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      FormControl<ReactiveSomeWiredNameFormArrayBuilderT> control,
-      ReactiveSomeWiredNameFormArrayBuilderT? item,
-      SomeWiredNameForm formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    SomeWiredNameForm formModel,
+  )? builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    FormControl<ReactiveSomeWiredNameFormArrayBuilderT> control,
+    ReactiveSomeWiredNameFormArrayBuilderT? item,
+    SomeWiredNameForm formModel,
+  ) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -683,11 +706,7 @@ class ReactiveSomeWiredNameFormArrayBuilder<
             .values
             .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );
@@ -702,8 +721,10 @@ class ReactiveSomeWiredNameFormFormGroupArrayBuilder<
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(extended != null || getExtended != null,
-            "You have to specify `control` or `formControl`!"),
+  })  : assert(
+          extended != null || getExtended != null,
+          "You have to specify `control` or `formControl`!",
+        ),
         super(key: key);
 
   final ExtendedControl<List<Map<String, Object?>?>,
@@ -713,14 +734,18 @@ class ReactiveSomeWiredNameFormFormGroupArrayBuilder<
           List<ReactiveSomeWiredNameFormFormGroupArrayBuilderT>>
       Function(SomeWiredNameForm formModel)? getExtended;
 
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      SomeWiredNameForm formModel)? builder;
+  final Widget Function(
+    BuildContext context,
+    List<Widget> itemList,
+    SomeWiredNameForm formModel,
+  )? builder;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      ReactiveSomeWiredNameFormFormGroupArrayBuilderT? item,
-      SomeWiredNameForm formModel) itemBuilder;
+    BuildContext context,
+    int i,
+    ReactiveSomeWiredNameFormFormGroupArrayBuilderT? item,
+    SomeWiredNameForm formModel,
+  ) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -738,23 +763,14 @@ class ReactiveSomeWiredNameFormFormGroupArrayBuilder<
         final itemList = (value.value() ??
                 <ReactiveSomeWiredNameFormFormGroupArrayBuilderT>[])
             .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
+            .map(
+              (i, item) =>
+                  MapEntry(i, itemBuilder(context, i, item, formModel)),
+            )
             .values
             .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );

@@ -123,7 +123,10 @@ class ReactiveMSICreateFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, MSICreateForm formModel, Widget? child) builder;
+    BuildContext context,
+    MSICreateForm formModel,
+    Widget? child,
+  ) builder;
 
   @override
   Widget build(BuildContext context) {
@@ -142,11 +145,7 @@ class MSICreateFormInheritedStreamer extends InheritedStreamer<dynamic> {
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(
-          stream,
-          child,
-          key: key,
-        );
+  }) : super(stream, child, key: key);
 
   final MSICreateForm form;
 }
@@ -168,10 +167,7 @@ class ReactiveMSICreateForm extends StatelessWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static MSICreateForm? of(
-    BuildContext context, {
-    bool listen = true,
-  }) {
+  static MSICreateForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<MSICreateFormInheritedStreamer>()
@@ -226,7 +222,10 @@ class MSICreateFormBuilder extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-      BuildContext context, MSICreateForm formModel, Widget? child) builder;
+    BuildContext context,
+    MSICreateForm formModel,
+    Widget? child,
+  ) builder;
 
   final void Function(BuildContext context, MSICreateForm formModel)? initState;
 
@@ -318,10 +317,7 @@ class _MSICreateFormBuilderState extends State<MSICreateFormBuilder> {
 final _logMSICreateForm = Logger.detached('MSICreateForm');
 
 class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
-  MSICreateForm(
-    this.form,
-    this.path,
-  );
+  MSICreateForm(this.form, this.path);
 
   static const String idControlName = "id";
 
@@ -416,7 +412,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
       adminsAdminContactInformationForm.map((e) => e.rawModel).toList();
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -427,7 +424,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsBusinessNumber {
     try {
       form.control(businessNumberControlPath());
@@ -438,7 +436,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsFileIds {
     try {
       form.control(fileIdsControlPath());
@@ -449,7 +448,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -460,7 +460,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -471,7 +472,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsSameMailingAddressAsCompany {
     try {
       form.control(sameMailingAddressAsCompanyControlPath());
@@ -482,7 +484,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsCompanyAddress {
     try {
       form.control(companyAddressControlPath());
@@ -493,7 +496,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsPrimaryContact {
     try {
       form.control(primaryContactControlPath());
@@ -504,7 +508,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsMailingAddress {
     try {
       form.control(mailingAddressControlPath());
@@ -515,7 +520,8 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsAdmins {
     try {
       form.control(adminsControlPath());
@@ -568,11 +574,9 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   void get adminsFocus => form.focus(adminsControlPath());
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void idRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void idRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsId) {
       final controlPath = path;
       if (controlPath == null) {
@@ -596,11 +600,9 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void businessNumberRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void businessNumberRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsBusinessNumber) {
       final controlPath = path;
       if (controlPath == null) {
@@ -624,11 +626,9 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void fileIdsRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void fileIdsRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsFileIds) {
       final controlPath = path;
       if (controlPath == null) {
@@ -652,11 +652,9 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void nameRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void nameRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsName) {
       final controlPath = path;
       if (controlPath == null) {
@@ -680,11 +678,9 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void emailRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void emailRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsEmail) {
       final controlPath = path;
       if (controlPath == null) {
@@ -712,8 +708,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    idControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void businessNumberValueUpdate(
@@ -721,8 +720,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    businessNumberControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    businessNumberControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void fileIdsValueUpdate(
@@ -730,8 +732,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    fileIdsControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    fileIdsControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void nameValueUpdate(
@@ -739,8 +744,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    nameControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailValueUpdate(
@@ -748,8 +756,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void sameMailingAddressAsCompanyValueUpdate(
@@ -757,8 +768,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    sameMailingAddressAsCompanyControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    sameMailingAddressAsCompanyControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void companyAddressValueUpdate(
@@ -766,8 +780,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    companyAddressControl.updateValue(AddressForm.formElements(value).rawValue,
-        updateParent: updateParent, emitEvent: emitEvent);
+    companyAddressControl.updateValue(
+      AddressForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void primaryContactValueUpdate(
@@ -776,9 +793,10 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool emitEvent = true,
   }) {
     primaryContactControl.updateValue(
-        PrimaryContactForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent);
+      PrimaryContactForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void mailingAddressValueUpdate(
@@ -786,8 +804,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    mailingAddressControl.updateValue(AddressForm.formElements(value).rawValue,
-        updateParent: updateParent, emitEvent: emitEvent);
+    mailingAddressControl.updateValue(
+      AddressForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void adminsValueUpdate(
@@ -818,17 +839,21 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
 
     if (toUpdate.isNotEmpty) {
       adminsControl.updateValue(
-          toUpdate
-              .map((e) => AdminContactInformationForm.formElements(e).rawValue)
-              .toList(),
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        toUpdate
+            .map((e) => AdminContactInformationForm.formElements(e).rawValue)
+            .toList(),
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     }
 
     if (toAdd.isNotEmpty) {
       toAdd.forEach((e) {
-        adminsControl.add(AdminContactInformationForm.formElements(e),
-            updateParent: updateParent, emitEvent: emitEvent);
+        adminsControl.add(
+          AdminContactInformationForm.formElements(e),
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
       });
     }
   }
@@ -853,10 +878,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     );
   }
 
-  void adminsClear({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void adminsClear({bool updateParent = true, bool emitEvent = true}) {
     adminsAdminContactInformationForm.clear();
     adminsControl.clear(updateParent: updateParent, emitEvent: emitEvent);
   }
@@ -866,8 +888,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    idControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void businessNumberValuePatch(
@@ -875,8 +900,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    businessNumberControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    businessNumberControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void fileIdsValuePatch(
@@ -884,8 +912,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    fileIdsControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    fileIdsControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void nameValuePatch(
@@ -893,8 +924,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    nameControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailValuePatch(
@@ -902,8 +936,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void sameMailingAddressAsCompanyValuePatch(
@@ -911,8 +948,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    sameMailingAddressAsCompanyControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    sameMailingAddressAsCompanyControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void companyAddressValuePatch(
@@ -920,8 +960,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    companyAddressControl.updateValue(AddressForm.formElements(value).rawValue,
-        updateParent: updateParent, emitEvent: emitEvent);
+    companyAddressControl.updateValue(
+      AddressForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void primaryContactValuePatch(
@@ -930,9 +973,10 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool emitEvent = true,
   }) {
     primaryContactControl.updateValue(
-        PrimaryContactForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent);
+      PrimaryContactForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void mailingAddressValuePatch(
@@ -940,8 +984,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    mailingAddressControl.updateValue(AddressForm.formElements(value).rawValue,
-        updateParent: updateParent, emitEvent: emitEvent);
+    mailingAddressControl.updateValue(
+      AddressForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void adminsValuePatch(
@@ -952,20 +999,19 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     final keys = adminsAdminContactInformationForm.asMap().keys;
 
     final toPatch = <AdminContactInformation>[];
-    (value).asMap().forEach(
-      (k, v) {
-        if (keys.contains(k)) {
-          toPatch.add(v);
-        }
-      },
-    );
+    (value).asMap().forEach((k, v) {
+      if (keys.contains(k)) {
+        toPatch.add(v);
+      }
+    });
 
     adminsControl.patchValue(
-        toPatch
-            .map((e) => AdminContactInformationForm.formElements(e).rawValue)
-            .toList(),
-        updateParent: updateParent,
-        emitEvent: emitEvent);
+      toPatch
+          .map((e) => AdminContactInformationForm.formElements(e).rawValue)
+          .toList(),
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void idValueReset(
@@ -1066,9 +1112,10 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool? disabled,
   }) =>
       companyAddressControl.reset(
-          value: AddressForm.formElements(value).rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        value: AddressForm.formElements(value).rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   void primaryContactValueReset(
     PrimaryContact value, {
@@ -1078,9 +1125,10 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool? disabled,
   }) =>
       primaryContactControl.reset(
-          value: PrimaryContactForm.formElements(value).rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        value: PrimaryContactForm.formElements(value).rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   void mailingAddressValueReset(
     Address value, {
@@ -1090,9 +1138,10 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool? disabled,
   }) =>
       mailingAddressControl.reset(
-          value: AddressForm.formElements(value).rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        value: AddressForm.formElements(value).rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   void adminsValueReset(
     List<AdminContactInformation> value, {
@@ -1102,11 +1151,12 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool? disabled,
   }) =>
       adminsControl.reset(
-          value: value
-              .map((e) => AdminContactInformationForm.formElements(e).rawValue)
-              .toList(),
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        value: value
+            .map((e) => AdminContactInformationForm.formElements(e).rawValue)
+            .toList(),
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
@@ -1153,8 +1203,12 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
 
     return values
         .asMap()
-        .map((k, v) => MapEntry(
-            k, AdminContactInformationForm(form, pathBuilder("admins.$k"))))
+        .map(
+          (k, v) => MapEntry(
+            k,
+            AdminContactInformationForm(form, pathBuilder("admins.$k")),
+          ),
+        )
         .values
         .toList();
   }
@@ -1170,10 +1224,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
         emitEvent: emitEvent,
       );
     } else {
-      idControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+      idControl.markAsEnabled(updateParent: updateParent, emitEvent: emitEvent);
     }
   }
 
@@ -1343,8 +1394,10 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
           List<AdminContactInformationForm>>
       get adminsExtendedControl => ExtendedControl<List<Map<String, Object?>?>,
               List<AdminContactInformationForm>>(
-          form.control(adminsControlPath()) as FormArray<Map<String, Object?>>,
-          () => adminsAdminContactInformationForm);
+            form.control(adminsControlPath())
+                as FormArray<Map<String, Object?>>,
+            () => adminsAdminContactInformationForm,
+          );
 
   void addAdminsItem(AdminContactInformation value) {
     adminsControl.add(AdminContactInformationForm.formElements(value));
@@ -1373,38 +1426,37 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
       );
     }
     return MSICreateOutput(
-        id: _idValue,
-        businessNumber: _businessNumberValue,
-        fileIds: _fileIdsValue,
-        name: _nameValue,
-        companyAddress: _companyAddressValue,
-        email: _emailValue,
-        primaryContact: _primaryContactValue,
-        sameMailingAddressAsCompany: _sameMailingAddressAsCompanyValue,
-        mailingAddress: _mailingAddressValue,
-        admins: _adminsValue);
+      id: _idValue,
+      businessNumber: _businessNumberValue,
+      fileIds: _fileIdsValue,
+      name: _nameValue,
+      companyAddress: _companyAddressValue,
+      email: _emailValue,
+      primaryContact: _primaryContactValue,
+      sameMailingAddressAsCompany: _sameMailingAddressAsCompanyValue,
+      mailingAddress: _mailingAddressValue,
+      admins: _adminsValue,
+    );
   }
 
   @override
   MSICreate get rawModel {
     return MSICreate(
-        id: _idRawValue,
-        businessNumber: _businessNumberRawValue,
-        fileIds: _fileIdsRawValue,
-        name: _nameRawValue,
-        companyAddress: _companyAddressRawValue,
-        email: _emailRawValue,
-        primaryContact: _primaryContactRawValue,
-        sameMailingAddressAsCompany: _sameMailingAddressAsCompanyRawValue,
-        mailingAddress: _mailingAddressRawValue,
-        admins: _adminsRawValue);
+      id: _idRawValue,
+      businessNumber: _businessNumberRawValue,
+      fileIds: _fileIdsRawValue,
+      name: _nameRawValue,
+      companyAddress: _companyAddressRawValue,
+      email: _emailRawValue,
+      primaryContact: _primaryContactRawValue,
+      sameMailingAddressAsCompany: _sameMailingAddressAsCompanyRawValue,
+      mailingAddress: _mailingAddressRawValue,
+      admins: _adminsRawValue,
+    );
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -1421,7 +1473,9 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
       primaryContactForm.toggleDisabled();
       mailingAddressForm.toggleDisabled();
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       adminsAdminContactInformationForm.forEach((e) => e.toggleDisabled());
       companyAddressForm.toggleDisabled();
@@ -1477,8 +1531,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(MSICreateForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+      form.updateValue(
+        MSICreateForm.formElements(value).rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   @override
   void reset({
@@ -1487,84 +1544,94 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        value: value != null ? formElements(value).rawValue : null,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(MSICreate? mSICreate) => FormGroup({
-        idControlName: FormControl<String>(
+  static FormGroup formElements(MSICreate? mSICreate) => FormGroup(
+        {
+          idControlName: FormControl<String>(
             value: mSICreate?.id,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        businessNumberControlName: FormControl<String>(
+            touched: false,
+          ),
+          businessNumberControlName: FormControl<String>(
             value: mSICreate?.businessNumber,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        fileIdsControlName: FormControl<List<String>>(
+            touched: false,
+          ),
+          fileIdsControlName: FormControl<List<String>>(
             value: mSICreate?.fileIds,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        nameControlName: FormControl<String>(
+            touched: false,
+          ),
+          nameControlName: FormControl<String>(
             value: mSICreate?.name,
             validators: [RequiredValidator(), MaxLengthValidator(120)],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        emailControlName: FormControl<String>(
+            touched: false,
+          ),
+          emailControlName: FormControl<String>(
             value: mSICreate?.email,
             validators: [RequiredValidator(), EmailValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        sameMailingAddressAsCompanyControlName: FormControl<bool>(
+            touched: false,
+          ),
+          sameMailingAddressAsCompanyControlName: FormControl<bool>(
             value: mSICreate?.sameMailingAddressAsCompany,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        adminsControlName: FormArray(
+            touched: false,
+          ),
+          adminsControlName: FormArray(
             (mSICreate?.admins ?? [])
                 .map((e) => AdminContactInformationForm.formElements(e))
                 .toList(),
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
-            disabled: false),
-        companyAddressControlName:
-            AddressForm.formElements(mSICreate?.companyAddress),
-        primaryContactControlName:
-            PrimaryContactForm.formElements(mSICreate?.primaryContact),
-        mailingAddressControlName:
-            AddressForm.formElements(mSICreate?.mailingAddress)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+            disabled: false,
+          ),
+          companyAddressControlName: AddressForm.formElements(
+            mSICreate?.companyAddress,
+          ),
+          primaryContactControlName: PrimaryContactForm.formElements(
+            mSICreate?.primaryContact,
+          ),
+          mailingAddressControlName: AddressForm.formElements(
+            mSICreate?.mailingAddress,
+          ),
+        },
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      );
 }
 
 final _logAddressForm = Logger.detached('AddressForm');
 
 class AddressForm implements FormModel<Address, AddressOutput> {
-  AddressForm(
-    this.form,
-    this.path,
-  );
+  AddressForm(this.form, this.path);
 
   static const String streetControlName = "street";
 
@@ -1606,7 +1673,8 @@ class AddressForm implements FormModel<Address, AddressOutput> {
   String? get _zipCodeRawValue => zipCodeControl.value;
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsStreet {
     try {
       form.control(streetControlPath());
@@ -1617,7 +1685,8 @@ class AddressForm implements FormModel<Address, AddressOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsCity {
     try {
       form.control(cityControlPath());
@@ -1628,7 +1697,8 @@ class AddressForm implements FormModel<Address, AddressOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsStateOrProvince {
     try {
       form.control(stateOrProvinceControlPath());
@@ -1639,7 +1709,8 @@ class AddressForm implements FormModel<Address, AddressOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsZipCode {
     try {
       form.control(zipCodeControlPath());
@@ -1667,11 +1738,9 @@ class AddressForm implements FormModel<Address, AddressOutput> {
   void get zipCodeFocus => form.focus(zipCodeControlPath());
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void streetRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void streetRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsStreet) {
       final controlPath = path;
       if (controlPath == null) {
@@ -1695,11 +1764,9 @@ class AddressForm implements FormModel<Address, AddressOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void cityRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void cityRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsCity) {
       final controlPath = path;
       if (controlPath == null) {
@@ -1723,7 +1790,8 @@ class AddressForm implements FormModel<Address, AddressOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
   void stateOrProvinceRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1751,11 +1819,9 @@ class AddressForm implements FormModel<Address, AddressOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void zipCodeRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void zipCodeRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsZipCode) {
       final controlPath = path;
       if (controlPath == null) {
@@ -1783,8 +1849,11 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    streetControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    streetControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void cityValueUpdate(
@@ -1792,8 +1861,11 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    cityControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    cityControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void stateOrProvinceValueUpdate(
@@ -1801,8 +1873,11 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    stateOrProvinceControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    stateOrProvinceControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void zipCodeValueUpdate(
@@ -1810,8 +1885,11 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    zipCodeControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    zipCodeControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void streetValuePatch(
@@ -1819,8 +1897,11 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    streetControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    streetControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void cityValuePatch(
@@ -1828,8 +1909,11 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    cityControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    cityControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void stateOrProvinceValuePatch(
@@ -1837,8 +1921,11 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    stateOrProvinceControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    stateOrProvinceControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void zipCodeValuePatch(
@@ -1846,8 +1933,11 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    zipCodeControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    zipCodeControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void streetValueReset(
@@ -2007,26 +2097,25 @@ class AddressForm implements FormModel<Address, AddressOutput> {
       );
     }
     return AddressOutput(
-        street: _streetValue,
-        city: _cityValue,
-        stateOrProvince: _stateOrProvinceValue,
-        zipCode: _zipCodeValue);
+      street: _streetValue,
+      city: _cityValue,
+      stateOrProvince: _stateOrProvinceValue,
+      zipCode: _zipCodeValue,
+    );
   }
 
   @override
   Address get rawModel {
     return Address(
-        street: _streetRawValue,
-        city: _cityRawValue,
-        stateOrProvince: _stateOrProvinceRawValue,
-        zipCode: _zipCodeRawValue);
+      street: _streetRawValue,
+      city: _cityRawValue,
+      stateOrProvince: _stateOrProvinceRawValue,
+      zipCode: _zipCodeRawValue,
+    );
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -2039,7 +2128,9 @@ class AddressForm implements FormModel<Address, AddressOutput> {
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -2091,8 +2182,11 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AddressForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+      form.updateValue(
+        AddressForm.formElements(value).rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   @override
   void reset({
@@ -2101,57 +2195,61 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        value: value != null ? formElements(value).rawValue : null,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(Address? address) => FormGroup({
-        streetControlName: FormControl<String>(
+  static FormGroup formElements(Address? address) => FormGroup(
+        {
+          streetControlName: FormControl<String>(
             value: address?.street,
             validators: [RequiredValidator(), MaxLengthValidator(120)],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        cityControlName: FormControl<String>(
+            touched: false,
+          ),
+          cityControlName: FormControl<String>(
             value: address?.city,
             validators: [RequiredValidator(), MaxLengthValidator(120)],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        stateOrProvinceControlName: FormControl<String>(
+            touched: false,
+          ),
+          stateOrProvinceControlName: FormControl<String>(
             value: address?.stateOrProvince,
             validators: [RequiredValidator(), MaxLengthValidator(120)],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        zipCodeControlName: FormControl<String>(
+            touched: false,
+          ),
+          zipCodeControlName: FormControl<String>(
             value: address?.zipCode,
             validators: [RequiredValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+            touched: false,
+          ),
+        },
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      );
 }
 
 final _logPrimaryContactForm = Logger.detached('PrimaryContactForm');
 
 class PrimaryContactForm
     implements FormModel<PrimaryContact, PrimaryContactOutput> {
-  PrimaryContactForm(
-    this.form,
-    this.path,
-  );
+  PrimaryContactForm(this.form, this.path);
 
   static const String fullNameControlName = "fullName";
 
@@ -2184,7 +2282,8 @@ class PrimaryContactForm
   String? get _emailRawValue => emailControl.value;
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsFullName {
     try {
       form.control(fullNameControlPath());
@@ -2195,7 +2294,8 @@ class PrimaryContactForm
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsJobTitle {
     try {
       form.control(jobTitleControlPath());
@@ -2206,7 +2306,8 @@ class PrimaryContactForm
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -2229,11 +2330,9 @@ class PrimaryContactForm
   void get emailFocus => form.focus(emailControlPath());
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void fullNameRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void fullNameRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsFullName) {
       final controlPath = path;
       if (controlPath == null) {
@@ -2257,11 +2356,9 @@ class PrimaryContactForm
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void jobTitleRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void jobTitleRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsJobTitle) {
       final controlPath = path;
       if (controlPath == null) {
@@ -2285,11 +2382,9 @@ class PrimaryContactForm
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void emailRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void emailRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsEmail) {
       final controlPath = path;
       if (controlPath == null) {
@@ -2317,8 +2412,11 @@ class PrimaryContactForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    fullNameControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    fullNameControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void jobTitleValueUpdate(
@@ -2326,8 +2424,11 @@ class PrimaryContactForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    jobTitleControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    jobTitleControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailValueUpdate(
@@ -2335,8 +2436,11 @@ class PrimaryContactForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void fullNameValuePatch(
@@ -2344,8 +2448,11 @@ class PrimaryContactForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    fullNameControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    fullNameControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void jobTitleValuePatch(
@@ -2353,8 +2460,11 @@ class PrimaryContactForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    jobTitleControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    jobTitleControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailValuePatch(
@@ -2362,8 +2472,11 @@ class PrimaryContactForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void fullNameValueReset(
@@ -2487,22 +2600,23 @@ class PrimaryContactForm
       );
     }
     return PrimaryContactOutput(
-        fullName: _fullNameValue, jobTitle: _jobTitleValue, email: _emailValue);
+      fullName: _fullNameValue,
+      jobTitle: _jobTitleValue,
+      email: _emailValue,
+    );
   }
 
   @override
   PrimaryContact get rawModel {
     return PrimaryContact(
-        fullName: _fullNameRawValue,
-        jobTitle: _jobTitleRawValue,
-        email: _emailRawValue);
+      fullName: _fullNameRawValue,
+      jobTitle: _jobTitleRawValue,
+      email: _emailRawValue,
+    );
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -2515,7 +2629,9 @@ class PrimaryContactForm
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -2567,8 +2683,11 @@ class PrimaryContactForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(PrimaryContactForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+      form.updateValue(
+        PrimaryContactForm.formElements(value).rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   @override
   void reset({
@@ -2577,52 +2696,56 @@ class PrimaryContactForm
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        value: value != null ? formElements(value).rawValue : null,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(PrimaryContact? primaryContact) => FormGroup({
-        fullNameControlName: FormControl<String>(
+  static FormGroup formElements(PrimaryContact? primaryContact) => FormGroup(
+        {
+          fullNameControlName: FormControl<String>(
             value: primaryContact?.fullName,
             validators: [RequiredValidator(), MaxLengthValidator(120)],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        jobTitleControlName: FormControl<String>(
+            touched: false,
+          ),
+          jobTitleControlName: FormControl<String>(
             value: primaryContact?.jobTitle,
             validators: [MaxLengthValidator(120)],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        emailControlName: FormControl<String>(
+            touched: false,
+          ),
+          emailControlName: FormControl<String>(
             value: primaryContact?.email,
             validators: [RequiredValidator(), EmailValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+            touched: false,
+          ),
+        },
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      );
 }
 
-final _logAdminContactInformationForm =
-    Logger.detached('AdminContactInformationForm');
+final _logAdminContactInformationForm = Logger.detached(
+  'AdminContactInformationForm',
+);
 
 class AdminContactInformationForm
     implements
         FormModel<AdminContactInformation, AdminContactInformationOutput> {
-  AdminContactInformationForm(
-    this.form,
-    this.path,
-  );
+  AdminContactInformationForm(this.form, this.path);
 
   static const String firstNameControlName = "firstName";
 
@@ -2655,7 +2778,8 @@ class AdminContactInformationForm
   String? get _emailRawValue => emailControl.value;
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsFirstName {
     try {
       form.control(firstNameControlPath());
@@ -2666,7 +2790,8 @@ class AdminContactInformationForm
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsLastName {
     try {
       form.control(lastNameControlPath());
@@ -2677,7 +2802,8 @@ class AdminContactInformationForm
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -2700,11 +2826,9 @@ class AdminContactInformationForm
   void get emailFocus => form.focus(emailControlPath());
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void firstNameRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void firstNameRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsFirstName) {
       final controlPath = path;
       if (controlPath == null) {
@@ -2728,11 +2852,9 @@ class AdminContactInformationForm
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void lastNameRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void lastNameRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsLastName) {
       final controlPath = path;
       if (controlPath == null) {
@@ -2756,11 +2878,9 @@ class AdminContactInformationForm
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void emailRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void emailRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsEmail) {
       final controlPath = path;
       if (controlPath == null) {
@@ -2788,8 +2908,11 @@ class AdminContactInformationForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    firstNameControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    firstNameControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void lastNameValueUpdate(
@@ -2797,8 +2920,11 @@ class AdminContactInformationForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    lastNameControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    lastNameControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailValueUpdate(
@@ -2806,8 +2932,11 @@ class AdminContactInformationForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void firstNameValuePatch(
@@ -2815,8 +2944,11 @@ class AdminContactInformationForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    firstNameControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    firstNameControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void lastNameValuePatch(
@@ -2824,8 +2956,11 @@ class AdminContactInformationForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    lastNameControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    lastNameControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailValuePatch(
@@ -2833,8 +2968,11 @@ class AdminContactInformationForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void firstNameValueReset(
@@ -2958,24 +3096,23 @@ class AdminContactInformationForm
       );
     }
     return AdminContactInformationOutput(
-        firstName: _firstNameValue,
-        lastName: _lastNameValue,
-        email: _emailValue);
+      firstName: _firstNameValue,
+      lastName: _lastNameValue,
+      email: _emailValue,
+    );
   }
 
   @override
   AdminContactInformation get rawModel {
     return AdminContactInformation(
-        firstName: _firstNameRawValue,
-        lastName: _lastNameRawValue,
-        email: _emailRawValue);
+      firstName: _firstNameRawValue,
+      lastName: _lastNameRawValue,
+      email: _emailRawValue,
+    );
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -2988,7 +3125,9 @@ class AdminContactInformationForm
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -3040,8 +3179,11 @@ class AdminContactInformationForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AdminContactInformationForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+      form.updateValue(
+        AdminContactInformationForm.formElements(value).rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   @override
   void reset({
@@ -3050,98 +3192,108 @@ class AdminContactInformationForm
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        value: value != null ? formElements(value).rawValue : null,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
   static FormGroup formElements(
-          AdminContactInformation? adminContactInformation) =>
-      FormGroup({
-        firstNameControlName: FormControl<String>(
+    AdminContactInformation? adminContactInformation,
+  ) =>
+      FormGroup(
+        {
+          firstNameControlName: FormControl<String>(
             value: adminContactInformation?.firstName,
             validators: [RequiredValidator(), MaxLengthValidator(120)],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        lastNameControlName: FormControl<String>(
+            touched: false,
+          ),
+          lastNameControlName: FormControl<String>(
             value: adminContactInformation?.lastName,
             validators: [RequiredValidator(), MaxLengthValidator(120)],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false),
-        emailControlName: FormControl<String>(
+            touched: false,
+          ),
+          emailControlName: FormControl<String>(
             value: adminContactInformation?.email,
             validators: [RequiredValidator(), EmailValidator()],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+            touched: false,
+          ),
+        },
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      );
 }
 
 @Rf(output: true)
 @freezed
 class MSICreateOutput with _$MSICreateOutput {
-  const factory MSICreateOutput(
-      {String? id,
-      String? businessNumber,
-      List<String>? fileIds,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      required String name,
-      required AddressOutput companyAddress,
-      @RfControl(validators: [RequiredValidator(), EmailValidator()])
-      required String email,
-      required PrimaryContactOutput primaryContact,
-      @RfControl<bool>() @Default(false) bool sameMailingAddressAsCompany,
-      required AddressOutput mailingAddress,
-      @RfArray<AdminContactInformationOutput>()
-      required List<AdminContactInformationOutput> admins}) = _MSICreateOutput;
+  const factory MSICreateOutput({
+    String? id,
+    String? businessNumber,
+    List<String>? fileIds,
+    @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
+    required String name,
+    required AddressOutput companyAddress,
+    @RfControl(validators: [RequiredValidator(), EmailValidator()])
+    required String email,
+    required PrimaryContactOutput primaryContact,
+    @RfControl<bool>() @Default(false) bool sameMailingAddressAsCompany,
+    required AddressOutput mailingAddress,
+    @RfArray<AdminContactInformationOutput>()
+    required List<AdminContactInformationOutput> admins,
+  }) = _MSICreateOutput;
 }
 
 @RfGroup()
 @freezed
 class AddressOutput with _$AddressOutput {
-  const factory AddressOutput(
-      {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      required String street,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      required String city,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      required String stateOrProvince,
-      @RfControl(validators: [RequiredValidator()])
-      required String zipCode}) = _AddressOutput;
+  const factory AddressOutput({
+    @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
+    required String street,
+    @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
+    required String city,
+    @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
+    required String stateOrProvince,
+    @RfControl(validators: [RequiredValidator()]) required String zipCode,
+  }) = _AddressOutput;
 }
 
 @RfGroup<PrimaryContactOutput>()
 @freezed
 class PrimaryContactOutput with _$PrimaryContactOutput {
-  const factory PrimaryContactOutput(
-      {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      required String fullName,
-      @RfControl(validators: [MaxLengthValidator(120)]) String? jobTitle,
-      @RfControl(validators: [RequiredValidator(), EmailValidator()])
-      required String email}) = _PrimaryContactOutput;
+  const factory PrimaryContactOutput({
+    @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
+    required String fullName,
+    @RfControl(validators: [MaxLengthValidator(120)]) String? jobTitle,
+    @RfControl(validators: [RequiredValidator(), EmailValidator()])
+    required String email,
+  }) = _PrimaryContactOutput;
 }
 
 @RfGroup<AdminContactInformationOutput>()
 @freezed
 class AdminContactInformationOutput with _$AdminContactInformationOutput {
-  const factory AdminContactInformationOutput(
-      {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      required String firstName,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      required String lastName,
-      @RfControl(validators: [RequiredValidator(), EmailValidator()])
-      required String email}) = _AdminContactInformationOutput;
+  const factory AdminContactInformationOutput({
+    @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
+    required String firstName,
+    @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
+    required String lastName,
+    @RfControl(validators: [RequiredValidator(), EmailValidator()])
+    required String email,
+  }) = _AdminContactInformationOutput;
 }
 
 class ReactiveMSICreateFormArrayBuilder<ReactiveMSICreateFormArrayBuilderT>
@@ -3152,25 +3304,31 @@ class ReactiveMSICreateFormArrayBuilder<ReactiveMSICreateFormArrayBuilderT>
     this.formControl,
     this.builder,
     required this.itemBuilder,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
+  })  : assert(
+          control != null || formControl != null,
+          "You have to specify `control` or `formControl`!",
+        ),
         super(key: key);
 
   final FormArray<ReactiveMSICreateFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveMSICreateFormArrayBuilderT>? Function(
-      MSICreateForm formModel)? control;
+    MSICreateForm formModel,
+  )? control;
 
   final Widget Function(
-          BuildContext context, List<Widget> itemList, MSICreateForm formModel)?
-      builder;
+    BuildContext context,
+    List<Widget> itemList,
+    MSICreateForm formModel,
+  )? builder;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      FormControl<ReactiveMSICreateFormArrayBuilderT> control,
-      ReactiveMSICreateFormArrayBuilderT? item,
-      MSICreateForm formModel) itemBuilder;
+    BuildContext context,
+    int i,
+    FormControl<ReactiveMSICreateFormArrayBuilderT> control,
+    ReactiveMSICreateFormArrayBuilderT? item,
+    MSICreateForm formModel,
+  ) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -3202,11 +3360,7 @@ class ReactiveMSICreateFormArrayBuilder<ReactiveMSICreateFormArrayBuilderT>
             .values
             .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );
@@ -3221,8 +3375,10 @@ class ReactiveMSICreateFormFormGroupArrayBuilder<
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(extended != null || getExtended != null,
-            "You have to specify `control` or `formControl`!"),
+  })  : assert(
+          extended != null || getExtended != null,
+          "You have to specify `control` or `formControl`!",
+        ),
         super(key: key);
 
   final ExtendedControl<List<Map<String, Object?>?>,
@@ -3233,14 +3389,17 @@ class ReactiveMSICreateFormFormGroupArrayBuilder<
       Function(MSICreateForm formModel)? getExtended;
 
   final Widget Function(
-          BuildContext context, List<Widget> itemList, MSICreateForm formModel)?
-      builder;
+    BuildContext context,
+    List<Widget> itemList,
+    MSICreateForm formModel,
+  )? builder;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      ReactiveMSICreateFormFormGroupArrayBuilderT? item,
-      MSICreateForm formModel) itemBuilder;
+    BuildContext context,
+    int i,
+    ReactiveMSICreateFormFormGroupArrayBuilderT? item,
+    MSICreateForm formModel,
+  ) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -3258,23 +3417,14 @@ class ReactiveMSICreateFormFormGroupArrayBuilder<
         final itemList =
             (value.value() ?? <ReactiveMSICreateFormFormGroupArrayBuilderT>[])
                 .asMap()
-                .map((i, item) => MapEntry(
-                      i,
-                      itemBuilder(
-                        context,
-                        i,
-                        item,
-                        formModel,
-                      ),
-                    ))
+                .map(
+                  (i, item) =>
+                      MapEntry(i, itemBuilder(context, i, item, formModel)),
+                )
                 .values
                 .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );
