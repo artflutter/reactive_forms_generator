@@ -75,11 +75,8 @@ class ReactiveLoginExtendedNullableOFormConsumer extends StatelessWidget {
 
   final Widget? child;
 
-  final Widget Function(
-    BuildContext context,
-    LoginExtendedNullableOForm formModel,
-    Widget? child,
-  ) builder;
+  final Widget Function(BuildContext context,
+      LoginExtendedNullableOForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +96,11 @@ class LoginExtendedNullableOFormInheritedStreamer
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(stream, child, key: key);
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
 
   final LoginExtendedNullableOForm form;
 }
@@ -180,16 +181,11 @@ class LoginExtendedNullableOFormBuilder extends StatefulWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  final Widget Function(
-    BuildContext context,
-    LoginExtendedNullableOForm formModel,
-    Widget? child,
-  ) builder;
+  final Widget Function(BuildContext context,
+      LoginExtendedNullableOForm formModel, Widget? child) builder;
 
   final void Function(
-    BuildContext context,
-    LoginExtendedNullableOForm formModel,
-  )? initState;
+      BuildContext context, LoginExtendedNullableOForm formModel)? initState;
 
   @override
   _LoginExtendedNullableOFormBuilderState createState() =>
@@ -205,9 +201,7 @@ class _LoginExtendedNullableOFormBuilderState
   @override
   void initState() {
     _formModel = LoginExtendedNullableOForm(
-      LoginExtendedNullableOForm.formElements(widget.model),
-      null,
-    );
+        LoginExtendedNullableOForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -215,9 +209,8 @@ class _LoginExtendedNullableOFormBuilderState
 
     widget.initState?.call(context, _formModel);
 
-    _logSubscription = _logLoginExtendedNullableOForm.onRecord.listen((
-      LogRecord e,
-    ) {
+    _logSubscription =
+        _logLoginExtendedNullableOForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -283,13 +276,15 @@ class _LoginExtendedNullableOFormBuilderState
   }
 }
 
-final _logLoginExtendedNullableOForm = Logger.detached(
-  'LoginExtendedNullableOForm',
-);
+final _logLoginExtendedNullableOForm =
+    Logger.detached('LoginExtendedNullableOForm');
 
 class LoginExtendedNullableOForm
     implements FormModel<LoginExtendedNullableO, LoginExtendedNullableOOutput> {
-  LoginExtendedNullableOForm(this.form, this.path);
+  LoginExtendedNullableOForm(
+    this.form,
+    this.path,
+  );
 
   static const String emailControlName = "email";
 
@@ -354,8 +349,7 @@ class LoginExtendedNullableOForm
   double? get _heightRawValue => heightControl.value;
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -366,8 +360,7 @@ class LoginExtendedNullableOForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsPassword {
     try {
       form.control(passwordControlPath());
@@ -378,8 +371,7 @@ class LoginExtendedNullableOForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsRememberMe {
     try {
       form.control(rememberMeControlPath());
@@ -390,8 +382,7 @@ class LoginExtendedNullableOForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsTheme {
     try {
       form.control(themeControlPath());
@@ -402,8 +393,7 @@ class LoginExtendedNullableOForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsMode {
     try {
       form.control(modeControlPath());
@@ -414,8 +404,7 @@ class LoginExtendedNullableOForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsTimeout {
     try {
       form.control(timeoutControlPath());
@@ -426,8 +415,7 @@ class LoginExtendedNullableOForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsHeight {
     try {
       form.control(heightControlPath());
@@ -466,9 +454,11 @@ class LoginExtendedNullableOForm
   void get heightFocus => form.focus(heightControlPath());
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void emailRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void emailRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsEmail) {
       final controlPath = path;
       if (controlPath == null) {
@@ -492,9 +482,11 @@ class LoginExtendedNullableOForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void passwordRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void passwordRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsPassword) {
       final controlPath = path;
       if (controlPath == null) {
@@ -518,9 +510,11 @@ class LoginExtendedNullableOForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void rememberMeRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void rememberMeRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsRememberMe) {
       final controlPath = path;
       if (controlPath == null) {
@@ -544,9 +538,11 @@ class LoginExtendedNullableOForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void themeRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void themeRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsTheme) {
       final controlPath = path;
       if (controlPath == null) {
@@ -570,9 +566,11 @@ class LoginExtendedNullableOForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void modeRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void modeRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsMode) {
       final controlPath = path;
       if (controlPath == null) {
@@ -596,9 +594,11 @@ class LoginExtendedNullableOForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void timeoutRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void timeoutRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsTimeout) {
       final controlPath = path;
       if (controlPath == null) {
@@ -622,9 +622,11 @@ class LoginExtendedNullableOForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void heightRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void heightRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsHeight) {
       final controlPath = path;
       if (controlPath == null) {
@@ -652,11 +654,8 @@ class LoginExtendedNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    emailControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void passwordValueUpdate(
@@ -664,11 +663,8 @@ class LoginExtendedNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    passwordControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    passwordControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void rememberMeValueUpdate(
@@ -676,11 +672,8 @@ class LoginExtendedNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    rememberMeControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    rememberMeControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void themeValueUpdate(
@@ -688,11 +681,8 @@ class LoginExtendedNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    themeControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    themeControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void modeValueUpdate(
@@ -700,11 +690,8 @@ class LoginExtendedNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    modeControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    modeControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void timeoutValueUpdate(
@@ -712,11 +699,8 @@ class LoginExtendedNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    timeoutControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    timeoutControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void heightValueUpdate(
@@ -724,11 +708,8 @@ class LoginExtendedNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    heightControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    heightControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void emailValuePatch(
@@ -736,11 +717,8 @@ class LoginExtendedNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    emailControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void passwordValuePatch(
@@ -748,11 +726,8 @@ class LoginExtendedNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    passwordControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    passwordControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void rememberMeValuePatch(
@@ -760,11 +735,8 @@ class LoginExtendedNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    rememberMeControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    rememberMeControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void themeValuePatch(
@@ -772,11 +744,8 @@ class LoginExtendedNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    themeControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    themeControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void modeValuePatch(
@@ -784,11 +753,8 @@ class LoginExtendedNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    modeControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    modeControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void timeoutValuePatch(
@@ -796,11 +762,8 @@ class LoginExtendedNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    timeoutControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    timeoutControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void heightValuePatch(
@@ -808,11 +771,8 @@ class LoginExtendedNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    heightControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    heightControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void emailValueReset(
@@ -1080,31 +1040,32 @@ class LoginExtendedNullableOForm
       );
     }
     return LoginExtendedNullableOOutput(
-      email: _emailValue,
-      password: _passwordValue,
-      rememberMe: _rememberMeValue,
-      theme: _themeValue,
-      mode: _modeValue,
-      timeout: _timeoutValue,
-      height: _heightValue,
-    );
+        email: _emailValue,
+        password: _passwordValue,
+        rememberMe: _rememberMeValue,
+        theme: _themeValue,
+        mode: _modeValue,
+        timeout: _timeoutValue,
+        height: _heightValue);
   }
 
   @override
   LoginExtendedNullableO get rawModel {
     return LoginExtendedNullableO(
-      email: _emailRawValue,
-      password: _passwordRawValue,
-      rememberMe: _rememberMeRawValue,
-      theme: _themeRawValue,
-      mode: _modeRawValue,
-      timeout: _timeoutRawValue,
-      height: _heightRawValue,
-    );
+        email: _emailRawValue,
+        password: _passwordRawValue,
+        rememberMe: _rememberMeRawValue,
+        theme: _themeRawValue,
+        mode: _modeRawValue,
+        timeout: _timeoutRawValue,
+        height: _heightRawValue);
   }
 
   @override
-  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -1117,9 +1078,7 @@ class LoginExtendedNullableOForm
       });
 
       currentForm.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          updateParent: updateParent, emitEvent: emitEvent);
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -1171,11 +1130,8 @@ class LoginExtendedNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-        LoginExtendedNullableOForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+      form.updateValue(LoginExtendedNullableOForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
 
   @override
   void reset({
@@ -1184,81 +1140,70 @@ class LoginExtendedNullableOForm
     bool emitEvent = true,
   }) =>
       form.reset(
-        value: value != null ? formElements(value).rawValue : null,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          value: value != null ? formElements(value).rawValue : null,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
   static FormGroup formElements(
-    LoginExtendedNullableO? loginExtendedNullableO,
-  ) =>
-      FormGroup(
-        {
-          emailControlName: FormControl<String>(
+          LoginExtendedNullableO? loginExtendedNullableO) =>
+      FormGroup({
+        emailControlName: FormControl<String>(
             value: loginExtendedNullableO?.email,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          passwordControlName: FormControl<String>(
+            touched: false),
+        passwordControlName: FormControl<String>(
             value: loginExtendedNullableO?.password,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          rememberMeControlName: FormControl<bool>(
+            touched: false),
+        rememberMeControlName: FormControl<bool>(
             value: loginExtendedNullableO?.rememberMe,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          themeControlName: FormControl<String>(
+            touched: false),
+        themeControlName: FormControl<String>(
             value: loginExtendedNullableO?.theme,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          modeControlName: FormControl<UserMode>(
+            touched: false),
+        modeControlName: FormControl<UserMode>(
             value: loginExtendedNullableO?.mode,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          timeoutControlName: FormControl<int>(
+            touched: false),
+        timeoutControlName: FormControl<int>(
             value: loginExtendedNullableO?.timeout,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          heightControlName: FormControl<double>(
+            touched: false),
+        heightControlName: FormControl<double>(
             value: loginExtendedNullableO?.height,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-        },
-        validators: [],
-        asyncValidators: [],
-        asyncValidatorsDebounceTime: 250,
-        disabled: false,
-      );
+            touched: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
 }
 
 @Rf(output: true)
@@ -1270,15 +1215,14 @@ class LoginExtendedNullableOOutput {
   final UserMode? mode;
   final int? timeout;
   final double? height;
-  LoginExtendedNullableOOutput({
-    @RfControl<String>(validators: []) this.email,
-    @RfControl() this.password,
-    @RfControl<bool>() this.rememberMe,
-    @RfControl<String>() this.theme,
-    @RfControl<UserMode>() this.mode,
-    @RfControl<int>() this.timeout,
-    @RfControl<double>() this.height,
-  });
+  LoginExtendedNullableOOutput(
+      {@RfControl<String>(validators: []) this.email,
+      @RfControl() this.password,
+      @RfControl<bool>() this.rememberMe,
+      @RfControl<String>() this.theme,
+      @RfControl<UserMode>() this.mode,
+      @RfControl<int>() this.timeout,
+      @RfControl<double>() this.height});
 }
 
 class ReactiveLoginExtendedNullableOFormArrayBuilder<
@@ -1289,31 +1233,24 @@ class ReactiveLoginExtendedNullableOFormArrayBuilder<
     this.formControl,
     this.builder,
     required this.itemBuilder,
-  })  : assert(
-          control != null || formControl != null,
-          "You have to specify `control` or `formControl`!",
-        ),
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
         super(key: key);
 
   final FormArray<ReactiveLoginExtendedNullableOFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveLoginExtendedNullableOFormArrayBuilderT>? Function(
-    LoginExtendedNullableOForm formModel,
-  )? control;
+      LoginExtendedNullableOForm formModel)? control;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      LoginExtendedNullableOForm formModel)? builder;
 
   final Widget Function(
-    BuildContext context,
-    List<Widget> itemList,
-    LoginExtendedNullableOForm formModel,
-  )? builder;
-
-  final Widget Function(
-    BuildContext context,
-    int i,
-    FormControl<ReactiveLoginExtendedNullableOFormArrayBuilderT> control,
-    ReactiveLoginExtendedNullableOFormArrayBuilderT? item,
-    LoginExtendedNullableOForm formModel,
-  ) itemBuilder;
+      BuildContext context,
+      int i,
+      FormControl<ReactiveLoginExtendedNullableOFormArrayBuilderT> control,
+      ReactiveLoginExtendedNullableOFormArrayBuilderT? item,
+      LoginExtendedNullableOForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1345,7 +1282,11 @@ class ReactiveLoginExtendedNullableOFormArrayBuilder<
             .values
             .toList();
 
-        return builder?.call(context, itemList, formModel) ??
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
             Column(children: itemList);
       },
     );
@@ -1361,10 +1302,8 @@ class ReactiveLoginExtendedNullableOFormFormGroupArrayBuilder<
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(
-          extended != null || getExtended != null,
-          "You have to specify `control` or `formControl`!",
-        ),
+  })  : assert(extended != null || getExtended != null,
+            "You have to specify `control` or `formControl`!"),
         super(key: key);
 
   final ExtendedControl<List<Map<String, Object?>?>,
@@ -1374,18 +1313,14 @@ class ReactiveLoginExtendedNullableOFormFormGroupArrayBuilder<
           List<ReactiveLoginExtendedNullableOFormFormGroupArrayBuilderT>>
       Function(LoginExtendedNullableOForm formModel)? getExtended;
 
-  final Widget Function(
-    BuildContext context,
-    List<Widget> itemList,
-    LoginExtendedNullableOForm formModel,
-  )? builder;
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      LoginExtendedNullableOForm formModel)? builder;
 
   final Widget Function(
-    BuildContext context,
-    int i,
-    ReactiveLoginExtendedNullableOFormFormGroupArrayBuilderT? item,
-    LoginExtendedNullableOForm formModel,
-  ) itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveLoginExtendedNullableOFormFormGroupArrayBuilderT? item,
+      LoginExtendedNullableOForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1403,14 +1338,23 @@ class ReactiveLoginExtendedNullableOFormFormGroupArrayBuilder<
         final itemList = (value.value() ??
                 <ReactiveLoginExtendedNullableOFormFormGroupArrayBuilderT>[])
             .asMap()
-            .map(
-              (i, item) =>
-                  MapEntry(i, itemBuilder(context, i, item, formModel)),
-            )
+            .map((i, item) => MapEntry(
+                  i,
+                  itemBuilder(
+                    context,
+                    i,
+                    item,
+                    formModel,
+                  ),
+                ))
             .values
             .toList();
 
-        return builder?.call(context, itemList, formModel) ??
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
             Column(children: itemList);
       },
     );

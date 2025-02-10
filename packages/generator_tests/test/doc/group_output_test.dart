@@ -104,10 +104,7 @@ class ReactiveGroupOFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-    BuildContext context,
-    GroupOForm formModel,
-    Widget? child,
-  ) builder;
+      BuildContext context, GroupOForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +123,11 @@ class GroupOFormInheritedStreamer extends InheritedStreamer<dynamic> {
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(stream, child, key: key);
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
 
   final GroupOForm form;
 }
@@ -148,7 +149,10 @@ class ReactiveGroupOForm extends StatelessWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static GroupOForm? of(BuildContext context, {bool listen = true}) {
+  static GroupOForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<GroupOFormInheritedStreamer>()
@@ -202,10 +206,7 @@ class GroupOFormBuilder extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-    BuildContext context,
-    GroupOForm formModel,
-    Widget? child,
-  ) builder;
+      BuildContext context, GroupOForm formModel, Widget? child) builder;
 
   final void Function(BuildContext context, GroupOForm formModel)? initState;
 
@@ -297,7 +298,10 @@ class _GroupOFormBuilderState extends State<GroupOFormBuilder> {
 final _logGroupOForm = Logger.detached('GroupOForm');
 
 class GroupOForm implements FormModel<GroupO, GroupOOutput> {
-  GroupOForm(this.form, this.path);
+  GroupOForm(
+    this.form,
+    this.path,
+  );
 
   static const String personalControlName = "personal";
 
@@ -338,8 +342,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
   AddressO? get _address2RawValue => address2Form.rawModel;
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsPersonal {
     try {
       form.control(personalControlPath());
@@ -350,8 +353,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsPhone {
     try {
       form.control(phoneControlPath());
@@ -362,8 +364,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsAddress {
     try {
       form.control(addressControlPath());
@@ -374,8 +375,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsAddress2 {
     try {
       form.control(address2ControlPath());
@@ -402,9 +402,11 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
   void get address2Focus => form.focus(address2ControlPath());
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void personalRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void personalRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsPersonal) {
       final controlPath = path;
       if (controlPath == null) {
@@ -428,9 +430,11 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void phoneRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void phoneRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsPhone) {
       final controlPath = path;
       if (controlPath == null) {
@@ -454,9 +458,11 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void addressRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void addressRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsAddress) {
       final controlPath = path;
       if (controlPath == null) {
@@ -480,9 +486,11 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void address2Remove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void address2Remove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsAddress2) {
       final controlPath = path;
       if (controlPath == null) {
@@ -510,11 +518,8 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    personalControl.updateValue(
-      PersonalOForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    personalControl.updateValue(PersonalOForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void phoneValueUpdate(
@@ -522,11 +527,8 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    phoneControl.updateValue(
-      PhoneOForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    phoneControl.updateValue(PhoneOForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void addressValueUpdate(
@@ -534,11 +536,8 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    addressControl.updateValue(
-      AddressOForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    addressControl.updateValue(AddressOForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void address2ValueUpdate(
@@ -546,11 +545,8 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    address2Control.updateValue(
-      AddressOForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    address2Control.updateValue(AddressOForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void personalValuePatch(
@@ -558,11 +554,8 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    personalControl.updateValue(
-      PersonalOForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    personalControl.updateValue(PersonalOForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void phoneValuePatch(
@@ -570,11 +563,8 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    phoneControl.updateValue(
-      PhoneOForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    phoneControl.updateValue(PhoneOForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void addressValuePatch(
@@ -582,11 +572,8 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    addressControl.updateValue(
-      AddressOForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    addressControl.updateValue(AddressOForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void address2ValuePatch(
@@ -594,11 +581,8 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    address2Control.updateValue(
-      AddressOForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    address2Control.updateValue(AddressOForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void personalValueReset(
@@ -609,10 +593,9 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool? disabled,
   }) =>
       personalControl.reset(
-        value: PersonalOForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          value: PersonalOForm.formElements(value).rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   void phoneValueReset(
     PhoneO? value, {
@@ -622,10 +605,9 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool? disabled,
   }) =>
       phoneControl.reset(
-        value: PhoneOForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          value: PhoneOForm.formElements(value).rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   void addressValueReset(
     AddressO? value, {
@@ -635,10 +617,9 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool? disabled,
   }) =>
       addressControl.reset(
-        value: AddressOForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          value: AddressOForm.formElements(value).rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   void address2ValueReset(
     AddressO? value, {
@@ -648,10 +629,9 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool? disabled,
   }) =>
       address2Control.reset(
-        value: AddressOForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          value: AddressOForm.formElements(value).rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   FormGroup get personalControl =>
       form.control(personalControlPath()) as FormGroup;
@@ -758,25 +738,26 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
       );
     }
     return GroupOOutput(
-      personal: _personalValue,
-      phone: _phoneValue,
-      address: _addressValue,
-      address2: _address2Value,
-    );
+        personal: _personalValue,
+        phone: _phoneValue,
+        address: _addressValue,
+        address2: _address2Value);
   }
 
   @override
   GroupO get rawModel {
     return GroupO(
-      personal: _personalRawValue,
-      phone: _phoneRawValue,
-      address: _addressRawValue,
-      address2: _address2RawValue,
-    );
+        personal: _personalRawValue,
+        phone: _phoneRawValue,
+        address: _addressRawValue,
+        address2: _address2RawValue);
   }
 
   @override
-  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -793,9 +774,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
       addressForm.toggleDisabled();
       address2Form.toggleDisabled();
       currentForm.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          updateParent: updateParent, emitEvent: emitEvent);
     } else {
       personalForm.toggleDisabled();
       phoneForm.toggleDisabled();
@@ -851,11 +830,8 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-        GroupOForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+      form.updateValue(GroupOForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
 
   @override
   void reset({
@@ -864,32 +840,32 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool emitEvent = true,
   }) =>
       form.reset(
-        value: value != null ? formElements(value).rawValue : null,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          value: value != null ? formElements(value).rawValue : null,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(GroupO? groupO) => FormGroup(
-        {
-          personalControlName: PersonalOForm.formElements(groupO?.personal),
-          phoneControlName: PhoneOForm.formElements(groupO?.phone),
-          addressControlName: AddressOForm.formElements(groupO?.address),
-          address2ControlName: AddressOForm.formElements(groupO?.address2),
-        },
-        validators: [],
-        asyncValidators: [],
-        asyncValidatorsDebounceTime: 250,
-        disabled: false,
-      );
+  static FormGroup formElements(GroupO? groupO) => FormGroup({
+        personalControlName: PersonalOForm.formElements(groupO?.personal),
+        phoneControlName: PhoneOForm.formElements(groupO?.phone),
+        addressControlName: AddressOForm.formElements(groupO?.address),
+        address2ControlName: AddressOForm.formElements(groupO?.address2)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
 }
 
 final _logPersonalOForm = Logger.detached('PersonalOForm');
 
 class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
-  PersonalOForm(this.form, this.path);
+  PersonalOForm(
+    this.form,
+    this.path,
+  );
 
   static const String nameControlName = "name";
 
@@ -914,8 +890,7 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
   String? get _emailRawValue => emailControl.value;
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -926,8 +901,7 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -946,9 +920,11 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
   void get emailFocus => form.focus(emailControlPath());
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void nameRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void nameRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsName) {
       final controlPath = path;
       if (controlPath == null) {
@@ -972,9 +948,11 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void emailRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void emailRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsEmail) {
       final controlPath = path;
       if (controlPath == null) {
@@ -1002,11 +980,8 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    nameControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void emailValueUpdate(
@@ -1014,11 +989,8 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    emailControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void nameValuePatch(
@@ -1026,11 +998,8 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    nameControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void emailValuePatch(
@@ -1038,11 +1007,8 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    emailControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void nameValueReset(
@@ -1138,7 +1104,10 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
   }
 
   @override
-  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -1151,9 +1120,7 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
       });
 
       currentForm.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          updateParent: updateParent, emitEvent: emitEvent);
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -1205,11 +1172,8 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-        PersonalOForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+      form.updateValue(PersonalOForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
 
   @override
   void reset({
@@ -1218,44 +1182,42 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
     bool emitEvent = true,
   }) =>
       form.reset(
-        value: value != null ? formElements(value).rawValue : null,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          value: value != null ? formElements(value).rawValue : null,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(PersonalO? personalO) => FormGroup(
-        {
-          nameControlName: FormControl<String>(
+  static FormGroup formElements(PersonalO? personalO) => FormGroup({
+        nameControlName: FormControl<String>(
             value: personalO?.name,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          emailControlName: FormControl<String>(
+            touched: false),
+        emailControlName: FormControl<String>(
             value: personalO?.email,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-        },
-        validators: [],
-        asyncValidators: [],
-        asyncValidatorsDebounceTime: 250,
-        disabled: false,
-      );
+            touched: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
 }
 
 final _logPhoneOForm = Logger.detached('PhoneOForm');
 
 class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
-  PhoneOForm(this.form, this.path);
+  PhoneOForm(
+    this.form,
+    this.path,
+  );
 
   static const String phoneNumberControlName = "phoneNumber";
 
@@ -1280,8 +1242,7 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
   String? get _countryIsoRawValue => countryIsoControl.value;
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsPhoneNumber {
     try {
       form.control(phoneNumberControlPath());
@@ -1292,8 +1253,7 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsCountryIso {
     try {
       form.control(countryIsoControlPath());
@@ -1312,9 +1272,11 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
   void get countryIsoFocus => form.focus(countryIsoControlPath());
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void phoneNumberRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void phoneNumberRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsPhoneNumber) {
       final controlPath = path;
       if (controlPath == null) {
@@ -1338,9 +1300,11 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void countryIsoRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void countryIsoRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsCountryIso) {
       final controlPath = path;
       if (controlPath == null) {
@@ -1368,11 +1332,8 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    phoneNumberControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    phoneNumberControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void countryIsoValueUpdate(
@@ -1380,11 +1341,8 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    countryIsoControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    countryIsoControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void phoneNumberValuePatch(
@@ -1392,11 +1350,8 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    phoneNumberControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    phoneNumberControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void countryIsoValuePatch(
@@ -1404,11 +1359,8 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    countryIsoControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    countryIsoControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void phoneNumberValueReset(
@@ -1496,21 +1448,20 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
       );
     }
     return PhoneOOutput(
-      phoneNumber: _phoneNumberValue,
-      countryIso: _countryIsoValue,
-    );
+        phoneNumber: _phoneNumberValue, countryIso: _countryIsoValue);
   }
 
   @override
   PhoneO get rawModel {
     return PhoneO(
-      phoneNumber: _phoneNumberRawValue,
-      countryIso: _countryIsoRawValue,
-    );
+        phoneNumber: _phoneNumberRawValue, countryIso: _countryIsoRawValue);
   }
 
   @override
-  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -1523,9 +1474,7 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
       });
 
       currentForm.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          updateParent: updateParent, emitEvent: emitEvent);
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -1577,11 +1526,8 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-        PhoneOForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+      form.updateValue(PhoneOForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
 
   @override
   void reset({
@@ -1590,44 +1536,42 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
     bool emitEvent = true,
   }) =>
       form.reset(
-        value: value != null ? formElements(value).rawValue : null,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          value: value != null ? formElements(value).rawValue : null,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(PhoneO? phoneO) => FormGroup(
-        {
-          phoneNumberControlName: FormControl<String>(
+  static FormGroup formElements(PhoneO? phoneO) => FormGroup({
+        phoneNumberControlName: FormControl<String>(
             value: phoneO?.phoneNumber,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          countryIsoControlName: FormControl<String>(
+            touched: false),
+        countryIsoControlName: FormControl<String>(
             value: phoneO?.countryIso,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-        },
-        validators: [],
-        asyncValidators: [],
-        asyncValidatorsDebounceTime: 250,
-        disabled: false,
-      );
+            touched: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
 }
 
 final _logAddressOForm = Logger.detached('AddressOForm');
 
 class AddressOForm implements FormModel<AddressO, AddressOOutput> {
-  AddressOForm(this.form, this.path);
+  AddressOForm(
+    this.form,
+    this.path,
+  );
 
   static const String streetControlName = "street";
 
@@ -1660,8 +1604,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
   String? get _zipRawValue => zipControl.value;
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsStreet {
     try {
       form.control(streetControlPath());
@@ -1672,8 +1615,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsCity {
     try {
       form.control(cityControlPath());
@@ -1684,8 +1626,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsZip {
     try {
       form.control(zipControlPath());
@@ -1708,9 +1649,11 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
   void get zipFocus => form.focus(zipControlPath());
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void streetRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void streetRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsStreet) {
       final controlPath = path;
       if (controlPath == null) {
@@ -1734,9 +1677,11 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void cityRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void cityRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsCity) {
       final controlPath = path;
       if (controlPath == null) {
@@ -1760,9 +1705,11 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void zipRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void zipRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsZip) {
       final controlPath = path;
       if (controlPath == null) {
@@ -1790,11 +1737,8 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    streetControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    streetControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void cityValueUpdate(
@@ -1802,11 +1746,8 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    cityControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    cityControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void zipValueUpdate(
@@ -1814,11 +1755,8 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    zipControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    zipControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void streetValuePatch(
@@ -1826,11 +1764,8 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    streetControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    streetControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void cityValuePatch(
@@ -1838,11 +1773,8 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    cityControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    cityControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void zipValuePatch(
@@ -1850,11 +1782,8 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    zipControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    zipControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void streetValueReset(
@@ -1978,23 +1907,20 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
       );
     }
     return AddressOOutput(
-      street: _streetValue,
-      city: _cityValue,
-      zip: _zipValue,
-    );
+        street: _streetValue, city: _cityValue, zip: _zipValue);
   }
 
   @override
   AddressO get rawModel {
     return AddressO(
-      street: _streetRawValue,
-      city: _cityRawValue,
-      zip: _zipRawValue,
-    );
+        street: _streetRawValue, city: _cityRawValue, zip: _zipRawValue);
   }
 
   @override
-  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -2007,9 +1933,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
       });
 
       currentForm.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          updateParent: updateParent, emitEvent: emitEvent);
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -2061,11 +1985,8 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-        AddressOForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+      form.updateValue(AddressOForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
 
   @override
   void reset({
@@ -2074,46 +1995,40 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     bool emitEvent = true,
   }) =>
       form.reset(
-        value: value != null ? formElements(value).rawValue : null,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          value: value != null ? formElements(value).rawValue : null,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(AddressO? addressO) => FormGroup(
-        {
-          streetControlName: FormControl<String>(
+  static FormGroup formElements(AddressO? addressO) => FormGroup({
+        streetControlName: FormControl<String>(
             value: addressO?.street,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          cityControlName: FormControl<String>(
+            touched: false),
+        cityControlName: FormControl<String>(
             value: addressO?.city,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          zipControlName: FormControl<String>(
+            touched: false),
+        zipControlName: FormControl<String>(
             value: addressO?.zip,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-        },
-        validators: [],
-        asyncValidators: [],
-        asyncValidatorsDebounceTime: 250,
-        disabled: false,
-      );
+            touched: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
 }
 
 @Rf(output: true)
@@ -2129,20 +2044,17 @@ class GroupOOutput {
 class PersonalOOutput {
   final String? name;
   final String? email;
-  PersonalOOutput({
-    @RfControl<String>() this.name,
-    @RfControl<String>() this.email,
-  });
+  PersonalOOutput(
+      {@RfControl<String>() this.name, @RfControl<String>() this.email});
 }
 
 @RfGroup()
 class PhoneOOutput {
   final String? phoneNumber;
   final String? countryIso;
-  PhoneOOutput({
-    @RfControl<String>() this.phoneNumber,
-    @RfControl<String>() this.countryIso,
-  });
+  PhoneOOutput(
+      {@RfControl<String>() this.phoneNumber,
+      @RfControl<String>() this.countryIso});
 }
 
 @RfGroup()
@@ -2150,11 +2062,10 @@ class AddressOOutput {
   final String? street;
   final String? city;
   final String? zip;
-  AddressOOutput({
-    @RfControl<String>() this.street,
-    @RfControl<String>() this.city,
-    @RfControl<String>() this.zip,
-  });
+  AddressOOutput(
+      {@RfControl<String>() this.street,
+      @RfControl<String>() this.city,
+      @RfControl<String>() this.zip});
 }
 
 class ReactiveGroupOFormArrayBuilder<ReactiveGroupOFormArrayBuilderT>
@@ -2165,31 +2076,25 @@ class ReactiveGroupOFormArrayBuilder<ReactiveGroupOFormArrayBuilderT>
     this.formControl,
     this.builder,
     required this.itemBuilder,
-  })  : assert(
-          control != null || formControl != null,
-          "You have to specify `control` or `formControl`!",
-        ),
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
         super(key: key);
 
   final FormArray<ReactiveGroupOFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveGroupOFormArrayBuilderT>? Function(
-    GroupOForm formModel,
-  )? control;
+      GroupOForm formModel)? control;
 
   final Widget Function(
-    BuildContext context,
-    List<Widget> itemList,
-    GroupOForm formModel,
-  )? builder;
+          BuildContext context, List<Widget> itemList, GroupOForm formModel)?
+      builder;
 
   final Widget Function(
-    BuildContext context,
-    int i,
-    FormControl<ReactiveGroupOFormArrayBuilderT> control,
-    ReactiveGroupOFormArrayBuilderT? item,
-    GroupOForm formModel,
-  ) itemBuilder;
+      BuildContext context,
+      int i,
+      FormControl<ReactiveGroupOFormArrayBuilderT> control,
+      ReactiveGroupOFormArrayBuilderT? item,
+      GroupOForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -2221,7 +2126,11 @@ class ReactiveGroupOFormArrayBuilder<ReactiveGroupOFormArrayBuilderT>
             .values
             .toList();
 
-        return builder?.call(context, itemList, formModel) ??
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
             Column(children: itemList);
       },
     );
@@ -2236,10 +2145,8 @@ class ReactiveGroupOFormFormGroupArrayBuilder<
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(
-          extended != null || getExtended != null,
-          "You have to specify `control` or `formControl`!",
-        ),
+  })  : assert(extended != null || getExtended != null,
+            "You have to specify `control` or `formControl`!"),
         super(key: key);
 
   final ExtendedControl<List<Map<String, Object?>?>,
@@ -2250,17 +2157,14 @@ class ReactiveGroupOFormFormGroupArrayBuilder<
       Function(GroupOForm formModel)? getExtended;
 
   final Widget Function(
-    BuildContext context,
-    List<Widget> itemList,
-    GroupOForm formModel,
-  )? builder;
+          BuildContext context, List<Widget> itemList, GroupOForm formModel)?
+      builder;
 
   final Widget Function(
-    BuildContext context,
-    int i,
-    ReactiveGroupOFormFormGroupArrayBuilderT? item,
-    GroupOForm formModel,
-  ) itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveGroupOFormFormGroupArrayBuilderT? item,
+      GroupOForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -2278,14 +2182,23 @@ class ReactiveGroupOFormFormGroupArrayBuilder<
         final itemList =
             (value.value() ?? <ReactiveGroupOFormFormGroupArrayBuilderT>[])
                 .asMap()
-                .map(
-                  (i, item) =>
-                      MapEntry(i, itemBuilder(context, i, item, formModel)),
-                )
+                .map((i, item) => MapEntry(
+                      i,
+                      itemBuilder(
+                        context,
+                        i,
+                        item,
+                        formModel,
+                      ),
+                    ))
                 .values
                 .toList();
 
-        return builder?.call(context, itemList, formModel) ??
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
             Column(children: itemList);
       },
     );
