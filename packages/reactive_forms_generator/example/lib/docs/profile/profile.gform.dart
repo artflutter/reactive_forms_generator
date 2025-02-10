@@ -19,10 +19,7 @@ class ReactiveProfileFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-    BuildContext context,
-    ProfileForm formModel,
-    Widget? child,
-  ) builder;
+      BuildContext context, ProfileForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +38,11 @@ class ProfileFormInheritedStreamer extends InheritedStreamer<dynamic> {
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(stream, child, key: key);
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
 
   final ProfileForm form;
 }
@@ -63,7 +64,10 @@ class ReactiveProfileForm extends StatelessWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static ProfileForm? of(BuildContext context, {bool listen = true}) {
+  static ProfileForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<ProfileFormInheritedStreamer>()
@@ -117,10 +121,7 @@ class ProfileFormBuilder extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-    BuildContext context,
-    ProfileForm formModel,
-    Widget? child,
-  ) builder;
+      BuildContext context, ProfileForm formModel, Widget? child) builder;
 
   final void Function(BuildContext context, ProfileForm formModel)? initState;
 
@@ -212,7 +213,10 @@ class _ProfileFormBuilderState extends State<ProfileFormBuilder> {
 final _logProfileForm = Logger.detached('ProfileForm');
 
 class ProfileForm implements FormModel<Profile, Profile> {
-  ProfileForm(this.form, this.path);
+  ProfileForm(
+    this.form,
+    this.path,
+  );
 
   static const String idControlName = "id";
 
@@ -310,8 +314,7 @@ class ProfileForm implements FormModel<Profile, Profile> {
   TimerSetting get _timerRawValue => timerForm.rawModel;
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -322,8 +325,7 @@ class ProfileForm implements FormModel<Profile, Profile> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsAnotherId {
     try {
       form.control(anotherIdControlPath());
@@ -334,8 +336,7 @@ class ProfileForm implements FormModel<Profile, Profile> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -346,8 +347,7 @@ class ProfileForm implements FormModel<Profile, Profile> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsChartingOrder {
     try {
       form.control(chartingOrderControlPath());
@@ -358,8 +358,7 @@ class ProfileForm implements FormModel<Profile, Profile> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsNumberingStandard {
     try {
       form.control(numberingStandardControlPath());
@@ -370,8 +369,7 @@ class ProfileForm implements FormModel<Profile, Profile> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsMeasurementType {
     try {
       form.control(measurementTypeControlPath());
@@ -382,8 +380,7 @@ class ProfileForm implements FormModel<Profile, Profile> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsAudioGuidance {
     try {
       form.control(audioGuidanceControlPath());
@@ -394,8 +391,7 @@ class ProfileForm implements FormModel<Profile, Profile> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIncidenceFilter {
     try {
       form.control(incidenceFilterControlPath());
@@ -406,8 +402,7 @@ class ProfileForm implements FormModel<Profile, Profile> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsThreshold {
     try {
       form.control(thresholdControlPath());
@@ -418,8 +413,7 @@ class ProfileForm implements FormModel<Profile, Profile> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsTimer {
     try {
       form.control(timerControlPath());
@@ -477,11 +471,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    idControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void anotherIdValueUpdate(
@@ -489,11 +480,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    anotherIdControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    anotherIdControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void nameValueUpdate(
@@ -501,11 +489,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    nameControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void chartingOrderValueUpdate(
@@ -513,11 +498,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    chartingOrderControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    chartingOrderControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void numberingStandardValueUpdate(
@@ -525,11 +507,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    numberingStandardControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    numberingStandardControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void measurementTypeValueUpdate(
@@ -537,11 +516,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    measurementTypeControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    measurementTypeControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void audioGuidanceValueUpdate(
@@ -549,11 +525,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    audioGuidanceControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    audioGuidanceControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void incidenceFilterValueUpdate(
@@ -562,10 +535,9 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool emitEvent = true,
   }) {
     incidenceFilterControl.updateValue(
-      IncidenceFilterForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+        IncidenceFilterForm.formElements(value).rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
   }
 
   void thresholdValueUpdate(
@@ -574,10 +546,9 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool emitEvent = true,
   }) {
     thresholdControl.updateValue(
-      ThresholdSettingForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+        ThresholdSettingForm.formElements(value).rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
   }
 
   void timerValueUpdate(
@@ -585,11 +556,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    timerControl.updateValue(
-      TimerSettingForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    timerControl.updateValue(TimerSettingForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void idValuePatch(
@@ -597,11 +565,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    idControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void anotherIdValuePatch(
@@ -609,11 +574,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    anotherIdControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    anotherIdControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void nameValuePatch(
@@ -621,11 +583,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    nameControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void chartingOrderValuePatch(
@@ -633,11 +592,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    chartingOrderControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    chartingOrderControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void numberingStandardValuePatch(
@@ -645,11 +601,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    numberingStandardControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    numberingStandardControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void measurementTypeValuePatch(
@@ -657,11 +610,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    measurementTypeControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    measurementTypeControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void audioGuidanceValuePatch(
@@ -669,11 +619,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    audioGuidanceControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    audioGuidanceControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void incidenceFilterValuePatch(
@@ -682,10 +629,9 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool emitEvent = true,
   }) {
     incidenceFilterControl.updateValue(
-      IncidenceFilterForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+        IncidenceFilterForm.formElements(value).rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
   }
 
   void thresholdValuePatch(
@@ -694,10 +640,9 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool emitEvent = true,
   }) {
     thresholdControl.updateValue(
-      ThresholdSettingForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+        ThresholdSettingForm.formElements(value).rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
   }
 
   void timerValuePatch(
@@ -705,11 +650,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    timerControl.updateValue(
-      TimerSettingForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    timerControl.updateValue(TimerSettingForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void idValueReset(
@@ -825,10 +767,9 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool? disabled,
   }) =>
       incidenceFilterControl.reset(
-        value: IncidenceFilterForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          value: IncidenceFilterForm.formElements(value).rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   void thresholdValueReset(
     ThresholdSetting value, {
@@ -838,10 +779,9 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool? disabled,
   }) =>
       thresholdControl.reset(
-        value: ThresholdSettingForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          value: ThresholdSettingForm.formElements(value).rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   void timerValueReset(
     TimerSetting value, {
@@ -851,10 +791,9 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool? disabled,
   }) =>
       timerControl.reset(
-        value: TimerSettingForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          value: TimerSettingForm.formElements(value).rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
@@ -908,7 +847,10 @@ class ProfileForm implements FormModel<Profile, Profile> {
         emitEvent: emitEvent,
       );
     } else {
-      idControl.markAsEnabled(updateParent: updateParent, emitEvent: emitEvent);
+      idControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     }
   }
 
@@ -1085,38 +1027,37 @@ class ProfileForm implements FormModel<Profile, Profile> {
         StackTrace.current,
       );
     }
-    return Profile(
-      _idValue,
-      anotherId: _anotherIdValue,
-      name: _nameValue,
-      chartingOrder: _chartingOrderValue,
-      numberingStandard: _numberingStandardValue,
-      incidenceFilter: _incidenceFilterValue,
-      measurementType: _measurementTypeValue,
-      threshold: _thresholdValue,
-      timer: _timerValue,
-      audioGuidance: _audioGuidanceValue,
-    );
+    return Profile(_idValue,
+        anotherId: _anotherIdValue,
+        name: _nameValue,
+        chartingOrder: _chartingOrderValue,
+        numberingStandard: _numberingStandardValue,
+        incidenceFilter: _incidenceFilterValue,
+        measurementType: _measurementTypeValue,
+        threshold: _thresholdValue,
+        timer: _timerValue,
+        audioGuidance: _audioGuidanceValue);
   }
 
   @override
   Profile get rawModel {
-    return Profile(
-      _idRawValue,
-      anotherId: _anotherIdRawValue,
-      name: _nameRawValue,
-      chartingOrder: _chartingOrderRawValue,
-      numberingStandard: _numberingStandardRawValue,
-      incidenceFilter: _incidenceFilterRawValue,
-      measurementType: _measurementTypeRawValue,
-      threshold: _thresholdRawValue,
-      timer: _timerRawValue,
-      audioGuidance: _audioGuidanceRawValue,
-    );
+    return Profile(_idRawValue,
+        anotherId: _anotherIdRawValue,
+        name: _nameRawValue,
+        chartingOrder: _chartingOrderRawValue,
+        numberingStandard: _numberingStandardRawValue,
+        incidenceFilter: _incidenceFilterRawValue,
+        measurementType: _measurementTypeRawValue,
+        threshold: _thresholdRawValue,
+        timer: _timerRawValue,
+        audioGuidance: _audioGuidanceRawValue);
   }
 
   @override
-  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -1132,9 +1073,7 @@ class ProfileForm implements FormModel<Profile, Profile> {
       thresholdForm.toggleDisabled();
       timerForm.toggleDisabled();
       currentForm.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          updateParent: updateParent, emitEvent: emitEvent);
     } else {
       incidenceFilterForm.toggleDisabled();
       thresholdForm.toggleDisabled();
@@ -1189,11 +1128,8 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-        ProfileForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+      form.updateValue(ProfileForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
 
   @override
   void reset({
@@ -1202,92 +1138,83 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool emitEvent = true,
   }) =>
       form.reset(
-        value: value != null ? formElements(value).rawValue : null,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          value: value != null ? formElements(value).rawValue : null,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(Profile? profile) => FormGroup(
-        {
-          idControlName: FormControl<String>(
+  static FormGroup formElements(Profile? profile) => FormGroup({
+        idControlName: FormControl<String>(
             value: profile?.id,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          anotherIdControlName: FormControl<String>(
+            touched: false),
+        anotherIdControlName: FormControl<String>(
             value: profile?.anotherId,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          nameControlName: FormControl<String>(
+            touched: false),
+        nameControlName: FormControl<String>(
             value: profile?.name,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          chartingOrderControlName: FormControl<ChartingOrderValue>(
+            touched: false),
+        chartingOrderControlName: FormControl<ChartingOrderValue>(
             value: profile?.chartingOrder,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          numberingStandardControlName: FormControl<NumberingStandard>(
+            touched: false),
+        numberingStandardControlName: FormControl<NumberingStandard>(
             value: profile?.numberingStandard,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          measurementTypeControlName: FormControl<MeasurementType>(
+            touched: false),
+        measurementTypeControlName: FormControl<MeasurementType>(
             value: profile?.measurementType,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          audioGuidanceControlName: FormControl<bool>(
+            touched: false),
+        audioGuidanceControlName: FormControl<bool>(
             value: profile?.audioGuidance,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          incidenceFilterControlName: IncidenceFilterForm.formElements(
-            profile?.incidenceFilter,
-          ),
-          thresholdControlName: ThresholdSettingForm.formElements(
-            profile?.threshold,
-          ),
-          timerControlName: TimerSettingForm.formElements(profile?.timer),
-        },
-        validators: [],
-        asyncValidators: [],
-        asyncValidatorsDebounceTime: 250,
-        disabled: false,
-      );
+            touched: false),
+        incidenceFilterControlName:
+            IncidenceFilterForm.formElements(profile?.incidenceFilter),
+        thresholdControlName:
+            ThresholdSettingForm.formElements(profile?.threshold),
+        timerControlName: TimerSettingForm.formElements(profile?.timer)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
 }
 
 final _logIncidenceFilterForm = Logger.detached('IncidenceFilterForm');
 
 class IncidenceFilterForm
     implements FormModel<IncidenceFilter, IncidenceFilter> {
-  IncidenceFilterForm(this.form, this.path);
+  IncidenceFilterForm(
+    this.form,
+    this.path,
+  );
 
   static const String isMobilityEnabledControlName = "isMobilityEnabled";
 
@@ -1353,8 +1280,7 @@ class IncidenceFilterForm
   bool get _isPlaqueEnabledRawValue => isPlaqueEnabledControl.value ?? true;
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIsMobilityEnabled {
     try {
       form.control(isMobilityEnabledControlPath());
@@ -1365,8 +1291,7 @@ class IncidenceFilterForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIsFurcationEnabled {
     try {
       form.control(isFurcationEnabledControlPath());
@@ -1377,8 +1302,7 @@ class IncidenceFilterForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIsBleedingEnabled {
     try {
       form.control(isBleedingEnabledControlPath());
@@ -1389,8 +1313,7 @@ class IncidenceFilterForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIsSuppurationEnabled {
     try {
       form.control(isSuppurationEnabledControlPath());
@@ -1401,8 +1324,7 @@ class IncidenceFilterForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIsCalculusEnabled {
     try {
       form.control(isCalculusEnabledControlPath());
@@ -1413,8 +1335,7 @@ class IncidenceFilterForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIsPlaqueEnabled {
     try {
       form.control(isPlaqueEnabledControlPath());
@@ -1461,11 +1382,8 @@ class IncidenceFilterForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    isMobilityEnabledControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    isMobilityEnabledControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void isFurcationEnabledValueUpdate(
@@ -1473,11 +1391,8 @@ class IncidenceFilterForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    isFurcationEnabledControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    isFurcationEnabledControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void isBleedingEnabledValueUpdate(
@@ -1485,11 +1400,8 @@ class IncidenceFilterForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    isBleedingEnabledControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    isBleedingEnabledControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void isSuppurationEnabledValueUpdate(
@@ -1497,11 +1409,8 @@ class IncidenceFilterForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    isSuppurationEnabledControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    isSuppurationEnabledControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void isCalculusEnabledValueUpdate(
@@ -1509,11 +1418,8 @@ class IncidenceFilterForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    isCalculusEnabledControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    isCalculusEnabledControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void isPlaqueEnabledValueUpdate(
@@ -1521,11 +1427,8 @@ class IncidenceFilterForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    isPlaqueEnabledControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    isPlaqueEnabledControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void isMobilityEnabledValuePatch(
@@ -1533,11 +1436,8 @@ class IncidenceFilterForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    isMobilityEnabledControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    isMobilityEnabledControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void isFurcationEnabledValuePatch(
@@ -1545,11 +1445,8 @@ class IncidenceFilterForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    isFurcationEnabledControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    isFurcationEnabledControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void isBleedingEnabledValuePatch(
@@ -1557,11 +1454,8 @@ class IncidenceFilterForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    isBleedingEnabledControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    isBleedingEnabledControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void isSuppurationEnabledValuePatch(
@@ -1569,11 +1463,8 @@ class IncidenceFilterForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    isSuppurationEnabledControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    isSuppurationEnabledControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void isCalculusEnabledValuePatch(
@@ -1581,11 +1472,8 @@ class IncidenceFilterForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    isCalculusEnabledControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    isCalculusEnabledControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void isPlaqueEnabledValuePatch(
@@ -1593,11 +1481,8 @@ class IncidenceFilterForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    isPlaqueEnabledControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    isPlaqueEnabledControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void isMobilityEnabledValueReset(
@@ -1828,29 +1713,30 @@ class IncidenceFilterForm
       );
     }
     return IncidenceFilter(
-      isMobilityEnabled: _isMobilityEnabledValue,
-      isFurcationEnabled: _isFurcationEnabledValue,
-      isBleedingEnabled: _isBleedingEnabledValue,
-      isSuppurationEnabled: _isSuppurationEnabledValue,
-      isCalculusEnabled: _isCalculusEnabledValue,
-      isPlaqueEnabled: _isPlaqueEnabledValue,
-    );
+        isMobilityEnabled: _isMobilityEnabledValue,
+        isFurcationEnabled: _isFurcationEnabledValue,
+        isBleedingEnabled: _isBleedingEnabledValue,
+        isSuppurationEnabled: _isSuppurationEnabledValue,
+        isCalculusEnabled: _isCalculusEnabledValue,
+        isPlaqueEnabled: _isPlaqueEnabledValue);
   }
 
   @override
   IncidenceFilter get rawModel {
     return IncidenceFilter(
-      isMobilityEnabled: _isMobilityEnabledRawValue,
-      isFurcationEnabled: _isFurcationEnabledRawValue,
-      isBleedingEnabled: _isBleedingEnabledRawValue,
-      isSuppurationEnabled: _isSuppurationEnabledRawValue,
-      isCalculusEnabled: _isCalculusEnabledRawValue,
-      isPlaqueEnabled: _isPlaqueEnabledRawValue,
-    );
+        isMobilityEnabled: _isMobilityEnabledRawValue,
+        isFurcationEnabled: _isFurcationEnabledRawValue,
+        isBleedingEnabled: _isBleedingEnabledRawValue,
+        isSuppurationEnabled: _isSuppurationEnabledRawValue,
+        isCalculusEnabled: _isCalculusEnabledRawValue,
+        isPlaqueEnabled: _isPlaqueEnabledRawValue);
   }
 
   @override
-  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -1863,9 +1749,7 @@ class IncidenceFilterForm
       });
 
       currentForm.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          updateParent: updateParent, emitEvent: emitEvent);
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -1917,11 +1801,8 @@ class IncidenceFilterForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-        IncidenceFilterForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+      form.updateValue(IncidenceFilterForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
 
   @override
   void reset({
@@ -1930,77 +1811,71 @@ class IncidenceFilterForm
     bool emitEvent = true,
   }) =>
       form.reset(
-        value: value != null ? formElements(value).rawValue : null,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          value: value != null ? formElements(value).rawValue : null,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(IncidenceFilter? incidenceFilter) => FormGroup(
-        {
-          isMobilityEnabledControlName: FormControl<bool>(
+  static FormGroup formElements(IncidenceFilter? incidenceFilter) => FormGroup({
+        isMobilityEnabledControlName: FormControl<bool>(
             value: incidenceFilter?.isMobilityEnabled,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          isFurcationEnabledControlName: FormControl<bool>(
+            touched: false),
+        isFurcationEnabledControlName: FormControl<bool>(
             value: incidenceFilter?.isFurcationEnabled,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          isBleedingEnabledControlName: FormControl<bool>(
+            touched: false),
+        isBleedingEnabledControlName: FormControl<bool>(
             value: incidenceFilter?.isBleedingEnabled,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          isSuppurationEnabledControlName: FormControl<bool>(
+            touched: false),
+        isSuppurationEnabledControlName: FormControl<bool>(
             value: incidenceFilter?.isSuppurationEnabled,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          isCalculusEnabledControlName: FormControl<bool>(
+            touched: false),
+        isCalculusEnabledControlName: FormControl<bool>(
             value: incidenceFilter?.isCalculusEnabled,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          isPlaqueEnabledControlName: FormControl<bool>(
+            touched: false),
+        isPlaqueEnabledControlName: FormControl<bool>(
             value: incidenceFilter?.isPlaqueEnabled,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-        },
-        validators: [],
-        asyncValidators: [],
-        asyncValidatorsDebounceTime: 250,
-        disabled: false,
-      );
+            touched: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
 }
 
 final _logThresholdSettingForm = Logger.detached('ThresholdSettingForm');
 
 class ThresholdSettingForm
     implements FormModel<ThresholdSetting, ThresholdSetting> {
-  ThresholdSettingForm(this.form, this.path);
+  ThresholdSettingForm(
+    this.form,
+    this.path,
+  );
 
   static const String isEnabledControlName = "isEnabled";
 
@@ -2025,8 +1900,7 @@ class ThresholdSettingForm
   int get _valueRawValue => valueControl.value ?? 2;
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIsEnabled {
     try {
       form.control(isEnabledControlPath());
@@ -2037,8 +1911,7 @@ class ThresholdSettingForm
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsValue {
     try {
       form.control(valueControlPath());
@@ -2061,11 +1934,8 @@ class ThresholdSettingForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    isEnabledControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    isEnabledControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void valueValueUpdate(
@@ -2073,11 +1943,8 @@ class ThresholdSettingForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    valueControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    valueControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void isEnabledValuePatch(
@@ -2085,11 +1952,8 @@ class ThresholdSettingForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    isEnabledControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    isEnabledControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void valueValuePatch(
@@ -2097,11 +1961,8 @@ class ThresholdSettingForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    valueControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    valueControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void isEnabledValueReset(
@@ -2193,13 +2054,14 @@ class ThresholdSettingForm
   @override
   ThresholdSetting get rawModel {
     return ThresholdSetting(
-      isEnabled: _isEnabledRawValue,
-      value: _valueRawValue,
-    );
+        isEnabled: _isEnabledRawValue, value: _valueRawValue);
   }
 
   @override
-  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -2212,9 +2074,7 @@ class ThresholdSettingForm
       });
 
       currentForm.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          updateParent: updateParent, emitEvent: emitEvent);
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -2266,11 +2126,8 @@ class ThresholdSettingForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-        ThresholdSettingForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+      form.updateValue(ThresholdSettingForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
 
   @override
   void reset({
@@ -2279,45 +2136,43 @@ class ThresholdSettingForm
     bool emitEvent = true,
   }) =>
       form.reset(
-        value: value != null ? formElements(value).rawValue : null,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          value: value != null ? formElements(value).rawValue : null,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
   static FormGroup formElements(ThresholdSetting? thresholdSetting) =>
-      FormGroup(
-        {
-          isEnabledControlName: FormControl<bool>(
+      FormGroup({
+        isEnabledControlName: FormControl<bool>(
             value: thresholdSetting?.isEnabled,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          valueControlName: FormControl<int>(
+            touched: false),
+        valueControlName: FormControl<int>(
             value: thresholdSetting?.value,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-        },
-        validators: [],
-        asyncValidators: [],
-        asyncValidatorsDebounceTime: 250,
-        disabled: false,
-      );
+            touched: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
 }
 
 final _logTimerSettingForm = Logger.detached('TimerSettingForm');
 
 class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
-  TimerSettingForm(this.form, this.path);
+  TimerSettingForm(
+    this.form,
+    this.path,
+  );
 
   static const String isEnabledControlName = "isEnabled";
 
@@ -2342,8 +2197,7 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
   int get _valueRawValue => valueControl.value ?? 5;
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsIsEnabled {
     try {
       form.control(isEnabledControlPath());
@@ -2354,8 +2208,7 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsValue {
     try {
       form.control(valueControlPath());
@@ -2378,11 +2231,8 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    isEnabledControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    isEnabledControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void valueValueUpdate(
@@ -2390,11 +2240,8 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    valueControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    valueControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void isEnabledValuePatch(
@@ -2402,11 +2249,8 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    isEnabledControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    isEnabledControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void valueValuePatch(
@@ -2414,11 +2258,8 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    valueControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    valueControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void isEnabledValueReset(
@@ -2513,7 +2354,10 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
   }
 
   @override
-  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -2526,9 +2370,7 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
       });
 
       currentForm.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          updateParent: updateParent, emitEvent: emitEvent);
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -2580,11 +2422,8 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-        TimerSettingForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+      form.updateValue(TimerSettingForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
 
   @override
   void reset({
@@ -2593,38 +2432,33 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
     bool emitEvent = true,
   }) =>
       form.reset(
-        value: value != null ? formElements(value).rawValue : null,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          value: value != null ? formElements(value).rawValue : null,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(TimerSetting? timerSetting) => FormGroup(
-        {
-          isEnabledControlName: FormControl<bool>(
+  static FormGroup formElements(TimerSetting? timerSetting) => FormGroup({
+        isEnabledControlName: FormControl<bool>(
             value: timerSetting?.isEnabled,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          valueControlName: FormControl<int>(
+            touched: false),
+        valueControlName: FormControl<int>(
             value: timerSetting?.value,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-        },
-        validators: [],
-        asyncValidators: [],
-        asyncValidatorsDebounceTime: 250,
-        disabled: false,
-      );
+            touched: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
 }
 
 class ReactiveProfileFormArrayBuilder<ReactiveProfileFormArrayBuilderT>
@@ -2635,31 +2469,25 @@ class ReactiveProfileFormArrayBuilder<ReactiveProfileFormArrayBuilderT>
     this.formControl,
     this.builder,
     required this.itemBuilder,
-  })  : assert(
-          control != null || formControl != null,
-          "You have to specify `control` or `formControl`!",
-        ),
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
         super(key: key);
 
   final FormArray<ReactiveProfileFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveProfileFormArrayBuilderT>? Function(
-    ProfileForm formModel,
-  )? control;
+      ProfileForm formModel)? control;
 
   final Widget Function(
-    BuildContext context,
-    List<Widget> itemList,
-    ProfileForm formModel,
-  )? builder;
+          BuildContext context, List<Widget> itemList, ProfileForm formModel)?
+      builder;
 
   final Widget Function(
-    BuildContext context,
-    int i,
-    FormControl<ReactiveProfileFormArrayBuilderT> control,
-    ReactiveProfileFormArrayBuilderT? item,
-    ProfileForm formModel,
-  ) itemBuilder;
+      BuildContext context,
+      int i,
+      FormControl<ReactiveProfileFormArrayBuilderT> control,
+      ReactiveProfileFormArrayBuilderT? item,
+      ProfileForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -2691,7 +2519,11 @@ class ReactiveProfileFormArrayBuilder<ReactiveProfileFormArrayBuilderT>
             .values
             .toList();
 
-        return builder?.call(context, itemList, formModel) ??
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
             Column(children: itemList);
       },
     );
@@ -2706,10 +2538,8 @@ class ReactiveProfileFormFormGroupArrayBuilder<
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(
-          extended != null || getExtended != null,
-          "You have to specify `control` or `formControl`!",
-        ),
+  })  : assert(extended != null || getExtended != null,
+            "You have to specify `control` or `formControl`!"),
         super(key: key);
 
   final ExtendedControl<List<Map<String, Object?>?>,
@@ -2720,17 +2550,14 @@ class ReactiveProfileFormFormGroupArrayBuilder<
       Function(ProfileForm formModel)? getExtended;
 
   final Widget Function(
-    BuildContext context,
-    List<Widget> itemList,
-    ProfileForm formModel,
-  )? builder;
+          BuildContext context, List<Widget> itemList, ProfileForm formModel)?
+      builder;
 
   final Widget Function(
-    BuildContext context,
-    int i,
-    ReactiveProfileFormFormGroupArrayBuilderT? item,
-    ProfileForm formModel,
-  ) itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveProfileFormFormGroupArrayBuilderT? item,
+      ProfileForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -2748,14 +2575,23 @@ class ReactiveProfileFormFormGroupArrayBuilder<
         final itemList =
             (value.value() ?? <ReactiveProfileFormFormGroupArrayBuilderT>[])
                 .asMap()
-                .map(
-                  (i, item) =>
-                      MapEntry(i, itemBuilder(context, i, item, formModel)),
-                )
+                .map((i, item) => MapEntry(
+                      i,
+                      itemBuilder(
+                        context,
+                        i,
+                        item,
+                        formModel,
+                      ),
+                    ))
                 .values
                 .toList();
 
-        return builder?.call(context, itemList, formModel) ??
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
             Column(children: itemList);
       },
     );

@@ -10,7 +10,9 @@ Builder reactiveFormsGenerator(BuilderOptions options) {
     formatOutput: (str, version) {
       if (options.config['format'] == false) return str;
 
-      return DartFormatter(languageVersion: version).format(str);
+      return DartFormatter(
+        languageVersion: DartFormatter.latestShortStyleLanguageVersion,
+      ).format(str);
     },
     '.gform.dart',
     header: '''

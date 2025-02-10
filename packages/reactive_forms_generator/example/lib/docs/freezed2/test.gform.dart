@@ -10,8 +10,11 @@ part of 'test.dart';
 // **************************************************************************
 
 class ReactiveTestFormConsumer extends StatelessWidget {
-  const ReactiveTestFormConsumer({Key? key, required this.builder, this.child})
-      : super(key: key);
+  const ReactiveTestFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
 
   final Widget? child;
 
@@ -35,7 +38,11 @@ class TestFormInheritedStreamer extends InheritedStreamer<dynamic> {
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(stream, child, key: key);
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
 
   final TestForm form;
 }
@@ -57,7 +64,10 @@ class ReactiveTestForm extends StatelessWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static TestForm? of(BuildContext context, {bool listen = true}) {
+  static TestForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<TestFormInheritedStreamer>()
@@ -203,7 +213,10 @@ class _TestFormBuilderState extends State<TestFormBuilder> {
 final _logTestForm = Logger.detached('TestForm');
 
 class TestForm implements FormModel<Test, Test> {
-  TestForm(this.form, this.path);
+  TestForm(
+    this.form,
+    this.path,
+  );
 
   static const String titleControlName = "title";
 
@@ -228,8 +241,7 @@ class TestForm implements FormModel<Test, Test> {
   String? get _descriptionRawValue => descriptionControl.value;
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsTitle {
     try {
       form.control(titleControlPath());
@@ -240,8 +252,7 @@ class TestForm implements FormModel<Test, Test> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsDescription {
     try {
       form.control(descriptionControlPath());
@@ -260,9 +271,11 @@ class TestForm implements FormModel<Test, Test> {
   void get descriptionFocus => form.focus(descriptionControlPath());
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void descriptionRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void descriptionRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsDescription) {
       final controlPath = path;
       if (controlPath == null) {
@@ -290,11 +303,8 @@ class TestForm implements FormModel<Test, Test> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    titleControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    titleControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void descriptionValueUpdate(
@@ -302,11 +312,8 @@ class TestForm implements FormModel<Test, Test> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    descriptionControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    descriptionControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void titleValuePatch(
@@ -314,11 +321,8 @@ class TestForm implements FormModel<Test, Test> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    titleControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    titleControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void descriptionValuePatch(
@@ -326,11 +330,8 @@ class TestForm implements FormModel<Test, Test> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    descriptionControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    descriptionControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void titleValueReset(
@@ -425,7 +426,10 @@ class TestForm implements FormModel<Test, Test> {
   }
 
   @override
-  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -438,9 +442,7 @@ class TestForm implements FormModel<Test, Test> {
       });
 
       currentForm.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          updateParent: updateParent, emitEvent: emitEvent);
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -492,47 +494,43 @@ class TestForm implements FormModel<Test, Test> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-        TestForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+      form.updateValue(TestForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
 
   @override
-  void reset({Test? value, bool updateParent = true, bool emitEvent = true}) =>
+  void reset({
+    Test? value,
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
       form.reset(
-        value: value != null ? formElements(value).rawValue : null,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          value: value != null ? formElements(value).rawValue : null,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(Test? test) => FormGroup(
-        {
-          titleControlName: FormControl<String>(
+  static FormGroup formElements(Test? test) => FormGroup({
+        titleControlName: FormControl<String>(
             value: test?.title,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-          descriptionControlName: FormControl<String>(
+            touched: false),
+        descriptionControlName: FormControl<String>(
             value: test?.description,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false,
-          ),
-        },
-        validators: [],
-        asyncValidators: [],
-        asyncValidatorsDebounceTime: 250,
-        disabled: false,
-      );
+            touched: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
 }
 
 class ReactiveTestFormArrayBuilder<ReactiveTestFormArrayBuilderT>
@@ -543,10 +541,8 @@ class ReactiveTestFormArrayBuilder<ReactiveTestFormArrayBuilderT>
     this.formControl,
     this.builder,
     required this.itemBuilder,
-  })  : assert(
-          control != null || formControl != null,
-          "You have to specify `control` or `formControl`!",
-        ),
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
         super(key: key);
 
   final FormArray<ReactiveTestFormArrayBuilderT>? formControl;
@@ -555,18 +551,14 @@ class ReactiveTestFormArrayBuilder<ReactiveTestFormArrayBuilderT>
       control;
 
   final Widget Function(
-    BuildContext context,
-    List<Widget> itemList,
-    TestForm formModel,
-  )? builder;
+      BuildContext context, List<Widget> itemList, TestForm formModel)? builder;
 
   final Widget Function(
-    BuildContext context,
-    int i,
-    FormControl<ReactiveTestFormArrayBuilderT> control,
-    ReactiveTestFormArrayBuilderT? item,
-    TestForm formModel,
-  ) itemBuilder;
+      BuildContext context,
+      int i,
+      FormControl<ReactiveTestFormArrayBuilderT> control,
+      ReactiveTestFormArrayBuilderT? item,
+      TestForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -598,7 +590,11 @@ class ReactiveTestFormArrayBuilder<ReactiveTestFormArrayBuilderT>
             .values
             .toList();
 
-        return builder?.call(context, itemList, formModel) ??
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
             Column(children: itemList);
       },
     );
@@ -613,10 +609,8 @@ class ReactiveTestFormFormGroupArrayBuilder<
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(
-          extended != null || getExtended != null,
-          "You have to specify `control` or `formControl`!",
-        ),
+  })  : assert(extended != null || getExtended != null,
+            "You have to specify `control` or `formControl`!"),
         super(key: key);
 
   final ExtendedControl<List<Map<String, Object?>?>,
@@ -627,17 +621,13 @@ class ReactiveTestFormFormGroupArrayBuilder<
       Function(TestForm formModel)? getExtended;
 
   final Widget Function(
-    BuildContext context,
-    List<Widget> itemList,
-    TestForm formModel,
-  )? builder;
+      BuildContext context, List<Widget> itemList, TestForm formModel)? builder;
 
   final Widget Function(
-    BuildContext context,
-    int i,
-    ReactiveTestFormFormGroupArrayBuilderT? item,
-    TestForm formModel,
-  ) itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveTestFormFormGroupArrayBuilderT? item,
+      TestForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -655,14 +645,23 @@ class ReactiveTestFormFormGroupArrayBuilder<
         final itemList =
             (value.value() ?? <ReactiveTestFormFormGroupArrayBuilderT>[])
                 .asMap()
-                .map(
-                  (i, item) =>
-                      MapEntry(i, itemBuilder(context, i, item, formModel)),
-                )
+                .map((i, item) => MapEntry(
+                      i,
+                      itemBuilder(
+                        context,
+                        i,
+                        item,
+                        formModel,
+                      ),
+                    ))
                 .values
                 .toList();
 
-        return builder?.call(context, itemList, formModel) ??
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
             Column(children: itemList);
       },
     );

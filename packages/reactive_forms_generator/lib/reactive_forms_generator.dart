@@ -61,7 +61,7 @@ class ReactiveFormsGenerator extends Generator {
     // final x = lib.accept(emitter).toString();
 
     final generatedValue = DartFormatter(
-      languageVersion: DartFormatter.latestLanguageVersion,
+      languageVersion: DartFormatter.latestShortStyleLanguageVersion,
     ).format(lib.accept(emitter).toString());
 
     final values = <String>[];
