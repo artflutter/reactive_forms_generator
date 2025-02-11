@@ -1,3 +1,14 @@
+## [6.0.0]
+
+* Output model generation with support with smart nullability detection.
+  Compare implementation
+    - https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/login/login.dart
+    - https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/login/login_output.dart
+      Technically this release should not bring any braking changes but I decided to do a major
+      version bump for safety.
+      By default generated code will have it's default behavior, to start migration you need to
+      migrate from `@Rf()` to `@Rf(output: true)`
+
 ## [6.0.0-beta.26]
 
 * analyzer version bump
