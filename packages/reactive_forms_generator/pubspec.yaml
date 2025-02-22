@@ -10,8 +10,8 @@ environment:
 dependencies:
   build: ^2.4.2
   source_gen: ^2.0.0
-  _fe_analyzer_shared: ^78.0.0
-  analyzer: ^7.0.0
+  _fe_analyzer_shared: ^80.0.0
+  analyzer: ^7.3.0
   path: ^1.8.1
   build_runner: ^2.4.14
   code_builder: ^4.10.1

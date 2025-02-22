@@ -830,13 +830,15 @@ class FormGenerator {
                               (e.ConstructorElementImpl('aa', 1)
                                 ..enclosingElement3 = element)
                           ..type = t.InterfaceTypeImpl(
-                            element: element,
+                            element: (element.thisType as t.InterfaceTypeImpl)
+                                .element3,
                             typeArguments: element.thisType.typeArguments,
                             nullabilitySuffix: NullabilitySuffix.none,
                           ),
                         type ??
                             t.InterfaceTypeImpl(
-                              element: element,
+                              element: (element.thisType as t.InterfaceTypeImpl)
+                                  .element3,
                               typeArguments: element.thisType.typeArguments,
                               nullabilitySuffix: element.isNullable
                                   ? NullabilitySuffix.question

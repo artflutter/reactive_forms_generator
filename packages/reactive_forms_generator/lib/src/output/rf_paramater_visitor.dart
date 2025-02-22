@@ -6,6 +6,7 @@ import 'package:analyzer/dart/element/type.dart';
 
 // import 'package:analyzer/dart/element/element.dart';
 // import 'package:analyzer/dart/element/visitor.dart';
+import 'package:analyzer/src/dart/element/type.dart' as t;
 import 'package:analyzer/src/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import "package:collection/collection.dart";
@@ -53,7 +54,11 @@ class RfParameterVisitor extends GeneralizingAstVisitor<dynamic> {
         final isList = type != null &&
             type.isDartCoreList == true &&
             type is ParameterizedType &&
-            type.typeArguments.firstOrNull?.element?.hasRfGroupAnnotation ==
+            (type as t.InterfaceTypeImpl)
+                    .typeArguments
+                    .firstOrNull
+                    ?.element
+                    ?.hasRfGroupAnnotation ==
                 true;
 
         // final hasRfGroupAnnotation = node.parameter.declaredElement?.type
