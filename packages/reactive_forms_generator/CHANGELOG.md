@@ -1,3 +1,7 @@
+## [6.1.0]
+
+* analyzer 7.3.0 support
+
 ## [6.0.0]
 
 * Output model generation with support with smart nullability detection.
