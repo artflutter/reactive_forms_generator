@@ -1,7 +1,17 @@
 name: reactive_forms_generator_monorepo
 
+workspace:
+  - packages/generator_tests
+  - packages/reactive_forms_annotations
+  - packages/reactive_forms_generator
+  - packages/reactive_forms_generator/example
+
 environment:
-  sdk: ">=2.18.0 <4.0.0"
+  sdk: ">=3.6.0 <4.0.0"
+
+dependency_overrides:
+  test_api: 0.7.4
 
 dev_dependencies:
-  melos: ^6.2.0
+  build_runner: ^2.4.15
+  melos: ^7.0.0-dev.7

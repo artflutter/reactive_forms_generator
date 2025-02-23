@@ -24,8 +24,16 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: reactive_forms_generator => analyze
-        run: cd packages/reactive_forms_generator && flutter pub get && flutter analyze --no-fatal-infos
+      - name: Activate Dart environment
+        run: |
+          export PATH="$PATH:${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:/bin"
+          dart pub global activate melos
 
-      - name: reactive_forms_generator => code formatting
-        run: cd packages/reactive_forms_generator && flutter pub get && dart format --set-exit-if-changed lib
+      - name: melos bootstrap
+        run: melos bs
+
+      - name: analyze
+        run: flutter analyze --no-fatal-infos
+
+      - name: code formatting
+        run: dart format --set-exit-if-changed lib

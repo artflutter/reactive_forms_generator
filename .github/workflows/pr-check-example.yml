@@ -24,14 +24,22 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
+      - name: Activate Dart environment
+        run: |
+          export PATH="$PATH:${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:/bin"
+          dart pub global activate melos
+
+      - name: melos bootstrap
+        run: melos bs
+
       - name: reactive_forms_generator => example => build_runner
-        run: cd packages/reactive_forms_generator/example && flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
+        run: cd packages/reactive_forms_generator/example && dart pub run build_runner build --delete-conflicting-outputs
 
       - name: reactive_forms_generator => example => analyze
-        run: cd packages/reactive_forms_generator/example && flutter pub get && flutter analyze --no-fatal-infos
+        run: cd packages/reactive_forms_generator/example && flutter analyze --no-fatal-infos
 
       #      - name: reactive_forms_generator => example => code formatting
       #        run: cd packages/reactive_forms_generator/example && flutter pub get && dart format --set-exit-if-changed lib
 
       - name: reactive_forms_generator => example => test
-        run: cd packages/reactive_forms_generator/example && flutter pub get && flutter test
+        run: cd packages/reactive_forms_generator/example && flutter test
