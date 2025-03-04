@@ -622,11 +622,11 @@ class DeliveryListOForm
   }
 
   void addDeliveryListItemList(List<DeliveryPointO> value) {
-    value.map((e) => addDeliveryListItem(e));
+    value.forEach((e) => addDeliveryListItem(e));
   }
 
   void addClientListItemList(List<ClientO> value) {
-    value.map((e) => addClientListItem(e));
+    value.forEach((e) => addClientListItem(e));
   }
 
   @override

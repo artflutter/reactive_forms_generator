@@ -707,11 +707,11 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
   }
 
   void addDeliveryListItemList(List<DeliveryPoint> value) {
-    value.map((e) => addDeliveryListItem(e));
+    value.forEach((e) => addDeliveryListItem(e));
   }
 
   void addClientListItemList(List<Client> value) {
-    value.map((e) => addClientListItem(e));
+    value.forEach((e) => addClientListItem(e));
   }
 
   @override

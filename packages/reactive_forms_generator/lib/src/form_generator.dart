@@ -285,7 +285,7 @@ class FormGenerator {
         )
         ..returns = const Reference('void')
         ..body = Code(
-          '''value.map((e) => ${field.addListItemName}(e));''',
+          '''value.forEach((e) => ${field.addListItemName}(e));''',
         ),
     );
   }
