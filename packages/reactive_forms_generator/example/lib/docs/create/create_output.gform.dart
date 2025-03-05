@@ -1253,7 +1253,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   }
 
   void addAdminsItemList(List<AdminContactInformation> value) {
-    value.map((e) => addAdminsItem(e));
+    value.forEach((e) => addAdminsItem(e));
   }
 
   @override

@@ -1065,7 +1065,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
   }
 
   void addSubGroupListItemList(List<SubGroupO> value) {
-    value.map((e) => addSubGroupListItem(e));
+    value.forEach((e) => addSubGroupListItem(e));
   }
 
   @override
@@ -1731,7 +1731,7 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
   }
 
   void addGroupListItemList(List<GroupO> value) {
-    value.map((e) => addGroupListItem(e));
+    value.forEach((e) => addGroupListItem(e));
   }
 
   @override

@@ -413,7 +413,7 @@ class AnimatedUrlListForm
   }
 
   void addUrlListItemList(List<UrlEntity> value) {
-    value.map((e) => addUrlListItem(e));
+    value.forEach((e) => addUrlListItem(e));
   }
 
   @override

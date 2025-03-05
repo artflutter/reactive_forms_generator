@@ -1031,7 +1031,7 @@ class GroupForm implements FormModel<Group, Group> {
   }
 
   void addSubGroupListItemList(List<SubGroup> value) {
-    value.map((e) => addSubGroupListItem(e));
+    value.forEach((e) => addSubGroupListItem(e));
   }
 
   @override
@@ -1696,7 +1696,7 @@ class NestedForm implements FormModel<Nested, Nested> {
   }
 
   void addGroupListItemList(List<Group> value) {
-    value.map((e) => addGroupListItem(e));
+    value.forEach((e) => addGroupListItem(e));
   }
 
   @override
