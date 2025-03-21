@@ -1,3 +1,7 @@
+## [6.1.1]
+
+* fix https://github.com/artflutter/reactive_forms_generator/issues/184
+
 ## [6.1.0]
 
 * analyzer 7.3.0 support
