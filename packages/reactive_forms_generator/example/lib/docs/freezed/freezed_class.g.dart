@@ -6,8 +6,8 @@ part of 'freezed_class.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FreezedClassImpl _$$FreezedClassImplFromJson(Map<String, dynamic> json) =>
-    _$FreezedClassImpl(
+_FreezedClass _$FreezedClassFromJson(Map<String, dynamic> json) =>
+    _FreezedClass(
       json['gender'] as String?,
       id: json['id'] as String?,
       name: json['name'] as String?,
@@ -19,7 +19,7 @@ _$FreezedClassImpl _$$FreezedClassImplFromJson(Map<String, dynamic> json) =>
           const [],
     );
 
-Map<String, dynamic> _$$FreezedClassImplToJson(_$FreezedClassImpl instance) =>
+Map<String, dynamic> _$FreezedClassToJson(_FreezedClass instance) =>
     <String, dynamic>{
       'gender': instance.gender,
       'id': instance.id,

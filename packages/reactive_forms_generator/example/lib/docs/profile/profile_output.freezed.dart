@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,47 +10,86 @@ part of 'profile_output.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-ProfileO _$ProfileOFromJson(Map<String, dynamic> json) {
-  return _ProfileO.fromJson(json);
-}
 
 /// @nodoc
 mixin _$ProfileO {
-  String get id => throw _privateConstructorUsedError;
-  String get anotherId => throw _privateConstructorUsedError;
+  String get id;
+  String get anotherId;
   @RfControl<String>()
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @RfControl<ChartingOrderValue>()
-  ChartingOrderValue get chartingOrder => throw _privateConstructorUsedError;
+  ChartingOrderValue get chartingOrder;
   @RfControl<NumberingStandard>()
-  NumberingStandard get numberingStandard => throw _privateConstructorUsedError;
-  IncidenceFilterO get incidenceFilter => throw _privateConstructorUsedError;
+  NumberingStandard get numberingStandard;
+  IncidenceFilterO get incidenceFilter;
   @RfControl<MeasurementType>()
-  MeasurementType get measurementType => throw _privateConstructorUsedError;
-  ThresholdSettingO get threshold => throw _privateConstructorUsedError;
-  TimerSettingO get timer => throw _privateConstructorUsedError;
+  MeasurementType get measurementType;
+  ThresholdSettingO get threshold;
+  TimerSettingO get timer;
   @RfControl<bool>()
-  bool get audioGuidance => throw _privateConstructorUsedError;
-
-  /// Serializes this ProfileO to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  bool get audioGuidance;
 
   /// Create a copy of ProfileO
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $ProfileOCopyWith<ProfileO> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$ProfileOCopyWithImpl<ProfileO>(this as ProfileO, _$identity);
+
+  /// Serializes this ProfileO to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ProfileO &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.anotherId, anotherId) ||
+                other.anotherId == anotherId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.chartingOrder, chartingOrder) ||
+                other.chartingOrder == chartingOrder) &&
+            (identical(other.numberingStandard, numberingStandard) ||
+                other.numberingStandard == numberingStandard) &&
+            (identical(other.incidenceFilter, incidenceFilter) ||
+                other.incidenceFilter == incidenceFilter) &&
+            (identical(other.measurementType, measurementType) ||
+                other.measurementType == measurementType) &&
+            (identical(other.threshold, threshold) ||
+                other.threshold == threshold) &&
+            (identical(other.timer, timer) || other.timer == timer) &&
+            (identical(other.audioGuidance, audioGuidance) ||
+                other.audioGuidance == audioGuidance));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      anotherId,
+      name,
+      chartingOrder,
+      numberingStandard,
+      incidenceFilter,
+      measurementType,
+      threshold,
+      timer,
+      audioGuidance);
+
+  @override
+  String toString() {
+    return 'ProfileO(id: $id, anotherId: $anotherId, name: $name, chartingOrder: $chartingOrder, numberingStandard: $numberingStandard, incidenceFilter: $incidenceFilter, measurementType: $measurementType, threshold: $threshold, timer: $timer, audioGuidance: $audioGuidance)';
+  }
 }
 
 /// @nodoc
-abstract class $ProfileOCopyWith<$Res> {
-  factory $ProfileOCopyWith(ProfileO value, $Res Function(ProfileO) then) =
-      _$ProfileOCopyWithImpl<$Res, ProfileO>;
+abstract mixin class $ProfileOCopyWith<$Res> {
+  factory $ProfileOCopyWith(ProfileO value, $Res Function(ProfileO) _then) =
+      _$ProfileOCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -70,14 +110,11 @@ abstract class $ProfileOCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ProfileOCopyWithImpl<$Res, $Val extends ProfileO>
-    implements $ProfileOCopyWith<$Res> {
-  _$ProfileOCopyWithImpl(this._value, this._then);
+class _$ProfileOCopyWithImpl<$Res> implements $ProfileOCopyWith<$Res> {
+  _$ProfileOCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ProfileO _self;
+  final $Res Function(ProfileO) _then;
 
   /// Create a copy of ProfileO
   /// with the given fields replaced by the non-null parameter values.
@@ -95,48 +132,48 @@ class _$ProfileOCopyWithImpl<$Res, $Val extends ProfileO>
     Object? timer = null,
     Object? audioGuidance = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       anotherId: null == anotherId
-          ? _value.anotherId
+          ? _self.anotherId
           : anotherId // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       chartingOrder: null == chartingOrder
-          ? _value.chartingOrder
+          ? _self.chartingOrder
           : chartingOrder // ignore: cast_nullable_to_non_nullable
               as ChartingOrderValue,
       numberingStandard: null == numberingStandard
-          ? _value.numberingStandard
+          ? _self.numberingStandard
           : numberingStandard // ignore: cast_nullable_to_non_nullable
               as NumberingStandard,
       incidenceFilter: null == incidenceFilter
-          ? _value.incidenceFilter
+          ? _self.incidenceFilter
           : incidenceFilter // ignore: cast_nullable_to_non_nullable
               as IncidenceFilterO,
       measurementType: null == measurementType
-          ? _value.measurementType
+          ? _self.measurementType
           : measurementType // ignore: cast_nullable_to_non_nullable
               as MeasurementType,
       threshold: null == threshold
-          ? _value.threshold
+          ? _self.threshold
           : threshold // ignore: cast_nullable_to_non_nullable
               as ThresholdSettingO,
       timer: null == timer
-          ? _value.timer
+          ? _self.timer
           : timer // ignore: cast_nullable_to_non_nullable
               as TimerSettingO,
       audioGuidance: null == audioGuidance
-          ? _value.audioGuidance
+          ? _self.audioGuidance
           : audioGuidance // ignore: cast_nullable_to_non_nullable
               as bool,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of ProfileO
@@ -144,8 +181,8 @@ class _$ProfileOCopyWithImpl<$Res, $Val extends ProfileO>
   @override
   @pragma('vm:prefer-inline')
   $ChartingOrderValueCopyWith<$Res> get chartingOrder {
-    return $ChartingOrderValueCopyWith<$Res>(_value.chartingOrder, (value) {
-      return _then(_value.copyWith(chartingOrder: value) as $Val);
+    return $ChartingOrderValueCopyWith<$Res>(_self.chartingOrder, (value) {
+      return _then(_self.copyWith(chartingOrder: value));
     });
   }
 
@@ -154,8 +191,8 @@ class _$ProfileOCopyWithImpl<$Res, $Val extends ProfileO>
   @override
   @pragma('vm:prefer-inline')
   $IncidenceFilterOCopyWith<$Res> get incidenceFilter {
-    return $IncidenceFilterOCopyWith<$Res>(_value.incidenceFilter, (value) {
-      return _then(_value.copyWith(incidenceFilter: value) as $Val);
+    return $IncidenceFilterOCopyWith<$Res>(_self.incidenceFilter, (value) {
+      return _then(_self.copyWith(incidenceFilter: value));
     });
   }
 
@@ -164,8 +201,8 @@ class _$ProfileOCopyWithImpl<$Res, $Val extends ProfileO>
   @override
   @pragma('vm:prefer-inline')
   $ThresholdSettingOCopyWith<$Res> get threshold {
-    return $ThresholdSettingOCopyWith<$Res>(_value.threshold, (value) {
-      return _then(_value.copyWith(threshold: value) as $Val);
+    return $ThresholdSettingOCopyWith<$Res>(_self.threshold, (value) {
+      return _then(_self.copyWith(threshold: value));
     });
   }
 
@@ -174,115 +211,16 @@ class _$ProfileOCopyWithImpl<$Res, $Val extends ProfileO>
   @override
   @pragma('vm:prefer-inline')
   $TimerSettingOCopyWith<$Res> get timer {
-    return $TimerSettingOCopyWith<$Res>(_value.timer, (value) {
-      return _then(_value.copyWith(timer: value) as $Val);
+    return $TimerSettingOCopyWith<$Res>(_self.timer, (value) {
+      return _then(_self.copyWith(timer: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$ProfileOImplCopyWith<$Res>
-    implements $ProfileOCopyWith<$Res> {
-  factory _$$ProfileOImplCopyWith(
-          _$ProfileOImpl value, $Res Function(_$ProfileOImpl) then) =
-      __$$ProfileOImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String anotherId,
-      @RfControl<String>() String name,
-      @RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,
-      @RfControl<NumberingStandard>() NumberingStandard numberingStandard,
-      IncidenceFilterO incidenceFilter,
-      @RfControl<MeasurementType>() MeasurementType measurementType,
-      ThresholdSettingO threshold,
-      TimerSettingO timer,
-      @RfControl<bool>() bool audioGuidance});
-
-  @override
-  $ChartingOrderValueCopyWith<$Res> get chartingOrder;
-  @override
-  $IncidenceFilterOCopyWith<$Res> get incidenceFilter;
-  @override
-  $ThresholdSettingOCopyWith<$Res> get threshold;
-  @override
-  $TimerSettingOCopyWith<$Res> get timer;
-}
-
-/// @nodoc
-class __$$ProfileOImplCopyWithImpl<$Res>
-    extends _$ProfileOCopyWithImpl<$Res, _$ProfileOImpl>
-    implements _$$ProfileOImplCopyWith<$Res> {
-  __$$ProfileOImplCopyWithImpl(
-      _$ProfileOImpl _value, $Res Function(_$ProfileOImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ProfileO
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? anotherId = null,
-    Object? name = null,
-    Object? chartingOrder = null,
-    Object? numberingStandard = null,
-    Object? incidenceFilter = null,
-    Object? measurementType = null,
-    Object? threshold = null,
-    Object? timer = null,
-    Object? audioGuidance = null,
-  }) {
-    return _then(_$ProfileOImpl(
-      null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      anotherId: null == anotherId
-          ? _value.anotherId
-          : anotherId // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      chartingOrder: null == chartingOrder
-          ? _value.chartingOrder
-          : chartingOrder // ignore: cast_nullable_to_non_nullable
-              as ChartingOrderValue,
-      numberingStandard: null == numberingStandard
-          ? _value.numberingStandard
-          : numberingStandard // ignore: cast_nullable_to_non_nullable
-              as NumberingStandard,
-      incidenceFilter: null == incidenceFilter
-          ? _value.incidenceFilter
-          : incidenceFilter // ignore: cast_nullable_to_non_nullable
-              as IncidenceFilterO,
-      measurementType: null == measurementType
-          ? _value.measurementType
-          : measurementType // ignore: cast_nullable_to_non_nullable
-              as MeasurementType,
-      threshold: null == threshold
-          ? _value.threshold
-          : threshold // ignore: cast_nullable_to_non_nullable
-              as ThresholdSettingO,
-      timer: null == timer
-          ? _value.timer
-          : timer // ignore: cast_nullable_to_non_nullable
-              as TimerSettingO,
-      audioGuidance: null == audioGuidance
-          ? _value.audioGuidance
-          : audioGuidance // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
 @JsonSerializable()
-class _$ProfileOImpl extends _ProfileO {
-  _$ProfileOImpl(this.id,
+class _ProfileO extends ProfileO {
+  _ProfileO(this.id,
       {required this.anotherId,
       @RfControl<String>() required this.name,
       @RfControl<ChartingOrderValue>() required this.chartingOrder,
@@ -293,9 +231,8 @@ class _$ProfileOImpl extends _ProfileO {
       required this.timer,
       @RfControl<bool>() required this.audioGuidance})
       : super._();
-
-  factory _$ProfileOImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ProfileOImplFromJson(json);
+  factory _ProfileO.fromJson(Map<String, dynamic> json) =>
+      _$ProfileOFromJson(json);
 
   @override
   final String id;
@@ -323,16 +260,26 @@ class _$ProfileOImpl extends _ProfileO {
   @RfControl<bool>()
   final bool audioGuidance;
 
+  /// Create a copy of ProfileO
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ProfileO(id: $id, anotherId: $anotherId, name: $name, chartingOrder: $chartingOrder, numberingStandard: $numberingStandard, incidenceFilter: $incidenceFilter, measurementType: $measurementType, threshold: $threshold, timer: $timer, audioGuidance: $audioGuidance)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ProfileOCopyWith<_ProfileO> get copyWith =>
+      __$ProfileOCopyWithImpl<_ProfileO>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ProfileOToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProfileOImpl &&
+            other is _ProfileO &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.anotherId, anotherId) ||
                 other.anotherId == anotherId) &&
@@ -367,295 +314,205 @@ class _$ProfileOImpl extends _ProfileO {
       timer,
       audioGuidance);
 
-  /// Create a copy of ProfileO
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ProfileOImplCopyWith<_$ProfileOImpl> get copyWith =>
-      __$$ProfileOImplCopyWithImpl<_$ProfileOImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ProfileOImplToJson(
-      this,
-    );
+  String toString() {
+    return 'ProfileO(id: $id, anotherId: $anotherId, name: $name, chartingOrder: $chartingOrder, numberingStandard: $numberingStandard, incidenceFilter: $incidenceFilter, measurementType: $measurementType, threshold: $threshold, timer: $timer, audioGuidance: $audioGuidance)';
   }
 }
 
-abstract class _ProfileO extends ProfileO {
-  factory _ProfileO(final String id,
-      {required final String anotherId,
-      @RfControl<String>() required final String name,
-      @RfControl<ChartingOrderValue>()
-      required final ChartingOrderValue chartingOrder,
-      @RfControl<NumberingStandard>()
-      required final NumberingStandard numberingStandard,
-      required final IncidenceFilterO incidenceFilter,
-      @RfControl<MeasurementType>()
-      required final MeasurementType measurementType,
-      required final ThresholdSettingO threshold,
-      required final TimerSettingO timer,
-      @RfControl<bool>() required final bool audioGuidance}) = _$ProfileOImpl;
-  _ProfileO._() : super._();
+/// @nodoc
+abstract mixin class _$ProfileOCopyWith<$Res>
+    implements $ProfileOCopyWith<$Res> {
+  factory _$ProfileOCopyWith(_ProfileO value, $Res Function(_ProfileO) _then) =
+      __$ProfileOCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String anotherId,
+      @RfControl<String>() String name,
+      @RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,
+      @RfControl<NumberingStandard>() NumberingStandard numberingStandard,
+      IncidenceFilterO incidenceFilter,
+      @RfControl<MeasurementType>() MeasurementType measurementType,
+      ThresholdSettingO threshold,
+      TimerSettingO timer,
+      @RfControl<bool>() bool audioGuidance});
 
-  factory _ProfileO.fromJson(Map<String, dynamic> json) =
-      _$ProfileOImpl.fromJson;
+  @override
+  $ChartingOrderValueCopyWith<$Res> get chartingOrder;
+  @override
+  $IncidenceFilterOCopyWith<$Res> get incidenceFilter;
+  @override
+  $ThresholdSettingOCopyWith<$Res> get threshold;
+  @override
+  $TimerSettingOCopyWith<$Res> get timer;
+}
 
-  @override
-  String get id;
-  @override
-  String get anotherId;
-  @override
-  @RfControl<String>()
-  String get name;
-  @override
-  @RfControl<ChartingOrderValue>()
-  ChartingOrderValue get chartingOrder;
-  @override
-  @RfControl<NumberingStandard>()
-  NumberingStandard get numberingStandard;
-  @override
-  IncidenceFilterO get incidenceFilter;
-  @override
-  @RfControl<MeasurementType>()
-  MeasurementType get measurementType;
-  @override
-  ThresholdSettingO get threshold;
-  @override
-  TimerSettingO get timer;
-  @override
-  @RfControl<bool>()
-  bool get audioGuidance;
+/// @nodoc
+class __$ProfileOCopyWithImpl<$Res> implements _$ProfileOCopyWith<$Res> {
+  __$ProfileOCopyWithImpl(this._self, this._then);
+
+  final _ProfileO _self;
+  final $Res Function(_ProfileO) _then;
 
   /// Create a copy of ProfileO
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ProfileOImplCopyWith<_$ProfileOImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? anotherId = null,
+    Object? name = null,
+    Object? chartingOrder = null,
+    Object? numberingStandard = null,
+    Object? incidenceFilter = null,
+    Object? measurementType = null,
+    Object? threshold = null,
+    Object? timer = null,
+    Object? audioGuidance = null,
+  }) {
+    return _then(_ProfileO(
+      null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      anotherId: null == anotherId
+          ? _self.anotherId
+          : anotherId // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      chartingOrder: null == chartingOrder
+          ? _self.chartingOrder
+          : chartingOrder // ignore: cast_nullable_to_non_nullable
+              as ChartingOrderValue,
+      numberingStandard: null == numberingStandard
+          ? _self.numberingStandard
+          : numberingStandard // ignore: cast_nullable_to_non_nullable
+              as NumberingStandard,
+      incidenceFilter: null == incidenceFilter
+          ? _self.incidenceFilter
+          : incidenceFilter // ignore: cast_nullable_to_non_nullable
+              as IncidenceFilterO,
+      measurementType: null == measurementType
+          ? _self.measurementType
+          : measurementType // ignore: cast_nullable_to_non_nullable
+              as MeasurementType,
+      threshold: null == threshold
+          ? _self.threshold
+          : threshold // ignore: cast_nullable_to_non_nullable
+              as ThresholdSettingO,
+      timer: null == timer
+          ? _self.timer
+          : timer // ignore: cast_nullable_to_non_nullable
+              as TimerSettingO,
+      audioGuidance: null == audioGuidance
+          ? _self.audioGuidance
+          : audioGuidance // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 
-ThresholdSettingO _$ThresholdSettingOFromJson(Map<String, dynamic> json) {
-  return _ThresholdSettingO.fromJson(json);
+  /// Create a copy of ProfileO
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ChartingOrderValueCopyWith<$Res> get chartingOrder {
+    return $ChartingOrderValueCopyWith<$Res>(_self.chartingOrder, (value) {
+      return _then(_self.copyWith(chartingOrder: value));
+    });
+  }
+
+  /// Create a copy of ProfileO
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $IncidenceFilterOCopyWith<$Res> get incidenceFilter {
+    return $IncidenceFilterOCopyWith<$Res>(_self.incidenceFilter, (value) {
+      return _then(_self.copyWith(incidenceFilter: value));
+    });
+  }
+
+  /// Create a copy of ProfileO
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ThresholdSettingOCopyWith<$Res> get threshold {
+    return $ThresholdSettingOCopyWith<$Res>(_self.threshold, (value) {
+      return _then(_self.copyWith(threshold: value));
+    });
+  }
+
+  /// Create a copy of ProfileO
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TimerSettingOCopyWith<$Res> get timer {
+    return $TimerSettingOCopyWith<$Res>(_self.timer, (value) {
+      return _then(_self.copyWith(timer: value));
+    });
+  }
 }
 
 /// @nodoc
 mixin _$ThresholdSettingO {
   @RfControl<bool>()
-  bool get isEnabled => throw _privateConstructorUsedError;
+  bool get isEnabled;
   @RfControl<int>()
-  int get value => throw _privateConstructorUsedError;
-
-  /// Serializes this ThresholdSettingO to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  int get value;
 
   /// Create a copy of ThresholdSettingO
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $ThresholdSettingOCopyWith<ThresholdSettingO> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$ThresholdSettingOCopyWithImpl<ThresholdSettingO>(
+          this as ThresholdSettingO, _$identity);
 
-/// @nodoc
-abstract class $ThresholdSettingOCopyWith<$Res> {
-  factory $ThresholdSettingOCopyWith(
-          ThresholdSettingO value, $Res Function(ThresholdSettingO) then) =
-      _$ThresholdSettingOCopyWithImpl<$Res, ThresholdSettingO>;
-  @useResult
-  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
-}
+  /// Serializes this ThresholdSettingO to a JSON map.
+  Map<String, dynamic> toJson();
 
-/// @nodoc
-class _$ThresholdSettingOCopyWithImpl<$Res, $Val extends ThresholdSettingO>
-    implements $ThresholdSettingOCopyWith<$Res> {
-  _$ThresholdSettingOCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ThresholdSettingO
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? isEnabled = null,
-    Object? value = null,
-  }) {
-    return _then(_value.copyWith(
-      isEnabled: null == isEnabled
-          ? _value.isEnabled
-          : isEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ThresholdSettingO &&
+            (identical(other.isEnabled, isEnabled) ||
+                other.isEnabled == isEnabled) &&
+            (identical(other.value, value) || other.value == value));
   }
-}
 
-/// @nodoc
-abstract class _$$ThresholdSettingOImplCopyWith<$Res>
-    implements $ThresholdSettingOCopyWith<$Res> {
-  factory _$$ThresholdSettingOImplCopyWith(_$ThresholdSettingOImpl value,
-          $Res Function(_$ThresholdSettingOImpl) then) =
-      __$$ThresholdSettingOImplCopyWithImpl<$Res>;
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @useResult
-  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
-}
-
-/// @nodoc
-class __$$ThresholdSettingOImplCopyWithImpl<$Res>
-    extends _$ThresholdSettingOCopyWithImpl<$Res, _$ThresholdSettingOImpl>
-    implements _$$ThresholdSettingOImplCopyWith<$Res> {
-  __$$ThresholdSettingOImplCopyWithImpl(_$ThresholdSettingOImpl _value,
-      $Res Function(_$ThresholdSettingOImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ThresholdSettingO
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isEnabled = null,
-    Object? value = null,
-  }) {
-    return _then(_$ThresholdSettingOImpl(
-      isEnabled: null == isEnabled
-          ? _value.isEnabled
-          : isEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$ThresholdSettingOImpl implements _ThresholdSettingO {
-  const _$ThresholdSettingOImpl(
-      {@RfControl<bool>() this.isEnabled = true,
-      @RfControl<int>() this.value = 2});
-
-  factory _$ThresholdSettingOImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ThresholdSettingOImplFromJson(json);
-
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isEnabled;
-  @override
-  @JsonKey()
-  @RfControl<int>()
-  final int value;
+  int get hashCode => Object.hash(runtimeType, isEnabled, value);
 
   @override
   String toString() {
     return 'ThresholdSettingO(isEnabled: $isEnabled, value: $value)';
   }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ThresholdSettingOImpl &&
-            (identical(other.isEnabled, isEnabled) ||
-                other.isEnabled == isEnabled) &&
-            (identical(other.value, value) || other.value == value));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, isEnabled, value);
-
-  /// Create a copy of ThresholdSettingO
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ThresholdSettingOImplCopyWith<_$ThresholdSettingOImpl> get copyWith =>
-      __$$ThresholdSettingOImplCopyWithImpl<_$ThresholdSettingOImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ThresholdSettingOImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _ThresholdSettingO implements ThresholdSettingO {
-  const factory _ThresholdSettingO(
-      {@RfControl<bool>() final bool isEnabled,
-      @RfControl<int>() final int value}) = _$ThresholdSettingOImpl;
-
-  factory _ThresholdSettingO.fromJson(Map<String, dynamic> json) =
-      _$ThresholdSettingOImpl.fromJson;
-
-  @override
-  @RfControl<bool>()
-  bool get isEnabled;
-  @override
-  @RfControl<int>()
-  int get value;
-
-  /// Create a copy of ThresholdSettingO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ThresholdSettingOImplCopyWith<_$ThresholdSettingOImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-TimerSettingO _$TimerSettingOFromJson(Map<String, dynamic> json) {
-  return _TimerSettingO.fromJson(json);
 }
 
 /// @nodoc
-mixin _$TimerSettingO {
-  @RfControl<bool>()
-  bool get isEnabled => throw _privateConstructorUsedError;
-  @RfControl<int>()
-  int get value => throw _privateConstructorUsedError;
-
-  /// Serializes this TimerSettingO to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of TimerSettingO
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $TimerSettingOCopyWith<TimerSettingO> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $TimerSettingOCopyWith<$Res> {
-  factory $TimerSettingOCopyWith(
-          TimerSettingO value, $Res Function(TimerSettingO) then) =
-      _$TimerSettingOCopyWithImpl<$Res, TimerSettingO>;
+abstract mixin class $ThresholdSettingOCopyWith<$Res> {
+  factory $ThresholdSettingOCopyWith(
+          ThresholdSettingO value, $Res Function(ThresholdSettingO) _then) =
+      _$ThresholdSettingOCopyWithImpl;
   @useResult
   $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
 }
 
 /// @nodoc
-class _$TimerSettingOCopyWithImpl<$Res, $Val extends TimerSettingO>
-    implements $TimerSettingOCopyWith<$Res> {
-  _$TimerSettingOCopyWithImpl(this._value, this._then);
+class _$ThresholdSettingOCopyWithImpl<$Res>
+    implements $ThresholdSettingOCopyWith<$Res> {
+  _$ThresholdSettingOCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ThresholdSettingO _self;
+  final $Res Function(ThresholdSettingO) _then;
 
-  /// Create a copy of TimerSettingO
+  /// Create a copy of ThresholdSettingO
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -663,53 +520,13 @@ class _$TimerSettingOCopyWithImpl<$Res, $Val extends TimerSettingO>
     Object? isEnabled = null,
     Object? value = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       isEnabled: null == isEnabled
-          ? _value.isEnabled
+          ? _self.isEnabled
           : isEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
       value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$TimerSettingOImplCopyWith<$Res>
-    implements $TimerSettingOCopyWith<$Res> {
-  factory _$$TimerSettingOImplCopyWith(
-          _$TimerSettingOImpl value, $Res Function(_$TimerSettingOImpl) then) =
-      __$$TimerSettingOImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
-}
-
-/// @nodoc
-class __$$TimerSettingOImplCopyWithImpl<$Res>
-    extends _$TimerSettingOCopyWithImpl<$Res, _$TimerSettingOImpl>
-    implements _$$TimerSettingOImplCopyWith<$Res> {
-  __$$TimerSettingOImplCopyWithImpl(
-      _$TimerSettingOImpl _value, $Res Function(_$TimerSettingOImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of TimerSettingO
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isEnabled = null,
-    Object? value = null,
-  }) {
-    return _then(_$TimerSettingOImpl(
-      isEnabled: null == isEnabled
-          ? _value.isEnabled
-          : isEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      value: null == value
-          ? _value.value
+          ? _self.value
           : value // ignore: cast_nullable_to_non_nullable
               as int,
     ));
@@ -718,13 +535,12 @@ class __$$TimerSettingOImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$TimerSettingOImpl implements _TimerSettingO {
-  const _$TimerSettingOImpl(
-      {@RfControl<bool>() this.isEnabled = false,
-      @RfControl<int>() this.value = 5});
-
-  factory _$TimerSettingOImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TimerSettingOImplFromJson(json);
+class _ThresholdSettingO implements ThresholdSettingO {
+  const _ThresholdSettingO(
+      {@RfControl<bool>() this.isEnabled = true,
+      @RfControl<int>() this.value = 2});
+  factory _ThresholdSettingO.fromJson(Map<String, dynamic> json) =>
+      _$ThresholdSettingOFromJson(json);
 
   @override
   @JsonKey()
@@ -735,16 +551,26 @@ class _$TimerSettingOImpl implements _TimerSettingO {
   @RfControl<int>()
   final int value;
 
+  /// Create a copy of ThresholdSettingO
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'TimerSettingO(isEnabled: $isEnabled, value: $value)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ThresholdSettingOCopyWith<_ThresholdSettingO> get copyWith =>
+      __$ThresholdSettingOCopyWithImpl<_ThresholdSettingO>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ThresholdSettingOToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TimerSettingOImpl &&
+            other is _ThresholdSettingO &&
             (identical(other.isEnabled, isEnabled) ||
                 other.isEnabled == isEnabled) &&
             (identical(other.value, value) || other.value == value));
@@ -754,147 +580,288 @@ class _$TimerSettingOImpl implements _TimerSettingO {
   @override
   int get hashCode => Object.hash(runtimeType, isEnabled, value);
 
-  /// Create a copy of TimerSettingO
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$TimerSettingOImplCopyWith<_$TimerSettingOImpl> get copyWith =>
-      __$$TimerSettingOImplCopyWithImpl<_$TimerSettingOImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TimerSettingOImplToJson(
-      this,
-    );
+  String toString() {
+    return 'ThresholdSettingO(isEnabled: $isEnabled, value: $value)';
   }
 }
 
-abstract class _TimerSettingO implements TimerSettingO {
-  const factory _TimerSettingO(
-      {@RfControl<bool>() final bool isEnabled,
-      @RfControl<int>() final int value}) = _$TimerSettingOImpl;
-
-  factory _TimerSettingO.fromJson(Map<String, dynamic> json) =
-      _$TimerSettingOImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$ThresholdSettingOCopyWith<$Res>
+    implements $ThresholdSettingOCopyWith<$Res> {
+  factory _$ThresholdSettingOCopyWith(
+          _ThresholdSettingO value, $Res Function(_ThresholdSettingO) _then) =
+      __$ThresholdSettingOCopyWithImpl;
   @override
+  @useResult
+  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
+}
+
+/// @nodoc
+class __$ThresholdSettingOCopyWithImpl<$Res>
+    implements _$ThresholdSettingOCopyWith<$Res> {
+  __$ThresholdSettingOCopyWithImpl(this._self, this._then);
+
+  final _ThresholdSettingO _self;
+  final $Res Function(_ThresholdSettingO) _then;
+
+  /// Create a copy of ThresholdSettingO
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? isEnabled = null,
+    Object? value = null,
+  }) {
+    return _then(_ThresholdSettingO(
+      isEnabled: null == isEnabled
+          ? _self.isEnabled
+          : isEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      value: null == value
+          ? _self.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+mixin _$TimerSettingO {
   @RfControl<bool>()
   bool get isEnabled;
-  @override
   @RfControl<int>()
   int get value;
 
   /// Create a copy of TimerSettingO
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TimerSettingOImplCopyWith<_$TimerSettingOImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $TimerSettingOCopyWith<TimerSettingO> get copyWith =>
+      _$TimerSettingOCopyWithImpl<TimerSettingO>(
+          this as TimerSettingO, _$identity);
+
+  /// Serializes this TimerSettingO to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TimerSettingO &&
+            (identical(other.isEnabled, isEnabled) ||
+                other.isEnabled == isEnabled) &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, isEnabled, value);
+
+  @override
+  String toString() {
+    return 'TimerSettingO(isEnabled: $isEnabled, value: $value)';
+  }
 }
 
-IncidenceFilterO _$IncidenceFilterOFromJson(Map<String, dynamic> json) {
-  return _IncidenceFilterO.fromJson(json);
+/// @nodoc
+abstract mixin class $TimerSettingOCopyWith<$Res> {
+  factory $TimerSettingOCopyWith(
+          TimerSettingO value, $Res Function(TimerSettingO) _then) =
+      _$TimerSettingOCopyWithImpl;
+  @useResult
+  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
+}
+
+/// @nodoc
+class _$TimerSettingOCopyWithImpl<$Res>
+    implements $TimerSettingOCopyWith<$Res> {
+  _$TimerSettingOCopyWithImpl(this._self, this._then);
+
+  final TimerSettingO _self;
+  final $Res Function(TimerSettingO) _then;
+
+  /// Create a copy of TimerSettingO
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isEnabled = null,
+    Object? value = null,
+  }) {
+    return _then(_self.copyWith(
+      isEnabled: null == isEnabled
+          ? _self.isEnabled
+          : isEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      value: null == value
+          ? _self.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _TimerSettingO implements TimerSettingO {
+  const _TimerSettingO(
+      {@RfControl<bool>() this.isEnabled = false,
+      @RfControl<int>() this.value = 5});
+  factory _TimerSettingO.fromJson(Map<String, dynamic> json) =>
+      _$TimerSettingOFromJson(json);
+
+  @override
+  @JsonKey()
+  @RfControl<bool>()
+  final bool isEnabled;
+  @override
+  @JsonKey()
+  @RfControl<int>()
+  final int value;
+
+  /// Create a copy of TimerSettingO
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$TimerSettingOCopyWith<_TimerSettingO> get copyWith =>
+      __$TimerSettingOCopyWithImpl<_TimerSettingO>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$TimerSettingOToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _TimerSettingO &&
+            (identical(other.isEnabled, isEnabled) ||
+                other.isEnabled == isEnabled) &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, isEnabled, value);
+
+  @override
+  String toString() {
+    return 'TimerSettingO(isEnabled: $isEnabled, value: $value)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$TimerSettingOCopyWith<$Res>
+    implements $TimerSettingOCopyWith<$Res> {
+  factory _$TimerSettingOCopyWith(
+          _TimerSettingO value, $Res Function(_TimerSettingO) _then) =
+      __$TimerSettingOCopyWithImpl;
+  @override
+  @useResult
+  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
+}
+
+/// @nodoc
+class __$TimerSettingOCopyWithImpl<$Res>
+    implements _$TimerSettingOCopyWith<$Res> {
+  __$TimerSettingOCopyWithImpl(this._self, this._then);
+
+  final _TimerSettingO _self;
+  final $Res Function(_TimerSettingO) _then;
+
+  /// Create a copy of TimerSettingO
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? isEnabled = null,
+    Object? value = null,
+  }) {
+    return _then(_TimerSettingO(
+      isEnabled: null == isEnabled
+          ? _self.isEnabled
+          : isEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      value: null == value
+          ? _self.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$IncidenceFilterO {
   @RfControl<bool>()
-  bool get isMobilityEnabled => throw _privateConstructorUsedError;
+  bool get isMobilityEnabled;
   @RfControl<bool>()
-  bool get isFurcationEnabled => throw _privateConstructorUsedError;
+  bool get isFurcationEnabled;
   @RfControl<bool>()
-  bool get isBleedingEnabled => throw _privateConstructorUsedError;
+  bool get isBleedingEnabled;
   @RfControl<bool>()
-  bool get isSuppurationEnabled => throw _privateConstructorUsedError;
+  bool get isSuppurationEnabled;
   @RfControl<bool>()
-  bool get isCalculusEnabled => throw _privateConstructorUsedError;
+  bool get isCalculusEnabled;
   @RfControl<bool>()
-  bool get isPlaqueEnabled => throw _privateConstructorUsedError;
-
-  /// Serializes this IncidenceFilterO to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  bool get isPlaqueEnabled;
 
   /// Create a copy of IncidenceFilterO
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $IncidenceFilterOCopyWith<IncidenceFilterO> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $IncidenceFilterOCopyWith<$Res> {
-  factory $IncidenceFilterOCopyWith(
-          IncidenceFilterO value, $Res Function(IncidenceFilterO) then) =
-      _$IncidenceFilterOCopyWithImpl<$Res, IncidenceFilterO>;
-  @useResult
-  $Res call(
-      {@RfControl<bool>() bool isMobilityEnabled,
-      @RfControl<bool>() bool isFurcationEnabled,
-      @RfControl<bool>() bool isBleedingEnabled,
-      @RfControl<bool>() bool isSuppurationEnabled,
-      @RfControl<bool>() bool isCalculusEnabled,
-      @RfControl<bool>() bool isPlaqueEnabled});
-}
-
-/// @nodoc
-class _$IncidenceFilterOCopyWithImpl<$Res, $Val extends IncidenceFilterO>
-    implements $IncidenceFilterOCopyWith<$Res> {
-  _$IncidenceFilterOCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of IncidenceFilterO
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $IncidenceFilterOCopyWith<IncidenceFilterO> get copyWith =>
+      _$IncidenceFilterOCopyWithImpl<IncidenceFilterO>(
+          this as IncidenceFilterO, _$identity);
+
+  /// Serializes this IncidenceFilterO to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? isMobilityEnabled = null,
-    Object? isFurcationEnabled = null,
-    Object? isBleedingEnabled = null,
-    Object? isSuppurationEnabled = null,
-    Object? isCalculusEnabled = null,
-    Object? isPlaqueEnabled = null,
-  }) {
-    return _then(_value.copyWith(
-      isMobilityEnabled: null == isMobilityEnabled
-          ? _value.isMobilityEnabled
-          : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFurcationEnabled: null == isFurcationEnabled
-          ? _value.isFurcationEnabled
-          : isFurcationEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isBleedingEnabled: null == isBleedingEnabled
-          ? _value.isBleedingEnabled
-          : isBleedingEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSuppurationEnabled: null == isSuppurationEnabled
-          ? _value.isSuppurationEnabled
-          : isSuppurationEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isCalculusEnabled: null == isCalculusEnabled
-          ? _value.isCalculusEnabled
-          : isCalculusEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isPlaqueEnabled: null == isPlaqueEnabled
-          ? _value.isPlaqueEnabled
-          : isPlaqueEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is IncidenceFilterO &&
+            (identical(other.isMobilityEnabled, isMobilityEnabled) ||
+                other.isMobilityEnabled == isMobilityEnabled) &&
+            (identical(other.isFurcationEnabled, isFurcationEnabled) ||
+                other.isFurcationEnabled == isFurcationEnabled) &&
+            (identical(other.isBleedingEnabled, isBleedingEnabled) ||
+                other.isBleedingEnabled == isBleedingEnabled) &&
+            (identical(other.isSuppurationEnabled, isSuppurationEnabled) ||
+                other.isSuppurationEnabled == isSuppurationEnabled) &&
+            (identical(other.isCalculusEnabled, isCalculusEnabled) ||
+                other.isCalculusEnabled == isCalculusEnabled) &&
+            (identical(other.isPlaqueEnabled, isPlaqueEnabled) ||
+                other.isPlaqueEnabled == isPlaqueEnabled));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      isMobilityEnabled,
+      isFurcationEnabled,
+      isBleedingEnabled,
+      isSuppurationEnabled,
+      isCalculusEnabled,
+      isPlaqueEnabled);
+
+  @override
+  String toString() {
+    return 'IncidenceFilterO(isMobilityEnabled: $isMobilityEnabled, isFurcationEnabled: $isFurcationEnabled, isBleedingEnabled: $isBleedingEnabled, isSuppurationEnabled: $isSuppurationEnabled, isCalculusEnabled: $isCalculusEnabled, isPlaqueEnabled: $isPlaqueEnabled)';
   }
 }
 
 /// @nodoc
-abstract class _$$IncidenceFilterOImplCopyWith<$Res>
-    implements $IncidenceFilterOCopyWith<$Res> {
-  factory _$$IncidenceFilterOImplCopyWith(_$IncidenceFilterOImpl value,
-          $Res Function(_$IncidenceFilterOImpl) then) =
-      __$$IncidenceFilterOImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $IncidenceFilterOCopyWith<$Res> {
+  factory $IncidenceFilterOCopyWith(
+          IncidenceFilterO value, $Res Function(IncidenceFilterO) _then) =
+      _$IncidenceFilterOCopyWithImpl;
   @useResult
   $Res call(
       {@RfControl<bool>() bool isMobilityEnabled,
@@ -906,12 +873,12 @@ abstract class _$$IncidenceFilterOImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$IncidenceFilterOImplCopyWithImpl<$Res>
-    extends _$IncidenceFilterOCopyWithImpl<$Res, _$IncidenceFilterOImpl>
-    implements _$$IncidenceFilterOImplCopyWith<$Res> {
-  __$$IncidenceFilterOImplCopyWithImpl(_$IncidenceFilterOImpl _value,
-      $Res Function(_$IncidenceFilterOImpl) _then)
-      : super(_value, _then);
+class _$IncidenceFilterOCopyWithImpl<$Res>
+    implements $IncidenceFilterOCopyWith<$Res> {
+  _$IncidenceFilterOCopyWithImpl(this._self, this._then);
+
+  final IncidenceFilterO _self;
+  final $Res Function(IncidenceFilterO) _then;
 
   /// Create a copy of IncidenceFilterO
   /// with the given fields replaced by the non-null parameter values.
@@ -925,29 +892,29 @@ class __$$IncidenceFilterOImplCopyWithImpl<$Res>
     Object? isCalculusEnabled = null,
     Object? isPlaqueEnabled = null,
   }) {
-    return _then(_$IncidenceFilterOImpl(
+    return _then(_self.copyWith(
       isMobilityEnabled: null == isMobilityEnabled
-          ? _value.isMobilityEnabled
+          ? _self.isMobilityEnabled
           : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
       isFurcationEnabled: null == isFurcationEnabled
-          ? _value.isFurcationEnabled
+          ? _self.isFurcationEnabled
           : isFurcationEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
       isBleedingEnabled: null == isBleedingEnabled
-          ? _value.isBleedingEnabled
+          ? _self.isBleedingEnabled
           : isBleedingEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
       isSuppurationEnabled: null == isSuppurationEnabled
-          ? _value.isSuppurationEnabled
+          ? _self.isSuppurationEnabled
           : isSuppurationEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
       isCalculusEnabled: null == isCalculusEnabled
-          ? _value.isCalculusEnabled
+          ? _self.isCalculusEnabled
           : isCalculusEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
       isPlaqueEnabled: null == isPlaqueEnabled
-          ? _value.isPlaqueEnabled
+          ? _self.isPlaqueEnabled
           : isPlaqueEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
@@ -956,17 +923,16 @@ class __$$IncidenceFilterOImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$IncidenceFilterOImpl implements _IncidenceFilterO {
-  const _$IncidenceFilterOImpl(
+class _IncidenceFilterO implements IncidenceFilterO {
+  const _IncidenceFilterO(
       {@RfControl<bool>() this.isMobilityEnabled = true,
       @RfControl<bool>() this.isFurcationEnabled = true,
       @RfControl<bool>() this.isBleedingEnabled = true,
       @RfControl<bool>() this.isSuppurationEnabled = true,
       @RfControl<bool>() this.isCalculusEnabled = true,
       @RfControl<bool>() this.isPlaqueEnabled = true});
-
-  factory _$IncidenceFilterOImpl.fromJson(Map<String, dynamic> json) =>
-      _$$IncidenceFilterOImplFromJson(json);
+  factory _IncidenceFilterO.fromJson(Map<String, dynamic> json) =>
+      _$IncidenceFilterOFromJson(json);
 
   @override
   @JsonKey()
@@ -993,16 +959,26 @@ class _$IncidenceFilterOImpl implements _IncidenceFilterO {
   @RfControl<bool>()
   final bool isPlaqueEnabled;
 
+  /// Create a copy of IncidenceFilterO
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'IncidenceFilterO(isMobilityEnabled: $isMobilityEnabled, isFurcationEnabled: $isFurcationEnabled, isBleedingEnabled: $isBleedingEnabled, isSuppurationEnabled: $isSuppurationEnabled, isCalculusEnabled: $isCalculusEnabled, isPlaqueEnabled: $isPlaqueEnabled)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$IncidenceFilterOCopyWith<_IncidenceFilterO> get copyWith =>
+      __$IncidenceFilterOCopyWithImpl<_IncidenceFilterO>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$IncidenceFilterOToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$IncidenceFilterOImpl &&
+            other is _IncidenceFilterO &&
             (identical(other.isMobilityEnabled, isMobilityEnabled) ||
                 other.isMobilityEnabled == isMobilityEnabled) &&
             (identical(other.isFurcationEnabled, isFurcationEnabled) ||
@@ -1028,60 +1004,76 @@ class _$IncidenceFilterOImpl implements _IncidenceFilterO {
       isCalculusEnabled,
       isPlaqueEnabled);
 
-  /// Create a copy of IncidenceFilterO
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$IncidenceFilterOImplCopyWith<_$IncidenceFilterOImpl> get copyWith =>
-      __$$IncidenceFilterOImplCopyWithImpl<_$IncidenceFilterOImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$IncidenceFilterOImplToJson(
-      this,
-    );
+  String toString() {
+    return 'IncidenceFilterO(isMobilityEnabled: $isMobilityEnabled, isFurcationEnabled: $isFurcationEnabled, isBleedingEnabled: $isBleedingEnabled, isSuppurationEnabled: $isSuppurationEnabled, isCalculusEnabled: $isCalculusEnabled, isPlaqueEnabled: $isPlaqueEnabled)';
   }
 }
 
-abstract class _IncidenceFilterO implements IncidenceFilterO {
-  const factory _IncidenceFilterO(
-      {@RfControl<bool>() final bool isMobilityEnabled,
-      @RfControl<bool>() final bool isFurcationEnabled,
-      @RfControl<bool>() final bool isBleedingEnabled,
-      @RfControl<bool>() final bool isSuppurationEnabled,
-      @RfControl<bool>() final bool isCalculusEnabled,
-      @RfControl<bool>() final bool isPlaqueEnabled}) = _$IncidenceFilterOImpl;
+/// @nodoc
+abstract mixin class _$IncidenceFilterOCopyWith<$Res>
+    implements $IncidenceFilterOCopyWith<$Res> {
+  factory _$IncidenceFilterOCopyWith(
+          _IncidenceFilterO value, $Res Function(_IncidenceFilterO) _then) =
+      __$IncidenceFilterOCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {@RfControl<bool>() bool isMobilityEnabled,
+      @RfControl<bool>() bool isFurcationEnabled,
+      @RfControl<bool>() bool isBleedingEnabled,
+      @RfControl<bool>() bool isSuppurationEnabled,
+      @RfControl<bool>() bool isCalculusEnabled,
+      @RfControl<bool>() bool isPlaqueEnabled});
+}
 
-  factory _IncidenceFilterO.fromJson(Map<String, dynamic> json) =
-      _$IncidenceFilterOImpl.fromJson;
+/// @nodoc
+class __$IncidenceFilterOCopyWithImpl<$Res>
+    implements _$IncidenceFilterOCopyWith<$Res> {
+  __$IncidenceFilterOCopyWithImpl(this._self, this._then);
 
-  @override
-  @RfControl<bool>()
-  bool get isMobilityEnabled;
-  @override
-  @RfControl<bool>()
-  bool get isFurcationEnabled;
-  @override
-  @RfControl<bool>()
-  bool get isBleedingEnabled;
-  @override
-  @RfControl<bool>()
-  bool get isSuppurationEnabled;
-  @override
-  @RfControl<bool>()
-  bool get isCalculusEnabled;
-  @override
-  @RfControl<bool>()
-  bool get isPlaqueEnabled;
+  final _IncidenceFilterO _self;
+  final $Res Function(_IncidenceFilterO) _then;
 
   /// Create a copy of IncidenceFilterO
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$IncidenceFilterOImplCopyWith<_$IncidenceFilterOImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? isMobilityEnabled = null,
+    Object? isFurcationEnabled = null,
+    Object? isBleedingEnabled = null,
+    Object? isSuppurationEnabled = null,
+    Object? isCalculusEnabled = null,
+    Object? isPlaqueEnabled = null,
+  }) {
+    return _then(_IncidenceFilterO(
+      isMobilityEnabled: null == isMobilityEnabled
+          ? _self.isMobilityEnabled
+          : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFurcationEnabled: null == isFurcationEnabled
+          ? _self.isFurcationEnabled
+          : isFurcationEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isBleedingEnabled: null == isBleedingEnabled
+          ? _self.isBleedingEnabled
+          : isBleedingEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSuppurationEnabled: null == isSuppurationEnabled
+          ? _self.isSuppurationEnabled
+          : isSuppurationEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isCalculusEnabled: null == isCalculusEnabled
+          ? _self.isCalculusEnabled
+          : isCalculusEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPlaqueEnabled: null == isPlaqueEnabled
+          ? _self.isPlaqueEnabled
+          : isPlaqueEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 ScanOrder _$ScanOrderFromJson(Map<String, dynamic> json) {
@@ -1099,81 +1091,54 @@ ScanOrder _$ScanOrderFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ScanOrder {
-  Direction get direction => throw _privateConstructorUsedError;
-  ToothSide get toothSide => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Jaw jaw, Direction direction, ToothSide toothSide)
-        arch,
-    required TResult Function(
-            Quadrant quadrant, Direction direction, ToothSide toothSide)
-        quadrant,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Jaw jaw, Direction direction, ToothSide toothSide)? arch,
-    TResult? Function(
-            Quadrant quadrant, Direction direction, ToothSide toothSide)?
-        quadrant,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Jaw jaw, Direction direction, ToothSide toothSide)? arch,
-    TResult Function(
-            Quadrant quadrant, Direction direction, ToothSide toothSide)?
-        quadrant,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ArchScanOrder value) arch,
-    required TResult Function(QuadrantScanOrder value) quadrant,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ArchScanOrder value)? arch,
-    TResult? Function(QuadrantScanOrder value)? quadrant,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ArchScanOrder value)? arch,
-    TResult Function(QuadrantScanOrder value)? quadrant,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-
-  /// Serializes this ScanOrder to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Direction get direction;
+  ToothSide get toothSide;
 
   /// Create a copy of ScanOrder
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $ScanOrderCopyWith<ScanOrder> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$ScanOrderCopyWithImpl<ScanOrder>(this as ScanOrder, _$identity);
+
+  /// Serializes this ScanOrder to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ScanOrder &&
+            (identical(other.direction, direction) ||
+                other.direction == direction) &&
+            (identical(other.toothSide, toothSide) ||
+                other.toothSide == toothSide));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, direction, toothSide);
+
+  @override
+  String toString() {
+    return 'ScanOrder(direction: $direction, toothSide: $toothSide)';
+  }
 }
 
 /// @nodoc
-abstract class $ScanOrderCopyWith<$Res> {
-  factory $ScanOrderCopyWith(ScanOrder value, $Res Function(ScanOrder) then) =
-      _$ScanOrderCopyWithImpl<$Res, ScanOrder>;
+abstract mixin class $ScanOrderCopyWith<$Res> {
+  factory $ScanOrderCopyWith(ScanOrder value, $Res Function(ScanOrder) _then) =
+      _$ScanOrderCopyWithImpl;
   @useResult
   $Res call({Direction direction, ToothSide toothSide});
 }
 
 /// @nodoc
-class _$ScanOrderCopyWithImpl<$Res, $Val extends ScanOrder>
-    implements $ScanOrderCopyWith<$Res> {
-  _$ScanOrderCopyWithImpl(this._value, this._then);
+class _$ScanOrderCopyWithImpl<$Res> implements $ScanOrderCopyWith<$Res> {
+  _$ScanOrderCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ScanOrder _self;
+  final $Res Function(ScanOrder) _then;
 
   /// Create a copy of ScanOrder
   /// with the given fields replaced by the non-null parameter values.
@@ -1183,58 +1148,13 @@ class _$ScanOrderCopyWithImpl<$Res, $Val extends ScanOrder>
     Object? direction = null,
     Object? toothSide = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       direction: null == direction
-          ? _value.direction
+          ? _self.direction
           : direction // ignore: cast_nullable_to_non_nullable
               as Direction,
       toothSide: null == toothSide
-          ? _value.toothSide
-          : toothSide // ignore: cast_nullable_to_non_nullable
-              as ToothSide,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$ArchScanOrderImplCopyWith<$Res>
-    implements $ScanOrderCopyWith<$Res> {
-  factory _$$ArchScanOrderImplCopyWith(
-          _$ArchScanOrderImpl value, $Res Function(_$ArchScanOrderImpl) then) =
-      __$$ArchScanOrderImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({Jaw jaw, Direction direction, ToothSide toothSide});
-}
-
-/// @nodoc
-class __$$ArchScanOrderImplCopyWithImpl<$Res>
-    extends _$ScanOrderCopyWithImpl<$Res, _$ArchScanOrderImpl>
-    implements _$$ArchScanOrderImplCopyWith<$Res> {
-  __$$ArchScanOrderImplCopyWithImpl(
-      _$ArchScanOrderImpl _value, $Res Function(_$ArchScanOrderImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ScanOrder
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? jaw = null,
-    Object? direction = null,
-    Object? toothSide = null,
-  }) {
-    return _then(_$ArchScanOrderImpl(
-      null == jaw
-          ? _value.jaw
-          : jaw // ignore: cast_nullable_to_non_nullable
-              as Jaw,
-      direction: null == direction
-          ? _value.direction
-          : direction // ignore: cast_nullable_to_non_nullable
-              as Direction,
-      toothSide: null == toothSide
-          ? _value.toothSide
+          ? _self.toothSide
           : toothSide // ignore: cast_nullable_to_non_nullable
               as ToothSide,
     ));
@@ -1243,15 +1163,13 @@ class __$$ArchScanOrderImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ArchScanOrderImpl implements ArchScanOrder {
-  const _$ArchScanOrderImpl(this.jaw,
+class ArchScanOrder implements ScanOrder {
+  const ArchScanOrder(this.jaw,
       {required this.direction, required this.toothSide, final String? $type})
       : $type = $type ?? 'arch';
+  factory ArchScanOrder.fromJson(Map<String, dynamic> json) =>
+      _$ArchScanOrderFromJson(json);
 
-  factory _$ArchScanOrderImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ArchScanOrderImplFromJson(json);
-
-  @override
   final Jaw jaw;
   @override
   final Direction direction;
@@ -1261,16 +1179,26 @@ class _$ArchScanOrderImpl implements ArchScanOrder {
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of ScanOrder
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ScanOrder.arch(jaw: $jaw, direction: $direction, toothSide: $toothSide)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ArchScanOrderCopyWith<ArchScanOrder> get copyWith =>
+      _$ArchScanOrderCopyWithImpl<ArchScanOrder>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ArchScanOrderToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ArchScanOrderImpl &&
+            other is ArchScanOrder &&
             (identical(other.jaw, jaw) || other.jaw == jaw) &&
             (identical(other.direction, direction) ||
                 other.direction == direction) &&
@@ -1282,152 +1210,51 @@ class _$ArchScanOrderImpl implements ArchScanOrder {
   @override
   int get hashCode => Object.hash(runtimeType, jaw, direction, toothSide);
 
-  /// Create a copy of ScanOrder
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ArchScanOrderImplCopyWith<_$ArchScanOrderImpl> get copyWith =>
-      __$$ArchScanOrderImplCopyWithImpl<_$ArchScanOrderImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Jaw jaw, Direction direction, ToothSide toothSide)
-        arch,
-    required TResult Function(
-            Quadrant quadrant, Direction direction, ToothSide toothSide)
-        quadrant,
-  }) {
-    return arch(jaw, direction, toothSide);
+  String toString() {
+    return 'ScanOrder.arch(jaw: $jaw, direction: $direction, toothSide: $toothSide)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Jaw jaw, Direction direction, ToothSide toothSide)? arch,
-    TResult? Function(
-            Quadrant quadrant, Direction direction, ToothSide toothSide)?
-        quadrant,
-  }) {
-    return arch?.call(jaw, direction, toothSide);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Jaw jaw, Direction direction, ToothSide toothSide)? arch,
-    TResult Function(
-            Quadrant quadrant, Direction direction, ToothSide toothSide)?
-        quadrant,
-    required TResult orElse(),
-  }) {
-    if (arch != null) {
-      return arch(jaw, direction, toothSide);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ArchScanOrder value) arch,
-    required TResult Function(QuadrantScanOrder value) quadrant,
-  }) {
-    return arch(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ArchScanOrder value)? arch,
-    TResult? Function(QuadrantScanOrder value)? quadrant,
-  }) {
-    return arch?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ArchScanOrder value)? arch,
-    TResult Function(QuadrantScanOrder value)? quadrant,
-    required TResult orElse(),
-  }) {
-    if (arch != null) {
-      return arch(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ArchScanOrderImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class ArchScanOrder implements ScanOrder {
-  const factory ArchScanOrder(final Jaw jaw,
-      {required final Direction direction,
-      required final ToothSide toothSide}) = _$ArchScanOrderImpl;
-
-  factory ArchScanOrder.fromJson(Map<String, dynamic> json) =
-      _$ArchScanOrderImpl.fromJson;
-
-  Jaw get jaw;
-  @override
-  Direction get direction;
-  @override
-  ToothSide get toothSide;
-
-  /// Create a copy of ScanOrder
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ArchScanOrderImplCopyWith<_$ArchScanOrderImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$QuadrantScanOrderImplCopyWith<$Res>
+abstract mixin class $ArchScanOrderCopyWith<$Res>
     implements $ScanOrderCopyWith<$Res> {
-  factory _$$QuadrantScanOrderImplCopyWith(_$QuadrantScanOrderImpl value,
-          $Res Function(_$QuadrantScanOrderImpl) then) =
-      __$$QuadrantScanOrderImplCopyWithImpl<$Res>;
+  factory $ArchScanOrderCopyWith(
+          ArchScanOrder value, $Res Function(ArchScanOrder) _then) =
+      _$ArchScanOrderCopyWithImpl;
   @override
   @useResult
-  $Res call({Quadrant quadrant, Direction direction, ToothSide toothSide});
+  $Res call({Jaw jaw, Direction direction, ToothSide toothSide});
 }
 
 /// @nodoc
-class __$$QuadrantScanOrderImplCopyWithImpl<$Res>
-    extends _$ScanOrderCopyWithImpl<$Res, _$QuadrantScanOrderImpl>
-    implements _$$QuadrantScanOrderImplCopyWith<$Res> {
-  __$$QuadrantScanOrderImplCopyWithImpl(_$QuadrantScanOrderImpl _value,
-      $Res Function(_$QuadrantScanOrderImpl) _then)
-      : super(_value, _then);
+class _$ArchScanOrderCopyWithImpl<$Res>
+    implements $ArchScanOrderCopyWith<$Res> {
+  _$ArchScanOrderCopyWithImpl(this._self, this._then);
+
+  final ArchScanOrder _self;
+  final $Res Function(ArchScanOrder) _then;
 
   /// Create a copy of ScanOrder
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
-    Object? quadrant = null,
+    Object? jaw = null,
     Object? direction = null,
     Object? toothSide = null,
   }) {
-    return _then(_$QuadrantScanOrderImpl(
-      null == quadrant
-          ? _value.quadrant
-          : quadrant // ignore: cast_nullable_to_non_nullable
-              as Quadrant,
+    return _then(ArchScanOrder(
+      null == jaw
+          ? _self.jaw
+          : jaw // ignore: cast_nullable_to_non_nullable
+              as Jaw,
       direction: null == direction
-          ? _value.direction
+          ? _self.direction
           : direction // ignore: cast_nullable_to_non_nullable
               as Direction,
       toothSide: null == toothSide
-          ? _value.toothSide
+          ? _self.toothSide
           : toothSide // ignore: cast_nullable_to_non_nullable
               as ToothSide,
     ));
@@ -1436,15 +1263,13 @@ class __$$QuadrantScanOrderImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$QuadrantScanOrderImpl implements QuadrantScanOrder {
-  const _$QuadrantScanOrderImpl(this.quadrant,
+class QuadrantScanOrder implements ScanOrder {
+  const QuadrantScanOrder(this.quadrant,
       {required this.direction, required this.toothSide, final String? $type})
       : $type = $type ?? 'quadrant';
+  factory QuadrantScanOrder.fromJson(Map<String, dynamic> json) =>
+      _$QuadrantScanOrderFromJson(json);
 
-  factory _$QuadrantScanOrderImpl.fromJson(Map<String, dynamic> json) =>
-      _$$QuadrantScanOrderImplFromJson(json);
-
-  @override
   final Quadrant quadrant;
   @override
   final Direction direction;
@@ -1454,16 +1279,26 @@ class _$QuadrantScanOrderImpl implements QuadrantScanOrder {
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of ScanOrder
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ScanOrder.quadrant(quadrant: $quadrant, direction: $direction, toothSide: $toothSide)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $QuadrantScanOrderCopyWith<QuadrantScanOrder> get copyWith =>
+      _$QuadrantScanOrderCopyWithImpl<QuadrantScanOrder>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$QuadrantScanOrderToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$QuadrantScanOrderImpl &&
+            other is QuadrantScanOrder &&
             (identical(other.quadrant, quadrant) ||
                 other.quadrant == quadrant) &&
             (identical(other.direction, direction) ||
@@ -1476,189 +1311,102 @@ class _$QuadrantScanOrderImpl implements QuadrantScanOrder {
   @override
   int get hashCode => Object.hash(runtimeType, quadrant, direction, toothSide);
 
+  @override
+  String toString() {
+    return 'ScanOrder.quadrant(quadrant: $quadrant, direction: $direction, toothSide: $toothSide)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $QuadrantScanOrderCopyWith<$Res>
+    implements $ScanOrderCopyWith<$Res> {
+  factory $QuadrantScanOrderCopyWith(
+          QuadrantScanOrder value, $Res Function(QuadrantScanOrder) _then) =
+      _$QuadrantScanOrderCopyWithImpl;
+  @override
+  @useResult
+  $Res call({Quadrant quadrant, Direction direction, ToothSide toothSide});
+}
+
+/// @nodoc
+class _$QuadrantScanOrderCopyWithImpl<$Res>
+    implements $QuadrantScanOrderCopyWith<$Res> {
+  _$QuadrantScanOrderCopyWithImpl(this._self, this._then);
+
+  final QuadrantScanOrder _self;
+  final $Res Function(QuadrantScanOrder) _then;
+
   /// Create a copy of ScanOrder
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$QuadrantScanOrderImplCopyWith<_$QuadrantScanOrderImpl> get copyWith =>
-      __$$QuadrantScanOrderImplCopyWithImpl<_$QuadrantScanOrderImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Jaw jaw, Direction direction, ToothSide toothSide)
-        arch,
-    required TResult Function(
-            Quadrant quadrant, Direction direction, ToothSide toothSide)
-        quadrant,
+  $Res call({
+    Object? quadrant = null,
+    Object? direction = null,
+    Object? toothSide = null,
   }) {
-    return quadrant(this.quadrant, direction, toothSide);
+    return _then(QuadrantScanOrder(
+      null == quadrant
+          ? _self.quadrant
+          : quadrant // ignore: cast_nullable_to_non_nullable
+              as Quadrant,
+      direction: null == direction
+          ? _self.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as Direction,
+      toothSide: null == toothSide
+          ? _self.toothSide
+          : toothSide // ignore: cast_nullable_to_non_nullable
+              as ToothSide,
+    ));
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Jaw jaw, Direction direction, ToothSide toothSide)? arch,
-    TResult? Function(
-            Quadrant quadrant, Direction direction, ToothSide toothSide)?
-        quadrant,
-  }) {
-    return quadrant?.call(this.quadrant, direction, toothSide);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Jaw jaw, Direction direction, ToothSide toothSide)? arch,
-    TResult Function(
-            Quadrant quadrant, Direction direction, ToothSide toothSide)?
-        quadrant,
-    required TResult orElse(),
-  }) {
-    if (quadrant != null) {
-      return quadrant(this.quadrant, direction, toothSide);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ArchScanOrder value) arch,
-    required TResult Function(QuadrantScanOrder value) quadrant,
-  }) {
-    return quadrant(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ArchScanOrder value)? arch,
-    TResult? Function(QuadrantScanOrder value)? quadrant,
-  }) {
-    return quadrant?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ArchScanOrder value)? arch,
-    TResult Function(QuadrantScanOrder value)? quadrant,
-    required TResult orElse(),
-  }) {
-    if (quadrant != null) {
-      return quadrant(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$QuadrantScanOrderImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class QuadrantScanOrder implements ScanOrder {
-  const factory QuadrantScanOrder(final Quadrant quadrant,
-      {required final Direction direction,
-      required final ToothSide toothSide}) = _$QuadrantScanOrderImpl;
-
-  factory QuadrantScanOrder.fromJson(Map<String, dynamic> json) =
-      _$QuadrantScanOrderImpl.fromJson;
-
-  Quadrant get quadrant;
-  @override
-  Direction get direction;
-  @override
-  ToothSide get toothSide;
-
-  /// Create a copy of ScanOrder
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$QuadrantScanOrderImplCopyWith<_$QuadrantScanOrderImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-ChartingOrderValue _$ChartingOrderValueFromJson(Map<String, dynamic> json) {
-  return _ChartingOrderValue.fromJson(json);
 }
 
 /// @nodoc
 mixin _$ChartingOrderValue {
-  ChartingOrderType get chartingOrder => throw _privateConstructorUsedError;
-  int get selectedOption => throw _privateConstructorUsedError;
-  List<List<ScanOrder>> get order => throw _privateConstructorUsedError;
-
-  /// Serializes this ChartingOrderValue to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  ChartingOrderType get chartingOrder;
+  int get selectedOption;
+  List<List<ScanOrder>> get order;
 
   /// Create a copy of ChartingOrderValue
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ChartingOrderValueCopyWith<ChartingOrderValue> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ChartingOrderValueCopyWith<$Res> {
-  factory $ChartingOrderValueCopyWith(
-          ChartingOrderValue value, $Res Function(ChartingOrderValue) then) =
-      _$ChartingOrderValueCopyWithImpl<$Res, ChartingOrderValue>;
-  @useResult
-  $Res call(
-      {ChartingOrderType chartingOrder,
-      int selectedOption,
-      List<List<ScanOrder>> order});
-}
-
-/// @nodoc
-class _$ChartingOrderValueCopyWithImpl<$Res, $Val extends ChartingOrderValue>
-    implements $ChartingOrderValueCopyWith<$Res> {
-  _$ChartingOrderValueCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ChartingOrderValue
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $ChartingOrderValueCopyWith<ChartingOrderValue> get copyWith =>
+      _$ChartingOrderValueCopyWithImpl<ChartingOrderValue>(
+          this as ChartingOrderValue, _$identity);
+
+  /// Serializes this ChartingOrderValue to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? chartingOrder = null,
-    Object? selectedOption = null,
-    Object? order = null,
-  }) {
-    return _then(_value.copyWith(
-      chartingOrder: null == chartingOrder
-          ? _value.chartingOrder
-          : chartingOrder // ignore: cast_nullable_to_non_nullable
-              as ChartingOrderType,
-      selectedOption: null == selectedOption
-          ? _value.selectedOption
-          : selectedOption // ignore: cast_nullable_to_non_nullable
-              as int,
-      order: null == order
-          ? _value.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as List<List<ScanOrder>>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ChartingOrderValue &&
+            (identical(other.chartingOrder, chartingOrder) ||
+                other.chartingOrder == chartingOrder) &&
+            (identical(other.selectedOption, selectedOption) ||
+                other.selectedOption == selectedOption) &&
+            const DeepCollectionEquality().equals(other.order, order));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, chartingOrder, selectedOption,
+      const DeepCollectionEquality().hash(order));
+
+  @override
+  String toString() {
+    return 'ChartingOrderValue(chartingOrder: $chartingOrder, selectedOption: $selectedOption, order: $order)';
   }
 }
 
 /// @nodoc
-abstract class _$$ChartingOrderValueImplCopyWith<$Res>
-    implements $ChartingOrderValueCopyWith<$Res> {
-  factory _$$ChartingOrderValueImplCopyWith(_$ChartingOrderValueImpl value,
-          $Res Function(_$ChartingOrderValueImpl) then) =
-      __$$ChartingOrderValueImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $ChartingOrderValueCopyWith<$Res> {
+  factory $ChartingOrderValueCopyWith(
+          ChartingOrderValue value, $Res Function(ChartingOrderValue) _then) =
+      _$ChartingOrderValueCopyWithImpl;
   @useResult
   $Res call(
       {ChartingOrderType chartingOrder,
@@ -1667,12 +1415,12 @@ abstract class _$$ChartingOrderValueImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ChartingOrderValueImplCopyWithImpl<$Res>
-    extends _$ChartingOrderValueCopyWithImpl<$Res, _$ChartingOrderValueImpl>
-    implements _$$ChartingOrderValueImplCopyWith<$Res> {
-  __$$ChartingOrderValueImplCopyWithImpl(_$ChartingOrderValueImpl _value,
-      $Res Function(_$ChartingOrderValueImpl) _then)
-      : super(_value, _then);
+class _$ChartingOrderValueCopyWithImpl<$Res>
+    implements $ChartingOrderValueCopyWith<$Res> {
+  _$ChartingOrderValueCopyWithImpl(this._self, this._then);
+
+  final ChartingOrderValue _self;
+  final $Res Function(ChartingOrderValue) _then;
 
   /// Create a copy of ChartingOrderValue
   /// with the given fields replaced by the non-null parameter values.
@@ -1683,17 +1431,17 @@ class __$$ChartingOrderValueImplCopyWithImpl<$Res>
     Object? selectedOption = null,
     Object? order = null,
   }) {
-    return _then(_$ChartingOrderValueImpl(
+    return _then(_self.copyWith(
       chartingOrder: null == chartingOrder
-          ? _value.chartingOrder
+          ? _self.chartingOrder
           : chartingOrder // ignore: cast_nullable_to_non_nullable
               as ChartingOrderType,
       selectedOption: null == selectedOption
-          ? _value.selectedOption
+          ? _self.selectedOption
           : selectedOption // ignore: cast_nullable_to_non_nullable
               as int,
       order: null == order
-          ? _value._order
+          ? _self.order
           : order // ignore: cast_nullable_to_non_nullable
               as List<List<ScanOrder>>,
     ));
@@ -1702,15 +1450,14 @@ class __$$ChartingOrderValueImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ChartingOrderValueImpl implements _ChartingOrderValue {
-  const _$ChartingOrderValueImpl(
+class _ChartingOrderValue implements ChartingOrderValue {
+  const _ChartingOrderValue(
       {this.chartingOrder = ChartingOrderType.arch,
       this.selectedOption = 0,
       required final List<List<ScanOrder>> order})
       : _order = order;
-
-  factory _$ChartingOrderValueImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ChartingOrderValueImplFromJson(json);
+  factory _ChartingOrderValue.fromJson(Map<String, dynamic> json) =>
+      _$ChartingOrderValueFromJson(json);
 
   @override
   @JsonKey()
@@ -1726,16 +1473,26 @@ class _$ChartingOrderValueImpl implements _ChartingOrderValue {
     return EqualUnmodifiableListView(_order);
   }
 
+  /// Create a copy of ChartingOrderValue
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ChartingOrderValue(chartingOrder: $chartingOrder, selectedOption: $selectedOption, order: $order)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ChartingOrderValueCopyWith<_ChartingOrderValue> get copyWith =>
+      __$ChartingOrderValueCopyWithImpl<_ChartingOrderValue>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ChartingOrderValueToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ChartingOrderValueImpl &&
+            other is _ChartingOrderValue &&
             (identical(other.chartingOrder, chartingOrder) ||
                 other.chartingOrder == chartingOrder) &&
             (identical(other.selectedOption, selectedOption) ||
@@ -1748,85 +1505,139 @@ class _$ChartingOrderValueImpl implements _ChartingOrderValue {
   int get hashCode => Object.hash(runtimeType, chartingOrder, selectedOption,
       const DeepCollectionEquality().hash(_order));
 
-  /// Create a copy of ChartingOrderValue
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ChartingOrderValueImplCopyWith<_$ChartingOrderValueImpl> get copyWith =>
-      __$$ChartingOrderValueImplCopyWithImpl<_$ChartingOrderValueImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ChartingOrderValueImplToJson(
-      this,
-    );
+  String toString() {
+    return 'ChartingOrderValue(chartingOrder: $chartingOrder, selectedOption: $selectedOption, order: $order)';
   }
 }
 
-abstract class _ChartingOrderValue implements ChartingOrderValue {
-  const factory _ChartingOrderValue(
-      {final ChartingOrderType chartingOrder,
-      final int selectedOption,
-      required final List<List<ScanOrder>> order}) = _$ChartingOrderValueImpl;
+/// @nodoc
+abstract mixin class _$ChartingOrderValueCopyWith<$Res>
+    implements $ChartingOrderValueCopyWith<$Res> {
+  factory _$ChartingOrderValueCopyWith(
+          _ChartingOrderValue value, $Res Function(_ChartingOrderValue) _then) =
+      __$ChartingOrderValueCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {ChartingOrderType chartingOrder,
+      int selectedOption,
+      List<List<ScanOrder>> order});
+}
 
-  factory _ChartingOrderValue.fromJson(Map<String, dynamic> json) =
-      _$ChartingOrderValueImpl.fromJson;
+/// @nodoc
+class __$ChartingOrderValueCopyWithImpl<$Res>
+    implements _$ChartingOrderValueCopyWith<$Res> {
+  __$ChartingOrderValueCopyWithImpl(this._self, this._then);
 
-  @override
-  ChartingOrderType get chartingOrder;
-  @override
-  int get selectedOption;
-  @override
-  List<List<ScanOrder>> get order;
+  final _ChartingOrderValue _self;
+  final $Res Function(_ChartingOrderValue) _then;
 
   /// Create a copy of ChartingOrderValue
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ChartingOrderValueImplCopyWith<_$ChartingOrderValueImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-ProfileOOutput _$ProfileOOutputFromJson(Map<String, dynamic> json) {
-  return _ProfileOOutput.fromJson(json);
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? chartingOrder = null,
+    Object? selectedOption = null,
+    Object? order = null,
+  }) {
+    return _then(_ChartingOrderValue(
+      chartingOrder: null == chartingOrder
+          ? _self.chartingOrder
+          : chartingOrder // ignore: cast_nullable_to_non_nullable
+              as ChartingOrderType,
+      selectedOption: null == selectedOption
+          ? _self.selectedOption
+          : selectedOption // ignore: cast_nullable_to_non_nullable
+              as int,
+      order: null == order
+          ? _self._order
+          : order // ignore: cast_nullable_to_non_nullable
+              as List<List<ScanOrder>>,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$ProfileOOutput {
-  String get id => throw _privateConstructorUsedError;
-  String get anotherId => throw _privateConstructorUsedError;
+  String get id;
+  String get anotherId;
   @RfControl<String>()
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @RfControl<ChartingOrderValue>()
-  ChartingOrderValue get chartingOrder => throw _privateConstructorUsedError;
+  ChartingOrderValue get chartingOrder;
   @RfControl<NumberingStandard>()
-  NumberingStandard get numberingStandard => throw _privateConstructorUsedError;
-  IncidenceFilterOOutput get incidenceFilter =>
-      throw _privateConstructorUsedError;
+  NumberingStandard get numberingStandard;
+  IncidenceFilterOOutput get incidenceFilter;
   @RfControl<MeasurementType>()
-  MeasurementType get measurementType => throw _privateConstructorUsedError;
-  ThresholdSettingOOutput get threshold => throw _privateConstructorUsedError;
-  TimerSettingOOutput get timer => throw _privateConstructorUsedError;
+  MeasurementType get measurementType;
+  ThresholdSettingOOutput get threshold;
+  TimerSettingOOutput get timer;
   @RfControl<bool>()
-  bool get audioGuidance => throw _privateConstructorUsedError;
-
-  /// Serializes this ProfileOOutput to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  bool get audioGuidance;
 
   /// Create a copy of ProfileOOutput
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $ProfileOOutputCopyWith<ProfileOOutput> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$ProfileOOutputCopyWithImpl<ProfileOOutput>(
+          this as ProfileOOutput, _$identity);
+
+  /// Serializes this ProfileOOutput to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ProfileOOutput &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.anotherId, anotherId) ||
+                other.anotherId == anotherId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.chartingOrder, chartingOrder) ||
+                other.chartingOrder == chartingOrder) &&
+            (identical(other.numberingStandard, numberingStandard) ||
+                other.numberingStandard == numberingStandard) &&
+            (identical(other.incidenceFilter, incidenceFilter) ||
+                other.incidenceFilter == incidenceFilter) &&
+            (identical(other.measurementType, measurementType) ||
+                other.measurementType == measurementType) &&
+            (identical(other.threshold, threshold) ||
+                other.threshold == threshold) &&
+            (identical(other.timer, timer) || other.timer == timer) &&
+            (identical(other.audioGuidance, audioGuidance) ||
+                other.audioGuidance == audioGuidance));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      anotherId,
+      name,
+      chartingOrder,
+      numberingStandard,
+      incidenceFilter,
+      measurementType,
+      threshold,
+      timer,
+      audioGuidance);
+
+  @override
+  String toString() {
+    return 'ProfileOOutput(id: $id, anotherId: $anotherId, name: $name, chartingOrder: $chartingOrder, numberingStandard: $numberingStandard, incidenceFilter: $incidenceFilter, measurementType: $measurementType, threshold: $threshold, timer: $timer, audioGuidance: $audioGuidance)';
+  }
 }
 
 /// @nodoc
-abstract class $ProfileOOutputCopyWith<$Res> {
+abstract mixin class $ProfileOOutputCopyWith<$Res> {
   factory $ProfileOOutputCopyWith(
-          ProfileOOutput value, $Res Function(ProfileOOutput) then) =
-      _$ProfileOOutputCopyWithImpl<$Res, ProfileOOutput>;
+          ProfileOOutput value, $Res Function(ProfileOOutput) _then) =
+      _$ProfileOOutputCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -1847,14 +1658,12 @@ abstract class $ProfileOOutputCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ProfileOOutputCopyWithImpl<$Res, $Val extends ProfileOOutput>
+class _$ProfileOOutputCopyWithImpl<$Res>
     implements $ProfileOOutputCopyWith<$Res> {
-  _$ProfileOOutputCopyWithImpl(this._value, this._then);
+  _$ProfileOOutputCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ProfileOOutput _self;
+  final $Res Function(ProfileOOutput) _then;
 
   /// Create a copy of ProfileOOutput
   /// with the given fields replaced by the non-null parameter values.
@@ -1872,48 +1681,48 @@ class _$ProfileOOutputCopyWithImpl<$Res, $Val extends ProfileOOutput>
     Object? timer = null,
     Object? audioGuidance = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       anotherId: null == anotherId
-          ? _value.anotherId
+          ? _self.anotherId
           : anotherId // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       chartingOrder: null == chartingOrder
-          ? _value.chartingOrder
+          ? _self.chartingOrder
           : chartingOrder // ignore: cast_nullable_to_non_nullable
               as ChartingOrderValue,
       numberingStandard: null == numberingStandard
-          ? _value.numberingStandard
+          ? _self.numberingStandard
           : numberingStandard // ignore: cast_nullable_to_non_nullable
               as NumberingStandard,
       incidenceFilter: null == incidenceFilter
-          ? _value.incidenceFilter
+          ? _self.incidenceFilter
           : incidenceFilter // ignore: cast_nullable_to_non_nullable
               as IncidenceFilterOOutput,
       measurementType: null == measurementType
-          ? _value.measurementType
+          ? _self.measurementType
           : measurementType // ignore: cast_nullable_to_non_nullable
               as MeasurementType,
       threshold: null == threshold
-          ? _value.threshold
+          ? _self.threshold
           : threshold // ignore: cast_nullable_to_non_nullable
               as ThresholdSettingOOutput,
       timer: null == timer
-          ? _value.timer
+          ? _self.timer
           : timer // ignore: cast_nullable_to_non_nullable
               as TimerSettingOOutput,
       audioGuidance: null == audioGuidance
-          ? _value.audioGuidance
+          ? _self.audioGuidance
           : audioGuidance // ignore: cast_nullable_to_non_nullable
               as bool,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of ProfileOOutput
@@ -1921,8 +1730,8 @@ class _$ProfileOOutputCopyWithImpl<$Res, $Val extends ProfileOOutput>
   @override
   @pragma('vm:prefer-inline')
   $ChartingOrderValueCopyWith<$Res> get chartingOrder {
-    return $ChartingOrderValueCopyWith<$Res>(_value.chartingOrder, (value) {
-      return _then(_value.copyWith(chartingOrder: value) as $Val);
+    return $ChartingOrderValueCopyWith<$Res>(_self.chartingOrder, (value) {
+      return _then(_self.copyWith(chartingOrder: value));
     });
   }
 
@@ -1931,9 +1740,9 @@ class _$ProfileOOutputCopyWithImpl<$Res, $Val extends ProfileOOutput>
   @override
   @pragma('vm:prefer-inline')
   $IncidenceFilterOOutputCopyWith<$Res> get incidenceFilter {
-    return $IncidenceFilterOOutputCopyWith<$Res>(_value.incidenceFilter,
+    return $IncidenceFilterOOutputCopyWith<$Res>(_self.incidenceFilter,
         (value) {
-      return _then(_value.copyWith(incidenceFilter: value) as $Val);
+      return _then(_self.copyWith(incidenceFilter: value));
     });
   }
 
@@ -1942,8 +1751,8 @@ class _$ProfileOOutputCopyWithImpl<$Res, $Val extends ProfileOOutput>
   @override
   @pragma('vm:prefer-inline')
   $ThresholdSettingOOutputCopyWith<$Res> get threshold {
-    return $ThresholdSettingOOutputCopyWith<$Res>(_value.threshold, (value) {
-      return _then(_value.copyWith(threshold: value) as $Val);
+    return $ThresholdSettingOOutputCopyWith<$Res>(_self.threshold, (value) {
+      return _then(_self.copyWith(threshold: value));
     });
   }
 
@@ -1952,115 +1761,16 @@ class _$ProfileOOutputCopyWithImpl<$Res, $Val extends ProfileOOutput>
   @override
   @pragma('vm:prefer-inline')
   $TimerSettingOOutputCopyWith<$Res> get timer {
-    return $TimerSettingOOutputCopyWith<$Res>(_value.timer, (value) {
-      return _then(_value.copyWith(timer: value) as $Val);
+    return $TimerSettingOOutputCopyWith<$Res>(_self.timer, (value) {
+      return _then(_self.copyWith(timer: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$ProfileOOutputImplCopyWith<$Res>
-    implements $ProfileOOutputCopyWith<$Res> {
-  factory _$$ProfileOOutputImplCopyWith(_$ProfileOOutputImpl value,
-          $Res Function(_$ProfileOOutputImpl) then) =
-      __$$ProfileOOutputImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String anotherId,
-      @RfControl<String>() String name,
-      @RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,
-      @RfControl<NumberingStandard>() NumberingStandard numberingStandard,
-      IncidenceFilterOOutput incidenceFilter,
-      @RfControl<MeasurementType>() MeasurementType measurementType,
-      ThresholdSettingOOutput threshold,
-      TimerSettingOOutput timer,
-      @RfControl<bool>() bool audioGuidance});
-
-  @override
-  $ChartingOrderValueCopyWith<$Res> get chartingOrder;
-  @override
-  $IncidenceFilterOOutputCopyWith<$Res> get incidenceFilter;
-  @override
-  $ThresholdSettingOOutputCopyWith<$Res> get threshold;
-  @override
-  $TimerSettingOOutputCopyWith<$Res> get timer;
-}
-
-/// @nodoc
-class __$$ProfileOOutputImplCopyWithImpl<$Res>
-    extends _$ProfileOOutputCopyWithImpl<$Res, _$ProfileOOutputImpl>
-    implements _$$ProfileOOutputImplCopyWith<$Res> {
-  __$$ProfileOOutputImplCopyWithImpl(
-      _$ProfileOOutputImpl _value, $Res Function(_$ProfileOOutputImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ProfileOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? anotherId = null,
-    Object? name = null,
-    Object? chartingOrder = null,
-    Object? numberingStandard = null,
-    Object? incidenceFilter = null,
-    Object? measurementType = null,
-    Object? threshold = null,
-    Object? timer = null,
-    Object? audioGuidance = null,
-  }) {
-    return _then(_$ProfileOOutputImpl(
-      null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      anotherId: null == anotherId
-          ? _value.anotherId
-          : anotherId // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      chartingOrder: null == chartingOrder
-          ? _value.chartingOrder
-          : chartingOrder // ignore: cast_nullable_to_non_nullable
-              as ChartingOrderValue,
-      numberingStandard: null == numberingStandard
-          ? _value.numberingStandard
-          : numberingStandard // ignore: cast_nullable_to_non_nullable
-              as NumberingStandard,
-      incidenceFilter: null == incidenceFilter
-          ? _value.incidenceFilter
-          : incidenceFilter // ignore: cast_nullable_to_non_nullable
-              as IncidenceFilterOOutput,
-      measurementType: null == measurementType
-          ? _value.measurementType
-          : measurementType // ignore: cast_nullable_to_non_nullable
-              as MeasurementType,
-      threshold: null == threshold
-          ? _value.threshold
-          : threshold // ignore: cast_nullable_to_non_nullable
-              as ThresholdSettingOOutput,
-      timer: null == timer
-          ? _value.timer
-          : timer // ignore: cast_nullable_to_non_nullable
-              as TimerSettingOOutput,
-      audioGuidance: null == audioGuidance
-          ? _value.audioGuidance
-          : audioGuidance // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
 @JsonSerializable()
-class _$ProfileOOutputImpl extends _ProfileOOutput {
-  _$ProfileOOutputImpl(this.id,
+class _ProfileOOutput extends ProfileOOutput {
+  _ProfileOOutput(this.id,
       {required this.anotherId,
       @RfControl<String>() required this.name,
       @RfControl<ChartingOrderValue>() required this.chartingOrder,
@@ -2071,9 +1781,8 @@ class _$ProfileOOutputImpl extends _ProfileOOutput {
       required this.timer,
       @RfControl<bool>() required this.audioGuidance})
       : super._();
-
-  factory _$ProfileOOutputImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ProfileOOutputImplFromJson(json);
+  factory _ProfileOOutput.fromJson(Map<String, dynamic> json) =>
+      _$ProfileOOutputFromJson(json);
 
   @override
   final String id;
@@ -2101,16 +1810,26 @@ class _$ProfileOOutputImpl extends _ProfileOOutput {
   @RfControl<bool>()
   final bool audioGuidance;
 
+  /// Create a copy of ProfileOOutput
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ProfileOOutput(id: $id, anotherId: $anotherId, name: $name, chartingOrder: $chartingOrder, numberingStandard: $numberingStandard, incidenceFilter: $incidenceFilter, measurementType: $measurementType, threshold: $threshold, timer: $timer, audioGuidance: $audioGuidance)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ProfileOOutputCopyWith<_ProfileOOutput> get copyWith =>
+      __$ProfileOOutputCopyWithImpl<_ProfileOOutput>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ProfileOOutputToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProfileOOutputImpl &&
+            other is _ProfileOOutput &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.anotherId, anotherId) ||
                 other.anotherId == anotherId) &&
@@ -2145,302 +1864,208 @@ class _$ProfileOOutputImpl extends _ProfileOOutput {
       timer,
       audioGuidance);
 
-  /// Create a copy of ProfileOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ProfileOOutputImplCopyWith<_$ProfileOOutputImpl> get copyWith =>
-      __$$ProfileOOutputImplCopyWithImpl<_$ProfileOOutputImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ProfileOOutputImplToJson(
-      this,
-    );
+  String toString() {
+    return 'ProfileOOutput(id: $id, anotherId: $anotherId, name: $name, chartingOrder: $chartingOrder, numberingStandard: $numberingStandard, incidenceFilter: $incidenceFilter, measurementType: $measurementType, threshold: $threshold, timer: $timer, audioGuidance: $audioGuidance)';
   }
 }
 
-abstract class _ProfileOOutput extends ProfileOOutput {
-  factory _ProfileOOutput(final String id,
-          {required final String anotherId,
-          @RfControl<String>() required final String name,
-          @RfControl<ChartingOrderValue>()
-          required final ChartingOrderValue chartingOrder,
-          @RfControl<NumberingStandard>()
-          required final NumberingStandard numberingStandard,
-          required final IncidenceFilterOOutput incidenceFilter,
-          @RfControl<MeasurementType>()
-          required final MeasurementType measurementType,
-          required final ThresholdSettingOOutput threshold,
-          required final TimerSettingOOutput timer,
-          @RfControl<bool>() required final bool audioGuidance}) =
-      _$ProfileOOutputImpl;
-  _ProfileOOutput._() : super._();
+/// @nodoc
+abstract mixin class _$ProfileOOutputCopyWith<$Res>
+    implements $ProfileOOutputCopyWith<$Res> {
+  factory _$ProfileOOutputCopyWith(
+          _ProfileOOutput value, $Res Function(_ProfileOOutput) _then) =
+      __$ProfileOOutputCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String anotherId,
+      @RfControl<String>() String name,
+      @RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,
+      @RfControl<NumberingStandard>() NumberingStandard numberingStandard,
+      IncidenceFilterOOutput incidenceFilter,
+      @RfControl<MeasurementType>() MeasurementType measurementType,
+      ThresholdSettingOOutput threshold,
+      TimerSettingOOutput timer,
+      @RfControl<bool>() bool audioGuidance});
 
-  factory _ProfileOOutput.fromJson(Map<String, dynamic> json) =
-      _$ProfileOOutputImpl.fromJson;
+  @override
+  $ChartingOrderValueCopyWith<$Res> get chartingOrder;
+  @override
+  $IncidenceFilterOOutputCopyWith<$Res> get incidenceFilter;
+  @override
+  $ThresholdSettingOOutputCopyWith<$Res> get threshold;
+  @override
+  $TimerSettingOOutputCopyWith<$Res> get timer;
+}
 
-  @override
-  String get id;
-  @override
-  String get anotherId;
-  @override
-  @RfControl<String>()
-  String get name;
-  @override
-  @RfControl<ChartingOrderValue>()
-  ChartingOrderValue get chartingOrder;
-  @override
-  @RfControl<NumberingStandard>()
-  NumberingStandard get numberingStandard;
-  @override
-  IncidenceFilterOOutput get incidenceFilter;
-  @override
-  @RfControl<MeasurementType>()
-  MeasurementType get measurementType;
-  @override
-  ThresholdSettingOOutput get threshold;
-  @override
-  TimerSettingOOutput get timer;
-  @override
-  @RfControl<bool>()
-  bool get audioGuidance;
+/// @nodoc
+class __$ProfileOOutputCopyWithImpl<$Res>
+    implements _$ProfileOOutputCopyWith<$Res> {
+  __$ProfileOOutputCopyWithImpl(this._self, this._then);
+
+  final _ProfileOOutput _self;
+  final $Res Function(_ProfileOOutput) _then;
 
   /// Create a copy of ProfileOOutput
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ProfileOOutputImplCopyWith<_$ProfileOOutputImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? anotherId = null,
+    Object? name = null,
+    Object? chartingOrder = null,
+    Object? numberingStandard = null,
+    Object? incidenceFilter = null,
+    Object? measurementType = null,
+    Object? threshold = null,
+    Object? timer = null,
+    Object? audioGuidance = null,
+  }) {
+    return _then(_ProfileOOutput(
+      null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      anotherId: null == anotherId
+          ? _self.anotherId
+          : anotherId // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      chartingOrder: null == chartingOrder
+          ? _self.chartingOrder
+          : chartingOrder // ignore: cast_nullable_to_non_nullable
+              as ChartingOrderValue,
+      numberingStandard: null == numberingStandard
+          ? _self.numberingStandard
+          : numberingStandard // ignore: cast_nullable_to_non_nullable
+              as NumberingStandard,
+      incidenceFilter: null == incidenceFilter
+          ? _self.incidenceFilter
+          : incidenceFilter // ignore: cast_nullable_to_non_nullable
+              as IncidenceFilterOOutput,
+      measurementType: null == measurementType
+          ? _self.measurementType
+          : measurementType // ignore: cast_nullable_to_non_nullable
+              as MeasurementType,
+      threshold: null == threshold
+          ? _self.threshold
+          : threshold // ignore: cast_nullable_to_non_nullable
+              as ThresholdSettingOOutput,
+      timer: null == timer
+          ? _self.timer
+          : timer // ignore: cast_nullable_to_non_nullable
+              as TimerSettingOOutput,
+      audioGuidance: null == audioGuidance
+          ? _self.audioGuidance
+          : audioGuidance // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 
-ThresholdSettingOOutput _$ThresholdSettingOOutputFromJson(
-    Map<String, dynamic> json) {
-  return _ThresholdSettingOOutput.fromJson(json);
+  /// Create a copy of ProfileOOutput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ChartingOrderValueCopyWith<$Res> get chartingOrder {
+    return $ChartingOrderValueCopyWith<$Res>(_self.chartingOrder, (value) {
+      return _then(_self.copyWith(chartingOrder: value));
+    });
+  }
+
+  /// Create a copy of ProfileOOutput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $IncidenceFilterOOutputCopyWith<$Res> get incidenceFilter {
+    return $IncidenceFilterOOutputCopyWith<$Res>(_self.incidenceFilter,
+        (value) {
+      return _then(_self.copyWith(incidenceFilter: value));
+    });
+  }
+
+  /// Create a copy of ProfileOOutput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ThresholdSettingOOutputCopyWith<$Res> get threshold {
+    return $ThresholdSettingOOutputCopyWith<$Res>(_self.threshold, (value) {
+      return _then(_self.copyWith(threshold: value));
+    });
+  }
+
+  /// Create a copy of ProfileOOutput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TimerSettingOOutputCopyWith<$Res> get timer {
+    return $TimerSettingOOutputCopyWith<$Res>(_self.timer, (value) {
+      return _then(_self.copyWith(timer: value));
+    });
+  }
 }
 
 /// @nodoc
 mixin _$ThresholdSettingOOutput {
   @RfControl<bool>()
-  bool get isEnabled => throw _privateConstructorUsedError;
+  bool get isEnabled;
   @RfControl<int>()
-  int get value => throw _privateConstructorUsedError;
-
-  /// Serializes this ThresholdSettingOOutput to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  int get value;
 
   /// Create a copy of ThresholdSettingOOutput
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $ThresholdSettingOOutputCopyWith<ThresholdSettingOOutput> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$ThresholdSettingOOutputCopyWithImpl<ThresholdSettingOOutput>(
+          this as ThresholdSettingOOutput, _$identity);
 
-/// @nodoc
-abstract class $ThresholdSettingOOutputCopyWith<$Res> {
-  factory $ThresholdSettingOOutputCopyWith(ThresholdSettingOOutput value,
-          $Res Function(ThresholdSettingOOutput) then) =
-      _$ThresholdSettingOOutputCopyWithImpl<$Res, ThresholdSettingOOutput>;
-  @useResult
-  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
-}
+  /// Serializes this ThresholdSettingOOutput to a JSON map.
+  Map<String, dynamic> toJson();
 
-/// @nodoc
-class _$ThresholdSettingOOutputCopyWithImpl<$Res,
-        $Val extends ThresholdSettingOOutput>
-    implements $ThresholdSettingOOutputCopyWith<$Res> {
-  _$ThresholdSettingOOutputCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ThresholdSettingOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? isEnabled = null,
-    Object? value = null,
-  }) {
-    return _then(_value.copyWith(
-      isEnabled: null == isEnabled
-          ? _value.isEnabled
-          : isEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ThresholdSettingOOutput &&
+            (identical(other.isEnabled, isEnabled) ||
+                other.isEnabled == isEnabled) &&
+            (identical(other.value, value) || other.value == value));
   }
-}
 
-/// @nodoc
-abstract class _$$ThresholdSettingOOutputImplCopyWith<$Res>
-    implements $ThresholdSettingOOutputCopyWith<$Res> {
-  factory _$$ThresholdSettingOOutputImplCopyWith(
-          _$ThresholdSettingOOutputImpl value,
-          $Res Function(_$ThresholdSettingOOutputImpl) then) =
-      __$$ThresholdSettingOOutputImplCopyWithImpl<$Res>;
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @useResult
-  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
-}
-
-/// @nodoc
-class __$$ThresholdSettingOOutputImplCopyWithImpl<$Res>
-    extends _$ThresholdSettingOOutputCopyWithImpl<$Res,
-        _$ThresholdSettingOOutputImpl>
-    implements _$$ThresholdSettingOOutputImplCopyWith<$Res> {
-  __$$ThresholdSettingOOutputImplCopyWithImpl(
-      _$ThresholdSettingOOutputImpl _value,
-      $Res Function(_$ThresholdSettingOOutputImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ThresholdSettingOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isEnabled = null,
-    Object? value = null,
-  }) {
-    return _then(_$ThresholdSettingOOutputImpl(
-      isEnabled: null == isEnabled
-          ? _value.isEnabled
-          : isEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$ThresholdSettingOOutputImpl implements _ThresholdSettingOOutput {
-  const _$ThresholdSettingOOutputImpl(
-      {@RfControl<bool>() this.isEnabled = true,
-      @RfControl<int>() this.value = 2});
-
-  factory _$ThresholdSettingOOutputImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ThresholdSettingOOutputImplFromJson(json);
-
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isEnabled;
-  @override
-  @JsonKey()
-  @RfControl<int>()
-  final int value;
+  int get hashCode => Object.hash(runtimeType, isEnabled, value);
 
   @override
   String toString() {
     return 'ThresholdSettingOOutput(isEnabled: $isEnabled, value: $value)';
   }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ThresholdSettingOOutputImpl &&
-            (identical(other.isEnabled, isEnabled) ||
-                other.isEnabled == isEnabled) &&
-            (identical(other.value, value) || other.value == value));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, isEnabled, value);
-
-  /// Create a copy of ThresholdSettingOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ThresholdSettingOOutputImplCopyWith<_$ThresholdSettingOOutputImpl>
-      get copyWith => __$$ThresholdSettingOOutputImplCopyWithImpl<
-          _$ThresholdSettingOOutputImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ThresholdSettingOOutputImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _ThresholdSettingOOutput implements ThresholdSettingOOutput {
-  const factory _ThresholdSettingOOutput(
-      {@RfControl<bool>() final bool isEnabled,
-      @RfControl<int>() final int value}) = _$ThresholdSettingOOutputImpl;
-
-  factory _ThresholdSettingOOutput.fromJson(Map<String, dynamic> json) =
-      _$ThresholdSettingOOutputImpl.fromJson;
-
-  @override
-  @RfControl<bool>()
-  bool get isEnabled;
-  @override
-  @RfControl<int>()
-  int get value;
-
-  /// Create a copy of ThresholdSettingOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ThresholdSettingOOutputImplCopyWith<_$ThresholdSettingOOutputImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-TimerSettingOOutput _$TimerSettingOOutputFromJson(Map<String, dynamic> json) {
-  return _TimerSettingOOutput.fromJson(json);
 }
 
 /// @nodoc
-mixin _$TimerSettingOOutput {
-  @RfControl<bool>()
-  bool get isEnabled => throw _privateConstructorUsedError;
-  @RfControl<int>()
-  int get value => throw _privateConstructorUsedError;
-
-  /// Serializes this TimerSettingOOutput to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of TimerSettingOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $TimerSettingOOutputCopyWith<TimerSettingOOutput> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $TimerSettingOOutputCopyWith<$Res> {
-  factory $TimerSettingOOutputCopyWith(
-          TimerSettingOOutput value, $Res Function(TimerSettingOOutput) then) =
-      _$TimerSettingOOutputCopyWithImpl<$Res, TimerSettingOOutput>;
+abstract mixin class $ThresholdSettingOOutputCopyWith<$Res> {
+  factory $ThresholdSettingOOutputCopyWith(ThresholdSettingOOutput value,
+          $Res Function(ThresholdSettingOOutput) _then) =
+      _$ThresholdSettingOOutputCopyWithImpl;
   @useResult
   $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
 }
 
 /// @nodoc
-class _$TimerSettingOOutputCopyWithImpl<$Res, $Val extends TimerSettingOOutput>
-    implements $TimerSettingOOutputCopyWith<$Res> {
-  _$TimerSettingOOutputCopyWithImpl(this._value, this._then);
+class _$ThresholdSettingOOutputCopyWithImpl<$Res>
+    implements $ThresholdSettingOOutputCopyWith<$Res> {
+  _$ThresholdSettingOOutputCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ThresholdSettingOOutput _self;
+  final $Res Function(ThresholdSettingOOutput) _then;
 
-  /// Create a copy of TimerSettingOOutput
+  /// Create a copy of ThresholdSettingOOutput
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -2448,53 +2073,13 @@ class _$TimerSettingOOutputCopyWithImpl<$Res, $Val extends TimerSettingOOutput>
     Object? isEnabled = null,
     Object? value = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       isEnabled: null == isEnabled
-          ? _value.isEnabled
+          ? _self.isEnabled
           : isEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
       value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$TimerSettingOOutputImplCopyWith<$Res>
-    implements $TimerSettingOOutputCopyWith<$Res> {
-  factory _$$TimerSettingOOutputImplCopyWith(_$TimerSettingOOutputImpl value,
-          $Res Function(_$TimerSettingOOutputImpl) then) =
-      __$$TimerSettingOOutputImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
-}
-
-/// @nodoc
-class __$$TimerSettingOOutputImplCopyWithImpl<$Res>
-    extends _$TimerSettingOOutputCopyWithImpl<$Res, _$TimerSettingOOutputImpl>
-    implements _$$TimerSettingOOutputImplCopyWith<$Res> {
-  __$$TimerSettingOOutputImplCopyWithImpl(_$TimerSettingOOutputImpl _value,
-      $Res Function(_$TimerSettingOOutputImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of TimerSettingOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isEnabled = null,
-    Object? value = null,
-  }) {
-    return _then(_$TimerSettingOOutputImpl(
-      isEnabled: null == isEnabled
-          ? _value.isEnabled
-          : isEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      value: null == value
-          ? _value.value
+          ? _self.value
           : value // ignore: cast_nullable_to_non_nullable
               as int,
     ));
@@ -2503,13 +2088,12 @@ class __$$TimerSettingOOutputImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$TimerSettingOOutputImpl implements _TimerSettingOOutput {
-  const _$TimerSettingOOutputImpl(
-      {@RfControl<bool>() this.isEnabled = false,
-      @RfControl<int>() this.value = 5});
-
-  factory _$TimerSettingOOutputImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TimerSettingOOutputImplFromJson(json);
+class _ThresholdSettingOOutput implements ThresholdSettingOOutput {
+  const _ThresholdSettingOOutput(
+      {@RfControl<bool>() this.isEnabled = true,
+      @RfControl<int>() this.value = 2});
+  factory _ThresholdSettingOOutput.fromJson(Map<String, dynamic> json) =>
+      _$ThresholdSettingOOutputFromJson(json);
 
   @override
   @JsonKey()
@@ -2520,16 +2104,27 @@ class _$TimerSettingOOutputImpl implements _TimerSettingOOutput {
   @RfControl<int>()
   final int value;
 
+  /// Create a copy of ThresholdSettingOOutput
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'TimerSettingOOutput(isEnabled: $isEnabled, value: $value)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ThresholdSettingOOutputCopyWith<_ThresholdSettingOOutput> get copyWith =>
+      __$ThresholdSettingOOutputCopyWithImpl<_ThresholdSettingOOutput>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ThresholdSettingOOutputToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TimerSettingOOutputImpl &&
+            other is _ThresholdSettingOOutput &&
             (identical(other.isEnabled, isEnabled) ||
                 other.isEnabled == isEnabled) &&
             (identical(other.value, value) || other.value == value));
@@ -2539,151 +2134,289 @@ class _$TimerSettingOOutputImpl implements _TimerSettingOOutput {
   @override
   int get hashCode => Object.hash(runtimeType, isEnabled, value);
 
-  /// Create a copy of TimerSettingOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$TimerSettingOOutputImplCopyWith<_$TimerSettingOOutputImpl> get copyWith =>
-      __$$TimerSettingOOutputImplCopyWithImpl<_$TimerSettingOOutputImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TimerSettingOOutputImplToJson(
-      this,
-    );
+  String toString() {
+    return 'ThresholdSettingOOutput(isEnabled: $isEnabled, value: $value)';
   }
 }
 
-abstract class _TimerSettingOOutput implements TimerSettingOOutput {
-  const factory _TimerSettingOOutput(
-      {@RfControl<bool>() final bool isEnabled,
-      @RfControl<int>() final int value}) = _$TimerSettingOOutputImpl;
-
-  factory _TimerSettingOOutput.fromJson(Map<String, dynamic> json) =
-      _$TimerSettingOOutputImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$ThresholdSettingOOutputCopyWith<$Res>
+    implements $ThresholdSettingOOutputCopyWith<$Res> {
+  factory _$ThresholdSettingOOutputCopyWith(_ThresholdSettingOOutput value,
+          $Res Function(_ThresholdSettingOOutput) _then) =
+      __$ThresholdSettingOOutputCopyWithImpl;
   @override
+  @useResult
+  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
+}
+
+/// @nodoc
+class __$ThresholdSettingOOutputCopyWithImpl<$Res>
+    implements _$ThresholdSettingOOutputCopyWith<$Res> {
+  __$ThresholdSettingOOutputCopyWithImpl(this._self, this._then);
+
+  final _ThresholdSettingOOutput _self;
+  final $Res Function(_ThresholdSettingOOutput) _then;
+
+  /// Create a copy of ThresholdSettingOOutput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? isEnabled = null,
+    Object? value = null,
+  }) {
+    return _then(_ThresholdSettingOOutput(
+      isEnabled: null == isEnabled
+          ? _self.isEnabled
+          : isEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      value: null == value
+          ? _self.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+mixin _$TimerSettingOOutput {
   @RfControl<bool>()
   bool get isEnabled;
-  @override
   @RfControl<int>()
   int get value;
 
   /// Create a copy of TimerSettingOOutput
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TimerSettingOOutputImplCopyWith<_$TimerSettingOOutputImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $TimerSettingOOutputCopyWith<TimerSettingOOutput> get copyWith =>
+      _$TimerSettingOOutputCopyWithImpl<TimerSettingOOutput>(
+          this as TimerSettingOOutput, _$identity);
+
+  /// Serializes this TimerSettingOOutput to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TimerSettingOOutput &&
+            (identical(other.isEnabled, isEnabled) ||
+                other.isEnabled == isEnabled) &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, isEnabled, value);
+
+  @override
+  String toString() {
+    return 'TimerSettingOOutput(isEnabled: $isEnabled, value: $value)';
+  }
 }
 
-IncidenceFilterOOutput _$IncidenceFilterOOutputFromJson(
-    Map<String, dynamic> json) {
-  return _IncidenceFilterOOutput.fromJson(json);
+/// @nodoc
+abstract mixin class $TimerSettingOOutputCopyWith<$Res> {
+  factory $TimerSettingOOutputCopyWith(
+          TimerSettingOOutput value, $Res Function(TimerSettingOOutput) _then) =
+      _$TimerSettingOOutputCopyWithImpl;
+  @useResult
+  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
+}
+
+/// @nodoc
+class _$TimerSettingOOutputCopyWithImpl<$Res>
+    implements $TimerSettingOOutputCopyWith<$Res> {
+  _$TimerSettingOOutputCopyWithImpl(this._self, this._then);
+
+  final TimerSettingOOutput _self;
+  final $Res Function(TimerSettingOOutput) _then;
+
+  /// Create a copy of TimerSettingOOutput
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isEnabled = null,
+    Object? value = null,
+  }) {
+    return _then(_self.copyWith(
+      isEnabled: null == isEnabled
+          ? _self.isEnabled
+          : isEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      value: null == value
+          ? _self.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _TimerSettingOOutput implements TimerSettingOOutput {
+  const _TimerSettingOOutput(
+      {@RfControl<bool>() this.isEnabled = false,
+      @RfControl<int>() this.value = 5});
+  factory _TimerSettingOOutput.fromJson(Map<String, dynamic> json) =>
+      _$TimerSettingOOutputFromJson(json);
+
+  @override
+  @JsonKey()
+  @RfControl<bool>()
+  final bool isEnabled;
+  @override
+  @JsonKey()
+  @RfControl<int>()
+  final int value;
+
+  /// Create a copy of TimerSettingOOutput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$TimerSettingOOutputCopyWith<_TimerSettingOOutput> get copyWith =>
+      __$TimerSettingOOutputCopyWithImpl<_TimerSettingOOutput>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$TimerSettingOOutputToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _TimerSettingOOutput &&
+            (identical(other.isEnabled, isEnabled) ||
+                other.isEnabled == isEnabled) &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, isEnabled, value);
+
+  @override
+  String toString() {
+    return 'TimerSettingOOutput(isEnabled: $isEnabled, value: $value)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$TimerSettingOOutputCopyWith<$Res>
+    implements $TimerSettingOOutputCopyWith<$Res> {
+  factory _$TimerSettingOOutputCopyWith(_TimerSettingOOutput value,
+          $Res Function(_TimerSettingOOutput) _then) =
+      __$TimerSettingOOutputCopyWithImpl;
+  @override
+  @useResult
+  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
+}
+
+/// @nodoc
+class __$TimerSettingOOutputCopyWithImpl<$Res>
+    implements _$TimerSettingOOutputCopyWith<$Res> {
+  __$TimerSettingOOutputCopyWithImpl(this._self, this._then);
+
+  final _TimerSettingOOutput _self;
+  final $Res Function(_TimerSettingOOutput) _then;
+
+  /// Create a copy of TimerSettingOOutput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? isEnabled = null,
+    Object? value = null,
+  }) {
+    return _then(_TimerSettingOOutput(
+      isEnabled: null == isEnabled
+          ? _self.isEnabled
+          : isEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      value: null == value
+          ? _self.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$IncidenceFilterOOutput {
   @RfControl<bool>()
-  bool get isMobilityEnabled => throw _privateConstructorUsedError;
+  bool get isMobilityEnabled;
   @RfControl<bool>()
-  bool get isFurcationEnabled => throw _privateConstructorUsedError;
+  bool get isFurcationEnabled;
   @RfControl<bool>()
-  bool get isBleedingEnabled => throw _privateConstructorUsedError;
+  bool get isBleedingEnabled;
   @RfControl<bool>()
-  bool get isSuppurationEnabled => throw _privateConstructorUsedError;
+  bool get isSuppurationEnabled;
   @RfControl<bool>()
-  bool get isCalculusEnabled => throw _privateConstructorUsedError;
+  bool get isCalculusEnabled;
   @RfControl<bool>()
-  bool get isPlaqueEnabled => throw _privateConstructorUsedError;
-
-  /// Serializes this IncidenceFilterOOutput to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  bool get isPlaqueEnabled;
 
   /// Create a copy of IncidenceFilterOOutput
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $IncidenceFilterOOutputCopyWith<IncidenceFilterOOutput> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $IncidenceFilterOOutputCopyWith<$Res> {
-  factory $IncidenceFilterOOutputCopyWith(IncidenceFilterOOutput value,
-          $Res Function(IncidenceFilterOOutput) then) =
-      _$IncidenceFilterOOutputCopyWithImpl<$Res, IncidenceFilterOOutput>;
-  @useResult
-  $Res call(
-      {@RfControl<bool>() bool isMobilityEnabled,
-      @RfControl<bool>() bool isFurcationEnabled,
-      @RfControl<bool>() bool isBleedingEnabled,
-      @RfControl<bool>() bool isSuppurationEnabled,
-      @RfControl<bool>() bool isCalculusEnabled,
-      @RfControl<bool>() bool isPlaqueEnabled});
-}
-
-/// @nodoc
-class _$IncidenceFilterOOutputCopyWithImpl<$Res,
-        $Val extends IncidenceFilterOOutput>
-    implements $IncidenceFilterOOutputCopyWith<$Res> {
-  _$IncidenceFilterOOutputCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of IncidenceFilterOOutput
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $IncidenceFilterOOutputCopyWith<IncidenceFilterOOutput> get copyWith =>
+      _$IncidenceFilterOOutputCopyWithImpl<IncidenceFilterOOutput>(
+          this as IncidenceFilterOOutput, _$identity);
+
+  /// Serializes this IncidenceFilterOOutput to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? isMobilityEnabled = null,
-    Object? isFurcationEnabled = null,
-    Object? isBleedingEnabled = null,
-    Object? isSuppurationEnabled = null,
-    Object? isCalculusEnabled = null,
-    Object? isPlaqueEnabled = null,
-  }) {
-    return _then(_value.copyWith(
-      isMobilityEnabled: null == isMobilityEnabled
-          ? _value.isMobilityEnabled
-          : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFurcationEnabled: null == isFurcationEnabled
-          ? _value.isFurcationEnabled
-          : isFurcationEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isBleedingEnabled: null == isBleedingEnabled
-          ? _value.isBleedingEnabled
-          : isBleedingEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSuppurationEnabled: null == isSuppurationEnabled
-          ? _value.isSuppurationEnabled
-          : isSuppurationEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isCalculusEnabled: null == isCalculusEnabled
-          ? _value.isCalculusEnabled
-          : isCalculusEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isPlaqueEnabled: null == isPlaqueEnabled
-          ? _value.isPlaqueEnabled
-          : isPlaqueEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is IncidenceFilterOOutput &&
+            (identical(other.isMobilityEnabled, isMobilityEnabled) ||
+                other.isMobilityEnabled == isMobilityEnabled) &&
+            (identical(other.isFurcationEnabled, isFurcationEnabled) ||
+                other.isFurcationEnabled == isFurcationEnabled) &&
+            (identical(other.isBleedingEnabled, isBleedingEnabled) ||
+                other.isBleedingEnabled == isBleedingEnabled) &&
+            (identical(other.isSuppurationEnabled, isSuppurationEnabled) ||
+                other.isSuppurationEnabled == isSuppurationEnabled) &&
+            (identical(other.isCalculusEnabled, isCalculusEnabled) ||
+                other.isCalculusEnabled == isCalculusEnabled) &&
+            (identical(other.isPlaqueEnabled, isPlaqueEnabled) ||
+                other.isPlaqueEnabled == isPlaqueEnabled));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      isMobilityEnabled,
+      isFurcationEnabled,
+      isBleedingEnabled,
+      isSuppurationEnabled,
+      isCalculusEnabled,
+      isPlaqueEnabled);
+
+  @override
+  String toString() {
+    return 'IncidenceFilterOOutput(isMobilityEnabled: $isMobilityEnabled, isFurcationEnabled: $isFurcationEnabled, isBleedingEnabled: $isBleedingEnabled, isSuppurationEnabled: $isSuppurationEnabled, isCalculusEnabled: $isCalculusEnabled, isPlaqueEnabled: $isPlaqueEnabled)';
   }
 }
 
 /// @nodoc
-abstract class _$$IncidenceFilterOOutputImplCopyWith<$Res>
-    implements $IncidenceFilterOOutputCopyWith<$Res> {
-  factory _$$IncidenceFilterOOutputImplCopyWith(
-          _$IncidenceFilterOOutputImpl value,
-          $Res Function(_$IncidenceFilterOOutputImpl) then) =
-      __$$IncidenceFilterOOutputImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $IncidenceFilterOOutputCopyWith<$Res> {
+  factory $IncidenceFilterOOutputCopyWith(IncidenceFilterOOutput value,
+          $Res Function(IncidenceFilterOOutput) _then) =
+      _$IncidenceFilterOOutputCopyWithImpl;
   @useResult
   $Res call(
       {@RfControl<bool>() bool isMobilityEnabled,
@@ -2695,14 +2428,12 @@ abstract class _$$IncidenceFilterOOutputImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$IncidenceFilterOOutputImplCopyWithImpl<$Res>
-    extends _$IncidenceFilterOOutputCopyWithImpl<$Res,
-        _$IncidenceFilterOOutputImpl>
-    implements _$$IncidenceFilterOOutputImplCopyWith<$Res> {
-  __$$IncidenceFilterOOutputImplCopyWithImpl(
-      _$IncidenceFilterOOutputImpl _value,
-      $Res Function(_$IncidenceFilterOOutputImpl) _then)
-      : super(_value, _then);
+class _$IncidenceFilterOOutputCopyWithImpl<$Res>
+    implements $IncidenceFilterOOutputCopyWith<$Res> {
+  _$IncidenceFilterOOutputCopyWithImpl(this._self, this._then);
+
+  final IncidenceFilterOOutput _self;
+  final $Res Function(IncidenceFilterOOutput) _then;
 
   /// Create a copy of IncidenceFilterOOutput
   /// with the given fields replaced by the non-null parameter values.
@@ -2716,29 +2447,29 @@ class __$$IncidenceFilterOOutputImplCopyWithImpl<$Res>
     Object? isCalculusEnabled = null,
     Object? isPlaqueEnabled = null,
   }) {
-    return _then(_$IncidenceFilterOOutputImpl(
+    return _then(_self.copyWith(
       isMobilityEnabled: null == isMobilityEnabled
-          ? _value.isMobilityEnabled
+          ? _self.isMobilityEnabled
           : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
       isFurcationEnabled: null == isFurcationEnabled
-          ? _value.isFurcationEnabled
+          ? _self.isFurcationEnabled
           : isFurcationEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
       isBleedingEnabled: null == isBleedingEnabled
-          ? _value.isBleedingEnabled
+          ? _self.isBleedingEnabled
           : isBleedingEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
       isSuppurationEnabled: null == isSuppurationEnabled
-          ? _value.isSuppurationEnabled
+          ? _self.isSuppurationEnabled
           : isSuppurationEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
       isCalculusEnabled: null == isCalculusEnabled
-          ? _value.isCalculusEnabled
+          ? _self.isCalculusEnabled
           : isCalculusEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
       isPlaqueEnabled: null == isPlaqueEnabled
-          ? _value.isPlaqueEnabled
+          ? _self.isPlaqueEnabled
           : isPlaqueEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
@@ -2747,17 +2478,16 @@ class __$$IncidenceFilterOOutputImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$IncidenceFilterOOutputImpl implements _IncidenceFilterOOutput {
-  const _$IncidenceFilterOOutputImpl(
+class _IncidenceFilterOOutput implements IncidenceFilterOOutput {
+  const _IncidenceFilterOOutput(
       {@RfControl<bool>() this.isMobilityEnabled = true,
       @RfControl<bool>() this.isFurcationEnabled = true,
       @RfControl<bool>() this.isBleedingEnabled = true,
       @RfControl<bool>() this.isSuppurationEnabled = true,
       @RfControl<bool>() this.isCalculusEnabled = true,
       @RfControl<bool>() this.isPlaqueEnabled = true});
-
-  factory _$IncidenceFilterOOutputImpl.fromJson(Map<String, dynamic> json) =>
-      _$$IncidenceFilterOOutputImplFromJson(json);
+  factory _IncidenceFilterOOutput.fromJson(Map<String, dynamic> json) =>
+      _$IncidenceFilterOOutputFromJson(json);
 
   @override
   @JsonKey()
@@ -2784,16 +2514,27 @@ class _$IncidenceFilterOOutputImpl implements _IncidenceFilterOOutput {
   @RfControl<bool>()
   final bool isPlaqueEnabled;
 
+  /// Create a copy of IncidenceFilterOOutput
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'IncidenceFilterOOutput(isMobilityEnabled: $isMobilityEnabled, isFurcationEnabled: $isFurcationEnabled, isBleedingEnabled: $isBleedingEnabled, isSuppurationEnabled: $isSuppurationEnabled, isCalculusEnabled: $isCalculusEnabled, isPlaqueEnabled: $isPlaqueEnabled)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$IncidenceFilterOOutputCopyWith<_IncidenceFilterOOutput> get copyWith =>
+      __$IncidenceFilterOOutputCopyWithImpl<_IncidenceFilterOOutput>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$IncidenceFilterOOutputToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$IncidenceFilterOOutputImpl &&
+            other is _IncidenceFilterOOutput &&
             (identical(other.isMobilityEnabled, isMobilityEnabled) ||
                 other.isMobilityEnabled == isMobilityEnabled) &&
             (identical(other.isFurcationEnabled, isFurcationEnabled) ||
@@ -2819,59 +2560,76 @@ class _$IncidenceFilterOOutputImpl implements _IncidenceFilterOOutput {
       isCalculusEnabled,
       isPlaqueEnabled);
 
-  /// Create a copy of IncidenceFilterOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$IncidenceFilterOOutputImplCopyWith<_$IncidenceFilterOOutputImpl>
-      get copyWith => __$$IncidenceFilterOOutputImplCopyWithImpl<
-          _$IncidenceFilterOOutputImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$IncidenceFilterOOutputImplToJson(
-      this,
-    );
+  String toString() {
+    return 'IncidenceFilterOOutput(isMobilityEnabled: $isMobilityEnabled, isFurcationEnabled: $isFurcationEnabled, isBleedingEnabled: $isBleedingEnabled, isSuppurationEnabled: $isSuppurationEnabled, isCalculusEnabled: $isCalculusEnabled, isPlaqueEnabled: $isPlaqueEnabled)';
   }
 }
 
-abstract class _IncidenceFilterOOutput implements IncidenceFilterOOutput {
-  const factory _IncidenceFilterOOutput(
-          {@RfControl<bool>() final bool isMobilityEnabled,
-          @RfControl<bool>() final bool isFurcationEnabled,
-          @RfControl<bool>() final bool isBleedingEnabled,
-          @RfControl<bool>() final bool isSuppurationEnabled,
-          @RfControl<bool>() final bool isCalculusEnabled,
-          @RfControl<bool>() final bool isPlaqueEnabled}) =
-      _$IncidenceFilterOOutputImpl;
+/// @nodoc
+abstract mixin class _$IncidenceFilterOOutputCopyWith<$Res>
+    implements $IncidenceFilterOOutputCopyWith<$Res> {
+  factory _$IncidenceFilterOOutputCopyWith(_IncidenceFilterOOutput value,
+          $Res Function(_IncidenceFilterOOutput) _then) =
+      __$IncidenceFilterOOutputCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {@RfControl<bool>() bool isMobilityEnabled,
+      @RfControl<bool>() bool isFurcationEnabled,
+      @RfControl<bool>() bool isBleedingEnabled,
+      @RfControl<bool>() bool isSuppurationEnabled,
+      @RfControl<bool>() bool isCalculusEnabled,
+      @RfControl<bool>() bool isPlaqueEnabled});
+}
 
-  factory _IncidenceFilterOOutput.fromJson(Map<String, dynamic> json) =
-      _$IncidenceFilterOOutputImpl.fromJson;
+/// @nodoc
+class __$IncidenceFilterOOutputCopyWithImpl<$Res>
+    implements _$IncidenceFilterOOutputCopyWith<$Res> {
+  __$IncidenceFilterOOutputCopyWithImpl(this._self, this._then);
 
-  @override
-  @RfControl<bool>()
-  bool get isMobilityEnabled;
-  @override
-  @RfControl<bool>()
-  bool get isFurcationEnabled;
-  @override
-  @RfControl<bool>()
-  bool get isBleedingEnabled;
-  @override
-  @RfControl<bool>()
-  bool get isSuppurationEnabled;
-  @override
-  @RfControl<bool>()
-  bool get isCalculusEnabled;
-  @override
-  @RfControl<bool>()
-  bool get isPlaqueEnabled;
+  final _IncidenceFilterOOutput _self;
+  final $Res Function(_IncidenceFilterOOutput) _then;
 
   /// Create a copy of IncidenceFilterOOutput
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$IncidenceFilterOOutputImplCopyWith<_$IncidenceFilterOOutputImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? isMobilityEnabled = null,
+    Object? isFurcationEnabled = null,
+    Object? isBleedingEnabled = null,
+    Object? isSuppurationEnabled = null,
+    Object? isCalculusEnabled = null,
+    Object? isPlaqueEnabled = null,
+  }) {
+    return _then(_IncidenceFilterOOutput(
+      isMobilityEnabled: null == isMobilityEnabled
+          ? _self.isMobilityEnabled
+          : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFurcationEnabled: null == isFurcationEnabled
+          ? _self.isFurcationEnabled
+          : isFurcationEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isBleedingEnabled: null == isBleedingEnabled
+          ? _self.isBleedingEnabled
+          : isBleedingEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSuppurationEnabled: null == isSuppurationEnabled
+          ? _self.isSuppurationEnabled
+          : isSuppurationEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isCalculusEnabled: null == isCalculusEnabled
+          ? _self.isCalculusEnabled
+          : isCalculusEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPlaqueEnabled: null == isPlaqueEnabled
+          ? _self.isPlaqueEnabled
+          : isPlaqueEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
+
+// dart format on

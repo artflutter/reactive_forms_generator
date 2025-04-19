@@ -26,7 +26,7 @@ void main() {
             
             @freezed
             @Rf(output: true)
-            class FreezedClassO with _\$FreezedClassO {
+            abstract class FreezedClassO with _\$FreezedClassO {
               FreezedClassO._();
             
               factory FreezedClassO(
@@ -1369,7 +1369,7 @@ class FreezedClassOForm
 
 @freezed
 @Rf(output: true)
-class FreezedClassOOutput with _$FreezedClassOOutput {
+abstract class FreezedClassOOutput with _$FreezedClassOOutput {
   FreezedClassOOutput._();
   factory FreezedClassOOutput(@RfControl<String>() String? gender,
       @RfControl(validators: [RequiredValidator()]) String genderR,

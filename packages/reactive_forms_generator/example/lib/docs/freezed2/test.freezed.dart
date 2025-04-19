@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,71 +10,46 @@ part of 'test.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Test {
   @RfControl<String>()
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @RfControl<String>()
-  String? get description => throw _privateConstructorUsedError;
+  String? get description;
 
   /// Create a copy of Test
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $TestCopyWith<Test> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $TestCopyWith<$Res> {
-  factory $TestCopyWith(Test value, $Res Function(Test) then) =
-      _$TestCopyWithImpl<$Res, Test>;
-  @useResult
-  $Res call(
-      {@RfControl<String>() String title,
-      @RfControl<String>() String? description});
-}
-
-/// @nodoc
-class _$TestCopyWithImpl<$Res, $Val extends Test>
-    implements $TestCopyWith<$Res> {
-  _$TestCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Test
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $TestCopyWith<Test> get copyWith =>
+      _$TestCopyWithImpl<Test>(this as Test, _$identity);
+
   @override
-  $Res call({
-    Object? title = null,
-    Object? description = freezed,
-  }) {
-    return _then(_value.copyWith(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Test &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, title, description);
+
+  @override
+  String toString() {
+    return 'Test(title: $title, description: $description)';
   }
 }
 
 /// @nodoc
-abstract class _$$TestImplCopyWith<$Res> implements $TestCopyWith<$Res> {
-  factory _$$TestImplCopyWith(
-          _$TestImpl value, $Res Function(_$TestImpl) then) =
-      __$$TestImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $TestCopyWith<$Res> {
+  factory $TestCopyWith(Test value, $Res Function(Test) _then) =
+      _$TestCopyWithImpl;
   @useResult
   $Res call(
       {@RfControl<String>() String title,
@@ -81,11 +57,11 @@ abstract class _$$TestImplCopyWith<$Res> implements $TestCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$TestImplCopyWithImpl<$Res>
-    extends _$TestCopyWithImpl<$Res, _$TestImpl>
-    implements _$$TestImplCopyWith<$Res> {
-  __$$TestImplCopyWithImpl(_$TestImpl _value, $Res Function(_$TestImpl) _then)
-      : super(_value, _then);
+class _$TestCopyWithImpl<$Res> implements $TestCopyWith<$Res> {
+  _$TestCopyWithImpl(this._self, this._then);
+
+  final Test _self;
+  final $Res Function(Test) _then;
 
   /// Create a copy of Test
   /// with the given fields replaced by the non-null parameter values.
@@ -95,13 +71,13 @@ class __$$TestImplCopyWithImpl<$Res>
     Object? title = null,
     Object? description = freezed,
   }) {
-    return _then(_$TestImpl(
+    return _then(_self.copyWith(
       title: null == title
-          ? _value.title
+          ? _self.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
       description: freezed == description
-          ? _value.description
+          ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
@@ -110,8 +86,8 @@ class __$$TestImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TestImpl extends _Test {
-  const _$TestImpl(
+class _Test extends Test {
+  const _Test(
       {@RfControl<String>() required this.title,
       @RfControl<String>() this.description})
       : super._();
@@ -123,16 +99,19 @@ class _$TestImpl extends _Test {
   @RfControl<String>()
   final String? description;
 
+  /// Create a copy of Test
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Test(title: $title, description: $description)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$TestCopyWith<_Test> get copyWith =>
+      __$TestCopyWithImpl<_Test>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TestImpl &&
+            other is _Test &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description));
@@ -141,32 +120,49 @@ class _$TestImpl extends _Test {
   @override
   int get hashCode => Object.hash(runtimeType, title, description);
 
+  @override
+  String toString() {
+    return 'Test(title: $title, description: $description)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$TestCopyWith<$Res> implements $TestCopyWith<$Res> {
+  factory _$TestCopyWith(_Test value, $Res Function(_Test) _then) =
+      __$TestCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {@RfControl<String>() String title,
+      @RfControl<String>() String? description});
+}
+
+/// @nodoc
+class __$TestCopyWithImpl<$Res> implements _$TestCopyWith<$Res> {
+  __$TestCopyWithImpl(this._self, this._then);
+
+  final _Test _self;
+  final $Res Function(_Test) _then;
+
   /// Create a copy of Test
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$TestImplCopyWith<_$TestImpl> get copyWith =>
-      __$$TestImplCopyWithImpl<_$TestImpl>(this, _$identity);
+  $Res call({
+    Object? title = null,
+    Object? description = freezed,
+  }) {
+    return _then(_Test(
+      title: null == title
+          ? _self.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: freezed == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
-abstract class _Test extends Test {
-  const factory _Test(
-      {@RfControl<String>() required final String title,
-      @RfControl<String>() final String? description}) = _$TestImpl;
-  const _Test._() : super._();
-
-  @override
-  @RfControl<String>()
-  String get title;
-  @override
-  @RfControl<String>()
-  String? get description;
-
-  /// Create a copy of Test
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TestImplCopyWith<_$TestImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

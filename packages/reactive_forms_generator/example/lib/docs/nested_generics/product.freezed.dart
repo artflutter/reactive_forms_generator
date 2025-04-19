@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,31 +10,48 @@ part of 'product.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ProductDetails<P extends Product, C extends Cart> {
   @RfControl()
-  String? get description => throw _privateConstructorUsedError;
+  String? get description;
   @Rf(output: false)
-  Id<P, C>? get id => throw _privateConstructorUsedError;
+  Id<P, C>? get id;
 
   /// Create a copy of ProductDetails
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $ProductDetailsCopyWith<P, C, ProductDetails<P, C>> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$ProductDetailsCopyWithImpl<P, C, ProductDetails<P, C>>(
+          this as ProductDetails<P, C>, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ProductDetails<P, C> &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, description, id);
+
+  @override
+  String toString() {
+    return 'ProductDetails<$P, $C>(description: $description, id: $id)';
+  }
 }
 
 /// @nodoc
-abstract class $ProductDetailsCopyWith<P extends Product, C extends Cart,
+abstract mixin class $ProductDetailsCopyWith<P extends Product, C extends Cart,
     $Res> {
   factory $ProductDetailsCopyWith(ProductDetails<P, C> value,
-          $Res Function(ProductDetails<P, C>) then) =
-      _$ProductDetailsCopyWithImpl<P, C, $Res, ProductDetails<P, C>>;
+      $Res Function(ProductDetails<P, C>) _then) = _$ProductDetailsCopyWithImpl;
   @useResult
   $Res call(
       {@RfControl() String? description, @Rf(output: false) Id<P, C>? id});
@@ -42,15 +60,12 @@ abstract class $ProductDetailsCopyWith<P extends Product, C extends Cart,
 }
 
 /// @nodoc
-class _$ProductDetailsCopyWithImpl<P extends Product, C extends Cart, $Res,
-        $Val extends ProductDetails<P, C>>
+class _$ProductDetailsCopyWithImpl<P extends Product, C extends Cart, $Res>
     implements $ProductDetailsCopyWith<P, C, $Res> {
-  _$ProductDetailsCopyWithImpl(this._value, this._then);
+  _$ProductDetailsCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ProductDetails<P, C> _self;
+  final $Res Function(ProductDetails<P, C>) _then;
 
   /// Create a copy of ProductDetails
   /// with the given fields replaced by the non-null parameter values.
@@ -60,16 +75,16 @@ class _$ProductDetailsCopyWithImpl<P extends Product, C extends Cart, $Res,
     Object? description = freezed,
     Object? id = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       description: freezed == description
-          ? _value.description
+          ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
       id: freezed == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as Id<P, C>?,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of ProductDetails
@@ -77,67 +92,21 @@ class _$ProductDetailsCopyWithImpl<P extends Product, C extends Cart, $Res,
   @override
   @pragma('vm:prefer-inline')
   $IdCopyWith<P, C, $Res>? get id {
-    if (_value.id == null) {
+    if (_self.id == null) {
       return null;
     }
 
-    return $IdCopyWith<P, C, $Res>(_value.id!, (value) {
-      return _then(_value.copyWith(id: value) as $Val);
+    return $IdCopyWith<P, C, $Res>(_self.id!, (value) {
+      return _then(_self.copyWith(id: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$ProductDetailsImplCopyWith<P extends Product, C extends Cart,
-    $Res> implements $ProductDetailsCopyWith<P, C, $Res> {
-  factory _$$ProductDetailsImplCopyWith(_$ProductDetailsImpl<P, C> value,
-          $Res Function(_$ProductDetailsImpl<P, C>) then) =
-      __$$ProductDetailsImplCopyWithImpl<P, C, $Res>;
-  @override
-  @useResult
-  $Res call(
-      {@RfControl() String? description, @Rf(output: false) Id<P, C>? id});
 
-  @override
-  $IdCopyWith<P, C, $Res>? get id;
-}
-
-/// @nodoc
-class __$$ProductDetailsImplCopyWithImpl<P extends Product, C extends Cart,
-        $Res>
-    extends _$ProductDetailsCopyWithImpl<P, C, $Res, _$ProductDetailsImpl<P, C>>
-    implements _$$ProductDetailsImplCopyWith<P, C, $Res> {
-  __$$ProductDetailsImplCopyWithImpl(_$ProductDetailsImpl<P, C> _value,
-      $Res Function(_$ProductDetailsImpl<P, C>) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ProductDetails
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? description = freezed,
-    Object? id = freezed,
-  }) {
-    return _then(_$ProductDetailsImpl<P, C>(
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as Id<P, C>?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ProductDetailsImpl<P extends Product, C extends Cart>
-    extends _ProductDetails<P, C> {
-  _$ProductDetailsImpl(
-      {@RfControl() this.description, @Rf(output: false) this.id})
+class _ProductDetails<P extends Product, C extends Cart>
+    extends ProductDetails<P, C> {
+  _ProductDetails({@RfControl() this.description, @Rf(output: false) this.id})
       : super._();
 
   @override
@@ -147,16 +116,20 @@ class _$ProductDetailsImpl<P extends Product, C extends Cart>
   @Rf(output: false)
   final Id<P, C>? id;
 
+  /// Create a copy of ProductDetails
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ProductDetails<$P, $C>(description: $description, id: $id)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ProductDetailsCopyWith<P, C, _ProductDetails<P, C>> get copyWith =>
+      __$ProductDetailsCopyWithImpl<P, C, _ProductDetails<P, C>>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProductDetailsImpl<P, C> &&
+            other is _ProductDetails<P, C> &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.id, id) || other.id == id));
@@ -165,438 +138,135 @@ class _$ProductDetailsImpl<P extends Product, C extends Cart>
   @override
   int get hashCode => Object.hash(runtimeType, description, id);
 
-  /// Create a copy of ProductDetails
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ProductDetailsImplCopyWith<P, C, _$ProductDetailsImpl<P, C>>
-      get copyWith =>
-          __$$ProductDetailsImplCopyWithImpl<P, C, _$ProductDetailsImpl<P, C>>(
-              this, _$identity);
-}
-
-abstract class _ProductDetails<P extends Product, C extends Cart>
-    extends ProductDetails<P, C> {
-  factory _ProductDetails(
-      {@RfControl() final String? description,
-      @Rf(output: false) final Id<P, C>? id}) = _$ProductDetailsImpl<P, C>;
-  _ProductDetails._() : super._();
-
-  @override
-  @RfControl()
-  String? get description;
-  @override
-  @Rf(output: false)
-  Id<P, C>? get id;
-
-  /// Create a copy of ProductDetails
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ProductDetailsImplCopyWith<P, C, _$ProductDetailsImpl<P, C>>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$Id<P extends Product, C extends Cart> {
-  @RfControl()
-  String? get companyName => throw _privateConstructorUsedError;
-  @RfControl()
-  String? get name => throw _privateConstructorUsedError;
-
-  /// Create a copy of Id
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $IdCopyWith<P, C, Id<P, C>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $IdCopyWith<P extends Product, C extends Cart, $Res> {
-  factory $IdCopyWith(Id<P, C> value, $Res Function(Id<P, C>) then) =
-      _$IdCopyWithImpl<P, C, $Res, Id<P, C>>;
-  @useResult
-  $Res call({@RfControl() String? companyName, @RfControl() String? name});
-}
-
-/// @nodoc
-class _$IdCopyWithImpl<P extends Product, C extends Cart, $Res,
-    $Val extends Id<P, C>> implements $IdCopyWith<P, C, $Res> {
-  _$IdCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Id
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? companyName = freezed,
-    Object? name = freezed,
-  }) {
-    return _then(_value.copyWith(
-      companyName: freezed == companyName
-          ? _value.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$IdImplCopyWith<P extends Product, C extends Cart, $Res>
-    implements $IdCopyWith<P, C, $Res> {
-  factory _$$IdImplCopyWith(
-          _$IdImpl<P, C> value, $Res Function(_$IdImpl<P, C>) then) =
-      __$$IdImplCopyWithImpl<P, C, $Res>;
-  @override
-  @useResult
-  $Res call({@RfControl() String? companyName, @RfControl() String? name});
-}
-
-/// @nodoc
-class __$$IdImplCopyWithImpl<P extends Product, C extends Cart, $Res>
-    extends _$IdCopyWithImpl<P, C, $Res, _$IdImpl<P, C>>
-    implements _$$IdImplCopyWith<P, C, $Res> {
-  __$$IdImplCopyWithImpl(
-      _$IdImpl<P, C> _value, $Res Function(_$IdImpl<P, C>) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Id
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? companyName = freezed,
-    Object? name = freezed,
-  }) {
-    return _then(_$IdImpl<P, C>(
-      companyName: freezed == companyName
-          ? _value.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$IdImpl<P extends Product, C extends Cart> extends _Id<P, C> {
-  _$IdImpl({@RfControl() this.companyName, @RfControl() this.name}) : super._();
-
-  @override
-  @RfControl()
-  final String? companyName;
-  @override
-  @RfControl()
-  final String? name;
-
   @override
   String toString() {
-    return 'Id<$P, $C>(companyName: $companyName, name: $name)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$IdImpl<P, C> &&
-            (identical(other.companyName, companyName) ||
-                other.companyName == companyName) &&
-            (identical(other.name, name) || other.name == name));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, companyName, name);
-
-  /// Create a copy of Id
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$IdImplCopyWith<P, C, _$IdImpl<P, C>> get copyWith =>
-      __$$IdImplCopyWithImpl<P, C, _$IdImpl<P, C>>(this, _$identity);
-}
-
-abstract class _Id<P extends Product, C extends Cart> extends Id<P, C> {
-  factory _Id(
-      {@RfControl() final String? companyName,
-      @RfControl() final String? name}) = _$IdImpl<P, C>;
-  _Id._() : super._();
-
-  @override
-  @RfControl()
-  String? get companyName;
-  @override
-  @RfControl()
-  String? get name;
-
-  /// Create a copy of Id
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$IdImplCopyWith<P, C, _$IdImpl<P, C>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$Product {
-  String? get companyName => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-
-  /// Create a copy of Product
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $ProductCopyWith<Product> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ProductCopyWith<$Res> {
-  factory $ProductCopyWith(Product value, $Res Function(Product) then) =
-      _$ProductCopyWithImpl<$Res, Product>;
-  @useResult
-  $Res call({String? companyName, String? name});
-}
-
-/// @nodoc
-class _$ProductCopyWithImpl<$Res, $Val extends Product>
-    implements $ProductCopyWith<$Res> {
-  _$ProductCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Product
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? companyName = freezed,
-    Object? name = freezed,
-  }) {
-    return _then(_value.copyWith(
-      companyName: freezed == companyName
-          ? _value.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+    return 'ProductDetails<$P, $C>(description: $description, id: $id)';
   }
 }
 
 /// @nodoc
-abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
-  factory _$$ProductImplCopyWith(
-          _$ProductImpl value, $Res Function(_$ProductImpl) then) =
-      __$$ProductImplCopyWithImpl<$Res>;
+abstract mixin class _$ProductDetailsCopyWith<P extends Product, C extends Cart,
+    $Res> implements $ProductDetailsCopyWith<P, C, $Res> {
+  factory _$ProductDetailsCopyWith(_ProductDetails<P, C> value,
+          $Res Function(_ProductDetails<P, C>) _then) =
+      __$ProductDetailsCopyWithImpl;
   @override
   @useResult
-  $Res call({String? companyName, String? name});
+  $Res call(
+      {@RfControl() String? description, @Rf(output: false) Id<P, C>? id});
+
+  @override
+  $IdCopyWith<P, C, $Res>? get id;
 }
 
 /// @nodoc
-class __$$ProductImplCopyWithImpl<$Res>
-    extends _$ProductCopyWithImpl<$Res, _$ProductImpl>
-    implements _$$ProductImplCopyWith<$Res> {
-  __$$ProductImplCopyWithImpl(
-      _$ProductImpl _value, $Res Function(_$ProductImpl) _then)
-      : super(_value, _then);
+class __$ProductDetailsCopyWithImpl<P extends Product, C extends Cart, $Res>
+    implements _$ProductDetailsCopyWith<P, C, $Res> {
+  __$ProductDetailsCopyWithImpl(this._self, this._then);
 
-  /// Create a copy of Product
+  final _ProductDetails<P, C> _self;
+  final $Res Function(_ProductDetails<P, C>) _then;
+
+  /// Create a copy of ProductDetails
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
-    Object? companyName = freezed,
-    Object? name = freezed,
-  }) {
-    return _then(_$ProductImpl(
-      companyName: freezed == companyName
-          ? _value.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ProductImpl extends _Product {
-  const _$ProductImpl({this.companyName, this.name}) : super._();
-
-  @override
-  final String? companyName;
-  @override
-  final String? name;
-
-  @override
-  String toString() {
-    return 'Product(companyName: $companyName, name: $name)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ProductImpl &&
-            (identical(other.companyName, companyName) ||
-                other.companyName == companyName) &&
-            (identical(other.name, name) || other.name == name));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, companyName, name);
-
-  /// Create a copy of Product
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>
-      __$$ProductImplCopyWithImpl<_$ProductImpl>(this, _$identity);
-}
-
-abstract class _Product extends Product {
-  const factory _Product({final String? companyName, final String? name}) =
-      _$ProductImpl;
-  const _Product._() : super._();
-
-  @override
-  String? get companyName;
-  @override
-  String? get name;
-
-  /// Create a copy of Product
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$Cart {
-  Product? get product => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-
-  /// Create a copy of Cart
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $CartCopyWith<Cart> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CartCopyWith<$Res> {
-  factory $CartCopyWith(Cart value, $Res Function(Cart) then) =
-      _$CartCopyWithImpl<$Res, Cart>;
-  @useResult
-  $Res call({Product? product, String? description});
-
-  $ProductCopyWith<$Res>? get product;
-}
-
-/// @nodoc
-class _$CartCopyWithImpl<$Res, $Val extends Cart>
-    implements $CartCopyWith<$Res> {
-  _$CartCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Cart
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? product = freezed,
     Object? description = freezed,
+    Object? id = freezed,
   }) {
-    return _then(_value.copyWith(
-      product: freezed == product
-          ? _value.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as Product?,
+    return _then(_ProductDetails<P, C>(
       description: freezed == description
-          ? _value.description
+          ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-    ) as $Val);
+      id: freezed == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as Id<P, C>?,
+    ));
   }
 
-  /// Create a copy of Cart
+  /// Create a copy of ProductDetails
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $ProductCopyWith<$Res>? get product {
-    if (_value.product == null) {
+  $IdCopyWith<P, C, $Res>? get id {
+    if (_self.id == null) {
       return null;
     }
 
-    return $ProductCopyWith<$Res>(_value.product!, (value) {
-      return _then(_value.copyWith(product: value) as $Val);
+    return $IdCopyWith<P, C, $Res>(_self.id!, (value) {
+      return _then(_self.copyWith(id: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$CartImplCopyWith<$Res> implements $CartCopyWith<$Res> {
-  factory _$$CartImplCopyWith(
-          _$CartImpl value, $Res Function(_$CartImpl) then) =
-      __$$CartImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({Product? product, String? description});
+mixin _$Id<P extends Product, C extends Cart> {
+  @RfControl()
+  String? get companyName;
+  @RfControl()
+  String? get name;
+
+  /// Create a copy of Id
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $IdCopyWith<P, C, Id<P, C>> get copyWith =>
+      _$IdCopyWithImpl<P, C, Id<P, C>>(this as Id<P, C>, _$identity);
 
   @override
-  $ProductCopyWith<$Res>? get product;
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Id<P, C> &&
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, companyName, name);
+
+  @override
+  String toString() {
+    return 'Id<$P, $C>(companyName: $companyName, name: $name)';
+  }
 }
 
 /// @nodoc
-class __$$CartImplCopyWithImpl<$Res>
-    extends _$CartCopyWithImpl<$Res, _$CartImpl>
-    implements _$$CartImplCopyWith<$Res> {
-  __$$CartImplCopyWithImpl(_$CartImpl _value, $Res Function(_$CartImpl) _then)
-      : super(_value, _then);
+abstract mixin class $IdCopyWith<P extends Product, C extends Cart, $Res> {
+  factory $IdCopyWith(Id<P, C> value, $Res Function(Id<P, C>) _then) =
+      _$IdCopyWithImpl;
+  @useResult
+  $Res call({@RfControl() String? companyName, @RfControl() String? name});
+}
 
-  /// Create a copy of Cart
+/// @nodoc
+class _$IdCopyWithImpl<P extends Product, C extends Cart, $Res>
+    implements $IdCopyWith<P, C, $Res> {
+  _$IdCopyWithImpl(this._self, this._then);
+
+  final Id<P, C> _self;
+  final $Res Function(Id<P, C>) _then;
+
+  /// Create a copy of Id
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? product = freezed,
-    Object? description = freezed,
+    Object? companyName = freezed,
+    Object? name = freezed,
   }) {
-    return _then(_$CartImpl(
-      product: freezed == product
-          ? _value.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as Product?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+    return _then(_self.copyWith(
+      companyName: freezed == companyName
+          ? _self.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -604,24 +274,240 @@ class __$$CartImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CartImpl extends _Cart {
-  const _$CartImpl({this.product, this.description}) : super._();
+class _Id<P extends Product, C extends Cart> extends Id<P, C> {
+  _Id({@RfControl() this.companyName, @RfControl() this.name}) : super._();
 
   @override
-  final Product? product;
+  @RfControl()
+  final String? companyName;
   @override
-  final String? description;
+  @RfControl()
+  final String? name;
 
+  /// Create a copy of Id
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Cart(product: $product, description: $description)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$IdCopyWith<P, C, _Id<P, C>> get copyWith =>
+      __$IdCopyWithImpl<P, C, _Id<P, C>>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CartImpl &&
+            other is _Id<P, C> &&
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, companyName, name);
+
+  @override
+  String toString() {
+    return 'Id<$P, $C>(companyName: $companyName, name: $name)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$IdCopyWith<P extends Product, C extends Cart, $Res>
+    implements $IdCopyWith<P, C, $Res> {
+  factory _$IdCopyWith(_Id<P, C> value, $Res Function(_Id<P, C>) _then) =
+      __$IdCopyWithImpl;
+  @override
+  @useResult
+  $Res call({@RfControl() String? companyName, @RfControl() String? name});
+}
+
+/// @nodoc
+class __$IdCopyWithImpl<P extends Product, C extends Cart, $Res>
+    implements _$IdCopyWith<P, C, $Res> {
+  __$IdCopyWithImpl(this._self, this._then);
+
+  final _Id<P, C> _self;
+  final $Res Function(_Id<P, C>) _then;
+
+  /// Create a copy of Id
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? companyName = freezed,
+    Object? name = freezed,
+  }) {
+    return _then(_Id<P, C>(
+      companyName: freezed == companyName
+          ? _self.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+mixin _$Product {
+  String? get companyName;
+  String? get name;
+
+  /// Create a copy of Product
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ProductCopyWith<Product> get copyWith =>
+      _$ProductCopyWithImpl<Product>(this as Product, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Product &&
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, companyName, name);
+
+  @override
+  String toString() {
+    return 'Product(companyName: $companyName, name: $name)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $ProductCopyWith<$Res> {
+  factory $ProductCopyWith(Product value, $Res Function(Product) _then) =
+      _$ProductCopyWithImpl;
+  @useResult
+  $Res call({String? companyName, String? name});
+}
+
+/// @nodoc
+class _$ProductCopyWithImpl<$Res> implements $ProductCopyWith<$Res> {
+  _$ProductCopyWithImpl(this._self, this._then);
+
+  final Product _self;
+  final $Res Function(Product) _then;
+
+  /// Create a copy of Product
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? companyName = freezed,
+    Object? name = freezed,
+  }) {
+    return _then(_self.copyWith(
+      companyName: freezed == companyName
+          ? _self.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _Product extends Product {
+  const _Product({this.companyName, this.name}) : super._();
+
+  @override
+  final String? companyName;
+  @override
+  final String? name;
+
+  /// Create a copy of Product
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ProductCopyWith<_Product> get copyWith =>
+      __$ProductCopyWithImpl<_Product>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Product &&
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, companyName, name);
+
+  @override
+  String toString() {
+    return 'Product(companyName: $companyName, name: $name)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
+  factory _$ProductCopyWith(_Product value, $Res Function(_Product) _then) =
+      __$ProductCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String? companyName, String? name});
+}
+
+/// @nodoc
+class __$ProductCopyWithImpl<$Res> implements _$ProductCopyWith<$Res> {
+  __$ProductCopyWithImpl(this._self, this._then);
+
+  final _Product _self;
+  final $Res Function(_Product) _then;
+
+  /// Create a copy of Product
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? companyName = freezed,
+    Object? name = freezed,
+  }) {
+    return _then(_Product(
+      companyName: freezed == companyName
+          ? _self.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+mixin _$Cart {
+  Product? get product;
+  String? get description;
+
+  /// Create a copy of Cart
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $CartCopyWith<Cart> get copyWith =>
+      _$CartCopyWithImpl<Cart>(this as Cart, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Cart &&
             (identical(other.product, product) || other.product == product) &&
             (identical(other.description, description) ||
                 other.description == description));
@@ -630,29 +516,153 @@ class _$CartImpl extends _Cart {
   @override
   int get hashCode => Object.hash(runtimeType, product, description);
 
+  @override
+  String toString() {
+    return 'Cart(product: $product, description: $description)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $CartCopyWith<$Res> {
+  factory $CartCopyWith(Cart value, $Res Function(Cart) _then) =
+      _$CartCopyWithImpl;
+  @useResult
+  $Res call({Product? product, String? description});
+
+  $ProductCopyWith<$Res>? get product;
+}
+
+/// @nodoc
+class _$CartCopyWithImpl<$Res> implements $CartCopyWith<$Res> {
+  _$CartCopyWithImpl(this._self, this._then);
+
+  final Cart _self;
+  final $Res Function(Cart) _then;
+
   /// Create a copy of Cart
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? product = freezed,
+    Object? description = freezed,
+  }) {
+    return _then(_self.copyWith(
+      product: freezed == product
+          ? _self.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as Product?,
+      description: freezed == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+
+  /// Create a copy of Cart
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$CartImplCopyWith<_$CartImpl> get copyWith =>
-      __$$CartImplCopyWithImpl<_$CartImpl>(this, _$identity);
+  $ProductCopyWith<$Res>? get product {
+    if (_self.product == null) {
+      return null;
+    }
+
+    return $ProductCopyWith<$Res>(_self.product!, (value) {
+      return _then(_self.copyWith(product: value));
+    });
+  }
 }
 
-abstract class _Cart extends Cart {
-  const factory _Cart({final Product? product, final String? description}) =
-      _$CartImpl;
-  const _Cart._() : super._();
+/// @nodoc
+
+class _Cart extends Cart {
+  const _Cart({this.product, this.description}) : super._();
 
   @override
-  Product? get product;
+  final Product? product;
   @override
-  String? get description;
+  final String? description;
 
   /// Create a copy of Cart
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CartImplCopyWith<_$CartImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$CartCopyWith<_Cart> get copyWith =>
+      __$CartCopyWithImpl<_Cart>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Cart &&
+            (identical(other.product, product) || other.product == product) &&
+            (identical(other.description, description) ||
+                other.description == description));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, product, description);
+
+  @override
+  String toString() {
+    return 'Cart(product: $product, description: $description)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$CartCopyWith<$Res> implements $CartCopyWith<$Res> {
+  factory _$CartCopyWith(_Cart value, $Res Function(_Cart) _then) =
+      __$CartCopyWithImpl;
+  @override
+  @useResult
+  $Res call({Product? product, String? description});
+
+  @override
+  $ProductCopyWith<$Res>? get product;
+}
+
+/// @nodoc
+class __$CartCopyWithImpl<$Res> implements _$CartCopyWith<$Res> {
+  __$CartCopyWithImpl(this._self, this._then);
+
+  final _Cart _self;
+  final $Res Function(_Cart) _then;
+
+  /// Create a copy of Cart
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? product = freezed,
+    Object? description = freezed,
+  }) {
+    return _then(_Cart(
+      product: freezed == product
+          ? _self.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as Product?,
+      description: freezed == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+
+  /// Create a copy of Cart
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ProductCopyWith<$Res>? get product {
+    if (_self.product == null) {
+      return null;
+    }
+
+    return $ProductCopyWith<$Res>(_self.product!, (value) {
+      return _then(_self.copyWith(product: value));
+    });
+  }
+}
+
+// dart format on

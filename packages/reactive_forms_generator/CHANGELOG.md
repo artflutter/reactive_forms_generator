@@ -1,3 +1,7 @@
+## [7.0.0-beta0]
+
+* freezed 3
+
 ## [6.1.1]
 
 * fix https://github.com/artflutter/reactive_forms_generator/issues/184

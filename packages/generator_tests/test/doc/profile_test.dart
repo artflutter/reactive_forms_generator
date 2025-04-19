@@ -59,7 +59,7 @@ void main() {
             
             @freezed
             @Rf(output: false)
-            class Profile with _\$Profile {
+            abstract class Profile with _\$Profile {
               const Profile._();
             
               factory Profile(String id, {
@@ -80,7 +80,7 @@ void main() {
             
             @freezed
             @RfGroup()
-            class ThresholdSetting with _\$ThresholdSetting {
+            abstract class ThresholdSetting with _\$ThresholdSetting {
               static const values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
             
               const factory ThresholdSetting({
@@ -94,7 +94,7 @@ void main() {
             
             @freezed
             @RfGroup()
-            class TimerSetting with _\$TimerSetting {
+            abstract class TimerSetting with _\$TimerSetting {
               static const values = [1, 2, 3, 4, 5, 6];
             
               const factory TimerSetting({
@@ -108,7 +108,7 @@ void main() {
             
             @RfGroup()
             @freezed
-            class IncidenceFilter with _\$IncidenceFilter {
+            abstract class IncidenceFilter with _\$IncidenceFilter {
               const factory IncidenceFilter({
                 @RfControl<bool>() @Default(true) bool isMobilityEnabled,
                 @RfControl<bool>() @Default(true) bool isFurcationEnabled,
@@ -133,7 +133,7 @@ void main() {
             enum ToothSide { facial, lingual }
             
             @freezed
-            class ScanOrder with _\$ScanOrder {
+            abstract class ScanOrder with _\$ScanOrder {
               const factory ScanOrder.arch(
                 Jaw jaw, {
                 required Direction direction,
@@ -151,7 +151,7 @@ void main() {
             }
             
             @freezed
-            class ChartingOrderValue with _\$ChartingOrderValue {
+            abstract class ChartingOrderValue with _\$ChartingOrderValue {
               const factory ChartingOrderValue({
                 @Default(ChartingOrderType.arch) ChartingOrderType chartingOrder,
                 @Default(0) int selectedOption,

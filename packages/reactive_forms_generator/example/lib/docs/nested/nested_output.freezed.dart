@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,121 +10,29 @@ part of 'nested_output.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-SubGroupO _$SubGroupOFromJson(Map<String, dynamic> json) {
-  return _SubGroupO.fromJson(json);
-}
 
 /// @nodoc
 mixin _$SubGroupO {
   @RfControl()
-  String get id => throw _privateConstructorUsedError;
-
-  /// Serializes this SubGroupO to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get id;
 
   /// Create a copy of SubGroupO
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $SubGroupOCopyWith<SubGroupO> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$SubGroupOCopyWithImpl<SubGroupO>(this as SubGroupO, _$identity);
 
-/// @nodoc
-abstract class $SubGroupOCopyWith<$Res> {
-  factory $SubGroupOCopyWith(SubGroupO value, $Res Function(SubGroupO) then) =
-      _$SubGroupOCopyWithImpl<$Res, SubGroupO>;
-  @useResult
-  $Res call({@RfControl() String id});
-}
-
-/// @nodoc
-class _$SubGroupOCopyWithImpl<$Res, $Val extends SubGroupO>
-    implements $SubGroupOCopyWith<$Res> {
-  _$SubGroupOCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of SubGroupO
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$SubGroupOImplCopyWith<$Res>
-    implements $SubGroupOCopyWith<$Res> {
-  factory _$$SubGroupOImplCopyWith(
-          _$SubGroupOImpl value, $Res Function(_$SubGroupOImpl) then) =
-      __$$SubGroupOImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({@RfControl() String id});
-}
-
-/// @nodoc
-class __$$SubGroupOImplCopyWithImpl<$Res>
-    extends _$SubGroupOCopyWithImpl<$Res, _$SubGroupOImpl>
-    implements _$$SubGroupOImplCopyWith<$Res> {
-  __$$SubGroupOImplCopyWithImpl(
-      _$SubGroupOImpl _value, $Res Function(_$SubGroupOImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SubGroupO
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-  }) {
-    return _then(_$SubGroupOImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$SubGroupOImpl implements _SubGroupO {
-  const _$SubGroupOImpl({@RfControl() required this.id});
-
-  factory _$SubGroupOImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SubGroupOImplFromJson(json);
-
-  @override
-  @RfControl()
-  final String id;
-
-  @override
-  String toString() {
-    return 'SubGroupO(id: $id)';
-  }
+  /// Serializes this SubGroupO to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SubGroupOImpl &&
+            other is SubGroupO &&
             (identical(other.id, id) || other.id == id));
   }
 
@@ -131,108 +40,163 @@ class _$SubGroupOImpl implements _SubGroupO {
   @override
   int get hashCode => Object.hash(runtimeType, id);
 
-  /// Create a copy of SubGroupO
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$SubGroupOImplCopyWith<_$SubGroupOImpl> get copyWith =>
-      __$$SubGroupOImplCopyWithImpl<_$SubGroupOImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SubGroupOImplToJson(
-      this,
-    );
+  String toString() {
+    return 'SubGroupO(id: $id)';
   }
 }
 
-abstract class _SubGroupO implements SubGroupO {
-  const factory _SubGroupO({@RfControl() required final String id}) =
-      _$SubGroupOImpl;
+/// @nodoc
+abstract mixin class $SubGroupOCopyWith<$Res> {
+  factory $SubGroupOCopyWith(SubGroupO value, $Res Function(SubGroupO) _then) =
+      _$SubGroupOCopyWithImpl;
+  @useResult
+  $Res call({@RfControl() String id});
+}
 
-  factory _SubGroupO.fromJson(Map<String, dynamic> json) =
-      _$SubGroupOImpl.fromJson;
+/// @nodoc
+class _$SubGroupOCopyWithImpl<$Res> implements $SubGroupOCopyWith<$Res> {
+  _$SubGroupOCopyWithImpl(this._self, this._then);
+
+  final SubGroupO _self;
+  final $Res Function(SubGroupO) _then;
+
+  /// Create a copy of SubGroupO
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _SubGroupO implements SubGroupO {
+  const _SubGroupO({@RfControl() required this.id});
+  factory _SubGroupO.fromJson(Map<String, dynamic> json) =>
+      _$SubGroupOFromJson(json);
 
   @override
   @RfControl()
-  String get id;
+  final String id;
 
   /// Create a copy of SubGroupO
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SubGroupOImplCopyWith<_$SubGroupOImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$SubGroupOCopyWith<_SubGroupO> get copyWith =>
+      __$SubGroupOCopyWithImpl<_SubGroupO>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$SubGroupOToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _SubGroupO &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @override
+  String toString() {
+    return 'SubGroupO(id: $id)';
+  }
 }
 
-GroupO _$GroupOFromJson(Map<String, dynamic> json) {
-  return _GroupO.fromJson(json);
+/// @nodoc
+abstract mixin class _$SubGroupOCopyWith<$Res>
+    implements $SubGroupOCopyWith<$Res> {
+  factory _$SubGroupOCopyWith(
+          _SubGroupO value, $Res Function(_SubGroupO) _then) =
+      __$SubGroupOCopyWithImpl;
+  @override
+  @useResult
+  $Res call({@RfControl() String id});
+}
+
+/// @nodoc
+class __$SubGroupOCopyWithImpl<$Res> implements _$SubGroupOCopyWith<$Res> {
+  __$SubGroupOCopyWithImpl(this._self, this._then);
+
+  final _SubGroupO _self;
+  final $Res Function(_SubGroupO) _then;
+
+  /// Create a copy of SubGroupO
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_SubGroupO(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$GroupO {
   @RfControl()
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @RfArray<dynamic>()
-  List<SubGroupO> get subGroupList => throw _privateConstructorUsedError;
-
-  /// Serializes this GroupO to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  List<SubGroupO> get subGroupList;
 
   /// Create a copy of GroupO
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GroupOCopyWith<GroupO> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $GroupOCopyWith<$Res> {
-  factory $GroupOCopyWith(GroupO value, $Res Function(GroupO) then) =
-      _$GroupOCopyWithImpl<$Res, GroupO>;
-  @useResult
-  $Res call(
-      {@RfControl() String id,
-      @RfArray<dynamic>() List<SubGroupO> subGroupList});
-}
-
-/// @nodoc
-class _$GroupOCopyWithImpl<$Res, $Val extends GroupO>
-    implements $GroupOCopyWith<$Res> {
-  _$GroupOCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of GroupO
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $GroupOCopyWith<GroupO> get copyWith =>
+      _$GroupOCopyWithImpl<GroupO>(this as GroupO, _$identity);
+
+  /// Serializes this GroupO to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? subGroupList = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      subGroupList: null == subGroupList
-          ? _value.subGroupList
-          : subGroupList // ignore: cast_nullable_to_non_nullable
-              as List<SubGroupO>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is GroupO &&
+            (identical(other.id, id) || other.id == id) &&
+            const DeepCollectionEquality()
+                .equals(other.subGroupList, subGroupList));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, id, const DeepCollectionEquality().hash(subGroupList));
+
+  @override
+  String toString() {
+    return 'GroupO(id: $id, subGroupList: $subGroupList)';
   }
 }
 
 /// @nodoc
-abstract class _$$GroupOImplCopyWith<$Res> implements $GroupOCopyWith<$Res> {
-  factory _$$GroupOImplCopyWith(
-          _$GroupOImpl value, $Res Function(_$GroupOImpl) then) =
-      __$$GroupOImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $GroupOCopyWith<$Res> {
+  factory $GroupOCopyWith(GroupO value, $Res Function(GroupO) _then) =
+      _$GroupOCopyWithImpl;
   @useResult
   $Res call(
       {@RfControl() String id,
@@ -240,12 +204,11 @@ abstract class _$$GroupOImplCopyWith<$Res> implements $GroupOCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$GroupOImplCopyWithImpl<$Res>
-    extends _$GroupOCopyWithImpl<$Res, _$GroupOImpl>
-    implements _$$GroupOImplCopyWith<$Res> {
-  __$$GroupOImplCopyWithImpl(
-      _$GroupOImpl _value, $Res Function(_$GroupOImpl) _then)
-      : super(_value, _then);
+class _$GroupOCopyWithImpl<$Res> implements $GroupOCopyWith<$Res> {
+  _$GroupOCopyWithImpl(this._self, this._then);
+
+  final GroupO _self;
+  final $Res Function(GroupO) _then;
 
   /// Create a copy of GroupO
   /// with the given fields replaced by the non-null parameter values.
@@ -255,13 +218,13 @@ class __$$GroupOImplCopyWithImpl<$Res>
     Object? id = null,
     Object? subGroupList = null,
   }) {
-    return _then(_$GroupOImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       subGroupList: null == subGroupList
-          ? _value._subGroupList
+          ? _self.subGroupList
           : subGroupList // ignore: cast_nullable_to_non_nullable
               as List<SubGroupO>,
     ));
@@ -270,14 +233,12 @@ class __$$GroupOImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GroupOImpl implements _GroupO {
-  const _$GroupOImpl(
+class _GroupO implements GroupO {
+  const _GroupO(
       {@RfControl() required this.id,
       @RfArray<dynamic>() required final List<SubGroupO> subGroupList})
       : _subGroupList = subGroupList;
-
-  factory _$GroupOImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GroupOImplFromJson(json);
+  factory _GroupO.fromJson(Map<String, dynamic> json) => _$GroupOFromJson(json);
 
   @override
   @RfControl()
@@ -291,16 +252,26 @@ class _$GroupOImpl implements _GroupO {
     return EqualUnmodifiableListView(_subGroupList);
   }
 
+  /// Create a copy of GroupO
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'GroupO(id: $id, subGroupList: $subGroupList)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$GroupOCopyWith<_GroupO> get copyWith =>
+      __$GroupOCopyWithImpl<_GroupO>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$GroupOToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GroupOImpl &&
+            other is _GroupO &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality()
                 .equals(other._subGroupList, _subGroupList));
@@ -311,114 +282,99 @@ class _$GroupOImpl implements _GroupO {
   int get hashCode => Object.hash(
       runtimeType, id, const DeepCollectionEquality().hash(_subGroupList));
 
-  /// Create a copy of GroupO
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$GroupOImplCopyWith<_$GroupOImpl> get copyWith =>
-      __$$GroupOImplCopyWithImpl<_$GroupOImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$GroupOImplToJson(
-      this,
-    );
+  String toString() {
+    return 'GroupO(id: $id, subGroupList: $subGroupList)';
   }
 }
 
-abstract class _GroupO implements GroupO {
-  const factory _GroupO(
-          {@RfControl() required final String id,
-          @RfArray<dynamic>() required final List<SubGroupO> subGroupList}) =
-      _$GroupOImpl;
-
-  factory _GroupO.fromJson(Map<String, dynamic> json) = _$GroupOImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$GroupOCopyWith<$Res> implements $GroupOCopyWith<$Res> {
+  factory _$GroupOCopyWith(_GroupO value, $Res Function(_GroupO) _then) =
+      __$GroupOCopyWithImpl;
   @override
-  @RfControl()
-  String get id;
-  @override
-  @RfArray<dynamic>()
-  List<SubGroupO> get subGroupList;
+  @useResult
+  $Res call(
+      {@RfControl() String id,
+      @RfArray<dynamic>() List<SubGroupO> subGroupList});
+}
+
+/// @nodoc
+class __$GroupOCopyWithImpl<$Res> implements _$GroupOCopyWith<$Res> {
+  __$GroupOCopyWithImpl(this._self, this._then);
+
+  final _GroupO _self;
+  final $Res Function(_GroupO) _then;
 
   /// Create a copy of GroupO
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GroupOImplCopyWith<_$GroupOImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-NestedO _$NestedOFromJson(Map<String, dynamic> json) {
-  return _NestedO.fromJson(json);
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? subGroupList = null,
+  }) {
+    return _then(_GroupO(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      subGroupList: null == subGroupList
+          ? _self._subGroupList
+          : subGroupList // ignore: cast_nullable_to_non_nullable
+              as List<SubGroupO>,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$NestedO {
   @RfArray<dynamic>()
-  List<GroupO> get groupList => throw _privateConstructorUsedError;
-
-  /// Serializes this NestedO to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  List<GroupO> get groupList;
 
   /// Create a copy of NestedO
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $NestedOCopyWith<NestedO> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $NestedOCopyWith<$Res> {
-  factory $NestedOCopyWith(NestedO value, $Res Function(NestedO) then) =
-      _$NestedOCopyWithImpl<$Res, NestedO>;
-  @useResult
-  $Res call({@RfArray<dynamic>() List<GroupO> groupList});
-}
-
-/// @nodoc
-class _$NestedOCopyWithImpl<$Res, $Val extends NestedO>
-    implements $NestedOCopyWith<$Res> {
-  _$NestedOCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of NestedO
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $NestedOCopyWith<NestedO> get copyWith =>
+      _$NestedOCopyWithImpl<NestedO>(this as NestedO, _$identity);
+
+  /// Serializes this NestedO to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? groupList = null,
-  }) {
-    return _then(_value.copyWith(
-      groupList: null == groupList
-          ? _value.groupList
-          : groupList // ignore: cast_nullable_to_non_nullable
-              as List<GroupO>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is NestedO &&
+            const DeepCollectionEquality().equals(other.groupList, groupList));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(groupList));
+
+  @override
+  String toString() {
+    return 'NestedO(groupList: $groupList)';
   }
 }
 
 /// @nodoc
-abstract class _$$NestedOImplCopyWith<$Res> implements $NestedOCopyWith<$Res> {
-  factory _$$NestedOImplCopyWith(
-          _$NestedOImpl value, $Res Function(_$NestedOImpl) then) =
-      __$$NestedOImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $NestedOCopyWith<$Res> {
+  factory $NestedOCopyWith(NestedO value, $Res Function(NestedO) _then) =
+      _$NestedOCopyWithImpl;
   @useResult
   $Res call({@RfArray<dynamic>() List<GroupO> groupList});
 }
 
 /// @nodoc
-class __$$NestedOImplCopyWithImpl<$Res>
-    extends _$NestedOCopyWithImpl<$Res, _$NestedOImpl>
-    implements _$$NestedOImplCopyWith<$Res> {
-  __$$NestedOImplCopyWithImpl(
-      _$NestedOImpl _value, $Res Function(_$NestedOImpl) _then)
-      : super(_value, _then);
+class _$NestedOCopyWithImpl<$Res> implements $NestedOCopyWith<$Res> {
+  _$NestedOCopyWithImpl(this._self, this._then);
+
+  final NestedO _self;
+  final $Res Function(NestedO) _then;
 
   /// Create a copy of NestedO
   /// with the given fields replaced by the non-null parameter values.
@@ -427,9 +383,9 @@ class __$$NestedOImplCopyWithImpl<$Res>
   $Res call({
     Object? groupList = null,
   }) {
-    return _then(_$NestedOImpl(
+    return _then(_self.copyWith(
       groupList: null == groupList
-          ? _value._groupList
+          ? _self.groupList
           : groupList // ignore: cast_nullable_to_non_nullable
               as List<GroupO>,
     ));
@@ -438,13 +394,11 @@ class __$$NestedOImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$NestedOImpl implements _NestedO {
-  const _$NestedOImpl(
-      {@RfArray<dynamic>() required final List<GroupO> groupList})
+class _NestedO implements NestedO {
+  const _NestedO({@RfArray<dynamic>() required final List<GroupO> groupList})
       : _groupList = groupList;
-
-  factory _$NestedOImpl.fromJson(Map<String, dynamic> json) =>
-      _$$NestedOImplFromJson(json);
+  factory _NestedO.fromJson(Map<String, dynamic> json) =>
+      _$NestedOFromJson(json);
 
   final List<GroupO> _groupList;
   @override
@@ -455,16 +409,26 @@ class _$NestedOImpl implements _NestedO {
     return EqualUnmodifiableListView(_groupList);
   }
 
+  /// Create a copy of NestedO
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'NestedO(groupList: $groupList)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$NestedOCopyWith<_NestedO> get copyWith =>
+      __$NestedOCopyWithImpl<_NestedO>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$NestedOToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NestedOImpl &&
+            other is _NestedO &&
             const DeepCollectionEquality()
                 .equals(other._groupList, _groupList));
   }
@@ -474,152 +438,65 @@ class _$NestedOImpl implements _NestedO {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_groupList));
 
-  /// Create a copy of NestedO
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$NestedOImplCopyWith<_$NestedOImpl> get copyWith =>
-      __$$NestedOImplCopyWithImpl<_$NestedOImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$NestedOImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _NestedO implements NestedO {
-  const factory _NestedO(
-          {@RfArray<dynamic>() required final List<GroupO> groupList}) =
-      _$NestedOImpl;
-
-  factory _NestedO.fromJson(Map<String, dynamic> json) = _$NestedOImpl.fromJson;
-
-  @override
-  @RfArray<dynamic>()
-  List<GroupO> get groupList;
-
-  /// Create a copy of NestedO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$NestedOImplCopyWith<_$NestedOImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-SubGroupOOutput _$SubGroupOOutputFromJson(Map<String, dynamic> json) {
-  return _SubGroupOOutput.fromJson(json);
-}
-
-/// @nodoc
-mixin _$SubGroupOOutput {
-  @RfControl()
-  String get id => throw _privateConstructorUsedError;
-
-  /// Serializes this SubGroupOOutput to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of SubGroupOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $SubGroupOOutputCopyWith<SubGroupOOutput> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SubGroupOOutputCopyWith<$Res> {
-  factory $SubGroupOOutputCopyWith(
-          SubGroupOOutput value, $Res Function(SubGroupOOutput) then) =
-      _$SubGroupOOutputCopyWithImpl<$Res, SubGroupOOutput>;
-  @useResult
-  $Res call({@RfControl() String id});
-}
-
-/// @nodoc
-class _$SubGroupOOutputCopyWithImpl<$Res, $Val extends SubGroupOOutput>
-    implements $SubGroupOOutputCopyWith<$Res> {
-  _$SubGroupOOutputCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of SubGroupOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  String toString() {
+    return 'NestedO(groupList: $groupList)';
   }
 }
 
 /// @nodoc
-abstract class _$$SubGroupOOutputImplCopyWith<$Res>
-    implements $SubGroupOOutputCopyWith<$Res> {
-  factory _$$SubGroupOOutputImplCopyWith(_$SubGroupOOutputImpl value,
-          $Res Function(_$SubGroupOOutputImpl) then) =
-      __$$SubGroupOOutputImplCopyWithImpl<$Res>;
+abstract mixin class _$NestedOCopyWith<$Res> implements $NestedOCopyWith<$Res> {
+  factory _$NestedOCopyWith(_NestedO value, $Res Function(_NestedO) _then) =
+      __$NestedOCopyWithImpl;
   @override
   @useResult
-  $Res call({@RfControl() String id});
+  $Res call({@RfArray<dynamic>() List<GroupO> groupList});
 }
 
 /// @nodoc
-class __$$SubGroupOOutputImplCopyWithImpl<$Res>
-    extends _$SubGroupOOutputCopyWithImpl<$Res, _$SubGroupOOutputImpl>
-    implements _$$SubGroupOOutputImplCopyWith<$Res> {
-  __$$SubGroupOOutputImplCopyWithImpl(
-      _$SubGroupOOutputImpl _value, $Res Function(_$SubGroupOOutputImpl) _then)
-      : super(_value, _then);
+class __$NestedOCopyWithImpl<$Res> implements _$NestedOCopyWith<$Res> {
+  __$NestedOCopyWithImpl(this._self, this._then);
 
-  /// Create a copy of SubGroupOOutput
+  final _NestedO _self;
+  final $Res Function(_NestedO) _then;
+
+  /// Create a copy of NestedO
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
-    Object? id = null,
+    Object? groupList = null,
   }) {
-    return _then(_$SubGroupOOutputImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_NestedO(
+      groupList: null == groupList
+          ? _self._groupList
+          : groupList // ignore: cast_nullable_to_non_nullable
+              as List<GroupO>,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$SubGroupOOutputImpl implements _SubGroupOOutput {
-  const _$SubGroupOOutputImpl({@RfControl() required this.id});
-
-  factory _$SubGroupOOutputImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SubGroupOOutputImplFromJson(json);
-
-  @override
+mixin _$SubGroupOOutput {
   @RfControl()
-  final String id;
+  String get id;
 
-  @override
-  String toString() {
-    return 'SubGroupOOutput(id: $id)';
-  }
+  /// Create a copy of SubGroupOOutput
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $SubGroupOOutputCopyWith<SubGroupOOutput> get copyWith =>
+      _$SubGroupOOutputCopyWithImpl<SubGroupOOutput>(
+          this as SubGroupOOutput, _$identity);
+
+  /// Serializes this SubGroupOOutput to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SubGroupOOutputImpl &&
+            other is SubGroupOOutput &&
             (identical(other.id, id) || other.id == id));
   }
 
@@ -627,112 +504,168 @@ class _$SubGroupOOutputImpl implements _SubGroupOOutput {
   @override
   int get hashCode => Object.hash(runtimeType, id);
 
-  /// Create a copy of SubGroupOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$SubGroupOOutputImplCopyWith<_$SubGroupOOutputImpl> get copyWith =>
-      __$$SubGroupOOutputImplCopyWithImpl<_$SubGroupOOutputImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SubGroupOOutputImplToJson(
-      this,
-    );
+  String toString() {
+    return 'SubGroupOOutput(id: $id)';
   }
 }
 
-abstract class _SubGroupOOutput implements SubGroupOOutput {
-  const factory _SubGroupOOutput({@RfControl() required final String id}) =
-      _$SubGroupOOutputImpl;
+/// @nodoc
+abstract mixin class $SubGroupOOutputCopyWith<$Res> {
+  factory $SubGroupOOutputCopyWith(
+          SubGroupOOutput value, $Res Function(SubGroupOOutput) _then) =
+      _$SubGroupOOutputCopyWithImpl;
+  @useResult
+  $Res call({@RfControl() String id});
+}
 
-  factory _SubGroupOOutput.fromJson(Map<String, dynamic> json) =
-      _$SubGroupOOutputImpl.fromJson;
+/// @nodoc
+class _$SubGroupOOutputCopyWithImpl<$Res>
+    implements $SubGroupOOutputCopyWith<$Res> {
+  _$SubGroupOOutputCopyWithImpl(this._self, this._then);
+
+  final SubGroupOOutput _self;
+  final $Res Function(SubGroupOOutput) _then;
+
+  /// Create a copy of SubGroupOOutput
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _SubGroupOOutput implements SubGroupOOutput {
+  const _SubGroupOOutput({@RfControl() required this.id});
+  factory _SubGroupOOutput.fromJson(Map<String, dynamic> json) =>
+      _$SubGroupOOutputFromJson(json);
 
   @override
   @RfControl()
-  String get id;
+  final String id;
 
   /// Create a copy of SubGroupOOutput
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SubGroupOOutputImplCopyWith<_$SubGroupOOutputImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$SubGroupOOutputCopyWith<_SubGroupOOutput> get copyWith =>
+      __$SubGroupOOutputCopyWithImpl<_SubGroupOOutput>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$SubGroupOOutputToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _SubGroupOOutput &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @override
+  String toString() {
+    return 'SubGroupOOutput(id: $id)';
+  }
 }
 
-GroupOOutput _$GroupOOutputFromJson(Map<String, dynamic> json) {
-  return _GroupOOutput.fromJson(json);
+/// @nodoc
+abstract mixin class _$SubGroupOOutputCopyWith<$Res>
+    implements $SubGroupOOutputCopyWith<$Res> {
+  factory _$SubGroupOOutputCopyWith(
+          _SubGroupOOutput value, $Res Function(_SubGroupOOutput) _then) =
+      __$SubGroupOOutputCopyWithImpl;
+  @override
+  @useResult
+  $Res call({@RfControl() String id});
+}
+
+/// @nodoc
+class __$SubGroupOOutputCopyWithImpl<$Res>
+    implements _$SubGroupOOutputCopyWith<$Res> {
+  __$SubGroupOOutputCopyWithImpl(this._self, this._then);
+
+  final _SubGroupOOutput _self;
+  final $Res Function(_SubGroupOOutput) _then;
+
+  /// Create a copy of SubGroupOOutput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_SubGroupOOutput(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$GroupOOutput {
   @RfControl()
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @RfArray<dynamic>()
-  List<SubGroupOOutput> get subGroupList => throw _privateConstructorUsedError;
-
-  /// Serializes this GroupOOutput to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  List<SubGroupOOutput> get subGroupList;
 
   /// Create a copy of GroupOOutput
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GroupOOutputCopyWith<GroupOOutput> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $GroupOOutputCopyWith<$Res> {
-  factory $GroupOOutputCopyWith(
-          GroupOOutput value, $Res Function(GroupOOutput) then) =
-      _$GroupOOutputCopyWithImpl<$Res, GroupOOutput>;
-  @useResult
-  $Res call(
-      {@RfControl() String id,
-      @RfArray<dynamic>() List<SubGroupOOutput> subGroupList});
-}
-
-/// @nodoc
-class _$GroupOOutputCopyWithImpl<$Res, $Val extends GroupOOutput>
-    implements $GroupOOutputCopyWith<$Res> {
-  _$GroupOOutputCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of GroupOOutput
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $GroupOOutputCopyWith<GroupOOutput> get copyWith =>
+      _$GroupOOutputCopyWithImpl<GroupOOutput>(
+          this as GroupOOutput, _$identity);
+
+  /// Serializes this GroupOOutput to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? subGroupList = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      subGroupList: null == subGroupList
-          ? _value.subGroupList
-          : subGroupList // ignore: cast_nullable_to_non_nullable
-              as List<SubGroupOOutput>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is GroupOOutput &&
+            (identical(other.id, id) || other.id == id) &&
+            const DeepCollectionEquality()
+                .equals(other.subGroupList, subGroupList));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, id, const DeepCollectionEquality().hash(subGroupList));
+
+  @override
+  String toString() {
+    return 'GroupOOutput(id: $id, subGroupList: $subGroupList)';
   }
 }
 
 /// @nodoc
-abstract class _$$GroupOOutputImplCopyWith<$Res>
-    implements $GroupOOutputCopyWith<$Res> {
-  factory _$$GroupOOutputImplCopyWith(
-          _$GroupOOutputImpl value, $Res Function(_$GroupOOutputImpl) then) =
-      __$$GroupOOutputImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $GroupOOutputCopyWith<$Res> {
+  factory $GroupOOutputCopyWith(
+          GroupOOutput value, $Res Function(GroupOOutput) _then) =
+      _$GroupOOutputCopyWithImpl;
   @useResult
   $Res call(
       {@RfControl() String id,
@@ -740,12 +673,11 @@ abstract class _$$GroupOOutputImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$GroupOOutputImplCopyWithImpl<$Res>
-    extends _$GroupOOutputCopyWithImpl<$Res, _$GroupOOutputImpl>
-    implements _$$GroupOOutputImplCopyWith<$Res> {
-  __$$GroupOOutputImplCopyWithImpl(
-      _$GroupOOutputImpl _value, $Res Function(_$GroupOOutputImpl) _then)
-      : super(_value, _then);
+class _$GroupOOutputCopyWithImpl<$Res> implements $GroupOOutputCopyWith<$Res> {
+  _$GroupOOutputCopyWithImpl(this._self, this._then);
+
+  final GroupOOutput _self;
+  final $Res Function(GroupOOutput) _then;
 
   /// Create a copy of GroupOOutput
   /// with the given fields replaced by the non-null parameter values.
@@ -755,13 +687,13 @@ class __$$GroupOOutputImplCopyWithImpl<$Res>
     Object? id = null,
     Object? subGroupList = null,
   }) {
-    return _then(_$GroupOOutputImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       subGroupList: null == subGroupList
-          ? _value._subGroupList
+          ? _self.subGroupList
           : subGroupList // ignore: cast_nullable_to_non_nullable
               as List<SubGroupOOutput>,
     ));
@@ -770,14 +702,13 @@ class __$$GroupOOutputImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GroupOOutputImpl implements _GroupOOutput {
-  const _$GroupOOutputImpl(
+class _GroupOOutput implements GroupOOutput {
+  const _GroupOOutput(
       {@RfControl() required this.id,
       @RfArray<dynamic>() required final List<SubGroupOOutput> subGroupList})
       : _subGroupList = subGroupList;
-
-  factory _$GroupOOutputImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GroupOOutputImplFromJson(json);
+  factory _GroupOOutput.fromJson(Map<String, dynamic> json) =>
+      _$GroupOOutputFromJson(json);
 
   @override
   @RfControl()
@@ -791,16 +722,26 @@ class _$GroupOOutputImpl implements _GroupOOutput {
     return EqualUnmodifiableListView(_subGroupList);
   }
 
+  /// Create a copy of GroupOOutput
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'GroupOOutput(id: $id, subGroupList: $subGroupList)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$GroupOOutputCopyWith<_GroupOOutput> get copyWith =>
+      __$GroupOOutputCopyWithImpl<_GroupOOutput>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$GroupOOutputToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GroupOOutputImpl &&
+            other is _GroupOOutput &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality()
                 .equals(other._subGroupList, _subGroupList));
@@ -811,118 +752,105 @@ class _$GroupOOutputImpl implements _GroupOOutput {
   int get hashCode => Object.hash(
       runtimeType, id, const DeepCollectionEquality().hash(_subGroupList));
 
-  /// Create a copy of GroupOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$GroupOOutputImplCopyWith<_$GroupOOutputImpl> get copyWith =>
-      __$$GroupOOutputImplCopyWithImpl<_$GroupOOutputImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$GroupOOutputImplToJson(
-      this,
-    );
+  String toString() {
+    return 'GroupOOutput(id: $id, subGroupList: $subGroupList)';
   }
 }
 
-abstract class _GroupOOutput implements GroupOOutput {
-  const factory _GroupOOutput(
-      {@RfControl() required final String id,
-      @RfArray<dynamic>()
-      required final List<SubGroupOOutput> subGroupList}) = _$GroupOOutputImpl;
-
-  factory _GroupOOutput.fromJson(Map<String, dynamic> json) =
-      _$GroupOOutputImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$GroupOOutputCopyWith<$Res>
+    implements $GroupOOutputCopyWith<$Res> {
+  factory _$GroupOOutputCopyWith(
+          _GroupOOutput value, $Res Function(_GroupOOutput) _then) =
+      __$GroupOOutputCopyWithImpl;
   @override
-  @RfControl()
-  String get id;
-  @override
-  @RfArray<dynamic>()
-  List<SubGroupOOutput> get subGroupList;
+  @useResult
+  $Res call(
+      {@RfControl() String id,
+      @RfArray<dynamic>() List<SubGroupOOutput> subGroupList});
+}
+
+/// @nodoc
+class __$GroupOOutputCopyWithImpl<$Res>
+    implements _$GroupOOutputCopyWith<$Res> {
+  __$GroupOOutputCopyWithImpl(this._self, this._then);
+
+  final _GroupOOutput _self;
+  final $Res Function(_GroupOOutput) _then;
 
   /// Create a copy of GroupOOutput
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GroupOOutputImplCopyWith<_$GroupOOutputImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-NestedOOutput _$NestedOOutputFromJson(Map<String, dynamic> json) {
-  return _NestedOOutput.fromJson(json);
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? subGroupList = null,
+  }) {
+    return _then(_GroupOOutput(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      subGroupList: null == subGroupList
+          ? _self._subGroupList
+          : subGroupList // ignore: cast_nullable_to_non_nullable
+              as List<SubGroupOOutput>,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$NestedOOutput {
   @RfArray<dynamic>()
-  List<GroupOOutput> get groupList => throw _privateConstructorUsedError;
-
-  /// Serializes this NestedOOutput to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  List<GroupOOutput> get groupList;
 
   /// Create a copy of NestedOOutput
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $NestedOOutputCopyWith<NestedOOutput> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $NestedOOutputCopyWith<$Res> {
-  factory $NestedOOutputCopyWith(
-          NestedOOutput value, $Res Function(NestedOOutput) then) =
-      _$NestedOOutputCopyWithImpl<$Res, NestedOOutput>;
-  @useResult
-  $Res call({@RfArray<dynamic>() List<GroupOOutput> groupList});
-}
-
-/// @nodoc
-class _$NestedOOutputCopyWithImpl<$Res, $Val extends NestedOOutput>
-    implements $NestedOOutputCopyWith<$Res> {
-  _$NestedOOutputCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of NestedOOutput
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $NestedOOutputCopyWith<NestedOOutput> get copyWith =>
+      _$NestedOOutputCopyWithImpl<NestedOOutput>(
+          this as NestedOOutput, _$identity);
+
+  /// Serializes this NestedOOutput to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? groupList = null,
-  }) {
-    return _then(_value.copyWith(
-      groupList: null == groupList
-          ? _value.groupList
-          : groupList // ignore: cast_nullable_to_non_nullable
-              as List<GroupOOutput>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is NestedOOutput &&
+            const DeepCollectionEquality().equals(other.groupList, groupList));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(groupList));
+
+  @override
+  String toString() {
+    return 'NestedOOutput(groupList: $groupList)';
   }
 }
 
 /// @nodoc
-abstract class _$$NestedOOutputImplCopyWith<$Res>
-    implements $NestedOOutputCopyWith<$Res> {
-  factory _$$NestedOOutputImplCopyWith(
-          _$NestedOOutputImpl value, $Res Function(_$NestedOOutputImpl) then) =
-      __$$NestedOOutputImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $NestedOOutputCopyWith<$Res> {
+  factory $NestedOOutputCopyWith(
+          NestedOOutput value, $Res Function(NestedOOutput) _then) =
+      _$NestedOOutputCopyWithImpl;
   @useResult
   $Res call({@RfArray<dynamic>() List<GroupOOutput> groupList});
 }
 
 /// @nodoc
-class __$$NestedOOutputImplCopyWithImpl<$Res>
-    extends _$NestedOOutputCopyWithImpl<$Res, _$NestedOOutputImpl>
-    implements _$$NestedOOutputImplCopyWith<$Res> {
-  __$$NestedOOutputImplCopyWithImpl(
-      _$NestedOOutputImpl _value, $Res Function(_$NestedOOutputImpl) _then)
-      : super(_value, _then);
+class _$NestedOOutputCopyWithImpl<$Res>
+    implements $NestedOOutputCopyWith<$Res> {
+  _$NestedOOutputCopyWithImpl(this._self, this._then);
+
+  final NestedOOutput _self;
+  final $Res Function(NestedOOutput) _then;
 
   /// Create a copy of NestedOOutput
   /// with the given fields replaced by the non-null parameter values.
@@ -931,9 +859,9 @@ class __$$NestedOOutputImplCopyWithImpl<$Res>
   $Res call({
     Object? groupList = null,
   }) {
-    return _then(_$NestedOOutputImpl(
+    return _then(_self.copyWith(
       groupList: null == groupList
-          ? _value._groupList
+          ? _self.groupList
           : groupList // ignore: cast_nullable_to_non_nullable
               as List<GroupOOutput>,
     ));
@@ -942,13 +870,12 @@ class __$$NestedOOutputImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$NestedOOutputImpl implements _NestedOOutput {
-  const _$NestedOOutputImpl(
+class _NestedOOutput implements NestedOOutput {
+  const _NestedOOutput(
       {@RfArray<dynamic>() required final List<GroupOOutput> groupList})
       : _groupList = groupList;
-
-  factory _$NestedOOutputImpl.fromJson(Map<String, dynamic> json) =>
-      _$$NestedOOutputImplFromJson(json);
+  factory _NestedOOutput.fromJson(Map<String, dynamic> json) =>
+      _$NestedOOutputFromJson(json);
 
   final List<GroupOOutput> _groupList;
   @override
@@ -959,16 +886,26 @@ class _$NestedOOutputImpl implements _NestedOOutput {
     return EqualUnmodifiableListView(_groupList);
   }
 
+  /// Create a copy of NestedOOutput
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'NestedOOutput(groupList: $groupList)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$NestedOOutputCopyWith<_NestedOOutput> get copyWith =>
+      __$NestedOOutputCopyWithImpl<_NestedOOutput>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$NestedOOutputToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NestedOOutputImpl &&
+            other is _NestedOOutput &&
             const DeepCollectionEquality()
                 .equals(other._groupList, _groupList));
   }
@@ -978,38 +915,45 @@ class _$NestedOOutputImpl implements _NestedOOutput {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_groupList));
 
-  /// Create a copy of NestedOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$NestedOOutputImplCopyWith<_$NestedOOutputImpl> get copyWith =>
-      __$$NestedOOutputImplCopyWithImpl<_$NestedOOutputImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$NestedOOutputImplToJson(
-      this,
-    );
+  String toString() {
+    return 'NestedOOutput(groupList: $groupList)';
   }
 }
 
-abstract class _NestedOOutput implements NestedOOutput {
-  const factory _NestedOOutput(
-          {@RfArray<dynamic>() required final List<GroupOOutput> groupList}) =
-      _$NestedOOutputImpl;
-
-  factory _NestedOOutput.fromJson(Map<String, dynamic> json) =
-      _$NestedOOutputImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$NestedOOutputCopyWith<$Res>
+    implements $NestedOOutputCopyWith<$Res> {
+  factory _$NestedOOutputCopyWith(
+          _NestedOOutput value, $Res Function(_NestedOOutput) _then) =
+      __$NestedOOutputCopyWithImpl;
   @override
-  @RfArray<dynamic>()
-  List<GroupOOutput> get groupList;
+  @useResult
+  $Res call({@RfArray<dynamic>() List<GroupOOutput> groupList});
+}
+
+/// @nodoc
+class __$NestedOOutputCopyWithImpl<$Res>
+    implements _$NestedOOutputCopyWith<$Res> {
+  __$NestedOOutputCopyWithImpl(this._self, this._then);
+
+  final _NestedOOutput _self;
+  final $Res Function(_NestedOOutput) _then;
 
   /// Create a copy of NestedOOutput
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$NestedOOutputImplCopyWith<_$NestedOOutputImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? groupList = null,
+  }) {
+    return _then(_NestedOOutput(
+      groupList: null == groupList
+          ? _self._groupList
+          : groupList // ignore: cast_nullable_to_non_nullable
+              as List<GroupOOutput>,
+    ));
+  }
 }
+
+// dart format on

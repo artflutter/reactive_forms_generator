@@ -6,8 +6,7 @@ part of 'profile_output.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ProfileOImpl _$$ProfileOImplFromJson(Map<String, dynamic> json) =>
-    _$ProfileOImpl(
+_ProfileO _$ProfileOFromJson(Map<String, dynamic> json) => _ProfileO(
       json['id'] as String,
       anotherId: json['anotherId'] as String,
       name: json['name'] as String,
@@ -25,8 +24,7 @@ _$ProfileOImpl _$$ProfileOImplFromJson(Map<String, dynamic> json) =>
       audioGuidance: json['audioGuidance'] as bool,
     );
 
-Map<String, dynamic> _$$ProfileOImplToJson(_$ProfileOImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ProfileOToJson(_ProfileO instance) => <String, dynamic>{
       'id': instance.id,
       'anotherId': instance.anotherId,
       'name': instance.name,
@@ -50,35 +48,32 @@ const _$MeasurementTypeEnumMap = {
   MeasurementType.pdGm: 'pdGm',
 };
 
-_$ThresholdSettingOImpl _$$ThresholdSettingOImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ThresholdSettingOImpl(
+_ThresholdSettingO _$ThresholdSettingOFromJson(Map<String, dynamic> json) =>
+    _ThresholdSettingO(
       isEnabled: json['isEnabled'] as bool? ?? true,
       value: (json['value'] as num?)?.toInt() ?? 2,
     );
 
-Map<String, dynamic> _$$ThresholdSettingOImplToJson(
-        _$ThresholdSettingOImpl instance) =>
+Map<String, dynamic> _$ThresholdSettingOToJson(_ThresholdSettingO instance) =>
     <String, dynamic>{
       'isEnabled': instance.isEnabled,
       'value': instance.value,
     };
 
-_$TimerSettingOImpl _$$TimerSettingOImplFromJson(Map<String, dynamic> json) =>
-    _$TimerSettingOImpl(
+_TimerSettingO _$TimerSettingOFromJson(Map<String, dynamic> json) =>
+    _TimerSettingO(
       isEnabled: json['isEnabled'] as bool? ?? false,
       value: (json['value'] as num?)?.toInt() ?? 5,
     );
 
-Map<String, dynamic> _$$TimerSettingOImplToJson(_$TimerSettingOImpl instance) =>
+Map<String, dynamic> _$TimerSettingOToJson(_TimerSettingO instance) =>
     <String, dynamic>{
       'isEnabled': instance.isEnabled,
       'value': instance.value,
     };
 
-_$IncidenceFilterOImpl _$$IncidenceFilterOImplFromJson(
-        Map<String, dynamic> json) =>
-    _$IncidenceFilterOImpl(
+_IncidenceFilterO _$IncidenceFilterOFromJson(Map<String, dynamic> json) =>
+    _IncidenceFilterO(
       isMobilityEnabled: json['isMobilityEnabled'] as bool? ?? true,
       isFurcationEnabled: json['isFurcationEnabled'] as bool? ?? true,
       isBleedingEnabled: json['isBleedingEnabled'] as bool? ?? true,
@@ -87,8 +82,7 @@ _$IncidenceFilterOImpl _$$IncidenceFilterOImplFromJson(
       isPlaqueEnabled: json['isPlaqueEnabled'] as bool? ?? true,
     );
 
-Map<String, dynamic> _$$IncidenceFilterOImplToJson(
-        _$IncidenceFilterOImpl instance) =>
+Map<String, dynamic> _$IncidenceFilterOToJson(_IncidenceFilterO instance) =>
     <String, dynamic>{
       'isMobilityEnabled': instance.isMobilityEnabled,
       'isFurcationEnabled': instance.isFurcationEnabled,
@@ -98,15 +92,15 @@ Map<String, dynamic> _$$IncidenceFilterOImplToJson(
       'isPlaqueEnabled': instance.isPlaqueEnabled,
     };
 
-_$ArchScanOrderImpl _$$ArchScanOrderImplFromJson(Map<String, dynamic> json) =>
-    _$ArchScanOrderImpl(
+ArchScanOrder _$ArchScanOrderFromJson(Map<String, dynamic> json) =>
+    ArchScanOrder(
       $enumDecode(_$JawEnumMap, json['jaw']),
       direction: $enumDecode(_$DirectionEnumMap, json['direction']),
       toothSide: $enumDecode(_$ToothSideEnumMap, json['toothSide']),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$ArchScanOrderImplToJson(_$ArchScanOrderImpl instance) =>
+Map<String, dynamic> _$ArchScanOrderToJson(ArchScanOrder instance) =>
     <String, dynamic>{
       'jaw': _$JawEnumMap[instance.jaw]!,
       'direction': _$DirectionEnumMap[instance.direction]!,
@@ -129,17 +123,15 @@ const _$ToothSideEnumMap = {
   ToothSide.lingual: 'lingual',
 };
 
-_$QuadrantScanOrderImpl _$$QuadrantScanOrderImplFromJson(
-        Map<String, dynamic> json) =>
-    _$QuadrantScanOrderImpl(
+QuadrantScanOrder _$QuadrantScanOrderFromJson(Map<String, dynamic> json) =>
+    QuadrantScanOrder(
       $enumDecode(_$QuadrantEnumMap, json['quadrant']),
       direction: $enumDecode(_$DirectionEnumMap, json['direction']),
       toothSide: $enumDecode(_$ToothSideEnumMap, json['toothSide']),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$QuadrantScanOrderImplToJson(
-        _$QuadrantScanOrderImpl instance) =>
+Map<String, dynamic> _$QuadrantScanOrderToJson(QuadrantScanOrder instance) =>
     <String, dynamic>{
       'quadrant': _$QuadrantEnumMap[instance.quadrant]!,
       'direction': _$DirectionEnumMap[instance.direction]!,
@@ -154,9 +146,8 @@ const _$QuadrantEnumMap = {
   Quadrant.lowerLeft: 'lowerLeft',
 };
 
-_$ChartingOrderValueImpl _$$ChartingOrderValueImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ChartingOrderValueImpl(
+_ChartingOrderValue _$ChartingOrderValueFromJson(Map<String, dynamic> json) =>
+    _ChartingOrderValue(
       chartingOrder: $enumDecodeNullable(
               _$ChartingOrderTypeEnumMap, json['chartingOrder']) ??
           ChartingOrderType.arch,
@@ -168,8 +159,7 @@ _$ChartingOrderValueImpl _$$ChartingOrderValueImplFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$ChartingOrderValueImplToJson(
-        _$ChartingOrderValueImpl instance) =>
+Map<String, dynamic> _$ChartingOrderValueToJson(_ChartingOrderValue instance) =>
     <String, dynamic>{
       'chartingOrder': _$ChartingOrderTypeEnumMap[instance.chartingOrder]!,
       'selectedOption': instance.selectedOption,
@@ -181,8 +171,8 @@ const _$ChartingOrderTypeEnumMap = {
   ChartingOrderType.quadrant: 'quadrant',
 };
 
-_$ProfileOOutputImpl _$$ProfileOOutputImplFromJson(Map<String, dynamic> json) =>
-    _$ProfileOOutputImpl(
+_ProfileOOutput _$ProfileOOutputFromJson(Map<String, dynamic> json) =>
+    _ProfileOOutput(
       json['id'] as String,
       anotherId: json['anotherId'] as String,
       name: json['name'] as String,
@@ -201,8 +191,7 @@ _$ProfileOOutputImpl _$$ProfileOOutputImplFromJson(Map<String, dynamic> json) =>
       audioGuidance: json['audioGuidance'] as bool,
     );
 
-Map<String, dynamic> _$$ProfileOOutputImplToJson(
-        _$ProfileOOutputImpl instance) =>
+Map<String, dynamic> _$ProfileOOutputToJson(_ProfileOOutput instance) =>
     <String, dynamic>{
       'id': instance.id,
       'anotherId': instance.anotherId,
@@ -217,37 +206,36 @@ Map<String, dynamic> _$$ProfileOOutputImplToJson(
       'audioGuidance': instance.audioGuidance,
     };
 
-_$ThresholdSettingOOutputImpl _$$ThresholdSettingOOutputImplFromJson(
+_ThresholdSettingOOutput _$ThresholdSettingOOutputFromJson(
         Map<String, dynamic> json) =>
-    _$ThresholdSettingOOutputImpl(
+    _ThresholdSettingOOutput(
       isEnabled: json['isEnabled'] as bool? ?? true,
       value: (json['value'] as num?)?.toInt() ?? 2,
     );
 
-Map<String, dynamic> _$$ThresholdSettingOOutputImplToJson(
-        _$ThresholdSettingOOutputImpl instance) =>
+Map<String, dynamic> _$ThresholdSettingOOutputToJson(
+        _ThresholdSettingOOutput instance) =>
     <String, dynamic>{
       'isEnabled': instance.isEnabled,
       'value': instance.value,
     };
 
-_$TimerSettingOOutputImpl _$$TimerSettingOOutputImplFromJson(
-        Map<String, dynamic> json) =>
-    _$TimerSettingOOutputImpl(
+_TimerSettingOOutput _$TimerSettingOOutputFromJson(Map<String, dynamic> json) =>
+    _TimerSettingOOutput(
       isEnabled: json['isEnabled'] as bool? ?? false,
       value: (json['value'] as num?)?.toInt() ?? 5,
     );
 
-Map<String, dynamic> _$$TimerSettingOOutputImplToJson(
-        _$TimerSettingOOutputImpl instance) =>
+Map<String, dynamic> _$TimerSettingOOutputToJson(
+        _TimerSettingOOutput instance) =>
     <String, dynamic>{
       'isEnabled': instance.isEnabled,
       'value': instance.value,
     };
 
-_$IncidenceFilterOOutputImpl _$$IncidenceFilterOOutputImplFromJson(
+_IncidenceFilterOOutput _$IncidenceFilterOOutputFromJson(
         Map<String, dynamic> json) =>
-    _$IncidenceFilterOOutputImpl(
+    _IncidenceFilterOOutput(
       isMobilityEnabled: json['isMobilityEnabled'] as bool? ?? true,
       isFurcationEnabled: json['isFurcationEnabled'] as bool? ?? true,
       isBleedingEnabled: json['isBleedingEnabled'] as bool? ?? true,
@@ -256,8 +244,8 @@ _$IncidenceFilterOOutputImpl _$$IncidenceFilterOOutputImplFromJson(
       isPlaqueEnabled: json['isPlaqueEnabled'] as bool? ?? true,
     );
 
-Map<String, dynamic> _$$IncidenceFilterOOutputImplToJson(
-        _$IncidenceFilterOOutputImpl instance) =>
+Map<String, dynamic> _$IncidenceFilterOOutputToJson(
+        _IncidenceFilterOOutput instance) =>
     <String, dynamic>{
       'isMobilityEnabled': instance.isMobilityEnabled,
       'isFurcationEnabled': instance.isFurcationEnabled,

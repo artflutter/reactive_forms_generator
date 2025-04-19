@@ -21,7 +21,7 @@ void main() {
             
             @freezed
             @Rf(output: true)
-            class TagsO<T> with _\$TagsO<T> {
+            abstract class TagsO<T> with _\$TagsO<T> {
               factory TagsO({
                 @RfControl() required List<T>? tags,
               }) = _TagsO;
@@ -491,7 +491,7 @@ class TagsOForm<T> implements FormModel<TagsO<T>, TagsOOutput<T>> {
 
 @freezed
 @Rf(output: true)
-class TagsOOutput<T> with _$TagsOOutput<T> {
+abstract class TagsOOutput<T> with _$TagsOOutput<T> {
   factory TagsOOutput({@RfControl() required List<T>? tags}) = _TagsOOutput;
   const TagsOOutput._();
 }

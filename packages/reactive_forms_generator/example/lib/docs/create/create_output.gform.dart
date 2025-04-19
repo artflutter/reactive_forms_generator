@@ -2986,7 +2986,7 @@ class AdminContactInformationForm
 
 @Rf(output: true)
 @freezed
-class MSICreateOutput with _$MSICreateOutput {
+abstract class MSICreateOutput with _$MSICreateOutput {
   const factory MSICreateOutput(
       {String? id,
       String? businessNumber,
@@ -3005,7 +3005,7 @@ class MSICreateOutput with _$MSICreateOutput {
 
 @RfGroup()
 @freezed
-class AddressOutput with _$AddressOutput {
+abstract class AddressOutput with _$AddressOutput {
   const factory AddressOutput(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       required String street,
@@ -3019,7 +3019,7 @@ class AddressOutput with _$AddressOutput {
 
 @RfGroup<PrimaryContactOutput>()
 @freezed
-class PrimaryContactOutput with _$PrimaryContactOutput {
+abstract class PrimaryContactOutput with _$PrimaryContactOutput {
   const factory PrimaryContactOutput(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       required String fullName,
@@ -3030,7 +3030,8 @@ class PrimaryContactOutput with _$PrimaryContactOutput {
 
 @RfGroup<AdminContactInformationOutput>()
 @freezed
-class AdminContactInformationOutput with _$AdminContactInformationOutput {
+abstract class AdminContactInformationOutput
+    with _$AdminContactInformationOutput {
   const factory AdminContactInformationOutput(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       required String firstName,

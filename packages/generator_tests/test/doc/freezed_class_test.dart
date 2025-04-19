@@ -26,7 +26,7 @@ void main() {
             
             @freezed
             @Rf(output: false)
-            class FreezedClass with _\$FreezedClass {
+            abstract class FreezedClass with _\$FreezedClass {
               FreezedClass._();
             
               factory FreezedClass(

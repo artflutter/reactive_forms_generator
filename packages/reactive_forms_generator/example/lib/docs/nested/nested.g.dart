@@ -6,36 +6,32 @@ part of 'nested.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$SubGroupImpl _$$SubGroupImplFromJson(Map<String, dynamic> json) =>
-    _$SubGroupImpl(
+_SubGroup _$SubGroupFromJson(Map<String, dynamic> json) => _SubGroup(
       id: json['id'] as String,
     );
 
-Map<String, dynamic> _$$SubGroupImplToJson(_$SubGroupImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$SubGroupToJson(_SubGroup instance) => <String, dynamic>{
       'id': instance.id,
     };
 
-_$GroupImpl _$$GroupImplFromJson(Map<String, dynamic> json) => _$GroupImpl(
+_Group _$GroupFromJson(Map<String, dynamic> json) => _Group(
       id: json['id'] as String,
       subGroupList: (json['subGroupList'] as List<dynamic>)
           .map((e) => SubGroup.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$GroupImplToJson(_$GroupImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$GroupToJson(_Group instance) => <String, dynamic>{
       'id': instance.id,
       'subGroupList': instance.subGroupList,
     };
 
-_$NestedImpl _$$NestedImplFromJson(Map<String, dynamic> json) => _$NestedImpl(
+_Nested _$NestedFromJson(Map<String, dynamic> json) => _Nested(
       groupList: (json['groupList'] as List<dynamic>)
           .map((e) => Group.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$NestedImplToJson(_$NestedImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$NestedToJson(_Nested instance) => <String, dynamic>{
       'groupList': instance.groupList,
     };

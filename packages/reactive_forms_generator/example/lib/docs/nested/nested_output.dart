@@ -10,7 +10,7 @@ part 'nested_output.gform.dart';
 @Rf(output: true)
 @RfGroup()
 @freezed
-class SubGroupO with _$SubGroupO {
+abstract class SubGroupO with _$SubGroupO {
   const factory SubGroupO({
     @RfControl() required String id,
   }) = _SubGroupO;
@@ -22,7 +22,7 @@ class SubGroupO with _$SubGroupO {
 @Rf(output: true)
 @RfGroup()
 @freezed
-class GroupO with _$GroupO {
+abstract class GroupO with _$GroupO {
   const factory GroupO({
     @RfControl() required String id,
     @RfArray<dynamic>() required List<SubGroupO> subGroupList,
@@ -34,7 +34,7 @@ class GroupO with _$GroupO {
 @Rf(output: true)
 @RfGroup()
 @freezed
-class NestedO with _$NestedO {
+abstract class NestedO with _$NestedO {
   const factory NestedO({
     @RfArray<dynamic>() required List<GroupO> groupList,
   }) = _NestedO;

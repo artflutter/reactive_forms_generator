@@ -21,7 +21,7 @@ void main() {
 
           @freezed
           @Rf(output: true)
-          class ProductDetailsO<P extends Product, C extends Cart>
+          abstract class ProductDetailsO<P extends Product, C extends Cart>
               with _\$ProductDetailsO<P, C> {
             factory ProductDetailsO({
               @RfControl() String? description,
@@ -34,7 +34,7 @@ void main() {
           @freezed
           @Rf(output: false)
           @RfGroup()
-          class IdO<P extends Product, C extends Cart> with _\$IdO<P, C> {
+          abstract class IdO<P extends Product, C extends Cart> with _\$IdO<P, C> {
             factory IdO({
               @RfControl() String? companyName,
               @RfControl() String? name,
@@ -44,7 +44,7 @@ void main() {
           }
           
           @freezed
-          class Product with _\$Product {
+          abstract class Product with _\$Product {
             const factory Product({
               String? companyName,
               String? name,
@@ -54,7 +54,7 @@ void main() {
           }
           
           @freezed
-          class Cart with _\$Cart {
+          abstract class Cart with _\$Cart {
             const factory Cart({
               Product? product,
               String? description,
@@ -1003,7 +1003,7 @@ class IdOForm<P extends Product, C extends Cart>
 
 @freezed
 @Rf(output: true)
-class ProductDetailsOOutput<P extends Product, C extends Cart>
+abstract class ProductDetailsOOutput<P extends Product, C extends Cart>
     with _$ProductDetailsOOutput<P, C> {
   factory ProductDetailsOOutput(
       {@RfControl() String? description,
@@ -1014,7 +1014,8 @@ class ProductDetailsOOutput<P extends Product, C extends Cart>
 @freezed
 @Rf(output: false)
 @RfGroup()
-class IdOOutput<P extends Product, C extends Cart> with _$IdOOutput<P, C> {
+abstract class IdOOutput<P extends Product, C extends Cart>
+    with _$IdOOutput<P, C> {
   factory IdOOutput(
       {@RfControl() String? companyName,
       @RfControl() String? name}) = _IdOOutput;
