@@ -8,7 +8,7 @@ part 'test.gform.dart';
 
 @freezed
 @Rf(output: false)
-class Test with _$Test {
+abstract class Test with _$Test {
   const Test._();
 
   const factory Test({

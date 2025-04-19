@@ -2471,7 +2471,7 @@ class TimerSettingOForm
 
 @freezed
 @Rf(output: true)
-class ProfileOOutput with _$ProfileOOutput {
+abstract class ProfileOOutput with _$ProfileOOutput {
   const ProfileOOutput._();
   factory ProfileOOutput(String id,
       {required String anotherId,
@@ -2491,7 +2491,7 @@ class ProfileOOutput with _$ProfileOOutput {
 
 @freezed
 @RfGroup()
-class ThresholdSettingOOutput with _$ThresholdSettingOOutput {
+abstract class ThresholdSettingOOutput with _$ThresholdSettingOOutput {
   static const values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const factory ThresholdSettingOOutput(
       {@RfControl<bool>() @Default(true) bool isEnabled,
@@ -2502,7 +2502,7 @@ class ThresholdSettingOOutput with _$ThresholdSettingOOutput {
 
 @freezed
 @RfGroup()
-class TimerSettingOOutput with _$TimerSettingOOutput {
+abstract class TimerSettingOOutput with _$TimerSettingOOutput {
   static const values = [1, 2, 3, 4, 5, 6];
   const factory TimerSettingOOutput(
       {@RfControl<bool>() @Default(false) bool isEnabled,
@@ -2513,7 +2513,7 @@ class TimerSettingOOutput with _$TimerSettingOOutput {
 
 @RfGroup()
 @freezed
-class IncidenceFilterOOutput with _$IncidenceFilterOOutput {
+abstract class IncidenceFilterOOutput with _$IncidenceFilterOOutput {
   const factory IncidenceFilterOOutput(
           {@RfControl<bool>() @Default(true) bool isMobilityEnabled,
           @RfControl<bool>() @Default(true) bool isFurcationEnabled,

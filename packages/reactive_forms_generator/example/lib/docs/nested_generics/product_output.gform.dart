@@ -931,7 +931,7 @@ class IdOForm<P extends Product, C extends Cart>
 
 @freezed
 @Rf(output: true)
-class ProductDetailsOOutput<P extends Product, C extends Cart>
+abstract class ProductDetailsOOutput<P extends Product, C extends Cart>
     with _$ProductDetailsOOutput<P, C> {
   factory ProductDetailsOOutput(
       {@RfControl() String? description,
@@ -942,7 +942,8 @@ class ProductDetailsOOutput<P extends Product, C extends Cart>
 @freezed
 @Rf(output: false)
 @RfGroup()
-class IdOOutput<P extends Product, C extends Cart> with _$IdOOutput<P, C> {
+abstract class IdOOutput<P extends Product, C extends Cart>
+    with _$IdOOutput<P, C> {
   factory IdOOutput(
       {@RfControl() String? companyName,
       @RfControl() String? name}) = _IdOOutput;

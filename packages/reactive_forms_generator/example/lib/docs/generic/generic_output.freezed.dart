@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,228 +10,64 @@ part of 'generic_output.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TagsO<T> {
   @RfControl()
-  List<T>? get tags => throw _privateConstructorUsedError;
+  List<T>? get tags;
 
   /// Create a copy of TagsO
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $TagsOCopyWith<T, TagsO<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$TagsOCopyWithImpl<T, TagsO<T>>(this as TagsO<T>, _$identity);
 
-/// @nodoc
-abstract class $TagsOCopyWith<T, $Res> {
-  factory $TagsOCopyWith(TagsO<T> value, $Res Function(TagsO<T>) then) =
-      _$TagsOCopyWithImpl<T, $Res, TagsO<T>>;
-  @useResult
-  $Res call({@RfControl() List<T>? tags});
-}
-
-/// @nodoc
-class _$TagsOCopyWithImpl<T, $Res, $Val extends TagsO<T>>
-    implements $TagsOCopyWith<T, $Res> {
-  _$TagsOCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of TagsO
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? tags = freezed,
-  }) {
-    return _then(_value.copyWith(
-      tags: freezed == tags
-          ? _value.tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<T>?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TagsO<T> &&
+            const DeepCollectionEquality().equals(other.tags, tags));
   }
-}
 
-/// @nodoc
-abstract class _$$TagsOImplCopyWith<T, $Res>
-    implements $TagsOCopyWith<T, $Res> {
-  factory _$$TagsOImplCopyWith(
-          _$TagsOImpl<T> value, $Res Function(_$TagsOImpl<T>) then) =
-      __$$TagsOImplCopyWithImpl<T, $Res>;
   @override
-  @useResult
-  $Res call({@RfControl() List<T>? tags});
-}
-
-/// @nodoc
-class __$$TagsOImplCopyWithImpl<T, $Res>
-    extends _$TagsOCopyWithImpl<T, $Res, _$TagsOImpl<T>>
-    implements _$$TagsOImplCopyWith<T, $Res> {
-  __$$TagsOImplCopyWithImpl(
-      _$TagsOImpl<T> _value, $Res Function(_$TagsOImpl<T>) _then)
-      : super(_value, _then);
-
-  /// Create a copy of TagsO
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? tags = freezed,
-  }) {
-    return _then(_$TagsOImpl<T>(
-      tags: freezed == tags
-          ? _value._tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<T>?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$TagsOImpl<T> extends _TagsO<T> {
-  _$TagsOImpl({@RfControl() required final List<T>? tags})
-      : _tags = tags,
-        super._();
-
-  final List<T>? _tags;
-  @override
-  @RfControl()
-  List<T>? get tags {
-    final value = _tags;
-    if (value == null) return null;
-    if (_tags is EqualUnmodifiableListView) return _tags;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(tags));
 
   @override
   String toString() {
     return 'TagsO<$T>(tags: $tags)';
   }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TagsOImpl<T> &&
-            const DeepCollectionEquality().equals(other._tags, _tags));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_tags));
-
-  /// Create a copy of TagsO
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TagsOImplCopyWith<T, _$TagsOImpl<T>> get copyWith =>
-      __$$TagsOImplCopyWithImpl<T, _$TagsOImpl<T>>(this, _$identity);
-}
-
-abstract class _TagsO<T> extends TagsO<T> {
-  factory _TagsO({@RfControl() required final List<T>? tags}) = _$TagsOImpl<T>;
-  _TagsO._() : super._();
-
-  @override
-  @RfControl()
-  List<T>? get tags;
-
-  /// Create a copy of TagsO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TagsOImplCopyWith<T, _$TagsOImpl<T>> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-mixin _$TagsOOutput<T> {
-  @RfControl()
-  List<T>? get tags => throw _privateConstructorUsedError;
-
-  /// Create a copy of TagsOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $TagsOOutputCopyWith<T, TagsOOutput<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $TagsOOutputCopyWith<T, $Res> {
-  factory $TagsOOutputCopyWith(
-          TagsOOutput<T> value, $Res Function(TagsOOutput<T>) then) =
-      _$TagsOOutputCopyWithImpl<T, $Res, TagsOOutput<T>>;
+abstract mixin class $TagsOCopyWith<T, $Res> {
+  factory $TagsOCopyWith(TagsO<T> value, $Res Function(TagsO<T>) _then) =
+      _$TagsOCopyWithImpl;
   @useResult
   $Res call({@RfControl() List<T>? tags});
 }
 
 /// @nodoc
-class _$TagsOOutputCopyWithImpl<T, $Res, $Val extends TagsOOutput<T>>
-    implements $TagsOOutputCopyWith<T, $Res> {
-  _$TagsOOutputCopyWithImpl(this._value, this._then);
+class _$TagsOCopyWithImpl<T, $Res> implements $TagsOCopyWith<T, $Res> {
+  _$TagsOCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final TagsO<T> _self;
+  final $Res Function(TagsO<T>) _then;
 
-  /// Create a copy of TagsOOutput
+  /// Create a copy of TagsO
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? tags = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       tags: freezed == tags
-          ? _value.tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<T>?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$TagsOOutputImplCopyWith<T, $Res>
-    implements $TagsOOutputCopyWith<T, $Res> {
-  factory _$$TagsOOutputImplCopyWith(_$TagsOOutputImpl<T> value,
-          $Res Function(_$TagsOOutputImpl<T>) then) =
-      __$$TagsOOutputImplCopyWithImpl<T, $Res>;
-  @override
-  @useResult
-  $Res call({@RfControl() List<T>? tags});
-}
-
-/// @nodoc
-class __$$TagsOOutputImplCopyWithImpl<T, $Res>
-    extends _$TagsOOutputCopyWithImpl<T, $Res, _$TagsOOutputImpl<T>>
-    implements _$$TagsOOutputImplCopyWith<T, $Res> {
-  __$$TagsOOutputImplCopyWithImpl(
-      _$TagsOOutputImpl<T> _value, $Res Function(_$TagsOOutputImpl<T>) _then)
-      : super(_value, _then);
-
-  /// Create a copy of TagsOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? tags = freezed,
-  }) {
-    return _then(_$TagsOOutputImpl<T>(
-      tags: freezed == tags
-          ? _value._tags
+          ? _self.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<T>?,
     ));
@@ -239,8 +76,8 @@ class __$$TagsOOutputImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$TagsOOutputImpl<T> extends _TagsOOutput<T> {
-  _$TagsOOutputImpl({@RfControl() required final List<T>? tags})
+class _TagsO<T> extends TagsO<T> {
+  _TagsO({@RfControl() required final List<T>? tags})
       : _tags = tags,
         super._();
 
@@ -255,16 +92,19 @@ class _$TagsOOutputImpl<T> extends _TagsOOutput<T> {
     return EqualUnmodifiableListView(value);
   }
 
+  /// Create a copy of TagsO
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'TagsOOutput<$T>(tags: $tags)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$TagsOCopyWith<T, _TagsO<T>> get copyWith =>
+      __$TagsOCopyWithImpl<T, _TagsO<T>>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TagsOOutputImpl<T> &&
+            other is _TagsO<T> &&
             const DeepCollectionEquality().equals(other._tags, _tags));
   }
 
@@ -272,29 +112,186 @@ class _$TagsOOutputImpl<T> extends _TagsOOutput<T> {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_tags));
 
-  /// Create a copy of TagsOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$TagsOOutputImplCopyWith<T, _$TagsOOutputImpl<T>> get copyWith =>
-      __$$TagsOOutputImplCopyWithImpl<T, _$TagsOOutputImpl<T>>(
-          this, _$identity);
+  String toString() {
+    return 'TagsO<$T>(tags: $tags)';
+  }
 }
 
-abstract class _TagsOOutput<T> extends TagsOOutput<T> {
-  factory _TagsOOutput({@RfControl() required final List<T>? tags}) =
-      _$TagsOOutputImpl<T>;
-  _TagsOOutput._() : super._();
-
+/// @nodoc
+abstract mixin class _$TagsOCopyWith<T, $Res>
+    implements $TagsOCopyWith<T, $Res> {
+  factory _$TagsOCopyWith(_TagsO<T> value, $Res Function(_TagsO<T>) _then) =
+      __$TagsOCopyWithImpl;
   @override
+  @useResult
+  $Res call({@RfControl() List<T>? tags});
+}
+
+/// @nodoc
+class __$TagsOCopyWithImpl<T, $Res> implements _$TagsOCopyWith<T, $Res> {
+  __$TagsOCopyWithImpl(this._self, this._then);
+
+  final _TagsO<T> _self;
+  final $Res Function(_TagsO<T>) _then;
+
+  /// Create a copy of TagsO
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? tags = freezed,
+  }) {
+    return _then(_TagsO<T>(
+      tags: freezed == tags
+          ? _self._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<T>?,
+    ));
+  }
+}
+
+/// @nodoc
+mixin _$TagsOOutput<T> {
   @RfControl()
   List<T>? get tags;
 
   /// Create a copy of TagsOOutput
   /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $TagsOOutputCopyWith<T, TagsOOutput<T>> get copyWith =>
+      _$TagsOOutputCopyWithImpl<T, TagsOOutput<T>>(
+          this as TagsOOutput<T>, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TagsOOutput<T> &&
+            const DeepCollectionEquality().equals(other.tags, tags));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(tags));
+
+  @override
+  String toString() {
+    return 'TagsOOutput<$T>(tags: $tags)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $TagsOOutputCopyWith<T, $Res> {
+  factory $TagsOOutputCopyWith(
+          TagsOOutput<T> value, $Res Function(TagsOOutput<T>) _then) =
+      _$TagsOOutputCopyWithImpl;
+  @useResult
+  $Res call({@RfControl() List<T>? tags});
+}
+
+/// @nodoc
+class _$TagsOOutputCopyWithImpl<T, $Res>
+    implements $TagsOOutputCopyWith<T, $Res> {
+  _$TagsOOutputCopyWithImpl(this._self, this._then);
+
+  final TagsOOutput<T> _self;
+  final $Res Function(TagsOOutput<T>) _then;
+
+  /// Create a copy of TagsOOutput
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tags = freezed,
+  }) {
+    return _then(_self.copyWith(
+      tags: freezed == tags
+          ? _self.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<T>?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _TagsOOutput<T> extends TagsOOutput<T> {
+  _TagsOOutput({@RfControl() required final List<T>? tags})
+      : _tags = tags,
+        super._();
+
+  final List<T>? _tags;
+  @override
+  @RfControl()
+  List<T>? get tags {
+    final value = _tags;
+    if (value == null) return null;
+    if (_tags is EqualUnmodifiableListView) return _tags;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  /// Create a copy of TagsOOutput
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TagsOOutputImplCopyWith<T, _$TagsOOutputImpl<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$TagsOOutputCopyWith<T, _TagsOOutput<T>> get copyWith =>
+      __$TagsOOutputCopyWithImpl<T, _TagsOOutput<T>>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _TagsOOutput<T> &&
+            const DeepCollectionEquality().equals(other._tags, _tags));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_tags));
+
+  @override
+  String toString() {
+    return 'TagsOOutput<$T>(tags: $tags)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$TagsOOutputCopyWith<T, $Res>
+    implements $TagsOOutputCopyWith<T, $Res> {
+  factory _$TagsOOutputCopyWith(
+          _TagsOOutput<T> value, $Res Function(_TagsOOutput<T>) _then) =
+      __$TagsOOutputCopyWithImpl;
+  @override
+  @useResult
+  $Res call({@RfControl() List<T>? tags});
+}
+
+/// @nodoc
+class __$TagsOOutputCopyWithImpl<T, $Res>
+    implements _$TagsOOutputCopyWith<T, $Res> {
+  __$TagsOOutputCopyWithImpl(this._self, this._then);
+
+  final _TagsOOutput<T> _self;
+  final $Res Function(_TagsOOutput<T>) _then;
+
+  /// Create a copy of TagsOOutput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? tags = freezed,
+  }) {
+    return _then(_TagsOOutput<T>(
+      tags: freezed == tags
+          ? _self._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<T>?,
+    ));
+  }
+}
+
+// dart format on

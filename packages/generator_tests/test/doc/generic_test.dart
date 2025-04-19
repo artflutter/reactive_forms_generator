@@ -21,7 +21,7 @@ void main() {
             
             @freezed
             @Rf(output: false)
-            class Tags<T> with _$Tags<T> {
+            abstract class Tags<T> with _$Tags<T> {
               factory Tags({
                 @RfControl() required List<T>? tags,
               }) = _Tags;

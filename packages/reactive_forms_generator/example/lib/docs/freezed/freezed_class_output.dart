@@ -10,7 +10,7 @@ part 'freezed_class_output.gform.dart';
 
 @freezed
 @Rf(output: true)
-class FreezedClassO with _$FreezedClassO {
+abstract class FreezedClassO with _$FreezedClassO {
   FreezedClassO._();
 
   factory FreezedClassO(

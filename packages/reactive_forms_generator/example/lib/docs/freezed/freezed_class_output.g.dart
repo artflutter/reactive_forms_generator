@@ -6,8 +6,8 @@ part of 'freezed_class_output.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FreezedClassOImpl _$$FreezedClassOImplFromJson(Map<String, dynamic> json) =>
-    _$FreezedClassOImpl(
+_FreezedClassO _$FreezedClassOFromJson(Map<String, dynamic> json) =>
+    _FreezedClassO(
       json['gender'] as String?,
       json['genderR'] as String?,
       id: json['id'] as String?,
@@ -22,7 +22,7 @@ _$FreezedClassOImpl _$$FreezedClassOImplFromJson(Map<String, dynamic> json) =>
           const [],
     );
 
-Map<String, dynamic> _$$FreezedClassOImplToJson(_$FreezedClassOImpl instance) =>
+Map<String, dynamic> _$FreezedClassOToJson(_FreezedClassO instance) =>
     <String, dynamic>{
       'gender': instance.gender,
       'genderR': instance.genderR,
@@ -35,9 +35,8 @@ Map<String, dynamic> _$$FreezedClassOImplToJson(_$FreezedClassOImpl instance) =>
       'selectedSpaces': instance.selectedSpaces,
     };
 
-_$FreezedClassOOutputImpl _$$FreezedClassOOutputImplFromJson(
-        Map<String, dynamic> json) =>
-    _$FreezedClassOOutputImpl(
+_FreezedClassOOutput _$FreezedClassOOutputFromJson(Map<String, dynamic> json) =>
+    _FreezedClassOOutput(
       json['gender'] as String?,
       json['genderR'] as String,
       id: json['id'] as String?,
@@ -52,8 +51,8 @@ _$FreezedClassOOutputImpl _$$FreezedClassOOutputImplFromJson(
           const [],
     );
 
-Map<String, dynamic> _$$FreezedClassOOutputImplToJson(
-        _$FreezedClassOOutputImpl instance) =>
+Map<String, dynamic> _$FreezedClassOOutputToJson(
+        _FreezedClassOOutput instance) =>
     <String, dynamic>{
       'gender': instance.gender,
       'genderR': instance.genderR,

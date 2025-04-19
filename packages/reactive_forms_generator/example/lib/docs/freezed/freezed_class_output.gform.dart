@@ -1313,7 +1313,7 @@ class FreezedClassOForm
 
 @freezed
 @Rf(output: true)
-class FreezedClassOOutput with _$FreezedClassOOutput {
+abstract class FreezedClassOOutput with _$FreezedClassOOutput {
   FreezedClassOOutput._();
   factory FreezedClassOOutput(@RfControl<String>() String? gender,
       @RfControl(validators: [RequiredValidator()]) String genderR,

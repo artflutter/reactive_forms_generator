@@ -6,8 +6,7 @@ part of 'profile.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ProfileImpl _$$ProfileImplFromJson(Map<String, dynamic> json) =>
-    _$ProfileImpl(
+_Profile _$ProfileFromJson(Map<String, dynamic> json) => _Profile(
       json['id'] as String,
       anotherId: json['anotherId'] as String,
       name: json['name'] as String,
@@ -25,8 +24,7 @@ _$ProfileImpl _$$ProfileImplFromJson(Map<String, dynamic> json) =>
       audioGuidance: json['audioGuidance'] as bool,
     );
 
-Map<String, dynamic> _$$ProfileImplToJson(_$ProfileImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ProfileToJson(_Profile instance) => <String, dynamic>{
       'id': instance.id,
       'anotherId': instance.anotherId,
       'name': instance.name,
@@ -50,35 +48,32 @@ const _$MeasurementTypeEnumMap = {
   MeasurementType.pdGm: 'pdGm',
 };
 
-_$ThresholdSettingImpl _$$ThresholdSettingImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ThresholdSettingImpl(
+_ThresholdSetting _$ThresholdSettingFromJson(Map<String, dynamic> json) =>
+    _ThresholdSetting(
       isEnabled: json['isEnabled'] as bool? ?? true,
       value: (json['value'] as num?)?.toInt() ?? 2,
     );
 
-Map<String, dynamic> _$$ThresholdSettingImplToJson(
-        _$ThresholdSettingImpl instance) =>
+Map<String, dynamic> _$ThresholdSettingToJson(_ThresholdSetting instance) =>
     <String, dynamic>{
       'isEnabled': instance.isEnabled,
       'value': instance.value,
     };
 
-_$TimerSettingImpl _$$TimerSettingImplFromJson(Map<String, dynamic> json) =>
-    _$TimerSettingImpl(
+_TimerSetting _$TimerSettingFromJson(Map<String, dynamic> json) =>
+    _TimerSetting(
       isEnabled: json['isEnabled'] as bool? ?? false,
       value: (json['value'] as num?)?.toInt() ?? 5,
     );
 
-Map<String, dynamic> _$$TimerSettingImplToJson(_$TimerSettingImpl instance) =>
+Map<String, dynamic> _$TimerSettingToJson(_TimerSetting instance) =>
     <String, dynamic>{
       'isEnabled': instance.isEnabled,
       'value': instance.value,
     };
 
-_$IncidenceFilterImpl _$$IncidenceFilterImplFromJson(
-        Map<String, dynamic> json) =>
-    _$IncidenceFilterImpl(
+_IncidenceFilter _$IncidenceFilterFromJson(Map<String, dynamic> json) =>
+    _IncidenceFilter(
       isMobilityEnabled: json['isMobilityEnabled'] as bool? ?? true,
       isFurcationEnabled: json['isFurcationEnabled'] as bool? ?? true,
       isBleedingEnabled: json['isBleedingEnabled'] as bool? ?? true,
@@ -87,8 +82,7 @@ _$IncidenceFilterImpl _$$IncidenceFilterImplFromJson(
       isPlaqueEnabled: json['isPlaqueEnabled'] as bool? ?? true,
     );
 
-Map<String, dynamic> _$$IncidenceFilterImplToJson(
-        _$IncidenceFilterImpl instance) =>
+Map<String, dynamic> _$IncidenceFilterToJson(_IncidenceFilter instance) =>
     <String, dynamic>{
       'isMobilityEnabled': instance.isMobilityEnabled,
       'isFurcationEnabled': instance.isFurcationEnabled,
@@ -98,15 +92,15 @@ Map<String, dynamic> _$$IncidenceFilterImplToJson(
       'isPlaqueEnabled': instance.isPlaqueEnabled,
     };
 
-_$ArchScanOrderImpl _$$ArchScanOrderImplFromJson(Map<String, dynamic> json) =>
-    _$ArchScanOrderImpl(
+ArchScanOrder _$ArchScanOrderFromJson(Map<String, dynamic> json) =>
+    ArchScanOrder(
       $enumDecode(_$JawEnumMap, json['jaw']),
       direction: $enumDecode(_$DirectionEnumMap, json['direction']),
       toothSide: $enumDecode(_$ToothSideEnumMap, json['toothSide']),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$ArchScanOrderImplToJson(_$ArchScanOrderImpl instance) =>
+Map<String, dynamic> _$ArchScanOrderToJson(ArchScanOrder instance) =>
     <String, dynamic>{
       'jaw': _$JawEnumMap[instance.jaw]!,
       'direction': _$DirectionEnumMap[instance.direction]!,
@@ -129,17 +123,15 @@ const _$ToothSideEnumMap = {
   ToothSide.lingual: 'lingual',
 };
 
-_$QuadrantScanOrderImpl _$$QuadrantScanOrderImplFromJson(
-        Map<String, dynamic> json) =>
-    _$QuadrantScanOrderImpl(
+QuadrantScanOrder _$QuadrantScanOrderFromJson(Map<String, dynamic> json) =>
+    QuadrantScanOrder(
       $enumDecode(_$QuadrantEnumMap, json['quadrant']),
       direction: $enumDecode(_$DirectionEnumMap, json['direction']),
       toothSide: $enumDecode(_$ToothSideEnumMap, json['toothSide']),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$QuadrantScanOrderImplToJson(
-        _$QuadrantScanOrderImpl instance) =>
+Map<String, dynamic> _$QuadrantScanOrderToJson(QuadrantScanOrder instance) =>
     <String, dynamic>{
       'quadrant': _$QuadrantEnumMap[instance.quadrant]!,
       'direction': _$DirectionEnumMap[instance.direction]!,
@@ -154,9 +146,8 @@ const _$QuadrantEnumMap = {
   Quadrant.lowerLeft: 'lowerLeft',
 };
 
-_$ChartingOrderValueImpl _$$ChartingOrderValueImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ChartingOrderValueImpl(
+_ChartingOrderValue _$ChartingOrderValueFromJson(Map<String, dynamic> json) =>
+    _ChartingOrderValue(
       chartingOrder: $enumDecodeNullable(
               _$ChartingOrderTypeEnumMap, json['chartingOrder']) ??
           ChartingOrderType.arch,
@@ -168,8 +159,7 @@ _$ChartingOrderValueImpl _$$ChartingOrderValueImplFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$ChartingOrderValueImplToJson(
-        _$ChartingOrderValueImpl instance) =>
+Map<String, dynamic> _$ChartingOrderValueToJson(_ChartingOrderValue instance) =>
     <String, dynamic>{
       'chartingOrder': _$ChartingOrderTypeEnumMap[instance.chartingOrder]!,
       'selectedOption': instance.selectedOption,

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,40 +10,81 @@ part of 'create_output.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MSICreate {
-  String? get id => throw _privateConstructorUsedError;
-  String? get businessNumber => throw _privateConstructorUsedError;
-  List<String>? get fileIds => throw _privateConstructorUsedError;
+  String? get id;
+  String? get businessNumber;
+  List<String>? get fileIds;
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String? get name => throw _privateConstructorUsedError;
-  Address get companyAddress => throw _privateConstructorUsedError;
+  String? get name;
+  Address get companyAddress;
   @RfControl(validators: [RequiredValidator(), EmailValidator()])
-  String? get email => throw _privateConstructorUsedError;
-  PrimaryContact get primaryContact => throw _privateConstructorUsedError;
+  String? get email;
+  PrimaryContact get primaryContact;
   @RfControl<bool>()
-  bool get sameMailingAddressAsCompany => throw _privateConstructorUsedError;
-  Address get mailingAddress => throw _privateConstructorUsedError;
+  bool get sameMailingAddressAsCompany;
+  Address get mailingAddress;
   @RfArray<AdminContactInformation>()
-  List<AdminContactInformation> get admins =>
-      throw _privateConstructorUsedError;
+  List<AdminContactInformation> get admins;
 
   /// Create a copy of MSICreate
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $MSICreateCopyWith<MSICreate> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$MSICreateCopyWithImpl<MSICreate>(this as MSICreate, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is MSICreate &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.businessNumber, businessNumber) ||
+                other.businessNumber == businessNumber) &&
+            const DeepCollectionEquality().equals(other.fileIds, fileIds) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.companyAddress, companyAddress) ||
+                other.companyAddress == companyAddress) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.primaryContact, primaryContact) ||
+                other.primaryContact == primaryContact) &&
+            (identical(other.sameMailingAddressAsCompany,
+                    sameMailingAddressAsCompany) ||
+                other.sameMailingAddressAsCompany ==
+                    sameMailingAddressAsCompany) &&
+            (identical(other.mailingAddress, mailingAddress) ||
+                other.mailingAddress == mailingAddress) &&
+            const DeepCollectionEquality().equals(other.admins, admins));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      businessNumber,
+      const DeepCollectionEquality().hash(fileIds),
+      name,
+      companyAddress,
+      email,
+      primaryContact,
+      sameMailingAddressAsCompany,
+      mailingAddress,
+      const DeepCollectionEquality().hash(admins));
+
+  @override
+  String toString() {
+    return 'MSICreate(id: $id, businessNumber: $businessNumber, fileIds: $fileIds, name: $name, companyAddress: $companyAddress, email: $email, primaryContact: $primaryContact, sameMailingAddressAsCompany: $sameMailingAddressAsCompany, mailingAddress: $mailingAddress, admins: $admins)';
+  }
 }
 
 /// @nodoc
-abstract class $MSICreateCopyWith<$Res> {
-  factory $MSICreateCopyWith(MSICreate value, $Res Function(MSICreate) then) =
-      _$MSICreateCopyWithImpl<$Res, MSICreate>;
+abstract mixin class $MSICreateCopyWith<$Res> {
+  factory $MSICreateCopyWith(MSICreate value, $Res Function(MSICreate) _then) =
+      _$MSICreateCopyWithImpl;
   @useResult
   $Res call(
       {String? id,
@@ -65,14 +107,11 @@ abstract class $MSICreateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MSICreateCopyWithImpl<$Res, $Val extends MSICreate>
-    implements $MSICreateCopyWith<$Res> {
-  _$MSICreateCopyWithImpl(this._value, this._then);
+class _$MSICreateCopyWithImpl<$Res> implements $MSICreateCopyWith<$Res> {
+  _$MSICreateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final MSICreate _self;
+  final $Res Function(MSICreate) _then;
 
   /// Create a copy of MSICreate
   /// with the given fields replaced by the non-null parameter values.
@@ -90,48 +129,48 @@ class _$MSICreateCopyWithImpl<$Res, $Val extends MSICreate>
     Object? mailingAddress = null,
     Object? admins = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: freezed == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
       businessNumber: freezed == businessNumber
-          ? _value.businessNumber
+          ? _self.businessNumber
           : businessNumber // ignore: cast_nullable_to_non_nullable
               as String?,
       fileIds: freezed == fileIds
-          ? _value.fileIds
+          ? _self.fileIds
           : fileIds // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       name: freezed == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
       companyAddress: null == companyAddress
-          ? _value.companyAddress
+          ? _self.companyAddress
           : companyAddress // ignore: cast_nullable_to_non_nullable
               as Address,
       email: freezed == email
-          ? _value.email
+          ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
       primaryContact: null == primaryContact
-          ? _value.primaryContact
+          ? _self.primaryContact
           : primaryContact // ignore: cast_nullable_to_non_nullable
               as PrimaryContact,
       sameMailingAddressAsCompany: null == sameMailingAddressAsCompany
-          ? _value.sameMailingAddressAsCompany
+          ? _self.sameMailingAddressAsCompany
           : sameMailingAddressAsCompany // ignore: cast_nullable_to_non_nullable
               as bool,
       mailingAddress: null == mailingAddress
-          ? _value.mailingAddress
+          ? _self.mailingAddress
           : mailingAddress // ignore: cast_nullable_to_non_nullable
               as Address,
       admins: null == admins
-          ? _value.admins
+          ? _self.admins
           : admins // ignore: cast_nullable_to_non_nullable
               as List<AdminContactInformation>,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of MSICreate
@@ -139,8 +178,8 @@ class _$MSICreateCopyWithImpl<$Res, $Val extends MSICreate>
   @override
   @pragma('vm:prefer-inline')
   $AddressCopyWith<$Res> get companyAddress {
-    return $AddressCopyWith<$Res>(_value.companyAddress, (value) {
-      return _then(_value.copyWith(companyAddress: value) as $Val);
+    return $AddressCopyWith<$Res>(_self.companyAddress, (value) {
+      return _then(_self.copyWith(companyAddress: value));
     });
   }
 
@@ -149,8 +188,8 @@ class _$MSICreateCopyWithImpl<$Res, $Val extends MSICreate>
   @override
   @pragma('vm:prefer-inline')
   $PrimaryContactCopyWith<$Res> get primaryContact {
-    return $PrimaryContactCopyWith<$Res>(_value.primaryContact, (value) {
-      return _then(_value.copyWith(primaryContact: value) as $Val);
+    return $PrimaryContactCopyWith<$Res>(_self.primaryContact, (value) {
+      return _then(_self.copyWith(primaryContact: value));
     });
   }
 
@@ -159,116 +198,16 @@ class _$MSICreateCopyWithImpl<$Res, $Val extends MSICreate>
   @override
   @pragma('vm:prefer-inline')
   $AddressCopyWith<$Res> get mailingAddress {
-    return $AddressCopyWith<$Res>(_value.mailingAddress, (value) {
-      return _then(_value.copyWith(mailingAddress: value) as $Val);
+    return $AddressCopyWith<$Res>(_self.mailingAddress, (value) {
+      return _then(_self.copyWith(mailingAddress: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$MSICreateImplCopyWith<$Res>
-    implements $MSICreateCopyWith<$Res> {
-  factory _$$MSICreateImplCopyWith(
-          _$MSICreateImpl value, $Res Function(_$MSICreateImpl) then) =
-      __$$MSICreateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String? id,
-      String? businessNumber,
-      List<String>? fileIds,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      String? name,
-      Address companyAddress,
-      @RfControl(validators: [RequiredValidator(), EmailValidator()])
-      String? email,
-      PrimaryContact primaryContact,
-      @RfControl<bool>() bool sameMailingAddressAsCompany,
-      Address mailingAddress,
-      @RfArray<AdminContactInformation>()
-      List<AdminContactInformation> admins});
 
-  @override
-  $AddressCopyWith<$Res> get companyAddress;
-  @override
-  $PrimaryContactCopyWith<$Res> get primaryContact;
-  @override
-  $AddressCopyWith<$Res> get mailingAddress;
-}
-
-/// @nodoc
-class __$$MSICreateImplCopyWithImpl<$Res>
-    extends _$MSICreateCopyWithImpl<$Res, _$MSICreateImpl>
-    implements _$$MSICreateImplCopyWith<$Res> {
-  __$$MSICreateImplCopyWithImpl(
-      _$MSICreateImpl _value, $Res Function(_$MSICreateImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of MSICreate
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? businessNumber = freezed,
-    Object? fileIds = freezed,
-    Object? name = freezed,
-    Object? companyAddress = null,
-    Object? email = freezed,
-    Object? primaryContact = null,
-    Object? sameMailingAddressAsCompany = null,
-    Object? mailingAddress = null,
-    Object? admins = null,
-  }) {
-    return _then(_$MSICreateImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      businessNumber: freezed == businessNumber
-          ? _value.businessNumber
-          : businessNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      fileIds: freezed == fileIds
-          ? _value._fileIds
-          : fileIds // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      companyAddress: null == companyAddress
-          ? _value.companyAddress
-          : companyAddress // ignore: cast_nullable_to_non_nullable
-              as Address,
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      primaryContact: null == primaryContact
-          ? _value.primaryContact
-          : primaryContact // ignore: cast_nullable_to_non_nullable
-              as PrimaryContact,
-      sameMailingAddressAsCompany: null == sameMailingAddressAsCompany
-          ? _value.sameMailingAddressAsCompany
-          : sameMailingAddressAsCompany // ignore: cast_nullable_to_non_nullable
-              as bool,
-      mailingAddress: null == mailingAddress
-          ? _value.mailingAddress
-          : mailingAddress // ignore: cast_nullable_to_non_nullable
-              as Address,
-      admins: null == admins
-          ? _value._admins
-          : admins // ignore: cast_nullable_to_non_nullable
-              as List<AdminContactInformation>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$MSICreateImpl implements _MSICreate {
-  const _$MSICreateImpl(
+class _MSICreate implements MSICreate {
+  const _MSICreate(
       {this.id,
       this.businessNumber,
       final List<String>? fileIds,
@@ -330,16 +269,19 @@ class _$MSICreateImpl implements _MSICreate {
     return EqualUnmodifiableListView(_admins);
   }
 
+  /// Create a copy of MSICreate
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'MSICreate(id: $id, businessNumber: $businessNumber, fileIds: $fileIds, name: $name, companyAddress: $companyAddress, email: $email, primaryContact: $primaryContact, sameMailingAddressAsCompany: $sameMailingAddressAsCompany, mailingAddress: $mailingAddress, admins: $admins)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$MSICreateCopyWith<_MSICreate> get copyWith =>
+      __$MSICreateCopyWithImpl<_MSICreate>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MSICreateImpl &&
+            other is _MSICreate &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.businessNumber, businessNumber) ||
                 other.businessNumber == businessNumber) &&
@@ -373,143 +315,185 @@ class _$MSICreateImpl implements _MSICreate {
       mailingAddress,
       const DeepCollectionEquality().hash(_admins));
 
-  /// Create a copy of MSICreate
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$MSICreateImplCopyWith<_$MSICreateImpl> get copyWith =>
-      __$$MSICreateImplCopyWithImpl<_$MSICreateImpl>(this, _$identity);
+  String toString() {
+    return 'MSICreate(id: $id, businessNumber: $businessNumber, fileIds: $fileIds, name: $name, companyAddress: $companyAddress, email: $email, primaryContact: $primaryContact, sameMailingAddressAsCompany: $sameMailingAddressAsCompany, mailingAddress: $mailingAddress, admins: $admins)';
+  }
 }
 
-abstract class _MSICreate implements MSICreate {
-  const factory _MSICreate(
-      {final String? id,
-      final String? businessNumber,
-      final List<String>? fileIds,
+/// @nodoc
+abstract mixin class _$MSICreateCopyWith<$Res>
+    implements $MSICreateCopyWith<$Res> {
+  factory _$MSICreateCopyWith(
+          _MSICreate value, $Res Function(_MSICreate) _then) =
+      __$MSICreateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String? id,
+      String? businessNumber,
+      List<String>? fileIds,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      final String? name,
-      final Address companyAddress,
+      String? name,
+      Address companyAddress,
       @RfControl(validators: [RequiredValidator(), EmailValidator()])
-      final String? email,
-      final PrimaryContact primaryContact,
-      @RfControl<bool>() final bool sameMailingAddressAsCompany,
-      final Address mailingAddress,
+      String? email,
+      PrimaryContact primaryContact,
+      @RfControl<bool>() bool sameMailingAddressAsCompany,
+      Address mailingAddress,
       @RfArray<AdminContactInformation>()
-      final List<AdminContactInformation> admins}) = _$MSICreateImpl;
+      List<AdminContactInformation> admins});
 
   @override
-  String? get id;
+  $AddressCopyWith<$Res> get companyAddress;
   @override
-  String? get businessNumber;
+  $PrimaryContactCopyWith<$Res> get primaryContact;
   @override
-  List<String>? get fileIds;
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String? get name;
-  @override
-  Address get companyAddress;
-  @override
-  @RfControl(validators: [RequiredValidator(), EmailValidator()])
-  String? get email;
-  @override
-  PrimaryContact get primaryContact;
-  @override
-  @RfControl<bool>()
-  bool get sameMailingAddressAsCompany;
-  @override
-  Address get mailingAddress;
-  @override
-  @RfArray<AdminContactInformation>()
-  List<AdminContactInformation> get admins;
+  $AddressCopyWith<$Res> get mailingAddress;
+}
+
+/// @nodoc
+class __$MSICreateCopyWithImpl<$Res> implements _$MSICreateCopyWith<$Res> {
+  __$MSICreateCopyWithImpl(this._self, this._then);
+
+  final _MSICreate _self;
+  final $Res Function(_MSICreate) _then;
 
   /// Create a copy of MSICreate
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MSICreateImplCopyWith<_$MSICreateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = freezed,
+    Object? businessNumber = freezed,
+    Object? fileIds = freezed,
+    Object? name = freezed,
+    Object? companyAddress = null,
+    Object? email = freezed,
+    Object? primaryContact = null,
+    Object? sameMailingAddressAsCompany = null,
+    Object? mailingAddress = null,
+    Object? admins = null,
+  }) {
+    return _then(_MSICreate(
+      id: freezed == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessNumber: freezed == businessNumber
+          ? _self.businessNumber
+          : businessNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fileIds: freezed == fileIds
+          ? _self._fileIds
+          : fileIds // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      name: freezed == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      companyAddress: null == companyAddress
+          ? _self.companyAddress
+          : companyAddress // ignore: cast_nullable_to_non_nullable
+              as Address,
+      email: freezed == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      primaryContact: null == primaryContact
+          ? _self.primaryContact
+          : primaryContact // ignore: cast_nullable_to_non_nullable
+              as PrimaryContact,
+      sameMailingAddressAsCompany: null == sameMailingAddressAsCompany
+          ? _self.sameMailingAddressAsCompany
+          : sameMailingAddressAsCompany // ignore: cast_nullable_to_non_nullable
+              as bool,
+      mailingAddress: null == mailingAddress
+          ? _self.mailingAddress
+          : mailingAddress // ignore: cast_nullable_to_non_nullable
+              as Address,
+      admins: null == admins
+          ? _self._admins
+          : admins // ignore: cast_nullable_to_non_nullable
+              as List<AdminContactInformation>,
+    ));
+  }
+
+  /// Create a copy of MSICreate
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AddressCopyWith<$Res> get companyAddress {
+    return $AddressCopyWith<$Res>(_self.companyAddress, (value) {
+      return _then(_self.copyWith(companyAddress: value));
+    });
+  }
+
+  /// Create a copy of MSICreate
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PrimaryContactCopyWith<$Res> get primaryContact {
+    return $PrimaryContactCopyWith<$Res>(_self.primaryContact, (value) {
+      return _then(_self.copyWith(primaryContact: value));
+    });
+  }
+
+  /// Create a copy of MSICreate
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AddressCopyWith<$Res> get mailingAddress {
+    return $AddressCopyWith<$Res>(_self.mailingAddress, (value) {
+      return _then(_self.copyWith(mailingAddress: value));
+    });
+  }
 }
 
 /// @nodoc
 mixin _$Address {
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String? get street => throw _privateConstructorUsedError;
+  String? get street;
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String? get city => throw _privateConstructorUsedError;
+  String? get city;
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String? get stateOrProvince => throw _privateConstructorUsedError;
+  String? get stateOrProvince;
   @RfControl(validators: [RequiredValidator()])
-  String? get zipCode => throw _privateConstructorUsedError;
+  String? get zipCode;
 
   /// Create a copy of Address
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AddressCopyWith<Address> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AddressCopyWith<$Res> {
-  factory $AddressCopyWith(Address value, $Res Function(Address) then) =
-      _$AddressCopyWithImpl<$Res, Address>;
-  @useResult
-  $Res call(
-      {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      String? street,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      String? city,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      String? stateOrProvince,
-      @RfControl(validators: [RequiredValidator()]) String? zipCode});
-}
-
-/// @nodoc
-class _$AddressCopyWithImpl<$Res, $Val extends Address>
-    implements $AddressCopyWith<$Res> {
-  _$AddressCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Address
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $AddressCopyWith<Address> get copyWith =>
+      _$AddressCopyWithImpl<Address>(this as Address, _$identity);
+
   @override
-  $Res call({
-    Object? street = freezed,
-    Object? city = freezed,
-    Object? stateOrProvince = freezed,
-    Object? zipCode = freezed,
-  }) {
-    return _then(_value.copyWith(
-      street: freezed == street
-          ? _value.street
-          : street // ignore: cast_nullable_to_non_nullable
-              as String?,
-      city: freezed == city
-          ? _value.city
-          : city // ignore: cast_nullable_to_non_nullable
-              as String?,
-      stateOrProvince: freezed == stateOrProvince
-          ? _value.stateOrProvince
-          : stateOrProvince // ignore: cast_nullable_to_non_nullable
-              as String?,
-      zipCode: freezed == zipCode
-          ? _value.zipCode
-          : zipCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Address &&
+            (identical(other.street, street) || other.street == street) &&
+            (identical(other.city, city) || other.city == city) &&
+            (identical(other.stateOrProvince, stateOrProvince) ||
+                other.stateOrProvince == stateOrProvince) &&
+            (identical(other.zipCode, zipCode) || other.zipCode == zipCode));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, street, city, stateOrProvince, zipCode);
+
+  @override
+  String toString() {
+    return 'Address(street: $street, city: $city, stateOrProvince: $stateOrProvince, zipCode: $zipCode)';
   }
 }
 
 /// @nodoc
-abstract class _$$AddressImplCopyWith<$Res> implements $AddressCopyWith<$Res> {
-  factory _$$AddressImplCopyWith(
-          _$AddressImpl value, $Res Function(_$AddressImpl) then) =
-      __$$AddressImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $AddressCopyWith<$Res> {
+  factory $AddressCopyWith(Address value, $Res Function(Address) _then) =
+      _$AddressCopyWithImpl;
   @useResult
   $Res call(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
@@ -522,12 +506,11 @@ abstract class _$$AddressImplCopyWith<$Res> implements $AddressCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$AddressImplCopyWithImpl<$Res>
-    extends _$AddressCopyWithImpl<$Res, _$AddressImpl>
-    implements _$$AddressImplCopyWith<$Res> {
-  __$$AddressImplCopyWithImpl(
-      _$AddressImpl _value, $Res Function(_$AddressImpl) _then)
-      : super(_value, _then);
+class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
+  _$AddressCopyWithImpl(this._self, this._then);
+
+  final Address _self;
+  final $Res Function(Address) _then;
 
   /// Create a copy of Address
   /// with the given fields replaced by the non-null parameter values.
@@ -539,21 +522,21 @@ class __$$AddressImplCopyWithImpl<$Res>
     Object? stateOrProvince = freezed,
     Object? zipCode = freezed,
   }) {
-    return _then(_$AddressImpl(
+    return _then(_self.copyWith(
       street: freezed == street
-          ? _value.street
+          ? _self.street
           : street // ignore: cast_nullable_to_non_nullable
               as String?,
       city: freezed == city
-          ? _value.city
+          ? _self.city
           : city // ignore: cast_nullable_to_non_nullable
               as String?,
       stateOrProvince: freezed == stateOrProvince
-          ? _value.stateOrProvince
+          ? _self.stateOrProvince
           : stateOrProvince // ignore: cast_nullable_to_non_nullable
               as String?,
       zipCode: freezed == zipCode
-          ? _value.zipCode
+          ? _self.zipCode
           : zipCode // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
@@ -562,8 +545,8 @@ class __$$AddressImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddressImpl implements _Address {
-  const _$AddressImpl(
+class _Address implements Address {
+  const _Address(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       this.street,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
@@ -585,16 +568,19 @@ class _$AddressImpl implements _Address {
   @RfControl(validators: [RequiredValidator()])
   final String? zipCode;
 
+  /// Create a copy of Address
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Address(street: $street, city: $city, stateOrProvince: $stateOrProvince, zipCode: $zipCode)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AddressCopyWith<_Address> get copyWith =>
+      __$AddressCopyWithImpl<_Address>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddressImpl &&
+            other is _Address &&
             (identical(other.street, street) || other.street == street) &&
             (identical(other.city, city) || other.city == city) &&
             (identical(other.stateOrProvince, stateOrProvince) ||
@@ -606,120 +592,109 @@ class _$AddressImpl implements _Address {
   int get hashCode =>
       Object.hash(runtimeType, street, city, stateOrProvince, zipCode);
 
-  /// Create a copy of Address
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$AddressImplCopyWith<_$AddressImpl> get copyWith =>
-      __$$AddressImplCopyWithImpl<_$AddressImpl>(this, _$identity);
+  String toString() {
+    return 'Address(street: $street, city: $city, stateOrProvince: $stateOrProvince, zipCode: $zipCode)';
+  }
 }
 
-abstract class _Address implements Address {
-  const factory _Address(
+/// @nodoc
+abstract mixin class _$AddressCopyWith<$Res> implements $AddressCopyWith<$Res> {
+  factory _$AddressCopyWith(_Address value, $Res Function(_Address) _then) =
+      __$AddressCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      final String? street,
+      String? street,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      final String? city,
+      String? city,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      final String? stateOrProvince,
-      @RfControl(validators: [RequiredValidator()])
-      final String? zipCode}) = _$AddressImpl;
+      String? stateOrProvince,
+      @RfControl(validators: [RequiredValidator()]) String? zipCode});
+}
 
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String? get street;
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String? get city;
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String? get stateOrProvince;
-  @override
-  @RfControl(validators: [RequiredValidator()])
-  String? get zipCode;
+/// @nodoc
+class __$AddressCopyWithImpl<$Res> implements _$AddressCopyWith<$Res> {
+  __$AddressCopyWithImpl(this._self, this._then);
+
+  final _Address _self;
+  final $Res Function(_Address) _then;
 
   /// Create a copy of Address
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AddressImplCopyWith<_$AddressImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? street = freezed,
+    Object? city = freezed,
+    Object? stateOrProvince = freezed,
+    Object? zipCode = freezed,
+  }) {
+    return _then(_Address(
+      street: freezed == street
+          ? _self.street
+          : street // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: freezed == city
+          ? _self.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      stateOrProvince: freezed == stateOrProvince
+          ? _self.stateOrProvince
+          : stateOrProvince // ignore: cast_nullable_to_non_nullable
+              as String?,
+      zipCode: freezed == zipCode
+          ? _self.zipCode
+          : zipCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$PrimaryContact {
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String? get fullName => throw _privateConstructorUsedError;
+  String? get fullName;
   @RfControl(validators: [MaxLengthValidator(120)])
-  String? get jobTitle => throw _privateConstructorUsedError;
+  String? get jobTitle;
   @RfControl(validators: [RequiredValidator(), EmailValidator()])
-  String? get email => throw _privateConstructorUsedError;
+  String? get email;
 
   /// Create a copy of PrimaryContact
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $PrimaryContactCopyWith<PrimaryContact> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PrimaryContactCopyWith<$Res> {
-  factory $PrimaryContactCopyWith(
-          PrimaryContact value, $Res Function(PrimaryContact) then) =
-      _$PrimaryContactCopyWithImpl<$Res, PrimaryContact>;
-  @useResult
-  $Res call(
-      {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      String? fullName,
-      @RfControl(validators: [MaxLengthValidator(120)]) String? jobTitle,
-      @RfControl(validators: [RequiredValidator(), EmailValidator()])
-      String? email});
-}
-
-/// @nodoc
-class _$PrimaryContactCopyWithImpl<$Res, $Val extends PrimaryContact>
-    implements $PrimaryContactCopyWith<$Res> {
-  _$PrimaryContactCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of PrimaryContact
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $PrimaryContactCopyWith<PrimaryContact> get copyWith =>
+      _$PrimaryContactCopyWithImpl<PrimaryContact>(
+          this as PrimaryContact, _$identity);
+
   @override
-  $Res call({
-    Object? fullName = freezed,
-    Object? jobTitle = freezed,
-    Object? email = freezed,
-  }) {
-    return _then(_value.copyWith(
-      fullName: freezed == fullName
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      jobTitle: freezed == jobTitle
-          ? _value.jobTitle
-          : jobTitle // ignore: cast_nullable_to_non_nullable
-              as String?,
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PrimaryContact &&
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName) &&
+            (identical(other.jobTitle, jobTitle) ||
+                other.jobTitle == jobTitle) &&
+            (identical(other.email, email) || other.email == email));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, fullName, jobTitle, email);
+
+  @override
+  String toString() {
+    return 'PrimaryContact(fullName: $fullName, jobTitle: $jobTitle, email: $email)';
   }
 }
 
 /// @nodoc
-abstract class _$$PrimaryContactImplCopyWith<$Res>
-    implements $PrimaryContactCopyWith<$Res> {
-  factory _$$PrimaryContactImplCopyWith(_$PrimaryContactImpl value,
-          $Res Function(_$PrimaryContactImpl) then) =
-      __$$PrimaryContactImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $PrimaryContactCopyWith<$Res> {
+  factory $PrimaryContactCopyWith(
+          PrimaryContact value, $Res Function(PrimaryContact) _then) =
+      _$PrimaryContactCopyWithImpl;
   @useResult
   $Res call(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
@@ -730,12 +705,12 @@ abstract class _$$PrimaryContactImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$PrimaryContactImplCopyWithImpl<$Res>
-    extends _$PrimaryContactCopyWithImpl<$Res, _$PrimaryContactImpl>
-    implements _$$PrimaryContactImplCopyWith<$Res> {
-  __$$PrimaryContactImplCopyWithImpl(
-      _$PrimaryContactImpl _value, $Res Function(_$PrimaryContactImpl) _then)
-      : super(_value, _then);
+class _$PrimaryContactCopyWithImpl<$Res>
+    implements $PrimaryContactCopyWith<$Res> {
+  _$PrimaryContactCopyWithImpl(this._self, this._then);
+
+  final PrimaryContact _self;
+  final $Res Function(PrimaryContact) _then;
 
   /// Create a copy of PrimaryContact
   /// with the given fields replaced by the non-null parameter values.
@@ -746,17 +721,17 @@ class __$$PrimaryContactImplCopyWithImpl<$Res>
     Object? jobTitle = freezed,
     Object? email = freezed,
   }) {
-    return _then(_$PrimaryContactImpl(
+    return _then(_self.copyWith(
       fullName: freezed == fullName
-          ? _value.fullName
+          ? _self.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String?,
       jobTitle: freezed == jobTitle
-          ? _value.jobTitle
+          ? _self.jobTitle
           : jobTitle // ignore: cast_nullable_to_non_nullable
               as String?,
       email: freezed == email
-          ? _value.email
+          ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
@@ -765,8 +740,8 @@ class __$$PrimaryContactImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PrimaryContactImpl implements _PrimaryContact {
-  const _$PrimaryContactImpl(
+class _PrimaryContact implements PrimaryContact {
+  const _PrimaryContact(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       this.fullName,
       @RfControl(validators: [MaxLengthValidator(120)]) this.jobTitle,
@@ -783,16 +758,19 @@ class _$PrimaryContactImpl implements _PrimaryContact {
   @RfControl(validators: [RequiredValidator(), EmailValidator()])
   final String? email;
 
+  /// Create a copy of PrimaryContact
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'PrimaryContact(fullName: $fullName, jobTitle: $jobTitle, email: $email)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PrimaryContactCopyWith<_PrimaryContact> get copyWith =>
+      __$PrimaryContactCopyWithImpl<_PrimaryContact>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PrimaryContactImpl &&
+            other is _PrimaryContact &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
             (identical(other.jobTitle, jobTitle) ||
@@ -803,118 +781,105 @@ class _$PrimaryContactImpl implements _PrimaryContact {
   @override
   int get hashCode => Object.hash(runtimeType, fullName, jobTitle, email);
 
-  /// Create a copy of PrimaryContact
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PrimaryContactImplCopyWith<_$PrimaryContactImpl> get copyWith =>
-      __$$PrimaryContactImplCopyWithImpl<_$PrimaryContactImpl>(
-          this, _$identity);
+  String toString() {
+    return 'PrimaryContact(fullName: $fullName, jobTitle: $jobTitle, email: $email)';
+  }
 }
 
-abstract class _PrimaryContact implements PrimaryContact {
-  const factory _PrimaryContact(
+/// @nodoc
+abstract mixin class _$PrimaryContactCopyWith<$Res>
+    implements $PrimaryContactCopyWith<$Res> {
+  factory _$PrimaryContactCopyWith(
+          _PrimaryContact value, $Res Function(_PrimaryContact) _then) =
+      __$PrimaryContactCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      final String? fullName,
-      @RfControl(validators: [MaxLengthValidator(120)]) final String? jobTitle,
+      String? fullName,
+      @RfControl(validators: [MaxLengthValidator(120)]) String? jobTitle,
       @RfControl(validators: [RequiredValidator(), EmailValidator()])
-      final String? email}) = _$PrimaryContactImpl;
+      String? email});
+}
 
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String? get fullName;
-  @override
-  @RfControl(validators: [MaxLengthValidator(120)])
-  String? get jobTitle;
-  @override
-  @RfControl(validators: [RequiredValidator(), EmailValidator()])
-  String? get email;
+/// @nodoc
+class __$PrimaryContactCopyWithImpl<$Res>
+    implements _$PrimaryContactCopyWith<$Res> {
+  __$PrimaryContactCopyWithImpl(this._self, this._then);
+
+  final _PrimaryContact _self;
+  final $Res Function(_PrimaryContact) _then;
 
   /// Create a copy of PrimaryContact
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PrimaryContactImplCopyWith<_$PrimaryContactImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? fullName = freezed,
+    Object? jobTitle = freezed,
+    Object? email = freezed,
+  }) {
+    return _then(_PrimaryContact(
+      fullName: freezed == fullName
+          ? _self.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      jobTitle: freezed == jobTitle
+          ? _self.jobTitle
+          : jobTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$AdminContactInformation {
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String? get firstName => throw _privateConstructorUsedError;
+  String? get firstName;
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String? get lastName => throw _privateConstructorUsedError;
+  String? get lastName;
   @RfControl(validators: [RequiredValidator(), EmailValidator()])
-  String? get email => throw _privateConstructorUsedError;
+  String? get email;
 
   /// Create a copy of AdminContactInformation
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AdminContactInformationCopyWith<AdminContactInformation> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AdminContactInformationCopyWith<$Res> {
-  factory $AdminContactInformationCopyWith(AdminContactInformation value,
-          $Res Function(AdminContactInformation) then) =
-      _$AdminContactInformationCopyWithImpl<$Res, AdminContactInformation>;
-  @useResult
-  $Res call(
-      {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      String? firstName,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      String? lastName,
-      @RfControl(validators: [RequiredValidator(), EmailValidator()])
-      String? email});
-}
-
-/// @nodoc
-class _$AdminContactInformationCopyWithImpl<$Res,
-        $Val extends AdminContactInformation>
-    implements $AdminContactInformationCopyWith<$Res> {
-  _$AdminContactInformationCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of AdminContactInformation
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $AdminContactInformationCopyWith<AdminContactInformation> get copyWith =>
+      _$AdminContactInformationCopyWithImpl<AdminContactInformation>(
+          this as AdminContactInformation, _$identity);
+
   @override
-  $Res call({
-    Object? firstName = freezed,
-    Object? lastName = freezed,
-    Object? email = freezed,
-  }) {
-    return _then(_value.copyWith(
-      firstName: freezed == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastName: freezed == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is AdminContactInformation &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.email, email) || other.email == email));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, firstName, lastName, email);
+
+  @override
+  String toString() {
+    return 'AdminContactInformation(firstName: $firstName, lastName: $lastName, email: $email)';
   }
 }
 
 /// @nodoc
-abstract class _$$AdminContactInformationImplCopyWith<$Res>
-    implements $AdminContactInformationCopyWith<$Res> {
-  factory _$$AdminContactInformationImplCopyWith(
-          _$AdminContactInformationImpl value,
-          $Res Function(_$AdminContactInformationImpl) then) =
-      __$$AdminContactInformationImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $AdminContactInformationCopyWith<$Res> {
+  factory $AdminContactInformationCopyWith(AdminContactInformation value,
+          $Res Function(AdminContactInformation) _then) =
+      _$AdminContactInformationCopyWithImpl;
   @useResult
   $Res call(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
@@ -926,14 +891,12 @@ abstract class _$$AdminContactInformationImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$AdminContactInformationImplCopyWithImpl<$Res>
-    extends _$AdminContactInformationCopyWithImpl<$Res,
-        _$AdminContactInformationImpl>
-    implements _$$AdminContactInformationImplCopyWith<$Res> {
-  __$$AdminContactInformationImplCopyWithImpl(
-      _$AdminContactInformationImpl _value,
-      $Res Function(_$AdminContactInformationImpl) _then)
-      : super(_value, _then);
+class _$AdminContactInformationCopyWithImpl<$Res>
+    implements $AdminContactInformationCopyWith<$Res> {
+  _$AdminContactInformationCopyWithImpl(this._self, this._then);
+
+  final AdminContactInformation _self;
+  final $Res Function(AdminContactInformation) _then;
 
   /// Create a copy of AdminContactInformation
   /// with the given fields replaced by the non-null parameter values.
@@ -944,17 +907,17 @@ class __$$AdminContactInformationImplCopyWithImpl<$Res>
     Object? lastName = freezed,
     Object? email = freezed,
   }) {
-    return _then(_$AdminContactInformationImpl(
+    return _then(_self.copyWith(
       firstName: freezed == firstName
-          ? _value.firstName
+          ? _self.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String?,
       lastName: freezed == lastName
-          ? _value.lastName
+          ? _self.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
       email: freezed == email
-          ? _value.email
+          ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
@@ -963,8 +926,8 @@ class __$$AdminContactInformationImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AdminContactInformationImpl implements _AdminContactInformation {
-  const _$AdminContactInformationImpl(
+class _AdminContactInformation implements AdminContactInformation {
+  const _AdminContactInformation(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       this.firstName,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
@@ -982,16 +945,20 @@ class _$AdminContactInformationImpl implements _AdminContactInformation {
   @RfControl(validators: [RequiredValidator(), EmailValidator()])
   final String? email;
 
+  /// Create a copy of AdminContactInformation
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'AdminContactInformation(firstName: $firstName, lastName: $lastName, email: $email)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AdminContactInformationCopyWith<_AdminContactInformation> get copyWith =>
+      __$AdminContactInformationCopyWithImpl<_AdminContactInformation>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AdminContactInformationImpl &&
+            other is _AdminContactInformation &&
             (identical(other.firstName, firstName) ||
                 other.firstName == firstName) &&
             (identical(other.lastName, lastName) ||
@@ -1002,73 +969,137 @@ class _$AdminContactInformationImpl implements _AdminContactInformation {
   @override
   int get hashCode => Object.hash(runtimeType, firstName, lastName, email);
 
-  /// Create a copy of AdminContactInformation
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$AdminContactInformationImplCopyWith<_$AdminContactInformationImpl>
-      get copyWith => __$$AdminContactInformationImplCopyWithImpl<
-          _$AdminContactInformationImpl>(this, _$identity);
+  String toString() {
+    return 'AdminContactInformation(firstName: $firstName, lastName: $lastName, email: $email)';
+  }
 }
 
-abstract class _AdminContactInformation implements AdminContactInformation {
-  const factory _AdminContactInformation(
+/// @nodoc
+abstract mixin class _$AdminContactInformationCopyWith<$Res>
+    implements $AdminContactInformationCopyWith<$Res> {
+  factory _$AdminContactInformationCopyWith(_AdminContactInformation value,
+          $Res Function(_AdminContactInformation) _then) =
+      __$AdminContactInformationCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      final String? firstName,
+      String? firstName,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      final String? lastName,
+      String? lastName,
       @RfControl(validators: [RequiredValidator(), EmailValidator()])
-      final String? email}) = _$AdminContactInformationImpl;
+      String? email});
+}
 
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String? get firstName;
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String? get lastName;
-  @override
-  @RfControl(validators: [RequiredValidator(), EmailValidator()])
-  String? get email;
+/// @nodoc
+class __$AdminContactInformationCopyWithImpl<$Res>
+    implements _$AdminContactInformationCopyWith<$Res> {
+  __$AdminContactInformationCopyWithImpl(this._self, this._then);
+
+  final _AdminContactInformation _self;
+  final $Res Function(_AdminContactInformation) _then;
 
   /// Create a copy of AdminContactInformation
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AdminContactInformationImplCopyWith<_$AdminContactInformationImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? firstName = freezed,
+    Object? lastName = freezed,
+    Object? email = freezed,
+  }) {
+    return _then(_AdminContactInformation(
+      firstName: freezed == firstName
+          ? _self.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _self.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$MSICreateOutput {
-  String? get id => throw _privateConstructorUsedError;
-  String? get businessNumber => throw _privateConstructorUsedError;
-  List<String>? get fileIds => throw _privateConstructorUsedError;
+  String? get id;
+  String? get businessNumber;
+  List<String>? get fileIds;
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String get name => throw _privateConstructorUsedError;
-  AddressOutput get companyAddress => throw _privateConstructorUsedError;
+  String get name;
+  AddressOutput get companyAddress;
   @RfControl(validators: [RequiredValidator(), EmailValidator()])
-  String get email => throw _privateConstructorUsedError;
-  PrimaryContactOutput get primaryContact => throw _privateConstructorUsedError;
+  String get email;
+  PrimaryContactOutput get primaryContact;
   @RfControl<bool>()
-  bool get sameMailingAddressAsCompany => throw _privateConstructorUsedError;
-  AddressOutput get mailingAddress => throw _privateConstructorUsedError;
+  bool get sameMailingAddressAsCompany;
+  AddressOutput get mailingAddress;
   @RfArray<AdminContactInformationOutput>()
-  List<AdminContactInformationOutput> get admins =>
-      throw _privateConstructorUsedError;
+  List<AdminContactInformationOutput> get admins;
 
   /// Create a copy of MSICreateOutput
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $MSICreateOutputCopyWith<MSICreateOutput> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$MSICreateOutputCopyWithImpl<MSICreateOutput>(
+          this as MSICreateOutput, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is MSICreateOutput &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.businessNumber, businessNumber) ||
+                other.businessNumber == businessNumber) &&
+            const DeepCollectionEquality().equals(other.fileIds, fileIds) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.companyAddress, companyAddress) ||
+                other.companyAddress == companyAddress) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.primaryContact, primaryContact) ||
+                other.primaryContact == primaryContact) &&
+            (identical(other.sameMailingAddressAsCompany,
+                    sameMailingAddressAsCompany) ||
+                other.sameMailingAddressAsCompany ==
+                    sameMailingAddressAsCompany) &&
+            (identical(other.mailingAddress, mailingAddress) ||
+                other.mailingAddress == mailingAddress) &&
+            const DeepCollectionEquality().equals(other.admins, admins));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      businessNumber,
+      const DeepCollectionEquality().hash(fileIds),
+      name,
+      companyAddress,
+      email,
+      primaryContact,
+      sameMailingAddressAsCompany,
+      mailingAddress,
+      const DeepCollectionEquality().hash(admins));
+
+  @override
+  String toString() {
+    return 'MSICreateOutput(id: $id, businessNumber: $businessNumber, fileIds: $fileIds, name: $name, companyAddress: $companyAddress, email: $email, primaryContact: $primaryContact, sameMailingAddressAsCompany: $sameMailingAddressAsCompany, mailingAddress: $mailingAddress, admins: $admins)';
+  }
 }
 
 /// @nodoc
-abstract class $MSICreateOutputCopyWith<$Res> {
+abstract mixin class $MSICreateOutputCopyWith<$Res> {
   factory $MSICreateOutputCopyWith(
-          MSICreateOutput value, $Res Function(MSICreateOutput) then) =
-      _$MSICreateOutputCopyWithImpl<$Res, MSICreateOutput>;
+          MSICreateOutput value, $Res Function(MSICreateOutput) _then) =
+      _$MSICreateOutputCopyWithImpl;
   @useResult
   $Res call(
       {String? id,
@@ -1091,14 +1122,12 @@ abstract class $MSICreateOutputCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MSICreateOutputCopyWithImpl<$Res, $Val extends MSICreateOutput>
+class _$MSICreateOutputCopyWithImpl<$Res>
     implements $MSICreateOutputCopyWith<$Res> {
-  _$MSICreateOutputCopyWithImpl(this._value, this._then);
+  _$MSICreateOutputCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final MSICreateOutput _self;
+  final $Res Function(MSICreateOutput) _then;
 
   /// Create a copy of MSICreateOutput
   /// with the given fields replaced by the non-null parameter values.
@@ -1116,48 +1145,48 @@ class _$MSICreateOutputCopyWithImpl<$Res, $Val extends MSICreateOutput>
     Object? mailingAddress = null,
     Object? admins = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: freezed == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
       businessNumber: freezed == businessNumber
-          ? _value.businessNumber
+          ? _self.businessNumber
           : businessNumber // ignore: cast_nullable_to_non_nullable
               as String?,
       fileIds: freezed == fileIds
-          ? _value.fileIds
+          ? _self.fileIds
           : fileIds // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       companyAddress: null == companyAddress
-          ? _value.companyAddress
+          ? _self.companyAddress
           : companyAddress // ignore: cast_nullable_to_non_nullable
               as AddressOutput,
       email: null == email
-          ? _value.email
+          ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
       primaryContact: null == primaryContact
-          ? _value.primaryContact
+          ? _self.primaryContact
           : primaryContact // ignore: cast_nullable_to_non_nullable
               as PrimaryContactOutput,
       sameMailingAddressAsCompany: null == sameMailingAddressAsCompany
-          ? _value.sameMailingAddressAsCompany
+          ? _self.sameMailingAddressAsCompany
           : sameMailingAddressAsCompany // ignore: cast_nullable_to_non_nullable
               as bool,
       mailingAddress: null == mailingAddress
-          ? _value.mailingAddress
+          ? _self.mailingAddress
           : mailingAddress // ignore: cast_nullable_to_non_nullable
               as AddressOutput,
       admins: null == admins
-          ? _value.admins
+          ? _self.admins
           : admins // ignore: cast_nullable_to_non_nullable
               as List<AdminContactInformationOutput>,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of MSICreateOutput
@@ -1165,8 +1194,8 @@ class _$MSICreateOutputCopyWithImpl<$Res, $Val extends MSICreateOutput>
   @override
   @pragma('vm:prefer-inline')
   $AddressOutputCopyWith<$Res> get companyAddress {
-    return $AddressOutputCopyWith<$Res>(_value.companyAddress, (value) {
-      return _then(_value.copyWith(companyAddress: value) as $Val);
+    return $AddressOutputCopyWith<$Res>(_self.companyAddress, (value) {
+      return _then(_self.copyWith(companyAddress: value));
     });
   }
 
@@ -1175,8 +1204,8 @@ class _$MSICreateOutputCopyWithImpl<$Res, $Val extends MSICreateOutput>
   @override
   @pragma('vm:prefer-inline')
   $PrimaryContactOutputCopyWith<$Res> get primaryContact {
-    return $PrimaryContactOutputCopyWith<$Res>(_value.primaryContact, (value) {
-      return _then(_value.copyWith(primaryContact: value) as $Val);
+    return $PrimaryContactOutputCopyWith<$Res>(_self.primaryContact, (value) {
+      return _then(_self.copyWith(primaryContact: value));
     });
   }
 
@@ -1185,116 +1214,16 @@ class _$MSICreateOutputCopyWithImpl<$Res, $Val extends MSICreateOutput>
   @override
   @pragma('vm:prefer-inline')
   $AddressOutputCopyWith<$Res> get mailingAddress {
-    return $AddressOutputCopyWith<$Res>(_value.mailingAddress, (value) {
-      return _then(_value.copyWith(mailingAddress: value) as $Val);
+    return $AddressOutputCopyWith<$Res>(_self.mailingAddress, (value) {
+      return _then(_self.copyWith(mailingAddress: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$MSICreateOutputImplCopyWith<$Res>
-    implements $MSICreateOutputCopyWith<$Res> {
-  factory _$$MSICreateOutputImplCopyWith(_$MSICreateOutputImpl value,
-          $Res Function(_$MSICreateOutputImpl) then) =
-      __$$MSICreateOutputImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String? id,
-      String? businessNumber,
-      List<String>? fileIds,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      String name,
-      AddressOutput companyAddress,
-      @RfControl(validators: [RequiredValidator(), EmailValidator()])
-      String email,
-      PrimaryContactOutput primaryContact,
-      @RfControl<bool>() bool sameMailingAddressAsCompany,
-      AddressOutput mailingAddress,
-      @RfArray<AdminContactInformationOutput>()
-      List<AdminContactInformationOutput> admins});
 
-  @override
-  $AddressOutputCopyWith<$Res> get companyAddress;
-  @override
-  $PrimaryContactOutputCopyWith<$Res> get primaryContact;
-  @override
-  $AddressOutputCopyWith<$Res> get mailingAddress;
-}
-
-/// @nodoc
-class __$$MSICreateOutputImplCopyWithImpl<$Res>
-    extends _$MSICreateOutputCopyWithImpl<$Res, _$MSICreateOutputImpl>
-    implements _$$MSICreateOutputImplCopyWith<$Res> {
-  __$$MSICreateOutputImplCopyWithImpl(
-      _$MSICreateOutputImpl _value, $Res Function(_$MSICreateOutputImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of MSICreateOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? businessNumber = freezed,
-    Object? fileIds = freezed,
-    Object? name = null,
-    Object? companyAddress = null,
-    Object? email = null,
-    Object? primaryContact = null,
-    Object? sameMailingAddressAsCompany = null,
-    Object? mailingAddress = null,
-    Object? admins = null,
-  }) {
-    return _then(_$MSICreateOutputImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      businessNumber: freezed == businessNumber
-          ? _value.businessNumber
-          : businessNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      fileIds: freezed == fileIds
-          ? _value._fileIds
-          : fileIds // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      companyAddress: null == companyAddress
-          ? _value.companyAddress
-          : companyAddress // ignore: cast_nullable_to_non_nullable
-              as AddressOutput,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      primaryContact: null == primaryContact
-          ? _value.primaryContact
-          : primaryContact // ignore: cast_nullable_to_non_nullable
-              as PrimaryContactOutput,
-      sameMailingAddressAsCompany: null == sameMailingAddressAsCompany
-          ? _value.sameMailingAddressAsCompany
-          : sameMailingAddressAsCompany // ignore: cast_nullable_to_non_nullable
-              as bool,
-      mailingAddress: null == mailingAddress
-          ? _value.mailingAddress
-          : mailingAddress // ignore: cast_nullable_to_non_nullable
-              as AddressOutput,
-      admins: null == admins
-          ? _value._admins
-          : admins // ignore: cast_nullable_to_non_nullable
-              as List<AdminContactInformationOutput>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$MSICreateOutputImpl implements _MSICreateOutput {
-  const _$MSICreateOutputImpl(
+class _MSICreateOutput implements MSICreateOutput {
+  const _MSICreateOutput(
       {this.id,
       this.businessNumber,
       final List<String>? fileIds,
@@ -1350,16 +1279,19 @@ class _$MSICreateOutputImpl implements _MSICreateOutput {
     return EqualUnmodifiableListView(_admins);
   }
 
+  /// Create a copy of MSICreateOutput
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'MSICreateOutput(id: $id, businessNumber: $businessNumber, fileIds: $fileIds, name: $name, companyAddress: $companyAddress, email: $email, primaryContact: $primaryContact, sameMailingAddressAsCompany: $sameMailingAddressAsCompany, mailingAddress: $mailingAddress, admins: $admins)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$MSICreateOutputCopyWith<_MSICreateOutput> get copyWith =>
+      __$MSICreateOutputCopyWithImpl<_MSICreateOutput>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MSICreateOutputImpl &&
+            other is _MSICreateOutput &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.businessNumber, businessNumber) ||
                 other.businessNumber == businessNumber) &&
@@ -1393,148 +1325,188 @@ class _$MSICreateOutputImpl implements _MSICreateOutput {
       mailingAddress,
       const DeepCollectionEquality().hash(_admins));
 
-  /// Create a copy of MSICreateOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$MSICreateOutputImplCopyWith<_$MSICreateOutputImpl> get copyWith =>
-      __$$MSICreateOutputImplCopyWithImpl<_$MSICreateOutputImpl>(
-          this, _$identity);
+  String toString() {
+    return 'MSICreateOutput(id: $id, businessNumber: $businessNumber, fileIds: $fileIds, name: $name, companyAddress: $companyAddress, email: $email, primaryContact: $primaryContact, sameMailingAddressAsCompany: $sameMailingAddressAsCompany, mailingAddress: $mailingAddress, admins: $admins)';
+  }
 }
 
-abstract class _MSICreateOutput implements MSICreateOutput {
-  const factory _MSICreateOutput(
-          {final String? id,
-          final String? businessNumber,
-          final List<String>? fileIds,
-          @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-          required final String name,
-          required final AddressOutput companyAddress,
-          @RfControl(validators: [RequiredValidator(), EmailValidator()])
-          required final String email,
-          required final PrimaryContactOutput primaryContact,
-          @RfControl<bool>() final bool sameMailingAddressAsCompany,
-          required final AddressOutput mailingAddress,
-          @RfArray<AdminContactInformationOutput>()
-          required final List<AdminContactInformationOutput> admins}) =
-      _$MSICreateOutputImpl;
+/// @nodoc
+abstract mixin class _$MSICreateOutputCopyWith<$Res>
+    implements $MSICreateOutputCopyWith<$Res> {
+  factory _$MSICreateOutputCopyWith(
+          _MSICreateOutput value, $Res Function(_MSICreateOutput) _then) =
+      __$MSICreateOutputCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String? id,
+      String? businessNumber,
+      List<String>? fileIds,
+      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
+      String name,
+      AddressOutput companyAddress,
+      @RfControl(validators: [RequiredValidator(), EmailValidator()])
+      String email,
+      PrimaryContactOutput primaryContact,
+      @RfControl<bool>() bool sameMailingAddressAsCompany,
+      AddressOutput mailingAddress,
+      @RfArray<AdminContactInformationOutput>()
+      List<AdminContactInformationOutput> admins});
 
   @override
-  String? get id;
+  $AddressOutputCopyWith<$Res> get companyAddress;
   @override
-  String? get businessNumber;
+  $PrimaryContactOutputCopyWith<$Res> get primaryContact;
   @override
-  List<String>? get fileIds;
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String get name;
-  @override
-  AddressOutput get companyAddress;
-  @override
-  @RfControl(validators: [RequiredValidator(), EmailValidator()])
-  String get email;
-  @override
-  PrimaryContactOutput get primaryContact;
-  @override
-  @RfControl<bool>()
-  bool get sameMailingAddressAsCompany;
-  @override
-  AddressOutput get mailingAddress;
-  @override
-  @RfArray<AdminContactInformationOutput>()
-  List<AdminContactInformationOutput> get admins;
+  $AddressOutputCopyWith<$Res> get mailingAddress;
+}
+
+/// @nodoc
+class __$MSICreateOutputCopyWithImpl<$Res>
+    implements _$MSICreateOutputCopyWith<$Res> {
+  __$MSICreateOutputCopyWithImpl(this._self, this._then);
+
+  final _MSICreateOutput _self;
+  final $Res Function(_MSICreateOutput) _then;
 
   /// Create a copy of MSICreateOutput
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MSICreateOutputImplCopyWith<_$MSICreateOutputImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = freezed,
+    Object? businessNumber = freezed,
+    Object? fileIds = freezed,
+    Object? name = null,
+    Object? companyAddress = null,
+    Object? email = null,
+    Object? primaryContact = null,
+    Object? sameMailingAddressAsCompany = null,
+    Object? mailingAddress = null,
+    Object? admins = null,
+  }) {
+    return _then(_MSICreateOutput(
+      id: freezed == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessNumber: freezed == businessNumber
+          ? _self.businessNumber
+          : businessNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fileIds: freezed == fileIds
+          ? _self._fileIds
+          : fileIds // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      companyAddress: null == companyAddress
+          ? _self.companyAddress
+          : companyAddress // ignore: cast_nullable_to_non_nullable
+              as AddressOutput,
+      email: null == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      primaryContact: null == primaryContact
+          ? _self.primaryContact
+          : primaryContact // ignore: cast_nullable_to_non_nullable
+              as PrimaryContactOutput,
+      sameMailingAddressAsCompany: null == sameMailingAddressAsCompany
+          ? _self.sameMailingAddressAsCompany
+          : sameMailingAddressAsCompany // ignore: cast_nullable_to_non_nullable
+              as bool,
+      mailingAddress: null == mailingAddress
+          ? _self.mailingAddress
+          : mailingAddress // ignore: cast_nullable_to_non_nullable
+              as AddressOutput,
+      admins: null == admins
+          ? _self._admins
+          : admins // ignore: cast_nullable_to_non_nullable
+              as List<AdminContactInformationOutput>,
+    ));
+  }
+
+  /// Create a copy of MSICreateOutput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AddressOutputCopyWith<$Res> get companyAddress {
+    return $AddressOutputCopyWith<$Res>(_self.companyAddress, (value) {
+      return _then(_self.copyWith(companyAddress: value));
+    });
+  }
+
+  /// Create a copy of MSICreateOutput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PrimaryContactOutputCopyWith<$Res> get primaryContact {
+    return $PrimaryContactOutputCopyWith<$Res>(_self.primaryContact, (value) {
+      return _then(_self.copyWith(primaryContact: value));
+    });
+  }
+
+  /// Create a copy of MSICreateOutput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AddressOutputCopyWith<$Res> get mailingAddress {
+    return $AddressOutputCopyWith<$Res>(_self.mailingAddress, (value) {
+      return _then(_self.copyWith(mailingAddress: value));
+    });
+  }
 }
 
 /// @nodoc
 mixin _$AddressOutput {
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String get street => throw _privateConstructorUsedError;
+  String get street;
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String get city => throw _privateConstructorUsedError;
+  String get city;
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String get stateOrProvince => throw _privateConstructorUsedError;
+  String get stateOrProvince;
   @RfControl(validators: [RequiredValidator()])
-  String get zipCode => throw _privateConstructorUsedError;
+  String get zipCode;
 
   /// Create a copy of AddressOutput
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AddressOutputCopyWith<AddressOutput> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AddressOutputCopyWith<$Res> {
-  factory $AddressOutputCopyWith(
-          AddressOutput value, $Res Function(AddressOutput) then) =
-      _$AddressOutputCopyWithImpl<$Res, AddressOutput>;
-  @useResult
-  $Res call(
-      {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      String street,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      String city,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      String stateOrProvince,
-      @RfControl(validators: [RequiredValidator()]) String zipCode});
-}
-
-/// @nodoc
-class _$AddressOutputCopyWithImpl<$Res, $Val extends AddressOutput>
-    implements $AddressOutputCopyWith<$Res> {
-  _$AddressOutputCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of AddressOutput
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $AddressOutputCopyWith<AddressOutput> get copyWith =>
+      _$AddressOutputCopyWithImpl<AddressOutput>(
+          this as AddressOutput, _$identity);
+
   @override
-  $Res call({
-    Object? street = null,
-    Object? city = null,
-    Object? stateOrProvince = null,
-    Object? zipCode = null,
-  }) {
-    return _then(_value.copyWith(
-      street: null == street
-          ? _value.street
-          : street // ignore: cast_nullable_to_non_nullable
-              as String,
-      city: null == city
-          ? _value.city
-          : city // ignore: cast_nullable_to_non_nullable
-              as String,
-      stateOrProvince: null == stateOrProvince
-          ? _value.stateOrProvince
-          : stateOrProvince // ignore: cast_nullable_to_non_nullable
-              as String,
-      zipCode: null == zipCode
-          ? _value.zipCode
-          : zipCode // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is AddressOutput &&
+            (identical(other.street, street) || other.street == street) &&
+            (identical(other.city, city) || other.city == city) &&
+            (identical(other.stateOrProvince, stateOrProvince) ||
+                other.stateOrProvince == stateOrProvince) &&
+            (identical(other.zipCode, zipCode) || other.zipCode == zipCode));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, street, city, stateOrProvince, zipCode);
+
+  @override
+  String toString() {
+    return 'AddressOutput(street: $street, city: $city, stateOrProvince: $stateOrProvince, zipCode: $zipCode)';
   }
 }
 
 /// @nodoc
-abstract class _$$AddressOutputImplCopyWith<$Res>
-    implements $AddressOutputCopyWith<$Res> {
-  factory _$$AddressOutputImplCopyWith(
-          _$AddressOutputImpl value, $Res Function(_$AddressOutputImpl) then) =
-      __$$AddressOutputImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $AddressOutputCopyWith<$Res> {
+  factory $AddressOutputCopyWith(
+          AddressOutput value, $Res Function(AddressOutput) _then) =
+      _$AddressOutputCopyWithImpl;
   @useResult
   $Res call(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
@@ -1547,12 +1519,12 @@ abstract class _$$AddressOutputImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$AddressOutputImplCopyWithImpl<$Res>
-    extends _$AddressOutputCopyWithImpl<$Res, _$AddressOutputImpl>
-    implements _$$AddressOutputImplCopyWith<$Res> {
-  __$$AddressOutputImplCopyWithImpl(
-      _$AddressOutputImpl _value, $Res Function(_$AddressOutputImpl) _then)
-      : super(_value, _then);
+class _$AddressOutputCopyWithImpl<$Res>
+    implements $AddressOutputCopyWith<$Res> {
+  _$AddressOutputCopyWithImpl(this._self, this._then);
+
+  final AddressOutput _self;
+  final $Res Function(AddressOutput) _then;
 
   /// Create a copy of AddressOutput
   /// with the given fields replaced by the non-null parameter values.
@@ -1564,21 +1536,21 @@ class __$$AddressOutputImplCopyWithImpl<$Res>
     Object? stateOrProvince = null,
     Object? zipCode = null,
   }) {
-    return _then(_$AddressOutputImpl(
+    return _then(_self.copyWith(
       street: null == street
-          ? _value.street
+          ? _self.street
           : street // ignore: cast_nullable_to_non_nullable
               as String,
       city: null == city
-          ? _value.city
+          ? _self.city
           : city // ignore: cast_nullable_to_non_nullable
               as String,
       stateOrProvince: null == stateOrProvince
-          ? _value.stateOrProvince
+          ? _self.stateOrProvince
           : stateOrProvince // ignore: cast_nullable_to_non_nullable
               as String,
       zipCode: null == zipCode
-          ? _value.zipCode
+          ? _self.zipCode
           : zipCode // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -1587,8 +1559,8 @@ class __$$AddressOutputImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddressOutputImpl implements _AddressOutput {
-  const _$AddressOutputImpl(
+class _AddressOutput implements AddressOutput {
+  const _AddressOutput(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       required this.street,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
@@ -1610,16 +1582,19 @@ class _$AddressOutputImpl implements _AddressOutput {
   @RfControl(validators: [RequiredValidator()])
   final String zipCode;
 
+  /// Create a copy of AddressOutput
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'AddressOutput(street: $street, city: $city, stateOrProvince: $stateOrProvince, zipCode: $zipCode)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AddressOutputCopyWith<_AddressOutput> get copyWith =>
+      __$AddressOutputCopyWithImpl<_AddressOutput>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddressOutputImpl &&
+            other is _AddressOutput &&
             (identical(other.street, street) || other.street == street) &&
             (identical(other.city, city) || other.city == city) &&
             (identical(other.stateOrProvince, stateOrProvince) ||
@@ -1631,121 +1606,112 @@ class _$AddressOutputImpl implements _AddressOutput {
   int get hashCode =>
       Object.hash(runtimeType, street, city, stateOrProvince, zipCode);
 
-  /// Create a copy of AddressOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$AddressOutputImplCopyWith<_$AddressOutputImpl> get copyWith =>
-      __$$AddressOutputImplCopyWithImpl<_$AddressOutputImpl>(this, _$identity);
+  String toString() {
+    return 'AddressOutput(street: $street, city: $city, stateOrProvince: $stateOrProvince, zipCode: $zipCode)';
+  }
 }
 
-abstract class _AddressOutput implements AddressOutput {
-  const factory _AddressOutput(
+/// @nodoc
+abstract mixin class _$AddressOutputCopyWith<$Res>
+    implements $AddressOutputCopyWith<$Res> {
+  factory _$AddressOutputCopyWith(
+          _AddressOutput value, $Res Function(_AddressOutput) _then) =
+      __$AddressOutputCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      required final String street,
+      String street,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      required final String city,
+      String city,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      required final String stateOrProvince,
-      @RfControl(validators: [RequiredValidator()])
-      required final String zipCode}) = _$AddressOutputImpl;
+      String stateOrProvince,
+      @RfControl(validators: [RequiredValidator()]) String zipCode});
+}
 
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String get street;
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String get city;
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String get stateOrProvince;
-  @override
-  @RfControl(validators: [RequiredValidator()])
-  String get zipCode;
+/// @nodoc
+class __$AddressOutputCopyWithImpl<$Res>
+    implements _$AddressOutputCopyWith<$Res> {
+  __$AddressOutputCopyWithImpl(this._self, this._then);
+
+  final _AddressOutput _self;
+  final $Res Function(_AddressOutput) _then;
 
   /// Create a copy of AddressOutput
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AddressOutputImplCopyWith<_$AddressOutputImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? street = null,
+    Object? city = null,
+    Object? stateOrProvince = null,
+    Object? zipCode = null,
+  }) {
+    return _then(_AddressOutput(
+      street: null == street
+          ? _self.street
+          : street // ignore: cast_nullable_to_non_nullable
+              as String,
+      city: null == city
+          ? _self.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String,
+      stateOrProvince: null == stateOrProvince
+          ? _self.stateOrProvince
+          : stateOrProvince // ignore: cast_nullable_to_non_nullable
+              as String,
+      zipCode: null == zipCode
+          ? _self.zipCode
+          : zipCode // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$PrimaryContactOutput {
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String get fullName => throw _privateConstructorUsedError;
+  String get fullName;
   @RfControl(validators: [MaxLengthValidator(120)])
-  String? get jobTitle => throw _privateConstructorUsedError;
+  String? get jobTitle;
   @RfControl(validators: [RequiredValidator(), EmailValidator()])
-  String get email => throw _privateConstructorUsedError;
+  String get email;
 
   /// Create a copy of PrimaryContactOutput
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $PrimaryContactOutputCopyWith<PrimaryContactOutput> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PrimaryContactOutputCopyWith<$Res> {
-  factory $PrimaryContactOutputCopyWith(PrimaryContactOutput value,
-          $Res Function(PrimaryContactOutput) then) =
-      _$PrimaryContactOutputCopyWithImpl<$Res, PrimaryContactOutput>;
-  @useResult
-  $Res call(
-      {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      String fullName,
-      @RfControl(validators: [MaxLengthValidator(120)]) String? jobTitle,
-      @RfControl(validators: [RequiredValidator(), EmailValidator()])
-      String email});
-}
-
-/// @nodoc
-class _$PrimaryContactOutputCopyWithImpl<$Res,
-        $Val extends PrimaryContactOutput>
-    implements $PrimaryContactOutputCopyWith<$Res> {
-  _$PrimaryContactOutputCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of PrimaryContactOutput
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $PrimaryContactOutputCopyWith<PrimaryContactOutput> get copyWith =>
+      _$PrimaryContactOutputCopyWithImpl<PrimaryContactOutput>(
+          this as PrimaryContactOutput, _$identity);
+
   @override
-  $Res call({
-    Object? fullName = null,
-    Object? jobTitle = freezed,
-    Object? email = null,
-  }) {
-    return _then(_value.copyWith(
-      fullName: null == fullName
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
-              as String,
-      jobTitle: freezed == jobTitle
-          ? _value.jobTitle
-          : jobTitle // ignore: cast_nullable_to_non_nullable
-              as String?,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PrimaryContactOutput &&
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName) &&
+            (identical(other.jobTitle, jobTitle) ||
+                other.jobTitle == jobTitle) &&
+            (identical(other.email, email) || other.email == email));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, fullName, jobTitle, email);
+
+  @override
+  String toString() {
+    return 'PrimaryContactOutput(fullName: $fullName, jobTitle: $jobTitle, email: $email)';
   }
 }
 
 /// @nodoc
-abstract class _$$PrimaryContactOutputImplCopyWith<$Res>
-    implements $PrimaryContactOutputCopyWith<$Res> {
-  factory _$$PrimaryContactOutputImplCopyWith(_$PrimaryContactOutputImpl value,
-          $Res Function(_$PrimaryContactOutputImpl) then) =
-      __$$PrimaryContactOutputImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $PrimaryContactOutputCopyWith<$Res> {
+  factory $PrimaryContactOutputCopyWith(PrimaryContactOutput value,
+          $Res Function(PrimaryContactOutput) _then) =
+      _$PrimaryContactOutputCopyWithImpl;
   @useResult
   $Res call(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
@@ -1756,12 +1722,12 @@ abstract class _$$PrimaryContactOutputImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$PrimaryContactOutputImplCopyWithImpl<$Res>
-    extends _$PrimaryContactOutputCopyWithImpl<$Res, _$PrimaryContactOutputImpl>
-    implements _$$PrimaryContactOutputImplCopyWith<$Res> {
-  __$$PrimaryContactOutputImplCopyWithImpl(_$PrimaryContactOutputImpl _value,
-      $Res Function(_$PrimaryContactOutputImpl) _then)
-      : super(_value, _then);
+class _$PrimaryContactOutputCopyWithImpl<$Res>
+    implements $PrimaryContactOutputCopyWith<$Res> {
+  _$PrimaryContactOutputCopyWithImpl(this._self, this._then);
+
+  final PrimaryContactOutput _self;
+  final $Res Function(PrimaryContactOutput) _then;
 
   /// Create a copy of PrimaryContactOutput
   /// with the given fields replaced by the non-null parameter values.
@@ -1772,17 +1738,17 @@ class __$$PrimaryContactOutputImplCopyWithImpl<$Res>
     Object? jobTitle = freezed,
     Object? email = null,
   }) {
-    return _then(_$PrimaryContactOutputImpl(
+    return _then(_self.copyWith(
       fullName: null == fullName
-          ? _value.fullName
+          ? _self.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String,
       jobTitle: freezed == jobTitle
-          ? _value.jobTitle
+          ? _self.jobTitle
           : jobTitle // ignore: cast_nullable_to_non_nullable
               as String?,
       email: null == email
-          ? _value.email
+          ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -1791,8 +1757,8 @@ class __$$PrimaryContactOutputImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PrimaryContactOutputImpl implements _PrimaryContactOutput {
-  const _$PrimaryContactOutputImpl(
+class _PrimaryContactOutput implements PrimaryContactOutput {
+  const _PrimaryContactOutput(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       required this.fullName,
       @RfControl(validators: [MaxLengthValidator(120)]) this.jobTitle,
@@ -1809,16 +1775,20 @@ class _$PrimaryContactOutputImpl implements _PrimaryContactOutput {
   @RfControl(validators: [RequiredValidator(), EmailValidator()])
   final String email;
 
+  /// Create a copy of PrimaryContactOutput
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'PrimaryContactOutput(fullName: $fullName, jobTitle: $jobTitle, email: $email)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PrimaryContactOutputCopyWith<_PrimaryContactOutput> get copyWith =>
+      __$PrimaryContactOutputCopyWithImpl<_PrimaryContactOutput>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PrimaryContactOutputImpl &&
+            other is _PrimaryContactOutput &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
             (identical(other.jobTitle, jobTitle) ||
@@ -1829,121 +1799,107 @@ class _$PrimaryContactOutputImpl implements _PrimaryContactOutput {
   @override
   int get hashCode => Object.hash(runtimeType, fullName, jobTitle, email);
 
-  /// Create a copy of PrimaryContactOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PrimaryContactOutputImplCopyWith<_$PrimaryContactOutputImpl>
-      get copyWith =>
-          __$$PrimaryContactOutputImplCopyWithImpl<_$PrimaryContactOutputImpl>(
-              this, _$identity);
+  String toString() {
+    return 'PrimaryContactOutput(fullName: $fullName, jobTitle: $jobTitle, email: $email)';
+  }
 }
 
-abstract class _PrimaryContactOutput implements PrimaryContactOutput {
-  const factory _PrimaryContactOutput(
+/// @nodoc
+abstract mixin class _$PrimaryContactOutputCopyWith<$Res>
+    implements $PrimaryContactOutputCopyWith<$Res> {
+  factory _$PrimaryContactOutputCopyWith(_PrimaryContactOutput value,
+          $Res Function(_PrimaryContactOutput) _then) =
+      __$PrimaryContactOutputCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      required final String fullName,
-      @RfControl(validators: [MaxLengthValidator(120)]) final String? jobTitle,
+      String fullName,
+      @RfControl(validators: [MaxLengthValidator(120)]) String? jobTitle,
       @RfControl(validators: [RequiredValidator(), EmailValidator()])
-      required final String email}) = _$PrimaryContactOutputImpl;
+      String email});
+}
 
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String get fullName;
-  @override
-  @RfControl(validators: [MaxLengthValidator(120)])
-  String? get jobTitle;
-  @override
-  @RfControl(validators: [RequiredValidator(), EmailValidator()])
-  String get email;
+/// @nodoc
+class __$PrimaryContactOutputCopyWithImpl<$Res>
+    implements _$PrimaryContactOutputCopyWith<$Res> {
+  __$PrimaryContactOutputCopyWithImpl(this._self, this._then);
+
+  final _PrimaryContactOutput _self;
+  final $Res Function(_PrimaryContactOutput) _then;
 
   /// Create a copy of PrimaryContactOutput
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PrimaryContactOutputImplCopyWith<_$PrimaryContactOutputImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? fullName = null,
+    Object? jobTitle = freezed,
+    Object? email = null,
+  }) {
+    return _then(_PrimaryContactOutput(
+      fullName: null == fullName
+          ? _self.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
+              as String,
+      jobTitle: freezed == jobTitle
+          ? _self.jobTitle
+          : jobTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: null == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$AdminContactInformationOutput {
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String get firstName => throw _privateConstructorUsedError;
+  String get firstName;
   @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String get lastName => throw _privateConstructorUsedError;
+  String get lastName;
   @RfControl(validators: [RequiredValidator(), EmailValidator()])
-  String get email => throw _privateConstructorUsedError;
+  String get email;
 
   /// Create a copy of AdminContactInformationOutput
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AdminContactInformationOutputCopyWith<AdminContactInformationOutput>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AdminContactInformationOutputCopyWith<$Res> {
-  factory $AdminContactInformationOutputCopyWith(
-          AdminContactInformationOutput value,
-          $Res Function(AdminContactInformationOutput) then) =
-      _$AdminContactInformationOutputCopyWithImpl<$Res,
-          AdminContactInformationOutput>;
-  @useResult
-  $Res call(
-      {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      String firstName,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      String lastName,
-      @RfControl(validators: [RequiredValidator(), EmailValidator()])
-      String email});
-}
-
-/// @nodoc
-class _$AdminContactInformationOutputCopyWithImpl<$Res,
-        $Val extends AdminContactInformationOutput>
-    implements $AdminContactInformationOutputCopyWith<$Res> {
-  _$AdminContactInformationOutputCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of AdminContactInformationOutput
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $AdminContactInformationOutputCopyWith<AdminContactInformationOutput>
+      get copyWith => _$AdminContactInformationOutputCopyWithImpl<
+              AdminContactInformationOutput>(
+          this as AdminContactInformationOutput, _$identity);
+
   @override
-  $Res call({
-    Object? firstName = null,
-    Object? lastName = null,
-    Object? email = null,
-  }) {
-    return _then(_value.copyWith(
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is AdminContactInformationOutput &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.email, email) || other.email == email));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, firstName, lastName, email);
+
+  @override
+  String toString() {
+    return 'AdminContactInformationOutput(firstName: $firstName, lastName: $lastName, email: $email)';
   }
 }
 
 /// @nodoc
-abstract class _$$AdminContactInformationOutputImplCopyWith<$Res>
-    implements $AdminContactInformationOutputCopyWith<$Res> {
-  factory _$$AdminContactInformationOutputImplCopyWith(
-          _$AdminContactInformationOutputImpl value,
-          $Res Function(_$AdminContactInformationOutputImpl) then) =
-      __$$AdminContactInformationOutputImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $AdminContactInformationOutputCopyWith<$Res> {
+  factory $AdminContactInformationOutputCopyWith(
+          AdminContactInformationOutput value,
+          $Res Function(AdminContactInformationOutput) _then) =
+      _$AdminContactInformationOutputCopyWithImpl;
   @useResult
   $Res call(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
@@ -1955,14 +1911,12 @@ abstract class _$$AdminContactInformationOutputImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$AdminContactInformationOutputImplCopyWithImpl<$Res>
-    extends _$AdminContactInformationOutputCopyWithImpl<$Res,
-        _$AdminContactInformationOutputImpl>
-    implements _$$AdminContactInformationOutputImplCopyWith<$Res> {
-  __$$AdminContactInformationOutputImplCopyWithImpl(
-      _$AdminContactInformationOutputImpl _value,
-      $Res Function(_$AdminContactInformationOutputImpl) _then)
-      : super(_value, _then);
+class _$AdminContactInformationOutputCopyWithImpl<$Res>
+    implements $AdminContactInformationOutputCopyWith<$Res> {
+  _$AdminContactInformationOutputCopyWithImpl(this._self, this._then);
+
+  final AdminContactInformationOutput _self;
+  final $Res Function(AdminContactInformationOutput) _then;
 
   /// Create a copy of AdminContactInformationOutput
   /// with the given fields replaced by the non-null parameter values.
@@ -1973,17 +1927,17 @@ class __$$AdminContactInformationOutputImplCopyWithImpl<$Res>
     Object? lastName = null,
     Object? email = null,
   }) {
-    return _then(_$AdminContactInformationOutputImpl(
+    return _then(_self.copyWith(
       firstName: null == firstName
-          ? _value.firstName
+          ? _self.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String,
       lastName: null == lastName
-          ? _value.lastName
+          ? _self.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
-          ? _value.email
+          ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -1992,9 +1946,8 @@ class __$$AdminContactInformationOutputImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AdminContactInformationOutputImpl
-    implements _AdminContactInformationOutput {
-  const _$AdminContactInformationOutputImpl(
+class _AdminContactInformationOutput implements AdminContactInformationOutput {
+  const _AdminContactInformationOutput(
       {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
       required this.firstName,
       @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
@@ -2012,16 +1965,20 @@ class _$AdminContactInformationOutputImpl
   @RfControl(validators: [RequiredValidator(), EmailValidator()])
   final String email;
 
+  /// Create a copy of AdminContactInformationOutput
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'AdminContactInformationOutput(firstName: $firstName, lastName: $lastName, email: $email)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AdminContactInformationOutputCopyWith<_AdminContactInformationOutput>
+      get copyWith => __$AdminContactInformationOutputCopyWithImpl<
+          _AdminContactInformationOutput>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AdminContactInformationOutputImpl &&
+            other is _AdminContactInformationOutput &&
             (identical(other.firstName, firstName) ||
                 other.firstName == firstName) &&
             (identical(other.lastName, lastName) ||
@@ -2032,42 +1989,62 @@ class _$AdminContactInformationOutputImpl
   @override
   int get hashCode => Object.hash(runtimeType, firstName, lastName, email);
 
+  @override
+  String toString() {
+    return 'AdminContactInformationOutput(firstName: $firstName, lastName: $lastName, email: $email)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$AdminContactInformationOutputCopyWith<$Res>
+    implements $AdminContactInformationOutputCopyWith<$Res> {
+  factory _$AdminContactInformationOutputCopyWith(
+          _AdminContactInformationOutput value,
+          $Res Function(_AdminContactInformationOutput) _then) =
+      __$AdminContactInformationOutputCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
+      String firstName,
+      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
+      String lastName,
+      @RfControl(validators: [RequiredValidator(), EmailValidator()])
+      String email});
+}
+
+/// @nodoc
+class __$AdminContactInformationOutputCopyWithImpl<$Res>
+    implements _$AdminContactInformationOutputCopyWith<$Res> {
+  __$AdminContactInformationOutputCopyWithImpl(this._self, this._then);
+
+  final _AdminContactInformationOutput _self;
+  final $Res Function(_AdminContactInformationOutput) _then;
+
   /// Create a copy of AdminContactInformationOutput
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AdminContactInformationOutputImplCopyWith<
-          _$AdminContactInformationOutputImpl>
-      get copyWith => __$$AdminContactInformationOutputImplCopyWithImpl<
-          _$AdminContactInformationOutputImpl>(this, _$identity);
+  $Res call({
+    Object? firstName = null,
+    Object? lastName = null,
+    Object? email = null,
+  }) {
+    return _then(_AdminContactInformationOutput(
+      firstName: null == firstName
+          ? _self.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _self.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _self.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
-abstract class _AdminContactInformationOutput
-    implements AdminContactInformationOutput {
-  const factory _AdminContactInformationOutput(
-      {@RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      required final String firstName,
-      @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-      required final String lastName,
-      @RfControl(validators: [RequiredValidator(), EmailValidator()])
-      required final String email}) = _$AdminContactInformationOutputImpl;
-
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String get firstName;
-  @override
-  @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
-  String get lastName;
-  @override
-  @RfControl(validators: [RequiredValidator(), EmailValidator()])
-  String get email;
-
-  /// Create a copy of AdminContactInformationOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AdminContactInformationOutputImplCopyWith<
-          _$AdminContactInformationOutputImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

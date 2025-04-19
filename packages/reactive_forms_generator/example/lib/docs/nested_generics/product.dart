@@ -7,7 +7,7 @@ part 'product.gform.dart';
 
 @freezed
 @Rf(output: false)
-class ProductDetails<P extends Product, C extends Cart>
+abstract class ProductDetails<P extends Product, C extends Cart>
     with _$ProductDetails<P, C> {
   factory ProductDetails({
     @RfControl() String? description,
@@ -20,7 +20,7 @@ class ProductDetails<P extends Product, C extends Cart>
 @freezed
 @Rf(output: false)
 @RfGroup()
-class Id<P extends Product, C extends Cart> with _$Id<P, C> {
+abstract class Id<P extends Product, C extends Cart> with _$Id<P, C> {
   factory Id({
     @RfControl() String? companyName,
     @RfControl() String? name,
@@ -30,7 +30,7 @@ class Id<P extends Product, C extends Cart> with _$Id<P, C> {
 }
 
 @freezed
-class Product with _$Product {
+abstract class Product with _$Product {
   const factory Product({
     String? companyName,
     String? name,
@@ -40,7 +40,7 @@ class Product with _$Product {
 }
 
 @freezed
-class Cart with _$Cart {
+abstract class Cart with _$Cart {
   const factory Cart({
     Product? product,
     String? description,

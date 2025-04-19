@@ -46,7 +46,7 @@ extension NumberingStandardExt on NumberingStandard {
 
 @freezed
 @Rf(output: true)
-class ProfileO with _$ProfileO {
+abstract class ProfileO with _$ProfileO {
   const ProfileO._();
 
   factory ProfileO(
@@ -69,7 +69,7 @@ class ProfileO with _$ProfileO {
 
 @freezed
 @RfGroup()
-class ThresholdSettingO with _$ThresholdSettingO {
+abstract class ThresholdSettingO with _$ThresholdSettingO {
   static const values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const factory ThresholdSettingO({
@@ -83,7 +83,7 @@ class ThresholdSettingO with _$ThresholdSettingO {
 
 @freezed
 @RfGroup()
-class TimerSettingO with _$TimerSettingO {
+abstract class TimerSettingO with _$TimerSettingO {
   static const values = [1, 2, 3, 4, 5, 6];
 
   const factory TimerSettingO({
@@ -97,7 +97,7 @@ class TimerSettingO with _$TimerSettingO {
 
 @RfGroup()
 @freezed
-class IncidenceFilterO with _$IncidenceFilterO {
+abstract class IncidenceFilterO with _$IncidenceFilterO {
   const factory IncidenceFilterO({
     @RfControl<bool>() @Default(true) bool isMobilityEnabled,
     @RfControl<bool>() @Default(true) bool isFurcationEnabled,
@@ -124,7 +124,7 @@ enum Direction {
 enum ToothSide { facial, lingual }
 
 @freezed
-class ScanOrder with _$ScanOrder {
+abstract class ScanOrder with _$ScanOrder {
   const factory ScanOrder.arch(
     Jaw jaw, {
     required Direction direction,
@@ -142,7 +142,7 @@ class ScanOrder with _$ScanOrder {
 }
 
 @freezed
-class ChartingOrderValue with _$ChartingOrderValue {
+abstract class ChartingOrderValue with _$ChartingOrderValue {
   const factory ChartingOrderValue({
     @Default(ChartingOrderType.arch) ChartingOrderType chartingOrder,
     @Default(0) int selectedOption,

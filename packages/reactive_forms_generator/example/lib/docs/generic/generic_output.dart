@@ -7,7 +7,7 @@ part 'generic_output.gform.dart';
 
 @freezed
 @Rf(output: true)
-class TagsO<T> with _$TagsO<T> {
+abstract class TagsO<T> with _$TagsO<T> {
   factory TagsO({
     @RfControl() required List<T>? tags,
   }) = _TagsO;

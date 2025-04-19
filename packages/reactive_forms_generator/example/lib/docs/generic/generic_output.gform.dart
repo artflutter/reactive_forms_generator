@@ -453,7 +453,7 @@ class TagsOForm<T> implements FormModel<TagsO<T>, TagsOOutput<T>> {
 
 @freezed
 @Rf(output: true)
-class TagsOOutput<T> with _$TagsOOutput<T> {
+abstract class TagsOOutput<T> with _$TagsOOutput<T> {
   factory TagsOOutput({@RfControl() required List<T>? tags}) = _TagsOOutput;
   const TagsOOutput._();
 }

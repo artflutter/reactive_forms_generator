@@ -1,3 +1,7 @@
+## [7.0.0-beta0]
+
+* freezed 3
+
 ## [6.0.0]
 
 * Output model generation with support with smart nullability detection.

@@ -7,7 +7,7 @@ part 'create_output.gform.dart';
 
 @Rf(output: true)
 @freezed
-class MSICreate with _$MSICreate {
+abstract class MSICreate with _$MSICreate {
   const factory MSICreate({
     String? id,
     String? businessNumber,
@@ -34,7 +34,7 @@ int zipCodeMaxLength(String value) {
 
 @RfGroup()
 @freezed
-class Address with _$Address {
+abstract class Address with _$Address {
   const factory Address({
     @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
     String? street,
@@ -48,7 +48,7 @@ class Address with _$Address {
 
 @RfGroup<PrimaryContact>()
 @freezed
-class PrimaryContact with _$PrimaryContact {
+abstract class PrimaryContact with _$PrimaryContact {
   const factory PrimaryContact({
     @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
     String? fullName,
@@ -60,7 +60,7 @@ class PrimaryContact with _$PrimaryContact {
 
 @RfGroup<AdminContactInformation>()
 @freezed
-class AdminContactInformation with _$AdminContactInformation {
+abstract class AdminContactInformation with _$AdminContactInformation {
   const factory AdminContactInformation({
     @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)])
     String? firstName,

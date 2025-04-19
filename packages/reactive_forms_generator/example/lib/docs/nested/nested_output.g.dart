@@ -6,75 +6,69 @@ part of 'nested_output.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$SubGroupOImpl _$$SubGroupOImplFromJson(Map<String, dynamic> json) =>
-    _$SubGroupOImpl(
+_SubGroupO _$SubGroupOFromJson(Map<String, dynamic> json) => _SubGroupO(
       id: json['id'] as String,
     );
 
-Map<String, dynamic> _$$SubGroupOImplToJson(_$SubGroupOImpl instance) =>
+Map<String, dynamic> _$SubGroupOToJson(_SubGroupO instance) =>
     <String, dynamic>{
       'id': instance.id,
     };
 
-_$GroupOImpl _$$GroupOImplFromJson(Map<String, dynamic> json) => _$GroupOImpl(
+_GroupO _$GroupOFromJson(Map<String, dynamic> json) => _GroupO(
       id: json['id'] as String,
       subGroupList: (json['subGroupList'] as List<dynamic>)
           .map((e) => SubGroupO.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$GroupOImplToJson(_$GroupOImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$GroupOToJson(_GroupO instance) => <String, dynamic>{
       'id': instance.id,
       'subGroupList': instance.subGroupList,
     };
 
-_$NestedOImpl _$$NestedOImplFromJson(Map<String, dynamic> json) =>
-    _$NestedOImpl(
+_NestedO _$NestedOFromJson(Map<String, dynamic> json) => _NestedO(
       groupList: (json['groupList'] as List<dynamic>)
           .map((e) => GroupO.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$NestedOImplToJson(_$NestedOImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$NestedOToJson(_NestedO instance) => <String, dynamic>{
       'groupList': instance.groupList,
     };
 
-_$SubGroupOOutputImpl _$$SubGroupOOutputImplFromJson(
-        Map<String, dynamic> json) =>
-    _$SubGroupOOutputImpl(
+_SubGroupOOutput _$SubGroupOOutputFromJson(Map<String, dynamic> json) =>
+    _SubGroupOOutput(
       id: json['id'] as String,
     );
 
-Map<String, dynamic> _$$SubGroupOOutputImplToJson(
-        _$SubGroupOOutputImpl instance) =>
+Map<String, dynamic> _$SubGroupOOutputToJson(_SubGroupOOutput instance) =>
     <String, dynamic>{
       'id': instance.id,
     };
 
-_$GroupOOutputImpl _$$GroupOOutputImplFromJson(Map<String, dynamic> json) =>
-    _$GroupOOutputImpl(
+_GroupOOutput _$GroupOOutputFromJson(Map<String, dynamic> json) =>
+    _GroupOOutput(
       id: json['id'] as String,
       subGroupList: (json['subGroupList'] as List<dynamic>)
           .map((e) => SubGroupOOutput.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$GroupOOutputImplToJson(_$GroupOOutputImpl instance) =>
+Map<String, dynamic> _$GroupOOutputToJson(_GroupOOutput instance) =>
     <String, dynamic>{
       'id': instance.id,
       'subGroupList': instance.subGroupList,
     };
 
-_$NestedOOutputImpl _$$NestedOOutputImplFromJson(Map<String, dynamic> json) =>
-    _$NestedOOutputImpl(
+_NestedOOutput _$NestedOOutputFromJson(Map<String, dynamic> json) =>
+    _NestedOOutput(
       groupList: (json['groupList'] as List<dynamic>)
           .map((e) => GroupOOutput.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$NestedOOutputImplToJson(_$NestedOOutputImpl instance) =>
+Map<String, dynamic> _$NestedOOutputToJson(_NestedOOutput instance) =>
     <String, dynamic>{
       'groupList': instance.groupList,
     };
