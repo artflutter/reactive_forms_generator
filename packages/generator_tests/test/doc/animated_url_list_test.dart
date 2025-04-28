@@ -896,6 +896,8 @@ class ReactiveAnimatedUrlListFormArrayBuilder<
     this.formControl,
     this.builder,
     required this.itemBuilder,
+    this.emptyBuilder,
+    this.controlFilter,
   })  : assert(control != null || formControl != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
@@ -915,6 +917,12 @@ class ReactiveAnimatedUrlListFormArrayBuilder<
       ReactiveAnimatedUrlListFormArrayBuilderT? item,
       AnimatedUrlListForm formModel) itemBuilder;
 
+  final Widget Function(BuildContext context)? emptyBuilder;
+
+  final bool Function(
+          FormControl<ReactiveAnimatedUrlListFormArrayBuilderT> control)?
+      controlFilter;
+
   @override
   Widget build(BuildContext context) {
     final formModel = ReactiveAnimatedUrlListForm.of(context);
@@ -926,7 +934,14 @@ class ReactiveAnimatedUrlListFormArrayBuilder<
     return ReactiveFormArray<ReactiveAnimatedUrlListFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls.map((e) => e.value).toList();
+        final values = formArray.controls
+            .where((e) =>
+                controlFilter?.call(e
+                    as FormControl<ReactiveAnimatedUrlListFormArrayBuilderT>) ??
+                true)
+            .map((e) => e.value)
+            .toList();
+
         final itemList = values
             .asMap()
             .map((i, item) {
@@ -945,11 +960,108 @@ class ReactiveAnimatedUrlListFormArrayBuilder<
             .values
             .toList();
 
+        if (emptyBuilder != null) {
+          return emptyBuilder!(context);
+        }
+
         return builder?.call(
               context,
               itemList,
               formModel,
             ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveAnimatedUrlListFormArrayBuilder2<
+    ReactiveAnimatedUrlListFormArrayBuilderT> extends StatelessWidget {
+  const ReactiveAnimatedUrlListFormArrayBuilder2({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+    this.emptyBuilder,
+    this.controlFilter,
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<ReactiveAnimatedUrlListFormArrayBuilderT>? formControl;
+
+  final FormArray<ReactiveAnimatedUrlListFormArrayBuilderT>? Function(
+      AnimatedUrlListForm formModel)? control;
+
+  final Widget Function(
+      ({
+        BuildContext context,
+        List<Widget> itemList,
+        AnimatedUrlListForm formModel
+      }) params)? builder;
+
+  final Widget Function(
+      ({
+        BuildContext context,
+        int i,
+        FormControl<ReactiveAnimatedUrlListFormArrayBuilderT> control,
+        ReactiveAnimatedUrlListFormArrayBuilderT? item,
+        AnimatedUrlListForm formModel
+      }) params) itemBuilder;
+
+  final Widget Function(BuildContext context)? emptyBuilder;
+
+  final bool Function(
+          FormControl<ReactiveAnimatedUrlListFormArrayBuilderT> control)?
+      controlFilter;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveAnimatedUrlListForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    return ReactiveFormArray<ReactiveAnimatedUrlListFormArrayBuilderT>(
+      formArray: formControl ?? control?.call(formModel),
+      builder: (context, formArray, child) {
+        final values = formArray.controls
+            .where((e) =>
+                controlFilter?.call(e
+                    as FormControl<ReactiveAnimatedUrlListFormArrayBuilderT>) ??
+                true)
+            .map((e) => e.value)
+            .toList();
+
+        final itemList = values
+            .asMap()
+            .map((i, item) {
+              return MapEntry(
+                i,
+                itemBuilder((
+                  context: context,
+                  i: i,
+                  control: formArray.controls[i]
+                      as FormControl<ReactiveAnimatedUrlListFormArrayBuilderT>,
+                  item: item,
+                  formModel: formModel
+                )),
+              );
+            })
+            .values
+            .toList();
+
+        if (emptyBuilder != null) {
+          return emptyBuilder!(context);
+        }
+
+        return builder?.call((
+              context: context,
+              itemList: itemList,
+              formModel: formModel,
+            )) ??
             Column(children: itemList);
       },
     );

@@ -1163,6 +1163,8 @@ class ReactiveArrayNullableFormArrayBuilder<
     this.formControl,
     this.builder,
     required this.itemBuilder,
+    this.emptyBuilder,
+    this.controlFilter,
   })  : assert(control != null || formControl != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
@@ -1182,6 +1184,12 @@ class ReactiveArrayNullableFormArrayBuilder<
       ReactiveArrayNullableFormArrayBuilderT? item,
       ArrayNullableForm formModel) itemBuilder;
 
+  final Widget Function(BuildContext context)? emptyBuilder;
+
+  final bool Function(
+          FormControl<ReactiveArrayNullableFormArrayBuilderT> control)?
+      controlFilter;
+
   @override
   Widget build(BuildContext context) {
     final formModel = ReactiveArrayNullableForm.of(context);
@@ -1193,7 +1201,14 @@ class ReactiveArrayNullableFormArrayBuilder<
     return ReactiveFormArray<ReactiveArrayNullableFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls.map((e) => e.value).toList();
+        final values = formArray.controls
+            .where((e) =>
+                controlFilter?.call(
+                    e as FormControl<ReactiveArrayNullableFormArrayBuilderT>) ??
+                true)
+            .map((e) => e.value)
+            .toList();
+
         final itemList = values
             .asMap()
             .map((i, item) {
@@ -1212,11 +1227,108 @@ class ReactiveArrayNullableFormArrayBuilder<
             .values
             .toList();
 
+        if (emptyBuilder != null) {
+          return emptyBuilder!(context);
+        }
+
         return builder?.call(
               context,
               itemList,
               formModel,
             ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveArrayNullableFormArrayBuilder2<
+    ReactiveArrayNullableFormArrayBuilderT> extends StatelessWidget {
+  const ReactiveArrayNullableFormArrayBuilder2({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+    this.emptyBuilder,
+    this.controlFilter,
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<ReactiveArrayNullableFormArrayBuilderT>? formControl;
+
+  final FormArray<ReactiveArrayNullableFormArrayBuilderT>? Function(
+      ArrayNullableForm formModel)? control;
+
+  final Widget Function(
+      ({
+        BuildContext context,
+        List<Widget> itemList,
+        ArrayNullableForm formModel
+      }) params)? builder;
+
+  final Widget Function(
+      ({
+        BuildContext context,
+        int i,
+        FormControl<ReactiveArrayNullableFormArrayBuilderT> control,
+        ReactiveArrayNullableFormArrayBuilderT? item,
+        ArrayNullableForm formModel
+      }) params) itemBuilder;
+
+  final Widget Function(BuildContext context)? emptyBuilder;
+
+  final bool Function(
+          FormControl<ReactiveArrayNullableFormArrayBuilderT> control)?
+      controlFilter;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveArrayNullableForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    return ReactiveFormArray<ReactiveArrayNullableFormArrayBuilderT>(
+      formArray: formControl ?? control?.call(formModel),
+      builder: (context, formArray, child) {
+        final values = formArray.controls
+            .where((e) =>
+                controlFilter?.call(
+                    e as FormControl<ReactiveArrayNullableFormArrayBuilderT>) ??
+                true)
+            .map((e) => e.value)
+            .toList();
+
+        final itemList = values
+            .asMap()
+            .map((i, item) {
+              return MapEntry(
+                i,
+                itemBuilder((
+                  context: context,
+                  i: i,
+                  control: formArray.controls[i]
+                      as FormControl<ReactiveArrayNullableFormArrayBuilderT>,
+                  item: item,
+                  formModel: formModel
+                )),
+              );
+            })
+            .values
+            .toList();
+
+        if (emptyBuilder != null) {
+          return emptyBuilder!(context);
+        }
+
+        return builder?.call((
+              context: context,
+              itemList: itemList,
+              formModel: formModel,
+            )) ??
             Column(children: itemList);
       },
     );

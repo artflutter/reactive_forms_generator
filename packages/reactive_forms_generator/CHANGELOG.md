@@ -2,6 +2,12 @@
 
 * freezed 3
 
+## [6.2.0]
+
+* experimental `...FormArrayBuilder2` with record params
+* `emptyBuilder` and `controlFilter` params form both `...FormArrayBuilder2` and
+  `...FormArrayBuilder`
+
 ## [6.1.1]
 
 * fix https://github.com/artflutter/reactive_forms_generator/issues/184

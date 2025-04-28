@@ -1967,6 +1967,8 @@ class ReactiveDeliveryListFormArrayBuilder<
     this.formControl,
     this.builder,
     required this.itemBuilder,
+    this.emptyBuilder,
+    this.controlFilter,
   })  : assert(control != null || formControl != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
@@ -1986,6 +1988,12 @@ class ReactiveDeliveryListFormArrayBuilder<
       ReactiveDeliveryListFormArrayBuilderT? item,
       DeliveryListForm formModel) itemBuilder;
 
+  final Widget Function(BuildContext context)? emptyBuilder;
+
+  final bool Function(
+          FormControl<ReactiveDeliveryListFormArrayBuilderT> control)?
+      controlFilter;
+
   @override
   Widget build(BuildContext context) {
     final formModel = ReactiveDeliveryListForm.of(context);
@@ -1997,7 +2005,14 @@ class ReactiveDeliveryListFormArrayBuilder<
     return ReactiveFormArray<ReactiveDeliveryListFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls.map((e) => e.value).toList();
+        final values = formArray.controls
+            .where((e) =>
+                controlFilter?.call(
+                    e as FormControl<ReactiveDeliveryListFormArrayBuilderT>) ??
+                true)
+            .map((e) => e.value)
+            .toList();
+
         final itemList = values
             .asMap()
             .map((i, item) {
@@ -2016,11 +2031,108 @@ class ReactiveDeliveryListFormArrayBuilder<
             .values
             .toList();
 
+        if (emptyBuilder != null) {
+          return emptyBuilder!(context);
+        }
+
         return builder?.call(
               context,
               itemList,
               formModel,
             ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveDeliveryListFormArrayBuilder2<
+    ReactiveDeliveryListFormArrayBuilderT> extends StatelessWidget {
+  const ReactiveDeliveryListFormArrayBuilder2({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+    this.emptyBuilder,
+    this.controlFilter,
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<ReactiveDeliveryListFormArrayBuilderT>? formControl;
+
+  final FormArray<ReactiveDeliveryListFormArrayBuilderT>? Function(
+      DeliveryListForm formModel)? control;
+
+  final Widget Function(
+      ({
+        BuildContext context,
+        List<Widget> itemList,
+        DeliveryListForm formModel
+      }) params)? builder;
+
+  final Widget Function(
+      ({
+        BuildContext context,
+        int i,
+        FormControl<ReactiveDeliveryListFormArrayBuilderT> control,
+        ReactiveDeliveryListFormArrayBuilderT? item,
+        DeliveryListForm formModel
+      }) params) itemBuilder;
+
+  final Widget Function(BuildContext context)? emptyBuilder;
+
+  final bool Function(
+          FormControl<ReactiveDeliveryListFormArrayBuilderT> control)?
+      controlFilter;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveDeliveryListForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    return ReactiveFormArray<ReactiveDeliveryListFormArrayBuilderT>(
+      formArray: formControl ?? control?.call(formModel),
+      builder: (context, formArray, child) {
+        final values = formArray.controls
+            .where((e) =>
+                controlFilter?.call(
+                    e as FormControl<ReactiveDeliveryListFormArrayBuilderT>) ??
+                true)
+            .map((e) => e.value)
+            .toList();
+
+        final itemList = values
+            .asMap()
+            .map((i, item) {
+              return MapEntry(
+                i,
+                itemBuilder((
+                  context: context,
+                  i: i,
+                  control: formArray.controls[i]
+                      as FormControl<ReactiveDeliveryListFormArrayBuilderT>,
+                  item: item,
+                  formModel: formModel
+                )),
+              );
+            })
+            .values
+            .toList();
+
+        if (emptyBuilder != null) {
+          return emptyBuilder!(context);
+        }
+
+        return builder?.call((
+              context: context,
+              itemList: itemList,
+              formModel: formModel,
+            )) ??
             Column(children: itemList);
       },
     );
@@ -2632,6 +2744,8 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder<
     this.formControl,
     this.builder,
     required this.itemBuilder,
+    this.emptyBuilder,
+    this.controlFilter,
   })  : assert(control != null || formControl != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
@@ -2652,6 +2766,12 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder<
       ReactiveStandaloneDeliveryPointFormArrayBuilderT? item,
       StandaloneDeliveryPointForm formModel) itemBuilder;
 
+  final Widget Function(BuildContext context)? emptyBuilder;
+
+  final bool Function(
+      FormControl<ReactiveStandaloneDeliveryPointFormArrayBuilderT>
+          control)? controlFilter;
+
   @override
   Widget build(BuildContext context) {
     final formModel = ReactiveStandaloneDeliveryPointForm.of(context);
@@ -2663,7 +2783,14 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder<
     return ReactiveFormArray<ReactiveStandaloneDeliveryPointFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls.map((e) => e.value).toList();
+        final values = formArray.controls
+            .where((e) =>
+                controlFilter?.call(e as FormControl<
+                    ReactiveStandaloneDeliveryPointFormArrayBuilderT>) ??
+                true)
+            .map((e) => e.value)
+            .toList();
+
         final itemList = values
             .asMap()
             .map((i, item) {
@@ -2682,11 +2809,109 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder<
             .values
             .toList();
 
+        if (emptyBuilder != null) {
+          return emptyBuilder!(context);
+        }
+
         return builder?.call(
               context,
               itemList,
               formModel,
             ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveStandaloneDeliveryPointFormArrayBuilder2<
+    ReactiveStandaloneDeliveryPointFormArrayBuilderT> extends StatelessWidget {
+  const ReactiveStandaloneDeliveryPointFormArrayBuilder2({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+    this.emptyBuilder,
+    this.controlFilter,
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<ReactiveStandaloneDeliveryPointFormArrayBuilderT>?
+      formControl;
+
+  final FormArray<ReactiveStandaloneDeliveryPointFormArrayBuilderT>? Function(
+      StandaloneDeliveryPointForm formModel)? control;
+
+  final Widget Function(
+      ({
+        BuildContext context,
+        List<Widget> itemList,
+        StandaloneDeliveryPointForm formModel
+      }) params)? builder;
+
+  final Widget Function(
+      ({
+        BuildContext context,
+        int i,
+        FormControl<ReactiveStandaloneDeliveryPointFormArrayBuilderT> control,
+        ReactiveStandaloneDeliveryPointFormArrayBuilderT? item,
+        StandaloneDeliveryPointForm formModel
+      }) params) itemBuilder;
+
+  final Widget Function(BuildContext context)? emptyBuilder;
+
+  final bool Function(
+      FormControl<ReactiveStandaloneDeliveryPointFormArrayBuilderT>
+          control)? controlFilter;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveStandaloneDeliveryPointForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    return ReactiveFormArray<ReactiveStandaloneDeliveryPointFormArrayBuilderT>(
+      formArray: formControl ?? control?.call(formModel),
+      builder: (context, formArray, child) {
+        final values = formArray.controls
+            .where((e) =>
+                controlFilter?.call(e as FormControl<
+                    ReactiveStandaloneDeliveryPointFormArrayBuilderT>) ??
+                true)
+            .map((e) => e.value)
+            .toList();
+
+        final itemList = values
+            .asMap()
+            .map((i, item) {
+              return MapEntry(
+                i,
+                itemBuilder((
+                  context: context,
+                  i: i,
+                  control: formArray.controls[i] as FormControl<
+                      ReactiveStandaloneDeliveryPointFormArrayBuilderT>,
+                  item: item,
+                  formModel: formModel
+                )),
+              );
+            })
+            .values
+            .toList();
+
+        if (emptyBuilder != null) {
+          return emptyBuilder!(context);
+        }
+
+        return builder?.call((
+              context: context,
+              itemList: itemList,
+              formModel: formModel,
+            )) ??
             Column(children: itemList);
       },
     );

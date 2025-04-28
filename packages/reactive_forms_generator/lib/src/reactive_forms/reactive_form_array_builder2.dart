@@ -2,10 +2,10 @@ import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/form_generator.dart';
 
-class ReactiveFormArrayBuilder {
+class ReactiveFormArrayBuilder2 {
   final FormGenerator formGenerator;
 
-  ReactiveFormArrayBuilder(this.formGenerator);
+  ReactiveFormArrayBuilder2(this.formGenerator);
 
   Constructor get _constructor => Constructor(
         (b) => b
@@ -55,14 +55,14 @@ class ReactiveFormArrayBuilder {
                   ..toThis = true,
               ),
               Parameter(
-                    (b) => b
+                (b) => b
                   ..name = 'emptyBuilder'
                   ..named = true
                   ..required = false
                   ..toThis = true,
               ),
               Parameter(
-                    (b) => b
+                (b) => b
                   ..name = 'controlFilter'
                   ..named = true
                   ..toThis = true,
@@ -102,27 +102,27 @@ class ReactiveFormArrayBuilder {
                     .map((i, item) {
                       return MapEntry(
                         i,
-                        itemBuilder(
-                          context,
-                          i,
-                          formArray.controls[i] as FormControl<$T>,
-                          item,
-                          formModel,
+                        itemBuilder((
+                          context: context,
+                          i: i,
+                          control: formArray.controls[i] as FormControl<$T>,
+                          item: item,
+                          formModel: formModel)
                         ),
                       );
                     })
                     .values
                     .toList();
                     
-               if(emptyBuilder != null) {
+                if(emptyBuilder != null) {
                   return emptyBuilder!(context);
                 }
         
-                return builder?.call(
-                      context,
-                      itemList,
-                      formModel,
-                    ) ??
+                return builder?.call((
+                      context: context,
+                      itemList: itemList,
+                      formModel: formModel,
+                    )) ??
                     Column(children: itemList);
               },
             );
@@ -151,7 +151,7 @@ class ReactiveFormArrayBuilder {
             ..name = 'builder'
             ..modifier = FieldModifier.final$
             ..type = Reference(
-              'Widget Function(BuildContext context, List<Widget> itemList, ${formGenerator.classNameFull} formModel)?',
+              'Widget Function(({BuildContext context, List<Widget> itemList, ${formGenerator.classNameFull} formModel}) params)?',
             ),
         ),
         Field(
@@ -159,7 +159,8 @@ class ReactiveFormArrayBuilder {
             ..name = 'itemBuilder'
             ..modifier = FieldModifier.final$
             ..type = Reference(
-                'Widget Function(BuildContext context, int i, FormControl<$T> control, $T? item, ${formGenerator.classNameFull} formModel)'),
+              'Widget Function(({BuildContext context, int i, FormControl<$T> control, $T? item, ${formGenerator.classNameFull} formModel}) params)',
+            ),
         ),
         Field(
           (b) => b
@@ -180,7 +181,7 @@ class ReactiveFormArrayBuilder {
   Class get generate {
     return Class(
       (b) => b
-        ..name = 'Reactive${formGenerator.className}ArrayBuilder'
+        ..name = 'Reactive${formGenerator.className}ArrayBuilder2'
         ..types.addAll(
           [
             Reference(T),

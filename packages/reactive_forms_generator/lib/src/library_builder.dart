@@ -4,6 +4,7 @@ import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/form_generator.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_array_builder.dart';
+import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_array_builder2.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_builder.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_consumer.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form_extension.dart';
@@ -25,6 +26,7 @@ List<Spec> generateLibrary(
   final reactiveFormConsumer = ReactiveFormConsumer(reactiveForm);
   final reactiveFormBuilder = ReactiveFormBuilder(reactiveForm);
   final reactiveFormArrayBuilder = ReactiveFormArrayBuilder(formGenerator);
+  final reactiveFormArrayBuilder2 = ReactiveFormArrayBuilder2(formGenerator);
   final reactiveFormGroupArrayBuilder =
       ReactiveFormGroupArrayBuilder(formGenerator);
 
@@ -40,6 +42,7 @@ List<Spec> generateLibrary(
     ...formGenerator.generate,
     ...p,
     reactiveFormArrayBuilder.generate,
+    reactiveFormArrayBuilder2.generate,
     reactiveFormGroupArrayBuilder.generate,
   ];
 }

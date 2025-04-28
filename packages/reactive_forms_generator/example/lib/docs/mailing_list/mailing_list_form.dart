@@ -32,26 +32,26 @@ class _MailingListFormWidgetState extends State<MailingListFormWidget> {
               Row(
                 children: [
                   Expanded(
-                    child: ReactiveMailingListFormArrayBuilder<String>(
+                    child: ReactiveMailingListFormArrayBuilder2<String>(
                       formControl: formModel.emailListControl,
-                      itemBuilder: (context, i, control, item, formModel) {
+                      itemBuilder: (params) {
                         return Row(
                           children: [
                             Expanded(
                               child: ReactiveTextField<String>(
-                                key: ObjectKey(control),
-                                formControl: control,
+                                key: ObjectKey(params.control),
+                                formControl: params.control,
                                 validationMessages: {
                                   'email': (_) => 'Invalid email',
                                 },
                                 decoration: InputDecoration(
-                                  labelText: 'Email $i',
+                                  labelText: 'Email $params.i',
                                 ),
                               ),
                             ),
                             IconButton(
                               onPressed: () {
-                                formModel.emailListControl.removeAt(i);
+                                formModel.emailListControl.removeAt(params.i);
                               },
                               icon: const Icon(Icons.delete),
                             ),

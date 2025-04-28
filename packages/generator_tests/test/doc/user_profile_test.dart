@@ -1333,6 +1333,8 @@ class ReactiveUserProfileFormArrayBuilder<ReactiveUserProfileFormArrayBuilderT>
     this.formControl,
     this.builder,
     required this.itemBuilder,
+    this.emptyBuilder,
+    this.controlFilter,
   })  : assert(control != null || formControl != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
@@ -1352,6 +1354,11 @@ class ReactiveUserProfileFormArrayBuilder<ReactiveUserProfileFormArrayBuilderT>
       ReactiveUserProfileFormArrayBuilderT? item,
       UserProfileForm formModel) itemBuilder;
 
+  final Widget Function(BuildContext context)? emptyBuilder;
+
+  final bool Function(
+      FormControl<ReactiveUserProfileFormArrayBuilderT> control)? controlFilter;
+
   @override
   Widget build(BuildContext context) {
     final formModel = ReactiveUserProfileForm.of(context);
@@ -1363,7 +1370,14 @@ class ReactiveUserProfileFormArrayBuilder<ReactiveUserProfileFormArrayBuilderT>
     return ReactiveFormArray<ReactiveUserProfileFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls.map((e) => e.value).toList();
+        final values = formArray.controls
+            .where((e) =>
+                controlFilter?.call(
+                    e as FormControl<ReactiveUserProfileFormArrayBuilderT>) ??
+                true)
+            .map((e) => e.value)
+            .toList();
+
         final itemList = values
             .asMap()
             .map((i, item) {
@@ -1382,11 +1396,107 @@ class ReactiveUserProfileFormArrayBuilder<ReactiveUserProfileFormArrayBuilderT>
             .values
             .toList();
 
+        if (emptyBuilder != null) {
+          return emptyBuilder!(context);
+        }
+
         return builder?.call(
               context,
               itemList,
               formModel,
             ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveUserProfileFormArrayBuilder2<ReactiveUserProfileFormArrayBuilderT>
+    extends StatelessWidget {
+  const ReactiveUserProfileFormArrayBuilder2({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+    this.emptyBuilder,
+    this.controlFilter,
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<ReactiveUserProfileFormArrayBuilderT>? formControl;
+
+  final FormArray<ReactiveUserProfileFormArrayBuilderT>? Function(
+      UserProfileForm formModel)? control;
+
+  final Widget Function(
+      ({
+        BuildContext context,
+        List<Widget> itemList,
+        UserProfileForm formModel
+      }) params)? builder;
+
+  final Widget Function(
+      ({
+        BuildContext context,
+        int i,
+        FormControl<ReactiveUserProfileFormArrayBuilderT> control,
+        ReactiveUserProfileFormArrayBuilderT? item,
+        UserProfileForm formModel
+      }) params) itemBuilder;
+
+  final Widget Function(BuildContext context)? emptyBuilder;
+
+  final bool Function(
+      FormControl<ReactiveUserProfileFormArrayBuilderT> control)? controlFilter;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveUserProfileForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    return ReactiveFormArray<ReactiveUserProfileFormArrayBuilderT>(
+      formArray: formControl ?? control?.call(formModel),
+      builder: (context, formArray, child) {
+        final values = formArray.controls
+            .where((e) =>
+                controlFilter?.call(
+                    e as FormControl<ReactiveUserProfileFormArrayBuilderT>) ??
+                true)
+            .map((e) => e.value)
+            .toList();
+
+        final itemList = values
+            .asMap()
+            .map((i, item) {
+              return MapEntry(
+                i,
+                itemBuilder((
+                  context: context,
+                  i: i,
+                  control: formArray.controls[i]
+                      as FormControl<ReactiveUserProfileFormArrayBuilderT>,
+                  item: item,
+                  formModel: formModel
+                )),
+              );
+            })
+            .values
+            .toList();
+
+        if (emptyBuilder != null) {
+          return emptyBuilder!(context);
+        }
+
+        return builder?.call((
+              context: context,
+              itemList: itemList,
+              formModel: formModel,
+            )) ??
             Column(children: itemList);
       },
     );
