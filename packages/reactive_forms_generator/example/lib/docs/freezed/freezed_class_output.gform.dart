@@ -1315,6 +1315,7 @@ class FreezedClassOForm
 @Rf(output: true)
 abstract class FreezedClassOOutput with _$FreezedClassOOutput {
   FreezedClassOOutput._();
+
   factory FreezedClassOOutput(@RfControl<String>() String? gender,
       @RfControl(validators: [RequiredValidator()]) String genderR,
       {@RfControl() String? id,
@@ -1324,8 +1325,10 @@ abstract class FreezedClassOOutput with _$FreezedClassOOutput {
       @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
       @RfControl<double>() double? year,
       @Default([]) List<String> selectedSpaces}) = _FreezedClassOOutput;
+
   factory FreezedClassOOutput.fromJson(Map<String, dynamic> json) =>
       _$FreezedClassOOutputFromJson(json);
+
   bool method() => false;
 }
 
@@ -1401,7 +1404,7 @@ class ReactiveFreezedClassOFormArrayBuilder<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1494,7 +1497,7 @@ class ReactiveFreezedClassOFormArrayBuilder2<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

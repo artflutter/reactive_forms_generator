@@ -573,6 +573,7 @@ class SomeWiredNameForm
 class RenamedBasicOOutput {
   final String email;
   final String password;
+
   RenamedBasicOOutput(
       {@RfControl(validators: [RequiredValidator()]) required this.email,
       @RfControl(validators: [RequiredValidator()]) required this.password});
@@ -650,7 +651,7 @@ class ReactiveSomeWiredNameFormArrayBuilder<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -743,7 +744,7 @@ class ReactiveSomeWiredNameFormArrayBuilder2<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

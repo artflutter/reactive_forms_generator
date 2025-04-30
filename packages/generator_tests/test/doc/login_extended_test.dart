@@ -1326,7 +1326,7 @@ class ReactiveLoginExtendedFormArrayBuilder<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if(emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1419,7 +1419,7 @@ class ReactiveLoginExtendedFormArrayBuilder2<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if(emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

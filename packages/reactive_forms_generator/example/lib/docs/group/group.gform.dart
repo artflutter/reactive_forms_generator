@@ -2011,7 +2011,7 @@ class ReactiveGroupFormArrayBuilder<ReactiveGroupFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -2103,7 +2103,7 @@ class ReactiveGroupFormArrayBuilder2<ReactiveGroupFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

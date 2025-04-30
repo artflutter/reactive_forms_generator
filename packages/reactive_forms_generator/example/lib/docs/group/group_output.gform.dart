@@ -1952,6 +1952,7 @@ class GroupOOutput {
   final PhoneOOutput? phone;
   final AddressOOutput? address;
   final AddressOOutput? address2;
+
   GroupOOutput({this.personal, this.phone, this.address, this.address2});
 }
 
@@ -1959,6 +1960,7 @@ class GroupOOutput {
 class PersonalOOutput {
   final String? name;
   final String? email;
+
   PersonalOOutput(
       {@RfControl<String>() this.name, @RfControl<String>() this.email});
 }
@@ -1967,6 +1969,7 @@ class PersonalOOutput {
 class PhoneOOutput {
   final String? phoneNumber;
   final String? countryIso;
+
   PhoneOOutput(
       {@RfControl<String>() this.phoneNumber,
       @RfControl<String>() this.countryIso});
@@ -1977,6 +1980,7 @@ class AddressOOutput {
   final String? street;
   final String? city;
   final String? zip;
+
   AddressOOutput(
       {@RfControl<String>() this.street,
       @RfControl<String>() this.city,
@@ -2055,7 +2059,7 @@ class ReactiveGroupOFormArrayBuilder<ReactiveGroupOFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -2147,7 +2151,7 @@ class ReactiveGroupOFormArrayBuilder2<ReactiveGroupOFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

@@ -599,7 +599,7 @@ class ReactiveMailingListFormArrayBuilder<ReactiveMailingListFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if(emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -691,7 +691,7 @@ class ReactiveMailingListFormArrayBuilder2<ReactiveMailingListFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if(emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

@@ -1484,7 +1484,7 @@ class ReactiveUserProfileOFormArrayBuilder<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if(emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1577,7 +1577,7 @@ class ReactiveUserProfileOFormArrayBuilder2<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if(emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

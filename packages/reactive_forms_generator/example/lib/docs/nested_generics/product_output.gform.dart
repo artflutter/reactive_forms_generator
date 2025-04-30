@@ -936,6 +936,7 @@ abstract class ProductDetailsOOutput<P extends Product, C extends Cart>
   factory ProductDetailsOOutput(
       {@RfControl() String? description,
       @Rf(output: false) IdOOutput<P, C>? id}) = _ProductDetailsOOutput;
+
   ProductDetailsOOutput._();
 }
 
@@ -947,6 +948,7 @@ abstract class IdOOutput<P extends Product, C extends Cart>
   factory IdOOutput(
       {@RfControl() String? companyName,
       @RfControl() String? name}) = _IdOOutput;
+
   IdOOutput._();
 }
 
@@ -1024,7 +1026,7 @@ class ReactiveProductDetailsOFormArrayBuilder<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1119,7 +1121,7 @@ class ReactiveProductDetailsOFormArrayBuilder2<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1482,7 +1484,7 @@ class ReactiveIdOFormArrayBuilder<ReactiveIdOFormArrayBuilderT,
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1574,7 +1576,7 @@ class ReactiveIdOFormArrayBuilder2<ReactiveIdOFormArrayBuilderT,
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

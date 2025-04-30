@@ -1319,6 +1319,7 @@ class UserProfileOOutput {
   final String lastName;
   final AddressOOutput home;
   final AddressOOutput? office;
+
   UserProfileOOutput(
       {required this.id,
       @RfControl(validators: [RequiredValidator()]) required this.firstName,
@@ -1332,6 +1333,7 @@ class AddressOOutput {
   final String? street;
   final String city;
   final String? zip;
+
   AddressOOutput(
       {@RfControl<String>() this.street,
       @RfControl(validators: [RequiredValidator()]) required this.city,
@@ -1410,7 +1412,7 @@ class ReactiveUserProfileOFormArrayBuilder<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1503,7 +1505,7 @@ class ReactiveUserProfileOFormArrayBuilder2<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

@@ -604,7 +604,7 @@ class ReactiveTestFormArrayBuilder<ReactiveTestFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -696,7 +696,7 @@ class ReactiveTestFormArrayBuilder2<ReactiveTestFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

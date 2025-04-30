@@ -2140,7 +2140,7 @@ class ReactiveGroupOFormArrayBuilder<ReactiveGroupOFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if(emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -2232,7 +2232,7 @@ class ReactiveGroupOFormArrayBuilder2<ReactiveGroupOFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if(emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

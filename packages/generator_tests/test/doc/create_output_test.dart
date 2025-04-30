@@ -3217,7 +3217,7 @@ class ReactiveMSICreateFormArrayBuilder<ReactiveMSICreateFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if(emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -3309,7 +3309,7 @@ class ReactiveMSICreateFormArrayBuilder2<ReactiveMSICreateFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if(emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

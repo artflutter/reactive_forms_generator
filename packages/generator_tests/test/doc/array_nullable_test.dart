@@ -1285,7 +1285,7 @@ class ReactiveArrayNullableFormArrayBuilder<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if(emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1378,7 +1378,7 @@ class ReactiveArrayNullableFormArrayBuilder2<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if(emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

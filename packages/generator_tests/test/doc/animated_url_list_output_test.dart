@@ -9,7 +9,7 @@ void main() {
   group('reactive_forms_generator', () {
     test(
       'Animated URL list Output',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -1034,7 +1034,7 @@ class ReactiveAnimatedUrlLisOFormArrayBuilder<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if(emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1127,7 +1127,7 @@ class ReactiveAnimatedUrlLisOFormArrayBuilder2<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if(emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

@@ -429,6 +429,7 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
 abstract class SubGroupOOutput with _$SubGroupOOutput {
   const factory SubGroupOOutput({@RfControl() required String id}) =
       _SubGroupOOutput;
+
   factory SubGroupOOutput.fromJson(Map<String, dynamic> json) =>
       _$SubGroupOOutputFromJson(json);
 }
@@ -441,6 +442,7 @@ abstract class GroupOOutput with _$GroupOOutput {
           {@RfControl() required String id,
           @RfArray<dynamic>() required List<SubGroupOOutput> subGroupList}) =
       _GroupOOutput;
+
   factory GroupOOutput.fromJson(Map<String, dynamic> json) =>
       _$GroupOOutputFromJson(json);
 }
@@ -452,6 +454,7 @@ abstract class NestedOOutput with _$NestedOOutput {
   const factory NestedOOutput(
           {@RfArray<dynamic>() required List<GroupOOutput> groupList}) =
       _NestedOOutput;
+
   factory NestedOOutput.fromJson(Map<String, dynamic> json) =>
       _$NestedOOutputFromJson(json);
 }
@@ -528,7 +531,7 @@ class ReactiveSubGroupOFormArrayBuilder<ReactiveSubGroupOFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -620,7 +623,7 @@ class ReactiveSubGroupOFormArrayBuilder2<ReactiveSubGroupOFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1383,7 +1386,7 @@ class ReactiveGroupOFormArrayBuilder<ReactiveGroupOFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1475,7 +1478,7 @@ class ReactiveGroupOFormArrayBuilder2<ReactiveGroupOFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -2152,7 +2155,7 @@ class ReactiveNestedOFormArrayBuilder<ReactiveNestedOFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -2244,7 +2247,7 @@ class ReactiveNestedOFormArrayBuilder2<ReactiveNestedOFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

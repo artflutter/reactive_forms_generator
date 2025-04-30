@@ -1076,6 +1076,7 @@ class ArrayNullableOOutput {
   final List<String?>? vegetablesList;
   final List<String?>? someList;
   final List<UserMode?>? modeList;
+
   ArrayNullableOOutput(
       {@RfArray(validators: [RequiredValidator()]) required this.emailList,
       @RfArray() this.fruitList = const [],
@@ -1156,7 +1157,7 @@ class ReactiveArrayNullableOFormArrayBuilder<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1249,7 +1250,7 @@ class ReactiveArrayNullableOFormArrayBuilder2<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

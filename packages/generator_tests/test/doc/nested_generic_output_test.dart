@@ -1096,7 +1096,7 @@ class ReactiveProductDetailsOFormArrayBuilder<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1191,7 +1191,7 @@ class ReactiveProductDetailsOFormArrayBuilder2<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if(emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1554,7 +1554,7 @@ class ReactiveIdOFormArrayBuilder<ReactiveIdOFormArrayBuilderT,
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if(emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1646,7 +1646,7 @@ class ReactiveIdOFormArrayBuilder2<ReactiveIdOFormArrayBuilderT,
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if(emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

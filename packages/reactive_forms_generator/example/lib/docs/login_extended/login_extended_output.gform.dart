@@ -1278,6 +1278,7 @@ class LoginExtendedOOutput {
   final double height;
   final String? unAnnotated;
   final List<int> someIntList;
+
   LoginExtendedOOutput(
       {@RfControl(
           validators: [RequiredValidator()],
@@ -1369,7 +1370,7 @@ class ReactiveLoginExtendedOFormArrayBuilder<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1462,7 +1463,7 @@ class ReactiveLoginExtendedOFormArrayBuilder2<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

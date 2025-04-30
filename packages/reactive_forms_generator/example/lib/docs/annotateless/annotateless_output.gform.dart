@@ -517,7 +517,9 @@ class AnnotatelessOForm
 class AnnotatelessOOutput extends Equatable {
   final String email;
   final String password;
+
   const AnnotatelessOOutput({@RfControl() this.email = "", this.password = ""});
+
   @override
   List<Object?> get props => [email, password];
 }
@@ -594,7 +596,7 @@ class ReactiveAnnotatelessOFormArrayBuilder<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -687,7 +689,7 @@ class ReactiveAnnotatelessOFormArrayBuilder2<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

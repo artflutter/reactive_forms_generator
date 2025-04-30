@@ -487,6 +487,7 @@ class StatusListOForm<T extends Enum>
 @Rf(output: true)
 class StatusListOOutput<T extends Enum> {
   final List<T?> list;
+
   StatusListOOutput({@RfArray<T>() this.list = const []});
 }
 
@@ -561,7 +562,7 @@ class ReactiveStatusListOFormArrayBuilder<ReactiveStatusListOFormArrayBuilderT,
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -653,7 +654,7 @@ class ReactiveStatusListOFormArrayBuilder2<ReactiveStatusListOFormArrayBuilderT,
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

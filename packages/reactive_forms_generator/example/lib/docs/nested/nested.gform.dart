@@ -494,7 +494,7 @@ class ReactiveSubGroupFormArrayBuilder<ReactiveSubGroupFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -586,7 +586,7 @@ class ReactiveSubGroupFormArrayBuilder2<ReactiveSubGroupFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1348,7 +1348,7 @@ class ReactiveGroupFormArrayBuilder<ReactiveGroupFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1440,7 +1440,7 @@ class ReactiveGroupFormArrayBuilder2<ReactiveGroupFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -2116,7 +2116,7 @@ class ReactiveNestedFormArrayBuilder<ReactiveNestedFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -2208,7 +2208,7 @@ class ReactiveNestedFormArrayBuilder2<ReactiveNestedFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

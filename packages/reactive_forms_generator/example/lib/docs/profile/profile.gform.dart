@@ -2533,7 +2533,7 @@ class ReactiveProfileFormArrayBuilder<ReactiveProfileFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -2625,7 +2625,7 @@ class ReactiveProfileFormArrayBuilder2<ReactiveProfileFormArrayBuilderT>
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

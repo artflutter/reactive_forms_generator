@@ -55,14 +55,14 @@ class ReactiveFormArrayBuilder {
                   ..toThis = true,
               ),
               Parameter(
-                    (b) => b
+                (b) => b
                   ..name = 'emptyBuilder'
                   ..named = true
                   ..required = false
                   ..toThis = true,
               ),
               Parameter(
-                    (b) => b
+                (b) => b
                   ..name = 'controlFilter'
                   ..named = true
                   ..toThis = true,
@@ -114,7 +114,7 @@ class ReactiveFormArrayBuilder {
                     .values
                     .toList();
                     
-               if(emptyBuilder != null) {
+               if(emptyBuilder != null && itemList.isEmpty) {
                   return emptyBuilder!(context);
                 }
         

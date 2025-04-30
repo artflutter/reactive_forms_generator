@@ -898,6 +898,7 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
 @Rf(output: true)
 class AnimatedUrlLisOOutput {
   final List<UrlEntityOOutput> urlList;
+
   AnimatedUrlLisOOutput({@RfArray() required this.urlList});
 }
 
@@ -905,6 +906,7 @@ class AnimatedUrlLisOOutput {
 class UrlEntityOOutput {
   final String label;
   final String url;
+
   UrlEntityOOutput(
       {@RfControl(validators: [RequiredValidator()]) required this.label,
       @RfControl(validators: [RequiredValidator()]) required this.url});
@@ -982,7 +984,7 @@ class ReactiveAnimatedUrlLisOFormArrayBuilder<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1075,7 +1077,7 @@ class ReactiveAnimatedUrlLisOFormArrayBuilder2<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

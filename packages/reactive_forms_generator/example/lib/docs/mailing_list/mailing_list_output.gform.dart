@@ -483,6 +483,7 @@ class MailingListOForm implements FormModel<MailingListO, MailingListOOutput> {
 @Rf(output: true)
 class MailingListOOutput {
   final List<String?> emailList;
+
   MailingListOOutput(
       {@RfArray(
           validators: [MailingListValidator()],
@@ -562,7 +563,7 @@ class ReactiveMailingListOFormArrayBuilder<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -655,7 +656,7 @@ class ReactiveMailingListOFormArrayBuilder2<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

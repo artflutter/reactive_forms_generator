@@ -1883,8 +1883,10 @@ class ClientOForm implements FormModel<ClientO, ClientOOutput> {
 class DeliveryListOOutput extends Equatable {
   final List<DeliveryPointOOutput> deliveryList;
   final List<ClientOOutput>? clientList;
+
   const DeliveryListOOutput(
       {@RfArray() required this.deliveryList, @RfArray() this.clientList});
+
   @override
   List<Object?> get props => [deliveryList, clientList];
 }
@@ -1894,9 +1896,11 @@ class DeliveryListOOutput extends Equatable {
 class DeliveryPointOOutput extends Equatable {
   final String name;
   final AddressOOutput? address;
+
   const DeliveryPointOOutput(
       {@RfControl(validators: [RequiredValidator()]) required this.name,
       this.address});
+
   @override
   List<Object?> get props => [name, address];
 }
@@ -1906,10 +1910,12 @@ class ClientOOutput extends Equatable {
   final ClientType clientType;
   final String? name;
   final String? notes;
+
   const ClientOOutput(
       {@RfControl<ClientType>() required this.clientType,
       @RfControl<String>() this.name,
       @RfControl<String>() this.notes});
+
   @override
   List<Object?> get props => [name, notes];
 }
@@ -1918,9 +1924,11 @@ class ClientOOutput extends Equatable {
 class AddressOOutput extends Equatable {
   final String street;
   final String? city;
+
   const AddressOOutput(
       {@RfControl(validators: [RequiredValidator()]) required this.street,
       @RfControl<String>() this.city});
+
   @override
   List<Object?> get props => [street, city];
 }
@@ -1997,7 +2005,7 @@ class ReactiveDeliveryListOFormArrayBuilder<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -2090,7 +2098,7 @@ class ReactiveDeliveryListOFormArrayBuilder2<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -2776,7 +2784,7 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -2870,7 +2878,7 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder2<
             .values
             .toList();
 
-        if (emptyBuilder != null) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
