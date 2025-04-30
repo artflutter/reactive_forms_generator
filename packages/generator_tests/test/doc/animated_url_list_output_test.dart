@@ -1034,7 +1034,7 @@ class ReactiveAnimatedUrlLisOFormArrayBuilder<
             .values
             .toList();
 
-        if(emptyBuilder != null && itemList.isEmpty) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1127,7 +1127,7 @@ class ReactiveAnimatedUrlLisOFormArrayBuilder2<
             .values
             .toList();
 
-        if(emptyBuilder != null && itemList.isEmpty) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

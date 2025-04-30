@@ -623,7 +623,7 @@ class ReactiveAnnotatelessFormArrayBuilder<
             .values
             .toList();
 
-        if(emptyBuilder != null && itemList.isEmpty) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -716,7 +716,7 @@ class ReactiveAnnotatelessFormArrayBuilder2<
             .values
             .toList();
 
-        if(emptyBuilder != null && itemList.isEmpty) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

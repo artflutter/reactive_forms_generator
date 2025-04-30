@@ -596,7 +596,7 @@ class ReactiveStatusListOFormArrayBuilder<ReactiveStatusListOFormArrayBuilderT,
             .values
             .toList();
 
-        if(emptyBuilder != null && itemList.isEmpty) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -688,7 +688,7 @@ class ReactiveStatusListOFormArrayBuilder2<ReactiveStatusListOFormArrayBuilderT,
             .values
             .toList();
 
-        if(emptyBuilder != null && itemList.isEmpty) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

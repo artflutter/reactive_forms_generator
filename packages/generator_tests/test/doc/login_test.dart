@@ -639,7 +639,7 @@ class ReactiveLoginFormArrayBuilder<ReactiveLoginFormArrayBuilderT>
             .values
             .toList();
 
-        if(emptyBuilder != null && itemList.isEmpty) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -731,7 +731,7 @@ class ReactiveLoginFormArrayBuilder2<ReactiveLoginFormArrayBuilderT>
             .values
             .toList();
 
-        if(emptyBuilder != null && itemList.isEmpty) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

@@ -1457,7 +1457,7 @@ class ReactiveFreezedClassOFormArrayBuilder<
             .values
             .toList();
 
-        if(emptyBuilder != null && itemList.isEmpty) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1550,7 +1550,7 @@ class ReactiveFreezedClassOFormArrayBuilder2<
             .values
             .toList();
 
-        if(emptyBuilder != null && itemList.isEmpty) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 

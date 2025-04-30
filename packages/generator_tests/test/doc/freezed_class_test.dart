@@ -1124,7 +1124,7 @@ class ReactiveFreezedClassFormArrayBuilder<
             .values
             .toList();
 
-        if(emptyBuilder != null && itemList.isEmpty) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
@@ -1217,7 +1217,7 @@ class ReactiveFreezedClassFormArrayBuilder2<
             .values
             .toList();
 
-        if(emptyBuilder != null && itemList.isEmpty) {
+        if (emptyBuilder != null && itemList.isEmpty) {
           return emptyBuilder!(context);
         }
 
