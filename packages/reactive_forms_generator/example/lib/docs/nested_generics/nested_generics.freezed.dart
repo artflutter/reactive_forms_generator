@@ -4,7 +4,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'product.dart';
+part of 'nested_generics.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -17,6 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$ProductDetails<P extends Product, C extends Cart> {
   @RfControl()
   String? get description;
+
   @Rf(output: false)
   Id<P, C>? get id;
 
@@ -52,6 +53,7 @@ abstract mixin class $ProductDetailsCopyWith<P extends Product, C extends Cart,
     $Res> {
   factory $ProductDetailsCopyWith(ProductDetails<P, C> value,
       $Res Function(ProductDetails<P, C>) _then) = _$ProductDetailsCopyWithImpl;
+
   @useResult
   $Res call(
       {@RfControl() String? description, @Rf(output: false) Id<P, C>? id});
@@ -150,6 +152,7 @@ abstract mixin class _$ProductDetailsCopyWith<P extends Product, C extends Cart,
   factory _$ProductDetailsCopyWith(_ProductDetails<P, C> value,
           $Res Function(_ProductDetails<P, C>) _then) =
       __$ProductDetailsCopyWithImpl;
+
   @override
   @useResult
   $Res call(
@@ -206,6 +209,7 @@ class __$ProductDetailsCopyWithImpl<P extends Product, C extends Cart, $Res>
 mixin _$Id<P extends Product, C extends Cart> {
   @RfControl()
   String? get companyName;
+
   @RfControl()
   String? get name;
 
@@ -239,6 +243,7 @@ mixin _$Id<P extends Product, C extends Cart> {
 abstract mixin class $IdCopyWith<P extends Product, C extends Cart, $Res> {
   factory $IdCopyWith(Id<P, C> value, $Res Function(Id<P, C>) _then) =
       _$IdCopyWithImpl;
+
   @useResult
   $Res call({@RfControl() String? companyName, @RfControl() String? name});
 }
@@ -316,6 +321,7 @@ abstract mixin class _$IdCopyWith<P extends Product, C extends Cart, $Res>
     implements $IdCopyWith<P, C, $Res> {
   factory _$IdCopyWith(_Id<P, C> value, $Res Function(_Id<P, C>) _then) =
       __$IdCopyWithImpl;
+
   @override
   @useResult
   $Res call({@RfControl() String? companyName, @RfControl() String? name});
@@ -353,6 +359,7 @@ class __$IdCopyWithImpl<P extends Product, C extends Cart, $Res>
 /// @nodoc
 mixin _$Product {
   String? get companyName;
+
   String? get name;
 
   /// Create a copy of Product
@@ -385,6 +392,7 @@ mixin _$Product {
 abstract mixin class $ProductCopyWith<$Res> {
   factory $ProductCopyWith(Product value, $Res Function(Product) _then) =
       _$ProductCopyWithImpl;
+
   @useResult
   $Res call({String? companyName, String? name});
 }
@@ -458,6 +466,7 @@ class _Product extends Product {
 abstract mixin class _$ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
   factory _$ProductCopyWith(_Product value, $Res Function(_Product) _then) =
       __$ProductCopyWithImpl;
+
   @override
   @useResult
   $Res call({String? companyName, String? name});
@@ -494,6 +503,7 @@ class __$ProductCopyWithImpl<$Res> implements _$ProductCopyWith<$Res> {
 /// @nodoc
 mixin _$Cart {
   Product? get product;
+
   String? get description;
 
   /// Create a copy of Cart
@@ -526,6 +536,7 @@ mixin _$Cart {
 abstract mixin class $CartCopyWith<$Res> {
   factory $CartCopyWith(Cart value, $Res Function(Cart) _then) =
       _$CartCopyWithImpl;
+
   @useResult
   $Res call({Product? product, String? description});
 
@@ -615,6 +626,7 @@ class _Cart extends Cart {
 abstract mixin class _$CartCopyWith<$Res> implements $CartCopyWith<$Res> {
   factory _$CartCopyWith(_Cart value, $Res Function(_Cart) _then) =
       __$CartCopyWithImpl;
+
   @override
   @useResult
   $Res call({Product? product, String? description});

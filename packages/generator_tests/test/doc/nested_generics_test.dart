@@ -1,17 +1,89 @@
-// coverage:ignore-file
+@Timeout(Duration(seconds: 145))
+import 'package:test/test.dart';
+
+import '../helpers.dart';
+
+const fileName = 'nested_generics';
+
+void main() {
+  group('reactive_forms_generator', () {
+    test(
+      'Nested generics',
+      () async {
+        return testGenerator(
+          fileName: fileName,
+          model: '''
+          import 'package:freezed_annotation/freezed_annotation.dart';
+          import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+
+          part '$fileName.freezed.dart';
+          part '$fileName.gform.dart';
+
+          @freezed
+          @Rf(output: false)
+          abstract class ProductDetails<P extends Product, C extends Cart>
+              with _\$ProductDetails<P, C> {
+            factory ProductDetails({
+              @RfControl() String? description,
+              @Rf(output: false) Id<P, C>? id,
+            }) = _ProductDetails;
+          
+            ProductDetails._();
+          }
+          
+          @freezed
+          @Rf(output: false)
+          @RfGroup()
+          abstract class Id<P extends Product, C extends Cart> with _\$Id<P, C> {
+            factory Id({
+              @RfControl() String? companyName,
+              @RfControl() String? name,
+            }) = _Id;
+          
+            Id._();
+          }
+          
+          @freezed
+          abstract class Product with _\$Product {
+            const factory Product({
+              String? companyName,
+              String? name,
+            }) = _Product;
+          
+            const Product._();
+          }
+          
+          @freezed
+          abstract class Cart with _\$Cart {
+            const factory Cart({
+              Product? product,
+              String? description,
+            }) = _Cart;
+          
+            const Cart._();
+          }
+          ''',
+          generatedFile: generatedFile,
+        );
+      },
+    );
+  });
+}
+
+const generatedFile = r'''// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'product_output.dart';
+part of 'nested_generics.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-class ReactiveProductDetailsOFormConsumer<P extends Product, C extends Cart>
+class ReactiveProductDetailsFormConsumer<P extends Product, C extends Cart>
     extends StatelessWidget {
-  const ReactiveProductDetailsOFormConsumer({
+  const ReactiveProductDetailsFormConsumer({
     Key? key,
     required this.builder,
     this.child,
@@ -20,22 +92,22 @@ class ReactiveProductDetailsOFormConsumer<P extends Product, C extends Cart>
   final Widget? child;
 
   final Widget Function(BuildContext context,
-      ProductDetailsOForm<P, C> formModel, Widget? child) builder;
+      ProductDetailsForm<P, C> formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveProductDetailsOForm.of<P, C>(context);
+    final formModel = ReactiveProductDetailsForm.of<P, C>(context);
 
-    if (formModel is! ProductDetailsOForm<P, C>) {
+    if (formModel is! ProductDetailsForm<P, C>) {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, formModel, child);
   }
 }
 
-class ProductDetailsOFormInheritedStreamer<P extends Product, C extends Cart>
+class ProductDetailsFormInheritedStreamer<P extends Product, C extends Cart>
     extends InheritedStreamer<dynamic> {
-  const ProductDetailsOFormInheritedStreamer({
+  const ProductDetailsFormInheritedStreamer({
     Key? key,
     required this.form,
     required Stream<dynamic> stream,
@@ -46,12 +118,12 @@ class ProductDetailsOFormInheritedStreamer<P extends Product, C extends Cart>
           key: key,
         );
 
-  final ProductDetailsOForm<P, C> form;
+  final ProductDetailsForm<P, C> form;
 }
 
-class ReactiveProductDetailsOForm<P extends Product, C extends Cart>
+class ReactiveProductDetailsForm<P extends Product, C extends Cart>
     extends StatelessWidget {
-  const ReactiveProductDetailsOForm({
+  const ReactiveProductDetailsForm({
     Key? key,
     required this.form,
     required this.child,
@@ -61,33 +133,33 @@ class ReactiveProductDetailsOForm<P extends Product, C extends Cart>
 
   final Widget child;
 
-  final ProductDetailsOForm<P, C> form;
+  final ProductDetailsForm<P, C> form;
 
   final bool Function(FormGroup formGroup)? canPop;
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static ProductDetailsOForm<P, C>? of<P extends Product, C extends Cart>(
+  static ProductDetailsForm<P, C>? of<P extends Product, C extends Cart>(
     BuildContext context, {
     bool listen = true,
   }) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
-              ProductDetailsOFormInheritedStreamer<P, C>>()
+              ProductDetailsFormInheritedStreamer<P, C>>()
           ?.form;
     }
 
     final element = context.getElementForInheritedWidgetOfExactType<
-        ProductDetailsOFormInheritedStreamer<P, C>>();
+        ProductDetailsFormInheritedStreamer<P, C>>();
     return element == null
         ? null
-        : (element.widget as ProductDetailsOFormInheritedStreamer<P, C>).form;
+        : (element.widget as ProductDetailsFormInheritedStreamer<P, C>).form;
   }
 
   @override
   Widget build(BuildContext context) {
-    return ProductDetailsOFormInheritedStreamer(
+    return ProductDetailsFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
@@ -99,19 +171,19 @@ class ReactiveProductDetailsOForm<P extends Product, C extends Cart>
   }
 }
 
-extension ReactiveReactiveProductDetailsOFormExt on BuildContext {
-  ProductDetailsOForm<P, C>?
-      productDetailsOFormWatch<P extends Product, C extends Cart>() =>
-          ReactiveProductDetailsOForm.of<P, C>(this);
+extension ReactiveReactiveProductDetailsFormExt on BuildContext {
+  ProductDetailsForm<P, C>?
+      productDetailsFormWatch<P extends Product, C extends Cart>() =>
+          ReactiveProductDetailsForm.of<P, C>(this);
 
-  ProductDetailsOForm<P, C>?
-      productDetailsOFormRead<P extends Product, C extends Cart>() =>
-          ReactiveProductDetailsOForm.of<P, C>(this, listen: false);
+  ProductDetailsForm<P, C>?
+      productDetailsFormRead<P extends Product, C extends Cart>() =>
+          ReactiveProductDetailsForm.of<P, C>(this, listen: false);
 }
 
-class ProductDetailsOFormBuilder<P extends Product, C extends Cart>
+class ProductDetailsFormBuilder<P extends Product, C extends Cart>
     extends StatefulWidget {
-  const ProductDetailsOFormBuilder({
+  const ProductDetailsFormBuilder({
     Key? key,
     this.model,
     this.child,
@@ -121,7 +193,7 @@ class ProductDetailsOFormBuilder<P extends Product, C extends Cart>
     this.initState,
   }) : super(key: key);
 
-  final ProductDetailsO<P, C>? model;
+  final ProductDetails<P, C>? model;
 
   final Widget? child;
 
@@ -130,26 +202,26 @@ class ProductDetailsOFormBuilder<P extends Product, C extends Cart>
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(BuildContext context,
-      ProductDetailsOForm<P, C> formModel, Widget? child) builder;
+      ProductDetailsForm<P, C> formModel, Widget? child) builder;
 
-  final void Function(
-      BuildContext context, ProductDetailsOForm<P, C> formModel)? initState;
+  final void Function(BuildContext context, ProductDetailsForm<P, C> formModel)?
+      initState;
 
   @override
-  _ProductDetailsOFormBuilderState<P, C> createState() =>
-      _ProductDetailsOFormBuilderState<P, C>();
+  _ProductDetailsFormBuilderState<P, C> createState() =>
+      _ProductDetailsFormBuilderState<P, C>();
 }
 
-class _ProductDetailsOFormBuilderState<P extends Product, C extends Cart>
-    extends State<ProductDetailsOFormBuilder<P, C>> {
-  late ProductDetailsOForm<P, C> _formModel;
+class _ProductDetailsFormBuilderState<P extends Product, C extends Cart>
+    extends State<ProductDetailsFormBuilder<P, C>> {
+  late ProductDetailsForm<P, C> _formModel;
 
   StreamSubscription<LogRecord>? _logSubscription;
 
   @override
   void initState() {
-    _formModel = ProductDetailsOForm<P, C>(
-        ProductDetailsOForm.formElements<P, C>(widget.model), null);
+    _formModel = ProductDetailsForm<P, C>(
+        ProductDetailsForm.formElements<P, C>(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -157,7 +229,7 @@ class _ProductDetailsOFormBuilderState<P extends Product, C extends Cart>
 
     widget.initState?.call(context, _formModel);
 
-    _logSubscription = _logProductDetailsOForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logProductDetailsForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -189,7 +261,7 @@ class _ProductDetailsOFormBuilderState<P extends Product, C extends Cart>
   }
 
   @override
-  void didUpdateWidget(covariant ProductDetailsOFormBuilder<P, C> oldWidget) {
+  void didUpdateWidget(covariant ProductDetailsFormBuilder<P, C> oldWidget) {
     if (widget.model != oldWidget.model) {
       _formModel.updateValue(widget.model);
     }
@@ -206,7 +278,7 @@ class _ProductDetailsOFormBuilderState<P extends Product, C extends Cart>
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveProductDetailsOForm(
+    return ReactiveProductDetailsForm(
       key: ObjectKey(_formModel),
       form: _formModel,
       // canPop: widget.canPop,
@@ -223,11 +295,11 @@ class _ProductDetailsOFormBuilderState<P extends Product, C extends Cart>
   }
 }
 
-final _logProductDetailsOForm = Logger.detached('ProductDetailsOForm<P, C>');
+final _logProductDetailsForm = Logger.detached('ProductDetailsForm<P, C>');
 
-class ProductDetailsOForm<P extends Product, C extends Cart>
-    implements FormModel<ProductDetailsO<P, C>, ProductDetailsOOutput<P, C>> {
-  ProductDetailsOForm(
+class ProductDetailsForm<P extends Product, C extends Cart>
+    implements FormModel<ProductDetails<P, C>, ProductDetails<P, C>> {
+  ProductDetailsForm(
     this.form,
     this.path,
   );
@@ -248,11 +320,11 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
 
   String? get _descriptionValue => descriptionControl.value;
 
-  IdOOutput<P, C>? get _idValue => idForm.model;
+  Id<P, C>? get _idValue => idForm.model;
 
   String? get _descriptionRawValue => descriptionControl.value;
 
-  IdO<P, C>? get _idRawValue => idForm.rawModel;
+  Id<P, C>? get _idRawValue => idForm.rawModel;
 
   @Deprecated(
       'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
@@ -350,11 +422,11 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
   }
 
   void idValueUpdate(
-    IdO<P, C>? value, {
+    Id<P, C>? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl.updateValue(IdOForm.formElements(value).rawValue,
+    idControl.updateValue(IdForm.formElements(value).rawValue,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -368,11 +440,11 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
   }
 
   void idValuePatch(
-    IdO<P, C>? value, {
+    Id<P, C>? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl.updateValue(IdOForm.formElements(value).rawValue,
+    idControl.updateValue(IdForm.formElements(value).rawValue,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -392,14 +464,14 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
       );
 
   void idValueReset(
-    IdO<P, C>? value, {
+    Id<P, C>? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
       idControl.reset(
-          value: IdOForm.formElements(value).rawValue,
+          value: IdForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
 
@@ -408,7 +480,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
 
   FormGroup get idControl => form.control(idControlPath()) as FormGroup;
 
-  IdOForm<P, C> get idForm => IdOForm(form, pathBuilder('id'));
+  IdForm<P, C> get idForm => IdForm(form, pathBuilder('id'));
 
   void descriptionSetDisabled(
     bool disabled, {
@@ -447,24 +519,22 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
   }
 
   @override
-  @protected
-  ProductDetailsOOutput<P, C> get model {
+  ProductDetails<P, C> get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      _logProductDetailsOForm.warning(
+      _logProductDetailsForm.warning(
         'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
         null,
         StackTrace.current,
       );
     }
-    return ProductDetailsOOutput<P, C>(
-        description: _descriptionValue, id: _idValue);
+    return ProductDetails<P, C>(description: _descriptionValue, id: _idValue);
   }
 
   @override
-  ProductDetailsO<P, C> get rawModel {
-    return ProductDetailsO<P, C>(
+  ProductDetails<P, C> get rawModel {
+    return ProductDetails<P, C>(
         description: _descriptionRawValue, id: _idRawValue);
   }
 
@@ -503,28 +573,28 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
   }
 
   @override
-  bool equalsTo(ProductDetailsO<P, C>? other) {
+  bool equalsTo(ProductDetails<P, C>? other) {
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
       currentForm is FormControlCollection<dynamic>
           ? currentForm.rawValue
           : currentForm.value,
-      ProductDetailsOForm.formElements(other).rawValue,
+      ProductDetailsForm.formElements(other).rawValue,
     );
   }
 
   @override
   void submit({
-    required void Function(ProductDetailsOOutput<P, C> model) onValid,
+    required void Function(ProductDetails<P, C> model) onValid,
     void Function()? onNotValid,
   }) {
     currentForm.markAllAsTouched();
     if (currentForm.valid) {
       onValid(model);
     } else {
-      _logProductDetailsOForm.info('Errors');
-      _logProductDetailsOForm.info('┗━━ ${form.errors}');
+      _logProductDetailsForm.info('Errors');
+      _logProductDetailsForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -535,16 +605,16 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
 
   @override
   void updateValue(
-    ProductDetailsO<P, C>? value, {
+    ProductDetails<P, C>? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ProductDetailsOForm.formElements(value).rawValue,
+      form.updateValue(ProductDetailsForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
   void reset({
-    ProductDetailsO<P, C>? value,
+    ProductDetails<P, C>? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
@@ -557,16 +627,16 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
       [path, pathItem].whereType<String>().join(".");
 
   static FormGroup formElements<P extends Product, C extends Cart>(
-          ProductDetailsO<P, C>? productDetailsO) =>
+          ProductDetails<P, C>? productDetails) =>
       FormGroup({
         descriptionControlName: FormControl<String>(
-            value: productDetailsO?.description,
+            value: productDetails?.description,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        idControlName: IdOForm.formElements(productDetailsO?.id)
+        idControlName: IdForm.formElements(productDetails?.id)
       },
           validators: [],
           asyncValidators: [],
@@ -574,11 +644,11 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
           disabled: false);
 }
 
-final _logIdOForm = Logger.detached('IdOForm<P, C>');
+final _logIdForm = Logger.detached('IdForm<P, C>');
 
-class IdOForm<P extends Product, C extends Cart>
-    implements FormModel<IdO<P, C>, IdOOutput<P, C>> {
-  IdOForm(
+class IdForm<P extends Product, C extends Cart>
+    implements FormModel<Id<P, C>, Id<P, C>> {
+  IdForm(
     this.form,
     this.path,
   );
@@ -800,23 +870,22 @@ class IdOForm<P extends Product, C extends Cart>
   }
 
   @override
-  @protected
-  IdOOutput<P, C> get model {
+  Id<P, C> get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      _logIdOForm.warning(
+      _logIdForm.warning(
         'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
         null,
         StackTrace.current,
       );
     }
-    return IdOOutput<P, C>(companyName: _companyNameValue, name: _nameValue);
+    return Id<P, C>(companyName: _companyNameValue, name: _nameValue);
   }
 
   @override
-  IdO<P, C> get rawModel {
-    return IdO<P, C>(companyName: _companyNameRawValue, name: _nameRawValue);
+  Id<P, C> get rawModel {
+    return Id<P, C>(companyName: _companyNameRawValue, name: _nameRawValue);
   }
 
   @override
@@ -852,28 +921,28 @@ class IdOForm<P extends Product, C extends Cart>
   }
 
   @override
-  bool equalsTo(IdO<P, C>? other) {
+  bool equalsTo(Id<P, C>? other) {
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
       currentForm is FormControlCollection<dynamic>
           ? currentForm.rawValue
           : currentForm.value,
-      IdOForm.formElements(other).rawValue,
+      IdForm.formElements(other).rawValue,
     );
   }
 
   @override
   void submit({
-    required void Function(IdOOutput<P, C> model) onValid,
+    required void Function(Id<P, C> model) onValid,
     void Function()? onNotValid,
   }) {
     currentForm.markAllAsTouched();
     if (currentForm.valid) {
       onValid(model);
     } else {
-      _logIdOForm.info('Errors');
-      _logIdOForm.info('┗━━ ${form.errors}');
+      _logIdForm.info('Errors');
+      _logIdForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -884,16 +953,16 @@ class IdOForm<P extends Product, C extends Cart>
 
   @override
   void updateValue(
-    IdO<P, C>? value, {
+    Id<P, C>? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(IdOForm.formElements(value).rawValue,
+      form.updateValue(IdForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
   void reset({
-    IdO<P, C>? value,
+    Id<P, C>? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
@@ -906,17 +975,17 @@ class IdOForm<P extends Product, C extends Cart>
       [path, pathItem].whereType<String>().join(".");
 
   static FormGroup formElements<P extends Product, C extends Cart>(
-          IdO<P, C>? idO) =>
+          Id<P, C>? id) =>
       FormGroup({
         companyNameControlName: FormControl<String>(
-            value: idO?.companyName,
+            value: id?.companyName,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         nameControlName: FormControl<String>(
-            value: idO?.name,
+            value: id?.name,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -929,34 +998,11 @@ class IdOForm<P extends Product, C extends Cart>
           disabled: false);
 }
 
-@freezed
-@Rf(output: true)
-abstract class ProductDetailsOOutput<P extends Product, C extends Cart>
-    with _$ProductDetailsOOutput<P, C> {
-  factory ProductDetailsOOutput(
-      {@RfControl() String? description,
-      @Rf(output: false) IdOOutput<P, C>? id}) = _ProductDetailsOOutput;
-
-  ProductDetailsOOutput._();
-}
-
-@freezed
-@Rf(output: false)
-@RfGroup()
-abstract class IdOOutput<P extends Product, C extends Cart>
-    with _$IdOOutput<P, C> {
-  factory IdOOutput(
-      {@RfControl() String? companyName,
-      @RfControl() String? name}) = _IdOOutput;
-
-  IdOOutput._();
-}
-
-class ReactiveProductDetailsOFormArrayBuilder<
-    ReactiveProductDetailsOFormArrayBuilderT,
+class ReactiveProductDetailsFormArrayBuilder<
+    ReactiveProductDetailsFormArrayBuilderT,
     P extends Product,
     C extends Cart> extends StatelessWidget {
-  const ReactiveProductDetailsOFormArrayBuilder({
+  const ReactiveProductDetailsFormArrayBuilder({
     Key? key,
     this.control,
     this.formControl,
@@ -968,62 +1014,61 @@ class ReactiveProductDetailsOFormArrayBuilder<
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<ReactiveProductDetailsOFormArrayBuilderT>? formControl;
+  final FormArray<ReactiveProductDetailsFormArrayBuilderT>? formControl;
 
-  final FormArray<ReactiveProductDetailsOFormArrayBuilderT>? Function(
-      ProductDetailsOForm<P, C> formModel)? control;
+  final FormArray<ReactiveProductDetailsFormArrayBuilderT>? Function(
+      ProductDetailsForm<P, C> formModel)? control;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
-      ProductDetailsOForm<P, C> formModel)? builder;
+      ProductDetailsForm<P, C> formModel)? builder;
 
   final Widget Function(
       BuildContext context,
       int i,
-      FormControl<ReactiveProductDetailsOFormArrayBuilderT> control,
-      ReactiveProductDetailsOFormArrayBuilderT? item,
-      ProductDetailsOForm<P, C> formModel) itemBuilder;
+      FormControl<ReactiveProductDetailsFormArrayBuilderT> control,
+      ReactiveProductDetailsFormArrayBuilderT? item,
+      ProductDetailsForm<P, C> formModel) itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-          FormControl<ReactiveProductDetailsOFormArrayBuilderT> control)?
+          FormControl<ReactiveProductDetailsFormArrayBuilderT> control)?
       controlFilter;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveProductDetailsOForm.of<P, C>(context);
+    final formModel = ReactiveProductDetailsForm.of<P, C>(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveProductDetailsOFormArrayBuilderT>(
+    return ReactiveFormArray<ReactiveProductDetailsFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
-                controlFilter?.call(e
-                    as FormControl<ReactiveProductDetailsOFormArrayBuilderT>) ??
+                controlFilter?.call(
+                  e as FormControl<ReactiveProductDetailsFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder(
                   context,
-                  i,
-                  formArray.controls[i]
-                      as FormControl<ReactiveProductDetailsOFormArrayBuilderT>,
-                  item,
+                  item.$1,
+                  formArray.controls[item.$1]
+                      as FormControl<ReactiveProductDetailsFormArrayBuilderT>,
+                  item.$2.value,
                   formModel,
                 ),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {
@@ -1041,11 +1086,11 @@ class ReactiveProductDetailsOFormArrayBuilder<
   }
 }
 
-class ReactiveProductDetailsOFormArrayBuilder2<
-    ReactiveProductDetailsOFormArrayBuilderT,
+class ReactiveProductDetailsFormArrayBuilder2<
+    ReactiveProductDetailsFormArrayBuilderT,
     P extends Product,
     C extends Cart> extends StatelessWidget {
-  const ReactiveProductDetailsOFormArrayBuilder2({
+  const ReactiveProductDetailsFormArrayBuilder2({
     Key? key,
     this.control,
     this.formControl,
@@ -1057,68 +1102,67 @@ class ReactiveProductDetailsOFormArrayBuilder2<
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<ReactiveProductDetailsOFormArrayBuilderT>? formControl;
+  final FormArray<ReactiveProductDetailsFormArrayBuilderT>? formControl;
 
-  final FormArray<ReactiveProductDetailsOFormArrayBuilderT>? Function(
-      ProductDetailsOForm<P, C> formModel)? control;
+  final FormArray<ReactiveProductDetailsFormArrayBuilderT>? Function(
+      ProductDetailsForm<P, C> formModel)? control;
 
   final Widget Function(
       ({
         BuildContext context,
         List<Widget> itemList,
-        ProductDetailsOForm<P, C> formModel
+        ProductDetailsForm<P, C> formModel
       }) params)? builder;
 
   final Widget Function(
       ({
         BuildContext context,
         int i,
-        FormControl<ReactiveProductDetailsOFormArrayBuilderT> control,
-        ReactiveProductDetailsOFormArrayBuilderT? item,
-        ProductDetailsOForm<P, C> formModel
+        FormControl<ReactiveProductDetailsFormArrayBuilderT> control,
+        ReactiveProductDetailsFormArrayBuilderT? item,
+        ProductDetailsForm<P, C> formModel
       }) params) itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-          FormControl<ReactiveProductDetailsOFormArrayBuilderT> control)?
+          FormControl<ReactiveProductDetailsFormArrayBuilderT> control)?
       controlFilter;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveProductDetailsOForm.of<P, C>(context);
+    final formModel = ReactiveProductDetailsForm.of<P, C>(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveProductDetailsOFormArrayBuilderT>(
+    return ReactiveFormArray<ReactiveProductDetailsFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
-                controlFilter?.call(e
-                    as FormControl<ReactiveProductDetailsOFormArrayBuilderT>) ??
+                controlFilter?.call(
+                  e as FormControl<ReactiveProductDetailsFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder((
                   context: context,
-                  i: i,
-                  control: formArray.controls[i]
-                      as FormControl<ReactiveProductDetailsOFormArrayBuilderT>,
-                  item: item,
+                  i: item.$1,
+                  control: formArray.controls[item.$1]
+                      as FormControl<ReactiveProductDetailsFormArrayBuilderT>,
+                  item: item.$2.value,
                   formModel: formModel
                 )),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {
@@ -1136,11 +1180,11 @@ class ReactiveProductDetailsOFormArrayBuilder2<
   }
 }
 
-class ReactiveProductDetailsOFormFormGroupArrayBuilder<
-    ReactiveProductDetailsOFormFormGroupArrayBuilderT,
+class ReactiveProductDetailsFormFormGroupArrayBuilder<
+    ReactiveProductDetailsFormFormGroupArrayBuilderT,
     P extends Product,
     C extends Cart> extends StatelessWidget {
-  const ReactiveProductDetailsOFormFormGroupArrayBuilder({
+  const ReactiveProductDetailsFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
@@ -1151,24 +1195,24 @@ class ReactiveProductDetailsOFormFormGroupArrayBuilder<
         super(key: key);
 
   final ExtendedControl<List<Map<String, Object?>?>,
-      List<ReactiveProductDetailsOFormFormGroupArrayBuilderT>>? extended;
+      List<ReactiveProductDetailsFormFormGroupArrayBuilderT>>? extended;
 
   final ExtendedControl<List<Map<String, Object?>?>,
-          List<ReactiveProductDetailsOFormFormGroupArrayBuilderT>>
-      Function(ProductDetailsOForm<P, C> formModel)? getExtended;
+          List<ReactiveProductDetailsFormFormGroupArrayBuilderT>>
+      Function(ProductDetailsForm<P, C> formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
-      ProductDetailsOForm<P, C> formModel)? builder;
+      ProductDetailsForm<P, C> formModel)? builder;
 
   final Widget Function(
       BuildContext context,
       int i,
-      ReactiveProductDetailsOFormFormGroupArrayBuilderT? item,
-      ProductDetailsOForm<P, C> formModel) itemBuilder;
+      ReactiveProductDetailsFormFormGroupArrayBuilderT? item,
+      ProductDetailsForm<P, C> formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveProductDetailsOForm.of<P, C>(context);
+    final formModel = ReactiveProductDetailsForm.of<P, C>(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
@@ -1180,7 +1224,7 @@ class ReactiveProductDetailsOFormFormGroupArrayBuilder<
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
         final itemList = (value.value() ??
-                <ReactiveProductDetailsOFormFormGroupArrayBuilderT>[])
+                <ReactiveProductDetailsFormFormGroupArrayBuilderT>[])
             .asMap()
             .map((i, item) => MapEntry(
                   i,
@@ -1205,9 +1249,9 @@ class ReactiveProductDetailsOFormFormGroupArrayBuilder<
   }
 }
 
-class ReactiveIdOFormConsumer<P extends Product, C extends Cart>
+class ReactiveIdFormConsumer<P extends Product, C extends Cart>
     extends StatelessWidget {
-  const ReactiveIdOFormConsumer({
+  const ReactiveIdFormConsumer({
     Key? key,
     required this.builder,
     this.child,
@@ -1216,22 +1260,22 @@ class ReactiveIdOFormConsumer<P extends Product, C extends Cart>
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, IdOForm<P, C> formModel, Widget? child) builder;
+      BuildContext context, IdForm<P, C> formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveIdOForm.of<P, C>(context);
+    final formModel = ReactiveIdForm.of<P, C>(context);
 
-    if (formModel is! IdOForm<P, C>) {
+    if (formModel is! IdForm<P, C>) {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, formModel, child);
   }
 }
 
-class IdOFormInheritedStreamer<P extends Product, C extends Cart>
+class IdFormInheritedStreamer<P extends Product, C extends Cart>
     extends InheritedStreamer<dynamic> {
-  const IdOFormInheritedStreamer({
+  const IdFormInheritedStreamer({
     Key? key,
     required this.form,
     required Stream<dynamic> stream,
@@ -1242,12 +1286,12 @@ class IdOFormInheritedStreamer<P extends Product, C extends Cart>
           key: key,
         );
 
-  final IdOForm<P, C> form;
+  final IdForm<P, C> form;
 }
 
-class ReactiveIdOForm<P extends Product, C extends Cart>
+class ReactiveIdForm<P extends Product, C extends Cart>
     extends StatelessWidget {
-  const ReactiveIdOForm({
+  const ReactiveIdForm({
     Key? key,
     required this.form,
     required this.child,
@@ -1257,32 +1301,32 @@ class ReactiveIdOForm<P extends Product, C extends Cart>
 
   final Widget child;
 
-  final IdOForm<P, C> form;
+  final IdForm<P, C> form;
 
   final bool Function(FormGroup formGroup)? canPop;
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static IdOForm<P, C>? of<P extends Product, C extends Cart>(
+  static IdForm<P, C>? of<P extends Product, C extends Cart>(
     BuildContext context, {
     bool listen = true,
   }) {
     if (listen) {
       return context
-          .dependOnInheritedWidgetOfExactType<IdOFormInheritedStreamer<P, C>>()
+          .dependOnInheritedWidgetOfExactType<IdFormInheritedStreamer<P, C>>()
           ?.form;
     }
 
     final element = context.getElementForInheritedWidgetOfExactType<
-        IdOFormInheritedStreamer<P, C>>();
+        IdFormInheritedStreamer<P, C>>();
     return element == null
         ? null
-        : (element.widget as IdOFormInheritedStreamer<P, C>).form;
+        : (element.widget as IdFormInheritedStreamer<P, C>).form;
   }
 
   @override
   Widget build(BuildContext context) {
-    return IdOFormInheritedStreamer(
+    return IdFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
@@ -1294,16 +1338,16 @@ class ReactiveIdOForm<P extends Product, C extends Cart>
   }
 }
 
-extension ReactiveReactiveIdOFormExt on BuildContext {
-  IdOForm<P, C>? idOFormWatch<P extends Product, C extends Cart>() =>
-      ReactiveIdOForm.of<P, C>(this);
+extension ReactiveReactiveIdFormExt on BuildContext {
+  IdForm<P, C>? idFormWatch<P extends Product, C extends Cart>() =>
+      ReactiveIdForm.of<P, C>(this);
 
-  IdOForm<P, C>? idOFormRead<P extends Product, C extends Cart>() =>
-      ReactiveIdOForm.of<P, C>(this, listen: false);
+  IdForm<P, C>? idFormRead<P extends Product, C extends Cart>() =>
+      ReactiveIdForm.of<P, C>(this, listen: false);
 }
 
-class IdOFormBuilder<P extends Product, C extends Cart> extends StatefulWidget {
-  const IdOFormBuilder({
+class IdFormBuilder<P extends Product, C extends Cart> extends StatefulWidget {
+  const IdFormBuilder({
     Key? key,
     this.model,
     this.child,
@@ -1313,7 +1357,7 @@ class IdOFormBuilder<P extends Product, C extends Cart> extends StatefulWidget {
     this.initState,
   }) : super(key: key);
 
-  final IdO<P, C>? model;
+  final Id<P, C>? model;
 
   final Widget? child;
 
@@ -1322,23 +1366,23 @@ class IdOFormBuilder<P extends Product, C extends Cart> extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-      BuildContext context, IdOForm<P, C> formModel, Widget? child) builder;
+      BuildContext context, IdForm<P, C> formModel, Widget? child) builder;
 
-  final void Function(BuildContext context, IdOForm<P, C> formModel)? initState;
+  final void Function(BuildContext context, IdForm<P, C> formModel)? initState;
 
   @override
-  _IdOFormBuilderState<P, C> createState() => _IdOFormBuilderState<P, C>();
+  _IdFormBuilderState<P, C> createState() => _IdFormBuilderState<P, C>();
 }
 
-class _IdOFormBuilderState<P extends Product, C extends Cart>
-    extends State<IdOFormBuilder<P, C>> {
-  late IdOForm<P, C> _formModel;
+class _IdFormBuilderState<P extends Product, C extends Cart>
+    extends State<IdFormBuilder<P, C>> {
+  late IdForm<P, C> _formModel;
 
   StreamSubscription<LogRecord>? _logSubscription;
 
   @override
   void initState() {
-    _formModel = IdOForm<P, C>(IdOForm.formElements<P, C>(widget.model), null);
+    _formModel = IdForm<P, C>(IdForm.formElements<P, C>(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -1346,7 +1390,7 @@ class _IdOFormBuilderState<P extends Product, C extends Cart>
 
     widget.initState?.call(context, _formModel);
 
-    _logSubscription = _logIdOForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logIdForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -1378,7 +1422,7 @@ class _IdOFormBuilderState<P extends Product, C extends Cart>
   }
 
   @override
-  void didUpdateWidget(covariant IdOFormBuilder<P, C> oldWidget) {
+  void didUpdateWidget(covariant IdFormBuilder<P, C> oldWidget) {
     if (widget.model != oldWidget.model) {
       _formModel.updateValue(widget.model);
     }
@@ -1395,7 +1439,7 @@ class _IdOFormBuilderState<P extends Product, C extends Cart>
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveIdOForm(
+    return ReactiveIdForm(
       key: ObjectKey(_formModel),
       form: _formModel,
       // canPop: widget.canPop,
@@ -1412,9 +1456,9 @@ class _IdOFormBuilderState<P extends Product, C extends Cart>
   }
 }
 
-class ReactiveIdOFormArrayBuilder<ReactiveIdOFormArrayBuilderT,
-    P extends Product, C extends Cart> extends StatelessWidget {
-  const ReactiveIdOFormArrayBuilder({
+class ReactiveIdFormArrayBuilder<ReactiveIdFormArrayBuilderT, P extends Product,
+    C extends Cart> extends StatelessWidget {
+  const ReactiveIdFormArrayBuilder({
     Key? key,
     this.control,
     this.formControl,
@@ -1426,62 +1470,61 @@ class ReactiveIdOFormArrayBuilder<ReactiveIdOFormArrayBuilderT,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<ReactiveIdOFormArrayBuilderT>? formControl;
+  final FormArray<ReactiveIdFormArrayBuilderT>? formControl;
 
-  final FormArray<ReactiveIdOFormArrayBuilderT>? Function(
-      IdOForm<P, C> formModel)? control;
+  final FormArray<ReactiveIdFormArrayBuilderT>? Function(
+      IdForm<P, C> formModel)? control;
 
   final Widget Function(
-          BuildContext context, List<Widget> itemList, IdOForm<P, C> formModel)?
+          BuildContext context, List<Widget> itemList, IdForm<P, C> formModel)?
       builder;
 
   final Widget Function(
       BuildContext context,
       int i,
-      FormControl<ReactiveIdOFormArrayBuilderT> control,
-      ReactiveIdOFormArrayBuilderT? item,
-      IdOForm<P, C> formModel) itemBuilder;
+      FormControl<ReactiveIdFormArrayBuilderT> control,
+      ReactiveIdFormArrayBuilderT? item,
+      IdForm<P, C> formModel) itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
-  final bool Function(FormControl<ReactiveIdOFormArrayBuilderT> control)?
+  final bool Function(FormControl<ReactiveIdFormArrayBuilderT> control)?
       controlFilter;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveIdOForm.of<P, C>(context);
+    final formModel = ReactiveIdForm.of<P, C>(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveIdOFormArrayBuilderT>(
+    return ReactiveFormArray<ReactiveIdFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
-                controlFilter
-                    ?.call(e as FormControl<ReactiveIdOFormArrayBuilderT>) ??
+                controlFilter?.call(
+                  e as FormControl<ReactiveIdFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder(
                   context,
-                  i,
-                  formArray.controls[i]
-                      as FormControl<ReactiveIdOFormArrayBuilderT>,
-                  item,
+                  item.$1,
+                  formArray.controls[item.$1]
+                      as FormControl<ReactiveIdFormArrayBuilderT>,
+                  item.$2.value,
                   formModel,
                 ),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {
@@ -1499,9 +1542,9 @@ class ReactiveIdOFormArrayBuilder<ReactiveIdOFormArrayBuilderT,
   }
 }
 
-class ReactiveIdOFormArrayBuilder2<ReactiveIdOFormArrayBuilderT,
+class ReactiveIdFormArrayBuilder2<ReactiveIdFormArrayBuilderT,
     P extends Product, C extends Cart> extends StatelessWidget {
-  const ReactiveIdOFormArrayBuilder2({
+  const ReactiveIdFormArrayBuilder2({
     Key? key,
     this.control,
     this.formControl,
@@ -1513,67 +1556,66 @@ class ReactiveIdOFormArrayBuilder2<ReactiveIdOFormArrayBuilderT,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<ReactiveIdOFormArrayBuilderT>? formControl;
+  final FormArray<ReactiveIdFormArrayBuilderT>? formControl;
 
-  final FormArray<ReactiveIdOFormArrayBuilderT>? Function(
-      IdOForm<P, C> formModel)? control;
+  final FormArray<ReactiveIdFormArrayBuilderT>? Function(
+      IdForm<P, C> formModel)? control;
 
   final Widget Function(
       ({
         BuildContext context,
         List<Widget> itemList,
-        IdOForm<P, C> formModel
+        IdForm<P, C> formModel
       }) params)? builder;
 
   final Widget Function(
       ({
         BuildContext context,
         int i,
-        FormControl<ReactiveIdOFormArrayBuilderT> control,
-        ReactiveIdOFormArrayBuilderT? item,
-        IdOForm<P, C> formModel
+        FormControl<ReactiveIdFormArrayBuilderT> control,
+        ReactiveIdFormArrayBuilderT? item,
+        IdForm<P, C> formModel
       }) params) itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
-  final bool Function(FormControl<ReactiveIdOFormArrayBuilderT> control)?
+  final bool Function(FormControl<ReactiveIdFormArrayBuilderT> control)?
       controlFilter;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveIdOForm.of<P, C>(context);
+    final formModel = ReactiveIdForm.of<P, C>(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveIdOFormArrayBuilderT>(
+    return ReactiveFormArray<ReactiveIdFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
-                controlFilter
-                    ?.call(e as FormControl<ReactiveIdOFormArrayBuilderT>) ??
+                controlFilter?.call(
+                  e as FormControl<ReactiveIdFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder((
                   context: context,
-                  i: i,
-                  control: formArray.controls[i]
-                      as FormControl<ReactiveIdOFormArrayBuilderT>,
-                  item: item,
+                  i: item.$1,
+                  control: formArray.controls[item.$1]
+                      as FormControl<ReactiveIdFormArrayBuilderT>,
+                  item: item.$2.value,
                   formModel: formModel
                 )),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {
@@ -1591,11 +1633,9 @@ class ReactiveIdOFormArrayBuilder2<ReactiveIdOFormArrayBuilderT,
   }
 }
 
-class ReactiveIdOFormFormGroupArrayBuilder<
-    ReactiveIdOFormFormGroupArrayBuilderT,
-    P extends Product,
-    C extends Cart> extends StatelessWidget {
-  const ReactiveIdOFormFormGroupArrayBuilder({
+class ReactiveIdFormFormGroupArrayBuilder<ReactiveIdFormFormGroupArrayBuilderT,
+    P extends Product, C extends Cart> extends StatelessWidget {
+  const ReactiveIdFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
@@ -1606,25 +1646,25 @@ class ReactiveIdOFormFormGroupArrayBuilder<
         super(key: key);
 
   final ExtendedControl<List<Map<String, Object?>?>,
-      List<ReactiveIdOFormFormGroupArrayBuilderT>>? extended;
+      List<ReactiveIdFormFormGroupArrayBuilderT>>? extended;
 
   final ExtendedControl<List<Map<String, Object?>?>,
-          List<ReactiveIdOFormFormGroupArrayBuilderT>>
-      Function(IdOForm<P, C> formModel)? getExtended;
+          List<ReactiveIdFormFormGroupArrayBuilderT>>
+      Function(IdForm<P, C> formModel)? getExtended;
 
   final Widget Function(
-          BuildContext context, List<Widget> itemList, IdOForm<P, C> formModel)?
+          BuildContext context, List<Widget> itemList, IdForm<P, C> formModel)?
       builder;
 
   final Widget Function(
       BuildContext context,
       int i,
-      ReactiveIdOFormFormGroupArrayBuilderT? item,
-      IdOForm<P, C> formModel) itemBuilder;
+      ReactiveIdFormFormGroupArrayBuilderT? item,
+      IdForm<P, C> formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveIdOForm.of<P, C>(context);
+    final formModel = ReactiveIdForm.of<P, C>(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
@@ -1636,7 +1676,7 @@ class ReactiveIdOFormFormGroupArrayBuilder<
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
         final itemList =
-            (value.value() ?? <ReactiveIdOFormFormGroupArrayBuilderT>[])
+            (value.value() ?? <ReactiveIdFormFormGroupArrayBuilderT>[])
                 .asMap()
                 .map((i, item) => MapEntry(
                       i,
@@ -1660,3 +1700,4 @@ class ReactiveIdOFormFormGroupArrayBuilder<
     );
   }
 }
+''';

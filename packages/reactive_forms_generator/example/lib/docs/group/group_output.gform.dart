@@ -1952,7 +1952,6 @@ class GroupOOutput {
   final PhoneOOutput? phone;
   final AddressOOutput? address;
   final AddressOOutput? address2;
-
   GroupOOutput({this.personal, this.phone, this.address, this.address2});
 }
 
@@ -1960,7 +1959,6 @@ class GroupOOutput {
 class PersonalOOutput {
   final String? name;
   final String? email;
-
   PersonalOOutput(
       {@RfControl<String>() this.name, @RfControl<String>() this.email});
 }
@@ -1969,7 +1967,6 @@ class PersonalOOutput {
 class PhoneOOutput {
   final String? phoneNumber;
   final String? countryIso;
-
   PhoneOOutput(
       {@RfControl<String>() this.phoneNumber,
       @RfControl<String>() this.countryIso});
@@ -1980,7 +1977,6 @@ class AddressOOutput {
   final String? street;
   final String? city;
   final String? zip;
-
   AddressOOutput(
       {@RfControl<String>() this.street,
       @RfControl<String>() this.city,
@@ -2033,30 +2029,29 @@ class ReactiveGroupOFormArrayBuilder<ReactiveGroupOFormArrayBuilderT>
     return ReactiveFormArray<ReactiveGroupOFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
-                controlFilter
-                    ?.call(e as FormControl<ReactiveGroupOFormArrayBuilderT>) ??
+                controlFilter?.call(
+                  e as FormControl<ReactiveGroupOFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder(
                   context,
-                  i,
-                  formArray.controls[i]
+                  item.$1,
+                  formArray.controls[item.$1]
                       as FormControl<ReactiveGroupOFormArrayBuilderT>,
-                  item,
+                  item.$2.value,
                   formModel,
                 ),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {
@@ -2125,30 +2120,29 @@ class ReactiveGroupOFormArrayBuilder2<ReactiveGroupOFormArrayBuilderT>
     return ReactiveFormArray<ReactiveGroupOFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
-                controlFilter
-                    ?.call(e as FormControl<ReactiveGroupOFormArrayBuilderT>) ??
+                controlFilter?.call(
+                  e as FormControl<ReactiveGroupOFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder((
                   context: context,
-                  i: i,
-                  control: formArray.controls[i]
+                  i: item.$1,
+                  control: formArray.controls[item.$1]
                       as FormControl<ReactiveGroupOFormArrayBuilderT>,
-                  item: item,
+                  item: item.$2.value,
                   formModel: formModel
                 )),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {

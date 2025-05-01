@@ -1,3 +1,7 @@
+## [7.0.0-beta3]
+
+* fix for `controlFilter`
+
 ## [7.0.0-beta2]
 
 * fix for `emptyBuilder`
