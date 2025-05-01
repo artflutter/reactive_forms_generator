@@ -573,7 +573,7 @@ class ReactiveStatusListOFormArrayBuilder<ReactiveStatusListOFormArrayBuilderT,
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveStatusListOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveStatusListOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -664,7 +664,7 @@ class ReactiveStatusListOFormArrayBuilder2<ReactiveStatusListOFormArrayBuilderT,
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveStatusListOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveStatusListOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

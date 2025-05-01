@@ -1,3 +1,7 @@
+## [7.0.0-beta4]
+
+* bugfix
+
 ## [7.0.0-beta3]
 
 * fix for `controlFilter`

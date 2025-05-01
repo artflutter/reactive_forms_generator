@@ -471,7 +471,7 @@ class ReactiveSubGroupFormArrayBuilder<ReactiveSubGroupFormArrayBuilderT>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveSubGroupFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveSubGroupFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -562,7 +562,7 @@ class ReactiveSubGroupFormArrayBuilder2<ReactiveSubGroupFormArrayBuilderT>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveSubGroupFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveSubGroupFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -1323,7 +1323,7 @@ class ReactiveGroupFormArrayBuilder<ReactiveGroupFormArrayBuilderT>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveGroupFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveGroupFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -1414,7 +1414,7 @@ class ReactiveGroupFormArrayBuilder2<ReactiveGroupFormArrayBuilderT>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveGroupFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveGroupFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -2089,7 +2089,7 @@ class ReactiveNestedFormArrayBuilder<ReactiveNestedFormArrayBuilderT>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveNestedFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveNestedFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

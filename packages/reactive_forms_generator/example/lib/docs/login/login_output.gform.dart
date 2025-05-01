@@ -571,10 +571,12 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
 class LoginOOutput extends Equatable {
   final String email;
   final String password;
+
   const LoginOOutput(
       {@RfControl(validators: [RequiredValidator(), RequiredValidator()])
       required this.email,
       @RfControl(validators: [RequiredValidator2()]) required this.password});
+
   @override
   List<Object?> get props => [email, password];
 }
@@ -628,7 +630,7 @@ class ReactiveLoginOFormArrayBuilder<ReactiveLoginOFormArrayBuilderT>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveLoginOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveLoginOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -719,7 +721,7 @@ class ReactiveLoginOFormArrayBuilder2<ReactiveLoginOFormArrayBuilderT>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveLoginOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveLoginOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

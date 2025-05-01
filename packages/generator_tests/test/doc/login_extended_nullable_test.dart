@@ -1253,7 +1253,7 @@ class ReactiveLoginExtendedNullableFormArrayBuilder<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<
+                  e.$2 as FormControl<
                       ReactiveLoginExtendedNullableFormArrayBuilderT>,
                 ) ??
                 true)
@@ -1346,7 +1346,7 @@ class ReactiveLoginExtendedNullableFormArrayBuilder2<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<
+                  e.$2 as FormControl<
                       ReactiveLoginExtendedNullableFormArrayBuilderT>,
                 ) ??
                 true)

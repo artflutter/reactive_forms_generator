@@ -1458,7 +1458,7 @@ class ReactiveLoginExtendedOFormArrayBuilder<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveLoginExtendedOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveLoginExtendedOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -1550,7 +1550,7 @@ class ReactiveLoginExtendedOFormArrayBuilder2<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveLoginExtendedOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveLoginExtendedOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

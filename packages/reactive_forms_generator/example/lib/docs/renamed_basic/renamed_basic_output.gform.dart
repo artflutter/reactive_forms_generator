@@ -573,6 +573,7 @@ class SomeWiredNameForm
 class RenamedBasicOOutput {
   final String email;
   final String password;
+
   RenamedBasicOOutput(
       {@RfControl(validators: [RequiredValidator()]) required this.email,
       @RfControl(validators: [RequiredValidator()]) required this.password});
@@ -627,7 +628,7 @@ class ReactiveSomeWiredNameFormArrayBuilder<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -719,7 +720,7 @@ class ReactiveSomeWiredNameFormArrayBuilder2<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

@@ -98,7 +98,7 @@ class ReactiveFormArrayBuilder {
                 final values = formArray.controls.indexed
                   .where((e) =>
                       controlFilter?.call(
-                        e as FormControl<$T>,
+                        e.\$2 as FormControl<$T>,
                       ) ??
                       true)
                   .toList();

@@ -455,6 +455,7 @@ class TagsOForm<T> implements FormModel<TagsO<T>, TagsOOutput<T>> {
 @Rf(output: true)
 abstract class TagsOOutput<T> with _$TagsOOutput<T> {
   factory TagsOOutput({@RfControl() required List<T>? tags}) = _TagsOOutput;
+
   const TagsOOutput._();
 }
 
@@ -507,7 +508,7 @@ class ReactiveTagsOFormArrayBuilder<ReactiveTagsOFormArrayBuilderT, T>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveTagsOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveTagsOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -598,7 +599,7 @@ class ReactiveTagsOFormArrayBuilder2<ReactiveTagsOFormArrayBuilderT, T>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveTagsOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveTagsOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

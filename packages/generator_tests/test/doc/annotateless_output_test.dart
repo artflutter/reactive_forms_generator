@@ -614,7 +614,7 @@ class ReactiveAnnotatelessOFormArrayBuilder<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveAnnotatelessOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveAnnotatelessOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -706,7 +706,7 @@ class ReactiveAnnotatelessOFormArrayBuilder2<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveAnnotatelessOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveAnnotatelessOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

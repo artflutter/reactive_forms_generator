@@ -2073,7 +2073,7 @@ class ReactiveGroupFormArrayBuilder<ReactiveGroupFormArrayBuilderT>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveGroupFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveGroupFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -2164,7 +2164,7 @@ class ReactiveGroupFormArrayBuilder2<ReactiveGroupFormArrayBuilderT>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveGroupFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveGroupFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

@@ -564,7 +564,7 @@ class ReactiveModelImplementsFormArrayBuilder<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveModelImplementsFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveModelImplementsFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

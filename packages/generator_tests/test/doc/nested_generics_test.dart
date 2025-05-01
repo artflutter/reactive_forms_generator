@@ -1049,7 +1049,7 @@ class ReactiveProductDetailsFormArrayBuilder<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveProductDetailsFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveProductDetailsFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -1143,7 +1143,7 @@ class ReactiveProductDetailsFormArrayBuilder2<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveProductDetailsFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveProductDetailsFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -1505,7 +1505,7 @@ class ReactiveIdFormArrayBuilder<ReactiveIdFormArrayBuilderT, P extends Product,
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveIdFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveIdFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -1596,7 +1596,7 @@ class ReactiveIdFormArrayBuilder2<ReactiveIdFormArrayBuilderT,
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveIdFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveIdFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

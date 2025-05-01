@@ -581,7 +581,7 @@ class ReactiveTestFormArrayBuilder<ReactiveTestFormArrayBuilderT>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveTestFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveTestFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

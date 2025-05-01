@@ -1011,7 +1011,7 @@ class ReactiveAnimatedUrlLisOFormArrayBuilder<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -1103,7 +1103,7 @@ class ReactiveAnimatedUrlLisOFormArrayBuilder2<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

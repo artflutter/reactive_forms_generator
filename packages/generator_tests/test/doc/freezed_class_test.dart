@@ -1101,7 +1101,7 @@ class ReactiveFreezedClassFormArrayBuilder<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveFreezedClassFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveFreezedClassFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -1193,7 +1193,7 @@ class ReactiveFreezedClassFormArrayBuilder2<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveFreezedClassFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveFreezedClassFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

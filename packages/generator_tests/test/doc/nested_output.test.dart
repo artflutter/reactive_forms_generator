@@ -1502,7 +1502,7 @@ class ReactiveIdFormArrayBuilder<ReactiveIdFormArrayBuilderT, P extends Product,
         final values = formArray.controls
             .where((e) =>
                 controlFilter
-                    ?.call(e as FormControl<ReactiveIdFormArrayBuilderT>) ??
+                    ?.call(e.$2 as FormControl<ReactiveIdFormArrayBuilderT>) ??
                 true)
             .map((e) => e.value)
             .toList();
@@ -1594,7 +1594,7 @@ class ReactiveIdFormArrayBuilder2<ReactiveIdFormArrayBuilderT,
         final values = formArray.controls
             .where((e) =>
                 controlFilter
-                    ?.call(e as FormControl<ReactiveIdFormArrayBuilderT>) ??
+                    ?.call(e.$2 as FormControl<ReactiveIdFormArrayBuilderT>) ??
                 true)
             .map((e) => e.value)
             .toList();

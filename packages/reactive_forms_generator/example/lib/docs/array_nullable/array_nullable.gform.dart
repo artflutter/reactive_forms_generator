@@ -1204,7 +1204,7 @@ class ReactiveArrayNullableFormArrayBuilder<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveArrayNullableFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveArrayNullableFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

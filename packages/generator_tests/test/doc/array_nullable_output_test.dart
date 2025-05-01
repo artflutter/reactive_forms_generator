@@ -9,7 +9,7 @@ void main() {
   group('reactive_forms_generator', () {
     test(
       'Form with array nullable types',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''
@@ -1188,7 +1188,7 @@ class ReactiveArrayNullableOFormArrayBuilder<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveArrayNullableOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveArrayNullableOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -1280,7 +1280,7 @@ class ReactiveArrayNullableOFormArrayBuilder2<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveArrayNullableOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveArrayNullableOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

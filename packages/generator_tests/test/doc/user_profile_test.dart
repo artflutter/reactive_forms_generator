@@ -1373,7 +1373,7 @@ class ReactiveUserProfileFormArrayBuilder<ReactiveUserProfileFormArrayBuilderT>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveUserProfileFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveUserProfileFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -1464,7 +1464,7 @@ class ReactiveUserProfileFormArrayBuilder2<ReactiveUserProfileFormArrayBuilderT>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveUserProfileFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveUserProfileFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

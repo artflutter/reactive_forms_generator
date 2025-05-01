@@ -3090,7 +3090,7 @@ class ReactiveMSICreateFormArrayBuilder<ReactiveMSICreateFormArrayBuilderT>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveMSICreateFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveMSICreateFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

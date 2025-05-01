@@ -2008,7 +2008,7 @@ class ReactiveDeliveryListFormArrayBuilder<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveDeliveryListFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveDeliveryListFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -2100,7 +2100,7 @@ class ReactiveDeliveryListFormArrayBuilder2<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveDeliveryListFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveDeliveryListFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -2784,7 +2784,7 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<
+                  e.$2 as FormControl<
                       ReactiveStandaloneDeliveryPointFormArrayBuilderT>,
                 ) ??
                 true)
@@ -2878,7 +2878,7 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder2<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<
+                  e.$2 as FormControl<
                       ReactiveStandaloneDeliveryPointFormArrayBuilderT>,
                 ) ??
                 true)

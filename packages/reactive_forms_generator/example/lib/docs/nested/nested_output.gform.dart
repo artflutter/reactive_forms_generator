@@ -429,6 +429,7 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
 abstract class SubGroupOOutput with _$SubGroupOOutput {
   const factory SubGroupOOutput({@RfControl() required String id}) =
       _SubGroupOOutput;
+
   factory SubGroupOOutput.fromJson(Map<String, dynamic> json) =>
       _$SubGroupOOutputFromJson(json);
 }
@@ -441,6 +442,7 @@ abstract class GroupOOutput with _$GroupOOutput {
           {@RfControl() required String id,
           @RfArray<dynamic>() required List<SubGroupOOutput> subGroupList}) =
       _GroupOOutput;
+
   factory GroupOOutput.fromJson(Map<String, dynamic> json) =>
       _$GroupOOutputFromJson(json);
 }
@@ -452,6 +454,7 @@ abstract class NestedOOutput with _$NestedOOutput {
   const factory NestedOOutput(
           {@RfArray<dynamic>() required List<GroupOOutput> groupList}) =
       _NestedOOutput;
+
   factory NestedOOutput.fromJson(Map<String, dynamic> json) =>
       _$NestedOOutputFromJson(json);
 }
@@ -505,7 +508,7 @@ class ReactiveSubGroupOFormArrayBuilder<ReactiveSubGroupOFormArrayBuilderT>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveSubGroupOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveSubGroupOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

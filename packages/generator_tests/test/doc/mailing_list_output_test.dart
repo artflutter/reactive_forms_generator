@@ -590,7 +590,7 @@ class ReactiveMailingListOFormArrayBuilder<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveMailingListOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveMailingListOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -682,7 +682,7 @@ class ReactiveMailingListOFormArrayBuilder2<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveMailingListOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveMailingListOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

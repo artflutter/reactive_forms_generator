@@ -498,7 +498,7 @@ class ReactiveTagsFormArrayBuilder<ReactiveTagsFormArrayBuilderT, T>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveTagsFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveTagsFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
@@ -589,7 +589,7 @@ class ReactiveTagsFormArrayBuilder2<ReactiveTagsFormArrayBuilderT, T>
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveTagsFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveTagsFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();

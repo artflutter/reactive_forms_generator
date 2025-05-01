@@ -1076,6 +1076,7 @@ class ArrayNullableOOutput {
   final List<String?>? vegetablesList;
   final List<String?>? someList;
   final List<UserMode?>? modeList;
+
   ArrayNullableOOutput(
       {@RfArray(validators: [RequiredValidator()]) required this.emailList,
       @RfArray() this.fruitList = const [],
@@ -1133,7 +1134,7 @@ class ReactiveArrayNullableOFormArrayBuilder<
         final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                  e as FormControl<ReactiveArrayNullableOFormArrayBuilderT>,
+                  e.$2 as FormControl<ReactiveArrayNullableOFormArrayBuilderT>,
                 ) ??
                 true)
             .toList();
