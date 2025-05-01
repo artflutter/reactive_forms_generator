@@ -898,7 +898,6 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
 @Rf(output: true)
 class AnimatedUrlLisOOutput {
   final List<UrlEntityOOutput> urlList;
-
   AnimatedUrlLisOOutput({@RfArray() required this.urlList});
 }
 
@@ -906,7 +905,6 @@ class AnimatedUrlLisOOutput {
 class UrlEntityOOutput {
   final String label;
   final String url;
-
   UrlEntityOOutput(
       {@RfControl(validators: [RequiredValidator()]) required this.label,
       @RfControl(validators: [RequiredValidator()]) required this.url});
@@ -958,30 +956,29 @@ class ReactiveAnimatedUrlLisOFormArrayBuilder<
     return ReactiveFormArray<ReactiveAnimatedUrlLisOFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
-                controlFilter?.call(e
-                    as FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT>) ??
+                controlFilter?.call(
+                  e as FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder(
                   context,
-                  i,
-                  formArray.controls[i]
+                  item.$1,
+                  formArray.controls[item.$1]
                       as FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT>,
-                  item,
+                  item.$2.value,
                   formModel,
                 ),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {
@@ -1051,30 +1048,29 @@ class ReactiveAnimatedUrlLisOFormArrayBuilder2<
     return ReactiveFormArray<ReactiveAnimatedUrlLisOFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
-                controlFilter?.call(e
-                    as FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT>) ??
+                controlFilter?.call(
+                  e as FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder((
                   context: context,
-                  i: i,
-                  control: formArray.controls[i]
+                  i: item.$1,
+                  control: formArray.controls[item.$1]
                       as FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT>,
-                  item: item,
+                  item: item.$2.value,
                   formModel: formModel
                 )),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {

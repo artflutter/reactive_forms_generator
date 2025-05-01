@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 import '../helpers.dart';
 
-const fileName = 'product_output';
+const fileName = 'nested_generics_output';
 
 void main() {
   group('reactive_forms_generator', () {
@@ -75,7 +75,7 @@ const generatedFile = r'''// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'product_output.dart';
+part of 'nested_generics_output.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
@@ -1070,30 +1070,29 @@ class ReactiveProductDetailsOFormArrayBuilder<
     return ReactiveFormArray<ReactiveProductDetailsOFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
-                controlFilter?.call(e
-                    as FormControl<ReactiveProductDetailsOFormArrayBuilderT>) ??
+                controlFilter?.call(
+                  e as FormControl<ReactiveProductDetailsOFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder(
                   context,
-                  i,
-                  formArray.controls[i]
+                  item.$1,
+                  formArray.controls[item.$1]
                       as FormControl<ReactiveProductDetailsOFormArrayBuilderT>,
-                  item,
+                  item.$2.value,
                   formModel,
                 ),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {
@@ -1165,30 +1164,29 @@ class ReactiveProductDetailsOFormArrayBuilder2<
     return ReactiveFormArray<ReactiveProductDetailsOFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
-                controlFilter?.call(e
-                    as FormControl<ReactiveProductDetailsOFormArrayBuilderT>) ??
+                controlFilter?.call(
+                  e as FormControl<ReactiveProductDetailsOFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder((
                   context: context,
-                  i: i,
-                  control: formArray.controls[i]
+                  i: item.$1,
+                  control: formArray.controls[item.$1]
                       as FormControl<ReactiveProductDetailsOFormArrayBuilderT>,
-                  item: item,
+                  item: item.$2.value,
                   formModel: formModel
                 )),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {
@@ -1528,30 +1526,29 @@ class ReactiveIdOFormArrayBuilder<ReactiveIdOFormArrayBuilderT,
     return ReactiveFormArray<ReactiveIdOFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
-                controlFilter
-                    ?.call(e as FormControl<ReactiveIdOFormArrayBuilderT>) ??
+                controlFilter?.call(
+                  e as FormControl<ReactiveIdOFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder(
                   context,
-                  i,
-                  formArray.controls[i]
+                  item.$1,
+                  formArray.controls[item.$1]
                       as FormControl<ReactiveIdOFormArrayBuilderT>,
-                  item,
+                  item.$2.value,
                   formModel,
                 ),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {
@@ -1620,30 +1617,29 @@ class ReactiveIdOFormArrayBuilder2<ReactiveIdOFormArrayBuilderT,
     return ReactiveFormArray<ReactiveIdOFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
-                controlFilter
-                    ?.call(e as FormControl<ReactiveIdOFormArrayBuilderT>) ??
+                controlFilter?.call(
+                  e as FormControl<ReactiveIdOFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder((
                   context: context,
-                  i: i,
-                  control: formArray.controls[i]
+                  i: item.$1,
+                  control: formArray.controls[item.$1]
                       as FormControl<ReactiveIdOFormArrayBuilderT>,
-                  item: item,
+                  item: item.$2.value,
                   formModel: formModel
                 )),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {

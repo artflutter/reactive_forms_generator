@@ -573,7 +573,6 @@ class SomeWiredNameForm
 class RenamedBasicOOutput {
   final String email;
   final String password;
-
   RenamedBasicOOutput(
       {@RfControl(validators: [RequiredValidator()]) required this.email,
       @RfControl(validators: [RequiredValidator()]) required this.password});
@@ -625,30 +624,29 @@ class ReactiveSomeWiredNameFormArrayBuilder<
     return ReactiveFormArray<ReactiveSomeWiredNameFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                    e as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>) ??
+                  e as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder(
                   context,
-                  i,
-                  formArray.controls[i]
+                  item.$1,
+                  formArray.controls[item.$1]
                       as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>,
-                  item,
+                  item.$2.value,
                   formModel,
                 ),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {
@@ -718,30 +716,29 @@ class ReactiveSomeWiredNameFormArrayBuilder2<
     return ReactiveFormArray<ReactiveSomeWiredNameFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                    e as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>) ??
+                  e as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder((
                   context: context,
-                  i: i,
-                  control: formArray.controls[i]
+                  i: item.$1,
+                  control: formArray.controls[item.$1]
                       as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>,
-                  item: item,
+                  item: item.$2.value,
                   formModel: formModel
                 )),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {

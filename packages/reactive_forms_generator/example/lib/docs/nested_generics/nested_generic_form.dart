@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 
-import 'package:example/docs/nested_generics/product.dart';
+import 'package:example/docs/nested_generics/nested_generics.dart';
 import 'package:example/sample_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';

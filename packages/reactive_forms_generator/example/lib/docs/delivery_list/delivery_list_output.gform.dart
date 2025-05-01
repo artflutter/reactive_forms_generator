@@ -1883,10 +1883,8 @@ class ClientOForm implements FormModel<ClientO, ClientOOutput> {
 class DeliveryListOOutput extends Equatable {
   final List<DeliveryPointOOutput> deliveryList;
   final List<ClientOOutput>? clientList;
-
   const DeliveryListOOutput(
       {@RfArray() required this.deliveryList, @RfArray() this.clientList});
-
   @override
   List<Object?> get props => [deliveryList, clientList];
 }
@@ -1896,11 +1894,9 @@ class DeliveryListOOutput extends Equatable {
 class DeliveryPointOOutput extends Equatable {
   final String name;
   final AddressOOutput? address;
-
   const DeliveryPointOOutput(
       {@RfControl(validators: [RequiredValidator()]) required this.name,
       this.address});
-
   @override
   List<Object?> get props => [name, address];
 }
@@ -1910,12 +1906,10 @@ class ClientOOutput extends Equatable {
   final ClientType clientType;
   final String? name;
   final String? notes;
-
   const ClientOOutput(
       {@RfControl<ClientType>() required this.clientType,
       @RfControl<String>() this.name,
       @RfControl<String>() this.notes});
-
   @override
   List<Object?> get props => [name, notes];
 }
@@ -1924,11 +1918,9 @@ class ClientOOutput extends Equatable {
 class AddressOOutput extends Equatable {
   final String street;
   final String? city;
-
   const AddressOOutput(
       {@RfControl(validators: [RequiredValidator()]) required this.street,
       @RfControl<String>() this.city});
-
   @override
   List<Object?> get props => [street, city];
 }
@@ -1979,30 +1971,29 @@ class ReactiveDeliveryListOFormArrayBuilder<
     return ReactiveFormArray<ReactiveDeliveryListOFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                    e as FormControl<ReactiveDeliveryListOFormArrayBuilderT>) ??
+                  e as FormControl<ReactiveDeliveryListOFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder(
                   context,
-                  i,
-                  formArray.controls[i]
+                  item.$1,
+                  formArray.controls[item.$1]
                       as FormControl<ReactiveDeliveryListOFormArrayBuilderT>,
-                  item,
+                  item.$2.value,
                   formModel,
                 ),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {
@@ -2072,30 +2063,29 @@ class ReactiveDeliveryListOFormArrayBuilder2<
     return ReactiveFormArray<ReactiveDeliveryListOFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
                 controlFilter?.call(
-                    e as FormControl<ReactiveDeliveryListOFormArrayBuilderT>) ??
+                  e as FormControl<ReactiveDeliveryListOFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder((
                   context: context,
-                  i: i,
-                  control: formArray.controls[i]
+                  i: item.$1,
+                  control: formArray.controls[item.$1]
                       as FormControl<ReactiveDeliveryListOFormArrayBuilderT>,
-                  item: item,
+                  item: item.$2.value,
                   formModel: formModel
                 )),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {
@@ -2758,30 +2748,30 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder<
     return ReactiveFormArray<ReactiveStandaloneDeliveryPointFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
-                controlFilter?.call(e as FormControl<
-                    ReactiveStandaloneDeliveryPointFormArrayBuilderT>) ??
+                controlFilter?.call(
+                  e as FormControl<
+                      ReactiveStandaloneDeliveryPointFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder(
                   context,
-                  i,
-                  formArray.controls[i] as FormControl<
+                  item.$1,
+                  formArray.controls[item.$1] as FormControl<
                       ReactiveStandaloneDeliveryPointFormArrayBuilderT>,
-                  item,
+                  item.$2.value,
                   formModel,
                 ),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {
@@ -2852,30 +2842,30 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder2<
     return ReactiveFormArray<ReactiveStandaloneDeliveryPointFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
-                controlFilter?.call(e as FormControl<
-                    ReactiveStandaloneDeliveryPointFormArrayBuilderT>) ??
+                controlFilter?.call(
+                  e as FormControl<
+                      ReactiveStandaloneDeliveryPointFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder((
                   context: context,
-                  i: i,
-                  control: formArray.controls[i] as FormControl<
+                  i: item.$1,
+                  control: formArray.controls[item.$1] as FormControl<
                       ReactiveStandaloneDeliveryPointFormArrayBuilderT>,
-                  item: item,
+                  item: item.$2.value,
                   formModel: formModel
                 )),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {

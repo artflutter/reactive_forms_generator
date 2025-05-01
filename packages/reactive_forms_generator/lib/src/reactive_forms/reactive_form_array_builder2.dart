@@ -95,25 +95,30 @@ class ReactiveFormArrayBuilder2 {
             return ReactiveFormArray<$T>(
               formArray: formControl ?? control?.call(formModel),
               builder: (context, formArray, child) {
-                final values = formArray.controls.where((e) => controlFilter?.call(e as FormControl<$T>) ?? true).map((e) => e.value).toList();
+                final values = formArray.controls.indexed
+                  .where((e) =>
+                      controlFilter?.call(
+                        e as FormControl<$T>,
+                      ) ??
+                      true)
+                  .toList();
+                  
+                final itemList = values
+                  .map((item) {
+                    return MapEntry(
+                      item.\$1,
+                      itemBuilder((
+                        context: context,
+                        i: item.\$1,
+                        control: formArray.controls[item.\$1] as FormControl<$T>,
+                        item: item.\$2.value,
+                        formModel: formModel)
+                      ),
+                    );
+                  })
+                  .map((e) => e.value)
+                  .toList();
                 
-                final itemList = values 
-                    .asMap()
-                    .map((i, item) {
-                      return MapEntry(
-                        i,
-                        itemBuilder((
-                          context: context,
-                          i: i,
-                          control: formArray.controls[i] as FormControl<$T>,
-                          item: item,
-                          formModel: formModel)
-                        ),
-                      );
-                    })
-                    .values
-                    .toList();
-                    
                 if(emptyBuilder != null && itemList.isEmpty) {
                   return emptyBuilder!(context);
                 }

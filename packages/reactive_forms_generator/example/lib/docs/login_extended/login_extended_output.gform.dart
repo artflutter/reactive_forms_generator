@@ -1278,7 +1278,6 @@ class LoginExtendedOOutput {
   final double height;
   final String? unAnnotated;
   final List<int> someIntList;
-
   LoginExtendedOOutput(
       {@RfControl(
           validators: [RequiredValidator()],
@@ -1344,30 +1343,29 @@ class ReactiveLoginExtendedOFormArrayBuilder<
     return ReactiveFormArray<ReactiveLoginExtendedOFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
-                controlFilter?.call(e
-                    as FormControl<ReactiveLoginExtendedOFormArrayBuilderT>) ??
+                controlFilter?.call(
+                  e as FormControl<ReactiveLoginExtendedOFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder(
                   context,
-                  i,
-                  formArray.controls[i]
+                  item.$1,
+                  formArray.controls[item.$1]
                       as FormControl<ReactiveLoginExtendedOFormArrayBuilderT>,
-                  item,
+                  item.$2.value,
                   formModel,
                 ),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {
@@ -1437,30 +1435,29 @@ class ReactiveLoginExtendedOFormArrayBuilder2<
     return ReactiveFormArray<ReactiveLoginExtendedOFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
-        final values = formArray.controls
+        final values = formArray.controls.indexed
             .where((e) =>
-                controlFilter?.call(e
-                    as FormControl<ReactiveLoginExtendedOFormArrayBuilderT>) ??
+                controlFilter?.call(
+                  e as FormControl<ReactiveLoginExtendedOFormArrayBuilderT>,
+                ) ??
                 true)
-            .map((e) => e.value)
             .toList();
 
         final itemList = values
-            .asMap()
-            .map((i, item) {
+            .map((item) {
               return MapEntry(
-                i,
+                item.$1,
                 itemBuilder((
                   context: context,
-                  i: i,
-                  control: formArray.controls[i]
+                  i: item.$1,
+                  control: formArray.controls[item.$1]
                       as FormControl<ReactiveLoginExtendedOFormArrayBuilderT>,
-                  item: item,
+                  item: item.$2.value,
                   formModel: formModel
                 )),
               );
             })
-            .values
+            .map((e) => e.value)
             .toList();
 
         if (emptyBuilder != null && itemList.isEmpty) {
