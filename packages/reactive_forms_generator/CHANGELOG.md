@@ -1,3 +1,23 @@
+## [8.1.0-beta0]
+
+* build 3
+
+## [8.0.3]
+
+* Recursive forms bugfix fix
+
+## [8.0.1]
+
+* bugfix
+
+## [8.0.0]
+
+* Rf18
+
+## [8.0.0-beta0]
+
+* Rf18
+
 ## [7.5.0-beta1]
 
 * properly handle missing controls in form
@@ -48,7 +68,23 @@
 
 ## [7.0.4]
 
-* fixes
+* ReactiveFormArrayItemBuilder
+
+## [7.0.3]
+
+* fix
+
+## [7.0.2]
+
+* fix
+
+## [7.0.1]
+
+* array builder improvements
+
+## [7.0.0]
+
+* v7 release
 
 ## [7.0.0-beta4]
 

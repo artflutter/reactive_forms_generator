@@ -56,7 +56,7 @@ class ReactiveProductDetailsForm<P extends Product, C extends Cart>
     required this.form,
     required this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
   }) : super(key: key);
 
   final Widget child;
@@ -65,7 +65,8 @@ class ReactiveProductDetailsForm<P extends Product, C extends Cart>
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   static ProductDetailsForm<P, C>? of<P extends Product, C extends Cart>(
     BuildContext context, {
@@ -95,7 +96,7 @@ class ReactiveProductDetailsForm<P extends Product, C extends Cart>
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
         canPop: canPop,
-        onPopInvoked: onPopInvoked,
+        onPopInvokedWithResult: onPopInvokedWithResult,
         child: child,
       ),
     );
@@ -119,7 +120,7 @@ class ProductDetailsFormBuilder<P extends Product, C extends Cart>
     this.model,
     this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -130,7 +131,8 @@ class ProductDetailsFormBuilder<P extends Product, C extends Cart>
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   final Widget Function(
     BuildContext context,
@@ -224,7 +226,7 @@ class _ProductDetailsFormBuilderState<P extends Product, C extends Cart>
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
-        onPopInvoked: widget.onPopInvoked,
+        onPopInvokedWithResult: widget.onPopInvokedWithResult,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -1359,7 +1361,7 @@ class ReactiveIdForm<P extends Product, C extends Cart>
     required this.form,
     required this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
   }) : super(key: key);
 
   final Widget child;
@@ -1368,7 +1370,8 @@ class ReactiveIdForm<P extends Product, C extends Cart>
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   static IdForm<P, C>? of<P extends Product, C extends Cart>(
     BuildContext context, {
@@ -1396,7 +1399,7 @@ class ReactiveIdForm<P extends Product, C extends Cart>
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
         canPop: canPop,
-        onPopInvoked: onPopInvoked,
+        onPopInvokedWithResult: onPopInvokedWithResult,
         child: child,
       ),
     );
@@ -1417,7 +1420,7 @@ class IdFormBuilder<P extends Product, C extends Cart> extends StatefulWidget {
     this.model,
     this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -1428,7 +1431,8 @@ class IdFormBuilder<P extends Product, C extends Cart> extends StatefulWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   final Widget Function(
     BuildContext context,
@@ -1520,7 +1524,7 @@ class _IdFormBuilderState<P extends Product, C extends Cart>
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
-        onPopInvoked: widget.onPopInvoked,
+        onPopInvokedWithResult: widget.onPopInvokedWithResult,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
