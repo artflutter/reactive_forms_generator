@@ -18,7 +18,7 @@ List<Spec> generateLibrary(
   ClassElement element,
   AstNode ast,
 ) {
-  final formGenerator = FormGenerator(element, element, null, ast);
+  final formGenerator = FormGenerator(element, element, null, ast, {});
   final reactiveInheritedStreamer = ReactiveInheritedStreamer(formGenerator);
   final reactiveForm = ReactiveForm(reactiveInheritedStreamer);
   final reactiveFormExtension =

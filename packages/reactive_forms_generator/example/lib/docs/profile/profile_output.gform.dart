@@ -2473,7 +2473,6 @@ class TimerSettingOForm
 @Rf(output: true)
 abstract class ProfileOOutput with _$ProfileOOutput {
   const ProfileOOutput._();
-
   factory ProfileOOutput(String id,
       {required String anotherId,
       @RfControl<String>() required String name,
@@ -2486,7 +2485,6 @@ abstract class ProfileOOutput with _$ProfileOOutput {
       required ThresholdSettingOOutput threshold,
       required TimerSettingOOutput timer,
       @RfControl<bool>() required bool audioGuidance}) = _ProfileOOutput;
-
   factory ProfileOOutput.fromJson(Map<String, dynamic> json) =>
       _$ProfileOOutputFromJson(json);
 }
@@ -2495,11 +2493,9 @@ abstract class ProfileOOutput with _$ProfileOOutput {
 @RfGroup()
 abstract class ThresholdSettingOOutput with _$ThresholdSettingOOutput {
   static const values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
   const factory ThresholdSettingOOutput(
       {@RfControl<bool>() @Default(true) bool isEnabled,
       @RfControl<int>() @Default(2) int value}) = _ThresholdSettingOOutput;
-
   factory ThresholdSettingOOutput.fromJson(Map<String, dynamic> json) =>
       _$ThresholdSettingOOutputFromJson(json);
 }
@@ -2508,11 +2504,9 @@ abstract class ThresholdSettingOOutput with _$ThresholdSettingOOutput {
 @RfGroup()
 abstract class TimerSettingOOutput with _$TimerSettingOOutput {
   static const values = [1, 2, 3, 4, 5, 6];
-
   const factory TimerSettingOOutput(
       {@RfControl<bool>() @Default(false) bool isEnabled,
       @RfControl<int>() @Default(5) int value}) = _TimerSettingOOutput;
-
   factory TimerSettingOOutput.fromJson(Map<String, dynamic> json) =>
       _$TimerSettingOOutputFromJson(json);
 }
@@ -2528,7 +2522,6 @@ abstract class IncidenceFilterOOutput with _$IncidenceFilterOOutput {
           @RfControl<bool>() @Default(true) bool isCalculusEnabled,
           @RfControl<bool>() @Default(true) bool isPlaqueEnabled}) =
       _IncidenceFilterOOutput;
-
   factory IncidenceFilterOOutput.fromJson(Map<String, dynamic> json) =>
       _$IncidenceFilterOOutputFromJson(json);
 }
@@ -2576,45 +2569,27 @@ class ReactiveProfileOFormArrayBuilder<ReactiveProfileOFormArrayBuilderT>
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveProfileOFormArrayBuilderT>(
-      formArray: formControl ?? control?.call(formModel),
-      builder: (context, formArray, child) {
-        final values = formArray.controls.indexed
-            .where((e) =>
-                controlFilter?.call(
-                  e.$2 as FormControl<ReactiveProfileOFormArrayBuilderT>,
-                ) ??
-                true)
-            .toList();
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
 
-        final itemList = values
-            .map((item) {
-              return MapEntry(
-                item.$1,
-                itemBuilder(
-                  context,
-                  item.$1,
-                  formArray.controls[item.$1]
-                      as FormControl<ReactiveProfileOFormArrayBuilderT>,
-                  item.$2.value,
-                  formModel,
-                ),
-              );
-            })
-            .map((e) => e.value)
-            .toList();
-
-        if (emptyBuilder != null && itemList.isEmpty) {
-          return emptyBuilder!(context);
-        }
-
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
-            Column(children: itemList);
-      },
+    return ReactiveFormArrayItemBuilder<ReactiveProfileOFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder(
+                context,
+                itemList,
+                formModel,
+              )
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder(context, i, control, item, formModel),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
     );
   }
 }
@@ -2667,45 +2642,33 @@ class ReactiveProfileOFormArrayBuilder2<ReactiveProfileOFormArrayBuilderT>
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveProfileOFormArrayBuilderT>(
-      formArray: formControl ?? control?.call(formModel),
-      builder: (context, formArray, child) {
-        final values = formArray.controls.indexed
-            .where((e) =>
-                controlFilter?.call(
-                  e as FormControl<ReactiveProfileOFormArrayBuilderT>,
-                ) ??
-                true)
-            .toList();
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
 
-        final itemList = values
-            .map((item) {
-              return MapEntry(
-                item.$1,
-                itemBuilder((
-                  context: context,
-                  i: item.$1,
-                  control: formArray.controls[item.$1]
-                      as FormControl<ReactiveProfileOFormArrayBuilderT>,
-                  item: item.$2.value,
-                  formModel: formModel
-                )),
-              );
-            })
-            .map((e) => e.value)
-            .toList();
-
-        if (emptyBuilder != null && itemList.isEmpty) {
-          return emptyBuilder!(context);
-        }
-
-        return builder?.call((
-              context: context,
-              itemList: itemList,
-              formModel: formModel,
-            )) ??
-            Column(children: itemList);
-      },
+    return ReactiveFormArrayItemBuilder<ReactiveProfileOFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder((
+                context: context,
+                itemList: itemList,
+                formModel: formModel,
+              ))
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder((
+        context: context,
+        i: i,
+        control: control,
+        item: item,
+        formModel: formModel
+      )),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
     );
   }
 }

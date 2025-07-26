@@ -17,7 +17,6 @@ T _$identity<T>(T value) => value;
 mixin _$ProductDetailsO<P extends Product, C extends Cart> {
   @RfControl()
   String? get description;
-
   @Rf(output: false)
   IdO<P, C>? get id;
 
@@ -54,7 +53,6 @@ abstract mixin class $ProductDetailsOCopyWith<P extends Product, C extends Cart,
   factory $ProductDetailsOCopyWith(ProductDetailsO<P, C> value,
           $Res Function(ProductDetailsO<P, C>) _then) =
       _$ProductDetailsOCopyWithImpl;
-
   @useResult
   $Res call(
       {@RfControl() String? description, @Rf(output: false) IdO<P, C>? id});
@@ -153,7 +151,6 @@ abstract mixin class _$ProductDetailsOCopyWith<P extends Product,
   factory _$ProductDetailsOCopyWith(_ProductDetailsO<P, C> value,
           $Res Function(_ProductDetailsO<P, C>) _then) =
       __$ProductDetailsOCopyWithImpl;
-
   @override
   @useResult
   $Res call(
@@ -210,7 +207,6 @@ class __$ProductDetailsOCopyWithImpl<P extends Product, C extends Cart, $Res>
 mixin _$IdO<P extends Product, C extends Cart> {
   @RfControl()
   String? get companyName;
-
   @RfControl()
   String? get name;
 
@@ -244,7 +240,6 @@ mixin _$IdO<P extends Product, C extends Cart> {
 abstract mixin class $IdOCopyWith<P extends Product, C extends Cart, $Res> {
   factory $IdOCopyWith(IdO<P, C> value, $Res Function(IdO<P, C>) _then) =
       _$IdOCopyWithImpl;
-
   @useResult
   $Res call({@RfControl() String? companyName, @RfControl() String? name});
 }
@@ -322,7 +317,6 @@ abstract mixin class _$IdOCopyWith<P extends Product, C extends Cart, $Res>
     implements $IdOCopyWith<P, C, $Res> {
   factory _$IdOCopyWith(_IdO<P, C> value, $Res Function(_IdO<P, C>) _then) =
       __$IdOCopyWithImpl;
-
   @override
   @useResult
   $Res call({@RfControl() String? companyName, @RfControl() String? name});
@@ -360,7 +354,6 @@ class __$IdOCopyWithImpl<P extends Product, C extends Cart, $Res>
 /// @nodoc
 mixin _$Product {
   String? get companyName;
-
   String? get name;
 
   /// Create a copy of Product
@@ -393,7 +386,6 @@ mixin _$Product {
 abstract mixin class $ProductCopyWith<$Res> {
   factory $ProductCopyWith(Product value, $Res Function(Product) _then) =
       _$ProductCopyWithImpl;
-
   @useResult
   $Res call({String? companyName, String? name});
 }
@@ -467,7 +459,6 @@ class _Product extends Product {
 abstract mixin class _$ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
   factory _$ProductCopyWith(_Product value, $Res Function(_Product) _then) =
       __$ProductCopyWithImpl;
-
   @override
   @useResult
   $Res call({String? companyName, String? name});
@@ -504,7 +495,6 @@ class __$ProductCopyWithImpl<$Res> implements _$ProductCopyWith<$Res> {
 /// @nodoc
 mixin _$Cart {
   Product? get product;
-
   String? get description;
 
   /// Create a copy of Cart
@@ -537,7 +527,6 @@ mixin _$Cart {
 abstract mixin class $CartCopyWith<$Res> {
   factory $CartCopyWith(Cart value, $Res Function(Cart) _then) =
       _$CartCopyWithImpl;
-
   @useResult
   $Res call({Product? product, String? description});
 
@@ -627,7 +616,6 @@ class _Cart extends Cart {
 abstract mixin class _$CartCopyWith<$Res> implements $CartCopyWith<$Res> {
   factory _$CartCopyWith(_Cart value, $Res Function(_Cart) _then) =
       __$CartCopyWithImpl;
-
   @override
   @useResult
   $Res call({Product? product, String? description});
@@ -682,7 +670,6 @@ class __$CartCopyWithImpl<$Res> implements _$CartCopyWith<$Res> {
 mixin _$ProductDetailsOOutput<P extends Product, C extends Cart> {
   @RfControl()
   String? get description;
-
   @Rf(output: false)
   IdOOutput<P, C>? get id;
 
@@ -720,7 +707,6 @@ abstract mixin class $ProductDetailsOOutputCopyWith<P extends Product,
   factory $ProductDetailsOOutputCopyWith(ProductDetailsOOutput<P, C> value,
           $Res Function(ProductDetailsOOutput<P, C>) _then) =
       _$ProductDetailsOOutputCopyWithImpl;
-
   @useResult
   $Res call(
       {@RfControl() String? description,
@@ -823,7 +809,6 @@ abstract mixin class _$ProductDetailsOOutputCopyWith<
   factory _$ProductDetailsOOutputCopyWith(_ProductDetailsOOutput<P, C> value,
           $Res Function(_ProductDetailsOOutput<P, C>) _then) =
       __$ProductDetailsOOutputCopyWithImpl;
-
   @override
   @useResult
   $Res call(
@@ -881,7 +866,6 @@ class __$ProductDetailsOOutputCopyWithImpl<P extends Product, C extends Cart,
 mixin _$IdOOutput<P extends Product, C extends Cart> {
   @RfControl()
   String? get companyName;
-
   @RfControl()
   String? get name;
 
@@ -918,7 +902,6 @@ abstract mixin class $IdOOutputCopyWith<P extends Product, C extends Cart,
   factory $IdOOutputCopyWith(
           IdOOutput<P, C> value, $Res Function(IdOOutput<P, C>) _then) =
       _$IdOOutputCopyWithImpl;
-
   @useResult
   $Res call({@RfControl() String? companyName, @RfControl() String? name});
 }
@@ -998,7 +981,6 @@ abstract mixin class _$IdOOutputCopyWith<P extends Product, C extends Cart,
   factory _$IdOOutputCopyWith(
           _IdOOutput<P, C> value, $Res Function(_IdOOutput<P, C>) _then) =
       __$IdOOutputCopyWithImpl;
-
   @override
   @useResult
   $Res call({@RfControl() String? companyName, @RfControl() String? name});

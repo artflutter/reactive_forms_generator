@@ -42,6 +42,7 @@ enum ValidatorsApplyMode {
 
 class FormGenerator {
   final ClassElement root;
+  final Set<String> classes;
 
   final ClassElement element;
 
@@ -70,14 +71,24 @@ class FormGenerator {
   //   return false;
   // }
 
-  FormGenerator(this.root, this.element, this.type, this.ast) {
+  FormGenerator(
+    this.root,
+    this.element,
+    this.type,
+    this.ast,
+    this.classes,
+  ) {
     for (var e in formGroups) {
-      formGroupGenerators[e.name] = FormGenerator(
-        root,
-        e.type.element! as ClassElement,
-        e.type,
-        ast,
-      );
+      if (!classes.contains(e.name)) {
+        classes.add(e.name);
+        formGroupGenerators[e.name] = FormGenerator(
+          root,
+          e.type.element! as ClassElement,
+          e.type,
+          ast,
+          classes,
+        );
+      }
     }
 
     for (var e in formGroupArrays) {
@@ -87,12 +98,16 @@ class FormGenerator {
 
       final typeParameter = typeArguments.first;
 
-      nestedFormGroupGenerators[e.name] = FormGenerator(
-        root,
-        typeParameter.element! as ClassElement,
-        e.type,
-        ast,
-      );
+      if (!classes.contains(e.name)) {
+        classes.add(e.name);
+        nestedFormGroupGenerators[e.name] = FormGenerator(
+          root,
+          typeParameter.element! as ClassElement,
+          e.type,
+          ast,
+          classes,
+        );
+      }
     }
   }
 
@@ -226,6 +241,7 @@ class FormGenerator {
       field.typeParameter.element as ClassElement,
       field.typeParameter,
       ast,
+      classes,
     );
 
     return Method(
@@ -479,6 +495,7 @@ class FormGenerator {
                   typeArguments.first.element! as ClassElement,
                   e.type,
                   ast,
+                  classes,
                 );
 
                 return '${e.name}${generator.className}.forEach((e) => e.toggleDisabled());';
@@ -723,6 +740,11 @@ class FormGenerator {
   }
 
   List<Spec> get generate {
+    if (classes.contains(className)) {
+      return [];
+    }
+
+    classes.add(className);
     return [
       logging,
       Class(
@@ -885,6 +907,7 @@ class FormGenerator {
           typeParameter.element! as ClassElement,
           type,
           ast,
+          classes,
         );
 
         return Method(
