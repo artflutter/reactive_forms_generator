@@ -1,3 +1,19 @@
+## [8.0.0]
+
+* Rf18
+
+## [8.0.0-beta0]
+
+* Rf18
+
+## [7.0.1]
+
+* ReactiveFormArrayItemBuilder
+
+## [7.0.0]
+
+* v7 release
+
 ## [7.0.0-beta0]
 
 * freezed 3

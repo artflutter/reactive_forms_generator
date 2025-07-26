@@ -429,7 +429,6 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
 abstract class SubGroupOOutput with _$SubGroupOOutput {
   const factory SubGroupOOutput({@RfControl() required String id}) =
       _SubGroupOOutput;
-
   factory SubGroupOOutput.fromJson(Map<String, dynamic> json) =>
       _$SubGroupOOutputFromJson(json);
 }
@@ -442,7 +441,6 @@ abstract class GroupOOutput with _$GroupOOutput {
           {@RfControl() required String id,
           @RfArray<dynamic>() required List<SubGroupOOutput> subGroupList}) =
       _GroupOOutput;
-
   factory GroupOOutput.fromJson(Map<String, dynamic> json) =>
       _$GroupOOutputFromJson(json);
 }
@@ -454,7 +452,6 @@ abstract class NestedOOutput with _$NestedOOutput {
   const factory NestedOOutput(
           {@RfArray<dynamic>() required List<GroupOOutput> groupList}) =
       _NestedOOutput;
-
   factory NestedOOutput.fromJson(Map<String, dynamic> json) =>
       _$NestedOOutputFromJson(json);
 }
@@ -502,45 +499,27 @@ class ReactiveSubGroupOFormArrayBuilder<ReactiveSubGroupOFormArrayBuilderT>
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveSubGroupOFormArrayBuilderT>(
-      formArray: formControl ?? control?.call(formModel),
-      builder: (context, formArray, child) {
-        final values = formArray.controls.indexed
-            .where((e) =>
-                controlFilter?.call(
-                  e.$2 as FormControl<ReactiveSubGroupOFormArrayBuilderT>,
-                ) ??
-                true)
-            .toList();
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
 
-        final itemList = values
-            .map((item) {
-              return MapEntry(
-                item.$1,
-                itemBuilder(
-                  context,
-                  item.$1,
-                  formArray.controls[item.$1]
-                      as FormControl<ReactiveSubGroupOFormArrayBuilderT>,
-                  item.$2.value,
-                  formModel,
-                ),
-              );
-            })
-            .map((e) => e.value)
-            .toList();
-
-        if (emptyBuilder != null && itemList.isEmpty) {
-          return emptyBuilder!(context);
-        }
-
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
-            Column(children: itemList);
-      },
+    return ReactiveFormArrayItemBuilder<ReactiveSubGroupOFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder(
+                context,
+                itemList,
+                formModel,
+              )
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder(context, i, control, item, formModel),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
     );
   }
 }
@@ -593,45 +572,33 @@ class ReactiveSubGroupOFormArrayBuilder2<ReactiveSubGroupOFormArrayBuilderT>
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveSubGroupOFormArrayBuilderT>(
-      formArray: formControl ?? control?.call(formModel),
-      builder: (context, formArray, child) {
-        final values = formArray.controls.indexed
-            .where((e) =>
-                controlFilter?.call(
-                  e as FormControl<ReactiveSubGroupOFormArrayBuilderT>,
-                ) ??
-                true)
-            .toList();
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
 
-        final itemList = values
-            .map((item) {
-              return MapEntry(
-                item.$1,
-                itemBuilder((
-                  context: context,
-                  i: item.$1,
-                  control: formArray.controls[item.$1]
-                      as FormControl<ReactiveSubGroupOFormArrayBuilderT>,
-                  item: item.$2.value,
-                  formModel: formModel
-                )),
-              );
-            })
-            .map((e) => e.value)
-            .toList();
-
-        if (emptyBuilder != null && itemList.isEmpty) {
-          return emptyBuilder!(context);
-        }
-
-        return builder?.call((
-              context: context,
-              itemList: itemList,
-              formModel: formModel,
-            )) ??
-            Column(children: itemList);
-      },
+    return ReactiveFormArrayItemBuilder<ReactiveSubGroupOFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder((
+                context: context,
+                itemList: itemList,
+                formModel: formModel,
+              ))
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder((
+        context: context,
+        i: i,
+        control: control,
+        item: item,
+        formModel: formModel
+      )),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
     );
   }
 }
@@ -1355,45 +1322,27 @@ class ReactiveGroupOFormArrayBuilder<ReactiveGroupOFormArrayBuilderT>
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveGroupOFormArrayBuilderT>(
-      formArray: formControl ?? control?.call(formModel),
-      builder: (context, formArray, child) {
-        final values = formArray.controls.indexed
-            .where((e) =>
-                controlFilter?.call(
-                  e as FormControl<ReactiveGroupOFormArrayBuilderT>,
-                ) ??
-                true)
-            .toList();
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
 
-        final itemList = values
-            .map((item) {
-              return MapEntry(
-                item.$1,
-                itemBuilder(
-                  context,
-                  item.$1,
-                  formArray.controls[item.$1]
-                      as FormControl<ReactiveGroupOFormArrayBuilderT>,
-                  item.$2.value,
-                  formModel,
-                ),
-              );
-            })
-            .map((e) => e.value)
-            .toList();
-
-        if (emptyBuilder != null && itemList.isEmpty) {
-          return emptyBuilder!(context);
-        }
-
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
-            Column(children: itemList);
-      },
+    return ReactiveFormArrayItemBuilder<ReactiveGroupOFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder(
+                context,
+                itemList,
+                formModel,
+              )
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder(context, i, control, item, formModel),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
     );
   }
 }
@@ -1446,45 +1395,33 @@ class ReactiveGroupOFormArrayBuilder2<ReactiveGroupOFormArrayBuilderT>
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveGroupOFormArrayBuilderT>(
-      formArray: formControl ?? control?.call(formModel),
-      builder: (context, formArray, child) {
-        final values = formArray.controls.indexed
-            .where((e) =>
-                controlFilter?.call(
-                  e as FormControl<ReactiveGroupOFormArrayBuilderT>,
-                ) ??
-                true)
-            .toList();
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
 
-        final itemList = values
-            .map((item) {
-              return MapEntry(
-                item.$1,
-                itemBuilder((
-                  context: context,
-                  i: item.$1,
-                  control: formArray.controls[item.$1]
-                      as FormControl<ReactiveGroupOFormArrayBuilderT>,
-                  item: item.$2.value,
-                  formModel: formModel
-                )),
-              );
-            })
-            .map((e) => e.value)
-            .toList();
-
-        if (emptyBuilder != null && itemList.isEmpty) {
-          return emptyBuilder!(context);
-        }
-
-        return builder?.call((
-              context: context,
-              itemList: itemList,
-              formModel: formModel,
-            )) ??
-            Column(children: itemList);
-      },
+    return ReactiveFormArrayItemBuilder<ReactiveGroupOFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder((
+                context: context,
+                itemList: itemList,
+                formModel: formModel,
+              ))
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder((
+        context: context,
+        i: i,
+        control: control,
+        item: item,
+        formModel: formModel
+      )),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
     );
   }
 }
@@ -2122,45 +2059,27 @@ class ReactiveNestedOFormArrayBuilder<ReactiveNestedOFormArrayBuilderT>
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveNestedOFormArrayBuilderT>(
-      formArray: formControl ?? control?.call(formModel),
-      builder: (context, formArray, child) {
-        final values = formArray.controls.indexed
-            .where((e) =>
-                controlFilter?.call(
-                  e as FormControl<ReactiveNestedOFormArrayBuilderT>,
-                ) ??
-                true)
-            .toList();
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
 
-        final itemList = values
-            .map((item) {
-              return MapEntry(
-                item.$1,
-                itemBuilder(
-                  context,
-                  item.$1,
-                  formArray.controls[item.$1]
-                      as FormControl<ReactiveNestedOFormArrayBuilderT>,
-                  item.$2.value,
-                  formModel,
-                ),
-              );
-            })
-            .map((e) => e.value)
-            .toList();
-
-        if (emptyBuilder != null && itemList.isEmpty) {
-          return emptyBuilder!(context);
-        }
-
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
-            Column(children: itemList);
-      },
+    return ReactiveFormArrayItemBuilder<ReactiveNestedOFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder(
+                context,
+                itemList,
+                formModel,
+              )
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder(context, i, control, item, formModel),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
     );
   }
 }
@@ -2213,45 +2132,33 @@ class ReactiveNestedOFormArrayBuilder2<ReactiveNestedOFormArrayBuilderT>
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveNestedOFormArrayBuilderT>(
-      formArray: formControl ?? control?.call(formModel),
-      builder: (context, formArray, child) {
-        final values = formArray.controls.indexed
-            .where((e) =>
-                controlFilter?.call(
-                  e as FormControl<ReactiveNestedOFormArrayBuilderT>,
-                ) ??
-                true)
-            .toList();
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
 
-        final itemList = values
-            .map((item) {
-              return MapEntry(
-                item.$1,
-                itemBuilder((
-                  context: context,
-                  i: item.$1,
-                  control: formArray.controls[item.$1]
-                      as FormControl<ReactiveNestedOFormArrayBuilderT>,
-                  item: item.$2.value,
-                  formModel: formModel
-                )),
-              );
-            })
-            .map((e) => e.value)
-            .toList();
-
-        if (emptyBuilder != null && itemList.isEmpty) {
-          return emptyBuilder!(context);
-        }
-
-        return builder?.call((
-              context: context,
-              itemList: itemList,
-              formModel: formModel,
-            )) ??
-            Column(children: itemList);
-      },
+    return ReactiveFormArrayItemBuilder<ReactiveNestedOFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder((
+                context: context,
+                itemList: itemList,
+                formModel: formModel,
+              ))
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder((
+        context: context,
+        i: i,
+        control: control,
+        item: item,
+        formModel: formModel
+      )),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
     );
   }
 }

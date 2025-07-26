@@ -573,7 +573,6 @@ class SomeWiredNameForm
 class RenamedBasicOOutput {
   final String email;
   final String password;
-
   RenamedBasicOOutput(
       {@RfControl(validators: [RequiredValidator()]) required this.email,
       @RfControl(validators: [RequiredValidator()]) required this.password});
@@ -622,45 +621,27 @@ class ReactiveSomeWiredNameFormArrayBuilder<
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveSomeWiredNameFormArrayBuilderT>(
-      formArray: formControl ?? control?.call(formModel),
-      builder: (context, formArray, child) {
-        final values = formArray.controls.indexed
-            .where((e) =>
-                controlFilter?.call(
-                  e.$2 as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>,
-                ) ??
-                true)
-            .toList();
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
 
-        final itemList = values
-            .map((item) {
-              return MapEntry(
-                item.$1,
-                itemBuilder(
-                  context,
-                  item.$1,
-                  formArray.controls[item.$1]
-                      as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>,
-                  item.$2.value,
-                  formModel,
-                ),
-              );
-            })
-            .map((e) => e.value)
-            .toList();
-
-        if (emptyBuilder != null && itemList.isEmpty) {
-          return emptyBuilder!(context);
-        }
-
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
-            Column(children: itemList);
-      },
+    return ReactiveFormArrayItemBuilder<ReactiveSomeWiredNameFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder(
+                context,
+                itemList,
+                formModel,
+              )
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder(context, i, control, item, formModel),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
     );
   }
 }
@@ -714,45 +695,33 @@ class ReactiveSomeWiredNameFormArrayBuilder2<
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveSomeWiredNameFormArrayBuilderT>(
-      formArray: formControl ?? control?.call(formModel),
-      builder: (context, formArray, child) {
-        final values = formArray.controls.indexed
-            .where((e) =>
-                controlFilter?.call(
-                  e.$2 as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>,
-                ) ??
-                true)
-            .toList();
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
 
-        final itemList = values
-            .map((item) {
-              return MapEntry(
-                item.$1,
-                itemBuilder((
-                  context: context,
-                  i: item.$1,
-                  control: formArray.controls[item.$1]
-                      as FormControl<ReactiveSomeWiredNameFormArrayBuilderT>,
-                  item: item.$2.value,
-                  formModel: formModel
-                )),
-              );
-            })
-            .map((e) => e.value)
-            .toList();
-
-        if (emptyBuilder != null && itemList.isEmpty) {
-          return emptyBuilder!(context);
-        }
-
-        return builder?.call((
-              context: context,
-              itemList: itemList,
-              formModel: formModel,
-            )) ??
-            Column(children: itemList);
-      },
+    return ReactiveFormArrayItemBuilder<ReactiveSomeWiredNameFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder((
+                context: context,
+                itemList: itemList,
+                formModel: formModel,
+              ))
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder((
+        context: context,
+        i: i,
+        control: control,
+        item: item,
+        formModel: formModel
+      )),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
     );
   }
 }

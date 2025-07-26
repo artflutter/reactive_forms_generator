@@ -3084,45 +3084,27 @@ class ReactiveMSICreateFormArrayBuilder<ReactiveMSICreateFormArrayBuilderT>
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveMSICreateFormArrayBuilderT>(
-      formArray: formControl ?? control?.call(formModel),
-      builder: (context, formArray, child) {
-        final values = formArray.controls.indexed
-            .where((e) =>
-                controlFilter?.call(
-                  e.$2 as FormControl<ReactiveMSICreateFormArrayBuilderT>,
-                ) ??
-                true)
-            .toList();
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
 
-        final itemList = values
-            .map((item) {
-              return MapEntry(
-                item.$1,
-                itemBuilder(
-                  context,
-                  item.$1,
-                  formArray.controls[item.$1]
-                      as FormControl<ReactiveMSICreateFormArrayBuilderT>,
-                  item.$2.value,
-                  formModel,
-                ),
-              );
-            })
-            .map((e) => e.value)
-            .toList();
-
-        if (emptyBuilder != null && itemList.isEmpty) {
-          return emptyBuilder!(context);
-        }
-
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
-            Column(children: itemList);
-      },
+    return ReactiveFormArrayItemBuilder<ReactiveMSICreateFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder(
+                context,
+                itemList,
+                formModel,
+              )
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder(context, i, control, item, formModel),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
     );
   }
 }
@@ -3175,45 +3157,33 @@ class ReactiveMSICreateFormArrayBuilder2<ReactiveMSICreateFormArrayBuilderT>
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveMSICreateFormArrayBuilderT>(
-      formArray: formControl ?? control?.call(formModel),
-      builder: (context, formArray, child) {
-        final values = formArray.controls.indexed
-            .where((e) =>
-                controlFilter?.call(
-                  e as FormControl<ReactiveMSICreateFormArrayBuilderT>,
-                ) ??
-                true)
-            .toList();
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
 
-        final itemList = values
-            .map((item) {
-              return MapEntry(
-                item.$1,
-                itemBuilder((
-                  context: context,
-                  i: item.$1,
-                  control: formArray.controls[item.$1]
-                      as FormControl<ReactiveMSICreateFormArrayBuilderT>,
-                  item: item.$2.value,
-                  formModel: formModel
-                )),
-              );
-            })
-            .map((e) => e.value)
-            .toList();
-
-        if (emptyBuilder != null && itemList.isEmpty) {
-          return emptyBuilder!(context);
-        }
-
-        return builder?.call((
-              context: context,
-              itemList: itemList,
-              formModel: formModel,
-            )) ??
-            Column(children: itemList);
-      },
+    return ReactiveFormArrayItemBuilder<ReactiveMSICreateFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder((
+                context: context,
+                itemList: itemList,
+                formModel: formModel,
+              ))
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder((
+        context: context,
+        i: i,
+        control: control,
+        item: item,
+        formModel: formModel
+      )),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
     );
   }
 }
