@@ -79,8 +79,9 @@ class FormGenerator {
     this.classes,
   ) {
     for (var e in formGroups) {
-      if (!classes.contains(e.name)) {
-        classes.add(e.name);
+      if (!classes.contains(e.className)) {
+        classes.add(e.className);
+
         formGroupGenerators[e.name] = FormGenerator(
           root,
           e.type.element! as ClassElement,
@@ -98,8 +99,8 @@ class FormGenerator {
 
       final typeParameter = typeArguments.first;
 
-      if (!classes.contains(e.name)) {
-        classes.add(e.name);
+      if (!classes.contains(e.className)) {
+        classes.add(e.className);
         nestedFormGroupGenerators[e.name] = FormGenerator(
           root,
           typeParameter.element! as ClassElement,
@@ -740,11 +741,11 @@ class FormGenerator {
   }
 
   List<Spec> get generate {
-    if (classes.contains(className)) {
-      return [];
-    }
+    // if (classes.contains(className)) {
+    //   return [];
+    // }
 
-    classes.add(className);
+    // classes.add(className);
     return [
       logging,
       Class(
@@ -880,22 +881,20 @@ class FormGenerator {
     ];
   }
 
-  Iterable<Method> get formGroupMethodList =>
-      formGroupGenerators.map<String, Method>((name, generator) {
-        return MapEntry(
-          name,
-          Method(
-            (b) => b
-              ..lambda = true
-              ..returns = Reference(generator.classNameFull)
-              ..name = '${name}Form'
-              ..type = MethodType.getter
-              ..body = Code(
-                '${generator.className}(form, pathBuilder(\'$name\'))',
-              ),
+  Iterable<Method> get formGroupMethodList {
+    return formGroups.map<Method>((e) {
+      return Method(
+        (b) => b
+          ..lambda = true
+          ..returns = Reference('${e.className}${element.generics}')
+          ..name = '${e.name}Form'
+          ..type = MethodType.getter
+          ..body = Code(
+            '${e.className}(form, pathBuilder(\'${e.name}\'))',
           ),
-        );
-      }).values;
+      );
+    });
+  }
 
   Iterable<Method> get formArrayMethodList {
     return formGroupArrays.map(

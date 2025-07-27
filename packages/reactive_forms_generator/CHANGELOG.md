@@ -1,3 +1,7 @@
+## [7.0.6]
+
+* Recursive forms bugfix fix
+
 ## [7.0.5]
 
 * Recursive forms bugfix

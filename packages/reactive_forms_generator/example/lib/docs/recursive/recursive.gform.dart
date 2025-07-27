@@ -226,6 +226,8 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
 
   static const String securedAreaControlName = "securedArea";
 
+  static const String parcelSystemControlName = "parcelSystem";
+
   static const String subSecuredAreasControlName = "subSecuredAreas";
 
   final FormGroup form;
@@ -238,6 +240,8 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
 
   String securedAreaControlPath() => pathBuilder(securedAreaControlName);
 
+  String parcelSystemControlPath() => pathBuilder(parcelSystemControlName);
+
   String subSecuredAreasControlPath() =>
       pathBuilder(subSecuredAreasControlName);
 
@@ -245,12 +249,16 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
 
   SecuredArea? get _securedAreaValue => securedAreaForm.model;
 
+  ParcelSystem? get _parcelSystemValue => parcelSystemForm.model;
+
   List<SecuredArea> get _subSecuredAreasValue =>
       subSecuredAreasSecuredAreaForm.map((e) => e.model).toList();
 
   String? get _idRawValue => idControl.value;
 
   SecuredArea? get _securedAreaRawValue => securedAreaForm.rawModel;
+
+  ParcelSystem? get _parcelSystemRawValue => parcelSystemForm.rawModel;
 
   List<SecuredArea> get _subSecuredAreasRawValue =>
       subSecuredAreasSecuredAreaForm.map((e) => e.rawModel).toList();
@@ -279,6 +287,17 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
 
   @Deprecated(
       'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+  bool get containsParcelSystem {
+    try {
+      form.control(parcelSystemControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsSubSecuredAreas {
     try {
       form.control(subSecuredAreasControlPath());
@@ -292,12 +311,16 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
 
   Map<String, Object>? get securedAreaErrors => securedAreaControl.errors;
 
+  Map<String, Object>? get parcelSystemErrors => parcelSystemControl.errors;
+
   Map<String, Object> get subSecuredAreasErrors =>
       subSecuredAreasControl.errors;
 
   void get idFocus => form.focus(idControlPath());
 
   void get securedAreaFocus => form.focus(securedAreaControlPath());
+
+  void get parcelSystemFocus => form.focus(parcelSystemControlPath());
 
   void get subSecuredAreasFocus => form.focus(subSecuredAreasControlPath());
 
@@ -357,6 +380,34 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void parcelSystemRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsParcelSystem) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          parcelSystemControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            parcelSystemControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void idValueUpdate(
     String? value, {
     bool updateParent = true,
@@ -373,6 +424,17 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
   }) {
     securedAreaControl.updateValue(SecuredAreaForm.formElements(value).rawValue,
         updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void parcelSystemValueUpdate(
+    ParcelSystem? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    parcelSystemControl.updateValue(
+        ParcelSystemForm.formElements(value).rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
   }
 
   void subSecuredAreasValueUpdate(
@@ -466,6 +528,17 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void parcelSystemValuePatch(
+    ParcelSystem? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    parcelSystemControl.updateValue(
+        ParcelSystemForm.formElements(value).rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
   void subSecuredAreasValuePatch(
     List<SecuredArea> value, {
     bool updateParent = true,
@@ -515,6 +588,18 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  void parcelSystemValueReset(
+    ParcelSystem? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      parcelSystemControl.reset(
+          value: ParcelSystemForm.formElements(value).rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+
   void subSecuredAreasValueReset(
     List<SecuredArea> value, {
     bool updateParent = true,
@@ -535,12 +620,18 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
   FormGroup get securedAreaControl =>
       form.control(securedAreaControlPath()) as FormGroup;
 
+  FormGroup get parcelSystemControl =>
+      form.control(parcelSystemControlPath()) as FormGroup;
+
   FormArray<Map<String, Object?>> get subSecuredAreasControl =>
       form.control(subSecuredAreasControlPath())
           as FormArray<Map<String, Object?>>;
 
   SecuredAreaForm get securedAreaForm =>
       SecuredAreaForm(form, pathBuilder('securedArea'));
+
+  ParcelSystemForm get parcelSystemForm =>
+      ParcelSystemForm(form, pathBuilder('parcelSystem'));
 
   List<SecuredAreaForm> get subSecuredAreasSecuredAreaForm {
     final values = subSecuredAreasControl.controls.map((e) => e.value).toList();
@@ -583,6 +674,24 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
       );
     } else {
       securedAreaControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void parcelSystemSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      parcelSystemControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      parcelSystemControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -642,6 +751,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     return SecuredArea(
         id: _idValue,
         securedArea: _securedAreaValue,
+        parcelSystem: _parcelSystemValue,
         subSecuredAreas: _subSecuredAreasValue);
   }
 
@@ -650,6 +760,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     return SecuredArea(
         id: _idRawValue,
         securedArea: _securedAreaRawValue,
+        parcelSystem: _parcelSystemRawValue,
         subSecuredAreas: _subSecuredAreasRawValue);
   }
 
@@ -671,11 +782,13 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
 
       subSecuredAreasSecuredAreaForm.forEach((e) => e.toggleDisabled());
       securedAreaForm.toggleDisabled();
+      parcelSystemForm.toggleDisabled();
       currentForm.markAsDisabled(
           updateParent: updateParent, emitEvent: emitEvent);
     } else {
       subSecuredAreasSecuredAreaForm.forEach((e) => e.toggleDisabled());
       securedAreaForm.toggleDisabled();
+      parcelSystemForm.toggleDisabled();
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
           currentFormInstance.controls[key]?.markAsEnabled(
@@ -760,7 +873,544 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
             asyncValidatorsDebounceTime: 250,
             disabled: false),
         securedAreaControlName:
-            SecuredAreaForm.formElements(securedArea?.securedArea)
+            SecuredAreaForm.formElements(securedArea?.securedArea),
+        parcelSystemControlName:
+            ParcelSystemForm.formElements(securedArea?.parcelSystem)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
+}
+
+final _logParcelSystemForm = Logger.detached('ParcelSystemForm');
+
+class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
+  ParcelSystemForm(
+    this.form,
+    this.path,
+  );
+
+  static const String hasParcelSystemControlName = "hasParcelSystem";
+
+  static const String dataControlName = "data";
+
+  final FormGroup form;
+
+  final String? path;
+
+  final Map<String, bool> _disabled = {};
+
+  String hasParcelSystemControlPath() =>
+      pathBuilder(hasParcelSystemControlName);
+
+  String dataControlPath() => pathBuilder(dataControlName);
+
+  bool get _hasParcelSystemValue => hasParcelSystemControl.value ?? false;
+
+  ParcelSystemData get _dataValue => dataForm.model;
+
+  bool get _hasParcelSystemRawValue => hasParcelSystemControl.value ?? false;
+
+  ParcelSystemData get _dataRawValue => dataForm.rawModel;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+  bool get containsHasParcelSystem {
+    try {
+      form.control(hasParcelSystemControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+  bool get containsData {
+    try {
+      form.control(dataControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Map<String, Object> get hasParcelSystemErrors =>
+      hasParcelSystemControl.errors;
+
+  Map<String, Object> get dataErrors => dataControl.errors;
+
+  void get hasParcelSystemFocus => form.focus(hasParcelSystemControlPath());
+
+  void get dataFocus => form.focus(dataControlPath());
+
+  void hasParcelSystemValueUpdate(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    hasParcelSystemControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void dataValueUpdate(
+    ParcelSystemData value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    dataControl.updateValue(ParcelSystemDataForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void hasParcelSystemValuePatch(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    hasParcelSystemControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void dataValuePatch(
+    ParcelSystemData value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    dataControl.updateValue(ParcelSystemDataForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void hasParcelSystemValueReset(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      hasParcelSystemControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
+
+  void dataValueReset(
+    ParcelSystemData value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      dataControl.reset(
+          value: ParcelSystemDataForm.formElements(value).rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+
+  FormControl<bool> get hasParcelSystemControl =>
+      form.control(hasParcelSystemControlPath()) as FormControl<bool>;
+
+  FormGroup get dataControl => form.control(dataControlPath()) as FormGroup;
+
+  ParcelSystemDataForm get dataForm =>
+      ParcelSystemDataForm(form, pathBuilder('data'));
+
+  void hasParcelSystemSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      hasParcelSystemControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      hasParcelSystemControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void dataSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      dataControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      dataControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  @override
+  ParcelSystem get model {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
+      _logParcelSystemForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
+    }
+    return ParcelSystem(
+        hasParcelSystem: _hasParcelSystemValue, data: _dataValue);
+  }
+
+  @override
+  ParcelSystem get rawModel {
+    return ParcelSystem(
+        hasParcelSystem: _hasParcelSystemRawValue, data: _dataRawValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      dataForm.toggleDisabled();
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      dataForm.toggleDisabled();
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
+  }
+
+  @override
+  bool equalsTo(ParcelSystem? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      ParcelSystemForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
+  void submit({
+    required void Function(ParcelSystem model) onValid,
+    void Function()? onNotValid,
+  }) {
+    currentForm.markAllAsTouched();
+    if (currentForm.valid) {
+      onValid(model);
+    } else {
+      _logParcelSystemForm.info('Errors');
+      _logParcelSystemForm.info('┗━━ ${form.errors}');
+      onNotValid?.call();
+    }
+  }
+
+  AbstractControl<dynamic> get currentForm {
+    return path == null ? form : form.control(path!);
+  }
+
+  @override
+  void updateValue(
+    ParcelSystem? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.updateValue(ParcelSystemForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
+
+  @override
+  void reset({
+    ParcelSystem? value,
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: value != null ? formElements(value).rawValue : null,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
+
+  static FormGroup formElements(ParcelSystem? parcelSystem) => FormGroup({
+        hasParcelSystemControlName: FormControl<bool>(
+            value: parcelSystem?.hasParcelSystem,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        dataControlName: ParcelSystemDataForm.formElements(parcelSystem?.data)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
+}
+
+final _logParcelSystemDataForm = Logger.detached('ParcelSystemDataForm');
+
+class ParcelSystemDataForm
+    implements FormModel<ParcelSystemData, ParcelSystemData> {
+  ParcelSystemDataForm(
+    this.form,
+    this.path,
+  );
+
+  static const String idControlName = "id";
+
+  final FormGroup form;
+
+  final String? path;
+
+  final Map<String, bool> _disabled = {};
+
+  String idControlPath() => pathBuilder(idControlName);
+
+  String? get _idValue => idControl.value;
+
+  String? get _idRawValue => idControl.value;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+  bool get containsId {
+    try {
+      form.control(idControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Map<String, Object>? get idErrors => idControl.errors;
+
+  void get idFocus => form.focus(idControlPath());
+
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void idRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsId) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          idControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            idControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void idValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    idControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void idValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    idControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void idValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      idControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
+
+  FormControl<String> get idControl =>
+      form.control(idControlPath()) as FormControl<String>;
+
+  void idSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      idControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      idControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  @override
+  ParcelSystemData get model {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
+      _logParcelSystemDataForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
+    }
+    return ParcelSystemData(id: _idValue);
+  }
+
+  @override
+  ParcelSystemData get rawModel {
+    return ParcelSystemData(id: _idRawValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
+  }
+
+  @override
+  bool equalsTo(ParcelSystemData? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      ParcelSystemDataForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
+  void submit({
+    required void Function(ParcelSystemData model) onValid,
+    void Function()? onNotValid,
+  }) {
+    currentForm.markAllAsTouched();
+    if (currentForm.valid) {
+      onValid(model);
+    } else {
+      _logParcelSystemDataForm.info('Errors');
+      _logParcelSystemDataForm.info('┗━━ ${form.errors}');
+      onNotValid?.call();
+    }
+  }
+
+  AbstractControl<dynamic> get currentForm {
+    return path == null ? form : form.control(path!);
+  }
+
+  @override
+  void updateValue(
+    ParcelSystemData? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.updateValue(ParcelSystemDataForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
+
+  @override
+  void reset({
+    ParcelSystemData? value,
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: value != null ? formElements(value).rawValue : null,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
+
+  static FormGroup formElements(ParcelSystemData? parcelSystemData) =>
+      FormGroup({
+        idControlName: FormControl<String>(
+            value: parcelSystemData?.id,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false)
       },
           validators: [],
           asyncValidators: [],
