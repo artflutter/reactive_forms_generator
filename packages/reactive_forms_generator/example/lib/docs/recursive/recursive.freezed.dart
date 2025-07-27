@@ -17,6 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$SecuredArea {
   String? get id;
   SecuredArea? get securedArea;
+  ParcelSystem? get parcelSystem;
   @RfArray<SecuredArea>()
   List<SecuredArea> get subSecuredAreas;
 
@@ -35,17 +36,19 @@ mixin _$SecuredArea {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.securedArea, securedArea) ||
                 other.securedArea == securedArea) &&
+            (identical(other.parcelSystem, parcelSystem) ||
+                other.parcelSystem == parcelSystem) &&
             const DeepCollectionEquality()
                 .equals(other.subSecuredAreas, subSecuredAreas));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, securedArea,
+  int get hashCode => Object.hash(runtimeType, id, securedArea, parcelSystem,
       const DeepCollectionEquality().hash(subSecuredAreas));
 
   @override
   String toString() {
-    return 'SecuredArea(id: $id, securedArea: $securedArea, subSecuredAreas: $subSecuredAreas)';
+    return 'SecuredArea(id: $id, securedArea: $securedArea, parcelSystem: $parcelSystem, subSecuredAreas: $subSecuredAreas)';
   }
 }
 
@@ -58,9 +61,11 @@ abstract mixin class $SecuredAreaCopyWith<$Res> {
   $Res call(
       {String? id,
       SecuredArea? securedArea,
+      ParcelSystem? parcelSystem,
       @RfArray<SecuredArea>() List<SecuredArea> subSecuredAreas});
 
   $SecuredAreaCopyWith<$Res>? get securedArea;
+  $ParcelSystemCopyWith<$Res>? get parcelSystem;
 }
 
 /// @nodoc
@@ -77,6 +82,7 @@ class _$SecuredAreaCopyWithImpl<$Res> implements $SecuredAreaCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? securedArea = freezed,
+    Object? parcelSystem = freezed,
     Object? subSecuredAreas = null,
   }) {
     return _then(_self.copyWith(
@@ -88,6 +94,10 @@ class _$SecuredAreaCopyWithImpl<$Res> implements $SecuredAreaCopyWith<$Res> {
           ? _self.securedArea
           : securedArea // ignore: cast_nullable_to_non_nullable
               as SecuredArea?,
+      parcelSystem: freezed == parcelSystem
+          ? _self.parcelSystem
+          : parcelSystem // ignore: cast_nullable_to_non_nullable
+              as ParcelSystem?,
       subSecuredAreas: null == subSecuredAreas
           ? _self.subSecuredAreas
           : subSecuredAreas // ignore: cast_nullable_to_non_nullable
@@ -108,6 +118,20 @@ class _$SecuredAreaCopyWithImpl<$Res> implements $SecuredAreaCopyWith<$Res> {
       return _then(_self.copyWith(securedArea: value));
     });
   }
+
+  /// Create a copy of SecuredArea
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ParcelSystemCopyWith<$Res>? get parcelSystem {
+    if (_self.parcelSystem == null) {
+      return null;
+    }
+
+    return $ParcelSystemCopyWith<$Res>(_self.parcelSystem!, (value) {
+      return _then(_self.copyWith(parcelSystem: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -116,6 +140,7 @@ class _SecuredArea implements SecuredArea {
   const _SecuredArea(
       {this.id,
       this.securedArea,
+      this.parcelSystem,
       @RfArray<SecuredArea>()
       final List<SecuredArea> subSecuredAreas = const []})
       : _subSecuredAreas = subSecuredAreas;
@@ -124,6 +149,8 @@ class _SecuredArea implements SecuredArea {
   final String? id;
   @override
   final SecuredArea? securedArea;
+  @override
+  final ParcelSystem? parcelSystem;
   final List<SecuredArea> _subSecuredAreas;
   @override
   @JsonKey()
@@ -150,17 +177,19 @@ class _SecuredArea implements SecuredArea {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.securedArea, securedArea) ||
                 other.securedArea == securedArea) &&
+            (identical(other.parcelSystem, parcelSystem) ||
+                other.parcelSystem == parcelSystem) &&
             const DeepCollectionEquality()
                 .equals(other._subSecuredAreas, _subSecuredAreas));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, securedArea,
+  int get hashCode => Object.hash(runtimeType, id, securedArea, parcelSystem,
       const DeepCollectionEquality().hash(_subSecuredAreas));
 
   @override
   String toString() {
-    return 'SecuredArea(id: $id, securedArea: $securedArea, subSecuredAreas: $subSecuredAreas)';
+    return 'SecuredArea(id: $id, securedArea: $securedArea, parcelSystem: $parcelSystem, subSecuredAreas: $subSecuredAreas)';
   }
 }
 
@@ -175,10 +204,13 @@ abstract mixin class _$SecuredAreaCopyWith<$Res>
   $Res call(
       {String? id,
       SecuredArea? securedArea,
+      ParcelSystem? parcelSystem,
       @RfArray<SecuredArea>() List<SecuredArea> subSecuredAreas});
 
   @override
   $SecuredAreaCopyWith<$Res>? get securedArea;
+  @override
+  $ParcelSystemCopyWith<$Res>? get parcelSystem;
 }
 
 /// @nodoc
@@ -195,6 +227,7 @@ class __$SecuredAreaCopyWithImpl<$Res> implements _$SecuredAreaCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? securedArea = freezed,
+    Object? parcelSystem = freezed,
     Object? subSecuredAreas = null,
   }) {
     return _then(_SecuredArea(
@@ -206,6 +239,10 @@ class __$SecuredAreaCopyWithImpl<$Res> implements _$SecuredAreaCopyWith<$Res> {
           ? _self.securedArea
           : securedArea // ignore: cast_nullable_to_non_nullable
               as SecuredArea?,
+      parcelSystem: freezed == parcelSystem
+          ? _self.parcelSystem
+          : parcelSystem // ignore: cast_nullable_to_non_nullable
+              as ParcelSystem?,
       subSecuredAreas: null == subSecuredAreas
           ? _self._subSecuredAreas
           : subSecuredAreas // ignore: cast_nullable_to_non_nullable
@@ -225,6 +262,327 @@ class __$SecuredAreaCopyWithImpl<$Res> implements _$SecuredAreaCopyWith<$Res> {
     return $SecuredAreaCopyWith<$Res>(_self.securedArea!, (value) {
       return _then(_self.copyWith(securedArea: value));
     });
+  }
+
+  /// Create a copy of SecuredArea
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ParcelSystemCopyWith<$Res>? get parcelSystem {
+    if (_self.parcelSystem == null) {
+      return null;
+    }
+
+    return $ParcelSystemCopyWith<$Res>(_self.parcelSystem!, (value) {
+      return _then(_self.copyWith(parcelSystem: value));
+    });
+  }
+}
+
+/// @nodoc
+mixin _$ParcelSystem {
+  @RfControl<bool>()
+  bool get hasParcelSystem;
+  ParcelSystemData get data;
+
+  /// Create a copy of ParcelSystem
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ParcelSystemCopyWith<ParcelSystem> get copyWith =>
+      _$ParcelSystemCopyWithImpl<ParcelSystem>(
+          this as ParcelSystem, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ParcelSystem &&
+            (identical(other.hasParcelSystem, hasParcelSystem) ||
+                other.hasParcelSystem == hasParcelSystem) &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, hasParcelSystem, data);
+
+  @override
+  String toString() {
+    return 'ParcelSystem(hasParcelSystem: $hasParcelSystem, data: $data)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $ParcelSystemCopyWith<$Res> {
+  factory $ParcelSystemCopyWith(
+          ParcelSystem value, $Res Function(ParcelSystem) _then) =
+      _$ParcelSystemCopyWithImpl;
+  @useResult
+  $Res call({@RfControl<bool>() bool hasParcelSystem, ParcelSystemData data});
+
+  $ParcelSystemDataCopyWith<$Res> get data;
+}
+
+/// @nodoc
+class _$ParcelSystemCopyWithImpl<$Res> implements $ParcelSystemCopyWith<$Res> {
+  _$ParcelSystemCopyWithImpl(this._self, this._then);
+
+  final ParcelSystem _self;
+  final $Res Function(ParcelSystem) _then;
+
+  /// Create a copy of ParcelSystem
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? hasParcelSystem = null,
+    Object? data = null,
+  }) {
+    return _then(_self.copyWith(
+      hasParcelSystem: null == hasParcelSystem
+          ? _self.hasParcelSystem
+          : hasParcelSystem // ignore: cast_nullable_to_non_nullable
+              as bool,
+      data: null == data
+          ? _self.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as ParcelSystemData,
+    ));
+  }
+
+  /// Create a copy of ParcelSystem
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ParcelSystemDataCopyWith<$Res> get data {
+    return $ParcelSystemDataCopyWith<$Res>(_self.data, (value) {
+      return _then(_self.copyWith(data: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _ParcelSystem implements ParcelSystem {
+  const _ParcelSystem(
+      {@RfControl<bool>() this.hasParcelSystem = false,
+      this.data = const ParcelSystemData()});
+
+  @override
+  @JsonKey()
+  @RfControl<bool>()
+  final bool hasParcelSystem;
+  @override
+  @JsonKey()
+  final ParcelSystemData data;
+
+  /// Create a copy of ParcelSystem
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ParcelSystemCopyWith<_ParcelSystem> get copyWith =>
+      __$ParcelSystemCopyWithImpl<_ParcelSystem>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ParcelSystem &&
+            (identical(other.hasParcelSystem, hasParcelSystem) ||
+                other.hasParcelSystem == hasParcelSystem) &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, hasParcelSystem, data);
+
+  @override
+  String toString() {
+    return 'ParcelSystem(hasParcelSystem: $hasParcelSystem, data: $data)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$ParcelSystemCopyWith<$Res>
+    implements $ParcelSystemCopyWith<$Res> {
+  factory _$ParcelSystemCopyWith(
+          _ParcelSystem value, $Res Function(_ParcelSystem) _then) =
+      __$ParcelSystemCopyWithImpl;
+  @override
+  @useResult
+  $Res call({@RfControl<bool>() bool hasParcelSystem, ParcelSystemData data});
+
+  @override
+  $ParcelSystemDataCopyWith<$Res> get data;
+}
+
+/// @nodoc
+class __$ParcelSystemCopyWithImpl<$Res>
+    implements _$ParcelSystemCopyWith<$Res> {
+  __$ParcelSystemCopyWithImpl(this._self, this._then);
+
+  final _ParcelSystem _self;
+  final $Res Function(_ParcelSystem) _then;
+
+  /// Create a copy of ParcelSystem
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? hasParcelSystem = null,
+    Object? data = null,
+  }) {
+    return _then(_ParcelSystem(
+      hasParcelSystem: null == hasParcelSystem
+          ? _self.hasParcelSystem
+          : hasParcelSystem // ignore: cast_nullable_to_non_nullable
+              as bool,
+      data: null == data
+          ? _self.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as ParcelSystemData,
+    ));
+  }
+
+  /// Create a copy of ParcelSystem
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ParcelSystemDataCopyWith<$Res> get data {
+    return $ParcelSystemDataCopyWith<$Res>(_self.data, (value) {
+      return _then(_self.copyWith(data: value));
+    });
+  }
+}
+
+/// @nodoc
+mixin _$ParcelSystemData {
+  String? get id;
+
+  /// Create a copy of ParcelSystemData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ParcelSystemDataCopyWith<ParcelSystemData> get copyWith =>
+      _$ParcelSystemDataCopyWithImpl<ParcelSystemData>(
+          this as ParcelSystemData, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ParcelSystemData &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @override
+  String toString() {
+    return 'ParcelSystemData(id: $id)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $ParcelSystemDataCopyWith<$Res> {
+  factory $ParcelSystemDataCopyWith(
+          ParcelSystemData value, $Res Function(ParcelSystemData) _then) =
+      _$ParcelSystemDataCopyWithImpl;
+  @useResult
+  $Res call({String? id});
+}
+
+/// @nodoc
+class _$ParcelSystemDataCopyWithImpl<$Res>
+    implements $ParcelSystemDataCopyWith<$Res> {
+  _$ParcelSystemDataCopyWithImpl(this._self, this._then);
+
+  final ParcelSystemData _self;
+  final $Res Function(ParcelSystemData) _then;
+
+  /// Create a copy of ParcelSystemData
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+  }) {
+    return _then(_self.copyWith(
+      id: freezed == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _ParcelSystemData implements ParcelSystemData {
+  const _ParcelSystemData({this.id});
+
+  @override
+  final String? id;
+
+  /// Create a copy of ParcelSystemData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ParcelSystemDataCopyWith<_ParcelSystemData> get copyWith =>
+      __$ParcelSystemDataCopyWithImpl<_ParcelSystemData>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ParcelSystemData &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @override
+  String toString() {
+    return 'ParcelSystemData(id: $id)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$ParcelSystemDataCopyWith<$Res>
+    implements $ParcelSystemDataCopyWith<$Res> {
+  factory _$ParcelSystemDataCopyWith(
+          _ParcelSystemData value, $Res Function(_ParcelSystemData) _then) =
+      __$ParcelSystemDataCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String? id});
+}
+
+/// @nodoc
+class __$ParcelSystemDataCopyWithImpl<$Res>
+    implements _$ParcelSystemDataCopyWith<$Res> {
+  __$ParcelSystemDataCopyWithImpl(this._self, this._then);
+
+  final _ParcelSystemData _self;
+  final $Res Function(_ParcelSystemData) _then;
+
+  /// Create a copy of ParcelSystemData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = freezed,
+  }) {
+    return _then(_ParcelSystemData(
+      id: freezed == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
