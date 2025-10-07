@@ -1,205 +1,212 @@
+## [8.0.4]
+
+- Complete migration to reactive_forms 18.1.1 (from ^17.0.0)
+- Updated `flutter_lints` from ^5.0.0 to ^6.0.0
+- Enhanced compatibility with latest Flutter SDK
+
 ## [8.0.0]
 
-* Rf18
+- Rf18
 
 ## [8.0.0-beta0]
 
-* Rf18
+- Rf18
 
 ## [7.0.1]
 
-* ReactiveFormArrayItemBuilder
+- ReactiveFormArrayItemBuilder
 
 ## [7.0.0]
 
-* v7 release
+- v7 release
 
 ## [7.0.0-beta0]
 
-* freezed 3
+- freezed 3
 
 ## [6.0.0]
 
-* Output model generation with support with smart nullability detection.
-  Compare implementation
-    - https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/login/login.dart
-    - https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/login/login_output.dart
-      Technically this release should not bring any braking changes but I decided to do a major
-      version bump for safety.
-      By default generated code will have it's default behavior, to start migration you need to
-      migrate from `@Rf()` to `@Rf(output: true)`
+- Output model generation with support with smart nullability detection. Compare
+  implementation
+  - https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/login/login.dart
+  - https://github.com/artflutter/reactive_forms_generator/blob/master/packages/reactive_forms_generator/example/lib/docs/login/login_output.dart
+    Technically this release should not bring any braking changes but I decided
+    to do a major version bump for safety. By default generated code will have
+    it's default behavior, to start migration you need to migrate from `@Rf()`
+    to `@Rf(output: true)`
 
 ## [6.0.0-beta.8]
 
-* requiredValidators
+- requiredValidators
 
 ## [6.0.0-beta.7]
 
-* output `false` by default
+- output `false` by default
 
 ## [6.0.0-beta.6]
 
-* export `DeepCollectionEquality`
+- export `DeepCollectionEquality`
 
 ## [6.0.0-beta.5]
 
-* equalsTo method
+- equalsTo method
 
 ## [6.0.0-beta.3]
 
-* improved logging
+- improved logging
 
 ## [6.0.0-beta.2]
 
-* improved logging
+- improved logging
 
 ## [6.0.0-beta.1]
 
-* BREAKING CHANGE: before generating code make sure to replace @Rf() with @Rf(output: false)
+- BREAKING CHANGE: before generating code make sure to replace @Rf() with
+  @Rf(output: false)
 
 ## [6.0.0-beta.0]
 
-* output
+- output
 
 ## [5.0.2]
 
-* equalsTo method
+- equalsTo method
 
 ## [5.0.0]
 
-* rf17
+- rf17
 
 ## [4.4.0-beta.0]
 
-* toggleEnabled method added.
+- toggleEnabled method added.
 
 ## [4.3.0]
 
-* fix for https://github.com/artflutter/reactive_forms_generator/issues/143
+- fix for https://github.com/artflutter/reactive_forms_generator/issues/143
 
 ## [4.2.0]
 
-* FormModel submit
+- FormModel submit
 
 ## [4.0.0]
 
-* annotation shorthands support - this is non-breaking change, old annotations will continue
-  working.
-  just a major bump for preventing unexpected auto updates
+- annotation shorthands support * this is non-breaking change, old annotations
+  will continue working. just a major bump for preventing unexpected auto
+  updates
 
 ## [3.0.0]
 
-* rf 16 migration
+- rf 16 migration
 
 ## [2.0.0]
 
-* rf 15 migration
+- rf 15 migration
 
 ## [1.1.0]
 
-* RF 14.3.0
+- RF 14.3.0
 
 ## [1.0.0]
 
-* Internal refactoring. Everything should work as previously but there is a small chance of breaking
-  changes
+- Internal refactoring. Everything should work as previously but there is a
+  small chance of breaking changes
 
 ## [0.14.0-beta]
 
-* fixes and refactoring
+- fixes and refactoring
 
 ## [0.13.2]
 
-* more methods in FormModel interface
+- more methods in FormModel interface
 
 ## [0.13.1]
 
-* fix for https://github.com/artflutter/reactive_forms_generator/issues/66
+- fix for https://github.com/artflutter/reactive_forms_generator/issues/66
 
 ## [0.13.0]
 
-* release
+- release
 
 ## [0.13.0-beta]
 
-* package update
+- package update
 
 ## [0.12.0-beta]
 
-* re-export reactive_forms
+- re-export reactive_forms
 
 ## [0.11.0-beta]
 
-* re-export flutter/widgets.dart
+- re-export flutter/widgets.dart
 
 ## [0.10.0-beta]
 
-* typed validators for FormGroup
+- typed validators for FormGroup
 
 ## [0.9.0-beta]
 
-* reactive_forms 13
+- reactive_forms 13
 
 ## [0.8.0-beta]
 
-* Flutter 3
+- Flutter 3
 
 ## [0.7.0-beta]
 
-* FormArrayAnnotation with generic typing
+- FormArrayAnnotation with generic typing
 
 ## [0.6.0-beta]
 
-* FormControlAnnotation with generic typing
+- FormControlAnnotation with generic typing
 
 ## [0.5.0-beta]
 
-* ExtendedControl model
+- ExtendedControl model
 
 ## [0.4.0-beta]
 
-* reactive_forms bump
+- reactive_forms bump
 
 ## [0.3.2-beta]
 
-* name parameter added
+- name parameter added
 
 ## [0.3.1-beta]
 
-* FormModel interface
+- FormModel interface
 
 ## [0.3.0-beta]
 
-* rf11
+- rf11
 
 ## [0.2.0-beta]
 
-* package update
+- package update
 
 ## [0.1.1-beta]
 
-* package update
+- package update
 
 ## [0.1.0-beta]
 
-* package update
+- package update
 
 ## [0.0.5-beta]
 
-* extended FormArray annotation
+- extended FormArray annotation
 
 ## [0.0.4-beta]
 
-* asyncDebounceTime and disable support
+- asyncDebounceTime and disable support
 
 ## [0.0.3-beta]
 
-* FormGroup support
+- FormGroup support
 
 ## [0.0.2-beta]
 
-* small fix
+- small fix
 
 ## [0.0.1-beta]
 
-* initial release.
+- initial release.

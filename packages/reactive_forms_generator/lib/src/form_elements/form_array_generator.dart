@@ -17,16 +17,13 @@ class FormArrayGenerator extends FormElementGenerator {
   @override
   String get value {
     final enclosingElement =
-        (fieldElement.enclosingElement3 as ConstructorElement)
-            .enclosingElement3;
+        (fieldElement.enclosingElement as ConstructorElement).enclosingElement;
 
-    final optionalChaining = (enclosingElement == root &&
-                type?.nullabilitySuffix != NullabilitySuffix.question) ||
-            (enclosingElement == root && !root.isNullable)
-        ? ''
-        : '?';
+    final elementName = (enclosingElement.name ?? '').camelCase;
+    final fieldName = fieldElement.name ?? '';
 
-    return '(${enclosingElement.name.camelCase}$optionalChaining.${fieldElement.name}${optionalChaining != '' ? '?? []' : ''})';
+    // Always use safe navigation for nullable objects and provide empty list fallback for arrays
+    return '($elementName?.$fieldName ?? [])';
   }
 
   String get displayType {

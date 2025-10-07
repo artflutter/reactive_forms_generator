@@ -1,16 +1,14 @@
 // ignore_for_file: implementation_imports
 import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
-import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
-import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:recase/recase.dart';
 
 abstract class FormElementGenerator {
   final ClassElement root;
-  final ParameterElement field;
+  final FormalParameterElement field;
   final DartType? type;
 
   static const String validatorKey = 'validators';
@@ -18,22 +16,17 @@ abstract class FormElementGenerator {
   FormElementGenerator(this.root, this.field, this.type);
 
   String get value {
-    final enclosingElement = constructorElement.enclosingElement3;
+    final enclosingElement = constructorElement.enclosingElement;
 
-    final optionalChaining = (enclosingElement == root &&
-                type?.nullabilitySuffix != NullabilitySuffix.question) ||
-            (enclosingElement == root && !root.isNullable)
-        ? ''
-        : '?';
-
-    return '${enclosingElement.name.camelCase}$optionalChaining.${fieldElement.name}';
+    // Always use safe navigation since formElements parameter is nullable
+    return '${enclosingElement.name?.camelCase}?.${fieldElement.name}';
   }
 
   String? validatorName(ExecutableElement? e) {
     var name = e?.name;
 
     if (e is MethodElement) {
-      name = '${e.enclosingElement3.name}.$name';
+      name = '${e.enclosingElement?.name ?? ''}.${name ?? ''}';
     }
 
     return name;
@@ -58,7 +51,7 @@ abstract class FormElementGenerator {
   Element get fieldElement => field;
 
   ConstructorElement get constructorElement =>
-      fieldElement.enclosingElement3 as ConstructorElement;
+      fieldElement.enclosingElement as ConstructorElement;
 
   // Map<String, String> get annotationParams {
   //   final result = <String, String>{};

@@ -4,7 +4,7 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 
 abstract class ReactiveFormGeneratorMethod {
-  final ParameterElement field;
+  final FormalParameterElement field;
   final bool output;
   final List<String> requiredValidators;
 

@@ -13,7 +13,7 @@ class FormGroupGenerator extends FormElementGenerator {
 
   @override
   String get value {
-    final enclosingElement = constructorElement.enclosingElement3;
+    final enclosingElement = constructorElement.enclosingElement;
 
     final optionalChaining = (enclosingElement == root &&
                 type?.nullabilitySuffix != NullabilitySuffix.question) ||
@@ -21,37 +21,36 @@ class FormGroupGenerator extends FormElementGenerator {
         ? ''
         : '?';
 
-    return '${enclosingElement.name.camelCase}$optionalChaining';
+    return '${(enclosingElement.name ?? '').camelCase}$optionalChaining';
   }
 
   @override
   ConstructorElement get constructorElement =>
-      field.enclosingElement3 as ConstructorElement;
+      field.enclosingElement as ConstructorElement;
 
   @override
   Element get fieldElement => field.type.element!;
 
   ClassElement get classElement => field.type.element as ClassElement;
 
-  List<ParameterElement> get formElements => classElement.constructors
+  List<FormalParameterElement> get formElements => classElement.constructors
       .where((e) => e.hasReactiveFormAnnotatedParameters)
       .first
-      .parameters
+      .formalParameters
       .where(
         (e) => (e.isFormControl || e.isFormArray || e.isFormGroupArray),
       )
       .toList();
 
-  List<ParameterElement> get nestedFormElements => classElement.constructors
-      .where((e) => e.hasReactiveFormAnnotatedParameters)
-      .first
-      .parameters
-      .where((e) => e.isFormGroup)
-      .toList();
+  List<FormalParameterElement> get nestedFormElements =>
+      classElement.constructors
+          .where((e) => e.hasReactiveFormAnnotatedParameters)
+          .first
+          .formalParameters
+          .where((e) => e.isFormGroup)
+          .toList();
 
-  // String get validators => syncValidators(formControlChecker);
-
-  // String get asyncValidators => asyncValidatorList(formGroupChecker);
+  // Use inherited validators implementation from FormElementGenerator
 
   @override
   String element() {
@@ -81,7 +80,7 @@ class FormGroupGenerator extends FormElementGenerator {
     formElementsList.addAll(
       nestedFormElements.map(
         (f) {
-          return '${f.fieldControlNameName}: ${f.className}.formElements($value.${f.name})';
+          return '${f.fieldControlNameName}: ${f.className}.formElements($value.${f.name ?? ''})';
         },
       ),
     );
