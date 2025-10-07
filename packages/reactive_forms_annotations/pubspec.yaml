@@ -2,18 +2,18 @@ name: reactive_forms_annotations
 description: Annotations for reactive_forms_generator
 repository: https://github.com/artflutter/reactive_forms_generator
 
-version: 7.0.1
+version: 8.0.4
 
 environment:
   sdk: ">=3.6.0 <4.0.0"
 resolution: workspace
 
 dependencies:
-  reactive_forms: ^17.0.0
+  reactive_forms: ^18.1.1
   collection: ^1.18.0
   logging: ^1.3.0
   flutter:
     sdk: flutter
 
 dev_dependencies:
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0

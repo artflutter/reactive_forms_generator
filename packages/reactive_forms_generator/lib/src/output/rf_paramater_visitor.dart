@@ -43,15 +43,15 @@ class RfParameterVisitor extends GeneralizingAstVisitor<dynamic> {
       case DefaultFormalParameterImpl():
         // final p = node;
         final hasDefaultValue =
-            node.parameter.declaredElement?.hasDefaultValue == true;
+            node.parameter.declaredFragment?.element.hasDefaultValue == true;
         final hasDefaultAnnotation = node.parameter.metadata.fold(
             false, (acc, e) => acc || e.name.toString().startsWith('Default'));
 
-        final hasRfGroupAnnotation = node.parameter.declaredElement?.type
-                .element?.hasRfGroupAnnotation ==
+        final hasRfGroupAnnotation = node.parameter.declaredFragment?.element
+                .type.element?.hasRfGroupAnnotation ==
             true;
 
-        final type = node.parameter.declaredElement?.type;
+        final type = node.parameter.declaredFragment?.element.type;
         final isList = type != null &&
             type.isDartCoreList == true &&
             type is ParameterizedType &&
@@ -180,15 +180,15 @@ class RfParameterVisitor2 extends GeneralizingAstVisitor<dynamic> {
     final element = node.element;
     if (node is NamedTypeImpl &&
         element is ClassElementImpl &&
-        element.metadata.hasRfGroupAnnotation) {
+        element.firstFragment.element.hasRfGroupAnnotation) {
       try {
         NodeReplacer.replace(
             node,
             NamedTypeImpl(
               importPrefix: node.importPrefix,
-              name2: StringToken(
+              name: StringToken(
                 TokenType.STRING,
-                '${node.name2}Output',
+                '${node.name}Output',
                 0,
               ),
               typeArguments: node.typeArguments,

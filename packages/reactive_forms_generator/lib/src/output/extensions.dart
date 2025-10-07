@@ -169,7 +169,7 @@ extension TypeAnnotationImplExt on TypeAnnotationImpl {
       final GenericFunctionTypeImpl _ => this,
       final NamedTypeImpl _ => NamedTypeImpl(
           importPrefix: type.importPrefix,
-          name2: type.name2,
+          name: type.name,
           typeArguments: type.typeArguments,
           question: null,
         ),
@@ -184,13 +184,13 @@ extension TypeAnnotationImplExt on TypeAnnotationImpl {
       GenericFunctionTypeImpl() => throw UnimplementedError(),
       NamedTypeImpl() => NamedTypeImpl(
           importPrefix: type.importPrefix,
-          name2: type.element?.hasRfGroupAnnotation == true
+          name: type.element?.hasRfGroupAnnotation == true
               ? StringToken(
                   TokenType.STRING,
-                  '${type.name2.lexeme}Output',
+                  '${type.name.lexeme}Output',
                   0,
                 )
-              : type.name2,
+              : type.name,
           typeArguments: type.typeArguments?.newTypeArguments,
           question: type.question,
         ),
@@ -220,7 +220,7 @@ extension FieldDeclarationImplExt on FieldDeclarationImpl {
         covariantKeyword: covariantKeyword,
         externalKeyword: externalKeyword,
         staticKeyword: staticKeyword,
-        fieldList: VariableDeclarationListImpl(
+        fields: VariableDeclarationListImpl(
           comment: null,
           metadata: fields.metadata,
           lateKeyword: fields.lateKeyword,

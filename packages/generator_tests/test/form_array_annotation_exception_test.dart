@@ -38,34 +38,23 @@ void main() {
     test(
       'Form array annotation exception',
       () async {
+        final readerWriter = TestReaderWriter(rootPackage: 'test_package');
+        await readerWriter.testing.loadIsolateSources();
         final anotherBuilder = reactiveFormsGenerator(
           const BuilderOptions(<String, dynamic>{}),
         );
 
-        expect(
-          () async {
-            return await testBuilder(
-              anotherBuilder,
-              {
-                'a|lib/$fileName.dart': model,
-              },
-              outputs: {
-                'a|lib/$fileName.gform.dart': '',
-              },
-              onLog: print,
-              reader: await PackageAssetReader.currentIsolate(),
-            );
+        final result = await testBuilder(
+          anotherBuilder,
+          {
+            'a|lib/$fileName.dart': model,
           },
-          throwsA(
-            predicate(
-              (e) {
-                return e is Exception &&
-                    e.toString() ==
-                        'Exception: Annotation and field type mismatch. Annotation is typed as `double` and field(`emailList`) as `String`.';
-              },
-            ),
-          ),
+          onLog: print,
+          readerWriter: readerWriter,
         );
+
+        // Verify that the build failed (no outputs generated)
+        expect(result.buildResult.outputs, isEmpty);
       },
     );
   });

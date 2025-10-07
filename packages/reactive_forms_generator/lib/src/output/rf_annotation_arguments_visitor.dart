@@ -72,9 +72,9 @@ class ClassRenameVisitor extends GeneralizingAstVisitor<void> {
                   (e) {
                     return NamedTypeImpl(
                       importPrefix: e.importPrefix,
-                      name2: StringToken(
+                      name: StringToken(
                         TokenType.STRING,
-                        '${e.name2.lexeme}Output',
+                        '${e.name.lexeme}Output',
                         0,
                       ),
                       typeArguments: e.typeArguments,
@@ -97,7 +97,7 @@ class ClassRenameVisitor extends GeneralizingAstVisitor<void> {
                 constKeyword: e.constKeyword,
                 factoryKeyword: e.factoryKeyword,
                 returnType: SimpleIdentifierImpl(
-                  StringToken(
+                  token: StringToken(
                     TokenType.STRING,
                     '${e.returnType.name}Output',
                     0,
@@ -113,9 +113,9 @@ class ClassRenameVisitor extends GeneralizingAstVisitor<void> {
                         type: NamedTypeImpl(
                           importPrefix:
                               e.redirectedConstructor!.type.importPrefix,
-                          name2: StringToken(
+                          name: StringToken(
                             TokenType.STRING,
-                            '${e.redirectedConstructor!.type.name2}Output',
+                            '${e.redirectedConstructor!.type.name}Output',
                             0,
                           ),
                           typeArguments:
@@ -145,7 +145,7 @@ class ClassRenameVisitor extends GeneralizingAstVisitor<void> {
                                     .expression as MethodInvocationImpl)
                                 .operator,
                             methodName: SimpleIdentifierImpl(
-                              StringToken(
+                              token: StringToken(
                                 TokenType.STRING,
                                 ((e.body as ExpressionFunctionBodyImpl)
                                         .expression as MethodInvocationImpl)
@@ -183,7 +183,7 @@ class ClassRenameVisitor extends GeneralizingAstVisitor<void> {
                 covariantKeyword: e.covariantKeyword,
                 externalKeyword: e.externalKeyword,
                 staticKeyword: e.staticKeyword,
-                fieldList: VariableDeclarationListImpl(
+                fields: VariableDeclarationListImpl(
                   comment: null,
                   metadata: e.fields.metadata,
                   lateKeyword: e.fields.lateKeyword,
@@ -377,7 +377,7 @@ class ClassRenameVisitor extends GeneralizingAstVisitor<void> {
         constKeyword: node.constKeyword,
         factoryKeyword: node.factoryKeyword,
         returnType: SimpleIdentifierImpl(
-          StringToken(
+          token: StringToken(
             TokenType.STRING,
             '${node.returnType.name}Output',
             0,

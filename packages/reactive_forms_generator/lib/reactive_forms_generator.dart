@@ -84,10 +84,10 @@ class ReactiveFormsGenerator extends Generator {
       element: element,
     );
 
-    final astElement = element.enclosingElement3;
+    final astElement = element.enclosingElement;
 
     final ast = await buildStep.resolver.astNodeFor(
-      astElement ?? element,
+      (astElement ?? element).firstFragment,
       resolve: true,
     );
 

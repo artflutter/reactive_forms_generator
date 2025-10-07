@@ -3,14 +3,11 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
-import 'package:analyzer/src/dart/element/element.dart' as e;
-import 'package:analyzer/src/dart/element/type.dart' as t;
 import 'package:analyzer/src/dart/ast/ast.dart' as u;
-import 'package:analyzer/src/generated/utilities_dart.dart' as u;
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_array_generator.dart';
-import 'package:reactive_forms_generator/src/form_elements/form_group_generator.dart';
+import 'package:reactive_forms_generator/src/form_elements/form_control_generator.dart';
 import 'package:reactive_forms_generator/src/output/helpers.dart';
 import 'package:reactive_forms_generator/src/output/rf_annotation_arguments_visitor.dart';
 import 'package:reactive_forms_generator/src/output/rf_paramater_visitor.dart';
@@ -57,9 +54,11 @@ class FormGenerator {
   String get baseName {
     if (element.hasRfAnnotation && root == element) {
       final annotation = element.rfAnnotation;
-      return annotation?.getField('name')?.toStringValue() ?? element.name;
+      return annotation?.getField('name')?.toStringValue() ??
+          element.name ??
+          '';
     }
-    return element.name;
+    return element.name ?? '';
   }
 
   // bool get hasOutput {
@@ -82,7 +81,7 @@ class FormGenerator {
       if (!classes.contains(e.className)) {
         classes.add(e.className);
 
-        formGroupGenerators[e.name] = FormGenerator(
+        formGroupGenerators[e.name ?? ''] = FormGenerator(
           root,
           e.type.element! as ClassElement,
           e.type,
@@ -101,7 +100,7 @@ class FormGenerator {
 
       if (!classes.contains(e.className)) {
         classes.add(e.className);
-        nestedFormGroupGenerators[e.name] = FormGenerator(
+        nestedFormGroupGenerators[e.name ?? ''] = FormGenerator(
           root,
           typeParameter.element! as ClassElement,
           e.type,
@@ -112,26 +111,26 @@ class FormGenerator {
     }
   }
 
-  List<ParameterElement> get all => [
+  List<FormalParameterElement> get all => [
         ...formControls,
         ...formArrays,
         ...formGroups,
         ...formGroupArrays,
       ];
 
-  Iterable<ParameterElement> get formControls => parameters.where(
+  Iterable<FormalParameterElement> get formControls => parameters.where(
         (e) => e.isFormControl,
       );
 
-  Iterable<ParameterElement> get formArrays => parameters.where(
+  Iterable<FormalParameterElement> get formArrays => parameters.where(
         (e) => e.isFormArray,
       );
 
-  Iterable<ParameterElement> get formGroups => parameters.where(
+  Iterable<FormalParameterElement> get formGroups => parameters.where(
         (e) => e.isFormGroup,
       );
 
-  Iterable<ParameterElement> get formGroupArrays => parameters.where(
+  Iterable<FormalParameterElement> get formGroupArrays => parameters.where(
         (e) => e.isFormGroupArray,
       );
 
@@ -143,12 +142,12 @@ class FormGenerator {
     return '$className${element.generics}';
   }
 
-  List<ParameterElement> get parameters => element.annotatedParameters;
+  List<FormalParameterElement> get parameters => element.annotatedParameters;
 
-  Iterable<ParameterElement> get annotatedParameters =>
+  Iterable<FormalParameterElement> get annotatedParameters =>
       parameters.where((e) => true);
 
-  Field staticFieldName(ParameterElement field) => Field(
+  Field staticFieldName(FormalParameterElement field) => Field(
         (b) => b
           ..static = true
           ..modifier = FieldModifier.constant
@@ -157,7 +156,7 @@ class FormGenerator {
           ..assignment = Code('"${field.fieldName}"'),
       );
 
-  Field field(ParameterElement field) => Field(
+  Field field(FormalParameterElement field) => Field(
         (b) => b
           ..type = stringRef
           ..name = field.fieldName
@@ -234,7 +233,7 @@ class FormGenerator {
     );
   }
 
-  Method addGroupControl(ParameterElement field) {
+  Method addGroupControl(FormalParameterElement field) {
     final type = field.typeParameter.getName(withNullability: false);
 
     final formGroupGenerator = FormGenerator(
@@ -263,7 +262,7 @@ class FormGenerator {
     );
   }
 
-  Method removeGroupControl(ParameterElement field) {
+  Method removeGroupControl(FormalParameterElement field) {
     final controlField = field.fieldControlName;
 
     return Method(
@@ -287,7 +286,7 @@ class FormGenerator {
     );
   }
 
-  Method addGroupControlList(ParameterElement field) {
+  Method addGroupControlList(FormalParameterElement field) {
     final type = field.typeParameter.getName(withNullability: false);
 
     return Method(
@@ -307,7 +306,7 @@ class FormGenerator {
     );
   }
 
-  Method addArrayControl(ParameterElement field) {
+  Method addArrayControl(FormalParameterElement field) {
     // until https://github.com/joanpablo/reactive_forms/issues/204 is somehow resolved
     final formControlType = field.typeParameter.getName(withNullability: false);
     final valueType = field.typeParameter.getName(withNullability: true);
@@ -684,6 +683,80 @@ class FormGenerator {
     return '$_modelDisplayTypeNonNullable?';
   }
 
+  Code _generateFormGroupCode(
+      ClassElement targetElement, DartType? targetType) {
+    // Generate FormGroup code directly instead of using fake analyzer elements
+    final formElementsList = <String>[];
+
+    // Find the constructor with reactive form annotations
+    final annotatedConstructor = targetElement.constructors
+        .where((e) => e.hasReactiveFormAnnotatedParameters)
+        .firstOrNull;
+
+    if (annotatedConstructor != null) {
+      final formElements = annotatedConstructor.formalParameters.where(
+        (e) => (e.isFormControl || e.isFormArray || e.isFormGroupArray),
+      );
+
+      for (final param in formElements) {
+        if (param.isFormControl) {
+          final controlGenerator =
+              FormControlGenerator(root, param, targetType);
+          formElementsList.add(
+              '${param.fieldControlNameName}: ${controlGenerator.element()}');
+        } else if (param.isFormArray || param.isFormGroupArray) {
+          final arrayGenerator =
+              FormArrayGenerator(targetElement, param, targetType);
+          formElementsList.add(
+              '${param.fieldControlNameName}: ${arrayGenerator.element()}');
+        }
+      }
+
+      // Handle nested form groups
+      final nestedFormElements =
+          annotatedConstructor.formalParameters.where((e) => e.isFormGroup);
+
+      for (final param in nestedFormElements) {
+        final paramName = param.name ?? '';
+        final targetElementName = (targetElement.name ?? '').camelCase;
+        formElementsList.add(
+            '${param.fieldControlNameName}: ${param.className}.formElements($targetElementName?.$paramName)');
+      }
+    }
+
+    // Extract validators from RfGroup annotation
+    final rfGroupValidators = _extractRfGroupValidators(targetElement);
+    final rfGroupAsyncValidators =
+        _extractRfGroupAsyncValidators(targetElement);
+
+    final props = [
+      '{${formElementsList.join(',')}}',
+      'validators: $rfGroupValidators',
+      'asyncValidators: $rfGroupAsyncValidators',
+      'asyncValidatorsDebounceTime: 250',
+      'disabled: false',
+    ].join(',');
+
+    return Code('FormGroup($props)');
+  }
+
+  String _extractRfGroupValidators(ClassElement element) {
+    try {
+      return element.annotationParams(formGroupChecker)['validators'] ?? '[]';
+    } catch (e) {
+      return '[]';
+    }
+  }
+
+  String _extractRfGroupAsyncValidators(ClassElement element) {
+    try {
+      return element.annotationParams(formGroupChecker)['asyncValidators'] ??
+          '[]';
+    } catch (e) {
+      return '[]';
+    }
+  }
+
   List<Code> test() {
     final ast = this.ast;
 
@@ -836,39 +909,12 @@ class FormGenerator {
                     ..requiredParameters.add(
                       Parameter(
                         (b) => b
-                          ..name = element.name.camelCase
+                          ..name = (element.name ?? '').camelCase
                           ..type = Reference(_modelDisplayTypeMaybeNullable),
                       ),
                     )
                     ..returns = const Reference('FormGroup')
-                    ..body = Code(
-                      FormGroupGenerator(
-                        root,
-                        e.ParameterElementImpl(
-                          name: 'FakeParameterElement',
-                          nameOffset: 20,
-                          parameterKind: u.ParameterKind.REQUIRED,
-                        )
-                          ..enclosingElement3 =
-                              (e.ConstructorElementImpl('aa', 1)
-                                ..enclosingElement3 = element)
-                          ..type = t.InterfaceTypeImpl(
-                            element: (element.thisType as t.InterfaceTypeImpl)
-                                .element3,
-                            typeArguments: element.thisType.typeArguments,
-                            nullabilitySuffix: NullabilitySuffix.none,
-                          ),
-                        type ??
-                            t.InterfaceTypeImpl(
-                              element: (element.thisType as t.InterfaceTypeImpl)
-                                  .element3,
-                              typeArguments: element.thisType.typeArguments,
-                              nullabilitySuffix: element.isNullable
-                                  ? NullabilitySuffix.question
-                                  : NullabilitySuffix.none,
-                            ),
-                      ).element(),
-                    );
+                    ..body = _generateFormGroupCode(element, type);
                 },
               )
             ],

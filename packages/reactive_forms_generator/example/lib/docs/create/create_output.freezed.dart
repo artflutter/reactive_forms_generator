@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -201,6 +200,238 @@ class _$MSICreateCopyWithImpl<$Res> implements $MSICreateCopyWith<$Res> {
     return $AddressCopyWith<$Res>(_self.mailingAddress, (value) {
       return _then(_self.copyWith(mailingAddress: value));
     });
+  }
+}
+
+/// Adds pattern-matching-related methods to [MSICreate].
+extension MSICreatePatterns on MSICreate {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_MSICreate value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _MSICreate() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_MSICreate value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _MSICreate():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_MSICreate value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _MSICreate() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String? id,
+            String? businessNumber,
+            List<String>? fileIds,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? name,
+            Address companyAddress,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String? email,
+            PrimaryContact primaryContact,
+            @RfControl<bool>() bool sameMailingAddressAsCompany,
+            Address mailingAddress,
+            @RfArray<AdminContactInformation>()
+            List<AdminContactInformation> admins)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _MSICreate() when $default != null:
+        return $default(
+            _that.id,
+            _that.businessNumber,
+            _that.fileIds,
+            _that.name,
+            _that.companyAddress,
+            _that.email,
+            _that.primaryContact,
+            _that.sameMailingAddressAsCompany,
+            _that.mailingAddress,
+            _that.admins);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String? id,
+            String? businessNumber,
+            List<String>? fileIds,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? name,
+            Address companyAddress,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String? email,
+            PrimaryContact primaryContact,
+            @RfControl<bool>() bool sameMailingAddressAsCompany,
+            Address mailingAddress,
+            @RfArray<AdminContactInformation>()
+            List<AdminContactInformation> admins)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _MSICreate():
+        return $default(
+            _that.id,
+            _that.businessNumber,
+            _that.fileIds,
+            _that.name,
+            _that.companyAddress,
+            _that.email,
+            _that.primaryContact,
+            _that.sameMailingAddressAsCompany,
+            _that.mailingAddress,
+            _that.admins);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String? id,
+            String? businessNumber,
+            List<String>? fileIds,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? name,
+            Address companyAddress,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String? email,
+            PrimaryContact primaryContact,
+            @RfControl<bool>() bool sameMailingAddressAsCompany,
+            Address mailingAddress,
+            @RfArray<AdminContactInformation>()
+            List<AdminContactInformation> admins)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _MSICreate() when $default != null:
+        return $default(
+            _that.id,
+            _that.businessNumber,
+            _that.fileIds,
+            _that.name,
+            _that.companyAddress,
+            _that.email,
+            _that.primaryContact,
+            _that.sameMailingAddressAsCompany,
+            _that.mailingAddress,
+            _that.admins);
+      case _:
+        return null;
+    }
   }
 }
 
@@ -543,6 +774,199 @@ class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
   }
 }
 
+/// Adds pattern-matching-related methods to [Address].
+extension AddressPatterns on Address {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_Address value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Address() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_Address value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Address():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_Address value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Address() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? street,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? city,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? stateOrProvince,
+            @RfControl(validators: [RequiredValidator()]) String? zipCode)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Address() when $default != null:
+        return $default(
+            _that.street, _that.city, _that.stateOrProvince, _that.zipCode);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? street,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? city,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? stateOrProvince,
+            @RfControl(validators: [RequiredValidator()]) String? zipCode)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Address():
+        return $default(
+            _that.street, _that.city, _that.stateOrProvince, _that.zipCode);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? street,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? city,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? stateOrProvince,
+            @RfControl(validators: [RequiredValidator()]) String? zipCode)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Address() when $default != null:
+        return $default(
+            _that.street, _that.city, _that.stateOrProvince, _that.zipCode);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
 class _Address implements Address {
@@ -738,6 +1162,184 @@ class _$PrimaryContactCopyWithImpl<$Res>
   }
 }
 
+/// Adds pattern-matching-related methods to [PrimaryContact].
+extension PrimaryContactPatterns on PrimaryContact {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_PrimaryContact value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _PrimaryContact() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_PrimaryContact value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PrimaryContact():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_PrimaryContact value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PrimaryContact() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? fullName,
+            @RfControl(validators: [MaxLengthValidator(120)]) String? jobTitle,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String? email)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _PrimaryContact() when $default != null:
+        return $default(_that.fullName, _that.jobTitle, _that.email);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? fullName,
+            @RfControl(validators: [MaxLengthValidator(120)]) String? jobTitle,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String? email)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PrimaryContact():
+        return $default(_that.fullName, _that.jobTitle, _that.email);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? fullName,
+            @RfControl(validators: [MaxLengthValidator(120)]) String? jobTitle,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String? email)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PrimaryContact() when $default != null:
+        return $default(_that.fullName, _that.jobTitle, _that.email);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
 class _PrimaryContact implements PrimaryContact {
@@ -921,6 +1523,190 @@ class _$AdminContactInformationCopyWithImpl<$Res>
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
+  }
+}
+
+/// Adds pattern-matching-related methods to [AdminContactInformation].
+extension AdminContactInformationPatterns on AdminContactInformation {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AdminContactInformation value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AdminContactInformation() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_AdminContactInformation value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AdminContactInformation():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_AdminContactInformation value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AdminContactInformation() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? firstName,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? lastName,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String? email)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AdminContactInformation() when $default != null:
+        return $default(_that.firstName, _that.lastName, _that.email);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? firstName,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? lastName,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String? email)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AdminContactInformation():
+        return $default(_that.firstName, _that.lastName, _that.email);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? firstName,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String? lastName,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String? email)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AdminContactInformation() when $default != null:
+        return $default(_that.firstName, _that.lastName, _that.email);
+      case _:
+        return null;
+    }
   }
 }
 
@@ -1217,6 +2003,238 @@ class _$MSICreateOutputCopyWithImpl<$Res>
     return $AddressOutputCopyWith<$Res>(_self.mailingAddress, (value) {
       return _then(_self.copyWith(mailingAddress: value));
     });
+  }
+}
+
+/// Adds pattern-matching-related methods to [MSICreateOutput].
+extension MSICreateOutputPatterns on MSICreateOutput {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_MSICreateOutput value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _MSICreateOutput() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_MSICreateOutput value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _MSICreateOutput():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_MSICreateOutput value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _MSICreateOutput() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String? id,
+            String? businessNumber,
+            List<String>? fileIds,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String name,
+            AddressOutput companyAddress,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String email,
+            PrimaryContactOutput primaryContact,
+            @RfControl<bool>() bool sameMailingAddressAsCompany,
+            AddressOutput mailingAddress,
+            @RfArray<AdminContactInformationOutput>()
+            List<AdminContactInformationOutput> admins)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _MSICreateOutput() when $default != null:
+        return $default(
+            _that.id,
+            _that.businessNumber,
+            _that.fileIds,
+            _that.name,
+            _that.companyAddress,
+            _that.email,
+            _that.primaryContact,
+            _that.sameMailingAddressAsCompany,
+            _that.mailingAddress,
+            _that.admins);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String? id,
+            String? businessNumber,
+            List<String>? fileIds,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String name,
+            AddressOutput companyAddress,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String email,
+            PrimaryContactOutput primaryContact,
+            @RfControl<bool>() bool sameMailingAddressAsCompany,
+            AddressOutput mailingAddress,
+            @RfArray<AdminContactInformationOutput>()
+            List<AdminContactInformationOutput> admins)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _MSICreateOutput():
+        return $default(
+            _that.id,
+            _that.businessNumber,
+            _that.fileIds,
+            _that.name,
+            _that.companyAddress,
+            _that.email,
+            _that.primaryContact,
+            _that.sameMailingAddressAsCompany,
+            _that.mailingAddress,
+            _that.admins);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String? id,
+            String? businessNumber,
+            List<String>? fileIds,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String name,
+            AddressOutput companyAddress,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String email,
+            PrimaryContactOutput primaryContact,
+            @RfControl<bool>() bool sameMailingAddressAsCompany,
+            AddressOutput mailingAddress,
+            @RfArray<AdminContactInformationOutput>()
+            List<AdminContactInformationOutput> admins)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _MSICreateOutput() when $default != null:
+        return $default(
+            _that.id,
+            _that.businessNumber,
+            _that.fileIds,
+            _that.name,
+            _that.companyAddress,
+            _that.email,
+            _that.primaryContact,
+            _that.sameMailingAddressAsCompany,
+            _that.mailingAddress,
+            _that.admins);
+      case _:
+        return null;
+    }
   }
 }
 
@@ -1557,6 +2575,199 @@ class _$AddressOutputCopyWithImpl<$Res>
   }
 }
 
+/// Adds pattern-matching-related methods to [AddressOutput].
+extension AddressOutputPatterns on AddressOutput {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AddressOutput value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AddressOutput() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_AddressOutput value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AddressOutput():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_AddressOutput value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AddressOutput() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String street,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String city,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String stateOrProvince,
+            @RfControl(validators: [RequiredValidator()]) String zipCode)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AddressOutput() when $default != null:
+        return $default(
+            _that.street, _that.city, _that.stateOrProvince, _that.zipCode);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String street,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String city,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String stateOrProvince,
+            @RfControl(validators: [RequiredValidator()]) String zipCode)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AddressOutput():
+        return $default(
+            _that.street, _that.city, _that.stateOrProvince, _that.zipCode);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String street,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String city,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String stateOrProvince,
+            @RfControl(validators: [RequiredValidator()]) String zipCode)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AddressOutput() when $default != null:
+        return $default(
+            _that.street, _that.city, _that.stateOrProvince, _that.zipCode);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
 class _AddressOutput implements AddressOutput {
@@ -1755,6 +2966,184 @@ class _$PrimaryContactOutputCopyWithImpl<$Res>
   }
 }
 
+/// Adds pattern-matching-related methods to [PrimaryContactOutput].
+extension PrimaryContactOutputPatterns on PrimaryContactOutput {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_PrimaryContactOutput value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _PrimaryContactOutput() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_PrimaryContactOutput value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PrimaryContactOutput():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_PrimaryContactOutput value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PrimaryContactOutput() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String fullName,
+            @RfControl(validators: [MaxLengthValidator(120)]) String? jobTitle,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String email)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _PrimaryContactOutput() when $default != null:
+        return $default(_that.fullName, _that.jobTitle, _that.email);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String fullName,
+            @RfControl(validators: [MaxLengthValidator(120)]) String? jobTitle,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String email)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PrimaryContactOutput():
+        return $default(_that.fullName, _that.jobTitle, _that.email);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String fullName,
+            @RfControl(validators: [MaxLengthValidator(120)]) String? jobTitle,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String email)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _PrimaryContactOutput() when $default != null:
+        return $default(_that.fullName, _that.jobTitle, _that.email);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
 class _PrimaryContactOutput implements PrimaryContactOutput {
@@ -1941,6 +3330,191 @@ class _$AdminContactInformationOutputCopyWithImpl<$Res>
           : email // ignore: cast_nullable_to_non_nullable
               as String,
     ));
+  }
+}
+
+/// Adds pattern-matching-related methods to [AdminContactInformationOutput].
+extension AdminContactInformationOutputPatterns
+    on AdminContactInformationOutput {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AdminContactInformationOutput value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AdminContactInformationOutput() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_AdminContactInformationOutput value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AdminContactInformationOutput():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_AdminContactInformationOutput value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AdminContactInformationOutput() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String firstName,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String lastName,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String email)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AdminContactInformationOutput() when $default != null:
+        return $default(_that.firstName, _that.lastName, _that.email);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String firstName,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String lastName,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String email)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AdminContactInformationOutput():
+        return $default(_that.firstName, _that.lastName, _that.email);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String firstName,
+            @RfControl(
+                validators: [RequiredValidator(), MaxLengthValidator(120)])
+            String lastName,
+            @RfControl(validators: [RequiredValidator(), EmailValidator()])
+            String email)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AdminContactInformationOutput() when $default != null:
+        return $default(_that.firstName, _that.lastName, _that.email);
+      case _:
+        return null;
+    }
   }
 }
 

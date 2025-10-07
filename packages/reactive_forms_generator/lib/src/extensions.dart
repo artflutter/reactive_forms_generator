@@ -12,7 +12,7 @@ import 'package:analyzer/src/dart/element/type.dart';
 import '../utils.dart';
 
 extension ConstructorElementExt on ConstructorElement {
-  bool get hasReactiveFormAnnotatedParameters => parameters.any(
+  bool get hasReactiveFormAnnotatedParameters => formalParameters.any(
         (e) => true,
       );
 }
@@ -42,17 +42,22 @@ extension ClassElementExt on ClassElement {
   }
 
   Iterable<Reference> get fullGenericTypes {
-    return thisType.typeArguments.map(
-      (e) => Reference(e.element?.getDisplayString()),
-    );
+    return typeParameters.map((typeParam) {
+      final name = typeParam.name;
+      final bound = typeParam.bound;
+      if (bound != null && bound.getDisplayString() != 'Object') {
+        return Reference('$name extends ${bound.getDisplayString()}');
+      }
+      return Reference(name);
+    });
   }
 
-  List<ParameterElement> get annotatedParameters {
+  List<FormalParameterElement> get annotatedParameters {
     final annotatedConstructors =
         constructors.where((e) => e.hasReactiveFormAnnotatedParameters);
 
     if (annotatedConstructors.isNotEmpty) {
-      return annotatedConstructors.first.parameters;
+      return annotatedConstructors.first.formalParameters;
     }
 
     return [];
@@ -61,8 +66,8 @@ extension ClassElementExt on ClassElement {
   bool get isNullable => annotatedParameters.fold(true, (acc, e) => acc);
 }
 
-extension ParameterElementExt on ParameterElement {
-  String get fieldName => name;
+extension ParameterElementExt on FormalParameterElement {
+  String get fieldName => name ?? '';
 
   String get addListItemName => 'add${fieldName.pascalCase}Item';
 
@@ -113,10 +118,11 @@ extension ParameterElementExt on ParameterElement {
 
     if (element.hasRfAnnotation) {
       final annotation = element.rfAnnotation;
-      baseName = annotation?.getField('name')?.toStringValue() ?? element.name;
+      baseName =
+          annotation?.getField('name')?.toStringValue() ?? element.name ?? '';
     }
 
-    baseName = element.name;
+    baseName = element.name ?? '';
 
     if (isFormGroupArray) {
       final element = typeParameter.element as ClassElement;
@@ -124,22 +130,22 @@ extension ParameterElementExt on ParameterElement {
       if (element.hasRfAnnotation) {
         final annotation = element.rfAnnotation;
         baseName =
-            annotation?.getField('name')?.toStringValue() ?? element.name;
+            annotation?.getField('name')?.toStringValue() ?? element.name ?? '';
       }
 
-      baseName = element.name;
+      baseName = element.name ?? '';
     }
 
     return baseName;
   }
 
-  String get valueUpdateMethodName => '${name}ValueUpdate';
+  String get valueUpdateMethodName => '${name ?? ''}ValueUpdate';
 
-  String get valuePatchMethodName => '${name}ValuePatch';
+  String get valuePatchMethodName => '${name ?? ''}ValuePatch';
 
-  String get clearMethodName => '${name}Clear';
+  String get clearMethodName => '${name ?? ''}Clear';
 
-  String get insertMethodName => '${name}Insert';
+  String get insertMethodName => '${name ?? ''}Insert';
 
   // needs careful usage and possibly refactoring
   DartType get typeParameter => (type as ParameterizedType).typeArguments.first;
@@ -184,7 +190,7 @@ extension ParameterElementExt on ParameterElement {
 
     throwIf(
       isFormControl && isFormGroup,
-      "Field `$name` can't be annotated with @RfControl and @FromGroupAnnotation at the same time.",
+      "Field `${name ?? ''}` can't be annotated with @RfControl and @FromGroupAnnotation at the same time.",
       element: this,
     );
 
@@ -193,10 +199,10 @@ extension ParameterElementExt on ParameterElement {
 
   bool get isFormGroup => type.element?.hasRfGroupAnnotation ?? false;
 
-  bool get isForm => hasRfAnnotation;
+  bool get isForm => ElementRfExt(this).hasRfAnnotation;
 
   String? get defaultValue {
-    for (final meta in metadata) {
+    for (final meta in metadata.annotations) {
       final source = meta.toSource();
 
       if (source.startsWith('@Default(')) {
@@ -227,7 +233,7 @@ extension ParameterElementExt on ParameterElement {
 }
 
 extension FieldElementExt on FieldElement {
-  String get fieldName => name;
+  String get fieldName => name ?? '';
 
   String get fieldValueName => '${fieldName}Value';
 
@@ -240,7 +246,7 @@ extension FieldElementExt on FieldElement {
 
   bool get isFormGroup => type.element?.hasRfGroupAnnotation ?? false;
 
-  bool get isForm => hasRfAnnotation;
+  bool get isForm => ElementRfExt(this).hasRfAnnotation;
 }
 
 typedef IterableFunction<T, U> = U Function(T i);

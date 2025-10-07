@@ -53,7 +53,7 @@ class ReactiveSubGroupForm extends StatelessWidget {
     required this.form,
     required this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
   }) : super(key: key);
 
   final Widget child;
@@ -62,7 +62,8 @@ class ReactiveSubGroupForm extends StatelessWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   static SubGroupForm? of(
     BuildContext context, {
@@ -88,7 +89,7 @@ class ReactiveSubGroupForm extends StatelessWidget {
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
         canPop: canPop,
-        onPopInvoked: onPopInvoked,
+        onPopInvokedWithResult: onPopInvokedWithResult,
         child: child,
       ),
     );
@@ -108,7 +109,7 @@ class SubGroupFormBuilder extends StatefulWidget {
     this.model,
     this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -119,7 +120,8 @@ class SubGroupFormBuilder extends StatefulWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   final Widget Function(
       BuildContext context, SubGroupForm formModel, Widget? child) builder;
@@ -198,11 +200,11 @@ class _SubGroupFormBuilderState extends State<SubGroupFormBuilder> {
       key: ObjectKey(_formModel),
       form: _formModel,
       // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
+      // onPopInvokedWithResult: widget.onPopInvokedWithResult,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
-        onPopInvoked: widget.onPopInvoked,
+        onPopInvokedWithResult: widget.onPopInvokedWithResult,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -681,7 +683,7 @@ class ReactiveGroupForm extends StatelessWidget {
     required this.form,
     required this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
   }) : super(key: key);
 
   final Widget child;
@@ -690,7 +692,8 @@ class ReactiveGroupForm extends StatelessWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   static GroupForm? of(
     BuildContext context, {
@@ -716,7 +719,7 @@ class ReactiveGroupForm extends StatelessWidget {
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
         canPop: canPop,
-        onPopInvoked: onPopInvoked,
+        onPopInvokedWithResult: onPopInvokedWithResult,
         child: child,
       ),
     );
@@ -735,7 +738,7 @@ class GroupFormBuilder extends StatefulWidget {
     this.model,
     this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -746,7 +749,8 @@ class GroupFormBuilder extends StatefulWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   final Widget Function(
       BuildContext context, GroupForm formModel, Widget? child) builder;
@@ -825,11 +829,11 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
       key: ObjectKey(_formModel),
       form: _formModel,
       // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
+      // onPopInvokedWithResult: widget.onPopInvokedWithResult,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
-        onPopInvoked: widget.onPopInvoked,
+        onPopInvokedWithResult: widget.onPopInvokedWithResult,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -1503,7 +1507,7 @@ class ReactiveNestedForm extends StatelessWidget {
     required this.form,
     required this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
   }) : super(key: key);
 
   final Widget child;
@@ -1512,7 +1516,8 @@ class ReactiveNestedForm extends StatelessWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   static NestedForm? of(
     BuildContext context, {
@@ -1538,7 +1543,7 @@ class ReactiveNestedForm extends StatelessWidget {
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
         canPop: canPop,
-        onPopInvoked: onPopInvoked,
+        onPopInvokedWithResult: onPopInvokedWithResult,
         child: child,
       ),
     );
@@ -1557,7 +1562,7 @@ class NestedFormBuilder extends StatefulWidget {
     this.model,
     this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -1568,7 +1573,8 @@ class NestedFormBuilder extends StatefulWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   final Widget Function(
       BuildContext context, NestedForm formModel, Widget? child) builder;
@@ -1647,11 +1653,11 @@ class _NestedFormBuilderState extends State<NestedFormBuilder> {
       key: ObjectKey(_formModel),
       form: _formModel,
       // canPop: widget.canPop,
-      // onPopInvoked: widget.onPopInvoked,
+      // onPopInvokedWithResult: widget.onPopInvokedWithResult,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
-        onPopInvoked: widget.onPopInvoked,
+        onPopInvokedWithResult: widget.onPopInvokedWithResult,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,

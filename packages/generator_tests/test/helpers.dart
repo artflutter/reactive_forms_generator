@@ -9,6 +9,8 @@ Future testGenerator({
   String fileName = 'gen',
 }) async {
   Logger.root.level = Level.INFO;
+  final readerWriter = TestReaderWriter(rootPackage: 'test_package');
+  await readerWriter.testing.loadIsolateSources();
 
   final anotherBuilder = reactiveFormsGenerator(
     const BuilderOptions(<String, dynamic>{}),
@@ -23,6 +25,6 @@ Future testGenerator({
       'a|lib/$fileName.gform.dart': generatedFile,
     },
     onLog: print,
-    reader: await PackageAssetReader.currentIsolate(),
+    readerWriter: readerWriter,
   );
 }

@@ -96,7 +96,7 @@ extension ElementRfExt on Element {
     final annotation = typeChecker?.firstAnnotationOf(this);
     try {
       if (annotation != null) {
-        for (final meta in metadata) {
+        for (final meta in metadata.annotations) {
           final obj = meta.computeConstantValue()!;
 
           if (typeChecker?.isExactlyType(obj.type!) == true) {
@@ -125,7 +125,7 @@ extension ElementRfExt on Element {
   }
 }
 
-extension ParameterElementAnnotationExt on ParameterElement {
+extension ParameterElementAnnotationExt on FormalParameterElement {
   bool get hasRfAnnotation {
     return _formChecker.hasAnnotationOfExact(this);
   }
