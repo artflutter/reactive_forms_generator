@@ -272,6 +272,7 @@ class MailingListForm implements FormModel<MailingList, MailingList> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void emailListValueReset(
     List<String?> value, {
     bool updateParent = true,

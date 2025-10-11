@@ -267,6 +267,7 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void idValueReset(
     String value, {
     bool updateParent = true,
@@ -1052,6 +1053,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
         emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void idValueReset(
     String value, {
     bool updateParent = true,
@@ -1067,6 +1069,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void subGroupListValueReset(
     List<SubGroupO> value, {
     bool updateParent = true,
@@ -1842,6 +1845,7 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
         emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void groupListValueReset(
     List<GroupO> value, {
     bool updateParent = true,

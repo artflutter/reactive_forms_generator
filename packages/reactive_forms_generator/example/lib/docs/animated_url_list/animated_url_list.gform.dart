@@ -351,6 +351,7 @@ class AnimatedUrlListForm
         emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void urlListValueReset(
     List<UrlEntity> value, {
     bool updateParent = true,
@@ -641,6 +642,7 @@ class UrlEntityForm implements FormModel<UrlEntity, UrlEntity> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void labelValueReset(
     String value, {
     bool updateParent = true,
@@ -656,6 +658,7 @@ class UrlEntityForm implements FormModel<UrlEntity, UrlEntity> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void urlValueReset(
     String value, {
     bool updateParent = true,

@@ -315,6 +315,7 @@ class AnnotatelessOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void emailValueReset(
     String value, {
     bool updateParent = true,
@@ -330,6 +331,7 @@ class AnnotatelessOForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void passwordValueReset(
     String value, {
     bool updateParent = true,

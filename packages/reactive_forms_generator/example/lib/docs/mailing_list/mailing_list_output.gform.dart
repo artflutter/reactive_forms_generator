@@ -274,6 +274,7 @@ class MailingListOForm implements FormModel<MailingListO, MailingListOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void emailListValueReset(
     List<String?> value, {
     bool updateParent = true,

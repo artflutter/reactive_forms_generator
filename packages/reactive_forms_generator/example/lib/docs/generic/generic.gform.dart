@@ -294,6 +294,7 @@ class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void tagsValueReset(
     List<T>? value, {
     bool updateParent = true,

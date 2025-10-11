@@ -805,6 +805,7 @@ class FreezedClassOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void genderValueReset(
     String? value, {
     bool updateParent = true,
@@ -820,6 +821,7 @@ class FreezedClassOForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void genderRValueReset(
     String? value, {
     bool updateParent = true,
@@ -835,6 +837,7 @@ class FreezedClassOForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void idValueReset(
     String? value, {
     bool updateParent = true,
@@ -850,6 +853,7 @@ class FreezedClassOForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void idRValueReset(
     String? value, {
     bool updateParent = true,
@@ -865,6 +869,7 @@ class FreezedClassOForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void idR2ValueReset(
     String value, {
     bool updateParent = true,
@@ -880,6 +885,7 @@ class FreezedClassOForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void nameValueReset(
     String? value, {
     bool updateParent = true,
@@ -895,6 +901,7 @@ class FreezedClassOForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void logoImageValueReset(
     String? value, {
     bool updateParent = true,
@@ -910,6 +917,7 @@ class FreezedClassOForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void yearValueReset(
     double? value, {
     bool updateParent = true,
@@ -925,6 +933,7 @@ class FreezedClassOForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void selectedSpacesValueReset(
     List<String> value, {
     bool updateParent = true,

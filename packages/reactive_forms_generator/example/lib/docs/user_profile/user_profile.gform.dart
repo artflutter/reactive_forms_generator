@@ -466,6 +466,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void idValueReset(
     String value, {
     bool updateParent = true,
@@ -481,6 +482,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void firstNameValueReset(
     String value, {
     bool updateParent = true,
@@ -496,6 +498,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void lastNameValueReset(
     String value, {
     bool updateParent = true,
@@ -511,6 +514,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void homeValueReset(
     Address value, {
     bool updateParent = true,
@@ -523,6 +527,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Use control.reset() instead")
   void officeValueReset(
     Address? value, {
     bool updateParent = true,
@@ -1036,6 +1041,7 @@ class AddressForm implements FormModel<Address, Address> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void streetValueReset(
     String? value, {
     bool updateParent = true,
@@ -1051,6 +1057,7 @@ class AddressForm implements FormModel<Address, Address> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void cityValueReset(
     String? value, {
     bool updateParent = true,
@@ -1066,6 +1073,7 @@ class AddressForm implements FormModel<Address, Address> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void zipValueReset(
     String? value, {
     bool updateParent = true,

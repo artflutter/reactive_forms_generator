@@ -622,6 +622,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void genderValueReset(
     String? value, {
     bool updateParent = true,
@@ -637,6 +638,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void idValueReset(
     String? value, {
     bool updateParent = true,
@@ -652,6 +654,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void nameValueReset(
     String? value, {
     bool updateParent = true,
@@ -667,6 +670,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void logoImageValueReset(
     String? value, {
     bool updateParent = true,
@@ -682,6 +686,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void yearValueReset(
     double? value, {
     bool updateParent = true,
@@ -697,6 +702,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void selectedSpacesValueReset(
     List<String> value, {
     bool updateParent = true,

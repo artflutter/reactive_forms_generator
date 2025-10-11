@@ -314,6 +314,7 @@ class SomeWiredNameForm implements FormModel<RenamedBasic, RenamedBasic> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void emailValueReset(
     String value, {
     bool updateParent = true,
@@ -329,6 +330,7 @@ class SomeWiredNameForm implements FormModel<RenamedBasic, RenamedBasic> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void passwordValueReset(
     String value, {
     bool updateParent = true,

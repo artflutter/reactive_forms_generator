@@ -725,6 +725,7 @@ class LoginExtendedNullableForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void emailValueReset(
     String? value, {
     bool updateParent = true,
@@ -740,6 +741,7 @@ class LoginExtendedNullableForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void passwordValueReset(
     String? value, {
     bool updateParent = true,
@@ -755,6 +757,7 @@ class LoginExtendedNullableForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void rememberMeValueReset(
     bool? value, {
     bool updateParent = true,
@@ -770,6 +773,7 @@ class LoginExtendedNullableForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void themeValueReset(
     String? value, {
     bool updateParent = true,
@@ -785,6 +789,7 @@ class LoginExtendedNullableForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void modeValueReset(
     UserMode? value, {
     bool updateParent = true,
@@ -800,6 +805,7 @@ class LoginExtendedNullableForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void timeoutValueReset(
     int? value, {
     bool updateParent = true,
@@ -815,6 +821,7 @@ class LoginExtendedNullableForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void heightValueReset(
     double? value, {
     bool updateParent = true,

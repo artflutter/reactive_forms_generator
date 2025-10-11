@@ -378,6 +378,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void descriptionValueReset(
     String? value, {
     bool updateParent = true,
@@ -393,6 +394,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void idValueReset(
     IdO<P, C>? value, {
     bool updateParent = true,
@@ -738,6 +740,7 @@ class IdOForm<P extends Product, C extends Cart>
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void companyNameValueReset(
     String? value, {
     bool updateParent = true,
@@ -753,6 +756,7 @@ class IdOForm<P extends Product, C extends Cart>
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void nameValueReset(
     String? value, {
     bool updateParent = true,

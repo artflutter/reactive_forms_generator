@@ -295,6 +295,7 @@ class TagsOForm<T> implements FormModel<TagsO<T>, TagsOOutput<T>> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void tagsValueReset(
     List<T>? value, {
     bool updateParent = true,

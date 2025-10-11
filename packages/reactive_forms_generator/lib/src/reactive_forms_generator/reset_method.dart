@@ -50,6 +50,9 @@ class ResetMethod extends ReactiveFormGeneratorMethod {
 
   Method get methodEntity => Method(
     (b) => b
+      ..annotations.add(
+        const CodeExpression(Code('Deprecated("Use control.reset() instead")')),
+      )
       ..name = field.resetMethodName
       ..lambda = true
       ..requiredParameters.add(

@@ -665,6 +665,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void idValueReset(
     String value, {
     bool updateParent = true,
@@ -680,6 +681,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void anotherIdValueReset(
     String value, {
     bool updateParent = true,
@@ -695,6 +697,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void nameValueReset(
     String value, {
     bool updateParent = true,
@@ -710,6 +713,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void chartingOrderValueReset(
     ChartingOrderValue value, {
     bool updateParent = true,
@@ -725,6 +729,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void numberingStandardValueReset(
     NumberingStandard value, {
     bool updateParent = true,
@@ -740,6 +745,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void measurementTypeValueReset(
     MeasurementType value, {
     bool updateParent = true,
@@ -755,6 +761,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void audioGuidanceValueReset(
     bool value, {
     bool updateParent = true,
@@ -770,6 +777,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void incidenceFilterValueReset(
     IncidenceFilterO value, {
     bool updateParent = true,
@@ -782,6 +790,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Use control.reset() instead")
   void thresholdValueReset(
     ThresholdSettingO value, {
     bool updateParent = true,
@@ -794,6 +803,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Use control.reset() instead")
   void timerValueReset(
     TimerSettingO value, {
     bool updateParent = true,
@@ -1554,6 +1564,7 @@ class IncidenceFilterOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void isMobilityEnabledValueReset(
     bool value, {
     bool updateParent = true,
@@ -1569,6 +1580,7 @@ class IncidenceFilterOForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void isFurcationEnabledValueReset(
     bool value, {
     bool updateParent = true,
@@ -1584,6 +1596,7 @@ class IncidenceFilterOForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void isBleedingEnabledValueReset(
     bool value, {
     bool updateParent = true,
@@ -1599,6 +1612,7 @@ class IncidenceFilterOForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void isSuppurationEnabledValueReset(
     bool value, {
     bool updateParent = true,
@@ -1614,6 +1628,7 @@ class IncidenceFilterOForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void isCalculusEnabledValueReset(
     bool value, {
     bool updateParent = true,
@@ -1629,6 +1644,7 @@ class IncidenceFilterOForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void isPlaqueEnabledValueReset(
     bool value, {
     bool updateParent = true,
@@ -2074,6 +2090,7 @@ class ThresholdSettingOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void isEnabledValueReset(
     bool value, {
     bool updateParent = true,
@@ -2089,6 +2106,7 @@ class ThresholdSettingOForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void valueValueReset(
     int value, {
     bool updateParent = true,
@@ -2388,6 +2406,7 @@ class TimerSettingOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void isEnabledValueReset(
     bool value, {
     bool updateParent = true,
@@ -2403,6 +2422,7 @@ class TimerSettingOForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void valueValueReset(
     int value, {
     bool updateParent = true,

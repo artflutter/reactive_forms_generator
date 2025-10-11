@@ -336,6 +336,7 @@ class TestForm implements FormModel<Test, Test> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void titleValueReset(
     String value, {
     bool updateParent = true,
@@ -351,6 +352,7 @@ class TestForm implements FormModel<Test, Test> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void descriptionValueReset(
     String? value, {
     bool updateParent = true,

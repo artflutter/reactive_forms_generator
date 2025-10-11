@@ -497,6 +497,7 @@ class DeliveryListOForm
         emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void deliveryListValueReset(
     List<DeliveryPointO> value, {
     bool updateParent = true,
@@ -511,6 +512,7 @@ class DeliveryListOForm
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Use control.reset() instead")
   void clientListValueReset(
     List<ClientO>? value, {
     bool updateParent = true,
@@ -898,6 +900,7 @@ class DeliveryPointOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void nameValueReset(
     String value, {
     bool updateParent = true,
@@ -913,6 +916,7 @@ class DeliveryPointOForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void addressValueReset(
     AddressO? value, {
     bool updateParent = true,
@@ -1254,6 +1258,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void streetValueReset(
     String? value, {
     bool updateParent = true,
@@ -1269,6 +1274,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void cityValueReset(
     String? value, {
     bool updateParent = true,
@@ -1662,6 +1668,7 @@ class ClientOForm implements FormModel<ClientO, ClientOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void clientTypeValueReset(
     ClientType value, {
     bool updateParent = true,
@@ -1677,6 +1684,7 @@ class ClientOForm implements FormModel<ClientO, ClientOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void nameValueReset(
     String? value, {
     bool updateParent = true,
@@ -1692,6 +1700,7 @@ class ClientOForm implements FormModel<ClientO, ClientOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void notesValueReset(
     String? value, {
     bool updateParent = true,
@@ -2527,6 +2536,7 @@ class StandaloneDeliveryPointForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void nameValueReset(
     String value, {
     bool updateParent = true,
@@ -2542,6 +2552,7 @@ class StandaloneDeliveryPointForm
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void addressValueReset(
     AddressO? value, {
     bool updateParent = true,

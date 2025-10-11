@@ -364,6 +364,7 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void emailValueReset(
     String? value, {
     bool updateParent = true,
@@ -379,6 +380,7 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void passwordValueReset(
     String? value, {
     bool updateParent = true,

@@ -504,6 +504,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void personalValueReset(
     PersonalO? value, {
     bool updateParent = true,
@@ -516,6 +517,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Use control.reset() instead")
   void phoneValueReset(
     PhoneO? value, {
     bool updateParent = true,
@@ -528,6 +530,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Use control.reset() instead")
   void addressValueReset(
     AddressO? value, {
     bool updateParent = true,
@@ -540,6 +543,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Use control.reset() instead")
   void address2ValueReset(
     AddressO? value, {
     bool updateParent = true,
@@ -936,6 +940,7 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void nameValueReset(
     String? value, {
     bool updateParent = true,
@@ -951,6 +956,7 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void emailValueReset(
     String? value, {
     bool updateParent = true,
@@ -1302,6 +1308,7 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void phoneNumberValueReset(
     String? value, {
     bool updateParent = true,
@@ -1317,6 +1324,7 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void countryIsoValueReset(
     String? value, {
     bool updateParent = true,
@@ -1740,6 +1748,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void streetValueReset(
     String? value, {
     bool updateParent = true,
@@ -1755,6 +1764,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void cityValueReset(
     String? value, {
     bool updateParent = true,
@@ -1770,6 +1780,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void zipValueReset(
     String? value, {
     bool updateParent = true,

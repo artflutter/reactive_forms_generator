@@ -636,6 +636,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void emailValueReset(
     String value, {
     bool updateParent = true,
@@ -651,6 +652,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void passwordValueReset(
     String value, {
     bool updateParent = true,
@@ -666,6 +668,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void rememberMeValueReset(
     bool value, {
     bool updateParent = true,
@@ -681,6 +684,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void themeValueReset(
     String value, {
     bool updateParent = true,
@@ -696,6 +700,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void modeValueReset(
     UserMode value, {
     bool updateParent = true,
@@ -711,6 +716,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void timeoutValueReset(
     int value, {
     bool updateParent = true,
@@ -726,6 +732,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void heightValueReset(
     double value, {
     bool updateParent = true,
@@ -741,6 +748,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void unAnnotatedValueReset(
     String? value, {
     bool updateParent = true,
@@ -756,6 +764,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void someIntListValueReset(
     List<int> value, {
     bool updateParent = true,

@@ -524,6 +524,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void idValueReset(
     String value, {
     bool updateParent = true,
@@ -539,6 +540,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void firstNameValueReset(
     String? value, {
     bool updateParent = true,
@@ -554,6 +556,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void lastNameValueReset(
     String? value, {
     bool updateParent = true,
@@ -569,6 +572,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void homeValueReset(
     AddressO value, {
     bool updateParent = true,
@@ -581,6 +585,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Use control.reset() instead")
   void officeValueReset(
     AddressO? value, {
     bool updateParent = true,
@@ -1095,6 +1100,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void streetValueReset(
     String? value, {
     bool updateParent = true,
@@ -1110,6 +1116,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void cityValueReset(
     String? value, {
     bool updateParent = true,
@@ -1125,6 +1132,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void zipValueReset(
     String? value, {
     bool updateParent = true,

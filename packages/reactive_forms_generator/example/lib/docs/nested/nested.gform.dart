@@ -267,6 +267,7 @@ class SubGroupForm implements FormModel<SubGroup, SubGroup> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void idValueReset(
     String value, {
     bool updateParent = true,
@@ -1018,6 +1019,7 @@ class GroupForm implements FormModel<Group, Group> {
         emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void idValueReset(
     String value, {
     bool updateParent = true,
@@ -1033,6 +1035,7 @@ class GroupForm implements FormModel<Group, Group> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void subGroupListValueReset(
     List<SubGroup> value, {
     bool updateParent = true,
@@ -1807,6 +1810,7 @@ class NestedForm implements FormModel<Nested, Nested> {
         emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void groupListValueReset(
     List<Group> value, {
     bool updateParent = true,

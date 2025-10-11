@@ -275,6 +275,7 @@ class StatusListForm<T extends Enum>
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void listValueReset(
     List<T?> value, {
     bool updateParent = true,

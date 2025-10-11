@@ -308,6 +308,7 @@ class LoginForm implements FormModel<Login, Login> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void emailValueReset(
     String value, {
     bool updateParent = true,
@@ -323,6 +324,7 @@ class LoginForm implements FormModel<Login, Login> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void passwordValueReset(
     String value, {
     bool updateParent = true,

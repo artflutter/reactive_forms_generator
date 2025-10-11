@@ -578,6 +578,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.reset() instead")
   void someListValueReset(
     List<String?>? value, {
     bool updateParent = true,
@@ -593,6 +594,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void someListRequiredValueReset(
     List<String> value, {
     bool updateParent = true,
@@ -608,6 +610,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void emailListValueReset(
     List<String> value, {
     bool updateParent = true,
@@ -623,6 +626,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void fruitListValueReset(
     List<bool?> value, {
     bool updateParent = true,
@@ -638,6 +642,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void vegetablesListValueReset(
     List<String?>? value, {
     bool updateParent = true,
@@ -653,6 +658,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
         disabled: disabled,
       );
 
+  @Deprecated("Use control.reset() instead")
   void modeListValueReset(
     List<UserMode?>? value, {
     bool updateParent = true,
