@@ -8,11 +8,7 @@ abstract class ReactiveFormGeneratorMethod {
   final bool output;
   final List<String> requiredValidators;
 
-  ReactiveFormGeneratorMethod(
-    this.field,
-    this.output,
-    this.requiredValidators,
-  );
+  ReactiveFormGeneratorMethod(this.field, this.output, this.requiredValidators);
 
   Method? method() {
     if (field.isFormGroup) {

@@ -7,12 +7,11 @@ const fileName = 'group';
 
 void main() {
   group('reactive_forms_generator', () {
-    test(
-      'Form with nullable groups types',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Form with nullable groups types', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
@@ -76,10 +75,9 @@ void main() {
               });
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 

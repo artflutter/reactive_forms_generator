@@ -358,6 +358,7 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
         form.control(passwordControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -376,6 +377,7 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void passwordSetDisabled(
     bool disabled, {
     bool updateParent = true,

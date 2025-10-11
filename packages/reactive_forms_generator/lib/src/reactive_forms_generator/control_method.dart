@@ -5,11 +5,7 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class ControlMethod extends ReactiveFormGeneratorMethod {
-  ControlMethod(
-    super.field,
-    super.output,
-    super.requiredValidators,
-  );
+  ControlMethod(super.field, super.output, super.requiredValidators);
 
   @override
   Method? formGroupMethod() {
@@ -117,7 +113,8 @@ class ControlMethod extends ReactiveFormGeneratorMethod {
     return Method(
       (b) => b
         ..annotations.add(
-            const CodeExpression(Code('Deprecated("Migrate to .control")')))
+          const CodeExpression(Code('Deprecated("Migrate to .control")')),
+        )
         ..name = field.fieldControlName
         ..lambda = true
         ..type = MethodType.getter
@@ -128,11 +125,7 @@ class ControlMethod extends ReactiveFormGeneratorMethod {
 }
 
 class ControlMethod2 extends ReactiveFormGeneratorMethod {
-  ControlMethod2(
-    super.field,
-    super.output,
-    super.requiredValidators,
-  );
+  ControlMethod2(super.field, super.output, super.requiredValidators);
 
   @override
   Method? formControlMethod() {

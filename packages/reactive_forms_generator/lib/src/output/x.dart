@@ -28,9 +28,9 @@ class ElementDisplayStringBuilder2 extends ElementDisplayStringBuilder {
     bool withNullability = true,
     bool multiline = false,
     required this.preferTypeAlias,
-  })  : _withNullability = withNullability,
-        _multiline = multiline,
-        super(withNullability: false, preferTypeAlias: false);
+  }) : _withNullability = withNullability,
+       _multiline = multiline,
+       super(withNullability: false, preferTypeAlias: false);
 
   @override
   String toString() => _buffer.toString();
@@ -233,8 +233,8 @@ class ElementDisplayStringBuilder2 extends ElementDisplayStringBuilder {
 
     final namePostfix =
         type.element3.hasRfGroupAnnotation || type.element3.hasRfAnnotation
-            ? 'Output'
-            : '';
+        ? 'Output'
+        : '';
     _write('${type.element3.name3 ?? '<null>'}$namePostfix');
     _writeTypeArguments(type.typeArguments);
 
@@ -676,9 +676,11 @@ class ElementDisplayStringBuilder2 extends ElementDisplayStringBuilder {
         const unicodeSubscriptZero = 0x2080;
         const unicodeZero = 0x30;
 
-        var subscript = String.fromCharCodes('$counter'.codeUnits.map((n) {
-          return unicodeSubscriptZero + (n - unicodeZero);
-        }));
+        var subscript = String.fromCharCodes(
+          '$counter'.codeUnits.map((n) {
+            return unicodeSubscriptZero + (n - unicodeZero);
+          }),
+        );
 
         name = typeParameter.name3! + subscript;
       }

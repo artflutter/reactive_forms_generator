@@ -59,9 +59,9 @@ extension ListElementAnnotationImplExt on List<ElementAnnotationImpl> {
     return any((e) => e.annotationAst.name.toString() == 'RfGroup');
   }
 
-// bool get hasRfAnnotation {
-//   return metadata.any((e) => e.name.toString() == 'Rf');
-// }
+  // bool get hasRfAnnotation {
+  //   return metadata.any((e) => e.name.toString() == 'Rf');
+  // }
 }
 
 extension NodeListImplAnnotationImplExt on NodeListImpl<AnnotationImpl> {
@@ -89,19 +89,17 @@ extension on Annotatable {
 
           final isExactlyType = typeChecker?.isExactlyType(obj.type!) ?? false;
           if (isExactlyType) {
-            final argumentList = (meta as ElementAnnotationImpl)
-                .annotationAst
-                .arguments as ArgumentListImpl;
+            final argumentList =
+                (meta as ElementAnnotationImpl).annotationAst.arguments
+                    as ArgumentListImpl;
             for (var argument in argumentList.arguments) {
               final argumentNamedExpression = argument as NamedExpressionImpl;
-              result.addEntries(
-                [
-                  MapEntry(
-                    argumentNamedExpression.name.label.toSource(),
-                    argumentNamedExpression.expression.toSource(),
-                  ),
-                ],
-              );
+              result.addEntries([
+                MapEntry(
+                  argumentNamedExpression.name.label.toSource(),
+                  argumentNamedExpression.expression.toSource(),
+                ),
+              ]);
             }
           }
         }
@@ -257,7 +255,8 @@ extension ClassElementAnnotationExt on ClassElement2 {
       if (hasRfAnnotation) {
         final annotation = rfAnnotation;
 
-        final x = annotation
+        final x =
+            annotation
                 ?.getField('requiredValidators')
                 ?.toListValue()
                 ?.map((e) {

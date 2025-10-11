@@ -289,6 +289,7 @@ class SubGroupForm implements FormModel<SubGroup, SubGroup> {
         form.control(idControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1065,6 +1066,7 @@ class GroupForm implements FormModel<Group, Group> {
         .toList();
   }
 
+  @Deprecated("Use control.disabled() instead")
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1083,6 +1085,7 @@ class GroupForm implements FormModel<Group, Group> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void subGroupListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1826,6 +1829,7 @@ class NestedForm implements FormModel<Nested, Nested> {
         .toList();
   }
 
+  @Deprecated("Use control.disabled() instead")
   void groupListSetDisabled(
     bool disabled, {
     bool updateParent = true,

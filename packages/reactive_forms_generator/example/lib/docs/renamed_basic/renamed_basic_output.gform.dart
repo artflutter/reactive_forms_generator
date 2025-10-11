@@ -415,6 +415,7 @@ class SomeWiredNameForm
         form.control(passwordControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -433,6 +434,7 @@ class SomeWiredNameForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void passwordSetDisabled(
     bool disabled, {
     bool updateParent = true,

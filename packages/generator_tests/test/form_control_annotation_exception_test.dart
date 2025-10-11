@@ -43,47 +43,35 @@ const model = r'''
 ''';
 
 void main() {
-  group(
-    skip: true,
-    'doc',
-    () {
-      test(
-        'Basic',
+  group(skip: true, 'doc', () {
+    test('Basic', () async {
+      final anotherBuilder = reactiveFormsGenerator(
+        const BuilderOptions(<String, dynamic>{}),
+      );
+
+      expect(
         () async {
-          final anotherBuilder = reactiveFormsGenerator(
-            const BuilderOptions(<String, dynamic>{}),
+          final readerWriter = TestReaderWriter(
+            rootPackage: 'reactive_forms_generator',
           );
+          await readerWriter.testing.loadIsolateSources();
 
-          expect(
-            () async {
-              final readerWriter =
-                  TestReaderWriter(rootPackage: 'reactive_forms_generator');
-              await readerWriter.testing.loadIsolateSources();
-
-              return await testBuilder(
-                anotherBuilder,
-                {
-                  'a|lib/$fileName.dart': model,
-                },
-                outputs: {
-                  'a|lib/$fileName.gform.dart': '',
-                },
-                onLog: (message) => stdout.writeln(message),
-                readerWriter: readerWriter,
-              );
-            },
-            throwsA(
-              predicate(
-                (e) {
-                  return e is Exception &&
-                      e.toString() ==
-                          'Exception: Annotation and field type mismatch. Annotation is typed as `double` and field(`email`) as `String`.';
-                },
-              ),
-            ),
+          return await testBuilder(
+            anotherBuilder,
+            {'a|lib/$fileName.dart': model},
+            outputs: {'a|lib/$fileName.gform.dart': ''},
+            onLog: (message) => stdout.writeln(message),
+            readerWriter: readerWriter,
           );
         },
+        throwsA(
+          predicate((e) {
+            return e is Exception &&
+                e.toString() ==
+                    'Exception: Annotation and field type mismatch. Annotation is typed as `double` and field(`email`) as `String`.';
+          }),
+        ),
       );
-    },
-  );
+    });
+  });
 }

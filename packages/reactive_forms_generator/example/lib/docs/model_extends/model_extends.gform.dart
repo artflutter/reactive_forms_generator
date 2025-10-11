@@ -358,6 +358,7 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
         form.control(passwordControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -376,6 +377,7 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void passwordSetDisabled(
     bool disabled, {
     bool updateParent = true,

@@ -168,11 +168,11 @@ extension TypeAnnotationImplExt on TypeAnnotationImpl {
     return switch (type) {
       final GenericFunctionTypeImpl _ => this,
       final NamedTypeImpl _ => NamedTypeImpl(
-          importPrefix: type.importPrefix,
-          name2: type.name2,
-          typeArguments: type.typeArguments,
-          question: null,
-        ),
+        importPrefix: type.importPrefix,
+        name2: type.name2,
+        typeArguments: type.typeArguments,
+        question: null,
+      ),
       final RecordTypeAnnotationImpl _ => this,
     };
   }
@@ -183,17 +183,13 @@ extension TypeAnnotationImplExt on TypeAnnotationImpl {
     return switch (type) {
       GenericFunctionTypeImpl() => throw UnimplementedError(),
       NamedTypeImpl() => NamedTypeImpl(
-          importPrefix: type.importPrefix,
-          name2: type.element2?.hasRfGroupAnnotation == true
-              ? StringToken(
-                  TokenType.STRING,
-                  '${type.name2.lexeme}Output',
-                  0,
-                )
-              : type.name2,
-          typeArguments: type.typeArguments?.newTypeArguments,
-          question: type.question,
-        ),
+        importPrefix: type.importPrefix,
+        name2: type.element2?.hasRfGroupAnnotation == true
+            ? StringToken(TokenType.STRING, '${type.name2.lexeme}Output', 0)
+            : type.name2,
+        typeArguments: type.typeArguments?.newTypeArguments,
+        question: type.question,
+      ),
       RecordTypeAnnotationImpl() => throw UnimplementedError(),
     };
   }
@@ -213,21 +209,21 @@ extension TypeArgumentListImplExt on TypeArgumentListImpl {
 
 extension FieldDeclarationImplExt on FieldDeclarationImpl {
   FieldDeclarationImpl get newField => FieldDeclarationImpl(
-        comment: null,
-        metadata: metadata,
-        abstractKeyword: abstractKeyword,
-        augmentKeyword: augmentKeyword,
-        covariantKeyword: covariantKeyword,
-        externalKeyword: externalKeyword,
-        staticKeyword: staticKeyword,
-        fieldList: VariableDeclarationListImpl(
-          comment: null,
-          metadata: fields.metadata,
-          lateKeyword: fields.lateKeyword,
-          keyword: fields.keyword,
-          type: fields.type?.newType,
-          variables: fields.variables,
-        ),
-        semicolon: semicolon,
-      );
+    comment: null,
+    metadata: metadata,
+    abstractKeyword: abstractKeyword,
+    augmentKeyword: augmentKeyword,
+    covariantKeyword: covariantKeyword,
+    externalKeyword: externalKeyword,
+    staticKeyword: staticKeyword,
+    fieldList: VariableDeclarationListImpl(
+      comment: null,
+      metadata: fields.metadata,
+      lateKeyword: fields.lateKeyword,
+      keyword: fields.keyword,
+      type: fields.type?.newType,
+      variables: fields.variables,
+    ),
+    semicolon: semicolon,
+  );
 }

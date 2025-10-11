@@ -567,6 +567,7 @@ class GroupForm implements FormModel<Group, Group> {
 
   AddressForm get address2Form => AddressForm(form, pathBuilder('address2'));
 
+  @Deprecated("Use control.disabled() instead")
   void personalSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -585,6 +586,7 @@ class GroupForm implements FormModel<Group, Group> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void phoneSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -603,6 +605,7 @@ class GroupForm implements FormModel<Group, Group> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void addressSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -621,6 +624,7 @@ class GroupForm implements FormModel<Group, Group> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void address2SetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -970,6 +974,7 @@ class PersonalForm implements FormModel<Personal, Personal> {
         form.control(emailControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void nameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -988,6 +993,7 @@ class PersonalForm implements FormModel<Personal, Personal> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1331,6 +1337,7 @@ class PhoneForm implements FormModel<Phone, Phone> {
         form.control(countryIsoControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void phoneNumberSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1349,6 +1356,7 @@ class PhoneForm implements FormModel<Phone, Phone> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void countryIsoSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1785,6 +1793,7 @@ class AddressForm implements FormModel<Address, Address> {
         form.control(zipControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void streetSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1803,6 +1812,7 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void citySetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1821,6 +1831,7 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void zipSetDisabled(
     bool disabled, {
     bool updateParent = true,

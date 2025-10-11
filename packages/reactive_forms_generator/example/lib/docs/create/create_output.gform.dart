@@ -1088,6 +1088,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
         .toList();
   }
 
+  @Deprecated("Use control.disabled() instead")
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1106,6 +1107,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void businessNumberSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1124,6 +1126,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void fileIdsSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1142,6 +1145,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void nameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1160,6 +1164,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1178,6 +1183,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void sameMailingAddressAsCompanySetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1196,6 +1202,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void companyAddressSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1214,6 +1221,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void primaryContactSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1232,6 +1240,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void mailingAddressSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1250,6 +1259,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void adminsSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1871,6 +1881,7 @@ class AddressForm implements FormModel<Address, AddressOutput> {
         form.control(zipCodeControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void streetSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1889,6 +1900,7 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void citySetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1907,6 +1919,7 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void stateOrProvinceSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1925,6 +1938,7 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void zipCodeSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2384,6 +2398,7 @@ class PrimaryContactForm
         form.control(emailControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void fullNameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2402,6 +2417,7 @@ class PrimaryContactForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void jobTitleSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2420,6 +2436,7 @@ class PrimaryContactForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2870,6 +2887,7 @@ class AdminContactInformationForm
         form.control(emailControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void firstNameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2888,6 +2906,7 @@ class AdminContactInformationForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void lastNameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2906,6 +2925,7 @@ class AdminContactInformationForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,

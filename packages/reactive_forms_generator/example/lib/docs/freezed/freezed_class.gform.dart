@@ -755,6 +755,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         form.control(selectedSpacesControlPath()) as FormControl<List<String>>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void genderSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -773,6 +774,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -791,6 +793,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void nameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -809,6 +812,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void logoImageSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -827,6 +831,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void yearSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -845,6 +850,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void selectedSpacesSetDisabled(
     bool disabled, {
     bool updateParent = true,

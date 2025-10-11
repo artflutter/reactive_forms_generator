@@ -7,12 +7,11 @@ const fileName = 'profile';
 
 void main() {
   group('doc', () {
-    test(
-      'Profile',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Profile', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/widgets.dart';
             import 'package:freezed_annotation/freezed_annotation.dart';
             import 'package:reactive_forms/reactive_forms.dart';
@@ -274,10 +273,9 @@ void main() {
               ];
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 

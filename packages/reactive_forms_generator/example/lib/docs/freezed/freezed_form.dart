@@ -23,7 +23,7 @@ class FreezedFormWidget extends StatelessWidget {
                 formControl: formModel.id.control,
                 textInputAction: TextInputAction.next,
                 validationMessages: {
-                  ValidationMessage.required: (_) => 'Required'
+                  ValidationMessage.required: (_) => 'Required',
                 },
                 decoration: const InputDecoration(
                   labelText: 'ID',
@@ -51,11 +51,13 @@ class FreezedFormWidget extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  formModel.submit(onValid: (model) {
-                    debugPrint(jsonEncode(model.toJson()));
-                    debugPrint(model.toString());
-                    debugPrint(model.year.toString());
-                  });
+                  formModel.submit(
+                    onValid: (model) {
+                      debugPrint(jsonEncode(model.toJson()));
+                      debugPrint(model.toString());
+                      debugPrint(model.year.toString());
+                    },
+                  );
                 },
                 child: const Text('Sign Up'),
               ),

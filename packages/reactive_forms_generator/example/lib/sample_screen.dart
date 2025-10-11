@@ -15,10 +15,7 @@ class SampleScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20.0,
-            vertical: 20.0,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
           child: body,
         ),
       ),

@@ -620,6 +620,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
 
   AddressOForm get officeForm => AddressOForm(form, pathBuilder('office'));
 
+  @Deprecated("Use control.disabled() instead")
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -638,6 +639,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void firstNameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -656,6 +658,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void lastNameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -674,6 +677,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void homeSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -692,6 +696,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void officeSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1151,6 +1156,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
         form.control(zipControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void streetSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1169,6 +1175,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void citySetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1187,6 +1194,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void zipSetDisabled(
     bool disabled, {
     bool updateParent = true,

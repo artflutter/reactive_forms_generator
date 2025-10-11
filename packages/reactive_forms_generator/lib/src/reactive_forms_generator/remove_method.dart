@@ -4,11 +4,7 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class RemoveMethod extends ReactiveFormGeneratorMethod {
-  RemoveMethod(
-    super.field,
-    super.output,
-    super.requiredValidators,
-  );
+  RemoveMethod(super.field, super.output, super.requiredValidators);
 
   @override
   Method? defaultMethod() {
@@ -36,12 +32,14 @@ class RemoveMethod extends ReactiveFormGeneratorMethod {
           ),
         ])
         ..annotations.add(
-          const CodeExpression(Code(
-              "Deprecated('Generator completely wraps the form so manual fields removal could lead to unexpected crashes')")),
+          const CodeExpression(
+            Code(
+              "Deprecated('Generator completely wraps the form so manual fields removal could lead to unexpected crashes')",
+            ),
+          ),
         )
         ..returns = const Reference('void')
-        ..body = Code(
-          '''
+        ..body = Code('''
             if (${field.containsMethodName}) {
               final controlPath = path;
               if (controlPath == null) {
@@ -62,8 +60,7 @@ class RemoveMethod extends ReactiveFormGeneratorMethod {
                 }
               }
             }
-          ''',
-        ),
+          '''),
     );
   }
 }

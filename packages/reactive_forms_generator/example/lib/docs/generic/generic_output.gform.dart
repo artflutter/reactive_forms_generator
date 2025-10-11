@@ -317,6 +317,7 @@ class TagsOForm<T> implements FormModel<TagsO<T>, TagsOOutput<T>> {
         form.control(tagsControlPath()) as FormControl<List<T>>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void tagsSetDisabled(
     bool disabled, {
     bool updateParent = true,

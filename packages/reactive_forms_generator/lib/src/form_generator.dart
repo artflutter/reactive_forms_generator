@@ -33,10 +33,7 @@ import 'package:recase/recase.dart';
 
 import 'library_builder.dart';
 
-enum ValidatorsApplyMode {
-  merge,
-  override,
-}
+enum ValidatorsApplyMode { merge, override }
 
 class FormGenerator {
   final ClassElement2 root;
@@ -71,13 +68,7 @@ class FormGenerator {
   //   return false;
   // }
 
-  FormGenerator(
-    this.root,
-    this.element,
-    this.type,
-    this.ast,
-    this.classes,
-  ) {
+  FormGenerator(this.root, this.element, this.type, this.ast, this.classes) {
     for (var e in formGroups) {
       if (!classes.contains(e.className)) {
         classes.add(e.className);
@@ -94,8 +85,9 @@ class FormGenerator {
 
     for (var e in formGroupArrays) {
       final type = e.type;
-      final typeArguments =
-          type is ParameterizedType ? type.typeArguments : const <DartType>[];
+      final typeArguments = type is ParameterizedType
+          ? type.typeArguments
+          : const <DartType>[];
 
       final typeParameter = typeArguments.first;
 
@@ -113,27 +105,23 @@ class FormGenerator {
   }
 
   List<FormalParameterElement> get all => [
-        ...formControls,
-        ...formArrays,
-        ...formGroups,
-        ...formGroupArrays,
-      ];
+    ...formControls,
+    ...formArrays,
+    ...formGroups,
+    ...formGroupArrays,
+  ];
 
-  Iterable<FormalParameterElement> get formControls => parameters.where(
-        (e) => e.isFormControl,
-      );
+  Iterable<FormalParameterElement> get formControls =>
+      parameters.where((e) => e.isFormControl);
 
-  Iterable<FormalParameterElement> get formArrays => parameters.where(
-        (e) => e.isFormArray,
-      );
+  Iterable<FormalParameterElement> get formArrays =>
+      parameters.where((e) => e.isFormArray);
 
-  Iterable<FormalParameterElement> get formGroups => parameters.where(
-        (e) => e.isFormGroup,
-      );
+  Iterable<FormalParameterElement> get formGroups =>
+      parameters.where((e) => e.isFormGroup);
 
-  Iterable<FormalParameterElement> get formGroupArrays => parameters.where(
-        (e) => e.isFormGroupArray,
-      );
+  Iterable<FormalParameterElement> get formGroupArrays =>
+      parameters.where((e) => e.isFormGroupArray);
 
   String get className => '${baseName}Form';
 
@@ -149,20 +137,20 @@ class FormGenerator {
       parameters.where((e) => true);
 
   Field staticFieldName(FormalParameterElement field) => Field(
-        (b) => b
-          ..static = true
-          ..modifier = FieldModifier.constant
-          ..type = stringRef
-          ..name = field.fieldControlNameName
-          ..assignment = Code('"${field.fieldName}"'),
-      );
+    (b) => b
+      ..static = true
+      ..modifier = FieldModifier.constant
+      ..type = stringRef
+      ..name = field.fieldControlNameName
+      ..assignment = Code('"${field.fieldName}"'),
+  );
 
   Field field(FormalParameterElement field) => Field(
-        (b) => b
-          ..type = stringRef
-          ..name = field.fieldName
-          ..assignment = Code('"${field.fieldName}"'),
-      );
+    (b) => b
+      ..type = stringRef
+      ..name = field.fieldName
+      ..assignment = Code('"${field.fieldName}"'),
+  );
 
   Method get updateValueMethod {
     return Method(
@@ -277,13 +265,11 @@ class FormGenerator {
           ),
         )
         ..returns = const Reference('void')
-        ..body = Code(
-          '''
+        ..body = Code('''
               if(($controlField.value ?? []).length > i) {
                 $controlField.removeAt(i);
               }
-            ''',
-        ),
+            '''),
     );
   }
 
@@ -301,9 +287,7 @@ class FormGenerator {
           ),
         )
         ..returns = const Reference('void')
-        ..body = Code(
-          '''value.forEach((e) => ${field.addListItemName}(e));''',
-        ),
+        ..body = Code('''value.forEach((e) => ${field.addListItemName}(e));'''),
     );
   }
 
@@ -377,8 +361,7 @@ class FormGenerator {
           ),
         )
         ..returns = const Reference('void')
-        ..body = Code(
-          '''
+        ..body = Code('''
               List<Validator<dynamic>> resultingValidators = $validators; 
               List<AsyncValidator<dynamic>> resultingAsyncValidators = $asyncValidators;
               
@@ -408,37 +391,34 @@ class FormGenerator {
                 asyncValidators: resultingAsyncValidators,
                 asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? $asyncValidatorsDebounceTime,
                 disabled: disabled ?? $disabled,
-              ));''',
-        ),
+              ));'''),
     );
   }
 
-  Method get modelMethod => Method(
-        (b) {
-          final parameterValues = parameters.map<String?>((e) {
-            if (e.isPositional ||
-                e.isRequiredPositional ||
-                (e.isOptional && e.isPositional)) {
-              return e.fieldValueName;
-            }
+  Method get modelMethod => Method((b) {
+    final parameterValues = parameters.map<String?>((e) {
+      if (e.isPositional ||
+          e.isRequiredPositional ||
+          (e.isOptional && e.isPositional)) {
+        return e.fieldValueName;
+      }
 
-            return '${e.fieldName}:${e.fieldValueName}';
-          }).whereType<String>();
+      return '${e.fieldName}:${e.fieldValueName}';
+    }).whereType<String>();
 
-          final referenceType =
-              root.output ? element.toReferenceType : element.fullTypeName;
+    final referenceType = root.output
+        ? element.toReferenceType
+        : element.fullTypeName;
 
-          b
-            ..name = 'model'
-            ..returns = Reference(referenceType)
-            ..annotations.addAll(
-              [
-                const CodeExpression(Code('override')),
-                if (root.output) const CodeExpression(Code('protected'))
-              ],
-            )
-            ..type = MethodType.getter
-            ..body = Code('''
+    b
+      ..name = 'model'
+      ..returns = Reference(referenceType)
+      ..annotations.addAll([
+        const CodeExpression(Code('override')),
+        if (root.output) const CodeExpression(Code('protected')),
+      ])
+      ..type = MethodType.getter
+      ..body = Code('''
               final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
               if (!isValid) {
@@ -450,85 +430,81 @@ class FormGenerator {
               }
               return $referenceType(${parameterValues.join(', ')});
             ''');
-        },
-      );
+  });
 
-  Method get rawModelMethod => Method(
-        (b) {
-          final parameterValues = parameters.map<String?>((e) {
-            if (e.isPositional ||
-                e.isRequiredPositional ||
-                (e.isOptional && e.isPositional)) {
-              return e.fieldRawValueName;
-            }
+  Method get rawModelMethod => Method((b) {
+    final parameterValues = parameters.map<String?>((e) {
+      if (e.isPositional ||
+          e.isRequiredPositional ||
+          (e.isOptional && e.isPositional)) {
+        return e.fieldRawValueName;
+      }
 
-            return '${e.fieldName}:${e.fieldRawValueName}';
-          }).whereType<String>();
+      return '${e.fieldName}:${e.fieldRawValueName}';
+    }).whereType<String>();
 
-          final referenceType = element.fullTypeName;
+    final referenceType = element.fullTypeName;
 
-          b
-            ..name = 'rawModel'
-            ..returns = Reference(referenceType)
-            ..annotations.add(const CodeExpression(Code('override')))
-            ..type = MethodType.getter
-            ..body = Code('''
+    b
+      ..name = 'rawModel'
+      ..returns = Reference(referenceType)
+      ..annotations.add(const CodeExpression(Code('override')))
+      ..type = MethodType.getter
+      ..body = Code('''
               return $referenceType(${parameterValues.join(', ')});
             ''');
-        },
-      );
+  });
 
-  Method get toggleDisabledMethod => Method(
-        (b) {
-          final formGroupsToggleDisabled = formGroups
-              .map((e) {
-                return '${e.fieldControlForm}.toggleDisabled();';
-              })
-              .toList()
-              .join('');
+  Method get toggleDisabledMethod => Method((b) {
+    final formGroupsToggleDisabled = formGroups
+        .map((e) {
+          return '${e.fieldControlForm}.toggleDisabled();';
+        })
+        .toList()
+        .join('');
 
-          final formGroupArraysToggleDisabled = formGroupArrays
-              .map((e) {
-                final type = e.type;
-                final typeArguments = type is ParameterizedType
-                    ? type.typeArguments
-                    : const <DartType>[];
+    final formGroupArraysToggleDisabled = formGroupArrays
+        .map((e) {
+          final type = e.type;
+          final typeArguments = type is ParameterizedType
+              ? type.typeArguments
+              : const <DartType>[];
 
-                final generator = FormGenerator(
-                  root,
-                  typeArguments.first.element3! as ClassElement2,
-                  e.type,
-                  ast,
-                  classes,
-                );
+          final generator = FormGenerator(
+            root,
+            typeArguments.first.element3! as ClassElement2,
+            e.type,
+            ast,
+            classes,
+          );
 
-                return '${e.name3}${generator.className}.forEach((e) => e.toggleDisabled());';
-              })
-              .toList()
-              .join('');
+          return '${e.name3}${generator.className}.forEach((e) => e.toggleDisabled());';
+        })
+        .toList()
+        .join('');
 
-          b
-            ..name = 'toggleDisabled'
-            ..returns = Reference(element.fullTypeName)
-            ..annotations.add(const CodeExpression(Code('override')))
-            ..optionalParameters.addAll([
-              Parameter(
-                (b) => b
-                  ..name = 'updateParent'
-                  ..named = true
-                  ..defaultTo = const Code('true')
-                  ..type = const Reference('bool'),
-              ),
-              Parameter(
-                (b) => b
-                  ..name = 'emitEvent'
-                  ..named = true
-                  ..defaultTo = const Code('true')
-                  ..type = const Reference('bool'),
-              ),
-            ])
-            ..returns = const Reference('void')
-            ..body = Code('''
+    b
+      ..name = 'toggleDisabled'
+      ..returns = Reference(element.fullTypeName)
+      ..annotations.add(const CodeExpression(Code('override')))
+      ..optionalParameters.addAll([
+        Parameter(
+          (b) => b
+            ..name = 'updateParent'
+            ..named = true
+            ..defaultTo = const Code('true')
+            ..type = const Reference('bool'),
+        ),
+        Parameter(
+          (b) => b
+            ..name = 'emitEvent'
+            ..named = true
+            ..defaultTo = const Code('true')
+            ..type = const Reference('bool'),
+        ),
+      ])
+      ..returns = const Reference('void')
+      ..body = Code('''
                 final currentFormInstance = currentForm;
 
                 if (currentFormInstance is! FormGroup) {
@@ -559,35 +535,31 @@ class FormGenerator {
                 });
               }
             ''');
-        },
-      );
+  });
 
-  Method get currentFormMethod => Method(
-        (b) {
-          b
-            ..name = 'currentForm'
-            ..type = MethodType.getter
-            ..returns = const Reference('AbstractControl<dynamic>')
-            ..body = const Code('''
+  Method get currentFormMethod => Method((b) {
+    b
+      ..name = 'currentForm'
+      ..type = MethodType.getter
+      ..returns = const Reference('AbstractControl<dynamic>')
+      ..body = const Code('''
               return path == null ? form : form.control(path!);
             ''');
-        },
-      );
+  });
 
-  Method get equalsToMethod => Method(
-        (b) {
-          b
-            ..name = 'equalsTo'
-            ..annotations.add(const CodeExpression(Code('override')))
-            ..returns = const Reference('bool')
-            ..requiredParameters.add(
-              Parameter(
-                (b) => b
-                  ..name = 'other'
-                  ..type = Reference(_modelDisplayTypeMaybeNullable),
-              ),
-            )
-            ..body = Code('''
+  Method get equalsToMethod => Method((b) {
+    b
+      ..name = 'equalsTo'
+      ..annotations.add(const CodeExpression(Code('override')))
+      ..returns = const Reference('bool')
+      ..requiredParameters.add(
+        Parameter(
+          (b) => b
+            ..name = 'other'
+            ..type = Reference(_modelDisplayTypeMaybeNullable),
+        ),
+      )
+      ..body = Code('''
               final currentForm = this.currentForm;
               
               return const DeepCollectionEquality().equals(
@@ -595,34 +567,31 @@ class FormGenerator {
                 $className.formElements(other).rawValue,
               );
             ''');
-        },
-      );
+  });
 
-  Method get submitMethod => Method(
-        (b) {
-          b
-            ..name = 'submit'
-            ..annotations.add(const CodeExpression(Code('override')))
-            ..returns = const Reference('void')
-            ..optionalParameters.addAll(
-              [
-                Parameter(
-                  (b) => b
-                    ..name = 'onValid'
-                    ..named = true
-                    ..required = true
-                    ..type = Reference(
-                        'void Function(${root.output ? element.toReferenceType : element.fullTypeName} model)'),
-                ),
-                Parameter(
-                  (b) => b
-                    ..name = 'onNotValid'
-                    ..named = true
-                    ..type = const Reference('void Function()?'),
-                ),
-              ],
-            )
-            ..body = Code('''
+  Method get submitMethod => Method((b) {
+    b
+      ..name = 'submit'
+      ..annotations.add(const CodeExpression(Code('override')))
+      ..returns = const Reference('void')
+      ..optionalParameters.addAll([
+        Parameter(
+          (b) => b
+            ..name = 'onValid'
+            ..named = true
+            ..required = true
+            ..type = Reference(
+              'void Function(${root.output ? element.toReferenceType : element.fullTypeName} model)',
+            ),
+        ),
+        Parameter(
+          (b) => b
+            ..name = 'onNotValid'
+            ..named = true
+            ..type = const Reference('void Function()?'),
+        ),
+      ])
+      ..body = Code('''
               currentForm.markAllAsTouched();
               if (currentForm.valid) {
                 onValid(model);
@@ -632,28 +601,25 @@ class FormGenerator {
                 onNotValid?.call();
               }
             ''');
-        },
-      );
+  });
 
   Code get logging => Code("final $log = Logger.detached('$classNameFull');");
 
   Constructor get _constructor => Constructor(
-        (b) => b
-          ..requiredParameters.addAll(
-            [
-              Parameter(
-                (b) => b
-                  ..name = 'form'
-                  ..toThis = true,
-              ),
-              Parameter(
-                (b) => b
-                  ..name = 'path'
-                  ..toThis = true,
-              ),
-            ],
-          ),
-      );
+    (b) => b
+      ..requiredParameters.addAll([
+        Parameter(
+          (b) => b
+            ..name = 'form'
+            ..toThis = true,
+        ),
+        Parameter(
+          (b) => b
+            ..name = 'path'
+            ..toThis = true,
+        ),
+      ]),
+  );
 
   String get _modelDisplayTypeNonNullable {
     String displayType =
@@ -661,10 +627,9 @@ class FormGenerator {
 
     if (type is ParameterizedType &&
         (type as ParameterizedType).isDartCoreList) {
-      displayType = (type as ParameterizedType)
-          .typeArguments
-          .first
-          .getName(withNullability: false);
+      displayType = (type as ParameterizedType).typeArguments.first.getName(
+        withNullability: false,
+      );
     }
 
     return displayType;
@@ -673,7 +638,8 @@ class FormGenerator {
   String get _modelDisplayTypeMaybeNullable {
     String displayType = _modelDisplayTypeNonNullable;
 
-    final isNullable = type?.nullabilitySuffix == NullabilitySuffix.question ||
+    final isNullable =
+        type?.nullabilitySuffix == NullabilitySuffix.question ||
         element.isNullable;
 
     if (isNullable) {
@@ -715,24 +681,27 @@ class FormGenerator {
     final x = ast.declarations;
 
     return x
-        .where((e) =>
-            e is u.ClassDeclarationImpl &&
-            (e.hasRfAnnotation || e.hasRfGroupAnnotation))
+        .where(
+          (e) =>
+              e is u.ClassDeclarationImpl &&
+              (e.hasRfAnnotation || e.hasRfGroupAnnotation),
+        )
         .map((e) {
-      final rfParameterVisitor2 = RfParameterVisitor2();
-      e.accept(rfParameterVisitor2);
+          final rfParameterVisitor2 = RfParameterVisitor2();
+          e.accept(rfParameterVisitor2);
 
-      final rfParameterVisitor = RfParameterVisitor(
-        requiredValidators: root.requiredValidators,
-      );
-      e.accept(rfParameterVisitor);
-      replaceR(
-        rfParameterVisitor.fieldDeclaration,
-        rfParameterVisitor.fieldFormalParameter,
-      );
+          final rfParameterVisitor = RfParameterVisitor(
+            requiredValidators: root.requiredValidators,
+          );
+          e.accept(rfParameterVisitor);
+          replaceR(
+            rfParameterVisitor.fieldDeclaration,
+            rfParameterVisitor.fieldFormalParameter,
+          );
 
-      return Code(e.toSource());
-    }).toList();
+          return Code(e.toSource());
+        })
+        .toList();
   }
 
   List<Spec> get generate2 {
@@ -755,136 +724,135 @@ class FormGenerator {
         (b) => b
           ..name = className
           ..types.addAll(element.fullGenericTypes)
-          ..implements.add(Reference(
-              'FormModel<${element.fullTypeName}, ${root.output ? element.toReferenceType : element.fullTypeName}>'))
-          ..fields.addAll(
-            [
-              ...staticFieldNameList,
-              Field(
-                (b) => b
-                  ..name = 'form'
-                  ..modifier = FieldModifier.final$
-                  ..type = const Reference('FormGroup'),
-              ),
-              Field(
-                (b) => b
-                  ..name = 'path'
-                  ..modifier = FieldModifier.final$
-                  ..type = const Reference('String?'),
-              ),
-              Field(
-                (b) => b
-                  ..name = '_disabled'
-                  ..modifier = FieldModifier.final$
-                  ..assignment = const Code('{}')
-                  ..type = const Reference('Map<String, bool>'),
-              ),
-            ],
+          ..implements.add(
+            Reference(
+              'FormModel<${element.fullTypeName}, ${root.output ? element.toReferenceType : element.fullTypeName}>',
+            ),
           )
+          ..fields.addAll([
+            ...staticFieldNameList,
+            Field(
+              (b) => b
+                ..name = 'form'
+                ..modifier = FieldModifier.final$
+                ..type = const Reference('FormGroup'),
+            ),
+            Field(
+              (b) => b
+                ..name = 'path'
+                ..modifier = FieldModifier.final$
+                ..type = const Reference('String?'),
+            ),
+            Field(
+              (b) => b
+                ..name = '_disabled'
+                ..modifier = FieldModifier.final$
+                ..assignment = const Code('{}')
+                ..type = const Reference('Map<String, bool>'),
+            ),
+          ])
           ..constructors.add(_constructor)
-          ..methods.addAll(
-            [
-              ...fieldControlNameMethodList,
-              ...fieldValueMethodList,
-              ...fieldRawValueMethodList,
-              ...fieldContainsMethodList,
-              ...fieldErrorsMethodList,
-              ...fieldFocusMethodList,
-              ...fieldRemoveMethodList,
-              ...fieldUpdateMethodList,
-              ...fieldInsertMethodList,
-              ...fieldClearMethodList,
-              ...fieldPatchMethodList,
-              ...fieldResetMethodList,
-              ...controlMethodList,
-              ...controlMethod2List,
-              ...controlControlsMethodList,
-              ...formGroupMethodList,
-              ...formArrayMethodList,
-              ...controlSetDisabledMethodList,
-              ...extendedControlMethodList,
-              ...addArrayControlMethodList,
-              ...addGroupControlMethodList,
-              ...removeGroupControlMethodList,
-              ...addGroupControlListMethodList,
-              modelMethod,
-              rawModelMethod,
-              toggleDisabledMethod,
-              equalsToMethod,
-              submitMethod,
-              currentFormMethod,
-              updateValueMethod,
-              resetMethod,
-              Method(
-                (b) => b
-                  ..name = 'pathBuilder'
-                  ..lambda = true
-                  ..requiredParameters.add(
-                    Parameter(
-                      (b) => b
-                        ..name = 'pathItem'
-                        ..type = const Reference('String?'),
-                    ),
-                  )
-                  ..returns = const Reference('String')
-                  ..body = const Code('''
+          ..methods.addAll([
+            ...fieldControlNameMethodList,
+            ...fieldValueMethodList,
+            ...fieldRawValueMethodList,
+            ...fieldContainsMethodList,
+            ...fieldErrorsMethodList,
+            ...fieldFocusMethodList,
+            ...fieldRemoveMethodList,
+            ...fieldUpdateMethodList,
+            ...fieldInsertMethodList,
+            ...fieldClearMethodList,
+            ...fieldPatchMethodList,
+            ...fieldResetMethodList,
+            ...controlMethodList,
+            ...controlMethod2List,
+            ...controlControlsMethodList,
+            ...formGroupMethodList,
+            ...formArrayMethodList,
+            ...controlSetDisabledMethodList,
+            ...extendedControlMethodList,
+            ...addArrayControlMethodList,
+            ...addGroupControlMethodList,
+            ...removeGroupControlMethodList,
+            ...addGroupControlListMethodList,
+            modelMethod,
+            rawModelMethod,
+            toggleDisabledMethod,
+            equalsToMethod,
+            submitMethod,
+            currentFormMethod,
+            updateValueMethod,
+            resetMethod,
+            Method(
+              (b) => b
+                ..name = 'pathBuilder'
+                ..lambda = true
+                ..requiredParameters.add(
+                  Parameter(
+                    (b) => b
+                      ..name = 'pathItem'
+                      ..type = const Reference('String?'),
+                  ),
+                )
+                ..returns = const Reference('String')
+                ..body = const Code('''
                       [path, pathItem].whereType<String>().join(".")
                     '''),
-              ),
-              Method(
-                (b) {
-                  b
-                    ..name = 'formElements${element.fullGenerics}'
-                    ..static = true
-                    ..lambda = true
-                    ..requiredParameters.add(
-                      Parameter(
-                        (b) => b
-                          ..name = element.name3?.camelCase ?? '<null>'
-                          ..type = Reference(_modelDisplayTypeMaybeNullable),
-                      ),
-                    )
-                    ..returns = const Reference('FormGroup')
-                    ..body = Code(
-                      FormGroupGenerator(
-                        root: root,
-                        formGroupField: element,
-                        // e.FormalParameterElementImpl(
-                        //   e.ParameterElementImpl(
-                        //     name2: 'FakeParameterElement',
-                        //     name: 'FakeParameterElement',
-                        //     nameOffset: 20,
-                        //     parameterKind: u.ParameterKind.REQUIRED,
-                        //     nameOffset2: 20,
-                        //   )
-                        //     ..enclosingElement3 =
-                        //         (e.ConstructorElement2Impl('aa', element)
-                        //           ..enclosingElement3 =
-                        //               element as e.ClassElementImpl2)
-                        //     ..type = t.InterfaceTypeImpl(
-                        //       element: (element.thisType as t.InterfaceTypeImpl)
-                        //           .element3,
-                        //       typeArguments: element.thisType.typeArguments
-                        //           as List<t.TypeImpl>,
-                        //       nullabilitySuffix: NullabilitySuffix.none,
-                        //     ),
-                        // ),
-                        type: type ??
-                            t.InterfaceTypeImpl(
-                              element: (element.thisType as t.InterfaceTypeImpl)
-                                  .element3,
-                              typeArguments: element.thisType.typeArguments
+            ),
+            Method((b) {
+              b
+                ..name = 'formElements${element.fullGenerics}'
+                ..static = true
+                ..lambda = true
+                ..requiredParameters.add(
+                  Parameter(
+                    (b) => b
+                      ..name = element.name3?.camelCase ?? '<null>'
+                      ..type = Reference(_modelDisplayTypeMaybeNullable),
+                  ),
+                )
+                ..returns = const Reference('FormGroup')
+                ..body = Code(
+                  FormGroupGenerator(
+                    root: root,
+                    formGroupField: element,
+                    // e.FormalParameterElementImpl(
+                    //   e.ParameterElementImpl(
+                    //     name2: 'FakeParameterElement',
+                    //     name: 'FakeParameterElement',
+                    //     nameOffset: 20,
+                    //     parameterKind: u.ParameterKind.REQUIRED,
+                    //     nameOffset2: 20,
+                    //   )
+                    //     ..enclosingElement3 =
+                    //         (e.ConstructorElement2Impl('aa', element)
+                    //           ..enclosingElement3 =
+                    //               element as e.ClassElementImpl2)
+                    //     ..type = t.InterfaceTypeImpl(
+                    //       element: (element.thisType as t.InterfaceTypeImpl)
+                    //           .element3,
+                    //       typeArguments: element.thisType.typeArguments
+                    //           as List<t.TypeImpl>,
+                    //       nullabilitySuffix: NullabilitySuffix.none,
+                    //     ),
+                    // ),
+                    type:
+                        type ??
+                        t.InterfaceTypeImpl(
+                          element: (element.thisType as t.InterfaceTypeImpl)
+                              .element3,
+                          typeArguments:
+                              element.thisType.typeArguments
                                   as List<t.TypeImpl>,
-                              nullabilitySuffix: element.isNullable
-                                  ? NullabilitySuffix.question
-                                  : NullabilitySuffix.none,
-                            ),
-                      ).element(),
-                    );
-                },
-              )
-            ],
-          ),
+                          nullabilitySuffix: element.isNullable
+                              ? NullabilitySuffix.question
+                              : NullabilitySuffix.none,
+                        ),
+                  ).element(),
+                );
+            }),
+          ]),
       ),
       ...formGroupGenerators.values.map((e) => e.generate).expand((e) => e),
       ...nestedFormGroupGenerators.values
@@ -901,33 +869,29 @@ class FormGenerator {
           ..returns = Reference('${e.className}${element.generics}')
           ..name = '${e.name3}Form'
           ..type = MethodType.getter
-          ..body = Code(
-            '${e.className}(form, pathBuilder(\'${e.name3}\'))',
-          ),
+          ..body = Code('${e.className}(form, pathBuilder(\'${e.name3}\'))'),
       );
     });
   }
 
   Iterable<Method> get formArrayMethodList {
-    return formGroupArrays.map(
-      (e) {
-        final typeParameter = (e.type as ParameterizedType).typeArguments.first;
+    return formGroupArrays.map((e) {
+      final typeParameter = (e.type as ParameterizedType).typeArguments.first;
 
-        final generator = FormGenerator(
-          root,
-          typeParameter.element3! as ClassElement2,
-          type,
-          ast,
-          classes,
-        );
+      final generator = FormGenerator(
+        root,
+        typeParameter.element3! as ClassElement2,
+        type,
+        ast,
+        classes,
+      );
 
-        return Method(
-          (b) => b
-            ..returns = Reference('List<${generator.className}>')
-            ..name = '${e.name3}${generator.className}'
-            ..type = MethodType.getter
-            ..body = Code(
-              '''
+      return Method(
+        (b) => b
+          ..returns = Reference('List<${generator.className}>')
+          ..name = '${e.name3}${generator.className}'
+          ..type = MethodType.getter
+          ..body = Code('''
                 final values = ${e.fieldControlName}.controls.map((e) => e.value).toList();
                 
                 return values
@@ -935,160 +899,150 @@ class FormGenerator {
                 .map((k, v) => MapEntry(k, ${generator.className}(form, pathBuilder("${e.name3}.\$k"))))
                 .values
                 .toList();
-              ''',
-            ),
-        );
-      },
-    );
+              '''),
+      );
+    });
   }
 
   Iterable<Method> get fieldContainsMethodList => all
-      .map((e) => ContainsMethod(
-            e,
-            root.output,
-            root.requiredValidators,
-          ).method())
+      .map(
+        (e) => ContainsMethod(e, root.output, root.requiredValidators).method(),
+      )
       .whereType<Method>();
 
   Iterable<Method> get fieldValueMethodList => all
-      .map((e) => FieldValueMethod(
-            e,
-            root.output,
-            root.requiredValidators,
-          ).method())
+      .map(
+        (e) =>
+            FieldValueMethod(e, root.output, root.requiredValidators).method(),
+      )
       .whereType<Method>();
 
   Iterable<Method> get fieldRawValueMethodList => all
-      .map((e) => FieldRawValueMethod(
-            e,
-            false,
-            [],
-          ).method())
+      .map((e) => FieldRawValueMethod(e, false, []).method())
       .whereType<Method>();
 
   Iterable<Method> get fieldControlNameMethodList => all
-      .map((e) => ControlPathMethod(
-            e,
-            root.output,
-            root.requiredValidators,
-          ).method())
+      .map(
+        (e) =>
+            ControlPathMethod(e, root.output, root.requiredValidators).method(),
+      )
       .whereType<Method>();
 
   Iterable<Field> get staticFieldNameList =>
       annotatedParameters.map(staticFieldName);
 
   Iterable<Method> get fieldErrorsMethodList => all
-      .map((e) => ErrorsMethod(
-            e,
-            root.output,
-            root.requiredValidators,
-          ).method())
+      .map(
+        (e) => ErrorsMethod(e, root.output, root.requiredValidators).method(),
+      )
       .whereType<Method>();
 
   Iterable<Field> get fieldNameList => annotatedParameters.map(field);
 
   Iterable<Method> get fieldFocusMethodList => all
-      .map((e) => FocusMethod(
-            e,
-            root.output,
-            root.requiredValidators,
-          ).method())
+      .map((e) => FocusMethod(e, root.output, root.requiredValidators).method())
       .whereType<Method>();
 
   Iterable<Method> get fieldRemoveMethodList => all
-      .map((e) => RemoveMethod(
-            e,
-            root.output,
-            root.requiredValidators,
-          ).method())
+      .map(
+        (e) => RemoveMethod(e, root.output, root.requiredValidators).method(),
+      )
       .whereType<Method>();
 
   Iterable<Method> get fieldUpdateMethodList => all
-      .map((e) => ReactiveFormUpdateValueMethod(
-            e,
-            root.output,
-            root.requiredValidators,
-          ).method())
+      .map(
+        (e) => ReactiveFormUpdateValueMethod(
+          e,
+          root.output,
+          root.requiredValidators,
+        ).method(),
+      )
       .whereType<Method>();
 
   Iterable<Method> get fieldInsertMethodList => all
-      .map((e) => ReactiveFormInsertMethod(
-            e,
-            root.output,
-            root.requiredValidators,
-          ).method())
+      .map(
+        (e) => ReactiveFormInsertMethod(
+          e,
+          root.output,
+          root.requiredValidators,
+        ).method(),
+      )
       .whereType<Method>();
 
   Iterable<Method> get fieldClearMethodList => all
-      .map((e) => ReactiveFormClearMethod(
-            e,
-            root.output,
-            root.requiredValidators,
-          ).method())
+      .map(
+        (e) => ReactiveFormClearMethod(
+          e,
+          root.output,
+          root.requiredValidators,
+        ).method(),
+      )
       .whereType<Method>();
 
   Iterable<Method> get fieldPatchMethodList => all
-      .map((e) => ReactiveFormPatchValueMethod(
-            e,
-            root.output,
-            root.requiredValidators,
-          ).method())
+      .map(
+        (e) => ReactiveFormPatchValueMethod(
+          e,
+          root.output,
+          root.requiredValidators,
+        ).method(),
+      )
       .whereType<Method>();
 
   Iterable<Method> get fieldResetMethodList => all
-      .map((e) => ResetMethod(
-            e,
-            root.output,
-            root.requiredValidators,
-          ).method())
+      .map((e) => ResetMethod(e, root.output, root.requiredValidators).method())
       .whereType<Method>();
 
   Iterable<Method> get controlMethodList => all
-      .map((e) => ControlMethod(
-            e,
-            root.output,
-            root.requiredValidators,
-          ).method())
+      .map(
+        (e) => ControlMethod(e, root.output, root.requiredValidators).method(),
+      )
       .whereType<Method>();
 
   Iterable<Method> get controlMethod2List => all
-      .map((e) => ControlMethod2(
-            e,
-            root.output,
-            root.requiredValidators,
-          ).method())
+      .map(
+        (e) => ControlMethod2(e, root.output, root.requiredValidators).method(),
+      )
       .whereType<Method>();
 
   Iterable<Method> get controlPrivateMethodList => all
-      .map((e) => ControlPrivateMethod(
-            e,
-            root.output,
-            root.requiredValidators,
-          ).method())
+      .map(
+        (e) => ControlPrivateMethod(
+          e,
+          root.output,
+          root.requiredValidators,
+        ).method(),
+      )
       .whereType<Method>();
 
   Iterable<Method> get controlControlsMethodList => all
-      .map((e) => ControlControlsMethod(
-            e,
-            root.output,
-            root.requiredValidators,
-          ).method())
+      .map(
+        (e) => ControlControlsMethod(
+          e,
+          root.output,
+          root.requiredValidators,
+        ).method(),
+      )
       .whereType<Method>();
 
   Iterable<Method> get controlSetDisabledMethodList => all
-      .map((e) => ControlSetDisableMethod(
-            e,
-            root.output,
-            root.requiredValidators,
-          ).method())
+      .map(
+        (e) => ControlSetDisableMethod(
+          e,
+          root.output,
+          root.requiredValidators,
+        ).method(),
+      )
       .whereType<Method>();
 
   Iterable<Method> get extendedControlMethodList => all
-      .map((e) => ExtendedControlMethod(
-            e,
-            root.output,
-            root.requiredValidators,
-          ).method())
+      .map(
+        (e) => ExtendedControlMethod(
+          e,
+          root.output,
+          root.requiredValidators,
+        ).method(),
+      )
       .whereType<Method>();
 
   Iterable<Method> get addArrayControlMethodList =>

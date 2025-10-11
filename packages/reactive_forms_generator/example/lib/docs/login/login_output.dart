@@ -7,28 +7,18 @@ part 'login_output.gform.dart';
 
 @Rf(
   output: true,
-  requiredValidators: [
-    ...defaultRequiredValidators,
-    'RequiredValidator2()',
-  ],
+  requiredValidators: [...defaultRequiredValidators, 'RequiredValidator2()'],
 )
-@RfGroup(
-  validators: [MustMatchValidator()],
-)
+@RfGroup(validators: [MustMatchValidator()])
 class LoginO extends Equatable {
   final String? email;
 
   final String? password;
 
   const LoginO({
-    @RfControl(
-      validators: [RequiredValidator(), RequiredValidator()],
-    )
+    @RfControl(validators: [RequiredValidator(), RequiredValidator()])
     this.email,
-    @RfControl(
-      validators: [RequiredValidator2()],
-    )
-    this.password,
+    @RfControl(validators: [RequiredValidator2()]) this.password,
   });
 
   @override

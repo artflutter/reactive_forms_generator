@@ -878,6 +878,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
   TimerSettingOForm get timerForm =>
       TimerSettingOForm(form, pathBuilder('timer'));
 
+  @Deprecated("Use control.disabled() instead")
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -896,6 +897,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void anotherIdSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -914,6 +916,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void nameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -932,6 +935,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void chartingOrderSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -950,6 +954,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void numberingStandardSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -968,6 +973,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void measurementTypeSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -986,6 +992,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void audioGuidanceSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1004,6 +1011,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void incidenceFilterSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1022,6 +1030,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void thresholdSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1040,6 +1049,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void timerSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1666,6 +1676,7 @@ class IncidenceFilterOForm
         form.control(isPlaqueEnabledControlPath()) as FormControl<bool>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void isMobilityEnabledSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1684,6 +1695,7 @@ class IncidenceFilterOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void isFurcationEnabledSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1702,6 +1714,7 @@ class IncidenceFilterOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void isBleedingEnabledSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1720,6 +1733,7 @@ class IncidenceFilterOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void isSuppurationEnabledSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1738,6 +1752,7 @@ class IncidenceFilterOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void isCalculusEnabledSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1756,6 +1771,7 @@ class IncidenceFilterOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void isPlaqueEnabledSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2086,6 +2102,7 @@ class ThresholdSettingOForm
         form.control(valueControlPath()) as FormControl<int>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void isEnabledSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2104,6 +2121,7 @@ class ThresholdSettingOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void valueSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2396,6 +2414,7 @@ class TimerSettingOForm
         form.control(valueControlPath()) as FormControl<int>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void isEnabledSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2414,6 +2433,7 @@ class TimerSettingOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void valueSetDisabled(
     bool disabled, {
     bool updateParent = true,

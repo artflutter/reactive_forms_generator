@@ -41,22 +41,24 @@ class ReactiveFormsGenerator extends Generator {
 
     final lib = Library(
       (b) => b
-        ..body.addAll(specList.mergeDuplicatesBy(
-          (i) {
-            // if (i is StaticCode) {
-            //   print(i.code.hashCode);
-            //   print(i.code);
-            // }
-            return switch (i) {
-              final Class _ => i.name,
-              final StaticCode _ => i.code.hashCode,
-              _ => i,
-            };
-          },
-          (a, b) {
-            return a;
-          },
-        )),
+        ..body.addAll(
+          specList.mergeDuplicatesBy(
+            (i) {
+              // if (i is StaticCode) {
+              //   print(i.code.hashCode);
+              //   print(i.code);
+              // }
+              return switch (i) {
+                final Class _ => i.name,
+                final StaticCode _ => i.code.hashCode,
+                _ => i,
+              };
+            },
+            (a, b) {
+              return a;
+            },
+          ),
+        ),
     );
 
     // final x = lib.accept(emitter).toString();

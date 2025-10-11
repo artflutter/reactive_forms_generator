@@ -292,6 +292,7 @@ class MailingListForm implements FormModel<MailingList, MailingList> {
   List<FormControl<String>> get emailListControlControls =>
       emailListControl.controls.cast<FormControl<String>>();
 
+  @Deprecated("Use control.disabled() instead")
   void emailListSetDisabled(
     bool disabled, {
     bool updateParent = true,

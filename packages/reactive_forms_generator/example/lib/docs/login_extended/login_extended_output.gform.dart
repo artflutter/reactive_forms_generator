@@ -930,6 +930,7 @@ class LoginExtendedOForm
         form.control(someIntListControlPath()) as FormControl<List<int>>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -948,6 +949,7 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void email2SetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -966,6 +968,7 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void passwordSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -984,6 +987,7 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void rememberMeSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1002,6 +1006,7 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void themeSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1020,6 +1025,7 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void modeSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1038,6 +1044,7 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void timeoutSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1056,6 +1063,7 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void heightSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1074,6 +1082,7 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void unAnnotatedSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1092,6 +1101,7 @@ class LoginExtendedOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void someIntListSetDisabled(
     bool disabled, {
     bool updateParent = true,

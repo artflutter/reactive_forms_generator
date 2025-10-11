@@ -289,6 +289,7 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
         form.control(idControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1099,6 +1100,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
         .toList();
   }
 
+  @Deprecated("Use control.disabled() instead")
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1117,6 +1119,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void subGroupListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1861,6 +1864,7 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
         .toList();
   }
 
+  @Deprecated("Use control.disabled() instead")
   void groupListSetDisabled(
     bool disabled, {
     bool updateParent = true,

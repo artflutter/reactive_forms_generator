@@ -18,10 +18,7 @@ class ArrayNullable {
   final List<UserMode?>? modeList;
 
   ArrayNullable({
-    @RfArray(
-      validators: [RequiredValidator()],
-    )
-    required this.emailList,
+    @RfArray(validators: [RequiredValidator()]) required this.emailList,
     @RfArray() this.fruitList = const [],
     @RfArray() this.vegetablesList,
     @RfArray() this.modeList,

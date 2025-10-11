@@ -7,12 +7,11 @@ const fileName = 'create_output';
 
 void main() {
   group('doc', () {
-    test(
-      'Create Output',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Create Output', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms/src/validators/required_validator.dart';
@@ -95,10 +94,9 @@ void main() {
               }
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 

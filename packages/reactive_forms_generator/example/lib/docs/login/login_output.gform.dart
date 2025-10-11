@@ -408,6 +408,7 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
         form.control(passwordControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -426,6 +427,7 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void passwordSetDisabled(
     bool disabled, {
     bool updateParent = true,

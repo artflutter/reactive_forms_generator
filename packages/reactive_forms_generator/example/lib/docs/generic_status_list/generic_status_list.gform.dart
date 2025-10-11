@@ -295,6 +295,7 @@ class StatusListForm<T extends Enum>
   List<FormControl<T>> get listControlControls =>
       listControl.controls.cast<FormControl<T>>();
 
+  @Deprecated("Use control.disabled() instead")
   void listSetDisabled(
     bool disabled, {
     bool updateParent = true,

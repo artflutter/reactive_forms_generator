@@ -705,6 +705,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
   List<FormControl<UserMode>?> get modeListControlControls =>
       modeListControl.controls.cast<FormControl<UserMode>?>();
 
+  @Deprecated("Use control.disabled() instead")
   void someListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -723,6 +724,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void someListRequiredSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -741,6 +743,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void emailListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -759,6 +762,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void fruitListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -777,6 +781,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void vegetablesListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -795,6 +800,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void modeListSetDisabled(
     bool disabled, {
     bool updateParent = true,

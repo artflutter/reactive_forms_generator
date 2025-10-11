@@ -12,12 +12,7 @@ class Group {
 
   final Address? address2;
 
-  Group({
-    this.personal,
-    this.phone,
-    this.address,
-    this.address2,
-  });
+  Group({this.personal, this.phone, this.address, this.address2});
 }
 
 @RfGroup()
@@ -26,10 +21,7 @@ class Personal {
 
   final String? email;
 
-  Personal({
-    @RfControl<String>() this.name,
-    @RfControl<String>() this.email,
-  });
+  Personal({@RfControl<String>() this.name, @RfControl<String>() this.email});
 }
 
 @RfGroup()

@@ -12,7 +12,8 @@ import 'package:reactive_forms_generator/builder.dart';
 import 'package:test/test.dart';
 
 const fileName = 'basic';
-const model = '''
+const model =
+    '''
   import 'package:flutter/material.dart';
   import 'package:reactive_forms/reactive_forms.dart';
   import 'package:example/helpers.dart';
@@ -36,47 +37,35 @@ const model = '''
 ''';
 
 void main() {
-  group(
-    skip: true,
-    'doc',
-    () {
-      test(
-        'Form array annotation exception',
+  group(skip: true, 'doc', () {
+    test('Form array annotation exception', () async {
+      final anotherBuilder = reactiveFormsGenerator(
+        const BuilderOptions(<String, dynamic>{}),
+      );
+
+      expect(
         () async {
-          final anotherBuilder = reactiveFormsGenerator(
-            const BuilderOptions(<String, dynamic>{}),
+          final readerWriter = TestReaderWriter(
+            rootPackage: 'reactive_forms_generator',
           );
+          await readerWriter.testing.loadIsolateSources();
 
-          expect(
-            () async {
-              final readerWriter =
-                  TestReaderWriter(rootPackage: 'reactive_forms_generator');
-              await readerWriter.testing.loadIsolateSources();
-
-              return await testBuilder(
-                anotherBuilder,
-                {
-                  'a|lib/$fileName.dart': model,
-                },
-                outputs: {
-                  'a|lib/$fileName.gform.dart': '',
-                },
-                onLog: (message) => stdout.writeln(message),
-                readerWriter: readerWriter,
-              );
-            },
-            throwsA(
-              predicate(
-                (e) {
-                  return e is Exception &&
-                      e.toString() ==
-                          'Exception: Annotation and field type mismatch. Annotation is typed as `double` and field(`emailList`) as `String`.';
-                },
-              ),
-            ),
+          return await testBuilder(
+            anotherBuilder,
+            {'a|lib/$fileName.dart': model},
+            outputs: {'a|lib/$fileName.gform.dart': ''},
+            onLog: (message) => stdout.writeln(message),
+            readerWriter: readerWriter,
           );
         },
+        throwsA(
+          predicate((e) {
+            return e is Exception &&
+                e.toString() ==
+                    'Exception: Annotation and field type mismatch. Annotation is typed as `double` and field(`emailList`) as `String`.';
+          }),
+        ),
       );
-    },
-  );
+    });
+  });
 }

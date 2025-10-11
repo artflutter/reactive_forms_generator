@@ -378,6 +378,7 @@ class AnimatedUrlLisOForm
         .toList();
   }
 
+  @Deprecated("Use control.disabled() instead")
   void urlListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -741,6 +742,7 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
         form.control(urlControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void labelSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -759,6 +761,7 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void urlSetDisabled(
     bool disabled, {
     bool updateParent = true,

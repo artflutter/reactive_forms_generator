@@ -118,7 +118,7 @@ enum Direction {
   rightward,
 
   /// <===
-  leftward
+  leftward,
 }
 
 enum ToothSide { facial, lingual }
@@ -169,7 +169,7 @@ enum Jaw {
   maxilla,
 
   /// Lower jaw
-  mandible
+  mandible,
 }
 
 enum Quadrant { upperLeft, upperRight, lowerRight, lowerLeft }
@@ -183,84 +183,180 @@ class ChartingOrders {
   };
 
   static const _arch01 = [
-    /*1*/ ArchScanOrder(Jaw.maxilla,
-        direction: Direction.rightward, toothSide: ToothSide.facial),
-    /*2*/ ArchScanOrder(Jaw.maxilla,
-        direction: Direction.leftward, toothSide: ToothSide.lingual),
-    /*3*/ ArchScanOrder(Jaw.mandible,
-        direction: Direction.rightward, toothSide: ToothSide.facial),
-    /*4*/ ArchScanOrder(Jaw.mandible,
-        direction: Direction.leftward, toothSide: ToothSide.lingual),
+    /*1*/ ArchScanOrder(
+      Jaw.maxilla,
+      direction: Direction.rightward,
+      toothSide: ToothSide.facial,
+    ),
+    /*2*/ ArchScanOrder(
+      Jaw.maxilla,
+      direction: Direction.leftward,
+      toothSide: ToothSide.lingual,
+    ),
+    /*3*/ ArchScanOrder(
+      Jaw.mandible,
+      direction: Direction.rightward,
+      toothSide: ToothSide.facial,
+    ),
+    /*4*/ ArchScanOrder(
+      Jaw.mandible,
+      direction: Direction.leftward,
+      toothSide: ToothSide.lingual,
+    ),
   ];
 
   static const _arch02 = [
-    /*1*/ ArchScanOrder(Jaw.mandible,
-        direction: Direction.rightward, toothSide: ToothSide.facial),
-    /*2*/ ArchScanOrder(Jaw.mandible,
-        direction: Direction.leftward, toothSide: ToothSide.lingual),
-    /*3*/ ArchScanOrder(Jaw.maxilla,
-        direction: Direction.rightward, toothSide: ToothSide.facial),
-    /*4*/ ArchScanOrder(Jaw.maxilla,
-        direction: Direction.leftward, toothSide: ToothSide.lingual),
+    /*1*/ ArchScanOrder(
+      Jaw.mandible,
+      direction: Direction.rightward,
+      toothSide: ToothSide.facial,
+    ),
+    /*2*/ ArchScanOrder(
+      Jaw.mandible,
+      direction: Direction.leftward,
+      toothSide: ToothSide.lingual,
+    ),
+    /*3*/ ArchScanOrder(
+      Jaw.maxilla,
+      direction: Direction.rightward,
+      toothSide: ToothSide.facial,
+    ),
+    /*4*/ ArchScanOrder(
+      Jaw.maxilla,
+      direction: Direction.leftward,
+      toothSide: ToothSide.lingual,
+    ),
   ];
 
   static const _arch03 = [
-    /*1*/ ArchScanOrder(Jaw.maxilla,
-        direction: Direction.rightward, toothSide: ToothSide.facial),
-    /*2*/ ArchScanOrder(Jaw.mandible,
-        direction: Direction.leftward, toothSide: ToothSide.facial),
-    /*3*/ ArchScanOrder(Jaw.maxilla,
-        direction: Direction.rightward, toothSide: ToothSide.lingual),
-    /*4*/ ArchScanOrder(Jaw.mandible,
-        direction: Direction.leftward, toothSide: ToothSide.lingual),
+    /*1*/ ArchScanOrder(
+      Jaw.maxilla,
+      direction: Direction.rightward,
+      toothSide: ToothSide.facial,
+    ),
+    /*2*/ ArchScanOrder(
+      Jaw.mandible,
+      direction: Direction.leftward,
+      toothSide: ToothSide.facial,
+    ),
+    /*3*/ ArchScanOrder(
+      Jaw.maxilla,
+      direction: Direction.rightward,
+      toothSide: ToothSide.lingual,
+    ),
+    /*4*/ ArchScanOrder(
+      Jaw.mandible,
+      direction: Direction.leftward,
+      toothSide: ToothSide.lingual,
+    ),
   ];
 
   static const _arch04 = [
-    /*1*/ ArchScanOrder(Jaw.maxilla,
-        direction: Direction.rightward, toothSide: ToothSide.facial),
-    /*2*/ ArchScanOrder(Jaw.maxilla,
-        direction: Direction.leftward, toothSide: ToothSide.lingual),
-    /*3*/ ArchScanOrder(Jaw.mandible,
-        direction: Direction.rightward, toothSide: ToothSide.lingual),
-    /*4*/ ArchScanOrder(Jaw.mandible,
-        direction: Direction.leftward, toothSide: ToothSide.facial),
+    /*1*/ ArchScanOrder(
+      Jaw.maxilla,
+      direction: Direction.rightward,
+      toothSide: ToothSide.facial,
+    ),
+    /*2*/ ArchScanOrder(
+      Jaw.maxilla,
+      direction: Direction.leftward,
+      toothSide: ToothSide.lingual,
+    ),
+    /*3*/ ArchScanOrder(
+      Jaw.mandible,
+      direction: Direction.rightward,
+      toothSide: ToothSide.lingual,
+    ),
+    /*4*/ ArchScanOrder(
+      Jaw.mandible,
+      direction: Direction.leftward,
+      toothSide: ToothSide.facial,
+    ),
   ];
 
   static const _quadrant01 = [
-    /*1*/ QuadrantScanOrder(Quadrant.upperLeft,
-        direction: Direction.rightward, toothSide: ToothSide.facial),
-    /*2*/ QuadrantScanOrder(Quadrant.upperLeft,
-        direction: Direction.leftward, toothSide: ToothSide.lingual),
-    /*3*/ QuadrantScanOrder(Quadrant.upperRight,
-        direction: Direction.rightward, toothSide: ToothSide.facial),
-    /*4*/ QuadrantScanOrder(Quadrant.upperRight,
-        direction: Direction.leftward, toothSide: ToothSide.lingual),
-    /*5*/ QuadrantScanOrder(Quadrant.lowerLeft,
-        direction: Direction.rightward, toothSide: ToothSide.facial),
-    /*6*/ QuadrantScanOrder(Quadrant.lowerLeft,
-        direction: Direction.leftward, toothSide: ToothSide.lingual),
-    /*7*/ QuadrantScanOrder(Quadrant.lowerRight,
-        direction: Direction.rightward, toothSide: ToothSide.facial),
-    /*8*/ QuadrantScanOrder(Quadrant.lowerRight,
-        direction: Direction.leftward, toothSide: ToothSide.lingual),
+    /*1*/ QuadrantScanOrder(
+      Quadrant.upperLeft,
+      direction: Direction.rightward,
+      toothSide: ToothSide.facial,
+    ),
+    /*2*/ QuadrantScanOrder(
+      Quadrant.upperLeft,
+      direction: Direction.leftward,
+      toothSide: ToothSide.lingual,
+    ),
+    /*3*/ QuadrantScanOrder(
+      Quadrant.upperRight,
+      direction: Direction.rightward,
+      toothSide: ToothSide.facial,
+    ),
+    /*4*/ QuadrantScanOrder(
+      Quadrant.upperRight,
+      direction: Direction.leftward,
+      toothSide: ToothSide.lingual,
+    ),
+    /*5*/ QuadrantScanOrder(
+      Quadrant.lowerLeft,
+      direction: Direction.rightward,
+      toothSide: ToothSide.facial,
+    ),
+    /*6*/ QuadrantScanOrder(
+      Quadrant.lowerLeft,
+      direction: Direction.leftward,
+      toothSide: ToothSide.lingual,
+    ),
+    /*7*/ QuadrantScanOrder(
+      Quadrant.lowerRight,
+      direction: Direction.rightward,
+      toothSide: ToothSide.facial,
+    ),
+    /*8*/ QuadrantScanOrder(
+      Quadrant.lowerRight,
+      direction: Direction.leftward,
+      toothSide: ToothSide.lingual,
+    ),
   ];
 
   static const _quadrant02 = [
-    /*1*/ QuadrantScanOrder(Quadrant.upperLeft,
-        direction: Direction.rightward, toothSide: ToothSide.facial),
-    /*2*/ QuadrantScanOrder(Quadrant.upperLeft,
-        direction: Direction.rightward, toothSide: ToothSide.lingual),
-    /*3*/ QuadrantScanOrder(Quadrant.upperRight,
-        direction: Direction.rightward, toothSide: ToothSide.facial),
-    /*4*/ QuadrantScanOrder(Quadrant.upperRight,
-        direction: Direction.rightward, toothSide: ToothSide.lingual),
-    /*5*/ QuadrantScanOrder(Quadrant.lowerLeft,
-        direction: Direction.rightward, toothSide: ToothSide.facial),
-    /*6*/ QuadrantScanOrder(Quadrant.lowerRight,
-        direction: Direction.rightward, toothSide: ToothSide.lingual),
-    /*7*/ QuadrantScanOrder(Quadrant.lowerRight,
-        direction: Direction.rightward, toothSide: ToothSide.facial),
-    /*8*/ QuadrantScanOrder(Quadrant.lowerLeft,
-        direction: Direction.rightward, toothSide: ToothSide.lingual),
+    /*1*/ QuadrantScanOrder(
+      Quadrant.upperLeft,
+      direction: Direction.rightward,
+      toothSide: ToothSide.facial,
+    ),
+    /*2*/ QuadrantScanOrder(
+      Quadrant.upperLeft,
+      direction: Direction.rightward,
+      toothSide: ToothSide.lingual,
+    ),
+    /*3*/ QuadrantScanOrder(
+      Quadrant.upperRight,
+      direction: Direction.rightward,
+      toothSide: ToothSide.facial,
+    ),
+    /*4*/ QuadrantScanOrder(
+      Quadrant.upperRight,
+      direction: Direction.rightward,
+      toothSide: ToothSide.lingual,
+    ),
+    /*5*/ QuadrantScanOrder(
+      Quadrant.lowerLeft,
+      direction: Direction.rightward,
+      toothSide: ToothSide.facial,
+    ),
+    /*6*/ QuadrantScanOrder(
+      Quadrant.lowerRight,
+      direction: Direction.rightward,
+      toothSide: ToothSide.lingual,
+    ),
+    /*7*/ QuadrantScanOrder(
+      Quadrant.lowerRight,
+      direction: Direction.rightward,
+      toothSide: ToothSide.facial,
+    ),
+    /*8*/ QuadrantScanOrder(
+      Quadrant.lowerLeft,
+      direction: Direction.rightward,
+      toothSide: ToothSide.lingual,
+    ),
   ];
 }

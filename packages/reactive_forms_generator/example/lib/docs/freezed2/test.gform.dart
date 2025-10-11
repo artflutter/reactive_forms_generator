@@ -380,6 +380,7 @@ class TestForm implements FormModel<Test, Test> {
         form.control(descriptionControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void titleSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -398,6 +399,7 @@ class TestForm implements FormModel<Test, Test> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void descriptionSetDisabled(
     bool disabled, {
     bool updateParent = true,

@@ -25,7 +25,8 @@ abstract class FormElementGenerator {
   String get value {
     final enclosingElement = constructorElement?.enclosingElement2;
 
-    final optionalChaining = (enclosingElement == root &&
+    final optionalChaining =
+        (enclosingElement == root &&
                 type?.nullabilitySuffix != NullabilitySuffix.question) ||
             (enclosingElement == root && !root.isNullable)
         ? ''
@@ -98,8 +99,9 @@ abstract class FormElementGenerator {
   // }
 
   String get validators =>
-      fieldElement
-          .annotationParams(typeChecker)[FormElementGenerator.validatorKey] ??
+      fieldElement.annotationParams(
+        typeChecker,
+      )[FormElementGenerator.validatorKey] ??
       '[]';
 
   String get itemAsyncValidators =>

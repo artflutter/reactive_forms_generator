@@ -28,7 +28,8 @@ class FormArrayGenerator extends FormElementGenerator {
         (fieldElement.enclosingElement2 as e.ConstructorElementImpl2)
             .enclosingElement2;
 
-    final optionalChaining = (enclosingElement.name3 == root.name3 &&
+    final optionalChaining =
+        (enclosingElement.name3 == root.name3 &&
                 type?.nullabilitySuffix != NullabilitySuffix.question) ||
             (enclosingElement.name3 == root.name3 && !root.isNullable)
         ? ''
@@ -43,8 +44,10 @@ class FormArrayGenerator extends FormElementGenerator {
     // we need to trim last NullabilitySuffix.question cause FormControl modifies
     // generic T => T?
     if (typeParameter.nullabilitySuffix == NullabilitySuffix.question) {
-      getDisplayString =
-          getDisplayString.substring(0, getDisplayString.length - 1);
+      getDisplayString = getDisplayString.substring(
+        0,
+        getDisplayString.length - 1,
+      );
     }
 
     return getDisplayString;
@@ -52,9 +55,7 @@ class FormArrayGenerator extends FormElementGenerator {
 
   @override
   String element() {
-    final typeParameterType = typeParameter.getName(
-      withNullability: false,
-    );
+    final typeParameterType = typeParameter.getName(withNullability: false);
 
     final formArrayAnnotationType = annotationType;
     final formArrayAnnotationTyped = annotationTyped;
@@ -76,7 +77,7 @@ class FormArrayGenerator extends FormElementGenerator {
     if (formArrayField.isFormGroupArray) {
       final props = [
         '$value.map((e) => ${formArrayField.className}.formElements(e)).toList()',
-        ...partialProps
+        ...partialProps,
       ].join(', ');
 
       return 'FormArray($props)';
@@ -89,7 +90,7 @@ class FormArrayGenerator extends FormElementGenerator {
               asyncValidatorsDebounceTime: $itemAsyncValidatorsDebounceTime,
               disabled: $itemDisabled,
             )).toList()''',
-        ...partialProps
+        ...partialProps,
       ].join(', ');
 
       return 'FormArray<$displayType>($props)';

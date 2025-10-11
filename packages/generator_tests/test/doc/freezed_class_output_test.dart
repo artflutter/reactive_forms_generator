@@ -7,12 +7,11 @@ const fileName = 'freezed_class_output';
 
 void main() {
   group('reactive_forms_generator', () {
-    test(
-      'Freezed class output',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Freezed class output', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms/src/validators/required_validator.dart';
@@ -47,10 +46,9 @@ void main() {
               bool method() => false;
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 

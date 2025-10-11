@@ -7,12 +7,11 @@ const fileName = 'nested_output';
 
 void main() {
   group('reactive_forms_generator', () {
-    test(
-      'Nested Output',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Nested Output', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
           import 'package:freezed_annotation/freezed_annotation.dart';
           import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
           
@@ -58,10 +57,9 @@ void main() {
                 _\$NestedOFromJson(json);
           }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 

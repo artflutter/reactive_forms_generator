@@ -45,14 +45,22 @@ class RfParameterVisitor extends GeneralizingAstVisitor<dynamic> {
         final hasDefaultValue =
             node.parameter.declaredElement?.hasDefaultValue == true;
         final hasDefaultAnnotation = node.parameter.metadata.fold(
-            false, (acc, e) => acc || e.name.toString().startsWith('Default'));
+          false,
+          (acc, e) => acc || e.name.toString().startsWith('Default'),
+        );
 
-        final hasRfGroupAnnotation = node.parameter.declaredElement?.type
-                .element3?.hasRfGroupAnnotation ==
+        final hasRfGroupAnnotation =
+            node
+                .parameter
+                .declaredElement
+                ?.type
+                .element3
+                ?.hasRfGroupAnnotation ==
             true;
 
         final type = node.parameter.declaredElement?.type;
-        final isList = type != null &&
+        final isList =
+            type != null &&
             type.isDartCoreList == true &&
             type is ParameterizedType &&
             (type as t.InterfaceTypeImpl)
@@ -69,9 +77,8 @@ class RfParameterVisitor extends GeneralizingAstVisitor<dynamic> {
         //     node.parameter.declaredElement?.type.nullabilitySuffix ==
         //         NullabilitySuffix.question;
 
-        if (/*!isNullable &&*/
-            (hasRfGroupAnnotation || isList) &&
-                (hasDefaultValue || hasDefaultAnnotation)) {
+        if ( /*!isNullable &&*/ (hasRfGroupAnnotation || isList) &&
+            (hasDefaultValue || hasDefaultAnnotation)) {
           NodeReplacer.replace(node, node.newParameter2);
         }
         // if (node.metadata.required) {
@@ -183,17 +190,14 @@ class RfParameterVisitor2 extends GeneralizingAstVisitor<dynamic> {
         element.metadata.hasRfGroupAnnotation) {
       try {
         NodeReplacer.replace(
-            node,
-            NamedTypeImpl(
-              importPrefix: node.importPrefix,
-              name2: StringToken(
-                TokenType.STRING,
-                '${node.name2}Output',
-                0,
-              ),
-              typeArguments: node.typeArguments,
-              question: node.question,
-            ));
+          node,
+          NamedTypeImpl(
+            importPrefix: node.importPrefix,
+            name2: StringToken(TokenType.STRING, '${node.name2}Output', 0),
+            typeArguments: node.typeArguments,
+            question: node.question,
+          ),
+        );
       } catch (e) {
         rethrow;
       }

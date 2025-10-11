@@ -551,6 +551,7 @@ class DeliveryListOForm
         .toList();
   }
 
+  @Deprecated("Use control.disabled() instead")
   void deliveryListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -569,6 +570,7 @@ class DeliveryListOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void clientListSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -932,6 +934,7 @@ class DeliveryPointOForm
 
   AddressOForm get addressForm => AddressOForm(form, pathBuilder('address'));
 
+  @Deprecated("Use control.disabled() instead")
   void nameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -950,6 +953,7 @@ class DeliveryPointOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void addressSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1290,6 +1294,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
         form.control(cityControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void streetSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1308,6 +1313,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void citySetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1717,6 +1723,7 @@ class ClientOForm implements FormModel<ClientO, ClientOOutput> {
         form.control(notesControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void clientTypeSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1735,6 +1742,7 @@ class ClientOForm implements FormModel<ClientO, ClientOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void nameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1753,6 +1761,7 @@ class ClientOForm implements FormModel<ClientO, ClientOOutput> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void notesSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2547,6 +2556,7 @@ class StandaloneDeliveryPointForm
 
   AddressOForm get addressForm => AddressOForm(form, pathBuilder('address'));
 
+  @Deprecated("Use control.disabled() instead")
   void nameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2565,6 +2575,7 @@ class StandaloneDeliveryPointForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void addressSetDisabled(
     bool disabled, {
     bool updateParent = true,

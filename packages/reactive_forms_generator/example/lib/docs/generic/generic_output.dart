@@ -8,9 +8,7 @@ part 'generic_output.gform.dart';
 @freezed
 @Rf(output: true)
 abstract class TagsO<T> with _$TagsO<T> {
-  factory TagsO({
-    @RfControl() required List<T>? tags,
-  }) = _TagsO;
+  factory TagsO({@RfControl() required List<T>? tags}) = _TagsO;
 
   const TagsO._();
 }

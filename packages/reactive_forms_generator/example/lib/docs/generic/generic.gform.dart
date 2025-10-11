@@ -316,6 +316,7 @@ class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
         form.control(tagsControlPath()) as FormControl<List<T>>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void tagsSetDisabled(
     bool disabled, {
     bool updateParent = true,

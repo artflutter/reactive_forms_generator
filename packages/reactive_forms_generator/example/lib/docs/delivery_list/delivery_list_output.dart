@@ -25,10 +25,7 @@ class DeliveryPointO extends Equatable {
   final AddressO? address;
 
   const DeliveryPointO({
-    @RfControl(
-      validators: [RequiredValidator()],
-    )
-    this.name = "",
+    @RfControl(validators: [RequiredValidator()]) this.name = "",
     this.address,
   });
 
@@ -63,10 +60,7 @@ class AddressO extends Equatable {
   final String? city;
 
   const AddressO({
-    @RfControl(
-      validators: [RequiredValidator()],
-    )
-    this.street,
+    @RfControl(validators: [RequiredValidator()]) this.street,
     @RfControl<String>() this.city,
   });
 

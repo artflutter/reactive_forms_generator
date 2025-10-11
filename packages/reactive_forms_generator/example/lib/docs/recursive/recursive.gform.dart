@@ -649,6 +649,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
         .toList();
   }
 
+  @Deprecated("Use control.disabled() instead")
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -667,6 +668,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void securedAreaSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -685,6 +687,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void parcelSystemSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -703,6 +706,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void subSecuredAreasSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1026,6 +1030,7 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
   ParcelSystemDataForm get dataForm =>
       ParcelSystemDataForm(form, pathBuilder('data'));
 
+  @Deprecated("Use control.disabled() instead")
   void hasParcelSystemSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1044,6 +1049,7 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void dataSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1294,6 +1300,7 @@ class ParcelSystemDataForm
         form.control(idControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,

@@ -23,7 +23,8 @@ class FormGroupGenerator extends FormElementGenerator {
   String get value {
     final enclosingElement = constructorElement?.enclosingElement2;
 
-    final optionalChaining = (enclosingElement == root &&
+    final optionalChaining =
+        (enclosingElement == root &&
                 type?.nullabilitySuffix != NullabilitySuffix.question) ||
             (enclosingElement == root && !root.isNullable)
         ? ''
@@ -47,18 +48,16 @@ class FormGroupGenerator extends FormElementGenerator {
       .where((e) => e.hasReactiveFormAnnotatedParameters)
       .first
       .formalParameters
-      .where(
-        (e) => (e.isFormControl || e.isFormArray || e.isFormGroupArray),
-      )
+      .where((e) => (e.isFormControl || e.isFormArray || e.isFormGroupArray))
       .toList();
 
-  List<FormalParameterElement> get nestedFormElements =>
-      classElement.constructors2
-          .where((e) => e.hasReactiveFormAnnotatedParameters)
-          .first
-          .formalParameters
-          .where((e) => e.isFormGroup)
-          .toList();
+  List<FormalParameterElement> get nestedFormElements => classElement
+      .constructors2
+      .where((e) => e.hasReactiveFormAnnotatedParameters)
+      .first
+      .formalParameters
+      .where((e) => e.isFormGroup)
+      .toList();
 
   // String get validators => syncValidators(formControlChecker);
 
@@ -67,42 +66,38 @@ class FormGroupGenerator extends FormElementGenerator {
   @override
   String element() {
     final formElementsList = formElements
-        .map(
-          (f) {
-            FormElementGenerator? formElementGenerator;
+        .map((f) {
+          FormElementGenerator? formElementGenerator;
 
-            if (f.isFormControl) {
-              formElementGenerator = FormControlGenerator(
-                root: root,
-                formControlField: f,
-                type: type,
-              );
-            }
+          if (f.isFormControl) {
+            formElementGenerator = FormControlGenerator(
+              root: root,
+              formControlField: f,
+              type: type,
+            );
+          }
 
-            if (f.isFormArray || f.isFormGroupArray) {
-              formElementGenerator = FormArrayGenerator(
-                root: root,
-                formArrayField: f,
-                type: type,
-              );
-            }
+          if (f.isFormArray || f.isFormGroupArray) {
+            formElementGenerator = FormArrayGenerator(
+              root: root,
+              formArrayField: f,
+              type: type,
+            );
+          }
 
-            if (formElementGenerator != null) {
-              return '${f.fieldControlNameName}: ${formElementGenerator.element()}';
-            }
+          if (formElementGenerator != null) {
+            return '${f.fieldControlNameName}: ${formElementGenerator.element()}';
+          }
 
-            return null;
-          },
-        )
+          return null;
+        })
         .whereType<String>()
         .toList();
 
     formElementsList.addAll(
-      nestedFormElements.map(
-        (f) {
-          return '${f.fieldControlNameName}: ${f.className}.formElements($value.${f.name3})';
-        },
-      ),
+      nestedFormElements.map((f) {
+        return '${f.fieldControlNameName}: ${f.className}.formElements($value.${f.name3})';
+      }),
     );
 
     final props = [

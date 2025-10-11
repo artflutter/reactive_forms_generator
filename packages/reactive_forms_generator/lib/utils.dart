@@ -8,8 +8,5 @@ void throwIf(bool condition, String message, {Element2? element}) {
 }
 
 void throwError(String message, {Element2? element}) {
-  throw InvalidGenerationSourceError(
-    message,
-    element: element,
-  );
+  throw InvalidGenerationSourceError(message, element: element);
 }

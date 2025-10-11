@@ -415,6 +415,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
 
   IdOForm<P, C> get idForm => IdOForm(form, pathBuilder('id'));
 
+  @Deprecated("Use control.disabled() instead")
   void descriptionSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -433,6 +434,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -778,6 +780,7 @@ class IdOForm<P extends Product, C extends Cart>
         form.control(nameControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void companyNameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -796,6 +799,7 @@ class IdOForm<P extends Product, C extends Cart>
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void nameSetDisabled(
     bool disabled, {
     bool updateParent = true,

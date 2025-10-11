@@ -13,9 +13,8 @@ import 'package:analyzer/src/dart/element/type.dart';
 import '../utils.dart';
 
 extension ConstructorElementExt on ConstructorElement2 {
-  bool get hasReactiveFormAnnotatedParameters => formalParameters.any(
-        (e) => true,
-      );
+  bool get hasReactiveFormAnnotatedParameters =>
+      formalParameters.any((e) => true);
 }
 
 extension ClassElementExt on ClassElement2 {
@@ -37,9 +36,7 @@ extension ClassElementExt on ClassElement2 {
   }
 
   Iterable<Reference> get genericTypes {
-    return thisType.typeArguments.map(
-      (e) => Reference(e.getDisplayString()),
-    );
+    return thisType.typeArguments.map((e) => Reference(e.getDisplayString()));
   }
 
   Iterable<Reference> get fullGenericTypes {
@@ -49,8 +46,9 @@ extension ClassElementExt on ClassElement2 {
   }
 
   List<FormalParameterElement> get annotatedParameters {
-    final annotatedConstructors =
-        constructors2.where((e) => e.hasReactiveFormAnnotatedParameters);
+    final annotatedConstructors = constructors2.where(
+      (e) => e.hasReactiveFormAnnotatedParameters,
+    );
 
     if (annotatedConstructors.isNotEmpty) {
       return annotatedConstructors.first.formalParameters;
@@ -116,7 +114,8 @@ extension ParameterElementExt on FormalParameterElement {
 
     if (element.hasRfAnnotation) {
       final annotation = element.rfAnnotation;
-      baseName = annotation?.getField('name')?.toStringValue() ??
+      baseName =
+          annotation?.getField('name')?.toStringValue() ??
           element.name3 ??
           '<null>';
     }
@@ -128,7 +127,8 @@ extension ParameterElementExt on FormalParameterElement {
 
       if (element.hasRfAnnotation) {
         final annotation = element.rfAnnotation;
-        baseName = annotation?.getField('name')?.toStringValue() ??
+        baseName =
+            annotation?.getField('name')?.toStringValue() ??
             element.name3 ??
             '<null>';
       }
@@ -156,8 +156,9 @@ extension ParameterElementExt on FormalParameterElement {
     }
 
     final type = this.type;
-    final typeArguments =
-        type is ParameterizedType ? type.typeArguments : const <DartType>[];
+    final typeArguments = type is ParameterizedType
+        ? type.typeArguments
+        : const <DartType>[];
 
     final typeParameter = typeArguments.first;
 
@@ -171,8 +172,9 @@ extension ParameterElementExt on FormalParameterElement {
     }
 
     final type = this.type;
-    final typeArguments =
-        type is ParameterizedType ? type.typeArguments : const <DartType>[];
+    final typeArguments = type is ParameterizedType
+        ? type.typeArguments
+        : const <DartType>[];
 
     final typeParameter = typeArguments.first;
 
@@ -219,8 +221,9 @@ extension ParameterElementExt on FormalParameterElement {
 
   String toReferenceType(List<String> requiredValidators) {
     if (hasRfControlAnnotation &&
-        annotationParams(formControlChecker)
-            .hasRequiredValidator(requiredValidators)) {
+        annotationParams(
+          formControlChecker,
+        ).hasRequiredValidator(requiredValidators)) {
       return type.getName(withNullability: false);
     }
 
@@ -254,7 +257,10 @@ typedef IterableFunction<T, U> = U Function(T i);
 typedef MergeableFunction<T> = T Function(T oldT, T newT);
 
 Iterable<T> _mergeDuplicatesBy<T, U>(
-    Iterable<T> list, IterableFunction<T, U> fn, MergeableFunction<T> mergeFn) {
+  Iterable<T> list,
+  IterableFunction<T, U> fn,
+  MergeableFunction<T> mergeFn,
+) {
   final values = <U, T>{};
   for (var i in list) {
     final value = fn(i);
@@ -264,7 +270,9 @@ Iterable<T> _mergeDuplicatesBy<T, U>(
 }
 
 Iterable<T> _removeDuplicatedBy<T, U>(
-    Iterable<T> list, IterableFunction<T, U> fn) {
+  Iterable<T> list,
+  IterableFunction<T, U> fn,
+) {
   final values = <U, bool>{};
   return list.where((i) {
     final value = fn(i);
@@ -278,8 +286,9 @@ extension ExtensionsOnIterable<T, U> on Iterable<T> {
   /// Merge multiple values from an iterable given a predicate without modifying
   /// the original iterable.
   Iterable<T> mergeDuplicatesBy(
-          IterableFunction<T, U> fn, MergeableFunction<T> mergeFn) =>
-      _mergeDuplicatesBy(this, fn, mergeFn);
+    IterableFunction<T, U> fn,
+    MergeableFunction<T> mergeFn,
+  ) => _mergeDuplicatesBy(this, fn, mergeFn);
 
   /// Remove duplicated values from an iterable given a predicate without
   /// modifying the original iterable.
@@ -288,9 +297,7 @@ extension ExtensionsOnIterable<T, U> on Iterable<T> {
 }
 
 extension DartTypeExt on DartType {
-  String getName({
-    bool withNullability = true,
-  }) {
+  String getName({bool withNullability = true}) {
     final name = getDisplayString();
 
     return switch (nullabilitySuffix) {

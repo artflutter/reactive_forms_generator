@@ -352,6 +352,7 @@ class LoginForm implements FormModel<Login, Login> {
         form.control(passwordControlPath()) as FormControl<String>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -370,6 +371,7 @@ class LoginForm implements FormModel<Login, Login> {
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void passwordSetDisabled(
     bool disabled, {
     bool updateParent = true,

@@ -7,12 +7,11 @@ const fileName = 'generic';
 
 void main() {
   group('reactive_forms_generator', () {
-    test(
-      'Generic',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Generic', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:freezed_annotation/freezed_annotation.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
@@ -29,10 +28,9 @@ void main() {
               const Tags._();
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 

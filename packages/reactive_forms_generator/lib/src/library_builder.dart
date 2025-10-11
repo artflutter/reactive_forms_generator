@@ -14,21 +14,20 @@ import 'package:reactive_forms_generator/src/reactive_forms/reactive_inherited_s
 const stringRef = Reference('String');
 const formGroupRef = Reference('FormGroup');
 
-List<Spec> generateLibrary(
-  ClassElement2 element,
-  AstNode ast,
-) {
+List<Spec> generateLibrary(ClassElement2 element, AstNode ast) {
   final formGenerator = FormGenerator(element, element, null, ast, {});
   final reactiveInheritedStreamer = ReactiveInheritedStreamer(formGenerator);
   final reactiveForm = ReactiveForm(reactiveInheritedStreamer);
-  final reactiveFormExtension =
-      ReactiveFormExtension(reactiveInheritedStreamer);
+  final reactiveFormExtension = ReactiveFormExtension(
+    reactiveInheritedStreamer,
+  );
   final reactiveFormConsumer = ReactiveFormConsumer(reactiveForm);
   final reactiveFormBuilder = ReactiveFormBuilder(reactiveForm);
   final reactiveFormArrayBuilder = ReactiveFormArrayBuilder(formGenerator);
   final reactiveFormArrayBuilder2 = ReactiveFormArrayBuilder2(formGenerator);
-  final reactiveFormGroupArrayBuilder =
-      ReactiveFormGroupArrayBuilder(formGenerator);
+  final reactiveFormGroupArrayBuilder = ReactiveFormGroupArrayBuilder(
+    formGenerator,
+  );
 
   final p = formGenerator.generate2;
   // print(p);

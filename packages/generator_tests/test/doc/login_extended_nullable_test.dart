@@ -7,12 +7,11 @@ const fileName = 'login_extended_nullable';
 
 void main() {
   group('reactive_forms_generator', () {
-    test(
-      'Login extended nullable',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Login extended nullable', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
@@ -48,10 +47,9 @@ void main() {
               });
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 

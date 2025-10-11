@@ -12,12 +12,7 @@ class GroupO {
 
   final AddressO? address2;
 
-  GroupO({
-    this.personal,
-    this.phone,
-    this.address,
-    this.address2,
-  });
+  GroupO({this.personal, this.phone, this.address, this.address2});
 }
 
 @RfGroup()
@@ -26,10 +21,7 @@ class PersonalO {
 
   final String? email;
 
-  PersonalO({
-    @RfControl<String>() this.name,
-    @RfControl<String>() this.email,
-  });
+  PersonalO({@RfControl<String>() this.name, @RfControl<String>() this.email});
 }
 
 @RfGroup()

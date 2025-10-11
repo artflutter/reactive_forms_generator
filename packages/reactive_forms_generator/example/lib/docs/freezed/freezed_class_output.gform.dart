@@ -1004,6 +1004,7 @@ class FreezedClassOForm
         form.control(selectedSpacesControlPath()) as FormControl<List<String>>,
       );
 
+  @Deprecated("Use control.disabled() instead")
   void genderSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1022,6 +1023,7 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void genderRSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1040,6 +1042,7 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void idSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1058,6 +1061,7 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void idRSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1076,6 +1080,7 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void idR2SetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1094,6 +1099,7 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void nameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1112,6 +1118,7 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void logoImageSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1130,6 +1137,7 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void yearSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1148,6 +1156,7 @@ class FreezedClassOForm
     }
   }
 
+  @Deprecated("Use control.disabled() instead")
   void selectedSpacesSetDisabled(
     bool disabled, {
     bool updateParent = true,

@@ -5,11 +5,7 @@ class FormControlWrapper<T> {
 
   FormControlWrapper(this.control);
 
-  void updateValue(
-    T value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void update(T value, {bool updateParent = true, bool emitEvent = true}) {
     control.updateValue(
       value,
       updateParent: updateParent,
@@ -17,33 +13,19 @@ class FormControlWrapper<T> {
     );
   }
 
-  void patchValue(
-    T value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    control.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+  void patch(T value, {bool updateParent = true, bool emitEvent = true}) {
+    control.patchValue(value, updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void setDisabled(
+  void disabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      control.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+      control.markAsDisabled(updateParent: updateParent, emitEvent: emitEvent);
     } else {
-      control.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+      control.markAsEnabled(updateParent: updateParent, emitEvent: emitEvent);
     }
   }
 
