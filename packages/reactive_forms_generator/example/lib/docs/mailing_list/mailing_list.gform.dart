@@ -262,6 +262,7 @@ class MailingListForm implements FormModel<MailingList, MailingList> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void emailListValuePatch(
     List<String?> value, {
     bool updateParent = true,

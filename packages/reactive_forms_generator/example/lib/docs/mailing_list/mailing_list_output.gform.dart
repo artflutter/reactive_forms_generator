@@ -264,6 +264,7 @@ class MailingListOForm implements FormModel<MailingListO, MailingListOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void emailListValuePatch(
     List<String?> value, {
     bool updateParent = true,

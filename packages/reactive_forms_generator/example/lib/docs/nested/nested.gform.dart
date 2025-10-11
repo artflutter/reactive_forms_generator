@@ -257,6 +257,7 @@ class SubGroupForm implements FormModel<SubGroup, SubGroup> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void idValuePatch(
     String value, {
     bool updateParent = true,
@@ -984,6 +985,7 @@ class GroupForm implements FormModel<Group, Group> {
     subGroupListControl.clear(updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void idValuePatch(
     String value, {
     bool updateParent = true,
@@ -993,6 +995,7 @@ class GroupForm implements FormModel<Group, Group> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void subGroupListValuePatch(
     List<SubGroup> value, {
     bool updateParent = true,
@@ -1781,6 +1784,7 @@ class NestedForm implements FormModel<Nested, Nested> {
     groupListControl.clear(updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void groupListValuePatch(
     List<Group> value, {
     bool updateParent = true,

@@ -284,6 +284,7 @@ class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void tagsValuePatch(
     List<T>? value, {
     bool updateParent = true,

@@ -294,6 +294,7 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void emailValuePatch(
     String value, {
     bool updateParent = true,
@@ -303,6 +304,7 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void passwordValuePatch(
     String value, {
     bool updateParent = true,

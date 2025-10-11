@@ -546,6 +546,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void emailValuePatch(
     String value, {
     bool updateParent = true,
@@ -555,6 +556,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void passwordValuePatch(
     String value, {
     bool updateParent = true,
@@ -564,6 +566,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void rememberMeValuePatch(
     bool value, {
     bool updateParent = true,
@@ -573,6 +576,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void themeValuePatch(
     String value, {
     bool updateParent = true,
@@ -582,6 +586,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void modeValuePatch(
     UserMode value, {
     bool updateParent = true,
@@ -591,6 +596,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void timeoutValuePatch(
     int value, {
     bool updateParent = true,
@@ -600,6 +606,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void heightValuePatch(
     double value, {
     bool updateParent = true,
@@ -609,6 +616,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void unAnnotatedValuePatch(
     String? value, {
     bool updateParent = true,
@@ -618,6 +626,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void someIntListValuePatch(
     List<int> value, {
     bool updateParent = true,

@@ -561,6 +561,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void idValuePatch(
     String value, {
     bool updateParent = true,
@@ -570,6 +571,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void anotherIdValuePatch(
     String value, {
     bool updateParent = true,
@@ -579,6 +581,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void nameValuePatch(
     String value, {
     bool updateParent = true,
@@ -588,6 +591,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void chartingOrderValuePatch(
     ChartingOrderValue value, {
     bool updateParent = true,
@@ -597,6 +601,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void numberingStandardValuePatch(
     NumberingStandard value, {
     bool updateParent = true,
@@ -606,6 +611,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void measurementTypeValuePatch(
     MeasurementType value, {
     bool updateParent = true,
@@ -615,6 +621,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void audioGuidanceValuePatch(
     bool value, {
     bool updateParent = true,
@@ -624,6 +631,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void incidenceFilterValuePatch(
     IncidenceFilterO value, {
     bool updateParent = true,
@@ -635,6 +643,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void thresholdValuePatch(
     ThresholdSettingO value, {
     bool updateParent = true,
@@ -646,6 +655,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
         emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void timerValuePatch(
     TimerSettingO value, {
     bool updateParent = true,
@@ -1484,6 +1494,7 @@ class IncidenceFilterOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void isMobilityEnabledValuePatch(
     bool value, {
     bool updateParent = true,
@@ -1493,6 +1504,7 @@ class IncidenceFilterOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void isFurcationEnabledValuePatch(
     bool value, {
     bool updateParent = true,
@@ -1502,6 +1514,7 @@ class IncidenceFilterOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void isBleedingEnabledValuePatch(
     bool value, {
     bool updateParent = true,
@@ -1511,6 +1524,7 @@ class IncidenceFilterOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void isSuppurationEnabledValuePatch(
     bool value, {
     bool updateParent = true,
@@ -1520,6 +1534,7 @@ class IncidenceFilterOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void isCalculusEnabledValuePatch(
     bool value, {
     bool updateParent = true,
@@ -1529,6 +1544,7 @@ class IncidenceFilterOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void isPlaqueEnabledValuePatch(
     bool value, {
     bool updateParent = true,
@@ -2038,6 +2054,7 @@ class ThresholdSettingOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void isEnabledValuePatch(
     bool value, {
     bool updateParent = true,
@@ -2047,6 +2064,7 @@ class ThresholdSettingOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void valueValuePatch(
     int value, {
     bool updateParent = true,
@@ -2350,6 +2368,7 @@ class TimerSettingOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void isEnabledValuePatch(
     bool value, {
     bool updateParent = true,
@@ -2359,6 +2378,7 @@ class TimerSettingOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void valueValuePatch(
     int value, {
     bool updateParent = true,

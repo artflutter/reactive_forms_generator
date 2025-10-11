@@ -351,6 +351,7 @@ class SomeWiredNameForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void emailValuePatch(
     String? value, {
     bool updateParent = true,
@@ -360,6 +361,7 @@ class SomeWiredNameForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void passwordValuePatch(
     String? value, {
     bool updateParent = true,

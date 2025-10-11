@@ -474,6 +474,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void idValuePatch(
     String value, {
     bool updateParent = true,
@@ -483,6 +484,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void firstNameValuePatch(
     String? value, {
     bool updateParent = true,
@@ -492,6 +494,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void lastNameValuePatch(
     String? value, {
     bool updateParent = true,
@@ -501,6 +504,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void homeValuePatch(
     AddressO value, {
     bool updateParent = true,
@@ -510,6 +514,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void officeValuePatch(
     AddressO? value, {
     bool updateParent = true,
@@ -1060,6 +1065,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void streetValuePatch(
     String? value, {
     bool updateParent = true,
@@ -1069,6 +1075,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void cityValuePatch(
     String? value, {
     bool updateParent = true,
@@ -1078,6 +1085,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void zipValuePatch(
     String? value, {
     bool updateParent = true,

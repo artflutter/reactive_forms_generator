@@ -358,6 +358,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void descriptionValuePatch(
     String? value, {
     bool updateParent = true,
@@ -367,6 +368,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void idValuePatch(
     IdO<P, C>? value, {
     bool updateParent = true,
@@ -716,6 +718,7 @@ class IdOForm<P extends Product, C extends Cart>
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void companyNameValuePatch(
     String? value, {
     bool updateParent = true,
@@ -725,6 +728,7 @@ class IdOForm<P extends Product, C extends Cart>
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void nameValuePatch(
     String? value, {
     bool updateParent = true,

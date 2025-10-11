@@ -416,6 +416,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void idValuePatch(
     String value, {
     bool updateParent = true,
@@ -425,6 +426,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void firstNameValuePatch(
     String value, {
     bool updateParent = true,
@@ -434,6 +436,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void lastNameValuePatch(
     String value, {
     bool updateParent = true,
@@ -443,6 +446,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void homeValuePatch(
     Address value, {
     bool updateParent = true,
@@ -452,6 +456,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void officeValuePatch(
     Address? value, {
     bool updateParent = true,
@@ -1001,6 +1006,7 @@ class AddressForm implements FormModel<Address, Address> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void streetValuePatch(
     String? value, {
     bool updateParent = true,
@@ -1010,6 +1016,7 @@ class AddressForm implements FormModel<Address, Address> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void cityValuePatch(
     String? value, {
     bool updateParent = true,
@@ -1019,6 +1026,7 @@ class AddressForm implements FormModel<Address, Address> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void zipValuePatch(
     String? value, {
     bool updateParent = true,

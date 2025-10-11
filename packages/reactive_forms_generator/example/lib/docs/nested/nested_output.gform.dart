@@ -257,6 +257,7 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void idValuePatch(
     String value, {
     bool updateParent = true,
@@ -1018,6 +1019,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     subGroupListControl.clear(updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void idValuePatch(
     String value, {
     bool updateParent = true,
@@ -1027,6 +1029,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void subGroupListValuePatch(
     List<SubGroupO> value, {
     bool updateParent = true,
@@ -1816,6 +1819,7 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
     groupListControl.clear(updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void groupListValuePatch(
     List<GroupO> value, {
     bool updateParent = true,

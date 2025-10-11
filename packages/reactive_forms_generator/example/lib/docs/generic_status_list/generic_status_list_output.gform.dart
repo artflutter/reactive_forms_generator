@@ -267,6 +267,7 @@ class StatusListOForm<T extends Enum>
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void listValuePatch(
     List<T?> value, {
     bool updateParent = true,

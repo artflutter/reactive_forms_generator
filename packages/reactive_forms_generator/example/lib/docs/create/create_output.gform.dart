@@ -757,6 +757,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     adminsControl.clear(updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void idValuePatch(
     String? value, {
     bool updateParent = true,
@@ -766,6 +767,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void businessNumberValuePatch(
     String? value, {
     bool updateParent = true,
@@ -775,6 +777,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void fileIdsValuePatch(
     List<String>? value, {
     bool updateParent = true,
@@ -784,6 +787,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void nameValuePatch(
     String? value, {
     bool updateParent = true,
@@ -793,6 +797,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void emailValuePatch(
     String? value, {
     bool updateParent = true,
@@ -802,6 +807,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void sameMailingAddressAsCompanyValuePatch(
     bool value, {
     bool updateParent = true,
@@ -811,6 +817,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void companyAddressValuePatch(
     Address value, {
     bool updateParent = true,
@@ -820,6 +827,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void primaryContactValuePatch(
     PrimaryContact value, {
     bool updateParent = true,
@@ -831,6 +839,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
         emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void mailingAddressValuePatch(
     Address value, {
     bool updateParent = true,
@@ -840,6 +849,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void adminsValuePatch(
     List<AdminContactInformation> value, {
     bool updateParent = true,
@@ -1753,6 +1763,7 @@ class AddressForm implements FormModel<Address, AddressOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void streetValuePatch(
     String? value, {
     bool updateParent = true,
@@ -1762,6 +1773,7 @@ class AddressForm implements FormModel<Address, AddressOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void cityValuePatch(
     String? value, {
     bool updateParent = true,
@@ -1771,6 +1783,7 @@ class AddressForm implements FormModel<Address, AddressOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void stateOrProvinceValuePatch(
     String? value, {
     bool updateParent = true,
@@ -1780,6 +1793,7 @@ class AddressForm implements FormModel<Address, AddressOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void zipCodeValuePatch(
     String? value, {
     bool updateParent = true,
@@ -2302,6 +2316,7 @@ class PrimaryContactForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void fullNameValuePatch(
     String? value, {
     bool updateParent = true,
@@ -2311,6 +2326,7 @@ class PrimaryContactForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void jobTitleValuePatch(
     String? value, {
     bool updateParent = true,
@@ -2320,6 +2336,7 @@ class PrimaryContactForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void emailValuePatch(
     String? value, {
     bool updateParent = true,
@@ -2791,6 +2808,7 @@ class AdminContactInformationForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void firstNameValuePatch(
     String? value, {
     bool updateParent = true,
@@ -2800,6 +2818,7 @@ class AdminContactInformationForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void lastNameValuePatch(
     String? value, {
     bool updateParent = true,
@@ -2809,6 +2828,7 @@ class AdminContactInformationForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void emailValuePatch(
     String? value, {
     bool updateParent = true,

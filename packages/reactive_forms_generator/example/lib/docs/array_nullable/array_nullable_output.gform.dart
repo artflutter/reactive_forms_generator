@@ -485,6 +485,7 @@ class ArrayNullableOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void someListValuePatch(
     List<String?>? value, {
     bool updateParent = true,
@@ -494,6 +495,7 @@ class ArrayNullableOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void emailListValuePatch(
     List<String> value, {
     bool updateParent = true,
@@ -503,6 +505,7 @@ class ArrayNullableOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void fruitListValuePatch(
     List<bool?> value, {
     bool updateParent = true,
@@ -512,6 +515,7 @@ class ArrayNullableOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void vegetablesListValuePatch(
     List<String?>? value, {
     bool updateParent = true,
@@ -521,6 +525,7 @@ class ArrayNullableOForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void modeListValuePatch(
     List<UserMode?>? value, {
     bool updateParent = true,

@@ -510,6 +510,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void idValuePatch(
     String? value, {
     bool updateParent = true,
@@ -519,6 +520,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void securedAreaValuePatch(
     SecuredArea? value, {
     bool updateParent = true,
@@ -528,6 +530,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void parcelSystemValuePatch(
     ParcelSystem? value, {
     bool updateParent = true,
@@ -539,6 +542,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
         emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void subSecuredAreasValuePatch(
     List<SecuredArea> value, {
     bool updateParent = true,
@@ -972,6 +976,7 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void hasParcelSystemValuePatch(
     bool value, {
     bool updateParent = true,
@@ -981,6 +986,7 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void dataValuePatch(
     ParcelSystemData value, {
     bool updateParent = true,
@@ -1268,6 +1274,7 @@ class ParcelSystemDataForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void idValuePatch(
     String? value, {
     bool updateParent = true,

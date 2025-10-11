@@ -464,6 +464,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void personalValuePatch(
     PersonalO? value, {
     bool updateParent = true,
@@ -473,6 +474,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void phoneValuePatch(
     PhoneO? value, {
     bool updateParent = true,
@@ -482,6 +484,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void addressValuePatch(
     AddressO? value, {
     bool updateParent = true,
@@ -491,6 +494,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void address2ValuePatch(
     AddressO? value, {
     bool updateParent = true,
@@ -912,6 +916,7 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void nameValuePatch(
     String? value, {
     bool updateParent = true,
@@ -921,6 +926,7 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void emailValuePatch(
     String? value, {
     bool updateParent = true,
@@ -1276,6 +1282,7 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void phoneNumberValuePatch(
     String? value, {
     bool updateParent = true,
@@ -1285,6 +1292,7 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void countryIsoValuePatch(
     String? value, {
     bool updateParent = true,
@@ -1702,6 +1710,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void streetValuePatch(
     String? value, {
     bool updateParent = true,
@@ -1711,6 +1720,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void cityValuePatch(
     String? value, {
     bool updateParent = true,
@@ -1720,6 +1730,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void zipValuePatch(
     String? value, {
     bool updateParent = true,

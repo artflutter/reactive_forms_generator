@@ -562,6 +562,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void genderValuePatch(
     String? value, {
     bool updateParent = true,
@@ -571,6 +572,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void idValuePatch(
     String? value, {
     bool updateParent = true,
@@ -580,6 +582,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void nameValuePatch(
     String? value, {
     bool updateParent = true,
@@ -589,6 +592,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void logoImageValuePatch(
     String? value, {
     bool updateParent = true,
@@ -598,6 +602,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void yearValuePatch(
     double? value, {
     bool updateParent = true,
@@ -607,6 +612,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void selectedSpacesValuePatch(
     List<String> value, {
     bool updateParent = true,

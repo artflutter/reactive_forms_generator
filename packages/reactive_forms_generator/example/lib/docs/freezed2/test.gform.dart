@@ -316,6 +316,7 @@ class TestForm implements FormModel<Test, Test> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void titleValuePatch(
     String value, {
     bool updateParent = true,
@@ -325,6 +326,7 @@ class TestForm implements FormModel<Test, Test> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void descriptionValuePatch(
     String? value, {
     bool updateParent = true,

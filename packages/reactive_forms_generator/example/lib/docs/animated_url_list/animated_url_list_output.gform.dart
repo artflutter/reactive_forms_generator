@@ -328,6 +328,7 @@ class AnimatedUrlLisOForm
     urlListControl.clear(updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void urlListValuePatch(
     List<UrlEntityO> value, {
     bool updateParent = true,
@@ -678,6 +679,7 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void labelValuePatch(
     String? value, {
     bool updateParent = true,
@@ -687,6 +689,7 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void urlValuePatch(
     String? value, {
     bool updateParent = true,

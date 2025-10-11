@@ -288,6 +288,7 @@ class LoginForm implements FormModel<Login, Login> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void emailValuePatch(
     String value, {
     bool updateParent = true,
@@ -297,6 +298,7 @@ class LoginForm implements FormModel<Login, Login> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void passwordValuePatch(
     String value, {
     bool updateParent = true,

@@ -328,6 +328,7 @@ class AnimatedUrlListForm
     urlListControl.clear(updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void urlListValuePatch(
     List<UrlEntity> value, {
     bool updateParent = true,
@@ -620,6 +621,7 @@ class UrlEntityForm implements FormModel<UrlEntity, UrlEntity> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void labelValuePatch(
     String value, {
     bool updateParent = true,
@@ -629,6 +631,7 @@ class UrlEntityForm implements FormModel<UrlEntity, UrlEntity> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  @Deprecated("Use control.patch() instead")
   void urlValuePatch(
     String value, {
     bool updateParent = true,

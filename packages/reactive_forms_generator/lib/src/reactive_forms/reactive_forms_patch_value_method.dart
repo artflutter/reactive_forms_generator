@@ -54,6 +54,9 @@ class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
 
   Method get methodEntity => Method(
     (b) => b
+      ..annotations.add(
+        const CodeExpression(Code('Deprecated("Use control.patch() instead")')),
+      )
       ..name = field.valuePatchMethodName
       ..lambda = false
       ..requiredParameters.add(
