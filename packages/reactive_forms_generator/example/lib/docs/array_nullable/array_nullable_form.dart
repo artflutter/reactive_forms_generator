@@ -41,7 +41,7 @@ class _ArrayNullableFormWidgetState extends State<ArrayNullableFormWidget> {
                 children: [
                   Expanded(
                     child: ReactiveArrayNullableFormArrayBuilder<String>(
-                      formControl: formModel.emailListControl,
+                      formControl: formModel.emailList.control,
                       itemBuilder: (context, i, control, item, formModel) {
                         return ReactiveTextField<String>(
                           formControl: control,
@@ -55,7 +55,7 @@ class _ArrayNullableFormWidgetState extends State<ArrayNullableFormWidget> {
                     onPressed: () {
                       final newEmail = 'other${contacts.length + 1}@email.com';
                       contacts.add(newEmail);
-                      formModel.emailListControl.add(
+                      formModel.emailList.control.add(
                         FormControl<String>(value: newEmail),
                       );
                     },
@@ -67,7 +67,7 @@ class _ArrayNullableFormWidgetState extends State<ArrayNullableFormWidget> {
                 children: [
                   Expanded(
                     child: ReactiveArrayNullableFormArrayBuilder<bool>(
-                      formControl: formModel.fruitListControl,
+                      formControl: formModel.fruitList.control,
                       itemBuilder: (_, i, control, _, _) {
                         return ReactiveCheckboxListTile(
                           formControl: control,
@@ -81,7 +81,7 @@ class _ArrayNullableFormWidgetState extends State<ArrayNullableFormWidget> {
                     onPressed: () {
                       final newFruit = 'otherFruit${fruits.length + 1}';
                       fruits.add(newFruit);
-                      formModel.fruitListControl.add(
+                      formModel.fruitList.control.add(
                         FormControl<bool>(value: false),
                       );
                     },

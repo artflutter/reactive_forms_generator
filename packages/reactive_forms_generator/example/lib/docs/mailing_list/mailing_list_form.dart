@@ -31,7 +31,7 @@ class _MailingListFormWidgetState extends State<MailingListFormWidget> {
                 children: [
                   Expanded(
                     child: ReactiveMailingListFormArrayBuilder2<String>(
-                      formControl: formModel.emailListControl,
+                      formControl: formModel.emailList.control,
                       itemBuilder: (params) {
                         return Row(
                           children: [
@@ -49,7 +49,7 @@ class _MailingListFormWidgetState extends State<MailingListFormWidget> {
                             ),
                             IconButton(
                               onPressed: () {
-                                formModel.emailListControl.removeAt(params.i);
+                                formModel.emailList.control.removeAt(params.i);
                               },
                               icon: const Icon(Icons.delete),
                             ),
@@ -75,13 +75,13 @@ class _MailingListFormWidgetState extends State<MailingListFormWidget> {
                   };
                   final errors = <String, dynamic>{};
 
-                  formModel.emailListControl.errors.forEach((key, value) {
+                  formModel.emailList.control.errors.forEach((key, value) {
                     final intKey = int.tryParse(key);
                     if (intKey == null) {
                       errors[key] = value;
                     }
                   });
-                  if (formModel.emailListControl.hasErrors &&
+                  if (formModel.emailList.control.hasErrors &&
                       errors.isNotEmpty) {
                     return Text(errorText[errors.entries.first.key] ?? '');
                   } else {

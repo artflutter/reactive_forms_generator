@@ -51,7 +51,8 @@ class DeliveryListFormWidget extends StatelessWidget {
                                       onPressed: () {
                                         formModel
                                             .deliveryListDeliveryPointForm[i]
-                                            .nameSetDisabled(
+                                            .name
+                                            .disabled(
                                               !formModel
                                                   .deliveryListDeliveryPointForm[i]
                                                   .name
@@ -89,7 +90,7 @@ class DeliveryListFormWidget extends StatelessWidget {
                                   builder: (context, formModel, child) {
                                     return ElevatedButton(
                                       onPressed:
-                                          formModel.deliveryListControl.enabled
+                                          formModel.deliveryList.control.enabled
                                           ? () => formModel
                                                 .removeDeliveryListItemAtIndex(
                                                   i,
@@ -116,7 +117,7 @@ class DeliveryListFormWidget extends StatelessWidget {
                   ReactiveDeliveryListFormConsumer(
                     builder: (context, formModel, child) {
                       return ElevatedButton(
-                        onPressed: formModel.deliveryListControl.enabled
+                        onPressed: formModel.deliveryList.control.enabled
                             ? () => formModel.addDeliveryListItem(
                                 emptyDeliveryPoint,
                               )

@@ -55,7 +55,7 @@ class _AnimatedUrlListFormWidgetState extends State<AnimatedUrlListFormWidget> {
   void _handleUrlAdd(AnimatedUrlListForm formModel) {
     formModel.addUrlListItem(UrlEntity(label: '', url: ''));
     _animatedListKeyForm.currentState?.insertItem(
-      (formModel.urlListControl.value ?? []).length - 1,
+      (formModel.urlList.control.value ?? []).length - 1,
     );
   }
 
