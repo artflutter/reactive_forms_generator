@@ -614,6 +614,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
 
@@ -626,6 +627,10 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
   FormArray<Map<String, Object?>> get subSecuredAreasControl =>
       form.control(subSecuredAreasControlPath())
           as FormArray<Map<String, Object?>>;
+
+  FormControlWrapper<String> get id => FormControlWrapper<String>(
+        form.control(idControlPath()) as FormControl<String>,
+      );
 
   SecuredAreaForm get securedAreaForm =>
       SecuredAreaForm(form, pathBuilder('securedArea'));
@@ -1008,10 +1013,15 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Migrate to .control")
   FormControl<bool> get hasParcelSystemControl =>
       form.control(hasParcelSystemControlPath()) as FormControl<bool>;
 
   FormGroup get dataControl => form.control(dataControlPath()) as FormGroup;
+
+  FormControlWrapper<bool> get hasParcelSystem => FormControlWrapper<bool>(
+        form.control(hasParcelSystemControlPath()) as FormControl<bool>,
+      );
 
   ParcelSystemDataForm get dataForm =>
       ParcelSystemDataForm(form, pathBuilder('data'));
@@ -1276,8 +1286,13 @@ class ParcelSystemDataForm
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
+
+  FormControlWrapper<String> get id => FormControlWrapper<String>(
+        form.control(idControlPath()) as FormControl<String>,
+      );
 
   void idSetDisabled(
     bool disabled, {

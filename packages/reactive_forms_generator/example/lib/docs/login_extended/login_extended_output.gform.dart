@@ -849,35 +849,86 @@ class LoginExtendedOForm
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get email2Control =>
       form.control(email2ControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<bool> get rememberMeControl =>
       form.control(rememberMeControlPath()) as FormControl<bool>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get themeControl =>
       form.control(themeControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<UserMode> get modeControl =>
       form.control(modeControlPath()) as FormControl<UserMode>;
 
+  @Deprecated("Migrate to .control")
   FormControl<int> get timeoutControl =>
       form.control(timeoutControlPath()) as FormControl<int>;
 
+  @Deprecated("Migrate to .control")
   FormControl<double> get heightControl =>
       form.control(heightControlPath()) as FormControl<double>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get unAnnotatedControl =>
       form.control(unAnnotatedControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<List<int>> get someIntListControl =>
       form.control(someIntListControlPath()) as FormControl<List<int>>;
+
+  FormControlWrapper<String> get email => FormControlWrapper<String>(
+        form.control(emailControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get email2 => FormControlWrapper<String>(
+        form.control(email2ControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get password => FormControlWrapper<String>(
+        form.control(passwordControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<bool> get rememberMe => FormControlWrapper<bool>(
+        form.control(rememberMeControlPath()) as FormControl<bool>,
+      );
+
+  FormControlWrapper<String> get theme => FormControlWrapper<String>(
+        form.control(themeControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<UserMode> get mode => FormControlWrapper<UserMode>(
+        form.control(modeControlPath()) as FormControl<UserMode>,
+      );
+
+  FormControlWrapper<int> get timeout => FormControlWrapper<int>(
+        form.control(timeoutControlPath()) as FormControl<int>,
+      );
+
+  FormControlWrapper<double> get height => FormControlWrapper<double>(
+        form.control(heightControlPath()) as FormControl<double>,
+      );
+
+  FormControlWrapper<String> get unAnnotated => FormControlWrapper<String>(
+        form.control(unAnnotatedControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<List<int>> get someIntList =>
+      FormControlWrapper<List<int>>(
+        form.control(someIntListControlPath()) as FormControl<List<int>>,
+      );
 
   void emailSetDisabled(
     bool disabled, {

@@ -28,9 +28,9 @@ class _AnnotatelessFormWidgetState extends State<AnnotatelessFormWidget> {
             children: [
               ReactiveTextField<String>(
                 key: email.itemKey,
-                formControl: formModel.emailControl,
+                formControl: formModel.email.control,
                 validationMessages: {
-                  ValidationMessage.required: (_) => errorRequired
+                  ValidationMessage.required: (_) => errorRequired,
                 },
                 decoration: InputDecoration(
                   labelText: email.name,
@@ -42,7 +42,7 @@ class _AnnotatelessFormWidgetState extends State<AnnotatelessFormWidget> {
               const SizedBox(height: 8.0),
               ReactiveTextField<String>(
                 key: password.itemKey,
-                formControl: formModel.passwordControl,
+                formControl: formModel.password.control,
                 obscureText: true,
                 validationMessages: {
                   ValidationMessage.required: (_) => errorRequired,
@@ -58,16 +58,16 @@ class _AnnotatelessFormWidgetState extends State<AnnotatelessFormWidget> {
               ),
               // ReactiveAnnotatelessFormConsumer(
               //   builder: (context, formModel, child) {
-              //     // debugPrint(formModel.passwordControl.errors);
+              //     // debugPrint(formModel.password.control.errors);
               //     // debugPrint(formModel.form);
               //     debugPrint('dirty => ${formModel.form.dirty}');
               //     debugPrint(
-              //         'passwordDirty => ${formModel.passwordControl.dirty}');
+              //         'passwordDirty => ${formModel.password.control.dirty}');
               //
               //     return Column(
               //       children: [
-              //         Text(formModel.emailControl.errors.toString()),
-              //         Text(formModel.passwordControl.errors.toString()),
+              //         Text(formModel.email.control.errors.toString()),
+              //         Text(formModel.password.control.errors.toString()),
               //       ],
               //     );
               //   },
@@ -81,13 +81,15 @@ class _AnnotatelessFormWidgetState extends State<AnnotatelessFormWidget> {
                         child: ElevatedButton(
                           key: submitRaw.itemKey,
                           onPressed: () {
-                            formModel.submit(onValid: (model) {
-                              debugPrint(model.email);
-                              debugPrint(model.password);
+                            formModel.submit(
+                              onValid: (model) {
+                                debugPrint(model.email);
+                                debugPrint(model.password);
 
-                              formModel.form.markAsDisabled();
-                              widget.onChange?.call(model);
-                            });
+                                formModel.form.markAsDisabled();
+                                widget.onChange?.call(model);
+                              },
+                            );
                           },
                           child: const Text('Submit raw'),
                         ),
@@ -100,12 +102,14 @@ class _AnnotatelessFormWidgetState extends State<AnnotatelessFormWidget> {
                               key: submit.itemKey,
                               onPressed: formModel.form.valid
                                   ? () {
-                                      formModel.submit(onValid: (model) {
-                                        debugPrint(model.toString());
-                                        debugPrint(model.email);
-                                        debugPrint(model.password);
-                                        widget.onChange?.call(model);
-                                      });
+                                      formModel.submit(
+                                        onValid: (model) {
+                                          debugPrint(model.toString());
+                                          debugPrint(model.email);
+                                          debugPrint(model.password);
+                                          widget.onChange?.call(model);
+                                        },
+                                      );
                                     }
                                   : null,
                               child: const Text('Submit'),

@@ -21,7 +21,7 @@ class DeliveryPointWidget extends StatelessWidget {
               Column(
                 children: [
                   ReactiveTextField<String>(
-                    formControl: formModel.nameControl,
+                    formControl: formModel.name.control,
                     validationMessages: {
                       ValidationMessage.required: (_) => 'Required'
                     },
@@ -30,7 +30,7 @@ class DeliveryPointWidget extends StatelessWidget {
                     ),
                   ),
                   ReactiveTextField<String>(
-                    formControl: formModel.addressForm.streetControl,
+                    formControl: formModel.addressForm.street.control,
                     validationMessages: {
                       ValidationMessage.required: (_) => 'Required'
                     },
@@ -39,7 +39,7 @@ class DeliveryPointWidget extends StatelessWidget {
                     ),
                   ),
                   ReactiveTextField<String>(
-                    formControl: formModel.addressForm.cityControl,
+                    formControl: formModel.addressForm.city.control,
                     validationMessages: {
                       ValidationMessage.required: (_) => 'Required'
                     },

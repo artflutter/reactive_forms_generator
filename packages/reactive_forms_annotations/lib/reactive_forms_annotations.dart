@@ -12,6 +12,7 @@ export 'src/reactive_form_annotation.dart';
 export 'src/form_group_annotation.dart';
 export 'src/form_array_annotation.dart';
 export 'src/form_array.dart';
+export 'src/abs_control.dart';
 export 'src/form_control_annotation.dart';
 export 'src/form_model.dart';
 export 'src/extended_control.dart';

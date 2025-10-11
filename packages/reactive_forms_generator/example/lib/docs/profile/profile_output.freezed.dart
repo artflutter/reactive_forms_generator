@@ -14,715 +14,409 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$ProfileO {
-  String get id;
-  String get anotherId;
-  @RfControl<String>()
-  String get name;
-  @RfControl<ChartingOrderValue>()
-  ChartingOrderValue get chartingOrder;
-  @RfControl<NumberingStandard>()
-  NumberingStandard get numberingStandard;
-  IncidenceFilterO get incidenceFilter;
-  @RfControl<MeasurementType>()
-  MeasurementType get measurementType;
-  ThresholdSettingO get threshold;
-  TimerSettingO get timer;
-  @RfControl<bool>()
-  bool get audioGuidance;
 
-  /// Create a copy of ProfileO
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $ProfileOCopyWith<ProfileO> get copyWith =>
-      _$ProfileOCopyWithImpl<ProfileO>(this as ProfileO, _$identity);
+ String get id; String get anotherId;@RfControl<String>() String get name;@RfControl<ChartingOrderValue>() ChartingOrderValue get chartingOrder;@RfControl<NumberingStandard>() NumberingStandard get numberingStandard; IncidenceFilterO get incidenceFilter;@RfControl<MeasurementType>() MeasurementType get measurementType; ThresholdSettingO get threshold; TimerSettingO get timer;@RfControl<bool>() bool get audioGuidance;
+/// Create a copy of ProfileO
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ProfileOCopyWith<ProfileO> get copyWith => _$ProfileOCopyWithImpl<ProfileO>(this as ProfileO, _$identity);
 
   /// Serializes this ProfileO to a JSON map.
   Map<String, dynamic> toJson();
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is ProfileO &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.anotherId, anotherId) ||
-                other.anotherId == anotherId) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.chartingOrder, chartingOrder) ||
-                other.chartingOrder == chartingOrder) &&
-            (identical(other.numberingStandard, numberingStandard) ||
-                other.numberingStandard == numberingStandard) &&
-            (identical(other.incidenceFilter, incidenceFilter) ||
-                other.incidenceFilter == incidenceFilter) &&
-            (identical(other.measurementType, measurementType) ||
-                other.measurementType == measurementType) &&
-            (identical(other.threshold, threshold) ||
-                other.threshold == threshold) &&
-            (identical(other.timer, timer) || other.timer == timer) &&
-            (identical(other.audioGuidance, audioGuidance) ||
-                other.audioGuidance == audioGuidance));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      anotherId,
-      name,
-      chartingOrder,
-      numberingStandard,
-      incidenceFilter,
-      measurementType,
-      threshold,
-      timer,
-      audioGuidance);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileO&&(identical(other.id, id) || other.id == id)&&(identical(other.anotherId, anotherId) || other.anotherId == anotherId)&&(identical(other.name, name) || other.name == name)&&(identical(other.chartingOrder, chartingOrder) || other.chartingOrder == chartingOrder)&&(identical(other.numberingStandard, numberingStandard) || other.numberingStandard == numberingStandard)&&(identical(other.incidenceFilter, incidenceFilter) || other.incidenceFilter == incidenceFilter)&&(identical(other.measurementType, measurementType) || other.measurementType == measurementType)&&(identical(other.threshold, threshold) || other.threshold == threshold)&&(identical(other.timer, timer) || other.timer == timer)&&(identical(other.audioGuidance, audioGuidance) || other.audioGuidance == audioGuidance));
+}
 
-  @override
-  String toString() {
-    return 'ProfileO(id: $id, anotherId: $anotherId, name: $name, chartingOrder: $chartingOrder, numberingStandard: $numberingStandard, incidenceFilter: $incidenceFilter, measurementType: $measurementType, threshold: $threshold, timer: $timer, audioGuidance: $audioGuidance)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,anotherId,name,chartingOrder,numberingStandard,incidenceFilter,measurementType,threshold,timer,audioGuidance);
+
+@override
+String toString() {
+  return 'ProfileO(id: $id, anotherId: $anotherId, name: $name, chartingOrder: $chartingOrder, numberingStandard: $numberingStandard, incidenceFilter: $incidenceFilter, measurementType: $measurementType, threshold: $threshold, timer: $timer, audioGuidance: $audioGuidance)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $ProfileOCopyWith<$Res> {
-  factory $ProfileOCopyWith(ProfileO value, $Res Function(ProfileO) _then) =
-      _$ProfileOCopyWithImpl;
-  @useResult
-  $Res call(
-      {String id,
-      String anotherId,
-      @RfControl<String>() String name,
-      @RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,
-      @RfControl<NumberingStandard>() NumberingStandard numberingStandard,
-      IncidenceFilterO incidenceFilter,
-      @RfControl<MeasurementType>() MeasurementType measurementType,
-      ThresholdSettingO threshold,
-      TimerSettingO timer,
-      @RfControl<bool>() bool audioGuidance});
+abstract mixin class $ProfileOCopyWith<$Res>  {
+  factory $ProfileOCopyWith(ProfileO value, $Res Function(ProfileO) _then) = _$ProfileOCopyWithImpl;
+@useResult
+$Res call({
+ String id, String anotherId,@RfControl<String>() String name,@RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,@RfControl<NumberingStandard>() NumberingStandard numberingStandard, IncidenceFilterO incidenceFilter,@RfControl<MeasurementType>() MeasurementType measurementType, ThresholdSettingO threshold, TimerSettingO timer,@RfControl<bool>() bool audioGuidance
+});
 
-  $ChartingOrderValueCopyWith<$Res> get chartingOrder;
-  $IncidenceFilterOCopyWith<$Res> get incidenceFilter;
-  $ThresholdSettingOCopyWith<$Res> get threshold;
-  $TimerSettingOCopyWith<$Res> get timer;
+
+$ChartingOrderValueCopyWith<$Res> get chartingOrder;$IncidenceFilterOCopyWith<$Res> get incidenceFilter;$ThresholdSettingOCopyWith<$Res> get threshold;$TimerSettingOCopyWith<$Res> get timer;
+
 }
-
 /// @nodoc
-class _$ProfileOCopyWithImpl<$Res> implements $ProfileOCopyWith<$Res> {
+class _$ProfileOCopyWithImpl<$Res>
+    implements $ProfileOCopyWith<$Res> {
   _$ProfileOCopyWithImpl(this._self, this._then);
 
   final ProfileO _self;
   final $Res Function(ProfileO) _then;
 
-  /// Create a copy of ProfileO
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? anotherId = null,
-    Object? name = null,
-    Object? chartingOrder = null,
-    Object? numberingStandard = null,
-    Object? incidenceFilter = null,
-    Object? measurementType = null,
-    Object? threshold = null,
-    Object? timer = null,
-    Object? audioGuidance = null,
-  }) {
-    return _then(_self.copyWith(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      anotherId: null == anotherId
-          ? _self.anotherId
-          : anotherId // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      chartingOrder: null == chartingOrder
-          ? _self.chartingOrder
-          : chartingOrder // ignore: cast_nullable_to_non_nullable
-              as ChartingOrderValue,
-      numberingStandard: null == numberingStandard
-          ? _self.numberingStandard
-          : numberingStandard // ignore: cast_nullable_to_non_nullable
-              as NumberingStandard,
-      incidenceFilter: null == incidenceFilter
-          ? _self.incidenceFilter
-          : incidenceFilter // ignore: cast_nullable_to_non_nullable
-              as IncidenceFilterO,
-      measurementType: null == measurementType
-          ? _self.measurementType
-          : measurementType // ignore: cast_nullable_to_non_nullable
-              as MeasurementType,
-      threshold: null == threshold
-          ? _self.threshold
-          : threshold // ignore: cast_nullable_to_non_nullable
-              as ThresholdSettingO,
-      timer: null == timer
-          ? _self.timer
-          : timer // ignore: cast_nullable_to_non_nullable
-              as TimerSettingO,
-      audioGuidance: null == audioGuidance
-          ? _self.audioGuidance
-          : audioGuidance // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-
-  /// Create a copy of ProfileO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ChartingOrderValueCopyWith<$Res> get chartingOrder {
-    return $ChartingOrderValueCopyWith<$Res>(_self.chartingOrder, (value) {
-      return _then(_self.copyWith(chartingOrder: value));
-    });
-  }
-
-  /// Create a copy of ProfileO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $IncidenceFilterOCopyWith<$Res> get incidenceFilter {
-    return $IncidenceFilterOCopyWith<$Res>(_self.incidenceFilter, (value) {
-      return _then(_self.copyWith(incidenceFilter: value));
-    });
-  }
-
-  /// Create a copy of ProfileO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ThresholdSettingOCopyWith<$Res> get threshold {
-    return $ThresholdSettingOCopyWith<$Res>(_self.threshold, (value) {
-      return _then(_self.copyWith(threshold: value));
-    });
-  }
-
-  /// Create a copy of ProfileO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $TimerSettingOCopyWith<$Res> get timer {
-    return $TimerSettingOCopyWith<$Res>(_self.timer, (value) {
-      return _then(_self.copyWith(timer: value));
-    });
-  }
+/// Create a copy of ProfileO
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? anotherId = null,Object? name = null,Object? chartingOrder = null,Object? numberingStandard = null,Object? incidenceFilter = null,Object? measurementType = null,Object? threshold = null,Object? timer = null,Object? audioGuidance = null,}) {
+  return _then(_self.copyWith(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,anotherId: null == anotherId ? _self.anotherId : anotherId // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,chartingOrder: null == chartingOrder ? _self.chartingOrder : chartingOrder // ignore: cast_nullable_to_non_nullable
+as ChartingOrderValue,numberingStandard: null == numberingStandard ? _self.numberingStandard : numberingStandard // ignore: cast_nullable_to_non_nullable
+as NumberingStandard,incidenceFilter: null == incidenceFilter ? _self.incidenceFilter : incidenceFilter // ignore: cast_nullable_to_non_nullable
+as IncidenceFilterO,measurementType: null == measurementType ? _self.measurementType : measurementType // ignore: cast_nullable_to_non_nullable
+as MeasurementType,threshold: null == threshold ? _self.threshold : threshold // ignore: cast_nullable_to_non_nullable
+as ThresholdSettingO,timer: null == timer ? _self.timer : timer // ignore: cast_nullable_to_non_nullable
+as TimerSettingO,audioGuidance: null == audioGuidance ? _self.audioGuidance : audioGuidance // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
+/// Create a copy of ProfileO
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ChartingOrderValueCopyWith<$Res> get chartingOrder {
+  
+  return $ChartingOrderValueCopyWith<$Res>(_self.chartingOrder, (value) {
+    return _then(_self.copyWith(chartingOrder: value));
+  });
+}/// Create a copy of ProfileO
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$IncidenceFilterOCopyWith<$Res> get incidenceFilter {
+  
+  return $IncidenceFilterOCopyWith<$Res>(_self.incidenceFilter, (value) {
+    return _then(_self.copyWith(incidenceFilter: value));
+  });
+}/// Create a copy of ProfileO
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ThresholdSettingOCopyWith<$Res> get threshold {
+  
+  return $ThresholdSettingOCopyWith<$Res>(_self.threshold, (value) {
+    return _then(_self.copyWith(threshold: value));
+  });
+}/// Create a copy of ProfileO
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$TimerSettingOCopyWith<$Res> get timer {
+  
+  return $TimerSettingOCopyWith<$Res>(_self.timer, (value) {
+    return _then(_self.copyWith(timer: value));
+  });
+}
+}
+
 
 /// Adds pattern-matching-related methods to [ProfileO].
 extension ProfileOPatterns on ProfileO {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_ProfileO value)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _ProfileO() when $default != null:
-        return $default(_that);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ProfileO value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ProfileO() when $default != null:
+return $default(_that);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_ProfileO value) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ProfileO():
-        return $default(_that);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ProfileO value)  $default,){
+final _that = this;
+switch (_that) {
+case _ProfileO():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_ProfileO value)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ProfileO() when $default != null:
-        return $default(_that);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ProfileO value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ProfileO() when $default != null:
+return $default(_that);case _:
+  return null;
 
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            String id,
-            String anotherId,
-            @RfControl<String>() String name,
-            @RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,
-            @RfControl<NumberingStandard>() NumberingStandard numberingStandard,
-            IncidenceFilterO incidenceFilter,
-            @RfControl<MeasurementType>() MeasurementType measurementType,
-            ThresholdSettingO threshold,
-            TimerSettingO timer,
-            @RfControl<bool>() bool audioGuidance)?
-        $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _ProfileO() when $default != null:
-        return $default(
-            _that.id,
-            _that.anotherId,
-            _that.name,
-            _that.chartingOrder,
-            _that.numberingStandard,
-            _that.incidenceFilter,
-            _that.measurementType,
-            _that.threshold,
-            _that.timer,
-            _that.audioGuidance);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String anotherId, @RfControl<String>()  String name, @RfControl<ChartingOrderValue>()  ChartingOrderValue chartingOrder, @RfControl<NumberingStandard>()  NumberingStandard numberingStandard,  IncidenceFilterO incidenceFilter, @RfControl<MeasurementType>()  MeasurementType measurementType,  ThresholdSettingO threshold,  TimerSettingO timer, @RfControl<bool>()  bool audioGuidance)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ProfileO() when $default != null:
+return $default(_that.id,_that.anotherId,_that.name,_that.chartingOrder,_that.numberingStandard,_that.incidenceFilter,_that.measurementType,_that.threshold,_that.timer,_that.audioGuidance);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(
-            String id,
-            String anotherId,
-            @RfControl<String>() String name,
-            @RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,
-            @RfControl<NumberingStandard>() NumberingStandard numberingStandard,
-            IncidenceFilterO incidenceFilter,
-            @RfControl<MeasurementType>() MeasurementType measurementType,
-            ThresholdSettingO threshold,
-            TimerSettingO timer,
-            @RfControl<bool>() bool audioGuidance)
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ProfileO():
-        return $default(
-            _that.id,
-            _that.anotherId,
-            _that.name,
-            _that.chartingOrder,
-            _that.numberingStandard,
-            _that.incidenceFilter,
-            _that.measurementType,
-            _that.threshold,
-            _that.timer,
-            _that.audioGuidance);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String anotherId, @RfControl<String>()  String name, @RfControl<ChartingOrderValue>()  ChartingOrderValue chartingOrder, @RfControl<NumberingStandard>()  NumberingStandard numberingStandard,  IncidenceFilterO incidenceFilter, @RfControl<MeasurementType>()  MeasurementType measurementType,  ThresholdSettingO threshold,  TimerSettingO timer, @RfControl<bool>()  bool audioGuidance)  $default,) {final _that = this;
+switch (_that) {
+case _ProfileO():
+return $default(_that.id,_that.anotherId,_that.name,_that.chartingOrder,_that.numberingStandard,_that.incidenceFilter,_that.measurementType,_that.threshold,_that.timer,_that.audioGuidance);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            String id,
-            String anotherId,
-            @RfControl<String>() String name,
-            @RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,
-            @RfControl<NumberingStandard>() NumberingStandard numberingStandard,
-            IncidenceFilterO incidenceFilter,
-            @RfControl<MeasurementType>() MeasurementType measurementType,
-            ThresholdSettingO threshold,
-            TimerSettingO timer,
-            @RfControl<bool>() bool audioGuidance)?
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ProfileO() when $default != null:
-        return $default(
-            _that.id,
-            _that.anotherId,
-            _that.name,
-            _that.chartingOrder,
-            _that.numberingStandard,
-            _that.incidenceFilter,
-            _that.measurementType,
-            _that.threshold,
-            _that.timer,
-            _that.audioGuidance);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String anotherId, @RfControl<String>()  String name, @RfControl<ChartingOrderValue>()  ChartingOrderValue chartingOrder, @RfControl<NumberingStandard>()  NumberingStandard numberingStandard,  IncidenceFilterO incidenceFilter, @RfControl<MeasurementType>()  MeasurementType measurementType,  ThresholdSettingO threshold,  TimerSettingO timer, @RfControl<bool>()  bool audioGuidance)?  $default,) {final _that = this;
+switch (_that) {
+case _ProfileO() when $default != null:
+return $default(_that.id,_that.anotherId,_that.name,_that.chartingOrder,_that.numberingStandard,_that.incidenceFilter,_that.measurementType,_that.threshold,_that.timer,_that.audioGuidance);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
+
 class _ProfileO extends ProfileO {
-  _ProfileO(this.id,
-      {required this.anotherId,
-      @RfControl<String>() required this.name,
-      @RfControl<ChartingOrderValue>() required this.chartingOrder,
-      @RfControl<NumberingStandard>() required this.numberingStandard,
-      required this.incidenceFilter,
-      @RfControl<MeasurementType>() required this.measurementType,
-      required this.threshold,
-      required this.timer,
-      @RfControl<bool>() required this.audioGuidance})
-      : super._();
-  factory _ProfileO.fromJson(Map<String, dynamic> json) =>
-      _$ProfileOFromJson(json);
+   _ProfileO(this.id, {required this.anotherId, @RfControl<String>() required this.name, @RfControl<ChartingOrderValue>() required this.chartingOrder, @RfControl<NumberingStandard>() required this.numberingStandard, required this.incidenceFilter, @RfControl<MeasurementType>() required this.measurementType, required this.threshold, required this.timer, @RfControl<bool>() required this.audioGuidance}): super._();
+  factory _ProfileO.fromJson(Map<String, dynamic> json) => _$ProfileOFromJson(json);
 
-  @override
-  final String id;
-  @override
-  final String anotherId;
-  @override
-  @RfControl<String>()
-  final String name;
-  @override
-  @RfControl<ChartingOrderValue>()
-  final ChartingOrderValue chartingOrder;
-  @override
-  @RfControl<NumberingStandard>()
-  final NumberingStandard numberingStandard;
-  @override
-  final IncidenceFilterO incidenceFilter;
-  @override
-  @RfControl<MeasurementType>()
-  final MeasurementType measurementType;
-  @override
-  final ThresholdSettingO threshold;
-  @override
-  final TimerSettingO timer;
-  @override
-  @RfControl<bool>()
-  final bool audioGuidance;
+@override final  String id;
+@override final  String anotherId;
+@override@RfControl<String>() final  String name;
+@override@RfControl<ChartingOrderValue>() final  ChartingOrderValue chartingOrder;
+@override@RfControl<NumberingStandard>() final  NumberingStandard numberingStandard;
+@override final  IncidenceFilterO incidenceFilter;
+@override@RfControl<MeasurementType>() final  MeasurementType measurementType;
+@override final  ThresholdSettingO threshold;
+@override final  TimerSettingO timer;
+@override@RfControl<bool>() final  bool audioGuidance;
 
-  /// Create a copy of ProfileO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$ProfileOCopyWith<_ProfileO> get copyWith =>
-      __$ProfileOCopyWithImpl<_ProfileO>(this, _$identity);
+/// Create a copy of ProfileO
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ProfileOCopyWith<_ProfileO> get copyWith => __$ProfileOCopyWithImpl<_ProfileO>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$ProfileOToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$ProfileOToJson(this, );
+}
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _ProfileO &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.anotherId, anotherId) ||
-                other.anotherId == anotherId) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.chartingOrder, chartingOrder) ||
-                other.chartingOrder == chartingOrder) &&
-            (identical(other.numberingStandard, numberingStandard) ||
-                other.numberingStandard == numberingStandard) &&
-            (identical(other.incidenceFilter, incidenceFilter) ||
-                other.incidenceFilter == incidenceFilter) &&
-            (identical(other.measurementType, measurementType) ||
-                other.measurementType == measurementType) &&
-            (identical(other.threshold, threshold) ||
-                other.threshold == threshold) &&
-            (identical(other.timer, timer) || other.timer == timer) &&
-            (identical(other.audioGuidance, audioGuidance) ||
-                other.audioGuidance == audioGuidance));
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileO&&(identical(other.id, id) || other.id == id)&&(identical(other.anotherId, anotherId) || other.anotherId == anotherId)&&(identical(other.name, name) || other.name == name)&&(identical(other.chartingOrder, chartingOrder) || other.chartingOrder == chartingOrder)&&(identical(other.numberingStandard, numberingStandard) || other.numberingStandard == numberingStandard)&&(identical(other.incidenceFilter, incidenceFilter) || other.incidenceFilter == incidenceFilter)&&(identical(other.measurementType, measurementType) || other.measurementType == measurementType)&&(identical(other.threshold, threshold) || other.threshold == threshold)&&(identical(other.timer, timer) || other.timer == timer)&&(identical(other.audioGuidance, audioGuidance) || other.audioGuidance == audioGuidance));
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      anotherId,
-      name,
-      chartingOrder,
-      numberingStandard,
-      incidenceFilter,
-      measurementType,
-      threshold,
-      timer,
-      audioGuidance);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,anotherId,name,chartingOrder,numberingStandard,incidenceFilter,measurementType,threshold,timer,audioGuidance);
 
-  @override
-  String toString() {
-    return 'ProfileO(id: $id, anotherId: $anotherId, name: $name, chartingOrder: $chartingOrder, numberingStandard: $numberingStandard, incidenceFilter: $incidenceFilter, measurementType: $measurementType, threshold: $threshold, timer: $timer, audioGuidance: $audioGuidance)';
-  }
+@override
+String toString() {
+  return 'ProfileO(id: $id, anotherId: $anotherId, name: $name, chartingOrder: $chartingOrder, numberingStandard: $numberingStandard, incidenceFilter: $incidenceFilter, measurementType: $measurementType, threshold: $threshold, timer: $timer, audioGuidance: $audioGuidance)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$ProfileOCopyWith<$Res>
-    implements $ProfileOCopyWith<$Res> {
-  factory _$ProfileOCopyWith(_ProfileO value, $Res Function(_ProfileO) _then) =
-      __$ProfileOCopyWithImpl;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String anotherId,
-      @RfControl<String>() String name,
-      @RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,
-      @RfControl<NumberingStandard>() NumberingStandard numberingStandard,
-      IncidenceFilterO incidenceFilter,
-      @RfControl<MeasurementType>() MeasurementType measurementType,
-      ThresholdSettingO threshold,
-      TimerSettingO timer,
-      @RfControl<bool>() bool audioGuidance});
+abstract mixin class _$ProfileOCopyWith<$Res> implements $ProfileOCopyWith<$Res> {
+  factory _$ProfileOCopyWith(_ProfileO value, $Res Function(_ProfileO) _then) = __$ProfileOCopyWithImpl;
+@override @useResult
+$Res call({
+ String id, String anotherId,@RfControl<String>() String name,@RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,@RfControl<NumberingStandard>() NumberingStandard numberingStandard, IncidenceFilterO incidenceFilter,@RfControl<MeasurementType>() MeasurementType measurementType, ThresholdSettingO threshold, TimerSettingO timer,@RfControl<bool>() bool audioGuidance
+});
 
-  @override
-  $ChartingOrderValueCopyWith<$Res> get chartingOrder;
-  @override
-  $IncidenceFilterOCopyWith<$Res> get incidenceFilter;
-  @override
-  $ThresholdSettingOCopyWith<$Res> get threshold;
-  @override
-  $TimerSettingOCopyWith<$Res> get timer;
+
+@override $ChartingOrderValueCopyWith<$Res> get chartingOrder;@override $IncidenceFilterOCopyWith<$Res> get incidenceFilter;@override $ThresholdSettingOCopyWith<$Res> get threshold;@override $TimerSettingOCopyWith<$Res> get timer;
+
 }
-
 /// @nodoc
-class __$ProfileOCopyWithImpl<$Res> implements _$ProfileOCopyWith<$Res> {
+class __$ProfileOCopyWithImpl<$Res>
+    implements _$ProfileOCopyWith<$Res> {
   __$ProfileOCopyWithImpl(this._self, this._then);
 
   final _ProfileO _self;
   final $Res Function(_ProfileO) _then;
 
-  /// Create a copy of ProfileO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? id = null,
-    Object? anotherId = null,
-    Object? name = null,
-    Object? chartingOrder = null,
-    Object? numberingStandard = null,
-    Object? incidenceFilter = null,
-    Object? measurementType = null,
-    Object? threshold = null,
-    Object? timer = null,
-    Object? audioGuidance = null,
-  }) {
-    return _then(_ProfileO(
-      null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      anotherId: null == anotherId
-          ? _self.anotherId
-          : anotherId // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      chartingOrder: null == chartingOrder
-          ? _self.chartingOrder
-          : chartingOrder // ignore: cast_nullable_to_non_nullable
-              as ChartingOrderValue,
-      numberingStandard: null == numberingStandard
-          ? _self.numberingStandard
-          : numberingStandard // ignore: cast_nullable_to_non_nullable
-              as NumberingStandard,
-      incidenceFilter: null == incidenceFilter
-          ? _self.incidenceFilter
-          : incidenceFilter // ignore: cast_nullable_to_non_nullable
-              as IncidenceFilterO,
-      measurementType: null == measurementType
-          ? _self.measurementType
-          : measurementType // ignore: cast_nullable_to_non_nullable
-              as MeasurementType,
-      threshold: null == threshold
-          ? _self.threshold
-          : threshold // ignore: cast_nullable_to_non_nullable
-              as ThresholdSettingO,
-      timer: null == timer
-          ? _self.timer
-          : timer // ignore: cast_nullable_to_non_nullable
-              as TimerSettingO,
-      audioGuidance: null == audioGuidance
-          ? _self.audioGuidance
-          : audioGuidance // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-
-  /// Create a copy of ProfileO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ChartingOrderValueCopyWith<$Res> get chartingOrder {
-    return $ChartingOrderValueCopyWith<$Res>(_self.chartingOrder, (value) {
-      return _then(_self.copyWith(chartingOrder: value));
-    });
-  }
-
-  /// Create a copy of ProfileO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $IncidenceFilterOCopyWith<$Res> get incidenceFilter {
-    return $IncidenceFilterOCopyWith<$Res>(_self.incidenceFilter, (value) {
-      return _then(_self.copyWith(incidenceFilter: value));
-    });
-  }
-
-  /// Create a copy of ProfileO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ThresholdSettingOCopyWith<$Res> get threshold {
-    return $ThresholdSettingOCopyWith<$Res>(_self.threshold, (value) {
-      return _then(_self.copyWith(threshold: value));
-    });
-  }
-
-  /// Create a copy of ProfileO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $TimerSettingOCopyWith<$Res> get timer {
-    return $TimerSettingOCopyWith<$Res>(_self.timer, (value) {
-      return _then(_self.copyWith(timer: value));
-    });
-  }
+/// Create a copy of ProfileO
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? anotherId = null,Object? name = null,Object? chartingOrder = null,Object? numberingStandard = null,Object? incidenceFilter = null,Object? measurementType = null,Object? threshold = null,Object? timer = null,Object? audioGuidance = null,}) {
+  return _then(_ProfileO(
+null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,anotherId: null == anotherId ? _self.anotherId : anotherId // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,chartingOrder: null == chartingOrder ? _self.chartingOrder : chartingOrder // ignore: cast_nullable_to_non_nullable
+as ChartingOrderValue,numberingStandard: null == numberingStandard ? _self.numberingStandard : numberingStandard // ignore: cast_nullable_to_non_nullable
+as NumberingStandard,incidenceFilter: null == incidenceFilter ? _self.incidenceFilter : incidenceFilter // ignore: cast_nullable_to_non_nullable
+as IncidenceFilterO,measurementType: null == measurementType ? _self.measurementType : measurementType // ignore: cast_nullable_to_non_nullable
+as MeasurementType,threshold: null == threshold ? _self.threshold : threshold // ignore: cast_nullable_to_non_nullable
+as ThresholdSettingO,timer: null == timer ? _self.timer : timer // ignore: cast_nullable_to_non_nullable
+as TimerSettingO,audioGuidance: null == audioGuidance ? _self.audioGuidance : audioGuidance // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
+
+/// Create a copy of ProfileO
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ChartingOrderValueCopyWith<$Res> get chartingOrder {
+  
+  return $ChartingOrderValueCopyWith<$Res>(_self.chartingOrder, (value) {
+    return _then(_self.copyWith(chartingOrder: value));
+  });
+}/// Create a copy of ProfileO
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$IncidenceFilterOCopyWith<$Res> get incidenceFilter {
+  
+  return $IncidenceFilterOCopyWith<$Res>(_self.incidenceFilter, (value) {
+    return _then(_self.copyWith(incidenceFilter: value));
+  });
+}/// Create a copy of ProfileO
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ThresholdSettingOCopyWith<$Res> get threshold {
+  
+  return $ThresholdSettingOCopyWith<$Res>(_self.threshold, (value) {
+    return _then(_self.copyWith(threshold: value));
+  });
+}/// Create a copy of ProfileO
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$TimerSettingOCopyWith<$Res> get timer {
+  
+  return $TimerSettingOCopyWith<$Res>(_self.timer, (value) {
+    return _then(_self.copyWith(timer: value));
+  });
+}
+}
+
 
 /// @nodoc
 mixin _$ThresholdSettingO {
-  @RfControl<bool>()
-  bool get isEnabled;
-  @RfControl<int>()
-  int get value;
 
-  /// Create a copy of ThresholdSettingO
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $ThresholdSettingOCopyWith<ThresholdSettingO> get copyWith =>
-      _$ThresholdSettingOCopyWithImpl<ThresholdSettingO>(
-          this as ThresholdSettingO, _$identity);
+@RfControl<bool>() bool get isEnabled;@RfControl<int>() int get value;
+/// Create a copy of ThresholdSettingO
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ThresholdSettingOCopyWith<ThresholdSettingO> get copyWith => _$ThresholdSettingOCopyWithImpl<ThresholdSettingO>(this as ThresholdSettingO, _$identity);
 
   /// Serializes this ThresholdSettingO to a JSON map.
   Map<String, dynamic> toJson();
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is ThresholdSettingO &&
-            (identical(other.isEnabled, isEnabled) ||
-                other.isEnabled == isEnabled) &&
-            (identical(other.value, value) || other.value == value));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, isEnabled, value);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ThresholdSettingO&&(identical(other.isEnabled, isEnabled) || other.isEnabled == isEnabled)&&(identical(other.value, value) || other.value == value));
+}
 
-  @override
-  String toString() {
-    return 'ThresholdSettingO(isEnabled: $isEnabled, value: $value)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,isEnabled,value);
+
+@override
+String toString() {
+  return 'ThresholdSettingO(isEnabled: $isEnabled, value: $value)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $ThresholdSettingOCopyWith<$Res> {
-  factory $ThresholdSettingOCopyWith(
-          ThresholdSettingO value, $Res Function(ThresholdSettingO) _then) =
-      _$ThresholdSettingOCopyWithImpl;
-  @useResult
-  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
-}
+abstract mixin class $ThresholdSettingOCopyWith<$Res>  {
+  factory $ThresholdSettingOCopyWith(ThresholdSettingO value, $Res Function(ThresholdSettingO) _then) = _$ThresholdSettingOCopyWithImpl;
+@useResult
+$Res call({
+@RfControl<bool>() bool isEnabled,@RfControl<int>() int value
+});
 
+
+
+
+}
 /// @nodoc
 class _$ThresholdSettingOCopyWithImpl<$Res>
     implements $ThresholdSettingOCopyWith<$Res> {
@@ -731,254 +425,199 @@ class _$ThresholdSettingOCopyWithImpl<$Res>
   final ThresholdSettingO _self;
   final $Res Function(ThresholdSettingO) _then;
 
-  /// Create a copy of ThresholdSettingO
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isEnabled = null,
-    Object? value = null,
-  }) {
-    return _then(_self.copyWith(
-      isEnabled: null == isEnabled
-          ? _self.isEnabled
-          : isEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      value: null == value
-          ? _self.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
+/// Create a copy of ThresholdSettingO
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? isEnabled = null,Object? value = null,}) {
+  return _then(_self.copyWith(
+isEnabled: null == isEnabled ? _self.isEnabled : isEnabled // ignore: cast_nullable_to_non_nullable
+as bool,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
 }
+
+}
+
 
 /// Adds pattern-matching-related methods to [ThresholdSettingO].
 extension ThresholdSettingOPatterns on ThresholdSettingO {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_ThresholdSettingO value)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _ThresholdSettingO() when $default != null:
-        return $default(_that);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ThresholdSettingO value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ThresholdSettingO() when $default != null:
+return $default(_that);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_ThresholdSettingO value) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ThresholdSettingO():
-        return $default(_that);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ThresholdSettingO value)  $default,){
+final _that = this;
+switch (_that) {
+case _ThresholdSettingO():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_ThresholdSettingO value)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ThresholdSettingO() when $default != null:
-        return $default(_that);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ThresholdSettingO value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ThresholdSettingO() when $default != null:
+return $default(_that);case _:
+  return null;
 
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            @RfControl<bool>() bool isEnabled, @RfControl<int>() int value)?
-        $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _ThresholdSettingO() when $default != null:
-        return $default(_that.isEnabled, _that.value);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@RfControl<bool>()  bool isEnabled, @RfControl<int>()  int value)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ThresholdSettingO() when $default != null:
+return $default(_that.isEnabled,_that.value);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(
-            @RfControl<bool>() bool isEnabled, @RfControl<int>() int value)
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ThresholdSettingO():
-        return $default(_that.isEnabled, _that.value);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@RfControl<bool>()  bool isEnabled, @RfControl<int>()  int value)  $default,) {final _that = this;
+switch (_that) {
+case _ThresholdSettingO():
+return $default(_that.isEnabled,_that.value);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            @RfControl<bool>() bool isEnabled, @RfControl<int>() int value)?
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ThresholdSettingO() when $default != null:
-        return $default(_that.isEnabled, _that.value);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@RfControl<bool>()  bool isEnabled, @RfControl<int>()  int value)?  $default,) {final _that = this;
+switch (_that) {
+case _ThresholdSettingO() when $default != null:
+return $default(_that.isEnabled,_that.value);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
+
 class _ThresholdSettingO implements ThresholdSettingO {
-  const _ThresholdSettingO(
-      {@RfControl<bool>() this.isEnabled = true,
-      @RfControl<int>() this.value = 2});
-  factory _ThresholdSettingO.fromJson(Map<String, dynamic> json) =>
-      _$ThresholdSettingOFromJson(json);
+  const _ThresholdSettingO({@RfControl<bool>() this.isEnabled = true, @RfControl<int>() this.value = 2});
+  factory _ThresholdSettingO.fromJson(Map<String, dynamic> json) => _$ThresholdSettingOFromJson(json);
 
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isEnabled;
-  @override
-  @JsonKey()
-  @RfControl<int>()
-  final int value;
+@override@JsonKey()@RfControl<bool>() final  bool isEnabled;
+@override@JsonKey()@RfControl<int>() final  int value;
 
-  /// Create a copy of ThresholdSettingO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$ThresholdSettingOCopyWith<_ThresholdSettingO> get copyWith =>
-      __$ThresholdSettingOCopyWithImpl<_ThresholdSettingO>(this, _$identity);
+/// Create a copy of ThresholdSettingO
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ThresholdSettingOCopyWith<_ThresholdSettingO> get copyWith => __$ThresholdSettingOCopyWithImpl<_ThresholdSettingO>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$ThresholdSettingOToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$ThresholdSettingOToJson(this, );
+}
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _ThresholdSettingO &&
-            (identical(other.isEnabled, isEnabled) ||
-                other.isEnabled == isEnabled) &&
-            (identical(other.value, value) || other.value == value));
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ThresholdSettingO&&(identical(other.isEnabled, isEnabled) || other.isEnabled == isEnabled)&&(identical(other.value, value) || other.value == value));
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, isEnabled, value);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,isEnabled,value);
 
-  @override
-  String toString() {
-    return 'ThresholdSettingO(isEnabled: $isEnabled, value: $value)';
-  }
+@override
+String toString() {
+  return 'ThresholdSettingO(isEnabled: $isEnabled, value: $value)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$ThresholdSettingOCopyWith<$Res>
-    implements $ThresholdSettingOCopyWith<$Res> {
-  factory _$ThresholdSettingOCopyWith(
-          _ThresholdSettingO value, $Res Function(_ThresholdSettingO) _then) =
-      __$ThresholdSettingOCopyWithImpl;
-  @override
-  @useResult
-  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
-}
+abstract mixin class _$ThresholdSettingOCopyWith<$Res> implements $ThresholdSettingOCopyWith<$Res> {
+  factory _$ThresholdSettingOCopyWith(_ThresholdSettingO value, $Res Function(_ThresholdSettingO) _then) = __$ThresholdSettingOCopyWithImpl;
+@override @useResult
+$Res call({
+@RfControl<bool>() bool isEnabled,@RfControl<int>() int value
+});
 
+
+
+
+}
 /// @nodoc
 class __$ThresholdSettingOCopyWithImpl<$Res>
     implements _$ThresholdSettingOCopyWith<$Res> {
@@ -987,74 +626,63 @@ class __$ThresholdSettingOCopyWithImpl<$Res>
   final _ThresholdSettingO _self;
   final $Res Function(_ThresholdSettingO) _then;
 
-  /// Create a copy of ThresholdSettingO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? isEnabled = null,
-    Object? value = null,
-  }) {
-    return _then(_ThresholdSettingO(
-      isEnabled: null == isEnabled
-          ? _self.isEnabled
-          : isEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      value: null == value
-          ? _self.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
+/// Create a copy of ThresholdSettingO
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? isEnabled = null,Object? value = null,}) {
+  return _then(_ThresholdSettingO(
+isEnabled: null == isEnabled ? _self.isEnabled : isEnabled // ignore: cast_nullable_to_non_nullable
+as bool,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
 }
+
+
+}
+
 
 /// @nodoc
 mixin _$TimerSettingO {
-  @RfControl<bool>()
-  bool get isEnabled;
-  @RfControl<int>()
-  int get value;
 
-  /// Create a copy of TimerSettingO
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $TimerSettingOCopyWith<TimerSettingO> get copyWith =>
-      _$TimerSettingOCopyWithImpl<TimerSettingO>(
-          this as TimerSettingO, _$identity);
+@RfControl<bool>() bool get isEnabled;@RfControl<int>() int get value;
+/// Create a copy of TimerSettingO
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$TimerSettingOCopyWith<TimerSettingO> get copyWith => _$TimerSettingOCopyWithImpl<TimerSettingO>(this as TimerSettingO, _$identity);
 
   /// Serializes this TimerSettingO to a JSON map.
   Map<String, dynamic> toJson();
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is TimerSettingO &&
-            (identical(other.isEnabled, isEnabled) ||
-                other.isEnabled == isEnabled) &&
-            (identical(other.value, value) || other.value == value));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, isEnabled, value);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TimerSettingO&&(identical(other.isEnabled, isEnabled) || other.isEnabled == isEnabled)&&(identical(other.value, value) || other.value == value));
+}
 
-  @override
-  String toString() {
-    return 'TimerSettingO(isEnabled: $isEnabled, value: $value)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,isEnabled,value);
+
+@override
+String toString() {
+  return 'TimerSettingO(isEnabled: $isEnabled, value: $value)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $TimerSettingOCopyWith<$Res> {
-  factory $TimerSettingOCopyWith(
-          TimerSettingO value, $Res Function(TimerSettingO) _then) =
-      _$TimerSettingOCopyWithImpl;
-  @useResult
-  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
-}
+abstract mixin class $TimerSettingOCopyWith<$Res>  {
+  factory $TimerSettingOCopyWith(TimerSettingO value, $Res Function(TimerSettingO) _then) = _$TimerSettingOCopyWithImpl;
+@useResult
+$Res call({
+@RfControl<bool>() bool isEnabled,@RfControl<int>() int value
+});
 
+
+
+
+}
 /// @nodoc
 class _$TimerSettingOCopyWithImpl<$Res>
     implements $TimerSettingOCopyWith<$Res> {
@@ -1063,254 +691,199 @@ class _$TimerSettingOCopyWithImpl<$Res>
   final TimerSettingO _self;
   final $Res Function(TimerSettingO) _then;
 
-  /// Create a copy of TimerSettingO
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isEnabled = null,
-    Object? value = null,
-  }) {
-    return _then(_self.copyWith(
-      isEnabled: null == isEnabled
-          ? _self.isEnabled
-          : isEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      value: null == value
-          ? _self.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
+/// Create a copy of TimerSettingO
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? isEnabled = null,Object? value = null,}) {
+  return _then(_self.copyWith(
+isEnabled: null == isEnabled ? _self.isEnabled : isEnabled // ignore: cast_nullable_to_non_nullable
+as bool,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
 }
+
+}
+
 
 /// Adds pattern-matching-related methods to [TimerSettingO].
 extension TimerSettingOPatterns on TimerSettingO {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_TimerSettingO value)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _TimerSettingO() when $default != null:
-        return $default(_that);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _TimerSettingO value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _TimerSettingO() when $default != null:
+return $default(_that);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_TimerSettingO value) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _TimerSettingO():
-        return $default(_that);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _TimerSettingO value)  $default,){
+final _that = this;
+switch (_that) {
+case _TimerSettingO():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_TimerSettingO value)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _TimerSettingO() when $default != null:
-        return $default(_that);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _TimerSettingO value)?  $default,){
+final _that = this;
+switch (_that) {
+case _TimerSettingO() when $default != null:
+return $default(_that);case _:
+  return null;
 
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            @RfControl<bool>() bool isEnabled, @RfControl<int>() int value)?
-        $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _TimerSettingO() when $default != null:
-        return $default(_that.isEnabled, _that.value);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@RfControl<bool>()  bool isEnabled, @RfControl<int>()  int value)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _TimerSettingO() when $default != null:
+return $default(_that.isEnabled,_that.value);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(
-            @RfControl<bool>() bool isEnabled, @RfControl<int>() int value)
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _TimerSettingO():
-        return $default(_that.isEnabled, _that.value);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@RfControl<bool>()  bool isEnabled, @RfControl<int>()  int value)  $default,) {final _that = this;
+switch (_that) {
+case _TimerSettingO():
+return $default(_that.isEnabled,_that.value);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            @RfControl<bool>() bool isEnabled, @RfControl<int>() int value)?
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _TimerSettingO() when $default != null:
-        return $default(_that.isEnabled, _that.value);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@RfControl<bool>()  bool isEnabled, @RfControl<int>()  int value)?  $default,) {final _that = this;
+switch (_that) {
+case _TimerSettingO() when $default != null:
+return $default(_that.isEnabled,_that.value);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
+
 class _TimerSettingO implements TimerSettingO {
-  const _TimerSettingO(
-      {@RfControl<bool>() this.isEnabled = false,
-      @RfControl<int>() this.value = 5});
-  factory _TimerSettingO.fromJson(Map<String, dynamic> json) =>
-      _$TimerSettingOFromJson(json);
+  const _TimerSettingO({@RfControl<bool>() this.isEnabled = false, @RfControl<int>() this.value = 5});
+  factory _TimerSettingO.fromJson(Map<String, dynamic> json) => _$TimerSettingOFromJson(json);
 
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isEnabled;
-  @override
-  @JsonKey()
-  @RfControl<int>()
-  final int value;
+@override@JsonKey()@RfControl<bool>() final  bool isEnabled;
+@override@JsonKey()@RfControl<int>() final  int value;
 
-  /// Create a copy of TimerSettingO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$TimerSettingOCopyWith<_TimerSettingO> get copyWith =>
-      __$TimerSettingOCopyWithImpl<_TimerSettingO>(this, _$identity);
+/// Create a copy of TimerSettingO
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$TimerSettingOCopyWith<_TimerSettingO> get copyWith => __$TimerSettingOCopyWithImpl<_TimerSettingO>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$TimerSettingOToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$TimerSettingOToJson(this, );
+}
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _TimerSettingO &&
-            (identical(other.isEnabled, isEnabled) ||
-                other.isEnabled == isEnabled) &&
-            (identical(other.value, value) || other.value == value));
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TimerSettingO&&(identical(other.isEnabled, isEnabled) || other.isEnabled == isEnabled)&&(identical(other.value, value) || other.value == value));
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, isEnabled, value);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,isEnabled,value);
 
-  @override
-  String toString() {
-    return 'TimerSettingO(isEnabled: $isEnabled, value: $value)';
-  }
+@override
+String toString() {
+  return 'TimerSettingO(isEnabled: $isEnabled, value: $value)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$TimerSettingOCopyWith<$Res>
-    implements $TimerSettingOCopyWith<$Res> {
-  factory _$TimerSettingOCopyWith(
-          _TimerSettingO value, $Res Function(_TimerSettingO) _then) =
-      __$TimerSettingOCopyWithImpl;
-  @override
-  @useResult
-  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
-}
+abstract mixin class _$TimerSettingOCopyWith<$Res> implements $TimerSettingOCopyWith<$Res> {
+  factory _$TimerSettingOCopyWith(_TimerSettingO value, $Res Function(_TimerSettingO) _then) = __$TimerSettingOCopyWithImpl;
+@override @useResult
+$Res call({
+@RfControl<bool>() bool isEnabled,@RfControl<int>() int value
+});
 
+
+
+
+}
 /// @nodoc
 class __$TimerSettingOCopyWithImpl<$Res>
     implements _$TimerSettingOCopyWith<$Res> {
@@ -1319,104 +892,63 @@ class __$TimerSettingOCopyWithImpl<$Res>
   final _TimerSettingO _self;
   final $Res Function(_TimerSettingO) _then;
 
-  /// Create a copy of TimerSettingO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? isEnabled = null,
-    Object? value = null,
-  }) {
-    return _then(_TimerSettingO(
-      isEnabled: null == isEnabled
-          ? _self.isEnabled
-          : isEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      value: null == value
-          ? _self.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
+/// Create a copy of TimerSettingO
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? isEnabled = null,Object? value = null,}) {
+  return _then(_TimerSettingO(
+isEnabled: null == isEnabled ? _self.isEnabled : isEnabled // ignore: cast_nullable_to_non_nullable
+as bool,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
 }
+
+
+}
+
 
 /// @nodoc
 mixin _$IncidenceFilterO {
-  @RfControl<bool>()
-  bool get isMobilityEnabled;
-  @RfControl<bool>()
-  bool get isFurcationEnabled;
-  @RfControl<bool>()
-  bool get isBleedingEnabled;
-  @RfControl<bool>()
-  bool get isSuppurationEnabled;
-  @RfControl<bool>()
-  bool get isCalculusEnabled;
-  @RfControl<bool>()
-  bool get isPlaqueEnabled;
 
-  /// Create a copy of IncidenceFilterO
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $IncidenceFilterOCopyWith<IncidenceFilterO> get copyWith =>
-      _$IncidenceFilterOCopyWithImpl<IncidenceFilterO>(
-          this as IncidenceFilterO, _$identity);
+@RfControl<bool>() bool get isMobilityEnabled;@RfControl<bool>() bool get isFurcationEnabled;@RfControl<bool>() bool get isBleedingEnabled;@RfControl<bool>() bool get isSuppurationEnabled;@RfControl<bool>() bool get isCalculusEnabled;@RfControl<bool>() bool get isPlaqueEnabled;
+/// Create a copy of IncidenceFilterO
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$IncidenceFilterOCopyWith<IncidenceFilterO> get copyWith => _$IncidenceFilterOCopyWithImpl<IncidenceFilterO>(this as IncidenceFilterO, _$identity);
 
   /// Serializes this IncidenceFilterO to a JSON map.
   Map<String, dynamic> toJson();
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is IncidenceFilterO &&
-            (identical(other.isMobilityEnabled, isMobilityEnabled) ||
-                other.isMobilityEnabled == isMobilityEnabled) &&
-            (identical(other.isFurcationEnabled, isFurcationEnabled) ||
-                other.isFurcationEnabled == isFurcationEnabled) &&
-            (identical(other.isBleedingEnabled, isBleedingEnabled) ||
-                other.isBleedingEnabled == isBleedingEnabled) &&
-            (identical(other.isSuppurationEnabled, isSuppurationEnabled) ||
-                other.isSuppurationEnabled == isSuppurationEnabled) &&
-            (identical(other.isCalculusEnabled, isCalculusEnabled) ||
-                other.isCalculusEnabled == isCalculusEnabled) &&
-            (identical(other.isPlaqueEnabled, isPlaqueEnabled) ||
-                other.isPlaqueEnabled == isPlaqueEnabled));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      isMobilityEnabled,
-      isFurcationEnabled,
-      isBleedingEnabled,
-      isSuppurationEnabled,
-      isCalculusEnabled,
-      isPlaqueEnabled);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is IncidenceFilterO&&(identical(other.isMobilityEnabled, isMobilityEnabled) || other.isMobilityEnabled == isMobilityEnabled)&&(identical(other.isFurcationEnabled, isFurcationEnabled) || other.isFurcationEnabled == isFurcationEnabled)&&(identical(other.isBleedingEnabled, isBleedingEnabled) || other.isBleedingEnabled == isBleedingEnabled)&&(identical(other.isSuppurationEnabled, isSuppurationEnabled) || other.isSuppurationEnabled == isSuppurationEnabled)&&(identical(other.isCalculusEnabled, isCalculusEnabled) || other.isCalculusEnabled == isCalculusEnabled)&&(identical(other.isPlaqueEnabled, isPlaqueEnabled) || other.isPlaqueEnabled == isPlaqueEnabled));
+}
 
-  @override
-  String toString() {
-    return 'IncidenceFilterO(isMobilityEnabled: $isMobilityEnabled, isFurcationEnabled: $isFurcationEnabled, isBleedingEnabled: $isBleedingEnabled, isSuppurationEnabled: $isSuppurationEnabled, isCalculusEnabled: $isCalculusEnabled, isPlaqueEnabled: $isPlaqueEnabled)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,isMobilityEnabled,isFurcationEnabled,isBleedingEnabled,isSuppurationEnabled,isCalculusEnabled,isPlaqueEnabled);
+
+@override
+String toString() {
+  return 'IncidenceFilterO(isMobilityEnabled: $isMobilityEnabled, isFurcationEnabled: $isFurcationEnabled, isBleedingEnabled: $isBleedingEnabled, isSuppurationEnabled: $isSuppurationEnabled, isCalculusEnabled: $isCalculusEnabled, isPlaqueEnabled: $isPlaqueEnabled)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $IncidenceFilterOCopyWith<$Res> {
-  factory $IncidenceFilterOCopyWith(
-          IncidenceFilterO value, $Res Function(IncidenceFilterO) _then) =
-      _$IncidenceFilterOCopyWithImpl;
-  @useResult
-  $Res call(
-      {@RfControl<bool>() bool isMobilityEnabled,
-      @RfControl<bool>() bool isFurcationEnabled,
-      @RfControl<bool>() bool isBleedingEnabled,
-      @RfControl<bool>() bool isSuppurationEnabled,
-      @RfControl<bool>() bool isCalculusEnabled,
-      @RfControl<bool>() bool isPlaqueEnabled});
-}
+abstract mixin class $IncidenceFilterOCopyWith<$Res>  {
+  factory $IncidenceFilterOCopyWith(IncidenceFilterO value, $Res Function(IncidenceFilterO) _then) = _$IncidenceFilterOCopyWithImpl;
+@useResult
+$Res call({
+@RfControl<bool>() bool isMobilityEnabled,@RfControl<bool>() bool isFurcationEnabled,@RfControl<bool>() bool isBleedingEnabled,@RfControl<bool>() bool isSuppurationEnabled,@RfControl<bool>() bool isCalculusEnabled,@RfControl<bool>() bool isPlaqueEnabled
+});
 
+
+
+
+}
 /// @nodoc
 class _$IncidenceFilterOCopyWithImpl<$Res>
     implements $IncidenceFilterOCopyWith<$Res> {
@@ -1425,349 +957,207 @@ class _$IncidenceFilterOCopyWithImpl<$Res>
   final IncidenceFilterO _self;
   final $Res Function(IncidenceFilterO) _then;
 
-  /// Create a copy of IncidenceFilterO
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isMobilityEnabled = null,
-    Object? isFurcationEnabled = null,
-    Object? isBleedingEnabled = null,
-    Object? isSuppurationEnabled = null,
-    Object? isCalculusEnabled = null,
-    Object? isPlaqueEnabled = null,
-  }) {
-    return _then(_self.copyWith(
-      isMobilityEnabled: null == isMobilityEnabled
-          ? _self.isMobilityEnabled
-          : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFurcationEnabled: null == isFurcationEnabled
-          ? _self.isFurcationEnabled
-          : isFurcationEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isBleedingEnabled: null == isBleedingEnabled
-          ? _self.isBleedingEnabled
-          : isBleedingEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSuppurationEnabled: null == isSuppurationEnabled
-          ? _self.isSuppurationEnabled
-          : isSuppurationEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isCalculusEnabled: null == isCalculusEnabled
-          ? _self.isCalculusEnabled
-          : isCalculusEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isPlaqueEnabled: null == isPlaqueEnabled
-          ? _self.isPlaqueEnabled
-          : isPlaqueEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+/// Create a copy of IncidenceFilterO
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? isMobilityEnabled = null,Object? isFurcationEnabled = null,Object? isBleedingEnabled = null,Object? isSuppurationEnabled = null,Object? isCalculusEnabled = null,Object? isPlaqueEnabled = null,}) {
+  return _then(_self.copyWith(
+isMobilityEnabled: null == isMobilityEnabled ? _self.isMobilityEnabled : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isFurcationEnabled: null == isFurcationEnabled ? _self.isFurcationEnabled : isFurcationEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isBleedingEnabled: null == isBleedingEnabled ? _self.isBleedingEnabled : isBleedingEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isSuppurationEnabled: null == isSuppurationEnabled ? _self.isSuppurationEnabled : isSuppurationEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isCalculusEnabled: null == isCalculusEnabled ? _self.isCalculusEnabled : isCalculusEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isPlaqueEnabled: null == isPlaqueEnabled ? _self.isPlaqueEnabled : isPlaqueEnabled // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
+
+}
+
 
 /// Adds pattern-matching-related methods to [IncidenceFilterO].
 extension IncidenceFilterOPatterns on IncidenceFilterO {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_IncidenceFilterO value)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _IncidenceFilterO() when $default != null:
-        return $default(_that);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _IncidenceFilterO value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _IncidenceFilterO() when $default != null:
+return $default(_that);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_IncidenceFilterO value) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _IncidenceFilterO():
-        return $default(_that);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _IncidenceFilterO value)  $default,){
+final _that = this;
+switch (_that) {
+case _IncidenceFilterO():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_IncidenceFilterO value)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _IncidenceFilterO() when $default != null:
-        return $default(_that);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _IncidenceFilterO value)?  $default,){
+final _that = this;
+switch (_that) {
+case _IncidenceFilterO() when $default != null:
+return $default(_that);case _:
+  return null;
 
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            @RfControl<bool>() bool isMobilityEnabled,
-            @RfControl<bool>() bool isFurcationEnabled,
-            @RfControl<bool>() bool isBleedingEnabled,
-            @RfControl<bool>() bool isSuppurationEnabled,
-            @RfControl<bool>() bool isCalculusEnabled,
-            @RfControl<bool>() bool isPlaqueEnabled)?
-        $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _IncidenceFilterO() when $default != null:
-        return $default(
-            _that.isMobilityEnabled,
-            _that.isFurcationEnabled,
-            _that.isBleedingEnabled,
-            _that.isSuppurationEnabled,
-            _that.isCalculusEnabled,
-            _that.isPlaqueEnabled);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@RfControl<bool>()  bool isMobilityEnabled, @RfControl<bool>()  bool isFurcationEnabled, @RfControl<bool>()  bool isBleedingEnabled, @RfControl<bool>()  bool isSuppurationEnabled, @RfControl<bool>()  bool isCalculusEnabled, @RfControl<bool>()  bool isPlaqueEnabled)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _IncidenceFilterO() when $default != null:
+return $default(_that.isMobilityEnabled,_that.isFurcationEnabled,_that.isBleedingEnabled,_that.isSuppurationEnabled,_that.isCalculusEnabled,_that.isPlaqueEnabled);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(
-            @RfControl<bool>() bool isMobilityEnabled,
-            @RfControl<bool>() bool isFurcationEnabled,
-            @RfControl<bool>() bool isBleedingEnabled,
-            @RfControl<bool>() bool isSuppurationEnabled,
-            @RfControl<bool>() bool isCalculusEnabled,
-            @RfControl<bool>() bool isPlaqueEnabled)
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _IncidenceFilterO():
-        return $default(
-            _that.isMobilityEnabled,
-            _that.isFurcationEnabled,
-            _that.isBleedingEnabled,
-            _that.isSuppurationEnabled,
-            _that.isCalculusEnabled,
-            _that.isPlaqueEnabled);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@RfControl<bool>()  bool isMobilityEnabled, @RfControl<bool>()  bool isFurcationEnabled, @RfControl<bool>()  bool isBleedingEnabled, @RfControl<bool>()  bool isSuppurationEnabled, @RfControl<bool>()  bool isCalculusEnabled, @RfControl<bool>()  bool isPlaqueEnabled)  $default,) {final _that = this;
+switch (_that) {
+case _IncidenceFilterO():
+return $default(_that.isMobilityEnabled,_that.isFurcationEnabled,_that.isBleedingEnabled,_that.isSuppurationEnabled,_that.isCalculusEnabled,_that.isPlaqueEnabled);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            @RfControl<bool>() bool isMobilityEnabled,
-            @RfControl<bool>() bool isFurcationEnabled,
-            @RfControl<bool>() bool isBleedingEnabled,
-            @RfControl<bool>() bool isSuppurationEnabled,
-            @RfControl<bool>() bool isCalculusEnabled,
-            @RfControl<bool>() bool isPlaqueEnabled)?
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _IncidenceFilterO() when $default != null:
-        return $default(
-            _that.isMobilityEnabled,
-            _that.isFurcationEnabled,
-            _that.isBleedingEnabled,
-            _that.isSuppurationEnabled,
-            _that.isCalculusEnabled,
-            _that.isPlaqueEnabled);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@RfControl<bool>()  bool isMobilityEnabled, @RfControl<bool>()  bool isFurcationEnabled, @RfControl<bool>()  bool isBleedingEnabled, @RfControl<bool>()  bool isSuppurationEnabled, @RfControl<bool>()  bool isCalculusEnabled, @RfControl<bool>()  bool isPlaqueEnabled)?  $default,) {final _that = this;
+switch (_that) {
+case _IncidenceFilterO() when $default != null:
+return $default(_that.isMobilityEnabled,_that.isFurcationEnabled,_that.isBleedingEnabled,_that.isSuppurationEnabled,_that.isCalculusEnabled,_that.isPlaqueEnabled);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
+
 class _IncidenceFilterO implements IncidenceFilterO {
-  const _IncidenceFilterO(
-      {@RfControl<bool>() this.isMobilityEnabled = true,
-      @RfControl<bool>() this.isFurcationEnabled = true,
-      @RfControl<bool>() this.isBleedingEnabled = true,
-      @RfControl<bool>() this.isSuppurationEnabled = true,
-      @RfControl<bool>() this.isCalculusEnabled = true,
-      @RfControl<bool>() this.isPlaqueEnabled = true});
-  factory _IncidenceFilterO.fromJson(Map<String, dynamic> json) =>
-      _$IncidenceFilterOFromJson(json);
+  const _IncidenceFilterO({@RfControl<bool>() this.isMobilityEnabled = true, @RfControl<bool>() this.isFurcationEnabled = true, @RfControl<bool>() this.isBleedingEnabled = true, @RfControl<bool>() this.isSuppurationEnabled = true, @RfControl<bool>() this.isCalculusEnabled = true, @RfControl<bool>() this.isPlaqueEnabled = true});
+  factory _IncidenceFilterO.fromJson(Map<String, dynamic> json) => _$IncidenceFilterOFromJson(json);
 
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isMobilityEnabled;
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isFurcationEnabled;
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isBleedingEnabled;
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isSuppurationEnabled;
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isCalculusEnabled;
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isPlaqueEnabled;
+@override@JsonKey()@RfControl<bool>() final  bool isMobilityEnabled;
+@override@JsonKey()@RfControl<bool>() final  bool isFurcationEnabled;
+@override@JsonKey()@RfControl<bool>() final  bool isBleedingEnabled;
+@override@JsonKey()@RfControl<bool>() final  bool isSuppurationEnabled;
+@override@JsonKey()@RfControl<bool>() final  bool isCalculusEnabled;
+@override@JsonKey()@RfControl<bool>() final  bool isPlaqueEnabled;
 
-  /// Create a copy of IncidenceFilterO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$IncidenceFilterOCopyWith<_IncidenceFilterO> get copyWith =>
-      __$IncidenceFilterOCopyWithImpl<_IncidenceFilterO>(this, _$identity);
+/// Create a copy of IncidenceFilterO
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$IncidenceFilterOCopyWith<_IncidenceFilterO> get copyWith => __$IncidenceFilterOCopyWithImpl<_IncidenceFilterO>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$IncidenceFilterOToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$IncidenceFilterOToJson(this, );
+}
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _IncidenceFilterO &&
-            (identical(other.isMobilityEnabled, isMobilityEnabled) ||
-                other.isMobilityEnabled == isMobilityEnabled) &&
-            (identical(other.isFurcationEnabled, isFurcationEnabled) ||
-                other.isFurcationEnabled == isFurcationEnabled) &&
-            (identical(other.isBleedingEnabled, isBleedingEnabled) ||
-                other.isBleedingEnabled == isBleedingEnabled) &&
-            (identical(other.isSuppurationEnabled, isSuppurationEnabled) ||
-                other.isSuppurationEnabled == isSuppurationEnabled) &&
-            (identical(other.isCalculusEnabled, isCalculusEnabled) ||
-                other.isCalculusEnabled == isCalculusEnabled) &&
-            (identical(other.isPlaqueEnabled, isPlaqueEnabled) ||
-                other.isPlaqueEnabled == isPlaqueEnabled));
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _IncidenceFilterO&&(identical(other.isMobilityEnabled, isMobilityEnabled) || other.isMobilityEnabled == isMobilityEnabled)&&(identical(other.isFurcationEnabled, isFurcationEnabled) || other.isFurcationEnabled == isFurcationEnabled)&&(identical(other.isBleedingEnabled, isBleedingEnabled) || other.isBleedingEnabled == isBleedingEnabled)&&(identical(other.isSuppurationEnabled, isSuppurationEnabled) || other.isSuppurationEnabled == isSuppurationEnabled)&&(identical(other.isCalculusEnabled, isCalculusEnabled) || other.isCalculusEnabled == isCalculusEnabled)&&(identical(other.isPlaqueEnabled, isPlaqueEnabled) || other.isPlaqueEnabled == isPlaqueEnabled));
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      isMobilityEnabled,
-      isFurcationEnabled,
-      isBleedingEnabled,
-      isSuppurationEnabled,
-      isCalculusEnabled,
-      isPlaqueEnabled);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,isMobilityEnabled,isFurcationEnabled,isBleedingEnabled,isSuppurationEnabled,isCalculusEnabled,isPlaqueEnabled);
 
-  @override
-  String toString() {
-    return 'IncidenceFilterO(isMobilityEnabled: $isMobilityEnabled, isFurcationEnabled: $isFurcationEnabled, isBleedingEnabled: $isBleedingEnabled, isSuppurationEnabled: $isSuppurationEnabled, isCalculusEnabled: $isCalculusEnabled, isPlaqueEnabled: $isPlaqueEnabled)';
-  }
+@override
+String toString() {
+  return 'IncidenceFilterO(isMobilityEnabled: $isMobilityEnabled, isFurcationEnabled: $isFurcationEnabled, isBleedingEnabled: $isBleedingEnabled, isSuppurationEnabled: $isSuppurationEnabled, isCalculusEnabled: $isCalculusEnabled, isPlaqueEnabled: $isPlaqueEnabled)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$IncidenceFilterOCopyWith<$Res>
-    implements $IncidenceFilterOCopyWith<$Res> {
-  factory _$IncidenceFilterOCopyWith(
-          _IncidenceFilterO value, $Res Function(_IncidenceFilterO) _then) =
-      __$IncidenceFilterOCopyWithImpl;
-  @override
-  @useResult
-  $Res call(
-      {@RfControl<bool>() bool isMobilityEnabled,
-      @RfControl<bool>() bool isFurcationEnabled,
-      @RfControl<bool>() bool isBleedingEnabled,
-      @RfControl<bool>() bool isSuppurationEnabled,
-      @RfControl<bool>() bool isCalculusEnabled,
-      @RfControl<bool>() bool isPlaqueEnabled});
-}
+abstract mixin class _$IncidenceFilterOCopyWith<$Res> implements $IncidenceFilterOCopyWith<$Res> {
+  factory _$IncidenceFilterOCopyWith(_IncidenceFilterO value, $Res Function(_IncidenceFilterO) _then) = __$IncidenceFilterOCopyWithImpl;
+@override @useResult
+$Res call({
+@RfControl<bool>() bool isMobilityEnabled,@RfControl<bool>() bool isFurcationEnabled,@RfControl<bool>() bool isBleedingEnabled,@RfControl<bool>() bool isSuppurationEnabled,@RfControl<bool>() bool isCalculusEnabled,@RfControl<bool>() bool isPlaqueEnabled
+});
 
+
+
+
+}
 /// @nodoc
 class __$IncidenceFilterOCopyWithImpl<$Res>
     implements _$IncidenceFilterOCopyWith<$Res> {
@@ -1776,380 +1166,302 @@ class __$IncidenceFilterOCopyWithImpl<$Res>
   final _IncidenceFilterO _self;
   final $Res Function(_IncidenceFilterO) _then;
 
-  /// Create a copy of IncidenceFilterO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? isMobilityEnabled = null,
-    Object? isFurcationEnabled = null,
-    Object? isBleedingEnabled = null,
-    Object? isSuppurationEnabled = null,
-    Object? isCalculusEnabled = null,
-    Object? isPlaqueEnabled = null,
-  }) {
-    return _then(_IncidenceFilterO(
-      isMobilityEnabled: null == isMobilityEnabled
-          ? _self.isMobilityEnabled
-          : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFurcationEnabled: null == isFurcationEnabled
-          ? _self.isFurcationEnabled
-          : isFurcationEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isBleedingEnabled: null == isBleedingEnabled
-          ? _self.isBleedingEnabled
-          : isBleedingEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSuppurationEnabled: null == isSuppurationEnabled
-          ? _self.isSuppurationEnabled
-          : isSuppurationEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isCalculusEnabled: null == isCalculusEnabled
-          ? _self.isCalculusEnabled
-          : isCalculusEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isPlaqueEnabled: null == isPlaqueEnabled
-          ? _self.isPlaqueEnabled
-          : isPlaqueEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+/// Create a copy of IncidenceFilterO
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? isMobilityEnabled = null,Object? isFurcationEnabled = null,Object? isBleedingEnabled = null,Object? isSuppurationEnabled = null,Object? isCalculusEnabled = null,Object? isPlaqueEnabled = null,}) {
+  return _then(_IncidenceFilterO(
+isMobilityEnabled: null == isMobilityEnabled ? _self.isMobilityEnabled : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isFurcationEnabled: null == isFurcationEnabled ? _self.isFurcationEnabled : isFurcationEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isBleedingEnabled: null == isBleedingEnabled ? _self.isBleedingEnabled : isBleedingEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isSuppurationEnabled: null == isSuppurationEnabled ? _self.isSuppurationEnabled : isSuppurationEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isCalculusEnabled: null == isCalculusEnabled ? _self.isCalculusEnabled : isCalculusEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isPlaqueEnabled: null == isPlaqueEnabled ? _self.isPlaqueEnabled : isPlaqueEnabled // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-ScanOrder _$ScanOrderFromJson(Map<String, dynamic> json) {
-  switch (json['runtimeType']) {
-    case 'arch':
-      return ArchScanOrder.fromJson(json);
-    case 'quadrant':
-      return QuadrantScanOrder.fromJson(json);
 
-    default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'ScanOrder',
-          'Invalid union type "${json['runtimeType']}"!');
-  }
+}
+
+ScanOrder _$ScanOrderFromJson(
+  Map<String, dynamic> json
+) {
+        switch (json['runtimeType']) {
+                  case 'arch':
+          return ArchScanOrder.fromJson(
+            json
+          );
+                case 'quadrant':
+          return QuadrantScanOrder.fromJson(
+            json
+          );
+        
+          default:
+            throw CheckedFromJsonException(
+  json,
+  'runtimeType',
+  'ScanOrder',
+  'Invalid union type "${json['runtimeType']}"!'
+);
+        }
+      
 }
 
 /// @nodoc
 mixin _$ScanOrder {
-  Direction get direction;
-  ToothSide get toothSide;
 
-  /// Create a copy of ScanOrder
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $ScanOrderCopyWith<ScanOrder> get copyWith =>
-      _$ScanOrderCopyWithImpl<ScanOrder>(this as ScanOrder, _$identity);
+ Direction get direction; ToothSide get toothSide;
+/// Create a copy of ScanOrder
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ScanOrderCopyWith<ScanOrder> get copyWith => _$ScanOrderCopyWithImpl<ScanOrder>(this as ScanOrder, _$identity);
 
   /// Serializes this ScanOrder to a JSON map.
   Map<String, dynamic> toJson();
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is ScanOrder &&
-            (identical(other.direction, direction) ||
-                other.direction == direction) &&
-            (identical(other.toothSide, toothSide) ||
-                other.toothSide == toothSide));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, direction, toothSide);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScanOrder&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.toothSide, toothSide) || other.toothSide == toothSide));
+}
 
-  @override
-  String toString() {
-    return 'ScanOrder(direction: $direction, toothSide: $toothSide)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,direction,toothSide);
+
+@override
+String toString() {
+  return 'ScanOrder(direction: $direction, toothSide: $toothSide)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $ScanOrderCopyWith<$Res> {
-  factory $ScanOrderCopyWith(ScanOrder value, $Res Function(ScanOrder) _then) =
-      _$ScanOrderCopyWithImpl;
-  @useResult
-  $Res call({Direction direction, ToothSide toothSide});
-}
+abstract mixin class $ScanOrderCopyWith<$Res>  {
+  factory $ScanOrderCopyWith(ScanOrder value, $Res Function(ScanOrder) _then) = _$ScanOrderCopyWithImpl;
+@useResult
+$Res call({
+ Direction direction, ToothSide toothSide
+});
 
+
+
+
+}
 /// @nodoc
-class _$ScanOrderCopyWithImpl<$Res> implements $ScanOrderCopyWith<$Res> {
+class _$ScanOrderCopyWithImpl<$Res>
+    implements $ScanOrderCopyWith<$Res> {
   _$ScanOrderCopyWithImpl(this._self, this._then);
 
   final ScanOrder _self;
   final $Res Function(ScanOrder) _then;
 
-  /// Create a copy of ScanOrder
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? direction = null,
-    Object? toothSide = null,
-  }) {
-    return _then(_self.copyWith(
-      direction: null == direction
-          ? _self.direction
-          : direction // ignore: cast_nullable_to_non_nullable
-              as Direction,
-      toothSide: null == toothSide
-          ? _self.toothSide
-          : toothSide // ignore: cast_nullable_to_non_nullable
-              as ToothSide,
-    ));
-  }
+/// Create a copy of ScanOrder
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? direction = null,Object? toothSide = null,}) {
+  return _then(_self.copyWith(
+direction: null == direction ? _self.direction : direction // ignore: cast_nullable_to_non_nullable
+as Direction,toothSide: null == toothSide ? _self.toothSide : toothSide // ignore: cast_nullable_to_non_nullable
+as ToothSide,
+  ));
 }
+
+}
+
 
 /// Adds pattern-matching-related methods to [ScanOrder].
 extension ScanOrderPatterns on ScanOrder {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ArchScanOrder value)? arch,
-    TResult Function(QuadrantScanOrder value)? quadrant,
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case ArchScanOrder() when arch != null:
-        return arch(_that);
-      case QuadrantScanOrder() when quadrant != null:
-        return quadrant(_that);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ArchScanOrder value)?  arch,TResult Function( QuadrantScanOrder value)?  quadrant,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case ArchScanOrder() when arch != null:
+return arch(_that);case QuadrantScanOrder() when quadrant != null:
+return quadrant(_that);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ArchScanOrder value) arch,
-    required TResult Function(QuadrantScanOrder value) quadrant,
-  }) {
-    final _that = this;
-    switch (_that) {
-      case ArchScanOrder():
-        return arch(_that);
-      case QuadrantScanOrder():
-        return quadrant(_that);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ArchScanOrder value)  arch,required TResult Function( QuadrantScanOrder value)  quadrant,}){
+final _that = this;
+switch (_that) {
+case ArchScanOrder():
+return arch(_that);case QuadrantScanOrder():
+return quadrant(_that);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ArchScanOrder value)? arch,
-    TResult? Function(QuadrantScanOrder value)? quadrant,
-  }) {
-    final _that = this;
-    switch (_that) {
-      case ArchScanOrder() when arch != null:
-        return arch(_that);
-      case QuadrantScanOrder() when quadrant != null:
-        return quadrant(_that);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ArchScanOrder value)?  arch,TResult? Function( QuadrantScanOrder value)?  quadrant,}){
+final _that = this;
+switch (_that) {
+case ArchScanOrder() when arch != null:
+return arch(_that);case QuadrantScanOrder() when quadrant != null:
+return quadrant(_that);case _:
+  return null;
 
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Jaw jaw, Direction direction, ToothSide toothSide)? arch,
-    TResult Function(
-            Quadrant quadrant, Direction direction, ToothSide toothSide)?
-        quadrant,
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case ArchScanOrder() when arch != null:
-        return arch(_that.jaw, _that.direction, _that.toothSide);
-      case QuadrantScanOrder() when quadrant != null:
-        return quadrant(_that.quadrant, _that.direction, _that.toothSide);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( Jaw jaw,  Direction direction,  ToothSide toothSide)?  arch,TResult Function( Quadrant quadrant,  Direction direction,  ToothSide toothSide)?  quadrant,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case ArchScanOrder() when arch != null:
+return arch(_that.jaw,_that.direction,_that.toothSide);case QuadrantScanOrder() when quadrant != null:
+return quadrant(_that.quadrant,_that.direction,_that.toothSide);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Jaw jaw, Direction direction, ToothSide toothSide)
-        arch,
-    required TResult Function(
-            Quadrant quadrant, Direction direction, ToothSide toothSide)
-        quadrant,
-  }) {
-    final _that = this;
-    switch (_that) {
-      case ArchScanOrder():
-        return arch(_that.jaw, _that.direction, _that.toothSide);
-      case QuadrantScanOrder():
-        return quadrant(_that.quadrant, _that.direction, _that.toothSide);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( Jaw jaw,  Direction direction,  ToothSide toothSide)  arch,required TResult Function( Quadrant quadrant,  Direction direction,  ToothSide toothSide)  quadrant,}) {final _that = this;
+switch (_that) {
+case ArchScanOrder():
+return arch(_that.jaw,_that.direction,_that.toothSide);case QuadrantScanOrder():
+return quadrant(_that.quadrant,_that.direction,_that.toothSide);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Jaw jaw, Direction direction, ToothSide toothSide)? arch,
-    TResult? Function(
-            Quadrant quadrant, Direction direction, ToothSide toothSide)?
-        quadrant,
-  }) {
-    final _that = this;
-    switch (_that) {
-      case ArchScanOrder() when arch != null:
-        return arch(_that.jaw, _that.direction, _that.toothSide);
-      case QuadrantScanOrder() when quadrant != null:
-        return quadrant(_that.quadrant, _that.direction, _that.toothSide);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( Jaw jaw,  Direction direction,  ToothSide toothSide)?  arch,TResult? Function( Quadrant quadrant,  Direction direction,  ToothSide toothSide)?  quadrant,}) {final _that = this;
+switch (_that) {
+case ArchScanOrder() when arch != null:
+return arch(_that.jaw,_that.direction,_that.toothSide);case QuadrantScanOrder() when quadrant != null:
+return quadrant(_that.quadrant,_that.direction,_that.toothSide);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
+
 class ArchScanOrder implements ScanOrder {
-  const ArchScanOrder(this.jaw,
-      {required this.direction, required this.toothSide, final String? $type})
-      : $type = $type ?? 'arch';
-  factory ArchScanOrder.fromJson(Map<String, dynamic> json) =>
-      _$ArchScanOrderFromJson(json);
+  const ArchScanOrder(this.jaw, {required this.direction, required this.toothSide, final  String? $type}): $type = $type ?? 'arch';
+  factory ArchScanOrder.fromJson(Map<String, dynamic> json) => _$ArchScanOrderFromJson(json);
 
-  final Jaw jaw;
-  @override
-  final Direction direction;
-  @override
-  final ToothSide toothSide;
+ final  Jaw jaw;
+@override final  Direction direction;
+@override final  ToothSide toothSide;
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+@JsonKey(name: 'runtimeType')
+final String $type;
 
-  /// Create a copy of ScanOrder
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $ArchScanOrderCopyWith<ArchScanOrder> get copyWith =>
-      _$ArchScanOrderCopyWithImpl<ArchScanOrder>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$ArchScanOrderToJson(
-      this,
-    );
-  }
+/// Create a copy of ScanOrder
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ArchScanOrderCopyWith<ArchScanOrder> get copyWith => _$ArchScanOrderCopyWithImpl<ArchScanOrder>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is ArchScanOrder &&
-            (identical(other.jaw, jaw) || other.jaw == jaw) &&
-            (identical(other.direction, direction) ||
-                other.direction == direction) &&
-            (identical(other.toothSide, toothSide) ||
-                other.toothSide == toothSide));
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$ArchScanOrderToJson(this, );
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, jaw, direction, toothSide);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ArchScanOrder&&(identical(other.jaw, jaw) || other.jaw == jaw)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.toothSide, toothSide) || other.toothSide == toothSide));
+}
 
-  @override
-  String toString() {
-    return 'ScanOrder.arch(jaw: $jaw, direction: $direction, toothSide: $toothSide)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,jaw,direction,toothSide);
+
+@override
+String toString() {
+  return 'ScanOrder.arch(jaw: $jaw, direction: $direction, toothSide: $toothSide)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $ArchScanOrderCopyWith<$Res>
-    implements $ScanOrderCopyWith<$Res> {
-  factory $ArchScanOrderCopyWith(
-          ArchScanOrder value, $Res Function(ArchScanOrder) _then) =
-      _$ArchScanOrderCopyWithImpl;
-  @override
-  @useResult
-  $Res call({Jaw jaw, Direction direction, ToothSide toothSide});
-}
+abstract mixin class $ArchScanOrderCopyWith<$Res> implements $ScanOrderCopyWith<$Res> {
+  factory $ArchScanOrderCopyWith(ArchScanOrder value, $Res Function(ArchScanOrder) _then) = _$ArchScanOrderCopyWithImpl;
+@override @useResult
+$Res call({
+ Jaw jaw, Direction direction, ToothSide toothSide
+});
 
+
+
+
+}
 /// @nodoc
 class _$ArchScanOrderCopyWithImpl<$Res>
     implements $ArchScanOrderCopyWith<$Res> {
@@ -2158,99 +1470,75 @@ class _$ArchScanOrderCopyWithImpl<$Res>
   final ArchScanOrder _self;
   final $Res Function(ArchScanOrder) _then;
 
-  /// Create a copy of ScanOrder
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? jaw = null,
-    Object? direction = null,
-    Object? toothSide = null,
-  }) {
-    return _then(ArchScanOrder(
-      null == jaw
-          ? _self.jaw
-          : jaw // ignore: cast_nullable_to_non_nullable
-              as Jaw,
-      direction: null == direction
-          ? _self.direction
-          : direction // ignore: cast_nullable_to_non_nullable
-              as Direction,
-      toothSide: null == toothSide
-          ? _self.toothSide
-          : toothSide // ignore: cast_nullable_to_non_nullable
-              as ToothSide,
-    ));
-  }
+/// Create a copy of ScanOrder
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? jaw = null,Object? direction = null,Object? toothSide = null,}) {
+  return _then(ArchScanOrder(
+null == jaw ? _self.jaw : jaw // ignore: cast_nullable_to_non_nullable
+as Jaw,direction: null == direction ? _self.direction : direction // ignore: cast_nullable_to_non_nullable
+as Direction,toothSide: null == toothSide ? _self.toothSide : toothSide // ignore: cast_nullable_to_non_nullable
+as ToothSide,
+  ));
+}
+
+
 }
 
 /// @nodoc
 @JsonSerializable()
+
 class QuadrantScanOrder implements ScanOrder {
-  const QuadrantScanOrder(this.quadrant,
-      {required this.direction, required this.toothSide, final String? $type})
-      : $type = $type ?? 'quadrant';
-  factory QuadrantScanOrder.fromJson(Map<String, dynamic> json) =>
-      _$QuadrantScanOrderFromJson(json);
+  const QuadrantScanOrder(this.quadrant, {required this.direction, required this.toothSide, final  String? $type}): $type = $type ?? 'quadrant';
+  factory QuadrantScanOrder.fromJson(Map<String, dynamic> json) => _$QuadrantScanOrderFromJson(json);
 
-  final Quadrant quadrant;
-  @override
-  final Direction direction;
-  @override
-  final ToothSide toothSide;
+ final  Quadrant quadrant;
+@override final  Direction direction;
+@override final  ToothSide toothSide;
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+@JsonKey(name: 'runtimeType')
+final String $type;
 
-  /// Create a copy of ScanOrder
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $QuadrantScanOrderCopyWith<QuadrantScanOrder> get copyWith =>
-      _$QuadrantScanOrderCopyWithImpl<QuadrantScanOrder>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$QuadrantScanOrderToJson(
-      this,
-    );
-  }
+/// Create a copy of ScanOrder
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$QuadrantScanOrderCopyWith<QuadrantScanOrder> get copyWith => _$QuadrantScanOrderCopyWithImpl<QuadrantScanOrder>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is QuadrantScanOrder &&
-            (identical(other.quadrant, quadrant) ||
-                other.quadrant == quadrant) &&
-            (identical(other.direction, direction) ||
-                other.direction == direction) &&
-            (identical(other.toothSide, toothSide) ||
-                other.toothSide == toothSide));
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$QuadrantScanOrderToJson(this, );
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, quadrant, direction, toothSide);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuadrantScanOrder&&(identical(other.quadrant, quadrant) || other.quadrant == quadrant)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.toothSide, toothSide) || other.toothSide == toothSide));
+}
 
-  @override
-  String toString() {
-    return 'ScanOrder.quadrant(quadrant: $quadrant, direction: $direction, toothSide: $toothSide)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,quadrant,direction,toothSide);
+
+@override
+String toString() {
+  return 'ScanOrder.quadrant(quadrant: $quadrant, direction: $direction, toothSide: $toothSide)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $QuadrantScanOrderCopyWith<$Res>
-    implements $ScanOrderCopyWith<$Res> {
-  factory $QuadrantScanOrderCopyWith(
-          QuadrantScanOrder value, $Res Function(QuadrantScanOrder) _then) =
-      _$QuadrantScanOrderCopyWithImpl;
-  @override
-  @useResult
-  $Res call({Quadrant quadrant, Direction direction, ToothSide toothSide});
-}
+abstract mixin class $QuadrantScanOrderCopyWith<$Res> implements $ScanOrderCopyWith<$Res> {
+  factory $QuadrantScanOrderCopyWith(QuadrantScanOrder value, $Res Function(QuadrantScanOrder) _then) = _$QuadrantScanOrderCopyWithImpl;
+@override @useResult
+$Res call({
+ Quadrant quadrant, Direction direction, ToothSide toothSide
+});
 
+
+
+
+}
 /// @nodoc
 class _$QuadrantScanOrderCopyWithImpl<$Res>
     implements $QuadrantScanOrderCopyWith<$Res> {
@@ -2259,84 +1547,64 @@ class _$QuadrantScanOrderCopyWithImpl<$Res>
   final QuadrantScanOrder _self;
   final $Res Function(QuadrantScanOrder) _then;
 
-  /// Create a copy of ScanOrder
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? quadrant = null,
-    Object? direction = null,
-    Object? toothSide = null,
-  }) {
-    return _then(QuadrantScanOrder(
-      null == quadrant
-          ? _self.quadrant
-          : quadrant // ignore: cast_nullable_to_non_nullable
-              as Quadrant,
-      direction: null == direction
-          ? _self.direction
-          : direction // ignore: cast_nullable_to_non_nullable
-              as Direction,
-      toothSide: null == toothSide
-          ? _self.toothSide
-          : toothSide // ignore: cast_nullable_to_non_nullable
-              as ToothSide,
-    ));
-  }
+/// Create a copy of ScanOrder
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? quadrant = null,Object? direction = null,Object? toothSide = null,}) {
+  return _then(QuadrantScanOrder(
+null == quadrant ? _self.quadrant : quadrant // ignore: cast_nullable_to_non_nullable
+as Quadrant,direction: null == direction ? _self.direction : direction // ignore: cast_nullable_to_non_nullable
+as Direction,toothSide: null == toothSide ? _self.toothSide : toothSide // ignore: cast_nullable_to_non_nullable
+as ToothSide,
+  ));
 }
+
+
+}
+
 
 /// @nodoc
 mixin _$ChartingOrderValue {
-  ChartingOrderType get chartingOrder;
-  int get selectedOption;
-  List<List<ScanOrder>> get order;
 
-  /// Create a copy of ChartingOrderValue
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $ChartingOrderValueCopyWith<ChartingOrderValue> get copyWith =>
-      _$ChartingOrderValueCopyWithImpl<ChartingOrderValue>(
-          this as ChartingOrderValue, _$identity);
+ ChartingOrderType get chartingOrder; int get selectedOption; List<List<ScanOrder>> get order;
+/// Create a copy of ChartingOrderValue
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ChartingOrderValueCopyWith<ChartingOrderValue> get copyWith => _$ChartingOrderValueCopyWithImpl<ChartingOrderValue>(this as ChartingOrderValue, _$identity);
 
   /// Serializes this ChartingOrderValue to a JSON map.
   Map<String, dynamic> toJson();
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is ChartingOrderValue &&
-            (identical(other.chartingOrder, chartingOrder) ||
-                other.chartingOrder == chartingOrder) &&
-            (identical(other.selectedOption, selectedOption) ||
-                other.selectedOption == selectedOption) &&
-            const DeepCollectionEquality().equals(other.order, order));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, chartingOrder, selectedOption,
-      const DeepCollectionEquality().hash(order));
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChartingOrderValue&&(identical(other.chartingOrder, chartingOrder) || other.chartingOrder == chartingOrder)&&(identical(other.selectedOption, selectedOption) || other.selectedOption == selectedOption)&&const DeepCollectionEquality().equals(other.order, order));
+}
 
-  @override
-  String toString() {
-    return 'ChartingOrderValue(chartingOrder: $chartingOrder, selectedOption: $selectedOption, order: $order)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,chartingOrder,selectedOption,const DeepCollectionEquality().hash(order));
+
+@override
+String toString() {
+  return 'ChartingOrderValue(chartingOrder: $chartingOrder, selectedOption: $selectedOption, order: $order)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $ChartingOrderValueCopyWith<$Res> {
-  factory $ChartingOrderValueCopyWith(
-          ChartingOrderValue value, $Res Function(ChartingOrderValue) _then) =
-      _$ChartingOrderValueCopyWithImpl;
-  @useResult
-  $Res call(
-      {ChartingOrderType chartingOrder,
-      int selectedOption,
-      List<List<ScanOrder>> order});
-}
+abstract mixin class $ChartingOrderValueCopyWith<$Res>  {
+  factory $ChartingOrderValueCopyWith(ChartingOrderValue value, $Res Function(ChartingOrderValue) _then) = _$ChartingOrderValueCopyWithImpl;
+@useResult
+$Res call({
+ ChartingOrderType chartingOrder, int selectedOption, List<List<ScanOrder>> order
+});
 
+
+
+
+}
 /// @nodoc
 class _$ChartingOrderValueCopyWithImpl<$Res>
     implements $ChartingOrderValueCopyWith<$Res> {
@@ -2345,272 +1613,207 @@ class _$ChartingOrderValueCopyWithImpl<$Res>
   final ChartingOrderValue _self;
   final $Res Function(ChartingOrderValue) _then;
 
-  /// Create a copy of ChartingOrderValue
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? chartingOrder = null,
-    Object? selectedOption = null,
-    Object? order = null,
-  }) {
-    return _then(_self.copyWith(
-      chartingOrder: null == chartingOrder
-          ? _self.chartingOrder
-          : chartingOrder // ignore: cast_nullable_to_non_nullable
-              as ChartingOrderType,
-      selectedOption: null == selectedOption
-          ? _self.selectedOption
-          : selectedOption // ignore: cast_nullable_to_non_nullable
-              as int,
-      order: null == order
-          ? _self.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as List<List<ScanOrder>>,
-    ));
-  }
+/// Create a copy of ChartingOrderValue
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? chartingOrder = null,Object? selectedOption = null,Object? order = null,}) {
+  return _then(_self.copyWith(
+chartingOrder: null == chartingOrder ? _self.chartingOrder : chartingOrder // ignore: cast_nullable_to_non_nullable
+as ChartingOrderType,selectedOption: null == selectedOption ? _self.selectedOption : selectedOption // ignore: cast_nullable_to_non_nullable
+as int,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
+as List<List<ScanOrder>>,
+  ));
 }
+
+}
+
 
 /// Adds pattern-matching-related methods to [ChartingOrderValue].
 extension ChartingOrderValuePatterns on ChartingOrderValue {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_ChartingOrderValue value)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _ChartingOrderValue() when $default != null:
-        return $default(_that);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ChartingOrderValue value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ChartingOrderValue() when $default != null:
+return $default(_that);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_ChartingOrderValue value) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ChartingOrderValue():
-        return $default(_that);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ChartingOrderValue value)  $default,){
+final _that = this;
+switch (_that) {
+case _ChartingOrderValue():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_ChartingOrderValue value)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ChartingOrderValue() when $default != null:
-        return $default(_that);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ChartingOrderValue value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ChartingOrderValue() when $default != null:
+return $default(_that);case _:
+  return null;
 
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(ChartingOrderType chartingOrder, int selectedOption,
-            List<List<ScanOrder>> order)?
-        $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _ChartingOrderValue() when $default != null:
-        return $default(_that.chartingOrder, _that.selectedOption, _that.order);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ChartingOrderType chartingOrder,  int selectedOption,  List<List<ScanOrder>> order)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ChartingOrderValue() when $default != null:
+return $default(_that.chartingOrder,_that.selectedOption,_that.order);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(ChartingOrderType chartingOrder, int selectedOption,
-            List<List<ScanOrder>> order)
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ChartingOrderValue():
-        return $default(_that.chartingOrder, _that.selectedOption, _that.order);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ChartingOrderType chartingOrder,  int selectedOption,  List<List<ScanOrder>> order)  $default,) {final _that = this;
+switch (_that) {
+case _ChartingOrderValue():
+return $default(_that.chartingOrder,_that.selectedOption,_that.order);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(ChartingOrderType chartingOrder, int selectedOption,
-            List<List<ScanOrder>> order)?
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ChartingOrderValue() when $default != null:
-        return $default(_that.chartingOrder, _that.selectedOption, _that.order);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ChartingOrderType chartingOrder,  int selectedOption,  List<List<ScanOrder>> order)?  $default,) {final _that = this;
+switch (_that) {
+case _ChartingOrderValue() when $default != null:
+return $default(_that.chartingOrder,_that.selectedOption,_that.order);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
+
 class _ChartingOrderValue implements ChartingOrderValue {
-  const _ChartingOrderValue(
-      {this.chartingOrder = ChartingOrderType.arch,
-      this.selectedOption = 0,
-      required final List<List<ScanOrder>> order})
-      : _order = order;
-  factory _ChartingOrderValue.fromJson(Map<String, dynamic> json) =>
-      _$ChartingOrderValueFromJson(json);
+  const _ChartingOrderValue({this.chartingOrder = ChartingOrderType.arch, this.selectedOption = 0, required final  List<List<ScanOrder>> order}): _order = order;
+  factory _ChartingOrderValue.fromJson(Map<String, dynamic> json) => _$ChartingOrderValueFromJson(json);
 
-  @override
-  @JsonKey()
-  final ChartingOrderType chartingOrder;
-  @override
-  @JsonKey()
-  final int selectedOption;
-  final List<List<ScanOrder>> _order;
-  @override
-  List<List<ScanOrder>> get order {
-    if (_order is EqualUnmodifiableListView) return _order;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_order);
-  }
+@override@JsonKey() final  ChartingOrderType chartingOrder;
+@override@JsonKey() final  int selectedOption;
+ final  List<List<ScanOrder>> _order;
+@override List<List<ScanOrder>> get order {
+  if (_order is EqualUnmodifiableListView) return _order;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_order);
+}
 
-  /// Create a copy of ChartingOrderValue
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$ChartingOrderValueCopyWith<_ChartingOrderValue> get copyWith =>
-      __$ChartingOrderValueCopyWithImpl<_ChartingOrderValue>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$ChartingOrderValueToJson(
-      this,
-    );
-  }
+/// Create a copy of ChartingOrderValue
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ChartingOrderValueCopyWith<_ChartingOrderValue> get copyWith => __$ChartingOrderValueCopyWithImpl<_ChartingOrderValue>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _ChartingOrderValue &&
-            (identical(other.chartingOrder, chartingOrder) ||
-                other.chartingOrder == chartingOrder) &&
-            (identical(other.selectedOption, selectedOption) ||
-                other.selectedOption == selectedOption) &&
-            const DeepCollectionEquality().equals(other._order, _order));
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$ChartingOrderValueToJson(this, );
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, chartingOrder, selectedOption,
-      const DeepCollectionEquality().hash(_order));
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChartingOrderValue&&(identical(other.chartingOrder, chartingOrder) || other.chartingOrder == chartingOrder)&&(identical(other.selectedOption, selectedOption) || other.selectedOption == selectedOption)&&const DeepCollectionEquality().equals(other._order, _order));
+}
 
-  @override
-  String toString() {
-    return 'ChartingOrderValue(chartingOrder: $chartingOrder, selectedOption: $selectedOption, order: $order)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,chartingOrder,selectedOption,const DeepCollectionEquality().hash(_order));
+
+@override
+String toString() {
+  return 'ChartingOrderValue(chartingOrder: $chartingOrder, selectedOption: $selectedOption, order: $order)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$ChartingOrderValueCopyWith<$Res>
-    implements $ChartingOrderValueCopyWith<$Res> {
-  factory _$ChartingOrderValueCopyWith(
-          _ChartingOrderValue value, $Res Function(_ChartingOrderValue) _then) =
-      __$ChartingOrderValueCopyWithImpl;
-  @override
-  @useResult
-  $Res call(
-      {ChartingOrderType chartingOrder,
-      int selectedOption,
-      List<List<ScanOrder>> order});
-}
+abstract mixin class _$ChartingOrderValueCopyWith<$Res> implements $ChartingOrderValueCopyWith<$Res> {
+  factory _$ChartingOrderValueCopyWith(_ChartingOrderValue value, $Res Function(_ChartingOrderValue) _then) = __$ChartingOrderValueCopyWithImpl;
+@override @useResult
+$Res call({
+ ChartingOrderType chartingOrder, int selectedOption, List<List<ScanOrder>> order
+});
 
+
+
+
+}
 /// @nodoc
 class __$ChartingOrderValueCopyWithImpl<$Res>
     implements _$ChartingOrderValueCopyWith<$Res> {
@@ -2619,130 +1822,64 @@ class __$ChartingOrderValueCopyWithImpl<$Res>
   final _ChartingOrderValue _self;
   final $Res Function(_ChartingOrderValue) _then;
 
-  /// Create a copy of ChartingOrderValue
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? chartingOrder = null,
-    Object? selectedOption = null,
-    Object? order = null,
-  }) {
-    return _then(_ChartingOrderValue(
-      chartingOrder: null == chartingOrder
-          ? _self.chartingOrder
-          : chartingOrder // ignore: cast_nullable_to_non_nullable
-              as ChartingOrderType,
-      selectedOption: null == selectedOption
-          ? _self.selectedOption
-          : selectedOption // ignore: cast_nullable_to_non_nullable
-              as int,
-      order: null == order
-          ? _self._order
-          : order // ignore: cast_nullable_to_non_nullable
-              as List<List<ScanOrder>>,
-    ));
-  }
+/// Create a copy of ChartingOrderValue
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? chartingOrder = null,Object? selectedOption = null,Object? order = null,}) {
+  return _then(_ChartingOrderValue(
+chartingOrder: null == chartingOrder ? _self.chartingOrder : chartingOrder // ignore: cast_nullable_to_non_nullable
+as ChartingOrderType,selectedOption: null == selectedOption ? _self.selectedOption : selectedOption // ignore: cast_nullable_to_non_nullable
+as int,order: null == order ? _self._order : order // ignore: cast_nullable_to_non_nullable
+as List<List<ScanOrder>>,
+  ));
 }
+
+
+}
+
 
 /// @nodoc
 mixin _$ProfileOOutput {
-  String get id;
-  String get anotherId;
-  @RfControl<String>()
-  String get name;
-  @RfControl<ChartingOrderValue>()
-  ChartingOrderValue get chartingOrder;
-  @RfControl<NumberingStandard>()
-  NumberingStandard get numberingStandard;
-  IncidenceFilterOOutput get incidenceFilter;
-  @RfControl<MeasurementType>()
-  MeasurementType get measurementType;
-  ThresholdSettingOOutput get threshold;
-  TimerSettingOOutput get timer;
-  @RfControl<bool>()
-  bool get audioGuidance;
 
-  /// Create a copy of ProfileOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $ProfileOOutputCopyWith<ProfileOOutput> get copyWith =>
-      _$ProfileOOutputCopyWithImpl<ProfileOOutput>(
-          this as ProfileOOutput, _$identity);
+ String get id; String get anotherId;@RfControl<String>() String get name;@RfControl<ChartingOrderValue>() ChartingOrderValue get chartingOrder;@RfControl<NumberingStandard>() NumberingStandard get numberingStandard; IncidenceFilterOOutput get incidenceFilter;@RfControl<MeasurementType>() MeasurementType get measurementType; ThresholdSettingOOutput get threshold; TimerSettingOOutput get timer;@RfControl<bool>() bool get audioGuidance;
+/// Create a copy of ProfileOOutput
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ProfileOOutputCopyWith<ProfileOOutput> get copyWith => _$ProfileOOutputCopyWithImpl<ProfileOOutput>(this as ProfileOOutput, _$identity);
 
   /// Serializes this ProfileOOutput to a JSON map.
   Map<String, dynamic> toJson();
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is ProfileOOutput &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.anotherId, anotherId) ||
-                other.anotherId == anotherId) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.chartingOrder, chartingOrder) ||
-                other.chartingOrder == chartingOrder) &&
-            (identical(other.numberingStandard, numberingStandard) ||
-                other.numberingStandard == numberingStandard) &&
-            (identical(other.incidenceFilter, incidenceFilter) ||
-                other.incidenceFilter == incidenceFilter) &&
-            (identical(other.measurementType, measurementType) ||
-                other.measurementType == measurementType) &&
-            (identical(other.threshold, threshold) ||
-                other.threshold == threshold) &&
-            (identical(other.timer, timer) || other.timer == timer) &&
-            (identical(other.audioGuidance, audioGuidance) ||
-                other.audioGuidance == audioGuidance));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      anotherId,
-      name,
-      chartingOrder,
-      numberingStandard,
-      incidenceFilter,
-      measurementType,
-      threshold,
-      timer,
-      audioGuidance);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileOOutput&&(identical(other.id, id) || other.id == id)&&(identical(other.anotherId, anotherId) || other.anotherId == anotherId)&&(identical(other.name, name) || other.name == name)&&(identical(other.chartingOrder, chartingOrder) || other.chartingOrder == chartingOrder)&&(identical(other.numberingStandard, numberingStandard) || other.numberingStandard == numberingStandard)&&(identical(other.incidenceFilter, incidenceFilter) || other.incidenceFilter == incidenceFilter)&&(identical(other.measurementType, measurementType) || other.measurementType == measurementType)&&(identical(other.threshold, threshold) || other.threshold == threshold)&&(identical(other.timer, timer) || other.timer == timer)&&(identical(other.audioGuidance, audioGuidance) || other.audioGuidance == audioGuidance));
+}
 
-  @override
-  String toString() {
-    return 'ProfileOOutput(id: $id, anotherId: $anotherId, name: $name, chartingOrder: $chartingOrder, numberingStandard: $numberingStandard, incidenceFilter: $incidenceFilter, measurementType: $measurementType, threshold: $threshold, timer: $timer, audioGuidance: $audioGuidance)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,anotherId,name,chartingOrder,numberingStandard,incidenceFilter,measurementType,threshold,timer,audioGuidance);
+
+@override
+String toString() {
+  return 'ProfileOOutput(id: $id, anotherId: $anotherId, name: $name, chartingOrder: $chartingOrder, numberingStandard: $numberingStandard, incidenceFilter: $incidenceFilter, measurementType: $measurementType, threshold: $threshold, timer: $timer, audioGuidance: $audioGuidance)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $ProfileOOutputCopyWith<$Res> {
-  factory $ProfileOOutputCopyWith(
-          ProfileOOutput value, $Res Function(ProfileOOutput) _then) =
-      _$ProfileOOutputCopyWithImpl;
-  @useResult
-  $Res call(
-      {String id,
-      String anotherId,
-      @RfControl<String>() String name,
-      @RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,
-      @RfControl<NumberingStandard>() NumberingStandard numberingStandard,
-      IncidenceFilterOOutput incidenceFilter,
-      @RfControl<MeasurementType>() MeasurementType measurementType,
-      ThresholdSettingOOutput threshold,
-      TimerSettingOOutput timer,
-      @RfControl<bool>() bool audioGuidance});
+abstract mixin class $ProfileOOutputCopyWith<$Res>  {
+  factory $ProfileOOutputCopyWith(ProfileOOutput value, $Res Function(ProfileOOutput) _then) = _$ProfileOOutputCopyWithImpl;
+@useResult
+$Res call({
+ String id, String anotherId,@RfControl<String>() String name,@RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,@RfControl<NumberingStandard>() NumberingStandard numberingStandard, IncidenceFilterOOutput incidenceFilter,@RfControl<MeasurementType>() MeasurementType measurementType, ThresholdSettingOOutput threshold, TimerSettingOOutput timer,@RfControl<bool>() bool audioGuidance
+});
 
-  $ChartingOrderValueCopyWith<$Res> get chartingOrder;
-  $IncidenceFilterOOutputCopyWith<$Res> get incidenceFilter;
-  $ThresholdSettingOOutputCopyWith<$Res> get threshold;
-  $TimerSettingOOutputCopyWith<$Res> get timer;
+
+$ChartingOrderValueCopyWith<$Res> get chartingOrder;$IncidenceFilterOOutputCopyWith<$Res> get incidenceFilter;$ThresholdSettingOOutputCopyWith<$Res> get threshold;$TimerSettingOOutputCopyWith<$Res> get timer;
+
 }
-
 /// @nodoc
 class _$ProfileOOutputCopyWithImpl<$Res>
     implements $ProfileOOutputCopyWith<$Res> {
@@ -2751,461 +1888,251 @@ class _$ProfileOOutputCopyWithImpl<$Res>
   final ProfileOOutput _self;
   final $Res Function(ProfileOOutput) _then;
 
-  /// Create a copy of ProfileOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? anotherId = null,
-    Object? name = null,
-    Object? chartingOrder = null,
-    Object? numberingStandard = null,
-    Object? incidenceFilter = null,
-    Object? measurementType = null,
-    Object? threshold = null,
-    Object? timer = null,
-    Object? audioGuidance = null,
-  }) {
-    return _then(_self.copyWith(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      anotherId: null == anotherId
-          ? _self.anotherId
-          : anotherId // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      chartingOrder: null == chartingOrder
-          ? _self.chartingOrder
-          : chartingOrder // ignore: cast_nullable_to_non_nullable
-              as ChartingOrderValue,
-      numberingStandard: null == numberingStandard
-          ? _self.numberingStandard
-          : numberingStandard // ignore: cast_nullable_to_non_nullable
-              as NumberingStandard,
-      incidenceFilter: null == incidenceFilter
-          ? _self.incidenceFilter
-          : incidenceFilter // ignore: cast_nullable_to_non_nullable
-              as IncidenceFilterOOutput,
-      measurementType: null == measurementType
-          ? _self.measurementType
-          : measurementType // ignore: cast_nullable_to_non_nullable
-              as MeasurementType,
-      threshold: null == threshold
-          ? _self.threshold
-          : threshold // ignore: cast_nullable_to_non_nullable
-              as ThresholdSettingOOutput,
-      timer: null == timer
-          ? _self.timer
-          : timer // ignore: cast_nullable_to_non_nullable
-              as TimerSettingOOutput,
-      audioGuidance: null == audioGuidance
-          ? _self.audioGuidance
-          : audioGuidance // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-
-  /// Create a copy of ProfileOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ChartingOrderValueCopyWith<$Res> get chartingOrder {
-    return $ChartingOrderValueCopyWith<$Res>(_self.chartingOrder, (value) {
-      return _then(_self.copyWith(chartingOrder: value));
-    });
-  }
-
-  /// Create a copy of ProfileOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $IncidenceFilterOOutputCopyWith<$Res> get incidenceFilter {
-    return $IncidenceFilterOOutputCopyWith<$Res>(_self.incidenceFilter,
-        (value) {
-      return _then(_self.copyWith(incidenceFilter: value));
-    });
-  }
-
-  /// Create a copy of ProfileOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ThresholdSettingOOutputCopyWith<$Res> get threshold {
-    return $ThresholdSettingOOutputCopyWith<$Res>(_self.threshold, (value) {
-      return _then(_self.copyWith(threshold: value));
-    });
-  }
-
-  /// Create a copy of ProfileOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $TimerSettingOOutputCopyWith<$Res> get timer {
-    return $TimerSettingOOutputCopyWith<$Res>(_self.timer, (value) {
-      return _then(_self.copyWith(timer: value));
-    });
-  }
+/// Create a copy of ProfileOOutput
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? anotherId = null,Object? name = null,Object? chartingOrder = null,Object? numberingStandard = null,Object? incidenceFilter = null,Object? measurementType = null,Object? threshold = null,Object? timer = null,Object? audioGuidance = null,}) {
+  return _then(_self.copyWith(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,anotherId: null == anotherId ? _self.anotherId : anotherId // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,chartingOrder: null == chartingOrder ? _self.chartingOrder : chartingOrder // ignore: cast_nullable_to_non_nullable
+as ChartingOrderValue,numberingStandard: null == numberingStandard ? _self.numberingStandard : numberingStandard // ignore: cast_nullable_to_non_nullable
+as NumberingStandard,incidenceFilter: null == incidenceFilter ? _self.incidenceFilter : incidenceFilter // ignore: cast_nullable_to_non_nullable
+as IncidenceFilterOOutput,measurementType: null == measurementType ? _self.measurementType : measurementType // ignore: cast_nullable_to_non_nullable
+as MeasurementType,threshold: null == threshold ? _self.threshold : threshold // ignore: cast_nullable_to_non_nullable
+as ThresholdSettingOOutput,timer: null == timer ? _self.timer : timer // ignore: cast_nullable_to_non_nullable
+as TimerSettingOOutput,audioGuidance: null == audioGuidance ? _self.audioGuidance : audioGuidance // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
+/// Create a copy of ProfileOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ChartingOrderValueCopyWith<$Res> get chartingOrder {
+  
+  return $ChartingOrderValueCopyWith<$Res>(_self.chartingOrder, (value) {
+    return _then(_self.copyWith(chartingOrder: value));
+  });
+}/// Create a copy of ProfileOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$IncidenceFilterOOutputCopyWith<$Res> get incidenceFilter {
+  
+  return $IncidenceFilterOOutputCopyWith<$Res>(_self.incidenceFilter, (value) {
+    return _then(_self.copyWith(incidenceFilter: value));
+  });
+}/// Create a copy of ProfileOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ThresholdSettingOOutputCopyWith<$Res> get threshold {
+  
+  return $ThresholdSettingOOutputCopyWith<$Res>(_self.threshold, (value) {
+    return _then(_self.copyWith(threshold: value));
+  });
+}/// Create a copy of ProfileOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$TimerSettingOOutputCopyWith<$Res> get timer {
+  
+  return $TimerSettingOOutputCopyWith<$Res>(_self.timer, (value) {
+    return _then(_self.copyWith(timer: value));
+  });
+}
+}
+
 
 /// Adds pattern-matching-related methods to [ProfileOOutput].
 extension ProfileOOutputPatterns on ProfileOOutput {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_ProfileOOutput value)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _ProfileOOutput() when $default != null:
-        return $default(_that);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ProfileOOutput value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ProfileOOutput() when $default != null:
+return $default(_that);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_ProfileOOutput value) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ProfileOOutput():
-        return $default(_that);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ProfileOOutput value)  $default,){
+final _that = this;
+switch (_that) {
+case _ProfileOOutput():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_ProfileOOutput value)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ProfileOOutput() when $default != null:
-        return $default(_that);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ProfileOOutput value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ProfileOOutput() when $default != null:
+return $default(_that);case _:
+  return null;
 
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            String id,
-            String anotherId,
-            @RfControl<String>() String name,
-            @RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,
-            @RfControl<NumberingStandard>() NumberingStandard numberingStandard,
-            IncidenceFilterOOutput incidenceFilter,
-            @RfControl<MeasurementType>() MeasurementType measurementType,
-            ThresholdSettingOOutput threshold,
-            TimerSettingOOutput timer,
-            @RfControl<bool>() bool audioGuidance)?
-        $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _ProfileOOutput() when $default != null:
-        return $default(
-            _that.id,
-            _that.anotherId,
-            _that.name,
-            _that.chartingOrder,
-            _that.numberingStandard,
-            _that.incidenceFilter,
-            _that.measurementType,
-            _that.threshold,
-            _that.timer,
-            _that.audioGuidance);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String anotherId, @RfControl<String>()  String name, @RfControl<ChartingOrderValue>()  ChartingOrderValue chartingOrder, @RfControl<NumberingStandard>()  NumberingStandard numberingStandard,  IncidenceFilterOOutput incidenceFilter, @RfControl<MeasurementType>()  MeasurementType measurementType,  ThresholdSettingOOutput threshold,  TimerSettingOOutput timer, @RfControl<bool>()  bool audioGuidance)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ProfileOOutput() when $default != null:
+return $default(_that.id,_that.anotherId,_that.name,_that.chartingOrder,_that.numberingStandard,_that.incidenceFilter,_that.measurementType,_that.threshold,_that.timer,_that.audioGuidance);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(
-            String id,
-            String anotherId,
-            @RfControl<String>() String name,
-            @RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,
-            @RfControl<NumberingStandard>() NumberingStandard numberingStandard,
-            IncidenceFilterOOutput incidenceFilter,
-            @RfControl<MeasurementType>() MeasurementType measurementType,
-            ThresholdSettingOOutput threshold,
-            TimerSettingOOutput timer,
-            @RfControl<bool>() bool audioGuidance)
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ProfileOOutput():
-        return $default(
-            _that.id,
-            _that.anotherId,
-            _that.name,
-            _that.chartingOrder,
-            _that.numberingStandard,
-            _that.incidenceFilter,
-            _that.measurementType,
-            _that.threshold,
-            _that.timer,
-            _that.audioGuidance);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String anotherId, @RfControl<String>()  String name, @RfControl<ChartingOrderValue>()  ChartingOrderValue chartingOrder, @RfControl<NumberingStandard>()  NumberingStandard numberingStandard,  IncidenceFilterOOutput incidenceFilter, @RfControl<MeasurementType>()  MeasurementType measurementType,  ThresholdSettingOOutput threshold,  TimerSettingOOutput timer, @RfControl<bool>()  bool audioGuidance)  $default,) {final _that = this;
+switch (_that) {
+case _ProfileOOutput():
+return $default(_that.id,_that.anotherId,_that.name,_that.chartingOrder,_that.numberingStandard,_that.incidenceFilter,_that.measurementType,_that.threshold,_that.timer,_that.audioGuidance);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            String id,
-            String anotherId,
-            @RfControl<String>() String name,
-            @RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,
-            @RfControl<NumberingStandard>() NumberingStandard numberingStandard,
-            IncidenceFilterOOutput incidenceFilter,
-            @RfControl<MeasurementType>() MeasurementType measurementType,
-            ThresholdSettingOOutput threshold,
-            TimerSettingOOutput timer,
-            @RfControl<bool>() bool audioGuidance)?
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ProfileOOutput() when $default != null:
-        return $default(
-            _that.id,
-            _that.anotherId,
-            _that.name,
-            _that.chartingOrder,
-            _that.numberingStandard,
-            _that.incidenceFilter,
-            _that.measurementType,
-            _that.threshold,
-            _that.timer,
-            _that.audioGuidance);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String anotherId, @RfControl<String>()  String name, @RfControl<ChartingOrderValue>()  ChartingOrderValue chartingOrder, @RfControl<NumberingStandard>()  NumberingStandard numberingStandard,  IncidenceFilterOOutput incidenceFilter, @RfControl<MeasurementType>()  MeasurementType measurementType,  ThresholdSettingOOutput threshold,  TimerSettingOOutput timer, @RfControl<bool>()  bool audioGuidance)?  $default,) {final _that = this;
+switch (_that) {
+case _ProfileOOutput() when $default != null:
+return $default(_that.id,_that.anotherId,_that.name,_that.chartingOrder,_that.numberingStandard,_that.incidenceFilter,_that.measurementType,_that.threshold,_that.timer,_that.audioGuidance);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
+
 class _ProfileOOutput extends ProfileOOutput {
-  _ProfileOOutput(this.id,
-      {required this.anotherId,
-      @RfControl<String>() required this.name,
-      @RfControl<ChartingOrderValue>() required this.chartingOrder,
-      @RfControl<NumberingStandard>() required this.numberingStandard,
-      required this.incidenceFilter,
-      @RfControl<MeasurementType>() required this.measurementType,
-      required this.threshold,
-      required this.timer,
-      @RfControl<bool>() required this.audioGuidance})
-      : super._();
-  factory _ProfileOOutput.fromJson(Map<String, dynamic> json) =>
-      _$ProfileOOutputFromJson(json);
+   _ProfileOOutput(this.id, {required this.anotherId, @RfControl<String>() required this.name, @RfControl<ChartingOrderValue>() required this.chartingOrder, @RfControl<NumberingStandard>() required this.numberingStandard, required this.incidenceFilter, @RfControl<MeasurementType>() required this.measurementType, required this.threshold, required this.timer, @RfControl<bool>() required this.audioGuidance}): super._();
+  factory _ProfileOOutput.fromJson(Map<String, dynamic> json) => _$ProfileOOutputFromJson(json);
 
-  @override
-  final String id;
-  @override
-  final String anotherId;
-  @override
-  @RfControl<String>()
-  final String name;
-  @override
-  @RfControl<ChartingOrderValue>()
-  final ChartingOrderValue chartingOrder;
-  @override
-  @RfControl<NumberingStandard>()
-  final NumberingStandard numberingStandard;
-  @override
-  final IncidenceFilterOOutput incidenceFilter;
-  @override
-  @RfControl<MeasurementType>()
-  final MeasurementType measurementType;
-  @override
-  final ThresholdSettingOOutput threshold;
-  @override
-  final TimerSettingOOutput timer;
-  @override
-  @RfControl<bool>()
-  final bool audioGuidance;
+@override final  String id;
+@override final  String anotherId;
+@override@RfControl<String>() final  String name;
+@override@RfControl<ChartingOrderValue>() final  ChartingOrderValue chartingOrder;
+@override@RfControl<NumberingStandard>() final  NumberingStandard numberingStandard;
+@override final  IncidenceFilterOOutput incidenceFilter;
+@override@RfControl<MeasurementType>() final  MeasurementType measurementType;
+@override final  ThresholdSettingOOutput threshold;
+@override final  TimerSettingOOutput timer;
+@override@RfControl<bool>() final  bool audioGuidance;
 
-  /// Create a copy of ProfileOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$ProfileOOutputCopyWith<_ProfileOOutput> get copyWith =>
-      __$ProfileOOutputCopyWithImpl<_ProfileOOutput>(this, _$identity);
+/// Create a copy of ProfileOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ProfileOOutputCopyWith<_ProfileOOutput> get copyWith => __$ProfileOOutputCopyWithImpl<_ProfileOOutput>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$ProfileOOutputToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$ProfileOOutputToJson(this, );
+}
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _ProfileOOutput &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.anotherId, anotherId) ||
-                other.anotherId == anotherId) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.chartingOrder, chartingOrder) ||
-                other.chartingOrder == chartingOrder) &&
-            (identical(other.numberingStandard, numberingStandard) ||
-                other.numberingStandard == numberingStandard) &&
-            (identical(other.incidenceFilter, incidenceFilter) ||
-                other.incidenceFilter == incidenceFilter) &&
-            (identical(other.measurementType, measurementType) ||
-                other.measurementType == measurementType) &&
-            (identical(other.threshold, threshold) ||
-                other.threshold == threshold) &&
-            (identical(other.timer, timer) || other.timer == timer) &&
-            (identical(other.audioGuidance, audioGuidance) ||
-                other.audioGuidance == audioGuidance));
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileOOutput&&(identical(other.id, id) || other.id == id)&&(identical(other.anotherId, anotherId) || other.anotherId == anotherId)&&(identical(other.name, name) || other.name == name)&&(identical(other.chartingOrder, chartingOrder) || other.chartingOrder == chartingOrder)&&(identical(other.numberingStandard, numberingStandard) || other.numberingStandard == numberingStandard)&&(identical(other.incidenceFilter, incidenceFilter) || other.incidenceFilter == incidenceFilter)&&(identical(other.measurementType, measurementType) || other.measurementType == measurementType)&&(identical(other.threshold, threshold) || other.threshold == threshold)&&(identical(other.timer, timer) || other.timer == timer)&&(identical(other.audioGuidance, audioGuidance) || other.audioGuidance == audioGuidance));
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      anotherId,
-      name,
-      chartingOrder,
-      numberingStandard,
-      incidenceFilter,
-      measurementType,
-      threshold,
-      timer,
-      audioGuidance);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,anotherId,name,chartingOrder,numberingStandard,incidenceFilter,measurementType,threshold,timer,audioGuidance);
 
-  @override
-  String toString() {
-    return 'ProfileOOutput(id: $id, anotherId: $anotherId, name: $name, chartingOrder: $chartingOrder, numberingStandard: $numberingStandard, incidenceFilter: $incidenceFilter, measurementType: $measurementType, threshold: $threshold, timer: $timer, audioGuidance: $audioGuidance)';
-  }
+@override
+String toString() {
+  return 'ProfileOOutput(id: $id, anotherId: $anotherId, name: $name, chartingOrder: $chartingOrder, numberingStandard: $numberingStandard, incidenceFilter: $incidenceFilter, measurementType: $measurementType, threshold: $threshold, timer: $timer, audioGuidance: $audioGuidance)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$ProfileOOutputCopyWith<$Res>
-    implements $ProfileOOutputCopyWith<$Res> {
-  factory _$ProfileOOutputCopyWith(
-          _ProfileOOutput value, $Res Function(_ProfileOOutput) _then) =
-      __$ProfileOOutputCopyWithImpl;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String anotherId,
-      @RfControl<String>() String name,
-      @RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,
-      @RfControl<NumberingStandard>() NumberingStandard numberingStandard,
-      IncidenceFilterOOutput incidenceFilter,
-      @RfControl<MeasurementType>() MeasurementType measurementType,
-      ThresholdSettingOOutput threshold,
-      TimerSettingOOutput timer,
-      @RfControl<bool>() bool audioGuidance});
+abstract mixin class _$ProfileOOutputCopyWith<$Res> implements $ProfileOOutputCopyWith<$Res> {
+  factory _$ProfileOOutputCopyWith(_ProfileOOutput value, $Res Function(_ProfileOOutput) _then) = __$ProfileOOutputCopyWithImpl;
+@override @useResult
+$Res call({
+ String id, String anotherId,@RfControl<String>() String name,@RfControl<ChartingOrderValue>() ChartingOrderValue chartingOrder,@RfControl<NumberingStandard>() NumberingStandard numberingStandard, IncidenceFilterOOutput incidenceFilter,@RfControl<MeasurementType>() MeasurementType measurementType, ThresholdSettingOOutput threshold, TimerSettingOOutput timer,@RfControl<bool>() bool audioGuidance
+});
 
-  @override
-  $ChartingOrderValueCopyWith<$Res> get chartingOrder;
-  @override
-  $IncidenceFilterOOutputCopyWith<$Res> get incidenceFilter;
-  @override
-  $ThresholdSettingOOutputCopyWith<$Res> get threshold;
-  @override
-  $TimerSettingOOutputCopyWith<$Res> get timer;
+
+@override $ChartingOrderValueCopyWith<$Res> get chartingOrder;@override $IncidenceFilterOOutputCopyWith<$Res> get incidenceFilter;@override $ThresholdSettingOOutputCopyWith<$Res> get threshold;@override $TimerSettingOOutputCopyWith<$Res> get timer;
+
 }
-
 /// @nodoc
 class __$ProfileOOutputCopyWithImpl<$Res>
     implements _$ProfileOOutputCopyWith<$Res> {
@@ -3214,155 +2141,107 @@ class __$ProfileOOutputCopyWithImpl<$Res>
   final _ProfileOOutput _self;
   final $Res Function(_ProfileOOutput) _then;
 
-  /// Create a copy of ProfileOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? id = null,
-    Object? anotherId = null,
-    Object? name = null,
-    Object? chartingOrder = null,
-    Object? numberingStandard = null,
-    Object? incidenceFilter = null,
-    Object? measurementType = null,
-    Object? threshold = null,
-    Object? timer = null,
-    Object? audioGuidance = null,
-  }) {
-    return _then(_ProfileOOutput(
-      null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      anotherId: null == anotherId
-          ? _self.anotherId
-          : anotherId // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      chartingOrder: null == chartingOrder
-          ? _self.chartingOrder
-          : chartingOrder // ignore: cast_nullable_to_non_nullable
-              as ChartingOrderValue,
-      numberingStandard: null == numberingStandard
-          ? _self.numberingStandard
-          : numberingStandard // ignore: cast_nullable_to_non_nullable
-              as NumberingStandard,
-      incidenceFilter: null == incidenceFilter
-          ? _self.incidenceFilter
-          : incidenceFilter // ignore: cast_nullable_to_non_nullable
-              as IncidenceFilterOOutput,
-      measurementType: null == measurementType
-          ? _self.measurementType
-          : measurementType // ignore: cast_nullable_to_non_nullable
-              as MeasurementType,
-      threshold: null == threshold
-          ? _self.threshold
-          : threshold // ignore: cast_nullable_to_non_nullable
-              as ThresholdSettingOOutput,
-      timer: null == timer
-          ? _self.timer
-          : timer // ignore: cast_nullable_to_non_nullable
-              as TimerSettingOOutput,
-      audioGuidance: null == audioGuidance
-          ? _self.audioGuidance
-          : audioGuidance // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-
-  /// Create a copy of ProfileOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ChartingOrderValueCopyWith<$Res> get chartingOrder {
-    return $ChartingOrderValueCopyWith<$Res>(_self.chartingOrder, (value) {
-      return _then(_self.copyWith(chartingOrder: value));
-    });
-  }
-
-  /// Create a copy of ProfileOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $IncidenceFilterOOutputCopyWith<$Res> get incidenceFilter {
-    return $IncidenceFilterOOutputCopyWith<$Res>(_self.incidenceFilter,
-        (value) {
-      return _then(_self.copyWith(incidenceFilter: value));
-    });
-  }
-
-  /// Create a copy of ProfileOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ThresholdSettingOOutputCopyWith<$Res> get threshold {
-    return $ThresholdSettingOOutputCopyWith<$Res>(_self.threshold, (value) {
-      return _then(_self.copyWith(threshold: value));
-    });
-  }
-
-  /// Create a copy of ProfileOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $TimerSettingOOutputCopyWith<$Res> get timer {
-    return $TimerSettingOOutputCopyWith<$Res>(_self.timer, (value) {
-      return _then(_self.copyWith(timer: value));
-    });
-  }
+/// Create a copy of ProfileOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? anotherId = null,Object? name = null,Object? chartingOrder = null,Object? numberingStandard = null,Object? incidenceFilter = null,Object? measurementType = null,Object? threshold = null,Object? timer = null,Object? audioGuidance = null,}) {
+  return _then(_ProfileOOutput(
+null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,anotherId: null == anotherId ? _self.anotherId : anotherId // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,chartingOrder: null == chartingOrder ? _self.chartingOrder : chartingOrder // ignore: cast_nullable_to_non_nullable
+as ChartingOrderValue,numberingStandard: null == numberingStandard ? _self.numberingStandard : numberingStandard // ignore: cast_nullable_to_non_nullable
+as NumberingStandard,incidenceFilter: null == incidenceFilter ? _self.incidenceFilter : incidenceFilter // ignore: cast_nullable_to_non_nullable
+as IncidenceFilterOOutput,measurementType: null == measurementType ? _self.measurementType : measurementType // ignore: cast_nullable_to_non_nullable
+as MeasurementType,threshold: null == threshold ? _self.threshold : threshold // ignore: cast_nullable_to_non_nullable
+as ThresholdSettingOOutput,timer: null == timer ? _self.timer : timer // ignore: cast_nullable_to_non_nullable
+as TimerSettingOOutput,audioGuidance: null == audioGuidance ? _self.audioGuidance : audioGuidance // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
+
+/// Create a copy of ProfileOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ChartingOrderValueCopyWith<$Res> get chartingOrder {
+  
+  return $ChartingOrderValueCopyWith<$Res>(_self.chartingOrder, (value) {
+    return _then(_self.copyWith(chartingOrder: value));
+  });
+}/// Create a copy of ProfileOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$IncidenceFilterOOutputCopyWith<$Res> get incidenceFilter {
+  
+  return $IncidenceFilterOOutputCopyWith<$Res>(_self.incidenceFilter, (value) {
+    return _then(_self.copyWith(incidenceFilter: value));
+  });
+}/// Create a copy of ProfileOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ThresholdSettingOOutputCopyWith<$Res> get threshold {
+  
+  return $ThresholdSettingOOutputCopyWith<$Res>(_self.threshold, (value) {
+    return _then(_self.copyWith(threshold: value));
+  });
+}/// Create a copy of ProfileOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$TimerSettingOOutputCopyWith<$Res> get timer {
+  
+  return $TimerSettingOOutputCopyWith<$Res>(_self.timer, (value) {
+    return _then(_self.copyWith(timer: value));
+  });
+}
+}
+
 
 /// @nodoc
 mixin _$ThresholdSettingOOutput {
-  @RfControl<bool>()
-  bool get isEnabled;
-  @RfControl<int>()
-  int get value;
 
-  /// Create a copy of ThresholdSettingOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $ThresholdSettingOOutputCopyWith<ThresholdSettingOOutput> get copyWith =>
-      _$ThresholdSettingOOutputCopyWithImpl<ThresholdSettingOOutput>(
-          this as ThresholdSettingOOutput, _$identity);
+@RfControl<bool>() bool get isEnabled;@RfControl<int>() int get value;
+/// Create a copy of ThresholdSettingOOutput
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ThresholdSettingOOutputCopyWith<ThresholdSettingOOutput> get copyWith => _$ThresholdSettingOOutputCopyWithImpl<ThresholdSettingOOutput>(this as ThresholdSettingOOutput, _$identity);
 
   /// Serializes this ThresholdSettingOOutput to a JSON map.
   Map<String, dynamic> toJson();
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is ThresholdSettingOOutput &&
-            (identical(other.isEnabled, isEnabled) ||
-                other.isEnabled == isEnabled) &&
-            (identical(other.value, value) || other.value == value));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, isEnabled, value);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ThresholdSettingOOutput&&(identical(other.isEnabled, isEnabled) || other.isEnabled == isEnabled)&&(identical(other.value, value) || other.value == value));
+}
 
-  @override
-  String toString() {
-    return 'ThresholdSettingOOutput(isEnabled: $isEnabled, value: $value)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,isEnabled,value);
+
+@override
+String toString() {
+  return 'ThresholdSettingOOutput(isEnabled: $isEnabled, value: $value)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $ThresholdSettingOOutputCopyWith<$Res> {
-  factory $ThresholdSettingOOutputCopyWith(ThresholdSettingOOutput value,
-          $Res Function(ThresholdSettingOOutput) _then) =
-      _$ThresholdSettingOOutputCopyWithImpl;
-  @useResult
-  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
-}
+abstract mixin class $ThresholdSettingOOutputCopyWith<$Res>  {
+  factory $ThresholdSettingOOutputCopyWith(ThresholdSettingOOutput value, $Res Function(ThresholdSettingOOutput) _then) = _$ThresholdSettingOOutputCopyWithImpl;
+@useResult
+$Res call({
+@RfControl<bool>() bool isEnabled,@RfControl<int>() int value
+});
 
+
+
+
+}
 /// @nodoc
 class _$ThresholdSettingOOutputCopyWithImpl<$Res>
     implements $ThresholdSettingOOutputCopyWith<$Res> {
@@ -3371,255 +2250,199 @@ class _$ThresholdSettingOOutputCopyWithImpl<$Res>
   final ThresholdSettingOOutput _self;
   final $Res Function(ThresholdSettingOOutput) _then;
 
-  /// Create a copy of ThresholdSettingOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isEnabled = null,
-    Object? value = null,
-  }) {
-    return _then(_self.copyWith(
-      isEnabled: null == isEnabled
-          ? _self.isEnabled
-          : isEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      value: null == value
-          ? _self.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
+/// Create a copy of ThresholdSettingOOutput
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? isEnabled = null,Object? value = null,}) {
+  return _then(_self.copyWith(
+isEnabled: null == isEnabled ? _self.isEnabled : isEnabled // ignore: cast_nullable_to_non_nullable
+as bool,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
 }
+
+}
+
 
 /// Adds pattern-matching-related methods to [ThresholdSettingOOutput].
 extension ThresholdSettingOOutputPatterns on ThresholdSettingOOutput {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_ThresholdSettingOOutput value)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _ThresholdSettingOOutput() when $default != null:
-        return $default(_that);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ThresholdSettingOOutput value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ThresholdSettingOOutput() when $default != null:
+return $default(_that);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_ThresholdSettingOOutput value) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ThresholdSettingOOutput():
-        return $default(_that);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ThresholdSettingOOutput value)  $default,){
+final _that = this;
+switch (_that) {
+case _ThresholdSettingOOutput():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_ThresholdSettingOOutput value)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ThresholdSettingOOutput() when $default != null:
-        return $default(_that);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ThresholdSettingOOutput value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ThresholdSettingOOutput() when $default != null:
+return $default(_that);case _:
+  return null;
 
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            @RfControl<bool>() bool isEnabled, @RfControl<int>() int value)?
-        $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _ThresholdSettingOOutput() when $default != null:
-        return $default(_that.isEnabled, _that.value);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@RfControl<bool>()  bool isEnabled, @RfControl<int>()  int value)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ThresholdSettingOOutput() when $default != null:
+return $default(_that.isEnabled,_that.value);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(
-            @RfControl<bool>() bool isEnabled, @RfControl<int>() int value)
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ThresholdSettingOOutput():
-        return $default(_that.isEnabled, _that.value);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@RfControl<bool>()  bool isEnabled, @RfControl<int>()  int value)  $default,) {final _that = this;
+switch (_that) {
+case _ThresholdSettingOOutput():
+return $default(_that.isEnabled,_that.value);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            @RfControl<bool>() bool isEnabled, @RfControl<int>() int value)?
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _ThresholdSettingOOutput() when $default != null:
-        return $default(_that.isEnabled, _that.value);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@RfControl<bool>()  bool isEnabled, @RfControl<int>()  int value)?  $default,) {final _that = this;
+switch (_that) {
+case _ThresholdSettingOOutput() when $default != null:
+return $default(_that.isEnabled,_that.value);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
+
 class _ThresholdSettingOOutput implements ThresholdSettingOOutput {
-  const _ThresholdSettingOOutput(
-      {@RfControl<bool>() this.isEnabled = true,
-      @RfControl<int>() this.value = 2});
-  factory _ThresholdSettingOOutput.fromJson(Map<String, dynamic> json) =>
-      _$ThresholdSettingOOutputFromJson(json);
+  const _ThresholdSettingOOutput({@RfControl<bool>() this.isEnabled = true, @RfControl<int>() this.value = 2});
+  factory _ThresholdSettingOOutput.fromJson(Map<String, dynamic> json) => _$ThresholdSettingOOutputFromJson(json);
 
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isEnabled;
-  @override
-  @JsonKey()
-  @RfControl<int>()
-  final int value;
+@override@JsonKey()@RfControl<bool>() final  bool isEnabled;
+@override@JsonKey()@RfControl<int>() final  int value;
 
-  /// Create a copy of ThresholdSettingOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$ThresholdSettingOOutputCopyWith<_ThresholdSettingOOutput> get copyWith =>
-      __$ThresholdSettingOOutputCopyWithImpl<_ThresholdSettingOOutput>(
-          this, _$identity);
+/// Create a copy of ThresholdSettingOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ThresholdSettingOOutputCopyWith<_ThresholdSettingOOutput> get copyWith => __$ThresholdSettingOOutputCopyWithImpl<_ThresholdSettingOOutput>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$ThresholdSettingOOutputToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$ThresholdSettingOOutputToJson(this, );
+}
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _ThresholdSettingOOutput &&
-            (identical(other.isEnabled, isEnabled) ||
-                other.isEnabled == isEnabled) &&
-            (identical(other.value, value) || other.value == value));
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ThresholdSettingOOutput&&(identical(other.isEnabled, isEnabled) || other.isEnabled == isEnabled)&&(identical(other.value, value) || other.value == value));
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, isEnabled, value);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,isEnabled,value);
 
-  @override
-  String toString() {
-    return 'ThresholdSettingOOutput(isEnabled: $isEnabled, value: $value)';
-  }
+@override
+String toString() {
+  return 'ThresholdSettingOOutput(isEnabled: $isEnabled, value: $value)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$ThresholdSettingOOutputCopyWith<$Res>
-    implements $ThresholdSettingOOutputCopyWith<$Res> {
-  factory _$ThresholdSettingOOutputCopyWith(_ThresholdSettingOOutput value,
-          $Res Function(_ThresholdSettingOOutput) _then) =
-      __$ThresholdSettingOOutputCopyWithImpl;
-  @override
-  @useResult
-  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
-}
+abstract mixin class _$ThresholdSettingOOutputCopyWith<$Res> implements $ThresholdSettingOOutputCopyWith<$Res> {
+  factory _$ThresholdSettingOOutputCopyWith(_ThresholdSettingOOutput value, $Res Function(_ThresholdSettingOOutput) _then) = __$ThresholdSettingOOutputCopyWithImpl;
+@override @useResult
+$Res call({
+@RfControl<bool>() bool isEnabled,@RfControl<int>() int value
+});
 
+
+
+
+}
 /// @nodoc
 class __$ThresholdSettingOOutputCopyWithImpl<$Res>
     implements _$ThresholdSettingOOutputCopyWith<$Res> {
@@ -3628,74 +2451,63 @@ class __$ThresholdSettingOOutputCopyWithImpl<$Res>
   final _ThresholdSettingOOutput _self;
   final $Res Function(_ThresholdSettingOOutput) _then;
 
-  /// Create a copy of ThresholdSettingOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? isEnabled = null,
-    Object? value = null,
-  }) {
-    return _then(_ThresholdSettingOOutput(
-      isEnabled: null == isEnabled
-          ? _self.isEnabled
-          : isEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      value: null == value
-          ? _self.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
+/// Create a copy of ThresholdSettingOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? isEnabled = null,Object? value = null,}) {
+  return _then(_ThresholdSettingOOutput(
+isEnabled: null == isEnabled ? _self.isEnabled : isEnabled // ignore: cast_nullable_to_non_nullable
+as bool,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
 }
+
+
+}
+
 
 /// @nodoc
 mixin _$TimerSettingOOutput {
-  @RfControl<bool>()
-  bool get isEnabled;
-  @RfControl<int>()
-  int get value;
 
-  /// Create a copy of TimerSettingOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $TimerSettingOOutputCopyWith<TimerSettingOOutput> get copyWith =>
-      _$TimerSettingOOutputCopyWithImpl<TimerSettingOOutput>(
-          this as TimerSettingOOutput, _$identity);
+@RfControl<bool>() bool get isEnabled;@RfControl<int>() int get value;
+/// Create a copy of TimerSettingOOutput
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$TimerSettingOOutputCopyWith<TimerSettingOOutput> get copyWith => _$TimerSettingOOutputCopyWithImpl<TimerSettingOOutput>(this as TimerSettingOOutput, _$identity);
 
   /// Serializes this TimerSettingOOutput to a JSON map.
   Map<String, dynamic> toJson();
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is TimerSettingOOutput &&
-            (identical(other.isEnabled, isEnabled) ||
-                other.isEnabled == isEnabled) &&
-            (identical(other.value, value) || other.value == value));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, isEnabled, value);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TimerSettingOOutput&&(identical(other.isEnabled, isEnabled) || other.isEnabled == isEnabled)&&(identical(other.value, value) || other.value == value));
+}
 
-  @override
-  String toString() {
-    return 'TimerSettingOOutput(isEnabled: $isEnabled, value: $value)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,isEnabled,value);
+
+@override
+String toString() {
+  return 'TimerSettingOOutput(isEnabled: $isEnabled, value: $value)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $TimerSettingOOutputCopyWith<$Res> {
-  factory $TimerSettingOOutputCopyWith(
-          TimerSettingOOutput value, $Res Function(TimerSettingOOutput) _then) =
-      _$TimerSettingOOutputCopyWithImpl;
-  @useResult
-  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
-}
+abstract mixin class $TimerSettingOOutputCopyWith<$Res>  {
+  factory $TimerSettingOOutputCopyWith(TimerSettingOOutput value, $Res Function(TimerSettingOOutput) _then) = _$TimerSettingOOutputCopyWithImpl;
+@useResult
+$Res call({
+@RfControl<bool>() bool isEnabled,@RfControl<int>() int value
+});
 
+
+
+
+}
 /// @nodoc
 class _$TimerSettingOOutputCopyWithImpl<$Res>
     implements $TimerSettingOOutputCopyWith<$Res> {
@@ -3704,255 +2516,199 @@ class _$TimerSettingOOutputCopyWithImpl<$Res>
   final TimerSettingOOutput _self;
   final $Res Function(TimerSettingOOutput) _then;
 
-  /// Create a copy of TimerSettingOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isEnabled = null,
-    Object? value = null,
-  }) {
-    return _then(_self.copyWith(
-      isEnabled: null == isEnabled
-          ? _self.isEnabled
-          : isEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      value: null == value
-          ? _self.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
+/// Create a copy of TimerSettingOOutput
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? isEnabled = null,Object? value = null,}) {
+  return _then(_self.copyWith(
+isEnabled: null == isEnabled ? _self.isEnabled : isEnabled // ignore: cast_nullable_to_non_nullable
+as bool,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
 }
+
+}
+
 
 /// Adds pattern-matching-related methods to [TimerSettingOOutput].
 extension TimerSettingOOutputPatterns on TimerSettingOOutput {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_TimerSettingOOutput value)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _TimerSettingOOutput() when $default != null:
-        return $default(_that);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _TimerSettingOOutput value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _TimerSettingOOutput() when $default != null:
+return $default(_that);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_TimerSettingOOutput value) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _TimerSettingOOutput():
-        return $default(_that);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _TimerSettingOOutput value)  $default,){
+final _that = this;
+switch (_that) {
+case _TimerSettingOOutput():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_TimerSettingOOutput value)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _TimerSettingOOutput() when $default != null:
-        return $default(_that);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _TimerSettingOOutput value)?  $default,){
+final _that = this;
+switch (_that) {
+case _TimerSettingOOutput() when $default != null:
+return $default(_that);case _:
+  return null;
 
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            @RfControl<bool>() bool isEnabled, @RfControl<int>() int value)?
-        $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _TimerSettingOOutput() when $default != null:
-        return $default(_that.isEnabled, _that.value);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@RfControl<bool>()  bool isEnabled, @RfControl<int>()  int value)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _TimerSettingOOutput() when $default != null:
+return $default(_that.isEnabled,_that.value);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(
-            @RfControl<bool>() bool isEnabled, @RfControl<int>() int value)
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _TimerSettingOOutput():
-        return $default(_that.isEnabled, _that.value);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@RfControl<bool>()  bool isEnabled, @RfControl<int>()  int value)  $default,) {final _that = this;
+switch (_that) {
+case _TimerSettingOOutput():
+return $default(_that.isEnabled,_that.value);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            @RfControl<bool>() bool isEnabled, @RfControl<int>() int value)?
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _TimerSettingOOutput() when $default != null:
-        return $default(_that.isEnabled, _that.value);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@RfControl<bool>()  bool isEnabled, @RfControl<int>()  int value)?  $default,) {final _that = this;
+switch (_that) {
+case _TimerSettingOOutput() when $default != null:
+return $default(_that.isEnabled,_that.value);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
+
 class _TimerSettingOOutput implements TimerSettingOOutput {
-  const _TimerSettingOOutput(
-      {@RfControl<bool>() this.isEnabled = false,
-      @RfControl<int>() this.value = 5});
-  factory _TimerSettingOOutput.fromJson(Map<String, dynamic> json) =>
-      _$TimerSettingOOutputFromJson(json);
+  const _TimerSettingOOutput({@RfControl<bool>() this.isEnabled = false, @RfControl<int>() this.value = 5});
+  factory _TimerSettingOOutput.fromJson(Map<String, dynamic> json) => _$TimerSettingOOutputFromJson(json);
 
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isEnabled;
-  @override
-  @JsonKey()
-  @RfControl<int>()
-  final int value;
+@override@JsonKey()@RfControl<bool>() final  bool isEnabled;
+@override@JsonKey()@RfControl<int>() final  int value;
 
-  /// Create a copy of TimerSettingOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$TimerSettingOOutputCopyWith<_TimerSettingOOutput> get copyWith =>
-      __$TimerSettingOOutputCopyWithImpl<_TimerSettingOOutput>(
-          this, _$identity);
+/// Create a copy of TimerSettingOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$TimerSettingOOutputCopyWith<_TimerSettingOOutput> get copyWith => __$TimerSettingOOutputCopyWithImpl<_TimerSettingOOutput>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$TimerSettingOOutputToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$TimerSettingOOutputToJson(this, );
+}
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _TimerSettingOOutput &&
-            (identical(other.isEnabled, isEnabled) ||
-                other.isEnabled == isEnabled) &&
-            (identical(other.value, value) || other.value == value));
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TimerSettingOOutput&&(identical(other.isEnabled, isEnabled) || other.isEnabled == isEnabled)&&(identical(other.value, value) || other.value == value));
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, isEnabled, value);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,isEnabled,value);
 
-  @override
-  String toString() {
-    return 'TimerSettingOOutput(isEnabled: $isEnabled, value: $value)';
-  }
+@override
+String toString() {
+  return 'TimerSettingOOutput(isEnabled: $isEnabled, value: $value)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$TimerSettingOOutputCopyWith<$Res>
-    implements $TimerSettingOOutputCopyWith<$Res> {
-  factory _$TimerSettingOOutputCopyWith(_TimerSettingOOutput value,
-          $Res Function(_TimerSettingOOutput) _then) =
-      __$TimerSettingOOutputCopyWithImpl;
-  @override
-  @useResult
-  $Res call({@RfControl<bool>() bool isEnabled, @RfControl<int>() int value});
-}
+abstract mixin class _$TimerSettingOOutputCopyWith<$Res> implements $TimerSettingOOutputCopyWith<$Res> {
+  factory _$TimerSettingOOutputCopyWith(_TimerSettingOOutput value, $Res Function(_TimerSettingOOutput) _then) = __$TimerSettingOOutputCopyWithImpl;
+@override @useResult
+$Res call({
+@RfControl<bool>() bool isEnabled,@RfControl<int>() int value
+});
 
+
+
+
+}
 /// @nodoc
 class __$TimerSettingOOutputCopyWithImpl<$Res>
     implements _$TimerSettingOOutputCopyWith<$Res> {
@@ -3961,104 +2717,63 @@ class __$TimerSettingOOutputCopyWithImpl<$Res>
   final _TimerSettingOOutput _self;
   final $Res Function(_TimerSettingOOutput) _then;
 
-  /// Create a copy of TimerSettingOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? isEnabled = null,
-    Object? value = null,
-  }) {
-    return _then(_TimerSettingOOutput(
-      isEnabled: null == isEnabled
-          ? _self.isEnabled
-          : isEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      value: null == value
-          ? _self.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
+/// Create a copy of TimerSettingOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? isEnabled = null,Object? value = null,}) {
+  return _then(_TimerSettingOOutput(
+isEnabled: null == isEnabled ? _self.isEnabled : isEnabled // ignore: cast_nullable_to_non_nullable
+as bool,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
 }
+
+
+}
+
 
 /// @nodoc
 mixin _$IncidenceFilterOOutput {
-  @RfControl<bool>()
-  bool get isMobilityEnabled;
-  @RfControl<bool>()
-  bool get isFurcationEnabled;
-  @RfControl<bool>()
-  bool get isBleedingEnabled;
-  @RfControl<bool>()
-  bool get isSuppurationEnabled;
-  @RfControl<bool>()
-  bool get isCalculusEnabled;
-  @RfControl<bool>()
-  bool get isPlaqueEnabled;
 
-  /// Create a copy of IncidenceFilterOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $IncidenceFilterOOutputCopyWith<IncidenceFilterOOutput> get copyWith =>
-      _$IncidenceFilterOOutputCopyWithImpl<IncidenceFilterOOutput>(
-          this as IncidenceFilterOOutput, _$identity);
+@RfControl<bool>() bool get isMobilityEnabled;@RfControl<bool>() bool get isFurcationEnabled;@RfControl<bool>() bool get isBleedingEnabled;@RfControl<bool>() bool get isSuppurationEnabled;@RfControl<bool>() bool get isCalculusEnabled;@RfControl<bool>() bool get isPlaqueEnabled;
+/// Create a copy of IncidenceFilterOOutput
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$IncidenceFilterOOutputCopyWith<IncidenceFilterOOutput> get copyWith => _$IncidenceFilterOOutputCopyWithImpl<IncidenceFilterOOutput>(this as IncidenceFilterOOutput, _$identity);
 
   /// Serializes this IncidenceFilterOOutput to a JSON map.
   Map<String, dynamic> toJson();
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is IncidenceFilterOOutput &&
-            (identical(other.isMobilityEnabled, isMobilityEnabled) ||
-                other.isMobilityEnabled == isMobilityEnabled) &&
-            (identical(other.isFurcationEnabled, isFurcationEnabled) ||
-                other.isFurcationEnabled == isFurcationEnabled) &&
-            (identical(other.isBleedingEnabled, isBleedingEnabled) ||
-                other.isBleedingEnabled == isBleedingEnabled) &&
-            (identical(other.isSuppurationEnabled, isSuppurationEnabled) ||
-                other.isSuppurationEnabled == isSuppurationEnabled) &&
-            (identical(other.isCalculusEnabled, isCalculusEnabled) ||
-                other.isCalculusEnabled == isCalculusEnabled) &&
-            (identical(other.isPlaqueEnabled, isPlaqueEnabled) ||
-                other.isPlaqueEnabled == isPlaqueEnabled));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      isMobilityEnabled,
-      isFurcationEnabled,
-      isBleedingEnabled,
-      isSuppurationEnabled,
-      isCalculusEnabled,
-      isPlaqueEnabled);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is IncidenceFilterOOutput&&(identical(other.isMobilityEnabled, isMobilityEnabled) || other.isMobilityEnabled == isMobilityEnabled)&&(identical(other.isFurcationEnabled, isFurcationEnabled) || other.isFurcationEnabled == isFurcationEnabled)&&(identical(other.isBleedingEnabled, isBleedingEnabled) || other.isBleedingEnabled == isBleedingEnabled)&&(identical(other.isSuppurationEnabled, isSuppurationEnabled) || other.isSuppurationEnabled == isSuppurationEnabled)&&(identical(other.isCalculusEnabled, isCalculusEnabled) || other.isCalculusEnabled == isCalculusEnabled)&&(identical(other.isPlaqueEnabled, isPlaqueEnabled) || other.isPlaqueEnabled == isPlaqueEnabled));
+}
 
-  @override
-  String toString() {
-    return 'IncidenceFilterOOutput(isMobilityEnabled: $isMobilityEnabled, isFurcationEnabled: $isFurcationEnabled, isBleedingEnabled: $isBleedingEnabled, isSuppurationEnabled: $isSuppurationEnabled, isCalculusEnabled: $isCalculusEnabled, isPlaqueEnabled: $isPlaqueEnabled)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,isMobilityEnabled,isFurcationEnabled,isBleedingEnabled,isSuppurationEnabled,isCalculusEnabled,isPlaqueEnabled);
+
+@override
+String toString() {
+  return 'IncidenceFilterOOutput(isMobilityEnabled: $isMobilityEnabled, isFurcationEnabled: $isFurcationEnabled, isBleedingEnabled: $isBleedingEnabled, isSuppurationEnabled: $isSuppurationEnabled, isCalculusEnabled: $isCalculusEnabled, isPlaqueEnabled: $isPlaqueEnabled)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $IncidenceFilterOOutputCopyWith<$Res> {
-  factory $IncidenceFilterOOutputCopyWith(IncidenceFilterOOutput value,
-          $Res Function(IncidenceFilterOOutput) _then) =
-      _$IncidenceFilterOOutputCopyWithImpl;
-  @useResult
-  $Res call(
-      {@RfControl<bool>() bool isMobilityEnabled,
-      @RfControl<bool>() bool isFurcationEnabled,
-      @RfControl<bool>() bool isBleedingEnabled,
-      @RfControl<bool>() bool isSuppurationEnabled,
-      @RfControl<bool>() bool isCalculusEnabled,
-      @RfControl<bool>() bool isPlaqueEnabled});
-}
+abstract mixin class $IncidenceFilterOOutputCopyWith<$Res>  {
+  factory $IncidenceFilterOOutputCopyWith(IncidenceFilterOOutput value, $Res Function(IncidenceFilterOOutput) _then) = _$IncidenceFilterOOutputCopyWithImpl;
+@useResult
+$Res call({
+@RfControl<bool>() bool isMobilityEnabled,@RfControl<bool>() bool isFurcationEnabled,@RfControl<bool>() bool isBleedingEnabled,@RfControl<bool>() bool isSuppurationEnabled,@RfControl<bool>() bool isCalculusEnabled,@RfControl<bool>() bool isPlaqueEnabled
+});
 
+
+
+
+}
 /// @nodoc
 class _$IncidenceFilterOOutputCopyWithImpl<$Res>
     implements $IncidenceFilterOOutputCopyWith<$Res> {
@@ -4067,350 +2782,207 @@ class _$IncidenceFilterOOutputCopyWithImpl<$Res>
   final IncidenceFilterOOutput _self;
   final $Res Function(IncidenceFilterOOutput) _then;
 
-  /// Create a copy of IncidenceFilterOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isMobilityEnabled = null,
-    Object? isFurcationEnabled = null,
-    Object? isBleedingEnabled = null,
-    Object? isSuppurationEnabled = null,
-    Object? isCalculusEnabled = null,
-    Object? isPlaqueEnabled = null,
-  }) {
-    return _then(_self.copyWith(
-      isMobilityEnabled: null == isMobilityEnabled
-          ? _self.isMobilityEnabled
-          : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFurcationEnabled: null == isFurcationEnabled
-          ? _self.isFurcationEnabled
-          : isFurcationEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isBleedingEnabled: null == isBleedingEnabled
-          ? _self.isBleedingEnabled
-          : isBleedingEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSuppurationEnabled: null == isSuppurationEnabled
-          ? _self.isSuppurationEnabled
-          : isSuppurationEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isCalculusEnabled: null == isCalculusEnabled
-          ? _self.isCalculusEnabled
-          : isCalculusEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isPlaqueEnabled: null == isPlaqueEnabled
-          ? _self.isPlaqueEnabled
-          : isPlaqueEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+/// Create a copy of IncidenceFilterOOutput
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? isMobilityEnabled = null,Object? isFurcationEnabled = null,Object? isBleedingEnabled = null,Object? isSuppurationEnabled = null,Object? isCalculusEnabled = null,Object? isPlaqueEnabled = null,}) {
+  return _then(_self.copyWith(
+isMobilityEnabled: null == isMobilityEnabled ? _self.isMobilityEnabled : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isFurcationEnabled: null == isFurcationEnabled ? _self.isFurcationEnabled : isFurcationEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isBleedingEnabled: null == isBleedingEnabled ? _self.isBleedingEnabled : isBleedingEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isSuppurationEnabled: null == isSuppurationEnabled ? _self.isSuppurationEnabled : isSuppurationEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isCalculusEnabled: null == isCalculusEnabled ? _self.isCalculusEnabled : isCalculusEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isPlaqueEnabled: null == isPlaqueEnabled ? _self.isPlaqueEnabled : isPlaqueEnabled // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
+
+}
+
 
 /// Adds pattern-matching-related methods to [IncidenceFilterOOutput].
 extension IncidenceFilterOOutputPatterns on IncidenceFilterOOutput {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_IncidenceFilterOOutput value)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _IncidenceFilterOOutput() when $default != null:
-        return $default(_that);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _IncidenceFilterOOutput value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _IncidenceFilterOOutput() when $default != null:
+return $default(_that);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_IncidenceFilterOOutput value) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _IncidenceFilterOOutput():
-        return $default(_that);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _IncidenceFilterOOutput value)  $default,){
+final _that = this;
+switch (_that) {
+case _IncidenceFilterOOutput():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_IncidenceFilterOOutput value)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _IncidenceFilterOOutput() when $default != null:
-        return $default(_that);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _IncidenceFilterOOutput value)?  $default,){
+final _that = this;
+switch (_that) {
+case _IncidenceFilterOOutput() when $default != null:
+return $default(_that);case _:
+  return null;
 
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            @RfControl<bool>() bool isMobilityEnabled,
-            @RfControl<bool>() bool isFurcationEnabled,
-            @RfControl<bool>() bool isBleedingEnabled,
-            @RfControl<bool>() bool isSuppurationEnabled,
-            @RfControl<bool>() bool isCalculusEnabled,
-            @RfControl<bool>() bool isPlaqueEnabled)?
-        $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _IncidenceFilterOOutput() when $default != null:
-        return $default(
-            _that.isMobilityEnabled,
-            _that.isFurcationEnabled,
-            _that.isBleedingEnabled,
-            _that.isSuppurationEnabled,
-            _that.isCalculusEnabled,
-            _that.isPlaqueEnabled);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@RfControl<bool>()  bool isMobilityEnabled, @RfControl<bool>()  bool isFurcationEnabled, @RfControl<bool>()  bool isBleedingEnabled, @RfControl<bool>()  bool isSuppurationEnabled, @RfControl<bool>()  bool isCalculusEnabled, @RfControl<bool>()  bool isPlaqueEnabled)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _IncidenceFilterOOutput() when $default != null:
+return $default(_that.isMobilityEnabled,_that.isFurcationEnabled,_that.isBleedingEnabled,_that.isSuppurationEnabled,_that.isCalculusEnabled,_that.isPlaqueEnabled);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(
-            @RfControl<bool>() bool isMobilityEnabled,
-            @RfControl<bool>() bool isFurcationEnabled,
-            @RfControl<bool>() bool isBleedingEnabled,
-            @RfControl<bool>() bool isSuppurationEnabled,
-            @RfControl<bool>() bool isCalculusEnabled,
-            @RfControl<bool>() bool isPlaqueEnabled)
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _IncidenceFilterOOutput():
-        return $default(
-            _that.isMobilityEnabled,
-            _that.isFurcationEnabled,
-            _that.isBleedingEnabled,
-            _that.isSuppurationEnabled,
-            _that.isCalculusEnabled,
-            _that.isPlaqueEnabled);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@RfControl<bool>()  bool isMobilityEnabled, @RfControl<bool>()  bool isFurcationEnabled, @RfControl<bool>()  bool isBleedingEnabled, @RfControl<bool>()  bool isSuppurationEnabled, @RfControl<bool>()  bool isCalculusEnabled, @RfControl<bool>()  bool isPlaqueEnabled)  $default,) {final _that = this;
+switch (_that) {
+case _IncidenceFilterOOutput():
+return $default(_that.isMobilityEnabled,_that.isFurcationEnabled,_that.isBleedingEnabled,_that.isSuppurationEnabled,_that.isCalculusEnabled,_that.isPlaqueEnabled);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            @RfControl<bool>() bool isMobilityEnabled,
-            @RfControl<bool>() bool isFurcationEnabled,
-            @RfControl<bool>() bool isBleedingEnabled,
-            @RfControl<bool>() bool isSuppurationEnabled,
-            @RfControl<bool>() bool isCalculusEnabled,
-            @RfControl<bool>() bool isPlaqueEnabled)?
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _IncidenceFilterOOutput() when $default != null:
-        return $default(
-            _that.isMobilityEnabled,
-            _that.isFurcationEnabled,
-            _that.isBleedingEnabled,
-            _that.isSuppurationEnabled,
-            _that.isCalculusEnabled,
-            _that.isPlaqueEnabled);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@RfControl<bool>()  bool isMobilityEnabled, @RfControl<bool>()  bool isFurcationEnabled, @RfControl<bool>()  bool isBleedingEnabled, @RfControl<bool>()  bool isSuppurationEnabled, @RfControl<bool>()  bool isCalculusEnabled, @RfControl<bool>()  bool isPlaqueEnabled)?  $default,) {final _that = this;
+switch (_that) {
+case _IncidenceFilterOOutput() when $default != null:
+return $default(_that.isMobilityEnabled,_that.isFurcationEnabled,_that.isBleedingEnabled,_that.isSuppurationEnabled,_that.isCalculusEnabled,_that.isPlaqueEnabled);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
+
 class _IncidenceFilterOOutput implements IncidenceFilterOOutput {
-  const _IncidenceFilterOOutput(
-      {@RfControl<bool>() this.isMobilityEnabled = true,
-      @RfControl<bool>() this.isFurcationEnabled = true,
-      @RfControl<bool>() this.isBleedingEnabled = true,
-      @RfControl<bool>() this.isSuppurationEnabled = true,
-      @RfControl<bool>() this.isCalculusEnabled = true,
-      @RfControl<bool>() this.isPlaqueEnabled = true});
-  factory _IncidenceFilterOOutput.fromJson(Map<String, dynamic> json) =>
-      _$IncidenceFilterOOutputFromJson(json);
+  const _IncidenceFilterOOutput({@RfControl<bool>() this.isMobilityEnabled = true, @RfControl<bool>() this.isFurcationEnabled = true, @RfControl<bool>() this.isBleedingEnabled = true, @RfControl<bool>() this.isSuppurationEnabled = true, @RfControl<bool>() this.isCalculusEnabled = true, @RfControl<bool>() this.isPlaqueEnabled = true});
+  factory _IncidenceFilterOOutput.fromJson(Map<String, dynamic> json) => _$IncidenceFilterOOutputFromJson(json);
 
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isMobilityEnabled;
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isFurcationEnabled;
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isBleedingEnabled;
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isSuppurationEnabled;
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isCalculusEnabled;
-  @override
-  @JsonKey()
-  @RfControl<bool>()
-  final bool isPlaqueEnabled;
+@override@JsonKey()@RfControl<bool>() final  bool isMobilityEnabled;
+@override@JsonKey()@RfControl<bool>() final  bool isFurcationEnabled;
+@override@JsonKey()@RfControl<bool>() final  bool isBleedingEnabled;
+@override@JsonKey()@RfControl<bool>() final  bool isSuppurationEnabled;
+@override@JsonKey()@RfControl<bool>() final  bool isCalculusEnabled;
+@override@JsonKey()@RfControl<bool>() final  bool isPlaqueEnabled;
 
-  /// Create a copy of IncidenceFilterOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$IncidenceFilterOOutputCopyWith<_IncidenceFilterOOutput> get copyWith =>
-      __$IncidenceFilterOOutputCopyWithImpl<_IncidenceFilterOOutput>(
-          this, _$identity);
+/// Create a copy of IncidenceFilterOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$IncidenceFilterOOutputCopyWith<_IncidenceFilterOOutput> get copyWith => __$IncidenceFilterOOutputCopyWithImpl<_IncidenceFilterOOutput>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$IncidenceFilterOOutputToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$IncidenceFilterOOutputToJson(this, );
+}
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _IncidenceFilterOOutput &&
-            (identical(other.isMobilityEnabled, isMobilityEnabled) ||
-                other.isMobilityEnabled == isMobilityEnabled) &&
-            (identical(other.isFurcationEnabled, isFurcationEnabled) ||
-                other.isFurcationEnabled == isFurcationEnabled) &&
-            (identical(other.isBleedingEnabled, isBleedingEnabled) ||
-                other.isBleedingEnabled == isBleedingEnabled) &&
-            (identical(other.isSuppurationEnabled, isSuppurationEnabled) ||
-                other.isSuppurationEnabled == isSuppurationEnabled) &&
-            (identical(other.isCalculusEnabled, isCalculusEnabled) ||
-                other.isCalculusEnabled == isCalculusEnabled) &&
-            (identical(other.isPlaqueEnabled, isPlaqueEnabled) ||
-                other.isPlaqueEnabled == isPlaqueEnabled));
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _IncidenceFilterOOutput&&(identical(other.isMobilityEnabled, isMobilityEnabled) || other.isMobilityEnabled == isMobilityEnabled)&&(identical(other.isFurcationEnabled, isFurcationEnabled) || other.isFurcationEnabled == isFurcationEnabled)&&(identical(other.isBleedingEnabled, isBleedingEnabled) || other.isBleedingEnabled == isBleedingEnabled)&&(identical(other.isSuppurationEnabled, isSuppurationEnabled) || other.isSuppurationEnabled == isSuppurationEnabled)&&(identical(other.isCalculusEnabled, isCalculusEnabled) || other.isCalculusEnabled == isCalculusEnabled)&&(identical(other.isPlaqueEnabled, isPlaqueEnabled) || other.isPlaqueEnabled == isPlaqueEnabled));
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      isMobilityEnabled,
-      isFurcationEnabled,
-      isBleedingEnabled,
-      isSuppurationEnabled,
-      isCalculusEnabled,
-      isPlaqueEnabled);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,isMobilityEnabled,isFurcationEnabled,isBleedingEnabled,isSuppurationEnabled,isCalculusEnabled,isPlaqueEnabled);
 
-  @override
-  String toString() {
-    return 'IncidenceFilterOOutput(isMobilityEnabled: $isMobilityEnabled, isFurcationEnabled: $isFurcationEnabled, isBleedingEnabled: $isBleedingEnabled, isSuppurationEnabled: $isSuppurationEnabled, isCalculusEnabled: $isCalculusEnabled, isPlaqueEnabled: $isPlaqueEnabled)';
-  }
+@override
+String toString() {
+  return 'IncidenceFilterOOutput(isMobilityEnabled: $isMobilityEnabled, isFurcationEnabled: $isFurcationEnabled, isBleedingEnabled: $isBleedingEnabled, isSuppurationEnabled: $isSuppurationEnabled, isCalculusEnabled: $isCalculusEnabled, isPlaqueEnabled: $isPlaqueEnabled)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$IncidenceFilterOOutputCopyWith<$Res>
-    implements $IncidenceFilterOOutputCopyWith<$Res> {
-  factory _$IncidenceFilterOOutputCopyWith(_IncidenceFilterOOutput value,
-          $Res Function(_IncidenceFilterOOutput) _then) =
-      __$IncidenceFilterOOutputCopyWithImpl;
-  @override
-  @useResult
-  $Res call(
-      {@RfControl<bool>() bool isMobilityEnabled,
-      @RfControl<bool>() bool isFurcationEnabled,
-      @RfControl<bool>() bool isBleedingEnabled,
-      @RfControl<bool>() bool isSuppurationEnabled,
-      @RfControl<bool>() bool isCalculusEnabled,
-      @RfControl<bool>() bool isPlaqueEnabled});
-}
+abstract mixin class _$IncidenceFilterOOutputCopyWith<$Res> implements $IncidenceFilterOOutputCopyWith<$Res> {
+  factory _$IncidenceFilterOOutputCopyWith(_IncidenceFilterOOutput value, $Res Function(_IncidenceFilterOOutput) _then) = __$IncidenceFilterOOutputCopyWithImpl;
+@override @useResult
+$Res call({
+@RfControl<bool>() bool isMobilityEnabled,@RfControl<bool>() bool isFurcationEnabled,@RfControl<bool>() bool isBleedingEnabled,@RfControl<bool>() bool isSuppurationEnabled,@RfControl<bool>() bool isCalculusEnabled,@RfControl<bool>() bool isPlaqueEnabled
+});
 
+
+
+
+}
 /// @nodoc
 class __$IncidenceFilterOOutputCopyWithImpl<$Res>
     implements _$IncidenceFilterOOutputCopyWith<$Res> {
@@ -4419,45 +2991,21 @@ class __$IncidenceFilterOOutputCopyWithImpl<$Res>
   final _IncidenceFilterOOutput _self;
   final $Res Function(_IncidenceFilterOOutput) _then;
 
-  /// Create a copy of IncidenceFilterOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? isMobilityEnabled = null,
-    Object? isFurcationEnabled = null,
-    Object? isBleedingEnabled = null,
-    Object? isSuppurationEnabled = null,
-    Object? isCalculusEnabled = null,
-    Object? isPlaqueEnabled = null,
-  }) {
-    return _then(_IncidenceFilterOOutput(
-      isMobilityEnabled: null == isMobilityEnabled
-          ? _self.isMobilityEnabled
-          : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFurcationEnabled: null == isFurcationEnabled
-          ? _self.isFurcationEnabled
-          : isFurcationEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isBleedingEnabled: null == isBleedingEnabled
-          ? _self.isBleedingEnabled
-          : isBleedingEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSuppurationEnabled: null == isSuppurationEnabled
-          ? _self.isSuppurationEnabled
-          : isSuppurationEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isCalculusEnabled: null == isCalculusEnabled
-          ? _self.isCalculusEnabled
-          : isCalculusEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isPlaqueEnabled: null == isPlaqueEnabled
-          ? _self.isPlaqueEnabled
-          : isPlaqueEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+/// Create a copy of IncidenceFilterOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? isMobilityEnabled = null,Object? isFurcationEnabled = null,Object? isBleedingEnabled = null,Object? isSuppurationEnabled = null,Object? isCalculusEnabled = null,Object? isPlaqueEnabled = null,}) {
+  return _then(_IncidenceFilterOOutput(
+isMobilityEnabled: null == isMobilityEnabled ? _self.isMobilityEnabled : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isFurcationEnabled: null == isFurcationEnabled ? _self.isFurcationEnabled : isFurcationEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isBleedingEnabled: null == isBleedingEnabled ? _self.isBleedingEnabled : isBleedingEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isSuppurationEnabled: null == isSuppurationEnabled ? _self.isSuppurationEnabled : isSuppurationEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isCalculusEnabled: null == isCalculusEnabled ? _self.isCalculusEnabled : isCalculusEnabled // ignore: cast_nullable_to_non_nullable
+as bool,isPlaqueEnabled: null == isPlaqueEnabled ? _self.isPlaqueEnabled : isPlaqueEnabled // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
 }
 
 // dart format on

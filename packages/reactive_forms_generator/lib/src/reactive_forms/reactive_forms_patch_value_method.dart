@@ -3,11 +3,9 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart';
 
 class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
-  ReactiveFormPatchValueMethod(
-    super.field,
-    super.output,
-    super.requiredValidators,
-  );
+  ReactiveFormPatchValueMethod(super.field,
+      super.output,
+      super.requiredValidators,);
 
   @override
   Method formGroupArrayMethod() {
@@ -36,8 +34,10 @@ class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
   @override
   Method formGroupMethod() {
     return methodEntity.rebuild(
-      (b) => b.body = Code(
-        '${field.fieldControlName}.updateValue(${field.className}.formElements(value).rawValue, updateParent: updateParent, emitEvent:emitEvent);',
+          (b) =>
+      b.body = Code(
+        '${field.fieldControlName}.updateValue(${field
+            .className}.formElements(value).rawValue, updateParent: updateParent, emitEvent:emitEvent);',
       ),
     );
   }
@@ -45,33 +45,40 @@ class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
   @override
   Method defaultMethod() {
     return methodEntity.rebuild(
-      (b) => b.body = Code(
-        '${field.fieldControlName}.patchValue(value, updateParent: updateParent, emitEvent:emitEvent);',
+          (b) =>
+      b.body = Code(
+        '${field
+            .fieldControlName}.patchValue(value, updateParent: updateParent, emitEvent:emitEvent);',
       ),
     );
   }
 
-  Method get methodEntity => Method(
-        (b) => b
+  Method get methodEntity =>
+      Method(
+            (b) =>
+        b
           ..name = field.valuePatchMethodName
           ..lambda = false
           ..requiredParameters.add(
             Parameter(
-              (b) => b
+                  (b) =>
+              b
                 ..name = 'value'
                 ..type = Reference(field.type.toString()),
             ),
           )
           ..optionalParameters.addAll([
             Parameter(
-              (b) => b
+                  (b) =>
+              b
                 ..name = 'updateParent'
                 ..named = true
                 ..defaultTo = const Code('true')
                 ..type = const Reference('bool'),
             ),
             Parameter(
-              (b) => b
+                  (b) =>
+              b
                 ..name = 'emitEvent'
                 ..named = true
                 ..defaultTo = const Code('true')

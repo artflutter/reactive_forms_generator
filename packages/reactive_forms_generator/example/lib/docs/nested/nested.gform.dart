@@ -281,8 +281,13 @@ class SubGroupForm implements FormModel<SubGroup, SubGroup> {
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
+
+  FormControlWrapper<String> get id => FormControlWrapper<String>(
+        form.control(idControlPath()) as FormControl<String>,
+      );
 
   void idSetDisabled(
     bool disabled, {
@@ -1037,12 +1042,17 @@ class GroupForm implements FormModel<Group, Group> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
 
   FormArray<Map<String, Object?>> get subGroupListControl =>
       form.control(subGroupListControlPath())
           as FormArray<Map<String, Object?>>;
+
+  FormControlWrapper<String> get id => FormControlWrapper<String>(
+        form.control(idControlPath()) as FormControl<String>,
+      );
 
   List<SubGroupForm> get subGroupListSubGroupForm {
     final values = subGroupListControl.controls.map((e) => e.value).toList();

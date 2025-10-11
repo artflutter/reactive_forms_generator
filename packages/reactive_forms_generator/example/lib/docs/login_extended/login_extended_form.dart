@@ -26,7 +26,7 @@ class LoginExtendedFormWidget extends StatelessWidget {
           return Column(
             children: [
               ReactiveTextField<String>(
-                formControl: formModel.emailControl,
+                formControl: formModel.email.control,
                 validationMessages: {
                   ValidationMessage.required: (control) =>
                       'The email must not be empty',
@@ -44,7 +44,7 @@ class LoginExtendedFormWidget extends StatelessWidget {
               ),
               const SizedBox(height: 16.0),
               ReactiveTextField<String>(
-                formControl: formModel.passwordControl,
+                formControl: formModel.password.control,
                 obscureText: true,
                 validationMessages: {
                   ValidationMessage.required: (control) =>
@@ -62,12 +62,12 @@ class LoginExtendedFormWidget extends StatelessWidget {
               ),
               const SizedBox(height: 16.0),
               ReactiveSwitchListTile(
-                formControl: formModel.rememberMeControl,
+                formControl: formModel.rememberMe.control,
                 title: const Text('remember me'),
                 controlAffinity: ListTileControlAffinity.trailing,
               ),
               ReactiveSlider(
-                formControl: formModel.heightControl,
+                formControl: formModel.height.control,
                 min: 120,
                 max: 220,
               ),
@@ -79,10 +79,12 @@ class LoginExtendedFormWidget extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  formModel.submit(onValid: (model) {
-                    debugPrint(model.toString());
-                    debugPrint(model.email);
-                  });
+                  formModel.submit(
+                    onValid: (model) {
+                      debugPrint(model.toString());
+                      debugPrint(model.email);
+                    },
+                  );
                 },
                 child: const Text('Sign Up'),
               ),
@@ -94,15 +96,17 @@ class LoginExtendedFormWidget extends StatelessWidget {
                       return ElevatedButton(
                         onPressed: formModel.form.valid
                             ? () {
-                                formModel.updateValue(LoginExtended(
-                                  email: 'some@e.mail',
-                                  password: 'a',
-                                  timeout: 3,
-                                  theme: 'light',
-                                  height: 130,
-                                  mode: UserMode.user,
-                                  rememberMe: true,
-                                ));
+                                formModel.updateValue(
+                                  LoginExtended(
+                                    email: 'some@e.mail',
+                                    password: 'a',
+                                    timeout: 3,
+                                    theme: 'light',
+                                    height: 130,
+                                    mode: UserMode.user,
+                                    rememberMe: true,
+                                  ),
+                                );
                               }
                             : null,
                         child: const Text('Update'),

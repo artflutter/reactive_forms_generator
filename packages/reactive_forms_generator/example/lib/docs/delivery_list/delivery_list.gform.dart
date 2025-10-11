@@ -914,11 +914,16 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
 
   FormGroup get addressControl =>
       form.control(addressControlPath()) as FormGroup;
+
+  FormControlWrapper<String> get name => FormControlWrapper<String>(
+        form.control(nameControlPath()) as FormControl<String>,
+      );
 
   AddressForm get addressForm => AddressForm(form, pathBuilder('address'));
 
@@ -1263,11 +1268,21 @@ class AddressForm implements FormModel<Address, Address> {
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get streetControl =>
       form.control(streetControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get cityControl =>
       form.control(cityControlPath()) as FormControl<String>;
+
+  FormControlWrapper<String> get street => FormControlWrapper<String>(
+        form.control(streetControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get city => FormControlWrapper<String>(
+        form.control(cityControlPath()) as FormControl<String>,
+      );
 
   void streetSetDisabled(
     bool disabled, {
@@ -1670,14 +1685,30 @@ class ClientForm implements FormModel<Client, Client> {
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<ClientType> get clientTypeControl =>
       form.control(clientTypeControlPath()) as FormControl<ClientType>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get notesControl =>
       form.control(notesControlPath()) as FormControl<String>;
+
+  FormControlWrapper<ClientType> get clientType =>
+      FormControlWrapper<ClientType>(
+        form.control(clientTypeControlPath()) as FormControl<ClientType>,
+      );
+
+  FormControlWrapper<String> get name => FormControlWrapper<String>(
+        form.control(nameControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get notes => FormControlWrapper<String>(
+        form.control(notesControlPath()) as FormControl<String>,
+      );
 
   void clientTypeSetDisabled(
     bool disabled, {
@@ -2449,11 +2480,16 @@ class StandaloneDeliveryPointForm
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
 
   FormGroup get addressControl =>
       form.control(addressControlPath()) as FormGroup;
+
+  FormControlWrapper<String> get name => FormControlWrapper<String>(
+        form.control(nameControlPath()) as FormControl<String>,
+      );
 
   AddressForm get addressForm => AddressForm(form, pathBuilder('address'));
 

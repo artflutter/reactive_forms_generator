@@ -342,11 +342,21 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
+
+  FormControlWrapper<String> get email => FormControlWrapper<String>(
+        form.control(emailControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get password => FormControlWrapper<String>(
+        form.control(passwordControlPath()) as FormControl<String>,
+      );
 
   void emailSetDisabled(
     bool disabled, {

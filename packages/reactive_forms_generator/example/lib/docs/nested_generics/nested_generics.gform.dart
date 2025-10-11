@@ -403,10 +403,15 @@ class ProductDetailsForm<P extends Product, C extends Cart>
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get descriptionControl =>
       form.control(descriptionControlPath()) as FormControl<String>;
 
   FormGroup get idControl => form.control(idControlPath()) as FormGroup;
+
+  FormControlWrapper<String> get description => FormControlWrapper<String>(
+        form.control(descriptionControlPath()) as FormControl<String>,
+      );
 
   IdForm<P, C> get idForm => IdForm(form, pathBuilder('id'));
 
@@ -755,11 +760,21 @@ class IdForm<P extends Product, C extends Cart>
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get companyNameControl =>
       form.control(companyNameControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
+
+  FormControlWrapper<String> get companyName => FormControlWrapper<String>(
+        form.control(companyNameControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get name => FormControlWrapper<String>(
+        form.control(nameControlPath()) as FormControl<String>,
+      );
 
   void companyNameSetDisabled(
     bool disabled, {

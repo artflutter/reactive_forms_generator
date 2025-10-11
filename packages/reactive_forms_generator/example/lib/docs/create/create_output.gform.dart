@@ -1004,21 +1004,27 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get businessNumberControl =>
       form.control(businessNumberControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<List<String>> get fileIdsControl =>
       form.control(fileIdsControlPath()) as FormControl<List<String>>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<bool> get sameMailingAddressAsCompanyControl =>
       form.control(sameMailingAddressAsCompanyControlPath())
           as FormControl<bool>;
@@ -1034,6 +1040,33 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
 
   FormArray<Map<String, Object?>> get adminsControl =>
       form.control(adminsControlPath()) as FormArray<Map<String, Object?>>;
+
+  FormControlWrapper<String> get id => FormControlWrapper<String>(
+        form.control(idControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get businessNumber => FormControlWrapper<String>(
+        form.control(businessNumberControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<List<String>> get fileIds =>
+      FormControlWrapper<List<String>>(
+        form.control(fileIdsControlPath()) as FormControl<List<String>>,
+      );
+
+  FormControlWrapper<String> get name => FormControlWrapper<String>(
+        form.control(nameControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get email => FormControlWrapper<String>(
+        form.control(emailControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<bool> get sameMailingAddressAsCompany =>
+      FormControlWrapper<bool>(
+        form.control(sameMailingAddressAsCompanyControlPath())
+            as FormControl<bool>,
+      );
 
   AddressForm get companyAddressForm =>
       AddressForm(form, pathBuilder('companyAddress'));
@@ -1806,17 +1839,37 @@ class AddressForm implements FormModel<Address, AddressOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get streetControl =>
       form.control(streetControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get cityControl =>
       form.control(cityControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get stateOrProvinceControl =>
       form.control(stateOrProvinceControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get zipCodeControl =>
       form.control(zipCodeControlPath()) as FormControl<String>;
+
+  FormControlWrapper<String> get street => FormControlWrapper<String>(
+        form.control(streetControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get city => FormControlWrapper<String>(
+        form.control(cityControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get stateOrProvince => FormControlWrapper<String>(
+        form.control(stateOrProvinceControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get zipCode => FormControlWrapper<String>(
+        form.control(zipCodeControlPath()) as FormControl<String>,
+      );
 
   void streetSetDisabled(
     bool disabled, {
@@ -2307,14 +2360,29 @@ class PrimaryContactForm
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get fullNameControl =>
       form.control(fullNameControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get jobTitleControl =>
       form.control(jobTitleControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
+
+  FormControlWrapper<String> get fullName => FormControlWrapper<String>(
+        form.control(fullNameControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get jobTitle => FormControlWrapper<String>(
+        form.control(jobTitleControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get email => FormControlWrapper<String>(
+        form.control(emailControlPath()) as FormControl<String>,
+      );
 
   void fullNameSetDisabled(
     bool disabled, {
@@ -2778,14 +2846,29 @@ class AdminContactInformationForm
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get firstNameControl =>
       form.control(firstNameControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get lastNameControl =>
       form.control(lastNameControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
+
+  FormControlWrapper<String> get firstName => FormControlWrapper<String>(
+        form.control(firstNameControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get lastName => FormControlWrapper<String>(
+        form.control(lastNameControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get email => FormControlWrapper<String>(
+        form.control(emailControlPath()) as FormControl<String>,
+      );
 
   void firstNameSetDisabled(
     bool disabled, {

@@ -17,7 +17,7 @@ class LoginExtendedNullableFormWidget extends StatelessWidget {
           return Column(
             children: [
               ReactiveTextField<String>(
-                formControl: formModel.emailControl,
+                formControl: formModel.email.control,
                 validationMessages: {
                   ValidationMessage.required: (control) =>
                       'The email must not be empty',
@@ -35,7 +35,7 @@ class LoginExtendedNullableFormWidget extends StatelessWidget {
               ),
               const SizedBox(height: 16.0),
               ReactiveTextField<String>(
-                formControl: formModel.passwordControl,
+                formControl: formModel.password.control,
                 obscureText: true,
                 validationMessages: {
                   ValidationMessage.required: (control) =>
@@ -55,19 +55,21 @@ class LoginExtendedNullableFormWidget extends StatelessWidget {
               ListTile(
                 title: const Text('remember me'),
                 trailing: ReactiveSwitch(
-                  formControl: formModel.rememberMeControl,
+                  formControl: formModel.rememberMe.control,
                 ),
               ),
               ReactiveSlider(
-                formControl: formModel.heightControl,
+                formControl: formModel.height.control,
                 min: 120,
                 max: 220,
               ),
               ElevatedButton(
                 onPressed: () {
-                  formModel.submit(onValid: (model) {
-                    debugPrint(model.toString());
-                  });
+                  formModel.submit(
+                    onValid: (model) {
+                      debugPrint(model.toString());
+                    },
+                  );
                 },
                 child: const Text('Sign Up'),
               ),

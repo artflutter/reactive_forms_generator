@@ -23,9 +23,9 @@ class _ModelImplementsWidgetState extends State<ModelImplementsWidget> {
           return Column(
             children: [
               ReactiveTextField<String>(
-                formControl: formModel.emailControl,
+                formControl: formModel.email.control,
                 validationMessages: {
-                  ValidationMessage.required: (_) => 'Required'
+                  ValidationMessage.required: (_) => 'Required',
                 },
                 decoration: const InputDecoration(
                   labelText: 'Email',
@@ -36,7 +36,7 @@ class _ModelImplementsWidgetState extends State<ModelImplementsWidget> {
               ),
               const SizedBox(height: 8.0),
               ReactiveTextField<String>(
-                formControl: formModel.passwordControl,
+                formControl: formModel.password.control,
                 obscureText: true,
                 validationMessages: {
                   ValidationMessage.required: (_) => 'Required',
@@ -52,26 +52,29 @@ class _ModelImplementsWidgetState extends State<ModelImplementsWidget> {
               ),
               ReactiveModelImplementsFormConsumer(
                 builder: (context, formModel, child) {
-                  // debugPrint(formModel.passwordControl.errors);
+                  // debugPrint(formModel.password.control.errors);
                   // debugPrint(formModel.form);
                   debugPrint('dirty => ${formModel.form.dirty}');
                   debugPrint(
-                      'passwordDirty => ${formModel.passwordControl.dirty}');
+                    'passwordDirty => ${formModel.password.control.dirty}',
+                  );
 
                   return Column(
                     children: [
-                      Text(formModel.emailControl.errors.toString()),
-                      Text(formModel.passwordControl.errors.toString()),
+                      Text(formModel.email.control.errors.toString()),
+                      Text(formModel.password.control.errors.toString()),
                     ],
                   );
                 },
               ),
               ElevatedButton(
                 onPressed: () {
-                  formModel.submit(onValid: (model) {
-                    debugPrint(model.email);
-                    debugPrint(model.password);
-                  });
+                  formModel.submit(
+                    onValid: (model) {
+                      debugPrint(model.email);
+                      debugPrint(model.password);
+                    },
+                  );
                 },
                 child: const Text('Submit raw'),
               ),
@@ -82,8 +85,10 @@ class _ModelImplementsWidgetState extends State<ModelImplementsWidget> {
                     ModelImplements(email: 'some@e.mail', password: 'xx'),
                   );
                   setState(() {
-                    _emptyModel =
-                        ModelImplements(email: 'some@e.mail', password: 'xx');
+                    _emptyModel = ModelImplements(
+                      email: 'some@e.mail',
+                      password: 'xx',
+                    );
                   });
                 },
                 child: const Text('Update model'),
@@ -100,11 +105,13 @@ class _ModelImplementsWidgetState extends State<ModelImplementsWidget> {
                   return ElevatedButton(
                     onPressed: formModel.form.valid
                         ? () {
-                            formModel.submit(onValid: (model) {
-                              debugPrint(model.toString());
-                              debugPrint(model.email);
-                              debugPrint(model.password);
-                            });
+                            formModel.submit(
+                              onValid: (model) {
+                                debugPrint(model.toString());
+                                debugPrint(model.email);
+                                debugPrint(model.password);
+                              },
+                            );
                           }
                         : null,
                     child: const Text('Submit'),

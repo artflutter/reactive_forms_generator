@@ -795,27 +795,34 @@ class ProfileForm implements FormModel<Profile, Profile> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get anotherIdControl =>
       form.control(anotherIdControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<ChartingOrderValue> get chartingOrderControl =>
       form.control(chartingOrderControlPath())
           as FormControl<ChartingOrderValue>;
 
+  @Deprecated("Migrate to .control")
   FormControl<NumberingStandard> get numberingStandardControl =>
       form.control(numberingStandardControlPath())
           as FormControl<NumberingStandard>;
 
+  @Deprecated("Migrate to .control")
   FormControl<MeasurementType> get measurementTypeControl =>
       form.control(measurementTypeControlPath())
           as FormControl<MeasurementType>;
 
+  @Deprecated("Migrate to .control")
   FormControl<bool> get audioGuidanceControl =>
       form.control(audioGuidanceControlPath()) as FormControl<bool>;
 
@@ -826,6 +833,40 @@ class ProfileForm implements FormModel<Profile, Profile> {
       form.control(thresholdControlPath()) as FormGroup;
 
   FormGroup get timerControl => form.control(timerControlPath()) as FormGroup;
+
+  FormControlWrapper<String> get id => FormControlWrapper<String>(
+        form.control(idControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get anotherId => FormControlWrapper<String>(
+        form.control(anotherIdControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get name => FormControlWrapper<String>(
+        form.control(nameControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<ChartingOrderValue> get chartingOrder =>
+      FormControlWrapper<ChartingOrderValue>(
+        form.control(chartingOrderControlPath())
+            as FormControl<ChartingOrderValue>,
+      );
+
+  FormControlWrapper<NumberingStandard> get numberingStandard =>
+      FormControlWrapper<NumberingStandard>(
+        form.control(numberingStandardControlPath())
+            as FormControl<NumberingStandard>,
+      );
+
+  FormControlWrapper<MeasurementType> get measurementType =>
+      FormControlWrapper<MeasurementType>(
+        form.control(measurementTypeControlPath())
+            as FormControl<MeasurementType>,
+      );
+
+  FormControlWrapper<bool> get audioGuidance => FormControlWrapper<bool>(
+        form.control(audioGuidanceControlPath()) as FormControl<bool>,
+      );
 
   IncidenceFilterForm get incidenceFilterForm =>
       IncidenceFilterForm(form, pathBuilder('incidenceFilter'));
@@ -1575,23 +1616,53 @@ class IncidenceFilterForm
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<bool> get isMobilityEnabledControl =>
       form.control(isMobilityEnabledControlPath()) as FormControl<bool>;
 
+  @Deprecated("Migrate to .control")
   FormControl<bool> get isFurcationEnabledControl =>
       form.control(isFurcationEnabledControlPath()) as FormControl<bool>;
 
+  @Deprecated("Migrate to .control")
   FormControl<bool> get isBleedingEnabledControl =>
       form.control(isBleedingEnabledControlPath()) as FormControl<bool>;
 
+  @Deprecated("Migrate to .control")
   FormControl<bool> get isSuppurationEnabledControl =>
       form.control(isSuppurationEnabledControlPath()) as FormControl<bool>;
 
+  @Deprecated("Migrate to .control")
   FormControl<bool> get isCalculusEnabledControl =>
       form.control(isCalculusEnabledControlPath()) as FormControl<bool>;
 
+  @Deprecated("Migrate to .control")
   FormControl<bool> get isPlaqueEnabledControl =>
       form.control(isPlaqueEnabledControlPath()) as FormControl<bool>;
+
+  FormControlWrapper<bool> get isMobilityEnabled => FormControlWrapper<bool>(
+        form.control(isMobilityEnabledControlPath()) as FormControl<bool>,
+      );
+
+  FormControlWrapper<bool> get isFurcationEnabled => FormControlWrapper<bool>(
+        form.control(isFurcationEnabledControlPath()) as FormControl<bool>,
+      );
+
+  FormControlWrapper<bool> get isBleedingEnabled => FormControlWrapper<bool>(
+        form.control(isBleedingEnabledControlPath()) as FormControl<bool>,
+      );
+
+  FormControlWrapper<bool> get isSuppurationEnabled => FormControlWrapper<bool>(
+        form.control(isSuppurationEnabledControlPath()) as FormControl<bool>,
+      );
+
+  FormControlWrapper<bool> get isCalculusEnabled => FormControlWrapper<bool>(
+        form.control(isCalculusEnabledControlPath()) as FormControl<bool>,
+      );
+
+  FormControlWrapper<bool> get isPlaqueEnabled => FormControlWrapper<bool>(
+        form.control(isPlaqueEnabledControlPath()) as FormControl<bool>,
+      );
 
   void isMobilityEnabledSetDisabled(
     bool disabled, {
@@ -1995,11 +2066,21 @@ class ThresholdSettingForm
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<bool> get isEnabledControl =>
       form.control(isEnabledControlPath()) as FormControl<bool>;
 
+  @Deprecated("Migrate to .control")
   FormControl<int> get valueControl =>
       form.control(valueControlPath()) as FormControl<int>;
+
+  FormControlWrapper<bool> get isEnabled => FormControlWrapper<bool>(
+        form.control(isEnabledControlPath()) as FormControl<bool>,
+      );
+
+  FormControlWrapper<int> get value => FormControlWrapper<int>(
+        form.control(valueControlPath()) as FormControl<int>,
+      );
 
   void isEnabledSetDisabled(
     bool disabled, {
@@ -2292,11 +2373,21 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<bool> get isEnabledControl =>
       form.control(isEnabledControlPath()) as FormControl<bool>;
 
+  @Deprecated("Migrate to .control")
   FormControl<int> get valueControl =>
       form.control(valueControlPath()) as FormControl<int>;
+
+  FormControlWrapper<bool> get isEnabled => FormControlWrapper<bool>(
+        form.control(isEnabledControlPath()) as FormControl<bool>,
+      );
+
+  FormControlWrapper<int> get value => FormControlWrapper<int>(
+        form.control(valueControlPath()) as FormControl<int>,
+      );
 
   void isEnabledSetDisabled(
     bool disabled, {

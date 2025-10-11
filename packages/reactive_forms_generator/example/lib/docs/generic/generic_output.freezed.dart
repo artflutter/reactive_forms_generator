@@ -11,600 +11,534 @@ part of 'generic_output.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$TagsO<T> {
-  @RfControl()
-  List<T>? get tags;
 
-  /// Create a copy of TagsO
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $TagsOCopyWith<T, TagsO<T>> get copyWith =>
-      _$TagsOCopyWithImpl<T, TagsO<T>>(this as TagsO<T>, _$identity);
+@RfControl() List<T>? get tags;
+/// Create a copy of TagsO
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$TagsOCopyWith<T, TagsO<T>> get copyWith => _$TagsOCopyWithImpl<T, TagsO<T>>(this as TagsO<T>, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is TagsO<T> &&
-            const DeepCollectionEquality().equals(other.tags, tags));
-  }
 
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(tags));
 
-  @override
-  String toString() {
-    return 'TagsO<$T>(tags: $tags)';
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TagsO<T>&&const DeepCollectionEquality().equals(other.tags, tags));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(tags));
+
+@override
+String toString() {
+  return 'TagsO<$T>(tags: $tags)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $TagsOCopyWith<T, $Res> {
-  factory $TagsOCopyWith(TagsO<T> value, $Res Function(TagsO<T>) _then) =
-      _$TagsOCopyWithImpl;
-  @useResult
-  $Res call({@RfControl() List<T>? tags});
-}
+abstract mixin class $TagsOCopyWith<T,$Res>  {
+  factory $TagsOCopyWith(TagsO<T> value, $Res Function(TagsO<T>) _then) = _$TagsOCopyWithImpl;
+@useResult
+$Res call({
+@RfControl() List<T>? tags
+});
 
+
+
+
+}
 /// @nodoc
-class _$TagsOCopyWithImpl<T, $Res> implements $TagsOCopyWith<T, $Res> {
+class _$TagsOCopyWithImpl<T,$Res>
+    implements $TagsOCopyWith<T, $Res> {
   _$TagsOCopyWithImpl(this._self, this._then);
 
   final TagsO<T> _self;
   final $Res Function(TagsO<T>) _then;
 
-  /// Create a copy of TagsO
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? tags = freezed,
-  }) {
-    return _then(_self.copyWith(
-      tags: freezed == tags
-          ? _self.tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<T>?,
-    ));
-  }
+/// Create a copy of TagsO
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? tags = freezed,}) {
+  return _then(_self.copyWith(
+tags: freezed == tags ? _self.tags : tags // ignore: cast_nullable_to_non_nullable
+as List<T>?,
+  ));
 }
+
+}
+
 
 /// Adds pattern-matching-related methods to [TagsO].
 extension TagsOPatterns<T> on TagsO<T> {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_TagsO<T> value)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _TagsO() when $default != null:
-        return $default(_that);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _TagsO<T> value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _TagsO() when $default != null:
+return $default(_that);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_TagsO<T> value) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _TagsO():
-        return $default(_that);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _TagsO<T> value)  $default,){
+final _that = this;
+switch (_that) {
+case _TagsO():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_TagsO<T> value)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _TagsO() when $default != null:
-        return $default(_that);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _TagsO<T> value)?  $default,){
+final _that = this;
+switch (_that) {
+case _TagsO() when $default != null:
+return $default(_that);case _:
+  return null;
 
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(@RfControl() List<T>? tags)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _TagsO() when $default != null:
-        return $default(_that.tags);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@RfControl()  List<T>? tags)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _TagsO() when $default != null:
+return $default(_that.tags);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(@RfControl() List<T>? tags) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _TagsO():
-        return $default(_that.tags);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@RfControl()  List<T>? tags)  $default,) {final _that = this;
+switch (_that) {
+case _TagsO():
+return $default(_that.tags);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(@RfControl() List<T>? tags)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _TagsO() when $default != null:
-        return $default(_that.tags);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@RfControl()  List<T>? tags)?  $default,) {final _that = this;
+switch (_that) {
+case _TagsO() when $default != null:
+return $default(_that.tags);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
+
 
 class _TagsO<T> extends TagsO<T> {
-  _TagsO({@RfControl() required final List<T>? tags})
-      : _tags = tags,
-        super._();
+   _TagsO({@RfControl() required final  List<T>? tags}): _tags = tags,super._();
+  
 
-  final List<T>? _tags;
-  @override
-  @RfControl()
-  List<T>? get tags {
-    final value = _tags;
-    if (value == null) return null;
-    if (_tags is EqualUnmodifiableListView) return _tags;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+ final  List<T>? _tags;
+@override@RfControl() List<T>? get tags {
+  final value = _tags;
+  if (value == null) return null;
+  if (_tags is EqualUnmodifiableListView) return _tags;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
 
-  /// Create a copy of TagsO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$TagsOCopyWith<T, _TagsO<T>> get copyWith =>
-      __$TagsOCopyWithImpl<T, _TagsO<T>>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _TagsO<T> &&
-            const DeepCollectionEquality().equals(other._tags, _tags));
-  }
+/// Create a copy of TagsO
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$TagsOCopyWith<T, _TagsO<T>> get copyWith => __$TagsOCopyWithImpl<T, _TagsO<T>>(this, _$identity);
 
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_tags));
 
-  @override
-  String toString() {
-    return 'TagsO<$T>(tags: $tags)';
-  }
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TagsO<T>&&const DeepCollectionEquality().equals(other._tags, _tags));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_tags));
+
+@override
+String toString() {
+  return 'TagsO<$T>(tags: $tags)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$TagsOCopyWith<T, $Res>
-    implements $TagsOCopyWith<T, $Res> {
-  factory _$TagsOCopyWith(_TagsO<T> value, $Res Function(_TagsO<T>) _then) =
-      __$TagsOCopyWithImpl;
-  @override
-  @useResult
-  $Res call({@RfControl() List<T>? tags});
-}
+abstract mixin class _$TagsOCopyWith<T,$Res> implements $TagsOCopyWith<T, $Res> {
+  factory _$TagsOCopyWith(_TagsO<T> value, $Res Function(_TagsO<T>) _then) = __$TagsOCopyWithImpl;
+@override @useResult
+$Res call({
+@RfControl() List<T>? tags
+});
 
+
+
+
+}
 /// @nodoc
-class __$TagsOCopyWithImpl<T, $Res> implements _$TagsOCopyWith<T, $Res> {
+class __$TagsOCopyWithImpl<T,$Res>
+    implements _$TagsOCopyWith<T, $Res> {
   __$TagsOCopyWithImpl(this._self, this._then);
 
   final _TagsO<T> _self;
   final $Res Function(_TagsO<T>) _then;
 
-  /// Create a copy of TagsO
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? tags = freezed,
-  }) {
-    return _then(_TagsO<T>(
-      tags: freezed == tags
-          ? _self._tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<T>?,
-    ));
-  }
+/// Create a copy of TagsO
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? tags = freezed,}) {
+  return _then(_TagsO<T>(
+tags: freezed == tags ? _self._tags : tags // ignore: cast_nullable_to_non_nullable
+as List<T>?,
+  ));
+}
+
+
 }
 
 /// @nodoc
 mixin _$TagsOOutput<T> {
-  @RfControl()
-  List<T>? get tags;
 
-  /// Create a copy of TagsOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $TagsOOutputCopyWith<T, TagsOOutput<T>> get copyWith =>
-      _$TagsOOutputCopyWithImpl<T, TagsOOutput<T>>(
-          this as TagsOOutput<T>, _$identity);
+@RfControl() List<T>? get tags;
+/// Create a copy of TagsOOutput
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$TagsOOutputCopyWith<T, TagsOOutput<T>> get copyWith => _$TagsOOutputCopyWithImpl<T, TagsOOutput<T>>(this as TagsOOutput<T>, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is TagsOOutput<T> &&
-            const DeepCollectionEquality().equals(other.tags, tags));
-  }
 
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(tags));
 
-  @override
-  String toString() {
-    return 'TagsOOutput<$T>(tags: $tags)';
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TagsOOutput<T>&&const DeepCollectionEquality().equals(other.tags, tags));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(tags));
+
+@override
+String toString() {
+  return 'TagsOOutput<$T>(tags: $tags)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $TagsOOutputCopyWith<T, $Res> {
-  factory $TagsOOutputCopyWith(
-          TagsOOutput<T> value, $Res Function(TagsOOutput<T>) _then) =
-      _$TagsOOutputCopyWithImpl;
-  @useResult
-  $Res call({@RfControl() List<T>? tags});
-}
+abstract mixin class $TagsOOutputCopyWith<T,$Res>  {
+  factory $TagsOOutputCopyWith(TagsOOutput<T> value, $Res Function(TagsOOutput<T>) _then) = _$TagsOOutputCopyWithImpl;
+@useResult
+$Res call({
+@RfControl() List<T>? tags
+});
 
+
+
+
+}
 /// @nodoc
-class _$TagsOOutputCopyWithImpl<T, $Res>
+class _$TagsOOutputCopyWithImpl<T,$Res>
     implements $TagsOOutputCopyWith<T, $Res> {
   _$TagsOOutputCopyWithImpl(this._self, this._then);
 
   final TagsOOutput<T> _self;
   final $Res Function(TagsOOutput<T>) _then;
 
-  /// Create a copy of TagsOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? tags = freezed,
-  }) {
-    return _then(_self.copyWith(
-      tags: freezed == tags
-          ? _self.tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<T>?,
-    ));
-  }
+/// Create a copy of TagsOOutput
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? tags = freezed,}) {
+  return _then(_self.copyWith(
+tags: freezed == tags ? _self.tags : tags // ignore: cast_nullable_to_non_nullable
+as List<T>?,
+  ));
 }
+
+}
+
 
 /// Adds pattern-matching-related methods to [TagsOOutput].
 extension TagsOOutputPatterns<T> on TagsOOutput<T> {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_TagsOOutput<T> value)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _TagsOOutput() when $default != null:
-        return $default(_that);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _TagsOOutput<T> value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _TagsOOutput() when $default != null:
+return $default(_that);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_TagsOOutput<T> value) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _TagsOOutput():
-        return $default(_that);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _TagsOOutput<T> value)  $default,){
+final _that = this;
+switch (_that) {
+case _TagsOOutput():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_TagsOOutput<T> value)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _TagsOOutput() when $default != null:
-        return $default(_that);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _TagsOOutput<T> value)?  $default,){
+final _that = this;
+switch (_that) {
+case _TagsOOutput() when $default != null:
+return $default(_that);case _:
+  return null;
 
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(@RfControl() List<T>? tags)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _TagsOOutput() when $default != null:
-        return $default(_that.tags);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@RfControl()  List<T>? tags)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _TagsOOutput() when $default != null:
+return $default(_that.tags);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(@RfControl() List<T>? tags) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _TagsOOutput():
-        return $default(_that.tags);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@RfControl()  List<T>? tags)  $default,) {final _that = this;
+switch (_that) {
+case _TagsOOutput():
+return $default(_that.tags);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(@RfControl() List<T>? tags)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _TagsOOutput() when $default != null:
-        return $default(_that.tags);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@RfControl()  List<T>? tags)?  $default,) {final _that = this;
+switch (_that) {
+case _TagsOOutput() when $default != null:
+return $default(_that.tags);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
+
 
 class _TagsOOutput<T> extends TagsOOutput<T> {
-  _TagsOOutput({@RfControl() required final List<T>? tags})
-      : _tags = tags,
-        super._();
+   _TagsOOutput({@RfControl() required final  List<T>? tags}): _tags = tags,super._();
+  
 
-  final List<T>? _tags;
-  @override
-  @RfControl()
-  List<T>? get tags {
-    final value = _tags;
-    if (value == null) return null;
-    if (_tags is EqualUnmodifiableListView) return _tags;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+ final  List<T>? _tags;
+@override@RfControl() List<T>? get tags {
+  final value = _tags;
+  if (value == null) return null;
+  if (_tags is EqualUnmodifiableListView) return _tags;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
 
-  /// Create a copy of TagsOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$TagsOOutputCopyWith<T, _TagsOOutput<T>> get copyWith =>
-      __$TagsOOutputCopyWithImpl<T, _TagsOOutput<T>>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _TagsOOutput<T> &&
-            const DeepCollectionEquality().equals(other._tags, _tags));
-  }
+/// Create a copy of TagsOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$TagsOOutputCopyWith<T, _TagsOOutput<T>> get copyWith => __$TagsOOutputCopyWithImpl<T, _TagsOOutput<T>>(this, _$identity);
 
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_tags));
 
-  @override
-  String toString() {
-    return 'TagsOOutput<$T>(tags: $tags)';
-  }
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TagsOOutput<T>&&const DeepCollectionEquality().equals(other._tags, _tags));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_tags));
+
+@override
+String toString() {
+  return 'TagsOOutput<$T>(tags: $tags)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$TagsOOutputCopyWith<T, $Res>
-    implements $TagsOOutputCopyWith<T, $Res> {
-  factory _$TagsOOutputCopyWith(
-          _TagsOOutput<T> value, $Res Function(_TagsOOutput<T>) _then) =
-      __$TagsOOutputCopyWithImpl;
-  @override
-  @useResult
-  $Res call({@RfControl() List<T>? tags});
-}
+abstract mixin class _$TagsOOutputCopyWith<T,$Res> implements $TagsOOutputCopyWith<T, $Res> {
+  factory _$TagsOOutputCopyWith(_TagsOOutput<T> value, $Res Function(_TagsOOutput<T>) _then) = __$TagsOOutputCopyWithImpl;
+@override @useResult
+$Res call({
+@RfControl() List<T>? tags
+});
 
+
+
+
+}
 /// @nodoc
-class __$TagsOOutputCopyWithImpl<T, $Res>
+class __$TagsOOutputCopyWithImpl<T,$Res>
     implements _$TagsOOutputCopyWith<T, $Res> {
   __$TagsOOutputCopyWithImpl(this._self, this._then);
 
   final _TagsOOutput<T> _self;
   final $Res Function(_TagsOOutput<T>) _then;
 
-  /// Create a copy of TagsOOutput
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? tags = freezed,
-  }) {
-    return _then(_TagsOOutput<T>(
-      tags: freezed == tags
-          ? _self._tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<T>?,
-    ));
-  }
+/// Create a copy of TagsOOutput
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? tags = freezed,}) {
+  return _then(_TagsOOutput<T>(
+tags: freezed == tags ? _self._tags : tags // ignore: cast_nullable_to_non_nullable
+as List<T>?,
+  ));
+}
+
+
 }
 
 // dart format on

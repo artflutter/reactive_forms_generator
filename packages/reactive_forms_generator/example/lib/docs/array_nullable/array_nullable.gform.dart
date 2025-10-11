@@ -662,9 +662,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<List<String?>> get someListControl =>
       form.control(someListControlPath()) as FormControl<List<String?>>;
 
+  @Deprecated("Migrate to .control")
   FormControl<List<String>> get someListRequiredControl =>
       form.control(someListRequiredControlPath()) as FormControl<List<String>>;
 
@@ -679,6 +681,17 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
 
   FormArray<UserMode> get modeListControl =>
       form.control(modeListControlPath()) as FormArray<UserMode>;
+
+  FormControlWrapper<List<String?>> get someList =>
+      FormControlWrapper<List<String?>>(
+        form.control(someListControlPath()) as FormControl<List<String?>>,
+      );
+
+  FormControlWrapper<List<String>> get someListRequired =>
+      FormControlWrapper<List<String>>(
+        form.control(someListRequiredControlPath())
+            as FormControl<List<String>>,
+      );
 
   List<FormControl<String>> get emailListControlControls =>
       emailListControl.controls.cast<FormControl<String>>();

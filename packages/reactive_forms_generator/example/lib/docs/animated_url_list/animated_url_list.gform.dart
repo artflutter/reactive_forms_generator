@@ -667,11 +667,21 @@ class UrlEntityForm implements FormModel<UrlEntity, UrlEntity> {
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get labelControl =>
       form.control(labelControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get urlControl =>
       form.control(urlControlPath()) as FormControl<String>;
+
+  FormControlWrapper<String> get label => FormControlWrapper<String>(
+        form.control(labelControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get url => FormControlWrapper<String>(
+        form.control(urlControlPath()) as FormControl<String>,
+      );
 
   void labelSetDisabled(
     bool disabled, {

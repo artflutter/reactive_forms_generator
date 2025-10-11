@@ -18,9 +18,9 @@ class BasicFormWidget extends StatelessWidget {
           return Column(
             children: [
               ReactiveTextField<String>(
-                formControl: formModel.emailControl,
+                formControl: formModel.email.control,
                 validationMessages: {
-                  ValidationMessage.required: (_) => 'Required'
+                  ValidationMessage.required: (_) => 'Required',
                 },
                 decoration: const InputDecoration(
                   labelText: 'Email',
@@ -31,10 +31,10 @@ class BasicFormWidget extends StatelessWidget {
               ),
               const SizedBox(height: 8.0),
               ReactiveTextField<String>(
-                formControl: formModel.passwordControl,
+                formControl: formModel.password.control,
                 obscureText: true,
                 validationMessages: {
-                  ValidationMessage.required: (_) => 'Required'
+                  ValidationMessage.required: (_) => 'Required',
                 },
                 textInputAction: TextInputAction.done,
                 decoration: const InputDecoration(
@@ -50,12 +50,14 @@ class BasicFormWidget extends StatelessWidget {
                   return ElevatedButton(
                     onPressed: formModel.form.valid
                         ? () {
-                            formModel.submit(onValid: (model) {
-                              // ignore: unnecessary_cast
-                              debugPrint(model.toString());
-                              debugPrint(model.email);
-                              debugPrint(model.password);
-                            });
+                            formModel.submit(
+                              onValid: (model) {
+                                // ignore: unnecessary_cast
+                                debugPrint(model.toString());
+                                debugPrint(model.email);
+                                debugPrint(model.password);
+                              },
+                            );
                           }
                         : null,
                     child: const Text('Submit'),

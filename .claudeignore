@@ -1,0 +1,15 @@
+.claudesync
+**/LICENSE
+**/.gitignore
+**/assets
+**/build
+**/.idea
+packages/generator_tests
+packages/reactive_forms_generator/example
+**/README.md
+**/pubspec.lock
+**/pubspec.yaml
+**/*.iml
+.metadata
+**/*.yaml
+**/*.md

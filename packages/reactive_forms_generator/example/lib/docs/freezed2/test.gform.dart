@@ -364,11 +364,21 @@ class TestForm implements FormModel<Test, Test> {
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get titleControl =>
       form.control(titleControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get descriptionControl =>
       form.control(descriptionControlPath()) as FormControl<String>;
+
+  FormControlWrapper<String> get title => FormControlWrapper<String>(
+        form.control(titleControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get description => FormControlWrapper<String>(
+        form.control(descriptionControlPath()) as FormControl<String>,
+      );
 
   void titleSetDisabled(
     bool disabled, {

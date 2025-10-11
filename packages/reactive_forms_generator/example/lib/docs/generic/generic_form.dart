@@ -55,7 +55,7 @@ class GenericFormWidgetState extends State<GenericFormWidget> {
                       ],
                     );
                   },
-                  formControl: formModel.tagsControl,
+                  formControl: formModel.tags.control,
                 ),
                 ReactiveTagsFormConsumer(
                   builder: (context, formModel, child) {
@@ -106,7 +106,7 @@ class GenericFormWidgetState extends State<GenericFormWidget> {
                       ],
                     );
                   },
-                  formControl: formModel.tagsControl,
+                  formControl: formModel.tags.control,
                 ),
                 ReactiveTagsFormConsumer(
                   builder: (context, formModel, child) {

@@ -116,11 +116,47 @@ class ControlMethod extends ReactiveFormGeneratorMethod {
 
     return Method(
       (b) => b
+        ..annotations.add(
+            const CodeExpression(Code('Deprecated("Migrate to .control")')))
         ..name = field.fieldControlName
         ..lambda = true
         ..type = MethodType.getter
         ..returns = Reference(reference)
         ..body = Code(body),
+    );
+  }
+}
+
+class ControlMethod2 extends ReactiveFormGeneratorMethod {
+  ControlMethod2(
+    super.field,
+    super.output,
+    super.requiredValidators,
+  );
+
+  @override
+  Method? formControlMethod() {
+    String displayType = field.type.getName(withNullability: !toOutput);
+
+    // we need to trim last NullabilitySuffix.question cause FormControl modifies
+    // generic T => T?
+    if (field.type.nullabilitySuffix == NullabilitySuffix.question &&
+        !toOutput) {
+      displayType = displayType.substring(0, displayType.length - 1);
+    }
+
+    final reference = 'FormControl<$displayType>';
+    final reference2 = 'FormControlWrapper<$displayType>';
+
+    return Method(
+      (b) => b
+        ..name = field.fieldControlName2
+        ..lambda = true
+        ..type = MethodType.getter
+        ..returns = Reference(reference2)
+        ..body = Code(
+          '$reference2(form.control(${field.fieldControlPath}()) as $reference,)',
+        ),
     );
   }
 }

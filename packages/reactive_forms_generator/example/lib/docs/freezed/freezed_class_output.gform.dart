@@ -931,32 +931,78 @@ class FreezedClassOForm
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get genderControl =>
       form.control(genderControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get genderRControl =>
       form.control(genderRControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get idRControl =>
       form.control(idRControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get idR2Control =>
       form.control(idR2ControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get logoImageControl =>
       form.control(logoImageControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<double> get yearControl =>
       form.control(yearControlPath()) as FormControl<double>;
 
+  @Deprecated("Migrate to .control")
   FormControl<List<String>> get selectedSpacesControl =>
       form.control(selectedSpacesControlPath()) as FormControl<List<String>>;
+
+  FormControlWrapper<String> get gender => FormControlWrapper<String>(
+        form.control(genderControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get genderR => FormControlWrapper<String>(
+        form.control(genderRControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get id => FormControlWrapper<String>(
+        form.control(idControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get idR => FormControlWrapper<String>(
+        form.control(idRControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get idR2 => FormControlWrapper<String>(
+        form.control(idR2ControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get name => FormControlWrapper<String>(
+        form.control(nameControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get logoImage => FormControlWrapper<String>(
+        form.control(logoImageControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<double> get year => FormControlWrapper<double>(
+        form.control(yearControlPath()) as FormControl<double>,
+      );
+
+  FormControlWrapper<List<String>> get selectedSpaces =>
+      FormControlWrapper<List<String>>(
+        form.control(selectedSpacesControlPath()) as FormControl<List<String>>,
+      );
 
   void genderSetDisabled(
     bool disabled, {

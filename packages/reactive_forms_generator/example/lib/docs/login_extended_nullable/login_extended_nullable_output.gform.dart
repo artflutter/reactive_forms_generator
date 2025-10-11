@@ -823,26 +823,61 @@ class LoginExtendedNullableOForm
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<bool> get rememberMeControl =>
       form.control(rememberMeControlPath()) as FormControl<bool>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get themeControl =>
       form.control(themeControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<UserMode> get modeControl =>
       form.control(modeControlPath()) as FormControl<UserMode>;
 
+  @Deprecated("Migrate to .control")
   FormControl<int> get timeoutControl =>
       form.control(timeoutControlPath()) as FormControl<int>;
 
+  @Deprecated("Migrate to .control")
   FormControl<double> get heightControl =>
       form.control(heightControlPath()) as FormControl<double>;
+
+  FormControlWrapper<String> get email => FormControlWrapper<String>(
+        form.control(emailControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get password => FormControlWrapper<String>(
+        form.control(passwordControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<bool> get rememberMe => FormControlWrapper<bool>(
+        form.control(rememberMeControlPath()) as FormControl<bool>,
+      );
+
+  FormControlWrapper<String> get theme => FormControlWrapper<String>(
+        form.control(themeControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<UserMode> get mode => FormControlWrapper<UserMode>(
+        form.control(modeControlPath()) as FormControl<UserMode>,
+      );
+
+  FormControlWrapper<int> get timeout => FormControlWrapper<int>(
+        form.control(timeoutControlPath()) as FormControl<int>,
+      );
+
+  FormControlWrapper<double> get height => FormControlWrapper<double>(
+        form.control(heightControlPath()) as FormControl<double>,
+      );
 
   void emailSetDisabled(
     bool disabled, {

@@ -605,6 +605,7 @@ class ArrayNullableOForm
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<List<String?>> get someListControl =>
       form.control(someListControlPath()) as FormControl<List<String?>>;
 
@@ -619,6 +620,11 @@ class ArrayNullableOForm
 
   FormArray<UserMode> get modeListControl =>
       form.control(modeListControlPath()) as FormArray<UserMode>;
+
+  FormControlWrapper<List<String?>> get someList =>
+      FormControlWrapper<List<String?>>(
+        form.control(someListControlPath()) as FormControl<List<String?>>,
+      );
 
   List<FormControl<String>> get emailListControlControls =>
       emailListControl.controls.cast<FormControl<String>>();

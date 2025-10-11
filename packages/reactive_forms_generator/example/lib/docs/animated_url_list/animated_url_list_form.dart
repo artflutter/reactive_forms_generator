@@ -27,12 +27,7 @@ class _AnimatedUrlListFormWidgetState extends State<AnimatedUrlListFormWidget> {
         sizeFactor: animation,
         child: FadeTransition(
           opacity: animation,
-          child: _buildUrlListItem(
-            formModel,
-            i,
-            labelControl,
-            urlControl,
-          ),
+          child: _buildUrlListItem(formModel, i, labelControl, urlControl),
         ),
       ),
     );
@@ -48,12 +43,7 @@ class _AnimatedUrlListFormWidgetState extends State<AnimatedUrlListFormWidget> {
   ) {
     return UrlListItem(
       header: UrlListItemHeader(
-        onTap: () => _handleUrlRemove(
-          formModel,
-          i,
-          labelControl,
-          urlControl,
-        ),
+        onTap: () => _handleUrlRemove(formModel, i, labelControl, urlControl),
       ),
       content: UrlListItemContent(
         labelControl: labelControl,
@@ -82,53 +72,56 @@ class _AnimatedUrlListFormWidgetState extends State<AnimatedUrlListFormWidget> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
-                  child: ReactiveAnimatedUrlListFormFormGroupArrayBuilder<
-                      UrlEntityForm>(
-                    getExtended: (formModel) =>
-                        formModel.urlListExtendedControl,
-                    builder: (context, itemList, formModel) {
-                      return AnimatedList(
-                        key: _animatedListKeyForm,
-                        itemBuilder: (context, index, animation) {
-                          if (index == itemList.length) {
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                if (itemList.isNotEmpty)
-                                  const Divider(
-                                    height: 10,
-                                    indent: 16,
-                                    endIndent: 16,
-                                  ),
-                                UrlListAddItem(
-                                  onTap: () => _handleUrlAdd(formModel),
+                  child:
+                      ReactiveAnimatedUrlListFormFormGroupArrayBuilder<
+                        UrlEntityForm
+                      >(
+                        getExtended: (formModel) =>
+                            formModel.urlListExtendedControl,
+                        builder: (context, itemList, formModel) {
+                          return AnimatedList(
+                            key: _animatedListKeyForm,
+                            itemBuilder: (context, index, animation) {
+                              if (index == itemList.length) {
+                                return Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    if (itemList.isNotEmpty)
+                                      const Divider(
+                                        height: 10,
+                                        indent: 16,
+                                        endIndent: 16,
+                                      ),
+                                    UrlListAddItem(
+                                      onTap: () => _handleUrlAdd(formModel),
+                                    ),
+                                  ],
+                                );
+                              }
+                              return FadeTransition(
+                                opacity: animation,
+                                child: SizeTransition(
+                                  sizeFactor: animation,
+                                  child: itemList[index],
                                 ),
-                              ],
-                            );
-                          }
-                          return FadeTransition(
-                            opacity: animation,
-                            child: SizeTransition(
-                              sizeFactor: animation,
-                              child: itemList[index],
-                            ),
+                              );
+                            },
+                            initialItemCount: itemList.length + 1,
                           );
                         },
-                        initialItemCount: itemList.length + 1,
-                      );
-                    },
-                    itemBuilder: (context, i, formItem, formModel) {
-                      if (formItem == null) {
-                        return const SizedBox.shrink();
-                      }
-                      return _buildUrlListItem(
-                        formModel,
-                        i,
-                        formItem.labelControl,
-                        formItem.urlControl,
-                      );
-                    },
-                  ),
+                        itemBuilder: (context, i, formItem, formModel) {
+                          if (formItem == null) {
+                            return const SizedBox.shrink();
+                          }
+                          return _buildUrlListItem(
+                            formModel,
+                            i,
+                            formItem.label.control,
+                            formItem.url.control,
+                          );
+                        },
+                      ),
                 ),
                 ReactiveAnimatedUrlListFormConsumer(
                   builder: (context, formModel, child) {
@@ -199,11 +192,7 @@ class UrlListAddItem extends StatelessWidget {
         child: const Padding(
           padding: EdgeInsets.symmetric(vertical: 16),
           child: Row(
-            children: [
-              Icon(Icons.add_circle),
-              SizedBox(width: 8),
-              Text('URL'),
-            ],
+            children: [Icon(Icons.add_circle), SizedBox(width: 8), Text('URL')],
           ),
         ),
       ),
@@ -241,16 +230,13 @@ class UrlListItemHeader extends StatelessWidget {
         Expanded(
           child: Text(
             'URL',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
           ),
         ),
         if (onTap != null)
-          IconButton(
-            onPressed: onTap,
-            icon: const Icon(Icons.remove_circle),
-          ),
+          IconButton(onPressed: onTap, icon: const Icon(Icons.remove_circle)),
       ],
     );
   }
@@ -279,9 +265,7 @@ class UrlListItemContent extends StatelessWidget {
             formControl: labelControl,
             validationMessages: {ValidationMessage.required: (_) => 'Required'},
             maxLength: 30,
-            decoration: const InputDecoration(
-              labelText: 'Label *',
-            ),
+            decoration: const InputDecoration(labelText: 'Label *'),
           ),
           const SizedBox(height: 8),
           ReactiveTextField<String>(
@@ -289,7 +273,8 @@ class UrlListItemContent extends StatelessWidget {
             formControl: urlControl,
             validationMessages: {ValidationMessage.required: (_) => 'Required'},
             decoration: const InputDecoration(
-                labelText: 'e.g https://www.example.com *'),
+              labelText: 'e.g https://www.example.com *',
+            ),
           ),
         ],
       ),

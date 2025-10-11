@@ -588,18 +588,33 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get firstNameControl =>
       form.control(firstNameControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get lastNameControl =>
       form.control(lastNameControlPath()) as FormControl<String>;
 
   FormGroup get homeControl => form.control(homeControlPath()) as FormGroup;
 
   FormGroup get officeControl => form.control(officeControlPath()) as FormGroup;
+
+  FormControlWrapper<String> get id => FormControlWrapper<String>(
+        form.control(idControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get firstName => FormControlWrapper<String>(
+        form.control(firstNameControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get lastName => FormControlWrapper<String>(
+        form.control(lastNameControlPath()) as FormControl<String>,
+      );
 
   AddressOForm get homeForm => AddressOForm(form, pathBuilder('home'));
 
@@ -1112,14 +1127,29 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get streetControl =>
       form.control(streetControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get cityControl =>
       form.control(cityControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormControl<String> get zipControl =>
       form.control(zipControlPath()) as FormControl<String>;
+
+  FormControlWrapper<String> get street => FormControlWrapper<String>(
+        form.control(streetControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get city => FormControlWrapper<String>(
+        form.control(cityControlPath()) as FormControl<String>,
+      );
+
+  FormControlWrapper<String> get zip => FormControlWrapper<String>(
+        form.control(zipControlPath()) as FormControl<String>,
+      );
 
   void streetSetDisabled(
     bool disabled, {

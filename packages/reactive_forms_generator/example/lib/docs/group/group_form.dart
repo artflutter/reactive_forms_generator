@@ -23,7 +23,7 @@ class GroupFormWidget extends StatelessWidget {
           return Column(
             children: [
               ReactiveTextField<String>(
-                formControl: formModel.personalForm.nameControl,
+                formControl: formModel.personalForm.name.control,
                 decoration: const InputDecoration(
                   labelText: 'Name',
                   helperText: '',
@@ -33,7 +33,7 @@ class GroupFormWidget extends StatelessWidget {
               ),
               const SizedBox(height: 16.0),
               ReactiveTextField<String>(
-                formControl: formModel.personalForm.emailControl,
+                formControl: formModel.personalForm.email.control,
                 decoration: const InputDecoration(
                   labelText: 'Email',
                   helperText: '',
@@ -43,7 +43,7 @@ class GroupFormWidget extends StatelessWidget {
               ),
               const SizedBox(height: 16.0),
               ReactiveTextField<String>(
-                formControl: formModel.phoneForm.phoneNumberControl,
+                formControl: formModel.phoneForm.phoneNumber.control,
                 decoration: const InputDecoration(
                   labelText: 'Phone number',
                   helperText: '',
@@ -53,7 +53,7 @@ class GroupFormWidget extends StatelessWidget {
               ),
               const SizedBox(height: 16.0),
               ReactiveTextField<String>(
-                formControl: formModel.phoneForm.countryIsoControl,
+                formControl: formModel.phoneForm.countryIso.control,
                 decoration: const InputDecoration(
                   labelText: 'Country iso',
                   helperText: '',
@@ -71,7 +71,7 @@ class GroupFormWidget extends StatelessWidget {
                     children: [
                       const Text('Address 1', style: TextStyle(fontSize: 20)),
                       ReactiveTextField<String>(
-                        formControl: formModel.addressForm.cityControl,
+                        formControl: formModel.addressForm.city.control,
                         decoration: const InputDecoration(
                           labelText: 'City',
                           helperText: '',
@@ -81,7 +81,7 @@ class GroupFormWidget extends StatelessWidget {
                       ),
                       const SizedBox(height: 16.0),
                       ReactiveTextField<String>(
-                        formControl: formModel.addressForm.streetControl,
+                        formControl: formModel.addressForm.street.control,
                         decoration: const InputDecoration(
                           labelText: 'Street',
                           helperText: '',
@@ -91,7 +91,7 @@ class GroupFormWidget extends StatelessWidget {
                       ),
                       const SizedBox(height: 16.0),
                       ReactiveTextField<String>(
-                        formControl: formModel.addressForm.zipControl,
+                        formControl: formModel.addressForm.zip.control,
                         decoration: const InputDecoration(
                           labelText: 'Zip',
                           helperText: '',
@@ -113,7 +113,7 @@ class GroupFormWidget extends StatelessWidget {
                     children: [
                       const Text('Address 2', style: TextStyle(fontSize: 20)),
                       ReactiveTextField<String>(
-                        formControl: formModel.address2Form.cityControl,
+                        formControl: formModel.address2Form.city.control,
                         decoration: const InputDecoration(
                           labelText: 'City',
                           helperText: '',
@@ -123,7 +123,7 @@ class GroupFormWidget extends StatelessWidget {
                       ),
                       const SizedBox(height: 16.0),
                       ReactiveTextField<String>(
-                        formControl: formModel.address2Form.streetControl,
+                        formControl: formModel.address2Form.street.control,
                         decoration: const InputDecoration(
                           labelText: 'Street',
                           helperText: '',
@@ -133,7 +133,7 @@ class GroupFormWidget extends StatelessWidget {
                       ),
                       const SizedBox(height: 16.0),
                       ReactiveTextField<String>(
-                        formControl: formModel.address2Form.zipControl,
+                        formControl: formModel.address2Form.zip.control,
                         decoration: const InputDecoration(
                           labelText: 'Zip',
                           helperText: '',

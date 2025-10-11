@@ -13,11 +13,9 @@ class MailingListFormWidget extends StatefulWidget {
 }
 
 class _MailingListFormWidgetState extends State<MailingListFormWidget> {
-  MailingList _model = MailingList(emailList: [
-    null,
-    'test@gmail.com',
-    'wrong email',
-  ]);
+  MailingList _model = MailingList(
+    emailList: [null, 'test@gmail.com', 'wrong email'],
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +64,7 @@ class _MailingListFormWidgetState extends State<MailingListFormWidget> {
                       formModel.addEmailListItem('');
                     },
                     child: const Text('add'),
-                  )
+                  ),
                 ],
               ),
               const SizedBox(height: 16),
@@ -104,10 +102,12 @@ class _MailingListFormWidgetState extends State<MailingListFormWidget> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        _model = MailingList(emailList: [
-                          'updateSetState1@gmail.com',
-                          'updateSetState2@email.com',
-                        ]);
+                        _model = MailingList(
+                          emailList: [
+                            'updateSetState1@gmail.com',
+                            'updateSetState2@email.com',
+                          ],
+                        );
                       });
                     },
                     child: const Text('Update `setState` 2 pcs.'),
@@ -115,11 +115,13 @@ class _MailingListFormWidgetState extends State<MailingListFormWidget> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        _model = MailingList(emailList: [
-                          'updateSetState1@gmail.com',
-                          'updateSetState2@email.com',
-                          'updateSetState3@email.com',
-                        ]);
+                        _model = MailingList(
+                          emailList: [
+                            'updateSetState1@gmail.com',
+                            'updateSetState2@email.com',
+                            'updateSetState3@email.com',
+                          ],
+                        );
                       });
                     },
                     child: const Text('Update `setState` 3 pcs.'),
@@ -127,20 +129,24 @@ class _MailingListFormWidgetState extends State<MailingListFormWidget> {
                   ElevatedButton(
                     onPressed: () {
                       formModel.reset(
-                        value: MailingList(emailList: [
-                          'update1@gmail.com2',
-                          'update2@email.com',
-                          'update3@email.com',
-                        ]),
+                        value: MailingList(
+                          emailList: [
+                            'update1@gmail.com2',
+                            'update2@email.com',
+                            'update3@email.com',
+                          ],
+                        ),
                       );
                     },
                     child: const Text('Update'),
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      formModel.submit(onValid: (model) {
-                        debugPrint(model.toString());
-                      });
+                      formModel.submit(
+                        onValid: (model) {
+                          debugPrint(model.toString());
+                        },
+                      );
                     },
                     child: const Text('Sign Up'),
                   ),
@@ -153,7 +159,7 @@ class _MailingListFormWidgetState extends State<MailingListFormWidget> {
                     },
                   ),
                 ],
-              )
+              ),
             ],
           );
         },

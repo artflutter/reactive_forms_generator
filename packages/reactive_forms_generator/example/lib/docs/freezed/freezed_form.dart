@@ -20,7 +20,7 @@ class FreezedFormWidget extends StatelessWidget {
           return Column(
             children: [
               ReactiveTextField<String>(
-                formControl: formModel.idControl,
+                formControl: formModel.id.control,
                 textInputAction: TextInputAction.next,
                 validationMessages: {
                   ValidationMessage.required: (_) => 'Required'
@@ -34,7 +34,7 @@ class FreezedFormWidget extends StatelessWidget {
               ),
               const SizedBox(height: 16.0),
               ReactiveTextField<String>(
-                formControl: formModel.nameControl,
+                formControl: formModel.name.control,
                 textInputAction: TextInputAction.done,
                 decoration: const InputDecoration(
                   labelText: 'Name',
@@ -45,7 +45,7 @@ class FreezedFormWidget extends StatelessWidget {
               ),
               const SizedBox(height: 16.0),
               ReactiveSlider(
-                formControl: formModel.yearControl,
+                formControl: formModel.year.control,
                 min: 1900,
                 max: 2100,
               ),
