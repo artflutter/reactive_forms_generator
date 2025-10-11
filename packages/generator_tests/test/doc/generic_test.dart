@@ -9,7 +9,7 @@ void main() {
   group('reactive_forms_generator', () {
     test(
       'Generic',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''

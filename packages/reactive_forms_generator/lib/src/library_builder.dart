@@ -1,5 +1,5 @@
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/form_generator.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form.dart';
@@ -15,7 +15,7 @@ const stringRef = Reference('String');
 const formGroupRef = Reference('FormGroup');
 
 List<Spec> generateLibrary(
-  ClassElement element,
+  ClassElement2 element,
   AstNode ast,
 ) {
   final formGenerator = FormGenerator(element, element, null, ast, {});

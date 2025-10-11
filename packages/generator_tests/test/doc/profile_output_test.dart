@@ -9,7 +9,7 @@ void main() {
   group('doc', () {
     test(
       'Profile',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''

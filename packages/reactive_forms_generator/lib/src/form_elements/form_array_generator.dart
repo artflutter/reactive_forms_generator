@@ -1,5 +1,5 @@
 // ignore_for_file: implementation_imports
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
@@ -8,25 +8,33 @@ import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:recase/recase.dart';
 import 'package:source_gen/src/type_checker.dart';
 
+import 'package:analyzer/src/dart/element/element.dart' as e;
+
 class FormArrayGenerator extends FormElementGenerator {
-  FormArrayGenerator(super.root, super.field, super.type);
+  final FormalParameterElement formArrayField;
+
+  FormArrayGenerator({
+    required super.root,
+    required this.formArrayField,
+    super.type,
+  }) : super(field: formArrayField);
 
   DartType get typeParameter =>
-      (field.type as ParameterizedType).typeArguments.first;
+      (formArrayField.type as ParameterizedType).typeArguments.first;
 
   @override
   String get value {
     final enclosingElement =
-        (fieldElement.enclosingElement3 as ConstructorElement)
-            .enclosingElement3;
+        (fieldElement.enclosingElement2 as e.ConstructorElementImpl2)
+            .enclosingElement2;
 
-    final optionalChaining = (enclosingElement == root &&
+    final optionalChaining = (enclosingElement.name3 == root.name3 &&
                 type?.nullabilitySuffix != NullabilitySuffix.question) ||
-            (enclosingElement == root && !root.isNullable)
+            (enclosingElement.name3 == root.name3 && !root.isNullable)
         ? ''
         : '?';
 
-    return '(${enclosingElement.name.camelCase}$optionalChaining.${fieldElement.name}${optionalChaining != '' ? '?? []' : ''})';
+    return '(${enclosingElement.firstFragment.name.camelCase}$optionalChaining.${fieldElement.name3}${optionalChaining != '' ? '?? []' : ''})';
   }
 
   String get displayType {
@@ -54,7 +62,7 @@ class FormArrayGenerator extends FormElementGenerator {
     if (formArrayAnnotationTyped &&
         formArrayAnnotationType != typeParameterType) {
       throw Exception(
-        'Annotation and field type mismatch. Annotation is typed as `$formArrayAnnotationType` and field(`${field.name}`) as `$typeParameterType`.',
+        'Annotation and field type mismatch. Annotation is typed as `$formArrayAnnotationType` and field(`${field.name3}`) as `$typeParameterType`.',
       );
     }
 
@@ -65,9 +73,9 @@ class FormArrayGenerator extends FormElementGenerator {
       'disabled: $disabled',
     ];
 
-    if (field.isFormGroupArray) {
+    if (formArrayField.isFormGroupArray) {
       final props = [
-        '$value.map((e) => ${field.className}.formElements(e)).toList()',
+        '$value.map((e) => ${formArrayField.className}.formElements(e)).toList()',
         ...partialProps
       ].join(', ');
 

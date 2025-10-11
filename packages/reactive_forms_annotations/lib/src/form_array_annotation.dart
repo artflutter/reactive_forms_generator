@@ -1,9 +1,6 @@
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
-enum ValidatorsApplyMode {
-  merge,
-  override,
-}
+enum ValidatorsApplyMode { merge, override }
 
 class FormArrayAnnotation<T> {
   final List<Validator<T>> validators;

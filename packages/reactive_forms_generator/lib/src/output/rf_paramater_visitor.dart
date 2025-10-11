@@ -48,7 +48,7 @@ class RfParameterVisitor extends GeneralizingAstVisitor<dynamic> {
             false, (acc, e) => acc || e.name.toString().startsWith('Default'));
 
         final hasRfGroupAnnotation = node.parameter.declaredElement?.type
-                .element?.hasRfGroupAnnotation ==
+                .element3?.hasRfGroupAnnotation ==
             true;
 
         final type = node.parameter.declaredElement?.type;
@@ -58,7 +58,7 @@ class RfParameterVisitor extends GeneralizingAstVisitor<dynamic> {
             (type as t.InterfaceTypeImpl)
                     .typeArguments
                     .firstOrNull
-                    ?.element
+                    ?.element3
                     ?.hasRfGroupAnnotation ==
                 true;
 

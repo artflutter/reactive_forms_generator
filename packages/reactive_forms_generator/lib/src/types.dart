@@ -1,6 +1,6 @@
 // ignore_for_file: implementation_imports
 import 'package:analyzer/dart/constant/value.dart';
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:analyzer/src/dart/element/element.dart';
@@ -78,28 +78,17 @@ extension NodeListImplAnnotationImplExt on NodeListImpl<AnnotationImpl> {
   }
 }
 
-extension ElementRfExt on Element {
-  bool get hasRfGroupAnnotation {
-    return formGroupChecker.hasAnnotationOfExact(this);
-  }
-
-  bool get hasRfAnnotation {
-    return _formChecker.hasAnnotationOfExact(this);
-  }
-
-  bool get hasRfControlAnnotation {
-    return formControlChecker.hasAnnotationOfExact(this);
-  }
-
-  Map<String, String> annotationParams(TypeChecker? typeChecker) {
+extension on Annotatable {
+  Map<String, String> annotationParams1(TypeChecker? typeChecker) {
     final result = <String, String>{};
     final annotation = typeChecker?.firstAnnotationOf(this);
     try {
       if (annotation != null) {
-        for (final meta in metadata) {
+        for (final meta in metadata2.annotations) {
           final obj = meta.computeConstantValue()!;
 
-          if (typeChecker?.isExactlyType(obj.type!) == true) {
+          final isExactlyType = typeChecker?.isExactlyType(obj.type!) ?? false;
+          if (isExactlyType) {
             final argumentList = (meta as ElementAnnotationImpl)
                 .annotationAst
                 .arguments as ArgumentListImpl;
@@ -125,7 +114,103 @@ extension ElementRfExt on Element {
   }
 }
 
-extension ParameterElementAnnotationExt on ParameterElement {
+// extension FormalParameterElementExt on FormalParameterElement {
+//   Map<String, String> annotationParams(TypeChecker? typeChecker) {
+//     final result = <String, String>{};
+//     final annotation = typeChecker?.firstAnnotationOf(this);
+//     try {
+//       if (annotation != null) {
+//         final x = this;
+//
+//         final p = this.firstFragment;
+//         p.metadata2;
+//
+//         print(x);
+//         // for (final meta in metadata) {
+//         //   final obj = meta.computeConstantValue()!;
+//         //
+//         //   if (typeChecker?.isExactlyType(obj.type!) == true) {
+//         //     final argumentList = (meta as ElementAnnotationImpl)
+//         //         .annotationAst
+//         //         .arguments as ArgumentListImpl;
+//         //     for (var argument in argumentList.arguments) {
+//         //       final argumentNamedExpression = argument as NamedExpressionImpl;
+//         //       result.addEntries(
+//         //         [
+//         //           MapEntry(
+//         //             argumentNamedExpression.name.label.toSource(),
+//         //             argumentNamedExpression.expression.toSource(),
+//         //           ),
+//         //         ],
+//         //       );
+//         //     }
+//         //   }
+//         // }
+//       }
+//
+//       return result;
+//     } catch (e) {
+//       return result;
+//     }
+//   }
+// }
+
+extension ElementRfExt on Element2 {
+  bool get hasRfGroupAnnotation {
+    return formGroupChecker.hasAnnotationOfExact(this);
+  }
+
+  bool get hasRfAnnotation {
+    return _formChecker.hasAnnotationOfExact(this);
+  }
+
+  bool get hasRfControlAnnotation {
+    return formControlChecker.hasAnnotationOfExact(this);
+  }
+
+  Map<String, String> annotationParams(TypeChecker? typeChecker) {
+    final result = <String, String>{};
+    if (this is Annotatable) {
+      return (this as Annotatable).annotationParams1(typeChecker);
+    }
+
+    return result;
+    // final annotation = typeChecker?.firstAnnotationOf(this);
+    // try {
+    //   if (annotation != null) {
+    //     final x = this;
+    //
+    //     print(x);
+    //     // for (final meta in metadata) {
+    //     //   final obj = meta.computeConstantValue()!;
+    //     //
+    //     //   if (typeChecker?.isExactlyType(obj.type!) == true) {
+    //     //     final argumentList = (meta as ElementAnnotationImpl)
+    //     //         .annotationAst
+    //     //         .arguments as ArgumentListImpl;
+    //     //     for (var argument in argumentList.arguments) {
+    //     //       final argumentNamedExpression = argument as NamedExpressionImpl;
+    //     //       result.addEntries(
+    //     //         [
+    //     //           MapEntry(
+    //     //             argumentNamedExpression.name.label.toSource(),
+    //     //             argumentNamedExpression.expression.toSource(),
+    //     //           ),
+    //     //         ],
+    //     //       );
+    //     //     }
+    //     //   }
+    //     // }
+    //   }
+    //
+    //   return result;
+    // } catch (e) {
+    //   return result;
+    // }
+  }
+}
+
+extension ParameterElementAnnotationExt on FormalParameterElement {
   bool get hasRfAnnotation {
     return _formChecker.hasAnnotationOfExact(this);
   }
@@ -138,13 +223,13 @@ extension ParameterElementAnnotationExt on ParameterElement {
   }
 }
 
-extension FieldElementAnnotationExt on FieldElement {
+extension FieldElementAnnotationExt on FieldElement2 {
   bool get hasRfAnnotation {
     return _formChecker.hasAnnotationOfExact(this);
   }
 }
 
-extension ClassElementAnnotationExt on ClassElement {
+extension ClassElementAnnotationExt on ClassElement2 {
   bool get hasRfAnnotation {
     return _formChecker.hasAnnotationOfExact(this);
   }

@@ -20,7 +20,8 @@ class ReactiveFormArrayItemBuilder<T> extends StatelessWidget {
     int i,
     FormControl<T> control,
     T? item,
-  ) itemBuilder;
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
@@ -32,11 +33,7 @@ class ReactiveFormArrayItemBuilder<T> extends StatelessWidget {
       formArray: formControl,
       builder: (context, formArray, child) {
         final values = formArray.controls.indexed
-            .where((e) =>
-                controlFilter?.call(
-                  e.$2 as FormControl<T>,
-                ) ??
-                true)
+            .where((e) => controlFilter?.call(e.$2 as FormControl<T>) ?? true)
             .toList();
 
         final itemList = values
@@ -58,11 +55,7 @@ class ReactiveFormArrayItemBuilder<T> extends StatelessWidget {
           return emptyBuilder!(context);
         }
 
-        return builder?.call(
-              context,
-              itemList,
-            ) ??
-            Column(children: itemList);
+        return builder?.call(context, itemList) ?? Column(children: itemList);
       },
     );
   }

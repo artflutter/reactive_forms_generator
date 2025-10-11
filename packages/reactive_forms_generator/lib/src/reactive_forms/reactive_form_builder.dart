@@ -1,4 +1,4 @@
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/reactive_forms/reactive_form.dart';
@@ -13,7 +13,7 @@ class ReactiveFormBuilder {
 
   String get _log => reactiveForm.reactiveInheritedStreamer.formGenerator.log;
 
-  ClassElement get _element =>
+  ClassElement2 get _element =>
       reactiveForm.reactiveInheritedStreamer.formGenerator.element;
 
   String get className => '${_baseName}Builder';

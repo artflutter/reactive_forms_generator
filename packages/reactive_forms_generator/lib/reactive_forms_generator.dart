@@ -3,7 +3,7 @@ library;
 
 import 'dart:async';
 
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
@@ -28,7 +28,8 @@ class ReactiveFormsGenerator extends Generator {
       useNullSafetySyntax: true,
     );
 
-    for (var annotatedElement in library.rfAnnotated) {
+    final rfAnnotated = library.rfAnnotated;
+    for (var annotatedElement in rfAnnotated) {
       specList.addAll(
         await generateForAnnotatedElement(
           annotatedElement.element,
@@ -74,20 +75,20 @@ class ReactiveFormsGenerator extends Generator {
   }
 
   Future<List<Spec>> generateForAnnotatedElement(
-    Element element,
+    Element2 element,
     ConstantReader annotation,
     BuildStep buildStep,
   ) async {
     throwIf(
-      element is! ClassElement,
-      '${element.name} is not a class element',
+      element is! ClassElement2,
+      '${element.name3} is not a class element',
       element: element,
     );
 
-    final astElement = element.enclosingElement3;
+    // final astElement = element.firstFragment;
 
     final ast = await buildStep.resolver.astNodeFor(
-      astElement ?? element,
+      element.enclosingElement2!.firstFragment, // astElement ?? element,
       resolve: true,
     );
 
@@ -95,6 +96,6 @@ class ReactiveFormsGenerator extends Generator {
       throw InvalidGenerationSourceError('Ast not found', element: element);
     }
 
-    return generateLibrary(element as ClassElement, ast);
+    return generateLibrary(element as ClassElement2, ast);
   }
 }

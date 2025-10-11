@@ -1,12 +1,10 @@
 // ignore_for_file: implementation_imports
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
-import 'package:analyzer/src/dart/element/element.dart' as e;
 import 'package:analyzer/src/dart/element/type.dart' as t;
 import 'package:analyzer/src/dart/ast/ast.dart' as u;
-import 'package:analyzer/src/generated/utilities_dart.dart' as u;
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_array_generator.dart';
@@ -41,10 +39,10 @@ enum ValidatorsApplyMode {
 }
 
 class FormGenerator {
-  final ClassElement root;
+  final ClassElement2 root;
   final Set<String> classes;
 
-  final ClassElement element;
+  final ClassElement2 element;
 
   final DartType? type;
 
@@ -57,9 +55,11 @@ class FormGenerator {
   String get baseName {
     if (element.hasRfAnnotation && root == element) {
       final annotation = element.rfAnnotation;
-      return annotation?.getField('name')?.toStringValue() ?? element.name;
+      return annotation?.getField('name')?.toStringValue() ??
+          element.name3 ??
+          '<null>';
     }
-    return element.name;
+    return element.name3 ?? '<null>';
   }
 
   // bool get hasOutput {
@@ -82,9 +82,9 @@ class FormGenerator {
       if (!classes.contains(e.className)) {
         classes.add(e.className);
 
-        formGroupGenerators[e.name] = FormGenerator(
+        formGroupGenerators[e.name3 ?? ''] = FormGenerator(
           root,
-          e.type.element! as ClassElement,
+          e.type.element3! as ClassElement2,
           e.type,
           ast,
           classes,
@@ -101,9 +101,9 @@ class FormGenerator {
 
       if (!classes.contains(e.className)) {
         classes.add(e.className);
-        nestedFormGroupGenerators[e.name] = FormGenerator(
+        nestedFormGroupGenerators[e.name3 ?? '<null>'] = FormGenerator(
           root,
-          typeParameter.element! as ClassElement,
+          typeParameter.element3! as ClassElement2,
           e.type,
           ast,
           classes,
@@ -112,26 +112,26 @@ class FormGenerator {
     }
   }
 
-  List<ParameterElement> get all => [
+  List<FormalParameterElement> get all => [
         ...formControls,
         ...formArrays,
         ...formGroups,
         ...formGroupArrays,
       ];
 
-  Iterable<ParameterElement> get formControls => parameters.where(
+  Iterable<FormalParameterElement> get formControls => parameters.where(
         (e) => e.isFormControl,
       );
 
-  Iterable<ParameterElement> get formArrays => parameters.where(
+  Iterable<FormalParameterElement> get formArrays => parameters.where(
         (e) => e.isFormArray,
       );
 
-  Iterable<ParameterElement> get formGroups => parameters.where(
+  Iterable<FormalParameterElement> get formGroups => parameters.where(
         (e) => e.isFormGroup,
       );
 
-  Iterable<ParameterElement> get formGroupArrays => parameters.where(
+  Iterable<FormalParameterElement> get formGroupArrays => parameters.where(
         (e) => e.isFormGroupArray,
       );
 
@@ -143,12 +143,12 @@ class FormGenerator {
     return '$className${element.generics}';
   }
 
-  List<ParameterElement> get parameters => element.annotatedParameters;
+  List<FormalParameterElement> get parameters => element.annotatedParameters;
 
-  Iterable<ParameterElement> get annotatedParameters =>
+  Iterable<FormalParameterElement> get annotatedParameters =>
       parameters.where((e) => true);
 
-  Field staticFieldName(ParameterElement field) => Field(
+  Field staticFieldName(FormalParameterElement field) => Field(
         (b) => b
           ..static = true
           ..modifier = FieldModifier.constant
@@ -157,7 +157,7 @@ class FormGenerator {
           ..assignment = Code('"${field.fieldName}"'),
       );
 
-  Field field(ParameterElement field) => Field(
+  Field field(FormalParameterElement field) => Field(
         (b) => b
           ..type = stringRef
           ..name = field.fieldName
@@ -234,12 +234,12 @@ class FormGenerator {
     );
   }
 
-  Method addGroupControl(ParameterElement field) {
+  Method addGroupControl(FormalParameterElement field) {
     final type = field.typeParameter.getName(withNullability: false);
 
     final formGroupGenerator = FormGenerator(
       root,
-      field.typeParameter.element as ClassElement,
+      field.typeParameter.element3 as ClassElement2,
       field.typeParameter,
       ast,
       classes,
@@ -263,7 +263,7 @@ class FormGenerator {
     );
   }
 
-  Method removeGroupControl(ParameterElement field) {
+  Method removeGroupControl(FormalParameterElement field) {
     final controlField = field.fieldControlName;
 
     return Method(
@@ -287,7 +287,7 @@ class FormGenerator {
     );
   }
 
-  Method addGroupControlList(ParameterElement field) {
+  Method addGroupControlList(FormalParameterElement field) {
     final type = field.typeParameter.getName(withNullability: false);
 
     return Method(
@@ -307,13 +307,16 @@ class FormGenerator {
     );
   }
 
-  Method addArrayControl(ParameterElement field) {
+  Method addArrayControl(FormalParameterElement field) {
     // until https://github.com/joanpablo/reactive_forms/issues/204 is somehow resolved
     final formControlType = field.typeParameter.getName(withNullability: false);
     final valueType = field.typeParameter.getName(withNullability: true);
 
-    final formArrayGenerator =
-        FormArrayGenerator(element, field, field.typeParameter);
+    final formArrayGenerator = FormArrayGenerator(
+      root: element,
+      formArrayField: field,
+      type: field.typeParameter,
+    );
 
     final validators = formArrayGenerator.itemValidators;
     final asyncValidators = formArrayGenerator.itemAsyncValidators;
@@ -493,13 +496,13 @@ class FormGenerator {
 
                 final generator = FormGenerator(
                   root,
-                  typeArguments.first.element! as ClassElement,
+                  typeArguments.first.element3! as ClassElement2,
                   e.type,
                   ast,
                   classes,
                 );
 
-                return '${e.name}${generator.className}.forEach((e) => e.toggleDisabled());';
+                return '${e.name3}${generator.className}.forEach((e) => e.toggleDisabled());';
               })
               .toList()
               .join('');
@@ -836,33 +839,41 @@ class FormGenerator {
                     ..requiredParameters.add(
                       Parameter(
                         (b) => b
-                          ..name = element.name.camelCase
+                          ..name = element.name3?.camelCase ?? '<null>'
                           ..type = Reference(_modelDisplayTypeMaybeNullable),
                       ),
                     )
                     ..returns = const Reference('FormGroup')
                     ..body = Code(
                       FormGroupGenerator(
-                        root,
-                        e.ParameterElementImpl(
-                          name: 'FakeParameterElement',
-                          nameOffset: 20,
-                          parameterKind: u.ParameterKind.REQUIRED,
-                        )
-                          ..enclosingElement3 =
-                              (e.ConstructorElementImpl('aa', 1)
-                                ..enclosingElement3 = element)
-                          ..type = t.InterfaceTypeImpl(
-                            element: (element.thisType as t.InterfaceTypeImpl)
-                                .element3,
-                            typeArguments: element.thisType.typeArguments,
-                            nullabilitySuffix: NullabilitySuffix.none,
-                          ),
-                        type ??
+                        root: root,
+                        formGroupField: element,
+                        // e.FormalParameterElementImpl(
+                        //   e.ParameterElementImpl(
+                        //     name2: 'FakeParameterElement',
+                        //     name: 'FakeParameterElement',
+                        //     nameOffset: 20,
+                        //     parameterKind: u.ParameterKind.REQUIRED,
+                        //     nameOffset2: 20,
+                        //   )
+                        //     ..enclosingElement3 =
+                        //         (e.ConstructorElement2Impl('aa', element)
+                        //           ..enclosingElement3 =
+                        //               element as e.ClassElementImpl2)
+                        //     ..type = t.InterfaceTypeImpl(
+                        //       element: (element.thisType as t.InterfaceTypeImpl)
+                        //           .element3,
+                        //       typeArguments: element.thisType.typeArguments
+                        //           as List<t.TypeImpl>,
+                        //       nullabilitySuffix: NullabilitySuffix.none,
+                        //     ),
+                        // ),
+                        type: type ??
                             t.InterfaceTypeImpl(
                               element: (element.thisType as t.InterfaceTypeImpl)
                                   .element3,
-                              typeArguments: element.thisType.typeArguments,
+                              typeArguments: element.thisType.typeArguments
+                                  as List<t.TypeImpl>,
                               nullabilitySuffix: element.isNullable
                                   ? NullabilitySuffix.question
                                   : NullabilitySuffix.none,
@@ -887,10 +898,10 @@ class FormGenerator {
         (b) => b
           ..lambda = true
           ..returns = Reference('${e.className}${element.generics}')
-          ..name = '${e.name}Form'
+          ..name = '${e.name3}Form'
           ..type = MethodType.getter
           ..body = Code(
-            '${e.className}(form, pathBuilder(\'${e.name}\'))',
+            '${e.className}(form, pathBuilder(\'${e.name3}\'))',
           ),
       );
     });
@@ -903,7 +914,7 @@ class FormGenerator {
 
         final generator = FormGenerator(
           root,
-          typeParameter.element! as ClassElement,
+          typeParameter.element3! as ClassElement2,
           type,
           ast,
           classes,
@@ -912,7 +923,7 @@ class FormGenerator {
         return Method(
           (b) => b
             ..returns = Reference('List<${generator.className}>')
-            ..name = '${e.name}${generator.className}'
+            ..name = '${e.name3}${generator.className}'
             ..type = MethodType.getter
             ..body = Code(
               '''
@@ -920,7 +931,7 @@ class FormGenerator {
                 
                 return values
                 .asMap()
-                .map((k, v) => MapEntry(k, ${generator.className}(form, pathBuilder("${e.name}.\$k"))))
+                .map((k, v) => MapEntry(k, ${generator.className}(form, pathBuilder("${e.name3}.\$k"))))
                 .values
                 .toList();
               ''',

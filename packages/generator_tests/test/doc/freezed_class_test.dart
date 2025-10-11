@@ -9,7 +9,7 @@ void main() {
   group('reactive_forms_generator', () {
     test(
       'Freezed class',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''
