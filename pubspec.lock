@@ -585,13 +585,13 @@ packages:
     source: hosted
     version: "1.5.0"
   reactive_forms:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: reactive_forms
-      sha256: "9b1fb18e0aae9c50cfa0aaabaaa38bc4d78eefc9b7b95fa9c947b051f6524b8e"
+      sha256: "4c8fe71f21ac88996c01a56fe19ea5ec39b47292cb07f99a467e1bb977136a98"
       url: "https://pub.dev"
     source: hosted
-    version: "17.0.1"
+    version: "18.1.1"
   reactive_forms_lbc:
     dependency: transitive
     description:
@@ -729,10 +729,10 @@ packages:
     dependency: transitive
     description:
       name: test
-      sha256: "301b213cd241ca982e9ba50266bd3f5bd1ea33f1455554c5abb85d1be0e2d87e"
+      sha256: "65e29d831719be0591f7b3b1a32a3cda258ec98c58c7b25f7b84241bc31215bb"
       url: "https://pub.dev"
     source: hosted
-    version: "1.25.15"
+    version: "1.26.2"
   test_api:
     dependency: "direct overridden"
     description:
@@ -745,10 +745,10 @@ packages:
     dependency: transitive
     description:
       name: test_core
-      sha256: "84d17c3486c8dfdbe5e12a50c8ae176d15e2a771b96909a9442b40173649ccaa"
+      sha256: "80bf5a02b60af04b09e14f6fe68b921aad119493e26e490deaca5993fef1b05a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.8"
+    version: "0.6.11"
   timing:
     dependency: transitive
     description:

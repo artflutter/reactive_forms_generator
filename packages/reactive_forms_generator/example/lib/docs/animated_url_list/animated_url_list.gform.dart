@@ -54,7 +54,7 @@ class ReactiveAnimatedUrlListForm extends StatelessWidget {
     required this.form,
     required this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
   }) : super(key: key);
 
   final Widget child;
@@ -63,7 +63,8 @@ class ReactiveAnimatedUrlListForm extends StatelessWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   static AnimatedUrlListForm? of(
     BuildContext context, {
@@ -90,7 +91,7 @@ class ReactiveAnimatedUrlListForm extends StatelessWidget {
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
         canPop: canPop,
-        onPopInvoked: onPopInvoked,
+        onPopInvokedWithResult: onPopInvokedWithResult,
         child: child,
       ),
     );
@@ -111,7 +112,7 @@ class AnimatedUrlListFormBuilder extends StatefulWidget {
     this.model,
     this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -122,7 +123,8 @@ class AnimatedUrlListFormBuilder extends StatefulWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   final Widget Function(
           BuildContext context, AnimatedUrlListForm formModel, Widget? child)
@@ -210,7 +212,7 @@ class _AnimatedUrlListFormBuilderState
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
-        onPopInvoked: widget.onPopInvoked,
+        onPopInvokedWithResult: widget.onPopInvokedWithResult,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,

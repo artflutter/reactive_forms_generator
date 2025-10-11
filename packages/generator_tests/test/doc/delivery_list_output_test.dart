@@ -149,7 +149,7 @@ class ReactiveDeliveryListOForm extends StatelessWidget {
     required this.form,
     required this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
   }) : super(key: key);
 
   final Widget child;
@@ -158,7 +158,8 @@ class ReactiveDeliveryListOForm extends StatelessWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   static DeliveryListOForm? of(
     BuildContext context, {
@@ -185,7 +186,7 @@ class ReactiveDeliveryListOForm extends StatelessWidget {
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
         canPop: canPop,
-        onPopInvoked: onPopInvoked,
+        onPopInvokedWithResult: onPopInvokedWithResult,
         child: child,
       ),
     );
@@ -206,7 +207,7 @@ class DeliveryListOFormBuilder extends StatefulWidget {
     this.model,
     this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -217,7 +218,8 @@ class DeliveryListOFormBuilder extends StatefulWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   final Widget Function(
       BuildContext context, DeliveryListOForm formModel, Widget? child) builder;
@@ -303,7 +305,7 @@ class _DeliveryListOFormBuilderState extends State<DeliveryListOFormBuilder> {
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
-        onPopInvoked: widget.onPopInvoked,
+        onPopInvokedWithResult: widget.onPopInvokedWithResult,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -2281,7 +2283,7 @@ class ReactiveStandaloneDeliveryPointForm extends StatelessWidget {
     required this.form,
     required this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
   }) : super(key: key);
 
   final Widget child;
@@ -2290,7 +2292,8 @@ class ReactiveStandaloneDeliveryPointForm extends StatelessWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   static StandaloneDeliveryPointForm? of(
     BuildContext context, {
@@ -2317,7 +2320,7 @@ class ReactiveStandaloneDeliveryPointForm extends StatelessWidget {
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
         canPop: canPop,
-        onPopInvoked: onPopInvoked,
+        onPopInvokedWithResult: onPopInvokedWithResult,
         child: child,
       ),
     );
@@ -2338,7 +2341,7 @@ class StandaloneDeliveryPointFormBuilder extends StatefulWidget {
     this.model,
     this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -2349,7 +2352,8 @@ class StandaloneDeliveryPointFormBuilder extends StatefulWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   final Widget Function(BuildContext context,
       StandaloneDeliveryPointForm formModel, Widget? child) builder;
@@ -2437,7 +2441,7 @@ class _StandaloneDeliveryPointFormBuilderState
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
-        onPopInvoked: widget.onPopInvoked,
+        onPopInvokedWithResult: widget.onPopInvokedWithResult,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
