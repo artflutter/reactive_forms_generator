@@ -1,6 +1,6 @@
 // ignore_for_file: implementation_imports
 
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:code_builder/code_builder.dart';
@@ -45,7 +45,7 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
   Method? formGroupArrayMethod() => methodEntity.rebuild(
         (b) => b
           ..body = Code(
-            '${field.name}${field.className}.map((e) => e.$fieldModelName).toList()',
+            '${field.name3}${field.className}.map((e) => e.$fieldModelName).toList()',
           ),
       );
 
@@ -116,9 +116,12 @@ class FieldRawValueMethod extends FieldValueMethod {
   }
 }
 
-extension Care on ClassElement {
+extension Care on ClassElement2 {
   String get toReferenceType {
-    var builder = ElementDisplayStringBuilder2(withNullability: true);
+    var builder = ElementDisplayStringBuilder2(
+      withNullability: true,
+      preferTypeAlias: false,
+    );
     (thisType as TypeImpl).appendTo(builder);
     return builder.toString();
   }

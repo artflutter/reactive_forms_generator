@@ -1,6 +1,7 @@
 // ignore_for_file: implementation_imports
 import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
@@ -9,16 +10,20 @@ import 'package:source_gen/source_gen.dart';
 import 'package:recase/recase.dart';
 
 abstract class FormElementGenerator {
-  final ClassElement root;
-  final ParameterElement field;
+  final ClassElement2 root;
+  final Element2 field;
   final DartType? type;
 
   static const String validatorKey = 'validators';
 
-  FormElementGenerator(this.root, this.field, this.type);
+  FormElementGenerator({
+    required this.root,
+    required this.field,
+    required this.type,
+  });
 
   String get value {
-    final enclosingElement = constructorElement.enclosingElement3;
+    final enclosingElement = constructorElement?.enclosingElement2;
 
     final optionalChaining = (enclosingElement == root &&
                 type?.nullabilitySuffix != NullabilitySuffix.question) ||
@@ -26,7 +31,7 @@ abstract class FormElementGenerator {
         ? ''
         : '?';
 
-    return '${enclosingElement.name.camelCase}$optionalChaining.${fieldElement.name}';
+    return '${enclosingElement?.name3?.camelCase}$optionalChaining.${fieldElement.name3}';
   }
 
   String? validatorName(ExecutableElement? e) {
@@ -55,10 +60,10 @@ abstract class FormElementGenerator {
         annotationType != 'Never';
   }
 
-  Element get fieldElement => field;
+  Element2 get fieldElement => field;
 
-  ConstructorElement get constructorElement =>
-      fieldElement.enclosingElement3 as ConstructorElement;
+  ConstructorElement2? get constructorElement =>
+      fieldElement.enclosingElement2 as ConstructorElement2?;
 
   // Map<String, String> get annotationParams {
   //   final result = <String, String>{};

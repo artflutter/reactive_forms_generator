@@ -7,7 +7,7 @@ workspace:
   - packages/reactive_forms_generator/example
 
 environment:
-  sdk: ">=3.6.0 <4.0.0"
+  sdk: ">=3.8.0 <4.0.0"
 
 dependency_overrides:
   test_api: 0.7.4

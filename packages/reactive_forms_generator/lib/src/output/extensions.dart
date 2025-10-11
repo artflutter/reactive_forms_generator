@@ -184,7 +184,7 @@ extension TypeAnnotationImplExt on TypeAnnotationImpl {
       GenericFunctionTypeImpl() => throw UnimplementedError(),
       NamedTypeImpl() => NamedTypeImpl(
           importPrefix: type.importPrefix,
-          name2: type.element?.hasRfGroupAnnotation == true
+          name2: type.element2?.hasRfGroupAnnotation == true
               ? StringToken(
                   TokenType.STRING,
                   '${type.name2.lexeme}Output',

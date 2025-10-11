@@ -9,7 +9,7 @@ void main() {
   group('doc', () {
     test(
       'Mailing list Output',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''

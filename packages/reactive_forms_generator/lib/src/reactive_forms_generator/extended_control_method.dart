@@ -21,7 +21,7 @@ class ExtendedControlMethod extends ReactiveFormGeneratorMethod {
       ExtendedControl<List<Map<String, Object?>?>, List<${type}Form>>(
           form.control(${field.fieldControlPath}())
               as FormArray<Map<String, Object?>>,
-          () => ${field.name}${field.className})
+          () => ${field.name3}${field.className})
     ''';
 
     return Method(

@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:code_builder/code_builder.dart';
@@ -11,13 +12,13 @@ import 'package:analyzer/src/dart/element/type.dart';
 
 import '../utils.dart';
 
-extension ConstructorElementExt on ConstructorElement {
-  bool get hasReactiveFormAnnotatedParameters => parameters.any(
+extension ConstructorElementExt on ConstructorElement2 {
+  bool get hasReactiveFormAnnotatedParameters => formalParameters.any(
         (e) => true,
       );
 }
 
-extension ClassElementExt on ClassElement {
+extension ClassElementExt on ClassElement2 {
   String get fullTypeName => thisType.toString();
 
   String get generics {
@@ -47,12 +48,12 @@ extension ClassElementExt on ClassElement {
     );
   }
 
-  List<ParameterElement> get annotatedParameters {
+  List<FormalParameterElement> get annotatedParameters {
     final annotatedConstructors =
-        constructors.where((e) => e.hasReactiveFormAnnotatedParameters);
+        constructors2.where((e) => e.hasReactiveFormAnnotatedParameters);
 
     if (annotatedConstructors.isNotEmpty) {
-      return annotatedConstructors.first.parameters;
+      return annotatedConstructors.first.formalParameters;
     }
 
     return [];
@@ -61,8 +62,8 @@ extension ClassElementExt on ClassElement {
   bool get isNullable => annotatedParameters.fold(true, (acc, e) => acc);
 }
 
-extension ParameterElementExt on ParameterElement {
-  String get fieldName => name;
+extension ParameterElementExt on FormalParameterElement {
+  String get fieldName => name3 ?? '<null>';
 
   String get addListItemName => 'add${fieldName.pascalCase}Item';
 
@@ -107,39 +108,42 @@ extension ParameterElementExt on ParameterElement {
   String get className => '${elementClassName}Form';
 
   String get elementClassName {
-    final element = type.element as ClassElement;
+    final element = type.element3 as ClassElement2;
 
     String baseName = '';
 
     if (element.hasRfAnnotation) {
       final annotation = element.rfAnnotation;
-      baseName = annotation?.getField('name')?.toStringValue() ?? element.name;
+      baseName = annotation?.getField('name')?.toStringValue() ??
+          element.name3 ??
+          '<null>';
     }
 
-    baseName = element.name;
+    baseName = element.name3 ?? '<null>';
 
     if (isFormGroupArray) {
-      final element = typeParameter.element as ClassElement;
+      final element = typeParameter.element3 as ClassElement2;
 
       if (element.hasRfAnnotation) {
         final annotation = element.rfAnnotation;
-        baseName =
-            annotation?.getField('name')?.toStringValue() ?? element.name;
+        baseName = annotation?.getField('name')?.toStringValue() ??
+            element.name3 ??
+            '<null>';
       }
 
-      baseName = element.name;
+      baseName = element.name3 ?? '<null>';
     }
 
     return baseName;
   }
 
-  String get valueUpdateMethodName => '${name}ValueUpdate';
+  String get valueUpdateMethodName => '${name3}ValueUpdate';
 
-  String get valuePatchMethodName => '${name}ValuePatch';
+  String get valuePatchMethodName => '${name3}ValuePatch';
 
-  String get clearMethodName => '${name}Clear';
+  String get clearMethodName => '${name3}Clear';
 
-  String get insertMethodName => '${name}Insert';
+  String get insertMethodName => '${name3}Insert';
 
   // needs careful usage and possibly refactoring
   DartType get typeParameter => (type as ParameterizedType).typeArguments.first;
@@ -155,8 +159,8 @@ extension ParameterElementExt on ParameterElement {
 
     final typeParameter = typeArguments.first;
 
-    return typeParameter.element is ClassElement &&
-        typeParameter.element!.hasRfGroupAnnotation;
+    return typeParameter.element3 is ClassElement2 &&
+        typeParameter.element3!.hasRfGroupAnnotation;
   }
 
   bool get isFormArray {
@@ -170,10 +174,10 @@ extension ParameterElementExt on ParameterElement {
 
     final typeParameter = typeArguments.first;
 
-    return (typeParameter.element is ClassElement ||
-            typeParameter.element is EnumElement ||
-            typeParameter.element is TypeDefiningElement) &&
-        !typeParameter.element!.hasRfGroupAnnotation;
+    return (typeParameter.element3 is ClassElement2 ||
+            typeParameter.element3 is EnumElement2 ||
+            typeParameter.element3 is TypeDefiningElement2) &&
+        !typeParameter.element3!.hasRfGroupAnnotation;
   }
 
   bool get isFormControl {
@@ -184,19 +188,19 @@ extension ParameterElementExt on ParameterElement {
 
     throwIf(
       isFormControl && isFormGroup,
-      "Field `$name` can't be annotated with @RfControl and @FromGroupAnnotation at the same time.",
+      "Field `$name3` can't be annotated with @RfControl and @FromGroupAnnotation at the same time.",
       element: this,
     );
 
     return isFormControl;
   }
 
-  bool get isFormGroup => type.element?.hasRfGroupAnnotation ?? false;
+  bool get isFormGroup => type.element3?.hasRfGroupAnnotation ?? false;
 
   bool get isForm => hasRfAnnotation;
 
   String? get defaultValue {
-    for (final meta in metadata) {
+    for (final meta in metadata2.annotations) {
       final source = meta.toSource();
 
       if (source.startsWith('@Default(')) {
@@ -220,14 +224,15 @@ extension ParameterElementExt on ParameterElement {
 
     var builder = ElementDisplayStringBuilder2(
       withNullability: true,
+      preferTypeAlias: false,
     );
     (type as TypeImpl).appendTo(builder);
     return builder.toString();
   }
 }
 
-extension FieldElementExt on FieldElement {
-  String get fieldName => name;
+extension FieldElementExt on FieldElement2 {
+  String get fieldName => name3 ?? '<null>';
 
   String get fieldValueName => '${fieldName}Value';
 
@@ -238,7 +243,7 @@ extension FieldElementExt on FieldElement {
   // needs careful usage and possibly refactoring
   DartType get typeParameter => (type as ParameterizedType).typeArguments.first;
 
-  bool get isFormGroup => type.element?.hasRfGroupAnnotation ?? false;
+  bool get isFormGroup => type.element3?.hasRfGroupAnnotation ?? false;
 
   bool get isForm => hasRfAnnotation;
 }

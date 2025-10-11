@@ -9,7 +9,7 @@ void main() {
   group('reactive_forms_generator', () {
     test(
       'Nested Output',
-          () async {
+      () async {
         return testGenerator(
           fileName: fileName,
           model: '''

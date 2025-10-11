@@ -12,7 +12,7 @@ class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
   @override
   Method formGroupArrayMethod() {
     final code = '''
-      final keys = ${field.name}${field.className}.asMap().keys;
+      final keys = ${field.name3}${field.className}.asMap().keys;
       
       final toPatch = <${field.typeParameter}>[];
       (value ${field.isNullable ? '?? []' : ''}).asMap()
