@@ -19,6 +19,9 @@ class ControlMethod extends ReactiveFormGeneratorMethod {
 
     return Method(
       (b) => b
+        ..annotations.add(
+          const CodeExpression(Code('Deprecated("Migrate to .control")')),
+        )
         ..name = field.fieldControlName
         ..lambda = true
         ..type = MethodType.getter
@@ -158,10 +161,23 @@ class ControlMethod2 extends ReactiveFormGeneratorMethod {
         ),
     );
   }
-}
 
-class ControlMethod3 extends ReactiveFormGeneratorMethod {
-  ControlMethod3(super.field, super.output, super.requiredValidators);
+  @override
+  Method? formGroupMethod() {
+    final reference = 'FormGroup';
+    final wrapperReference = 'FormGroupWrapper';
+
+    return Method(
+      (b) => b
+        ..name = field.fieldControlName2
+        ..lambda = true
+        ..type = MethodType.getter
+        ..returns = Reference(wrapperReference)
+        ..body = Code(
+          '$wrapperReference(form.control(${field.fieldControlPath}()) as $reference,)',
+        ),
+    );
+  }
 
   @override
   Method? formGroupArrayMethod() {

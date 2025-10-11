@@ -19,7 +19,11 @@ class ReactiveMailingListOFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, MailingListOForm formModel, Widget? child) builder;
+    BuildContext context,
+    MailingListOForm formModel,
+    Widget? child,
+  )
+  builder;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +42,7 @@ class MailingListOFormInheritedStreamer extends InheritedStreamer<dynamic> {
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(
-          stream,
-          child,
-          key: key,
-        );
+  }) : super(stream, child, key: key);
 
   final MailingListOForm form;
 }
@@ -64,19 +64,19 @@ class ReactiveMailingListOForm extends StatelessWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static MailingListOForm? of(
-    BuildContext context, {
-    bool listen = true,
-  }) {
+  static MailingListOForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
-              MailingListOFormInheritedStreamer>()
+            MailingListOFormInheritedStreamer
+          >()
           ?.form;
     }
 
-    final element = context.getElementForInheritedWidgetOfExactType<
-        MailingListOFormInheritedStreamer>();
+    final element = context
+        .getElementForInheritedWidgetOfExactType<
+          MailingListOFormInheritedStreamer
+        >();
     return element == null
         ? null
         : (element.widget as MailingListOFormInheritedStreamer).form;
@@ -124,10 +124,14 @@ class MailingListOFormBuilder extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-      BuildContext context, MailingListOForm formModel, Widget? child) builder;
+    BuildContext context,
+    MailingListOForm formModel,
+    Widget? child,
+  )
+  builder;
 
   final void Function(BuildContext context, MailingListOForm formModel)?
-      initState;
+  initState;
 
   @override
   _MailingListOFormBuilderState createState() =>
@@ -141,8 +145,10 @@ class _MailingListOFormBuilderState extends State<MailingListOFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
-        MailingListOForm(MailingListOForm.formElements(widget.model), null);
+    _formModel = MailingListOForm(
+      MailingListOForm.formElements(widget.model),
+      null,
+    );
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -219,10 +225,7 @@ class _MailingListOFormBuilderState extends State<MailingListOFormBuilder> {
 final _logMailingListOForm = Logger.detached('MailingListOForm');
 
 class MailingListOForm implements FormModel<MailingListO, MailingListOOutput> {
-  MailingListOForm(
-    this.form,
-    this.path,
-  );
+  MailingListOForm(this.form, this.path);
 
   static const String emailListControlName = "emailList";
 
@@ -241,7 +244,8 @@ class MailingListOForm implements FormModel<MailingListO, MailingListOOutput> {
       emailListControl.rawValue.whereType<String?>().toList();
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsEmailList {
     try {
       form.control(emailListControlPath());
@@ -260,8 +264,11 @@ class MailingListOForm implements FormModel<MailingListO, MailingListOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailListControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailListControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   @Deprecated("Use control.patch() instead")
@@ -270,8 +277,11 @@ class MailingListOForm implements FormModel<MailingListO, MailingListOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailListControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailListControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   @Deprecated("Use control.reset() instead")
@@ -281,22 +291,21 @@ class MailingListOForm implements FormModel<MailingListO, MailingListOOutput> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      emailListControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => emailListControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   @Deprecated("Migrate to .control")
   FormArray<String> get emailListControl =>
       form.control(emailListControlPath()) as FormArray<String>;
 
   FormArrayWrapper<String> get emailList => FormArrayWrapper<String>(
-        form.control(emailListControlPath()) as FormArray<String>,
-      );
+    form.control(emailListControlPath()) as FormArray<String>,
+  );
 
   List<FormControl<String>> get emailListControlControls =>
       emailListControl.controls.cast<FormControl<String>>();
@@ -351,13 +360,15 @@ class MailingListOForm implements FormModel<MailingListO, MailingListOOutput> {
         break;
     }
 
-    emailListControl.add(FormControl<String>(
-      value: value,
-      validators: resultingValidators,
-      asyncValidators: resultingAsyncValidators,
-      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
-      disabled: disabled ?? false,
-    ));
+    emailListControl.add(
+      FormControl<String>(
+        value: value,
+        validators: resultingValidators,
+        asyncValidators: resultingAsyncValidators,
+        asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+        disabled: disabled ?? false,
+      ),
+    );
   }
 
   @override
@@ -381,10 +392,7 @@ class MailingListOForm implements FormModel<MailingListO, MailingListOOutput> {
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -397,7 +405,9 @@ class MailingListOForm implements FormModel<MailingListO, MailingListOOutput> {
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -448,58 +458,69 @@ class MailingListOForm implements FormModel<MailingListO, MailingListOOutput> {
     MailingListO? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      form.updateValue(MailingListOForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => form.updateValue(
+    MailingListOForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
   void reset({
     MailingListO? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => form.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(MailingListO? mailingListO) => FormGroup({
-        emailListControlName: FormArray<String>(
-            (mailingListO?.emailList ?? [])
-                .map((e) => FormControl<String>(
-                      value: e,
-                      validators: [EmailValidator()],
-                      asyncValidators: [],
-                      asyncValidatorsDebounceTime: 250,
-                      disabled: false,
-                    ))
-                .toList(),
-            validators: [MailingListValidator()],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+  static FormGroup formElements(MailingListO? mailingListO) => FormGroup(
+    {
+      emailListControlName: FormArray<String>(
+        (mailingListO?.emailList ?? [])
+            .map(
+              (e) => FormControl<String>(
+                value: e,
+                validators: [EmailValidator()],
+                asyncValidators: [],
+                asyncValidatorsDebounceTime: 250,
+                disabled: false,
+              ),
+            )
+            .toList(),
+        validators: [MailingListValidator()],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      ),
+    },
+    validators: [],
+    asyncValidators: [],
+    asyncValidatorsDebounceTime: 250,
+    disabled: false,
+  );
 }
 
 @Rf(output: true)
 class MailingListOOutput {
   final List<String?> emailList;
-  MailingListOOutput(
-      {@RfArray(
-          validators: [MailingListValidator()],
-          itemValidators: [EmailValidator()])
-      this.emailList = const []});
+  MailingListOOutput({
+    @RfArray(
+      validators: [MailingListValidator()],
+      itemValidators: [EmailValidator()],
+    )
+    this.emailList = const [],
+  });
 }
 
 class ReactiveMailingListOFormArrayBuilder<
-    ReactiveMailingListOFormArrayBuilderT> extends StatelessWidget {
+  ReactiveMailingListOFormArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveMailingListOFormArrayBuilder({
     Key? key,
     this.control,
@@ -508,30 +529,41 @@ class ReactiveMailingListOFormArrayBuilder<
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveMailingListOFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveMailingListOFormArrayBuilderT>? Function(
-      MailingListOForm formModel)? control;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      MailingListOForm formModel)? builder;
+    MailingListOForm formModel,
+  )?
+  control;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      FormControl<ReactiveMailingListOFormArrayBuilderT> control,
-      ReactiveMailingListOFormArrayBuilderT? item,
-      MailingListOForm formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    MailingListOForm formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    FormControl<ReactiveMailingListOFormArrayBuilderT> control,
+    ReactiveMailingListOFormArrayBuilderT? item,
+    MailingListOForm formModel,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-          FormControl<ReactiveMailingListOFormArrayBuilderT> control)?
-      controlFilter;
+    FormControl<ReactiveMailingListOFormArrayBuilderT> control,
+  )?
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -547,18 +579,9 @@ class ReactiveMailingListOFormArrayBuilder<
     return ReactiveFormArrayItemBuilder<ReactiveMailingListOFormArrayBuilderT>(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
-          ? (context, itemList) => builder(
-                context,
-                itemList,
-                formModel,
-              )
+          ? (context, itemList) => builder(context, itemList, formModel)
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
+      itemBuilder: (context, i, control, item) =>
           itemBuilder(context, i, control, item, formModel),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -567,7 +590,9 @@ class ReactiveMailingListOFormArrayBuilder<
 }
 
 class ReactiveMailingListOFormArrayBuilder2<
-    ReactiveMailingListOFormArrayBuilderT> extends StatelessWidget {
+  ReactiveMailingListOFormArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveMailingListOFormArrayBuilder2({
     Key? key,
     this.control,
@@ -576,36 +601,43 @@ class ReactiveMailingListOFormArrayBuilder2<
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveMailingListOFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveMailingListOFormArrayBuilderT>? Function(
-      MailingListOForm formModel)? control;
+    MailingListOForm formModel,
+  )?
+  control;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        List<Widget> itemList,
-        MailingListOForm formModel
-      }) params)? builder;
+    ({BuildContext context, List<Widget> itemList, MailingListOForm formModel})
+    params,
+  )?
+  builder;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        int i,
-        FormControl<ReactiveMailingListOFormArrayBuilderT> control,
-        ReactiveMailingListOFormArrayBuilderT? item,
-        MailingListOForm formModel
-      }) params) itemBuilder;
+    ({
+      BuildContext context,
+      int i,
+      FormControl<ReactiveMailingListOFormArrayBuilderT> control,
+      ReactiveMailingListOFormArrayBuilderT? item,
+      MailingListOForm formModel,
+    })
+    params,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-          FormControl<ReactiveMailingListOFormArrayBuilderT> control)?
-      controlFilter;
+    FormControl<ReactiveMailingListOFormArrayBuilderT> control,
+  )?
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -622,23 +654,17 @@ class ReactiveMailingListOFormArrayBuilder2<
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
           ? (context, itemList) => builder((
-                context: context,
-                itemList: itemList,
-                formModel: formModel,
-              ))
+              context: context,
+              itemList: itemList,
+              formModel: formModel,
+            ))
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
-          itemBuilder((
+      itemBuilder: (context, i, control, item) => itemBuilder((
         context: context,
         i: i,
         control: control,
         item: item,
-        formModel: formModel
+        formModel: formModel,
       )),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -647,32 +673,48 @@ class ReactiveMailingListOFormArrayBuilder2<
 }
 
 class ReactiveMailingListOFormFormGroupArrayBuilder<
-    ReactiveMailingListOFormFormGroupArrayBuilderT> extends StatelessWidget {
+  ReactiveMailingListOFormFormGroupArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveMailingListOFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(extended != null || getExtended != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         extended != null || getExtended != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-      List<ReactiveMailingListOFormFormGroupArrayBuilderT>>? extended;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveMailingListOFormFormGroupArrayBuilderT>
+  >?
+  extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-          List<ReactiveMailingListOFormFormGroupArrayBuilderT>>
-      Function(MailingListOForm formModel)? getExtended;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      MailingListOForm formModel)? builder;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveMailingListOFormFormGroupArrayBuilderT>
+  >
+  Function(MailingListOForm formModel)?
+  getExtended;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      ReactiveMailingListOFormFormGroupArrayBuilderT? item,
-      MailingListOForm formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    MailingListOForm formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    ReactiveMailingListOFormFormGroupArrayBuilderT? item,
+    MailingListOForm formModel,
+  )
+  itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -687,26 +729,18 @@ class ReactiveMailingListOFormFormGroupArrayBuilder<
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ??
-                <ReactiveMailingListOFormFormGroupArrayBuilderT>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ??
+                    <ReactiveMailingListOFormFormGroupArrayBuilderT>[])
+                .asMap()
+                .map(
+                  (i, item) =>
+                      MapEntry(i, itemBuilder(context, i, item, formModel)),
+                )
+                .values
+                .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );

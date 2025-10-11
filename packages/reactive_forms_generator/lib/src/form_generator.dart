@@ -1008,7 +1008,7 @@ class FormGenerator {
 
   Iterable<Method> get controlMethod3List => all
       .map(
-        (e) => ControlMethod3(e, root.output, root.requiredValidators).method(),
+        (e) => ControlMethod2(e, root.output, root.requiredValidators).method(),
       )
       .whereType<Method>();
 

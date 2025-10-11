@@ -143,23 +143,23 @@ const _$QuadrantEnumMap = {
   Quadrant.lowerLeft: 'lowerLeft',
 };
 
-_ChartingOrderValue _$ChartingOrderValueFromJson(
-  Map<String, dynamic> json,
-) => _ChartingOrderValue(
-  chartingOrder:
-      $enumDecodeNullable(_$ChartingOrderTypeEnumMap, json['chartingOrder']) ??
-      ChartingOrderType.arch,
-  selectedOption: (json['selectedOption'] as num?)?.toInt() ?? 0,
-  order:
-      (json['order'] as List<dynamic>)
+_ChartingOrderValue _$ChartingOrderValueFromJson(Map<String, dynamic> json) =>
+    _ChartingOrderValue(
+      chartingOrder:
+          $enumDecodeNullable(
+            _$ChartingOrderTypeEnumMap,
+            json['chartingOrder'],
+          ) ??
+          ChartingOrderType.arch,
+      selectedOption: (json['selectedOption'] as num?)?.toInt() ?? 0,
+      order: (json['order'] as List<dynamic>)
           .map(
-            (e) =>
-                (e as List<dynamic>)
-                    .map((e) => ScanOrder.fromJson(e as Map<String, dynamic>))
-                    .toList(),
+            (e) => (e as List<dynamic>)
+                .map((e) => ScanOrder.fromJson(e as Map<String, dynamic>))
+                .toList(),
           )
           .toList(),
-);
+    );
 
 Map<String, dynamic> _$ChartingOrderValueToJson(_ChartingOrderValue instance) =>
     <String, dynamic>{

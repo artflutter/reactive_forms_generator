@@ -96,7 +96,7 @@ class FormArrayWrapper<T> {
   // }
 }
 
-class FormGroupWrapper<T> {
+class FormGroupWrapper {
   final FormGroup control;
 
   FormGroupWrapper(this.control);

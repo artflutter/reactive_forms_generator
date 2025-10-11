@@ -19,7 +19,11 @@ class ReactiveDeliveryListFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, DeliveryListForm formModel, Widget? child) builder;
+    BuildContext context,
+    DeliveryListForm formModel,
+    Widget? child,
+  )
+  builder;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +42,7 @@ class DeliveryListFormInheritedStreamer extends InheritedStreamer<dynamic> {
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(
-          stream,
-          child,
-          key: key,
-        );
+  }) : super(stream, child, key: key);
 
   final DeliveryListForm form;
 }
@@ -64,19 +64,19 @@ class ReactiveDeliveryListForm extends StatelessWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static DeliveryListForm? of(
-    BuildContext context, {
-    bool listen = true,
-  }) {
+  static DeliveryListForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
-              DeliveryListFormInheritedStreamer>()
+            DeliveryListFormInheritedStreamer
+          >()
           ?.form;
     }
 
-    final element = context.getElementForInheritedWidgetOfExactType<
-        DeliveryListFormInheritedStreamer>();
+    final element = context
+        .getElementForInheritedWidgetOfExactType<
+          DeliveryListFormInheritedStreamer
+        >();
     return element == null
         ? null
         : (element.widget as DeliveryListFormInheritedStreamer).form;
@@ -124,10 +124,14 @@ class DeliveryListFormBuilder extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-      BuildContext context, DeliveryListForm formModel, Widget? child) builder;
+    BuildContext context,
+    DeliveryListForm formModel,
+    Widget? child,
+  )
+  builder;
 
   final void Function(BuildContext context, DeliveryListForm formModel)?
-      initState;
+  initState;
 
   @override
   _DeliveryListFormBuilderState createState() =>
@@ -141,8 +145,10 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
-        DeliveryListForm(DeliveryListForm.formElements(widget.model), null);
+    _formModel = DeliveryListForm(
+      DeliveryListForm.formElements(widget.model),
+      null,
+    );
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -219,10 +225,7 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
 final _logDeliveryListForm = Logger.detached('DeliveryListForm');
 
 class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
-  DeliveryListForm(
-    this.form,
-    this.path,
-  );
+  DeliveryListForm(this.form, this.path);
 
   static const String deliveryListControlName = "deliveryList";
 
@@ -251,7 +254,8 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
       clientListClientForm.map((e) => e.rawModel).toList();
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsDeliveryList {
     try {
       form.control(deliveryListControlPath());
@@ -262,7 +266,8 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsClientList {
     try {
       form.control(clientListControlPath());
@@ -281,11 +286,9 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
   void get clientListFocus => form.focus(clientListControlPath());
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void clientListRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void clientListRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsClientList) {
       final controlPath = path;
       if (controlPath == null) {
@@ -336,17 +339,21 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
 
     if (toUpdate.isNotEmpty) {
       deliveryListControl.updateValue(
-          toUpdate
-              .map((e) => DeliveryPointForm.formElements(e).rawValue)
-              .toList(),
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        toUpdate
+            .map((e) => DeliveryPointForm.formElements(e).rawValue)
+            .toList(),
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     }
 
     if (toAdd.isNotEmpty) {
       toAdd.forEach((e) {
-        deliveryListControl.add(DeliveryPointForm.formElements(e),
-            updateParent: updateParent, emitEvent: emitEvent);
+        deliveryListControl.add(
+          DeliveryPointForm.formElements(e),
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
       });
     }
   }
@@ -379,15 +386,19 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
 
     if (toUpdate.isNotEmpty) {
       clientListControl.updateValue(
-          toUpdate.map((e) => ClientForm.formElements(e).rawValue).toList(),
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        toUpdate.map((e) => ClientForm.formElements(e).rawValue).toList(),
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     }
 
     if (toAdd.isNotEmpty) {
       toAdd.forEach((e) {
-        clientListControl.add(ClientForm.formElements(e),
-            updateParent: updateParent, emitEvent: emitEvent);
+        clientListControl.add(
+          ClientForm.formElements(e),
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
       });
     }
   }
@@ -432,18 +443,12 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     );
   }
 
-  void deliveryListClear({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void deliveryListClear({bool updateParent = true, bool emitEvent = true}) {
     deliveryListDeliveryPointForm.clear();
     deliveryListControl.clear(updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void clientListClear({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void clientListClear({bool updateParent = true, bool emitEvent = true}) {
     clientListClientForm.clear();
     clientListControl.clear(updateParent: updateParent, emitEvent: emitEvent);
   }
@@ -457,18 +462,17 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     final keys = deliveryListDeliveryPointForm.asMap().keys;
 
     final toPatch = <DeliveryPoint>[];
-    (value).asMap().forEach(
-      (k, v) {
-        if (keys.contains(k)) {
-          toPatch.add(v);
-        }
-      },
-    );
+    (value).asMap().forEach((k, v) {
+      if (keys.contains(k)) {
+        toPatch.add(v);
+      }
+    });
 
     deliveryListControl.patchValue(
-        toPatch.map((e) => DeliveryPointForm.formElements(e).rawValue).toList(),
-        updateParent: updateParent,
-        emitEvent: emitEvent);
+      toPatch.map((e) => DeliveryPointForm.formElements(e).rawValue).toList(),
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   @Deprecated("Use control.patch() instead")
@@ -480,18 +484,17 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     final keys = clientListClientForm.asMap().keys;
 
     final toPatch = <Client>[];
-    (value ?? []).asMap().forEach(
-      (k, v) {
-        if (keys.contains(k)) {
-          toPatch.add(v);
-        }
-      },
-    );
+    (value ?? []).asMap().forEach((k, v) {
+      if (keys.contains(k)) {
+        toPatch.add(v);
+      }
+    });
 
     clientListControl.patchValue(
-        toPatch.map((e) => ClientForm.formElements(e).rawValue).toList(),
-        updateParent: updateParent,
-        emitEvent: emitEvent);
+      toPatch.map((e) => ClientForm.formElements(e).rawValue).toList(),
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   @Deprecated("Use control.reset() instead")
@@ -501,13 +504,13 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      deliveryListControl.reset(
-          value: value
-              .map((e) => DeliveryPointForm.formElements(e).rawValue)
-              .toList(),
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => deliveryListControl.reset(
+    value: value
+        .map((e) => DeliveryPointForm.formElements(e).rawValue)
+        .toList(),
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @Deprecated("Use control.reset() instead")
   void clientListValueReset(
@@ -516,12 +519,11 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      clientListControl.reset(
-          value:
-              value?.map((e) => ClientForm.formElements(e).rawValue).toList(),
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => clientListControl.reset(
+    value: value?.map((e) => ClientForm.formElements(e).rawValue).toList(),
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @Deprecated("Migrate to .control")
   FormArray<Map<String, Object?>> get deliveryListControl =>
@@ -549,8 +551,12 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
 
     return values
         .asMap()
-        .map((k, v) => MapEntry(
-            k, DeliveryPointForm(form, pathBuilder("deliveryList.$k"))))
+        .map(
+          (k, v) => MapEntry(
+            k,
+            DeliveryPointForm(form, pathBuilder("deliveryList.$k")),
+          ),
+        )
         .values
         .toList();
   }
@@ -560,8 +566,9 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
 
     return values
         .asMap()
-        .map((k, v) =>
-            MapEntry(k, ClientForm(form, pathBuilder("clientList.$k"))))
+        .map(
+          (k, v) => MapEntry(k, ClientForm(form, pathBuilder("clientList.$k"))),
+        )
         .values
         .toList();
   }
@@ -605,18 +612,20 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
   }
 
   ExtendedControl<List<Map<String, Object?>?>, List<DeliveryPointForm>>
-      get deliveryListExtendedControl =>
-          ExtendedControl<List<Map<String, Object?>?>, List<DeliveryPointForm>>(
-              form.control(deliveryListControlPath())
-                  as FormArray<Map<String, Object?>>,
-              () => deliveryListDeliveryPointForm);
+  get deliveryListExtendedControl =>
+      ExtendedControl<List<Map<String, Object?>?>, List<DeliveryPointForm>>(
+        form.control(deliveryListControlPath())
+            as FormArray<Map<String, Object?>>,
+        () => deliveryListDeliveryPointForm,
+      );
 
   ExtendedControl<List<Map<String, Object?>?>, List<ClientForm>>
-      get clientListExtendedControl =>
-          ExtendedControl<List<Map<String, Object?>?>, List<ClientForm>>(
-              form.control(clientListControlPath())
-                  as FormArray<Map<String, Object?>>,
-              () => clientListClientForm);
+  get clientListExtendedControl =>
+      ExtendedControl<List<Map<String, Object?>?>, List<ClientForm>>(
+        form.control(clientListControlPath())
+            as FormArray<Map<String, Object?>>,
+        () => clientListClientForm,
+      );
 
   void addDeliveryListItem(DeliveryPoint value) {
     deliveryListControl.add(DeliveryPointForm.formElements(value));
@@ -658,20 +667,21 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
       );
     }
     return DeliveryList(
-        deliveryList: _deliveryListValue, clientList: _clientListValue);
+      deliveryList: _deliveryListValue,
+      clientList: _clientListValue,
+    );
   }
 
   @override
   DeliveryList get rawModel {
     return DeliveryList(
-        deliveryList: _deliveryListRawValue, clientList: _clientListRawValue);
+      deliveryList: _deliveryListRawValue,
+      clientList: _clientListRawValue,
+    );
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -687,7 +697,9 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
       clientListClientForm.forEach((e) => e.toggleDisabled());
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       deliveryListDeliveryPointForm.forEach((e) => e.toggleDisabled());
       clientListClientForm.forEach((e) => e.toggleDisabled());
@@ -741,55 +753,58 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     DeliveryList? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      form.updateValue(DeliveryListForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => form.updateValue(
+    DeliveryListForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
   void reset({
     DeliveryList? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => form.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(DeliveryList? deliveryList) => FormGroup({
-        deliveryListControlName: FormArray(
-            (deliveryList?.deliveryList ?? [])
-                .map((e) => DeliveryPointForm.formElements(e))
-                .toList(),
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false),
-        clientListControlName: FormArray(
-            (deliveryList?.clientList ?? [])
-                .map((e) => ClientForm.formElements(e))
-                .toList(),
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+  static FormGroup formElements(DeliveryList? deliveryList) => FormGroup(
+    {
+      deliveryListControlName: FormArray(
+        (deliveryList?.deliveryList ?? [])
+            .map((e) => DeliveryPointForm.formElements(e))
+            .toList(),
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      ),
+      clientListControlName: FormArray(
+        (deliveryList?.clientList ?? [])
+            .map((e) => ClientForm.formElements(e))
+            .toList(),
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      ),
+    },
+    validators: [],
+    asyncValidators: [],
+    asyncValidatorsDebounceTime: 250,
+    disabled: false,
+  );
 }
 
 final _logDeliveryPointForm = Logger.detached('DeliveryPointForm');
 
 class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
-  DeliveryPointForm(
-    this.form,
-    this.path,
-  );
+  DeliveryPointForm(this.form, this.path);
 
   static const String nameControlName = "name";
 
@@ -814,7 +829,8 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
   Address? get _addressRawValue => addressForm.rawModel;
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -825,7 +841,8 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsAddress {
     try {
       form.control(addressControlPath());
@@ -844,11 +861,9 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
   void get addressFocus => form.focus(addressControlPath());
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void addressRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void addressRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsAddress) {
       final controlPath = path;
       if (controlPath == null) {
@@ -876,8 +891,11 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    nameControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void addressValueUpdate(
@@ -885,8 +903,11 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    addressControl.updateValue(AddressForm.formElements(value).rawValue,
-        updateParent: updateParent, emitEvent: emitEvent);
+    addressControl.updateValue(
+      AddressForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   @Deprecated("Use control.patch() instead")
@@ -895,8 +916,11 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    nameControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   @Deprecated("Use control.patch() instead")
@@ -905,8 +929,11 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    addressControl.updateValue(AddressForm.formElements(value).rawValue,
-        updateParent: updateParent, emitEvent: emitEvent);
+    addressControl.updateValue(
+      AddressForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   @Deprecated("Use control.reset() instead")
@@ -916,14 +943,13 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      nameControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => nameControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   @Deprecated("Use control.reset() instead")
   void addressValueReset(
@@ -932,22 +958,26 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      addressControl.reset(
-          value: AddressForm.formElements(value).rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => addressControl.reset(
+    value: AddressForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @Deprecated("Migrate to .control")
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormGroup get addressControl =>
       form.control(addressControlPath()) as FormGroup;
 
   FormControlWrapper<String> get name => FormControlWrapper<String>(
-        form.control(nameControlPath()) as FormControl<String>,
-      );
+    form.control(nameControlPath()) as FormControl<String>,
+  );
+
+  FormGroupWrapper get address =>
+      FormGroupWrapper(form.control(addressControlPath()) as FormGroup);
 
   AddressForm get addressForm => AddressForm(form, pathBuilder('address'));
 
@@ -1009,10 +1039,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -1026,7 +1053,9 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
 
       addressForm.toggleDisabled();
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       addressForm.toggleDisabled();
       currentFormInstance.controls.forEach((key, control) {
@@ -1078,47 +1107,49 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
     DeliveryPoint? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      form.updateValue(DeliveryPointForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => form.updateValue(
+    DeliveryPointForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
   void reset({
     DeliveryPoint? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => form.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(DeliveryPoint? deliveryPoint) => FormGroup({
-        nameControlName: FormControl<String>(
-            value: deliveryPoint?.name,
-            validators: [RequiredValidator()],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        addressControlName: AddressForm.formElements(deliveryPoint?.address)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+  static FormGroup formElements(DeliveryPoint? deliveryPoint) => FormGroup(
+    {
+      nameControlName: FormControl<String>(
+        value: deliveryPoint?.name,
+        validators: [RequiredValidator()],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+      addressControlName: AddressForm.formElements(deliveryPoint?.address),
+    },
+    validators: [],
+    asyncValidators: [],
+    asyncValidatorsDebounceTime: 250,
+    disabled: false,
+  );
 }
 
 final _logAddressForm = Logger.detached('AddressForm');
 
 class AddressForm implements FormModel<Address, Address> {
-  AddressForm(
-    this.form,
-    this.path,
-  );
+  AddressForm(this.form, this.path);
 
   static const String streetControlName = "street";
 
@@ -1143,7 +1174,8 @@ class AddressForm implements FormModel<Address, Address> {
   String? get _cityRawValue => cityControl.value;
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsStreet {
     try {
       form.control(streetControlPath());
@@ -1154,7 +1186,8 @@ class AddressForm implements FormModel<Address, Address> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsCity {
     try {
       form.control(cityControlPath());
@@ -1173,11 +1206,9 @@ class AddressForm implements FormModel<Address, Address> {
   void get cityFocus => form.focus(cityControlPath());
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void streetRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void streetRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsStreet) {
       final controlPath = path;
       if (controlPath == null) {
@@ -1201,11 +1232,9 @@ class AddressForm implements FormModel<Address, Address> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void cityRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void cityRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsCity) {
       final controlPath = path;
       if (controlPath == null) {
@@ -1233,8 +1262,11 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    streetControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    streetControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void cityValueUpdate(
@@ -1242,8 +1274,11 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    cityControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    cityControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   @Deprecated("Use control.patch() instead")
@@ -1252,8 +1287,11 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    streetControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    streetControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   @Deprecated("Use control.patch() instead")
@@ -1262,8 +1300,11 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    cityControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    cityControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   @Deprecated("Use control.reset() instead")
@@ -1273,14 +1314,13 @@ class AddressForm implements FormModel<Address, Address> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      streetControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => streetControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   @Deprecated("Use control.reset() instead")
   void cityValueReset(
@@ -1289,14 +1329,13 @@ class AddressForm implements FormModel<Address, Address> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      cityControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => cityControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   @Deprecated("Migrate to .control")
   FormControl<String> get streetControl =>
@@ -1307,12 +1346,12 @@ class AddressForm implements FormModel<Address, Address> {
       form.control(cityControlPath()) as FormControl<String>;
 
   FormControlWrapper<String> get street => FormControlWrapper<String>(
-        form.control(streetControlPath()) as FormControl<String>,
-      );
+    form.control(streetControlPath()) as FormControl<String>,
+  );
 
   FormControlWrapper<String> get city => FormControlWrapper<String>(
-        form.control(cityControlPath()) as FormControl<String>,
-      );
+    form.control(cityControlPath()) as FormControl<String>,
+  );
 
   @Deprecated("Use control.disabled() instead")
   void streetSetDisabled(
@@ -1372,10 +1411,7 @@ class AddressForm implements FormModel<Address, Address> {
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -1388,7 +1424,9 @@ class AddressForm implements FormModel<Address, Address> {
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -1439,53 +1477,56 @@ class AddressForm implements FormModel<Address, Address> {
     Address? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      form.updateValue(AddressForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => form.updateValue(
+    AddressForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
   void reset({
     Address? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => form.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(Address? address) => FormGroup({
-        streetControlName: FormControl<String>(
-            value: address?.street,
-            validators: [RequiredValidator()],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        cityControlName: FormControl<String>(
-            value: address?.city,
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+  static FormGroup formElements(Address? address) => FormGroup(
+    {
+      streetControlName: FormControl<String>(
+        value: address?.street,
+        validators: [RequiredValidator()],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+      cityControlName: FormControl<String>(
+        value: address?.city,
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+    },
+    validators: [],
+    asyncValidators: [],
+    asyncValidatorsDebounceTime: 250,
+    disabled: false,
+  );
 }
 
 final _logClientForm = Logger.detached('ClientForm');
 
 class ClientForm implements FormModel<Client, Client> {
-  ClientForm(
-    this.form,
-    this.path,
-  );
+  ClientForm(this.form, this.path);
 
   static const String clientTypeControlName = "clientType";
 
@@ -1518,7 +1559,8 @@ class ClientForm implements FormModel<Client, Client> {
   String? get _notesRawValue => notesControl.value;
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsClientType {
     try {
       form.control(clientTypeControlPath());
@@ -1529,7 +1571,8 @@ class ClientForm implements FormModel<Client, Client> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -1540,7 +1583,8 @@ class ClientForm implements FormModel<Client, Client> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsNotes {
     try {
       form.control(notesControlPath());
@@ -1563,11 +1607,9 @@ class ClientForm implements FormModel<Client, Client> {
   void get notesFocus => form.focus(notesControlPath());
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void nameRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void nameRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsName) {
       final controlPath = path;
       if (controlPath == null) {
@@ -1591,11 +1633,9 @@ class ClientForm implements FormModel<Client, Client> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void notesRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void notesRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsNotes) {
       final controlPath = path;
       if (controlPath == null) {
@@ -1623,8 +1663,11 @@ class ClientForm implements FormModel<Client, Client> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    clientTypeControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    clientTypeControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void nameValueUpdate(
@@ -1632,8 +1675,11 @@ class ClientForm implements FormModel<Client, Client> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    nameControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void notesValueUpdate(
@@ -1641,8 +1687,11 @@ class ClientForm implements FormModel<Client, Client> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    notesControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    notesControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   @Deprecated("Use control.patch() instead")
@@ -1651,8 +1700,11 @@ class ClientForm implements FormModel<Client, Client> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    clientTypeControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    clientTypeControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   @Deprecated("Use control.patch() instead")
@@ -1661,8 +1713,11 @@ class ClientForm implements FormModel<Client, Client> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    nameControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   @Deprecated("Use control.patch() instead")
@@ -1671,8 +1726,11 @@ class ClientForm implements FormModel<Client, Client> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    notesControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    notesControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   @Deprecated("Use control.reset() instead")
@@ -1682,14 +1740,13 @@ class ClientForm implements FormModel<Client, Client> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      clientTypeControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => clientTypeControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   @Deprecated("Use control.reset() instead")
   void nameValueReset(
@@ -1698,14 +1755,13 @@ class ClientForm implements FormModel<Client, Client> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      nameControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => nameControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   @Deprecated("Use control.reset() instead")
   void notesValueReset(
@@ -1714,14 +1770,13 @@ class ClientForm implements FormModel<Client, Client> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      notesControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => notesControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   @Deprecated("Migrate to .control")
   FormControl<ClientType> get clientTypeControl =>
@@ -1741,12 +1796,12 @@ class ClientForm implements FormModel<Client, Client> {
       );
 
   FormControlWrapper<String> get name => FormControlWrapper<String>(
-        form.control(nameControlPath()) as FormControl<String>,
-      );
+    form.control(nameControlPath()) as FormControl<String>,
+  );
 
   FormControlWrapper<String> get notes => FormControlWrapper<String>(
-        form.control(notesControlPath()) as FormControl<String>,
-      );
+    form.control(notesControlPath()) as FormControl<String>,
+  );
 
   @Deprecated("Use control.disabled() instead")
   void clientTypeSetDisabled(
@@ -1817,22 +1872,23 @@ class ClientForm implements FormModel<Client, Client> {
       );
     }
     return Client(
-        clientType: _clientTypeValue, name: _nameValue, notes: _notesValue);
+      clientType: _clientTypeValue,
+      name: _nameValue,
+      notes: _notesValue,
+    );
   }
 
   @override
   Client get rawModel {
     return Client(
-        clientType: _clientTypeRawValue,
-        name: _nameRawValue,
-        notes: _notesRawValue);
+      clientType: _clientTypeRawValue,
+      name: _nameRawValue,
+      notes: _notesRawValue,
+    );
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -1845,7 +1901,9 @@ class ClientForm implements FormModel<Client, Client> {
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -1896,55 +1954,64 @@ class ClientForm implements FormModel<Client, Client> {
     Client? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      form.updateValue(ClientForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => form.updateValue(
+    ClientForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
   void reset({
     Client? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => form.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(Client? client) => FormGroup({
-        clientTypeControlName: FormControl<ClientType>(
-            value: client?.clientType,
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        nameControlName: FormControl<String>(
-            value: client?.name,
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        notesControlName: FormControl<String>(
-            value: client?.notes,
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+  static FormGroup formElements(Client? client) => FormGroup(
+    {
+      clientTypeControlName: FormControl<ClientType>(
+        value: client?.clientType,
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+      nameControlName: FormControl<String>(
+        value: client?.name,
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+      notesControlName: FormControl<String>(
+        value: client?.notes,
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+    },
+    validators: [],
+    asyncValidators: [],
+    asyncValidatorsDebounceTime: 250,
+    disabled: false,
+  );
 }
 
 class ReactiveDeliveryListFormArrayBuilder<
-    ReactiveDeliveryListFormArrayBuilderT> extends StatelessWidget {
+  ReactiveDeliveryListFormArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveDeliveryListFormArrayBuilder({
     Key? key,
     this.control,
@@ -1953,30 +2020,41 @@ class ReactiveDeliveryListFormArrayBuilder<
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveDeliveryListFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveDeliveryListFormArrayBuilderT>? Function(
-      DeliveryListForm formModel)? control;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      DeliveryListForm formModel)? builder;
+    DeliveryListForm formModel,
+  )?
+  control;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      FormControl<ReactiveDeliveryListFormArrayBuilderT> control,
-      ReactiveDeliveryListFormArrayBuilderT? item,
-      DeliveryListForm formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    DeliveryListForm formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    FormControl<ReactiveDeliveryListFormArrayBuilderT> control,
+    ReactiveDeliveryListFormArrayBuilderT? item,
+    DeliveryListForm formModel,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-          FormControl<ReactiveDeliveryListFormArrayBuilderT> control)?
-      controlFilter;
+    FormControl<ReactiveDeliveryListFormArrayBuilderT> control,
+  )?
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -1992,18 +2070,9 @@ class ReactiveDeliveryListFormArrayBuilder<
     return ReactiveFormArrayItemBuilder<ReactiveDeliveryListFormArrayBuilderT>(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
-          ? (context, itemList) => builder(
-                context,
-                itemList,
-                formModel,
-              )
+          ? (context, itemList) => builder(context, itemList, formModel)
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
+      itemBuilder: (context, i, control, item) =>
           itemBuilder(context, i, control, item, formModel),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -2012,7 +2081,9 @@ class ReactiveDeliveryListFormArrayBuilder<
 }
 
 class ReactiveDeliveryListFormArrayBuilder2<
-    ReactiveDeliveryListFormArrayBuilderT> extends StatelessWidget {
+  ReactiveDeliveryListFormArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveDeliveryListFormArrayBuilder2({
     Key? key,
     this.control,
@@ -2021,36 +2092,43 @@ class ReactiveDeliveryListFormArrayBuilder2<
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveDeliveryListFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveDeliveryListFormArrayBuilderT>? Function(
-      DeliveryListForm formModel)? control;
+    DeliveryListForm formModel,
+  )?
+  control;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        List<Widget> itemList,
-        DeliveryListForm formModel
-      }) params)? builder;
+    ({BuildContext context, List<Widget> itemList, DeliveryListForm formModel})
+    params,
+  )?
+  builder;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        int i,
-        FormControl<ReactiveDeliveryListFormArrayBuilderT> control,
-        ReactiveDeliveryListFormArrayBuilderT? item,
-        DeliveryListForm formModel
-      }) params) itemBuilder;
+    ({
+      BuildContext context,
+      int i,
+      FormControl<ReactiveDeliveryListFormArrayBuilderT> control,
+      ReactiveDeliveryListFormArrayBuilderT? item,
+      DeliveryListForm formModel,
+    })
+    params,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-          FormControl<ReactiveDeliveryListFormArrayBuilderT> control)?
-      controlFilter;
+    FormControl<ReactiveDeliveryListFormArrayBuilderT> control,
+  )?
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -2067,23 +2145,17 @@ class ReactiveDeliveryListFormArrayBuilder2<
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
           ? (context, itemList) => builder((
-                context: context,
-                itemList: itemList,
-                formModel: formModel,
-              ))
+              context: context,
+              itemList: itemList,
+              formModel: formModel,
+            ))
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
-          itemBuilder((
+      itemBuilder: (context, i, control, item) => itemBuilder((
         context: context,
         i: i,
         control: control,
         item: item,
-        formModel: formModel
+        formModel: formModel,
       )),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -2092,32 +2164,48 @@ class ReactiveDeliveryListFormArrayBuilder2<
 }
 
 class ReactiveDeliveryListFormFormGroupArrayBuilder<
-    ReactiveDeliveryListFormFormGroupArrayBuilderT> extends StatelessWidget {
+  ReactiveDeliveryListFormFormGroupArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveDeliveryListFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(extended != null || getExtended != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         extended != null || getExtended != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-      List<ReactiveDeliveryListFormFormGroupArrayBuilderT>>? extended;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveDeliveryListFormFormGroupArrayBuilderT>
+  >?
+  extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-          List<ReactiveDeliveryListFormFormGroupArrayBuilderT>>
-      Function(DeliveryListForm formModel)? getExtended;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      DeliveryListForm formModel)? builder;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveDeliveryListFormFormGroupArrayBuilderT>
+  >
+  Function(DeliveryListForm formModel)?
+  getExtended;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      ReactiveDeliveryListFormFormGroupArrayBuilderT? item,
-      DeliveryListForm formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    DeliveryListForm formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    ReactiveDeliveryListFormFormGroupArrayBuilderT? item,
+    DeliveryListForm formModel,
+  )
+  itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -2132,26 +2220,18 @@ class ReactiveDeliveryListFormFormGroupArrayBuilder<
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ??
-                <ReactiveDeliveryListFormFormGroupArrayBuilderT>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ??
+                    <ReactiveDeliveryListFormFormGroupArrayBuilderT>[])
+                .asMap()
+                .map(
+                  (i, item) =>
+                      MapEntry(i, itemBuilder(context, i, item, formModel)),
+                )
+                .values
+                .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );
@@ -2167,8 +2247,12 @@ class ReactiveStandaloneDeliveryPointFormConsumer extends StatelessWidget {
 
   final Widget? child;
 
-  final Widget Function(BuildContext context,
-      StandaloneDeliveryPointForm formModel, Widget? child) builder;
+  final Widget Function(
+    BuildContext context,
+    StandaloneDeliveryPointForm formModel,
+    Widget? child,
+  )
+  builder;
 
   @override
   Widget build(BuildContext context) {
@@ -2188,11 +2272,7 @@ class StandaloneDeliveryPointFormInheritedStreamer
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(
-          stream,
-          child,
-          key: key,
-        );
+  }) : super(stream, child, key: key);
 
   final StandaloneDeliveryPointForm form;
 }
@@ -2221,12 +2301,15 @@ class ReactiveStandaloneDeliveryPointForm extends StatelessWidget {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
-              StandaloneDeliveryPointFormInheritedStreamer>()
+            StandaloneDeliveryPointFormInheritedStreamer
+          >()
           ?.form;
     }
 
-    final element = context.getElementForInheritedWidgetOfExactType<
-        StandaloneDeliveryPointFormInheritedStreamer>();
+    final element = context
+        .getElementForInheritedWidgetOfExactType<
+          StandaloneDeliveryPointFormInheritedStreamer
+        >();
     return element == null
         ? null
         : (element.widget as StandaloneDeliveryPointFormInheritedStreamer).form;
@@ -2273,11 +2356,18 @@ class StandaloneDeliveryPointFormBuilder extends StatefulWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  final Widget Function(BuildContext context,
-      StandaloneDeliveryPointForm formModel, Widget? child) builder;
+  final Widget Function(
+    BuildContext context,
+    StandaloneDeliveryPointForm formModel,
+    Widget? child,
+  )
+  builder;
 
   final void Function(
-      BuildContext context, StandaloneDeliveryPointForm formModel)? initState;
+    BuildContext context,
+    StandaloneDeliveryPointForm formModel,
+  )?
+  initState;
 
   @override
   _StandaloneDeliveryPointFormBuilderState createState() =>
@@ -2293,7 +2383,9 @@ class _StandaloneDeliveryPointFormBuilderState
   @override
   void initState() {
     _formModel = StandaloneDeliveryPointForm(
-        StandaloneDeliveryPointForm.formElements(widget.model), null);
+      StandaloneDeliveryPointForm.formElements(widget.model),
+      null,
+    );
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -2301,8 +2393,9 @@ class _StandaloneDeliveryPointFormBuilderState
 
     widget.initState?.call(context, _formModel);
 
-    _logSubscription =
-        _logStandaloneDeliveryPointForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logStandaloneDeliveryPointForm.onRecord.listen((
+      LogRecord e,
+    ) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -2368,15 +2461,13 @@ class _StandaloneDeliveryPointFormBuilderState
   }
 }
 
-final _logStandaloneDeliveryPointForm =
-    Logger.detached('StandaloneDeliveryPointForm');
+final _logStandaloneDeliveryPointForm = Logger.detached(
+  'StandaloneDeliveryPointForm',
+);
 
 class StandaloneDeliveryPointForm
     implements FormModel<DeliveryPoint, DeliveryPoint> {
-  StandaloneDeliveryPointForm(
-    this.form,
-    this.path,
-  );
+  StandaloneDeliveryPointForm(this.form, this.path);
 
   static const String nameControlName = "name";
 
@@ -2401,7 +2492,8 @@ class StandaloneDeliveryPointForm
   Address? get _addressRawValue => addressForm.rawModel;
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -2412,7 +2504,8 @@ class StandaloneDeliveryPointForm
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsAddress {
     try {
       form.control(addressControlPath());
@@ -2431,11 +2524,9 @@ class StandaloneDeliveryPointForm
   void get addressFocus => form.focus(addressControlPath());
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void addressRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void addressRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsAddress) {
       final controlPath = path;
       if (controlPath == null) {
@@ -2463,8 +2554,11 @@ class StandaloneDeliveryPointForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    nameControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void addressValueUpdate(
@@ -2472,8 +2566,11 @@ class StandaloneDeliveryPointForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    addressControl.updateValue(AddressForm.formElements(value).rawValue,
-        updateParent: updateParent, emitEvent: emitEvent);
+    addressControl.updateValue(
+      AddressForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   @Deprecated("Use control.patch() instead")
@@ -2482,8 +2579,11 @@ class StandaloneDeliveryPointForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    nameControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   @Deprecated("Use control.patch() instead")
@@ -2492,8 +2592,11 @@ class StandaloneDeliveryPointForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    addressControl.updateValue(AddressForm.formElements(value).rawValue,
-        updateParent: updateParent, emitEvent: emitEvent);
+    addressControl.updateValue(
+      AddressForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   @Deprecated("Use control.reset() instead")
@@ -2503,14 +2606,13 @@ class StandaloneDeliveryPointForm
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      nameControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => nameControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   @Deprecated("Use control.reset() instead")
   void addressValueReset(
@@ -2519,22 +2621,26 @@ class StandaloneDeliveryPointForm
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      addressControl.reset(
-          value: AddressForm.formElements(value).rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => addressControl.reset(
+    value: AddressForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @Deprecated("Migrate to .control")
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormGroup get addressControl =>
       form.control(addressControlPath()) as FormGroup;
 
   FormControlWrapper<String> get name => FormControlWrapper<String>(
-        form.control(nameControlPath()) as FormControl<String>,
-      );
+    form.control(nameControlPath()) as FormControl<String>,
+  );
+
+  FormGroupWrapper get address =>
+      FormGroupWrapper(form.control(addressControlPath()) as FormGroup);
 
   AddressForm get addressForm => AddressForm(form, pathBuilder('address'));
 
@@ -2596,10 +2702,7 @@ class StandaloneDeliveryPointForm
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -2613,7 +2716,9 @@ class StandaloneDeliveryPointForm
 
       addressForm.toggleDisabled();
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       addressForm.toggleDisabled();
       currentFormInstance.controls.forEach((key, control) {
@@ -2665,42 +2770,49 @@ class StandaloneDeliveryPointForm
     DeliveryPoint? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      form.updateValue(StandaloneDeliveryPointForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => form.updateValue(
+    StandaloneDeliveryPointForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
   void reset({
     DeliveryPoint? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => form.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(DeliveryPoint? deliveryPoint) => FormGroup({
-        nameControlName: FormControl<String>(
-            value: deliveryPoint?.name,
-            validators: [RequiredValidator()],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        addressControlName: AddressForm.formElements(deliveryPoint?.address)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+  static FormGroup formElements(DeliveryPoint? deliveryPoint) => FormGroup(
+    {
+      nameControlName: FormControl<String>(
+        value: deliveryPoint?.name,
+        validators: [RequiredValidator()],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+      addressControlName: AddressForm.formElements(deliveryPoint?.address),
+    },
+    validators: [],
+    asyncValidators: [],
+    asyncValidatorsDebounceTime: 250,
+    disabled: false,
+  );
 }
 
 class ReactiveStandaloneDeliveryPointFormArrayBuilder<
-    ReactiveStandaloneDeliveryPointFormArrayBuilderT> extends StatelessWidget {
+  ReactiveStandaloneDeliveryPointFormArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveStandaloneDeliveryPointFormArrayBuilder({
     Key? key,
     this.control,
@@ -2709,31 +2821,42 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder<
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveStandaloneDeliveryPointFormArrayBuilderT>?
-      formControl;
+  formControl;
 
   final FormArray<ReactiveStandaloneDeliveryPointFormArrayBuilderT>? Function(
-      StandaloneDeliveryPointForm formModel)? control;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      StandaloneDeliveryPointForm formModel)? builder;
+    StandaloneDeliveryPointForm formModel,
+  )?
+  control;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      FormControl<ReactiveStandaloneDeliveryPointFormArrayBuilderT> control,
-      ReactiveStandaloneDeliveryPointFormArrayBuilderT? item,
-      StandaloneDeliveryPointForm formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    StandaloneDeliveryPointForm formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    FormControl<ReactiveStandaloneDeliveryPointFormArrayBuilderT> control,
+    ReactiveStandaloneDeliveryPointFormArrayBuilderT? item,
+    StandaloneDeliveryPointForm formModel,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-      FormControl<ReactiveStandaloneDeliveryPointFormArrayBuilderT>
-          control)? controlFilter;
+    FormControl<ReactiveStandaloneDeliveryPointFormArrayBuilderT> control,
+  )?
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -2747,21 +2870,13 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder<
     final itemBuilder = this.itemBuilder;
 
     return ReactiveFormArrayItemBuilder<
-        ReactiveStandaloneDeliveryPointFormArrayBuilderT>(
+      ReactiveStandaloneDeliveryPointFormArrayBuilderT
+    >(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
-          ? (context, itemList) => builder(
-                context,
-                itemList,
-                formModel,
-              )
+          ? (context, itemList) => builder(context, itemList, formModel)
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
+      itemBuilder: (context, i, control, item) =>
           itemBuilder(context, i, control, item, formModel),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -2770,7 +2885,9 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder<
 }
 
 class ReactiveStandaloneDeliveryPointFormArrayBuilder2<
-    ReactiveStandaloneDeliveryPointFormArrayBuilderT> extends StatelessWidget {
+  ReactiveStandaloneDeliveryPointFormArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveStandaloneDeliveryPointFormArrayBuilder2({
     Key? key,
     this.control,
@@ -2779,37 +2896,48 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder2<
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveStandaloneDeliveryPointFormArrayBuilderT>?
-      formControl;
+  formControl;
 
   final FormArray<ReactiveStandaloneDeliveryPointFormArrayBuilderT>? Function(
-      StandaloneDeliveryPointForm formModel)? control;
+    StandaloneDeliveryPointForm formModel,
+  )?
+  control;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        List<Widget> itemList,
-        StandaloneDeliveryPointForm formModel
-      }) params)? builder;
+    ({
+      BuildContext context,
+      List<Widget> itemList,
+      StandaloneDeliveryPointForm formModel,
+    })
+    params,
+  )?
+  builder;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        int i,
-        FormControl<ReactiveStandaloneDeliveryPointFormArrayBuilderT> control,
-        ReactiveStandaloneDeliveryPointFormArrayBuilderT? item,
-        StandaloneDeliveryPointForm formModel
-      }) params) itemBuilder;
+    ({
+      BuildContext context,
+      int i,
+      FormControl<ReactiveStandaloneDeliveryPointFormArrayBuilderT> control,
+      ReactiveStandaloneDeliveryPointFormArrayBuilderT? item,
+      StandaloneDeliveryPointForm formModel,
+    })
+    params,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-      FormControl<ReactiveStandaloneDeliveryPointFormArrayBuilderT>
-          control)? controlFilter;
+    FormControl<ReactiveStandaloneDeliveryPointFormArrayBuilderT> control,
+  )?
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -2823,27 +2951,22 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder2<
     final itemBuilder = this.itemBuilder;
 
     return ReactiveFormArrayItemBuilder<
-        ReactiveStandaloneDeliveryPointFormArrayBuilderT>(
+      ReactiveStandaloneDeliveryPointFormArrayBuilderT
+    >(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
           ? (context, itemList) => builder((
-                context: context,
-                itemList: itemList,
-                formModel: formModel,
-              ))
+              context: context,
+              itemList: itemList,
+              formModel: formModel,
+            ))
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
-          itemBuilder((
+      itemBuilder: (context, i, control, item) => itemBuilder((
         context: context,
         i: i,
         control: control,
         item: item,
-        formModel: formModel
+        formModel: formModel,
       )),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -2852,7 +2975,8 @@ class ReactiveStandaloneDeliveryPointFormArrayBuilder2<
 }
 
 class ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilder<
-        ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilderT>
+  ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilderT
+>
     extends StatelessWidget {
   const ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilder({
     Key? key,
@@ -2860,26 +2984,39 @@ class ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilder<
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(extended != null || getExtended != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         extended != null || getExtended != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-          List<ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilderT>>?
-      extended;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilderT>
+  >?
+  extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-          List<ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilderT>>
-      Function(StandaloneDeliveryPointForm formModel)? getExtended;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      StandaloneDeliveryPointForm formModel)? builder;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilderT>
+  >
+  Function(StandaloneDeliveryPointForm formModel)?
+  getExtended;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilderT? item,
-      StandaloneDeliveryPointForm formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    StandaloneDeliveryPointForm formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilderT? item,
+    StandaloneDeliveryPointForm formModel,
+  )
+  itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -2894,26 +3031,20 @@ class ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilder<
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ??
-                <ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilderT>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ??
+                    <
+                      ReactiveStandaloneDeliveryPointFormFormGroupArrayBuilderT
+                    >[])
+                .asMap()
+                .map(
+                  (i, item) =>
+                      MapEntry(i, itemBuilder(context, i, item, formModel)),
+                )
+                .values
+                .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );

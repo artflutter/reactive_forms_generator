@@ -15,10 +15,9 @@ Map<String, dynamic> _$SubGroupToJson(_SubGroup instance) => <String, dynamic>{
 
 _Group _$GroupFromJson(Map<String, dynamic> json) => _Group(
   id: json['id'] as String,
-  subGroupList:
-      (json['subGroupList'] as List<dynamic>)
-          .map((e) => SubGroup.fromJson(e as Map<String, dynamic>))
-          .toList(),
+  subGroupList: (json['subGroupList'] as List<dynamic>)
+      .map((e) => SubGroup.fromJson(e as Map<String, dynamic>))
+      .toList(),
 );
 
 Map<String, dynamic> _$GroupToJson(_Group instance) => <String, dynamic>{
@@ -27,10 +26,9 @@ Map<String, dynamic> _$GroupToJson(_Group instance) => <String, dynamic>{
 };
 
 _Nested _$NestedFromJson(Map<String, dynamic> json) => _Nested(
-  groupList:
-      (json['groupList'] as List<dynamic>)
-          .map((e) => Group.fromJson(e as Map<String, dynamic>))
-          .toList(),
+  groupList: (json['groupList'] as List<dynamic>)
+      .map((e) => Group.fromJson(e as Map<String, dynamic>))
+      .toList(),
 );
 
 Map<String, dynamic> _$NestedToJson(_Nested instance) => <String, dynamic>{
