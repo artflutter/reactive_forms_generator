@@ -1058,6 +1058,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
   FormGroup get mailingAddressControl =>
       form.control(mailingAddressControlPath()) as FormGroup;
 
+  @Deprecated("Migrate to .control")
   FormArray<Map<String, Object?>> get adminsControl =>
       form.control(adminsControlPath()) as FormArray<Map<String, Object?>>;
 
@@ -1086,6 +1087,11 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
       FormControlWrapper<bool>(
         form.control(sameMailingAddressAsCompanyControlPath())
             as FormControl<bool>,
+      );
+
+  FormArrayWrapper<Map<String, Object?>> get admins =>
+      FormArrayWrapper<Map<String, Object?>>(
+        form.control(adminsControlPath()) as FormArray<Map<String, Object?>>,
       );
 
   AddressForm get companyAddressForm =>

@@ -523,12 +523,26 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Migrate to .control")
   FormArray<Map<String, Object?>> get deliveryListControl =>
       form.control(deliveryListControlPath())
           as FormArray<Map<String, Object?>>;
 
+  @Deprecated("Migrate to .control")
   FormArray<Map<String, Object?>> get clientListControl =>
       form.control(clientListControlPath()) as FormArray<Map<String, Object?>>;
+
+  FormArrayWrapper<Map<String, Object?>> get deliveryList =>
+      FormArrayWrapper<Map<String, Object?>>(
+        form.control(deliveryListControlPath())
+            as FormArray<Map<String, Object?>>,
+      );
+
+  FormArrayWrapper<Map<String, Object?>> get clientList =>
+      FormArrayWrapper<Map<String, Object?>>(
+        form.control(clientListControlPath())
+            as FormArray<Map<String, Object?>>,
+      );
 
   List<DeliveryPointForm> get deliveryListDeliveryPointForm {
     final values = deliveryListControl.controls.map((e) => e.value).toList();

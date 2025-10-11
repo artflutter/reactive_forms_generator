@@ -291,8 +291,13 @@ class StatusListForm<T extends Enum>
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormArray<T> get listControl =>
       form.control(listControlPath()) as FormArray<T>;
+
+  FormArrayWrapper<T> get list => FormArrayWrapper<T>(
+        form.control(listControlPath()) as FormArray<T>,
+      );
 
   List<FormControl<T>> get listControlControls =>
       listControl.controls.cast<FormControl<T>>();

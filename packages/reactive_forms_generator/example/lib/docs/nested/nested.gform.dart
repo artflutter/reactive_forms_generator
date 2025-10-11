@@ -1053,12 +1053,19 @@ class GroupForm implements FormModel<Group, Group> {
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
 
+  @Deprecated("Migrate to .control")
   FormArray<Map<String, Object?>> get subGroupListControl =>
       form.control(subGroupListControlPath())
           as FormArray<Map<String, Object?>>;
 
   FormControlWrapper<String> get id => FormControlWrapper<String>(
         form.control(idControlPath()) as FormControl<String>,
+      );
+
+  FormArrayWrapper<Map<String, Object?>> get subGroupList =>
+      FormArrayWrapper<Map<String, Object?>>(
+        form.control(subGroupListControlPath())
+            as FormArray<Map<String, Object?>>,
       );
 
   List<SubGroupForm> get subGroupListSubGroupForm {
@@ -1823,8 +1830,14 @@ class NestedForm implements FormModel<Nested, Nested> {
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Migrate to .control")
   FormArray<Map<String, Object?>> get groupListControl =>
       form.control(groupListControlPath()) as FormArray<Map<String, Object?>>;
+
+  FormArrayWrapper<Map<String, Object?>> get groupList =>
+      FormArrayWrapper<Map<String, Object?>>(
+        form.control(groupListControlPath()) as FormArray<Map<String, Object?>>,
+      );
 
   List<GroupForm> get groupListGroupForm {
     final values = groupListControl.controls.map((e) => e.value).toList();

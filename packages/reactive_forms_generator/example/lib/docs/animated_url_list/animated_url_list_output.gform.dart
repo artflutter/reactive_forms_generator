@@ -366,8 +366,14 @@ class AnimatedUrlLisOForm
           updateParent: updateParent,
           emitEvent: emitEvent);
 
+  @Deprecated("Migrate to .control")
   FormArray<Map<String, Object?>> get urlListControl =>
       form.control(urlListControlPath()) as FormArray<Map<String, Object?>>;
+
+  FormArrayWrapper<Map<String, Object?>> get urlList =>
+      FormArrayWrapper<Map<String, Object?>>(
+        form.control(urlListControlPath()) as FormArray<Map<String, Object?>>,
+      );
 
   List<UrlEntityOForm> get urlListUrlEntityOForm {
     final values = urlListControl.controls.map((e) => e.value).toList();

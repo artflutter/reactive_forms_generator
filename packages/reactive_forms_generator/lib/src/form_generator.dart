@@ -767,6 +767,7 @@ class FormGenerator {
             ...fieldResetMethodList,
             ...controlMethodList,
             ...controlMethod2List,
+            ...controlMethod3List,
             ...controlControlsMethodList,
             ...formGroupMethodList,
             ...formArrayMethodList,
@@ -1002,6 +1003,12 @@ class FormGenerator {
   Iterable<Method> get controlMethod2List => all
       .map(
         (e) => ControlMethod2(e, root.output, root.requiredValidators).method(),
+      )
+      .whereType<Method>();
+
+  Iterable<Method> get controlMethod3List => all
+      .map(
+        (e) => ControlMethod3(e, root.output, root.requiredValidators).method(),
       )
       .whereType<Method>();
 

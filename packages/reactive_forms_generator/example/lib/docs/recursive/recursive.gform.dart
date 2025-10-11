@@ -632,12 +632,19 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
   FormGroup get parcelSystemControl =>
       form.control(parcelSystemControlPath()) as FormGroup;
 
+  @Deprecated("Migrate to .control")
   FormArray<Map<String, Object?>> get subSecuredAreasControl =>
       form.control(subSecuredAreasControlPath())
           as FormArray<Map<String, Object?>>;
 
   FormControlWrapper<String> get id => FormControlWrapper<String>(
         form.control(idControlPath()) as FormControl<String>,
+      );
+
+  FormArrayWrapper<Map<String, Object?>> get subSecuredAreas =>
+      FormArrayWrapper<Map<String, Object?>>(
+        form.control(subSecuredAreasControlPath())
+            as FormArray<Map<String, Object?>>,
       );
 
   SecuredAreaForm get securedAreaForm =>

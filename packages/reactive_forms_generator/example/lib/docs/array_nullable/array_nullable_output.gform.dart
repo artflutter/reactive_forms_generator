@@ -619,21 +619,41 @@ class ArrayNullableOForm
   FormControl<List<String?>> get someListControl =>
       form.control(someListControlPath()) as FormControl<List<String?>>;
 
+  @Deprecated("Migrate to .control")
   FormArray<String> get emailListControl =>
       form.control(emailListControlPath()) as FormArray<String>;
 
+  @Deprecated("Migrate to .control")
   FormArray<bool> get fruitListControl =>
       form.control(fruitListControlPath()) as FormArray<bool>;
 
+  @Deprecated("Migrate to .control")
   FormArray<String> get vegetablesListControl =>
       form.control(vegetablesListControlPath()) as FormArray<String>;
 
+  @Deprecated("Migrate to .control")
   FormArray<UserMode> get modeListControl =>
       form.control(modeListControlPath()) as FormArray<UserMode>;
 
   FormControlWrapper<List<String?>> get someList =>
       FormControlWrapper<List<String?>>(
         form.control(someListControlPath()) as FormControl<List<String?>>,
+      );
+
+  FormArrayWrapper<String> get emailList => FormArrayWrapper<String>(
+        form.control(emailListControlPath()) as FormArray<String>,
+      );
+
+  FormArrayWrapper<bool> get fruitList => FormArrayWrapper<bool>(
+        form.control(fruitListControlPath()) as FormArray<bool>,
+      );
+
+  FormArrayWrapper<String> get vegetablesList => FormArrayWrapper<String>(
+        form.control(vegetablesListControlPath()) as FormArray<String>,
+      );
+
+  FormArrayWrapper<UserMode> get modeList => FormArrayWrapper<UserMode>(
+        form.control(modeListControlPath()) as FormArray<UserMode>,
       );
 
   List<FormControl<String>> get emailListControlControls =>

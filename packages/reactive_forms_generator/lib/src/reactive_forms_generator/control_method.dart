@@ -53,6 +53,9 @@ class ControlMethod extends ReactiveFormGeneratorMethod {
 
     return Method(
       (b) => b
+        ..annotations.add(
+          const CodeExpression(Code('Deprecated("Migrate to .control")')),
+        )
         ..name = field.fieldControlName
         ..lambda = true
         ..type = MethodType.getter
@@ -83,6 +86,9 @@ class ControlMethod extends ReactiveFormGeneratorMethod {
 
     return Method(
       (b) => b
+        ..annotations.add(
+          const CodeExpression(Code('Deprecated("Migrate to .control")')),
+        )
         ..name = field.fieldControlName
         ..lambda = true
         ..type = MethodType.getter
@@ -149,6 +155,69 @@ class ControlMethod2 extends ReactiveFormGeneratorMethod {
         ..returns = Reference(reference2)
         ..body = Code(
           '$reference2(form.control(${field.fieldControlPath}()) as $reference,)',
+        ),
+    );
+  }
+}
+
+class ControlMethod3 extends ReactiveFormGeneratorMethod {
+  ControlMethod3(super.field, super.output, super.requiredValidators);
+
+  @override
+  Method? formGroupArrayMethod() {
+    final type = (field.type as ParameterizedType).typeArguments.first;
+
+    String displayType = type.getName(withNullability: true);
+
+    // we need to trim last NullabilitySuffix.question cause FormControl modifies
+    // generic T => T?
+    if (type.nullabilitySuffix == NullabilitySuffix.question) {
+      displayType = displayType.substring(0, displayType.length - 1);
+    }
+
+    String typeReference = 'FormArray<$displayType>';
+    String wrapperReference = 'FormArrayWrapper<$displayType>';
+
+    if (field.isFormGroupArray) {
+      typeReference = 'FormArray<Map<String, Object?>>';
+      wrapperReference = 'FormArrayWrapper<Map<String, Object?>>';
+    }
+
+    return Method(
+      (b) => b
+        ..name = field.fieldControlName2
+        ..lambda = true
+        ..type = MethodType.getter
+        ..returns = Reference(wrapperReference)
+        ..body = Code(
+          '$wrapperReference(form.control(${field.fieldControlPath}()) as $typeReference,)',
+        ),
+    );
+  }
+
+  @override
+  Method? formArrayMethod() {
+    final type = (field.type as ParameterizedType).typeArguments.first;
+
+    String displayType = type.getName(withNullability: true);
+
+    // we need to trim last NullabilitySuffix.question cause FormControl modifies
+    // generic T => T?
+    if (type.nullabilitySuffix == NullabilitySuffix.question) {
+      displayType = displayType.substring(0, displayType.length - 1);
+    }
+
+    String typeReference = 'FormArray<$displayType>';
+    String wrapperReference = 'FormArrayWrapper<$displayType>';
+
+    return Method(
+      (b) => b
+        ..name = field.fieldControlName2
+        ..lambda = true
+        ..type = MethodType.getter
+        ..returns = Reference(wrapperReference)
+        ..body = Code(
+          '$wrapperReference(form.control(${field.fieldControlPath}()) as $typeReference,)',
         ),
     );
   }

@@ -288,8 +288,13 @@ class MailingListForm implements FormModel<MailingList, MailingList> {
         disabled: disabled,
       );
 
+  @Deprecated("Migrate to .control")
   FormArray<String> get emailListControl =>
       form.control(emailListControlPath()) as FormArray<String>;
+
+  FormArrayWrapper<String> get emailList => FormArrayWrapper<String>(
+        form.control(emailListControlPath()) as FormArray<String>,
+      );
 
   List<FormControl<String>> get emailListControlControls =>
       emailListControl.controls.cast<FormControl<String>>();
