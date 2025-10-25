@@ -6,6 +6,10 @@
 
 * Rf18
 
+## [7.1.0-beta2]
+
+* export ReactiveFormGroupArrayItemBuilder
+
 ## [7.1.0-beta1]
 
 * Port ReactiveFormGroupArrayItemBuilder
