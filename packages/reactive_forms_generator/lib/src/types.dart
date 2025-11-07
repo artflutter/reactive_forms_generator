@@ -1,6 +1,6 @@
 // ignore_for_file: implementation_imports
 import 'package:analyzer/dart/constant/value.dart';
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:analyzer/src/dart/element/element.dart';
@@ -59,9 +59,9 @@ extension ListElementAnnotationImplExt on List<ElementAnnotationImpl> {
     return any((e) => e.annotationAst.name.toString() == 'RfGroup');
   }
 
-// bool get hasRfAnnotation {
-//   return metadata.any((e) => e.name.toString() == 'Rf');
-// }
+  // bool get hasRfAnnotation {
+  //   return metadata.any((e) => e.name.toString() == 'Rf');
+  // }
 }
 
 extension NodeListImplAnnotationImplExt on NodeListImpl<AnnotationImpl> {
@@ -84,24 +84,22 @@ extension on Annotatable {
     final annotation = typeChecker?.firstAnnotationOf(this);
     try {
       if (annotation != null) {
-        for (final meta in metadata2.annotations) {
+        for (final meta in metadata.annotations) {
           final obj = meta.computeConstantValue()!;
 
           final isExactlyType = typeChecker?.isExactlyType(obj.type!) ?? false;
           if (isExactlyType) {
-            final argumentList = (meta as ElementAnnotationImpl)
-                .annotationAst
-                .arguments as ArgumentListImpl;
+            final argumentList =
+                (meta as ElementAnnotationImpl).annotationAst.arguments
+                    as ArgumentListImpl;
             for (var argument in argumentList.arguments) {
               final argumentNamedExpression = argument as NamedExpressionImpl;
-              result.addEntries(
-                [
-                  MapEntry(
-                    argumentNamedExpression.name.label.toSource(),
-                    argumentNamedExpression.expression.toSource(),
-                  ),
-                ],
-              );
+              result.addEntries([
+                MapEntry(
+                  argumentNamedExpression.name.label.toSource(),
+                  argumentNamedExpression.expression.toSource(),
+                ),
+              ]);
             }
           }
         }
@@ -155,7 +153,7 @@ extension on Annotatable {
 //   }
 // }
 
-extension ElementRfExt on Element2 {
+extension ElementRfExt on Element {
   bool get hasRfGroupAnnotation {
     return formGroupChecker.hasAnnotationOfExact(this);
   }
@@ -223,13 +221,13 @@ extension ParameterElementAnnotationExt on FormalParameterElement {
   }
 }
 
-extension FieldElementAnnotationExt on FieldElement2 {
+extension FieldElementAnnotationExt on FieldElement {
   bool get hasRfAnnotation {
     return _formChecker.hasAnnotationOfExact(this);
   }
 }
 
-extension ClassElementAnnotationExt on ClassElement2 {
+extension ClassElementAnnotationExt on ClassElement {
   bool get hasRfAnnotation {
     return _formChecker.hasAnnotationOfExact(this);
   }
@@ -257,7 +255,8 @@ extension ClassElementAnnotationExt on ClassElement2 {
       if (hasRfAnnotation) {
         final annotation = rfAnnotation;
 
-        final x = annotation
+        final x =
+            annotation
                 ?.getField('requiredValidators')
                 ?.toListValue()
                 ?.map((e) {

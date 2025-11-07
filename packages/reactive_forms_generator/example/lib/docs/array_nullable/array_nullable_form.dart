@@ -13,17 +13,9 @@ class ArrayNullableFormWidget extends StatefulWidget {
 }
 
 class _ArrayNullableFormWidgetState extends State<ArrayNullableFormWidget> {
-  final contacts = [
-    'john@email.com',
-    'susan@email.com',
-    'caroline@email.com',
-  ];
+  final contacts = ['john@email.com', 'susan@email.com', 'caroline@email.com'];
 
-  final fruits = [
-    'apple',
-    'banana',
-    'orange',
-  ];
+  final fruits = ['apple', 'banana', 'orange'];
 
   late final ArrayNullable model;
 
@@ -68,7 +60,7 @@ class _ArrayNullableFormWidgetState extends State<ArrayNullableFormWidget> {
                       );
                     },
                     child: const Text('add'),
-                  )
+                  ),
                 ],
               ),
               Row(
@@ -76,7 +68,7 @@ class _ArrayNullableFormWidgetState extends State<ArrayNullableFormWidget> {
                   Expanded(
                     child: ReactiveArrayNullableFormArrayBuilder<bool>(
                       formControl: formModel.fruitListControl,
-                      itemBuilder: (_, i, control, __, ___) {
+                      itemBuilder: (_, i, control, _, _) {
                         return ReactiveCheckboxListTile(
                           formControl: control,
                           title: Text(fruits[i]),
@@ -94,14 +86,16 @@ class _ArrayNullableFormWidgetState extends State<ArrayNullableFormWidget> {
                       );
                     },
                     child: const Text('add'),
-                  )
+                  ),
                 ],
               ),
               ElevatedButton(
                 onPressed: () {
-                  formModel.submit(onValid: (model) {
-                    debugPrint(model.toString());
-                  });
+                  formModel.submit(
+                    onValid: (model) {
+                      debugPrint(model.toString());
+                    },
+                  );
                 },
                 child: const Text('Sign Up'),
               ),

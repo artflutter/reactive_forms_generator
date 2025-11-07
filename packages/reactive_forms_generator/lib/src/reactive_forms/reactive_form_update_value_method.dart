@@ -11,7 +11,8 @@ class ReactiveFormUpdateValueMethod extends ReactiveFormGeneratorMethod {
 
   @override
   Method formGroupArrayMethod() {
-    final code = '''
+    final code =
+        '''
         final localValue = (value ${field.isNullable ? '?? []' : ''});
         if(localValue.isEmpty) {
           ${field.clearMethodName}(updateParent: updateParent, emitEvent: emitEvent);
@@ -25,7 +26,7 @@ class ReactiveFormUpdateValueMethod extends ReactiveFormGeneratorMethod {
         localValue.asMap().forEach((k, v) {
           final values = ${field.fieldControlName}.controls.map((e) => e.value).toList();
           
-          if (${field.name3}${field.className}.asMap().containsKey(k) &&
+          if (${field.name}${field.className}.asMap().containsKey(k) &&
               values.asMap().containsKey(k)) {
             toUpdate.add(v);
           } else {
@@ -70,32 +71,32 @@ class ReactiveFormUpdateValueMethod extends ReactiveFormGeneratorMethod {
   }
 
   Method get methodEntity => Method(
-        (b) => b
-          ..name = field.valueUpdateMethodName
-          ..lambda = false
-          ..requiredParameters.add(
-            Parameter(
-              (b) => b
-                ..name = 'value'
-                ..type = Reference(field.type.toString()),
-            ),
-          )
-          ..optionalParameters.addAll([
-            Parameter(
-              (b) => b
-                ..name = 'updateParent'
-                ..named = true
-                ..defaultTo = const Code('true')
-                ..type = const Reference('bool'),
-            ),
-            Parameter(
-              (b) => b
-                ..name = 'emitEvent'
-                ..named = true
-                ..defaultTo = const Code('true')
-                ..type = const Reference('bool'),
-            ),
-          ])
-          ..returns = const Reference('void'),
-      );
+    (b) => b
+      ..name = field.valueUpdateMethodName
+      ..lambda = false
+      ..requiredParameters.add(
+        Parameter(
+          (b) => b
+            ..name = 'value'
+            ..type = Reference(field.type.toString()),
+        ),
+      )
+      ..optionalParameters.addAll([
+        Parameter(
+          (b) => b
+            ..name = 'updateParent'
+            ..named = true
+            ..defaultTo = const Code('true')
+            ..type = const Reference('bool'),
+        ),
+        Parameter(
+          (b) => b
+            ..name = 'emitEvent'
+            ..named = true
+            ..defaultTo = const Code('true')
+            ..type = const Reference('bool'),
+        ),
+      ])
+      ..returns = const Reference('void'),
+  );
 }

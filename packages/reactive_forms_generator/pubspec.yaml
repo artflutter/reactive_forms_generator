@@ -9,10 +9,10 @@ environment:
 resolution: workspace
 
 dependencies:
-  build: ^3.0.2
-  source_gen: ^3.1.0
-  _fe_analyzer_shared: ^85.0.0
-  analyzer: ^7.5.9
+  build: ^4.0.1
+  source_gen: ^4.0.1
+  _fe_analyzer_shared: ^89.0.0
+  analyzer: ^8.2.0
   path: ^1.8.1
   build_runner: ^2.7.0
   code_builder: ^4.10.1
@@ -21,7 +21,7 @@ dependencies:
   recase: ^4.1.0
 
 dev_dependencies:
-  build_test: ^3.3.3
+  build_test: ^3.4.1
   logging: ^1.2.0
   flutter_lints: ^6.0.0
 

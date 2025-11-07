@@ -1,4 +1,4 @@
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
@@ -27,7 +27,7 @@ class FormControlGenerator extends FormElementGenerator {
 
     if (annotationTyped && annotationType != displayType) {
       throw Exception(
-        'Annotation and field type mismatch. Annotation is typed as `$annotationType` and field(`${field.name3}`) as `$displayType`.',
+        'Annotation and field type mismatch. Annotation is typed as `$annotationType` and field(`${field.name}`) as `$displayType`.',
       );
     }
 

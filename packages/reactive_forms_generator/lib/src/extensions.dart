@@ -1,5 +1,4 @@
 import 'package:analyzer/dart/element/element.dart';
-import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:code_builder/code_builder.dart';
@@ -12,13 +11,12 @@ import 'package:analyzer/src/dart/element/type.dart';
 
 import '../utils.dart';
 
-extension ConstructorElementExt on ConstructorElement2 {
-  bool get hasReactiveFormAnnotatedParameters => formalParameters.any(
-        (e) => true,
-      );
+extension ConstructorElementExt on ConstructorElement {
+  bool get hasReactiveFormAnnotatedParameters =>
+      formalParameters.any((e) => true);
 }
 
-extension ClassElementExt on ClassElement2 {
+extension ClassElementExt on ClassElement {
   String get fullTypeName => thisType.toString();
 
   String get generics {
@@ -37,20 +35,24 @@ extension ClassElementExt on ClassElement2 {
   }
 
   Iterable<Reference> get genericTypes {
-    return thisType.typeArguments.map(
-      (e) => Reference(e.getDisplayString()),
-    );
+    return thisType.typeArguments.map((e) => Reference(e.getDisplayString()));
   }
 
   Iterable<Reference> get fullGenericTypes {
-    return thisType.typeArguments.map(
-      (e) => Reference(e.element?.getDisplayString()),
-    );
+    return typeParameters.map((typeParam) {
+      final name = typeParam.name;
+      final bound = typeParam.bound;
+      if (bound != null && bound.getDisplayString() != 'Object') {
+        return Reference('$name extends ${bound.getDisplayString()}');
+      }
+      return Reference(name);
+    });
   }
 
   List<FormalParameterElement> get annotatedParameters {
-    final annotatedConstructors =
-        constructors2.where((e) => e.hasReactiveFormAnnotatedParameters);
+    final annotatedConstructors = constructors.where(
+      (e) => e.hasReactiveFormAnnotatedParameters,
+    );
 
     if (annotatedConstructors.isNotEmpty) {
       return annotatedConstructors.first.formalParameters;
@@ -63,7 +65,7 @@ extension ClassElementExt on ClassElement2 {
 }
 
 extension ParameterElementExt on FormalParameterElement {
-  String get fieldName => name3 ?? '<null>';
+  String get fieldName => name ?? '';
 
   String get addListItemName => 'add${fieldName.pascalCase}Item';
 
@@ -108,42 +110,40 @@ extension ParameterElementExt on FormalParameterElement {
   String get className => '${elementClassName}Form';
 
   String get elementClassName {
-    final element = type.element3 as ClassElement2;
+    final element = type.element as ClassElement;
 
     String baseName = '';
 
     if (element.hasRfAnnotation) {
       final annotation = element.rfAnnotation;
-      baseName = annotation?.getField('name')?.toStringValue() ??
-          element.name3 ??
-          '<null>';
+      baseName =
+          annotation?.getField('name')?.toStringValue() ?? element.name ?? '';
     }
 
-    baseName = element.name3 ?? '<null>';
+    baseName = element.name ?? '';
 
     if (isFormGroupArray) {
-      final element = typeParameter.element3 as ClassElement2;
+      final element = typeParameter.element as ClassElement;
 
       if (element.hasRfAnnotation) {
         final annotation = element.rfAnnotation;
-        baseName = annotation?.getField('name')?.toStringValue() ??
-            element.name3 ??
-            '<null>';
+        baseName =
+            annotation?.getField('name')?.toStringValue() ?? element.name ?? '';
       }
 
-      baseName = element.name3 ?? '<null>';
+      baseName = element.name ?? '';
     }
 
     return baseName;
   }
 
-  String get valueUpdateMethodName => '${name3}ValueUpdate';
+  String get valueUpdateMethodName => '${name ?? ''}ValueUpdate';
 
-  String get valuePatchMethodName => '${name3}ValuePatch';
+  String get valuePatchMethodName => '${name ?? ''}ValuePatch';
 
-  String get clearMethodName => '${name3}Clear';
+  String get clearMethodName => '${name ?? ''}Clear';
 
-  String get insertMethodName => '${name3}Insert';
+  String get insertMethodName => '${name ?? ''}Insert';
 
   // needs careful usage and possibly refactoring
   DartType get typeParameter => (type as ParameterizedType).typeArguments.first;
@@ -154,13 +154,14 @@ extension ParameterElementExt on FormalParameterElement {
     }
 
     final type = this.type;
-    final typeArguments =
-        type is ParameterizedType ? type.typeArguments : const <DartType>[];
+    final typeArguments = type is ParameterizedType
+        ? type.typeArguments
+        : const <DartType>[];
 
     final typeParameter = typeArguments.first;
 
-    return typeParameter.element3 is ClassElement2 &&
-        typeParameter.element3!.hasRfGroupAnnotation;
+    return typeParameter.element is ClassElement &&
+        typeParameter.element!.hasRfGroupAnnotation;
   }
 
   bool get isFormArray {
@@ -169,15 +170,16 @@ extension ParameterElementExt on FormalParameterElement {
     }
 
     final type = this.type;
-    final typeArguments =
-        type is ParameterizedType ? type.typeArguments : const <DartType>[];
+    final typeArguments = type is ParameterizedType
+        ? type.typeArguments
+        : const <DartType>[];
 
     final typeParameter = typeArguments.first;
 
-    return (typeParameter.element3 is ClassElement2 ||
-            typeParameter.element3 is EnumElement2 ||
-            typeParameter.element3 is TypeDefiningElement2) &&
-        !typeParameter.element3!.hasRfGroupAnnotation;
+    return (typeParameter.element is ClassElement ||
+            typeParameter.element is EnumElement ||
+            typeParameter.element is TypeDefiningElement) &&
+        !typeParameter.element!.hasRfGroupAnnotation;
   }
 
   bool get isFormControl {
@@ -188,19 +190,19 @@ extension ParameterElementExt on FormalParameterElement {
 
     throwIf(
       isFormControl && isFormGroup,
-      "Field `$name3` can't be annotated with @RfControl and @FromGroupAnnotation at the same time.",
+      "Field `${name ?? ''}` can't be annotated with @RfControl and @FromGroupAnnotation at the same time.",
       element: this,
     );
 
     return isFormControl;
   }
 
-  bool get isFormGroup => type.element3?.hasRfGroupAnnotation ?? false;
+  bool get isFormGroup => type.element?.hasRfGroupAnnotation ?? false;
 
-  bool get isForm => hasRfAnnotation;
+  bool get isForm => ElementRfExt(this).hasRfAnnotation;
 
   String? get defaultValue {
-    for (final meta in metadata2.annotations) {
+    for (final meta in metadata.annotations) {
       final source = meta.toSource();
 
       if (source.startsWith('@Default(')) {
@@ -217,22 +219,20 @@ extension ParameterElementExt on FormalParameterElement {
 
   String toReferenceType(List<String> requiredValidators) {
     if (hasRfControlAnnotation &&
-        annotationParams(formControlChecker)
-            .hasRequiredValidator(requiredValidators)) {
+        annotationParams(
+          formControlChecker,
+        ).hasRequiredValidator(requiredValidators)) {
       return type.getName(withNullability: false);
     }
 
-    var builder = ElementDisplayStringBuilder2(
-      withNullability: true,
-      preferTypeAlias: false,
-    );
+    var builder = ElementDisplayStringBuilder2(withNullability: true);
     (type as TypeImpl).appendTo(builder);
     return builder.toString();
   }
 }
 
-extension FieldElementExt on FieldElement2 {
-  String get fieldName => name3 ?? '<null>';
+extension FieldElementExt on FieldElement {
+  String get fieldName => name ?? '';
 
   String get fieldValueName => '${fieldName}Value';
 
@@ -243,16 +243,19 @@ extension FieldElementExt on FieldElement2 {
   // needs careful usage and possibly refactoring
   DartType get typeParameter => (type as ParameterizedType).typeArguments.first;
 
-  bool get isFormGroup => type.element3?.hasRfGroupAnnotation ?? false;
+  bool get isFormGroup => type.element?.hasRfGroupAnnotation ?? false;
 
-  bool get isForm => hasRfAnnotation;
+  bool get isForm => ElementRfExt(this).hasRfAnnotation;
 }
 
 typedef IterableFunction<T, U> = U Function(T i);
 typedef MergeableFunction<T> = T Function(T oldT, T newT);
 
 Iterable<T> _mergeDuplicatesBy<T, U>(
-    Iterable<T> list, IterableFunction<T, U> fn, MergeableFunction<T> mergeFn) {
+  Iterable<T> list,
+  IterableFunction<T, U> fn,
+  MergeableFunction<T> mergeFn,
+) {
   final values = <U, T>{};
   for (var i in list) {
     final value = fn(i);
@@ -262,7 +265,9 @@ Iterable<T> _mergeDuplicatesBy<T, U>(
 }
 
 Iterable<T> _removeDuplicatedBy<T, U>(
-    Iterable<T> list, IterableFunction<T, U> fn) {
+  Iterable<T> list,
+  IterableFunction<T, U> fn,
+) {
   final values = <U, bool>{};
   return list.where((i) {
     final value = fn(i);
@@ -276,8 +281,9 @@ extension ExtensionsOnIterable<T, U> on Iterable<T> {
   /// Merge multiple values from an iterable given a predicate without modifying
   /// the original iterable.
   Iterable<T> mergeDuplicatesBy(
-          IterableFunction<T, U> fn, MergeableFunction<T> mergeFn) =>
-      _mergeDuplicatesBy(this, fn, mergeFn);
+    IterableFunction<T, U> fn,
+    MergeableFunction<T> mergeFn,
+  ) => _mergeDuplicatesBy(this, fn, mergeFn);
 
   /// Remove duplicated values from an iterable given a predicate without
   /// modifying the original iterable.
@@ -286,9 +292,7 @@ extension ExtensionsOnIterable<T, U> on Iterable<T> {
 }
 
 extension DartTypeExt on DartType {
-  String getName({
-    bool withNullability = true,
-  }) {
+  String getName({bool withNullability = true}) {
     final name = getDisplayString();
 
     return switch (nullabilitySuffix) {

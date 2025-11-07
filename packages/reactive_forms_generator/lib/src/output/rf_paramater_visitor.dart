@@ -43,22 +43,31 @@ class RfParameterVisitor extends GeneralizingAstVisitor<dynamic> {
       case DefaultFormalParameterImpl():
         // final p = node;
         final hasDefaultValue =
-            node.parameter.declaredElement?.hasDefaultValue == true;
+            node.parameter.declaredFragment?.element.hasDefaultValue == true;
         final hasDefaultAnnotation = node.parameter.metadata.fold(
-            false, (acc, e) => acc || e.name.toString().startsWith('Default'));
+          false,
+          (acc, e) => acc || e.name.toString().startsWith('Default'),
+        );
 
-        final hasRfGroupAnnotation = node.parameter.declaredElement?.type
-                .element3?.hasRfGroupAnnotation ==
+        final hasRfGroupAnnotation =
+            node
+                .parameter
+                .declaredFragment
+                ?.element
+                .type
+                .element
+                ?.hasRfGroupAnnotation ==
             true;
 
-        final type = node.parameter.declaredElement?.type;
-        final isList = type != null &&
+        final type = node.parameter.declaredFragment?.element.type;
+        final isList =
+            type != null &&
             type.isDartCoreList == true &&
             type is ParameterizedType &&
             (type as t.InterfaceTypeImpl)
                     .typeArguments
                     .firstOrNull
-                    ?.element3
+                    ?.element
                     ?.hasRfGroupAnnotation ==
                 true;
 
@@ -69,9 +78,8 @@ class RfParameterVisitor extends GeneralizingAstVisitor<dynamic> {
         //     node.parameter.declaredElement?.type.nullabilitySuffix ==
         //         NullabilitySuffix.question;
 
-        if (/*!isNullable &&*/
-            (hasRfGroupAnnotation || isList) &&
-                (hasDefaultValue || hasDefaultAnnotation)) {
+        if ( /*!isNullable &&*/ (hasRfGroupAnnotation || isList) &&
+            (hasDefaultValue || hasDefaultAnnotation)) {
           NodeReplacer.replace(node, node.newParameter2);
         }
         // if (node.metadata.required) {
@@ -180,20 +188,17 @@ class RfParameterVisitor2 extends GeneralizingAstVisitor<dynamic> {
     final element = node.element;
     if (node is NamedTypeImpl &&
         element is ClassElementImpl &&
-        element.metadata.hasRfGroupAnnotation) {
+        element.firstFragment.element.hasRfGroupAnnotation) {
       try {
         NodeReplacer.replace(
-            node,
-            NamedTypeImpl(
-              importPrefix: node.importPrefix,
-              name2: StringToken(
-                TokenType.STRING,
-                '${node.name2}Output',
-                0,
-              ),
-              typeArguments: node.typeArguments,
-              question: node.question,
-            ));
+          node,
+          NamedTypeImpl(
+            importPrefix: node.importPrefix,
+            name: StringToken(TokenType.STRING, '${node.name}Output', 0),
+            typeArguments: node.typeArguments,
+            question: node.question,
+          ),
+        );
       } catch (e) {
         rethrow;
       }
