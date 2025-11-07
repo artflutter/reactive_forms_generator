@@ -1,5 +1,5 @@
 // ignore_for_file: implementation_imports
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
@@ -25,16 +25,17 @@ class FormArrayGenerator extends FormElementGenerator {
   @override
   String get value {
     final enclosingElement =
-        (fieldElement.enclosingElement2 as e.ConstructorElementImpl2)
-            .enclosingElement2;
+        (fieldElement.enclosingElement as e.ConstructorElementImpl)
+            .enclosingElement;
 
-    final optionalChaining = (enclosingElement.name3 == root.name3 &&
+    final optionalChaining =
+        (enclosingElement.name == root.name &&
                 type?.nullabilitySuffix != NullabilitySuffix.question) ||
-            (enclosingElement.name3 == root.name3 && !root.isNullable)
+            (enclosingElement.name == root.name && !root.isNullable)
         ? ''
         : '?';
 
-    return '(${enclosingElement.firstFragment.name.camelCase}$optionalChaining.${fieldElement.name3}${optionalChaining != '' ? '?? []' : ''})';
+    return '(${enclosingElement.firstFragment.name?.camelCase}$optionalChaining.${fieldElement.name}${optionalChaining != '' ? '?? []' : ''})';
   }
 
   String get displayType {
@@ -43,8 +44,10 @@ class FormArrayGenerator extends FormElementGenerator {
     // we need to trim last NullabilitySuffix.question cause FormControl modifies
     // generic T => T?
     if (typeParameter.nullabilitySuffix == NullabilitySuffix.question) {
-      getDisplayString =
-          getDisplayString.substring(0, getDisplayString.length - 1);
+      getDisplayString = getDisplayString.substring(
+        0,
+        getDisplayString.length - 1,
+      );
     }
 
     return getDisplayString;
@@ -52,9 +55,7 @@ class FormArrayGenerator extends FormElementGenerator {
 
   @override
   String element() {
-    final typeParameterType = typeParameter.getName(
-      withNullability: false,
-    );
+    final typeParameterType = typeParameter.getName(withNullability: false);
 
     final formArrayAnnotationType = annotationType;
     final formArrayAnnotationTyped = annotationTyped;
@@ -62,7 +63,7 @@ class FormArrayGenerator extends FormElementGenerator {
     if (formArrayAnnotationTyped &&
         formArrayAnnotationType != typeParameterType) {
       throw Exception(
-        'Annotation and field type mismatch. Annotation is typed as `$formArrayAnnotationType` and field(`${field.name3}`) as `$typeParameterType`.',
+        'Annotation and field type mismatch. Annotation is typed as `$formArrayAnnotationType` and field(`${field.name}`) as `$typeParameterType`.',
       );
     }
 
@@ -76,7 +77,7 @@ class FormArrayGenerator extends FormElementGenerator {
     if (formArrayField.isFormGroupArray) {
       final props = [
         '$value.map((e) => ${formArrayField.className}.formElements(e)).toList()',
-        ...partialProps
+        ...partialProps,
       ].join(', ');
 
       return 'FormArray($props)';
@@ -89,7 +90,7 @@ class FormArrayGenerator extends FormElementGenerator {
               asyncValidatorsDebounceTime: $itemAsyncValidatorsDebounceTime,
               disabled: $itemDisabled,
             )).toList()''',
-        ...partialProps
+        ...partialProps,
       ].join(', ');
 
       return 'FormArray<$displayType>($props)';

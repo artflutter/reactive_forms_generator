@@ -1,6 +1,6 @@
 // ignore_for_file: implementation_imports
 
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:code_builder/code_builder.dart';
@@ -15,11 +15,7 @@ import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart
 // import 'package:analyzer/src/dart/element/display_string_builder.dart';
 
 class FieldValueMethod extends ReactiveFormGeneratorMethod {
-  FieldValueMethod(
-    super.field,
-    super.output,
-    super.requiredValidators,
-  );
+  FieldValueMethod(super.field, super.output, super.requiredValidators);
 
   @override
   Method? formGroupMethod() {
@@ -32,22 +28,19 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
   Method? formArrayMethod() {
     final type = (field.type as ParameterizedType).typeArguments.first;
 
-    final code = '${field.fieldControlName}.rawValue.whereType<${type.getName(
-      withNullability: true,
-    )}>().toList()';
+    final code =
+        '${field.fieldControlName}.rawValue.whereType<${type.getName(withNullability: true)}>().toList()';
 
-    return methodEntity.rebuild(
-      (b) => b..body = Code(code),
-    );
+    return methodEntity.rebuild((b) => b..body = Code(code));
   }
 
   @override
   Method? formGroupArrayMethod() => methodEntity.rebuild(
-        (b) => b
-          ..body = Code(
-            '${field.name3}${field.className}.map((e) => e.$fieldModelName).toList()',
-          ),
-      );
+    (b) => b
+      ..body = Code(
+        '${field.name}${field.className}.map((e) => e.$fieldModelName).toList()',
+      ),
+  );
 
   @override
   Method? defaultMethod() {
@@ -82,27 +75,21 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
 
   String get fieldModelName => 'model';
 
-  Method get methodEntity => Method(
-        (b) {
-          b
-            ..name = fieldValueName
-            ..lambda = true
-            ..type = MethodType.getter
-            ..returns = Reference(
-              output
-                  ? field.toReferenceType(requiredValidators)
-                  : field.type.toString(),
-            );
-        },
+  Method get methodEntity => Method((b) {
+    b
+      ..name = fieldValueName
+      ..lambda = true
+      ..type = MethodType.getter
+      ..returns = Reference(
+        output
+            ? field.toReferenceType(requiredValidators)
+            : field.type.toString(),
       );
+  });
 }
 
 class FieldRawValueMethod extends FieldValueMethod {
-  FieldRawValueMethod(
-    super.field,
-    super.output,
-    super.requiredValidators,
-  );
+  FieldRawValueMethod(super.field, super.output, super.requiredValidators);
 
   @override
   String get fieldModelName => 'rawModel';
@@ -116,11 +103,11 @@ class FieldRawValueMethod extends FieldValueMethod {
   }
 }
 
-extension Care on ClassElement2 {
+extension Care on ClassElement {
   String get toReferenceType {
     var builder = ElementDisplayStringBuilder2(
       withNullability: true,
-      preferTypeAlias: false,
+      // preferTypeAlias: false,
     );
     (thisType as TypeImpl).appendTo(builder);
     return builder.toString();

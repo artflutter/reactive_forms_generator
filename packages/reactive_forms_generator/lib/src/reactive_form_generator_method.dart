@@ -1,4 +1,4 @@
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:reactive_forms_generator/src/types.dart';
@@ -8,11 +8,7 @@ abstract class ReactiveFormGeneratorMethod {
   final bool output;
   final List<String> requiredValidators;
 
-  ReactiveFormGeneratorMethod(
-    this.field,
-    this.output,
-    this.requiredValidators,
-  );
+  ReactiveFormGeneratorMethod(this.field, this.output, this.requiredValidators);
 
   Method? method() {
     if (field.isFormGroup) {

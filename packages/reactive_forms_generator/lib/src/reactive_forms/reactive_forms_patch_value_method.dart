@@ -11,8 +11,9 @@ class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
 
   @override
   Method formGroupArrayMethod() {
-    final code = '''
-      final keys = ${field.name3}${field.className}.asMap().keys;
+    final code =
+        '''
+      final keys = ${field.name}${field.className}.asMap().keys;
       
       final toPatch = <${field.typeParameter}>[];
       (value ${field.isNullable ? '?? []' : ''}).asMap()
@@ -52,32 +53,32 @@ class ReactiveFormPatchValueMethod extends ReactiveFormGeneratorMethod {
   }
 
   Method get methodEntity => Method(
-        (b) => b
-          ..name = field.valuePatchMethodName
-          ..lambda = false
-          ..requiredParameters.add(
-            Parameter(
-              (b) => b
-                ..name = 'value'
-                ..type = Reference(field.type.toString()),
-            ),
-          )
-          ..optionalParameters.addAll([
-            Parameter(
-              (b) => b
-                ..name = 'updateParent'
-                ..named = true
-                ..defaultTo = const Code('true')
-                ..type = const Reference('bool'),
-            ),
-            Parameter(
-              (b) => b
-                ..name = 'emitEvent'
-                ..named = true
-                ..defaultTo = const Code('true')
-                ..type = const Reference('bool'),
-            ),
-          ])
-          ..returns = const Reference('void'),
-      );
+    (b) => b
+      ..name = field.valuePatchMethodName
+      ..lambda = false
+      ..requiredParameters.add(
+        Parameter(
+          (b) => b
+            ..name = 'value'
+            ..type = Reference(field.type.toString()),
+        ),
+      )
+      ..optionalParameters.addAll([
+        Parameter(
+          (b) => b
+            ..name = 'updateParent'
+            ..named = true
+            ..defaultTo = const Code('true')
+            ..type = const Reference('bool'),
+        ),
+        Parameter(
+          (b) => b
+            ..name = 'emitEvent'
+            ..named = true
+            ..defaultTo = const Code('true')
+            ..type = const Reference('bool'),
+        ),
+      ])
+      ..returns = const Reference('void'),
+  );
 }

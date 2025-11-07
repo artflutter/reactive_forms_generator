@@ -18,14 +18,12 @@ class RfAnnotationArgumentsVisitor extends RecursiveAstVisitor<dynamic> {
   visitArgumentList(ArgumentList node) {
     for (var argument in node.arguments) {
       if (argument is NamedExpression) {
-        arguments.addEntries(
-          [
-            MapEntry(
-              argument.name.label.name,
-              argument.expression.toSource().toString(),
-            ),
-          ],
-        );
+        arguments.addEntries([
+          MapEntry(
+            argument.name.label.name,
+            argument.expression.toSource().toString(),
+          ),
+        ]);
       } else {
         // For positional arguments
       }
@@ -58,30 +56,24 @@ class ClassRenameVisitor extends GeneralizingAstVisitor<void> {
         finalKeyword: node.finalKeyword,
         mixinKeyword: node.mixinKeyword,
         classKeyword: node.classKeyword,
-        name: StringToken(
-          TokenType.STRING,
-          '${node.name.lexeme}Output',
-          0,
-        ),
+        name: StringToken(TokenType.STRING, '${node.name.lexeme}Output', 0),
         typeParameters: node.typeParameters,
         extendsClause: node.extendsClause,
         withClause: node.withClause != null
             ? WithClauseImpl(
                 withKeyword: node.withClause!.withKeyword,
-                mixinTypes: node.withClause!.mixinTypes.map(
-                  (e) {
-                    return NamedTypeImpl(
-                      importPrefix: e.importPrefix,
-                      name2: StringToken(
-                        TokenType.STRING,
-                        '${e.name2.lexeme}Output',
-                        0,
-                      ),
-                      typeArguments: e.typeArguments,
-                      question: e.question,
-                    );
-                  },
-                ).toList(),
+                mixinTypes: node.withClause!.mixinTypes.map((e) {
+                  return NamedTypeImpl(
+                    importPrefix: e.importPrefix,
+                    name: StringToken(
+                      TokenType.STRING,
+                      '${e.name.lexeme}Output',
+                      0,
+                    ),
+                    typeArguments: e.typeArguments,
+                    question: e.question,
+                  );
+                }).toList(),
               )
             : null,
         implementsClause: node.implementsClause,
@@ -90,126 +82,127 @@ class ClassRenameVisitor extends GeneralizingAstVisitor<void> {
         members: node.members.map((e) {
           return switch (e) {
             final ConstructorDeclarationImpl _ => ConstructorDeclarationImpl(
-                comment: null,
-                metadata: e.metadata,
-                augmentKeyword: e.augmentKeyword,
-                externalKeyword: e.externalKeyword,
-                constKeyword: e.constKeyword,
-                factoryKeyword: e.factoryKeyword,
-                returnType: SimpleIdentifierImpl(
-                  StringToken(
-                    TokenType.STRING,
-                    '${e.returnType.name}Output',
-                    0,
-                  ),
+              comment: null,
+              metadata: e.metadata,
+              augmentKeyword: e.augmentKeyword,
+              externalKeyword: e.externalKeyword,
+              constKeyword: e.constKeyword,
+              factoryKeyword: e.factoryKeyword,
+              returnType: SimpleIdentifierImpl(
+                token: StringToken(
+                  TokenType.STRING,
+                  '${e.returnType.name}Output',
+                  0,
                 ),
-                period: e.period,
-                name: e.name,
-                parameters: e.parameters,
-                separator: e.separator,
-                initializers: e.initializers,
-                redirectedConstructor: e.redirectedConstructor != null
-                    ? ConstructorNameImpl(
-                        type: NamedTypeImpl(
-                          importPrefix:
-                              e.redirectedConstructor!.type.importPrefix,
-                          name2: StringToken(
+              ),
+              period: e.period,
+              name: e.name,
+              parameters: e.parameters,
+              separator: e.separator,
+              initializers: e.initializers,
+              redirectedConstructor: e.redirectedConstructor != null
+                  ? ConstructorNameImpl(
+                      type: NamedTypeImpl(
+                        importPrefix:
+                            e.redirectedConstructor!.type.importPrefix,
+                        name: StringToken(
+                          TokenType.STRING,
+                          '${e.redirectedConstructor!.type.name}Output',
+                          0,
+                        ),
+                        typeArguments:
+                            e.redirectedConstructor!.type.typeArguments,
+                        question: e.redirectedConstructor!.type.question,
+                      ),
+                      period: e.redirectedConstructor!.period,
+                      name: e.redirectedConstructor!.name,
+                    )
+                  : null,
+              body: switch (e.body) {
+                final BlockFunctionBody _ => e.body,
+                final EmptyFunctionBodyImpl _ => e.body,
+                final ExpressionFunctionBodyImpl _ =>
+                  ExpressionFunctionBodyImpl(
+                    keyword: (e.body as ExpressionFunctionBodyImpl).keyword,
+                    star: (e.body as ExpressionFunctionBodyImpl).star,
+                    functionDefinition: (e.body as ExpressionFunctionBodyImpl)
+                        .functionDefinition,
+                    expression: switch ((e.body as ExpressionFunctionBodyImpl)
+                        .expression) {
+                      MethodInvocationImpl() => MethodInvocationImpl(
+                        target:
+                            ((e.body as ExpressionFunctionBodyImpl).expression
+                                    as MethodInvocationImpl)
+                                .target,
+                        operator:
+                            ((e.body as ExpressionFunctionBodyImpl).expression
+                                    as MethodInvocationImpl)
+                                .operator,
+                        methodName: SimpleIdentifierImpl(
+                          token: StringToken(
                             TokenType.STRING,
-                            '${e.redirectedConstructor!.type.name2}Output',
+                            ((e.body as ExpressionFunctionBodyImpl).expression
+                                    as MethodInvocationImpl)
+                                .methodName
+                                .name
+                                .replaceFirst(
+                                  e.returnType.name,
+                                  '${e.returnType.name}Output',
+                                ),
                             0,
                           ),
-                          typeArguments:
-                              e.redirectedConstructor!.type.typeArguments,
-                          question: e.redirectedConstructor!.type.question,
                         ),
-                        period: e.redirectedConstructor!.period,
-                        name: e.redirectedConstructor!.name,
-                      )
-                    : null,
-                body: switch (e.body) {
-                  final BlockFunctionBody _ => e.body,
-                  final EmptyFunctionBodyImpl _ => e.body,
-                  final ExpressionFunctionBodyImpl _ =>
-                    ExpressionFunctionBodyImpl(
-                      keyword: (e.body as ExpressionFunctionBodyImpl).keyword,
-                      star: (e.body as ExpressionFunctionBodyImpl).star,
-                      functionDefinition: (e.body as ExpressionFunctionBodyImpl)
-                          .functionDefinition,
-                      expression: switch (
-                          (e.body as ExpressionFunctionBodyImpl).expression) {
-                        MethodInvocationImpl() => MethodInvocationImpl(
-                            target: ((e.body as ExpressionFunctionBodyImpl)
-                                    .expression as MethodInvocationImpl)
-                                .target,
-                            operator: ((e.body as ExpressionFunctionBodyImpl)
-                                    .expression as MethodInvocationImpl)
-                                .operator,
-                            methodName: SimpleIdentifierImpl(
-                              StringToken(
-                                TokenType.STRING,
-                                ((e.body as ExpressionFunctionBodyImpl)
-                                        .expression as MethodInvocationImpl)
-                                    .methodName
-                                    .name
-                                    .replaceFirst(
-                                      e.returnType.name,
-                                      '${e.returnType.name}Output',
-                                    ),
-                                0,
-                              ),
-                            ),
-                            typeArguments:
-                                ((e.body as ExpressionFunctionBodyImpl)
-                                        .expression as MethodInvocationImpl)
-                                    .typeArguments,
-                            argumentList:
-                                ((e.body as ExpressionFunctionBodyImpl)
-                                        .expression as MethodInvocationImpl)
-                                    .argumentList,
-                          ),
-                        _ => (e.body as ExpressionFunctionBodyImpl).expression,
-                      },
-                      semicolon:
-                          (e.body as ExpressionFunctionBodyImpl).semicolon,
-                    ),
-                  final NativeFunctionBodyImpl _ => e.body,
-                },
-              ),
+                        typeArguments:
+                            ((e.body as ExpressionFunctionBodyImpl).expression
+                                    as MethodInvocationImpl)
+                                .typeArguments,
+                        argumentList:
+                            ((e.body as ExpressionFunctionBodyImpl).expression
+                                    as MethodInvocationImpl)
+                                .argumentList,
+                      ),
+                      _ => (e.body as ExpressionFunctionBodyImpl).expression,
+                    },
+                    semicolon: (e.body as ExpressionFunctionBodyImpl).semicolon,
+                  ),
+                final NativeFunctionBodyImpl _ => e.body,
+              },
+            ),
             final FieldDeclarationImpl _ => FieldDeclarationImpl(
+              comment: null,
+              metadata: e.metadata,
+              abstractKeyword: e.abstractKeyword,
+              augmentKeyword: e.augmentKeyword,
+              covariantKeyword: e.covariantKeyword,
+              externalKeyword: e.externalKeyword,
+              staticKeyword: e.staticKeyword,
+              fields: VariableDeclarationListImpl(
                 comment: null,
-                metadata: e.metadata,
-                abstractKeyword: e.abstractKeyword,
-                augmentKeyword: e.augmentKeyword,
-                covariantKeyword: e.covariantKeyword,
-                externalKeyword: e.externalKeyword,
-                staticKeyword: e.staticKeyword,
-                fieldList: VariableDeclarationListImpl(
-                  comment: null,
-                  metadata: e.fields.metadata,
-                  lateKeyword: e.fields.lateKeyword,
-                  keyword: e.fields.keyword,
-                  type: e.fields.type?.newTypeO,
-                  variables: e.fields.variables.map((e) {
-                    return e;
-                  }).toList(),
-                ),
-                //e.fields
-                semicolon: e.semicolon,
+                metadata: e.fields.metadata,
+                lateKeyword: e.fields.lateKeyword,
+                keyword: e.fields.keyword,
+                type: e.fields.type?.newTypeO,
+                variables: e.fields.variables.map((e) {
+                  return e;
+                }).toList(),
               ),
+              //e.fields
+              semicolon: e.semicolon,
+            ),
             final MethodDeclarationImpl _ => MethodDeclarationImpl(
-                comment: null,
-                metadata: e.metadata,
-                augmentKeyword: e.augmentKeyword,
-                externalKeyword: e.externalKeyword,
-                modifierKeyword: e.modifierKeyword,
-                returnType: e.returnType,
-                propertyKeyword: e.propertyKeyword,
-                operatorKeyword: e.operatorKeyword,
-                name: e.name,
-                typeParameters: e.typeParameters,
-                parameters: e.parameters,
-                body: e.body,
-              ),
+              comment: null,
+              metadata: e.metadata,
+              augmentKeyword: e.augmentKeyword,
+              externalKeyword: e.externalKeyword,
+              modifierKeyword: e.modifierKeyword,
+              returnType: e.returnType,
+              propertyKeyword: e.propertyKeyword,
+              operatorKeyword: e.operatorKeyword,
+              name: e.name,
+              typeParameters: e.typeParameters,
+              parameters: e.parameters,
+              body: e.body,
+            ),
           };
         }).toList(),
         rightBracket: node.rightBracket,
@@ -220,24 +213,24 @@ class ClassRenameVisitor extends GeneralizingAstVisitor<void> {
     super.visitClassDeclaration(node);
   }
 
-// @override
-// void visitSimpleFormalParameter(SimpleFormalParameter node) {
-//   print(node);
-//
-//   if (node is SimpleFormalParameterImpl) {
-//     if (node.metadata.hasRfGroupAnnotation) {}
-//     if (node.metadata.hasRfArrayAnnotation) {
-//       final type = node.type;
-//       final x = switch(type) {
-//         null => type,
-//         GenericFunctionTypeImpl() => type,
-//         NamedTypeImpl() => type.typeArguments NamedTypeImpl(),
-//         RecordTypeAnnotationImpl() => type,
-//       };
-//     }
-//   }
-//   node.visitChildren(this);
-// }
+  // @override
+  // void visitSimpleFormalParameter(SimpleFormalParameter node) {
+  //   print(node);
+  //
+  //   if (node is SimpleFormalParameterImpl) {
+  //     if (node.metadata.hasRfGroupAnnotation) {}
+  //     if (node.metadata.hasRfArrayAnnotation) {
+  //       final type = node.type;
+  //       final x = switch(type) {
+  //         null => type,
+  //         GenericFunctionTypeImpl() => type,
+  //         NamedTypeImpl() => type.typeArguments NamedTypeImpl(),
+  //         RecordTypeAnnotationImpl() => type,
+  //       };
+  //     }
+  //   }
+  //   node.visitChildren(this);
+  // }
 
   // @override
   // void visitFormalParameter(FormalParameter node) {
@@ -377,7 +370,7 @@ class ClassRenameVisitor extends GeneralizingAstVisitor<void> {
         constKeyword: node.constKeyword,
         factoryKeyword: node.factoryKeyword,
         returnType: SimpleIdentifierImpl(
-          StringToken(
+          token: StringToken(
             TokenType.STRING,
             '${node.returnType.name}Output',
             0,

@@ -3,7 +3,7 @@ library;
 
 import 'dart:async';
 
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
@@ -41,22 +41,24 @@ class ReactiveFormsGenerator extends Generator {
 
     final lib = Library(
       (b) => b
-        ..body.addAll(specList.mergeDuplicatesBy(
-          (i) {
-            // if (i is StaticCode) {
-            //   print(i.code.hashCode);
-            //   print(i.code);
-            // }
-            return switch (i) {
-              final Class _ => i.name,
-              final StaticCode _ => i.code.hashCode,
-              _ => i,
-            };
-          },
-          (a, b) {
-            return a;
-          },
-        )),
+        ..body.addAll(
+          specList.mergeDuplicatesBy(
+            (i) {
+              // if (i is StaticCode) {
+              //   print(i.code.hashCode);
+              //   print(i.code);
+              // }
+              return switch (i) {
+                final Class _ => i.name,
+                final StaticCode _ => i.code.hashCode,
+                _ => i,
+              };
+            },
+            (a, b) {
+              return a;
+            },
+          ),
+        ),
     );
 
     // final x = lib.accept(emitter).toString();
@@ -75,20 +77,20 @@ class ReactiveFormsGenerator extends Generator {
   }
 
   Future<List<Spec>> generateForAnnotatedElement(
-    Element2 element,
+    Element element,
     ConstantReader annotation,
     BuildStep buildStep,
   ) async {
     throwIf(
-      element is! ClassElement2,
-      '${element.name3} is not a class element',
+      element is! ClassElement,
+      '${element.name} is not a class element',
       element: element,
     );
 
-    // final astElement = element.firstFragment;
+    final astElement = element.enclosingElement;
 
     final ast = await buildStep.resolver.astNodeFor(
-      element.enclosingElement2!.firstFragment, // astElement ?? element,
+      (astElement ?? element).firstFragment,
       resolve: true,
     );
 
@@ -96,6 +98,6 @@ class ReactiveFormsGenerator extends Generator {
       throw InvalidGenerationSourceError('Ast not found', element: element);
     }
 
-    return generateLibrary(element as ClassElement2, ast);
+    return generateLibrary(element as ClassElement, ast);
   }
 }
