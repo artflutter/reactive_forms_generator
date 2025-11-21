@@ -7,12 +7,11 @@ const fileName = 'login';
 
 void main() {
   group('doc', () {
-    test(
-      'Login',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Login', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms/src/validators/required_validator.dart';
@@ -51,10 +50,9 @@ void main() {
               });
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -526,7 +524,7 @@ class LoginForm implements FormModel<Login, Login> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(LoginForm.formElements(value).rawValue,
+      currentForm.updateValue(LoginForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

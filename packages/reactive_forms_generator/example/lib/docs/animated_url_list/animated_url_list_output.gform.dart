@@ -510,7 +510,7 @@ class AnimatedUrlLisOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AnimatedUrlLisOForm.formElements(value).rawValue,
+      currentForm.updateValue(AnimatedUrlLisOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -856,7 +856,7 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(UrlEntityOForm.formElements(value).rawValue,
+      currentForm.updateValue(UrlEntityOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

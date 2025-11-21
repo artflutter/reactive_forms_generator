@@ -7,12 +7,11 @@ const fileName = 'generic_output';
 
 void main() {
   group('reactive_forms_generator', () {
-    test(
-      'Generic Output',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Generic Output', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:freezed_annotation/freezed_annotation.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
@@ -29,10 +28,9 @@ void main() {
               const TagsO._();
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -457,7 +455,7 @@ class TagsOForm<T> implements FormModel<TagsO<T>, TagsOOutput<T>> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(TagsOForm.formElements(value).rawValue,
+      currentForm.updateValue(TagsOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

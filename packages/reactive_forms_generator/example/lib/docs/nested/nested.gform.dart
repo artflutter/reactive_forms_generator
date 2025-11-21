@@ -390,7 +390,7 @@ class SubGroupForm implements FormModel<SubGroup, SubGroup> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(SubGroupForm.formElements(value).rawValue,
+      currentForm.updateValue(SubGroupForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1204,7 +1204,7 @@ class GroupForm implements FormModel<Group, Group> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(GroupForm.formElements(value).rawValue,
+      currentForm.updateValue(GroupForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1947,7 +1947,7 @@ class NestedForm implements FormModel<Nested, Nested> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(NestedForm.formElements(value).rawValue,
+      currentForm.updateValue(NestedForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

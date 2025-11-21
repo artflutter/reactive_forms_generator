@@ -494,7 +494,7 @@ class TestForm implements FormModel<Test, Test> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(TestForm.formElements(value).rawValue,
+      currentForm.updateValue(TestForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

@@ -7,12 +7,11 @@ const fileName = 'login_extended';
 
 void main() {
   group('reactive_forms_generator', () {
-    test(
-      'Login extended',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Login extended', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms/src/validators/required_validator.dart';
@@ -98,10 +97,9 @@ void main() {
             }
 
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -1164,7 +1162,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(LoginExtendedForm.formElements(value).rawValue,
+      currentForm.updateValue(LoginExtendedForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

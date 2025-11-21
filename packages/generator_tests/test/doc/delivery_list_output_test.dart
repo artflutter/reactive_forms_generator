@@ -7,12 +7,11 @@ const fileName = 'delivery_list_output';
 
 void main() {
   group('doc', () {
-    test(
-      'Delivery list Output',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Delivery list Output', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms/src/validators/required_validator.dart';
@@ -87,10 +86,9 @@ void main() {
               List<Object?> get props => [street, city];
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -822,7 +820,7 @@ class DeliveryListOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(DeliveryListOForm.formElements(value).rawValue,
+      currentForm.updateValue(DeliveryListOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1150,7 +1148,7 @@ class DeliveryPointOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(DeliveryPointOForm.formElements(value).rawValue,
+      currentForm.updateValue(DeliveryPointOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1496,7 +1494,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AddressOForm.formElements(value).rawValue,
+      currentForm.updateValue(AddressOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1929,7 +1927,7 @@ class ClientOForm implements FormModel<ClientO, ClientOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ClientOForm.formElements(value).rawValue,
+      currentForm.updateValue(ClientOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -2734,8 +2732,10 @@ class StandaloneDeliveryPointForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(StandaloneDeliveryPointForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+      currentForm.updateValue(
+          StandaloneDeliveryPointForm.formElements(value).rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   @override
   void reset({

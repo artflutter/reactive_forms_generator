@@ -743,7 +743,7 @@ class GroupForm implements FormModel<Group, Group> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(GroupForm.formElements(value).rawValue,
+      currentForm.updateValue(GroupForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1084,7 +1084,7 @@ class PersonalForm implements FormModel<Personal, Personal> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(PersonalForm.formElements(value).rawValue,
+      currentForm.updateValue(PersonalForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1436,7 +1436,7 @@ class PhoneForm implements FormModel<Phone, Phone> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(PhoneForm.formElements(value).rawValue,
+      currentForm.updateValue(PhoneForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1893,7 +1893,7 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AddressForm.formElements(value).rawValue,
+      currentForm.updateValue(AddressForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

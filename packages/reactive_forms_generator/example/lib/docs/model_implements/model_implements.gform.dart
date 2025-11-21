@@ -476,7 +476,7 @@ class ModelImplementsForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ModelImplementsForm.formElements(value).rawValue,
+      currentForm.updateValue(ModelImplementsForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

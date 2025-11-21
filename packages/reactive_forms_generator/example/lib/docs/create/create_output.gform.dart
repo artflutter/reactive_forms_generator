@@ -1373,7 +1373,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(MSICreateForm.formElements(value).rawValue,
+      currentForm.updateValue(MSICreateForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1987,7 +1987,7 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AddressForm.formElements(value).rawValue,
+      currentForm.updateValue(AddressForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -2463,7 +2463,7 @@ class PrimaryContactForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(PrimaryContactForm.formElements(value).rawValue,
+      currentForm.updateValue(PrimaryContactForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -2936,8 +2936,10 @@ class AdminContactInformationForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AdminContactInformationForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+      currentForm.updateValue(
+          AdminContactInformationForm.formElements(value).rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   @override
   void reset({

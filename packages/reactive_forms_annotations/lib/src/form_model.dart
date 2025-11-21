@@ -28,3 +28,5 @@ abstract class FormModel<TModel, TModelOutput> {
 
   void toggleDisabled({bool updateParent = true, bool emitEvent = true});
 }
+
+extension FormModelExt on FormModel {}

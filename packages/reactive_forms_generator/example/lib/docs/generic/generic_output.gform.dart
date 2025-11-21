@@ -419,7 +419,7 @@ class TagsOForm<T> implements FormModel<TagsO<T>, TagsOOutput<T>> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(TagsOForm.formElements(value).rawValue,
+      currentForm.updateValue(TagsOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

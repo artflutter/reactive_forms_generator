@@ -1168,7 +1168,7 @@ class LoginExtendedOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(LoginExtendedOForm.formElements(value).rawValue,
+      currentForm.updateValue(LoginExtendedOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

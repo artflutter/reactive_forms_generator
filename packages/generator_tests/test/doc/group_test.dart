@@ -7,12 +7,11 @@ const fileName = 'group';
 
 void main() {
   group('reactive_forms_generator', () {
-    test(
-      'Form with nullable groups types',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Form with nullable groups types', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
@@ -76,10 +75,9 @@ void main() {
               });
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -828,7 +826,7 @@ class GroupForm implements FormModel<Group, Group> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(GroupForm.formElements(value).rawValue,
+      currentForm.updateValue(GroupForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1169,7 +1167,7 @@ class PersonalForm implements FormModel<Personal, Personal> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(PersonalForm.formElements(value).rawValue,
+      currentForm.updateValue(PersonalForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1521,7 +1519,7 @@ class PhoneForm implements FormModel<Phone, Phone> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(PhoneForm.formElements(value).rawValue,
+      currentForm.updateValue(PhoneForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1978,7 +1976,7 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AddressForm.formElements(value).rawValue,
+      currentForm.updateValue(AddressForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

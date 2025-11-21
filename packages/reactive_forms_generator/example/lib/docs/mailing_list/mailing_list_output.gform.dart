@@ -441,7 +441,7 @@ class MailingListOForm implements FormModel<MailingListO, MailingListOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(MailingListOForm.formElements(value).rawValue,
+      currentForm.updateValue(MailingListOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

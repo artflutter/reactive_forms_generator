@@ -7,12 +7,11 @@ const fileName = 'array_nullable_output';
 
 void main() {
   group('reactive_forms_generator', () {
-    test(
-      'Form with array nullable types',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Form with array nullable types', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms/src/validators/required_validator.dart';
@@ -46,10 +45,9 @@ void main() {
               });
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -1036,7 +1034,7 @@ class ArrayNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ArrayNullableOForm.formElements(value).rawValue,
+      currentForm.updateValue(ArrayNullableOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

@@ -523,7 +523,7 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(LoginOForm.formElements(value).rawValue,
+      currentForm.updateValue(LoginOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

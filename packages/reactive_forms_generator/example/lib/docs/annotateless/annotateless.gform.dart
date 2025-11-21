@@ -472,7 +472,7 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AnnotatelessForm.formElements(value).rawValue,
+      currentForm.updateValue(AnnotatelessForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

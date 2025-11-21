@@ -466,7 +466,7 @@ class LoginForm implements FormModel<Login, Login> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(LoginForm.formElements(value).rawValue,
+      currentForm.updateValue(LoginForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

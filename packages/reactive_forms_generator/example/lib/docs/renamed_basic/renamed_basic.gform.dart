@@ -472,7 +472,7 @@ class SomeWiredNameForm implements FormModel<RenamedBasic, RenamedBasic> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(SomeWiredNameForm.formElements(value).rawValue,
+      currentForm.updateValue(SomeWiredNameForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

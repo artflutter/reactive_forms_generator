@@ -7,12 +7,11 @@ const fileName = 'recursive';
 
 void main() {
   group('doc', () {
-    test(
-      'Recursive',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Recursive', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:freezed_annotation/freezed_annotation.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
@@ -49,10 +48,9 @@ void main() {
               }) = _ParcelSystemData;
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -897,7 +895,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(SecuredAreaForm.formElements(value).rawValue,
+      currentForm.updateValue(SecuredAreaForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1202,7 +1200,7 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ParcelSystemForm.formElements(value).rawValue,
+      currentForm.updateValue(ParcelSystemForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1443,7 +1441,7 @@ class ParcelSystemDataForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ParcelSystemDataForm.formElements(value).rawValue,
+      currentForm.updateValue(ParcelSystemDataForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

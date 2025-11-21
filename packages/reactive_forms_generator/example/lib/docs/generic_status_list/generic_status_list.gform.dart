@@ -441,7 +441,7 @@ class StatusListForm<T extends Enum>
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(StatusListForm.formElements(value).rawValue,
+      currentForm.updateValue(StatusListForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

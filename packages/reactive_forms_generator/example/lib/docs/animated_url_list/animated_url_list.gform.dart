@@ -508,7 +508,7 @@ class AnimatedUrlListForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AnimatedUrlListForm.formElements(value).rawValue,
+      currentForm.updateValue(AnimatedUrlListForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -797,7 +797,7 @@ class UrlEntityForm implements FormModel<UrlEntity, UrlEntity> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(UrlEntityForm.formElements(value).rawValue,
+      currentForm.updateValue(UrlEntityForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

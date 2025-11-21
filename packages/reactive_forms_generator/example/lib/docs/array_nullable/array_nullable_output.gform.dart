@@ -981,7 +981,7 @@ class ArrayNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ArrayNullableOForm.formElements(value).rawValue,
+      currentForm.updateValue(ArrayNullableOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

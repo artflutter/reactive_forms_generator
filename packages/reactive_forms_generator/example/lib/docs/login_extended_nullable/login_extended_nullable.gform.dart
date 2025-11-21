@@ -1072,8 +1072,10 @@ class LoginExtendedNullableForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(LoginExtendedNullableForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+      currentForm.updateValue(
+          LoginExtendedNullableForm.formElements(value).rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   @override
   void reset({

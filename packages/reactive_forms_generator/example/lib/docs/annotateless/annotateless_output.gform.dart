@@ -474,7 +474,7 @@ class AnnotatelessOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AnnotatelessOForm.formElements(value).rawValue,
+      currentForm.updateValue(AnnotatelessOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

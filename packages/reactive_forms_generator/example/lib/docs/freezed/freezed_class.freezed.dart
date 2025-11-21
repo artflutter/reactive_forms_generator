@@ -14,397 +14,262 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$FreezedClass {
-  @RfControl<String>()
-  String? get gender;
-  @RfControl(validators: [RequiredValidator()])
-  String? get id;
-  @RfControl<String>()
-  String? get name;
-  @JsonKey(name: 'logo_image')
-  @RfControl<String>()
-  String? get logoImage;
-  @RfControl<double>()
-  double? get year;
-  List<String> get selectedSpaces;
 
-  /// Create a copy of FreezedClass
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $FreezedClassCopyWith<FreezedClass> get copyWith =>
-      _$FreezedClassCopyWithImpl<FreezedClass>(
-          this as FreezedClass, _$identity);
+@RfControl<String>() String? get gender;@RfControl(validators: [RequiredValidator()]) String? get id;@RfControl<String>() String? get name;@JsonKey(name: 'logo_image')@RfControl<String>() String? get logoImage;@RfControl<double>() double? get year; List<String> get selectedSpaces;
+/// Create a copy of FreezedClass
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$FreezedClassCopyWith<FreezedClass> get copyWith => _$FreezedClassCopyWithImpl<FreezedClass>(this as FreezedClass, _$identity);
 
   /// Serializes this FreezedClass to a JSON map.
   Map<String, dynamic> toJson();
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is FreezedClass &&
-            (identical(other.gender, gender) || other.gender == gender) &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.logoImage, logoImage) ||
-                other.logoImage == logoImage) &&
-            (identical(other.year, year) || other.year == year) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedSpaces, selectedSpaces));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, gender, id, name, logoImage,
-      year, const DeepCollectionEquality().hash(selectedSpaces));
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FreezedClass&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logoImage, logoImage) || other.logoImage == logoImage)&&(identical(other.year, year) || other.year == year)&&const DeepCollectionEquality().equals(other.selectedSpaces, selectedSpaces));
+}
 
-  @override
-  String toString() {
-    return 'FreezedClass(gender: $gender, id: $id, name: $name, logoImage: $logoImage, year: $year, selectedSpaces: $selectedSpaces)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,gender,id,name,logoImage,year,const DeepCollectionEquality().hash(selectedSpaces));
+
+@override
+String toString() {
+  return 'FreezedClass(gender: $gender, id: $id, name: $name, logoImage: $logoImage, year: $year, selectedSpaces: $selectedSpaces)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $FreezedClassCopyWith<$Res> {
-  factory $FreezedClassCopyWith(
-          FreezedClass value, $Res Function(FreezedClass) _then) =
-      _$FreezedClassCopyWithImpl;
-  @useResult
-  $Res call(
-      {@RfControl<String>() String? gender,
-      @RfControl(validators: [RequiredValidator()]) String? id,
-      @RfControl<String>() String? name,
-      @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
-      @RfControl<double>() double? year,
-      List<String> selectedSpaces});
-}
+abstract mixin class $FreezedClassCopyWith<$Res>  {
+  factory $FreezedClassCopyWith(FreezedClass value, $Res Function(FreezedClass) _then) = _$FreezedClassCopyWithImpl;
+@useResult
+$Res call({
+@RfControl<String>() String? gender,@RfControl(validators: [RequiredValidator()]) String? id,@RfControl<String>() String? name,@JsonKey(name: 'logo_image')@RfControl<String>() String? logoImage,@RfControl<double>() double? year, List<String> selectedSpaces
+});
 
+
+
+
+}
 /// @nodoc
-class _$FreezedClassCopyWithImpl<$Res> implements $FreezedClassCopyWith<$Res> {
+class _$FreezedClassCopyWithImpl<$Res>
+    implements $FreezedClassCopyWith<$Res> {
   _$FreezedClassCopyWithImpl(this._self, this._then);
 
   final FreezedClass _self;
   final $Res Function(FreezedClass) _then;
 
-  /// Create a copy of FreezedClass
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? gender = freezed,
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? logoImage = freezed,
-    Object? year = freezed,
-    Object? selectedSpaces = null,
-  }) {
-    return _then(_self.copyWith(
-      gender: freezed == gender
-          ? _self.gender
-          : gender // ignore: cast_nullable_to_non_nullable
-              as String?,
-      id: freezed == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      logoImage: freezed == logoImage
-          ? _self.logoImage
-          : logoImage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      year: freezed == year
-          ? _self.year
-          : year // ignore: cast_nullable_to_non_nullable
-              as double?,
-      selectedSpaces: null == selectedSpaces
-          ? _self.selectedSpaces
-          : selectedSpaces // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ));
-  }
+/// Create a copy of FreezedClass
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? gender = freezed,Object? id = freezed,Object? name = freezed,Object? logoImage = freezed,Object? year = freezed,Object? selectedSpaces = null,}) {
+  return _then(_self.copyWith(
+gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as String?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,logoImage: freezed == logoImage ? _self.logoImage : logoImage // ignore: cast_nullable_to_non_nullable
+as String?,year: freezed == year ? _self.year : year // ignore: cast_nullable_to_non_nullable
+as double?,selectedSpaces: null == selectedSpaces ? _self.selectedSpaces : selectedSpaces // ignore: cast_nullable_to_non_nullable
+as List<String>,
+  ));
 }
+
+}
+
 
 /// Adds pattern-matching-related methods to [FreezedClass].
 extension FreezedClassPatterns on FreezedClass {
-  /// A variant of `map` that fallback to returning `orElse`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_FreezedClass value)? $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _FreezedClass() when $default != null:
-        return $default(_that);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _FreezedClass value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _FreezedClass() when $default != null:
+return $default(_that);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// Callbacks receives the raw object, upcasted.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case final Subclass2 value:
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_FreezedClass value) $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _FreezedClass():
-        return $default(_that);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _FreezedClass value)  $default,){
+final _that = this;
+switch (_that) {
+case _FreezedClass():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `map` that fallback to returning `null`.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case final Subclass value:
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_FreezedClass value)? $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _FreezedClass() when $default != null:
-        return $default(_that);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _FreezedClass value)?  $default,){
+final _that = this;
+switch (_that) {
+case _FreezedClass() when $default != null:
+return $default(_that);case _:
+  return null;
 
-  /// A variant of `when` that fallback to an `orElse` callback.
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return orElse();
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            @RfControl<String>() String? gender,
-            @RfControl(validators: [RequiredValidator()]) String? id,
-            @RfControl<String>() String? name,
-            @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
-            @RfControl<double>() double? year,
-            List<String> selectedSpaces)?
-        $default, {
-    required TResult orElse(),
-  }) {
-    final _that = this;
-    switch (_that) {
-      case _FreezedClass() when $default != null:
-        return $default(_that.gender, _that.id, _that.name, _that.logoImage,
-            _that.year, _that.selectedSpaces);
-      case _:
-        return orElse();
-    }
-  }
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@RfControl<String>()  String? gender, @RfControl(validators: [RequiredValidator()])  String? id, @RfControl<String>()  String? name, @JsonKey(name: 'logo_image')@RfControl<String>()  String? logoImage, @RfControl<double>()  double? year,  List<String> selectedSpaces)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _FreezedClass() when $default != null:
+return $default(_that.gender,_that.id,_that.name,_that.logoImage,_that.year,_that.selectedSpaces);case _:
+  return orElse();
 
-  /// A `switch`-like method, using callbacks.
-  ///
-  /// As opposed to `map`, this offers destructuring.
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case Subclass2(:final field2):
-  ///     return ...;
-  /// }
-  /// ```
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(
-            @RfControl<String>() String? gender,
-            @RfControl(validators: [RequiredValidator()]) String? id,
-            @RfControl<String>() String? name,
-            @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
-            @RfControl<double>() double? year,
-            List<String> selectedSpaces)
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _FreezedClass():
-        return $default(_that.gender, _that.id, _that.name, _that.logoImage,
-            _that.year, _that.selectedSpaces);
-      case _:
-        throw StateError('Unexpected subclass');
-    }
-  }
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@RfControl<String>()  String? gender, @RfControl(validators: [RequiredValidator()])  String? id, @RfControl<String>()  String? name, @JsonKey(name: 'logo_image')@RfControl<String>()  String? logoImage, @RfControl<double>()  double? year,  List<String> selectedSpaces)  $default,) {final _that = this;
+switch (_that) {
+case _FreezedClass():
+return $default(_that.gender,_that.id,_that.name,_that.logoImage,_that.year,_that.selectedSpaces);case _:
+  throw StateError('Unexpected subclass');
 
-  /// A variant of `when` that fallback to returning `null`
-  ///
-  /// It is equivalent to doing:
-  /// ```dart
-  /// switch (sealedClass) {
-  ///   case Subclass(:final field):
-  ///     return ...;
-  ///   case _:
-  ///     return null;
-  /// }
-  /// ```
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
 
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            @RfControl<String>() String? gender,
-            @RfControl(validators: [RequiredValidator()]) String? id,
-            @RfControl<String>() String? name,
-            @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
-            @RfControl<double>() double? year,
-            List<String> selectedSpaces)?
-        $default,
-  ) {
-    final _that = this;
-    switch (_that) {
-      case _FreezedClass() when $default != null:
-        return $default(_that.gender, _that.id, _that.name, _that.logoImage,
-            _that.year, _that.selectedSpaces);
-      case _:
-        return null;
-    }
-  }
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@RfControl<String>()  String? gender, @RfControl(validators: [RequiredValidator()])  String? id, @RfControl<String>()  String? name, @JsonKey(name: 'logo_image')@RfControl<String>()  String? logoImage, @RfControl<double>()  double? year,  List<String> selectedSpaces)?  $default,) {final _that = this;
+switch (_that) {
+case _FreezedClass() when $default != null:
+return $default(_that.gender,_that.id,_that.name,_that.logoImage,_that.year,_that.selectedSpaces);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
+
 class _FreezedClass extends FreezedClass {
-  _FreezedClass(@RfControl<String>() this.gender,
-      {@RfControl(validators: [RequiredValidator()]) this.id,
-      @RfControl<String>() this.name,
-      @JsonKey(name: 'logo_image') @RfControl<String>() this.logoImage,
-      @RfControl<double>() this.year,
-      final List<String> selectedSpaces = const []})
-      : _selectedSpaces = selectedSpaces,
-        super._();
-  factory _FreezedClass.fromJson(Map<String, dynamic> json) =>
-      _$FreezedClassFromJson(json);
+   _FreezedClass(@RfControl<String>() this.gender, {@RfControl(validators: [RequiredValidator()]) this.id, @RfControl<String>() this.name, @JsonKey(name: 'logo_image')@RfControl<String>() this.logoImage, @RfControl<double>() this.year, final  List<String> selectedSpaces = const []}): _selectedSpaces = selectedSpaces,super._();
+  factory _FreezedClass.fromJson(Map<String, dynamic> json) => _$FreezedClassFromJson(json);
 
-  @override
-  @RfControl<String>()
-  final String? gender;
-  @override
-  @RfControl(validators: [RequiredValidator()])
-  final String? id;
-  @override
-  @RfControl<String>()
-  final String? name;
-  @override
-  @JsonKey(name: 'logo_image')
-  @RfControl<String>()
-  final String? logoImage;
-  @override
-  @RfControl<double>()
-  final double? year;
-  final List<String> _selectedSpaces;
-  @override
-  @JsonKey()
-  List<String> get selectedSpaces {
-    if (_selectedSpaces is EqualUnmodifiableListView) return _selectedSpaces;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_selectedSpaces);
-  }
+@override@RfControl<String>() final  String? gender;
+@override@RfControl(validators: [RequiredValidator()]) final  String? id;
+@override@RfControl<String>() final  String? name;
+@override@JsonKey(name: 'logo_image')@RfControl<String>() final  String? logoImage;
+@override@RfControl<double>() final  double? year;
+ final  List<String> _selectedSpaces;
+@override@JsonKey() List<String> get selectedSpaces {
+  if (_selectedSpaces is EqualUnmodifiableListView) return _selectedSpaces;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_selectedSpaces);
+}
 
-  /// Create a copy of FreezedClass
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$FreezedClassCopyWith<_FreezedClass> get copyWith =>
-      __$FreezedClassCopyWithImpl<_FreezedClass>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$FreezedClassToJson(
-      this,
-    );
-  }
+/// Create a copy of FreezedClass
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$FreezedClassCopyWith<_FreezedClass> get copyWith => __$FreezedClassCopyWithImpl<_FreezedClass>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _FreezedClass &&
-            (identical(other.gender, gender) || other.gender == gender) &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.logoImage, logoImage) ||
-                other.logoImage == logoImage) &&
-            (identical(other.year, year) || other.year == year) &&
-            const DeepCollectionEquality()
-                .equals(other._selectedSpaces, _selectedSpaces));
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$FreezedClassToJson(this, );
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, gender, id, name, logoImage,
-      year, const DeepCollectionEquality().hash(_selectedSpaces));
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FreezedClass&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.logoImage, logoImage) || other.logoImage == logoImage)&&(identical(other.year, year) || other.year == year)&&const DeepCollectionEquality().equals(other._selectedSpaces, _selectedSpaces));
+}
 
-  @override
-  String toString() {
-    return 'FreezedClass(gender: $gender, id: $id, name: $name, logoImage: $logoImage, year: $year, selectedSpaces: $selectedSpaces)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,gender,id,name,logoImage,year,const DeepCollectionEquality().hash(_selectedSpaces));
+
+@override
+String toString() {
+  return 'FreezedClass(gender: $gender, id: $id, name: $name, logoImage: $logoImage, year: $year, selectedSpaces: $selectedSpaces)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$FreezedClassCopyWith<$Res>
-    implements $FreezedClassCopyWith<$Res> {
-  factory _$FreezedClassCopyWith(
-          _FreezedClass value, $Res Function(_FreezedClass) _then) =
-      __$FreezedClassCopyWithImpl;
-  @override
-  @useResult
-  $Res call(
-      {@RfControl<String>() String? gender,
-      @RfControl(validators: [RequiredValidator()]) String? id,
-      @RfControl<String>() String? name,
-      @JsonKey(name: 'logo_image') @RfControl<String>() String? logoImage,
-      @RfControl<double>() double? year,
-      List<String> selectedSpaces});
-}
+abstract mixin class _$FreezedClassCopyWith<$Res> implements $FreezedClassCopyWith<$Res> {
+  factory _$FreezedClassCopyWith(_FreezedClass value, $Res Function(_FreezedClass) _then) = __$FreezedClassCopyWithImpl;
+@override @useResult
+$Res call({
+@RfControl<String>() String? gender,@RfControl(validators: [RequiredValidator()]) String? id,@RfControl<String>() String? name,@JsonKey(name: 'logo_image')@RfControl<String>() String? logoImage,@RfControl<double>() double? year, List<String> selectedSpaces
+});
 
+
+
+
+}
 /// @nodoc
 class __$FreezedClassCopyWithImpl<$Res>
     implements _$FreezedClassCopyWith<$Res> {
@@ -413,45 +278,21 @@ class __$FreezedClassCopyWithImpl<$Res>
   final _FreezedClass _self;
   final $Res Function(_FreezedClass) _then;
 
-  /// Create a copy of FreezedClass
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? gender = freezed,
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? logoImage = freezed,
-    Object? year = freezed,
-    Object? selectedSpaces = null,
-  }) {
-    return _then(_FreezedClass(
-      freezed == gender
-          ? _self.gender
-          : gender // ignore: cast_nullable_to_non_nullable
-              as String?,
-      id: freezed == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: freezed == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      logoImage: freezed == logoImage
-          ? _self.logoImage
-          : logoImage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      year: freezed == year
-          ? _self.year
-          : year // ignore: cast_nullable_to_non_nullable
-              as double?,
-      selectedSpaces: null == selectedSpaces
-          ? _self._selectedSpaces
-          : selectedSpaces // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ));
-  }
+/// Create a copy of FreezedClass
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? gender = freezed,Object? id = freezed,Object? name = freezed,Object? logoImage = freezed,Object? year = freezed,Object? selectedSpaces = null,}) {
+  return _then(_FreezedClass(
+freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as String?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,logoImage: freezed == logoImage ? _self.logoImage : logoImage // ignore: cast_nullable_to_non_nullable
+as String?,year: freezed == year ? _self.year : year // ignore: cast_nullable_to_non_nullable
+as double?,selectedSpaces: null == selectedSpaces ? _self._selectedSpaces : selectedSpaces // ignore: cast_nullable_to_non_nullable
+as List<String>,
+  ));
+}
+
+
 }
 
 // dart format on

@@ -739,7 +739,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(UserProfileForm.formElements(value).rawValue,
+      currentForm.updateValue(UserProfileForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1205,7 +1205,7 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AddressForm.formElements(value).rawValue,
+      currentForm.updateValue(AddressForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

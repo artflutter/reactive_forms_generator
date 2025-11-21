@@ -1,3 +1,7 @@
+## [7.4.1]
+
+* fix updateValue to refer to `currentForm` instead of global `form`
+
 ## [7.4.0]
 
 * build 4

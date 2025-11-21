@@ -7,12 +7,11 @@ const fileName = 'nested_output';
 
 void main() {
   group('reactive_forms_generator', () {
-    test(
-      'Nested Output',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Nested Output', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
           import 'package:freezed_annotation/freezed_annotation.dart';
           import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
           
@@ -58,10 +57,9 @@ void main() {
                 _\$NestedOFromJson(json);
           }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -458,7 +456,7 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(SubGroupOForm.formElements(value).rawValue,
+      currentForm.updateValue(SubGroupOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1306,7 +1304,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(GroupOForm.formElements(value).rawValue,
+      currentForm.updateValue(GroupOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -2050,7 +2048,7 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(NestedOForm.formElements(value).rawValue,
+      currentForm.updateValue(NestedOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

@@ -7,12 +7,11 @@ const fileName = 'animated_url_list_output';
 
 void main() {
   group('reactive_forms_generator', () {
-    test(
-      'Animated URL list Output',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Animated URL list Output', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
@@ -43,10 +42,9 @@ void main() {
               });
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -562,7 +560,7 @@ class AnimatedUrlLisOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AnimatedUrlLisOForm.formElements(value).rawValue,
+      currentForm.updateValue(AnimatedUrlLisOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -908,7 +906,7 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(UrlEntityOForm.formElements(value).rawValue,
+      currentForm.updateValue(UrlEntityOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

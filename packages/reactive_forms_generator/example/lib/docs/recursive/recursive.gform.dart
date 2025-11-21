@@ -839,7 +839,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(SecuredAreaForm.formElements(value).rawValue,
+      currentForm.updateValue(SecuredAreaForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1144,7 +1144,7 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ParcelSystemForm.formElements(value).rawValue,
+      currentForm.updateValue(ParcelSystemForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1385,7 +1385,7 @@ class ParcelSystemDataForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ParcelSystemDataForm.formElements(value).rawValue,
+      currentForm.updateValue(ParcelSystemDataForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

@@ -7,12 +7,11 @@ const fileName = 'user_profile_output';
 
 void main() {
   group('doc', () {
-    test(
-      'User profile',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('User profile', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms/src/validators/required_validator.dart';
@@ -65,10 +64,9 @@ void main() {
               });
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -872,7 +870,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(UserProfileOForm.formElements(value).rawValue,
+      currentForm.updateValue(UserProfileOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1340,7 +1338,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AddressOForm.formElements(value).rawValue,
+      currentForm.updateValue(AddressOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

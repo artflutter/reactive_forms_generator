@@ -7,12 +7,11 @@ const fileName = 'login_extended_output';
 
 void main() {
   group('reactive_forms_generator', () {
-    test(
-      'Login extended Output',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Login extended Output', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms/src/validators/required_validator.dart';
@@ -103,10 +102,9 @@ void main() {
               });
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -1280,7 +1278,7 @@ class LoginExtendedOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(LoginExtendedOForm.formElements(value).rawValue,
+      currentForm.updateValue(LoginExtendedOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

@@ -7,12 +7,11 @@ const fileName = 'annotateless_output';
 
 void main() {
   group('reactive_forms_generator', () {
-    test(
-      'Form with annotateless fields',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Form with annotateless fields', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
@@ -34,10 +33,9 @@ void main() {
               List<Object?> get props => [email, password];
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -517,7 +515,7 @@ class AnnotatelessOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AnnotatelessOForm.formElements(value).rawValue,
+      currentForm.updateValue(AnnotatelessOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

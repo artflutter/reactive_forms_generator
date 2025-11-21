@@ -1060,7 +1060,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ArrayNullableForm.formElements(value).rawValue,
+      currentForm.updateValue(ArrayNullableForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

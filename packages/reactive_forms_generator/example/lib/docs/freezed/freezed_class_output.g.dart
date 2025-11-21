@@ -16,7 +16,8 @@ _FreezedClassO _$FreezedClassOFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
       logoImage: json['logo_image'] as String?,
       year: (json['year'] as num?)?.toDouble(),
-      selectedSpaces: (json['selectedSpaces'] as List<dynamic>?)
+      selectedSpaces:
+          (json['selectedSpaces'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           const [],
@@ -45,22 +46,23 @@ _FreezedClassOOutput _$FreezedClassOOutputFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
       logoImage: json['logo_image'] as String?,
       year: (json['year'] as num?)?.toDouble(),
-      selectedSpaces: (json['selectedSpaces'] as List<dynamic>?)
+      selectedSpaces:
+          (json['selectedSpaces'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           const [],
     );
 
 Map<String, dynamic> _$FreezedClassOOutputToJson(
-        _FreezedClassOOutput instance) =>
-    <String, dynamic>{
-      'gender': instance.gender,
-      'genderR': instance.genderR,
-      'id': instance.id,
-      'idR': instance.idR,
-      'idR2': instance.idR2,
-      'name': instance.name,
-      'logo_image': instance.logoImage,
-      'year': instance.year,
-      'selectedSpaces': instance.selectedSpaces,
-    };
+  _FreezedClassOOutput instance,
+) => <String, dynamic>{
+  'gender': instance.gender,
+  'genderR': instance.genderR,
+  'id': instance.id,
+  'idR': instance.idR,
+  'idR2': instance.idR2,
+  'name': instance.name,
+  'logo_image': instance.logoImage,
+  'year': instance.year,
+  'selectedSpaces': instance.selectedSpaces,
+};

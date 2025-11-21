@@ -930,7 +930,7 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(FreezedClassForm.formElements(value).rawValue,
+      currentForm.updateValue(FreezedClassForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

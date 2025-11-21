@@ -183,7 +183,7 @@ class FormGenerator {
         ])
         ..returns = const Reference('void')
         ..body = Code(
-          'form.updateValue($className.formElements(value).rawValue, updateParent: updateParent, emitEvent:emitEvent)',
+          'currentForm.updateValue($className.formElements(value).rawValue, updateParent: updateParent, emitEvent:emitEvent)',
         ),
     );
   }

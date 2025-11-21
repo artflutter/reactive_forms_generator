@@ -745,7 +745,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(GroupOForm.formElements(value).rawValue,
+      currentForm.updateValue(GroupOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1087,7 +1087,7 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(PersonalOForm.formElements(value).rawValue,
+      currentForm.updateValue(PersonalOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1441,7 +1441,7 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(PhoneOForm.formElements(value).rawValue,
+      currentForm.updateValue(PhoneOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1900,7 +1900,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AddressOForm.formElements(value).rawValue,
+      currentForm.updateValue(AddressOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

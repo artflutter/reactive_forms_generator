@@ -13,7 +13,8 @@ _FreezedClass _$FreezedClassFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
       logoImage: json['logo_image'] as String?,
       year: (json['year'] as num?)?.toDouble(),
-      selectedSpaces: (json['selectedSpaces'] as List<dynamic>?)
+      selectedSpaces:
+          (json['selectedSpaces'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           const [],

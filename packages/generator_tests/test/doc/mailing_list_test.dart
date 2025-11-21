@@ -7,12 +7,11 @@ const fileName = 'mailing_list';
 
 void main() {
   group('doc', () {
-    test(
-      'Mailing list',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Mailing list', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms/src/validators/email_validator.dart';
@@ -42,10 +41,9 @@ void main() {
               });
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -489,7 +487,7 @@ class MailingListForm implements FormModel<MailingList, MailingList> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(MailingListForm.formElements(value).rawValue,
+      currentForm.updateValue(MailingListForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

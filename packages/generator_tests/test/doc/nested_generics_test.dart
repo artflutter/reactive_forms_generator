@@ -7,12 +7,11 @@ const fileName = 'nested_generics';
 
 void main() {
   group('reactive_forms_generator', () {
-    test(
-      'Nested generics',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Nested generics', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
           import 'package:freezed_annotation/freezed_annotation.dart';
           import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
@@ -63,10 +62,9 @@ void main() {
             const Cart._();
           }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -609,7 +607,7 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ProductDetailsForm.formElements(value).rawValue,
+      currentForm.updateValue(ProductDetailsForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -957,7 +955,7 @@ class IdForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(IdForm.formElements(value).rawValue,
+      currentForm.updateValue(IdForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

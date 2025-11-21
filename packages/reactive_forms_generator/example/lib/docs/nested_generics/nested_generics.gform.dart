@@ -537,7 +537,7 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ProductDetailsForm.formElements(value).rawValue,
+      currentForm.updateValue(ProductDetailsForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -885,7 +885,7 @@ class IdForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(IdForm.formElements(value).rawValue,
+      currentForm.updateValue(IdForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

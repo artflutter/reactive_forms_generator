@@ -7,12 +7,11 @@ const fileName = 'login_extended_nullable_output';
 
 void main() {
   group('reactive_forms_generator', () {
-    test(
-      'Login extended nullable Output',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Login extended nullable Output', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
@@ -48,10 +47,9 @@ void main() {
               });
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -1130,8 +1128,10 @@ class LoginExtendedNullableOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(LoginExtendedNullableOForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+      currentForm.updateValue(
+          LoginExtendedNullableOForm.formElements(value).rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   @override
   void reset({

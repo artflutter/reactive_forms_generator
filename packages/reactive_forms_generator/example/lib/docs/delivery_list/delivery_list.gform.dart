@@ -722,7 +722,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(DeliveryListForm.formElements(value).rawValue,
+      currentForm.updateValue(DeliveryListForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1048,7 +1048,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(DeliveryPointForm.formElements(value).rawValue,
+      currentForm.updateValue(DeliveryPointForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1393,7 +1393,7 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AddressForm.formElements(value).rawValue,
+      currentForm.updateValue(AddressForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1825,7 +1825,7 @@ class ClientForm implements FormModel<Client, Client> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ClientForm.formElements(value).rawValue,
+      currentForm.updateValue(ClientForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -2583,8 +2583,10 @@ class StandaloneDeliveryPointForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(StandaloneDeliveryPointForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+      currentForm.updateValue(
+          StandaloneDeliveryPointForm.formElements(value).rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   @override
   void reset({

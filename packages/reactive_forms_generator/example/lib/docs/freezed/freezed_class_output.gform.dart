@@ -1223,7 +1223,7 @@ class FreezedClassOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(FreezedClassOForm.formElements(value).rawValue,
+      currentForm.updateValue(FreezedClassOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

@@ -7,12 +7,11 @@ const fileName = 'animated_url_list';
 
 void main() {
   group('reactive_forms_generator', () {
-    test(
-      'Animated URL list',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Animated URL list', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
@@ -43,10 +42,9 @@ void main() {
               });
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -560,7 +558,7 @@ class AnimatedUrlListForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(AnimatedUrlListForm.formElements(value).rawValue,
+      currentForm.updateValue(AnimatedUrlListForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -849,7 +847,7 @@ class UrlEntityForm implements FormModel<UrlEntity, UrlEntity> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(UrlEntityForm.formElements(value).rawValue,
+      currentForm.updateValue(UrlEntityForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

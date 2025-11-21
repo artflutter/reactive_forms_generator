@@ -7,12 +7,11 @@ const fileName = 'generic_status_list';
 
 void main() {
   group('reactive_forms_generator', () {
-    test(
-      'Generic status list',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Generic status list', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
             
             part '$fileName.gform.dart';
@@ -26,10 +25,9 @@ void main() {
               });
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -476,7 +474,7 @@ class StatusListForm<T extends Enum>
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(StatusListForm.formElements(value).rawValue,
+      currentForm.updateValue(StatusListForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

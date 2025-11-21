@@ -391,7 +391,7 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(SubGroupOForm.formElements(value).rawValue,
+      currentForm.updateValue(SubGroupOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1239,7 +1239,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(GroupOForm.formElements(value).rawValue,
+      currentForm.updateValue(GroupOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1983,7 +1983,7 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(NestedOForm.formElements(value).rawValue,
+      currentForm.updateValue(NestedOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

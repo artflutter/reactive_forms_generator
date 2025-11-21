@@ -1057,7 +1057,7 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(LoginExtendedForm.formElements(value).rawValue,
+      currentForm.updateValue(LoginExtendedForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

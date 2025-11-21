@@ -7,12 +7,11 @@ const fileName = 'profile';
 
 void main() {
   group('doc', () {
-    test(
-      'Profile',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Profile', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/widgets.dart';
             import 'package:freezed_annotation/freezed_annotation.dart';
             import 'package:reactive_forms/reactive_forms.dart';
@@ -274,10 +273,9 @@ void main() {
               ];
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -1411,7 +1409,7 @@ class ProfileForm implements FormModel<Profile, Profile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ProfileForm.formElements(value).rawValue,
+      currentForm.updateValue(ProfileForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -2084,7 +2082,7 @@ class IncidenceFilterForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(IncidenceFilterForm.formElements(value).rawValue,
+      currentForm.updateValue(IncidenceFilterForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -2409,7 +2407,7 @@ class ThresholdSettingForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ThresholdSettingForm.formElements(value).rawValue,
+      currentForm.updateValue(ThresholdSettingForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -2705,7 +2703,7 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(TimerSettingForm.formElements(value).rawValue,
+      currentForm.updateValue(TimerSettingForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

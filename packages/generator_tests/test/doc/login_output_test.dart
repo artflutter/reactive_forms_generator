@@ -7,12 +7,11 @@ const fileName = 'login_output';
 
 void main() {
   group('doc', () {
-    test(
-      'Login Output',
-      () async {
-        return testGenerator(
-          fileName: fileName,
-          model: '''
+    test('Login Output', () async {
+      return testGenerator(
+        fileName: fileName,
+        model:
+            '''
             import 'package:flutter/material.dart';
             import 'package:reactive_forms/reactive_forms.dart';
             import 'package:reactive_forms/src/validators/required_validator.dart';
@@ -64,10 +63,9 @@ void main() {
               List<Object?> get props => [email, password];
             }
           ''',
-          generatedFile: generatedFile,
-        );
-      },
-    );
+        generatedFile: generatedFile,
+      );
+    });
   });
 }
 
@@ -596,7 +594,7 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(LoginOForm.formElements(value).rawValue,
+      currentForm.updateValue(LoginOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

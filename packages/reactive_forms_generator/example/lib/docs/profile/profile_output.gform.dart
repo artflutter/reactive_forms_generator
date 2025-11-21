@@ -1130,7 +1130,7 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ProfileOForm.formElements(value).rawValue,
+      currentForm.updateValue(ProfileOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -1804,7 +1804,7 @@ class IncidenceFilterOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(IncidenceFilterOForm.formElements(value).rawValue,
+      currentForm.updateValue(IncidenceFilterOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
@@ -2132,8 +2132,10 @@ class ThresholdSettingOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ThresholdSettingOForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+      currentForm.updateValue(
+          ThresholdSettingOForm.formElements(value).rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   @override
   void reset({
@@ -2430,7 +2432,7 @@ class TimerSettingOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(TimerSettingOForm.formElements(value).rawValue,
+      currentForm.updateValue(TimerSettingOForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override

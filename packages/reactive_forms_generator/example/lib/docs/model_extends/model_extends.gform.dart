@@ -472,7 +472,7 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(ModelExtendsForm.formElements(value).rawValue,
+      currentForm.updateValue(ModelExtendsForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
