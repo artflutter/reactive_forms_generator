@@ -885,6 +885,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -1190,6 +1191,7 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -1431,6 +1433,7 @@ class ParcelSystemDataForm
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }

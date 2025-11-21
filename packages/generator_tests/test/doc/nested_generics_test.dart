@@ -597,6 +597,7 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -945,6 +946,7 @@ class IdForm<P extends Product, C extends Cart>
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }

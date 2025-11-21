@@ -1,3 +1,7 @@
+## [7.4.2]
+
+* currentForm getter for `FormModel`
+
 ## [7.4.1]
 
 * fix updateValue to refer to `currentForm` instead of global `form`

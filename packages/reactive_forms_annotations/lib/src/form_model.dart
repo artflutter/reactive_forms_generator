@@ -18,6 +18,8 @@ abstract class FormModel<TModel, TModelOutput> {
 
   bool equalsTo(TModel other);
 
+  AbstractControl<dynamic> get currentForm;
+
   void updateValue(
     TModel? value, {
     bool updateParent = true,

@@ -10,16 +10,17 @@ part of 'login.dart';
 // **************************************************************************
 
 class ReactiveLoginFormConsumer extends StatelessWidget {
-  const ReactiveLoginFormConsumer({
-    Key? key,
-    required this.builder,
-    this.child,
-  }) : super(key: key);
+  const ReactiveLoginFormConsumer({Key? key, required this.builder, this.child})
+    : super(key: key);
 
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, LoginForm formModel, Widget? child) builder;
+    BuildContext context,
+    LoginForm formModel,
+    Widget? child,
+  )
+  builder;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +39,7 @@ class LoginFormInheritedStreamer extends InheritedStreamer<dynamic> {
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(
-          stream,
-          child,
-          key: key,
-        );
+  }) : super(stream, child, key: key);
 
   final LoginForm form;
 }
@@ -64,10 +61,7 @@ class ReactiveLoginForm extends StatelessWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static LoginForm? of(
-    BuildContext context, {
-    bool listen = true,
-  }) {
+  static LoginForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<LoginFormInheritedStreamer>()
@@ -121,7 +115,11 @@ class LoginFormBuilder extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-      BuildContext context, LoginForm formModel, Widget? child) builder;
+    BuildContext context,
+    LoginForm formModel,
+    Widget? child,
+  )
+  builder;
 
   final void Function(BuildContext context, LoginForm formModel)? initState;
 
@@ -213,10 +211,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
 final _logLoginForm = Logger.detached('LoginForm');
 
 class LoginForm implements FormModel<Login, Login> {
-  LoginForm(
-    this.form,
-    this.path,
-  );
+  LoginForm(this.form, this.path);
 
   static const String emailControlName = "email";
 
@@ -241,7 +236,8 @@ class LoginForm implements FormModel<Login, Login> {
   String get _passwordRawValue => passwordControl.value ?? "";
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -252,7 +248,8 @@ class LoginForm implements FormModel<Login, Login> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsPassword {
     try {
       form.control(passwordControlPath());
@@ -275,8 +272,11 @@ class LoginForm implements FormModel<Login, Login> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void passwordValueUpdate(
@@ -284,8 +284,11 @@ class LoginForm implements FormModel<Login, Login> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    passwordControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    passwordControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailValuePatch(
@@ -293,8 +296,11 @@ class LoginForm implements FormModel<Login, Login> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void passwordValuePatch(
@@ -302,8 +308,11 @@ class LoginForm implements FormModel<Login, Login> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    passwordControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    passwordControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailValueReset(
@@ -312,14 +321,13 @@ class LoginForm implements FormModel<Login, Login> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      emailControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => emailControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   void passwordValueReset(
     String value, {
@@ -327,14 +335,13 @@ class LoginForm implements FormModel<Login, Login> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      passwordControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => passwordControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
@@ -398,10 +405,7 @@ class LoginForm implements FormModel<Login, Login> {
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -414,7 +418,9 @@ class LoginForm implements FormModel<Login, Login> {
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -456,6 +462,7 @@ class LoginForm implements FormModel<Login, Login> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -465,46 +472,47 @@ class LoginForm implements FormModel<Login, Login> {
     Login? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.updateValue(LoginForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => currentForm.updateValue(
+    LoginForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
-  void reset({
-    Login? value,
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
+  void reset({Login? value, bool updateParent = true, bool emitEvent = true}) =>
       form.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        value: value != null ? formElements(value).rawValue : null,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(Login? login) => FormGroup({
-        emailControlName: FormControl<String>(
-            value: login?.email,
-            validators: [RequiredValidator(), RequiredValidator()],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        passwordControlName: FormControl<String>(
-            value: login?.password,
-            validators: [RequiredValidator()],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false)
-      },
-          validators: [
-            MustMatchValidator()
-          ],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+  static FormGroup formElements(Login? login) => FormGroup(
+    {
+      emailControlName: FormControl<String>(
+        value: login?.email,
+        validators: [RequiredValidator(), RequiredValidator()],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+      passwordControlName: FormControl<String>(
+        value: login?.password,
+        validators: [RequiredValidator()],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+    },
+    validators: [MustMatchValidator()],
+    asyncValidators: [],
+    asyncValidatorsDebounceTime: 250,
+    disabled: false,
+  );
 }
 
 class ReactiveLoginFormArrayBuilder<ReactiveLoginFormArrayBuilderT>
@@ -517,30 +525,39 @@ class ReactiveLoginFormArrayBuilder<ReactiveLoginFormArrayBuilderT>
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveLoginFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveLoginFormArrayBuilderT>? Function(
-      LoginForm formModel)? control;
+    LoginForm formModel,
+  )?
+  control;
 
   final Widget Function(
-          BuildContext context, List<Widget> itemList, LoginForm formModel)?
-      builder;
+    BuildContext context,
+    List<Widget> itemList,
+    LoginForm formModel,
+  )?
+  builder;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      FormControl<ReactiveLoginFormArrayBuilderT> control,
-      ReactiveLoginFormArrayBuilderT? item,
-      LoginForm formModel) itemBuilder;
+    BuildContext context,
+    int i,
+    FormControl<ReactiveLoginFormArrayBuilderT> control,
+    ReactiveLoginFormArrayBuilderT? item,
+    LoginForm formModel,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(FormControl<ReactiveLoginFormArrayBuilderT> control)?
-      controlFilter;
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -556,18 +573,9 @@ class ReactiveLoginFormArrayBuilder<ReactiveLoginFormArrayBuilderT>
     return ReactiveFormArrayItemBuilder<ReactiveLoginFormArrayBuilderT>(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
-          ? (context, itemList) => builder(
-                context,
-                itemList,
-                formModel,
-              )
+          ? (context, itemList) => builder(context, itemList, formModel)
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
+      itemBuilder: (context, i, control, item) =>
           itemBuilder(context, i, control, item, formModel),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -585,35 +593,40 @@ class ReactiveLoginFormArrayBuilder2<ReactiveLoginFormArrayBuilderT>
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveLoginFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveLoginFormArrayBuilderT>? Function(
-      LoginForm formModel)? control;
+    LoginForm formModel,
+  )?
+  control;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        List<Widget> itemList,
-        LoginForm formModel
-      }) params)? builder;
+    ({BuildContext context, List<Widget> itemList, LoginForm formModel}) params,
+  )?
+  builder;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        int i,
-        FormControl<ReactiveLoginFormArrayBuilderT> control,
-        ReactiveLoginFormArrayBuilderT? item,
-        LoginForm formModel
-      }) params) itemBuilder;
+    ({
+      BuildContext context,
+      int i,
+      FormControl<ReactiveLoginFormArrayBuilderT> control,
+      ReactiveLoginFormArrayBuilderT? item,
+      LoginForm formModel,
+    })
+    params,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(FormControl<ReactiveLoginFormArrayBuilderT> control)?
-      controlFilter;
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -630,23 +643,17 @@ class ReactiveLoginFormArrayBuilder2<ReactiveLoginFormArrayBuilderT>
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
           ? (context, itemList) => builder((
-                context: context,
-                itemList: itemList,
-                formModel: formModel,
-              ))
+              context: context,
+              itemList: itemList,
+              formModel: formModel,
+            ))
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
-          itemBuilder((
+      itemBuilder: (context, i, control, item) => itemBuilder((
         context: context,
         i: i,
         control: control,
         item: item,
-        formModel: formModel
+        formModel: formModel,
       )),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -655,33 +662,48 @@ class ReactiveLoginFormArrayBuilder2<ReactiveLoginFormArrayBuilderT>
 }
 
 class ReactiveLoginFormFormGroupArrayBuilder<
-    ReactiveLoginFormFormGroupArrayBuilderT> extends StatelessWidget {
+  ReactiveLoginFormFormGroupArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveLoginFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(extended != null || getExtended != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         extended != null || getExtended != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-      List<ReactiveLoginFormFormGroupArrayBuilderT>>? extended;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveLoginFormFormGroupArrayBuilderT>
+  >?
+  extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-          List<ReactiveLoginFormFormGroupArrayBuilderT>>
-      Function(LoginForm formModel)? getExtended;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveLoginFormFormGroupArrayBuilderT>
+  >
+  Function(LoginForm formModel)?
+  getExtended;
 
   final Widget Function(
-          BuildContext context, List<Widget> itemList, LoginForm formModel)?
-      builder;
+    BuildContext context,
+    List<Widget> itemList,
+    LoginForm formModel,
+  )?
+  builder;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      ReactiveLoginFormFormGroupArrayBuilderT? item,
-      LoginForm formModel) itemBuilder;
+    BuildContext context,
+    int i,
+    ReactiveLoginFormFormGroupArrayBuilderT? item,
+    LoginForm formModel,
+  )
+  itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -699,23 +721,14 @@ class ReactiveLoginFormFormGroupArrayBuilder<
         final itemList =
             (value.value() ?? <ReactiveLoginFormFormGroupArrayBuilderT>[])
                 .asMap()
-                .map((i, item) => MapEntry(
-                      i,
-                      itemBuilder(
-                        context,
-                        i,
-                        item,
-                        formModel,
-                      ),
-                    ))
+                .map(
+                  (i, item) =>
+                      MapEntry(i, itemBuilder(context, i, item, formModel)),
+                )
                 .values
                 .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );

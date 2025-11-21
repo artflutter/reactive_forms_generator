@@ -801,6 +801,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -1267,6 +1268,7 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }

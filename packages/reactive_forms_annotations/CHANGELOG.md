@@ -6,9 +6,9 @@
 
 * Rf18
 
-## [7.3.0]
+## [7.4.2]
 
-* build 3
+* currentForm getter for `FormModel`
 
 ## [7.1.0-beta2]
 

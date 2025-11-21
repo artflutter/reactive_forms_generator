@@ -1465,6 +1465,7 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -2079,6 +2080,7 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -2555,6 +2557,7 @@ class PrimaryContactForm
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -3028,6 +3031,7 @@ class AdminContactInformationForm
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }

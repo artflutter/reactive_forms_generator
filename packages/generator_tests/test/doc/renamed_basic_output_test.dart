@@ -566,6 +566,7 @@ class SomeWiredNameForm
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }

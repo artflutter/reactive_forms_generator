@@ -540,6 +540,7 @@ class FormGenerator {
   Method get currentFormMethod => Method((b) {
     b
       ..name = 'currentForm'
+      ..annotations.add(const CodeExpression(Code('override')))
       ..type = MethodType.getter
       ..returns = const Reference('AbstractControl<dynamic>')
       ..body = const Code('''

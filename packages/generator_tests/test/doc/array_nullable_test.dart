@@ -1106,6 +1106,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }

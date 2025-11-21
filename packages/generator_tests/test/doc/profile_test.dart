@@ -1399,6 +1399,7 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -2072,6 +2073,7 @@ class IncidenceFilterForm
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -2397,6 +2399,7 @@ class ThresholdSettingForm
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -2693,6 +2696,7 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }

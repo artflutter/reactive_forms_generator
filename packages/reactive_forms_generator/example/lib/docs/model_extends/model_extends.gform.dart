@@ -462,6 +462,7 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }

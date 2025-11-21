@@ -548,6 +548,7 @@ class AnimatedUrlListForm
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -837,6 +838,7 @@ class UrlEntityForm implements FormModel<UrlEntity, UrlEntity> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }

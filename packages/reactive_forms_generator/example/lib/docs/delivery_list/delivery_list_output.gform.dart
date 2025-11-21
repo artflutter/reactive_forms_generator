@@ -716,6 +716,7 @@ class DeliveryListOForm
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -1044,6 +1045,7 @@ class DeliveryPointOForm
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -1390,6 +1392,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -1823,6 +1826,7 @@ class ClientOForm implements FormModel<ClientO, ClientOOutput> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -2628,6 +2632,7 @@ class StandaloneDeliveryPointForm
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }

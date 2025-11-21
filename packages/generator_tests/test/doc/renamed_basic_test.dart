@@ -508,6 +508,7 @@ class SomeWiredNameForm implements FormModel<RenamedBasic, RenamedBasic> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }

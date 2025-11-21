@@ -446,6 +446,7 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -1294,6 +1295,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -2038,6 +2040,7 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }

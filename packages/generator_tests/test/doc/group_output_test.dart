@@ -818,6 +818,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -1160,6 +1161,7 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -1514,6 +1516,7 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -1973,6 +1976,7 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }

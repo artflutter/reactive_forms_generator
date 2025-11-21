@@ -480,6 +480,7 @@ class MailingListOForm implements FormModel<MailingListO, MailingListOOutput> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }

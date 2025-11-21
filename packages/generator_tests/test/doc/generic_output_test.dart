@@ -445,6 +445,7 @@ class TagsOForm<T> implements FormModel<TagsO<T>, TagsOOutput<T>> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }

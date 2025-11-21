@@ -816,6 +816,7 @@ class GroupForm implements FormModel<Group, Group> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -1157,6 +1158,7 @@ class PersonalForm implements FormModel<Personal, Personal> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -1509,6 +1511,7 @@ class PhoneForm implements FormModel<Phone, Phone> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
@@ -1966,6 +1969,7 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }

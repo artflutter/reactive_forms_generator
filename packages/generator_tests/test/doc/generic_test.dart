@@ -443,6 +443,7 @@ class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
     }
   }
 
+  @override
   AbstractControl<dynamic> get currentForm {
     return path == null ? form : form.control(path!);
   }
