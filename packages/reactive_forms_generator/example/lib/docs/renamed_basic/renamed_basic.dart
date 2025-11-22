@@ -9,13 +9,7 @@ class RenamedBasic {
   final String password;
 
   RenamedBasic({
-    @RfControl(
-      validators: [RequiredValidator()],
-    )
-    this.email = "",
-    @RfControl(
-      validators: [RequiredValidator()],
-    )
-    this.password = "",
+    @RfControl(validators: [RequiredValidator()]) this.email = "",
+    @RfControl(validators: [RequiredValidator()]) this.password = "",
   });
 }

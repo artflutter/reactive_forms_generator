@@ -6,23 +6,16 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart'
 part 'login.gform.dart';
 
 @Rf(output: false)
-@RfGroup(
-  validators: [MustMatchValidator()],
-)
+@RfGroup(validators: [MustMatchValidator()])
 class Login extends Equatable {
   final String email;
 
   final String password;
 
   const Login({
-    @RfControl(
-      validators: [RequiredValidator(), RequiredValidator()],
-    )
+    @RfControl(validators: [RequiredValidator(), RequiredValidator()])
     this.email = "",
-    @RfControl(
-      validators: [RequiredValidator()],
-    )
-    this.password = "",
+    @RfControl(validators: [RequiredValidator()]) this.password = "",
   });
 
   @override

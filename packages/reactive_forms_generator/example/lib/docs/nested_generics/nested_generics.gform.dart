@@ -542,12 +542,25 @@ class ProductDetailsForm<P extends Product, C extends Cart>
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
+  void upsertValue(
+    ProductDetails<P, C>? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = ProductDetailsForm.formElements(value);
+
+    if (currentForm is FormGroup) {
+      (currentForm as FormGroup).addAll(formElements.controls);
+    }
+  }
+
+  @override
   void reset({
     ProductDetails<P, C>? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.reset(
+      currentForm.reset(
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
@@ -891,12 +904,25 @@ class IdForm<P extends Product, C extends Cart>
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
+  void upsertValue(
+    Id<P, C>? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = IdForm.formElements(value);
+
+    if (currentForm is FormGroup) {
+      (currentForm as FormGroup).addAll(formElements.controls);
+    }
+  }
+
+  @override
   void reset({
     Id<P, C>? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.reset(
+      currentForm.reset(
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);

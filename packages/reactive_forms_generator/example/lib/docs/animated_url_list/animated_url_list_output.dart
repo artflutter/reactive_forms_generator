@@ -15,13 +15,7 @@ class UrlEntityO {
   final String? url;
 
   UrlEntityO({
-    @RfControl(validators: [
-      RequiredValidator(),
-    ])
-    this.label,
-    @RfControl(validators: [
-      RequiredValidator(),
-    ])
-    this.url,
+    @RfControl(validators: [RequiredValidator()]) this.label,
+    @RfControl(validators: [RequiredValidator()]) this.url,
   });
 }

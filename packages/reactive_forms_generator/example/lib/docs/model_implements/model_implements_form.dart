@@ -25,7 +25,7 @@ class _ModelImplementsWidgetState extends State<ModelImplementsWidget> {
               ReactiveTextField<String>(
                 formControl: formModel.emailControl,
                 validationMessages: {
-                  ValidationMessage.required: (_) => 'Required'
+                  ValidationMessage.required: (_) => 'Required',
                 },
                 decoration: const InputDecoration(
                   labelText: 'Email',
@@ -56,7 +56,8 @@ class _ModelImplementsWidgetState extends State<ModelImplementsWidget> {
                   // debugPrint(formModel.form);
                   debugPrint('dirty => ${formModel.form.dirty}');
                   debugPrint(
-                      'passwordDirty => ${formModel.passwordControl.dirty}');
+                    'passwordDirty => ${formModel.passwordControl.dirty}',
+                  );
 
                   return Column(
                     children: [
@@ -68,10 +69,12 @@ class _ModelImplementsWidgetState extends State<ModelImplementsWidget> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  formModel.submit(onValid: (model) {
-                    debugPrint(model.email);
-                    debugPrint(model.password);
-                  });
+                  formModel.submit(
+                    onValid: (model) {
+                      debugPrint(model.email);
+                      debugPrint(model.password);
+                    },
+                  );
                 },
                 child: const Text('Submit raw'),
               ),
@@ -82,8 +85,10 @@ class _ModelImplementsWidgetState extends State<ModelImplementsWidget> {
                     ModelImplements(email: 'some@e.mail', password: 'xx'),
                   );
                   setState(() {
-                    _emptyModel =
-                        ModelImplements(email: 'some@e.mail', password: 'xx');
+                    _emptyModel = ModelImplements(
+                      email: 'some@e.mail',
+                      password: 'xx',
+                    );
                   });
                 },
                 child: const Text('Update model'),
@@ -100,11 +105,13 @@ class _ModelImplementsWidgetState extends State<ModelImplementsWidget> {
                   return ElevatedButton(
                     onPressed: formModel.form.valid
                         ? () {
-                            formModel.submit(onValid: (model) {
-                              debugPrint(model.toString());
-                              debugPrint(model.email);
-                              debugPrint(model.password);
-                            });
+                            formModel.submit(
+                              onValid: (model) {
+                                debugPrint(model.toString());
+                                debugPrint(model.email);
+                                debugPrint(model.password);
+                              },
+                            );
                           }
                         : null,
                     child: const Text('Submit'),

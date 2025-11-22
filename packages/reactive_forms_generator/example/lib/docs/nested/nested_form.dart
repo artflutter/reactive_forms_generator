@@ -33,30 +33,24 @@ class _NestedFormWidgetState extends State<NestedFormWidget> {
                     setState(() {
                       formModel.groupListValueUpdate([]);
 
-                      formModel.addGroupListItem(const Group(
-                        id: 'id_1',
-                        subGroupList: [],
-                      ));
+                      formModel.addGroupListItem(
+                        const Group(id: 'id_1', subGroupList: []),
+                      );
                       formModel.groupListGroupForm
                           .elementAt(0)
-                          .addSubGroupListItem(
-                            const SubGroup(
-                              id: 'sub_id_1',
-                            ),
-                          );
+                          .addSubGroupListItem(const SubGroup(id: 'sub_id_1'));
 
                       widget.onChange?.call(formModel.rawModel);
 
-                      modelString = const JsonEncoder.withIndent('  ').convert(
-                        formModel.rawModel.toJson(),
-                      );
-                      formValueString = const JsonEncoder.withIndent('  ')
-                          .convert(formModel.form.value);
+                      modelString = const JsonEncoder.withIndent(
+                        '  ',
+                      ).convert(formModel.rawModel.toJson());
+                      formValueString = const JsonEncoder.withIndent(
+                        '  ',
+                      ).convert(formModel.form.value);
                     });
                   },
-                  child: const Text(
-                    'Add item independently',
-                  ),
+                  child: const Text('Add item independently'),
                 ),
               ),
               SizedBox(
@@ -65,22 +59,21 @@ class _NestedFormWidgetState extends State<NestedFormWidget> {
                   onPressed: () {
                     setState(() {
                       formModel.groupListValueUpdate([]);
-                      formModel.addGroupListItem(const Group(
-                        id: 'id_1',
-                        subGroupList: [
-                          SubGroup(
-                            id: 'sub_id_1',
-                          ),
-                        ],
-                      ));
+                      formModel.addGroupListItem(
+                        const Group(
+                          id: 'id_1',
+                          subGroupList: [SubGroup(id: 'sub_id_1')],
+                        ),
+                      );
 
                       widget.onChange?.call(formModel.rawModel);
 
-                      modelString = const JsonEncoder.withIndent('  ').convert(
-                        formModel.rawModel.toJson(),
-                      );
-                      formValueString = const JsonEncoder.withIndent('  ')
-                          .convert(formModel.form.value);
+                      modelString = const JsonEncoder.withIndent(
+                        '  ',
+                      ).convert(formModel.rawModel.toJson());
+                      formValueString = const JsonEncoder.withIndent(
+                        '  ',
+                      ).convert(formModel.form.value);
                     });
                   },
                   child: const Text('Add item'),

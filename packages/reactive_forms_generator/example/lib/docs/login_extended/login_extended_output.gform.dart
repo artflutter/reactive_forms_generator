@@ -1173,12 +1173,25 @@ class LoginExtendedOForm
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
+  void upsertValue(
+    LoginExtendedO? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = LoginExtendedOForm.formElements(value);
+
+    if (currentForm is FormGroup) {
+      (currentForm as FormGroup).addAll(formElements.controls);
+    }
+  }
+
+  @override
   void reset({
     LoginExtendedO? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.reset(
+      currentForm.reset(
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);

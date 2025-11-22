@@ -25,7 +25,7 @@ class _ModelExtendsWidgetState extends State<ModelExtendsWidget> {
               ReactiveTextField<String>(
                 formControl: formModel.emailControl,
                 validationMessages: {
-                  ValidationMessage.required: (_) => 'Required'
+                  ValidationMessage.required: (_) => 'Required',
                 },
                 // showErrors: (_) => false,
                 decoration: const InputDecoration(
@@ -58,7 +58,8 @@ class _ModelExtendsWidgetState extends State<ModelExtendsWidget> {
                   // debugPrint(formModel.form);
                   debugPrint('dirty => ${formModel.form.dirty}');
                   debugPrint(
-                      'passwordDirty => ${formModel.passwordControl.dirty}');
+                    'passwordDirty => ${formModel.passwordControl.dirty}',
+                  );
 
                   return Column(
                     children: [
@@ -70,10 +71,12 @@ class _ModelExtendsWidgetState extends State<ModelExtendsWidget> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  formModel.submit(onValid: (model) {
-                    debugPrint(model.email);
-                    debugPrint(model.password);
-                  });
+                  formModel.submit(
+                    onValid: (model) {
+                      debugPrint(model.email);
+                      debugPrint(model.password);
+                    },
+                  );
                 },
                 child: const Text('Submit raw'),
               ),
@@ -84,8 +87,10 @@ class _ModelExtendsWidgetState extends State<ModelExtendsWidget> {
                     ModelExtends(email: 'some@e.mail', password: 'xx'),
                   );
                   setState(() {
-                    _emptyModel =
-                        ModelExtends(email: 'some@e.mail', password: 'xx');
+                    _emptyModel = ModelExtends(
+                      email: 'some@e.mail',
+                      password: 'xx',
+                    );
                   });
                 },
                 child: const Text('Update model'),
@@ -102,11 +107,13 @@ class _ModelExtendsWidgetState extends State<ModelExtendsWidget> {
                   return ElevatedButton(
                     onPressed: formModel.form.valid
                         ? () {
-                            formModel.submit(onValid: (model) {
-                              debugPrint(model.toString());
-                              debugPrint(model.email);
-                              debugPrint(model.password);
-                            });
+                            formModel.submit(
+                              onValid: (model) {
+                                debugPrint(model.toString());
+                                debugPrint(model.email);
+                                debugPrint(model.password);
+                              },
+                            );
                           }
                         : null,
                     child: const Text('Submit'),

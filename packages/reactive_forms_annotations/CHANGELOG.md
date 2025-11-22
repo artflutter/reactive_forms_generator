@@ -6,6 +6,10 @@
 
 * Rf18
 
+## [7.4.3]
+
+* upsertValue method
+
 ## [7.4.2]
 
 * currentForm getter for `FormModel`

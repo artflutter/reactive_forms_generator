@@ -29,7 +29,5 @@ abstract class ParcelSystem with _$ParcelSystem {
 @freezed
 @RfGroup<ParcelSystemData>()
 abstract class ParcelSystemData with _$ParcelSystemData {
-  const factory ParcelSystemData({
-    String? id,
-  }) = _ParcelSystemData;
+  const factory ParcelSystemData({String? id}) = _ParcelSystemData;
 }

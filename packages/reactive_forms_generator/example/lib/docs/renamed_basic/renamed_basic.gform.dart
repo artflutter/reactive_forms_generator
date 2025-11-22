@@ -477,12 +477,25 @@ class SomeWiredNameForm implements FormModel<RenamedBasic, RenamedBasic> {
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
+  void upsertValue(
+    RenamedBasic? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = SomeWiredNameForm.formElements(value);
+
+    if (currentForm is FormGroup) {
+      (currentForm as FormGroup).addAll(formElements.controls);
+    }
+  }
+
+  @override
   void reset({
     RenamedBasic? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.reset(
+      currentForm.reset(
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);

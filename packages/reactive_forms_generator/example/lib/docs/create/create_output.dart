@@ -21,9 +21,7 @@ abstract class MSICreate with _$MSICreate {
     @RfControl<bool>() @Default(false) bool sameMailingAddressAsCompany,
     @Default(Address()) Address mailingAddress,
     @RfArray<AdminContactInformation>()
-    @Default([
-      AdminContactInformation(),
-    ])
+    @Default([AdminContactInformation()])
     List<AdminContactInformation> admins,
   }) = _MSICreate;
 }

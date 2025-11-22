@@ -13,13 +13,7 @@ class ModelExtends extends Email {
   final String password;
 
   ModelExtends({
-    @RfControl(
-      validators: [RequiredValidator()],
-    )
-    super.email = "",
-    @RfControl(
-      validators: [RequiredValidator()],
-    )
-    this.password = "",
+    @RfControl(validators: [RequiredValidator()]) super.email = "",
+    @RfControl(validators: [RequiredValidator()]) this.password = "",
   });
 }

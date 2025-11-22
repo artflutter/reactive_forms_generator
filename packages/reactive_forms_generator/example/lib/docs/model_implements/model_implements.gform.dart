@@ -481,12 +481,25 @@ class ModelImplementsForm
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
+  void upsertValue(
+    ModelImplements? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = ModelImplementsForm.formElements(value);
+
+    if (currentForm is FormGroup) {
+      (currentForm as FormGroup).addAll(formElements.controls);
+    }
+  }
+
+  @override
   void reset({
     ModelImplements? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.reset(
+      currentForm.reset(
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);

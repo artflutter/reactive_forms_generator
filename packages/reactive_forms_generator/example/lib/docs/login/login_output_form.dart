@@ -30,7 +30,7 @@ class _LoginFormWidgetState extends State<LoginOutputFormWidget> {
                 key: email.itemKey,
                 formControl: formModel.emailControl,
                 validationMessages: {
-                  ValidationMessage.required: (_) => errorRequired
+                  ValidationMessage.required: (_) => errorRequired,
                 },
                 decoration: InputDecoration(
                   labelText: email.name,
@@ -81,11 +81,13 @@ class _LoginFormWidgetState extends State<LoginOutputFormWidget> {
                         child: ElevatedButton(
                           key: submitRaw.itemKey,
                           onPressed: () {
-                            formModel.submit(onValid: (model) {
-                              debugPrint(model.email);
-                              debugPrint(model.password);
-                              widget.onChange?.call(model);
-                            });
+                            formModel.submit(
+                              onValid: (model) {
+                                debugPrint(model.email);
+                                debugPrint(model.password);
+                                widget.onChange?.call(model);
+                              },
+                            );
                           },
                           child: const Text('Submit raw'),
                         ),
@@ -98,12 +100,14 @@ class _LoginFormWidgetState extends State<LoginOutputFormWidget> {
                               key: submit.itemKey,
                               onPressed: formModel.form.valid
                                   ? () {
-                                      formModel.submit(onValid: (model) {
-                                        debugPrint(model.toString());
-                                        debugPrint(model.email);
-                                        debugPrint(model.password);
-                                        widget.onChange?.call(model);
-                                      });
+                                      formModel.submit(
+                                        onValid: (model) {
+                                          debugPrint(model.toString());
+                                          debugPrint(model.email);
+                                          debugPrint(model.password);
+                                          widget.onChange?.call(model);
+                                        },
+                                      );
                                     }
                                   : null,
                               child: const Text('Submit'),

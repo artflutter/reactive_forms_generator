@@ -1,3 +1,15 @@
+## [7.4.5]
+
+* fix upsertValue method
+
+## [7.4.4]
+
+* fix upsertValue method
+
+## [7.4.3]
+
+* upsertValue method
+
 ## [7.4.2]
 
 * currentForm getter for `FormModel`

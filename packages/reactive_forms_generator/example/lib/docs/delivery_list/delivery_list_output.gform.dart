@@ -731,12 +731,25 @@ class DeliveryListOForm
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
+  void upsertValue(
+    DeliveryListO? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = DeliveryListOForm.formElements(value);
+
+    if (currentForm is FormGroup) {
+      (currentForm as FormGroup).addAll(formElements.controls);
+    }
+  }
+
+  @override
   void reset({
     DeliveryListO? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.reset(
+      currentForm.reset(
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
@@ -1060,12 +1073,25 @@ class DeliveryPointOForm
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
+  void upsertValue(
+    DeliveryPointO? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = DeliveryPointOForm.formElements(value);
+
+    if (currentForm is FormGroup) {
+      (currentForm as FormGroup).addAll(formElements.controls);
+    }
+  }
+
+  @override
   void reset({
     DeliveryPointO? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.reset(
+      currentForm.reset(
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
@@ -1407,12 +1433,25 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
+  void upsertValue(
+    AddressO? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = AddressOForm.formElements(value);
+
+    if (currentForm is FormGroup) {
+      (currentForm as FormGroup).addAll(formElements.controls);
+    }
+  }
+
+  @override
   void reset({
     AddressO? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.reset(
+      currentForm.reset(
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
@@ -1841,12 +1880,25 @@ class ClientOForm implements FormModel<ClientO, ClientOOutput> {
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
+  void upsertValue(
+    ClientO? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = ClientOForm.formElements(value);
+
+    if (currentForm is FormGroup) {
+      (currentForm as FormGroup).addAll(formElements.controls);
+    }
+  }
+
+  @override
   void reset({
     ClientO? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.reset(
+      currentForm.reset(
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
@@ -2649,12 +2701,25 @@ class StandaloneDeliveryPointForm
           emitEvent: emitEvent);
 
   @override
+  void upsertValue(
+    DeliveryPointO? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = StandaloneDeliveryPointForm.formElements(value);
+
+    if (currentForm is FormGroup) {
+      (currentForm as FormGroup).addAll(formElements.controls);
+    }
+  }
+
+  @override
   void reset({
     DeliveryPointO? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.reset(
+      currentForm.reset(
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);

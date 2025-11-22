@@ -803,12 +803,25 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
+  void upsertValue(
+    UserProfileO? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = UserProfileOForm.formElements(value);
+
+    if (currentForm is FormGroup) {
+      (currentForm as FormGroup).addAll(formElements.controls);
+    }
+  }
+
+  @override
   void reset({
     UserProfileO? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.reset(
+      currentForm.reset(
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
@@ -1272,12 +1285,25 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
+  void upsertValue(
+    AddressO? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = AddressOForm.formElements(value);
+
+    if (currentForm is FormGroup) {
+      (currentForm as FormGroup).addAll(formElements.controls);
+    }
+  }
+
+  @override
   void reset({
     AddressO? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.reset(
+      currentForm.reset(
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);

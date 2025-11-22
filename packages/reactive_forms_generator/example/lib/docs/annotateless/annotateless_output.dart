@@ -9,10 +9,7 @@ class AnnotatelessO extends Equatable {
 
   final String password;
 
-  const AnnotatelessO({
-    @RfControl() this.email = "",
-    this.password = "",
-  });
+  const AnnotatelessO({@RfControl() this.email = "", this.password = ""});
 
   @override
   List<Object?> get props => [email, password];

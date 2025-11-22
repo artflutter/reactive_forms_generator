@@ -56,8 +56,10 @@ class MailingListValidator extends Validator<dynamic> {
     final emails = formArray.value ?? [];
     final test = <String>{};
 
-    final result = emails.fold<bool>(true,
-        (previousValue, element) => previousValue && test.add(element ?? ''));
+    final result = emails.fold<bool>(
+      true,
+      (previousValue, element) => previousValue && test.add(element ?? ''),
+    );
 
     return result ? null : <String, dynamic>{'emailDuplicates': true};
   }
@@ -70,7 +72,8 @@ class UniqueEmailAsyncValidator extends AsyncValidator<dynamic> {
 
   @override
   Future<Map<String, dynamic>?> validate(
-      AbstractControl<dynamic> control) async {
+    AbstractControl<dynamic> control,
+  ) async {
     final error = {'unique': false};
 
     final isUniqueEmail = await _getIsUniqueEmail(control.value.toString());
@@ -99,9 +102,7 @@ enum UserMode { user, admin }
 class NumValueAccessor extends ControlValueAccessor<int, num> {
   final int fractionDigits;
 
-  NumValueAccessor({
-    this.fractionDigits = 2,
-  });
+  NumValueAccessor({this.fractionDigits = 2});
 
   @override
   num? modelToViewValue(int? modelValue) {

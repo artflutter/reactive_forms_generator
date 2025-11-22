@@ -16,14 +16,8 @@ class UserProfile {
 
   UserProfile({
     required this.id,
-    @RfControl(
-      validators: [RequiredValidator()],
-    )
-    this.firstName = "",
-    @RfControl(
-      validators: [RequiredValidator()],
-    )
-    this.lastName = "",
+    @RfControl(validators: [RequiredValidator()]) this.firstName = "",
+    @RfControl(validators: [RequiredValidator()]) this.lastName = "",
     required this.home,
     this.office,
   });
@@ -39,10 +33,7 @@ class Address {
 
   Address({
     @RfControl<String>() this.street,
-    @RfControl(
-      validators: [RequiredValidator()],
-    )
-    this.city,
+    @RfControl(validators: [RequiredValidator()]) this.city,
     @RfControl<String>() this.zip,
   });
 }

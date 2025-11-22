@@ -11,9 +11,7 @@ part 'nested.gform.dart';
 @RfGroup()
 @freezed
 abstract class SubGroup with _$SubGroup {
-  const factory SubGroup({
-    @RfControl() required String id,
-  }) = _SubGroup;
+  const factory SubGroup({@RfControl() required String id}) = _SubGroup;
 
   factory SubGroup.fromJson(Map<String, dynamic> json) =>
       _$SubGroupFromJson(json);
@@ -35,9 +33,8 @@ abstract class Group with _$Group {
 @RfGroup()
 @freezed
 abstract class Nested with _$Nested {
-  const factory Nested({
-    @RfArray<dynamic>() required List<Group> groupList,
-  }) = _Nested;
+  const factory Nested({@RfArray<dynamic>() required List<Group> groupList}) =
+      _Nested;
 
   factory Nested.fromJson(Map<String, dynamic> json) => _$NestedFromJson(json);
 }

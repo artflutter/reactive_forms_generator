@@ -443,12 +443,25 @@ class MailingListForm implements FormModel<MailingList, MailingList> {
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
+  void upsertValue(
+    MailingList? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = MailingListForm.formElements(value);
+
+    if (currentForm is FormGroup) {
+      (currentForm as FormGroup).addAll(formElements.controls);
+    }
+  }
+
+  @override
   void reset({
     MailingList? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.reset(
+      currentForm.reset(
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);

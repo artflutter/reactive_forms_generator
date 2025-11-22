@@ -15,13 +15,7 @@ class UrlEntity {
   final String url;
 
   UrlEntity({
-    @RfControl(validators: [
-      RequiredValidator(),
-    ])
-    this.label = "",
-    @RfControl(validators: [
-      RequiredValidator(),
-    ])
-    this.url = "",
+    @RfControl(validators: [RequiredValidator()]) this.label = "",
+    @RfControl(validators: [RequiredValidator()]) this.url = "",
   });
 }

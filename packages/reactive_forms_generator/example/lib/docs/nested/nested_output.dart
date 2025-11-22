@@ -11,9 +11,7 @@ part 'nested_output.gform.dart';
 @RfGroup()
 @freezed
 abstract class SubGroupO with _$SubGroupO {
-  const factory SubGroupO({
-    @RfControl() required String id,
-  }) = _SubGroupO;
+  const factory SubGroupO({@RfControl() required String id}) = _SubGroupO;
 
   factory SubGroupO.fromJson(Map<String, dynamic> json) =>
       _$SubGroupOFromJson(json);
@@ -35,9 +33,8 @@ abstract class GroupO with _$GroupO {
 @RfGroup()
 @freezed
 abstract class NestedO with _$NestedO {
-  const factory NestedO({
-    @RfArray<dynamic>() required List<GroupO> groupList,
-  }) = _NestedO;
+  const factory NestedO({@RfArray<dynamic>() required List<GroupO> groupList}) =
+      _NestedO;
 
   factory NestedO.fromJson(Map<String, dynamic> json) =>
       _$NestedOFromJson(json);

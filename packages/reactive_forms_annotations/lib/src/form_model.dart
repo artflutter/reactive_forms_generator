@@ -26,6 +26,12 @@ abstract class FormModel<TModel, TModelOutput> {
     bool emitEvent = true,
   });
 
+  void upsertValue(
+    TModel? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  });
+
   reset({TModel? value, bool updateParent = true, bool emitEvent = true});
 
   void toggleDisabled({bool updateParent = true, bool emitEvent = true});

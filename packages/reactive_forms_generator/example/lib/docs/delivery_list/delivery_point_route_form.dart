@@ -23,29 +23,23 @@ class DeliveryPointWidget extends StatelessWidget {
                   ReactiveTextField<String>(
                     formControl: formModel.nameControl,
                     validationMessages: {
-                      ValidationMessage.required: (_) => 'Required'
+                      ValidationMessage.required: (_) => 'Required',
                     },
-                    decoration: const InputDecoration(
-                      labelText: 'Name',
-                    ),
+                    decoration: const InputDecoration(labelText: 'Name'),
                   ),
                   ReactiveTextField<String>(
                     formControl: formModel.addressForm.streetControl,
                     validationMessages: {
-                      ValidationMessage.required: (_) => 'Required'
+                      ValidationMessage.required: (_) => 'Required',
                     },
-                    decoration: const InputDecoration(
-                      labelText: 'Street',
-                    ),
+                    decoration: const InputDecoration(labelText: 'Street'),
                   ),
                   ReactiveTextField<String>(
                     formControl: formModel.addressForm.cityControl,
                     validationMessages: {
-                      ValidationMessage.required: (_) => 'Required'
+                      ValidationMessage.required: (_) => 'Required',
                     },
-                    decoration: const InputDecoration(
-                      labelText: 'City',
-                    ),
+                    decoration: const InputDecoration(labelText: 'City'),
                   ),
                 ],
               ),
@@ -56,9 +50,11 @@ class DeliveryPointWidget extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      formModel.submit(onValid: (model) {
-                        debugPrint(model.toString());
-                      });
+                      formModel.submit(
+                        onValid: (model) {
+                          debugPrint(model.toString());
+                        },
+                      );
                     },
                     child: const Text('Sign Up'),
                   ),
@@ -71,7 +67,7 @@ class DeliveryPointWidget extends StatelessWidget {
                     },
                   ),
                 ],
-              )
+              ),
             ],
           );
         },

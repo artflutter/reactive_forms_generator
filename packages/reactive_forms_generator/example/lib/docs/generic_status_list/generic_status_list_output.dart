@@ -6,7 +6,5 @@ part 'generic_status_list_output.gform.dart';
 class StatusListO<T extends Enum> {
   final List<T?> list;
 
-  StatusListO({
-    @RfArray<T>() this.list = const [],
-  });
+  StatusListO({@RfArray<T>() this.list = const []});
 }

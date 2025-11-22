@@ -79,10 +79,12 @@ class LoginExtendedFormWidget extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  formModel.submit(onValid: (model) {
-                    debugPrint(model.toString());
-                    debugPrint(model.email);
-                  });
+                  formModel.submit(
+                    onValid: (model) {
+                      debugPrint(model.toString());
+                      debugPrint(model.email);
+                    },
+                  );
                 },
                 child: const Text('Sign Up'),
               ),
@@ -94,15 +96,17 @@ class LoginExtendedFormWidget extends StatelessWidget {
                       return ElevatedButton(
                         onPressed: formModel.form.valid
                             ? () {
-                                formModel.updateValue(LoginExtended(
-                                  email: 'some@e.mail',
-                                  password: 'a',
-                                  timeout: 3,
-                                  theme: 'light',
-                                  height: 130,
-                                  mode: UserMode.user,
-                                  rememberMe: true,
-                                ));
+                                formModel.updateValue(
+                                  LoginExtended(
+                                    email: 'some@e.mail',
+                                    password: 'a',
+                                    timeout: 3,
+                                    theme: 'light',
+                                    height: 130,
+                                    mode: UserMode.user,
+                                    rememberMe: true,
+                                  ),
+                                );
                               }
                             : null,
                         child: const Text('Update'),

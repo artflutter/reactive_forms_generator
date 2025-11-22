@@ -23,100 +23,107 @@ class DeliveryListFormWidget extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: ReactiveDeliveryListFormFormGroupArrayBuilder<
-                        DeliveryPointForm>(
-                      extended: formModel.deliveryListExtendedControl,
-                      itemBuilder: (context, i, formItem, _) {
-                        return Column(
-                          children: [
-                            Row(
+                    child:
+                        ReactiveDeliveryListFormFormGroupArrayBuilder<
+                          DeliveryPointForm
+                        >(
+                          extended: formModel.deliveryListExtendedControl,
+                          itemBuilder: (context, i, formItem, _) {
+                            return Column(
                               children: [
-                                Expanded(
-                                  child: ReactiveTextField<String>(
-                                    key: name.itemIndexKey(i),
-                                    formControl: formItem?.nameControl,
-                                    validationMessages: {
-                                      ValidationMessage.required: (_) =>
-                                          name.itemError(
-                                            i,
-                                            errorRequired,
-                                          ),
-                                    },
-                                    decoration: InputDecoration(
-                                      labelText: name.itemIndex(i),
-                                    ),
-                                  ),
-                                ),
-                                IconButton(
-                                  key: toggleEnableDisable.itemKey,
-                                  onPressed: () {
-                                    formModel.deliveryListDeliveryPointForm[i]
-                                        .nameSetDisabled(!formModel
-                                            .deliveryListDeliveryPointForm[i]
-                                            .nameControl
-                                            .disabled);
-                                  },
-                                  icon: const Icon(
-                                    Icons.disabled_by_default_rounded,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            ReactiveTextField<String>(
-                              key: street.itemIndexKey(i),
-                              formControl: formItem?.addressForm.streetControl,
-                              validationMessages: {
-                                ValidationMessage.required: (error) =>
-                                    street.itemError(
-                                      i,
-                                      errorRequired,
-                                    ),
-                              },
-                              decoration: InputDecoration(
-                                labelText: street.itemIndex(i),
-                              ),
-                            ),
-                            ReactiveTextField<String>(
-                              key: city.itemIndexKey(i),
-                              formControl: formItem?.addressForm.cityControl,
-                              decoration: InputDecoration(
-                                labelText: city.itemIndex(i),
-                              ),
-                            ),
-                            ReactiveDeliveryListFormConsumer(
-                                builder: (context, formModel, child) {
-                              return ElevatedButton(
-                                onPressed: formModel.deliveryListControl.enabled
-                                    ? () => formModel
-                                        .removeDeliveryListItemAtIndex(i)
-                                    : null,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                                Row(
                                   children: [
-                                    const Icon(Icons.arrow_upward),
-                                    Text(remove.itemIndex(i)),
-                                    const Icon(Icons.arrow_upward),
+                                    Expanded(
+                                      child: ReactiveTextField<String>(
+                                        key: name.itemIndexKey(i),
+                                        formControl: formItem?.nameControl,
+                                        validationMessages: {
+                                          ValidationMessage.required: (_) =>
+                                              name.itemError(i, errorRequired),
+                                        },
+                                        decoration: InputDecoration(
+                                          labelText: name.itemIndex(i),
+                                        ),
+                                      ),
+                                    ),
+                                    IconButton(
+                                      key: toggleEnableDisable.itemKey,
+                                      onPressed: () {
+                                        formModel
+                                            .deliveryListDeliveryPointForm[i]
+                                            .nameSetDisabled(
+                                              !formModel
+                                                  .deliveryListDeliveryPointForm[i]
+                                                  .nameControl
+                                                  .disabled,
+                                            );
+                                      },
+                                      icon: const Icon(
+                                        Icons.disabled_by_default_rounded,
+                                      ),
+                                    ),
                                   ],
                                 ),
-                              );
-                            }),
-                          ],
-                        );
-                      },
-                    ),
+                                ReactiveTextField<String>(
+                                  key: street.itemIndexKey(i),
+                                  formControl:
+                                      formItem?.addressForm.streetControl,
+                                  validationMessages: {
+                                    ValidationMessage.required: (error) =>
+                                        street.itemError(i, errorRequired),
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: street.itemIndex(i),
+                                  ),
+                                ),
+                                ReactiveTextField<String>(
+                                  key: city.itemIndexKey(i),
+                                  formControl:
+                                      formItem?.addressForm.cityControl,
+                                  decoration: InputDecoration(
+                                    labelText: city.itemIndex(i),
+                                  ),
+                                ),
+                                ReactiveDeliveryListFormConsumer(
+                                  builder: (context, formModel, child) {
+                                    return ElevatedButton(
+                                      onPressed:
+                                          formModel.deliveryListControl.enabled
+                                          ? () => formModel
+                                                .removeDeliveryListItemAtIndex(
+                                                  i,
+                                                )
+                                          : null,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          const Icon(Icons.arrow_upward),
+                                          Text(remove.itemIndex(i)),
+                                          const Icon(Icons.arrow_upward),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        ),
                   ),
                   const SizedBox(width: 16),
                   ReactiveDeliveryListFormConsumer(
-                      builder: (context, formModel, child) {
-                    return ElevatedButton(
-                      onPressed: formModel.deliveryListControl.enabled
-                          ? () =>
-                              formModel.addDeliveryListItem(emptyDeliveryPoint)
-                          : null,
-                      child: Text(add.name),
-                    );
-                  }),
+                    builder: (context, formModel, child) {
+                      return ElevatedButton(
+                        onPressed: formModel.deliveryListControl.enabled
+                            ? () => formModel.addDeliveryListItem(
+                                emptyDeliveryPoint,
+                              )
+                            : null,
+                        child: Text(add.name),
+                      );
+                    },
+                  ),
                 ],
               ),
               const SizedBox(height: 16),
@@ -129,18 +136,18 @@ class DeliveryListFormWidget extends StatelessWidget {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
-                            formModel.submit(onValid: (model) {
-                              debugPrint(model.toString());
-                              onChange?.call(model);
-                            });
+                            formModel.submit(
+                              onValid: (model) {
+                                debugPrint(model.toString());
+                                onChange?.call(model);
+                              },
+                            );
                           },
                           child: Text(submit.name),
                         ),
                       ),
                       const SizedBox(width: 8),
-                      const Expanded(
-                        child: SizedBox.shrink(),
-                      ),
+                      const Expanded(child: SizedBox.shrink()),
                     ],
                   ),
                   Row(
@@ -244,9 +251,9 @@ class DeliveryListFormWidget extends StatelessWidget {
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           );
         },

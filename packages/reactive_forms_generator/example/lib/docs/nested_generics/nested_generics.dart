@@ -21,30 +21,22 @@ abstract class ProductDetails<P extends Product, C extends Cart>
 @Rf(output: false)
 @RfGroup()
 abstract class Id<P extends Product, C extends Cart> with _$Id<P, C> {
-  factory Id({
-    @RfControl() String? companyName,
-    @RfControl() String? name,
-  }) = _Id;
+  factory Id({@RfControl() String? companyName, @RfControl() String? name}) =
+      _Id;
 
   Id._();
 }
 
 @freezed
 abstract class Product with _$Product {
-  const factory Product({
-    String? companyName,
-    String? name,
-  }) = _Product;
+  const factory Product({String? companyName, String? name}) = _Product;
 
   const Product._();
 }
 
 @freezed
 abstract class Cart with _$Cart {
-  const factory Cart({
-    Product? product,
-    String? description,
-  }) = _Cart;
+  const factory Cart({Product? product, String? description}) = _Cart;
 
   const Cart._();
 }

@@ -19,11 +19,7 @@ class ReactiveUserProfileFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-    BuildContext context,
-    UserProfileForm formModel,
-    Widget? child,
-  )
-  builder;
+      BuildContext context, UserProfileForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +38,11 @@ class UserProfileFormInheritedStreamer extends InheritedStreamer<dynamic> {
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(stream, child, key: key);
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
 
   final UserProfileForm form;
 }
@@ -64,19 +64,19 @@ class ReactiveUserProfileForm extends StatelessWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static UserProfileForm? of(BuildContext context, {bool listen = true}) {
+  static UserProfileForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
-            UserProfileFormInheritedStreamer
-          >()
+              UserProfileFormInheritedStreamer>()
           ?.form;
     }
 
-    final element = context
-        .getElementForInheritedWidgetOfExactType<
-          UserProfileFormInheritedStreamer
-        >();
+    final element = context.getElementForInheritedWidgetOfExactType<
+        UserProfileFormInheritedStreamer>();
     return element == null
         ? null
         : (element.widget as UserProfileFormInheritedStreamer).form;
@@ -123,14 +123,10 @@ class UserProfileFormBuilder extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-    BuildContext context,
-    UserProfileForm formModel,
-    Widget? child,
-  )
-  builder;
+      BuildContext context, UserProfileForm formModel, Widget? child) builder;
 
   final void Function(BuildContext context, UserProfileForm formModel)?
-  initState;
+      initState;
 
   @override
   _UserProfileFormBuilderState createState() => _UserProfileFormBuilderState();
@@ -143,10 +139,8 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
 
   @override
   void initState() {
-    _formModel = UserProfileForm(
-      UserProfileForm.formElements(widget.model),
-      null,
-    );
+    _formModel =
+        UserProfileForm(UserProfileForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -223,7 +217,10 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
 final _logUserProfileForm = Logger.detached('UserProfileForm');
 
 class UserProfileForm implements FormModel<UserProfile, UserProfile> {
-  UserProfileForm(this.form, this.path);
+  UserProfileForm(
+    this.form,
+    this.path,
+  );
 
   static const String idControlName = "id";
 
@@ -272,8 +269,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
   Address? get _officeRawValue => officeForm.rawModel;
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -284,8 +280,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsFirstName {
     try {
       form.control(firstNameControlPath());
@@ -296,8 +291,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsLastName {
     try {
       form.control(lastNameControlPath());
@@ -308,8 +302,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsHome {
     try {
       form.control(homeControlPath());
@@ -320,8 +313,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsOffice {
     try {
       form.control(officeControlPath());
@@ -352,9 +344,11 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
   void get officeFocus => form.focus(officeControlPath());
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void officeRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void officeRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsOffice) {
       final controlPath = path;
       if (controlPath == null) {
@@ -382,11 +376,8 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    idControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void firstNameValueUpdate(
@@ -394,11 +385,8 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    firstNameControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    firstNameControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void lastNameValueUpdate(
@@ -406,11 +394,8 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    lastNameControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    lastNameControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void homeValueUpdate(
@@ -418,11 +403,8 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    homeControl.updateValue(
-      AddressForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    homeControl.updateValue(AddressForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void officeValueUpdate(
@@ -430,11 +412,8 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    officeControl.updateValue(
-      AddressForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    officeControl.updateValue(AddressForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void idValuePatch(
@@ -442,11 +421,8 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    idControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void firstNameValuePatch(
@@ -454,11 +430,8 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    firstNameControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    firstNameControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void lastNameValuePatch(
@@ -466,11 +439,8 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    lastNameControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    lastNameControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void homeValuePatch(
@@ -478,11 +448,8 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    homeControl.updateValue(
-      AddressForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    homeControl.updateValue(AddressForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void officeValuePatch(
@@ -490,11 +457,8 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    officeControl.updateValue(
-      AddressForm.formElements(value).rawValue,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    officeControl.updateValue(AddressForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void idValueReset(
@@ -503,13 +467,14 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) => idControl.reset(
-    value: value,
-    updateParent: updateParent,
-    emitEvent: emitEvent,
-    removeFocus: removeFocus,
-    disabled: disabled,
-  );
+  }) =>
+      idControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void firstNameValueReset(
     String value, {
@@ -517,13 +482,14 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) => firstNameControl.reset(
-    value: value,
-    updateParent: updateParent,
-    emitEvent: emitEvent,
-    removeFocus: removeFocus,
-    disabled: disabled,
-  );
+  }) =>
+      firstNameControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void lastNameValueReset(
     String value, {
@@ -531,13 +497,14 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) => lastNameControl.reset(
-    value: value,
-    updateParent: updateParent,
-    emitEvent: emitEvent,
-    removeFocus: removeFocus,
-    disabled: disabled,
-  );
+  }) =>
+      lastNameControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void homeValueReset(
     Address value, {
@@ -545,11 +512,11 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) => homeControl.reset(
-    value: AddressForm.formElements(value).rawValue,
-    updateParent: updateParent,
-    emitEvent: emitEvent,
-  );
+  }) =>
+      homeControl.reset(
+          value: AddressForm.formElements(value).rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   void officeValueReset(
     Address? value, {
@@ -557,11 +524,11 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) => officeControl.reset(
-    value: AddressForm.formElements(value).rawValue,
-    updateParent: updateParent,
-    emitEvent: emitEvent,
-  );
+  }) =>
+      officeControl.reset(
+          value: AddressForm.formElements(value).rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
@@ -591,7 +558,10 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
         emitEvent: emitEvent,
       );
     } else {
-      idControl.markAsEnabled(updateParent: updateParent, emitEvent: emitEvent);
+      idControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     }
   }
 
@@ -679,27 +649,28 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
       );
     }
     return UserProfile(
-      id: _idValue,
-      firstName: _firstNameValue,
-      lastName: _lastNameValue,
-      home: _homeValue,
-      office: _officeValue,
-    );
+        id: _idValue,
+        firstName: _firstNameValue,
+        lastName: _lastNameValue,
+        home: _homeValue,
+        office: _officeValue);
   }
 
   @override
   UserProfile get rawModel {
     return UserProfile(
-      id: _idRawValue,
-      firstName: _firstNameRawValue,
-      lastName: _lastNameRawValue,
-      home: _homeRawValue,
-      office: _officeRawValue,
-    );
+        id: _idRawValue,
+        firstName: _firstNameRawValue,
+        lastName: _lastNameRawValue,
+        home: _homeRawValue,
+        office: _officeRawValue);
   }
 
   @override
-  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -714,9 +685,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
       homeForm.toggleDisabled();
       officeForm.toggleDisabled();
       currentForm.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          updateParent: updateParent, emitEvent: emitEvent);
     } else {
       homeForm.toggleDisabled();
       officeForm.toggleDisabled();
@@ -770,66 +739,75 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     UserProfile? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) => currentForm.updateValue(
-    UserProfileForm.formElements(value).rawValue,
-    updateParent: updateParent,
-    emitEvent: emitEvent,
-  );
+  }) =>
+      currentForm.updateValue(UserProfileForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
+
+  @override
+  void upsertValue(
+    UserProfile? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = UserProfileForm.formElements(value);
+
+    if (currentForm is FormGroup) {
+      (currentForm as FormGroup).addAll(formElements.controls);
+    }
+  }
 
   @override
   void reset({
     UserProfile? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) => form.reset(
-    value: value != null ? formElements(value).rawValue : null,
-    updateParent: updateParent,
-    emitEvent: emitEvent,
-  );
+  }) =>
+      currentForm.reset(
+          value: value != null ? formElements(value).rawValue : null,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(UserProfile? userProfile) => FormGroup(
-    {
-      idControlName: FormControl<String>(
-        value: userProfile?.id,
-        validators: [],
-        asyncValidators: [],
-        asyncValidatorsDebounceTime: 250,
-        disabled: false,
-        touched: false,
-      ),
-      firstNameControlName: FormControl<String>(
-        value: userProfile?.firstName,
-        validators: [RequiredValidator()],
-        asyncValidators: [],
-        asyncValidatorsDebounceTime: 250,
-        disabled: false,
-        touched: false,
-      ),
-      lastNameControlName: FormControl<String>(
-        value: userProfile?.lastName,
-        validators: [RequiredValidator()],
-        asyncValidators: [],
-        asyncValidatorsDebounceTime: 250,
-        disabled: false,
-        touched: false,
-      ),
-      homeControlName: AddressForm.formElements(userProfile?.home),
-      officeControlName: AddressForm.formElements(userProfile?.office),
-    },
-    validators: [],
-    asyncValidators: [],
-    asyncValidatorsDebounceTime: 250,
-    disabled: false,
-  );
+  static FormGroup formElements(UserProfile? userProfile) => FormGroup({
+        idControlName: FormControl<String>(
+            value: userProfile?.id,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        firstNameControlName: FormControl<String>(
+            value: userProfile?.firstName,
+            validators: [RequiredValidator()],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        lastNameControlName: FormControl<String>(
+            value: userProfile?.lastName,
+            validators: [RequiredValidator()],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        homeControlName: AddressForm.formElements(userProfile?.home),
+        officeControlName: AddressForm.formElements(userProfile?.office)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
 }
 
 final _logAddressForm = Logger.detached('AddressForm');
 
 class AddressForm implements FormModel<Address, Address> {
-  AddressForm(this.form, this.path);
+  AddressForm(
+    this.form,
+    this.path,
+  );
 
   static const String streetControlName = "street";
 
@@ -862,8 +840,7 @@ class AddressForm implements FormModel<Address, Address> {
   String? get _zipRawValue => zipControl.value;
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsStreet {
     try {
       form.control(streetControlPath());
@@ -874,8 +851,7 @@ class AddressForm implements FormModel<Address, Address> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsCity {
     try {
       form.control(cityControlPath());
@@ -886,8 +862,7 @@ class AddressForm implements FormModel<Address, Address> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsZip {
     try {
       form.control(zipControlPath());
@@ -910,9 +885,11 @@ class AddressForm implements FormModel<Address, Address> {
   void get zipFocus => form.focus(zipControlPath());
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void streetRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void streetRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsStreet) {
       final controlPath = path;
       if (controlPath == null) {
@@ -936,9 +913,11 @@ class AddressForm implements FormModel<Address, Address> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void cityRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void cityRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsCity) {
       final controlPath = path;
       if (controlPath == null) {
@@ -962,9 +941,11 @@ class AddressForm implements FormModel<Address, Address> {
   }
 
   @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
-  void zipRemove({bool updateParent = true, bool emitEvent = true}) {
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
+  void zipRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     if (containsZip) {
       final controlPath = path;
       if (controlPath == null) {
@@ -992,11 +973,8 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    streetControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    streetControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void cityValueUpdate(
@@ -1004,11 +982,8 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    cityControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    cityControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void zipValueUpdate(
@@ -1016,11 +991,8 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    zipControl.updateValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    zipControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void streetValuePatch(
@@ -1028,11 +1000,8 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    streetControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    streetControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void cityValuePatch(
@@ -1040,11 +1009,8 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    cityControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    cityControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void zipValuePatch(
@@ -1052,11 +1018,8 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    zipControl.patchValue(
-      value,
-      updateParent: updateParent,
-      emitEvent: emitEvent,
-    );
+    zipControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void streetValueReset(
@@ -1065,13 +1028,14 @@ class AddressForm implements FormModel<Address, Address> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) => streetControl.reset(
-    value: value,
-    updateParent: updateParent,
-    emitEvent: emitEvent,
-    removeFocus: removeFocus,
-    disabled: disabled,
-  );
+  }) =>
+      streetControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void cityValueReset(
     String? value, {
@@ -1079,13 +1043,14 @@ class AddressForm implements FormModel<Address, Address> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) => cityControl.reset(
-    value: value,
-    updateParent: updateParent,
-    emitEvent: emitEvent,
-    removeFocus: removeFocus,
-    disabled: disabled,
-  );
+  }) =>
+      cityControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void zipValueReset(
     String? value, {
@@ -1093,13 +1058,14 @@ class AddressForm implements FormModel<Address, Address> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) => zipControl.reset(
-    value: value,
-    updateParent: updateParent,
-    emitEvent: emitEvent,
-    removeFocus: removeFocus,
-    disabled: disabled,
-  );
+  }) =>
+      zipControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   FormControl<String> get streetControl =>
       form.control(streetControlPath()) as FormControl<String>;
@@ -1181,14 +1147,14 @@ class AddressForm implements FormModel<Address, Address> {
   @override
   Address get rawModel {
     return Address(
-      street: _streetRawValue,
-      city: _cityRawValue,
-      zip: _zipRawValue,
-    );
+        street: _streetRawValue, city: _cityRawValue, zip: _zipRawValue);
   }
 
   @override
-  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
     final currentFormInstance = currentForm;
 
     if (currentFormInstance is! FormGroup) {
@@ -1201,9 +1167,7 @@ class AddressForm implements FormModel<Address, Address> {
       });
 
       currentForm.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+          updateParent: updateParent, emitEvent: emitEvent);
     } else {
       currentFormInstance.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -1255,58 +1219,64 @@ class AddressForm implements FormModel<Address, Address> {
     Address? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) => currentForm.updateValue(
-    AddressForm.formElements(value).rawValue,
-    updateParent: updateParent,
-    emitEvent: emitEvent,
-  );
+  }) =>
+      currentForm.updateValue(AddressForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
+
+  @override
+  void upsertValue(
+    Address? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = AddressForm.formElements(value);
+
+    if (currentForm is FormGroup) {
+      (currentForm as FormGroup).addAll(formElements.controls);
+    }
+  }
 
   @override
   void reset({
     Address? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) => form.reset(
-    value: value != null ? formElements(value).rawValue : null,
-    updateParent: updateParent,
-    emitEvent: emitEvent,
-  );
+  }) =>
+      currentForm.reset(
+          value: value != null ? formElements(value).rawValue : null,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(Address? address) => FormGroup(
-    {
-      streetControlName: FormControl<String>(
-        value: address?.street,
-        validators: [],
-        asyncValidators: [],
-        asyncValidatorsDebounceTime: 250,
-        disabled: false,
-        touched: false,
-      ),
-      cityControlName: FormControl<String>(
-        value: address?.city,
-        validators: [RequiredValidator()],
-        asyncValidators: [],
-        asyncValidatorsDebounceTime: 250,
-        disabled: false,
-        touched: false,
-      ),
-      zipControlName: FormControl<String>(
-        value: address?.zip,
-        validators: [],
-        asyncValidators: [],
-        asyncValidatorsDebounceTime: 250,
-        disabled: false,
-        touched: false,
-      ),
-    },
-    validators: [],
-    asyncValidators: [],
-    asyncValidatorsDebounceTime: 250,
-    disabled: false,
-  );
+  static FormGroup formElements(Address? address) => FormGroup({
+        streetControlName: FormControl<String>(
+            value: address?.street,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        cityControlName: FormControl<String>(
+            value: address?.city,
+            validators: [RequiredValidator()],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        zipControlName: FormControl<String>(
+            value: address?.zip,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
 }
 
 class ReactiveUserProfileFormArrayBuilder<ReactiveUserProfileFormArrayBuilderT>
@@ -1319,41 +1289,29 @@ class ReactiveUserProfileFormArrayBuilder<ReactiveUserProfileFormArrayBuilderT>
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  }) : assert(
-         control != null || formControl != null,
-         "You have to specify `control` or `formControl`!",
-       ),
-       super(key: key);
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
 
   final FormArray<ReactiveUserProfileFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveUserProfileFormArrayBuilderT>? Function(
-    UserProfileForm formModel,
-  )?
-  control;
+      UserProfileForm formModel)? control;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      UserProfileForm formModel)? builder;
 
   final Widget Function(
-    BuildContext context,
-    List<Widget> itemList,
-    UserProfileForm formModel,
-  )?
-  builder;
-
-  final Widget Function(
-    BuildContext context,
-    int i,
-    FormControl<ReactiveUserProfileFormArrayBuilderT> control,
-    ReactiveUserProfileFormArrayBuilderT? item,
-    UserProfileForm formModel,
-  )
-  itemBuilder;
+      BuildContext context,
+      int i,
+      FormControl<ReactiveUserProfileFormArrayBuilderT> control,
+      ReactiveUserProfileFormArrayBuilderT? item,
+      UserProfileForm formModel) itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-    FormControl<ReactiveUserProfileFormArrayBuilderT> control,
-  )?
-  controlFilter;
+      FormControl<ReactiveUserProfileFormArrayBuilderT> control)? controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -1369,9 +1327,18 @@ class ReactiveUserProfileFormArrayBuilder<ReactiveUserProfileFormArrayBuilderT>
     return ReactiveFormArrayItemBuilder<ReactiveUserProfileFormArrayBuilderT>(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
-          ? (context, itemList) => builder(context, itemList, formModel)
+          ? (context, itemList) => builder(
+                context,
+                itemList,
+                formModel,
+              )
           : null,
-      itemBuilder: (context, i, control, item) =>
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
           itemBuilder(context, i, control, item, formModel),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -1389,43 +1356,35 @@ class ReactiveUserProfileFormArrayBuilder2<ReactiveUserProfileFormArrayBuilderT>
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  }) : assert(
-         control != null || formControl != null,
-         "You have to specify `control` or `formControl`!",
-       ),
-       super(key: key);
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
 
   final FormArray<ReactiveUserProfileFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveUserProfileFormArrayBuilderT>? Function(
-    UserProfileForm formModel,
-  )?
-  control;
+      UserProfileForm formModel)? control;
 
   final Widget Function(
-    ({BuildContext context, List<Widget> itemList, UserProfileForm formModel})
-    params,
-  )?
-  builder;
+      ({
+        BuildContext context,
+        List<Widget> itemList,
+        UserProfileForm formModel
+      }) params)? builder;
 
   final Widget Function(
-    ({
-      BuildContext context,
-      int i,
-      FormControl<ReactiveUserProfileFormArrayBuilderT> control,
-      ReactiveUserProfileFormArrayBuilderT? item,
-      UserProfileForm formModel,
-    })
-    params,
-  )
-  itemBuilder;
+      ({
+        BuildContext context,
+        int i,
+        FormControl<ReactiveUserProfileFormArrayBuilderT> control,
+        ReactiveUserProfileFormArrayBuilderT? item,
+        UserProfileForm formModel
+      }) params) itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-    FormControl<ReactiveUserProfileFormArrayBuilderT> control,
-  )?
-  controlFilter;
+      FormControl<ReactiveUserProfileFormArrayBuilderT> control)? controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -1442,17 +1401,23 @@ class ReactiveUserProfileFormArrayBuilder2<ReactiveUserProfileFormArrayBuilderT>
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
           ? (context, itemList) => builder((
-              context: context,
-              itemList: itemList,
-              formModel: formModel,
-            ))
+                context: context,
+                itemList: itemList,
+                formModel: formModel,
+              ))
           : null,
-      itemBuilder: (context, i, control, item) => itemBuilder((
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder((
         context: context,
         i: i,
         control: control,
         item: item,
-        formModel: formModel,
+        formModel: formModel
       )),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -1461,48 +1426,32 @@ class ReactiveUserProfileFormArrayBuilder2<ReactiveUserProfileFormArrayBuilderT>
 }
 
 class ReactiveUserProfileFormFormGroupArrayBuilder<
-  ReactiveUserProfileFormFormGroupArrayBuilderT
->
-    extends StatelessWidget {
+    ReactiveUserProfileFormFormGroupArrayBuilderT> extends StatelessWidget {
   const ReactiveUserProfileFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  }) : assert(
-         extended != null || getExtended != null,
-         "You have to specify `control` or `formControl`!",
-       ),
-       super(key: key);
+  })  : assert(extended != null || getExtended != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
 
-  final ExtendedControl<
-    List<Map<String, Object?>?>,
-    List<ReactiveUserProfileFormFormGroupArrayBuilderT>
-  >?
-  extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveUserProfileFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<
-    List<Map<String, Object?>?>,
-    List<ReactiveUserProfileFormFormGroupArrayBuilderT>
-  >
-  Function(UserProfileForm formModel)?
-  getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveUserProfileFormFormGroupArrayBuilderT>>
+      Function(UserProfileForm formModel)? getExtended;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      UserProfileForm formModel)? builder;
 
   final Widget Function(
-    BuildContext context,
-    List<Widget> itemList,
-    UserProfileForm formModel,
-  )?
-  builder;
-
-  final Widget Function(
-    BuildContext context,
-    int i,
-    ReactiveUserProfileFormFormGroupArrayBuilderT? item,
-    UserProfileForm formModel,
-  )
-  itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveUserProfileFormFormGroupArrayBuilderT? item,
+      UserProfileForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1520,14 +1469,23 @@ class ReactiveUserProfileFormFormGroupArrayBuilder<
         final itemList =
             (value.value() ?? <ReactiveUserProfileFormFormGroupArrayBuilderT>[])
                 .asMap()
-                .map(
-                  (i, item) =>
-                      MapEntry(i, itemBuilder(context, i, item, formModel)),
-                )
+                .map((i, item) => MapEntry(
+                      i,
+                      itemBuilder(
+                        context,
+                        i,
+                        item,
+                        formModel,
+                      ),
+                    ))
                 .values
                 .toList();
 
-        return builder?.call(context, itemList, formModel) ??
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
             Column(children: itemList);
       },
     );

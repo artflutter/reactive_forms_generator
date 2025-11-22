@@ -16,10 +16,7 @@ abstract class Test with _$Test {
     @RfControl<String>() String? description,
   }) = _Test;
 
-  factory Test.empty() => const Test(
-        title: '',
-        description: '',
-      );
+  factory Test.empty() => const Test(title: '', description: '');
 
   // The error occurs with this grrr
   dartz.Option<String> get failureOption {

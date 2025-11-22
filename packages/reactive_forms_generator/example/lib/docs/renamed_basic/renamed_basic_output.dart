@@ -9,13 +9,7 @@ class RenamedBasicO {
   final String? password;
 
   RenamedBasicO({
-    @RfControl(
-      validators: [RequiredValidator()],
-    )
-    this.email,
-    @RfControl(
-      validators: [RequiredValidator()],
-    )
-    this.password,
+    @RfControl(validators: [RequiredValidator()]) this.email,
+    @RfControl(validators: [RequiredValidator()]) this.password,
   });
 }

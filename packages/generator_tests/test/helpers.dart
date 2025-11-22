@@ -12,8 +12,9 @@ Future testGenerator({
 }) async {
   Logger.root.level = Level.INFO;
 
-  final readerWriter =
-      TestReaderWriter(rootPackage: 'reactive_forms_generator');
+  final readerWriter = TestReaderWriter(
+    rootPackage: 'reactive_forms_generator',
+  );
   await readerWriter.testing.loadIsolateSources();
 
   final anotherBuilder = reactiveFormsGenerator(
@@ -22,12 +23,8 @@ Future testGenerator({
 
   return await testBuilder(
     anotherBuilder,
-    {
-      'a|lib/$fileName.dart': model,
-    },
-    outputs: {
-      'a|lib/$fileName.gform.dart': generatedFile,
-    },
+    {'a|lib/$fileName.dart': model},
+    outputs: {'a|lib/$fileName.gform.dart': generatedFile},
     onLog: (message) => stdout.writeln(message),
     readerWriter: readerWriter,
   );

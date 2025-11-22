@@ -477,12 +477,25 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
           updateParent: updateParent, emitEvent: emitEvent);
 
   @override
+  void upsertValue(
+    ModelExtends? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = ModelExtendsForm.formElements(value);
+
+    if (currentForm is FormGroup) {
+      (currentForm as FormGroup).addAll(formElements.controls);
+    }
+  }
+
+  @override
   void reset({
     ModelExtends? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.reset(
+      currentForm.reset(
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);

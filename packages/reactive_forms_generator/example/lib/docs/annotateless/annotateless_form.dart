@@ -30,7 +30,7 @@ class _AnnotatelessFormWidgetState extends State<AnnotatelessFormWidget> {
                 key: email.itemKey,
                 formControl: formModel.emailControl,
                 validationMessages: {
-                  ValidationMessage.required: (_) => errorRequired
+                  ValidationMessage.required: (_) => errorRequired,
                 },
                 decoration: InputDecoration(
                   labelText: email.name,
@@ -81,13 +81,15 @@ class _AnnotatelessFormWidgetState extends State<AnnotatelessFormWidget> {
                         child: ElevatedButton(
                           key: submitRaw.itemKey,
                           onPressed: () {
-                            formModel.submit(onValid: (model) {
-                              debugPrint(model.email);
-                              debugPrint(model.password);
+                            formModel.submit(
+                              onValid: (model) {
+                                debugPrint(model.email);
+                                debugPrint(model.password);
 
-                              formModel.form.markAsDisabled();
-                              widget.onChange?.call(model);
-                            });
+                                formModel.form.markAsDisabled();
+                                widget.onChange?.call(model);
+                              },
+                            );
                           },
                           child: const Text('Submit raw'),
                         ),
@@ -100,12 +102,14 @@ class _AnnotatelessFormWidgetState extends State<AnnotatelessFormWidget> {
                               key: submit.itemKey,
                               onPressed: formModel.form.valid
                                   ? () {
-                                      formModel.submit(onValid: (model) {
-                                        debugPrint(model.toString());
-                                        debugPrint(model.email);
-                                        debugPrint(model.password);
-                                        widget.onChange?.call(model);
-                                      });
+                                      formModel.submit(
+                                        onValid: (model) {
+                                          debugPrint(model.toString());
+                                          debugPrint(model.email);
+                                          debugPrint(model.password);
+                                          widget.onChange?.call(model);
+                                        },
+                                      );
                                     }
                                   : null,
                               child: const Text('Submit'),

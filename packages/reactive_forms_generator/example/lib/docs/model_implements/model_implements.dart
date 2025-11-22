@@ -23,13 +23,7 @@ class ModelImplements implements Email, Password {
   final String password;
 
   ModelImplements({
-    @RfControl(
-      validators: [RequiredValidator()],
-    )
-    this.email = "",
-    @RfControl(
-      validators: [RequiredValidator()],
-    )
-    this.password = "",
+    @RfControl(validators: [RequiredValidator()]) this.email = "",
+    @RfControl(validators: [RequiredValidator()]) this.password = "",
   });
 }

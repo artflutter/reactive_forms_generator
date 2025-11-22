@@ -1080,12 +1080,25 @@ class LoginExtendedNullableOForm
           emitEvent: emitEvent);
 
   @override
+  void upsertValue(
+    LoginExtendedNullableO? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = LoginExtendedNullableOForm.formElements(value);
+
+    if (currentForm is FormGroup) {
+      (currentForm as FormGroup).addAll(formElements.controls);
+    }
+  }
+
+  @override
   void reset({
     LoginExtendedNullableO? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.reset(
+      currentForm.reset(
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);

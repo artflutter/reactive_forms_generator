@@ -8,71 +8,64 @@ class ReactiveFormGroupArrayBuilder {
   ReactiveFormGroupArrayBuilder(this.formGenerator);
 
   Constructor get _constructor => Constructor(
-        (b) => b
-          ..constant = true
-          ..initializers.addAll(
-            [
-              const Code(
-                'assert(extended != null || getExtended != null, "You have to specify `control` or `formControl`!")',
-              ),
-              refer('super').call(
-                [],
-                {'key': const CodeExpression(Code('key'))},
-              ).code,
-            ],
-          )
-          ..optionalParameters.addAll(
-            [
-              Parameter(
-                (b) => b
-                  ..name = 'key'
-                  ..named = true
-                  ..type = const Reference('Key?'),
-              ),
-              Parameter(
-                (b) => b
-                  ..name = 'extended'
-                  ..named = true
-                  ..toThis = true,
-              ),
-              Parameter(
-                (b) => b
-                  ..name = 'getExtended'
-                  ..named = true
-                  ..toThis = true,
-              ),
-              Parameter(
-                (b) => b
-                  ..name = 'builder'
-                  ..named = true
-                  ..toThis = true,
-              ),
-              Parameter(
-                (b) => b
-                  ..name = 'itemBuilder'
-                  ..named = true
-                  ..required = true
-                  ..toThis = true,
-              ),
-            ],
-          ),
-      );
+    (b) => b
+      ..constant = true
+      ..initializers.addAll([
+        const Code(
+          'assert(extended != null || getExtended != null, "You have to specify `control` or `formControl`!")',
+        ),
+        refer(
+          'super',
+        ).call([], {'key': const CodeExpression(Code('key'))}).code,
+      ])
+      ..optionalParameters.addAll([
+        Parameter(
+          (b) => b
+            ..name = 'key'
+            ..named = true
+            ..type = const Reference('Key?'),
+        ),
+        Parameter(
+          (b) => b
+            ..name = 'extended'
+            ..named = true
+            ..toThis = true,
+        ),
+        Parameter(
+          (b) => b
+            ..name = 'getExtended'
+            ..named = true
+            ..toThis = true,
+        ),
+        Parameter(
+          (b) => b
+            ..name = 'builder'
+            ..named = true
+            ..toThis = true,
+        ),
+        Parameter(
+          (b) => b
+            ..name = 'itemBuilder'
+            ..named = true
+            ..required = true
+            ..toThis = true,
+        ),
+      ]),
+  );
 
   Method get _buildMethod => Method(
-        (b) => b
-          ..name = 'build'
-          ..returns = const Reference('Widget')
-          ..requiredParameters.add(
-            Parameter(
-              (b) => b
-                ..name = 'context'
-                ..type = const Reference('BuildContext'),
-            ),
-          )
-          ..annotations.add(
-            const CodeExpression(Code('override')),
-          )
-          ..body = Code('''
+    (b) => b
+      ..name = 'build'
+      ..returns = const Reference('Widget')
+      ..requiredParameters.add(
+        Parameter(
+          (b) => b
+            ..name = 'context'
+            ..type = const Reference('BuildContext'),
+        ),
+      )
+      ..annotations.add(const CodeExpression(Code('override')))
+      ..body = Code('''
             final formModel = Reactive${formGenerator.className}.of${formGenerator.element.generics}(context);
         
             if (formModel == null) {
@@ -107,40 +100,42 @@ class ReactiveFormGroupArrayBuilder {
               },
             );
           '''),
-      );
+  );
 
   List<Field> get _fields => [
-        Field(
-          (b) => b
-            ..name = 'extended'
-            ..modifier = FieldModifier.final$
-            ..type = Reference(
-              'ExtendedControl<List<Map<String, Object?>?>, List<$T>>?',
-            ),
+    Field(
+      (b) => b
+        ..name = 'extended'
+        ..modifier = FieldModifier.final$
+        ..type = Reference(
+          'ExtendedControl<List<Map<String, Object?>?>, List<$T>>?',
         ),
-        Field(
-          (b) => b
-            ..name = 'getExtended'
-            ..modifier = FieldModifier.final$
-            ..type = Reference(
-                'ExtendedControl<List<Map<String, Object?>?>, List<$T>> Function(${formGenerator.classNameFull} formModel)?'),
+    ),
+    Field(
+      (b) => b
+        ..name = 'getExtended'
+        ..modifier = FieldModifier.final$
+        ..type = Reference(
+          'ExtendedControl<List<Map<String, Object?>?>, List<$T>> Function(${formGenerator.classNameFull} formModel)?',
         ),
-        Field(
-          (b) => b
-            ..name = 'builder'
-            ..modifier = FieldModifier.final$
-            ..type = Reference(
-              'Widget Function(BuildContext context, List<Widget> itemList, ${formGenerator.classNameFull} formModel)?',
-            ),
+    ),
+    Field(
+      (b) => b
+        ..name = 'builder'
+        ..modifier = FieldModifier.final$
+        ..type = Reference(
+          'Widget Function(BuildContext context, List<Widget> itemList, ${formGenerator.classNameFull} formModel)?',
         ),
-        Field(
-          (b) => b
-            ..name = 'itemBuilder'
-            ..modifier = FieldModifier.final$
-            ..type = Reference(
-                'Widget Function(BuildContext context, int i, $T? item, ${formGenerator.classNameFull} formModel)'),
+    ),
+    Field(
+      (b) => b
+        ..name = 'itemBuilder'
+        ..modifier = FieldModifier.final$
+        ..type = Reference(
+          'Widget Function(BuildContext context, int i, $T? item, ${formGenerator.classNameFull} formModel)',
         ),
-      ];
+    ),
+  ];
 
   String get T => 'Reactive${formGenerator.className}FormGroupArrayBuilderT';
 
@@ -148,12 +143,10 @@ class ReactiveFormGroupArrayBuilder {
     return Class(
       (b) => b
         ..name = 'Reactive${formGenerator.className}FormGroupArrayBuilder'
-        ..types.addAll(
-          [
-            Reference(T),
-            ...formGenerator.element.fullGenericTypes,
-          ],
-        )
+        ..types.addAll([
+          Reference(T),
+          ...formGenerator.element.fullGenericTypes,
+        ])
         ..extend = const Reference('StatelessWidget')
         ..constructors.add(_constructor)
         ..methods.add(_buildMethod)

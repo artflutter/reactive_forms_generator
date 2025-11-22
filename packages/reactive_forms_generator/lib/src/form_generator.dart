@@ -188,6 +188,46 @@ class FormGenerator {
     );
   }
 
+  Method get upsertValueMethod {
+    return Method(
+      (b) => b
+        ..name = 'upsertValue'
+        ..lambda = false
+        ..annotations.add(const CodeExpression(Code('override')))
+        ..requiredParameters.add(
+          Parameter(
+            (b) => b
+              ..name = 'value'
+              ..type = Reference(_modelDisplayTypeMaybeNullable),
+          ),
+        )
+        ..optionalParameters.addAll([
+          Parameter(
+            (b) => b
+              ..name = 'updateParent'
+              ..named = true
+              ..defaultTo = const Code('true')
+              ..type = const Reference('bool'),
+          ),
+          Parameter(
+            (b) => b
+              ..name = 'emitEvent'
+              ..named = true
+              ..defaultTo = const Code('true')
+              ..type = const Reference('bool'),
+          ),
+        ])
+        ..returns = const Reference('void')
+        ..body = Code('''
+          final formElements = $className.formElements(value);
+
+          if (currentForm is FormGroup) {
+            (currentForm as FormGroup).addAll(formElements.controls);
+          }
+        '''),
+    );
+  }
+
   Method get resetMethod {
     return Method(
       (b) => b
@@ -217,7 +257,7 @@ class FormGenerator {
         ])
         ..returns = const Reference('void')
         ..body = const Code(
-          'form.reset(value: value != null ? formElements(value).rawValue : null, updateParent: updateParent, emitEvent:emitEvent)',
+          'currentForm.reset(value: value != null ? formElements(value).rawValue : null, updateParent: updateParent, emitEvent:emitEvent)',
         ),
     );
   }
@@ -783,6 +823,7 @@ class FormGenerator {
             submitMethod,
             currentFormMethod,
             updateValueMethod,
+            upsertValueMethod,
             resetMethod,
             Method(
               (b) => b
