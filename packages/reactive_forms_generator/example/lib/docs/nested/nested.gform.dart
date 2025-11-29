@@ -137,7 +137,8 @@ class _SubGroupFormBuilderState extends State<SubGroupFormBuilder> {
 
   @override
   void initState() {
-    _formModel = SubGroupForm(SubGroupForm.formElements(widget.model), null);
+    _formModel =
+        SubGroupForm(SubGroupForm.formElements(widget.model), null, null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -217,7 +218,8 @@ class SubGroupForm implements FormModel<SubGroup, SubGroup> {
   SubGroupForm(
     this.form,
     this.path,
-  );
+    this._formModel,
+  ) : initial = form.rawValue;
 
   static const String idControlName = "id";
 
@@ -225,7 +227,13 @@ class SubGroupForm implements FormModel<SubGroup, SubGroup> {
 
   final String? path;
 
+// ignore: unused_field
+  final FormModel<dynamic, dynamic>? _formModel;
+
   final Map<String, bool> _disabled = {};
+
+  @override
+  final Map<String, Object?> initial;
 
   String idControlPath() => pathBuilder(idControlName);
 
@@ -326,23 +334,17 @@ class SubGroupForm implements FormModel<SubGroup, SubGroup> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final currentFormInstance = currentForm;
-
-    if (currentFormInstance is! FormGroup) {
-      return;
-    }
-
     if (_disabled.isEmpty) {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
       currentForm.markAsDisabled(
           updateParent: updateParent, emitEvent: emitEvent);
     } else {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
-          currentFormInstance.controls[key]?.markAsEnabled(
+          currentForm.controls[key]?.markAsEnabled(
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -358,9 +360,7 @@ class SubGroupForm implements FormModel<SubGroup, SubGroup> {
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
-      currentForm is FormControlCollection<dynamic>
-          ? currentForm.rawValue
-          : currentForm.value,
+      currentForm.rawValue,
       SubGroupForm.formElements(other).rawValue,
     );
   }
@@ -381,8 +381,16 @@ class SubGroupForm implements FormModel<SubGroup, SubGroup> {
   }
 
   @override
-  AbstractControl<dynamic> get currentForm {
-    return path == null ? form : form.control(path!);
+  bool get hasChanged {
+    return !const DeepCollectionEquality().equals(
+      currentForm.rawValue,
+      initial,
+    );
+  }
+
+  @override
+  FormGroup get currentForm {
+    return path == null ? form : form.control(path!) as FormGroup;
   }
 
   @override
@@ -402,9 +410,7 @@ class SubGroupForm implements FormModel<SubGroup, SubGroup> {
   }) {
     final formElements = SubGroupForm.formElements(value);
 
-    if (currentForm is FormGroup) {
-      (currentForm as FormGroup).addAll(formElements.controls);
-    }
+    currentForm.addAll(formElements.controls);
   }
 
   @override
@@ -417,6 +423,58 @@ class SubGroupForm implements FormModel<SubGroup, SubGroup> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
+  @override
+  void updateInitial(
+    Map<String, Object?>? value,
+    String? path,
+  ) {
+    if (_formModel != null) {
+      _formModel?.updateInitial(currentForm.rawValue, path);
+      return;
+    }
+
+    if (value == null) return;
+
+    if (path == null || path.isEmpty) {
+      initial.addAll(value);
+      return;
+    }
+
+    final keys = path.split('.');
+    Object? current = initial;
+    for (var i = 0; i < keys.length - 1; i++) {
+      final key = keys[i];
+
+      if (current is List) {
+        final index = int.tryParse(key);
+        if (index != null && index >= 0 && index < current.length) {
+          current = current[index];
+          continue;
+        }
+      }
+
+      if (current is Map) {
+        if (!current.containsKey(key)) {
+          current[key] = <String, Object?>{};
+        }
+        current = current[key];
+        continue;
+      }
+
+      return;
+    }
+
+    final key = keys.last;
+    if (current is List) {
+      final index = int.tryParse(key);
+      if (index != null && index >= 0 && index < current.length) {
+        current[index] = value;
+      }
+    } else if (current is Map) {
+      current[key] = value;
+    }
+  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
@@ -778,7 +836,7 @@ class _GroupFormBuilderState extends State<GroupFormBuilder> {
 
   @override
   void initState() {
-    _formModel = GroupForm(GroupForm.formElements(widget.model), null);
+    _formModel = GroupForm(GroupForm.formElements(widget.model), null, null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -858,7 +916,8 @@ class GroupForm implements FormModel<Group, Group> {
   GroupForm(
     this.form,
     this.path,
-  );
+    this._formModel,
+  ) : initial = form.rawValue;
 
   static const String idControlName = "id";
 
@@ -868,7 +927,13 @@ class GroupForm implements FormModel<Group, Group> {
 
   final String? path;
 
+// ignore: unused_field
+  final FormModel<dynamic, dynamic>? _formModel;
+
   final Map<String, bool> _disabled = {};
+
+  @override
+  final Map<String, Object?> initial;
 
   String idControlPath() => pathBuilder(idControlName);
 
@@ -1063,8 +1128,10 @@ class GroupForm implements FormModel<Group, Group> {
 
     return values
         .asMap()
-        .map((k, v) =>
-            MapEntry(k, SubGroupForm(form, pathBuilder("subGroupList.$k"))))
+        .map((k, v) => MapEntry(
+            k,
+            SubGroupForm(
+                form, pathBuilder("subGroupList.$k"), _formModel ?? this)))
         .values
         .toList();
   }
@@ -1150,14 +1217,8 @@ class GroupForm implements FormModel<Group, Group> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final currentFormInstance = currentForm;
-
-    if (currentFormInstance is! FormGroup) {
-      return;
-    }
-
     if (_disabled.isEmpty) {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
@@ -1168,9 +1229,9 @@ class GroupForm implements FormModel<Group, Group> {
     } else {
       subGroupListSubGroupForm.forEach((e) => e.toggleDisabled());
 
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
-          currentFormInstance.controls[key]?.markAsEnabled(
+          currentForm.controls[key]?.markAsEnabled(
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -1186,9 +1247,7 @@ class GroupForm implements FormModel<Group, Group> {
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
-      currentForm is FormControlCollection<dynamic>
-          ? currentForm.rawValue
-          : currentForm.value,
+      currentForm.rawValue,
       GroupForm.formElements(other).rawValue,
     );
   }
@@ -1209,8 +1268,16 @@ class GroupForm implements FormModel<Group, Group> {
   }
 
   @override
-  AbstractControl<dynamic> get currentForm {
-    return path == null ? form : form.control(path!);
+  bool get hasChanged {
+    return !const DeepCollectionEquality().equals(
+      currentForm.rawValue,
+      initial,
+    );
+  }
+
+  @override
+  FormGroup get currentForm {
+    return path == null ? form : form.control(path!) as FormGroup;
   }
 
   @override
@@ -1230,9 +1297,7 @@ class GroupForm implements FormModel<Group, Group> {
   }) {
     final formElements = GroupForm.formElements(value);
 
-    if (currentForm is FormGroup) {
-      (currentForm as FormGroup).addAll(formElements.controls);
-    }
+    currentForm.addAll(formElements.controls);
   }
 
   @override
@@ -1245,6 +1310,58 @@ class GroupForm implements FormModel<Group, Group> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
+  @override
+  void updateInitial(
+    Map<String, Object?>? value,
+    String? path,
+  ) {
+    if (_formModel != null) {
+      _formModel?.updateInitial(currentForm.rawValue, path);
+      return;
+    }
+
+    if (value == null) return;
+
+    if (path == null || path.isEmpty) {
+      initial.addAll(value);
+      return;
+    }
+
+    final keys = path.split('.');
+    Object? current = initial;
+    for (var i = 0; i < keys.length - 1; i++) {
+      final key = keys[i];
+
+      if (current is List) {
+        final index = int.tryParse(key);
+        if (index != null && index >= 0 && index < current.length) {
+          current = current[index];
+          continue;
+        }
+      }
+
+      if (current is Map) {
+        if (!current.containsKey(key)) {
+          current[key] = <String, Object?>{};
+        }
+        current = current[key];
+        continue;
+      }
+
+      return;
+    }
+
+    final key = keys.last;
+    if (current is List) {
+      final index = int.tryParse(key);
+      if (index != null && index >= 0 && index < current.length) {
+        current[index] = value;
+      }
+    } else if (current is Map) {
+      current[key] = value;
+    }
+  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
@@ -1614,7 +1731,7 @@ class _NestedFormBuilderState extends State<NestedFormBuilder> {
 
   @override
   void initState() {
-    _formModel = NestedForm(NestedForm.formElements(widget.model), null);
+    _formModel = NestedForm(NestedForm.formElements(widget.model), null, null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -1694,7 +1811,8 @@ class NestedForm implements FormModel<Nested, Nested> {
   NestedForm(
     this.form,
     this.path,
-  );
+    this._formModel,
+  ) : initial = form.rawValue;
 
   static const String groupListControlName = "groupList";
 
@@ -1702,7 +1820,13 @@ class NestedForm implements FormModel<Nested, Nested> {
 
   final String? path;
 
+// ignore: unused_field
+  final FormModel<dynamic, dynamic>? _formModel;
+
   final Map<String, bool> _disabled = {};
+
+  @override
+  final Map<String, Object?> initial;
 
   String groupListControlPath() => pathBuilder(groupListControlName);
 
@@ -1838,8 +1962,8 @@ class NestedForm implements FormModel<Nested, Nested> {
 
     return values
         .asMap()
-        .map(
-            (k, v) => MapEntry(k, GroupForm(form, pathBuilder("groupList.$k"))))
+        .map((k, v) => MapEntry(k,
+            GroupForm(form, pathBuilder("groupList.$k"), _formModel ?? this)))
         .values
         .toList();
   }
@@ -1907,14 +2031,8 @@ class NestedForm implements FormModel<Nested, Nested> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final currentFormInstance = currentForm;
-
-    if (currentFormInstance is! FormGroup) {
-      return;
-    }
-
     if (_disabled.isEmpty) {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
@@ -1925,9 +2043,9 @@ class NestedForm implements FormModel<Nested, Nested> {
     } else {
       groupListGroupForm.forEach((e) => e.toggleDisabled());
 
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
-          currentFormInstance.controls[key]?.markAsEnabled(
+          currentForm.controls[key]?.markAsEnabled(
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -1943,9 +2061,7 @@ class NestedForm implements FormModel<Nested, Nested> {
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
-      currentForm is FormControlCollection<dynamic>
-          ? currentForm.rawValue
-          : currentForm.value,
+      currentForm.rawValue,
       NestedForm.formElements(other).rawValue,
     );
   }
@@ -1966,8 +2082,16 @@ class NestedForm implements FormModel<Nested, Nested> {
   }
 
   @override
-  AbstractControl<dynamic> get currentForm {
-    return path == null ? form : form.control(path!);
+  bool get hasChanged {
+    return !const DeepCollectionEquality().equals(
+      currentForm.rawValue,
+      initial,
+    );
+  }
+
+  @override
+  FormGroup get currentForm {
+    return path == null ? form : form.control(path!) as FormGroup;
   }
 
   @override
@@ -1987,9 +2111,7 @@ class NestedForm implements FormModel<Nested, Nested> {
   }) {
     final formElements = NestedForm.formElements(value);
 
-    if (currentForm is FormGroup) {
-      (currentForm as FormGroup).addAll(formElements.controls);
-    }
+    currentForm.addAll(formElements.controls);
   }
 
   @override
@@ -2002,6 +2124,58 @@ class NestedForm implements FormModel<Nested, Nested> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
+  @override
+  void updateInitial(
+    Map<String, Object?>? value,
+    String? path,
+  ) {
+    if (_formModel != null) {
+      _formModel?.updateInitial(currentForm.rawValue, path);
+      return;
+    }
+
+    if (value == null) return;
+
+    if (path == null || path.isEmpty) {
+      initial.addAll(value);
+      return;
+    }
+
+    final keys = path.split('.');
+    Object? current = initial;
+    for (var i = 0; i < keys.length - 1; i++) {
+      final key = keys[i];
+
+      if (current is List) {
+        final index = int.tryParse(key);
+        if (index != null && index >= 0 && index < current.length) {
+          current = current[index];
+          continue;
+        }
+      }
+
+      if (current is Map) {
+        if (!current.containsKey(key)) {
+          current[key] = <String, Object?>{};
+        }
+        current = current[key];
+        continue;
+      }
+
+      return;
+    }
+
+    final key = keys.last;
+    if (current is List) {
+      final index = int.tryParse(key);
+      if (index != null && index >= 0 && index < current.length) {
+        current[index] = value;
+      }
+    } else if (current is Map) {
+      current[key] = value;
+    }
+  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");

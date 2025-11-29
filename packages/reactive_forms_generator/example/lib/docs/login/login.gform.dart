@@ -136,7 +136,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
 
   @override
   void initState() {
-    _formModel = LoginForm(LoginForm.formElements(widget.model), null);
+    _formModel = LoginForm(LoginForm.formElements(widget.model), null, null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -216,7 +216,8 @@ class LoginForm implements FormModel<Login, Login> {
   LoginForm(
     this.form,
     this.path,
-  );
+    this._formModel,
+  ) : initial = form.rawValue;
 
   static const String emailControlName = "email";
 
@@ -226,7 +227,13 @@ class LoginForm implements FormModel<Login, Login> {
 
   final String? path;
 
+// ignore: unused_field
+  final FormModel<dynamic, dynamic>? _formModel;
+
   final Map<String, bool> _disabled = {};
+
+  @override
+  final Map<String, Object?> initial;
 
   String emailControlPath() => pathBuilder(emailControlName);
 
@@ -402,23 +409,17 @@ class LoginForm implements FormModel<Login, Login> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final currentFormInstance = currentForm;
-
-    if (currentFormInstance is! FormGroup) {
-      return;
-    }
-
     if (_disabled.isEmpty) {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
       currentForm.markAsDisabled(
           updateParent: updateParent, emitEvent: emitEvent);
     } else {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
-          currentFormInstance.controls[key]?.markAsEnabled(
+          currentForm.controls[key]?.markAsEnabled(
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -434,9 +435,7 @@ class LoginForm implements FormModel<Login, Login> {
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
-      currentForm is FormControlCollection<dynamic>
-          ? currentForm.rawValue
-          : currentForm.value,
+      currentForm.rawValue,
       LoginForm.formElements(other).rawValue,
     );
   }
@@ -457,8 +456,16 @@ class LoginForm implements FormModel<Login, Login> {
   }
 
   @override
-  AbstractControl<dynamic> get currentForm {
-    return path == null ? form : form.control(path!);
+  bool get hasChanged {
+    return !const DeepCollectionEquality().equals(
+      currentForm.rawValue,
+      initial,
+    );
+  }
+
+  @override
+  FormGroup get currentForm {
+    return path == null ? form : form.control(path!) as FormGroup;
   }
 
   @override
@@ -478,9 +485,7 @@ class LoginForm implements FormModel<Login, Login> {
   }) {
     final formElements = LoginForm.formElements(value);
 
-    if (currentForm is FormGroup) {
-      (currentForm as FormGroup).addAll(formElements.controls);
-    }
+    currentForm.addAll(formElements.controls);
   }
 
   @override
@@ -493,6 +498,58 @@ class LoginForm implements FormModel<Login, Login> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
+  @override
+  void updateInitial(
+    Map<String, Object?>? value,
+    String? path,
+  ) {
+    if (_formModel != null) {
+      _formModel?.updateInitial(currentForm.rawValue, path);
+      return;
+    }
+
+    if (value == null) return;
+
+    if (path == null || path.isEmpty) {
+      initial.addAll(value);
+      return;
+    }
+
+    final keys = path.split('.');
+    Object? current = initial;
+    for (var i = 0; i < keys.length - 1; i++) {
+      final key = keys[i];
+
+      if (current is List) {
+        final index = int.tryParse(key);
+        if (index != null && index >= 0 && index < current.length) {
+          current = current[index];
+          continue;
+        }
+      }
+
+      if (current is Map) {
+        if (!current.containsKey(key)) {
+          current[key] = <String, Object?>{};
+        }
+        current = current[key];
+        continue;
+      }
+
+      return;
+    }
+
+    final key = keys.last;
+    if (current is List) {
+      final index = int.tryParse(key);
+      if (index != null && index >= 0 && index < current.length) {
+        current[index] = value;
+      }
+    } else if (current is Map) {
+      current[key] = value;
+    }
+  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");

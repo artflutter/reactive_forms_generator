@@ -221,9 +221,7 @@ class FormGenerator {
         ..body = Code('''
           final formElements = $className.formElements(value);
 
-          if (currentForm is FormGroup) {
-            (currentForm as FormGroup).addAll(formElements.controls);
-          }
+          currentForm.addAll(formElements.controls);
         '''),
     );
   }
@@ -545,14 +543,8 @@ class FormGenerator {
       ])
       ..returns = const Reference('void')
       ..body = Code('''
-                final currentFormInstance = currentForm;
-
-                if (currentFormInstance is! FormGroup) {
-                  return;
-                }
-                
               if (_disabled.isEmpty) {
-                currentFormInstance.controls.forEach((key, control) {
+                currentForm.controls.forEach((key, control) {
                   _disabled[key] = control.disabled;
                 });
               
@@ -563,9 +555,9 @@ class FormGenerator {
               } else {
                 $formGroupArraysToggleDisabled
                 $formGroupsToggleDisabled
-                currentFormInstance.controls.forEach((key, control) {
+                currentForm.controls.forEach((key, control) {
                   if (_disabled[key] == false) {
-                    currentFormInstance.controls[key]?.markAsEnabled(
+                    currentForm.controls[key]?.markAsEnabled(
                       updateParent: updateParent,
                       emitEvent: emitEvent,
                     );
@@ -582,9 +574,9 @@ class FormGenerator {
       ..name = 'currentForm'
       ..annotations.add(const CodeExpression(Code('override')))
       ..type = MethodType.getter
-      ..returns = const Reference('AbstractControl<dynamic>')
+      ..returns = const Reference('FormGroup')
       ..body = const Code('''
-              return path == null ? form : form.control(path!);
+              return path == null ? form : form.control(path!) as FormGroup;
             ''');
   });
 
@@ -604,7 +596,7 @@ class FormGenerator {
               final currentForm = this.currentForm;
               
               return const DeepCollectionEquality().equals(
-                currentForm is FormControlCollection<dynamic> ? currentForm.rawValue : currentForm.value,
+                currentForm.rawValue,
                 $className.formElements(other).rawValue,
               );
             ''');
@@ -659,7 +651,13 @@ class FormGenerator {
             ..name = 'path'
             ..toThis = true,
         ),
-      ]),
+        Parameter(
+          (b) => b
+            ..name = '_formModel'
+            ..toThis = true,
+        ),
+      ])
+      ..initializers.add(const Code('initial = form.rawValue')),
   );
 
   String get _modelDisplayTypeNonNullable {
@@ -784,12 +782,27 @@ class FormGenerator {
                 ..modifier = FieldModifier.final$
                 ..type = const Reference('String?'),
             ),
+
+            Field(
+              (b) => b
+                ..name = '_formModel'
+                ..docs.add('// ignore: unused_field')
+                ..modifier = FieldModifier.final$
+                ..type = Reference("FormModel<dynamic, dynamic>?"),
+            ),
             Field(
               (b) => b
                 ..name = '_disabled'
                 ..modifier = FieldModifier.final$
                 ..assignment = const Code('{}')
                 ..type = const Reference('Map<String, bool>'),
+            ),
+            Field(
+              (b) => b
+                ..name = 'initial'
+                ..annotations.add(const CodeExpression(Code('override')))
+                ..modifier = FieldModifier.final$
+                ..type = const Reference('Map<String, Object?>'),
             ),
           ])
           ..constructors.add(_constructor)
@@ -821,10 +834,89 @@ class FormGenerator {
             toggleDisabledMethod,
             equalsToMethod,
             submitMethod,
+            Method(
+              (b) => b
+                ..name = 'hasChanged'
+                ..type = MethodType.getter
+                ..annotations.add(const CodeExpression(Code('override')))
+                ..returns = const Reference('bool')
+                ..body = const Code('''
+                  return !const DeepCollectionEquality().equals(
+                    currentForm.rawValue,
+                    initial,
+                  );
+                '''),
+            ),
             currentFormMethod,
             updateValueMethod,
             upsertValueMethod,
             resetMethod,
+            Method(
+              (b) => b
+                ..name = 'updateInitial'
+                ..lambda = false
+                ..annotations.add(const CodeExpression(Code('override')))
+                ..requiredParameters.addAll([
+                  Parameter(
+                    (b) => b
+                      ..name = 'value'
+                      ..type = const Reference('Map<String, Object?>?'),
+                  ),
+                  Parameter(
+                    (b) => b
+                      ..name = 'path'
+                      ..type = const Reference('String?'),
+                  ),
+                ])
+                ..returns = const Reference('void')
+                ..body = const Code('''
+                  if (_formModel != null) {
+                    _formModel?.updateInitial(currentForm.rawValue, path);
+                    return;
+                  }
+
+                  if (value == null) return;
+
+                  if (path == null || path.isEmpty) {
+                    initial.addAll(value);
+                    return;
+                  }
+
+                  final keys = path.split('.');
+                  Object? current = initial;
+                  for (var i = 0; i < keys.length - 1; i++) {
+                    final key = keys[i];
+
+                    if (current is List) {
+                      final index = int.tryParse(key);
+                      if (index != null && index >= 0 && index < current.length) {
+                        current = current[index];
+                        continue;
+                      }
+                    }
+
+                    if (current is Map) {
+                      if (!current.containsKey(key)) {
+                        current[key] = <String, Object?>{};
+                      }
+                      current = current[key];
+                      continue;
+                    }
+                    
+                    return;
+                  }
+
+                  final key = keys.last;
+                  if (current is List) {
+                    final index = int.tryParse(key);
+                    if (index != null && index >= 0 && index < current.length) {
+                      current[index] = value;
+                    }
+                  } else if (current is Map) {
+                    current[key] = value;
+                  }
+                '''),
+            ),
             Method(
               (b) => b
                 ..name = 'pathBuilder'
@@ -910,7 +1002,9 @@ class FormGenerator {
           ..returns = Reference('${e.className}${element.generics}')
           ..name = '${e.name}Form'
           ..type = MethodType.getter
-          ..body = Code('${e.className}(form, pathBuilder(\'${e.name}\'))'),
+          ..body = Code(
+            '${e.className}(form, pathBuilder(\'${e.name}\'), _formModel ?? this)',
+          ),
       );
     });
   }
@@ -937,7 +1031,7 @@ class FormGenerator {
                 
                 return values
                 .asMap()
-                .map((k, v) => MapEntry(k, ${generator.className}(form, pathBuilder("${e.name}.\$k"))))
+                .map((k, v) => MapEntry(k, ${generator.className}(form, pathBuilder("${e.name}.\$k"), _formModel ?? this)))
                 .values
                 .toList();
               '''),

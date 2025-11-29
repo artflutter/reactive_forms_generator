@@ -158,7 +158,7 @@ class ReactiveFormBuilder {
         ..annotations.add(const CodeExpression(Code('override')))
         ..returns = const Reference('void')
         ..body = Code('''
-                _formModel = ${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull}(${reactiveForm.reactiveInheritedStreamer.formGenerator.className}.formElements${reactiveForm.reactiveInheritedStreamer.formGenerator.element.generics}(widget.model), null);
+                _formModel = ${reactiveForm.reactiveInheritedStreamer.formGenerator.classNameFull}(${reactiveForm.reactiveInheritedStreamer.formGenerator.className}.formElements${reactiveForm.reactiveInheritedStreamer.formGenerator.element.generics}(widget.model), null, null);
 
                 if (_formModel.form.disabled) {
                   _formModel.form.markAsDisabled();

@@ -145,7 +145,7 @@ class _AnimatedUrlLisOFormBuilderState
   @override
   void initState() {
     _formModel = AnimatedUrlLisOForm(
-        AnimatedUrlLisOForm.formElements(widget.model), null);
+        AnimatedUrlLisOForm.formElements(widget.model), null, null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -226,7 +226,8 @@ class AnimatedUrlLisOForm
   AnimatedUrlLisOForm(
     this.form,
     this.path,
-  );
+    this._formModel,
+  ) : initial = form.rawValue;
 
   static const String urlListControlName = "urlList";
 
@@ -234,7 +235,13 @@ class AnimatedUrlLisOForm
 
   final String? path;
 
+// ignore: unused_field
+  final FormModel<dynamic, dynamic>? _formModel;
+
   final Map<String, bool> _disabled = {};
+
+  @override
+  final Map<String, Object?> initial;
 
   String urlListControlPath() => pathBuilder(urlListControlName);
 
@@ -372,8 +379,10 @@ class AnimatedUrlLisOForm
 
     return values
         .asMap()
-        .map((k, v) =>
-            MapEntry(k, UrlEntityOForm(form, pathBuilder("urlList.$k"))))
+        .map((k, v) => MapEntry(
+            k,
+            UrlEntityOForm(
+                form, pathBuilder("urlList.$k"), _formModel ?? this)))
         .values
         .toList();
   }
@@ -442,14 +451,8 @@ class AnimatedUrlLisOForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final currentFormInstance = currentForm;
-
-    if (currentFormInstance is! FormGroup) {
-      return;
-    }
-
     if (_disabled.isEmpty) {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
@@ -460,9 +463,9 @@ class AnimatedUrlLisOForm
     } else {
       urlListUrlEntityOForm.forEach((e) => e.toggleDisabled());
 
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
-          currentFormInstance.controls[key]?.markAsEnabled(
+          currentForm.controls[key]?.markAsEnabled(
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -478,9 +481,7 @@ class AnimatedUrlLisOForm
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
-      currentForm is FormControlCollection<dynamic>
-          ? currentForm.rawValue
-          : currentForm.value,
+      currentForm.rawValue,
       AnimatedUrlLisOForm.formElements(other).rawValue,
     );
   }
@@ -501,8 +502,16 @@ class AnimatedUrlLisOForm
   }
 
   @override
-  AbstractControl<dynamic> get currentForm {
-    return path == null ? form : form.control(path!);
+  bool get hasChanged {
+    return !const DeepCollectionEquality().equals(
+      currentForm.rawValue,
+      initial,
+    );
+  }
+
+  @override
+  FormGroup get currentForm {
+    return path == null ? form : form.control(path!) as FormGroup;
   }
 
   @override
@@ -522,9 +531,7 @@ class AnimatedUrlLisOForm
   }) {
     final formElements = AnimatedUrlLisOForm.formElements(value);
 
-    if (currentForm is FormGroup) {
-      (currentForm as FormGroup).addAll(formElements.controls);
-    }
+    currentForm.addAll(formElements.controls);
   }
 
   @override
@@ -537,6 +544,58 @@ class AnimatedUrlLisOForm
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
+  @override
+  void updateInitial(
+    Map<String, Object?>? value,
+    String? path,
+  ) {
+    if (_formModel != null) {
+      _formModel?.updateInitial(currentForm.rawValue, path);
+      return;
+    }
+
+    if (value == null) return;
+
+    if (path == null || path.isEmpty) {
+      initial.addAll(value);
+      return;
+    }
+
+    final keys = path.split('.');
+    Object? current = initial;
+    for (var i = 0; i < keys.length - 1; i++) {
+      final key = keys[i];
+
+      if (current is List) {
+        final index = int.tryParse(key);
+        if (index != null && index >= 0 && index < current.length) {
+          current = current[index];
+          continue;
+        }
+      }
+
+      if (current is Map) {
+        if (!current.containsKey(key)) {
+          current[key] = <String, Object?>{};
+        }
+        current = current[key];
+        continue;
+      }
+
+      return;
+    }
+
+    final key = keys.last;
+    if (current is List) {
+      final index = int.tryParse(key);
+      if (index != null && index >= 0 && index < current.length) {
+        current[index] = value;
+      }
+    } else if (current is Map) {
+      current[key] = value;
+    }
+  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
@@ -563,7 +622,8 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
   UrlEntityOForm(
     this.form,
     this.path,
-  );
+    this._formModel,
+  ) : initial = form.rawValue;
 
   static const String labelControlName = "label";
 
@@ -573,7 +633,13 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
 
   final String? path;
 
+// ignore: unused_field
+  final FormModel<dynamic, dynamic>? _formModel;
+
   final Map<String, bool> _disabled = {};
+
+  @override
+  final Map<String, Object?> initial;
 
   String labelControlPath() => pathBuilder(labelControlName);
 
@@ -806,23 +872,17 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final currentFormInstance = currentForm;
-
-    if (currentFormInstance is! FormGroup) {
-      return;
-    }
-
     if (_disabled.isEmpty) {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
       currentForm.markAsDisabled(
           updateParent: updateParent, emitEvent: emitEvent);
     } else {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
-          currentFormInstance.controls[key]?.markAsEnabled(
+          currentForm.controls[key]?.markAsEnabled(
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -838,9 +898,7 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
-      currentForm is FormControlCollection<dynamic>
-          ? currentForm.rawValue
-          : currentForm.value,
+      currentForm.rawValue,
       UrlEntityOForm.formElements(other).rawValue,
     );
   }
@@ -861,8 +919,16 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
   }
 
   @override
-  AbstractControl<dynamic> get currentForm {
-    return path == null ? form : form.control(path!);
+  bool get hasChanged {
+    return !const DeepCollectionEquality().equals(
+      currentForm.rawValue,
+      initial,
+    );
+  }
+
+  @override
+  FormGroup get currentForm {
+    return path == null ? form : form.control(path!) as FormGroup;
   }
 
   @override
@@ -882,9 +948,7 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
   }) {
     final formElements = UrlEntityOForm.formElements(value);
 
-    if (currentForm is FormGroup) {
-      (currentForm as FormGroup).addAll(formElements.controls);
-    }
+    currentForm.addAll(formElements.controls);
   }
 
   @override
@@ -897,6 +961,58 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
+  @override
+  void updateInitial(
+    Map<String, Object?>? value,
+    String? path,
+  ) {
+    if (_formModel != null) {
+      _formModel?.updateInitial(currentForm.rawValue, path);
+      return;
+    }
+
+    if (value == null) return;
+
+    if (path == null || path.isEmpty) {
+      initial.addAll(value);
+      return;
+    }
+
+    final keys = path.split('.');
+    Object? current = initial;
+    for (var i = 0; i < keys.length - 1; i++) {
+      final key = keys[i];
+
+      if (current is List) {
+        final index = int.tryParse(key);
+        if (index != null && index >= 0 && index < current.length) {
+          current = current[index];
+          continue;
+        }
+      }
+
+      if (current is Map) {
+        if (!current.containsKey(key)) {
+          current[key] = <String, Object?>{};
+        }
+        current = current[key];
+        continue;
+      }
+
+      return;
+    }
+
+    final key = keys.last;
+    if (current is List) {
+      final index = int.tryParse(key);
+      if (index != null && index >= 0 && index < current.length) {
+        current[index] = value;
+      }
+    } else if (current is Map) {
+      current[key] = value;
+    }
+  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");

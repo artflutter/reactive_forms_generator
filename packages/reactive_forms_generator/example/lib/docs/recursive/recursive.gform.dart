@@ -140,7 +140,7 @@ class _SecuredAreaFormBuilderState extends State<SecuredAreaFormBuilder> {
   @override
   void initState() {
     _formModel =
-        SecuredAreaForm(SecuredAreaForm.formElements(widget.model), null);
+        SecuredAreaForm(SecuredAreaForm.formElements(widget.model), null, null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -220,7 +220,8 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
   SecuredAreaForm(
     this.form,
     this.path,
-  );
+    this._formModel,
+  ) : initial = form.rawValue;
 
   static const String idControlName = "id";
 
@@ -234,7 +235,13 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
 
   final String? path;
 
+// ignore: unused_field
+  final FormModel<dynamic, dynamic>? _formModel;
+
   final Map<String, bool> _disabled = {};
+
+  @override
+  final Map<String, Object?> initial;
 
   String idControlPath() => pathBuilder(idControlName);
 
@@ -628,10 +635,10 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
           as FormArray<Map<String, Object?>>;
 
   SecuredAreaForm get securedAreaForm =>
-      SecuredAreaForm(form, pathBuilder('securedArea'));
+      SecuredAreaForm(form, pathBuilder('securedArea'), _formModel ?? this);
 
   ParcelSystemForm get parcelSystemForm =>
-      ParcelSystemForm(form, pathBuilder('parcelSystem'));
+      ParcelSystemForm(form, pathBuilder('parcelSystem'), _formModel ?? this);
 
   List<SecuredAreaForm> get subSecuredAreasSecuredAreaForm {
     final values = subSecuredAreasControl.controls.map((e) => e.value).toList();
@@ -639,7 +646,9 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     return values
         .asMap()
         .map((k, v) => MapEntry(
-            k, SecuredAreaForm(form, pathBuilder("subSecuredAreas.$k"))))
+            k,
+            SecuredAreaForm(
+                form, pathBuilder("subSecuredAreas.$k"), _formModel ?? this)))
         .values
         .toList();
   }
@@ -769,14 +778,8 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final currentFormInstance = currentForm;
-
-    if (currentFormInstance is! FormGroup) {
-      return;
-    }
-
     if (_disabled.isEmpty) {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
@@ -789,9 +792,9 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
       subSecuredAreasSecuredAreaForm.forEach((e) => e.toggleDisabled());
       securedAreaForm.toggleDisabled();
       parcelSystemForm.toggleDisabled();
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
-          currentFormInstance.controls[key]?.markAsEnabled(
+          currentForm.controls[key]?.markAsEnabled(
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -807,9 +810,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
-      currentForm is FormControlCollection<dynamic>
-          ? currentForm.rawValue
-          : currentForm.value,
+      currentForm.rawValue,
       SecuredAreaForm.formElements(other).rawValue,
     );
   }
@@ -830,8 +831,16 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
   }
 
   @override
-  AbstractControl<dynamic> get currentForm {
-    return path == null ? form : form.control(path!);
+  bool get hasChanged {
+    return !const DeepCollectionEquality().equals(
+      currentForm.rawValue,
+      initial,
+    );
+  }
+
+  @override
+  FormGroup get currentForm {
+    return path == null ? form : form.control(path!) as FormGroup;
   }
 
   @override
@@ -851,9 +860,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
   }) {
     final formElements = SecuredAreaForm.formElements(value);
 
-    if (currentForm is FormGroup) {
-      (currentForm as FormGroup).addAll(formElements.controls);
-    }
+    currentForm.addAll(formElements.controls);
   }
 
   @override
@@ -866,6 +873,58 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
+  @override
+  void updateInitial(
+    Map<String, Object?>? value,
+    String? path,
+  ) {
+    if (_formModel != null) {
+      _formModel?.updateInitial(currentForm.rawValue, path);
+      return;
+    }
+
+    if (value == null) return;
+
+    if (path == null || path.isEmpty) {
+      initial.addAll(value);
+      return;
+    }
+
+    final keys = path.split('.');
+    Object? current = initial;
+    for (var i = 0; i < keys.length - 1; i++) {
+      final key = keys[i];
+
+      if (current is List) {
+        final index = int.tryParse(key);
+        if (index != null && index >= 0 && index < current.length) {
+          current = current[index];
+          continue;
+        }
+      }
+
+      if (current is Map) {
+        if (!current.containsKey(key)) {
+          current[key] = <String, Object?>{};
+        }
+        current = current[key];
+        continue;
+      }
+
+      return;
+    }
+
+    final key = keys.last;
+    if (current is List) {
+      final index = int.tryParse(key);
+      if (index != null && index >= 0 && index < current.length) {
+        current[index] = value;
+      }
+    } else if (current is Map) {
+      current[key] = value;
+    }
+  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
@@ -903,7 +962,8 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
   ParcelSystemForm(
     this.form,
     this.path,
-  );
+    this._formModel,
+  ) : initial = form.rawValue;
 
   static const String hasParcelSystemControlName = "hasParcelSystem";
 
@@ -913,7 +973,13 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
 
   final String? path;
 
+// ignore: unused_field
+  final FormModel<dynamic, dynamic>? _formModel;
+
   final Map<String, bool> _disabled = {};
+
+  @override
+  final Map<String, Object?> initial;
 
   String hasParcelSystemControlPath() =>
       pathBuilder(hasParcelSystemControlName);
@@ -1028,7 +1094,7 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
   FormGroup get dataControl => form.control(dataControlPath()) as FormGroup;
 
   ParcelSystemDataForm get dataForm =>
-      ParcelSystemDataForm(form, pathBuilder('data'));
+      ParcelSystemDataForm(form, pathBuilder('data'), _formModel ?? this);
 
   void hasParcelSystemSetDisabled(
     bool disabled, {
@@ -1092,14 +1158,8 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final currentFormInstance = currentForm;
-
-    if (currentFormInstance is! FormGroup) {
-      return;
-    }
-
     if (_disabled.isEmpty) {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
@@ -1108,9 +1168,9 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
           updateParent: updateParent, emitEvent: emitEvent);
     } else {
       dataForm.toggleDisabled();
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
-          currentFormInstance.controls[key]?.markAsEnabled(
+          currentForm.controls[key]?.markAsEnabled(
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -1126,9 +1186,7 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
-      currentForm is FormControlCollection<dynamic>
-          ? currentForm.rawValue
-          : currentForm.value,
+      currentForm.rawValue,
       ParcelSystemForm.formElements(other).rawValue,
     );
   }
@@ -1149,8 +1207,16 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
   }
 
   @override
-  AbstractControl<dynamic> get currentForm {
-    return path == null ? form : form.control(path!);
+  bool get hasChanged {
+    return !const DeepCollectionEquality().equals(
+      currentForm.rawValue,
+      initial,
+    );
+  }
+
+  @override
+  FormGroup get currentForm {
+    return path == null ? form : form.control(path!) as FormGroup;
   }
 
   @override
@@ -1170,9 +1236,7 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
   }) {
     final formElements = ParcelSystemForm.formElements(value);
 
-    if (currentForm is FormGroup) {
-      (currentForm as FormGroup).addAll(formElements.controls);
-    }
+    currentForm.addAll(formElements.controls);
   }
 
   @override
@@ -1185,6 +1249,58 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
+  @override
+  void updateInitial(
+    Map<String, Object?>? value,
+    String? path,
+  ) {
+    if (_formModel != null) {
+      _formModel?.updateInitial(currentForm.rawValue, path);
+      return;
+    }
+
+    if (value == null) return;
+
+    if (path == null || path.isEmpty) {
+      initial.addAll(value);
+      return;
+    }
+
+    final keys = path.split('.');
+    Object? current = initial;
+    for (var i = 0; i < keys.length - 1; i++) {
+      final key = keys[i];
+
+      if (current is List) {
+        final index = int.tryParse(key);
+        if (index != null && index >= 0 && index < current.length) {
+          current = current[index];
+          continue;
+        }
+      }
+
+      if (current is Map) {
+        if (!current.containsKey(key)) {
+          current[key] = <String, Object?>{};
+        }
+        current = current[key];
+        continue;
+      }
+
+      return;
+    }
+
+    final key = keys.last;
+    if (current is List) {
+      final index = int.tryParse(key);
+      if (index != null && index >= 0 && index < current.length) {
+        current[index] = value;
+      }
+    } else if (current is Map) {
+      current[key] = value;
+    }
+  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
@@ -1212,7 +1328,8 @@ class ParcelSystemDataForm
   ParcelSystemDataForm(
     this.form,
     this.path,
-  );
+    this._formModel,
+  ) : initial = form.rawValue;
 
   static const String idControlName = "id";
 
@@ -1220,7 +1337,13 @@ class ParcelSystemDataForm
 
   final String? path;
 
+// ignore: unused_field
+  final FormModel<dynamic, dynamic>? _formModel;
+
   final Map<String, bool> _disabled = {};
+
+  @override
+  final Map<String, Object?> initial;
 
   String idControlPath() => pathBuilder(idControlName);
 
@@ -1349,23 +1472,17 @@ class ParcelSystemDataForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final currentFormInstance = currentForm;
-
-    if (currentFormInstance is! FormGroup) {
-      return;
-    }
-
     if (_disabled.isEmpty) {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
       currentForm.markAsDisabled(
           updateParent: updateParent, emitEvent: emitEvent);
     } else {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
-          currentFormInstance.controls[key]?.markAsEnabled(
+          currentForm.controls[key]?.markAsEnabled(
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -1381,9 +1498,7 @@ class ParcelSystemDataForm
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
-      currentForm is FormControlCollection<dynamic>
-          ? currentForm.rawValue
-          : currentForm.value,
+      currentForm.rawValue,
       ParcelSystemDataForm.formElements(other).rawValue,
     );
   }
@@ -1404,8 +1519,16 @@ class ParcelSystemDataForm
   }
 
   @override
-  AbstractControl<dynamic> get currentForm {
-    return path == null ? form : form.control(path!);
+  bool get hasChanged {
+    return !const DeepCollectionEquality().equals(
+      currentForm.rawValue,
+      initial,
+    );
+  }
+
+  @override
+  FormGroup get currentForm {
+    return path == null ? form : form.control(path!) as FormGroup;
   }
 
   @override
@@ -1425,9 +1548,7 @@ class ParcelSystemDataForm
   }) {
     final formElements = ParcelSystemDataForm.formElements(value);
 
-    if (currentForm is FormGroup) {
-      (currentForm as FormGroup).addAll(formElements.controls);
-    }
+    currentForm.addAll(formElements.controls);
   }
 
   @override
@@ -1440,6 +1561,58 @@ class ParcelSystemDataForm
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
+  @override
+  void updateInitial(
+    Map<String, Object?>? value,
+    String? path,
+  ) {
+    if (_formModel != null) {
+      _formModel?.updateInitial(currentForm.rawValue, path);
+      return;
+    }
+
+    if (value == null) return;
+
+    if (path == null || path.isEmpty) {
+      initial.addAll(value);
+      return;
+    }
+
+    final keys = path.split('.');
+    Object? current = initial;
+    for (var i = 0; i < keys.length - 1; i++) {
+      final key = keys[i];
+
+      if (current is List) {
+        final index = int.tryParse(key);
+        if (index != null && index >= 0 && index < current.length) {
+          current = current[index];
+          continue;
+        }
+      }
+
+      if (current is Map) {
+        if (!current.containsKey(key)) {
+          current[key] = <String, Object?>{};
+        }
+        current = current[key];
+        continue;
+      }
+
+      return;
+    }
+
+    final key = keys.last;
+    if (current is List) {
+      final index = int.tryParse(key);
+      if (index != null && index >= 0 && index < current.length) {
+        current[index] = value;
+      }
+    } else if (current is Map) {
+      current[key] = value;
+    }
+  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");

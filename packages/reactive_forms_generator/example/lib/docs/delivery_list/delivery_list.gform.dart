@@ -141,8 +141,8 @@ class _DeliveryListFormBuilderState extends State<DeliveryListFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
-        DeliveryListForm(DeliveryListForm.formElements(widget.model), null);
+    _formModel = DeliveryListForm(
+        DeliveryListForm.formElements(widget.model), null, null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -222,7 +222,8 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
   DeliveryListForm(
     this.form,
     this.path,
-  );
+    this._formModel,
+  ) : initial = form.rawValue;
 
   static const String deliveryListControlName = "deliveryList";
 
@@ -232,7 +233,13 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
 
   final String? path;
 
+// ignore: unused_field
+  final FormModel<dynamic, dynamic>? _formModel;
+
   final Map<String, bool> _disabled = {};
+
+  @override
+  final Map<String, Object?> initial;
 
   String deliveryListControlPath() => pathBuilder(deliveryListControlName);
 
@@ -532,7 +539,9 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     return values
         .asMap()
         .map((k, v) => MapEntry(
-            k, DeliveryPointForm(form, pathBuilder("deliveryList.$k"))))
+            k,
+            DeliveryPointForm(
+                form, pathBuilder("deliveryList.$k"), _formModel ?? this)))
         .values
         .toList();
   }
@@ -542,8 +551,8 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
 
     return values
         .asMap()
-        .map((k, v) =>
-            MapEntry(k, ClientForm(form, pathBuilder("clientList.$k"))))
+        .map((k, v) => MapEntry(k,
+            ClientForm(form, pathBuilder("clientList.$k"), _formModel ?? this)))
         .values
         .toList();
   }
@@ -652,14 +661,8 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final currentFormInstance = currentForm;
-
-    if (currentFormInstance is! FormGroup) {
-      return;
-    }
-
     if (_disabled.isEmpty) {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
@@ -672,9 +675,9 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
       deliveryListDeliveryPointForm.forEach((e) => e.toggleDisabled());
       clientListClientForm.forEach((e) => e.toggleDisabled());
 
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
-          currentFormInstance.controls[key]?.markAsEnabled(
+          currentForm.controls[key]?.markAsEnabled(
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -690,9 +693,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
-      currentForm is FormControlCollection<dynamic>
-          ? currentForm.rawValue
-          : currentForm.value,
+      currentForm.rawValue,
       DeliveryListForm.formElements(other).rawValue,
     );
   }
@@ -713,8 +714,16 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
   }
 
   @override
-  AbstractControl<dynamic> get currentForm {
-    return path == null ? form : form.control(path!);
+  bool get hasChanged {
+    return !const DeepCollectionEquality().equals(
+      currentForm.rawValue,
+      initial,
+    );
+  }
+
+  @override
+  FormGroup get currentForm {
+    return path == null ? form : form.control(path!) as FormGroup;
   }
 
   @override
@@ -734,9 +743,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
   }) {
     final formElements = DeliveryListForm.formElements(value);
 
-    if (currentForm is FormGroup) {
-      (currentForm as FormGroup).addAll(formElements.controls);
-    }
+    currentForm.addAll(formElements.controls);
   }
 
   @override
@@ -749,6 +756,58 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
+  @override
+  void updateInitial(
+    Map<String, Object?>? value,
+    String? path,
+  ) {
+    if (_formModel != null) {
+      _formModel?.updateInitial(currentForm.rawValue, path);
+      return;
+    }
+
+    if (value == null) return;
+
+    if (path == null || path.isEmpty) {
+      initial.addAll(value);
+      return;
+    }
+
+    final keys = path.split('.');
+    Object? current = initial;
+    for (var i = 0; i < keys.length - 1; i++) {
+      final key = keys[i];
+
+      if (current is List) {
+        final index = int.tryParse(key);
+        if (index != null && index >= 0 && index < current.length) {
+          current = current[index];
+          continue;
+        }
+      }
+
+      if (current is Map) {
+        if (!current.containsKey(key)) {
+          current[key] = <String, Object?>{};
+        }
+        current = current[key];
+        continue;
+      }
+
+      return;
+    }
+
+    final key = keys.last;
+    if (current is List) {
+      final index = int.tryParse(key);
+      if (index != null && index >= 0 && index < current.length) {
+        current[index] = value;
+      }
+    } else if (current is Map) {
+      current[key] = value;
+    }
+  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
@@ -783,7 +842,8 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
   DeliveryPointForm(
     this.form,
     this.path,
-  );
+    this._formModel,
+  ) : initial = form.rawValue;
 
   static const String nameControlName = "name";
 
@@ -793,7 +853,13 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
 
   final String? path;
 
+// ignore: unused_field
+  final FormModel<dynamic, dynamic>? _formModel;
+
   final Map<String, bool> _disabled = {};
+
+  @override
+  final Map<String, Object?> initial;
 
   String nameControlPath() => pathBuilder(nameControlName);
 
@@ -934,7 +1000,8 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
   FormGroup get addressControl =>
       form.control(addressControlPath()) as FormGroup;
 
-  AddressForm get addressForm => AddressForm(form, pathBuilder('address'));
+  AddressForm get addressForm =>
+      AddressForm(form, pathBuilder('address'), _formModel ?? this);
 
   void nameSetDisabled(
     bool disabled, {
@@ -996,14 +1063,8 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final currentFormInstance = currentForm;
-
-    if (currentFormInstance is! FormGroup) {
-      return;
-    }
-
     if (_disabled.isEmpty) {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
@@ -1012,9 +1073,9 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
           updateParent: updateParent, emitEvent: emitEvent);
     } else {
       addressForm.toggleDisabled();
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
-          currentFormInstance.controls[key]?.markAsEnabled(
+          currentForm.controls[key]?.markAsEnabled(
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -1030,9 +1091,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
-      currentForm is FormControlCollection<dynamic>
-          ? currentForm.rawValue
-          : currentForm.value,
+      currentForm.rawValue,
       DeliveryPointForm.formElements(other).rawValue,
     );
   }
@@ -1053,8 +1112,16 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
   }
 
   @override
-  AbstractControl<dynamic> get currentForm {
-    return path == null ? form : form.control(path!);
+  bool get hasChanged {
+    return !const DeepCollectionEquality().equals(
+      currentForm.rawValue,
+      initial,
+    );
+  }
+
+  @override
+  FormGroup get currentForm {
+    return path == null ? form : form.control(path!) as FormGroup;
   }
 
   @override
@@ -1074,9 +1141,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
   }) {
     final formElements = DeliveryPointForm.formElements(value);
 
-    if (currentForm is FormGroup) {
-      (currentForm as FormGroup).addAll(formElements.controls);
-    }
+    currentForm.addAll(formElements.controls);
   }
 
   @override
@@ -1089,6 +1154,58 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
+  @override
+  void updateInitial(
+    Map<String, Object?>? value,
+    String? path,
+  ) {
+    if (_formModel != null) {
+      _formModel?.updateInitial(currentForm.rawValue, path);
+      return;
+    }
+
+    if (value == null) return;
+
+    if (path == null || path.isEmpty) {
+      initial.addAll(value);
+      return;
+    }
+
+    final keys = path.split('.');
+    Object? current = initial;
+    for (var i = 0; i < keys.length - 1; i++) {
+      final key = keys[i];
+
+      if (current is List) {
+        final index = int.tryParse(key);
+        if (index != null && index >= 0 && index < current.length) {
+          current = current[index];
+          continue;
+        }
+      }
+
+      if (current is Map) {
+        if (!current.containsKey(key)) {
+          current[key] = <String, Object?>{};
+        }
+        current = current[key];
+        continue;
+      }
+
+      return;
+    }
+
+    final key = keys.last;
+    if (current is List) {
+      final index = int.tryParse(key);
+      if (index != null && index >= 0 && index < current.length) {
+        current[index] = value;
+      }
+    } else if (current is Map) {
+      current[key] = value;
+    }
+  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
@@ -1115,7 +1232,8 @@ class AddressForm implements FormModel<Address, Address> {
   AddressForm(
     this.form,
     this.path,
-  );
+    this._formModel,
+  ) : initial = form.rawValue;
 
   static const String streetControlName = "street";
 
@@ -1125,7 +1243,13 @@ class AddressForm implements FormModel<Address, Address> {
 
   final String? path;
 
+// ignore: unused_field
+  final FormModel<dynamic, dynamic>? _formModel;
+
   final Map<String, bool> _disabled = {};
+
+  @override
+  final Map<String, Object?> initial;
 
   String streetControlPath() => pathBuilder(streetControlName);
 
@@ -1357,23 +1481,17 @@ class AddressForm implements FormModel<Address, Address> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final currentFormInstance = currentForm;
-
-    if (currentFormInstance is! FormGroup) {
-      return;
-    }
-
     if (_disabled.isEmpty) {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
       currentForm.markAsDisabled(
           updateParent: updateParent, emitEvent: emitEvent);
     } else {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
-          currentFormInstance.controls[key]?.markAsEnabled(
+          currentForm.controls[key]?.markAsEnabled(
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -1389,9 +1507,7 @@ class AddressForm implements FormModel<Address, Address> {
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
-      currentForm is FormControlCollection<dynamic>
-          ? currentForm.rawValue
-          : currentForm.value,
+      currentForm.rawValue,
       AddressForm.formElements(other).rawValue,
     );
   }
@@ -1412,8 +1528,16 @@ class AddressForm implements FormModel<Address, Address> {
   }
 
   @override
-  AbstractControl<dynamic> get currentForm {
-    return path == null ? form : form.control(path!);
+  bool get hasChanged {
+    return !const DeepCollectionEquality().equals(
+      currentForm.rawValue,
+      initial,
+    );
+  }
+
+  @override
+  FormGroup get currentForm {
+    return path == null ? form : form.control(path!) as FormGroup;
   }
 
   @override
@@ -1433,9 +1557,7 @@ class AddressForm implements FormModel<Address, Address> {
   }) {
     final formElements = AddressForm.formElements(value);
 
-    if (currentForm is FormGroup) {
-      (currentForm as FormGroup).addAll(formElements.controls);
-    }
+    currentForm.addAll(formElements.controls);
   }
 
   @override
@@ -1448,6 +1570,58 @@ class AddressForm implements FormModel<Address, Address> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
+  @override
+  void updateInitial(
+    Map<String, Object?>? value,
+    String? path,
+  ) {
+    if (_formModel != null) {
+      _formModel?.updateInitial(currentForm.rawValue, path);
+      return;
+    }
+
+    if (value == null) return;
+
+    if (path == null || path.isEmpty) {
+      initial.addAll(value);
+      return;
+    }
+
+    final keys = path.split('.');
+    Object? current = initial;
+    for (var i = 0; i < keys.length - 1; i++) {
+      final key = keys[i];
+
+      if (current is List) {
+        final index = int.tryParse(key);
+        if (index != null && index >= 0 && index < current.length) {
+          current = current[index];
+          continue;
+        }
+      }
+
+      if (current is Map) {
+        if (!current.containsKey(key)) {
+          current[key] = <String, Object?>{};
+        }
+        current = current[key];
+        continue;
+      }
+
+      return;
+    }
+
+    final key = keys.last;
+    if (current is List) {
+      final index = int.tryParse(key);
+      if (index != null && index >= 0 && index < current.length) {
+        current[index] = value;
+      }
+    } else if (current is Map) {
+      current[key] = value;
+    }
+  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
@@ -1480,7 +1654,8 @@ class ClientForm implements FormModel<Client, Client> {
   ClientForm(
     this.form,
     this.path,
-  );
+    this._formModel,
+  ) : initial = form.rawValue;
 
   static const String clientTypeControlName = "clientType";
 
@@ -1492,7 +1667,13 @@ class ClientForm implements FormModel<Client, Client> {
 
   final String? path;
 
+// ignore: unused_field
+  final FormModel<dynamic, dynamic>? _formModel;
+
   final Map<String, bool> _disabled = {};
+
+  @override
+  final Map<String, Object?> initial;
 
   String clientTypeControlPath() => pathBuilder(clientTypeControlName);
 
@@ -1803,23 +1984,17 @@ class ClientForm implements FormModel<Client, Client> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final currentFormInstance = currentForm;
-
-    if (currentFormInstance is! FormGroup) {
-      return;
-    }
-
     if (_disabled.isEmpty) {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
       currentForm.markAsDisabled(
           updateParent: updateParent, emitEvent: emitEvent);
     } else {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
-          currentFormInstance.controls[key]?.markAsEnabled(
+          currentForm.controls[key]?.markAsEnabled(
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -1835,9 +2010,7 @@ class ClientForm implements FormModel<Client, Client> {
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
-      currentForm is FormControlCollection<dynamic>
-          ? currentForm.rawValue
-          : currentForm.value,
+      currentForm.rawValue,
       ClientForm.formElements(other).rawValue,
     );
   }
@@ -1858,8 +2031,16 @@ class ClientForm implements FormModel<Client, Client> {
   }
 
   @override
-  AbstractControl<dynamic> get currentForm {
-    return path == null ? form : form.control(path!);
+  bool get hasChanged {
+    return !const DeepCollectionEquality().equals(
+      currentForm.rawValue,
+      initial,
+    );
+  }
+
+  @override
+  FormGroup get currentForm {
+    return path == null ? form : form.control(path!) as FormGroup;
   }
 
   @override
@@ -1879,9 +2060,7 @@ class ClientForm implements FormModel<Client, Client> {
   }) {
     final formElements = ClientForm.formElements(value);
 
-    if (currentForm is FormGroup) {
-      (currentForm as FormGroup).addAll(formElements.controls);
-    }
+    currentForm.addAll(formElements.controls);
   }
 
   @override
@@ -1894,6 +2073,58 @@ class ClientForm implements FormModel<Client, Client> {
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
+  @override
+  void updateInitial(
+    Map<String, Object?>? value,
+    String? path,
+  ) {
+    if (_formModel != null) {
+      _formModel?.updateInitial(currentForm.rawValue, path);
+      return;
+    }
+
+    if (value == null) return;
+
+    if (path == null || path.isEmpty) {
+      initial.addAll(value);
+      return;
+    }
+
+    final keys = path.split('.');
+    Object? current = initial;
+    for (var i = 0; i < keys.length - 1; i++) {
+      final key = keys[i];
+
+      if (current is List) {
+        final index = int.tryParse(key);
+        if (index != null && index >= 0 && index < current.length) {
+          current = current[index];
+          continue;
+        }
+      }
+
+      if (current is Map) {
+        if (!current.containsKey(key)) {
+          current[key] = <String, Object?>{};
+        }
+        current = current[key];
+        continue;
+      }
+
+      return;
+    }
+
+    final key = keys.last;
+    if (current is List) {
+      final index = int.tryParse(key);
+      if (index != null && index >= 0 && index < current.length) {
+        current[index] = value;
+      }
+    } else if (current is Map) {
+      current[key] = value;
+    }
+  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
@@ -2277,7 +2508,7 @@ class _StandaloneDeliveryPointFormBuilderState
   @override
   void initState() {
     _formModel = StandaloneDeliveryPointForm(
-        StandaloneDeliveryPointForm.formElements(widget.model), null);
+        StandaloneDeliveryPointForm.formElements(widget.model), null, null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -2360,7 +2591,8 @@ class StandaloneDeliveryPointForm
   StandaloneDeliveryPointForm(
     this.form,
     this.path,
-  );
+    this._formModel,
+  ) : initial = form.rawValue;
 
   static const String nameControlName = "name";
 
@@ -2370,7 +2602,13 @@ class StandaloneDeliveryPointForm
 
   final String? path;
 
+// ignore: unused_field
+  final FormModel<dynamic, dynamic>? _formModel;
+
   final Map<String, bool> _disabled = {};
+
+  @override
+  final Map<String, Object?> initial;
 
   String nameControlPath() => pathBuilder(nameControlName);
 
@@ -2511,7 +2749,8 @@ class StandaloneDeliveryPointForm
   FormGroup get addressControl =>
       form.control(addressControlPath()) as FormGroup;
 
-  AddressForm get addressForm => AddressForm(form, pathBuilder('address'));
+  AddressForm get addressForm =>
+      AddressForm(form, pathBuilder('address'), _formModel ?? this);
 
   void nameSetDisabled(
     bool disabled, {
@@ -2573,14 +2812,8 @@ class StandaloneDeliveryPointForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final currentFormInstance = currentForm;
-
-    if (currentFormInstance is! FormGroup) {
-      return;
-    }
-
     if (_disabled.isEmpty) {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
@@ -2589,9 +2822,9 @@ class StandaloneDeliveryPointForm
           updateParent: updateParent, emitEvent: emitEvent);
     } else {
       addressForm.toggleDisabled();
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
-          currentFormInstance.controls[key]?.markAsEnabled(
+          currentForm.controls[key]?.markAsEnabled(
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -2607,9 +2840,7 @@ class StandaloneDeliveryPointForm
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
-      currentForm is FormControlCollection<dynamic>
-          ? currentForm.rawValue
-          : currentForm.value,
+      currentForm.rawValue,
       StandaloneDeliveryPointForm.formElements(other).rawValue,
     );
   }
@@ -2630,8 +2861,16 @@ class StandaloneDeliveryPointForm
   }
 
   @override
-  AbstractControl<dynamic> get currentForm {
-    return path == null ? form : form.control(path!);
+  bool get hasChanged {
+    return !const DeepCollectionEquality().equals(
+      currentForm.rawValue,
+      initial,
+    );
+  }
+
+  @override
+  FormGroup get currentForm {
+    return path == null ? form : form.control(path!) as FormGroup;
   }
 
   @override
@@ -2653,9 +2892,7 @@ class StandaloneDeliveryPointForm
   }) {
     final formElements = StandaloneDeliveryPointForm.formElements(value);
 
-    if (currentForm is FormGroup) {
-      (currentForm as FormGroup).addAll(formElements.controls);
-    }
+    currentForm.addAll(formElements.controls);
   }
 
   @override
@@ -2668,6 +2905,58 @@ class StandaloneDeliveryPointForm
           value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
+
+  @override
+  void updateInitial(
+    Map<String, Object?>? value,
+    String? path,
+  ) {
+    if (_formModel != null) {
+      _formModel?.updateInitial(currentForm.rawValue, path);
+      return;
+    }
+
+    if (value == null) return;
+
+    if (path == null || path.isEmpty) {
+      initial.addAll(value);
+      return;
+    }
+
+    final keys = path.split('.');
+    Object? current = initial;
+    for (var i = 0; i < keys.length - 1; i++) {
+      final key = keys[i];
+
+      if (current is List) {
+        final index = int.tryParse(key);
+        if (index != null && index >= 0 && index < current.length) {
+          current = current[index];
+          continue;
+        }
+      }
+
+      if (current is Map) {
+        if (!current.containsKey(key)) {
+          current[key] = <String, Object?>{};
+        }
+        current = current[key];
+        continue;
+      }
+
+      return;
+    }
+
+    final key = keys.last;
+    if (current is List) {
+      final index = int.tryParse(key);
+      if (index != null && index >= 0 && index < current.length) {
+        current[index] = value;
+      }
+    } else if (current is Map) {
+      current[key] = value;
+    }
+  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");

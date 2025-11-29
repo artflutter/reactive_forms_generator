@@ -2,9 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 abstract class FormModel<TModel, TModelOutput> {
-  FormModel({required this.form});
+  FormModel({
+    required this.form,
+    this.path,
+    FormModel<dynamic, dynamic>? formModel,
+  });
 
   final FormGroup form;
+
+  final String? path;
+
+  final Map<String, Object?>? initial = null;
 
   @protected
   TModelOutput get model;
@@ -18,7 +26,9 @@ abstract class FormModel<TModel, TModelOutput> {
 
   bool equalsTo(TModel other);
 
-  AbstractControl<dynamic> get currentForm;
+  bool get hasChanged;
+
+  FormGroup get currentForm;
 
   void updateValue(
     TModel? value, {
@@ -34,7 +44,7 @@ abstract class FormModel<TModel, TModelOutput> {
 
   reset({TModel? value, bool updateParent = true, bool emitEvent = true});
 
+  void updateInitial(Map<String, Object?>? value, String? path);
+
   void toggleDisabled({bool updateParent = true, bool emitEvent = true});
 }
-
-extension FormModelExt on FormModel {}

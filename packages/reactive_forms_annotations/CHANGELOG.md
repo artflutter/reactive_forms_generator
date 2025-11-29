@@ -6,6 +6,14 @@
 
 * Rf18
 
+## [7.5.0-beta1]
+
+* Beta experiments
+
+## [7.5.0-beta0]
+
+* Beta experiments
+
 ## [7.4.3]
 
 * upsertValue method
