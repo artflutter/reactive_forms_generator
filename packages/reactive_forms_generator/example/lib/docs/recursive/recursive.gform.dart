@@ -19,7 +19,11 @@ class ReactiveSecuredAreaFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, SecuredAreaForm formModel, Widget? child) builder;
+    BuildContext context,
+    SecuredAreaForm formModel,
+    Widget? child,
+  )
+  builder;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +42,7 @@ class SecuredAreaFormInheritedStreamer extends InheritedStreamer<dynamic> {
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(
-          stream,
-          child,
-          key: key,
-        );
+  }) : super(stream, child, key: key);
 
   final SecuredAreaForm form;
 }
@@ -64,19 +64,19 @@ class ReactiveSecuredAreaForm extends StatelessWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static SecuredAreaForm? of(
-    BuildContext context, {
-    bool listen = true,
-  }) {
+  static SecuredAreaForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
-              SecuredAreaFormInheritedStreamer>()
+            SecuredAreaFormInheritedStreamer
+          >()
           ?.form;
     }
 
-    final element = context.getElementForInheritedWidgetOfExactType<
-        SecuredAreaFormInheritedStreamer>();
+    final element = context
+        .getElementForInheritedWidgetOfExactType<
+          SecuredAreaFormInheritedStreamer
+        >();
     return element == null
         ? null
         : (element.widget as SecuredAreaFormInheritedStreamer).form;
@@ -123,10 +123,14 @@ class SecuredAreaFormBuilder extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-      BuildContext context, SecuredAreaForm formModel, Widget? child) builder;
+    BuildContext context,
+    SecuredAreaForm formModel,
+    Widget? child,
+  )
+  builder;
 
   final void Function(BuildContext context, SecuredAreaForm formModel)?
-      initState;
+  initState;
 
   @override
   _SecuredAreaFormBuilderState createState() => _SecuredAreaFormBuilderState();
@@ -139,8 +143,11 @@ class _SecuredAreaFormBuilderState extends State<SecuredAreaFormBuilder> {
 
   @override
   void initState() {
-    _formModel =
-        SecuredAreaForm(SecuredAreaForm.formElements(widget.model), null, null);
+    _formModel = SecuredAreaForm(
+      SecuredAreaForm.formElements(widget.model),
+      null,
+      null,
+    );
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -217,11 +224,8 @@ class _SecuredAreaFormBuilderState extends State<SecuredAreaFormBuilder> {
 final _logSecuredAreaForm = Logger.detached('SecuredAreaForm');
 
 class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
-  SecuredAreaForm(
-    this.form,
-    this.path,
-    this._formModel,
-  ) : initial = form.rawValue;
+  SecuredAreaForm(this.form, this.path, this._formModel)
+    : initial = form.rawValue;
 
   static const String idControlName = "id";
 
@@ -235,7 +239,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
 
   final String? path;
 
-// ignore: unused_field
+  // ignore: unused_field
   final FormModel<dynamic, dynamic>? _formModel;
 
   final Map<String, bool> _disabled = {};
@@ -271,7 +275,8 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
       subSecuredAreasSecuredAreaForm.map((e) => e.rawModel).toList();
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -282,7 +287,8 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsSecuredArea {
     try {
       form.control(securedAreaControlPath());
@@ -293,7 +299,8 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsParcelSystem {
     try {
       form.control(parcelSystemControlPath());
@@ -304,7 +311,8 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsSubSecuredAreas {
     try {
       form.control(subSecuredAreasControlPath());
@@ -332,11 +340,9 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
   void get subSecuredAreasFocus => form.focus(subSecuredAreasControlPath());
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void idRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void idRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsId) {
       final controlPath = path;
       if (controlPath == null) {
@@ -360,11 +366,9 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void securedAreaRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void securedAreaRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsSecuredArea) {
       final controlPath = path;
       if (controlPath == null) {
@@ -388,11 +392,9 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void parcelSystemRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void parcelSystemRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsParcelSystem) {
       final controlPath = path;
       if (controlPath == null) {
@@ -420,8 +422,11 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    idControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void securedAreaValueUpdate(
@@ -429,8 +434,11 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    securedAreaControl.updateValue(SecuredAreaForm.formElements(value).rawValue,
-        updateParent: updateParent, emitEvent: emitEvent);
+    securedAreaControl.updateValue(
+      SecuredAreaForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void parcelSystemValueUpdate(
@@ -439,9 +447,10 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     bool emitEvent = true,
   }) {
     parcelSystemControl.updateValue(
-        ParcelSystemForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent);
+      ParcelSystemForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void subSecuredAreasValueUpdate(
@@ -460,8 +469,9 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     final toAdd = <SecuredArea>[];
 
     localValue.asMap().forEach((k, v) {
-      final values =
-          subSecuredAreasControl.controls.map((e) => e.value).toList();
+      final values = subSecuredAreasControl.controls
+          .map((e) => e.value)
+          .toList();
 
       if (subSecuredAreasSecuredAreaForm.asMap().containsKey(k) &&
           values.asMap().containsKey(k)) {
@@ -473,17 +483,19 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
 
     if (toUpdate.isNotEmpty) {
       subSecuredAreasControl.updateValue(
-          toUpdate
-              .map((e) => SecuredAreaForm.formElements(e).rawValue)
-              .toList(),
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        toUpdate.map((e) => SecuredAreaForm.formElements(e).rawValue).toList(),
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     }
 
     if (toAdd.isNotEmpty) {
       toAdd.forEach((e) {
-        subSecuredAreasControl.add(SecuredAreaForm.formElements(e),
-            updateParent: updateParent, emitEvent: emitEvent);
+        subSecuredAreasControl.add(
+          SecuredAreaForm.formElements(e),
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
       });
     }
   }
@@ -508,13 +520,12 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     );
   }
 
-  void subSecuredAreasClear({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void subSecuredAreasClear({bool updateParent = true, bool emitEvent = true}) {
     subSecuredAreasSecuredAreaForm.clear();
     subSecuredAreasControl.clear(
-        updateParent: updateParent, emitEvent: emitEvent);
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void idValuePatch(
@@ -522,8 +533,11 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    idControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void securedAreaValuePatch(
@@ -531,8 +545,11 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    securedAreaControl.updateValue(SecuredAreaForm.formElements(value).rawValue,
-        updateParent: updateParent, emitEvent: emitEvent);
+    securedAreaControl.updateValue(
+      SecuredAreaForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void parcelSystemValuePatch(
@@ -541,9 +558,10 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     bool emitEvent = true,
   }) {
     parcelSystemControl.updateValue(
-        ParcelSystemForm.formElements(value).rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent);
+      ParcelSystemForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void subSecuredAreasValuePatch(
@@ -554,18 +572,17 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     final keys = subSecuredAreasSecuredAreaForm.asMap().keys;
 
     final toPatch = <SecuredArea>[];
-    (value).asMap().forEach(
-      (k, v) {
-        if (keys.contains(k)) {
-          toPatch.add(v);
-        }
-      },
-    );
+    (value).asMap().forEach((k, v) {
+      if (keys.contains(k)) {
+        toPatch.add(v);
+      }
+    });
 
     subSecuredAreasControl.patchValue(
-        toPatch.map((e) => SecuredAreaForm.formElements(e).rawValue).toList(),
-        updateParent: updateParent,
-        emitEvent: emitEvent);
+      toPatch.map((e) => SecuredAreaForm.formElements(e).rawValue).toList(),
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void idValueReset(
@@ -574,14 +591,13 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      idControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => idControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   void securedAreaValueReset(
     SecuredArea? value, {
@@ -589,11 +605,11 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      securedAreaControl.reset(
-          value: SecuredAreaForm.formElements(value).rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => securedAreaControl.reset(
+    value: SecuredAreaForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   void parcelSystemValueReset(
     ParcelSystem? value, {
@@ -601,11 +617,11 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      parcelSystemControl.reset(
-          value: ParcelSystemForm.formElements(value).rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => parcelSystemControl.reset(
+    value: ParcelSystemForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   void subSecuredAreasValueReset(
     List<SecuredArea> value, {
@@ -613,13 +629,11 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      subSecuredAreasControl.reset(
-          value: value
-              .map((e) => SecuredAreaForm.formElements(e).rawValue)
-              .toList(),
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => subSecuredAreasControl.reset(
+    value: value.map((e) => SecuredAreaForm.formElements(e).rawValue).toList(),
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
@@ -645,10 +659,16 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
 
     return values
         .asMap()
-        .map((k, v) => MapEntry(
+        .map(
+          (k, v) => MapEntry(
             k,
             SecuredAreaForm(
-                form, pathBuilder("subSecuredAreas.$k"), _formModel ?? this)))
+              form,
+              pathBuilder("subSecuredAreas.$k"),
+              _formModel ?? this,
+            ),
+          ),
+        )
         .values
         .toList();
   }
@@ -664,10 +684,7 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
         emitEvent: emitEvent,
       );
     } else {
-      idControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+      idControl.markAsEnabled(updateParent: updateParent, emitEvent: emitEvent);
     }
   }
 
@@ -726,11 +743,12 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
   }
 
   ExtendedControl<List<Map<String, Object?>?>, List<SecuredAreaForm>>
-      get subSecuredAreasExtendedControl =>
-          ExtendedControl<List<Map<String, Object?>?>, List<SecuredAreaForm>>(
-              form.control(subSecuredAreasControlPath())
-                  as FormArray<Map<String, Object?>>,
-              () => subSecuredAreasSecuredAreaForm);
+  get subSecuredAreasExtendedControl =>
+      ExtendedControl<List<Map<String, Object?>?>, List<SecuredAreaForm>>(
+        form.control(subSecuredAreasControlPath())
+            as FormArray<Map<String, Object?>>,
+        () => subSecuredAreasSecuredAreaForm,
+      );
 
   void addSubSecuredAreasItem(SecuredArea value) {
     subSecuredAreasControl.add(SecuredAreaForm.formElements(value));
@@ -758,26 +776,25 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
       );
     }
     return SecuredArea(
-        id: _idValue,
-        securedArea: _securedAreaValue,
-        parcelSystem: _parcelSystemValue,
-        subSecuredAreas: _subSecuredAreasValue);
+      id: containsId ? _idValue : null,
+      securedArea: containsSecuredArea ? _securedAreaValue : null,
+      parcelSystem: containsParcelSystem ? _parcelSystemValue : null,
+      subSecuredAreas: _subSecuredAreasValue,
+    );
   }
 
   @override
   SecuredArea get rawModel {
     return SecuredArea(
-        id: _idRawValue,
-        securedArea: _securedAreaRawValue,
-        parcelSystem: _parcelSystemRawValue,
-        subSecuredAreas: _subSecuredAreasRawValue);
+      id: _idRawValue,
+      securedArea: _securedAreaRawValue,
+      parcelSystem: _parcelSystemRawValue,
+      subSecuredAreas: _subSecuredAreasRawValue,
+    );
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     if (_disabled.isEmpty) {
       currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
@@ -787,7 +804,9 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
       securedAreaForm.toggleDisabled();
       parcelSystemForm.toggleDisabled();
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       subSecuredAreasSecuredAreaForm.forEach((e) => e.toggleDisabled());
       securedAreaForm.toggleDisabled();
@@ -848,9 +867,11 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     SecuredArea? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.updateValue(SecuredAreaForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => currentForm.updateValue(
+    SecuredAreaForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
   void upsertValue(
@@ -868,17 +889,14 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     SecuredArea? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => currentForm.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
-  void updateInitial(
-    Map<String, Object?>? value,
-    String? path,
-  ) {
+  void updateInitial(Map<String, Object?>? value, String? path) {
     if (_formModel != null) {
       _formModel?.updateInitial(currentForm.rawValue, path);
       return;
@@ -929,41 +947,44 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(SecuredArea? securedArea) => FormGroup({
-        idControlName: FormControl<String>(
-            value: securedArea?.id,
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        subSecuredAreasControlName: FormArray(
-            (securedArea?.subSecuredAreas ?? [])
-                .map((e) => SecuredAreaForm.formElements(e))
-                .toList(),
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false),
-        securedAreaControlName:
-            SecuredAreaForm.formElements(securedArea?.securedArea),
-        parcelSystemControlName:
-            ParcelSystemForm.formElements(securedArea?.parcelSystem)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+  static FormGroup formElements(SecuredArea? securedArea) => FormGroup(
+    {
+      idControlName: FormControl<String>(
+        value: securedArea?.id,
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+      subSecuredAreasControlName: FormArray(
+        (securedArea?.subSecuredAreas ?? [])
+            .map((e) => SecuredAreaForm.formElements(e))
+            .toList(),
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      ),
+      securedAreaControlName: SecuredAreaForm.formElements(
+        securedArea?.securedArea,
+      ),
+      parcelSystemControlName: ParcelSystemForm.formElements(
+        securedArea?.parcelSystem,
+      ),
+    },
+    validators: [],
+    asyncValidators: [],
+    asyncValidatorsDebounceTime: 250,
+    disabled: false,
+  );
 }
 
 final _logParcelSystemForm = Logger.detached('ParcelSystemForm');
 
 class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
-  ParcelSystemForm(
-    this.form,
-    this.path,
-    this._formModel,
-  ) : initial = form.rawValue;
+  ParcelSystemForm(this.form, this.path, this._formModel)
+    : initial = form.rawValue;
 
   static const String hasParcelSystemControlName = "hasParcelSystem";
 
@@ -973,7 +994,7 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
 
   final String? path;
 
-// ignore: unused_field
+  // ignore: unused_field
   final FormModel<dynamic, dynamic>? _formModel;
 
   final Map<String, bool> _disabled = {};
@@ -995,7 +1016,8 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
   ParcelSystemData get _dataRawValue => dataForm.rawModel;
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsHasParcelSystem {
     try {
       form.control(hasParcelSystemControlPath());
@@ -1006,7 +1028,8 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsData {
     try {
       form.control(dataControlPath());
@@ -1030,8 +1053,11 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    hasParcelSystemControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    hasParcelSystemControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void dataValueUpdate(
@@ -1039,8 +1065,11 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    dataControl.updateValue(ParcelSystemDataForm.formElements(value).rawValue,
-        updateParent: updateParent, emitEvent: emitEvent);
+    dataControl.updateValue(
+      ParcelSystemDataForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void hasParcelSystemValuePatch(
@@ -1048,8 +1077,11 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    hasParcelSystemControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    hasParcelSystemControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void dataValuePatch(
@@ -1057,8 +1089,11 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    dataControl.updateValue(ParcelSystemDataForm.formElements(value).rawValue,
-        updateParent: updateParent, emitEvent: emitEvent);
+    dataControl.updateValue(
+      ParcelSystemDataForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void hasParcelSystemValueReset(
@@ -1067,14 +1102,13 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      hasParcelSystemControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => hasParcelSystemControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   void dataValueReset(
     ParcelSystemData value, {
@@ -1082,11 +1116,11 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      dataControl.reset(
-          value: ParcelSystemDataForm.formElements(value).rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => dataControl.reset(
+    value: ParcelSystemDataForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   FormControl<bool> get hasParcelSystemControl =>
       form.control(hasParcelSystemControlPath()) as FormControl<bool>;
@@ -1144,20 +1178,21 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
       );
     }
     return ParcelSystem(
-        hasParcelSystem: _hasParcelSystemValue, data: _dataValue);
+      hasParcelSystem: _hasParcelSystemValue,
+      data: _dataValue,
+    );
   }
 
   @override
   ParcelSystem get rawModel {
     return ParcelSystem(
-        hasParcelSystem: _hasParcelSystemRawValue, data: _dataRawValue);
+      hasParcelSystem: _hasParcelSystemRawValue,
+      data: _dataRawValue,
+    );
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     if (_disabled.isEmpty) {
       currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
@@ -1165,7 +1200,9 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
 
       dataForm.toggleDisabled();
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       dataForm.toggleDisabled();
       currentForm.controls.forEach((key, control) {
@@ -1224,9 +1261,11 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
     ParcelSystem? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.updateValue(ParcelSystemForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => currentForm.updateValue(
+    ParcelSystemForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
   void upsertValue(
@@ -1244,17 +1283,14 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
     ParcelSystem? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => currentForm.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
-  void updateInitial(
-    Map<String, Object?>? value,
-    String? path,
-  ) {
+  void updateInitial(Map<String, Object?>? value, String? path) {
     if (_formModel != null) {
       _formModel?.updateInitial(currentForm.rawValue, path);
       return;
@@ -1305,31 +1341,31 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(ParcelSystem? parcelSystem) => FormGroup({
-        hasParcelSystemControlName: FormControl<bool>(
-            value: parcelSystem?.hasParcelSystem,
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        dataControlName: ParcelSystemDataForm.formElements(parcelSystem?.data)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+  static FormGroup formElements(ParcelSystem? parcelSystem) => FormGroup(
+    {
+      hasParcelSystemControlName: FormControl<bool>(
+        value: parcelSystem?.hasParcelSystem,
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+      dataControlName: ParcelSystemDataForm.formElements(parcelSystem?.data),
+    },
+    validators: [],
+    asyncValidators: [],
+    asyncValidatorsDebounceTime: 250,
+    disabled: false,
+  );
 }
 
 final _logParcelSystemDataForm = Logger.detached('ParcelSystemDataForm');
 
 class ParcelSystemDataForm
     implements FormModel<ParcelSystemData, ParcelSystemData> {
-  ParcelSystemDataForm(
-    this.form,
-    this.path,
-    this._formModel,
-  ) : initial = form.rawValue;
+  ParcelSystemDataForm(this.form, this.path, this._formModel)
+    : initial = form.rawValue;
 
   static const String idControlName = "id";
 
@@ -1337,7 +1373,7 @@ class ParcelSystemDataForm
 
   final String? path;
 
-// ignore: unused_field
+  // ignore: unused_field
   final FormModel<dynamic, dynamic>? _formModel;
 
   final Map<String, bool> _disabled = {};
@@ -1352,7 +1388,8 @@ class ParcelSystemDataForm
   String? get _idRawValue => idControl.value;
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -1367,11 +1404,9 @@ class ParcelSystemDataForm
   void get idFocus => form.focus(idControlPath());
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void idRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void idRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsId) {
       final controlPath = path;
       if (controlPath == null) {
@@ -1399,8 +1434,11 @@ class ParcelSystemDataForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    idControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void idValuePatch(
@@ -1408,8 +1446,11 @@ class ParcelSystemDataForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    idControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void idValueReset(
@@ -1418,14 +1459,13 @@ class ParcelSystemDataForm
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      idControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => idControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
@@ -1441,10 +1481,7 @@ class ParcelSystemDataForm
         emitEvent: emitEvent,
       );
     } else {
-      idControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+      idControl.markAsEnabled(updateParent: updateParent, emitEvent: emitEvent);
     }
   }
 
@@ -1459,7 +1496,7 @@ class ParcelSystemDataForm
         StackTrace.current,
       );
     }
-    return ParcelSystemData(id: _idValue);
+    return ParcelSystemData(id: containsId ? _idValue : null);
   }
 
   @override
@@ -1468,17 +1505,16 @@ class ParcelSystemDataForm
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     if (_disabled.isEmpty) {
       currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -1536,9 +1572,11 @@ class ParcelSystemDataForm
     ParcelSystemData? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.updateValue(ParcelSystemDataForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => currentForm.updateValue(
+    ParcelSystemDataForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
   void upsertValue(
@@ -1556,17 +1594,14 @@ class ParcelSystemDataForm
     ParcelSystemData? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => currentForm.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
-  void updateInitial(
-    Map<String, Object?>? value,
-    String? path,
-  ) {
+  void updateInitial(Map<String, Object?>? value, String? path) {
     if (_formModel != null) {
       _formModel?.updateInitial(currentForm.rawValue, path);
       return;
@@ -1618,19 +1653,22 @@ class ParcelSystemDataForm
       [path, pathItem].whereType<String>().join(".");
 
   static FormGroup formElements(ParcelSystemData? parcelSystemData) =>
-      FormGroup({
-        idControlName: FormControl<String>(
+      FormGroup(
+        {
+          idControlName: FormControl<String>(
             value: parcelSystemData?.id,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+            touched: false,
+          ),
+        },
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      );
 }
 
 class ReactiveSecuredAreaFormArrayBuilder<ReactiveSecuredAreaFormArrayBuilderT>
@@ -1643,29 +1681,41 @@ class ReactiveSecuredAreaFormArrayBuilder<ReactiveSecuredAreaFormArrayBuilderT>
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveSecuredAreaFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveSecuredAreaFormArrayBuilderT>? Function(
-      SecuredAreaForm formModel)? control;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      SecuredAreaForm formModel)? builder;
+    SecuredAreaForm formModel,
+  )?
+  control;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      FormControl<ReactiveSecuredAreaFormArrayBuilderT> control,
-      ReactiveSecuredAreaFormArrayBuilderT? item,
-      SecuredAreaForm formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    SecuredAreaForm formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    FormControl<ReactiveSecuredAreaFormArrayBuilderT> control,
+    ReactiveSecuredAreaFormArrayBuilderT? item,
+    SecuredAreaForm formModel,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-      FormControl<ReactiveSecuredAreaFormArrayBuilderT> control)? controlFilter;
+    FormControl<ReactiveSecuredAreaFormArrayBuilderT> control,
+  )?
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -1681,18 +1731,9 @@ class ReactiveSecuredAreaFormArrayBuilder<ReactiveSecuredAreaFormArrayBuilderT>
     return ReactiveFormArrayItemBuilder<ReactiveSecuredAreaFormArrayBuilderT>(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
-          ? (context, itemList) => builder(
-                context,
-                itemList,
-                formModel,
-              )
+          ? (context, itemList) => builder(context, itemList, formModel)
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
+      itemBuilder: (context, i, control, item) =>
           itemBuilder(context, i, control, item, formModel),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -1710,35 +1751,43 @@ class ReactiveSecuredAreaFormArrayBuilder2<ReactiveSecuredAreaFormArrayBuilderT>
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveSecuredAreaFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveSecuredAreaFormArrayBuilderT>? Function(
-      SecuredAreaForm formModel)? control;
+    SecuredAreaForm formModel,
+  )?
+  control;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        List<Widget> itemList,
-        SecuredAreaForm formModel
-      }) params)? builder;
+    ({BuildContext context, List<Widget> itemList, SecuredAreaForm formModel})
+    params,
+  )?
+  builder;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        int i,
-        FormControl<ReactiveSecuredAreaFormArrayBuilderT> control,
-        ReactiveSecuredAreaFormArrayBuilderT? item,
-        SecuredAreaForm formModel
-      }) params) itemBuilder;
+    ({
+      BuildContext context,
+      int i,
+      FormControl<ReactiveSecuredAreaFormArrayBuilderT> control,
+      ReactiveSecuredAreaFormArrayBuilderT? item,
+      SecuredAreaForm formModel,
+    })
+    params,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-      FormControl<ReactiveSecuredAreaFormArrayBuilderT> control)? controlFilter;
+    FormControl<ReactiveSecuredAreaFormArrayBuilderT> control,
+  )?
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -1755,23 +1804,17 @@ class ReactiveSecuredAreaFormArrayBuilder2<ReactiveSecuredAreaFormArrayBuilderT>
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
           ? (context, itemList) => builder((
-                context: context,
-                itemList: itemList,
-                formModel: formModel,
-              ))
+              context: context,
+              itemList: itemList,
+              formModel: formModel,
+            ))
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
-          itemBuilder((
+      itemBuilder: (context, i, control, item) => itemBuilder((
         context: context,
         i: i,
         control: control,
         item: item,
-        formModel: formModel
+        formModel: formModel,
       )),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -1780,32 +1823,48 @@ class ReactiveSecuredAreaFormArrayBuilder2<ReactiveSecuredAreaFormArrayBuilderT>
 }
 
 class ReactiveSecuredAreaFormFormGroupArrayBuilder<
-    ReactiveSecuredAreaFormFormGroupArrayBuilderT> extends StatelessWidget {
+  ReactiveSecuredAreaFormFormGroupArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveSecuredAreaFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(extended != null || getExtended != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         extended != null || getExtended != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-      List<ReactiveSecuredAreaFormFormGroupArrayBuilderT>>? extended;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveSecuredAreaFormFormGroupArrayBuilderT>
+  >?
+  extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-          List<ReactiveSecuredAreaFormFormGroupArrayBuilderT>>
-      Function(SecuredAreaForm formModel)? getExtended;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      SecuredAreaForm formModel)? builder;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveSecuredAreaFormFormGroupArrayBuilderT>
+  >
+  Function(SecuredAreaForm formModel)?
+  getExtended;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      ReactiveSecuredAreaFormFormGroupArrayBuilderT? item,
-      SecuredAreaForm formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    SecuredAreaForm formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    ReactiveSecuredAreaFormFormGroupArrayBuilderT? item,
+    SecuredAreaForm formModel,
+  )
+  itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1823,23 +1882,14 @@ class ReactiveSecuredAreaFormFormGroupArrayBuilder<
         final itemList =
             (value.value() ?? <ReactiveSecuredAreaFormFormGroupArrayBuilderT>[])
                 .asMap()
-                .map((i, item) => MapEntry(
-                      i,
-                      itemBuilder(
-                        context,
-                        i,
-                        item,
-                        formModel,
-                      ),
-                    ))
+                .map(
+                  (i, item) =>
+                      MapEntry(i, itemBuilder(context, i, item, formModel)),
+                )
                 .values
                 .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );

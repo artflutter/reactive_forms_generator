@@ -34,7 +34,7 @@ void main() {
               validators: [MustMatchValidator()],
             )
             class Login {
-              final String email;
+              final String? email;
             
               final String password;
             
@@ -42,7 +42,7 @@ void main() {
                 @RfControl(
                   validators: [RequiredValidator(), RequiredValidator()],
                 )
-                    this.email = "",
+                    this.email,
                 @RfControl(
                   validators: [RequiredValidator()],
                 )

@@ -19,7 +19,11 @@ class ReactiveLoginOFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, LoginOForm formModel, Widget? child) builder;
+    BuildContext context,
+    LoginOForm formModel,
+    Widget? child,
+  )
+  builder;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +42,7 @@ class LoginOFormInheritedStreamer extends InheritedStreamer<dynamic> {
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(
-          stream,
-          child,
-          key: key,
-        );
+  }) : super(stream, child, key: key);
 
   final LoginOForm form;
 }
@@ -64,10 +64,7 @@ class ReactiveLoginOForm extends StatelessWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static LoginOForm? of(
-    BuildContext context, {
-    bool listen = true,
-  }) {
+  static LoginOForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<LoginOFormInheritedStreamer>()
@@ -121,7 +118,11 @@ class LoginOFormBuilder extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-      BuildContext context, LoginOForm formModel, Widget? child) builder;
+    BuildContext context,
+    LoginOForm formModel,
+    Widget? child,
+  )
+  builder;
 
   final void Function(BuildContext context, LoginOForm formModel)? initState;
 
@@ -213,11 +214,7 @@ class _LoginOFormBuilderState extends State<LoginOFormBuilder> {
 final _logLoginOForm = Logger.detached('LoginOForm');
 
 class LoginOForm implements FormModel<LoginO, LoginOOutput> {
-  LoginOForm(
-    this.form,
-    this.path,
-    this._formModel,
-  ) : initial = form.rawValue;
+  LoginOForm(this.form, this.path, this._formModel) : initial = form.rawValue;
 
   static const String emailControlName = "email";
 
@@ -227,7 +224,7 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
 
   final String? path;
 
-// ignore: unused_field
+  // ignore: unused_field
   final FormModel<dynamic, dynamic>? _formModel;
 
   final Map<String, bool> _disabled = {};
@@ -248,7 +245,8 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
   String? get _passwordRawValue => passwordControl.value;
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -259,7 +257,8 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsPassword {
     try {
       form.control(passwordControlPath());
@@ -278,11 +277,9 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
   void get passwordFocus => form.focus(passwordControlPath());
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void emailRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void emailRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsEmail) {
       final controlPath = path;
       if (controlPath == null) {
@@ -306,11 +303,9 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void passwordRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void passwordRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsPassword) {
       final controlPath = path;
       if (controlPath == null) {
@@ -338,8 +333,11 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void passwordValueUpdate(
@@ -347,8 +345,11 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    passwordControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    passwordControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailValuePatch(
@@ -356,8 +357,11 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void passwordValuePatch(
@@ -365,8 +369,11 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    passwordControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    passwordControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailValueReset(
@@ -375,14 +382,13 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      emailControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => emailControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   void passwordValueReset(
     String? value, {
@@ -390,14 +396,13 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      passwordControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => passwordControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
@@ -462,17 +467,16 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     if (_disabled.isEmpty) {
       currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -530,9 +534,11 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
     LoginO? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.updateValue(LoginOForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => currentForm.updateValue(
+    LoginOForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
   void upsertValue(
@@ -550,17 +556,14 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
     LoginO? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => currentForm.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
-  void updateInitial(
-    Map<String, Object?>? value,
-    String? path,
-  ) {
+  void updateInitial(Map<String, Object?>? value, String? path) {
     if (_formModel != null) {
       _formModel?.updateInitial(currentForm.rawValue, path);
       return;
@@ -611,41 +614,45 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(LoginO? loginO) => FormGroup({
-        emailControlName: FormControl<String>(
-            value: loginO?.email,
-            validators: [RequiredValidator(), RequiredValidator()],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        passwordControlName: FormControl<String>(
-            value: loginO?.password,
-            validators: [RequiredValidator2()],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false)
-      },
-          validators: [
-            MustMatchValidator()
-          ],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+  static FormGroup formElements(LoginO? loginO) => FormGroup(
+    {
+      emailControlName: FormControl<String>(
+        value: loginO?.email,
+        validators: [RequiredValidator(), RequiredValidator()],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+      passwordControlName: FormControl<String>(
+        value: loginO?.password,
+        validators: [RequiredValidator2()],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+    },
+    validators: [MustMatchValidator()],
+    asyncValidators: [],
+    asyncValidatorsDebounceTime: 250,
+    disabled: false,
+  );
 }
 
 @Rf(
-    output: true,
-    requiredValidators: [...defaultRequiredValidators, 'RequiredValidator2()'])
+  output: true,
+  requiredValidators: [...defaultRequiredValidators, 'RequiredValidator2()'],
+)
 @RfGroup(validators: [MustMatchValidator()])
 class LoginOOutput extends Equatable {
   final String email;
   final String password;
-  const LoginOOutput(
-      {@RfControl(validators: [RequiredValidator(), RequiredValidator()])
-      required this.email,
-      @RfControl(validators: [RequiredValidator2()]) required this.password});
+  const LoginOOutput({
+    @RfControl(validators: [RequiredValidator(), RequiredValidator()])
+    required this.email,
+    @RfControl(validators: [RequiredValidator2()]) required this.password,
+  });
   @override
   List<Object?> get props => [email, password];
 }
@@ -660,30 +667,39 @@ class ReactiveLoginOFormArrayBuilder<ReactiveLoginOFormArrayBuilderT>
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveLoginOFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveLoginOFormArrayBuilderT>? Function(
-      LoginOForm formModel)? control;
+    LoginOForm formModel,
+  )?
+  control;
 
   final Widget Function(
-          BuildContext context, List<Widget> itemList, LoginOForm formModel)?
-      builder;
+    BuildContext context,
+    List<Widget> itemList,
+    LoginOForm formModel,
+  )?
+  builder;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      FormControl<ReactiveLoginOFormArrayBuilderT> control,
-      ReactiveLoginOFormArrayBuilderT? item,
-      LoginOForm formModel) itemBuilder;
+    BuildContext context,
+    int i,
+    FormControl<ReactiveLoginOFormArrayBuilderT> control,
+    ReactiveLoginOFormArrayBuilderT? item,
+    LoginOForm formModel,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(FormControl<ReactiveLoginOFormArrayBuilderT> control)?
-      controlFilter;
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -699,18 +715,9 @@ class ReactiveLoginOFormArrayBuilder<ReactiveLoginOFormArrayBuilderT>
     return ReactiveFormArrayItemBuilder<ReactiveLoginOFormArrayBuilderT>(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
-          ? (context, itemList) => builder(
-                context,
-                itemList,
-                formModel,
-              )
+          ? (context, itemList) => builder(context, itemList, formModel)
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
+      itemBuilder: (context, i, control, item) =>
           itemBuilder(context, i, control, item, formModel),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -728,35 +735,41 @@ class ReactiveLoginOFormArrayBuilder2<ReactiveLoginOFormArrayBuilderT>
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveLoginOFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveLoginOFormArrayBuilderT>? Function(
-      LoginOForm formModel)? control;
+    LoginOForm formModel,
+  )?
+  control;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        List<Widget> itemList,
-        LoginOForm formModel
-      }) params)? builder;
+    ({BuildContext context, List<Widget> itemList, LoginOForm formModel})
+    params,
+  )?
+  builder;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        int i,
-        FormControl<ReactiveLoginOFormArrayBuilderT> control,
-        ReactiveLoginOFormArrayBuilderT? item,
-        LoginOForm formModel
-      }) params) itemBuilder;
+    ({
+      BuildContext context,
+      int i,
+      FormControl<ReactiveLoginOFormArrayBuilderT> control,
+      ReactiveLoginOFormArrayBuilderT? item,
+      LoginOForm formModel,
+    })
+    params,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(FormControl<ReactiveLoginOFormArrayBuilderT> control)?
-      controlFilter;
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -773,23 +786,17 @@ class ReactiveLoginOFormArrayBuilder2<ReactiveLoginOFormArrayBuilderT>
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
           ? (context, itemList) => builder((
-                context: context,
-                itemList: itemList,
-                formModel: formModel,
-              ))
+              context: context,
+              itemList: itemList,
+              formModel: formModel,
+            ))
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
-          itemBuilder((
+      itemBuilder: (context, i, control, item) => itemBuilder((
         context: context,
         i: i,
         control: control,
         item: item,
-        formModel: formModel
+        formModel: formModel,
       )),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -798,33 +805,48 @@ class ReactiveLoginOFormArrayBuilder2<ReactiveLoginOFormArrayBuilderT>
 }
 
 class ReactiveLoginOFormFormGroupArrayBuilder<
-    ReactiveLoginOFormFormGroupArrayBuilderT> extends StatelessWidget {
+  ReactiveLoginOFormFormGroupArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveLoginOFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(extended != null || getExtended != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         extended != null || getExtended != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-      List<ReactiveLoginOFormFormGroupArrayBuilderT>>? extended;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveLoginOFormFormGroupArrayBuilderT>
+  >?
+  extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-          List<ReactiveLoginOFormFormGroupArrayBuilderT>>
-      Function(LoginOForm formModel)? getExtended;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveLoginOFormFormGroupArrayBuilderT>
+  >
+  Function(LoginOForm formModel)?
+  getExtended;
 
   final Widget Function(
-          BuildContext context, List<Widget> itemList, LoginOForm formModel)?
-      builder;
+    BuildContext context,
+    List<Widget> itemList,
+    LoginOForm formModel,
+  )?
+  builder;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      ReactiveLoginOFormFormGroupArrayBuilderT? item,
-      LoginOForm formModel) itemBuilder;
+    BuildContext context,
+    int i,
+    ReactiveLoginOFormFormGroupArrayBuilderT? item,
+    LoginOForm formModel,
+  )
+  itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -842,23 +864,14 @@ class ReactiveLoginOFormFormGroupArrayBuilder<
         final itemList =
             (value.value() ?? <ReactiveLoginOFormFormGroupArrayBuilderT>[])
                 .asMap()
-                .map((i, item) => MapEntry(
-                      i,
-                      itemBuilder(
-                        context,
-                        i,
-                        item,
-                        formModel,
-                      ),
-                    ))
+                .map(
+                  (i, item) =>
+                      MapEntry(i, itemBuilder(context, i, item, formModel)),
+                )
                 .values
                 .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );

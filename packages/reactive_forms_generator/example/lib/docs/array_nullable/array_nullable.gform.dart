@@ -19,7 +19,11 @@ class ReactiveArrayNullableFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, ArrayNullableForm formModel, Widget? child) builder;
+    BuildContext context,
+    ArrayNullableForm formModel,
+    Widget? child,
+  )
+  builder;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +42,7 @@ class ArrayNullableFormInheritedStreamer extends InheritedStreamer<dynamic> {
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(
-          stream,
-          child,
-          key: key,
-        );
+  }) : super(stream, child, key: key);
 
   final ArrayNullableForm form;
 }
@@ -64,19 +64,19 @@ class ReactiveArrayNullableForm extends StatelessWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static ArrayNullableForm? of(
-    BuildContext context, {
-    bool listen = true,
-  }) {
+  static ArrayNullableForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
-              ArrayNullableFormInheritedStreamer>()
+            ArrayNullableFormInheritedStreamer
+          >()
           ?.form;
     }
 
-    final element = context.getElementForInheritedWidgetOfExactType<
-        ArrayNullableFormInheritedStreamer>();
+    final element = context
+        .getElementForInheritedWidgetOfExactType<
+          ArrayNullableFormInheritedStreamer
+        >();
     return element == null
         ? null
         : (element.widget as ArrayNullableFormInheritedStreamer).form;
@@ -124,10 +124,14 @@ class ArrayNullableFormBuilder extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-      BuildContext context, ArrayNullableForm formModel, Widget? child) builder;
+    BuildContext context,
+    ArrayNullableForm formModel,
+    Widget? child,
+  )
+  builder;
 
   final void Function(BuildContext context, ArrayNullableForm formModel)?
-      initState;
+  initState;
 
   @override
   _ArrayNullableFormBuilderState createState() =>
@@ -142,7 +146,10 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
   @override
   void initState() {
     _formModel = ArrayNullableForm(
-        ArrayNullableForm.formElements(widget.model), null, null);
+      ArrayNullableForm.formElements(widget.model),
+      null,
+      null,
+    );
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -219,11 +226,8 @@ class _ArrayNullableFormBuilderState extends State<ArrayNullableFormBuilder> {
 final _logArrayNullableForm = Logger.detached('ArrayNullableForm');
 
 class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
-  ArrayNullableForm(
-    this.form,
-    this.path,
-    this._formModel,
-  ) : initial = form.rawValue;
+  ArrayNullableForm(this.form, this.path, this._formModel)
+    : initial = form.rawValue;
 
   static const String emailListControlName = "emailList";
 
@@ -241,7 +245,7 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
 
   final String? path;
 
-// ignore: unused_field
+  // ignore: unused_field
   final FormModel<dynamic, dynamic>? _formModel;
 
   final Map<String, bool> _disabled = {};
@@ -297,7 +301,8 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
       modeListControl.rawValue.whereType<UserMode?>().toList();
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsSomeList {
     try {
       form.control(someListControlPath());
@@ -308,7 +313,8 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsSomeListRequired {
     try {
       form.control(someListRequiredControlPath());
@@ -319,7 +325,8 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsEmailList {
     try {
       form.control(emailListControlPath());
@@ -330,7 +337,8 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsFruitList {
     try {
       form.control(fruitListControlPath());
@@ -341,7 +349,8 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsVegetablesList {
     try {
       form.control(vegetablesListControlPath());
@@ -352,7 +361,8 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
+    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
+  )
   bool get containsModeList {
     try {
       form.control(modeListControlPath());
@@ -388,11 +398,9 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
   void get modeListFocus => form.focus(modeListControlPath());
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void someListRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void someListRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsSomeList) {
       final controlPath = path;
       if (controlPath == null) {
@@ -416,11 +424,9 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void vegetablesListRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void vegetablesListRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsVegetablesList) {
       final controlPath = path;
       if (controlPath == null) {
@@ -444,11 +450,9 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
   }
 
   @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void modeListRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
+  )
+  void modeListRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsModeList) {
       final controlPath = path;
       if (controlPath == null) {
@@ -476,8 +480,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    someListControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    someListControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void someListRequiredValueUpdate(
@@ -485,8 +492,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    someListRequiredControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    someListRequiredControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailListValueUpdate(
@@ -494,8 +504,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailListControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailListControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void fruitListValueUpdate(
@@ -503,8 +516,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    fruitListControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    fruitListControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void vegetablesListValueUpdate(
@@ -512,8 +528,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    vegetablesListControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    vegetablesListControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void modeListValueUpdate(
@@ -521,8 +540,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    modeListControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    modeListControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void someListValuePatch(
@@ -530,8 +552,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    someListControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    someListControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void someListRequiredValuePatch(
@@ -539,8 +564,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    someListRequiredControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    someListRequiredControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailListValuePatch(
@@ -548,8 +576,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailListControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailListControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void fruitListValuePatch(
@@ -557,8 +588,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    fruitListControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    fruitListControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void vegetablesListValuePatch(
@@ -566,8 +600,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    vegetablesListControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    vegetablesListControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void modeListValuePatch(
@@ -575,8 +612,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    modeListControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    modeListControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void someListValueReset(
@@ -585,14 +625,13 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      someListControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => someListControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   void someListRequiredValueReset(
     List<String> value, {
@@ -600,14 +639,13 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      someListRequiredControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => someListRequiredControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   void emailListValueReset(
     List<String> value, {
@@ -615,14 +653,13 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      emailListControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => emailListControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   void fruitListValueReset(
     List<bool?> value, {
@@ -630,14 +667,13 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      fruitListControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => fruitListControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   void vegetablesListValueReset(
     List<String?>? value, {
@@ -645,14 +681,13 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      vegetablesListControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => vegetablesListControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   void modeListValueReset(
     List<UserMode?>? value, {
@@ -660,14 +695,13 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      modeListControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => modeListControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   FormControl<List<String?>> get someListControl =>
       form.control(someListControlPath()) as FormControl<List<String?>>;
@@ -838,13 +872,15 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
         break;
     }
 
-    emailListControl.add(FormControl<String>(
-      value: value,
-      validators: resultingValidators,
-      asyncValidators: resultingAsyncValidators,
-      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
-      disabled: disabled ?? false,
-    ));
+    emailListControl.add(
+      FormControl<String>(
+        value: value,
+        validators: resultingValidators,
+        asyncValidators: resultingAsyncValidators,
+        asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+        disabled: disabled ?? false,
+      ),
+    );
   }
 
   void addFruitListItem(
@@ -878,13 +914,15 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
         break;
     }
 
-    fruitListControl.add(FormControl<bool>(
-      value: value,
-      validators: resultingValidators,
-      asyncValidators: resultingAsyncValidators,
-      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
-      disabled: disabled ?? false,
-    ));
+    fruitListControl.add(
+      FormControl<bool>(
+        value: value,
+        validators: resultingValidators,
+        asyncValidators: resultingAsyncValidators,
+        asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+        disabled: disabled ?? false,
+      ),
+    );
   }
 
   void addVegetablesListItem(
@@ -918,13 +956,15 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
         break;
     }
 
-    vegetablesListControl.add(FormControl<String>(
-      value: value,
-      validators: resultingValidators,
-      asyncValidators: resultingAsyncValidators,
-      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
-      disabled: disabled ?? false,
-    ));
+    vegetablesListControl.add(
+      FormControl<String>(
+        value: value,
+        validators: resultingValidators,
+        asyncValidators: resultingAsyncValidators,
+        asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+        disabled: disabled ?? false,
+      ),
+    );
   }
 
   void addModeListItem(
@@ -958,13 +998,15 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
         break;
     }
 
-    modeListControl.add(FormControl<UserMode>(
-      value: value,
-      validators: resultingValidators,
-      asyncValidators: resultingAsyncValidators,
-      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
-      disabled: disabled ?? false,
-    ));
+    modeListControl.add(
+      FormControl<UserMode>(
+        value: value,
+        validators: resultingValidators,
+        asyncValidators: resultingAsyncValidators,
+        asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+        disabled: disabled ?? false,
+      ),
+    );
   }
 
   @override
@@ -979,37 +1021,38 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
       );
     }
     return ArrayNullable(
-        emailList: _emailListValue,
-        fruitList: _fruitListValue,
-        vegetablesList: _vegetablesListValue,
-        modeList: _modeListValue,
-        someList: _someListValue,
-        someListRequired: _someListRequiredValue);
+      emailList: _emailListValue,
+      fruitList: _fruitListValue,
+      vegetablesList: containsVegetablesList ? _vegetablesListValue : null,
+      modeList: containsModeList ? _modeListValue : null,
+      someList: containsSomeList ? _someListValue : null,
+      someListRequired: _someListRequiredValue,
+    );
   }
 
   @override
   ArrayNullable get rawModel {
     return ArrayNullable(
-        emailList: _emailListRawValue,
-        fruitList: _fruitListRawValue,
-        vegetablesList: _vegetablesListRawValue,
-        modeList: _modeListRawValue,
-        someList: _someListRawValue,
-        someListRequired: _someListRequiredRawValue);
+      emailList: _emailListRawValue,
+      fruitList: _fruitListRawValue,
+      vegetablesList: _vegetablesListRawValue,
+      modeList: _modeListRawValue,
+      someList: _someListRawValue,
+      someListRequired: _someListRequiredRawValue,
+    );
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     if (_disabled.isEmpty) {
       currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -1067,9 +1110,11 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     ArrayNullable? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.updateValue(ArrayNullableForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => currentForm.updateValue(
+    ArrayNullableForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
   void upsertValue(
@@ -1087,17 +1132,14 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     ArrayNullable? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => currentForm.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
-  void updateInitial(
-    Map<String, Object?>? value,
-    String? path,
-  ) {
+  void updateInitial(Map<String, Object?>? value, String? path) {
     if (_formModel != null) {
       _formModel?.updateInitial(currentForm.rawValue, path);
       return;
@@ -1148,86 +1190,104 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(ArrayNullable? arrayNullable) => FormGroup({
-        emailListControlName: FormArray<String>(
-            (arrayNullable?.emailList ?? [])
-                .map((e) => FormControl<String>(
-                      value: e,
-                      validators: [],
-                      asyncValidators: [],
-                      asyncValidatorsDebounceTime: 250,
-                      disabled: false,
-                    ))
-                .toList(),
-            validators: [RequiredValidator()],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false),
-        fruitListControlName: FormArray<bool>(
-            (arrayNullable?.fruitList ?? [])
-                .map((e) => FormControl<bool>(
-                      value: e,
-                      validators: [],
-                      asyncValidators: [],
-                      asyncValidatorsDebounceTime: 250,
-                      disabled: false,
-                    ))
-                .toList(),
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false),
-        vegetablesListControlName: FormArray<String>(
-            (arrayNullable?.vegetablesList ?? [])
-                .map((e) => FormControl<String>(
-                      value: e,
-                      validators: [],
-                      asyncValidators: [],
-                      asyncValidatorsDebounceTime: 250,
-                      disabled: false,
-                    ))
-                .toList(),
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false),
-        modeListControlName: FormArray<UserMode>(
-            (arrayNullable?.modeList ?? [])
-                .map((e) => FormControl<UserMode>(
-                      value: e,
-                      validators: [],
-                      asyncValidators: [],
-                      asyncValidatorsDebounceTime: 250,
-                      disabled: false,
-                    ))
-                .toList(),
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false),
-        someListControlName: FormControl<List<String?>>(
-            value: arrayNullable?.someList,
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        someListRequiredControlName: FormControl<List<String>>(
-            value: arrayNullable?.someListRequired,
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+  static FormGroup formElements(ArrayNullable? arrayNullable) => FormGroup(
+    {
+      emailListControlName: FormArray<String>(
+        (arrayNullable?.emailList ?? [])
+            .map(
+              (e) => FormControl<String>(
+                value: e,
+                validators: [],
+                asyncValidators: [],
+                asyncValidatorsDebounceTime: 250,
+                disabled: false,
+              ),
+            )
+            .toList(),
+        validators: [RequiredValidator()],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      ),
+      fruitListControlName: FormArray<bool>(
+        (arrayNullable?.fruitList ?? [])
+            .map(
+              (e) => FormControl<bool>(
+                value: e,
+                validators: [],
+                asyncValidators: [],
+                asyncValidatorsDebounceTime: 250,
+                disabled: false,
+              ),
+            )
+            .toList(),
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      ),
+      vegetablesListControlName: FormArray<String>(
+        (arrayNullable?.vegetablesList ?? [])
+            .map(
+              (e) => FormControl<String>(
+                value: e,
+                validators: [],
+                asyncValidators: [],
+                asyncValidatorsDebounceTime: 250,
+                disabled: false,
+              ),
+            )
+            .toList(),
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      ),
+      modeListControlName: FormArray<UserMode>(
+        (arrayNullable?.modeList ?? [])
+            .map(
+              (e) => FormControl<UserMode>(
+                value: e,
+                validators: [],
+                asyncValidators: [],
+                asyncValidatorsDebounceTime: 250,
+                disabled: false,
+              ),
+            )
+            .toList(),
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      ),
+      someListControlName: FormControl<List<String?>>(
+        value: arrayNullable?.someList,
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+      someListRequiredControlName: FormControl<List<String>>(
+        value: arrayNullable?.someListRequired,
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+    },
+    validators: [],
+    asyncValidators: [],
+    asyncValidatorsDebounceTime: 250,
+    disabled: false,
+  );
 }
 
 class ReactiveArrayNullableFormArrayBuilder<
-    ReactiveArrayNullableFormArrayBuilderT> extends StatelessWidget {
+  ReactiveArrayNullableFormArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveArrayNullableFormArrayBuilder({
     Key? key,
     this.control,
@@ -1236,30 +1296,41 @@ class ReactiveArrayNullableFormArrayBuilder<
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveArrayNullableFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveArrayNullableFormArrayBuilderT>? Function(
-      ArrayNullableForm formModel)? control;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      ArrayNullableForm formModel)? builder;
+    ArrayNullableForm formModel,
+  )?
+  control;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      FormControl<ReactiveArrayNullableFormArrayBuilderT> control,
-      ReactiveArrayNullableFormArrayBuilderT? item,
-      ArrayNullableForm formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    ArrayNullableForm formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    FormControl<ReactiveArrayNullableFormArrayBuilderT> control,
+    ReactiveArrayNullableFormArrayBuilderT? item,
+    ArrayNullableForm formModel,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-          FormControl<ReactiveArrayNullableFormArrayBuilderT> control)?
-      controlFilter;
+    FormControl<ReactiveArrayNullableFormArrayBuilderT> control,
+  )?
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -1275,18 +1346,9 @@ class ReactiveArrayNullableFormArrayBuilder<
     return ReactiveFormArrayItemBuilder<ReactiveArrayNullableFormArrayBuilderT>(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
-          ? (context, itemList) => builder(
-                context,
-                itemList,
-                formModel,
-              )
+          ? (context, itemList) => builder(context, itemList, formModel)
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
+      itemBuilder: (context, i, control, item) =>
           itemBuilder(context, i, control, item, formModel),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -1295,7 +1357,9 @@ class ReactiveArrayNullableFormArrayBuilder<
 }
 
 class ReactiveArrayNullableFormArrayBuilder2<
-    ReactiveArrayNullableFormArrayBuilderT> extends StatelessWidget {
+  ReactiveArrayNullableFormArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveArrayNullableFormArrayBuilder2({
     Key? key,
     this.control,
@@ -1304,36 +1368,43 @@ class ReactiveArrayNullableFormArrayBuilder2<
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveArrayNullableFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveArrayNullableFormArrayBuilderT>? Function(
-      ArrayNullableForm formModel)? control;
+    ArrayNullableForm formModel,
+  )?
+  control;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        List<Widget> itemList,
-        ArrayNullableForm formModel
-      }) params)? builder;
+    ({BuildContext context, List<Widget> itemList, ArrayNullableForm formModel})
+    params,
+  )?
+  builder;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        int i,
-        FormControl<ReactiveArrayNullableFormArrayBuilderT> control,
-        ReactiveArrayNullableFormArrayBuilderT? item,
-        ArrayNullableForm formModel
-      }) params) itemBuilder;
+    ({
+      BuildContext context,
+      int i,
+      FormControl<ReactiveArrayNullableFormArrayBuilderT> control,
+      ReactiveArrayNullableFormArrayBuilderT? item,
+      ArrayNullableForm formModel,
+    })
+    params,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-          FormControl<ReactiveArrayNullableFormArrayBuilderT> control)?
-      controlFilter;
+    FormControl<ReactiveArrayNullableFormArrayBuilderT> control,
+  )?
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -1350,23 +1421,17 @@ class ReactiveArrayNullableFormArrayBuilder2<
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
           ? (context, itemList) => builder((
-                context: context,
-                itemList: itemList,
-                formModel: formModel,
-              ))
+              context: context,
+              itemList: itemList,
+              formModel: formModel,
+            ))
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
-          itemBuilder((
+      itemBuilder: (context, i, control, item) => itemBuilder((
         context: context,
         i: i,
         control: control,
         item: item,
-        formModel: formModel
+        formModel: formModel,
       )),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -1375,32 +1440,48 @@ class ReactiveArrayNullableFormArrayBuilder2<
 }
 
 class ReactiveArrayNullableFormFormGroupArrayBuilder<
-    ReactiveArrayNullableFormFormGroupArrayBuilderT> extends StatelessWidget {
+  ReactiveArrayNullableFormFormGroupArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveArrayNullableFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(extended != null || getExtended != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         extended != null || getExtended != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-      List<ReactiveArrayNullableFormFormGroupArrayBuilderT>>? extended;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveArrayNullableFormFormGroupArrayBuilderT>
+  >?
+  extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-          List<ReactiveArrayNullableFormFormGroupArrayBuilderT>>
-      Function(ArrayNullableForm formModel)? getExtended;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      ArrayNullableForm formModel)? builder;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveArrayNullableFormFormGroupArrayBuilderT>
+  >
+  Function(ArrayNullableForm formModel)?
+  getExtended;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      ReactiveArrayNullableFormFormGroupArrayBuilderT? item,
-      ArrayNullableForm formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    ArrayNullableForm formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    ReactiveArrayNullableFormFormGroupArrayBuilderT? item,
+    ArrayNullableForm formModel,
+  )
+  itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1415,26 +1496,18 @@ class ReactiveArrayNullableFormFormGroupArrayBuilder<
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ??
-                <ReactiveArrayNullableFormFormGroupArrayBuilderT>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ??
+                    <ReactiveArrayNullableFormFormGroupArrayBuilderT>[])
+                .asMap()
+                .map(
+                  (i, item) =>
+                      MapEntry(i, itemBuilder(context, i, item, formModel)),
+                )
+                .values
+                .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );

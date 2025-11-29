@@ -229,6 +229,11 @@ extension ParameterElementExt on FormalParameterElement {
     (type as TypeImpl).appendTo(builder);
     return builder.toString();
   }
+
+  bool isOutputNullable(List<String> requiredValidators) {
+    final type = toReferenceType(requiredValidators);
+    return type.endsWith('?');
+  }
 }
 
 extension FieldElementExt on FieldElement {
