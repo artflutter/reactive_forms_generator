@@ -31,13 +31,6 @@ class RemoveMethod extends ReactiveFormGeneratorMethod {
               ..type = const Reference('bool'),
           ),
         ])
-        ..annotations.add(
-          const CodeExpression(
-            Code(
-              "Deprecated('Generator completely wraps the form so manual fields removal could lead to unexpected crashes')",
-            ),
-          ),
-        )
         ..returns = const Reference('void')
         ..body = Code('''
             if (${field.containsMethodName}) {

@@ -269,21 +269,20 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
 
   AddressOOutput get _homeValue => homeForm.model;
 
-  AddressOOutput? get _officeValue => officeForm.model;
+  AddressOOutput? get _officeValue => containsOffice ? officeForm.model : null;
 
   String get _idRawValue => idControl.value as String;
 
-  String? get _firstNameRawValue => firstNameControl.value;
+  String? get _firstNameRawValue =>
+      containsFirstName ? firstNameControl.value : null;
 
-  String? get _lastNameRawValue => lastNameControl.value;
+  String? get _lastNameRawValue =>
+      containsLastName ? lastNameControl.value : null;
 
   AddressO get _homeRawValue => homeForm.rawModel;
 
-  AddressO? get _officeRawValue => officeForm.rawModel;
+  AddressO? get _officeRawValue => containsOffice ? officeForm.rawModel : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -293,9 +292,6 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsFirstName {
     try {
       form.control(firstNameControlPath());
@@ -305,9 +301,6 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsLastName {
     try {
       form.control(lastNameControlPath());
@@ -317,9 +310,6 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsHome {
     try {
       form.control(homeControlPath());
@@ -329,9 +319,6 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsOffice {
     try {
       form.control(officeControlPath());
@@ -361,9 +348,6 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
 
   void get officeFocus => form.focus(officeControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void firstNameRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsFirstName) {
       final controlPath = path;
@@ -387,9 +371,6 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void lastNameRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsLastName) {
       final controlPath = path;
@@ -413,9 +394,6 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void officeRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsOffice) {
       final controlPath = path;
@@ -748,7 +726,7 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
       firstName: _firstNameValue,
       lastName: _lastNameValue,
       home: _homeValue,
-      office: containsOffice ? _officeValue : null,
+      office: _officeValue,
     );
   }
 
@@ -980,21 +958,18 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
 
   String zipControlPath() => pathBuilder(zipControlName);
 
-  String? get _streetValue => streetControl.value;
+  String? get _streetValue => containsStreet ? streetControl.value : null;
 
   String get _cityValue => cityControl.value as String;
 
-  String? get _zipValue => zipControl.value;
+  String? get _zipValue => containsZip ? zipControl.value : null;
 
-  String? get _streetRawValue => streetControl.value;
+  String? get _streetRawValue => containsStreet ? streetControl.value : null;
 
-  String? get _cityRawValue => cityControl.value;
+  String? get _cityRawValue => containsCity ? cityControl.value : null;
 
-  String? get _zipRawValue => zipControl.value;
+  String? get _zipRawValue => containsZip ? zipControl.value : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsStreet {
     try {
       form.control(streetControlPath());
@@ -1004,9 +979,6 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsCity {
     try {
       form.control(cityControlPath());
@@ -1016,9 +988,6 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsZip {
     try {
       form.control(zipControlPath());
@@ -1040,9 +1009,6 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
 
   void get zipFocus => form.focus(zipControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void streetRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsStreet) {
       final controlPath = path;
@@ -1066,9 +1032,6 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void cityRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsCity) {
       final controlPath = path;
@@ -1092,9 +1055,6 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void zipRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsZip) {
       final controlPath = path;
@@ -1308,9 +1268,9 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
       );
     }
     return AddressOOutput(
-      street: containsStreet ? _streetValue : null,
+      street: _streetValue,
       city: _cityValue,
-      zip: containsZip ? _zipValue : null,
+      zip: _zipValue,
     );
   }
 

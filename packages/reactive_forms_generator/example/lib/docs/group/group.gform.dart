@@ -241,25 +241,25 @@ class GroupForm implements FormModel<Group, Group> {
 
   String address2ControlPath() => pathBuilder(address2ControlName);
 
-  Personal? get _personalValue => personalForm.model;
+  Personal? get _personalValue => containsPersonal ? personalForm.model : null;
 
-  Phone? get _phoneValue => phoneForm.model;
+  Phone? get _phoneValue => containsPhone ? phoneForm.model : null;
 
-  Address? get _addressValue => addressForm.model;
+  Address? get _addressValue => containsAddress ? addressForm.model : null;
 
-  Address? get _address2Value => address2Form.model;
+  Address? get _address2Value => containsAddress2 ? address2Form.model : null;
 
-  Personal? get _personalRawValue => personalForm.rawModel;
+  Personal? get _personalRawValue =>
+      containsPersonal ? personalForm.rawModel : null;
 
-  Phone? get _phoneRawValue => phoneForm.rawModel;
+  Phone? get _phoneRawValue => containsPhone ? phoneForm.rawModel : null;
 
-  Address? get _addressRawValue => addressForm.rawModel;
+  Address? get _addressRawValue =>
+      containsAddress ? addressForm.rawModel : null;
 
-  Address? get _address2RawValue => address2Form.rawModel;
+  Address? get _address2RawValue =>
+      containsAddress2 ? address2Form.rawModel : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsPersonal {
     try {
       form.control(personalControlPath());
@@ -269,9 +269,6 @@ class GroupForm implements FormModel<Group, Group> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsPhone {
     try {
       form.control(phoneControlPath());
@@ -281,9 +278,6 @@ class GroupForm implements FormModel<Group, Group> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsAddress {
     try {
       form.control(addressControlPath());
@@ -293,9 +287,6 @@ class GroupForm implements FormModel<Group, Group> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsAddress2 {
     try {
       form.control(address2ControlPath());
@@ -321,9 +312,6 @@ class GroupForm implements FormModel<Group, Group> {
 
   void get address2Focus => form.focus(address2ControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void personalRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsPersonal) {
       final controlPath = path;
@@ -347,9 +335,6 @@ class GroupForm implements FormModel<Group, Group> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void phoneRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsPhone) {
       final controlPath = path;
@@ -373,9 +358,6 @@ class GroupForm implements FormModel<Group, Group> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void addressRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsAddress) {
       final controlPath = path;
@@ -399,9 +381,6 @@ class GroupForm implements FormModel<Group, Group> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void address2Remove({bool updateParent = true, bool emitEvent = true}) {
     if (containsAddress2) {
       final controlPath = path;
@@ -676,10 +655,10 @@ class GroupForm implements FormModel<Group, Group> {
       );
     }
     return Group(
-      personal: containsPersonal ? _personalValue : null,
-      phone: containsPhone ? _phoneValue : null,
-      address: containsAddress ? _addressValue : null,
-      address2: containsAddress2 ? _address2Value : null,
+      personal: _personalValue,
+      phone: _phoneValue,
+      address: _addressValue,
+      address2: _address2Value,
     );
   }
 
@@ -885,17 +864,14 @@ class PersonalForm implements FormModel<Personal, Personal> {
 
   String emailControlPath() => pathBuilder(emailControlName);
 
-  String? get _nameValue => nameControl.value;
+  String? get _nameValue => containsName ? nameControl.value : null;
 
-  String? get _emailValue => emailControl.value;
+  String? get _emailValue => containsEmail ? emailControl.value : null;
 
-  String? get _nameRawValue => nameControl.value;
+  String? get _nameRawValue => containsName ? nameControl.value : null;
 
-  String? get _emailRawValue => emailControl.value;
+  String? get _emailRawValue => containsEmail ? emailControl.value : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -905,9 +881,6 @@ class PersonalForm implements FormModel<Personal, Personal> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -925,9 +898,6 @@ class PersonalForm implements FormModel<Personal, Personal> {
 
   void get emailFocus => form.focus(emailControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void nameRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsName) {
       final controlPath = path;
@@ -951,9 +921,6 @@ class PersonalForm implements FormModel<Personal, Personal> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void emailRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsEmail) {
       final controlPath = path;
@@ -1106,10 +1073,7 @@ class PersonalForm implements FormModel<Personal, Personal> {
         StackTrace.current,
       );
     }
-    return Personal(
-      name: containsName ? _nameValue : null,
-      email: containsEmail ? _emailValue : null,
-    );
+    return Personal(name: _nameValue, email: _emailValue);
   }
 
   @override
@@ -1316,17 +1280,18 @@ class PhoneForm implements FormModel<Phone, Phone> {
 
   String countryIsoControlPath() => pathBuilder(countryIsoControlName);
 
-  String? get _phoneNumberValue => phoneNumberControl.value;
+  String? get _phoneNumberValue =>
+      containsPhoneNumber ? phoneNumberControl.value : null;
 
-  String? get _countryIsoValue => countryIsoControl.value;
+  String? get _countryIsoValue =>
+      containsCountryIso ? countryIsoControl.value : null;
 
-  String? get _phoneNumberRawValue => phoneNumberControl.value;
+  String? get _phoneNumberRawValue =>
+      containsPhoneNumber ? phoneNumberControl.value : null;
 
-  String? get _countryIsoRawValue => countryIsoControl.value;
+  String? get _countryIsoRawValue =>
+      containsCountryIso ? countryIsoControl.value : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsPhoneNumber {
     try {
       form.control(phoneNumberControlPath());
@@ -1336,9 +1301,6 @@ class PhoneForm implements FormModel<Phone, Phone> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsCountryIso {
     try {
       form.control(countryIsoControlPath());
@@ -1356,9 +1318,6 @@ class PhoneForm implements FormModel<Phone, Phone> {
 
   void get countryIsoFocus => form.focus(countryIsoControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void phoneNumberRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsPhoneNumber) {
       final controlPath = path;
@@ -1382,9 +1341,6 @@ class PhoneForm implements FormModel<Phone, Phone> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void countryIsoRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsCountryIso) {
       final controlPath = path;
@@ -1537,10 +1493,7 @@ class PhoneForm implements FormModel<Phone, Phone> {
         StackTrace.current,
       );
     }
-    return Phone(
-      phoneNumber: containsPhoneNumber ? _phoneNumberValue : null,
-      countryIso: containsCountryIso ? _countryIsoValue : null,
-    );
+    return Phone(phoneNumber: _phoneNumberValue, countryIso: _countryIsoValue);
   }
 
   @override
@@ -1751,21 +1704,18 @@ class AddressForm implements FormModel<Address, Address> {
 
   String zipControlPath() => pathBuilder(zipControlName);
 
-  String? get _streetValue => streetControl.value;
+  String? get _streetValue => containsStreet ? streetControl.value : null;
 
-  String? get _cityValue => cityControl.value;
+  String? get _cityValue => containsCity ? cityControl.value : null;
 
-  String? get _zipValue => zipControl.value;
+  String? get _zipValue => containsZip ? zipControl.value : null;
 
-  String? get _streetRawValue => streetControl.value;
+  String? get _streetRawValue => containsStreet ? streetControl.value : null;
 
-  String? get _cityRawValue => cityControl.value;
+  String? get _cityRawValue => containsCity ? cityControl.value : null;
 
-  String? get _zipRawValue => zipControl.value;
+  String? get _zipRawValue => containsZip ? zipControl.value : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsStreet {
     try {
       form.control(streetControlPath());
@@ -1775,9 +1725,6 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsCity {
     try {
       form.control(cityControlPath());
@@ -1787,9 +1734,6 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsZip {
     try {
       form.control(zipControlPath());
@@ -1811,9 +1755,6 @@ class AddressForm implements FormModel<Address, Address> {
 
   void get zipFocus => form.focus(zipControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void streetRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsStreet) {
       final controlPath = path;
@@ -1837,9 +1778,6 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void cityRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsCity) {
       final controlPath = path;
@@ -1863,9 +1801,6 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void zipRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsZip) {
       final controlPath = path;
@@ -2077,11 +2012,7 @@ class AddressForm implements FormModel<Address, Address> {
         StackTrace.current,
       );
     }
-    return Address(
-      street: containsStreet ? _streetValue : null,
-      city: containsCity ? _cityValue : null,
-      zip: containsZip ? _zipValue : null,
-    );
+    return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
   }
 
   @override

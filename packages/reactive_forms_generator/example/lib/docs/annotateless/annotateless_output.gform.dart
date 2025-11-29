@@ -258,9 +258,6 @@ class AnnotatelessOForm
 
   String get _passwordRawValue => passwordControl.value ?? "";
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -270,9 +267,6 @@ class AnnotatelessOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsPassword {
     try {
       form.control(passwordControlPath());

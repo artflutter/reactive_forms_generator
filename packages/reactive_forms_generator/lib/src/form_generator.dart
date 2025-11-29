@@ -435,21 +435,13 @@ class FormGenerator {
 
   Method get modelMethod => Method((b) {
     final parameterValues = parameters.map<String?>((e) {
-      var fieldValueName = e.fieldValueName;
-      final isNullable = e.isNullable;
-      final isOutputNullable = e.isOutputNullable(root.requiredValidators);
-
-      if (isNullable && !root.output || root.output && isOutputNullable) {
-        fieldValueName = '${e.containsMethodName} ? ${e.fieldValueName} : null';
-      }
-
       if (e.isPositional ||
           e.isRequiredPositional ||
           (e.isOptional && e.isPositional)) {
-        return fieldValueName;
+        return e.fieldValueName;
       }
 
-      return '${e.fieldName}: $fieldValueName';
+      return '${e.fieldName}:${e.fieldValueName}';
     }).whereType<String>();
 
     final referenceType = root.output

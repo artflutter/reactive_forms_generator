@@ -252,18 +252,17 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
   List<DeliveryPoint> get _deliveryListValue =>
       deliveryListDeliveryPointForm.map((e) => e.model).toList();
 
-  List<Client>? get _clientListValue =>
-      clientListClientForm.map((e) => e.model).toList();
+  List<Client>? get _clientListValue => containsClientList
+      ? clientListClientForm.map((e) => e.model).toList()
+      : null;
 
   List<DeliveryPoint> get _deliveryListRawValue =>
       deliveryListDeliveryPointForm.map((e) => e.rawModel).toList();
 
-  List<Client>? get _clientListRawValue =>
-      clientListClientForm.map((e) => e.rawModel).toList();
+  List<Client>? get _clientListRawValue => containsClientList
+      ? clientListClientForm.map((e) => e.rawModel).toList()
+      : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsDeliveryList {
     try {
       form.control(deliveryListControlPath());
@@ -273,9 +272,6 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsClientList {
     try {
       form.control(clientListControlPath());
@@ -293,9 +289,6 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
 
   void get clientListFocus => form.focus(clientListControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void clientListRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsClientList) {
       final controlPath = path;
@@ -663,7 +656,7 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     }
     return DeliveryList(
       deliveryList: _deliveryListValue,
-      clientList: containsClientList ? _clientListValue : null,
+      clientList: _clientListValue,
     );
   }
 
@@ -885,15 +878,13 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
 
   String get _nameValue => nameControl.value ?? "";
 
-  Address? get _addressValue => addressForm.model;
+  Address? get _addressValue => containsAddress ? addressForm.model : null;
 
   String get _nameRawValue => nameControl.value ?? "";
 
-  Address? get _addressRawValue => addressForm.rawModel;
+  Address? get _addressRawValue =>
+      containsAddress ? addressForm.rawModel : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -903,9 +894,6 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsAddress {
     try {
       form.control(addressControlPath());
@@ -923,9 +911,6 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
 
   void get addressFocus => form.focus(addressControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void addressRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsAddress) {
       final controlPath = path;
@@ -1079,10 +1064,7 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
         StackTrace.current,
       );
     }
-    return DeliveryPoint(
-      name: _nameValue,
-      address: containsAddress ? _addressValue : null,
-    );
+    return DeliveryPoint(name: _nameValue, address: _addressValue);
   }
 
   @override
@@ -1284,17 +1266,14 @@ class AddressForm implements FormModel<Address, Address> {
 
   String cityControlPath() => pathBuilder(cityControlName);
 
-  String? get _streetValue => streetControl.value;
+  String? get _streetValue => containsStreet ? streetControl.value : null;
 
-  String? get _cityValue => cityControl.value;
+  String? get _cityValue => containsCity ? cityControl.value : null;
 
-  String? get _streetRawValue => streetControl.value;
+  String? get _streetRawValue => containsStreet ? streetControl.value : null;
 
-  String? get _cityRawValue => cityControl.value;
+  String? get _cityRawValue => containsCity ? cityControl.value : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsStreet {
     try {
       form.control(streetControlPath());
@@ -1304,9 +1283,6 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsCity {
     try {
       form.control(cityControlPath());
@@ -1324,9 +1300,6 @@ class AddressForm implements FormModel<Address, Address> {
 
   void get cityFocus => form.focus(cityControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void streetRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsStreet) {
       final controlPath = path;
@@ -1350,9 +1323,6 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void cityRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsCity) {
       final controlPath = path;
@@ -1505,10 +1475,7 @@ class AddressForm implements FormModel<Address, Address> {
         StackTrace.current,
       );
     }
-    return Address(
-      street: containsStreet ? _streetValue : null,
-      city: containsCity ? _cityValue : null,
-    );
+    return Address(street: _streetValue, city: _cityValue);
   }
 
   @override
@@ -1721,19 +1688,16 @@ class ClientForm implements FormModel<Client, Client> {
 
   ClientType get _clientTypeValue => clientTypeControl.value as ClientType;
 
-  String? get _nameValue => nameControl.value;
+  String? get _nameValue => containsName ? nameControl.value : null;
 
-  String? get _notesValue => notesControl.value;
+  String? get _notesValue => containsNotes ? notesControl.value : null;
 
   ClientType get _clientTypeRawValue => clientTypeControl.value as ClientType;
 
-  String? get _nameRawValue => nameControl.value;
+  String? get _nameRawValue => containsName ? nameControl.value : null;
 
-  String? get _notesRawValue => notesControl.value;
+  String? get _notesRawValue => containsNotes ? notesControl.value : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsClientType {
     try {
       form.control(clientTypeControlPath());
@@ -1743,9 +1707,6 @@ class ClientForm implements FormModel<Client, Client> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -1755,9 +1716,6 @@ class ClientForm implements FormModel<Client, Client> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsNotes {
     try {
       form.control(notesControlPath());
@@ -1779,9 +1737,6 @@ class ClientForm implements FormModel<Client, Client> {
 
   void get notesFocus => form.focus(notesControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void nameRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsName) {
       final controlPath = path;
@@ -1805,9 +1760,6 @@ class ClientForm implements FormModel<Client, Client> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void notesRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsNotes) {
       final controlPath = path;
@@ -2021,8 +1973,8 @@ class ClientForm implements FormModel<Client, Client> {
     }
     return Client(
       clientType: _clientTypeValue,
-      name: containsName ? _nameValue : null,
-      notes: containsNotes ? _notesValue : null,
+      name: _nameValue,
+      notes: _notesValue,
     );
   }
 
@@ -2702,15 +2654,13 @@ class StandaloneDeliveryPointForm
 
   String get _nameValue => nameControl.value ?? "";
 
-  Address? get _addressValue => addressForm.model;
+  Address? get _addressValue => containsAddress ? addressForm.model : null;
 
   String get _nameRawValue => nameControl.value ?? "";
 
-  Address? get _addressRawValue => addressForm.rawModel;
+  Address? get _addressRawValue =>
+      containsAddress ? addressForm.rawModel : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -2720,9 +2670,6 @@ class StandaloneDeliveryPointForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsAddress {
     try {
       form.control(addressControlPath());
@@ -2740,9 +2687,6 @@ class StandaloneDeliveryPointForm
 
   void get addressFocus => form.focus(addressControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void addressRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsAddress) {
       final controlPath = path;
@@ -2896,10 +2840,7 @@ class StandaloneDeliveryPointForm
         StackTrace.current,
       );
     }
-    return DeliveryPoint(
-      name: _nameValue,
-      address: containsAddress ? _addressValue : null,
-    );
+    return DeliveryPoint(name: _nameValue, address: _addressValue);
   }
 
   @override

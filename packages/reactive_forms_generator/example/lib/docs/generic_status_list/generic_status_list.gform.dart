@@ -255,9 +255,6 @@ class StatusListForm<T extends Enum>
 
   List<T?> get _listRawValue => listControl.rawValue.whereType<T?>().toList();
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsList {
     try {
       form.control(listControlPath());

@@ -243,9 +243,6 @@ class SubGroupForm implements FormModel<SubGroup, SubGroup> {
 
   String get _idRawValue => idControl.value as String;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -955,9 +952,6 @@ class GroupForm implements FormModel<Group, Group> {
   List<SubGroup> get _subGroupListRawValue =>
       subGroupListSubGroupForm.map((e) => e.rawModel).toList();
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -967,9 +961,6 @@ class GroupForm implements FormModel<Group, Group> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsSubGroupList {
     try {
       form.control(subGroupListControlPath());
@@ -1853,9 +1844,6 @@ class NestedForm implements FormModel<Nested, Nested> {
   List<Group> get _groupListRawValue =>
       groupListGroupForm.map((e) => e.rawModel).toList();
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsGroupList {
     try {
       form.control(groupListControlPath());

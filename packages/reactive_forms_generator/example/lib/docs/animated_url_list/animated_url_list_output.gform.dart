@@ -253,9 +253,6 @@ class AnimatedUrlLisOForm
   List<UrlEntityO> get _urlListRawValue =>
       urlListUrlEntityOForm.map((e) => e.rawModel).toList();
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsUrlList {
     try {
       form.control(urlListControlPath());
@@ -650,13 +647,10 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
 
   String get _urlValue => urlControl.value as String;
 
-  String? get _labelRawValue => labelControl.value;
+  String? get _labelRawValue => containsLabel ? labelControl.value : null;
 
-  String? get _urlRawValue => urlControl.value;
+  String? get _urlRawValue => containsUrl ? urlControl.value : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsLabel {
     try {
       form.control(labelControlPath());
@@ -666,9 +660,6 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsUrl {
     try {
       form.control(urlControlPath());
@@ -686,9 +677,6 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
 
   void get urlFocus => form.focus(urlControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void labelRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsLabel) {
       final controlPath = path;
@@ -712,9 +700,6 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void urlRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsUrl) {
       final controlPath = path;
@@ -1053,6 +1038,7 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
 @Rf(output: true)
 class AnimatedUrlLisOOutput {
   final List<UrlEntityOOutput> urlList;
+
   AnimatedUrlLisOOutput({@RfArray() required this.urlList});
 }
 
@@ -1060,6 +1046,7 @@ class AnimatedUrlLisOOutput {
 class UrlEntityOOutput {
   final String label;
   final String url;
+
   UrlEntityOOutput({
     @RfControl(validators: [RequiredValidator()]) required this.label,
     @RfControl(validators: [RequiredValidator()]) required this.url,

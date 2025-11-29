@@ -260,17 +260,16 @@ class ProductDetailsForm<P extends Product, C extends Cart>
 
   String idControlPath() => pathBuilder(idControlName);
 
-  String? get _descriptionValue => descriptionControl.value;
+  String? get _descriptionValue =>
+      containsDescription ? descriptionControl.value : null;
 
-  Id<P, C>? get _idValue => idForm.model;
+  Id<P, C>? get _idValue => containsId ? idForm.model : null;
 
-  String? get _descriptionRawValue => descriptionControl.value;
+  String? get _descriptionRawValue =>
+      containsDescription ? descriptionControl.value : null;
 
-  Id<P, C>? get _idRawValue => idForm.rawModel;
+  Id<P, C>? get _idRawValue => containsId ? idForm.rawModel : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsDescription {
     try {
       form.control(descriptionControlPath());
@@ -280,9 +279,6 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -300,9 +296,6 @@ class ProductDetailsForm<P extends Product, C extends Cart>
 
   void get idFocus => form.focus(idControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void descriptionRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsDescription) {
       final controlPath = path;
@@ -326,9 +319,6 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void idRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsId) {
       final controlPath = path;
@@ -478,10 +468,7 @@ class ProductDetailsForm<P extends Product, C extends Cart>
         StackTrace.current,
       );
     }
-    return ProductDetails<P, C>(
-      description: containsDescription ? _descriptionValue : null,
-      id: containsId ? _idValue : null,
-    );
+    return ProductDetails<P, C>(description: _descriptionValue, id: _idValue);
   }
 
   @override
@@ -689,17 +676,16 @@ class IdForm<P extends Product, C extends Cart>
 
   String nameControlPath() => pathBuilder(nameControlName);
 
-  String? get _companyNameValue => companyNameControl.value;
+  String? get _companyNameValue =>
+      containsCompanyName ? companyNameControl.value : null;
 
-  String? get _nameValue => nameControl.value;
+  String? get _nameValue => containsName ? nameControl.value : null;
 
-  String? get _companyNameRawValue => companyNameControl.value;
+  String? get _companyNameRawValue =>
+      containsCompanyName ? companyNameControl.value : null;
 
-  String? get _nameRawValue => nameControl.value;
+  String? get _nameRawValue => containsName ? nameControl.value : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsCompanyName {
     try {
       form.control(companyNameControlPath());
@@ -709,9 +695,6 @@ class IdForm<P extends Product, C extends Cart>
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -729,9 +712,6 @@ class IdForm<P extends Product, C extends Cart>
 
   void get nameFocus => form.focus(nameControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void companyNameRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsCompanyName) {
       final controlPath = path;
@@ -755,9 +735,6 @@ class IdForm<P extends Product, C extends Cart>
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void nameRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsName) {
       final controlPath = path;
@@ -910,10 +887,7 @@ class IdForm<P extends Product, C extends Cart>
         StackTrace.current,
       );
     }
-    return Id<P, C>(
-      companyName: containsCompanyName ? _companyNameValue : null,
-      name: containsName ? _nameValue : null,
-    );
+    return Id<P, C>(companyName: _companyNameValue, name: _nameValue);
   }
 
   @override

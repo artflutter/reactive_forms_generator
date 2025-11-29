@@ -323,9 +323,6 @@ class ProfileForm implements FormModel<Profile, Profile> {
 
   TimerSetting get _timerRawValue => timerForm.rawModel;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -335,9 +332,6 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsAnotherId {
     try {
       form.control(anotherIdControlPath());
@@ -347,9 +341,6 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -359,9 +350,6 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsChartingOrder {
     try {
       form.control(chartingOrderControlPath());
@@ -371,9 +359,6 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsNumberingStandard {
     try {
       form.control(numberingStandardControlPath());
@@ -383,9 +368,6 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsMeasurementType {
     try {
       form.control(measurementTypeControlPath());
@@ -395,9 +377,6 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsAudioGuidance {
     try {
       form.control(audioGuidanceControlPath());
@@ -407,9 +386,6 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsIncidenceFilter {
     try {
       form.control(incidenceFilterControlPath());
@@ -419,9 +395,6 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsThreshold {
     try {
       form.control(thresholdControlPath());
@@ -431,9 +404,6 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsTimer {
     try {
       form.control(timerControlPath());
@@ -1425,9 +1395,6 @@ class IncidenceFilterForm
 
   bool get _isPlaqueEnabledRawValue => isPlaqueEnabledControl.value ?? true;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsIsMobilityEnabled {
     try {
       form.control(isMobilityEnabledControlPath());
@@ -1437,9 +1404,6 @@ class IncidenceFilterForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsIsFurcationEnabled {
     try {
       form.control(isFurcationEnabledControlPath());
@@ -1449,9 +1413,6 @@ class IncidenceFilterForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsIsBleedingEnabled {
     try {
       form.control(isBleedingEnabledControlPath());
@@ -1461,9 +1422,6 @@ class IncidenceFilterForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsIsSuppurationEnabled {
     try {
       form.control(isSuppurationEnabledControlPath());
@@ -1473,9 +1431,6 @@ class IncidenceFilterForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsIsCalculusEnabled {
     try {
       form.control(isCalculusEnabledControlPath());
@@ -1485,9 +1440,6 @@ class IncidenceFilterForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsIsPlaqueEnabled {
     try {
       form.control(isPlaqueEnabledControlPath());
@@ -2157,9 +2109,6 @@ class ThresholdSettingForm
 
   int get _valueRawValue => valueControl.value ?? 2;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsIsEnabled {
     try {
       form.control(isEnabledControlPath());
@@ -2169,9 +2118,6 @@ class ThresholdSettingForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsValue {
     try {
       form.control(valueControlPath());
@@ -2538,9 +2484,6 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
 
   int get _valueRawValue => valueControl.value ?? 5;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsIsEnabled {
     try {
       form.control(isEnabledControlPath());
@@ -2550,9 +2493,6 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsValue {
     try {
       form.control(valueControlPath());

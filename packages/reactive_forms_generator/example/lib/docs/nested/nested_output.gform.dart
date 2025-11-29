@@ -244,9 +244,6 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
 
   String get _idRawValue => idControl.value as String;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -993,9 +990,6 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
   List<SubGroupO> get _subGroupListRawValue =>
       subGroupListSubGroupOForm.map((e) => e.rawModel).toList();
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -1005,9 +999,6 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsSubGroupList {
     try {
       form.control(subGroupListControlPath());
@@ -1902,9 +1893,6 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
   List<GroupO> get _groupListRawValue =>
       groupListGroupOForm.map((e) => e.rawModel).toList();
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsGroupList {
     try {
       form.control(groupListControlPath());

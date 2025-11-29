@@ -282,37 +282,37 @@ class LoginExtendedNullableOForm
 
   String heightControlPath() => pathBuilder(heightControlName);
 
-  String? get _emailValue => emailControl.value;
+  String? get _emailValue => containsEmail ? emailControl.value : null;
 
-  String? get _passwordValue => passwordControl.value;
+  String? get _passwordValue => containsPassword ? passwordControl.value : null;
 
-  bool? get _rememberMeValue => rememberMeControl.value;
+  bool? get _rememberMeValue =>
+      containsRememberMe ? rememberMeControl.value : null;
 
-  String? get _themeValue => themeControl.value;
+  String? get _themeValue => containsTheme ? themeControl.value : null;
 
-  UserMode? get _modeValue => modeControl.value;
+  UserMode? get _modeValue => containsMode ? modeControl.value : null;
 
-  int? get _timeoutValue => timeoutControl.value;
+  int? get _timeoutValue => containsTimeout ? timeoutControl.value : null;
 
-  double? get _heightValue => heightControl.value;
+  double? get _heightValue => containsHeight ? heightControl.value : null;
 
-  String? get _emailRawValue => emailControl.value;
+  String? get _emailRawValue => containsEmail ? emailControl.value : null;
 
-  String? get _passwordRawValue => passwordControl.value;
+  String? get _passwordRawValue =>
+      containsPassword ? passwordControl.value : null;
 
-  bool? get _rememberMeRawValue => rememberMeControl.value;
+  bool? get _rememberMeRawValue =>
+      containsRememberMe ? rememberMeControl.value : null;
 
-  String? get _themeRawValue => themeControl.value;
+  String? get _themeRawValue => containsTheme ? themeControl.value : null;
 
-  UserMode? get _modeRawValue => modeControl.value;
+  UserMode? get _modeRawValue => containsMode ? modeControl.value : null;
 
-  int? get _timeoutRawValue => timeoutControl.value;
+  int? get _timeoutRawValue => containsTimeout ? timeoutControl.value : null;
 
-  double? get _heightRawValue => heightControl.value;
+  double? get _heightRawValue => containsHeight ? heightControl.value : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -322,9 +322,6 @@ class LoginExtendedNullableOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsPassword {
     try {
       form.control(passwordControlPath());
@@ -334,9 +331,6 @@ class LoginExtendedNullableOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsRememberMe {
     try {
       form.control(rememberMeControlPath());
@@ -346,9 +340,6 @@ class LoginExtendedNullableOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsTheme {
     try {
       form.control(themeControlPath());
@@ -358,9 +349,6 @@ class LoginExtendedNullableOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsMode {
     try {
       form.control(modeControlPath());
@@ -370,9 +358,6 @@ class LoginExtendedNullableOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsTimeout {
     try {
       form.control(timeoutControlPath());
@@ -382,9 +367,6 @@ class LoginExtendedNullableOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsHeight {
     try {
       form.control(heightControlPath());
@@ -422,9 +404,6 @@ class LoginExtendedNullableOForm
 
   void get heightFocus => form.focus(heightControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void emailRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsEmail) {
       final controlPath = path;
@@ -448,9 +427,6 @@ class LoginExtendedNullableOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void passwordRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsPassword) {
       final controlPath = path;
@@ -474,9 +450,6 @@ class LoginExtendedNullableOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void rememberMeRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsRememberMe) {
       final controlPath = path;
@@ -500,9 +473,6 @@ class LoginExtendedNullableOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void themeRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsTheme) {
       final controlPath = path;
@@ -526,9 +496,6 @@ class LoginExtendedNullableOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void modeRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsMode) {
       final controlPath = path;
@@ -552,9 +519,6 @@ class LoginExtendedNullableOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void timeoutRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsTimeout) {
       final controlPath = path;
@@ -578,9 +542,6 @@ class LoginExtendedNullableOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void heightRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsHeight) {
       final controlPath = path;
@@ -1030,13 +991,13 @@ class LoginExtendedNullableOForm
       );
     }
     return LoginExtendedNullableOOutput(
-      email: containsEmail ? _emailValue : null,
-      password: containsPassword ? _passwordValue : null,
-      rememberMe: containsRememberMe ? _rememberMeValue : null,
-      theme: containsTheme ? _themeValue : null,
-      mode: containsMode ? _modeValue : null,
-      timeout: containsTimeout ? _timeoutValue : null,
-      height: containsHeight ? _heightValue : null,
+      email: _emailValue,
+      password: _passwordValue,
+      rememberMe: _rememberMeValue,
+      theme: _themeValue,
+      mode: _modeValue,
+      timeout: _timeoutValue,
+      height: _heightValue,
     );
   }
 

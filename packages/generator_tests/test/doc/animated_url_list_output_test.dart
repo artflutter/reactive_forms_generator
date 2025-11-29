@@ -69,8 +69,11 @@ class ReactiveAnimatedUrlLisOFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-          BuildContext context, AnimatedUrlLisOForm formModel, Widget? child)
-      builder;
+    BuildContext context,
+    AnimatedUrlLisOForm formModel,
+    Widget? child,
+  )
+  builder;
 
   @override
   Widget build(BuildContext context) {
@@ -89,11 +92,7 @@ class AnimatedUrlLisOFormInheritedStreamer extends InheritedStreamer<dynamic> {
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(
-          stream,
-          child,
-          key: key,
-        );
+  }) : super(stream, child, key: key);
 
   final AnimatedUrlLisOForm form;
 }
@@ -115,19 +114,19 @@ class ReactiveAnimatedUrlLisOForm extends StatelessWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static AnimatedUrlLisOForm? of(
-    BuildContext context, {
-    bool listen = true,
-  }) {
+  static AnimatedUrlLisOForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
-              AnimatedUrlLisOFormInheritedStreamer>()
+            AnimatedUrlLisOFormInheritedStreamer
+          >()
           ?.form;
     }
 
-    final element = context.getElementForInheritedWidgetOfExactType<
-        AnimatedUrlLisOFormInheritedStreamer>();
+    final element = context
+        .getElementForInheritedWidgetOfExactType<
+          AnimatedUrlLisOFormInheritedStreamer
+        >();
     return element == null
         ? null
         : (element.widget as AnimatedUrlLisOFormInheritedStreamer).form;
@@ -175,11 +174,14 @@ class AnimatedUrlLisOFormBuilder extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-          BuildContext context, AnimatedUrlLisOForm formModel, Widget? child)
-      builder;
+    BuildContext context,
+    AnimatedUrlLisOForm formModel,
+    Widget? child,
+  )
+  builder;
 
   final void Function(BuildContext context, AnimatedUrlLisOForm formModel)?
-      initState;
+  initState;
 
   @override
   _AnimatedUrlLisOFormBuilderState createState() =>
@@ -195,7 +197,10 @@ class _AnimatedUrlLisOFormBuilderState
   @override
   void initState() {
     _formModel = AnimatedUrlLisOForm(
-        AnimatedUrlLisOForm.formElements(widget.model), null);
+      AnimatedUrlLisOForm.formElements(widget.model),
+      null,
+      null,
+    );
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -273,10 +278,8 @@ final _logAnimatedUrlLisOForm = Logger.detached('AnimatedUrlLisOForm');
 
 class AnimatedUrlLisOForm
     implements FormModel<AnimatedUrlLisO, AnimatedUrlLisOOutput> {
-  AnimatedUrlLisOForm(
-    this.form,
-    this.path,
-  );
+  AnimatedUrlLisOForm(this.form, this.path, this._formModel)
+    : initial = form.rawValue;
 
   static const String urlListControlName = "urlList";
 
@@ -284,7 +287,13 @@ class AnimatedUrlLisOForm
 
   final String? path;
 
+  // ignore: unused_field
+  final FormModel<dynamic, dynamic>? _formModel;
+
   final Map<String, bool> _disabled = {};
+
+  @override
+  final Map<String, Object?> initial;
 
   String urlListControlPath() => pathBuilder(urlListControlName);
 
@@ -294,8 +303,6 @@ class AnimatedUrlLisOForm
   List<UrlEntityO> get _urlListRawValue =>
       urlListUrlEntityOForm.map((e) => e.rawModel).toList();
 
-  @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsUrlList {
     try {
       form.control(urlListControlPath());
@@ -337,15 +344,19 @@ class AnimatedUrlLisOForm
 
     if (toUpdate.isNotEmpty) {
       urlListControl.updateValue(
-          toUpdate.map((e) => UrlEntityOForm.formElements(e).rawValue).toList(),
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+        toUpdate.map((e) => UrlEntityOForm.formElements(e).rawValue).toList(),
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     }
 
     if (toAdd.isNotEmpty) {
       toAdd.forEach((e) {
-        urlListControl.add(UrlEntityOForm.formElements(e),
-            updateParent: updateParent, emitEvent: emitEvent);
+        urlListControl.add(
+          UrlEntityOForm.formElements(e),
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
       });
     }
   }
@@ -370,10 +381,7 @@ class AnimatedUrlLisOForm
     );
   }
 
-  void urlListClear({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void urlListClear({bool updateParent = true, bool emitEvent = true}) {
     urlListUrlEntityOForm.clear();
     urlListControl.clear(updateParent: updateParent, emitEvent: emitEvent);
   }
@@ -386,18 +394,17 @@ class AnimatedUrlLisOForm
     final keys = urlListUrlEntityOForm.asMap().keys;
 
     final toPatch = <UrlEntityO>[];
-    (value).asMap().forEach(
-      (k, v) {
-        if (keys.contains(k)) {
-          toPatch.add(v);
-        }
-      },
-    );
+    (value).asMap().forEach((k, v) {
+      if (keys.contains(k)) {
+        toPatch.add(v);
+      }
+    });
 
     urlListControl.patchValue(
-        toPatch.map((e) => UrlEntityOForm.formElements(e).rawValue).toList(),
-        updateParent: updateParent,
-        emitEvent: emitEvent);
+      toPatch.map((e) => UrlEntityOForm.formElements(e).rawValue).toList(),
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void urlListValueReset(
@@ -406,13 +413,11 @@ class AnimatedUrlLisOForm
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      urlListControl.reset(
-          value: value
-              .map((e) => UrlEntityOForm.formElements(e).rawValue)
-              .toList(),
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => urlListControl.reset(
+    value: value.map((e) => UrlEntityOForm.formElements(e).rawValue).toList(),
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   FormArray<Map<String, Object?>> get urlListControl =>
       form.control(urlListControlPath()) as FormArray<Map<String, Object?>>;
@@ -422,8 +427,12 @@ class AnimatedUrlLisOForm
 
     return values
         .asMap()
-        .map((k, v) =>
-            MapEntry(k, UrlEntityOForm(form, pathBuilder("urlList.$k"))))
+        .map(
+          (k, v) => MapEntry(
+            k,
+            UrlEntityOForm(form, pathBuilder("urlList.$k"), _formModel ?? this),
+          ),
+        )
         .values
         .toList();
   }
@@ -447,11 +456,11 @@ class AnimatedUrlLisOForm
   }
 
   ExtendedControl<List<Map<String, Object?>?>, List<UrlEntityOForm>>
-      get urlListExtendedControl =>
-          ExtendedControl<List<Map<String, Object?>?>, List<UrlEntityOForm>>(
-              form.control(urlListControlPath())
-                  as FormArray<Map<String, Object?>>,
-              () => urlListUrlEntityOForm);
+  get urlListExtendedControl =>
+      ExtendedControl<List<Map<String, Object?>?>, List<UrlEntityOForm>>(
+        form.control(urlListControlPath()) as FormArray<Map<String, Object?>>,
+        () => urlListUrlEntityOForm,
+      );
 
   void addUrlListItem(UrlEntityO value) {
     urlListControl.add(UrlEntityOForm.formElements(value));
@@ -488,31 +497,24 @@ class AnimatedUrlLisOForm
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    final currentFormInstance = currentForm;
-
-    if (currentFormInstance is! FormGroup) {
-      return;
-    }
-
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     if (_disabled.isEmpty) {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
       urlListUrlEntityOForm.forEach((e) => e.toggleDisabled());
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       urlListUrlEntityOForm.forEach((e) => e.toggleDisabled());
 
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
-          currentFormInstance.controls[key]?.markAsEnabled(
+          currentForm.controls[key]?.markAsEnabled(
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -528,9 +530,7 @@ class AnimatedUrlLisOForm
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
-      currentForm is FormControlCollection<dynamic>
-          ? currentForm.rawValue
-          : currentForm.value,
+      currentForm.rawValue,
       AnimatedUrlLisOForm.formElements(other).rawValue,
     );
   }
@@ -551,8 +551,16 @@ class AnimatedUrlLisOForm
   }
 
   @override
-  AbstractControl<dynamic> get currentForm {
-    return path == null ? form : form.control(path!);
+  bool get hasChanged {
+    return !const DeepCollectionEquality().equals(
+      currentForm.rawValue,
+      initial,
+    );
+  }
+
+  @override
+  FormGroup get currentForm {
+    return path == null ? form : form.control(path!) as FormGroup;
   }
 
   @override
@@ -560,47 +568,110 @@ class AnimatedUrlLisOForm
     AnimatedUrlLisO? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.updateValue(AnimatedUrlLisOForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => currentForm.updateValue(
+    AnimatedUrlLisOForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
+
+  @override
+  void upsertValue(
+    AnimatedUrlLisO? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = AnimatedUrlLisOForm.formElements(value);
+
+    currentForm.addAll(formElements.controls);
+  }
 
   @override
   void reset({
     AnimatedUrlLisO? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => currentForm.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
+
+  @override
+  void updateInitial(Map<String, Object?>? value, String? path) {
+    if (_formModel != null) {
+      _formModel?.updateInitial(currentForm.rawValue, path);
+      return;
+    }
+
+    if (value == null) return;
+
+    if (path == null || path.isEmpty) {
+      initial.addAll(value);
+      return;
+    }
+
+    final keys = path.split('.');
+    Object? current = initial;
+    for (var i = 0; i < keys.length - 1; i++) {
+      final key = keys[i];
+
+      if (current is List) {
+        final index = int.tryParse(key);
+        if (index != null && index >= 0 && index < current.length) {
+          current = current[index];
+          continue;
+        }
+      }
+
+      if (current is Map) {
+        if (!current.containsKey(key)) {
+          current[key] = <String, Object?>{};
+        }
+        current = current[key];
+        continue;
+      }
+
+      return;
+    }
+
+    final key = keys.last;
+    if (current is List) {
+      final index = int.tryParse(key);
+      if (index != null && index >= 0 && index < current.length) {
+        current[index] = value;
+      }
+    } else if (current is Map) {
+      current[key] = value;
+    }
+  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(AnimatedUrlLisO? animatedUrlLisO) => FormGroup({
-        urlListControlName: FormArray(
-            (animatedUrlLisO?.urlList ?? [])
-                .map((e) => UrlEntityOForm.formElements(e))
-                .toList(),
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+  static FormGroup formElements(AnimatedUrlLisO? animatedUrlLisO) => FormGroup(
+    {
+      urlListControlName: FormArray(
+        (animatedUrlLisO?.urlList ?? [])
+            .map((e) => UrlEntityOForm.formElements(e))
+            .toList(),
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      ),
+    },
+    validators: [],
+    asyncValidators: [],
+    asyncValidatorsDebounceTime: 250,
+    disabled: false,
+  );
 }
 
 final _logUrlEntityOForm = Logger.detached('UrlEntityOForm');
 
 class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
-  UrlEntityOForm(
-    this.form,
-    this.path,
-  );
+  UrlEntityOForm(this.form, this.path, this._formModel)
+    : initial = form.rawValue;
 
   static const String labelControlName = "label";
 
@@ -610,7 +681,13 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
 
   final String? path;
 
+  // ignore: unused_field
+  final FormModel<dynamic, dynamic>? _formModel;
+
   final Map<String, bool> _disabled = {};
+
+  @override
+  final Map<String, Object?> initial;
 
   String labelControlPath() => pathBuilder(labelControlName);
 
@@ -620,12 +697,10 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
 
   String get _urlValue => urlControl.value as String;
 
-  String? get _labelRawValue => labelControl.value;
+  String? get _labelRawValue => containsLabel ? labelControl.value : null;
 
-  String? get _urlRawValue => urlControl.value;
+  String? get _urlRawValue => containsUrl ? urlControl.value : null;
 
-  @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsLabel {
     try {
       form.control(labelControlPath());
@@ -635,8 +710,6 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     }
   }
 
-  @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsUrl {
     try {
       form.control(urlControlPath());
@@ -654,12 +727,7 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
 
   void get urlFocus => form.focus(urlControlPath());
 
-  @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void labelRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void labelRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsLabel) {
       final controlPath = path;
       if (controlPath == null) {
@@ -682,12 +750,7 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     }
   }
 
-  @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void urlRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void urlRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsUrl) {
       final controlPath = path;
       if (controlPath == null) {
@@ -715,8 +778,11 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    labelControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    labelControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void urlValueUpdate(
@@ -724,8 +790,11 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    urlControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    urlControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void labelValuePatch(
@@ -733,8 +802,11 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    labelControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    labelControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void urlValuePatch(
@@ -742,8 +814,11 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    urlControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    urlControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void labelValueReset(
@@ -752,14 +827,13 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      labelControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => labelControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   void urlValueReset(
     String? value, {
@@ -767,14 +841,13 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      urlControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => urlControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   FormControl<String> get labelControl =>
       form.control(labelControlPath()) as FormControl<String>;
@@ -839,27 +912,20 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    final currentFormInstance = currentForm;
-
-    if (currentFormInstance is! FormGroup) {
-      return;
-    }
-
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     if (_disabled.isEmpty) {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
-      currentFormInstance.controls.forEach((key, control) {
+      currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
-          currentFormInstance.controls[key]?.markAsEnabled(
+          currentForm.controls[key]?.markAsEnabled(
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -875,9 +941,7 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
-      currentForm is FormControlCollection<dynamic>
-          ? currentForm.rawValue
-          : currentForm.value,
+      currentForm.rawValue,
       UrlEntityOForm.formElements(other).rawValue,
     );
   }
@@ -898,8 +962,16 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
   }
 
   @override
-  AbstractControl<dynamic> get currentForm {
-    return path == null ? form : form.control(path!);
+  bool get hasChanged {
+    return !const DeepCollectionEquality().equals(
+      currentForm.rawValue,
+      initial,
+    );
+  }
+
+  @override
+  FormGroup get currentForm {
+    return path == null ? form : form.control(path!) as FormGroup;
   }
 
   @override
@@ -907,44 +979,110 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     UrlEntityO? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.updateValue(UrlEntityOForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => currentForm.updateValue(
+    UrlEntityOForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
+
+  @override
+  void upsertValue(
+    UrlEntityO? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final formElements = UrlEntityOForm.formElements(value);
+
+    currentForm.addAll(formElements.controls);
+  }
 
   @override
   void reset({
     UrlEntityO? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => currentForm.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
+
+  @override
+  void updateInitial(Map<String, Object?>? value, String? path) {
+    if (_formModel != null) {
+      _formModel?.updateInitial(currentForm.rawValue, path);
+      return;
+    }
+
+    if (value == null) return;
+
+    if (path == null || path.isEmpty) {
+      initial.addAll(value);
+      return;
+    }
+
+    final keys = path.split('.');
+    Object? current = initial;
+    for (var i = 0; i < keys.length - 1; i++) {
+      final key = keys[i];
+
+      if (current is List) {
+        final index = int.tryParse(key);
+        if (index != null && index >= 0 && index < current.length) {
+          current = current[index];
+          continue;
+        }
+      }
+
+      if (current is Map) {
+        if (!current.containsKey(key)) {
+          current[key] = <String, Object?>{};
+        }
+        current = current[key];
+        continue;
+      }
+
+      return;
+    }
+
+    final key = keys.last;
+    if (current is List) {
+      final index = int.tryParse(key);
+      if (index != null && index >= 0 && index < current.length) {
+        current[index] = value;
+      }
+    } else if (current is Map) {
+      current[key] = value;
+    }
+  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(UrlEntityO? urlEntityO) => FormGroup({
-        labelControlName: FormControl<String>(
-            value: urlEntityO?.label,
-            validators: [RequiredValidator()],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        urlControlName: FormControl<String>(
-            value: urlEntityO?.url,
-            validators: [RequiredValidator()],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+  static FormGroup formElements(UrlEntityO? urlEntityO) => FormGroup(
+    {
+      labelControlName: FormControl<String>(
+        value: urlEntityO?.label,
+        validators: [RequiredValidator()],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+      urlControlName: FormControl<String>(
+        value: urlEntityO?.url,
+        validators: [RequiredValidator()],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+    },
+    validators: [],
+    asyncValidators: [],
+    asyncValidatorsDebounceTime: 250,
+    disabled: false,
+  );
 }
 
 @Rf(output: true)
@@ -957,13 +1095,16 @@ class AnimatedUrlLisOOutput {
 class UrlEntityOOutput {
   final String label;
   final String url;
-  UrlEntityOOutput(
-      {@RfControl(validators: [RequiredValidator()]) required this.label,
-      @RfControl(validators: [RequiredValidator()]) required this.url});
+  UrlEntityOOutput({
+    @RfControl(validators: [RequiredValidator()]) required this.label,
+    @RfControl(validators: [RequiredValidator()]) required this.url,
+  });
 }
 
 class ReactiveAnimatedUrlLisOFormArrayBuilder<
-    ReactiveAnimatedUrlLisOFormArrayBuilderT> extends StatelessWidget {
+  ReactiveAnimatedUrlLisOFormArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveAnimatedUrlLisOFormArrayBuilder({
     Key? key,
     this.control,
@@ -972,30 +1113,41 @@ class ReactiveAnimatedUrlLisOFormArrayBuilder<
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveAnimatedUrlLisOFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveAnimatedUrlLisOFormArrayBuilderT>? Function(
-      AnimatedUrlLisOForm formModel)? control;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      AnimatedUrlLisOForm formModel)? builder;
+    AnimatedUrlLisOForm formModel,
+  )?
+  control;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT> control,
-      ReactiveAnimatedUrlLisOFormArrayBuilderT? item,
-      AnimatedUrlLisOForm formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    AnimatedUrlLisOForm formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT> control,
+    ReactiveAnimatedUrlLisOFormArrayBuilderT? item,
+    AnimatedUrlLisOForm formModel,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-          FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT> control)?
-      controlFilter;
+    FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT> control,
+  )?
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -1009,21 +1161,13 @@ class ReactiveAnimatedUrlLisOFormArrayBuilder<
     final itemBuilder = this.itemBuilder;
 
     return ReactiveFormArrayItemBuilder<
-        ReactiveAnimatedUrlLisOFormArrayBuilderT>(
+      ReactiveAnimatedUrlLisOFormArrayBuilderT
+    >(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
-          ? (context, itemList) => builder(
-                context,
-                itemList,
-                formModel,
-              )
+          ? (context, itemList) => builder(context, itemList, formModel)
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
+      itemBuilder: (context, i, control, item) =>
           itemBuilder(context, i, control, item, formModel),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -1032,7 +1176,9 @@ class ReactiveAnimatedUrlLisOFormArrayBuilder<
 }
 
 class ReactiveAnimatedUrlLisOFormArrayBuilder2<
-    ReactiveAnimatedUrlLisOFormArrayBuilderT> extends StatelessWidget {
+  ReactiveAnimatedUrlLisOFormArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveAnimatedUrlLisOFormArrayBuilder2({
     Key? key,
     this.control,
@@ -1041,36 +1187,47 @@ class ReactiveAnimatedUrlLisOFormArrayBuilder2<
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveAnimatedUrlLisOFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveAnimatedUrlLisOFormArrayBuilderT>? Function(
-      AnimatedUrlLisOForm formModel)? control;
+    AnimatedUrlLisOForm formModel,
+  )?
+  control;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        List<Widget> itemList,
-        AnimatedUrlLisOForm formModel
-      }) params)? builder;
+    ({
+      BuildContext context,
+      List<Widget> itemList,
+      AnimatedUrlLisOForm formModel,
+    })
+    params,
+  )?
+  builder;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        int i,
-        FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT> control,
-        ReactiveAnimatedUrlLisOFormArrayBuilderT? item,
-        AnimatedUrlLisOForm formModel
-      }) params) itemBuilder;
+    ({
+      BuildContext context,
+      int i,
+      FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT> control,
+      ReactiveAnimatedUrlLisOFormArrayBuilderT? item,
+      AnimatedUrlLisOForm formModel,
+    })
+    params,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-          FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT> control)?
-      controlFilter;
+    FormControl<ReactiveAnimatedUrlLisOFormArrayBuilderT> control,
+  )?
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -1084,27 +1241,22 @@ class ReactiveAnimatedUrlLisOFormArrayBuilder2<
     final itemBuilder = this.itemBuilder;
 
     return ReactiveFormArrayItemBuilder<
-        ReactiveAnimatedUrlLisOFormArrayBuilderT>(
+      ReactiveAnimatedUrlLisOFormArrayBuilderT
+    >(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
           ? (context, itemList) => builder((
-                context: context,
-                itemList: itemList,
-                formModel: formModel,
-              ))
+              context: context,
+              itemList: itemList,
+              formModel: formModel,
+            ))
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
-          itemBuilder((
+      itemBuilder: (context, i, control, item) => itemBuilder((
         context: context,
         i: i,
         control: control,
         item: item,
-        formModel: formModel
+        formModel: formModel,
       )),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -1113,32 +1265,48 @@ class ReactiveAnimatedUrlLisOFormArrayBuilder2<
 }
 
 class ReactiveAnimatedUrlLisOFormFormGroupArrayBuilder<
-    ReactiveAnimatedUrlLisOFormFormGroupArrayBuilderT> extends StatelessWidget {
+  ReactiveAnimatedUrlLisOFormFormGroupArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveAnimatedUrlLisOFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(extended != null || getExtended != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         extended != null || getExtended != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-      List<ReactiveAnimatedUrlLisOFormFormGroupArrayBuilderT>>? extended;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveAnimatedUrlLisOFormFormGroupArrayBuilderT>
+  >?
+  extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-          List<ReactiveAnimatedUrlLisOFormFormGroupArrayBuilderT>>
-      Function(AnimatedUrlLisOForm formModel)? getExtended;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      AnimatedUrlLisOForm formModel)? builder;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveAnimatedUrlLisOFormFormGroupArrayBuilderT>
+  >
+  Function(AnimatedUrlLisOForm formModel)?
+  getExtended;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      ReactiveAnimatedUrlLisOFormFormGroupArrayBuilderT? item,
-      AnimatedUrlLisOForm formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    AnimatedUrlLisOForm formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    ReactiveAnimatedUrlLisOFormFormGroupArrayBuilderT? item,
+    AnimatedUrlLisOForm formModel,
+  )
+  itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1153,26 +1321,18 @@ class ReactiveAnimatedUrlLisOFormFormGroupArrayBuilder<
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ??
-                <ReactiveAnimatedUrlLisOFormFormGroupArrayBuilderT>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ??
+                    <ReactiveAnimatedUrlLisOFormFormGroupArrayBuilderT>[])
+                .asMap()
+                .map(
+                  (i, item) =>
+                      MapEntry(i, itemBuilder(context, i, item, formModel)),
+                )
+                .values
+                .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );

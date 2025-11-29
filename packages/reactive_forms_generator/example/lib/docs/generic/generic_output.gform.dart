@@ -236,13 +236,10 @@ class TagsOForm<T> implements FormModel<TagsO<T>, TagsOOutput<T>> {
 
   String tagsControlPath() => pathBuilder(tagsControlName);
 
-  List<T>? get _tagsValue => tagsControl.value;
+  List<T>? get _tagsValue => containsTags ? tagsControl.value : null;
 
-  List<T>? get _tagsRawValue => tagsControl.value;
+  List<T>? get _tagsRawValue => containsTags ? tagsControl.value : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsTags {
     try {
       form.control(tagsControlPath());
@@ -256,9 +253,6 @@ class TagsOForm<T> implements FormModel<TagsO<T>, TagsOOutput<T>> {
 
   void get tagsFocus => form.focus(tagsControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void tagsRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsTags) {
       final controlPath = path;
@@ -353,7 +347,7 @@ class TagsOForm<T> implements FormModel<TagsO<T>, TagsOOutput<T>> {
         StackTrace.current,
       );
     }
-    return TagsOOutput<T>(tags: containsTags ? _tagsValue : null);
+    return TagsOOutput<T>(tags: _tagsValue);
   }
 
   @override

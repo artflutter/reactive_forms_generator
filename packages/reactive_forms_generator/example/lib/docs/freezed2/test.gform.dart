@@ -227,15 +227,14 @@ class TestForm implements FormModel<Test, Test> {
 
   String get _titleValue => titleControl.value as String;
 
-  String? get _descriptionValue => descriptionControl.value;
+  String? get _descriptionValue =>
+      containsDescription ? descriptionControl.value : null;
 
   String get _titleRawValue => titleControl.value as String;
 
-  String? get _descriptionRawValue => descriptionControl.value;
+  String? get _descriptionRawValue =>
+      containsDescription ? descriptionControl.value : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsTitle {
     try {
       form.control(titleControlPath());
@@ -245,9 +244,6 @@ class TestForm implements FormModel<Test, Test> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsDescription {
     try {
       form.control(descriptionControlPath());
@@ -265,9 +261,6 @@ class TestForm implements FormModel<Test, Test> {
 
   void get descriptionFocus => form.focus(descriptionControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void descriptionRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsDescription) {
       final controlPath = path;
@@ -420,10 +413,7 @@ class TestForm implements FormModel<Test, Test> {
         StackTrace.current,
       );
     }
-    return Test(
-      title: _titleValue,
-      description: containsDescription ? _descriptionValue : null,
-    );
+    return Test(title: _titleValue, description: _descriptionValue);
   }
 
   @override

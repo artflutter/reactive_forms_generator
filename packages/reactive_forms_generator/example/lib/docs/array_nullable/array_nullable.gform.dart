@@ -266,7 +266,8 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
 
   String modeListControlPath() => pathBuilder(modeListControlName);
 
-  List<String?>? get _someListValue => someListControl.value;
+  List<String?>? get _someListValue =>
+      containsSomeList ? someListControl.value : null;
 
   List<String> get _someListRequiredValue =>
       someListRequiredControl.value ?? const [];
@@ -277,13 +278,16 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
   List<bool?> get _fruitListValue =>
       fruitListControl.rawValue.whereType<bool?>().toList();
 
-  List<String?>? get _vegetablesListValue =>
-      vegetablesListControl.rawValue.whereType<String?>().toList();
+  List<String?>? get _vegetablesListValue => containsVegetablesList
+      ? vegetablesListControl.rawValue.whereType<String?>().toList()
+      : null;
 
-  List<UserMode?>? get _modeListValue =>
-      modeListControl.rawValue.whereType<UserMode?>().toList();
+  List<UserMode?>? get _modeListValue => containsModeList
+      ? modeListControl.rawValue.whereType<UserMode?>().toList()
+      : null;
 
-  List<String?>? get _someListRawValue => someListControl.value;
+  List<String?>? get _someListRawValue =>
+      containsSomeList ? someListControl.value : null;
 
   List<String> get _someListRequiredRawValue =>
       someListRequiredControl.value ?? const [];
@@ -294,15 +298,14 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
   List<bool?> get _fruitListRawValue =>
       fruitListControl.rawValue.whereType<bool?>().toList();
 
-  List<String?>? get _vegetablesListRawValue =>
-      vegetablesListControl.rawValue.whereType<String?>().toList();
+  List<String?>? get _vegetablesListRawValue => containsVegetablesList
+      ? vegetablesListControl.rawValue.whereType<String?>().toList()
+      : null;
 
-  List<UserMode?>? get _modeListRawValue =>
-      modeListControl.rawValue.whereType<UserMode?>().toList();
+  List<UserMode?>? get _modeListRawValue => containsModeList
+      ? modeListControl.rawValue.whereType<UserMode?>().toList()
+      : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsSomeList {
     try {
       form.control(someListControlPath());
@@ -312,9 +315,6 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsSomeListRequired {
     try {
       form.control(someListRequiredControlPath());
@@ -324,9 +324,6 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsEmailList {
     try {
       form.control(emailListControlPath());
@@ -336,9 +333,6 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsFruitList {
     try {
       form.control(fruitListControlPath());
@@ -348,9 +342,6 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsVegetablesList {
     try {
       form.control(vegetablesListControlPath());
@@ -360,9 +351,6 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsModeList {
     try {
       form.control(modeListControlPath());
@@ -397,9 +385,6 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
 
   void get modeListFocus => form.focus(modeListControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void someListRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsSomeList) {
       final controlPath = path;
@@ -423,9 +408,6 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void vegetablesListRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsVegetablesList) {
       final controlPath = path;
@@ -449,9 +431,6 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void modeListRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsModeList) {
       final controlPath = path;
@@ -1023,9 +1002,9 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
     return ArrayNullable(
       emailList: _emailListValue,
       fruitList: _fruitListValue,
-      vegetablesList: containsVegetablesList ? _vegetablesListValue : null,
-      modeList: containsModeList ? _modeListValue : null,
-      someList: containsSomeList ? _someListValue : null,
+      vegetablesList: _vegetablesListValue,
+      modeList: _modeListValue,
+      someList: _someListValue,
       someListRequired: _someListRequiredValue,
     );
   }

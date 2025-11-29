@@ -253,9 +253,6 @@ class AnimatedUrlListForm
   List<UrlEntity> get _urlListRawValue =>
       urlListUrlEntityForm.map((e) => e.rawModel).toList();
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsUrlList {
     try {
       form.control(urlListControlPath());
@@ -653,9 +650,6 @@ class UrlEntityForm implements FormModel<UrlEntity, UrlEntity> {
 
   String get _urlRawValue => urlControl.value ?? "";
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsLabel {
     try {
       form.control(labelControlPath());
@@ -665,9 +659,6 @@ class UrlEntityForm implements FormModel<UrlEntity, UrlEntity> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsUrl {
     try {
       form.control(urlControlPath());

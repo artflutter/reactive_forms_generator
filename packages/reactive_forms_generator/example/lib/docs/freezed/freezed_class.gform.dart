@@ -265,33 +265,32 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
 
   String selectedSpacesControlPath() => pathBuilder(selectedSpacesControlName);
 
-  String? get _genderValue => genderControl.value;
+  String? get _genderValue => containsGender ? genderControl.value : null;
 
-  String? get _idValue => idControl.value;
+  String? get _idValue => containsId ? idControl.value : null;
 
-  String? get _nameValue => nameControl.value;
+  String? get _nameValue => containsName ? nameControl.value : null;
 
-  String? get _logoImageValue => logoImageControl.value;
+  String? get _logoImageValue =>
+      containsLogoImage ? logoImageControl.value : null;
 
-  double? get _yearValue => yearControl.value;
+  double? get _yearValue => containsYear ? yearControl.value : null;
 
   List<String> get _selectedSpacesValue => selectedSpacesControl.value ?? [];
 
-  String? get _genderRawValue => genderControl.value;
+  String? get _genderRawValue => containsGender ? genderControl.value : null;
 
-  String? get _idRawValue => idControl.value;
+  String? get _idRawValue => containsId ? idControl.value : null;
 
-  String? get _nameRawValue => nameControl.value;
+  String? get _nameRawValue => containsName ? nameControl.value : null;
 
-  String? get _logoImageRawValue => logoImageControl.value;
+  String? get _logoImageRawValue =>
+      containsLogoImage ? logoImageControl.value : null;
 
-  double? get _yearRawValue => yearControl.value;
+  double? get _yearRawValue => containsYear ? yearControl.value : null;
 
   List<String> get _selectedSpacesRawValue => selectedSpacesControl.value ?? [];
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsGender {
     try {
       form.control(genderControlPath());
@@ -301,9 +300,6 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -313,9 +309,6 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -325,9 +318,6 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsLogoImage {
     try {
       form.control(logoImageControlPath());
@@ -337,9 +327,6 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsYear {
     try {
       form.control(yearControlPath());
@@ -349,9 +336,6 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsSelectedSpaces {
     try {
       form.control(selectedSpacesControlPath());
@@ -385,9 +369,6 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
 
   void get selectedSpacesFocus => form.focus(selectedSpacesControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void genderRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsGender) {
       final controlPath = path;
@@ -411,9 +392,6 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void idRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsId) {
       final controlPath = path;
@@ -437,9 +415,6 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void nameRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsName) {
       final controlPath = path;
@@ -463,9 +438,6 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void logoImageRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsLogoImage) {
       final controlPath = path;
@@ -489,9 +461,6 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void yearRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsYear) {
       final controlPath = path;
@@ -878,11 +847,11 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
       );
     }
     return FreezedClass(
-      containsGender ? _genderValue : null,
-      id: containsId ? _idValue : null,
-      name: containsName ? _nameValue : null,
-      logoImage: containsLogoImage ? _logoImageValue : null,
-      year: containsYear ? _yearValue : null,
+      _genderValue,
+      id: _idValue,
+      name: _nameValue,
+      logoImage: _logoImageValue,
+      year: _yearValue,
       selectedSpaces: _selectedSpacesValue,
     );
   }

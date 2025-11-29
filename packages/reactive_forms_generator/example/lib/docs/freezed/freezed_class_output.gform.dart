@@ -278,45 +278,44 @@ class FreezedClassOForm
 
   String selectedSpacesControlPath() => pathBuilder(selectedSpacesControlName);
 
-  String? get _genderValue => genderControl.value;
+  String? get _genderValue => containsGender ? genderControl.value : null;
 
   String get _genderRValue => genderRControl.value as String;
 
-  String? get _idValue => idControl.value;
+  String? get _idValue => containsId ? idControl.value : null;
 
   String get _idRValue => idRControl.value as String;
 
   String get _idR2Value => idR2Control.value ?? '';
 
-  String? get _nameValue => nameControl.value;
+  String? get _nameValue => containsName ? nameControl.value : null;
 
-  String? get _logoImageValue => logoImageControl.value;
+  String? get _logoImageValue =>
+      containsLogoImage ? logoImageControl.value : null;
 
-  double? get _yearValue => yearControl.value;
+  double? get _yearValue => containsYear ? yearControl.value : null;
 
   List<String> get _selectedSpacesValue => selectedSpacesControl.value ?? [];
 
-  String? get _genderRawValue => genderControl.value;
+  String? get _genderRawValue => containsGender ? genderControl.value : null;
 
-  String? get _genderRRawValue => genderRControl.value;
+  String? get _genderRRawValue => containsGenderR ? genderRControl.value : null;
 
-  String? get _idRawValue => idControl.value;
+  String? get _idRawValue => containsId ? idControl.value : null;
 
-  String? get _idRRawValue => idRControl.value;
+  String? get _idRRawValue => containsIdR ? idRControl.value : null;
 
   String get _idR2RawValue => idR2Control.value ?? '';
 
-  String? get _nameRawValue => nameControl.value;
+  String? get _nameRawValue => containsName ? nameControl.value : null;
 
-  String? get _logoImageRawValue => logoImageControl.value;
+  String? get _logoImageRawValue =>
+      containsLogoImage ? logoImageControl.value : null;
 
-  double? get _yearRawValue => yearControl.value;
+  double? get _yearRawValue => containsYear ? yearControl.value : null;
 
   List<String> get _selectedSpacesRawValue => selectedSpacesControl.value ?? [];
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsGender {
     try {
       form.control(genderControlPath());
@@ -326,9 +325,6 @@ class FreezedClassOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsGenderR {
     try {
       form.control(genderRControlPath());
@@ -338,9 +334,6 @@ class FreezedClassOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -350,9 +343,6 @@ class FreezedClassOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsIdR {
     try {
       form.control(idRControlPath());
@@ -362,9 +352,6 @@ class FreezedClassOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsIdR2 {
     try {
       form.control(idR2ControlPath());
@@ -374,9 +361,6 @@ class FreezedClassOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -386,9 +370,6 @@ class FreezedClassOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsLogoImage {
     try {
       form.control(logoImageControlPath());
@@ -398,9 +379,6 @@ class FreezedClassOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsYear {
     try {
       form.control(yearControlPath());
@@ -410,9 +388,6 @@ class FreezedClassOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsSelectedSpaces {
     try {
       form.control(selectedSpacesControlPath());
@@ -458,9 +433,6 @@ class FreezedClassOForm
 
   void get selectedSpacesFocus => form.focus(selectedSpacesControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void genderRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsGender) {
       final controlPath = path;
@@ -484,9 +456,6 @@ class FreezedClassOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void genderRRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsGenderR) {
       final controlPath = path;
@@ -510,9 +479,6 @@ class FreezedClassOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void idRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsId) {
       final controlPath = path;
@@ -536,9 +502,6 @@ class FreezedClassOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void idRRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsIdR) {
       final controlPath = path;
@@ -562,9 +525,6 @@ class FreezedClassOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void nameRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsName) {
       final controlPath = path;
@@ -588,9 +548,6 @@ class FreezedClassOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void logoImageRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsLogoImage) {
       final controlPath = path;
@@ -614,9 +571,6 @@ class FreezedClassOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void yearRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsYear) {
       final controlPath = path;
@@ -1181,14 +1135,14 @@ class FreezedClassOForm
       );
     }
     return FreezedClassOOutput(
-      containsGender ? _genderValue : null,
+      _genderValue,
       _genderRValue,
-      id: containsId ? _idValue : null,
+      id: _idValue,
       idR: _idRValue,
       idR2: _idR2Value,
-      name: containsName ? _nameValue : null,
-      logoImage: containsLogoImage ? _logoImageValue : null,
-      year: containsYear ? _yearValue : null,
+      name: _nameValue,
+      logoImage: _logoImageValue,
+      year: _yearValue,
       selectedSpaces: _selectedSpacesValue,
     );
   }

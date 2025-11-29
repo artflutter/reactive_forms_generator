@@ -18,6 +18,7 @@ import 'package:example/docs/user_profile/user_profile_form.dart';
 import 'package:flutter/material.dart';
 
 import 'docs/animated_url_list/animated_url_list_form.dart';
+import 'docs/group/group_contains_form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
             const LoginExtendedNullableFormWidget(),
         Routes.arrayNullable: (_) => const ArrayNullableFormWidget(),
         Routes.group: (_) => const GroupFormWidget(),
+        Routes.groupContains: (_) => const GroupContainsFormWidget(),
         Routes.deliveryList: (_) => const DeliveryListFormWidget(),
         Routes.deliveryPoint: (_) => const DeliveryPointWidget(),
         Routes.freezed: (_) => const FreezedFormWidget(),
@@ -55,7 +57,7 @@ class MyApp extends StatelessWidget {
         Routes.modelImplements: (_) => const ModelImplementsWidget(),
         Routes.nested: (_) => const NestedFormWidget(),
       },
-      home: const AnimatedUrlListFormWidget(),
+      home: const GroupContainsFormWidget(),
     );
   }
 }
@@ -74,6 +76,8 @@ class Routes {
   static const userProfile = '/user-profile';
 
   static const group = '/group';
+
+  static const groupContains = '/group-contains';
 
   static const deliveryList = '/delivery-list';
 

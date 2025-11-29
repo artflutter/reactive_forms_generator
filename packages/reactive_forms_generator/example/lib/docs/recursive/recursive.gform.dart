@@ -256,27 +256,28 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
   String subSecuredAreasControlPath() =>
       pathBuilder(subSecuredAreasControlName);
 
-  String? get _idValue => idControl.value;
+  String? get _idValue => containsId ? idControl.value : null;
 
-  SecuredArea? get _securedAreaValue => securedAreaForm.model;
+  SecuredArea? get _securedAreaValue =>
+      containsSecuredArea ? securedAreaForm.model : null;
 
-  ParcelSystem? get _parcelSystemValue => parcelSystemForm.model;
+  ParcelSystem? get _parcelSystemValue =>
+      containsParcelSystem ? parcelSystemForm.model : null;
 
   List<SecuredArea> get _subSecuredAreasValue =>
       subSecuredAreasSecuredAreaForm.map((e) => e.model).toList();
 
-  String? get _idRawValue => idControl.value;
+  String? get _idRawValue => containsId ? idControl.value : null;
 
-  SecuredArea? get _securedAreaRawValue => securedAreaForm.rawModel;
+  SecuredArea? get _securedAreaRawValue =>
+      containsSecuredArea ? securedAreaForm.rawModel : null;
 
-  ParcelSystem? get _parcelSystemRawValue => parcelSystemForm.rawModel;
+  ParcelSystem? get _parcelSystemRawValue =>
+      containsParcelSystem ? parcelSystemForm.rawModel : null;
 
   List<SecuredArea> get _subSecuredAreasRawValue =>
       subSecuredAreasSecuredAreaForm.map((e) => e.rawModel).toList();
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -286,9 +287,6 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsSecuredArea {
     try {
       form.control(securedAreaControlPath());
@@ -298,9 +296,6 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsParcelSystem {
     try {
       form.control(parcelSystemControlPath());
@@ -310,9 +305,6 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsSubSecuredAreas {
     try {
       form.control(subSecuredAreasControlPath());
@@ -339,9 +331,6 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
 
   void get subSecuredAreasFocus => form.focus(subSecuredAreasControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void idRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsId) {
       final controlPath = path;
@@ -365,9 +354,6 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void securedAreaRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsSecuredArea) {
       final controlPath = path;
@@ -391,9 +377,6 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void parcelSystemRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsParcelSystem) {
       final controlPath = path;
@@ -776,9 +759,9 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
       );
     }
     return SecuredArea(
-      id: containsId ? _idValue : null,
-      securedArea: containsSecuredArea ? _securedAreaValue : null,
-      parcelSystem: containsParcelSystem ? _parcelSystemValue : null,
+      id: _idValue,
+      securedArea: _securedAreaValue,
+      parcelSystem: _parcelSystemValue,
       subSecuredAreas: _subSecuredAreasValue,
     );
   }
@@ -1015,9 +998,6 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
 
   ParcelSystemData get _dataRawValue => dataForm.rawModel;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsHasParcelSystem {
     try {
       form.control(hasParcelSystemControlPath());
@@ -1027,9 +1007,6 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsData {
     try {
       form.control(dataControlPath());
@@ -1383,13 +1360,10 @@ class ParcelSystemDataForm
 
   String idControlPath() => pathBuilder(idControlName);
 
-  String? get _idValue => idControl.value;
+  String? get _idValue => containsId ? idControl.value : null;
 
-  String? get _idRawValue => idControl.value;
+  String? get _idRawValue => containsId ? idControl.value : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -1403,9 +1377,6 @@ class ParcelSystemDataForm
 
   void get idFocus => form.focus(idControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void idRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsId) {
       final controlPath = path;
@@ -1496,7 +1467,7 @@ class ParcelSystemDataForm
         StackTrace.current,
       );
     }
-    return ParcelSystemData(id: containsId ? _idValue : null);
+    return ParcelSystemData(id: _idValue);
   }
 
   @override

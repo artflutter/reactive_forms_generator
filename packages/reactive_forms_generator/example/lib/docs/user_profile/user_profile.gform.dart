@@ -267,7 +267,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
 
   Address get _homeValue => homeForm.model;
 
-  Address? get _officeValue => officeForm.model;
+  Address? get _officeValue => containsOffice ? officeForm.model : null;
 
   String get _idRawValue => idControl.value as String;
 
@@ -277,11 +277,8 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
 
   Address get _homeRawValue => homeForm.rawModel;
 
-  Address? get _officeRawValue => officeForm.rawModel;
+  Address? get _officeRawValue => containsOffice ? officeForm.rawModel : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -291,9 +288,6 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsFirstName {
     try {
       form.control(firstNameControlPath());
@@ -303,9 +297,6 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsLastName {
     try {
       form.control(lastNameControlPath());
@@ -315,9 +306,6 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsHome {
     try {
       form.control(homeControlPath());
@@ -327,9 +315,6 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsOffice {
     try {
       form.control(officeControlPath());
@@ -359,9 +344,6 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
 
   void get officeFocus => form.focus(officeControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void officeRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsOffice) {
       final controlPath = path;
@@ -693,7 +675,7 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
       firstName: _firstNameValue,
       lastName: _lastNameValue,
       home: _homeValue,
-      office: containsOffice ? _officeValue : null,
+      office: _officeValue,
     );
   }
 
@@ -925,21 +907,18 @@ class AddressForm implements FormModel<Address, Address> {
 
   String zipControlPath() => pathBuilder(zipControlName);
 
-  String? get _streetValue => streetControl.value;
+  String? get _streetValue => containsStreet ? streetControl.value : null;
 
-  String? get _cityValue => cityControl.value;
+  String? get _cityValue => containsCity ? cityControl.value : null;
 
-  String? get _zipValue => zipControl.value;
+  String? get _zipValue => containsZip ? zipControl.value : null;
 
-  String? get _streetRawValue => streetControl.value;
+  String? get _streetRawValue => containsStreet ? streetControl.value : null;
 
-  String? get _cityRawValue => cityControl.value;
+  String? get _cityRawValue => containsCity ? cityControl.value : null;
 
-  String? get _zipRawValue => zipControl.value;
+  String? get _zipRawValue => containsZip ? zipControl.value : null;
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsStreet {
     try {
       form.control(streetControlPath());
@@ -949,9 +928,6 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsCity {
     try {
       form.control(cityControlPath());
@@ -961,9 +937,6 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsZip {
     try {
       form.control(zipControlPath());
@@ -985,9 +958,6 @@ class AddressForm implements FormModel<Address, Address> {
 
   void get zipFocus => form.focus(zipControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void streetRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsStreet) {
       final controlPath = path;
@@ -1011,9 +981,6 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void cityRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsCity) {
       final controlPath = path;
@@ -1037,9 +1004,6 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void zipRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsZip) {
       final controlPath = path;
@@ -1251,11 +1215,7 @@ class AddressForm implements FormModel<Address, Address> {
         StackTrace.current,
       );
     }
-    return Address(
-      street: containsStreet ? _streetValue : null,
-      city: containsCity ? _cityValue : null,
-      zip: containsZip ? _zipValue : null,
-    );
+    return Address(street: _streetValue, city: _cityValue, zip: _zipValue);
   }
 
   @override

@@ -298,11 +298,12 @@ class LoginExtendedOForm
 
   double get _heightValue => heightControl.value as double;
 
-  String? get _unAnnotatedValue => unAnnotatedControl.value;
+  String? get _unAnnotatedValue =>
+      containsUnAnnotated ? unAnnotatedControl.value : null;
 
   List<int> get _someIntListValue => someIntListControl.value ?? const [];
 
-  String? get _emailRawValue => emailControl.value;
+  String? get _emailRawValue => containsEmail ? emailControl.value : null;
 
   String get _email2RawValue => email2Control.value ?? "";
 
@@ -318,13 +319,11 @@ class LoginExtendedOForm
 
   double get _heightRawValue => heightControl.value as double;
 
-  String? get _unAnnotatedRawValue => unAnnotatedControl.value;
+  String? get _unAnnotatedRawValue =>
+      containsUnAnnotated ? unAnnotatedControl.value : null;
 
   List<int> get _someIntListRawValue => someIntListControl.value ?? const [];
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -334,9 +333,6 @@ class LoginExtendedOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsEmail2 {
     try {
       form.control(email2ControlPath());
@@ -346,9 +342,6 @@ class LoginExtendedOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsPassword {
     try {
       form.control(passwordControlPath());
@@ -358,9 +351,6 @@ class LoginExtendedOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsRememberMe {
     try {
       form.control(rememberMeControlPath());
@@ -370,9 +360,6 @@ class LoginExtendedOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsTheme {
     try {
       form.control(themeControlPath());
@@ -382,9 +369,6 @@ class LoginExtendedOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsMode {
     try {
       form.control(modeControlPath());
@@ -394,9 +378,6 @@ class LoginExtendedOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsTimeout {
     try {
       form.control(timeoutControlPath());
@@ -406,9 +387,6 @@ class LoginExtendedOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsHeight {
     try {
       form.control(heightControlPath());
@@ -418,9 +396,6 @@ class LoginExtendedOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsUnAnnotated {
     try {
       form.control(unAnnotatedControlPath());
@@ -430,9 +405,6 @@ class LoginExtendedOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step',
-  )
   bool get containsSomeIntList {
     try {
       form.control(someIntListControlPath());
@@ -482,9 +454,6 @@ class LoginExtendedOForm
 
   void get someIntListFocus => form.focus(someIntListControlPath());
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void emailRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsEmail) {
       final controlPath = path;
@@ -508,9 +477,6 @@ class LoginExtendedOForm
     }
   }
 
-  @Deprecated(
-    'Generator completely wraps the form so manual fields removal could lead to unexpected crashes',
-  )
   void unAnnotatedRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsUnAnnotated) {
       final controlPath = path;
@@ -1145,7 +1111,7 @@ class LoginExtendedOForm
       mode: _modeValue,
       timeout: _timeoutValue,
       height: _heightValue,
-      unAnnotated: containsUnAnnotated ? _unAnnotatedValue : null,
+      unAnnotated: _unAnnotatedValue,
       someIntList: _someIntListValue,
     );
   }
