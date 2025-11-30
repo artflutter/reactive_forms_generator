@@ -19,7 +19,11 @@ class ReactiveStatusListFormConsumer<T extends Enum> extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, StatusListForm<T> formModel, Widget? child) builder;
+    BuildContext context,
+    StatusListForm<T> formModel,
+    Widget? child,
+  )
+  builder;
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +43,7 @@ class StatusListFormInheritedStreamer<T extends Enum>
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(
-          stream,
-          child,
-          key: key,
-        );
+  }) : super(stream, child, key: key);
 
   final StatusListForm<T> form;
 }
@@ -72,12 +72,15 @@ class ReactiveStatusListForm<T extends Enum> extends StatelessWidget {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
-              StatusListFormInheritedStreamer<T>>()
+            StatusListFormInheritedStreamer<T>
+          >()
           ?.form;
     }
 
-    final element = context.getElementForInheritedWidgetOfExactType<
-        StatusListFormInheritedStreamer<T>>();
+    final element = context
+        .getElementForInheritedWidgetOfExactType<
+          StatusListFormInheritedStreamer<T>
+        >();
     return element == null
         ? null
         : (element.widget as StatusListFormInheritedStreamer<T>).form;
@@ -125,10 +128,14 @@ class StatusListFormBuilder<T extends Enum> extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-      BuildContext context, StatusListForm<T> formModel, Widget? child) builder;
+    BuildContext context,
+    StatusListForm<T> formModel,
+    Widget? child,
+  )
+  builder;
 
   final void Function(BuildContext context, StatusListForm<T> formModel)?
-      initState;
+  initState;
 
   @override
   _StatusListFormBuilderState<T> createState() =>
@@ -144,7 +151,10 @@ class _StatusListFormBuilderState<T extends Enum>
   @override
   void initState() {
     _formModel = StatusListForm<T>(
-        StatusListForm.formElements<T>(widget.model), null, null);
+      StatusListForm.formElements<T>(widget.model),
+      null,
+      null,
+    );
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -222,11 +232,8 @@ final _logStatusListForm = Logger.detached('StatusListForm<T>');
 
 class StatusListForm<T extends Enum>
     implements FormModel<StatusList<T>, StatusList<T>> {
-  StatusListForm(
-    this.form,
-    this.path,
-    this._formModel,
-  ) : initial = form.rawValue;
+  StatusListForm(this.form, this.path, this._formModel)
+    : initial = form.rawValue;
 
   static const String listControlName = "list";
 
@@ -234,7 +241,7 @@ class StatusListForm<T extends Enum>
 
   final String? path;
 
-// ignore: unused_field
+  // ignore: unused_field
   final FormModel<dynamic, dynamic>? _formModel;
 
   final Map<String, bool> _disabled = {};
@@ -248,8 +255,6 @@ class StatusListForm<T extends Enum>
 
   List<T?> get _listRawValue => listControl.rawValue.whereType<T?>().toList();
 
-  @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsList {
     try {
       form.control(listControlPath());
@@ -268,8 +273,11 @@ class StatusListForm<T extends Enum>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    listControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    listControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void listValuePatch(
@@ -277,8 +285,11 @@ class StatusListForm<T extends Enum>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    listControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    listControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void listValueReset(
@@ -287,14 +298,13 @@ class StatusListForm<T extends Enum>
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      listControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => listControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   FormArray<T> get listControl =>
       form.control(listControlPath()) as FormArray<T>;
@@ -351,13 +361,15 @@ class StatusListForm<T extends Enum>
         break;
     }
 
-    listControl.add(FormControl<T>(
-      value: value,
-      validators: resultingValidators,
-      asyncValidators: resultingAsyncValidators,
-      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
-      disabled: disabled ?? false,
-    ));
+    listControl.add(
+      FormControl<T>(
+        value: value,
+        validators: resultingValidators,
+        asyncValidators: resultingAsyncValidators,
+        asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+        disabled: disabled ?? false,
+      ),
+    );
   }
 
   @override
@@ -380,17 +392,16 @@ class StatusListForm<T extends Enum>
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     if (_disabled.isEmpty) {
       currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -448,9 +459,11 @@ class StatusListForm<T extends Enum>
     StatusList<T>? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.updateValue(StatusListForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => currentForm.updateValue(
+    StatusListForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
   void upsertValue(
@@ -468,17 +481,14 @@ class StatusListForm<T extends Enum>
     StatusList<T>? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => currentForm.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
-  void updateInitial(
-    Map<String, Object?>? value,
-    String? path,
-  ) {
+  void updateInitial(Map<String, Object?>? value, String? path) {
     if (_formModel != null) {
       _formModel?.updateInitial(currentForm.rawValue, path);
       return;
@@ -530,30 +540,38 @@ class StatusListForm<T extends Enum>
       [path, pathItem].whereType<String>().join(".");
 
   static FormGroup formElements<T extends Enum>(StatusList<T>? statusList) =>
-      FormGroup({
-        listControlName: FormArray<T>(
+      FormGroup(
+        {
+          listControlName: FormArray<T>(
             (statusList?.list ?? [])
-                .map((e) => FormControl<T>(
-                      value: e,
-                      validators: [],
-                      asyncValidators: [],
-                      asyncValidatorsDebounceTime: 250,
-                      disabled: false,
-                    ))
+                .map(
+                  (e) => FormControl<T>(
+                    value: e,
+                    validators: [],
+                    asyncValidators: [],
+                    asyncValidatorsDebounceTime: 250,
+                    disabled: false,
+                  ),
+                )
                 .toList(),
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
-            disabled: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+            disabled: false,
+          ),
+        },
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+      );
 }
 
-class ReactiveStatusListFormArrayBuilder<ReactiveStatusListFormArrayBuilderT,
-    T extends Enum> extends StatelessWidget {
+class ReactiveStatusListFormArrayBuilder<
+  ReactiveStatusListFormArrayBuilderT,
+  T extends Enum
+>
+    extends StatelessWidget {
   const ReactiveStatusListFormArrayBuilder({
     Key? key,
     this.control,
@@ -562,29 +580,39 @@ class ReactiveStatusListFormArrayBuilder<ReactiveStatusListFormArrayBuilderT,
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveStatusListFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveStatusListFormArrayBuilderT>? Function(
-      StatusListForm<T> formModel)? control;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      StatusListForm<T> formModel)? builder;
+    StatusListForm<T> formModel,
+  )?
+  control;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      FormControl<ReactiveStatusListFormArrayBuilderT> control,
-      ReactiveStatusListFormArrayBuilderT? item,
-      StatusListForm<T> formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    StatusListForm<T> formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    FormControl<ReactiveStatusListFormArrayBuilderT> control,
+    ReactiveStatusListFormArrayBuilderT? item,
+    StatusListForm<T> formModel,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(FormControl<ReactiveStatusListFormArrayBuilderT> control)?
-      controlFilter;
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -600,18 +628,9 @@ class ReactiveStatusListFormArrayBuilder<ReactiveStatusListFormArrayBuilderT,
     return ReactiveFormArrayItemBuilder<ReactiveStatusListFormArrayBuilderT>(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
-          ? (context, itemList) => builder(
-                context,
-                itemList,
-                formModel,
-              )
+          ? (context, itemList) => builder(context, itemList, formModel)
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
+      itemBuilder: (context, i, control, item) =>
           itemBuilder(context, i, control, item, formModel),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -619,8 +638,11 @@ class ReactiveStatusListFormArrayBuilder<ReactiveStatusListFormArrayBuilderT,
   }
 }
 
-class ReactiveStatusListFormArrayBuilder2<ReactiveStatusListFormArrayBuilderT,
-    T extends Enum> extends StatelessWidget {
+class ReactiveStatusListFormArrayBuilder2<
+  ReactiveStatusListFormArrayBuilderT,
+  T extends Enum
+>
+    extends StatelessWidget {
   const ReactiveStatusListFormArrayBuilder2({
     Key? key,
     this.control,
@@ -629,35 +651,41 @@ class ReactiveStatusListFormArrayBuilder2<ReactiveStatusListFormArrayBuilderT,
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveStatusListFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveStatusListFormArrayBuilderT>? Function(
-      StatusListForm<T> formModel)? control;
+    StatusListForm<T> formModel,
+  )?
+  control;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        List<Widget> itemList,
-        StatusListForm<T> formModel
-      }) params)? builder;
+    ({BuildContext context, List<Widget> itemList, StatusListForm<T> formModel})
+    params,
+  )?
+  builder;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        int i,
-        FormControl<ReactiveStatusListFormArrayBuilderT> control,
-        ReactiveStatusListFormArrayBuilderT? item,
-        StatusListForm<T> formModel
-      }) params) itemBuilder;
+    ({
+      BuildContext context,
+      int i,
+      FormControl<ReactiveStatusListFormArrayBuilderT> control,
+      ReactiveStatusListFormArrayBuilderT? item,
+      StatusListForm<T> formModel,
+    })
+    params,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(FormControl<ReactiveStatusListFormArrayBuilderT> control)?
-      controlFilter;
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -674,23 +702,17 @@ class ReactiveStatusListFormArrayBuilder2<ReactiveStatusListFormArrayBuilderT,
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
           ? (context, itemList) => builder((
-                context: context,
-                itemList: itemList,
-                formModel: formModel,
-              ))
+              context: context,
+              itemList: itemList,
+              formModel: formModel,
+            ))
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
-          itemBuilder((
+      itemBuilder: (context, i, control, item) => itemBuilder((
         context: context,
         i: i,
         control: control,
         item: item,
-        formModel: formModel
+        formModel: formModel,
       )),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -699,33 +721,49 @@ class ReactiveStatusListFormArrayBuilder2<ReactiveStatusListFormArrayBuilderT,
 }
 
 class ReactiveStatusListFormFormGroupArrayBuilder<
-    ReactiveStatusListFormFormGroupArrayBuilderT,
-    T extends Enum> extends StatelessWidget {
+  ReactiveStatusListFormFormGroupArrayBuilderT,
+  T extends Enum
+>
+    extends StatelessWidget {
   const ReactiveStatusListFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(extended != null || getExtended != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         extended != null || getExtended != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-      List<ReactiveStatusListFormFormGroupArrayBuilderT>>? extended;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveStatusListFormFormGroupArrayBuilderT>
+  >?
+  extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-          List<ReactiveStatusListFormFormGroupArrayBuilderT>>
-      Function(StatusListForm<T> formModel)? getExtended;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      StatusListForm<T> formModel)? builder;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveStatusListFormFormGroupArrayBuilderT>
+  >
+  Function(StatusListForm<T> formModel)?
+  getExtended;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      ReactiveStatusListFormFormGroupArrayBuilderT? item,
-      StatusListForm<T> formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    StatusListForm<T> formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    ReactiveStatusListFormFormGroupArrayBuilderT? item,
+    StatusListForm<T> formModel,
+  )
+  itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -743,23 +781,14 @@ class ReactiveStatusListFormFormGroupArrayBuilder<
         final itemList =
             (value.value() ?? <ReactiveStatusListFormFormGroupArrayBuilderT>[])
                 .asMap()
-                .map((i, item) => MapEntry(
-                      i,
-                      itemBuilder(
-                        context,
-                        i,
-                        item,
-                        formModel,
-                      ),
-                    ))
+                .map(
+                  (i, item) =>
+                      MapEntry(i, itemBuilder(context, i, item, formModel)),
+                )
                 .values
                 .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );

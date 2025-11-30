@@ -19,7 +19,11 @@ class ReactiveAnnotatelessFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, AnnotatelessForm formModel, Widget? child) builder;
+    BuildContext context,
+    AnnotatelessForm formModel,
+    Widget? child,
+  )
+  builder;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +42,7 @@ class AnnotatelessFormInheritedStreamer extends InheritedStreamer<dynamic> {
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(
-          stream,
-          child,
-          key: key,
-        );
+  }) : super(stream, child, key: key);
 
   final AnnotatelessForm form;
 }
@@ -64,19 +64,19 @@ class ReactiveAnnotatelessForm extends StatelessWidget {
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  static AnnotatelessForm? of(
-    BuildContext context, {
-    bool listen = true,
-  }) {
+  static AnnotatelessForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
-              AnnotatelessFormInheritedStreamer>()
+            AnnotatelessFormInheritedStreamer
+          >()
           ?.form;
     }
 
-    final element = context.getElementForInheritedWidgetOfExactType<
-        AnnotatelessFormInheritedStreamer>();
+    final element = context
+        .getElementForInheritedWidgetOfExactType<
+          AnnotatelessFormInheritedStreamer
+        >();
     return element == null
         ? null
         : (element.widget as AnnotatelessFormInheritedStreamer).form;
@@ -124,10 +124,14 @@ class AnnotatelessFormBuilder extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-      BuildContext context, AnnotatelessForm formModel, Widget? child) builder;
+    BuildContext context,
+    AnnotatelessForm formModel,
+    Widget? child,
+  )
+  builder;
 
   final void Function(BuildContext context, AnnotatelessForm formModel)?
-      initState;
+  initState;
 
   @override
   _AnnotatelessFormBuilderState createState() =>
@@ -142,7 +146,10 @@ class _AnnotatelessFormBuilderState extends State<AnnotatelessFormBuilder> {
   @override
   void initState() {
     _formModel = AnnotatelessForm(
-        AnnotatelessForm.formElements(widget.model), null, null);
+      AnnotatelessForm.formElements(widget.model),
+      null,
+      null,
+    );
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -219,11 +226,8 @@ class _AnnotatelessFormBuilderState extends State<AnnotatelessFormBuilder> {
 final _logAnnotatelessForm = Logger.detached('AnnotatelessForm');
 
 class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
-  AnnotatelessForm(
-    this.form,
-    this.path,
-    this._formModel,
-  ) : initial = form.rawValue;
+  AnnotatelessForm(this.form, this.path, this._formModel)
+    : initial = form.rawValue;
 
   static const String emailControlName = "email";
 
@@ -233,7 +237,7 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
 
   final String? path;
 
-// ignore: unused_field
+  // ignore: unused_field
   final FormModel<dynamic, dynamic>? _formModel;
 
   final Map<String, bool> _disabled = {};
@@ -253,8 +257,6 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
 
   String get _passwordRawValue => passwordControl.value ?? "";
 
-  @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -264,8 +266,6 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
     }
   }
 
-  @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsPassword {
     try {
       form.control(passwordControlPath());
@@ -288,8 +288,11 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void passwordValueUpdate(
@@ -297,8 +300,11 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    passwordControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    passwordControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailValuePatch(
@@ -306,8 +312,11 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    emailControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void passwordValuePatch(
@@ -315,8 +324,11 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    passwordControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    passwordControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void emailValueReset(
@@ -325,14 +337,13 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      emailControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => emailControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   void passwordValueReset(
     String value, {
@@ -340,14 +351,13 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      passwordControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => passwordControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
@@ -411,17 +421,16 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     if (_disabled.isEmpty) {
       currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -479,9 +488,11 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
     Annotateless? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.updateValue(AnnotatelessForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => currentForm.updateValue(
+    AnnotatelessForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
   void upsertValue(
@@ -499,17 +510,14 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
     Annotateless? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => currentForm.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
-  void updateInitial(
-    Map<String, Object?>? value,
-    String? path,
-  ) {
+  void updateInitial(Map<String, Object?>? value, String? path) {
     if (_formModel != null) {
       _formModel?.updateInitial(currentForm.rawValue, path);
       return;
@@ -560,30 +568,36 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(Annotateless? annotateless) => FormGroup({
-        emailControlName: FormControl<String>(
-            value: annotateless?.email,
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        passwordControlName: FormControl<String>(
-            value: annotateless?.password,
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+  static FormGroup formElements(Annotateless? annotateless) => FormGroup(
+    {
+      emailControlName: FormControl<String>(
+        value: annotateless?.email,
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+      passwordControlName: FormControl<String>(
+        value: annotateless?.password,
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+    },
+    validators: [],
+    asyncValidators: [],
+    asyncValidatorsDebounceTime: 250,
+    disabled: false,
+  );
 }
 
 class ReactiveAnnotatelessFormArrayBuilder<
-    ReactiveAnnotatelessFormArrayBuilderT> extends StatelessWidget {
+  ReactiveAnnotatelessFormArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveAnnotatelessFormArrayBuilder({
     Key? key,
     this.control,
@@ -592,30 +606,41 @@ class ReactiveAnnotatelessFormArrayBuilder<
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveAnnotatelessFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveAnnotatelessFormArrayBuilderT>? Function(
-      AnnotatelessForm formModel)? control;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      AnnotatelessForm formModel)? builder;
+    AnnotatelessForm formModel,
+  )?
+  control;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      FormControl<ReactiveAnnotatelessFormArrayBuilderT> control,
-      ReactiveAnnotatelessFormArrayBuilderT? item,
-      AnnotatelessForm formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    AnnotatelessForm formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    FormControl<ReactiveAnnotatelessFormArrayBuilderT> control,
+    ReactiveAnnotatelessFormArrayBuilderT? item,
+    AnnotatelessForm formModel,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-          FormControl<ReactiveAnnotatelessFormArrayBuilderT> control)?
-      controlFilter;
+    FormControl<ReactiveAnnotatelessFormArrayBuilderT> control,
+  )?
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -631,18 +656,9 @@ class ReactiveAnnotatelessFormArrayBuilder<
     return ReactiveFormArrayItemBuilder<ReactiveAnnotatelessFormArrayBuilderT>(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
-          ? (context, itemList) => builder(
-                context,
-                itemList,
-                formModel,
-              )
+          ? (context, itemList) => builder(context, itemList, formModel)
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
+      itemBuilder: (context, i, control, item) =>
           itemBuilder(context, i, control, item, formModel),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -651,7 +667,9 @@ class ReactiveAnnotatelessFormArrayBuilder<
 }
 
 class ReactiveAnnotatelessFormArrayBuilder2<
-    ReactiveAnnotatelessFormArrayBuilderT> extends StatelessWidget {
+  ReactiveAnnotatelessFormArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveAnnotatelessFormArrayBuilder2({
     Key? key,
     this.control,
@@ -660,36 +678,43 @@ class ReactiveAnnotatelessFormArrayBuilder2<
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveAnnotatelessFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveAnnotatelessFormArrayBuilderT>? Function(
-      AnnotatelessForm formModel)? control;
+    AnnotatelessForm formModel,
+  )?
+  control;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        List<Widget> itemList,
-        AnnotatelessForm formModel
-      }) params)? builder;
+    ({BuildContext context, List<Widget> itemList, AnnotatelessForm formModel})
+    params,
+  )?
+  builder;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        int i,
-        FormControl<ReactiveAnnotatelessFormArrayBuilderT> control,
-        ReactiveAnnotatelessFormArrayBuilderT? item,
-        AnnotatelessForm formModel
-      }) params) itemBuilder;
+    ({
+      BuildContext context,
+      int i,
+      FormControl<ReactiveAnnotatelessFormArrayBuilderT> control,
+      ReactiveAnnotatelessFormArrayBuilderT? item,
+      AnnotatelessForm formModel,
+    })
+    params,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-          FormControl<ReactiveAnnotatelessFormArrayBuilderT> control)?
-      controlFilter;
+    FormControl<ReactiveAnnotatelessFormArrayBuilderT> control,
+  )?
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -706,23 +731,17 @@ class ReactiveAnnotatelessFormArrayBuilder2<
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
           ? (context, itemList) => builder((
-                context: context,
-                itemList: itemList,
-                formModel: formModel,
-              ))
+              context: context,
+              itemList: itemList,
+              formModel: formModel,
+            ))
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
-          itemBuilder((
+      itemBuilder: (context, i, control, item) => itemBuilder((
         context: context,
         i: i,
         control: control,
         item: item,
-        formModel: formModel
+        formModel: formModel,
       )),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -731,32 +750,48 @@ class ReactiveAnnotatelessFormArrayBuilder2<
 }
 
 class ReactiveAnnotatelessFormFormGroupArrayBuilder<
-    ReactiveAnnotatelessFormFormGroupArrayBuilderT> extends StatelessWidget {
+  ReactiveAnnotatelessFormFormGroupArrayBuilderT
+>
+    extends StatelessWidget {
   const ReactiveAnnotatelessFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(extended != null || getExtended != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         extended != null || getExtended != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-      List<ReactiveAnnotatelessFormFormGroupArrayBuilderT>>? extended;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveAnnotatelessFormFormGroupArrayBuilderT>
+  >?
+  extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-          List<ReactiveAnnotatelessFormFormGroupArrayBuilderT>>
-      Function(AnnotatelessForm formModel)? getExtended;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      AnnotatelessForm formModel)? builder;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveAnnotatelessFormFormGroupArrayBuilderT>
+  >
+  Function(AnnotatelessForm formModel)?
+  getExtended;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      ReactiveAnnotatelessFormFormGroupArrayBuilderT? item,
-      AnnotatelessForm formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    AnnotatelessForm formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    ReactiveAnnotatelessFormFormGroupArrayBuilderT? item,
+    AnnotatelessForm formModel,
+  )
+  itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -771,26 +806,18 @@ class ReactiveAnnotatelessFormFormGroupArrayBuilder<
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ??
-                <ReactiveAnnotatelessFormFormGroupArrayBuilderT>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ??
+                    <ReactiveAnnotatelessFormFormGroupArrayBuilderT>[])
+                .asMap()
+                .map(
+                  (i, item) =>
+                      MapEntry(i, itemBuilder(context, i, item, formModel)),
+                )
+                .values
+                .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );

@@ -11,13 +11,6 @@ class ContainsMethod extends ReactiveFormGeneratorMethod {
       ..name = field.containsMethodName
       ..type = MethodType.getter
       ..returns = const Reference('bool')
-      ..annotations.add(
-        const CodeExpression(
-          Code(
-            "Deprecated('Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')",
-          ),
-        ),
-      )
       ..body = Code('''try {
                 form.control(${field.fieldControlPath}());
                 return true;

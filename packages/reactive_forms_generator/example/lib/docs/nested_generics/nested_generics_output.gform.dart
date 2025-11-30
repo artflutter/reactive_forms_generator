@@ -19,8 +19,12 @@ class ReactiveProductDetailsOFormConsumer<P extends Product, C extends Cart>
 
   final Widget? child;
 
-  final Widget Function(BuildContext context,
-      ProductDetailsOForm<P, C> formModel, Widget? child) builder;
+  final Widget Function(
+    BuildContext context,
+    ProductDetailsOForm<P, C> formModel,
+    Widget? child,
+  )
+  builder;
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +44,7 @@ class ProductDetailsOFormInheritedStreamer<P extends Product, C extends Cart>
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(
-          stream,
-          child,
-          key: key,
-        );
+  }) : super(stream, child, key: key);
 
   final ProductDetailsOForm<P, C> form;
 }
@@ -74,12 +74,15 @@ class ReactiveProductDetailsOForm<P extends Product, C extends Cart>
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
-              ProductDetailsOFormInheritedStreamer<P, C>>()
+            ProductDetailsOFormInheritedStreamer<P, C>
+          >()
           ?.form;
     }
 
-    final element = context.getElementForInheritedWidgetOfExactType<
-        ProductDetailsOFormInheritedStreamer<P, C>>();
+    final element = context
+        .getElementForInheritedWidgetOfExactType<
+          ProductDetailsOFormInheritedStreamer<P, C>
+        >();
     return element == null
         ? null
         : (element.widget as ProductDetailsOFormInheritedStreamer<P, C>).form;
@@ -101,12 +104,12 @@ class ReactiveProductDetailsOForm<P extends Product, C extends Cart>
 
 extension ReactiveReactiveProductDetailsOFormExt on BuildContext {
   ProductDetailsOForm<P, C>?
-      productDetailsOFormWatch<P extends Product, C extends Cart>() =>
-          ReactiveProductDetailsOForm.of<P, C>(this);
+  productDetailsOFormWatch<P extends Product, C extends Cart>() =>
+      ReactiveProductDetailsOForm.of<P, C>(this);
 
   ProductDetailsOForm<P, C>?
-      productDetailsOFormRead<P extends Product, C extends Cart>() =>
-          ReactiveProductDetailsOForm.of<P, C>(this, listen: false);
+  productDetailsOFormRead<P extends Product, C extends Cart>() =>
+      ReactiveProductDetailsOForm.of<P, C>(this, listen: false);
 }
 
 class ProductDetailsOFormBuilder<P extends Product, C extends Cart>
@@ -129,11 +132,18 @@ class ProductDetailsOFormBuilder<P extends Product, C extends Cart>
 
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
-  final Widget Function(BuildContext context,
-      ProductDetailsOForm<P, C> formModel, Widget? child) builder;
+  final Widget Function(
+    BuildContext context,
+    ProductDetailsOForm<P, C> formModel,
+    Widget? child,
+  )
+  builder;
 
   final void Function(
-      BuildContext context, ProductDetailsOForm<P, C> formModel)? initState;
+    BuildContext context,
+    ProductDetailsOForm<P, C> formModel,
+  )?
+  initState;
 
   @override
   _ProductDetailsOFormBuilderState<P, C> createState() =>
@@ -149,7 +159,10 @@ class _ProductDetailsOFormBuilderState<P extends Product, C extends Cart>
   @override
   void initState() {
     _formModel = ProductDetailsOForm<P, C>(
-        ProductDetailsOForm.formElements<P, C>(widget.model), null, null);
+      ProductDetailsOForm.formElements<P, C>(widget.model),
+      null,
+      null,
+    );
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -227,11 +240,8 @@ final _logProductDetailsOForm = Logger.detached('ProductDetailsOForm<P, C>');
 
 class ProductDetailsOForm<P extends Product, C extends Cart>
     implements FormModel<ProductDetailsO<P, C>, ProductDetailsOOutput<P, C>> {
-  ProductDetailsOForm(
-    this.form,
-    this.path,
-    this._formModel,
-  ) : initial = form.rawValue;
+  ProductDetailsOForm(this.form, this.path, this._formModel)
+    : initial = form.rawValue;
 
   static const String descriptionControlName = "description";
 
@@ -241,7 +251,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
 
   final String? path;
 
-// ignore: unused_field
+  // ignore: unused_field
   final FormModel<dynamic, dynamic>? _formModel;
 
   final Map<String, bool> _disabled = {};
@@ -253,16 +263,16 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
 
   String idControlPath() => pathBuilder(idControlName);
 
-  String? get _descriptionValue => descriptionControl.value;
+  String? get _descriptionValue =>
+      containsDescription ? descriptionControl.value : null;
 
-  IdOOutput<P, C>? get _idValue => idForm.model;
+  IdOOutput<P, C>? get _idValue => containsId ? idForm.model : null;
 
-  String? get _descriptionRawValue => descriptionControl.value;
+  String? get _descriptionRawValue =>
+      containsDescription ? descriptionControl.value : null;
 
-  IdO<P, C>? get _idRawValue => idForm.rawModel;
+  IdO<P, C>? get _idRawValue => containsId ? idForm.rawModel : null;
 
-  @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsDescription {
     try {
       form.control(descriptionControlPath());
@@ -272,8 +282,6 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     }
   }
 
-  @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsId {
     try {
       form.control(idControlPath());
@@ -291,12 +299,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
 
   void get idFocus => form.focus(idControlPath());
 
-  @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void descriptionRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void descriptionRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsDescription) {
       final controlPath = path;
       if (controlPath == null) {
@@ -319,12 +322,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     }
   }
 
-  @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void idRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void idRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsId) {
       final controlPath = path;
       if (controlPath == null) {
@@ -352,8 +350,11 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    descriptionControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    descriptionControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void idValueUpdate(
@@ -361,8 +362,11 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl.updateValue(IdOForm.formElements(value).rawValue,
-        updateParent: updateParent, emitEvent: emitEvent);
+    idControl.updateValue(
+      IdOForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void descriptionValuePatch(
@@ -370,8 +374,11 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    descriptionControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    descriptionControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void idValuePatch(
@@ -379,8 +386,11 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    idControl.updateValue(IdOForm.formElements(value).rawValue,
-        updateParent: updateParent, emitEvent: emitEvent);
+    idControl.updateValue(
+      IdOForm.formElements(value).rawValue,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void descriptionValueReset(
@@ -389,14 +399,13 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      descriptionControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => descriptionControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   void idValueReset(
     IdO<P, C>? value, {
@@ -404,11 +413,11 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      idControl.reset(
-          value: IdOForm.formElements(value).rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => idControl.reset(
+    value: IdOForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   FormControl<String> get descriptionControl =>
       form.control(descriptionControlPath()) as FormControl<String>;
@@ -447,10 +456,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
         emitEvent: emitEvent,
       );
     } else {
-      idControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+      idControl.markAsEnabled(updateParent: updateParent, emitEvent: emitEvent);
     }
   }
 
@@ -467,20 +473,21 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
       );
     }
     return ProductDetailsOOutput<P, C>(
-        description: _descriptionValue, id: _idValue);
+      description: _descriptionValue,
+      id: _idValue,
+    );
   }
 
   @override
   ProductDetailsO<P, C> get rawModel {
     return ProductDetailsO<P, C>(
-        description: _descriptionRawValue, id: _idRawValue);
+      description: _descriptionRawValue,
+      id: _idRawValue,
+    );
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     if (_disabled.isEmpty) {
       currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
@@ -488,7 +495,9 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
 
       idForm.toggleDisabled();
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       idForm.toggleDisabled();
       currentForm.controls.forEach((key, control) {
@@ -547,9 +556,11 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     ProductDetailsO<P, C>? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.updateValue(ProductDetailsOForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => currentForm.updateValue(
+    ProductDetailsOForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
   void upsertValue(
@@ -567,17 +578,14 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     ProductDetailsO<P, C>? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => currentForm.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
-  void updateInitial(
-    Map<String, Object?>? value,
-    String? path,
-  ) {
+  void updateInitial(Map<String, Object?>? value, String? path) {
     if (_formModel != null) {
       _formModel?.updateInitial(currentForm.rawValue, path);
       return;
@@ -629,32 +637,31 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
       [path, pathItem].whereType<String>().join(".");
 
   static FormGroup formElements<P extends Product, C extends Cart>(
-          ProductDetailsO<P, C>? productDetailsO) =>
-      FormGroup({
-        descriptionControlName: FormControl<String>(
-            value: productDetailsO?.description,
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        idControlName: IdOForm.formElements(productDetailsO?.id)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+    ProductDetailsO<P, C>? productDetailsO,
+  ) => FormGroup(
+    {
+      descriptionControlName: FormControl<String>(
+        value: productDetailsO?.description,
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+      idControlName: IdOForm.formElements(productDetailsO?.id),
+    },
+    validators: [],
+    asyncValidators: [],
+    asyncValidatorsDebounceTime: 250,
+    disabled: false,
+  );
 }
 
 final _logIdOForm = Logger.detached('IdOForm<P, C>');
 
 class IdOForm<P extends Product, C extends Cart>
     implements FormModel<IdO<P, C>, IdOOutput<P, C>> {
-  IdOForm(
-    this.form,
-    this.path,
-    this._formModel,
-  ) : initial = form.rawValue;
+  IdOForm(this.form, this.path, this._formModel) : initial = form.rawValue;
 
   static const String companyNameControlName = "companyName";
 
@@ -664,7 +671,7 @@ class IdOForm<P extends Product, C extends Cart>
 
   final String? path;
 
-// ignore: unused_field
+  // ignore: unused_field
   final FormModel<dynamic, dynamic>? _formModel;
 
   final Map<String, bool> _disabled = {};
@@ -676,16 +683,16 @@ class IdOForm<P extends Product, C extends Cart>
 
   String nameControlPath() => pathBuilder(nameControlName);
 
-  String? get _companyNameValue => companyNameControl.value;
+  String? get _companyNameValue =>
+      containsCompanyName ? companyNameControl.value : null;
 
-  String? get _nameValue => nameControl.value;
+  String? get _nameValue => containsName ? nameControl.value : null;
 
-  String? get _companyNameRawValue => companyNameControl.value;
+  String? get _companyNameRawValue =>
+      containsCompanyName ? companyNameControl.value : null;
 
-  String? get _nameRawValue => nameControl.value;
+  String? get _nameRawValue => containsName ? nameControl.value : null;
 
-  @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsCompanyName {
     try {
       form.control(companyNameControlPath());
@@ -695,8 +702,6 @@ class IdOForm<P extends Product, C extends Cart>
     }
   }
 
-  @Deprecated(
-      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -714,12 +719,7 @@ class IdOForm<P extends Product, C extends Cart>
 
   void get nameFocus => form.focus(nameControlPath());
 
-  @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void companyNameRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void companyNameRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsCompanyName) {
       final controlPath = path;
       if (controlPath == null) {
@@ -742,12 +742,7 @@ class IdOForm<P extends Product, C extends Cart>
     }
   }
 
-  @Deprecated(
-      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
-  void nameRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void nameRemove({bool updateParent = true, bool emitEvent = true}) {
     if (containsName) {
       final controlPath = path;
       if (controlPath == null) {
@@ -775,8 +770,11 @@ class IdOForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    companyNameControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    companyNameControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void nameValueUpdate(
@@ -784,8 +782,11 @@ class IdOForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    nameControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void companyNameValuePatch(
@@ -793,8 +794,11 @@ class IdOForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    companyNameControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    companyNameControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void nameValuePatch(
@@ -802,8 +806,11 @@ class IdOForm<P extends Product, C extends Cart>
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    nameControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
   }
 
   void companyNameValueReset(
@@ -812,14 +819,13 @@ class IdOForm<P extends Product, C extends Cart>
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      companyNameControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => companyNameControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   void nameValueReset(
     String? value, {
@@ -827,14 +833,13 @@ class IdOForm<P extends Product, C extends Cart>
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) =>
-      nameControl.reset(
-        value: value,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-        removeFocus: removeFocus,
-        disabled: disabled,
-      );
+  }) => nameControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
 
   FormControl<String> get companyNameControl =>
       form.control(companyNameControlPath()) as FormControl<String>;
@@ -899,17 +904,16 @@ class IdOForm<P extends Product, C extends Cart>
   }
 
   @override
-  void toggleDisabled({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
+  void toggleDisabled({bool updateParent = true, bool emitEvent = true}) {
     if (_disabled.isEmpty) {
       currentForm.controls.forEach((key, control) {
         _disabled[key] = control.disabled;
       });
 
       currentForm.markAsDisabled(
-          updateParent: updateParent, emitEvent: emitEvent);
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
     } else {
       currentForm.controls.forEach((key, control) {
         if (_disabled[key] == false) {
@@ -967,9 +971,11 @@ class IdOForm<P extends Product, C extends Cart>
     IdO<P, C>? value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.updateValue(IdOForm.formElements(value).rawValue,
-          updateParent: updateParent, emitEvent: emitEvent);
+  }) => currentForm.updateValue(
+    IdOForm.formElements(value).rawValue,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
   void upsertValue(
@@ -987,17 +993,14 @@ class IdOForm<P extends Product, C extends Cart>
     IdO<P, C>? value,
     bool updateParent = true,
     bool emitEvent = true,
-  }) =>
-      currentForm.reset(
-          value: value != null ? formElements(value).rawValue : null,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+  }) => currentForm.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
-  void updateInitial(
-    Map<String, Object?>? value,
-    String? path,
-  ) {
+  void updateInitial(Map<String, Object?>? value, String? path) {
     if (_formModel != null) {
       _formModel?.updateInitial(currentForm.rawValue, path);
       return;
@@ -1049,36 +1052,41 @@ class IdOForm<P extends Product, C extends Cart>
       [path, pathItem].whereType<String>().join(".");
 
   static FormGroup formElements<P extends Product, C extends Cart>(
-          IdO<P, C>? idO) =>
-      FormGroup({
-        companyNameControlName: FormControl<String>(
-            value: idO?.companyName,
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        nameControlName: FormControl<String>(
-            value: idO?.name,
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false)
-      },
-          validators: [],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
+    IdO<P, C>? idO,
+  ) => FormGroup(
+    {
+      companyNameControlName: FormControl<String>(
+        value: idO?.companyName,
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+      nameControlName: FormControl<String>(
+        value: idO?.name,
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+    },
+    validators: [],
+    asyncValidators: [],
+    asyncValidatorsDebounceTime: 250,
+    disabled: false,
+  );
 }
 
 @freezed
 @Rf(output: true)
 abstract class ProductDetailsOOutput<P extends Product, C extends Cart>
     with _$ProductDetailsOOutput<P, C> {
-  factory ProductDetailsOOutput(
-      {@RfControl() String? description,
-      @Rf(output: false) IdOOutput<P, C>? id}) = _ProductDetailsOOutput;
+  factory ProductDetailsOOutput({
+    @RfControl() String? description,
+    @Rf(output: false) IdOOutput<P, C>? id,
+  }) = _ProductDetailsOOutput;
   ProductDetailsOOutput._();
 }
 
@@ -1087,16 +1095,19 @@ abstract class ProductDetailsOOutput<P extends Product, C extends Cart>
 @RfGroup()
 abstract class IdOOutput<P extends Product, C extends Cart>
     with _$IdOOutput<P, C> {
-  factory IdOOutput(
-      {@RfControl() String? companyName,
-      @RfControl() String? name}) = _IdOOutput;
+  factory IdOOutput({
+    @RfControl() String? companyName,
+    @RfControl() String? name,
+  }) = _IdOOutput;
   IdOOutput._();
 }
 
 class ReactiveProductDetailsOFormArrayBuilder<
-    ReactiveProductDetailsOFormArrayBuilderT,
-    P extends Product,
-    C extends Cart> extends StatelessWidget {
+  ReactiveProductDetailsOFormArrayBuilderT,
+  P extends Product,
+  C extends Cart
+>
+    extends StatelessWidget {
   const ReactiveProductDetailsOFormArrayBuilder({
     Key? key,
     this.control,
@@ -1105,30 +1116,41 @@ class ReactiveProductDetailsOFormArrayBuilder<
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveProductDetailsOFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveProductDetailsOFormArrayBuilderT>? Function(
-      ProductDetailsOForm<P, C> formModel)? control;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      ProductDetailsOForm<P, C> formModel)? builder;
+    ProductDetailsOForm<P, C> formModel,
+  )?
+  control;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      FormControl<ReactiveProductDetailsOFormArrayBuilderT> control,
-      ReactiveProductDetailsOFormArrayBuilderT? item,
-      ProductDetailsOForm<P, C> formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    ProductDetailsOForm<P, C> formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    FormControl<ReactiveProductDetailsOFormArrayBuilderT> control,
+    ReactiveProductDetailsOFormArrayBuilderT? item,
+    ProductDetailsOForm<P, C> formModel,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-          FormControl<ReactiveProductDetailsOFormArrayBuilderT> control)?
-      controlFilter;
+    FormControl<ReactiveProductDetailsOFormArrayBuilderT> control,
+  )?
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -1142,21 +1164,13 @@ class ReactiveProductDetailsOFormArrayBuilder<
     final itemBuilder = this.itemBuilder;
 
     return ReactiveFormArrayItemBuilder<
-        ReactiveProductDetailsOFormArrayBuilderT>(
+      ReactiveProductDetailsOFormArrayBuilderT
+    >(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
-          ? (context, itemList) => builder(
-                context,
-                itemList,
-                formModel,
-              )
+          ? (context, itemList) => builder(context, itemList, formModel)
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
+      itemBuilder: (context, i, control, item) =>
           itemBuilder(context, i, control, item, formModel),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -1165,9 +1179,11 @@ class ReactiveProductDetailsOFormArrayBuilder<
 }
 
 class ReactiveProductDetailsOFormArrayBuilder2<
-    ReactiveProductDetailsOFormArrayBuilderT,
-    P extends Product,
-    C extends Cart> extends StatelessWidget {
+  ReactiveProductDetailsOFormArrayBuilderT,
+  P extends Product,
+  C extends Cart
+>
+    extends StatelessWidget {
   const ReactiveProductDetailsOFormArrayBuilder2({
     Key? key,
     this.control,
@@ -1176,36 +1192,47 @@ class ReactiveProductDetailsOFormArrayBuilder2<
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveProductDetailsOFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveProductDetailsOFormArrayBuilderT>? Function(
-      ProductDetailsOForm<P, C> formModel)? control;
+    ProductDetailsOForm<P, C> formModel,
+  )?
+  control;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        List<Widget> itemList,
-        ProductDetailsOForm<P, C> formModel
-      }) params)? builder;
+    ({
+      BuildContext context,
+      List<Widget> itemList,
+      ProductDetailsOForm<P, C> formModel,
+    })
+    params,
+  )?
+  builder;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        int i,
-        FormControl<ReactiveProductDetailsOFormArrayBuilderT> control,
-        ReactiveProductDetailsOFormArrayBuilderT? item,
-        ProductDetailsOForm<P, C> formModel
-      }) params) itemBuilder;
+    ({
+      BuildContext context,
+      int i,
+      FormControl<ReactiveProductDetailsOFormArrayBuilderT> control,
+      ReactiveProductDetailsOFormArrayBuilderT? item,
+      ProductDetailsOForm<P, C> formModel,
+    })
+    params,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(
-          FormControl<ReactiveProductDetailsOFormArrayBuilderT> control)?
-      controlFilter;
+    FormControl<ReactiveProductDetailsOFormArrayBuilderT> control,
+  )?
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -1219,27 +1246,22 @@ class ReactiveProductDetailsOFormArrayBuilder2<
     final itemBuilder = this.itemBuilder;
 
     return ReactiveFormArrayItemBuilder<
-        ReactiveProductDetailsOFormArrayBuilderT>(
+      ReactiveProductDetailsOFormArrayBuilderT
+    >(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
           ? (context, itemList) => builder((
-                context: context,
-                itemList: itemList,
-                formModel: formModel,
-              ))
+              context: context,
+              itemList: itemList,
+              formModel: formModel,
+            ))
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
-          itemBuilder((
+      itemBuilder: (context, i, control, item) => itemBuilder((
         context: context,
         i: i,
         control: control,
         item: item,
-        formModel: formModel
+        formModel: formModel,
       )),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -1248,34 +1270,50 @@ class ReactiveProductDetailsOFormArrayBuilder2<
 }
 
 class ReactiveProductDetailsOFormFormGroupArrayBuilder<
-    ReactiveProductDetailsOFormFormGroupArrayBuilderT,
-    P extends Product,
-    C extends Cart> extends StatelessWidget {
+  ReactiveProductDetailsOFormFormGroupArrayBuilderT,
+  P extends Product,
+  C extends Cart
+>
+    extends StatelessWidget {
   const ReactiveProductDetailsOFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(extended != null || getExtended != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         extended != null || getExtended != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-      List<ReactiveProductDetailsOFormFormGroupArrayBuilderT>>? extended;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveProductDetailsOFormFormGroupArrayBuilderT>
+  >?
+  extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-          List<ReactiveProductDetailsOFormFormGroupArrayBuilderT>>
-      Function(ProductDetailsOForm<P, C> formModel)? getExtended;
-
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      ProductDetailsOForm<P, C> formModel)? builder;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveProductDetailsOFormFormGroupArrayBuilderT>
+  >
+  Function(ProductDetailsOForm<P, C> formModel)?
+  getExtended;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      ReactiveProductDetailsOFormFormGroupArrayBuilderT? item,
-      ProductDetailsOForm<P, C> formModel) itemBuilder;
+    BuildContext context,
+    List<Widget> itemList,
+    ProductDetailsOForm<P, C> formModel,
+  )?
+  builder;
+
+  final Widget Function(
+    BuildContext context,
+    int i,
+    ReactiveProductDetailsOFormFormGroupArrayBuilderT? item,
+    ProductDetailsOForm<P, C> formModel,
+  )
+  itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1290,26 +1328,18 @@ class ReactiveProductDetailsOFormFormGroupArrayBuilder<
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ??
-                <ReactiveProductDetailsOFormFormGroupArrayBuilderT>[])
-            .asMap()
-            .map((i, item) => MapEntry(
-                  i,
-                  itemBuilder(
-                    context,
-                    i,
-                    item,
-                    formModel,
-                  ),
-                ))
-            .values
-            .toList();
+        final itemList =
+            (value.value() ??
+                    <ReactiveProductDetailsOFormFormGroupArrayBuilderT>[])
+                .asMap()
+                .map(
+                  (i, item) =>
+                      MapEntry(i, itemBuilder(context, i, item, formModel)),
+                )
+                .values
+                .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );
@@ -1318,16 +1348,17 @@ class ReactiveProductDetailsOFormFormGroupArrayBuilder<
 
 class ReactiveIdOFormConsumer<P extends Product, C extends Cart>
     extends StatelessWidget {
-  const ReactiveIdOFormConsumer({
-    Key? key,
-    required this.builder,
-    this.child,
-  }) : super(key: key);
+  const ReactiveIdOFormConsumer({Key? key, required this.builder, this.child})
+    : super(key: key);
 
   final Widget? child;
 
   final Widget Function(
-      BuildContext context, IdOForm<P, C> formModel, Widget? child) builder;
+    BuildContext context,
+    IdOForm<P, C> formModel,
+    Widget? child,
+  )
+  builder;
 
   @override
   Widget build(BuildContext context) {
@@ -1347,11 +1378,7 @@ class IdOFormInheritedStreamer<P extends Product, C extends Cart>
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
-  }) : super(
-          stream,
-          child,
-          key: key,
-        );
+  }) : super(stream, child, key: key);
 
   final IdOForm<P, C> form;
 }
@@ -1384,8 +1411,10 @@ class ReactiveIdOForm<P extends Product, C extends Cart>
           ?.form;
     }
 
-    final element = context.getElementForInheritedWidgetOfExactType<
-        IdOFormInheritedStreamer<P, C>>();
+    final element = context
+        .getElementForInheritedWidgetOfExactType<
+          IdOFormInheritedStreamer<P, C>
+        >();
     return element == null
         ? null
         : (element.widget as IdOFormInheritedStreamer<P, C>).form;
@@ -1433,7 +1462,11 @@ class IdOFormBuilder<P extends Product, C extends Cart> extends StatefulWidget {
   final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
-      BuildContext context, IdOForm<P, C> formModel, Widget? child) builder;
+    BuildContext context,
+    IdOForm<P, C> formModel,
+    Widget? child,
+  )
+  builder;
 
   final void Function(BuildContext context, IdOForm<P, C> formModel)? initState;
 
@@ -1449,8 +1482,11 @@ class _IdOFormBuilderState<P extends Product, C extends Cart>
 
   @override
   void initState() {
-    _formModel =
-        IdOForm<P, C>(IdOForm.formElements<P, C>(widget.model), null, null);
+    _formModel = IdOForm<P, C>(
+      IdOForm.formElements<P, C>(widget.model),
+      null,
+      null,
+    );
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -1524,8 +1560,12 @@ class _IdOFormBuilderState<P extends Product, C extends Cart>
   }
 }
 
-class ReactiveIdOFormArrayBuilder<ReactiveIdOFormArrayBuilderT,
-    P extends Product, C extends Cart> extends StatelessWidget {
+class ReactiveIdOFormArrayBuilder<
+  ReactiveIdOFormArrayBuilderT,
+  P extends Product,
+  C extends Cart
+>
+    extends StatelessWidget {
   const ReactiveIdOFormArrayBuilder({
     Key? key,
     this.control,
@@ -1534,30 +1574,39 @@ class ReactiveIdOFormArrayBuilder<ReactiveIdOFormArrayBuilderT,
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveIdOFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveIdOFormArrayBuilderT>? Function(
-      IdOForm<P, C> formModel)? control;
+    IdOForm<P, C> formModel,
+  )?
+  control;
 
   final Widget Function(
-          BuildContext context, List<Widget> itemList, IdOForm<P, C> formModel)?
-      builder;
+    BuildContext context,
+    List<Widget> itemList,
+    IdOForm<P, C> formModel,
+  )?
+  builder;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      FormControl<ReactiveIdOFormArrayBuilderT> control,
-      ReactiveIdOFormArrayBuilderT? item,
-      IdOForm<P, C> formModel) itemBuilder;
+    BuildContext context,
+    int i,
+    FormControl<ReactiveIdOFormArrayBuilderT> control,
+    ReactiveIdOFormArrayBuilderT? item,
+    IdOForm<P, C> formModel,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(FormControl<ReactiveIdOFormArrayBuilderT> control)?
-      controlFilter;
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -1573,18 +1622,9 @@ class ReactiveIdOFormArrayBuilder<ReactiveIdOFormArrayBuilderT,
     return ReactiveFormArrayItemBuilder<ReactiveIdOFormArrayBuilderT>(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
-          ? (context, itemList) => builder(
-                context,
-                itemList,
-                formModel,
-              )
+          ? (context, itemList) => builder(context, itemList, formModel)
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
+      itemBuilder: (context, i, control, item) =>
           itemBuilder(context, i, control, item, formModel),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -1592,8 +1632,12 @@ class ReactiveIdOFormArrayBuilder<ReactiveIdOFormArrayBuilderT,
   }
 }
 
-class ReactiveIdOFormArrayBuilder2<ReactiveIdOFormArrayBuilderT,
-    P extends Product, C extends Cart> extends StatelessWidget {
+class ReactiveIdOFormArrayBuilder2<
+  ReactiveIdOFormArrayBuilderT,
+  P extends Product,
+  C extends Cart
+>
+    extends StatelessWidget {
   const ReactiveIdOFormArrayBuilder2({
     Key? key,
     this.control,
@@ -1602,35 +1646,41 @@ class ReactiveIdOFormArrayBuilder2<ReactiveIdOFormArrayBuilderT,
     required this.itemBuilder,
     this.emptyBuilder,
     this.controlFilter,
-  })  : assert(control != null || formControl != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         control != null || formControl != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
   final FormArray<ReactiveIdOFormArrayBuilderT>? formControl;
 
   final FormArray<ReactiveIdOFormArrayBuilderT>? Function(
-      IdOForm<P, C> formModel)? control;
+    IdOForm<P, C> formModel,
+  )?
+  control;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        List<Widget> itemList,
-        IdOForm<P, C> formModel
-      }) params)? builder;
+    ({BuildContext context, List<Widget> itemList, IdOForm<P, C> formModel})
+    params,
+  )?
+  builder;
 
   final Widget Function(
-      ({
-        BuildContext context,
-        int i,
-        FormControl<ReactiveIdOFormArrayBuilderT> control,
-        ReactiveIdOFormArrayBuilderT? item,
-        IdOForm<P, C> formModel
-      }) params) itemBuilder;
+    ({
+      BuildContext context,
+      int i,
+      FormControl<ReactiveIdOFormArrayBuilderT> control,
+      ReactiveIdOFormArrayBuilderT? item,
+      IdOForm<P, C> formModel,
+    })
+    params,
+  )
+  itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
   final bool Function(FormControl<ReactiveIdOFormArrayBuilderT> control)?
-      controlFilter;
+  controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -1647,23 +1697,17 @@ class ReactiveIdOFormArrayBuilder2<ReactiveIdOFormArrayBuilderT,
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
           ? (context, itemList) => builder((
-                context: context,
-                itemList: itemList,
-                formModel: formModel,
-              ))
+              context: context,
+              itemList: itemList,
+              formModel: formModel,
+            ))
           : null,
-      itemBuilder: (
-        context,
-        i,
-        control,
-        item,
-      ) =>
-          itemBuilder((
+      itemBuilder: (context, i, control, item) => itemBuilder((
         context: context,
         i: i,
         control: control,
         item: item,
-        formModel: formModel
+        formModel: formModel,
       )),
       emptyBuilder: emptyBuilder,
       controlFilter: controlFilter,
@@ -1672,35 +1716,50 @@ class ReactiveIdOFormArrayBuilder2<ReactiveIdOFormArrayBuilderT,
 }
 
 class ReactiveIdOFormFormGroupArrayBuilder<
-    ReactiveIdOFormFormGroupArrayBuilderT,
-    P extends Product,
-    C extends Cart> extends StatelessWidget {
+  ReactiveIdOFormFormGroupArrayBuilderT,
+  P extends Product,
+  C extends Cart
+>
+    extends StatelessWidget {
   const ReactiveIdOFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
     this.builder,
     required this.itemBuilder,
-  })  : assert(extended != null || getExtended != null,
-            "You have to specify `control` or `formControl`!"),
-        super(key: key);
+  }) : assert(
+         extended != null || getExtended != null,
+         "You have to specify `control` or `formControl`!",
+       ),
+       super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-      List<ReactiveIdOFormFormGroupArrayBuilderT>>? extended;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveIdOFormFormGroupArrayBuilderT>
+  >?
+  extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>,
-          List<ReactiveIdOFormFormGroupArrayBuilderT>>
-      Function(IdOForm<P, C> formModel)? getExtended;
+  final ExtendedControl<
+    List<Map<String, Object?>?>,
+    List<ReactiveIdOFormFormGroupArrayBuilderT>
+  >
+  Function(IdOForm<P, C> formModel)?
+  getExtended;
 
   final Widget Function(
-          BuildContext context, List<Widget> itemList, IdOForm<P, C> formModel)?
-      builder;
+    BuildContext context,
+    List<Widget> itemList,
+    IdOForm<P, C> formModel,
+  )?
+  builder;
 
   final Widget Function(
-      BuildContext context,
-      int i,
-      ReactiveIdOFormFormGroupArrayBuilderT? item,
-      IdOForm<P, C> formModel) itemBuilder;
+    BuildContext context,
+    int i,
+    ReactiveIdOFormFormGroupArrayBuilderT? item,
+    IdOForm<P, C> formModel,
+  )
+  itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1718,23 +1777,14 @@ class ReactiveIdOFormFormGroupArrayBuilder<
         final itemList =
             (value.value() ?? <ReactiveIdOFormFormGroupArrayBuilderT>[])
                 .asMap()
-                .map((i, item) => MapEntry(
-                      i,
-                      itemBuilder(
-                        context,
-                        i,
-                        item,
-                        formModel,
-                      ),
-                    ))
+                .map(
+                  (i, item) =>
+                      MapEntry(i, itemBuilder(context, i, item, formModel)),
+                )
                 .values
                 .toList();
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
+        return builder?.call(context, itemList, formModel) ??
             Column(children: itemList);
       },
     );

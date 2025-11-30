@@ -52,6 +52,12 @@ class AppDrawer extends StatelessWidget {
                   Navigator.of(context).pushReplacementNamed(Routes.group),
             ),
             ListTile(
+              title: const Text('Group Contains'),
+              onTap: () => Navigator.of(
+                context,
+              ).pushReplacementNamed(Routes.groupContains),
+            ),
+            ListTile(
               title: const Text('Mailing list'),
               onTap: () => Navigator.of(
                 context,

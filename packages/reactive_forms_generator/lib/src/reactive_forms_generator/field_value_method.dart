@@ -17,11 +17,20 @@ import 'package:reactive_forms_generator/src/reactive_form_generator_method.dart
 class FieldValueMethod extends ReactiveFormGeneratorMethod {
   FieldValueMethod(super.field, super.output, super.requiredValidators);
 
+  Code _code(String code) {
+    if (field.isNullable && !output ||
+        output && field.isOutputNullable(requiredValidators)) {
+      code = '${field.containsMethodName} ? $code : null';
+    }
+
+    return Code(code);
+  }
+
   @override
   Method? formGroupMethod() {
-    return methodEntity.rebuild(
-      (b) => b..body = Code('${field.fieldName}Form.$fieldModelName'),
-    );
+    var code = '${field.fieldName}Form.$fieldModelName';
+
+    return methodEntity.rebuild((b) => b..body = _code(code));
   }
 
   @override
@@ -31,13 +40,13 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
     final code =
         '${field.fieldControlName}.rawValue.whereType<${type.getName(withNullability: true)}>().toList()';
 
-    return methodEntity.rebuild((b) => b..body = Code(code));
+    return methodEntity.rebuild((b) => b..body = _code(code));
   }
 
   @override
   Method? formGroupArrayMethod() => methodEntity.rebuild(
     (b) => b
-      ..body = Code(
+      ..body = _code(
         '${field.name}${field.className}.map((e) => e.$fieldModelName).toList()',
       ),
   );
@@ -68,7 +77,7 @@ class FieldValueMethod extends ReactiveFormGeneratorMethod {
       }
     }
 
-    return methodEntity.rebuild((b) => b..body = Code(code));
+    return methodEntity.rebuild((b) => b..body = _code(code));
   }
 
   String get fieldValueName => field.fieldValueName;

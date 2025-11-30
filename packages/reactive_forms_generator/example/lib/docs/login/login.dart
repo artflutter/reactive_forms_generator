@@ -8,13 +8,13 @@ part 'login.gform.dart';
 @Rf(output: false)
 @RfGroup(validators: [MustMatchValidator()])
 class Login extends Equatable {
-  final String email;
+  final String? email;
 
   final String password;
 
   const Login({
     @RfControl(validators: [RequiredValidator(), RequiredValidator()])
-    this.email = "",
+    this.email,
     @RfControl(validators: [RequiredValidator()]) this.password = "",
   });
 

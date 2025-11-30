@@ -48,7 +48,10 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      await tester.enterText(find.byKey(email.itemKey), mockedLogin.email);
+      await tester.enterText(
+        find.byKey(email.itemKey),
+        mockedLogin.email ?? '',
+      );
 
       await tester.enterText(
         find.byKey(password.itemKey),

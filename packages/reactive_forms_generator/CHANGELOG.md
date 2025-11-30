@@ -1,3 +1,7 @@
+## [7.5.0-beta1]
+
+* properly handle missing controls in form
+
 ## [7.5.0-beta0]
 
 * Beta experiments
