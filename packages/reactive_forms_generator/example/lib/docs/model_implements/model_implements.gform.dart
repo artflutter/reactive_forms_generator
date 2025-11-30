@@ -63,7 +63,7 @@ class ReactiveModelImplementsForm extends StatelessWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   static ModelImplementsForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
@@ -123,7 +123,7 @@ class ModelImplementsFormBuilder extends StatefulWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   final Widget Function(
     BuildContext context,

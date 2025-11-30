@@ -63,7 +63,7 @@ class ReactiveAnimatedUrlLisOForm extends StatelessWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   static AnimatedUrlLisOForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
@@ -123,7 +123,7 @@ class AnimatedUrlLisOFormBuilder extends StatefulWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   final Widget Function(
     BuildContext context,
@@ -1040,7 +1040,6 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
 @Rf(output: true)
 class AnimatedUrlLisOOutput {
   final List<UrlEntityOOutput> urlList;
-
   AnimatedUrlLisOOutput({@RfArray() required this.urlList});
 }
 
@@ -1048,7 +1047,6 @@ class AnimatedUrlLisOOutput {
 class UrlEntityOOutput {
   final String label;
   final String url;
-
   UrlEntityOOutput({
     @RfControl(validators: [RequiredValidator()]) required this.label,
     @RfControl(validators: [RequiredValidator()]) required this.url,

@@ -63,7 +63,7 @@ class ReactiveDeliveryListForm extends StatelessWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   static DeliveryListForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
@@ -123,7 +123,7 @@ class DeliveryListFormBuilder extends StatefulWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   final Widget Function(
     BuildContext context,
@@ -2456,7 +2456,7 @@ class ReactiveStandaloneDeliveryPointForm extends StatelessWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   static StandaloneDeliveryPointForm? of(
     BuildContext context, {
@@ -2519,7 +2519,7 @@ class StandaloneDeliveryPointFormBuilder extends StatefulWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   final Widget Function(
     BuildContext context,

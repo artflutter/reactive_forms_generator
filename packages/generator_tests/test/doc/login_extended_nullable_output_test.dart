@@ -119,7 +119,7 @@ class ReactiveLoginExtendedNullableOForm extends StatelessWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   static LoginExtendedNullableOForm? of(
     BuildContext context, {
@@ -182,7 +182,7 @@ class LoginExtendedNullableOFormBuilder extends StatefulWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   final Widget Function(
     BuildContext context,

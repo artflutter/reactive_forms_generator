@@ -63,7 +63,7 @@ class ReactiveMSICreateForm extends StatelessWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   static MSICreateForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
@@ -120,7 +120,7 @@ class MSICreateFormBuilder extends StatefulWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   final Widget Function(
     BuildContext context,

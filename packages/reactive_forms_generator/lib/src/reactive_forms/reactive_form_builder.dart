@@ -116,11 +116,12 @@ class ReactiveFormBuilder {
         ..modifier = FieldModifier.final$,
     ),
     Field(
-          (b) => b
+      (b) => b
         ..name = 'onPopInvokedWithResult'
         ..modifier = FieldModifier.final$
         ..type = const Reference(
-            'ReactiveFormPopInvokedWithResultCallback<dynamic>?'),
+          'ReactiveFormPopInvokedWithResultCallback<dynamic>?',
+        ),
     ),
     Field(
       (b) => b

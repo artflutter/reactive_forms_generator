@@ -64,7 +64,7 @@ class ReactiveStatusListOForm<T extends Enum> extends StatelessWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   static StatusListOForm<T>? of<T extends Enum>(
     BuildContext context, {
@@ -127,7 +127,7 @@ class StatusListOFormBuilder<T extends Enum> extends StatefulWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   final Widget Function(
     BuildContext context,

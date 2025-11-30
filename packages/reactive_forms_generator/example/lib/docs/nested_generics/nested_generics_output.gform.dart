@@ -66,7 +66,7 @@ class ReactiveProductDetailsOForm<P extends Product, C extends Cart>
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   static ProductDetailsOForm<P, C>? of<P extends Product, C extends Cart>(
     BuildContext context, {
@@ -132,7 +132,7 @@ class ProductDetailsOFormBuilder<P extends Product, C extends Cart>
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   final Widget Function(
     BuildContext context,
@@ -1402,7 +1402,7 @@ class ReactiveIdOForm<P extends Product, C extends Cart>
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   static IdOForm<P, C>? of<P extends Product, C extends Cart>(
     BuildContext context, {
@@ -1463,7 +1463,7 @@ class IdOFormBuilder<P extends Product, C extends Cart> extends StatefulWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   final Widget Function(
     BuildContext context,

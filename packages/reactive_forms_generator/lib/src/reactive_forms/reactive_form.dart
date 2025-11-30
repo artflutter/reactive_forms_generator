@@ -43,7 +43,7 @@ class ReactiveForm {
             ..named = true,
         ),
         Parameter(
-              (b) => b
+          (b) => b
             ..name = 'onPopInvokedWithResult'
             ..toThis = true
             ..named = true,
@@ -82,11 +82,12 @@ class ReactiveForm {
             ..type = const Reference('bool Function(FormGroup formGroup)?'),
         ),
         Field(
-              (b) => b
+          (b) => b
             ..name = 'onPopInvokedWithResult'
             ..modifier = FieldModifier.final$
             ..type = const Reference(
-                'ReactiveFormPopInvokedWithResultCallback<dynamic>?'),
+              'ReactiveFormPopInvokedWithResultCallback<dynamic>?',
+            ),
         ),
       ])
       ..methods.addAll([

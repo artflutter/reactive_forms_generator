@@ -56,7 +56,7 @@ class ReactiveTestForm extends StatelessWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   static TestForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
@@ -110,7 +110,7 @@ class TestFormBuilder extends StatefulWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   final Widget Function(BuildContext context, TestForm formModel, Widget? child)
   builder;

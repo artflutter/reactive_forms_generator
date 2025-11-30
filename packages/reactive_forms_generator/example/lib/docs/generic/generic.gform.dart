@@ -60,7 +60,7 @@ class ReactiveTagsForm<T> extends StatelessWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   static TagsForm<T>? of<T>(BuildContext context, {bool listen = true}) {
     if (listen) {
@@ -116,7 +116,7 @@ class TagsFormBuilder<T> extends StatefulWidget {
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
-      onPopInvokedWithResult;
+  onPopInvokedWithResult;
 
   final Widget Function(
     BuildContext context,
