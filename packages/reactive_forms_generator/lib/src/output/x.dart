@@ -274,13 +274,7 @@ class ElementDisplayStringBuilder2 extends ElementDisplayStringBuilder {
     _write(element.displayName);
     _writeTypeParameters(element.typeParameters);
     _write(' = ');
-
-    var aliasedElement = element.aliasedElement;
-    if (aliasedElement != null) {
-      aliasedElement.appendTo(this);
-    } else {
-      _writeType(element.aliasedType);
-    }
+    _writeType(element.aliasedType);
   }
 
   void writeTypeParameter(TypeParameterElement element) {

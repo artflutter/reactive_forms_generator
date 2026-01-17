@@ -177,8 +177,7 @@ extension ParameterElementExt on FormalParameterElement {
     final typeParameter = typeArguments.first;
 
     return (typeParameter.element is ClassElement ||
-            typeParameter.element is EnumElement ||
-            typeParameter.element is TypeDefiningElement) &&
+            typeParameter.element is EnumElement) &&
         !typeParameter.element!.hasRfGroupAnnotation;
   }
 

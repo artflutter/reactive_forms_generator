@@ -11,7 +11,7 @@ class ErrorsMethod extends ReactiveFormGeneratorMethod {
       ..name = field.errorsMethodName
       ..lambda = true
       ..type = MethodType.getter
-      ..returns = Reference('Map<String, Object>${field.nullabilitySuffix}')
+      ..returns = Reference('Map<String, dynamic>${field.nullabilitySuffix}')
       ..body = Code('${field.fieldControlName}.errors'),
   );
 }

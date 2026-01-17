@@ -78,37 +78,41 @@ extension NodeListImplAnnotationImplExt on NodeListImpl<AnnotationImpl> {
   }
 }
 
-extension on Annotatable {
-  Map<String, String> annotationParams1(TypeChecker? typeChecker) {
-    final result = <String, String>{};
-    final annotation = typeChecker?.firstAnnotationOf(this);
-    try {
-      if (annotation != null) {
-        for (final meta in metadata.annotations) {
-          final obj = meta.computeConstantValue()!;
+Map<String, String> _annotationParamsFromElement(
+  Element element,
+  TypeChecker? typeChecker,
+) {
+  final result = <String, String>{};
+  final annotation = typeChecker?.firstAnnotationOf(element);
+  try {
+    if (annotation != null) {
+      for (final meta in element.metadata.annotations) {
+        final obj = meta.computeConstantValue();
+        if (obj == null) {
+          continue;
+        }
 
-          final isExactlyType = typeChecker?.isExactlyType(obj.type!) ?? false;
-          if (isExactlyType) {
-            final argumentList =
-                (meta as ElementAnnotationImpl).annotationAst.arguments
-                    as ArgumentListImpl;
-            for (var argument in argumentList.arguments) {
-              final argumentNamedExpression = argument as NamedExpressionImpl;
-              result.addEntries([
-                MapEntry(
-                  argumentNamedExpression.name.label.toSource(),
-                  argumentNamedExpression.expression.toSource(),
-                ),
-              ]);
-            }
+        final isExactlyType = typeChecker?.isExactlyType(obj.type!) ?? false;
+        if (isExactlyType) {
+          final argumentList =
+              (meta as ElementAnnotationImpl).annotationAst.arguments
+                  as ArgumentListImpl;
+          for (var argument in argumentList.arguments) {
+            final argumentNamedExpression = argument as NamedExpressionImpl;
+            result.addEntries([
+              MapEntry(
+                argumentNamedExpression.name.label.toSource(),
+                argumentNamedExpression.expression.toSource(),
+              ),
+            ]);
           }
         }
       }
-
-      return result;
-    } catch (e) {
-      return result;
     }
+
+    return result;
+  } catch (e) {
+    return result;
   }
 }
 
@@ -167,12 +171,7 @@ extension ElementRfExt on Element {
   }
 
   Map<String, String> annotationParams(TypeChecker? typeChecker) {
-    final result = <String, String>{};
-    if (this is Annotatable) {
-      return (this as Annotatable).annotationParams1(typeChecker);
-    }
-
-    return result;
+    return _annotationParamsFromElement(this, typeChecker);
     // final annotation = typeChecker?.firstAnnotationOf(this);
     // try {
     //   if (annotation != null) {

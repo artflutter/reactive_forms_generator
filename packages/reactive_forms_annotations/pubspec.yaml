@@ -9,7 +9,7 @@ environment:
 resolution: workspace
 
 dependencies:
-  reactive_forms: ^17.0.0
+  reactive_forms: ^18.2.2
   collection: ^1.18.0
   logging: ^1.3.0
   flutter:
