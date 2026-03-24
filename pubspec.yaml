@@ -14,4 +14,4 @@ dependency_overrides:
 
 dev_dependencies:
   build_runner: ^2.4.15
-  melos: ^7.0.0-dev.7
+  melos: ^7.4.1
