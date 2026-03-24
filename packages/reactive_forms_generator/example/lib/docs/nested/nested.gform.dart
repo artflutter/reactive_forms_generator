@@ -254,7 +254,7 @@ class SubGroupForm implements FormModel<SubGroup, SubGroup> {
     }
   }
 
-  Map<String, Object> get idErrors => idControl.errors;
+  Map<String, dynamic> get idErrors => idControl.errors;
 
   void get idFocus => form.focus(idControlPath());
 
@@ -974,9 +974,9 @@ class GroupForm implements FormModel<Group, Group> {
     }
   }
 
-  Map<String, Object> get idErrors => idControl.errors;
+  Map<String, dynamic> get idErrors => idControl.errors;
 
-  Map<String, Object> get subGroupListErrors => subGroupListControl.errors;
+  Map<String, dynamic> get subGroupListErrors => subGroupListControl.errors;
 
   void get idFocus => form.focus(idControlPath());
 
@@ -1859,7 +1859,7 @@ class NestedForm implements FormModel<Nested, Nested> {
     }
   }
 
-  Map<String, Object> get groupListErrors => groupListControl.errors;
+  Map<String, dynamic> get groupListErrors => groupListControl.errors;
 
   void get groupListFocus => form.focus(groupListControlPath());
 

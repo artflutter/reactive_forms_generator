@@ -283,9 +283,9 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
     }
   }
 
-  Map<String, Object> get deliveryListErrors => deliveryListControl.errors;
+  Map<String, dynamic> get deliveryListErrors => deliveryListControl.errors;
 
-  Map<String, Object>? get clientListErrors => clientListControl.errors;
+  Map<String, dynamic>? get clientListErrors => clientListControl.errors;
 
   void get deliveryListFocus => form.focus(deliveryListControlPath());
 
@@ -905,9 +905,9 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
     }
   }
 
-  Map<String, Object> get nameErrors => nameControl.errors;
+  Map<String, dynamic> get nameErrors => nameControl.errors;
 
-  Map<String, Object>? get addressErrors => addressControl.errors;
+  Map<String, dynamic>? get addressErrors => addressControl.errors;
 
   void get nameFocus => form.focus(nameControlPath());
 
@@ -1294,9 +1294,9 @@ class AddressForm implements FormModel<Address, Address> {
     }
   }
 
-  Map<String, Object>? get streetErrors => streetControl.errors;
+  Map<String, dynamic>? get streetErrors => streetControl.errors;
 
-  Map<String, Object>? get cityErrors => cityControl.errors;
+  Map<String, dynamic>? get cityErrors => cityControl.errors;
 
   void get streetFocus => form.focus(streetControlPath());
 
@@ -1727,11 +1727,11 @@ class ClientForm implements FormModel<Client, Client> {
     }
   }
 
-  Map<String, Object> get clientTypeErrors => clientTypeControl.errors;
+  Map<String, dynamic> get clientTypeErrors => clientTypeControl.errors;
 
-  Map<String, Object>? get nameErrors => nameControl.errors;
+  Map<String, dynamic>? get nameErrors => nameControl.errors;
 
-  Map<String, Object>? get notesErrors => notesControl.errors;
+  Map<String, dynamic>? get notesErrors => notesControl.errors;
 
   void get clientTypeFocus => form.focus(clientTypeControlPath());
 
@@ -2683,9 +2683,9 @@ class StandaloneDeliveryPointForm
     }
   }
 
-  Map<String, Object> get nameErrors => nameControl.errors;
+  Map<String, dynamic> get nameErrors => nameControl.errors;
 
-  Map<String, Object>? get addressErrors => addressControl.errors;
+  Map<String, dynamic>? get addressErrors => addressControl.errors;
 
   void get nameFocus => form.focus(nameControlPath());
 

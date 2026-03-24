@@ -309,7 +309,7 @@ class MailingListForm implements FormModel<MailingList, MailingList> {
     }
   }
 
-  Map<String, Object> get emailListErrors => emailListControl.errors;
+  Map<String, dynamic> get emailListErrors => emailListControl.errors;
 
   void get emailListFocus => form.focus(emailListControlPath());
 

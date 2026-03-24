@@ -415,28 +415,28 @@ class ProfileForm implements FormModel<Profile, Profile> {
     }
   }
 
-  Map<String, Object> get idErrors => idControl.errors;
+  Map<String, dynamic> get idErrors => idControl.errors;
 
-  Map<String, Object> get anotherIdErrors => anotherIdControl.errors;
+  Map<String, dynamic> get anotherIdErrors => anotherIdControl.errors;
 
-  Map<String, Object> get nameErrors => nameControl.errors;
+  Map<String, dynamic> get nameErrors => nameControl.errors;
 
-  Map<String, Object> get chartingOrderErrors => chartingOrderControl.errors;
+  Map<String, dynamic> get chartingOrderErrors => chartingOrderControl.errors;
 
-  Map<String, Object> get numberingStandardErrors =>
+  Map<String, dynamic> get numberingStandardErrors =>
       numberingStandardControl.errors;
 
-  Map<String, Object> get measurementTypeErrors =>
+  Map<String, dynamic> get measurementTypeErrors =>
       measurementTypeControl.errors;
 
-  Map<String, Object> get audioGuidanceErrors => audioGuidanceControl.errors;
+  Map<String, dynamic> get audioGuidanceErrors => audioGuidanceControl.errors;
 
-  Map<String, Object> get incidenceFilterErrors =>
+  Map<String, dynamic> get incidenceFilterErrors =>
       incidenceFilterControl.errors;
 
-  Map<String, Object> get thresholdErrors => thresholdControl.errors;
+  Map<String, dynamic> get thresholdErrors => thresholdControl.errors;
 
-  Map<String, Object> get timerErrors => timerControl.errors;
+  Map<String, dynamic> get timerErrors => timerControl.errors;
 
   void get idFocus => form.focus(idControlPath());
 
@@ -1451,22 +1451,22 @@ class IncidenceFilterForm
     }
   }
 
-  Map<String, Object> get isMobilityEnabledErrors =>
+  Map<String, dynamic> get isMobilityEnabledErrors =>
       isMobilityEnabledControl.errors;
 
-  Map<String, Object> get isFurcationEnabledErrors =>
+  Map<String, dynamic> get isFurcationEnabledErrors =>
       isFurcationEnabledControl.errors;
 
-  Map<String, Object> get isBleedingEnabledErrors =>
+  Map<String, dynamic> get isBleedingEnabledErrors =>
       isBleedingEnabledControl.errors;
 
-  Map<String, Object> get isSuppurationEnabledErrors =>
+  Map<String, dynamic> get isSuppurationEnabledErrors =>
       isSuppurationEnabledControl.errors;
 
-  Map<String, Object> get isCalculusEnabledErrors =>
+  Map<String, dynamic> get isCalculusEnabledErrors =>
       isCalculusEnabledControl.errors;
 
-  Map<String, Object> get isPlaqueEnabledErrors =>
+  Map<String, dynamic> get isPlaqueEnabledErrors =>
       isPlaqueEnabledControl.errors;
 
   void get isMobilityEnabledFocus => form.focus(isMobilityEnabledControlPath());
@@ -2129,9 +2129,9 @@ class ThresholdSettingForm
     }
   }
 
-  Map<String, Object> get isEnabledErrors => isEnabledControl.errors;
+  Map<String, dynamic> get isEnabledErrors => isEnabledControl.errors;
 
-  Map<String, Object> get valueErrors => valueControl.errors;
+  Map<String, dynamic> get valueErrors => valueControl.errors;
 
   void get isEnabledFocus => form.focus(isEnabledControlPath());
 
@@ -2504,9 +2504,9 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
     }
   }
 
-  Map<String, Object> get isEnabledErrors => isEnabledControl.errors;
+  Map<String, dynamic> get isEnabledErrors => isEnabledControl.errors;
 
-  Map<String, Object> get valueErrors => valueControl.errors;
+  Map<String, dynamic> get valueErrors => valueControl.errors;
 
   void get isEnabledFocus => form.focus(isEnabledControlPath());
 

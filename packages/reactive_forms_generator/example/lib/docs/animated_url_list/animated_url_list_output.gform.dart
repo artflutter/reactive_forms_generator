@@ -264,7 +264,7 @@ class AnimatedUrlLisOForm
     }
   }
 
-  Map<String, Object> get urlListErrors => urlListControl.errors;
+  Map<String, dynamic> get urlListErrors => urlListControl.errors;
 
   void get urlListFocus => form.focus(urlListControlPath());
 
@@ -671,9 +671,9 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     }
   }
 
-  Map<String, Object>? get labelErrors => labelControl.errors;
+  Map<String, dynamic>? get labelErrors => labelControl.errors;
 
-  Map<String, Object>? get urlErrors => urlControl.errors;
+  Map<String, dynamic>? get urlErrors => urlControl.errors;
 
   void get labelFocus => form.focus(labelControlPath());
 

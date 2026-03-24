@@ -396,15 +396,16 @@ class ArrayNullableOForm
     }
   }
 
-  Map<String, Object>? get someListErrors => someListControl.errors;
+  Map<String, dynamic>? get someListErrors => someListControl.errors;
 
-  Map<String, Object> get emailListErrors => emailListControl.errors;
+  Map<String, dynamic> get emailListErrors => emailListControl.errors;
 
-  Map<String, Object> get fruitListErrors => fruitListControl.errors;
+  Map<String, dynamic> get fruitListErrors => fruitListControl.errors;
 
-  Map<String, Object>? get vegetablesListErrors => vegetablesListControl.errors;
+  Map<String, dynamic>? get vegetablesListErrors =>
+      vegetablesListControl.errors;
 
-  Map<String, Object>? get modeListErrors => modeListControl.errors;
+  Map<String, dynamic>? get modeListErrors => modeListControl.errors;
 
   void get someListFocus => form.focus(someListControlPath());
 

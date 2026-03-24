@@ -398,23 +398,23 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
     }
   }
 
-  Map<String, Object> get emailErrors => emailControl.errors;
+  Map<String, dynamic> get emailErrors => emailControl.errors;
 
-  Map<String, Object> get passwordErrors => passwordControl.errors;
+  Map<String, dynamic> get passwordErrors => passwordControl.errors;
 
-  Map<String, Object> get rememberMeErrors => rememberMeControl.errors;
+  Map<String, dynamic> get rememberMeErrors => rememberMeControl.errors;
 
-  Map<String, Object> get themeErrors => themeControl.errors;
+  Map<String, dynamic> get themeErrors => themeControl.errors;
 
-  Map<String, Object> get modeErrors => modeControl.errors;
+  Map<String, dynamic> get modeErrors => modeControl.errors;
 
-  Map<String, Object> get timeoutErrors => timeoutControl.errors;
+  Map<String, dynamic> get timeoutErrors => timeoutControl.errors;
 
-  Map<String, Object> get heightErrors => heightControl.errors;
+  Map<String, dynamic> get heightErrors => heightControl.errors;
 
-  Map<String, Object>? get unAnnotatedErrors => unAnnotatedControl.errors;
+  Map<String, dynamic>? get unAnnotatedErrors => unAnnotatedControl.errors;
 
-  Map<String, Object> get someIntListErrors => someIntListControl.errors;
+  Map<String, dynamic> get someIntListErrors => someIntListControl.errors;
 
   void get emailFocus => form.focus(emailControlPath());
 

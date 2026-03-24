@@ -372,13 +372,13 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     }
   }
 
-  Map<String, Object>? get idErrors => idControl.errors;
+  Map<String, dynamic>? get idErrors => idControl.errors;
 
-  Map<String, Object>? get securedAreaErrors => securedAreaControl.errors;
+  Map<String, dynamic>? get securedAreaErrors => securedAreaControl.errors;
 
-  Map<String, Object>? get parcelSystemErrors => parcelSystemControl.errors;
+  Map<String, dynamic>? get parcelSystemErrors => parcelSystemControl.errors;
 
-  Map<String, Object> get subSecuredAreasErrors =>
+  Map<String, dynamic> get subSecuredAreasErrors =>
       subSecuredAreasControl.errors;
 
   void get idFocus => form.focus(idControlPath());
@@ -1074,10 +1074,10 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
     }
   }
 
-  Map<String, Object> get hasParcelSystemErrors =>
+  Map<String, dynamic> get hasParcelSystemErrors =>
       hasParcelSystemControl.errors;
 
-  Map<String, Object> get dataErrors => dataControl.errors;
+  Map<String, dynamic> get dataErrors => dataControl.errors;
 
   void get hasParcelSystemFocus => form.focus(hasParcelSystemControlPath());
 
@@ -1431,7 +1431,7 @@ class ParcelSystemDataForm
     }
   }
 
-  Map<String, Object>? get idErrors => idControl.errors;
+  Map<String, dynamic>? get idErrors => idControl.errors;
 
   void get idFocus => form.focus(idControlPath());
 

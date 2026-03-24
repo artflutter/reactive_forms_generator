@@ -255,9 +255,9 @@ class TestForm implements FormModel<Test, Test> {
     }
   }
 
-  Map<String, Object> get titleErrors => titleControl.errors;
+  Map<String, dynamic> get titleErrors => titleControl.errors;
 
-  Map<String, Object>? get descriptionErrors => descriptionControl.errors;
+  Map<String, dynamic>? get descriptionErrors => descriptionControl.errors;
 
   void get titleFocus => form.focus(titleControlPath());
 

@@ -255,7 +255,7 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
     }
   }
 
-  Map<String, Object> get idErrors => idControl.errors;
+  Map<String, dynamic> get idErrors => idControl.errors;
 
   void get idFocus => form.focus(idControlPath());
 
@@ -1012,9 +1012,9 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     }
   }
 
-  Map<String, Object> get idErrors => idControl.errors;
+  Map<String, dynamic> get idErrors => idControl.errors;
 
-  Map<String, Object> get subGroupListErrors => subGroupListControl.errors;
+  Map<String, dynamic> get subGroupListErrors => subGroupListControl.errors;
 
   void get idFocus => form.focus(idControlPath());
 
@@ -1908,7 +1908,7 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
     }
   }
 
-  Map<String, Object> get groupListErrors => groupListControl.errors;
+  Map<String, dynamic> get groupListErrors => groupListControl.errors;
 
   void get groupListFocus => form.focus(groupListControlPath());
 

@@ -290,9 +290,9 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     }
   }
 
-  Map<String, Object>? get descriptionErrors => descriptionControl.errors;
+  Map<String, dynamic>? get descriptionErrors => descriptionControl.errors;
 
-  Map<String, Object>? get idErrors => idControl.errors;
+  Map<String, dynamic>? get idErrors => idControl.errors;
 
   void get descriptionFocus => form.focus(descriptionControlPath());
 
@@ -706,9 +706,9 @@ class IdForm<P extends Product, C extends Cart>
     }
   }
 
-  Map<String, Object>? get companyNameErrors => companyNameControl.errors;
+  Map<String, dynamic>? get companyNameErrors => companyNameControl.errors;
 
-  Map<String, Object>? get nameErrors => nameControl.errors;
+  Map<String, dynamic>? get nameErrors => nameControl.errors;
 
   void get companyNameFocus => form.focus(companyNameControlPath());
 

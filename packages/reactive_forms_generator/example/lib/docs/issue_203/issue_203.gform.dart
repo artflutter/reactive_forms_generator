@@ -1,109 +1,54 @@
-@Timeout(Duration(seconds: 145))
-import 'package:test/test.dart';
-
-import '../helpers.dart';
-
-const fileName = 'login';
-
-void main() {
-  group('doc', () {
-    test('Login', () async {
-      return testGenerator(
-        fileName: fileName,
-        model:
-            '''
-            import 'package:flutter/material.dart';
-            import 'package:reactive_forms/reactive_forms.dart';
-            import 'package:reactive_forms/src/validators/required_validator.dart';
-            import 'package:example/helpers.dart';
-            import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-            
-            part '$fileName.gform.dart';
-            
-            class MustMatchValidator extends Validator<dynamic> {
-              const MustMatchValidator() : super();
-            
-              @override
-              Map<String, dynamic>? validate(AbstractControl<dynamic> control) {
-                return null;
-              }
-            }
-            
-            @Rf(output: false)
-            @RfGroup(
-              validators: [MustMatchValidator()],
-            )
-            class Login {
-              final String? email;
-            
-              final String password;
-            
-              const Login({
-                @RfControl(
-                  validators: [RequiredValidator(), RequiredValidator()],
-                )
-                    this.email,
-                @RfControl(
-                  validators: [RequiredValidator()],
-                )
-                    this.password = "",
-              });
-            }
-          ''',
-        generatedFile: generatedFile,
-      );
-    });
-  });
-}
-
-const generatedFile = r'''// coverage:ignore-file
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'login.dart';
+part of 'issue_203.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-class ReactiveLoginFormConsumer extends StatelessWidget {
-  const ReactiveLoginFormConsumer({Key? key, required this.builder, this.child})
-    : super(key: key);
+class ReactiveLoginFormModelFormConsumer extends StatelessWidget {
+  const ReactiveLoginFormModelFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
 
   final Widget? child;
 
   final Widget Function(
     BuildContext context,
-    LoginForm formModel,
+    LoginFormModelForm formModel,
     Widget? child,
   )
   builder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveLoginForm.of(context);
+    final formModel = ReactiveLoginFormModelForm.of(context);
 
-    if (formModel is! LoginForm) {
+    if (formModel is! LoginFormModelForm) {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, formModel, child);
   }
 }
 
-class LoginFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const LoginFormInheritedStreamer({
+class LoginFormModelFormInheritedStreamer extends InheritedStreamer<dynamic> {
+  const LoginFormModelFormInheritedStreamer({
     Key? key,
     required this.form,
     required Stream<dynamic> stream,
     required Widget child,
   }) : super(stream, child, key: key);
 
-  final LoginForm form;
+  final LoginFormModelForm form;
 }
 
-class ReactiveLoginForm extends StatelessWidget {
-  const ReactiveLoginForm({
+class ReactiveLoginFormModelForm extends StatelessWidget {
+  const ReactiveLoginFormModelForm({
     Key? key,
     required this.form,
     required this.child,
@@ -113,30 +58,34 @@ class ReactiveLoginForm extends StatelessWidget {
 
   final Widget child;
 
-  final LoginForm form;
+  final LoginFormModelForm form;
 
   final bool Function(FormGroup formGroup)? canPop;
 
   final ReactiveFormPopInvokedWithResultCallback<dynamic>?
   onPopInvokedWithResult;
 
-  static LoginForm? of(BuildContext context, {bool listen = true}) {
+  static LoginFormModelForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
       return context
-          .dependOnInheritedWidgetOfExactType<LoginFormInheritedStreamer>()
+          .dependOnInheritedWidgetOfExactType<
+            LoginFormModelFormInheritedStreamer
+          >()
           ?.form;
     }
 
     final element = context
-        .getElementForInheritedWidgetOfExactType<LoginFormInheritedStreamer>();
+        .getElementForInheritedWidgetOfExactType<
+          LoginFormModelFormInheritedStreamer
+        >();
     return element == null
         ? null
-        : (element.widget as LoginFormInheritedStreamer).form;
+        : (element.widget as LoginFormModelFormInheritedStreamer).form;
   }
 
   @override
   Widget build(BuildContext context) {
-    return LoginFormInheritedStreamer(
+    return LoginFormModelFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
@@ -148,14 +97,16 @@ class ReactiveLoginForm extends StatelessWidget {
   }
 }
 
-extension ReactiveReactiveLoginFormExt on BuildContext {
-  LoginForm? loginFormWatch() => ReactiveLoginForm.of(this);
+extension ReactiveReactiveLoginFormModelFormExt on BuildContext {
+  LoginFormModelForm? loginFormModelFormWatch() =>
+      ReactiveLoginFormModelForm.of(this);
 
-  LoginForm? loginFormRead() => ReactiveLoginForm.of(this, listen: false);
+  LoginFormModelForm? loginFormModelFormRead() =>
+      ReactiveLoginFormModelForm.of(this, listen: false);
 }
 
-class LoginFormBuilder extends StatefulWidget {
-  const LoginFormBuilder({
+class LoginFormModelFormBuilder extends StatefulWidget {
+  const LoginFormModelFormBuilder({
     Key? key,
     this.model,
     this.child,
@@ -165,7 +116,7 @@ class LoginFormBuilder extends StatefulWidget {
     this.initState,
   }) : super(key: key);
 
-  final Login? model;
+  final LoginFormModel? model;
 
   final Widget? child;
 
@@ -176,25 +127,31 @@ class LoginFormBuilder extends StatefulWidget {
 
   final Widget Function(
     BuildContext context,
-    LoginForm formModel,
+    LoginFormModelForm formModel,
     Widget? child,
   )
   builder;
 
-  final void Function(BuildContext context, LoginForm formModel)? initState;
+  final void Function(BuildContext context, LoginFormModelForm formModel)?
+  initState;
 
   @override
-  _LoginFormBuilderState createState() => _LoginFormBuilderState();
+  _LoginFormModelFormBuilderState createState() =>
+      _LoginFormModelFormBuilderState();
 }
 
-class _LoginFormBuilderState extends State<LoginFormBuilder> {
-  late LoginForm _formModel;
+class _LoginFormModelFormBuilderState extends State<LoginFormModelFormBuilder> {
+  late LoginFormModelForm _formModel;
 
   StreamSubscription<LogRecord>? _logSubscription;
 
   @override
   void initState() {
-    _formModel = LoginForm(LoginForm.formElements(widget.model), null, null);
+    _formModel = LoginFormModelForm(
+      LoginFormModelForm.formElements(widget.model),
+      null,
+      null,
+    );
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -202,7 +159,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
 
     widget.initState?.call(context, _formModel);
 
-    _logSubscription = _logLoginForm.onRecord.listen((LogRecord e) {
+    _logSubscription = _logLoginFormModelForm.onRecord.listen((LogRecord e) {
       // use `dumpErrorToConsole` for severe messages to ensure that severe
       // exceptions are formatted consistently with other Flutter examples and
       // avoids printing duplicate exceptions
@@ -234,7 +191,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
   }
 
   @override
-  void didUpdateWidget(covariant LoginFormBuilder oldWidget) {
+  void didUpdateWidget(covariant LoginFormModelFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
       _formModel.updateValue(widget.model);
     }
@@ -251,7 +208,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveLoginForm(
+    return ReactiveLoginFormModelForm(
       key: ObjectKey(_formModel),
       form: _formModel,
       // canPop: widget.canPop,
@@ -268,14 +225,19 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
   }
 }
 
-final _logLoginForm = Logger.detached('LoginForm');
+final _logLoginFormModelForm = Logger.detached('LoginFormModelForm');
 
-class LoginForm implements FormModel<Login, Login> {
-  LoginForm(this.form, this.path, this._formModel) : initial = form.rawValue;
+class LoginFormModelForm implements FormModel<LoginFormModel, LoginFormModel> {
+  LoginFormModelForm(this.form, this.path, this._formModel)
+    : initial = form.rawValue;
 
-  static const String emailControlName = "email";
+  static const String domainControlName = "domain";
+
+  static const String usernameControlName = "username";
 
   static const String passwordControlName = "password";
+
+  static const String rememberMeControlName = "rememberMe";
 
   final FormGroup form;
 
@@ -289,21 +251,42 @@ class LoginForm implements FormModel<Login, Login> {
   @override
   final Map<String, Object?> initial;
 
-  String emailControlPath() => pathBuilder(emailControlName);
+  String domainControlPath() => pathBuilder(domainControlName);
+
+  String usernameControlPath() => pathBuilder(usernameControlName);
 
   String passwordControlPath() => pathBuilder(passwordControlName);
 
-  String? get _emailValue => containsEmail ? emailControl.value : null;
+  String rememberMeControlPath() => pathBuilder(rememberMeControlName);
 
-  String get _passwordValue => passwordControl.value ?? "";
+  String get _domainValue => domainControl.value ?? '';
 
-  String? get _emailRawValue => containsEmail ? emailControl.value : null;
+  String get _usernameValue => usernameControl.value ?? '';
 
-  String get _passwordRawValue => passwordControl.value ?? "";
+  String get _passwordValue => passwordControl.value ?? '';
 
-  bool get containsEmail {
+  bool get _rememberMeValue => rememberMeControl.value ?? true;
+
+  String get _domainRawValue => domainControl.value ?? '';
+
+  String get _usernameRawValue => usernameControl.value ?? '';
+
+  String get _passwordRawValue => passwordControl.value ?? '';
+
+  bool get _rememberMeRawValue => rememberMeControl.value ?? true;
+
+  bool get containsDomain {
     try {
-      form.control(emailControlPath());
+      form.control(domainControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsUsername {
+    try {
+      form.control(usernameControlPath());
       return true;
     } catch (e) {
       return false;
@@ -319,43 +302,49 @@ class LoginForm implements FormModel<Login, Login> {
     }
   }
 
-  Map<String, dynamic>? get emailErrors => emailControl.errors;
-
-  Map<String, dynamic> get passwordErrors => passwordControl.errors;
-
-  void get emailFocus => form.focus(emailControlPath());
-
-  void get passwordFocus => form.focus(passwordControlPath());
-
-  void emailRemove({bool updateParent = true, bool emitEvent = true}) {
-    if (containsEmail) {
-      final controlPath = path;
-      if (controlPath == null) {
-        form.removeControl(
-          emailControlName,
-          updateParent: updateParent,
-          emitEvent: emitEvent,
-        );
-      } else {
-        final formGroup = form.control(controlPath);
-
-        if (formGroup is FormGroup) {
-          formGroup.removeControl(
-            emailControlName,
-            updateParent: updateParent,
-            emitEvent: emitEvent,
-          );
-        }
-      }
+  bool get containsRememberMe {
+    try {
+      form.control(rememberMeControlPath());
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 
-  void emailValueUpdate(
-    String? value, {
+  Map<String, dynamic> get domainErrors => domainControl.errors;
+
+  Map<String, dynamic> get usernameErrors => usernameControl.errors;
+
+  Map<String, dynamic> get passwordErrors => passwordControl.errors;
+
+  Map<String, dynamic> get rememberMeErrors => rememberMeControl.errors;
+
+  void get domainFocus => form.focus(domainControlPath());
+
+  void get usernameFocus => form.focus(usernameControlPath());
+
+  void get passwordFocus => form.focus(passwordControlPath());
+
+  void get rememberMeFocus => form.focus(rememberMeControlPath());
+
+  void domainValueUpdate(
+    String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.updateValue(
+    domainControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
+  }
+
+  void usernameValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    usernameControl.updateValue(
       value,
       updateParent: updateParent,
       emitEvent: emitEvent,
@@ -374,12 +363,36 @@ class LoginForm implements FormModel<Login, Login> {
     );
   }
 
-  void emailValuePatch(
-    String? value, {
+  void rememberMeValueUpdate(
+    bool value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.patchValue(
+    rememberMeControl.updateValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
+  }
+
+  void domainValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    domainControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
+  }
+
+  void usernameValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    usernameControl.patchValue(
       value,
       updateParent: updateParent,
       emitEvent: emitEvent,
@@ -398,13 +411,39 @@ class LoginForm implements FormModel<Login, Login> {
     );
   }
 
-  void emailValueReset(
-    String? value, {
+  void rememberMeValuePatch(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    rememberMeControl.patchValue(
+      value,
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
+  }
+
+  void domainValueReset(
+    String value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
-  }) => emailControl.reset(
+  }) => domainControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
+
+  void usernameValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) => usernameControl.reset(
     value: value,
     updateParent: updateParent,
     emitEvent: emitEvent,
@@ -426,24 +465,62 @@ class LoginForm implements FormModel<Login, Login> {
     disabled: disabled,
   );
 
-  FormControl<String> get emailControl =>
-      form.control(emailControlPath()) as FormControl<String>;
+  void rememberMeValueReset(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) => rememberMeControl.reset(
+    value: value,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+    removeFocus: removeFocus,
+    disabled: disabled,
+  );
+
+  FormControl<String> get domainControl =>
+      form.control(domainControlPath()) as FormControl<String>;
+
+  FormControl<String> get usernameControl =>
+      form.control(usernameControlPath()) as FormControl<String>;
 
   FormControl<String> get passwordControl =>
       form.control(passwordControlPath()) as FormControl<String>;
 
-  void emailSetDisabled(
+  FormControl<bool> get rememberMeControl =>
+      form.control(rememberMeControlPath()) as FormControl<bool>;
+
+  void domainSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      emailControl.markAsDisabled(
+      domainControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      emailControl.markAsEnabled(
+      domainControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void usernameSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      usernameControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      usernameControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -468,23 +545,51 @@ class LoginForm implements FormModel<Login, Login> {
     }
   }
 
+  void rememberMeSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      rememberMeControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      rememberMeControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   @override
-  Login get model {
+  LoginFormModel get model {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      _logLoginForm.warning(
+      _logLoginFormModelForm.warning(
         'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
         null,
         StackTrace.current,
       );
     }
-    return Login(email: _emailValue, password: _passwordValue);
+    return LoginFormModel(
+      domain: _domainValue,
+      username: _usernameValue,
+      password: _passwordValue,
+      rememberMe: _rememberMeValue,
+    );
   }
 
   @override
-  Login get rawModel {
-    return Login(email: _emailRawValue, password: _passwordRawValue);
+  LoginFormModel get rawModel {
+    return LoginFormModel(
+      domain: _domainRawValue,
+      username: _usernameRawValue,
+      password: _passwordRawValue,
+      rememberMe: _rememberMeRawValue,
+    );
   }
 
   @override
@@ -513,26 +618,26 @@ class LoginForm implements FormModel<Login, Login> {
   }
 
   @override
-  bool equalsTo(Login? other) {
+  bool equalsTo(LoginFormModel? other) {
     final currentForm = this.currentForm;
 
     return const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      LoginForm.formElements(other).rawValue,
+      LoginFormModelForm.formElements(other).rawValue,
     );
   }
 
   @override
   void submit({
-    required void Function(Login model) onValid,
+    required void Function(LoginFormModel model) onValid,
     void Function()? onNotValid,
   }) {
     currentForm.markAllAsTouched();
     if (currentForm.valid) {
       onValid(model);
     } else {
-      _logLoginForm.info('Errors');
-      _logLoginForm.info('┗━━ ${form.errors}');
+      _logLoginFormModelForm.info('Errors');
+      _logLoginFormModelForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -552,33 +657,36 @@ class LoginForm implements FormModel<Login, Login> {
 
   @override
   void updateValue(
-    Login? value, {
+    LoginFormModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) => currentForm.updateValue(
-    LoginForm.formElements(value).rawValue,
+    LoginFormModelForm.formElements(value).rawValue,
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
 
   @override
   void upsertValue(
-    Login? value, {
+    LoginFormModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    final formElements = LoginForm.formElements(value);
+    final formElements = LoginFormModelForm.formElements(value);
 
     currentForm.addAll(formElements.controls);
   }
 
   @override
-  void reset({Login? value, bool updateParent = true, bool emitEvent = true}) =>
-      currentForm.reset(
-        value: value != null ? formElements(value).rawValue : null,
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
+  void reset({
+    LoginFormModel? value,
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) => currentForm.reset(
+    value: value != null ? formElements(value).rawValue : null,
+    updateParent: updateParent,
+    emitEvent: emitEvent,
+  );
 
   @override
   void updateInitial(Map<String, Object?>? value, String? path) {
@@ -632,35 +740,53 @@ class LoginForm implements FormModel<Login, Login> {
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
-  static FormGroup formElements(Login? login) => FormGroup(
+  static FormGroup formElements(LoginFormModel? loginFormModel) => FormGroup(
     {
-      emailControlName: FormControl<String>(
-        value: login?.email,
-        validators: [RequiredValidator(), RequiredValidator()],
-        asyncValidators: [],
-        asyncValidatorsDebounceTime: 250,
-        disabled: false,
-        touched: false,
-      ),
-      passwordControlName: FormControl<String>(
-        value: login?.password,
+      domainControlName: FormControl<String>(
+        value: loginFormModel?.domain,
         validators: [RequiredValidator()],
         asyncValidators: [],
         asyncValidatorsDebounceTime: 250,
         disabled: false,
         touched: false,
       ),
+      usernameControlName: FormControl<String>(
+        value: loginFormModel?.username,
+        validators: [RequiredValidator()],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+      passwordControlName: FormControl<String>(
+        value: loginFormModel?.password,
+        validators: [RequiredValidator()],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
+      rememberMeControlName: FormControl<bool>(
+        value: loginFormModel?.rememberMe,
+        validators: [],
+        asyncValidators: [],
+        asyncValidatorsDebounceTime: 250,
+        disabled: false,
+        touched: false,
+      ),
     },
-    validators: [MustMatchValidator()],
+    validators: [],
     asyncValidators: [],
     asyncValidatorsDebounceTime: 250,
     disabled: false,
   );
 }
 
-class ReactiveLoginFormArrayBuilder<ReactiveLoginFormArrayBuilderT>
+class ReactiveLoginFormModelFormArrayBuilder<
+  ReactiveLoginFormModelFormArrayBuilderT
+>
     extends StatelessWidget {
-  const ReactiveLoginFormArrayBuilder({
+  const ReactiveLoginFormModelFormArrayBuilder({
     Key? key,
     this.control,
     this.formControl,
@@ -674,37 +800,39 @@ class ReactiveLoginFormArrayBuilder<ReactiveLoginFormArrayBuilderT>
        ),
        super(key: key);
 
-  final FormArray<ReactiveLoginFormArrayBuilderT>? formControl;
+  final FormArray<ReactiveLoginFormModelFormArrayBuilderT>? formControl;
 
-  final FormArray<ReactiveLoginFormArrayBuilderT>? Function(
-    LoginForm formModel,
+  final FormArray<ReactiveLoginFormModelFormArrayBuilderT>? Function(
+    LoginFormModelForm formModel,
   )?
   control;
 
   final Widget Function(
     BuildContext context,
     List<Widget> itemList,
-    LoginForm formModel,
+    LoginFormModelForm formModel,
   )?
   builder;
 
   final Widget Function(
     BuildContext context,
     int i,
-    FormControl<ReactiveLoginFormArrayBuilderT> control,
-    ReactiveLoginFormArrayBuilderT? item,
-    LoginForm formModel,
+    FormControl<ReactiveLoginFormModelFormArrayBuilderT> control,
+    ReactiveLoginFormModelFormArrayBuilderT? item,
+    LoginFormModelForm formModel,
   )
   itemBuilder;
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
-  final bool Function(FormControl<ReactiveLoginFormArrayBuilderT> control)?
+  final bool Function(
+    FormControl<ReactiveLoginFormModelFormArrayBuilderT> control,
+  )?
   controlFilter;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveLoginForm.of(context);
+    final formModel = ReactiveLoginFormModelForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
@@ -713,7 +841,9 @@ class ReactiveLoginFormArrayBuilder<ReactiveLoginFormArrayBuilderT>
     final builder = this.builder;
     final itemBuilder = this.itemBuilder;
 
-    return ReactiveFormArrayItemBuilder<ReactiveLoginFormArrayBuilderT>(
+    return ReactiveFormArrayItemBuilder<
+      ReactiveLoginFormModelFormArrayBuilderT
+    >(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
           ? (context, itemList) => builder(context, itemList, formModel)
@@ -726,9 +856,11 @@ class ReactiveLoginFormArrayBuilder<ReactiveLoginFormArrayBuilderT>
   }
 }
 
-class ReactiveLoginFormArrayBuilder2<ReactiveLoginFormArrayBuilderT>
+class ReactiveLoginFormModelFormArrayBuilder2<
+  ReactiveLoginFormModelFormArrayBuilderT
+>
     extends StatelessWidget {
-  const ReactiveLoginFormArrayBuilder2({
+  const ReactiveLoginFormModelFormArrayBuilder2({
     Key? key,
     this.control,
     this.formControl,
@@ -742,15 +874,20 @@ class ReactiveLoginFormArrayBuilder2<ReactiveLoginFormArrayBuilderT>
        ),
        super(key: key);
 
-  final FormArray<ReactiveLoginFormArrayBuilderT>? formControl;
+  final FormArray<ReactiveLoginFormModelFormArrayBuilderT>? formControl;
 
-  final FormArray<ReactiveLoginFormArrayBuilderT>? Function(
-    LoginForm formModel,
+  final FormArray<ReactiveLoginFormModelFormArrayBuilderT>? Function(
+    LoginFormModelForm formModel,
   )?
   control;
 
   final Widget Function(
-    ({BuildContext context, List<Widget> itemList, LoginForm formModel}) params,
+    ({
+      BuildContext context,
+      List<Widget> itemList,
+      LoginFormModelForm formModel,
+    })
+    params,
   )?
   builder;
 
@@ -758,9 +895,9 @@ class ReactiveLoginFormArrayBuilder2<ReactiveLoginFormArrayBuilderT>
     ({
       BuildContext context,
       int i,
-      FormControl<ReactiveLoginFormArrayBuilderT> control,
-      ReactiveLoginFormArrayBuilderT? item,
-      LoginForm formModel,
+      FormControl<ReactiveLoginFormModelFormArrayBuilderT> control,
+      ReactiveLoginFormModelFormArrayBuilderT? item,
+      LoginFormModelForm formModel,
     })
     params,
   )
@@ -768,12 +905,14 @@ class ReactiveLoginFormArrayBuilder2<ReactiveLoginFormArrayBuilderT>
 
   final Widget Function(BuildContext context)? emptyBuilder;
 
-  final bool Function(FormControl<ReactiveLoginFormArrayBuilderT> control)?
+  final bool Function(
+    FormControl<ReactiveLoginFormModelFormArrayBuilderT> control,
+  )?
   controlFilter;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveLoginForm.of(context);
+    final formModel = ReactiveLoginFormModelForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
@@ -782,7 +921,9 @@ class ReactiveLoginFormArrayBuilder2<ReactiveLoginFormArrayBuilderT>
     final builder = this.builder;
     final itemBuilder = this.itemBuilder;
 
-    return ReactiveFormArrayItemBuilder<ReactiveLoginFormArrayBuilderT>(
+    return ReactiveFormArrayItemBuilder<
+      ReactiveLoginFormModelFormArrayBuilderT
+    >(
       formControl: formControl ?? control?.call(formModel),
       builder: builder != null
           ? (context, itemList) => builder((
@@ -804,11 +945,11 @@ class ReactiveLoginFormArrayBuilder2<ReactiveLoginFormArrayBuilderT>
   }
 }
 
-class ReactiveLoginFormFormGroupArrayBuilder<
-  ReactiveLoginFormFormGroupArrayBuilderT
+class ReactiveLoginFormModelFormFormGroupArrayBuilder<
+  ReactiveLoginFormModelFormFormGroupArrayBuilderT
 >
     extends StatelessWidget {
-  const ReactiveLoginFormFormGroupArrayBuilder({
+  const ReactiveLoginFormModelFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
@@ -822,35 +963,35 @@ class ReactiveLoginFormFormGroupArrayBuilder<
 
   final ExtendedControl<
     List<Map<String, Object?>?>,
-    List<ReactiveLoginFormFormGroupArrayBuilderT>
+    List<ReactiveLoginFormModelFormFormGroupArrayBuilderT>
   >?
   extended;
 
   final ExtendedControl<
     List<Map<String, Object?>?>,
-    List<ReactiveLoginFormFormGroupArrayBuilderT>
+    List<ReactiveLoginFormModelFormFormGroupArrayBuilderT>
   >
-  Function(LoginForm formModel)?
+  Function(LoginFormModelForm formModel)?
   getExtended;
 
   final Widget Function(
     BuildContext context,
     List<Widget> itemList,
-    LoginForm formModel,
+    LoginFormModelForm formModel,
   )?
   builder;
 
   final Widget Function(
     BuildContext context,
     int i,
-    ReactiveLoginFormFormGroupArrayBuilderT? item,
-    LoginForm formModel,
+    ReactiveLoginFormModelFormFormGroupArrayBuilderT? item,
+    LoginFormModelForm formModel,
   )
   itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveLoginForm.of(context);
+    final formModel = ReactiveLoginFormModelForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
@@ -862,7 +1003,8 @@ class ReactiveLoginFormFormGroupArrayBuilder<
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
         final itemList =
-            (value.value() ?? <ReactiveLoginFormFormGroupArrayBuilderT>[])
+            (value.value() ??
+                    <ReactiveLoginFormModelFormFormGroupArrayBuilderT>[])
                 .asMap()
                 .map(
                   (i, item) =>
@@ -877,4 +1019,3 @@ class ReactiveLoginFormFormGroupArrayBuilder<
     );
   }
 }
-''';

@@ -265,9 +265,9 @@ class LoginOForm implements FormModel<LoginO, LoginOOutput> {
     }
   }
 
-  Map<String, Object>? get emailErrors => emailControl.errors;
+  Map<String, dynamic>? get emailErrors => emailControl.errors;
 
-  Map<String, Object>? get passwordErrors => passwordControl.errors;
+  Map<String, dynamic>? get passwordErrors => passwordControl.errors;
 
   void get emailFocus => form.focus(emailControlPath());
 

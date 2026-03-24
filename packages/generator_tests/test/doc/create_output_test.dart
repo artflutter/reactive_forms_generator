@@ -520,26 +520,27 @@ class MSICreateForm implements FormModel<MSICreate, MSICreateOutput> {
     }
   }
 
-  Map<String, Object>? get idErrors => idControl.errors;
+  Map<String, dynamic>? get idErrors => idControl.errors;
 
-  Map<String, Object>? get businessNumberErrors => businessNumberControl.errors;
+  Map<String, dynamic>? get businessNumberErrors =>
+      businessNumberControl.errors;
 
-  Map<String, Object>? get fileIdsErrors => fileIdsControl.errors;
+  Map<String, dynamic>? get fileIdsErrors => fileIdsControl.errors;
 
-  Map<String, Object>? get nameErrors => nameControl.errors;
+  Map<String, dynamic>? get nameErrors => nameControl.errors;
 
-  Map<String, Object>? get emailErrors => emailControl.errors;
+  Map<String, dynamic>? get emailErrors => emailControl.errors;
 
-  Map<String, Object> get sameMailingAddressAsCompanyErrors =>
+  Map<String, dynamic> get sameMailingAddressAsCompanyErrors =>
       sameMailingAddressAsCompanyControl.errors;
 
-  Map<String, Object> get companyAddressErrors => companyAddressControl.errors;
+  Map<String, dynamic> get companyAddressErrors => companyAddressControl.errors;
 
-  Map<String, Object> get primaryContactErrors => primaryContactControl.errors;
+  Map<String, dynamic> get primaryContactErrors => primaryContactControl.errors;
 
-  Map<String, Object> get mailingAddressErrors => mailingAddressControl.errors;
+  Map<String, dynamic> get mailingAddressErrors => mailingAddressControl.errors;
 
-  Map<String, Object> get adminsErrors => adminsControl.errors;
+  Map<String, dynamic> get adminsErrors => adminsControl.errors;
 
   void get idFocus => form.focus(idControlPath());
 
@@ -1749,14 +1750,14 @@ class AddressForm implements FormModel<Address, AddressOutput> {
     }
   }
 
-  Map<String, Object>? get streetErrors => streetControl.errors;
+  Map<String, dynamic>? get streetErrors => streetControl.errors;
 
-  Map<String, Object>? get cityErrors => cityControl.errors;
+  Map<String, dynamic>? get cityErrors => cityControl.errors;
 
-  Map<String, Object>? get stateOrProvinceErrors =>
+  Map<String, dynamic>? get stateOrProvinceErrors =>
       stateOrProvinceControl.errors;
 
-  Map<String, Object>? get zipCodeErrors => zipCodeControl.errors;
+  Map<String, dynamic>? get zipCodeErrors => zipCodeControl.errors;
 
   void get streetFocus => form.focus(streetControlPath());
 
@@ -2389,11 +2390,11 @@ class PrimaryContactForm
     }
   }
 
-  Map<String, Object>? get fullNameErrors => fullNameControl.errors;
+  Map<String, dynamic>? get fullNameErrors => fullNameControl.errors;
 
-  Map<String, Object>? get jobTitleErrors => jobTitleControl.errors;
+  Map<String, dynamic>? get jobTitleErrors => jobTitleControl.errors;
 
-  Map<String, Object>? get emailErrors => emailControl.errors;
+  Map<String, dynamic>? get emailErrors => emailControl.errors;
 
   void get fullNameFocus => form.focus(fullNameControlPath());
 
@@ -2932,11 +2933,11 @@ class AdminContactInformationForm
     }
   }
 
-  Map<String, Object>? get firstNameErrors => firstNameControl.errors;
+  Map<String, dynamic>? get firstNameErrors => firstNameControl.errors;
 
-  Map<String, Object>? get lastNameErrors => lastNameControl.errors;
+  Map<String, dynamic>? get lastNameErrors => lastNameControl.errors;
 
-  Map<String, Object>? get emailErrors => emailControl.errors;
+  Map<String, dynamic>? get emailErrors => emailControl.errors;
 
   void get firstNameFocus => form.focus(firstNameControlPath());
 

@@ -387,13 +387,13 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     }
   }
 
-  Map<String, Object>? get personalErrors => personalControl.errors;
+  Map<String, dynamic>? get personalErrors => personalControl.errors;
 
-  Map<String, Object>? get phoneErrors => phoneControl.errors;
+  Map<String, dynamic>? get phoneErrors => phoneControl.errors;
 
-  Map<String, Object>? get addressErrors => addressControl.errors;
+  Map<String, dynamic>? get addressErrors => addressControl.errors;
 
-  Map<String, Object>? get address2Errors => address2Control.errors;
+  Map<String, dynamic>? get address2Errors => address2Control.errors;
 
   void get personalFocus => form.focus(personalControlPath());
 
@@ -986,9 +986,9 @@ class PersonalOForm implements FormModel<PersonalO, PersonalOOutput> {
     }
   }
 
-  Map<String, Object>? get nameErrors => nameControl.errors;
+  Map<String, dynamic>? get nameErrors => nameControl.errors;
 
-  Map<String, Object>? get emailErrors => emailControl.errors;
+  Map<String, dynamic>? get emailErrors => emailControl.errors;
 
   void get nameFocus => form.focus(nameControlPath());
 
@@ -1407,9 +1407,9 @@ class PhoneOForm implements FormModel<PhoneO, PhoneOOutput> {
     }
   }
 
-  Map<String, Object>? get phoneNumberErrors => phoneNumberControl.errors;
+  Map<String, dynamic>? get phoneNumberErrors => phoneNumberControl.errors;
 
-  Map<String, Object>? get countryIsoErrors => countryIsoControl.errors;
+  Map<String, dynamic>? get countryIsoErrors => countryIsoControl.errors;
 
   void get phoneNumberFocus => form.focus(phoneNumberControlPath());
 
@@ -1847,11 +1847,11 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     }
   }
 
-  Map<String, Object>? get streetErrors => streetControl.errors;
+  Map<String, dynamic>? get streetErrors => streetControl.errors;
 
-  Map<String, Object>? get cityErrors => cityControl.errors;
+  Map<String, dynamic>? get cityErrors => cityControl.errors;
 
-  Map<String, Object>? get zipErrors => zipControl.errors;
+  Map<String, dynamic>? get zipErrors => zipControl.errors;
 
   void get streetFocus => form.focus(streetControlPath());
 

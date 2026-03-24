@@ -330,15 +330,15 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
     }
   }
 
-  Map<String, Object> get idErrors => idControl.errors;
+  Map<String, dynamic> get idErrors => idControl.errors;
 
-  Map<String, Object>? get firstNameErrors => firstNameControl.errors;
+  Map<String, dynamic>? get firstNameErrors => firstNameControl.errors;
 
-  Map<String, Object>? get lastNameErrors => lastNameControl.errors;
+  Map<String, dynamic>? get lastNameErrors => lastNameControl.errors;
 
-  Map<String, Object> get homeErrors => homeControl.errors;
+  Map<String, dynamic> get homeErrors => homeControl.errors;
 
-  Map<String, Object>? get officeErrors => officeControl.errors;
+  Map<String, dynamic>? get officeErrors => officeControl.errors;
 
   void get idFocus => form.focus(idControlPath());
 
@@ -999,11 +999,11 @@ class AddressOForm implements FormModel<AddressO, AddressOOutput> {
     }
   }
 
-  Map<String, Object>? get streetErrors => streetControl.errors;
+  Map<String, dynamic>? get streetErrors => streetControl.errors;
 
-  Map<String, Object>? get cityErrors => cityControl.errors;
+  Map<String, dynamic>? get cityErrors => cityControl.errors;
 
-  Map<String, Object>? get zipErrors => zipControl.errors;
+  Map<String, dynamic>? get zipErrors => zipControl.errors;
 
   void get streetFocus => form.focus(streetControlPath());
 

@@ -299,7 +299,7 @@ class StatusListOForm<T extends Enum>
     }
   }
 
-  Map<String, Object> get listErrors => listControl.errors;
+  Map<String, dynamic> get listErrors => listControl.errors;
 
   void get listFocus => form.focus(listControlPath());
 
