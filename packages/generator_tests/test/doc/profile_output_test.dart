@@ -339,7 +339,7 @@ class ReactiveProfileOForm extends StatelessWidget {
     required this.form,
     required this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
   }) : super(key: key);
 
   final Widget child;
@@ -348,7 +348,8 @@ class ReactiveProfileOForm extends StatelessWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+  onPopInvokedWithResult;
 
   static ProfileOForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
@@ -373,7 +374,7 @@ class ReactiveProfileOForm extends StatelessWidget {
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
         canPop: canPop,
-        onPopInvoked: onPopInvoked,
+        onPopInvokedWithResult: onPopInvokedWithResult,
         child: child,
       ),
     );
@@ -393,7 +394,7 @@ class ProfileOFormBuilder extends StatefulWidget {
     this.model,
     this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -404,7 +405,8 @@ class ProfileOFormBuilder extends StatefulWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+  onPopInvokedWithResult;
 
   final Widget Function(
     BuildContext context,
@@ -495,7 +497,7 @@ class _ProfileOFormBuilderState extends State<ProfileOFormBuilder> {
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
-        onPopInvoked: widget.onPopInvoked,
+        onPopInvokedWithResult: widget.onPopInvokedWithResult,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -700,28 +702,28 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
     }
   }
 
-  Map<String, Object> get idErrors => idControl.errors;
+  Map<String, dynamic> get idErrors => idControl.errors;
 
-  Map<String, Object> get anotherIdErrors => anotherIdControl.errors;
+  Map<String, dynamic> get anotherIdErrors => anotherIdControl.errors;
 
-  Map<String, Object> get nameErrors => nameControl.errors;
+  Map<String, dynamic> get nameErrors => nameControl.errors;
 
-  Map<String, Object> get chartingOrderErrors => chartingOrderControl.errors;
+  Map<String, dynamic> get chartingOrderErrors => chartingOrderControl.errors;
 
-  Map<String, Object> get numberingStandardErrors =>
+  Map<String, dynamic> get numberingStandardErrors =>
       numberingStandardControl.errors;
 
-  Map<String, Object> get measurementTypeErrors =>
+  Map<String, dynamic> get measurementTypeErrors =>
       measurementTypeControl.errors;
 
-  Map<String, Object> get audioGuidanceErrors => audioGuidanceControl.errors;
+  Map<String, dynamic> get audioGuidanceErrors => audioGuidanceControl.errors;
 
-  Map<String, Object> get incidenceFilterErrors =>
+  Map<String, dynamic> get incidenceFilterErrors =>
       incidenceFilterControl.errors;
 
-  Map<String, Object> get thresholdErrors => thresholdControl.errors;
+  Map<String, dynamic> get thresholdErrors => thresholdControl.errors;
 
-  Map<String, Object> get timerErrors => timerControl.errors;
+  Map<String, dynamic> get timerErrors => timerControl.errors;
 
   void get idFocus => form.focus(idControlPath());
 
@@ -1737,22 +1739,22 @@ class IncidenceFilterOForm
     }
   }
 
-  Map<String, Object> get isMobilityEnabledErrors =>
+  Map<String, dynamic> get isMobilityEnabledErrors =>
       isMobilityEnabledControl.errors;
 
-  Map<String, Object> get isFurcationEnabledErrors =>
+  Map<String, dynamic> get isFurcationEnabledErrors =>
       isFurcationEnabledControl.errors;
 
-  Map<String, Object> get isBleedingEnabledErrors =>
+  Map<String, dynamic> get isBleedingEnabledErrors =>
       isBleedingEnabledControl.errors;
 
-  Map<String, Object> get isSuppurationEnabledErrors =>
+  Map<String, dynamic> get isSuppurationEnabledErrors =>
       isSuppurationEnabledControl.errors;
 
-  Map<String, Object> get isCalculusEnabledErrors =>
+  Map<String, dynamic> get isCalculusEnabledErrors =>
       isCalculusEnabledControl.errors;
 
-  Map<String, Object> get isPlaqueEnabledErrors =>
+  Map<String, dynamic> get isPlaqueEnabledErrors =>
       isPlaqueEnabledControl.errors;
 
   void get isMobilityEnabledFocus => form.focus(isMobilityEnabledControlPath());
@@ -2417,9 +2419,9 @@ class ThresholdSettingOForm
     }
   }
 
-  Map<String, Object> get isEnabledErrors => isEnabledControl.errors;
+  Map<String, dynamic> get isEnabledErrors => isEnabledControl.errors;
 
-  Map<String, Object> get valueErrors => valueControl.errors;
+  Map<String, dynamic> get valueErrors => valueControl.errors;
 
   void get isEnabledFocus => form.focus(isEnabledControlPath());
 
@@ -2797,9 +2799,9 @@ class TimerSettingOForm
     }
   }
 
-  Map<String, Object> get isEnabledErrors => isEnabledControl.errors;
+  Map<String, dynamic> get isEnabledErrors => isEnabledControl.errors;
 
-  Map<String, Object> get valueErrors => valueControl.errors;
+  Map<String, dynamic> get valueErrors => valueControl.errors;
 
   void get isEnabledFocus => form.focus(isEnabledControlPath());
 

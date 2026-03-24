@@ -109,7 +109,7 @@ class ReactiveSecuredAreaForm extends StatelessWidget {
     required this.form,
     required this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
   }) : super(key: key);
 
   final Widget child;
@@ -118,7 +118,8 @@ class ReactiveSecuredAreaForm extends StatelessWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+  onPopInvokedWithResult;
 
   static SecuredAreaForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
@@ -145,7 +146,7 @@ class ReactiveSecuredAreaForm extends StatelessWidget {
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
         canPop: canPop,
-        onPopInvoked: onPopInvoked,
+        onPopInvokedWithResult: onPopInvokedWithResult,
         child: child,
       ),
     );
@@ -165,7 +166,7 @@ class SecuredAreaFormBuilder extends StatefulWidget {
     this.model,
     this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -176,7 +177,8 @@ class SecuredAreaFormBuilder extends StatefulWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+  onPopInvokedWithResult;
 
   final Widget Function(
     BuildContext context,
@@ -268,7 +270,7 @@ class _SecuredAreaFormBuilderState extends State<SecuredAreaFormBuilder> {
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
-        onPopInvoked: widget.onPopInvoked,
+        onPopInvokedWithResult: widget.onPopInvokedWithResult,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -370,13 +372,13 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
     }
   }
 
-  Map<String, Object>? get idErrors => idControl.errors;
+  Map<String, dynamic>? get idErrors => idControl.errors;
 
-  Map<String, Object>? get securedAreaErrors => securedAreaControl.errors;
+  Map<String, dynamic>? get securedAreaErrors => securedAreaControl.errors;
 
-  Map<String, Object>? get parcelSystemErrors => parcelSystemControl.errors;
+  Map<String, dynamic>? get parcelSystemErrors => parcelSystemControl.errors;
 
-  Map<String, Object> get subSecuredAreasErrors =>
+  Map<String, dynamic> get subSecuredAreasErrors =>
       subSecuredAreasControl.errors;
 
   void get idFocus => form.focus(idControlPath());
@@ -1072,10 +1074,10 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
     }
   }
 
-  Map<String, Object> get hasParcelSystemErrors =>
+  Map<String, dynamic> get hasParcelSystemErrors =>
       hasParcelSystemControl.errors;
 
-  Map<String, Object> get dataErrors => dataControl.errors;
+  Map<String, dynamic> get dataErrors => dataControl.errors;
 
   void get hasParcelSystemFocus => form.focus(hasParcelSystemControlPath());
 
@@ -1429,7 +1431,7 @@ class ParcelSystemDataForm
     }
   }
 
-  Map<String, Object>? get idErrors => idControl.errors;
+  Map<String, dynamic>? get idErrors => idControl.errors;
 
   void get idFocus => form.focus(idControlPath());
 

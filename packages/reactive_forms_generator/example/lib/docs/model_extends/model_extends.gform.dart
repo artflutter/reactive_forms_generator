@@ -53,7 +53,7 @@ class ReactiveModelExtendsForm extends StatelessWidget {
     required this.form,
     required this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
   }) : super(key: key);
 
   final Widget child;
@@ -62,7 +62,8 @@ class ReactiveModelExtendsForm extends StatelessWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+  onPopInvokedWithResult;
 
   static ModelExtendsForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
@@ -89,7 +90,7 @@ class ReactiveModelExtendsForm extends StatelessWidget {
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
         canPop: canPop,
-        onPopInvoked: onPopInvoked,
+        onPopInvokedWithResult: onPopInvokedWithResult,
         child: child,
       ),
     );
@@ -110,7 +111,7 @@ class ModelExtendsFormBuilder extends StatefulWidget {
     this.model,
     this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -121,7 +122,8 @@ class ModelExtendsFormBuilder extends StatefulWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+  onPopInvokedWithResult;
 
   final Widget Function(
     BuildContext context,
@@ -214,7 +216,7 @@ class _ModelExtendsFormBuilderState extends State<ModelExtendsFormBuilder> {
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
-        onPopInvoked: widget.onPopInvoked,
+        onPopInvokedWithResult: widget.onPopInvokedWithResult,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -275,9 +277,9 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
     }
   }
 
-  Map<String, Object> get emailErrors => emailControl.errors;
+  Map<String, dynamic> get emailErrors => emailControl.errors;
 
-  Map<String, Object> get passwordErrors => passwordControl.errors;
+  Map<String, dynamic> get passwordErrors => passwordControl.errors;
 
   void get emailFocus => form.focus(emailControlPath());
 

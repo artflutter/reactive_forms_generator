@@ -54,7 +54,7 @@ class ReactiveLoginExtendedNullableForm extends StatelessWidget {
     required this.form,
     required this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
   }) : super(key: key);
 
   final Widget child;
@@ -63,7 +63,8 @@ class ReactiveLoginExtendedNullableForm extends StatelessWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+  onPopInvokedWithResult;
 
   static LoginExtendedNullableForm? of(
     BuildContext context, {
@@ -93,7 +94,7 @@ class ReactiveLoginExtendedNullableForm extends StatelessWidget {
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
         canPop: canPop,
-        onPopInvoked: onPopInvoked,
+        onPopInvokedWithResult: onPopInvokedWithResult,
         child: child,
       ),
     );
@@ -114,7 +115,7 @@ class LoginExtendedNullableFormBuilder extends StatefulWidget {
     this.model,
     this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -125,7 +126,8 @@ class LoginExtendedNullableFormBuilder extends StatefulWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+  onPopInvokedWithResult;
 
   final Widget Function(
     BuildContext context,
@@ -224,7 +226,7 @@ class _LoginExtendedNullableFormBuilderState
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
-        onPopInvoked: widget.onPopInvoked,
+        onPopInvokedWithResult: widget.onPopInvokedWithResult,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -376,19 +378,19 @@ class LoginExtendedNullableForm
     }
   }
 
-  Map<String, Object>? get emailErrors => emailControl.errors;
+  Map<String, dynamic>? get emailErrors => emailControl.errors;
 
-  Map<String, Object>? get passwordErrors => passwordControl.errors;
+  Map<String, dynamic>? get passwordErrors => passwordControl.errors;
 
-  Map<String, Object>? get rememberMeErrors => rememberMeControl.errors;
+  Map<String, dynamic>? get rememberMeErrors => rememberMeControl.errors;
 
-  Map<String, Object>? get themeErrors => themeControl.errors;
+  Map<String, dynamic>? get themeErrors => themeControl.errors;
 
-  Map<String, Object>? get modeErrors => modeControl.errors;
+  Map<String, dynamic>? get modeErrors => modeControl.errors;
 
-  Map<String, Object>? get timeoutErrors => timeoutControl.errors;
+  Map<String, dynamic>? get timeoutErrors => timeoutControl.errors;
 
-  Map<String, Object>? get heightErrors => heightControl.errors;
+  Map<String, dynamic>? get heightErrors => heightControl.errors;
 
   void get emailFocus => form.focus(emailControlPath());
 

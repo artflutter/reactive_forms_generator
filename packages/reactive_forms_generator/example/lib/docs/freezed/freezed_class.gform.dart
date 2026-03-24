@@ -53,7 +53,7 @@ class ReactiveFreezedClassForm extends StatelessWidget {
     required this.form,
     required this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
   }) : super(key: key);
 
   final Widget child;
@@ -62,7 +62,8 @@ class ReactiveFreezedClassForm extends StatelessWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+  onPopInvokedWithResult;
 
   static FreezedClassForm? of(BuildContext context, {bool listen = true}) {
     if (listen) {
@@ -89,7 +90,7 @@ class ReactiveFreezedClassForm extends StatelessWidget {
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
         canPop: canPop,
-        onPopInvoked: onPopInvoked,
+        onPopInvokedWithResult: onPopInvokedWithResult,
         child: child,
       ),
     );
@@ -110,7 +111,7 @@ class FreezedClassFormBuilder extends StatefulWidget {
     this.model,
     this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -121,7 +122,8 @@ class FreezedClassFormBuilder extends StatefulWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+  onPopInvokedWithResult;
 
   final Widget Function(
     BuildContext context,
@@ -214,7 +216,7 @@ class _FreezedClassFormBuilderState extends State<FreezedClassFormBuilder> {
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
-        onPopInvoked: widget.onPopInvoked,
+        onPopInvokedWithResult: widget.onPopInvokedWithResult,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -345,17 +347,17 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
     }
   }
 
-  Map<String, Object>? get genderErrors => genderControl.errors;
+  Map<String, dynamic>? get genderErrors => genderControl.errors;
 
-  Map<String, Object>? get idErrors => idControl.errors;
+  Map<String, dynamic>? get idErrors => idControl.errors;
 
-  Map<String, Object>? get nameErrors => nameControl.errors;
+  Map<String, dynamic>? get nameErrors => nameControl.errors;
 
-  Map<String, Object>? get logoImageErrors => logoImageControl.errors;
+  Map<String, dynamic>? get logoImageErrors => logoImageControl.errors;
 
-  Map<String, Object>? get yearErrors => yearControl.errors;
+  Map<String, dynamic>? get yearErrors => yearControl.errors;
 
-  Map<String, Object> get selectedSpacesErrors => selectedSpacesControl.errors;
+  Map<String, dynamic> get selectedSpacesErrors => selectedSpacesControl.errors;
 
   void get genderFocus => form.focus(genderControlPath());
 
