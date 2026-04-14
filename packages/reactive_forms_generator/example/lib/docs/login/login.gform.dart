@@ -213,7 +213,7 @@ class _LoginFormBuilderState extends State<LoginFormBuilder> {
 final _logLoginForm = Logger.detached('LoginForm');
 
 class LoginForm implements FormModel<Login, Login> {
-  LoginForm(this.form, this.path, this._formModel) : initial = form.rawValue;
+  LoginForm(this.form, this.path, this._formModel);
 
   static const String emailControlName = "email";
 
@@ -227,9 +227,6 @@ class LoginForm implements FormModel<Login, Login> {
   final FormModel<dynamic, dynamic>? _formModel;
 
   final Map<String, bool> _disabled = {};
-
-  @override
-  final Map<String, Object?> initial;
 
   String emailControlPath() => pathBuilder(emailControlName);
 
@@ -483,7 +480,7 @@ class LoginForm implements FormModel<Login, Login> {
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.defaultRawValue(currentForm),
     );
   }
 
@@ -521,55 +518,6 @@ class LoginForm implements FormModel<Login, Login> {
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");

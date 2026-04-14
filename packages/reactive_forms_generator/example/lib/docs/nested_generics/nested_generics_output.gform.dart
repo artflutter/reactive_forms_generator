@@ -242,8 +242,7 @@ final _logProductDetailsOForm = Logger.detached('ProductDetailsOForm<P, C>');
 
 class ProductDetailsOForm<P extends Product, C extends Cart>
     implements FormModel<ProductDetailsO<P, C>, ProductDetailsOOutput<P, C>> {
-  ProductDetailsOForm(this.form, this.path, this._formModel)
-    : initial = form.rawValue;
+  ProductDetailsOForm(this.form, this.path, this._formModel);
 
   static const String descriptionControlName = "description";
 
@@ -257,9 +256,6 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
   final FormModel<dynamic, dynamic>? _formModel;
 
   final Map<String, bool> _disabled = {};
-
-  @override
-  final Map<String, Object?> initial;
 
   String descriptionControlPath() => pathBuilder(descriptionControlName);
 
@@ -544,7 +540,7 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.defaultRawValue(currentForm),
     );
   }
 
@@ -586,55 +582,6 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
     emitEvent: emitEvent,
   );
 
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
-
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
@@ -663,7 +610,7 @@ final _logIdOForm = Logger.detached('IdOForm<P, C>');
 
 class IdOForm<P extends Product, C extends Cart>
     implements FormModel<IdO<P, C>, IdOOutput<P, C>> {
-  IdOForm(this.form, this.path, this._formModel) : initial = form.rawValue;
+  IdOForm(this.form, this.path, this._formModel);
 
   static const String companyNameControlName = "companyName";
 
@@ -677,9 +624,6 @@ class IdOForm<P extends Product, C extends Cart>
   final FormModel<dynamic, dynamic>? _formModel;
 
   final Map<String, bool> _disabled = {};
-
-  @override
-  final Map<String, Object?> initial;
 
   String companyNameControlPath() => pathBuilder(companyNameControlName);
 
@@ -959,7 +903,7 @@ class IdOForm<P extends Product, C extends Cart>
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.defaultRawValue(currentForm),
     );
   }
 
@@ -1000,55 +944,6 @@ class IdOForm<P extends Product, C extends Cart>
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");

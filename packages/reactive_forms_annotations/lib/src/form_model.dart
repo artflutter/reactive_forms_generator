@@ -12,8 +12,6 @@ abstract class FormModel<TModel, TModelOutput> {
 
   final String? path;
 
-  final Map<String, Object?>? initial = null;
-
   @protected
   TModelOutput get model;
 
@@ -44,7 +42,35 @@ abstract class FormModel<TModel, TModelOutput> {
 
   reset({TModel? value, bool updateParent = true, bool emitEvent = true});
 
-  void updateInitial(Map<String, Object?>? value, String? path);
-
   void toggleDisabled({bool updateParent = true, bool emitEvent = true});
+
+  static Map<String, Object?> defaultRawValue(FormGroup group) {
+    return group.controls.map<String, Object?>((key, control) {
+      if (control is FormGroup) {
+        return MapEntry(key, defaultRawValue(control));
+      }
+      if (control is FormArray) {
+        return MapEntry(key, defaultRawValueArray(control));
+      }
+      if (control is FormControl) {
+        return MapEntry(key, control.defaultValue);
+      }
+      return MapEntry(key, control.value);
+    });
+  }
+
+  static List<Object?> defaultRawValueArray(FormArray array) {
+    return array.controls.map<Object?>((control) {
+      if (control is FormGroup) {
+        return defaultRawValue(control);
+      }
+      if (control is FormArray) {
+        return defaultRawValueArray(control);
+      }
+      if (control is FormControl) {
+        return control.defaultValue;
+      }
+      return control.value;
+    }).toList();
+  }
 }

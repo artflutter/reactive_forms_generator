@@ -656,8 +656,7 @@ class FormGenerator {
             ..name = '_formModel'
             ..toThis = true,
         ),
-      ])
-      ..initializers.add(const Code('initial = form.rawValue')),
+      ]),
   );
 
   String get _modelDisplayTypeNonNullable {
@@ -797,13 +796,6 @@ class FormGenerator {
                 ..assignment = const Code('{}')
                 ..type = const Reference('Map<String, bool>'),
             ),
-            Field(
-              (b) => b
-                ..name = 'initial'
-                ..annotations.add(const CodeExpression(Code('override')))
-                ..modifier = FieldModifier.final$
-                ..type = const Reference('Map<String, Object?>'),
-            ),
           ])
           ..constructors.add(_constructor)
           ..methods.addAll([
@@ -843,7 +835,7 @@ class FormGenerator {
                 ..body = const Code('''
                   return !const DeepCollectionEquality().equals(
                     currentForm.rawValue,
-                    initial,
+                    FormModel.defaultRawValue(currentForm),
                   );
                 '''),
             ),
@@ -851,72 +843,6 @@ class FormGenerator {
             updateValueMethod,
             upsertValueMethod,
             resetMethod,
-            Method(
-              (b) => b
-                ..name = 'updateInitial'
-                ..lambda = false
-                ..annotations.add(const CodeExpression(Code('override')))
-                ..requiredParameters.addAll([
-                  Parameter(
-                    (b) => b
-                      ..name = 'value'
-                      ..type = const Reference('Map<String, Object?>?'),
-                  ),
-                  Parameter(
-                    (b) => b
-                      ..name = 'path'
-                      ..type = const Reference('String?'),
-                  ),
-                ])
-                ..returns = const Reference('void')
-                ..body = const Code('''
-                  if (_formModel != null) {
-                    _formModel?.updateInitial(currentForm.rawValue, path);
-                    return;
-                  }
-
-                  if (value == null) return;
-
-                  if (path == null || path.isEmpty) {
-                    initial.addAll(value);
-                    return;
-                  }
-
-                  final keys = path.split('.');
-                  Object? current = initial;
-                  for (var i = 0; i < keys.length - 1; i++) {
-                    final key = keys[i];
-
-                    if (current is List) {
-                      final index = int.tryParse(key);
-                      if (index != null && index >= 0 && index < current.length) {
-                        current = current[index];
-                        continue;
-                      }
-                    }
-
-                    if (current is Map) {
-                      if (!current.containsKey(key)) {
-                        current[key] = <String, Object?>{};
-                      }
-                      current = current[key];
-                      continue;
-                    }
-                    
-                    return;
-                  }
-
-                  final key = keys.last;
-                  if (current is List) {
-                    final index = int.tryParse(key);
-                    if (index != null && index >= 0 && index < current.length) {
-                      current[index] = value;
-                    }
-                  } else if (current is Map) {
-                    current[key] = value;
-                  }
-                '''),
-            ),
             Method(
               (b) => b
                 ..name = 'pathBuilder'

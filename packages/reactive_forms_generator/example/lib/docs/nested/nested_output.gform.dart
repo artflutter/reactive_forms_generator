@@ -223,8 +223,7 @@ class _SubGroupOFormBuilderState extends State<SubGroupOFormBuilder> {
 final _logSubGroupOForm = Logger.detached('SubGroupOForm');
 
 class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
-  SubGroupOForm(this.form, this.path, this._formModel)
-    : initial = form.rawValue;
+  SubGroupOForm(this.form, this.path, this._formModel);
 
   static const String idControlName = "id";
 
@@ -236,9 +235,6 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
   final FormModel<dynamic, dynamic>? _formModel;
 
   final Map<String, bool> _disabled = {};
-
-  @override
-  final Map<String, Object?> initial;
 
   String idControlPath() => pathBuilder(idControlName);
 
@@ -389,7 +385,7 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.defaultRawValue(currentForm),
     );
   }
 
@@ -430,55 +426,6 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
@@ -962,7 +909,7 @@ class _GroupOFormBuilderState extends State<GroupOFormBuilder> {
 final _logGroupOForm = Logger.detached('GroupOForm');
 
 class GroupOForm implements FormModel<GroupO, GroupOOutput> {
-  GroupOForm(this.form, this.path, this._formModel) : initial = form.rawValue;
+  GroupOForm(this.form, this.path, this._formModel);
 
   static const String idControlName = "id";
 
@@ -976,9 +923,6 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
   final FormModel<dynamic, dynamic>? _formModel;
 
   final Map<String, bool> _disabled = {};
-
-  @override
-  final Map<String, Object?> initial;
 
   String idControlPath() => pathBuilder(idControlName);
 
@@ -1320,7 +1264,7 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.defaultRawValue(currentForm),
     );
   }
 
@@ -1361,55 +1305,6 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
@@ -1875,7 +1770,7 @@ class _NestedOFormBuilderState extends State<NestedOFormBuilder> {
 final _logNestedOForm = Logger.detached('NestedOForm');
 
 class NestedOForm implements FormModel<NestedO, NestedOOutput> {
-  NestedOForm(this.form, this.path, this._formModel) : initial = form.rawValue;
+  NestedOForm(this.form, this.path, this._formModel);
 
   static const String groupListControlName = "groupList";
 
@@ -1887,9 +1782,6 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
   final FormModel<dynamic, dynamic>? _formModel;
 
   final Map<String, bool> _disabled = {};
-
-  @override
-  final Map<String, Object?> initial;
 
   String groupListControlPath() => pathBuilder(groupListControlName);
 
@@ -2150,7 +2042,7 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.defaultRawValue(currentForm),
     );
   }
 
@@ -2191,55 +2083,6 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
