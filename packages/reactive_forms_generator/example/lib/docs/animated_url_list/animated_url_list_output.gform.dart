@@ -152,6 +152,7 @@ class _AnimatedUrlLisOFormBuilderState
       AnimatedUrlLisOForm.formElements(widget.model),
       null,
       null,
+      initialModel: widget.model,
     );
 
     if (_formModel.form.disabled) {
@@ -194,7 +195,9 @@ class _AnimatedUrlLisOFormBuilderState
   @override
   void didUpdateWidget(covariant AnimatedUrlLisOFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel.updateValue(widget.model);
+      _formModel
+        ..updateValue(widget.model)
+        ..commitInitial(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -230,8 +233,12 @@ final _logAnimatedUrlLisOForm = Logger.detached('AnimatedUrlLisOForm');
 
 class AnimatedUrlLisOForm
     implements FormModel<AnimatedUrlLisO, AnimatedUrlLisOOutput> {
-  AnimatedUrlLisOForm(this.form, this.path, this._formModel)
-    : initial = form.rawValue;
+  AnimatedUrlLisOForm(
+    this.form,
+    this.path,
+    this._formModel, {
+    AnimatedUrlLisO? initialModel,
+  }) : _ownInitialModel = initialModel;
 
   static const String urlListControlName = "urlList";
 
@@ -244,8 +251,10 @@ class AnimatedUrlLisOForm
 
   final Map<String, bool> _disabled = {};
 
-  @override
-  final Map<String, Object?> initial;
+  AnimatedUrlLisO? _ownInitialModel;
+
+  late Map<String, Object?> _ownInitialRawValue =
+      AnimatedUrlLisOForm.formElements(_ownInitialModel).rawValue;
 
   String urlListControlPath() => pathBuilder(urlListControlName);
 
@@ -506,8 +515,26 @@ class AnimatedUrlLisOForm
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.sliceByPath(initialRawValue, path),
     );
+  }
+
+  @override
+  Map<String, Object?> get initialRawValue {
+    return _formModel != null
+        ? _formModel!.initialRawValue
+        : _ownInitialRawValue;
+  }
+
+  AnimatedUrlLisO? get initialModel {
+    return _ownInitialModel;
+  }
+
+  void commitInitial([AnimatedUrlLisO? newModel]) {
+    _ownInitialModel = newModel ?? rawModel;
+    _ownInitialRawValue = AnimatedUrlLisOForm.formElements(
+      _ownInitialModel,
+    ).rawValue;
   }
 
   @override
@@ -548,55 +575,6 @@ class AnimatedUrlLisOForm
     emitEvent: emitEvent,
   );
 
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
-
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
@@ -622,8 +600,12 @@ class AnimatedUrlLisOForm
 final _logUrlEntityOForm = Logger.detached('UrlEntityOForm');
 
 class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
-  UrlEntityOForm(this.form, this.path, this._formModel)
-    : initial = form.rawValue;
+  UrlEntityOForm(
+    this.form,
+    this.path,
+    this._formModel, {
+    UrlEntityO? initialModel,
+  }) : _ownInitialModel = initialModel;
 
   static const String labelControlName = "label";
 
@@ -638,8 +620,11 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
 
   final Map<String, bool> _disabled = {};
 
-  @override
-  final Map<String, Object?> initial;
+  UrlEntityO? _ownInitialModel;
+
+  late Map<String, Object?> _ownInitialRawValue = UrlEntityOForm.formElements(
+    _ownInitialModel,
+  ).rawValue;
 
   String labelControlPath() => pathBuilder(labelControlName);
 
@@ -917,8 +902,26 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.sliceByPath(initialRawValue, path),
     );
+  }
+
+  @override
+  Map<String, Object?> get initialRawValue {
+    return _formModel != null
+        ? _formModel!.initialRawValue
+        : _ownInitialRawValue;
+  }
+
+  UrlEntityO? get initialModel {
+    return _ownInitialModel;
+  }
+
+  void commitInitial([UrlEntityO? newModel]) {
+    _ownInitialModel = newModel ?? rawModel;
+    _ownInitialRawValue = UrlEntityOForm.formElements(
+      _ownInitialModel,
+    ).rawValue;
   }
 
   @override
@@ -958,55 +961,6 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");

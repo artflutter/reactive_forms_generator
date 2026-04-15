@@ -146,6 +146,7 @@ class _ProfileOFormBuilderState extends State<ProfileOFormBuilder> {
       ProfileOForm.formElements(widget.model),
       null,
       null,
+      initialModel: widget.model,
     );
 
     if (_formModel.form.disabled) {
@@ -188,7 +189,9 @@ class _ProfileOFormBuilderState extends State<ProfileOFormBuilder> {
   @override
   void didUpdateWidget(covariant ProfileOFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel.updateValue(widget.model);
+      _formModel
+        ..updateValue(widget.model)
+        ..commitInitial(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -223,7 +226,8 @@ class _ProfileOFormBuilderState extends State<ProfileOFormBuilder> {
 final _logProfileOForm = Logger.detached('ProfileOForm');
 
 class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
-  ProfileOForm(this.form, this.path, this._formModel) : initial = form.rawValue;
+  ProfileOForm(this.form, this.path, this._formModel, {ProfileO? initialModel})
+    : _ownInitialModel = initialModel;
 
   static const String idControlName = "id";
 
@@ -254,8 +258,11 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
 
   final Map<String, bool> _disabled = {};
 
-  @override
-  final Map<String, Object?> initial;
+  ProfileO? _ownInitialModel;
+
+  late Map<String, Object?> _ownInitialRawValue = ProfileOForm.formElements(
+    _ownInitialModel,
+  ).rawValue;
 
   String idControlPath() => pathBuilder(idControlName);
 
@@ -1156,8 +1163,24 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.sliceByPath(initialRawValue, path),
     );
+  }
+
+  @override
+  Map<String, Object?> get initialRawValue {
+    return _formModel != null
+        ? _formModel!.initialRawValue
+        : _ownInitialRawValue;
+  }
+
+  ProfileO? get initialModel {
+    return _ownInitialModel;
+  }
+
+  void commitInitial([ProfileO? newModel]) {
+    _ownInitialModel = newModel ?? rawModel;
+    _ownInitialRawValue = ProfileOForm.formElements(_ownInitialModel).rawValue;
   }
 
   @override
@@ -1197,55 +1220,6 @@ class ProfileOForm implements FormModel<ProfileO, ProfileOOutput> {
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
@@ -1327,8 +1301,12 @@ final _logIncidenceFilterOForm = Logger.detached('IncidenceFilterOForm');
 
 class IncidenceFilterOForm
     implements FormModel<IncidenceFilterO, IncidenceFilterOOutput> {
-  IncidenceFilterOForm(this.form, this.path, this._formModel)
-    : initial = form.rawValue;
+  IncidenceFilterOForm(
+    this.form,
+    this.path,
+    this._formModel, {
+    IncidenceFilterO? initialModel,
+  }) : _ownInitialModel = initialModel;
 
   static const String isMobilityEnabledControlName = "isMobilityEnabled";
 
@@ -1351,8 +1329,10 @@ class IncidenceFilterOForm
 
   final Map<String, bool> _disabled = {};
 
-  @override
-  final Map<String, Object?> initial;
+  IncidenceFilterO? _ownInitialModel;
+
+  late Map<String, Object?> _ownInitialRawValue =
+      IncidenceFilterOForm.formElements(_ownInitialModel).rawValue;
 
   String isMobilityEnabledControlPath() =>
       pathBuilder(isMobilityEnabledControlName);
@@ -1927,8 +1907,26 @@ class IncidenceFilterOForm
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.sliceByPath(initialRawValue, path),
     );
+  }
+
+  @override
+  Map<String, Object?> get initialRawValue {
+    return _formModel != null
+        ? _formModel!.initialRawValue
+        : _ownInitialRawValue;
+  }
+
+  IncidenceFilterO? get initialModel {
+    return _ownInitialModel;
+  }
+
+  void commitInitial([IncidenceFilterO? newModel]) {
+    _ownInitialModel = newModel ?? rawModel;
+    _ownInitialRawValue = IncidenceFilterOForm.formElements(
+      _ownInitialModel,
+    ).rawValue;
   }
 
   @override
@@ -1968,55 +1966,6 @@ class IncidenceFilterOForm
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
@@ -2084,8 +2033,12 @@ final _logThresholdSettingOForm = Logger.detached('ThresholdSettingOForm');
 
 class ThresholdSettingOForm
     implements FormModel<ThresholdSettingO, ThresholdSettingOOutput> {
-  ThresholdSettingOForm(this.form, this.path, this._formModel)
-    : initial = form.rawValue;
+  ThresholdSettingOForm(
+    this.form,
+    this.path,
+    this._formModel, {
+    ThresholdSettingO? initialModel,
+  }) : _ownInitialModel = initialModel;
 
   static const String isEnabledControlName = "isEnabled";
 
@@ -2100,8 +2053,10 @@ class ThresholdSettingOForm
 
   final Map<String, bool> _disabled = {};
 
-  @override
-  final Map<String, Object?> initial;
+  ThresholdSettingO? _ownInitialModel;
+
+  late Map<String, Object?> _ownInitialRawValue =
+      ThresholdSettingOForm.formElements(_ownInitialModel).rawValue;
 
   String isEnabledControlPath() => pathBuilder(isEnabledControlName);
 
@@ -2339,8 +2294,26 @@ class ThresholdSettingOForm
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.sliceByPath(initialRawValue, path),
     );
+  }
+
+  @override
+  Map<String, Object?> get initialRawValue {
+    return _formModel != null
+        ? _formModel!.initialRawValue
+        : _ownInitialRawValue;
+  }
+
+  ThresholdSettingO? get initialModel {
+    return _ownInitialModel;
+  }
+
+  void commitInitial([ThresholdSettingO? newModel]) {
+    _ownInitialModel = newModel ?? rawModel;
+    _ownInitialRawValue = ThresholdSettingOForm.formElements(
+      _ownInitialModel,
+    ).rawValue;
   }
 
   @override
@@ -2381,55 +2354,6 @@ class ThresholdSettingOForm
     emitEvent: emitEvent,
   );
 
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
-
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
@@ -2464,8 +2388,12 @@ final _logTimerSettingOForm = Logger.detached('TimerSettingOForm');
 
 class TimerSettingOForm
     implements FormModel<TimerSettingO, TimerSettingOOutput> {
-  TimerSettingOForm(this.form, this.path, this._formModel)
-    : initial = form.rawValue;
+  TimerSettingOForm(
+    this.form,
+    this.path,
+    this._formModel, {
+    TimerSettingO? initialModel,
+  }) : _ownInitialModel = initialModel;
 
   static const String isEnabledControlName = "isEnabled";
 
@@ -2480,8 +2408,10 @@ class TimerSettingOForm
 
   final Map<String, bool> _disabled = {};
 
-  @override
-  final Map<String, Object?> initial;
+  TimerSettingO? _ownInitialModel;
+
+  late Map<String, Object?> _ownInitialRawValue =
+      TimerSettingOForm.formElements(_ownInitialModel).rawValue;
 
   String isEnabledControlPath() => pathBuilder(isEnabledControlName);
 
@@ -2713,8 +2643,26 @@ class TimerSettingOForm
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.sliceByPath(initialRawValue, path),
     );
+  }
+
+  @override
+  Map<String, Object?> get initialRawValue {
+    return _formModel != null
+        ? _formModel!.initialRawValue
+        : _ownInitialRawValue;
+  }
+
+  TimerSettingO? get initialModel {
+    return _ownInitialModel;
+  }
+
+  void commitInitial([TimerSettingO? newModel]) {
+    _ownInitialModel = newModel ?? rawModel;
+    _ownInitialRawValue = TimerSettingOForm.formElements(
+      _ownInitialModel,
+    ).rawValue;
   }
 
   @override
@@ -2754,55 +2702,6 @@ class TimerSettingOForm
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");

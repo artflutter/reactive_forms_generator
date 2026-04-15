@@ -2,6 +2,7 @@ import 'package:example/docs/delivery_list/delivery_list.dart';
 import 'package:example/docs/delivery_list/labels.dart';
 import 'package:example/docs/delivery_list/mocks.dart';
 import 'package:example/sample_screen.dart';
+import 'package:example/widgets/dirty_badge.dart';
 import 'package:flutter/material.dart' hide ProgressIndicator;
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -17,9 +18,18 @@ class DeliveryListFormWidget extends StatelessWidget {
       body: DeliveryListFormBuilder(
         model: const DeliveryList(),
         builder: (context, formModel, child) {
-          return Column(
+          return StreamBuilder<Object?>(
+            stream: formModel.form.valueChanges,
+            builder: (context, _) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: DirtyBadge(
+                  changed: formModel.hasChanged,
+                  label: 'form',
+                ),
+              ),
               Row(
                 children: [
                   Expanded(
@@ -29,8 +39,17 @@ class DeliveryListFormWidget extends StatelessWidget {
                         >(
                           extended: formModel.deliveryListExtendedControl,
                           itemBuilder: (context, i, formItem, _) {
+                            final itemForm =
+                                formModel.deliveryListDeliveryPointForm[i];
                             return Column(
                               children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4),
+                                  child: DirtyBadge(
+                                    changed: itemForm.hasChanged,
+                                    label: 'item $i',
+                                  ),
+                                ),
                                 Row(
                                   children: [
                                     Expanded(
@@ -63,6 +82,13 @@ class DeliveryListFormWidget extends StatelessWidget {
                                       ),
                                     ),
                                   ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4),
+                                  child: DirtyBadge(
+                                    changed: itemForm.addressForm.hasChanged,
+                                    label: 'address $i',
+                                  ),
                                 ),
                                 ReactiveTextField<String>(
                                   key: street.itemIndexKey(i),
@@ -255,6 +281,7 @@ class DeliveryListFormWidget extends StatelessWidget {
                 ],
               ),
             ],
+          ),
           );
         },
       ),
