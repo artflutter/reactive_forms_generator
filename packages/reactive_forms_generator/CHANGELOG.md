@@ -1,3 +1,7 @@
+## [8.4.0]
+
+* fix hasChanges
+
 ## [8.3.1]
 
 * fix deps

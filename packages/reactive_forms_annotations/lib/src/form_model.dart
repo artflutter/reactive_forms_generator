@@ -12,12 +12,12 @@ abstract class FormModel<TModel, TModelOutput> {
 
   final String? path;
 
-  final Map<String, Object?>? initial = null;
-
   @protected
   TModelOutput get model;
 
   TModel get rawModel;
+
+  Map<String, Object?> get initialRawValue;
 
   void submit({
     required void Function(TModelOutput model) onValid,
@@ -44,7 +44,22 @@ abstract class FormModel<TModel, TModelOutput> {
 
   reset({TModel? value, bool updateParent = true, bool emitEvent = true});
 
-  void updateInitial(Map<String, Object?>? value, String? path);
-
   void toggleDisabled({bool updateParent = true, bool emitEvent = true});
+
+  static Object? sliceByPath(Object? root, String? path) {
+    if (path == null || path.isEmpty) return root;
+    Object? current = root;
+    for (final key in path.split('.')) {
+      if (current is Map) {
+        current = current[key];
+      } else if (current is List) {
+        final idx = int.tryParse(key);
+        if (idx == null || idx < 0 || idx >= current.length) return null;
+        current = current[idx];
+      } else {
+        return null;
+      }
+    }
+    return current;
+  }
 }

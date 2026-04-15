@@ -638,8 +638,8 @@ class FormGenerator {
 
   Code get logging => Code("final $log = Logger.detached('$classNameFull');");
 
-  Constructor get _constructor => Constructor(
-    (b) => b
+  Constructor get _constructor => Constructor((b) {
+    b
       ..requiredParameters.addAll([
         Parameter(
           (b) => b
@@ -657,8 +657,16 @@ class FormGenerator {
             ..toThis = true,
         ),
       ])
-      ..initializers.add(const Code('initial = form.rawValue')),
-  );
+      ..optionalParameters.add(
+        Parameter(
+          (p) => p
+            ..name = 'initialModel'
+            ..named = true
+            ..type = Reference('${element.fullTypeName}?'),
+        ),
+      )
+      ..initializers.add(const Code('_ownInitialModel = initialModel'));
+  });
 
   String get _modelDisplayTypeNonNullable {
     String displayType =
@@ -799,9 +807,16 @@ class FormGenerator {
             ),
             Field(
               (b) => b
-                ..name = 'initial'
-                ..annotations.add(const CodeExpression(Code('override')))
-                ..modifier = FieldModifier.final$
+                ..name = '_ownInitialModel'
+                ..type = Reference('${element.fullTypeName}?'),
+            ),
+            Field(
+              (b) => b
+                ..name = '_ownInitialRawValue'
+                ..late = true
+                ..assignment = Code(
+                  '$className.formElements(_ownInitialModel).rawValue',
+                )
                 ..type = const Reference('Map<String, Object?>'),
             ),
           ])
@@ -843,80 +858,50 @@ class FormGenerator {
                 ..body = const Code('''
                   return !const DeepCollectionEquality().equals(
                     currentForm.rawValue,
-                    initial,
+                    FormModel.sliceByPath(initialRawValue, path),
                   );
+                '''),
+            ),
+            Method(
+              (b) => b
+                ..name = 'initialRawValue'
+                ..type = MethodType.getter
+                ..annotations.add(const CodeExpression(Code('override')))
+                ..returns = const Reference('Map<String, Object?>')
+                ..body = const Code('''
+                  return _formModel != null
+                      ? _formModel!.initialRawValue
+                      : _ownInitialRawValue;
+                '''),
+            ),
+            Method(
+              (b) => b
+                ..name = 'initialModel'
+                ..type = MethodType.getter
+                ..returns = Reference('${element.fullTypeName}?')
+                ..body = const Code('return _ownInitialModel;'),
+            ),
+            Method(
+              (b) => b
+                ..name = 'commitInitial'
+                ..returns = const Reference('void')
+                ..optionalParameters.add(
+                  Parameter(
+                    (p) => p
+                      ..name = 'newModel'
+                      ..type = Reference('${element.fullTypeName}?'),
+                  ),
+                )
+                ..body = Code('''
+                  _ownInitialModel = newModel ?? rawModel;
+                  _ownInitialRawValue =
+                      $className.formElements(_ownInitialModel).rawValue;
                 '''),
             ),
             currentFormMethod,
             updateValueMethod,
             upsertValueMethod,
             resetMethod,
-            Method(
-              (b) => b
-                ..name = 'updateInitial'
-                ..lambda = false
-                ..annotations.add(const CodeExpression(Code('override')))
-                ..requiredParameters.addAll([
-                  Parameter(
-                    (b) => b
-                      ..name = 'value'
-                      ..type = const Reference('Map<String, Object?>?'),
-                  ),
-                  Parameter(
-                    (b) => b
-                      ..name = 'path'
-                      ..type = const Reference('String?'),
-                  ),
-                ])
-                ..returns = const Reference('void')
-                ..body = const Code('''
-                  if (_formModel != null) {
-                    _formModel?.updateInitial(currentForm.rawValue, path);
-                    return;
-                  }
-
-                  if (value == null) return;
-
-                  if (path == null || path.isEmpty) {
-                    initial.addAll(value);
-                    return;
-                  }
-
-                  final keys = path.split('.');
-                  Object? current = initial;
-                  for (var i = 0; i < keys.length - 1; i++) {
-                    final key = keys[i];
-
-                    if (current is List) {
-                      final index = int.tryParse(key);
-                      if (index != null && index >= 0 && index < current.length) {
-                        current = current[index];
-                        continue;
-                      }
-                    }
-
-                    if (current is Map) {
-                      if (!current.containsKey(key)) {
-                        current[key] = <String, Object?>{};
-                      }
-                      current = current[key];
-                      continue;
-                    }
-                    
-                    return;
-                  }
-
-                  final key = keys.last;
-                  if (current is List) {
-                    final index = int.tryParse(key);
-                    if (index != null && index >= 0 && index < current.length) {
-                      current[index] = value;
-                    }
-                  } else if (current is Map) {
-                    current[key] = value;
-                  }
-                '''),
-            ),
             Method(
               (b) => b
                 ..name = 'pathBuilder'
