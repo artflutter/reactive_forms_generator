@@ -229,6 +229,7 @@ class _ProductDetailsFormBuilderState<P extends Product, C extends Cart>
       ProductDetailsForm.formElements<P, C>(widget.model),
       null,
       null,
+      initialModel: widget.model,
     );
 
     if (_formModel.form.disabled) {
@@ -271,7 +272,9 @@ class _ProductDetailsFormBuilderState<P extends Product, C extends Cart>
   @override
   void didUpdateWidget(covariant ProductDetailsFormBuilder<P, C> oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel.updateValue(widget.model);
+      _formModel
+        ..updateValue(widget.model)
+        ..commitInitial(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -307,8 +310,12 @@ final _logProductDetailsForm = Logger.detached('ProductDetailsForm<P, C>');
 
 class ProductDetailsForm<P extends Product, C extends Cart>
     implements FormModel<ProductDetails<P, C>, ProductDetails<P, C>> {
-  ProductDetailsForm(this.form, this.path, this._formModel)
-    : initial = form.rawValue;
+  ProductDetailsForm(
+    this.form,
+    this.path,
+    this._formModel, {
+    ProductDetails<P, C>? initialModel,
+  }) : _ownInitialModel = initialModel;
 
   static const String descriptionControlName = "description";
 
@@ -323,8 +330,10 @@ class ProductDetailsForm<P extends Product, C extends Cart>
 
   final Map<String, bool> _disabled = {};
 
-  @override
-  final Map<String, Object?> initial;
+  ProductDetails<P, C>? _ownInitialModel;
+
+  late Map<String, Object?> _ownInitialRawValue =
+      ProductDetailsForm.formElements(_ownInitialModel).rawValue;
 
   String descriptionControlPath() => pathBuilder(descriptionControlName);
 
@@ -605,8 +614,26 @@ class ProductDetailsForm<P extends Product, C extends Cart>
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.sliceByPath(initialRawValue, path),
     );
+  }
+
+  @override
+  Map<String, Object?> get initialRawValue {
+    return _formModel != null
+        ? _formModel!.initialRawValue
+        : _ownInitialRawValue;
+  }
+
+  ProductDetails<P, C>? get initialModel {
+    return _ownInitialModel;
+  }
+
+  void commitInitial([ProductDetails<P, C>? newModel]) {
+    _ownInitialModel = newModel ?? rawModel;
+    _ownInitialRawValue = ProductDetailsForm.formElements(
+      _ownInitialModel,
+    ).rawValue;
   }
 
   @override
@@ -647,55 +674,6 @@ class ProductDetailsForm<P extends Product, C extends Cart>
     emitEvent: emitEvent,
   );
 
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
-
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
@@ -724,7 +702,8 @@ final _logIdForm = Logger.detached('IdForm<P, C>');
 
 class IdForm<P extends Product, C extends Cart>
     implements FormModel<Id<P, C>, Id<P, C>> {
-  IdForm(this.form, this.path, this._formModel) : initial = form.rawValue;
+  IdForm(this.form, this.path, this._formModel, {Id<P, C>? initialModel})
+    : _ownInitialModel = initialModel;
 
   static const String companyNameControlName = "companyName";
 
@@ -739,8 +718,11 @@ class IdForm<P extends Product, C extends Cart>
 
   final Map<String, bool> _disabled = {};
 
-  @override
-  final Map<String, Object?> initial;
+  Id<P, C>? _ownInitialModel;
+
+  late Map<String, Object?> _ownInitialRawValue = IdForm.formElements(
+    _ownInitialModel,
+  ).rawValue;
 
   String companyNameControlPath() => pathBuilder(companyNameControlName);
 
@@ -1019,8 +1001,24 @@ class IdForm<P extends Product, C extends Cart>
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.sliceByPath(initialRawValue, path),
     );
+  }
+
+  @override
+  Map<String, Object?> get initialRawValue {
+    return _formModel != null
+        ? _formModel!.initialRawValue
+        : _ownInitialRawValue;
+  }
+
+  Id<P, C>? get initialModel {
+    return _ownInitialModel;
+  }
+
+  void commitInitial([Id<P, C>? newModel]) {
+    _ownInitialModel = newModel ?? rawModel;
+    _ownInitialRawValue = IdForm.formElements(_ownInitialModel).rawValue;
   }
 
   @override
@@ -1060,55 +1058,6 @@ class IdForm<P extends Product, C extends Cart>
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
@@ -1525,6 +1474,7 @@ class _IdFormBuilderState<P extends Product, C extends Cart>
       IdForm.formElements<P, C>(widget.model),
       null,
       null,
+      initialModel: widget.model,
     );
 
     if (_formModel.form.disabled) {
@@ -1567,7 +1517,9 @@ class _IdFormBuilderState<P extends Product, C extends Cart>
   @override
   void didUpdateWidget(covariant IdFormBuilder<P, C> oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel.updateValue(widget.model);
+      _formModel
+        ..updateValue(widget.model)
+        ..commitInitial(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);

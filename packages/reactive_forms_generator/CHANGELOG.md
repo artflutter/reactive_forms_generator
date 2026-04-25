@@ -1,3 +1,7 @@
+## [7.5.0-beta2]
+
+* fix hasChanges (backport of #210)
+
 ## [7.5.0-beta1]
 
 * properly handle missing controls in form

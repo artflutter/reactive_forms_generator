@@ -149,6 +149,7 @@ class _ArrayNullableOFormBuilderState extends State<ArrayNullableOFormBuilder> {
       ArrayNullableOForm.formElements(widget.model),
       null,
       null,
+      initialModel: widget.model,
     );
 
     if (_formModel.form.disabled) {
@@ -191,7 +192,9 @@ class _ArrayNullableOFormBuilderState extends State<ArrayNullableOFormBuilder> {
   @override
   void didUpdateWidget(covariant ArrayNullableOFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel.updateValue(widget.model);
+      _formModel
+        ..updateValue(widget.model)
+        ..commitInitial(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -227,8 +230,12 @@ final _logArrayNullableOForm = Logger.detached('ArrayNullableOForm');
 
 class ArrayNullableOForm
     implements FormModel<ArrayNullableO, ArrayNullableOOutput> {
-  ArrayNullableOForm(this.form, this.path, this._formModel)
-    : initial = form.rawValue;
+  ArrayNullableOForm(
+    this.form,
+    this.path,
+    this._formModel, {
+    ArrayNullableO? initialModel,
+  }) : _ownInitialModel = initialModel;
 
   static const String emailListControlName = "emailList";
 
@@ -249,8 +256,10 @@ class ArrayNullableOForm
 
   final Map<String, bool> _disabled = {};
 
-  @override
-  final Map<String, Object?> initial;
+  ArrayNullableO? _ownInitialModel;
+
+  late Map<String, Object?> _ownInitialRawValue =
+      ArrayNullableOForm.formElements(_ownInitialModel).rawValue;
 
   String someListControlPath() => pathBuilder(someListControlName);
 
@@ -991,8 +1000,26 @@ class ArrayNullableOForm
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.sliceByPath(initialRawValue, path),
     );
+  }
+
+  @override
+  Map<String, Object?> get initialRawValue {
+    return _formModel != null
+        ? _formModel!.initialRawValue
+        : _ownInitialRawValue;
+  }
+
+  ArrayNullableO? get initialModel {
+    return _ownInitialModel;
+  }
+
+  void commitInitial([ArrayNullableO? newModel]) {
+    _ownInitialModel = newModel ?? rawModel;
+    _ownInitialRawValue = ArrayNullableOForm.formElements(
+      _ownInitialModel,
+    ).rawValue;
   }
 
   @override
@@ -1032,55 +1059,6 @@ class ArrayNullableOForm
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");

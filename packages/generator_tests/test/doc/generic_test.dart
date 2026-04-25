@@ -176,6 +176,7 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
       TagsForm.formElements<T>(widget.model),
       null,
       null,
+      initialModel: widget.model,
     );
 
     if (_formModel.form.disabled) {
@@ -218,7 +219,9 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
   @override
   void didUpdateWidget(covariant TagsFormBuilder<T> oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel.updateValue(widget.model);
+      _formModel
+        ..updateValue(widget.model)
+        ..commitInitial(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -253,7 +256,8 @@ class _TagsFormBuilderState<T> extends State<TagsFormBuilder<T>> {
 final _logTagsForm = Logger.detached('TagsForm<T>');
 
 class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
-  TagsForm(this.form, this.path, this._formModel) : initial = form.rawValue;
+  TagsForm(this.form, this.path, this._formModel, {Tags<T>? initialModel})
+    : _ownInitialModel = initialModel;
 
   static const String tagsControlName = "tags";
 
@@ -266,8 +270,11 @@ class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
 
   final Map<String, bool> _disabled = {};
 
-  @override
-  final Map<String, Object?> initial;
+  Tags<T>? _ownInitialModel;
+
+  late Map<String, Object?> _ownInitialRawValue = TagsForm.formElements(
+    _ownInitialModel,
+  ).rawValue;
 
   String tagsControlPath() => pathBuilder(tagsControlName);
 
@@ -443,8 +450,24 @@ class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.sliceByPath(initialRawValue, path),
     );
+  }
+
+  @override
+  Map<String, Object?> get initialRawValue {
+    return _formModel != null
+        ? _formModel!.initialRawValue
+        : _ownInitialRawValue;
+  }
+
+  Tags<T>? get initialModel {
+    return _ownInitialModel;
+  }
+
+  void commitInitial([Tags<T>? newModel]) {
+    _ownInitialModel = newModel ?? rawModel;
+    _ownInitialRawValue = TagsForm.formElements(_ownInitialModel).rawValue;
   }
 
   @override
@@ -484,55 +507,6 @@ class TagsForm<T> implements FormModel<Tags<T>, Tags<T>> {
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");

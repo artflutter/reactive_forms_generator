@@ -147,6 +147,7 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
       UserProfileForm.formElements(widget.model),
       null,
       null,
+      initialModel: widget.model,
     );
 
     if (_formModel.form.disabled) {
@@ -189,7 +190,9 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
   @override
   void didUpdateWidget(covariant UserProfileFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel.updateValue(widget.model);
+      _formModel
+        ..updateValue(widget.model)
+        ..commitInitial(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -224,8 +227,12 @@ class _UserProfileFormBuilderState extends State<UserProfileFormBuilder> {
 final _logUserProfileForm = Logger.detached('UserProfileForm');
 
 class UserProfileForm implements FormModel<UserProfile, UserProfile> {
-  UserProfileForm(this.form, this.path, this._formModel)
-    : initial = form.rawValue;
+  UserProfileForm(
+    this.form,
+    this.path,
+    this._formModel, {
+    UserProfile? initialModel,
+  }) : _ownInitialModel = initialModel;
 
   static const String idControlName = "id";
 
@@ -246,8 +253,11 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
 
   final Map<String, bool> _disabled = {};
 
-  @override
-  final Map<String, Object?> initial;
+  UserProfile? _ownInitialModel;
+
+  late Map<String, Object?> _ownInitialRawValue = UserProfileForm.formElements(
+    _ownInitialModel,
+  ).rawValue;
 
   String idControlPath() => pathBuilder(idControlName);
 
@@ -748,8 +758,26 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.sliceByPath(initialRawValue, path),
     );
+  }
+
+  @override
+  Map<String, Object?> get initialRawValue {
+    return _formModel != null
+        ? _formModel!.initialRawValue
+        : _ownInitialRawValue;
+  }
+
+  UserProfile? get initialModel {
+    return _ownInitialModel;
+  }
+
+  void commitInitial([UserProfile? newModel]) {
+    _ownInitialModel = newModel ?? rawModel;
+    _ownInitialRawValue = UserProfileForm.formElements(
+      _ownInitialModel,
+    ).rawValue;
   }
 
   @override
@@ -789,55 +817,6 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
@@ -881,7 +860,8 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
 final _logAddressForm = Logger.detached('AddressForm');
 
 class AddressForm implements FormModel<Address, Address> {
-  AddressForm(this.form, this.path, this._formModel) : initial = form.rawValue;
+  AddressForm(this.form, this.path, this._formModel, {Address? initialModel})
+    : _ownInitialModel = initialModel;
 
   static const String streetControlName = "street";
 
@@ -898,8 +878,11 @@ class AddressForm implements FormModel<Address, Address> {
 
   final Map<String, bool> _disabled = {};
 
-  @override
-  final Map<String, Object?> initial;
+  Address? _ownInitialModel;
+
+  late Map<String, Object?> _ownInitialRawValue = AddressForm.formElements(
+    _ownInitialModel,
+  ).rawValue;
 
   String streetControlPath() => pathBuilder(streetControlName);
 
@@ -1281,8 +1264,24 @@ class AddressForm implements FormModel<Address, Address> {
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.sliceByPath(initialRawValue, path),
     );
+  }
+
+  @override
+  Map<String, Object?> get initialRawValue {
+    return _formModel != null
+        ? _formModel!.initialRawValue
+        : _ownInitialRawValue;
+  }
+
+  Address? get initialModel {
+    return _ownInitialModel;
+  }
+
+  void commitInitial([Address? newModel]) {
+    _ownInitialModel = newModel ?? rawModel;
+    _ownInitialRawValue = AddressForm.formElements(_ownInitialModel).rawValue;
   }
 
   @override
@@ -1322,55 +1321,6 @@ class AddressForm implements FormModel<Address, Address> {
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
