@@ -1,13 +1,9 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
-import 'package:code_builder/code_builder.dart';
-import 'package:reactive_forms_generator/src/output/x.dart';
+import 'package:code_builder/code_builder.dart' hide FunctionType, RecordType;
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:recase/recase.dart';
-
-// ignore: implementation_imports
-import 'package:analyzer/src/dart/element/type.dart';
 
 import '../utils.dart';
 
@@ -18,6 +14,8 @@ extension ConstructorElementExt on ConstructorElement {
 
 extension ClassElementExt on ClassElement {
   String get fullTypeName => thisType.toString();
+
+  String get toReferenceType => reactiveOutputTypeName(thisType);
 
   String get generics {
     final generics = genericTypes.map((e) => e.symbol).join(', ');
@@ -176,10 +174,11 @@ extension ParameterElementExt on FormalParameterElement {
 
     final typeParameter = typeArguments.first;
 
-    return (typeParameter.element is ClassElement ||
-            typeParameter.element is EnumElement ||
-            typeParameter.element is TypeDefiningElement) &&
-        !typeParameter.element!.hasRfGroupAnnotation;
+    final element = typeParameter.element;
+
+    return element != null &&
+        (element is InterfaceElement || element is TypeAliasElement) &&
+        !element.hasRfGroupAnnotation;
   }
 
   bool get isFormControl {
@@ -225,9 +224,7 @@ extension ParameterElementExt on FormalParameterElement {
       return type.getName(withNullability: false);
     }
 
-    var builder = ElementDisplayStringBuilder2(withNullability: true);
-    (type as TypeImpl).appendTo(builder);
-    return builder.toString();
+    return reactiveOutputTypeName(type);
   }
 
   bool isOutputNullable(List<String> requiredValidators) {
@@ -307,4 +304,210 @@ extension DartTypeExt on DartType {
       NullabilitySuffix.none => name,
     };
   }
+}
+
+String reactiveOutputTypeName(DartType type, {bool withNullability = true}) {
+  return _ReactiveOutputTypeNameWriter(
+    withNullability: withNullability,
+  ).write(type);
+}
+
+class _ReactiveOutputTypeNameWriter {
+  _ReactiveOutputTypeNameWriter({required this.withNullability});
+
+  final bool withNullability;
+
+  String write(DartType type) {
+    return switch (type) {
+      InterfaceType() => _writeInterfaceType(type),
+      RecordType() => _writeRecordType(type),
+      FunctionType() => _writeFunctionType(type),
+      TypeParameterType() => _writeTypeParameterType(type),
+      DynamicType() => 'dynamic',
+      VoidType() => 'void',
+      NeverType() => 'Never${_writeNullability(type)}',
+      InvalidType() => 'InvalidType',
+      _ => _writeFallbackType(type),
+    };
+  }
+
+  String _writeInterfaceType(InterfaceType type) {
+    final element = type.element;
+    final postfix =
+        ElementRfExt(element).hasRfGroupAnnotation ||
+            ElementRfExt(element).hasRfAnnotation
+        ? 'Output'
+        : '';
+
+    return '${element.name ?? '<null>'}$postfix'
+        '${_writeTypeArguments(type.typeArguments)}'
+        '${_writeNullability(type)}';
+  }
+
+  String _writeFunctionType(FunctionType type) {
+    return '${write(type.returnType)} Function'
+        '${_writeTypeParameters(type.typeParameters)}'
+        '${_writeFormalParameters(type.formalParameters)}'
+        '${_writeNullability(type)}';
+  }
+
+  String _writeRecordType(RecordType type) {
+    final positionalFields = type.positionalFields;
+    final namedFields = type.namedFields;
+    final fieldCount = positionalFields.length + namedFields.length;
+    final buffer = StringBuffer('(');
+
+    var index = 0;
+    for (final field in positionalFields) {
+      buffer.write(write(field.type));
+      if (index++ < fieldCount - 1) {
+        buffer.write(', ');
+      }
+    }
+
+    if (namedFields.isNotEmpty) {
+      buffer.write('{');
+      for (final field in namedFields) {
+        buffer
+          ..write(write(field.type))
+          ..write(' ')
+          ..write(field.name);
+        if (index++ < fieldCount - 1) {
+          buffer.write(', ');
+        }
+      }
+      buffer.write('}');
+    }
+
+    if (positionalFields.length == 1 && namedFields.isEmpty) {
+      buffer.write(',');
+    }
+
+    buffer
+      ..write(')')
+      ..write(_writeNullability(type));
+
+    return buffer.toString();
+  }
+
+  String _writeTypeParameterType(TypeParameterType type) {
+    return '${type.element.displayName}${_writeNullability(type)}';
+  }
+
+  String _writeFormalParameters(List<FormalParameterElement> parameters) {
+    final buffer = StringBuffer('(');
+    var lastKind = _FormalParameterKind.none;
+    var lastClose = '';
+
+    void openGroup(_FormalParameterKind kind, String open, String close) {
+      if (lastKind == kind) {
+        return;
+      }
+
+      buffer.write(lastClose);
+      buffer.write(open);
+      lastKind = kind;
+      lastClose = close;
+    }
+
+    for (var i = 0; i < parameters.length; i++) {
+      if (i != 0) {
+        buffer.write(', ');
+      }
+
+      final parameter = parameters[i];
+      if (parameter.isRequiredPositional) {
+        openGroup(_FormalParameterKind.requiredPositional, '', '');
+      } else if (parameter.isOptionalPositional) {
+        openGroup(_FormalParameterKind.optionalPositional, '[', ']');
+      } else if (parameter.isNamed) {
+        openGroup(_FormalParameterKind.named, '{', '}');
+      }
+
+      buffer.write(_writeFormalParameter(parameter));
+    }
+
+    buffer
+      ..write(lastClose)
+      ..write(')');
+
+    return buffer.toString();
+  }
+
+  String _writeFormalParameter(FormalParameterElement parameter) {
+    final buffer = StringBuffer();
+    if (parameter.isRequiredNamed) {
+      buffer.write('required ');
+    }
+
+    buffer.write(write(parameter.type));
+    if (parameter.isNamed) {
+      final name = parameter.name;
+      if (name != null) {
+        buffer.write(' $name');
+      }
+    }
+
+    return buffer.toString();
+  }
+
+  String _writeTypeArguments(List<DartType> typeArguments) {
+    if (typeArguments.isEmpty) {
+      return '';
+    }
+
+    return '<${typeArguments.map(write).join(', ')}>';
+  }
+
+  String _writeTypeParameters(List<TypeParameterElement> elements) {
+    if (elements.isEmpty) {
+      return '';
+    }
+
+    return '<${elements.map(_writeTypeParameter).join(', ')}>';
+  }
+
+  String _writeTypeParameter(TypeParameterElement element) {
+    final buffer = StringBuffer(element.name ?? element.displayName);
+    final bound = element.bound;
+    if (bound != null) {
+      buffer
+        ..write(' extends ')
+        ..write(write(bound));
+    }
+
+    return buffer.toString();
+  }
+
+  String _writeNullability(DartType type) {
+    if (!withNullability) {
+      return '';
+    }
+
+    return switch (type.nullabilitySuffix) {
+      NullabilitySuffix.question => '?',
+      NullabilitySuffix.star => '*',
+      NullabilitySuffix.none => '',
+    };
+  }
+
+  String _writeFallbackType(DartType type) {
+    final name = type.getDisplayString();
+    if (withNullability) {
+      return name;
+    }
+
+    return switch (type.nullabilitySuffix) {
+      NullabilitySuffix.question ||
+      NullabilitySuffix.star => name.substring(0, name.length - 1),
+      NullabilitySuffix.none => name,
+    };
+  }
+}
+
+enum _FormalParameterKind {
+  none,
+  requiredPositional,
+  optionalPositional,
+  named,
 }

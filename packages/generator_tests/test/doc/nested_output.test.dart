@@ -211,6 +211,7 @@ class _SubGroupOFormBuilderState extends State<SubGroupOFormBuilder> {
       SubGroupOForm.formElements(widget.model),
       null,
       null,
+      initialModel: widget.model,
     );
 
     if (_formModel.form.disabled) {
@@ -253,7 +254,9 @@ class _SubGroupOFormBuilderState extends State<SubGroupOFormBuilder> {
   @override
   void didUpdateWidget(covariant SubGroupOFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel.updateValue(widget.model);
+      _formModel
+        ..updateValue(widget.model)
+        ..commitInitial(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -288,8 +291,12 @@ class _SubGroupOFormBuilderState extends State<SubGroupOFormBuilder> {
 final _logSubGroupOForm = Logger.detached('SubGroupOForm');
 
 class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
-  SubGroupOForm(this.form, this.path, this._formModel)
-    : initial = form.rawValue;
+  SubGroupOForm(
+    this.form,
+    this.path,
+    this._formModel, {
+    SubGroupO? initialModel,
+  }) : _ownInitialModel = initialModel;
 
   static const String idControlName = "id";
 
@@ -302,8 +309,11 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
 
   final Map<String, bool> _disabled = {};
 
-  @override
-  final Map<String, Object?> initial;
+  SubGroupO? _ownInitialModel;
+
+  late Map<String, Object?> _ownInitialRawValue = SubGroupOForm.formElements(
+    _ownInitialModel,
+  ).rawValue;
 
   String idControlPath() => pathBuilder(idControlName);
 
@@ -454,8 +464,24 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.sliceByPath(initialRawValue, path),
     );
+  }
+
+  @override
+  Map<String, Object?> get initialRawValue {
+    return _formModel != null
+        ? _formModel!.initialRawValue
+        : _ownInitialRawValue;
+  }
+
+  SubGroupO? get initialModel {
+    return _ownInitialModel;
+  }
+
+  void commitInitial([SubGroupO? newModel]) {
+    _ownInitialModel = newModel ?? rawModel;
+    _ownInitialRawValue = SubGroupOForm.formElements(_ownInitialModel).rawValue;
   }
 
   @override
@@ -495,55 +521,6 @@ class SubGroupOForm implements FormModel<SubGroupO, SubGroupOOutput> {
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
@@ -950,7 +927,12 @@ class _GroupOFormBuilderState extends State<GroupOFormBuilder> {
 
   @override
   void initState() {
-    _formModel = GroupOForm(GroupOForm.formElements(widget.model), null, null);
+    _formModel = GroupOForm(
+      GroupOForm.formElements(widget.model),
+      null,
+      null,
+      initialModel: widget.model,
+    );
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -992,7 +974,9 @@ class _GroupOFormBuilderState extends State<GroupOFormBuilder> {
   @override
   void didUpdateWidget(covariant GroupOFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel.updateValue(widget.model);
+      _formModel
+        ..updateValue(widget.model)
+        ..commitInitial(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -1027,7 +1011,8 @@ class _GroupOFormBuilderState extends State<GroupOFormBuilder> {
 final _logGroupOForm = Logger.detached('GroupOForm');
 
 class GroupOForm implements FormModel<GroupO, GroupOOutput> {
-  GroupOForm(this.form, this.path, this._formModel) : initial = form.rawValue;
+  GroupOForm(this.form, this.path, this._formModel, {GroupO? initialModel})
+    : _ownInitialModel = initialModel;
 
   static const String idControlName = "id";
 
@@ -1042,8 +1027,11 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
 
   final Map<String, bool> _disabled = {};
 
-  @override
-  final Map<String, Object?> initial;
+  GroupO? _ownInitialModel;
+
+  late Map<String, Object?> _ownInitialRawValue = GroupOForm.formElements(
+    _ownInitialModel,
+  ).rawValue;
 
   String idControlPath() => pathBuilder(idControlName);
 
@@ -1385,8 +1373,24 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.sliceByPath(initialRawValue, path),
     );
+  }
+
+  @override
+  Map<String, Object?> get initialRawValue {
+    return _formModel != null
+        ? _formModel!.initialRawValue
+        : _ownInitialRawValue;
+  }
+
+  GroupO? get initialModel {
+    return _ownInitialModel;
+  }
+
+  void commitInitial([GroupO? newModel]) {
+    _ownInitialModel = newModel ?? rawModel;
+    _ownInitialRawValue = GroupOForm.formElements(_ownInitialModel).rawValue;
   }
 
   @override
@@ -1426,55 +1430,6 @@ class GroupOForm implements FormModel<GroupO, GroupOOutput> {
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
@@ -1863,6 +1818,7 @@ class _NestedOFormBuilderState extends State<NestedOFormBuilder> {
       NestedOForm.formElements(widget.model),
       null,
       null,
+      initialModel: widget.model,
     );
 
     if (_formModel.form.disabled) {
@@ -1905,7 +1861,9 @@ class _NestedOFormBuilderState extends State<NestedOFormBuilder> {
   @override
   void didUpdateWidget(covariant NestedOFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel.updateValue(widget.model);
+      _formModel
+        ..updateValue(widget.model)
+        ..commitInitial(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -1940,7 +1898,8 @@ class _NestedOFormBuilderState extends State<NestedOFormBuilder> {
 final _logNestedOForm = Logger.detached('NestedOForm');
 
 class NestedOForm implements FormModel<NestedO, NestedOOutput> {
-  NestedOForm(this.form, this.path, this._formModel) : initial = form.rawValue;
+  NestedOForm(this.form, this.path, this._formModel, {NestedO? initialModel})
+    : _ownInitialModel = initialModel;
 
   static const String groupListControlName = "groupList";
 
@@ -1953,8 +1912,11 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
 
   final Map<String, bool> _disabled = {};
 
-  @override
-  final Map<String, Object?> initial;
+  NestedO? _ownInitialModel;
+
+  late Map<String, Object?> _ownInitialRawValue = NestedOForm.formElements(
+    _ownInitialModel,
+  ).rawValue;
 
   String groupListControlPath() => pathBuilder(groupListControlName);
 
@@ -2215,8 +2177,24 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.sliceByPath(initialRawValue, path),
     );
+  }
+
+  @override
+  Map<String, Object?> get initialRawValue {
+    return _formModel != null
+        ? _formModel!.initialRawValue
+        : _ownInitialRawValue;
+  }
+
+  NestedO? get initialModel {
+    return _ownInitialModel;
+  }
+
+  void commitInitial([NestedO? newModel]) {
+    _ownInitialModel = newModel ?? rawModel;
+    _ownInitialRawValue = NestedOForm.formElements(_ownInitialModel).rawValue;
   }
 
   @override
@@ -2256,55 +2234,6 @@ class NestedOForm implements FormModel<NestedO, NestedOOutput> {
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");

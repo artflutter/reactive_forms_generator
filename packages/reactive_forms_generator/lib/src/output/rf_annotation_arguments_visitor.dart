@@ -11,24 +11,68 @@ import 'package:reactive_forms_generator/src/output/extensions.dart';
 // import 'package:reactive_forms_generator/src/types.dart';
 // import 'package:analyzer/src/dart/element/element.dart';
 
-class RfAnnotationArgumentsVisitor extends RecursiveAstVisitor<dynamic> {
-  final arguments = <String, String>{};
+extension RfAnnotationArguments on Annotation {
+  Expression? namedArgument(String name) {
+    final argumentList = arguments;
+    if (argumentList == null) {
+      return null;
+    }
 
-  @override
-  visitArgumentList(ArgumentList node) {
-    for (var argument in node.arguments) {
-      if (argument is NamedExpression) {
-        arguments.addEntries([
-          MapEntry(
-            argument.name.label.name,
-            argument.expression.toSource().toString(),
-          ),
-        ]);
-      } else {
-        // For positional arguments
+    for (final argument in argumentList.arguments) {
+      if (argument is NamedExpression && argument.name.label.name == name) {
+        return argument.expression;
       }
     }
-    return super.visitArgumentList(node);
+
+    return null;
+  }
+
+  Map<String, String> get namedArgumentSources {
+    final argumentList = arguments;
+    if (argumentList == null) {
+      return const <String, String>{};
+    }
+
+    final result = <String, String>{};
+    for (final argument in argumentList.arguments) {
+      if (argument is NamedExpression) {
+        result[argument.name.label.name] = argument.expression.toSource();
+      }
+    }
+
+    return result;
+  }
+}
+
+extension RfParameterAnnotation on FormalParameter {
+  Annotation? get rfAnnotation {
+    for (final annotation in metadata) {
+      final name = annotation.name.toSource().split('.').last;
+      if (name.startsWith('Rf')) {
+        return annotation;
+      }
+    }
+
+    return null;
+  }
+}
+
+extension RfValidatorArgument on Expression? {
+  bool containsAnyValidator(Iterable<String> validators) {
+    final expression = this;
+    if (expression == null) {
+      return false;
+    }
+
+    if (expression is ListLiteral) {
+      return expression.elements.any((element) {
+        final source = element.toSource();
+        return validators.any(source.contains);
+      });
+    }
+
+    final source = expression.toSource();
+    return validators.any(source.contains);
   }
 }
 
@@ -49,7 +93,6 @@ class ClassRenameVisitor extends GeneralizingAstVisitor<void> {
             .toList(),
         augmentKeyword: node.augmentKeyword,
         abstractKeyword: node.abstractKeyword,
-        macroKeyword: node.macroKeyword,
         sealedKeyword: node.sealedKeyword,
         baseKeyword: node.baseKeyword,
         interfaceKeyword: node.interfaceKeyword,
@@ -57,6 +100,7 @@ class ClassRenameVisitor extends GeneralizingAstVisitor<void> {
         mixinKeyword: node.mixinKeyword,
         classKeyword: node.classKeyword,
         name: StringToken(TokenType.STRING, '${node.name.lexeme}Output', 0),
+        namePart: ClassNamePartImplStub(),
         typeParameters: node.typeParameters,
         extendsClause: node.extendsClause,
         withClause: node.withClause != null
@@ -78,6 +122,7 @@ class ClassRenameVisitor extends GeneralizingAstVisitor<void> {
             : null,
         implementsClause: node.implementsClause,
         nativeClause: node.nativeClause,
+        body: ClassBodyImplStub(),
         leftBracket: node.leftBracket,
         members: node.members.map((e) {
           return switch (e) {

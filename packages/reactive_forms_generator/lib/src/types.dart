@@ -78,40 +78,6 @@ extension NodeListImplAnnotationImplExt on NodeListImpl<AnnotationImpl> {
   }
 }
 
-extension on Annotatable {
-  Map<String, String> annotationParams1(TypeChecker? typeChecker) {
-    final result = <String, String>{};
-    final annotation = typeChecker?.firstAnnotationOf(this);
-    try {
-      if (annotation != null) {
-        for (final meta in metadata.annotations) {
-          final obj = meta.computeConstantValue()!;
-
-          final isExactlyType = typeChecker?.isExactlyType(obj.type!) ?? false;
-          if (isExactlyType) {
-            final argumentList =
-                (meta as ElementAnnotationImpl).annotationAst.arguments
-                    as ArgumentListImpl;
-            for (var argument in argumentList.arguments) {
-              final argumentNamedExpression = argument as NamedExpressionImpl;
-              result.addEntries([
-                MapEntry(
-                  argumentNamedExpression.name.label.toSource(),
-                  argumentNamedExpression.expression.toSource(),
-                ),
-              ]);
-            }
-          }
-        }
-      }
-
-      return result;
-    } catch (e) {
-      return result;
-    }
-  }
-}
-
 // extension FormalParameterElementExt on FormalParameterElement {
 //   Map<String, String> annotationParams(TypeChecker? typeChecker) {
 //     final result = <String, String>{};
@@ -168,11 +134,34 @@ extension ElementRfExt on Element {
 
   Map<String, String> annotationParams(TypeChecker? typeChecker) {
     final result = <String, String>{};
-    if (this is Annotatable) {
-      return (this as Annotatable).annotationParams1(typeChecker);
-    }
+    final annotation = typeChecker?.firstAnnotationOf(this);
+    try {
+      if (annotation != null) {
+        for (final meta in metadata.annotations) {
+          final obj = meta.computeConstantValue();
 
-    return result;
+          final type = obj?.type;
+          if (type != null && typeChecker?.isExactlyType(type) == true) {
+            final argumentList =
+                (meta as ElementAnnotationImpl).annotationAst.arguments
+                    as ArgumentListImpl;
+            for (var argument in argumentList.arguments) {
+              final argumentNamedExpression = argument as NamedExpressionImpl;
+              result.addEntries([
+                MapEntry(
+                  argumentNamedExpression.name.label.toSource(),
+                  argumentNamedExpression.expression.toSource(),
+                ),
+              ]);
+            }
+          }
+        }
+      }
+
+      return result;
+    } catch (e) {
+      return result;
+    }
     // final annotation = typeChecker?.firstAnnotationOf(this);
     // try {
     //   if (annotation != null) {
