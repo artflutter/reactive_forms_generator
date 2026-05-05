@@ -95,18 +95,48 @@ extension on ClassDeclarationImpl {
       finalKeyword: finalKeyword,
       mixinKeyword: mixinKeyword,
       classKeyword: classKeyword,
-      name: _outputToken(name.lexeme),
-      namePart: ClassNamePartImplStub(),
-      typeParameters: typeParameters,
+      namePart: namePart.outputClassNamePart,
       extendsClause: extendsClause,
       withClause: withClause?.outputWithClause,
       implementsClause: implementsClause,
       nativeClause: nativeClause,
-      body: ClassBodyImplStub(),
-      leftBracket: leftBracket,
-      members: members.map((member) => member.outputMember).toList(),
-      rightBracket: rightBracket,
+      body: body.outputClassBody,
     );
+  }
+}
+
+extension on ClassNamePartImpl {
+  ClassNamePartImpl get outputClassNamePart {
+    return switch (this) {
+      final NameWithTypeParametersImpl part => NameWithTypeParametersImpl(
+        typeName: _outputToken(part.typeName.lexeme),
+        typeParameters: part.typeParameters,
+      ),
+      final PrimaryConstructorDeclarationImpl part =>
+        PrimaryConstructorDeclarationImpl(
+          constKeyword: part.constKeyword,
+          typeName: _outputToken(part.typeName.lexeme),
+          typeParameters: part.typeParameters,
+          constructorName: part.constructorName,
+          formalParameters: part.formalParameters,
+        ),
+    };
+  }
+}
+
+extension on ClassBodyImpl {
+  ClassBodyImpl get outputClassBody {
+    return switch (this) {
+      final BlockClassBodyImpl body => BlockClassBodyImpl(
+        leftBracket: body.leftBracket,
+        members: body.members.map((member) => member.outputMember).toList(),
+        rightBracket: body.rightBracket,
+      ),
+      final EmptyClassBodyImpl body => EmptyClassBodyImpl(
+        semicolon: body.semicolon,
+      ),
+      _ => this,
+    };
   }
 }
 
@@ -125,12 +155,14 @@ extension on ClassMemberImpl {
       final ConstructorDeclarationImpl member => member.outputConstructor,
       final FieldDeclarationImpl member => member.outputField,
       final MethodDeclarationImpl member => member,
+      final PrimaryConstructorBodyImpl member => member,
     };
   }
 }
 
 extension on ConstructorDeclarationImpl {
   ConstructorDeclarationImpl get outputConstructor {
+    final typeName = this.typeName;
     return ConstructorDeclarationImpl(
       comment: null,
       metadata: metadata,
@@ -138,14 +170,17 @@ extension on ConstructorDeclarationImpl {
       externalKeyword: externalKeyword,
       constKeyword: constKeyword,
       factoryKeyword: factoryKeyword,
-      returnType: SimpleIdentifierImpl(token: _outputToken(returnType.name)),
+      newKeyword: newKeyword,
+      typeName: typeName == null
+          ? null
+          : SimpleIdentifierImpl(token: _outputToken(typeName.name)),
       period: period,
       name: name,
       parameters: parameters,
       separator: separator,
       initializers: initializers,
       redirectedConstructor: redirectedConstructor?.outputConstructorName,
-      body: body.outputBody(returnType.name),
+      body: body.outputBody(typeName?.name),
     );
   }
 }
@@ -161,7 +196,7 @@ extension on ConstructorNameImpl {
 }
 
 extension on FunctionBodyImpl {
-  FunctionBodyImpl outputBody(String returnTypeName) {
+  FunctionBodyImpl outputBody(String? returnTypeName) {
     return switch (this) {
       final ExpressionFunctionBodyImpl body => body.outputExpressionBody(
         returnTypeName,
@@ -172,7 +207,7 @@ extension on FunctionBodyImpl {
 }
 
 extension on ExpressionFunctionBodyImpl {
-  ExpressionFunctionBodyImpl outputExpressionBody(String returnTypeName) {
+  ExpressionFunctionBodyImpl outputExpressionBody(String? returnTypeName) {
     return ExpressionFunctionBodyImpl(
       keyword: keyword,
       star: star,
@@ -184,7 +219,7 @@ extension on ExpressionFunctionBodyImpl {
 }
 
 extension on ExpressionImpl {
-  ExpressionImpl outputExpression(String returnTypeName) {
+  ExpressionImpl outputExpression(String? returnTypeName) {
     return switch (this) {
       final MethodInvocationImpl expression =>
         expression.outputMethodInvocation(returnTypeName),
@@ -194,7 +229,11 @@ extension on ExpressionImpl {
 }
 
 extension on MethodInvocationImpl {
-  MethodInvocationImpl outputMethodInvocation(String returnTypeName) {
+  MethodInvocationImpl outputMethodInvocation(String? returnTypeName) {
+    if (returnTypeName == null) {
+      return this;
+    }
+
     return MethodInvocationImpl(
       target: target,
       operator: operator,
