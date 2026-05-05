@@ -115,10 +115,9 @@ class User {
 ''',
   ).unit;
 
-  return unit.declarations
-      .whereType<ClassDeclaration>()
-      .single
-      .members
+  final classBody = unit.declarations.whereType<ClassDeclaration>().single.body;
+
+  return (classBody as BlockClassBody).members
       .whereType<ConstructorDeclaration>()
       .single
       .parameters
