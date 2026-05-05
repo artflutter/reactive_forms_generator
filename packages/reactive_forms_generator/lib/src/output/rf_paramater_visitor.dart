@@ -14,7 +14,7 @@ import "package:collection/collection.dart";
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
 import 'package:reactive_forms_generator/src/output/extensions.dart';
 import 'package:reactive_forms_generator/src/types.dart';
-import 'package:reactive_forms_generator/src/output/rf_annotation_arguments_visitor.dart';
+import 'package:reactive_forms_generator/src/output/rf_annotation_arguments.dart';
 import 'package:analyzer/dart/ast/token.dart';
 import 'package:analyzer/src/dart/ast/token.dart';
 import 'package:analyzer/src/dart/ast/utilities.dart';
