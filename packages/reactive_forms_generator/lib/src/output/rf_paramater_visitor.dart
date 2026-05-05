@@ -14,8 +14,7 @@ import "package:collection/collection.dart";
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
 import 'package:reactive_forms_generator/src/output/extensions.dart';
 import 'package:reactive_forms_generator/src/types.dart';
-import 'package:reactive_forms_generator/src/output/rf_annotation_arguments_visitor.dart';
-import 'package:reactive_forms_generator/src/output/rf_annotation_visitor.dart';
+import 'package:reactive_forms_generator/src/output/rf_annotation_arguments.dart';
 import 'package:analyzer/dart/ast/token.dart';
 import 'package:analyzer/src/dart/ast/token.dart';
 import 'package:analyzer/src/dart/ast/utilities.dart';
@@ -157,22 +156,11 @@ class RfParameterVisitor extends GeneralizingAstVisitor<dynamic> {
   @override
   visitFormalParameterList(FormalParameterList node) {
     for (var e in node.parameters) {
-      final rfAnnotationVisitor = RfAnnotationVisitor();
-      final rfAnnotationArguments = RfAnnotationArgumentsVisitor();
-      e.visitChildren(rfAnnotationVisitor);
+      final validators = e.rfAnnotation?.namedArgument(
+        FormElementGenerator.validatorKey,
+      );
 
-      if (rfAnnotationVisitor.rfAnnotation != null) {
-        e.visitChildren(rfAnnotationArguments);
-      }
-
-      final validators =
-          rfAnnotationArguments.arguments[FormElementGenerator.validatorKey];
-
-      final p = requiredValidators.fold(false, (acc, e) {
-        return acc || validators?.contains(e) == true;
-      });
-
-      if (p) {
+      if (validators.containsAnyValidator(requiredValidators)) {
         fieldFormalParameter[e.name.toString()] = e;
       }
     }

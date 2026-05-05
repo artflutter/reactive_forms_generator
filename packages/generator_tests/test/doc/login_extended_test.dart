@@ -256,6 +256,7 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
       LoginExtendedForm.formElements(widget.model),
       null,
       null,
+      initialModel: widget.model,
     );
 
     if (_formModel.form.disabled) {
@@ -298,7 +299,9 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
   @override
   void didUpdateWidget(covariant LoginExtendedFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel.updateValue(widget.model);
+      _formModel
+        ..updateValue(widget.model)
+        ..commitInitial(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -333,8 +336,12 @@ class _LoginExtendedFormBuilderState extends State<LoginExtendedFormBuilder> {
 final _logLoginExtendedForm = Logger.detached('LoginExtendedForm');
 
 class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
-  LoginExtendedForm(this.form, this.path, this._formModel)
-    : initial = form.rawValue;
+  LoginExtendedForm(
+    this.form,
+    this.path,
+    this._formModel, {
+    LoginExtended? initialModel,
+  }) : _ownInitialModel = initialModel;
 
   static const String emailControlName = "email";
 
@@ -363,8 +370,10 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
 
   final Map<String, bool> _disabled = {};
 
-  @override
-  final Map<String, Object?> initial;
+  LoginExtended? _ownInitialModel;
+
+  late Map<String, Object?> _ownInitialRawValue =
+      LoginExtendedForm.formElements(_ownInitialModel).rawValue;
 
   String emailControlPath() => pathBuilder(emailControlName);
 
@@ -1186,8 +1195,26 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.sliceByPath(initialRawValue, path),
     );
+  }
+
+  @override
+  Map<String, Object?> get initialRawValue {
+    return _formModel != null
+        ? _formModel!.initialRawValue
+        : _ownInitialRawValue;
+  }
+
+  LoginExtended? get initialModel {
+    return _ownInitialModel;
+  }
+
+  void commitInitial([LoginExtended? newModel]) {
+    _ownInitialModel = newModel ?? rawModel;
+    _ownInitialRawValue = LoginExtendedForm.formElements(
+      _ownInitialModel,
+    ).rawValue;
   }
 
   @override
@@ -1227,55 +1254,6 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
     updateParent: updateParent,
     emitEvent: emitEvent,
   );
-
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
 
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");

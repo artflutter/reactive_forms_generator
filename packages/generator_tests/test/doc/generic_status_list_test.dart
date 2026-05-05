@@ -189,6 +189,7 @@ class _StatusListFormBuilderState<T extends Enum>
       StatusListForm.formElements<T>(widget.model),
       null,
       null,
+      initialModel: widget.model,
     );
 
     if (_formModel.form.disabled) {
@@ -231,7 +232,9 @@ class _StatusListFormBuilderState<T extends Enum>
   @override
   void didUpdateWidget(covariant StatusListFormBuilder<T> oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel.updateValue(widget.model);
+      _formModel
+        ..updateValue(widget.model)
+        ..commitInitial(widget.model);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -267,8 +270,12 @@ final _logStatusListForm = Logger.detached('StatusListForm<T>');
 
 class StatusListForm<T extends Enum>
     implements FormModel<StatusList<T>, StatusList<T>> {
-  StatusListForm(this.form, this.path, this._formModel)
-    : initial = form.rawValue;
+  StatusListForm(
+    this.form,
+    this.path,
+    this._formModel, {
+    StatusList<T>? initialModel,
+  }) : _ownInitialModel = initialModel;
 
   static const String listControlName = "list";
 
@@ -281,14 +288,17 @@ class StatusListForm<T extends Enum>
 
   final Map<String, bool> _disabled = {};
 
-  @override
-  final Map<String, Object?> initial;
+  StatusList<T>? _ownInitialModel;
+
+  late Map<String, Object?> _ownInitialRawValue = StatusListForm.formElements(
+    _ownInitialModel,
+  ).rawValue;
 
   String listControlPath() => pathBuilder(listControlName);
 
-  List<T?> get _listValue => listControl.rawValue.whereType<T?>().toList();
+  List<T?> get _listValue => listControl.value ?? const [];
 
-  List<T?> get _listRawValue => listControl.rawValue.whereType<T?>().toList();
+  List<T?> get _listRawValue => listControl.value ?? const [];
 
   bool get containsList {
     try {
@@ -341,11 +351,8 @@ class StatusListForm<T extends Enum>
     disabled: disabled,
   );
 
-  FormArray<T> get listControl =>
-      form.control(listControlPath()) as FormArray<T>;
-
-  List<FormControl<T>> get listControlControls =>
-      listControl.controls.cast<FormControl<T>>();
+  FormControl<List<T?>> get listControl =>
+      form.control(listControlPath()) as FormControl<List<T?>>;
 
   void listSetDisabled(
     bool disabled, {
@@ -363,48 +370,6 @@ class StatusListForm<T extends Enum>
         emitEvent: emitEvent,
       );
     }
-  }
-
-  void addListItem(
-    T? value, {
-    List<AsyncValidator<dynamic>>? asyncValidators,
-    List<Validator<dynamic>>? validators,
-    int? asyncValidatorsDebounceTime,
-    bool? disabled,
-    ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
-  }) {
-    List<Validator<dynamic>> resultingValidators = [];
-    List<AsyncValidator<dynamic>> resultingAsyncValidators = [];
-
-    switch (validatorsApplyMode) {
-      case ValidatorsApplyMode.merge:
-        if (validators != null) {
-          resultingValidators.addAll(validators);
-        }
-        if (asyncValidators != null) {
-          resultingAsyncValidators.addAll(asyncValidators);
-        }
-        break;
-      case ValidatorsApplyMode.override:
-        if (validators != null) {
-          resultingValidators = validators;
-        }
-
-        if (asyncValidators != null) {
-          resultingAsyncValidators = asyncValidators;
-        }
-        break;
-    }
-
-    listControl.add(
-      FormControl<T>(
-        value: value,
-        validators: resultingValidators,
-        asyncValidators: resultingAsyncValidators,
-        asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
-        disabled: disabled ?? false,
-      ),
-    );
   }
 
   @override
@@ -480,8 +445,26 @@ class StatusListForm<T extends Enum>
   bool get hasChanged {
     return !const DeepCollectionEquality().equals(
       currentForm.rawValue,
-      initial,
+      FormModel.sliceByPath(initialRawValue, path),
     );
+  }
+
+  @override
+  Map<String, Object?> get initialRawValue {
+    return _formModel != null
+        ? _formModel!.initialRawValue
+        : _ownInitialRawValue;
+  }
+
+  StatusList<T>? get initialModel {
+    return _ownInitialModel;
+  }
+
+  void commitInitial([StatusList<T>? newModel]) {
+    _ownInitialModel = newModel ?? rawModel;
+    _ownInitialRawValue = StatusListForm.formElements(
+      _ownInitialModel,
+    ).rawValue;
   }
 
   @override
@@ -522,77 +505,19 @@ class StatusListForm<T extends Enum>
     emitEvent: emitEvent,
   );
 
-  @override
-  void updateInitial(Map<String, Object?>? value, String? path) {
-    if (_formModel != null) {
-      _formModel?.updateInitial(currentForm.rawValue, path);
-      return;
-    }
-
-    if (value == null) return;
-
-    if (path == null || path.isEmpty) {
-      initial.addAll(value);
-      return;
-    }
-
-    final keys = path.split('.');
-    Object? current = initial;
-    for (var i = 0; i < keys.length - 1; i++) {
-      final key = keys[i];
-
-      if (current is List) {
-        final index = int.tryParse(key);
-        if (index != null && index >= 0 && index < current.length) {
-          current = current[index];
-          continue;
-        }
-      }
-
-      if (current is Map) {
-        if (!current.containsKey(key)) {
-          current[key] = <String, Object?>{};
-        }
-        current = current[key];
-        continue;
-      }
-
-      return;
-    }
-
-    final key = keys.last;
-    if (current is List) {
-      final index = int.tryParse(key);
-      if (index != null && index >= 0 && index < current.length) {
-        current[index] = value;
-      }
-    } else if (current is Map) {
-      current[key] = value;
-    }
-  }
-
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
 
   static FormGroup formElements<T extends Enum>(StatusList<T>? statusList) =>
       FormGroup(
         {
-          listControlName: FormArray<T>(
-            (statusList?.list ?? [])
-                .map(
-                  (e) => FormControl<T>(
-                    value: e,
-                    validators: [],
-                    asyncValidators: [],
-                    asyncValidatorsDebounceTime: 250,
-                    disabled: false,
-                  ),
-                )
-                .toList(),
+          listControlName: FormControl<List<T?>>(
+            value: statusList?.list,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
+            touched: false,
           ),
         },
         validators: [],

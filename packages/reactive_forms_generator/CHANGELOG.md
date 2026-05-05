@@ -1,3 +1,8 @@
+## [8.5.0-beta9]
+
+* analyzer 9 compatibility
+* refactor annotation argument parsing
+
 ## [8.4.0]
 
 * fix hasChanges

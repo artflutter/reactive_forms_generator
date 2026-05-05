@@ -6,7 +6,7 @@ import 'package:reactive_forms_generator/src/form_elements/form_element_generato
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:reactive_forms_generator/src/extensions.dart';
 import 'package:recase/recase.dart';
-import 'package:source_gen/src/type_checker.dart';
+import 'package:source_gen/source_gen.dart';
 
 import 'package:analyzer/src/dart/element/element.dart' as e;
 

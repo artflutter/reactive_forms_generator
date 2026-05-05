@@ -1,3 +1,7 @@
+## [8.5.0-beta9]
+
+* analyzer 9 compatibility
+
 ## [8.3.0]
 
 * hasChanges fix

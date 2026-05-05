@@ -722,7 +722,7 @@ class FormGenerator {
     // );
 
     // final astDeclaration = classNode as u.ClassDeclarationImpl;
-    final renamedClass = ClassRenameVisitor();
+    const renamedClass = ClassRenameVisitor();
     ast.accept(renamedClass);
 
     final x = ast.declarations;
