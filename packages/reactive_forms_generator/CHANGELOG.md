@@ -1,3 +1,8 @@
+## [7.5.0-beta9]
+
+* analyzer 9 support
+* require Dart 3.9
+
 ## [7.5.0-beta2]
 
 * fix hasChanges (backport of #210)

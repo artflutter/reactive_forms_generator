@@ -49,7 +49,6 @@ class ClassRenameVisitor extends GeneralizingAstVisitor<void> {
             .toList(),
         augmentKeyword: node.augmentKeyword,
         abstractKeyword: node.abstractKeyword,
-        macroKeyword: node.macroKeyword,
         sealedKeyword: node.sealedKeyword,
         baseKeyword: node.baseKeyword,
         interfaceKeyword: node.interfaceKeyword,
@@ -57,6 +56,7 @@ class ClassRenameVisitor extends GeneralizingAstVisitor<void> {
         mixinKeyword: node.mixinKeyword,
         classKeyword: node.classKeyword,
         name: StringToken(TokenType.STRING, '${node.name.lexeme}Output', 0),
+        namePart: ClassNamePartImplStub(),
         typeParameters: node.typeParameters,
         extendsClause: node.extendsClause,
         withClause: node.withClause != null
@@ -78,6 +78,7 @@ class ClassRenameVisitor extends GeneralizingAstVisitor<void> {
             : null,
         implementsClause: node.implementsClause,
         nativeClause: node.nativeClause,
+        body: ClassBodyImplStub(),
         leftBracket: node.leftBracket,
         members: node.members.map((e) {
           return switch (e) {

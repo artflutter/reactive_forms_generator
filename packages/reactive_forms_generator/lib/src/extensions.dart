@@ -176,10 +176,15 @@ extension ParameterElementExt on FormalParameterElement {
 
     final typeParameter = typeArguments.first;
 
-    return (typeParameter.element is ClassElement ||
-            typeParameter.element is EnumElement ||
-            typeParameter.element is TypeDefiningElement) &&
-        !typeParameter.element!.hasRfGroupAnnotation;
+    final element = typeParameter.element;
+
+    return element != null &&
+        (element is ClassElement ||
+            element is EnumElement ||
+            element is TypeAliasElement ||
+            element is TypeParameterElement ||
+            element is ExtensionTypeElement) &&
+        !element.hasRfGroupAnnotation;
   }
 
   bool get isFormControl {
