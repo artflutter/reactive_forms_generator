@@ -1,3 +1,8 @@
+## [8.5.0-beta11]
+
+* analyzer 12 compatibility
+* sdk: '>=3.10.0 <4.0.0'
+
 ## [8.5.0-beta10]
 
 * analyzer 10 compatibility
