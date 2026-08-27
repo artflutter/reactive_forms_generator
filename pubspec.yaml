@@ -13,12 +13,6 @@ dev_dependencies:
   build_runner: ^2.4.15
   melos: ^7.0.0-dev.7
 
-# analyzer 11 requires meta ^1.18.0 while flutter_test (Flutter <=3.41) pins meta 1.17.0.
-# freezed has no analyzer 11 release (3.2.5 caps at <11, 3.2.6-dev jumps to ^12) —
-# force analyzer 11 for the dev-only freezed used in generator_tests/example goldens.
 dependency_overrides:
   meta: ^1.18.0
-  analyzer: ^11.0.0
-  _fe_analyzer_shared: ^97.0.0
-  freezed: 3.2.6-dev.1
-  json_serializable: ^6.13.1
+  test_api: 0.7.12
