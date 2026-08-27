@@ -1,3 +1,7 @@
+## [7.5.0-beta10]
+
+* align beta release with `reactive_forms_generator`
+
 ## [7.5.0-beta9]
 
 * require Dart 3.9

@@ -13,12 +13,12 @@ import 'package:analyzer/dart/ast/visitor.dart';
 import "package:collection/collection.dart";
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
 import 'package:reactive_forms_generator/src/output/extensions.dart';
+import 'package:reactive_forms_generator/src/output/helpers.dart';
 import 'package:reactive_forms_generator/src/types.dart';
 import 'package:reactive_forms_generator/src/output/rf_annotation_arguments_visitor.dart';
 import 'package:reactive_forms_generator/src/output/rf_annotation_visitor.dart';
 import 'package:analyzer/dart/ast/token.dart';
 import 'package:analyzer/src/dart/ast/token.dart';
-import 'package:analyzer/src/dart/ast/utilities.dart';
 import 'package:analyzer/src/dart/element/element.dart';
 
 class RfParameterVisitor extends GeneralizingAstVisitor<dynamic> {
@@ -80,7 +80,7 @@ class RfParameterVisitor extends GeneralizingAstVisitor<dynamic> {
 
         if ( /*!isNullable &&*/ (hasRfGroupAnnotation || isList) &&
             (hasDefaultValue || hasDefaultAnnotation)) {
-          NodeReplacer.replace(node, node.newParameter2);
+          replaceNode(node, node.newParameter2);
         }
         // if (node.metadata.required) {
         //   NodeReplacer.replace(node, node.newParameter);
@@ -190,7 +190,7 @@ class RfParameterVisitor2 extends GeneralizingAstVisitor<dynamic> {
         element is ClassElementImpl &&
         element.firstFragment.element.hasRfGroupAnnotation) {
       try {
-        NodeReplacer.replace(
+        replaceNode(
           node,
           NamedTypeImpl(
             importPrefix: node.importPrefix,

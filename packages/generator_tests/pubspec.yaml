@@ -28,7 +28,7 @@ dependencies:
   path: ^1.8.2
   build_runner: ^2.10.1
   code_builder: ^4.11.0
-  dart_style: ^3.1.2
+  dart_style: ">=3.1.4 <3.1.6"
   recase: ^4.1.0
   reactive_forms_annotations:
     path: ../reactive_forms_annotations
@@ -43,7 +43,3 @@ dev_dependencies:
   reactive_forms_generator:
     path: ../reactive_forms_generator
   flutter_lints: ^6.0.0
-
-dependency_overrides:
-  analyzer: 9.0.0
-  _fe_analyzer_shared: 92.0.0

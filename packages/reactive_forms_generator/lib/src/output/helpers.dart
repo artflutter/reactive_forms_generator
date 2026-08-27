@@ -3,32 +3,48 @@ import 'package:analyzer/src/dart/ast/utilities.dart';
 import 'package:analyzer/src/dart/ast/ast.dart';
 import 'package:reactive_forms_generator/src/output/extensions.dart';
 
+void replaceNode(AstNode oldNode, AstNode newNode) {
+  final parent = oldNode.parent;
+
+  if (parent is BlockClassBodyImpl &&
+      oldNode is ClassMemberImpl &&
+      newNode is ClassMemberImpl) {
+    final index = parent.members.indexOf(oldNode);
+    if (index != -1) {
+      parent.members[index] = newNode;
+      return;
+    }
+  }
+
+  NodeReplacer.replace(oldNode, newNode);
+}
+
 void replaceR(
   Map<String, FieldDeclaration> fieldDeclaration,
   Map<String, FormalParameter> fieldFormalParameter,
 ) {
   fieldFormalParameter.forEach((key, node) {
     if (node is SimpleFormalParameterImpl) {
-      NodeReplacer.replace(node, node.newParameter);
+      replaceNode(node, node.newParameter);
     } else if (node is DefaultFormalParameterImpl) {
       final parameter = node.parameter;
 
       if (parameter is SimpleFormalParameterImpl) {
         final field = fieldDeclaration[key];
         if (field != null && field is FieldDeclarationImpl) {
-          NodeReplacer.replace(field, field.newField);
+          replaceNode(field, field.newField);
         }
 
-        NodeReplacer.replace(node, node.newParameter2);
+        replaceNode(node, node.newParameter2);
       }
 
       if (parameter is FieldFormalParameterImpl) {
         final field = fieldDeclaration[key];
         if (field != null && field is FieldDeclarationImpl) {
-          NodeReplacer.replace(field, field.newField);
+          replaceNode(field, field.newField);
         }
 
-        NodeReplacer.replace(node, node.newParameter2);
+        replaceNode(node, node.newParameter2);
       }
     }
   });
