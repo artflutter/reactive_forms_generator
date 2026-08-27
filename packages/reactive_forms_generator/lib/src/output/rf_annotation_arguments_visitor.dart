@@ -128,7 +128,6 @@ class ClassRenameVisitor extends GeneralizingAstVisitor<void> {
           final EmptyClassBodyImpl body => EmptyClassBodyImpl(
             semicolon: body.semicolon,
           ),
-          final ClassBodyImpl body => body,
         },
       );
 

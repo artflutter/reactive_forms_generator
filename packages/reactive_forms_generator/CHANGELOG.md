@@ -1,3 +1,7 @@
+## [7.5.0-beta11]
+
+* analyzer 11 support
+
 ## [7.5.0-beta10]
 
 * analyzer 10 support
