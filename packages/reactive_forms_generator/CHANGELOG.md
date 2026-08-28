@@ -1,4 +1,4 @@
-## [8.5.0-beta12]
+## [8.5.0]
 
 * analyzer 12 compatibility
 
