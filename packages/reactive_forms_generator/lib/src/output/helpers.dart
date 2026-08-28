@@ -1,6 +1,7 @@
 // ignore_for_file: implementation_imports
 import 'package:analyzer/src/dart/ast/utilities.dart';
 import 'package:analyzer/src/dart/ast/ast.dart';
+import 'package:analyzer/src/generated/utilities_dart.dart';
 import 'package:reactive_forms_generator/src/output/extensions.dart';
 
 void replaceNode(AstNode oldNode, AstNode newNode) {
@@ -26,28 +27,27 @@ void replaceR(
   Map<String, FormalParameter> fieldFormalParameter,
 ) {
   fieldFormalParameter.forEach((key, node) {
-    if (node is SimpleFormalParameterImpl) {
-      replaceNode(node, node.newParameter);
-    } else if (node is DefaultFormalParameterImpl) {
-      final parameter = node.parameter;
+    if (node is! FormalParameterImpl) {
+      return;
+    }
 
-      if (parameter is SimpleFormalParameterImpl) {
-        final field = fieldDeclaration[key];
-        if (field != null && field is FieldDeclarationImpl) {
-          replaceNode(field, field.newField);
-        }
-
-        replaceNode(node, node.newParameter2);
+    if (node.kind == ParameterKind.REQUIRED) {
+      // a plain required positional parameter
+      if (node is RegularFormalParameterImpl &&
+          node.functionTypedSuffix == null) {
+        replaceNode(node, node.newParameter);
+      }
+    } else if ((node is RegularFormalParameterImpl &&
+            node.functionTypedSuffix == null) ||
+        node is FieldFormalParameterImpl) {
+      // an optional/named parameter — before analyzer 13 these were wrapped
+      // in the now-removed DefaultFormalParameter
+      final field = fieldDeclaration[key];
+      if (field != null && field is FieldDeclarationImpl) {
+        replaceNode(field, field.newField);
       }
 
-      if (parameter is FieldFormalParameterImpl) {
-        final field = fieldDeclaration[key];
-        if (field != null && field is FieldDeclarationImpl) {
-          replaceNode(field, field.newField);
-        }
-
-        replaceNode(node, node.newParameter2);
-      }
+      replaceNode(node, node.newParameter2);
     }
   });
 }

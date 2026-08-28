@@ -1,3 +1,8 @@
+## [8.6.0]
+
+* analyzer 13 compatibility
+* migrate to analyzer 13 unified formal parameter AST
+
 ## [8.5.0]
 
 * analyzer 12 compatibility

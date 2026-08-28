@@ -1,3 +1,7 @@
+## [8.6.0]
+
+* analyzer 13 compatibility
+
 ## [8.5.0]
 
 * analyzer 12 compatibility

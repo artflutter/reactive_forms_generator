@@ -12,3 +12,9 @@ environment:
 dev_dependencies:
   build_runner: ^2.4.15
   melos: ^7.4.1
+
+# unavoidable: flutter_test (Flutter 3.44.9) pins test_api 0.7.11 exactly, while
+# test 1.31.1 - the only analyzer 13 compatible release - requires test_api 0.7.12.
+# SDK pins cannot be relaxed from package pubspecs, only via an override.
+dependency_overrides:
+  test_api: 0.7.12

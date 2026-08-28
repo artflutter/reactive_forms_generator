@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'freezed_class.dart';
@@ -9,6 +9,7 @@ part of 'freezed_class.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,8 +67,8 @@ class _$FreezedClassCopyWithImpl<$Res>
 /// Create a copy of FreezedClass
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? gender = freezed,Object? id = freezed,Object? name = freezed,Object? logoImage = freezed,Object? year = freezed,Object? selectedSpaces = null,}) {
-  return _then(_self.copyWith(
-gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+  return _then(FreezedClass(
+freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as String?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,logoImage: freezed == logoImage ? _self.logoImage : logoImage // ignore: cast_nullable_to_non_nullable
@@ -214,7 +215,7 @@ return $default(_that.gender,_that.id,_that.name,_that.logoImage,_that.year,_tha
 @JsonSerializable()
 
 class _FreezedClass extends FreezedClass {
-   _FreezedClass(@RfControl<String>() this.gender, {@RfControl(validators: [RequiredValidator()]) this.id, @RfControl<String>() this.name, @JsonKey(name: 'logo_image')@RfControl<String>() this.logoImage, @RfControl<double>() this.year, final  List<String> selectedSpaces = const []}): _selectedSpaces = selectedSpaces,super._();
+   _FreezedClass(@RfControl<String>() this.gender, {@RfControl(validators: [RequiredValidator()]) this.id, @RfControl<String>() this.name, @JsonKey(name: 'logo_image')@RfControl<String>() this.logoImage, @RfControl<double>() this.year,  List<String> selectedSpaces = const []}): _selectedSpaces = selectedSpaces,super._();
   factory _FreezedClass.fromJson(Map<String, dynamic> json) => _$FreezedClassFromJson(json);
 
 @override@RfControl<String>() final  String? gender;

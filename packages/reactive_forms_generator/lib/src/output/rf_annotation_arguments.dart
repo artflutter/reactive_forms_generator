@@ -11,27 +11,27 @@ const _rfAnnotationNames = <String>{
 };
 
 extension AnnotationNamedArguments on Annotation {
-  Iterable<NamedExpression> get namedArguments =>
-      arguments?.arguments.whereType<NamedExpression>() ??
-      const <NamedExpression>[];
+  Iterable<NamedArgument> get namedArguments =>
+      arguments?.arguments.whereType<NamedArgument>() ??
+      const <NamedArgument>[];
 
   Expression? namedArgument(String name) {
     return namedArguments
-        .firstWhereOrNull((argument) => argument.name.label.name == name)
-        ?.expression;
+        .firstWhereOrNull((argument) => argument.name.lexeme == name)
+        ?.argumentExpression;
   }
 
   Map<String, Expression> get namedArgumentExpressions {
     return Map.unmodifiable({
       for (final argument in namedArguments)
-        argument.name.label.name: argument.expression,
+        argument.name.lexeme: argument.argumentExpression,
     });
   }
 
   Map<String, String> get namedArgumentSources {
     return Map.unmodifiable({
       for (final argument in namedArguments)
-        argument.name.label.name: argument.expression.toSource(),
+        argument.name.lexeme: argument.argumentExpression.toSource(),
     });
   }
 }

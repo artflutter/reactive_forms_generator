@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'nested_generics_output.dart';
@@ -9,6 +9,7 @@ part of 'nested_generics_output.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -63,7 +64,7 @@ class _$ProductDetailsOCopyWithImpl<P extends Product,C extends Cart,$Res>
 /// Create a copy of ProductDetailsO
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? description = freezed,Object? id = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(ProductDetailsO(
 description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as IdO<P, C>?,
@@ -347,7 +348,7 @@ class _$IdOCopyWithImpl<P extends Product,C extends Cart,$Res>
 /// Create a copy of IdO
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? companyName = freezed,Object? name = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(IdO(
 companyName: freezed == companyName ? _self.companyName : companyName // ignore: cast_nullable_to_non_nullable
 as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -607,7 +608,7 @@ class _$ProductCopyWithImpl<$Res>
 /// Create a copy of Product
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? companyName = freezed,Object? name = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(Product(
 companyName: freezed == companyName ? _self.companyName : companyName // ignore: cast_nullable_to_non_nullable
 as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -867,7 +868,7 @@ class _$CartCopyWithImpl<$Res>
 /// Create a copy of Cart
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? product = freezed,Object? description = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(Cart(
 product: freezed == product ? _self.product : product // ignore: cast_nullable_to_non_nullable
 as Product?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -1151,7 +1152,7 @@ class _$ProductDetailsOOutputCopyWithImpl<P extends Product,C extends Cart,$Res>
 /// Create a copy of ProductDetailsOOutput
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? description = freezed,Object? id = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(ProductDetailsOOutput(
 description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as IdOOutput<P, C>?,
@@ -1435,7 +1436,7 @@ class _$IdOOutputCopyWithImpl<P extends Product,C extends Cart,$Res>
 /// Create a copy of IdOOutput
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? companyName = freezed,Object? name = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(IdOOutput(
 companyName: freezed == companyName ? _self.companyName : companyName // ignore: cast_nullable_to_non_nullable
 as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,

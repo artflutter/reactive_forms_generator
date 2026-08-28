@@ -146,11 +146,11 @@ extension ElementRfExt on Element {
                 (meta as ElementAnnotationImpl).annotationAst.arguments
                     as ArgumentListImpl;
             for (var argument in argumentList.arguments) {
-              final argumentNamedExpression = argument as NamedExpressionImpl;
+              final namedArgument = argument as NamedArgumentImpl;
               result.addEntries([
                 MapEntry(
-                  argumentNamedExpression.name.label.toSource(),
-                  argumentNamedExpression.expression.toSource(),
+                  namedArgument.name.lexeme,
+                  namedArgument.argumentExpression.toSource(),
                 ),
               ]);
             }

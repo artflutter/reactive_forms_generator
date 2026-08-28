@@ -79,3 +79,4 @@ build/
 
 # Vs Code related
 **/.vscode/launch.json
+.vscode/
