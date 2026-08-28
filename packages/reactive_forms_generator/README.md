@@ -13,18 +13,6 @@ which will save you tons of time and make your forms type safe.
 
 **There is no reason to write code manually! Let the code generation work for you.**
 
-# Sponsors
-
-<table border="0">
-    <tbody>
-        <tr>
-            <td align="center">
-                <a href="https://www.dellaconnect.com/"><img src="https://github.com/artflutter/reactive_forms_generator/blob/master/assets/dc.png?raw=true" width="225"/></a>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
 # Table of Contents
 
 - [Motivation](#motivation)
