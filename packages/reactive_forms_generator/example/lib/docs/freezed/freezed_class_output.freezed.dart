@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'freezed_class_output.dart';
@@ -9,6 +9,7 @@ part of 'freezed_class_output.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,9 +67,9 @@ class _$FreezedClassOCopyWithImpl<$Res>
 /// Create a copy of FreezedClassO
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? gender = freezed,Object? genderR = freezed,Object? id = freezed,Object? idR = freezed,Object? idR2 = null,Object? name = freezed,Object? logoImage = freezed,Object? year = freezed,Object? selectedSpaces = null,}) {
-  return _then(_self.copyWith(
-gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
-as String?,genderR: freezed == genderR ? _self.genderR : genderR // ignore: cast_nullable_to_non_nullable
+  return _then(FreezedClassO(
+freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as String?,freezed == genderR ? _self.genderR : genderR // ignore: cast_nullable_to_non_nullable
 as String?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,idR: freezed == idR ? _self.idR : idR // ignore: cast_nullable_to_non_nullable
 as String?,idR2: null == idR2 ? _self.idR2 : idR2 // ignore: cast_nullable_to_non_nullable
@@ -217,7 +218,7 @@ return $default(_that.gender,_that.genderR,_that.id,_that.idR,_that.idR2,_that.n
 @JsonSerializable()
 
 class _FreezedClassO extends FreezedClassO {
-   _FreezedClassO(@RfControl<String>() this.gender, @RfControl(validators: [RequiredValidator()]) this.genderR, {@RfControl() this.id, @RfControl(validators: [RequiredValidator()]) this.idR, @RfControl(validators: [RequiredValidator()]) this.idR2 = '', @RfControl<String>() this.name, @JsonKey(name: 'logo_image')@RfControl<String>() this.logoImage, @RfControl<double>() this.year, final  List<String> selectedSpaces = const []}): _selectedSpaces = selectedSpaces,super._();
+   _FreezedClassO(@RfControl<String>() this.gender, @RfControl(validators: [RequiredValidator()]) this.genderR, {@RfControl() this.id, @RfControl(validators: [RequiredValidator()]) this.idR, @RfControl(validators: [RequiredValidator()]) this.idR2 = '', @RfControl<String>() this.name, @JsonKey(name: 'logo_image')@RfControl<String>() this.logoImage, @RfControl<double>() this.year,  List<String> selectedSpaces = const []}): _selectedSpaces = selectedSpaces,super._();
   factory _FreezedClassO.fromJson(Map<String, dynamic> json) => _$FreezedClassOFromJson(json);
 
 @override@RfControl<String>() final  String? gender;
@@ -359,9 +360,9 @@ class _$FreezedClassOOutputCopyWithImpl<$Res>
 /// Create a copy of FreezedClassOOutput
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? gender = freezed,Object? genderR = null,Object? id = freezed,Object? idR = null,Object? idR2 = null,Object? name = freezed,Object? logoImage = freezed,Object? year = freezed,Object? selectedSpaces = null,}) {
-  return _then(_self.copyWith(
-gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
-as String?,genderR: null == genderR ? _self.genderR : genderR // ignore: cast_nullable_to_non_nullable
+  return _then(FreezedClassOOutput(
+freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as String?,null == genderR ? _self.genderR : genderR // ignore: cast_nullable_to_non_nullable
 as String,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,idR: null == idR ? _self.idR : idR // ignore: cast_nullable_to_non_nullable
 as String,idR2: null == idR2 ? _self.idR2 : idR2 // ignore: cast_nullable_to_non_nullable
@@ -510,7 +511,7 @@ return $default(_that.gender,_that.genderR,_that.id,_that.idR,_that.idR2,_that.n
 @JsonSerializable()
 
 class _FreezedClassOOutput extends FreezedClassOOutput {
-   _FreezedClassOOutput(@RfControl<String>() this.gender, @RfControl(validators: [RequiredValidator()]) this.genderR, {@RfControl() this.id, @RfControl(validators: [RequiredValidator()]) required this.idR, @RfControl(validators: [RequiredValidator()]) required this.idR2, @RfControl<String>() this.name, @JsonKey(name: 'logo_image')@RfControl<String>() this.logoImage, @RfControl<double>() this.year, final  List<String> selectedSpaces = const []}): _selectedSpaces = selectedSpaces,super._();
+   _FreezedClassOOutput(@RfControl<String>() this.gender, @RfControl(validators: [RequiredValidator()]) this.genderR, {@RfControl() this.id, @RfControl(validators: [RequiredValidator()]) required this.idR, @RfControl(validators: [RequiredValidator()]) required this.idR2, @RfControl<String>() this.name, @JsonKey(name: 'logo_image')@RfControl<String>() this.logoImage, @RfControl<double>() this.year,  List<String> selectedSpaces = const []}): _selectedSpaces = selectedSpaces,super._();
   factory _FreezedClassOOutput.fromJson(Map<String, dynamic> json) => _$FreezedClassOOutputFromJson(json);
 
 @override@RfControl<String>() final  String? gender;

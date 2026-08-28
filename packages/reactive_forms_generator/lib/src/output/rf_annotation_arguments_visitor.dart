@@ -17,11 +17,11 @@ class RfAnnotationArgumentsVisitor extends RecursiveAstVisitor<dynamic> {
   @override
   visitArgumentList(ArgumentList node) {
     for (var argument in node.arguments) {
-      if (argument is NamedExpression) {
+      if (argument is NamedArgument) {
         arguments.addEntries([
           MapEntry(
-            argument.name.label.name,
-            argument.expression.toSource().toString(),
+            argument.name.lexeme,
+            argument.argumentExpression.toSource().toString(),
           ),
         ]);
       } else {

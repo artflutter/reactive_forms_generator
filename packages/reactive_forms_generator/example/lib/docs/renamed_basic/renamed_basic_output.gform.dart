@@ -549,9 +549,8 @@ class SomeWiredNameForm
 
   void commitInitial([RenamedBasicO? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = SomeWiredNameForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = SomeWiredNameForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

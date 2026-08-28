@@ -579,9 +579,8 @@ class AnimatedUrlListForm
 
   void commitInitial([AnimatedUrlList? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = AnimatedUrlListForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = AnimatedUrlListForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

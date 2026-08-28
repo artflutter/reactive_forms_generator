@@ -472,9 +472,8 @@ class StatusListForm<T extends Enum>
 
   void commitInitial([StatusList<T>? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = StatusListForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = StatusListForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

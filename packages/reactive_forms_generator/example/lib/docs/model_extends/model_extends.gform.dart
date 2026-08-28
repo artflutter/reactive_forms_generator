@@ -501,9 +501,8 @@ class ModelExtendsForm implements FormModel<ModelExtends, ModelExtends> {
 
   void commitInitial([ModelExtends? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = ModelExtendsForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = ModelExtendsForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

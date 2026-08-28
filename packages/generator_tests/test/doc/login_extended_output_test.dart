@@ -1322,9 +1322,8 @@ class LoginExtendedOForm
 
   void commitInitial([LoginExtendedO? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = LoginExtendedOForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = LoginExtendedOForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

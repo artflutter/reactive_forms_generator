@@ -756,9 +756,8 @@ class DeliveryListOForm
 
   void commitInitial([DeliveryListO? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = DeliveryListOForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = DeliveryListOForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override
@@ -1134,9 +1133,8 @@ class DeliveryPointOForm
 
   void commitInitial([DeliveryPointO? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = DeliveryPointOForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = DeliveryPointOForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

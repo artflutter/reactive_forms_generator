@@ -1210,9 +1210,8 @@ class LoginExtendedForm implements FormModel<LoginExtended, LoginExtended> {
 
   void commitInitial([LoginExtended? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = LoginExtendedForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = LoginExtendedForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

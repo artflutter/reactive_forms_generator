@@ -949,9 +949,8 @@ class FreezedClassForm implements FormModel<FreezedClass, FreezedClass> {
 
   void commitInitial([FreezedClass? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = FreezedClassForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = FreezedClassForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

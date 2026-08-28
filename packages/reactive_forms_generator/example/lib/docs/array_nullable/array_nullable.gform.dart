@@ -1101,9 +1101,8 @@ class ArrayNullableForm implements FormModel<ArrayNullable, ArrayNullable> {
 
   void commitInitial([ArrayNullable? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = ArrayNullableForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = ArrayNullableForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

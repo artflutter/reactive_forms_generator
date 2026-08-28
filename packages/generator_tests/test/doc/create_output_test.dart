@@ -2698,9 +2698,8 @@ class PrimaryContactForm
 
   void commitInitial([PrimaryContact? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = PrimaryContactForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = PrimaryContactForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

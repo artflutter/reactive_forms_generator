@@ -826,9 +826,8 @@ class UserProfileOForm implements FormModel<UserProfileO, UserProfileOOutput> {
 
   void commitInitial([UserProfileO? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = UserProfileOForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = UserProfileOForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

@@ -841,9 +841,8 @@ class DeliveryListForm implements FormModel<DeliveryList, DeliveryList> {
 
   void commitInitial([DeliveryList? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = DeliveryListForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = DeliveryListForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override
@@ -1216,9 +1215,8 @@ class DeliveryPointForm implements FormModel<DeliveryPoint, DeliveryPoint> {
 
   void commitInitial([DeliveryPoint? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = DeliveryPointForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = DeliveryPointForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

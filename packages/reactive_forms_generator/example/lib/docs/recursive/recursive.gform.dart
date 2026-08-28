@@ -863,9 +863,8 @@ class SecuredAreaForm implements FormModel<SecuredArea, SecuredArea> {
 
   void commitInitial([SecuredArea? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = SecuredAreaForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = SecuredAreaForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override
@@ -1227,9 +1226,8 @@ class ParcelSystemForm implements FormModel<ParcelSystem, ParcelSystem> {
 
   void commitInitial([ParcelSystem? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = ParcelSystemForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = ParcelSystemForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override
@@ -1507,9 +1505,8 @@ class ParcelSystemDataForm
 
   void commitInitial([ParcelSystemData? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = ParcelSystemDataForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = ParcelSystemDataForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

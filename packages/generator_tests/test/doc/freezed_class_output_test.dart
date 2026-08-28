@@ -1296,9 +1296,8 @@ class FreezedClassOForm
 
   void commitInitial([FreezedClassO? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = FreezedClassOForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = FreezedClassOForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

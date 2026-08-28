@@ -469,9 +469,8 @@ class MailingListOForm implements FormModel<MailingListO, MailingListOOutput> {
 
   void commitInitial([MailingListO? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = MailingListOForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = MailingListOForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

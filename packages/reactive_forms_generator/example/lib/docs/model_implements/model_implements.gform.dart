@@ -502,9 +502,8 @@ class ModelImplementsForm
 
   void commitInitial([ModelImplements? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = ModelImplementsForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = ModelImplementsForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

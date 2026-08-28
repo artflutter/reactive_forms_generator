@@ -2200,9 +2200,8 @@ class IncidenceFilterForm
 
   void commitInitial([IncidenceFilter? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = IncidenceFilterForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = IncidenceFilterForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override
@@ -2582,9 +2581,8 @@ class ThresholdSettingForm
 
   void commitInitial([ThresholdSetting? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = ThresholdSettingForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = ThresholdSettingForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override
@@ -2930,9 +2928,8 @@ class TimerSettingForm implements FormModel<TimerSetting, TimerSetting> {
 
   void commitInitial([TimerSetting? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = TimerSettingForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = TimerSettingForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

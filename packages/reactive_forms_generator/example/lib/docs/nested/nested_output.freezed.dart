@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'nested_output.dart';
@@ -9,6 +9,7 @@ part of 'nested_output.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$SubGroupOCopyWithImpl<$Res>
 /// Create a copy of SubGroupO
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,}) {
-  return _then(_self.copyWith(
+  return _then(SubGroupO(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -329,7 +330,7 @@ class _$GroupOCopyWithImpl<$Res>
 /// Create a copy of GroupO
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? subGroupList = null,}) {
-  return _then(_self.copyWith(
+  return _then(GroupO(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,subGroupList: null == subGroupList ? _self.subGroupList : subGroupList // ignore: cast_nullable_to_non_nullable
 as List<SubGroupO>,
@@ -473,7 +474,7 @@ return $default(_that.id,_that.subGroupList);case _:
 @JsonSerializable()
 
 class _GroupO implements GroupO {
-  const _GroupO({@RfControl() required this.id, @RfArray<dynamic>() required final  List<SubGroupO> subGroupList}): _subGroupList = subGroupList;
+  const _GroupO({@RfControl() required this.id, @RfArray<dynamic>() required  List<SubGroupO> subGroupList}): _subGroupList = subGroupList;
   factory _GroupO.fromJson(Map<String, dynamic> json) => _$GroupOFromJson(json);
 
 @override@RfControl() final  String id;
@@ -601,7 +602,7 @@ class _$NestedOCopyWithImpl<$Res>
 /// Create a copy of NestedO
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? groupList = null,}) {
-  return _then(_self.copyWith(
+  return _then(NestedO(
 groupList: null == groupList ? _self.groupList : groupList // ignore: cast_nullable_to_non_nullable
 as List<GroupO>,
   ));
@@ -744,7 +745,7 @@ return $default(_that.groupList);case _:
 @JsonSerializable()
 
 class _NestedO implements NestedO {
-  const _NestedO({@RfArray<dynamic>() required final  List<GroupO> groupList}): _groupList = groupList;
+  const _NestedO({@RfArray<dynamic>() required  List<GroupO> groupList}): _groupList = groupList;
   factory _NestedO.fromJson(Map<String, dynamic> json) => _$NestedOFromJson(json);
 
  final  List<GroupO> _groupList;
@@ -870,7 +871,7 @@ class _$SubGroupOOutputCopyWithImpl<$Res>
 /// Create a copy of SubGroupOOutput
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,}) {
-  return _then(_self.copyWith(
+  return _then(SubGroupOOutput(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -1133,7 +1134,7 @@ class _$GroupOOutputCopyWithImpl<$Res>
 /// Create a copy of GroupOOutput
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? subGroupList = null,}) {
-  return _then(_self.copyWith(
+  return _then(GroupOOutput(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,subGroupList: null == subGroupList ? _self.subGroupList : subGroupList // ignore: cast_nullable_to_non_nullable
 as List<SubGroupOOutput>,
@@ -1277,7 +1278,7 @@ return $default(_that.id,_that.subGroupList);case _:
 @JsonSerializable()
 
 class _GroupOOutput implements GroupOOutput {
-  const _GroupOOutput({@RfControl() required this.id, @RfArray<dynamic>() required final  List<SubGroupOOutput> subGroupList}): _subGroupList = subGroupList;
+  const _GroupOOutput({@RfControl() required this.id, @RfArray<dynamic>() required  List<SubGroupOOutput> subGroupList}): _subGroupList = subGroupList;
   factory _GroupOOutput.fromJson(Map<String, dynamic> json) => _$GroupOOutputFromJson(json);
 
 @override@RfControl() final  String id;
@@ -1405,7 +1406,7 @@ class _$NestedOOutputCopyWithImpl<$Res>
 /// Create a copy of NestedOOutput
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? groupList = null,}) {
-  return _then(_self.copyWith(
+  return _then(NestedOOutput(
 groupList: null == groupList ? _self.groupList : groupList // ignore: cast_nullable_to_non_nullable
 as List<GroupOOutput>,
   ));
@@ -1548,7 +1549,7 @@ return $default(_that.groupList);case _:
 @JsonSerializable()
 
 class _NestedOOutput implements NestedOOutput {
-  const _NestedOOutput({@RfArray<dynamic>() required final  List<GroupOOutput> groupList}): _groupList = groupList;
+  const _NestedOOutput({@RfArray<dynamic>() required  List<GroupOOutput> groupList}): _groupList = groupList;
   factory _NestedOOutput.fromJson(Map<String, dynamic> json) => _$NestedOOutputFromJson(json);
 
  final  List<GroupOOutput> _groupList;

@@ -500,9 +500,8 @@ class SomeWiredNameForm implements FormModel<RenamedBasic, RenamedBasic> {
 
   void commitInitial([RenamedBasic? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = SomeWiredNameForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = SomeWiredNameForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

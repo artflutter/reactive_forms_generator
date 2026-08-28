@@ -501,9 +501,8 @@ class AnnotatelessForm implements FormModel<Annotateless, Annotateless> {
 
   void commitInitial([Annotateless? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = AnnotatelessForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = AnnotatelessForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

@@ -543,9 +543,8 @@ class AnnotatelessOForm
 
   void commitInitial([AnnotatelessO? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = AnnotatelessOForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = AnnotatelessOForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

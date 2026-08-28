@@ -1,8 +1,10 @@
 // ignore_for_file: implementation_imports
-import 'package:analyzer/src/dart/ast/utilities.dart';
 import 'package:analyzer/src/dart/ast/ast.dart';
+import 'package:analyzer/src/generated/utilities_dart.dart';
 import 'package:reactive_forms_generator/src/output/extensions.dart';
 
+// analyzer 13 removed NodeReplacer, so the parent shapes we rewrite are
+// handled explicitly here.
 void replaceNode(AstNode oldNode, AstNode newNode) {
   final parent = oldNode.parent;
 
@@ -16,7 +18,68 @@ void replaceNode(AstNode oldNode, AstNode newNode) {
     }
   }
 
-  NodeReplacer.replace(oldNode, newNode);
+  if (parent is CompilationUnitImpl &&
+      oldNode is CompilationUnitMemberImpl &&
+      newNode is CompilationUnitMemberImpl) {
+    final index = parent.declarations.indexOf(oldNode);
+    if (index != -1) {
+      parent.declarations[index] = newNode;
+      return;
+    }
+  }
+
+  if (parent is FormalParameterListImpl &&
+      oldNode is FormalParameterImpl &&
+      newNode is FormalParameterImpl) {
+    final index = parent.parameters.indexOf(oldNode);
+    if (index != -1) {
+      parent.parameters[index] = newNode;
+      return;
+    }
+  }
+
+  if (parent is TypeArgumentListImpl &&
+      oldNode is TypeAnnotationImpl &&
+      newNode is TypeAnnotationImpl) {
+    final index = parent.arguments.indexOf(oldNode);
+    if (index != -1) {
+      parent.arguments[index] = newNode;
+      return;
+    }
+  }
+
+  if (parent is VariableDeclarationListImpl &&
+      identical(parent.type, oldNode) &&
+      newNode is TypeAnnotationImpl) {
+    parent.type = newNode;
+    return;
+  }
+
+  if (parent is FormalParameterImpl &&
+      identical(parent.type, oldNode) &&
+      newNode is TypeAnnotationImpl) {
+    parent.type = newNode;
+    return;
+  }
+
+  if (parent is MethodDeclarationImpl &&
+      identical(parent.returnType, oldNode) &&
+      newNode is TypeAnnotationImpl) {
+    parent.returnType = newNode;
+    return;
+  }
+
+  if (parent is ConstructorNameImpl &&
+      identical(parent.type, oldNode) &&
+      newNode is NamedTypeImpl) {
+    parent.type = newNode;
+    return;
+  }
+
+  throw UnsupportedError(
+    'replaceNode: unhandled parent ${parent.runtimeType} '
+    'for ${oldNode.runtimeType}',
+  );
 }
 
 void replaceR(
@@ -24,28 +87,24 @@ void replaceR(
   Map<String, FormalParameter> fieldFormalParameter,
 ) {
   fieldFormalParameter.forEach((key, node) {
-    if (node is SimpleFormalParameterImpl) {
-      replaceNode(node, node.newParameter);
-    } else if (node is DefaultFormalParameterImpl) {
-      final parameter = node.parameter;
+    if (node is! FormalParameterImpl) {
+      return;
+    }
 
-      if (parameter is SimpleFormalParameterImpl) {
-        final field = fieldDeclaration[key];
-        if (field != null && field is FieldDeclarationImpl) {
-          replaceNode(field, field.newField);
-        }
-
-        replaceNode(node, node.newParameter2);
+    if (node.kind == ParameterKind.REQUIRED) {
+      if (node is RegularFormalParameterImpl &&
+          node.functionTypedSuffix == null) {
+        replaceNode(node, node.newParameter);
+      }
+    } else if ((node is RegularFormalParameterImpl &&
+            node.functionTypedSuffix == null) ||
+        node is FieldFormalParameterImpl) {
+      final field = fieldDeclaration[key];
+      if (field != null && field is FieldDeclarationImpl) {
+        replaceNode(field, field.newField);
       }
 
-      if (parameter is FieldFormalParameterImpl) {
-        final field = fieldDeclaration[key];
-        if (field != null && field is FieldDeclarationImpl) {
-          replaceNode(field, field.newField);
-        }
-
-        replaceNode(node, node.newParameter2);
-      }
+      replaceNode(node, node.newParameter2);
     }
   });
 }

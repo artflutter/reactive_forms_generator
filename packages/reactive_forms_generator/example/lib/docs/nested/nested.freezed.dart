@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'nested.dart';
@@ -9,6 +9,7 @@ part of 'nested.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,7 +67,7 @@ class _$SubGroupCopyWithImpl<$Res>
 /// Create a copy of SubGroup
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,}) {
-  return _then(_self.copyWith(
+  return _then(SubGroup(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -329,7 +330,7 @@ class _$GroupCopyWithImpl<$Res>
 /// Create a copy of Group
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? subGroupList = null,}) {
-  return _then(_self.copyWith(
+  return _then(Group(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,subGroupList: null == subGroupList ? _self.subGroupList : subGroupList // ignore: cast_nullable_to_non_nullable
 as List<SubGroup>,
@@ -473,7 +474,7 @@ return $default(_that.id,_that.subGroupList);case _:
 @JsonSerializable()
 
 class _Group implements Group {
-  const _Group({@RfControl() required this.id, @RfArray<dynamic>() required final  List<SubGroup> subGroupList}): _subGroupList = subGroupList;
+  const _Group({@RfControl() required this.id, @RfArray<dynamic>() required  List<SubGroup> subGroupList}): _subGroupList = subGroupList;
   factory _Group.fromJson(Map<String, dynamic> json) => _$GroupFromJson(json);
 
 @override@RfControl() final  String id;
@@ -601,7 +602,7 @@ class _$NestedCopyWithImpl<$Res>
 /// Create a copy of Nested
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? groupList = null,}) {
-  return _then(_self.copyWith(
+  return _then(Nested(
 groupList: null == groupList ? _self.groupList : groupList // ignore: cast_nullable_to_non_nullable
 as List<Group>,
   ));
@@ -744,7 +745,7 @@ return $default(_that.groupList);case _:
 @JsonSerializable()
 
 class _Nested implements Nested {
-  const _Nested({@RfArray<dynamic>() required final  List<Group> groupList}): _groupList = groupList;
+  const _Nested({@RfArray<dynamic>() required  List<Group> groupList}): _groupList = groupList;
   factory _Nested.fromJson(Map<String, dynamic> json) => _$NestedFromJson(json);
 
  final  List<Group> _groupList;

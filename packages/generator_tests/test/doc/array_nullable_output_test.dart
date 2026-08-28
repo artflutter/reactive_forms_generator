@@ -1070,9 +1070,8 @@ class ArrayNullableOForm
 
   void commitInitial([ArrayNullableO? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = ArrayNullableOForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = ArrayNullableOForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

@@ -1,3 +1,7 @@
+## [7.5.0-beta13]
+
+* align beta release with `reactive_forms_generator`
+
 ## [7.5.0-beta12]
 
 * align beta release with `reactive_forms_generator`

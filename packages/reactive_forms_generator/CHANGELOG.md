@@ -1,3 +1,8 @@
+## [7.5.0-beta13]
+
+* analyzer 13 support
+* migrate to analyzer 13 unified formal parameter AST
+
 ## [7.5.0-beta12]
 
 * analyzer 12 support

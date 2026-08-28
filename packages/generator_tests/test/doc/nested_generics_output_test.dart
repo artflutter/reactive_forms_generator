@@ -638,9 +638,8 @@ class ProductDetailsOForm<P extends Product, C extends Cart>
 
   void commitInitial([ProductDetailsO<P, C>? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = ProductDetailsOForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = ProductDetailsOForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

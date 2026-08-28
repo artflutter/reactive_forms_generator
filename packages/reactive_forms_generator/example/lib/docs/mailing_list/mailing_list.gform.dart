@@ -466,9 +466,8 @@ class MailingListForm implements FormModel<MailingList, MailingList> {
 
   void commitInitial([MailingList? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = MailingListForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = MailingListForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

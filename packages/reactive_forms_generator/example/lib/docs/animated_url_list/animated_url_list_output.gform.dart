@@ -530,9 +530,8 @@ class AnimatedUrlLisOForm
 
   void commitInitial([AnimatedUrlLisO? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = AnimatedUrlLisOForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = AnimatedUrlLisOForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override
@@ -917,9 +916,8 @@ class UrlEntityOForm implements FormModel<UrlEntityO, UrlEntityOOutput> {
 
   void commitInitial([UrlEntityO? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = UrlEntityOForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = UrlEntityOForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

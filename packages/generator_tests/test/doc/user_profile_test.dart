@@ -847,9 +847,8 @@ class UserProfileForm implements FormModel<UserProfile, UserProfile> {
 
   void commitInitial([UserProfile? newModel]) {
     _ownInitialModel = newModel ?? rawModel;
-    _ownInitialRawValue = UserProfileForm.formElements(
-      _ownInitialModel,
-    ).rawValue;
+    _ownInitialRawValue = UserProfileForm.formElements(_ownInitialModel)
+        .rawValue;
   }
 
   @override

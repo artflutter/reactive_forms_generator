@@ -52,113 +52,84 @@ import 'package:reactive_forms_generator/src/types.dart';
 //   // }
 // }
 
-extension NormalFormalParameterImplExt on NormalFormalParameterImpl {
-  NormalFormalParameterImpl get newParameter {
+extension FormalParameterImplExt on FormalParameterImpl {
+  /// Copy of a plain required positional parameter with the type rewritten.
+  FormalParameterImpl get newParameter {
     final parameter = this;
+    if (parameter is RegularFormalParameterImpl &&
+        parameter.functionTypedSuffix == null) {
+      return RegularFormalParameterImpl(
+        comment: null,
+        metadata: parameter.metadata.toList(),
+        kind: parameter.kind,
+        requiredKeyword: parameter.requiredKeyword,
+        covariantKeyword: parameter.covariantKeyword,
+        constFinalOrVarKeyword: parameter.constFinalOrVarKeyword,
+        type: parameter.type?.newType,
+        name: parameter.name,
+        functionTypedSuffix: null,
+        defaultClause: null,
+      );
+    }
+    return parameter;
+  }
+
+  /// Rewrite an optional/named parameter into a required named one without a
+  /// default value, dropping `Default*` annotations.
+  FormalParameterImpl get newParameter2 {
+    final parameter = this;
+    final newMetadata = parameter.metadata
+        .where((e) => !e.name.toString().startsWith('Default'))
+        .toList();
     switch (parameter) {
       case FieldFormalParameterImpl _:
         return FieldFormalParameterImpl(
           comment: null,
-          metadata: parameter.metadata,
-          covariantKeyword: parameter.covariantKeyword,
+          metadata: newMetadata,
+          kind: ParameterKind.NAMED_REQUIRED,
           requiredKeyword: KeywordToken(Keyword.REQUIRED, 0),
-          name: parameter.name,
-          keyword: parameter.keyword,
+          covariantKeyword: parameter.covariantKeyword,
+          constFinalOrVarKeyword: parameter.constFinalOrVarKeyword,
           type: parameter.type,
           thisKeyword: parameter.thisKeyword,
           period: parameter.period,
-          typeParameters: parameter.typeParameters,
-          parameters: parameter.parameters,
-          question: parameter.question,
-        );
-      case FunctionTypedFormalParameterImpl _:
-        return this;
-      case SimpleFormalParameterImpl _:
-        return SimpleFormalParameterImpl(
-          comment: null,
-          metadata: parameter.metadata,
-          covariantKeyword: parameter.covariantKeyword,
-          requiredKeyword: KeywordToken(Keyword.REQUIRED, 0),
-          keyword: parameter.keyword,
-          type: parameter.type?.newType,
           name: parameter.name,
+          functionTypedSuffix: parameter.functionTypedSuffix,
+          defaultClause: null,
+        );
+      case RegularFormalParameterImpl _:
+        return RegularFormalParameterImpl(
+          comment: null,
+          metadata: parameter.functionTypedSuffix != null
+              ? parameter.metadata.toList()
+              : newMetadata,
+          kind: ParameterKind.NAMED_REQUIRED,
+          requiredKeyword: KeywordToken(Keyword.REQUIRED, 0),
+          covariantKeyword: parameter.covariantKeyword,
+          constFinalOrVarKeyword: parameter.constFinalOrVarKeyword,
+          type: parameter.functionTypedSuffix != null
+              ? parameter.type
+              : parameter.type?.newType,
+          name: parameter.name,
+          functionTypedSuffix: parameter.functionTypedSuffix,
+          defaultClause: null,
         );
       case SuperFormalParameterImpl _:
-        return this;
-    }
-  }
-
-  NormalFormalParameterImpl get newParameter2 {
-    final parameter = this;
-    switch (parameter) {
-      case FieldFormalParameterImpl _:
-        return FieldFormalParameterImpl(
+        return SuperFormalParameterImpl(
           comment: null,
-          metadata: parameter.metadata
-              .where((e) => !e.name.toString().startsWith('Default'))
-              .toList(),
-          covariantKeyword: parameter.covariantKeyword,
+          metadata: newMetadata,
+          kind: ParameterKind.NAMED_REQUIRED,
           requiredKeyword: KeywordToken(Keyword.REQUIRED, 0),
-          name: parameter.name,
-          keyword: parameter.keyword,
+          covariantKeyword: parameter.covariantKeyword,
+          constFinalOrVarKeyword: parameter.constFinalOrVarKeyword,
           type: parameter.type,
-          thisKeyword: parameter.thisKeyword,
+          superKeyword: parameter.superKeyword,
           period: parameter.period,
-          typeParameters: parameter.typeParameters,
-          parameters: parameter.parameters,
-          question: parameter.question,
-        );
-      case FunctionTypedFormalParameterImpl _:
-        return this;
-      case SimpleFormalParameterImpl _:
-        return SimpleFormalParameterImpl(
-          comment: null,
-          metadata: parameter.metadata
-              .where((e) => !e.name.toString().startsWith('Default'))
-              .toList(),
-          covariantKeyword: parameter.covariantKeyword,
-          requiredKeyword: KeywordToken(Keyword.REQUIRED, 0),
-          keyword: parameter.keyword,
-          type: parameter.type?.newType,
           name: parameter.name,
+          functionTypedSuffix: parameter.functionTypedSuffix,
+          defaultClause: null,
         );
-      case SuperFormalParameterImpl _:
-        return this;
     }
-  }
-}
-
-extension DefaultFormalParameterImplExt on DefaultFormalParameterImpl {
-  DefaultFormalParameterImpl get newParameter {
-    return DefaultFormalParameterImpl(
-      parameter: parameter.newParameter,
-      kind: ParameterKind.NAMED_REQUIRED,
-      separator: null,
-      defaultValue: null,
-    );
-  }
-
-  DefaultFormalParameterImpl get newParameter2 {
-    return DefaultFormalParameterImpl(
-      parameter: parameter.newParameter2,
-      kind: ParameterKind.NAMED_REQUIRED,
-      separator: null,
-      defaultValue: null,
-    );
-  }
-}
-
-extension SimpleFormalParameterImplExt on SimpleFormalParameterImpl {
-  SimpleFormalParameterImpl get newParameter {
-    return SimpleFormalParameterImpl(
-      comment: null,
-      metadata: metadata,
-      covariantKeyword: covariantKeyword,
-      requiredKeyword: requiredKeyword,
-      keyword: keyword,
-      type: type?.newType,
-      name: name,
-    );
   }
 }
 
