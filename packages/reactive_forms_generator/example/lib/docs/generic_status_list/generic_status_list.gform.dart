@@ -263,9 +263,9 @@ class StatusListForm<T extends Enum>
 
   String listControlPath() => pathBuilder(listControlName);
 
-  List<T?> get _listValue => listControl.rawValue.whereType<T?>().toList();
+  List<T?> get _listValue => listControl.value ?? const [];
 
-  List<T?> get _listRawValue => listControl.rawValue.whereType<T?>().toList();
+  List<T?> get _listRawValue => listControl.value ?? const [];
 
   bool get containsList {
     try {
@@ -318,11 +318,8 @@ class StatusListForm<T extends Enum>
     disabled: disabled,
   );
 
-  FormArray<T> get listControl =>
-      form.control(listControlPath()) as FormArray<T>;
-
-  List<FormControl<T>> get listControlControls =>
-      listControl.controls.cast<FormControl<T>>();
+  FormControl<List<T?>> get listControl =>
+      form.control(listControlPath()) as FormControl<List<T?>>;
 
   void listSetDisabled(
     bool disabled, {
@@ -340,48 +337,6 @@ class StatusListForm<T extends Enum>
         emitEvent: emitEvent,
       );
     }
-  }
-
-  void addListItem(
-    T? value, {
-    List<AsyncValidator<dynamic>>? asyncValidators,
-    List<Validator<dynamic>>? validators,
-    int? asyncValidatorsDebounceTime,
-    bool? disabled,
-    ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
-  }) {
-    List<Validator<dynamic>> resultingValidators = [];
-    List<AsyncValidator<dynamic>> resultingAsyncValidators = [];
-
-    switch (validatorsApplyMode) {
-      case ValidatorsApplyMode.merge:
-        if (validators != null) {
-          resultingValidators.addAll(validators);
-        }
-        if (asyncValidators != null) {
-          resultingAsyncValidators.addAll(asyncValidators);
-        }
-        break;
-      case ValidatorsApplyMode.override:
-        if (validators != null) {
-          resultingValidators = validators;
-        }
-
-        if (asyncValidators != null) {
-          resultingAsyncValidators = asyncValidators;
-        }
-        break;
-    }
-
-    listControl.add(
-      FormControl<T>(
-        value: value,
-        validators: resultingValidators,
-        asyncValidators: resultingAsyncValidators,
-        asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
-        disabled: disabled ?? false,
-      ),
-    );
   }
 
   @override
@@ -523,22 +478,13 @@ class StatusListForm<T extends Enum>
   static FormGroup formElements<T extends Enum>(StatusList<T>? statusList) =>
       FormGroup(
         {
-          listControlName: FormArray<T>(
-            (statusList?.list ?? [])
-                .map(
-                  (e) => FormControl<T>(
-                    value: e,
-                    validators: [],
-                    asyncValidators: [],
-                    asyncValidatorsDebounceTime: 250,
-                    disabled: false,
-                  ),
-                )
-                .toList(),
+          listControlName: FormControl<List<T?>>(
+            value: statusList?.list,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
+            touched: false,
           ),
         },
         validators: [],

@@ -135,7 +135,6 @@ extension on ClassBodyImpl {
       final EmptyClassBodyImpl body => EmptyClassBodyImpl(
         semicolon: body.semicolon,
       ),
-      _ => this,
     };
   }
 }
