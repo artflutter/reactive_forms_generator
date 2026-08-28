@@ -9,6 +9,7 @@ import 'package:analyzer/src/dart/element/type.dart' as t;
 
 // import 'package:analyzer/dart/element/visitor.dart';
 import 'package:analyzer/src/dart/ast/ast.dart';
+import 'package:analyzer/src/generated/utilities_dart.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import "package:collection/collection.dart";
 import 'package:reactive_forms_generator/src/form_elements/form_element_generator.dart';
@@ -39,26 +40,21 @@ class RfParameterVisitor extends GeneralizingAstVisitor<dynamic> {
     //   // } );
     //
     switch (node) {
-      case DefaultFormalParameterImpl():
-        // final p = node;
+      // an optional/named parameter — before analyzer 13 these were wrapped
+      // in the now-removed DefaultFormalParameter
+      case FormalParameterImpl() when node.kind != ParameterKind.REQUIRED:
         final hasDefaultValue =
-            node.parameter.declaredFragment?.element.hasDefaultValue == true;
-        final hasDefaultAnnotation = node.parameter.metadata.fold(
+            node.declaredFragment?.element.hasDefaultValue == true;
+        final hasDefaultAnnotation = node.metadata.fold(
           false,
           (acc, e) => acc || e.name.toString().startsWith('Default'),
         );
 
         final hasRfGroupAnnotation =
-            node
-                .parameter
-                .declaredFragment
-                ?.element
-                .type
-                .element
-                ?.hasRfGroupAnnotation ==
+            node.declaredFragment?.element.type.element?.hasRfGroupAnnotation ==
             true;
 
-        final type = node.parameter.declaredFragment?.element.type;
+        final type = node.declaredFragment?.element.type;
         final isList =
             type != null &&
             type.isDartCoreList == true &&

@@ -14,8 +14,8 @@ extension RfAnnotationArguments on Annotation {
     }
 
     for (final argument in argumentList.arguments) {
-      if (argument is NamedExpression && argument.name.label.name == name) {
-        return argument.expression;
+      if (argument is NamedArgument && argument.name.lexeme == name) {
+        return argument.argumentExpression;
       }
     }
 
@@ -30,8 +30,8 @@ extension RfAnnotationArguments on Annotation {
 
     final result = <String, String>{};
     for (final argument in argumentList.arguments) {
-      if (argument is NamedExpression) {
-        result[argument.name.label.name] = argument.expression.toSource();
+      if (argument is NamedArgument) {
+        result[argument.name.lexeme] = argument.argumentExpression.toSource();
       }
     }
 

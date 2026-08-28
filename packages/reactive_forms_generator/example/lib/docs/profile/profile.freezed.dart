@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'profile.dart';
@@ -9,6 +9,7 @@ part of 'profile.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -66,8 +67,8 @@ class _$ProfileCopyWithImpl<$Res>
 /// Create a copy of Profile
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? anotherId = null,Object? name = null,Object? chartingOrder = null,Object? numberingStandard = null,Object? incidenceFilter = null,Object? measurementType = null,Object? threshold = null,Object? timer = null,Object? audioGuidance = null,}) {
-  return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+  return _then(Profile(
+null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,anotherId: null == anotherId ? _self.anotherId : anotherId // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,chartingOrder: null == chartingOrder ? _self.chartingOrder : chartingOrder // ignore: cast_nullable_to_non_nullable
@@ -428,7 +429,7 @@ class _$ThresholdSettingCopyWithImpl<$Res>
 /// Create a copy of ThresholdSetting
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? isEnabled = null,Object? value = null,}) {
-  return _then(_self.copyWith(
+  return _then(ThresholdSetting(
 isEnabled: null == isEnabled ? _self.isEnabled : isEnabled // ignore: cast_nullable_to_non_nullable
 as bool,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as int,
@@ -694,7 +695,7 @@ class _$TimerSettingCopyWithImpl<$Res>
 /// Create a copy of TimerSetting
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? isEnabled = null,Object? value = null,}) {
-  return _then(_self.copyWith(
+  return _then(TimerSetting(
 isEnabled: null == isEnabled ? _self.isEnabled : isEnabled // ignore: cast_nullable_to_non_nullable
 as bool,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as int,
@@ -960,7 +961,7 @@ class _$IncidenceFilterCopyWithImpl<$Res>
 /// Create a copy of IncidenceFilter
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? isMobilityEnabled = null,Object? isFurcationEnabled = null,Object? isBleedingEnabled = null,Object? isSuppurationEnabled = null,Object? isCalculusEnabled = null,Object? isPlaqueEnabled = null,}) {
-  return _then(_self.copyWith(
+  return _then(IncidenceFilter(
 isMobilityEnabled: null == isMobilityEnabled ? _self.isMobilityEnabled : isMobilityEnabled // ignore: cast_nullable_to_non_nullable
 as bool,isFurcationEnabled: null == isFurcationEnabled ? _self.isFurcationEnabled : isFurcationEnabled // ignore: cast_nullable_to_non_nullable
 as bool,isBleedingEnabled: null == isBleedingEnabled ? _self.isBleedingEnabled : isBleedingEnabled // ignore: cast_nullable_to_non_nullable
@@ -1411,7 +1412,7 @@ return quadrant(_that.quadrant,_that.direction,_that.toothSide);case _:
 @JsonSerializable()
 
 class ArchScanOrder implements ScanOrder {
-  const ArchScanOrder(this.jaw, {required this.direction, required this.toothSide, final  String? $type}): $type = $type ?? 'arch';
+  const ArchScanOrder(this.jaw, {required this.direction, required this.toothSide,  String? $type}): $type = $type ?? 'arch';
   factory ArchScanOrder.fromJson(Map<String, dynamic> json) => _$ArchScanOrderFromJson(json);
 
  final  Jaw jaw;
@@ -1488,7 +1489,7 @@ as ToothSide,
 @JsonSerializable()
 
 class QuadrantScanOrder implements ScanOrder {
-  const QuadrantScanOrder(this.quadrant, {required this.direction, required this.toothSide, final  String? $type}): $type = $type ?? 'quadrant';
+  const QuadrantScanOrder(this.quadrant, {required this.direction, required this.toothSide,  String? $type}): $type = $type ?? 'quadrant';
   factory QuadrantScanOrder.fromJson(Map<String, dynamic> json) => _$QuadrantScanOrderFromJson(json);
 
  final  Quadrant quadrant;
@@ -1616,7 +1617,7 @@ class _$ChartingOrderValueCopyWithImpl<$Res>
 /// Create a copy of ChartingOrderValue
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? chartingOrder = null,Object? selectedOption = null,Object? order = null,}) {
-  return _then(_self.copyWith(
+  return _then(ChartingOrderValue(
 chartingOrder: null == chartingOrder ? _self.chartingOrder : chartingOrder // ignore: cast_nullable_to_non_nullable
 as ChartingOrderType,selectedOption: null == selectedOption ? _self.selectedOption : selectedOption // ignore: cast_nullable_to_non_nullable
 as int,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
@@ -1761,7 +1762,7 @@ return $default(_that.chartingOrder,_that.selectedOption,_that.order);case _:
 @JsonSerializable()
 
 class _ChartingOrderValue implements ChartingOrderValue {
-  const _ChartingOrderValue({this.chartingOrder = ChartingOrderType.arch, this.selectedOption = 0, required final  List<List<ScanOrder>> order}): _order = order;
+  const _ChartingOrderValue({this.chartingOrder = ChartingOrderType.arch, this.selectedOption = 0, required  List<List<ScanOrder>> order}): _order = order;
   factory _ChartingOrderValue.fromJson(Map<String, dynamic> json) => _$ChartingOrderValueFromJson(json);
 
 @override@JsonKey() final  ChartingOrderType chartingOrder;

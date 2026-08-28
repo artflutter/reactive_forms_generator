@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'create_output.dart';
@@ -9,6 +9,7 @@ part of 'create_output.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -63,7 +64,7 @@ class _$MSICreateCopyWithImpl<$Res>
 /// Create a copy of MSICreate
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? businessNumber = freezed,Object? fileIds = freezed,Object? name = freezed,Object? companyAddress = null,Object? email = freezed,Object? primaryContact = null,Object? sameMailingAddressAsCompany = null,Object? mailingAddress = null,Object? admins = null,}) {
-  return _then(_self.copyWith(
+  return _then(MSICreate(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,businessNumber: freezed == businessNumber ? _self.businessNumber : businessNumber // ignore: cast_nullable_to_non_nullable
 as String?,fileIds: freezed == fileIds ? _self.fileIds : fileIds // ignore: cast_nullable_to_non_nullable
@@ -242,7 +243,7 @@ return $default(_that.id,_that.businessNumber,_that.fileIds,_that.name,_that.com
 
 
 class _MSICreate implements MSICreate {
-  const _MSICreate({this.id, this.businessNumber, final  List<String>? fileIds, @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)]) this.name, this.companyAddress = const Address(), @RfControl(validators: [RequiredValidator(), EmailValidator()]) this.email, this.primaryContact = const PrimaryContact(), @RfControl<bool>() this.sameMailingAddressAsCompany = false, this.mailingAddress = const Address(), @RfArray<AdminContactInformation>() final  List<AdminContactInformation> admins = const [AdminContactInformation()]}): _fileIds = fileIds,_admins = admins;
+  const _MSICreate({this.id, this.businessNumber,  List<String>? fileIds, @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)]) this.name, this.companyAddress = const Address(), @RfControl(validators: [RequiredValidator(), EmailValidator()]) this.email, this.primaryContact = const PrimaryContact(), @RfControl<bool>() this.sameMailingAddressAsCompany = false, this.mailingAddress = const Address(), @RfArray<AdminContactInformation>()  List<AdminContactInformation> admins = const [AdminContactInformation()]}): _fileIds = fileIds,_admins = admins;
   
 
 @override final  String? id;
@@ -415,7 +416,7 @@ class _$AddressCopyWithImpl<$Res>
 /// Create a copy of Address
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? street = freezed,Object? city = freezed,Object? stateOrProvince = freezed,Object? zipCode = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(Address(
 street: freezed == street ? _self.street : street // ignore: cast_nullable_to_non_nullable
 as String?,city: freezed == city ? _self.city : city // ignore: cast_nullable_to_non_nullable
 as String?,stateOrProvince: freezed == stateOrProvince ? _self.stateOrProvince : stateOrProvince // ignore: cast_nullable_to_non_nullable
@@ -681,7 +682,7 @@ class _$PrimaryContactCopyWithImpl<$Res>
 /// Create a copy of PrimaryContact
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? fullName = freezed,Object? jobTitle = freezed,Object? email = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(PrimaryContact(
 fullName: freezed == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
 as String?,jobTitle: freezed == jobTitle ? _self.jobTitle : jobTitle // ignore: cast_nullable_to_non_nullable
 as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
@@ -944,7 +945,7 @@ class _$AdminContactInformationCopyWithImpl<$Res>
 /// Create a copy of AdminContactInformation
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? firstName = freezed,Object? lastName = freezed,Object? email = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(AdminContactInformation(
 firstName: freezed == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String?,lastName: freezed == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
 as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
@@ -1207,7 +1208,7 @@ class _$MSICreateOutputCopyWithImpl<$Res>
 /// Create a copy of MSICreateOutput
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? businessNumber = freezed,Object? fileIds = freezed,Object? name = null,Object? companyAddress = null,Object? email = null,Object? primaryContact = null,Object? sameMailingAddressAsCompany = null,Object? mailingAddress = null,Object? admins = null,}) {
-  return _then(_self.copyWith(
+  return _then(MSICreateOutput(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,businessNumber: freezed == businessNumber ? _self.businessNumber : businessNumber // ignore: cast_nullable_to_non_nullable
 as String?,fileIds: freezed == fileIds ? _self.fileIds : fileIds // ignore: cast_nullable_to_non_nullable
@@ -1386,7 +1387,7 @@ return $default(_that.id,_that.businessNumber,_that.fileIds,_that.name,_that.com
 
 
 class _MSICreateOutput implements MSICreateOutput {
-  const _MSICreateOutput({this.id, this.businessNumber, final  List<String>? fileIds, @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)]) required this.name, required this.companyAddress, @RfControl(validators: [RequiredValidator(), EmailValidator()]) required this.email, required this.primaryContact, @RfControl<bool>() this.sameMailingAddressAsCompany = false, required this.mailingAddress, @RfArray<AdminContactInformationOutput>() required final  List<AdminContactInformationOutput> admins}): _fileIds = fileIds,_admins = admins;
+  const _MSICreateOutput({this.id, this.businessNumber,  List<String>? fileIds, @RfControl(validators: [RequiredValidator(), MaxLengthValidator(120)]) required this.name, required this.companyAddress, @RfControl(validators: [RequiredValidator(), EmailValidator()]) required this.email, required this.primaryContact, @RfControl<bool>() this.sameMailingAddressAsCompany = false, required this.mailingAddress, @RfArray<AdminContactInformationOutput>() required  List<AdminContactInformationOutput> admins}): _fileIds = fileIds,_admins = admins;
   
 
 @override final  String? id;
@@ -1559,7 +1560,7 @@ class _$AddressOutputCopyWithImpl<$Res>
 /// Create a copy of AddressOutput
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? street = null,Object? city = null,Object? stateOrProvince = null,Object? zipCode = null,}) {
-  return _then(_self.copyWith(
+  return _then(AddressOutput(
 street: null == street ? _self.street : street // ignore: cast_nullable_to_non_nullable
 as String,city: null == city ? _self.city : city // ignore: cast_nullable_to_non_nullable
 as String,stateOrProvince: null == stateOrProvince ? _self.stateOrProvince : stateOrProvince // ignore: cast_nullable_to_non_nullable
@@ -1825,7 +1826,7 @@ class _$PrimaryContactOutputCopyWithImpl<$Res>
 /// Create a copy of PrimaryContactOutput
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? fullName = null,Object? jobTitle = freezed,Object? email = null,}) {
-  return _then(_self.copyWith(
+  return _then(PrimaryContactOutput(
 fullName: null == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
 as String,jobTitle: freezed == jobTitle ? _self.jobTitle : jobTitle // ignore: cast_nullable_to_non_nullable
 as String?,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
@@ -2088,7 +2089,7 @@ class _$AdminContactInformationOutputCopyWithImpl<$Res>
 /// Create a copy of AdminContactInformationOutput
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? firstName = null,Object? lastName = null,Object? email = null,}) {
-  return _then(_self.copyWith(
+  return _then(AdminContactInformationOutput(
 firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
